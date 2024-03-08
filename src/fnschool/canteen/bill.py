@@ -1,14 +1,8 @@
 
 import os
 import sys
+import colorma
 from fnschool import _
-
-try:
-    from .sett1ngs import operators
-except:
-    print(
-        _("Please refer to file  to customize your 'sett1ngs.py' file.")
-    )
 
 class Operator():
     def __init__(
@@ -72,7 +66,7 @@ class Bill():
     def operator(self):
         if self._operator:
             return self._operator
-        print("Please set operator.")
+        print(_("Please configure operator."))
         return None
 
     def times_are_same_year_month(self, *times):
@@ -172,12 +166,12 @@ class Bill():
                 try:
                     number = float(number)
                 except:
-                    print("%s can't change." % number)
+                    print(_("%s can't change.") % number)
             else:
                 try:
                     number = int(number)
                 except:
-                    print("%s   can't change." % number)
+                    print(_("%s   can't change.") % number)
 
         if type(number) == float:
             real_numbers = []
@@ -192,7 +186,7 @@ class Bill():
                     real_numbers.append(int(round(number / (10**i), 2) % 10))
 
         else:
-            print("%s can't change" % number)
+            print(_("%s can't change") % number)
 
         zflag = 0
         start = len(real_numbers) - 3

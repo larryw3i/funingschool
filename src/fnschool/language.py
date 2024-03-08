@@ -1,7 +1,7 @@
-import gettext
-import locale
 import os
 import sys
+import gettext
+import locale
 from pathlib import Path
 
 app_name = Path(__file__).parent.as_posix().split(os.sep)[-1]

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-07 22:08+0800\n"
-"PO-Revision-Date: 2024-03-07 22:18+0800\n"
+"POT-Creation-Date: 2024-03-08 11:49+0800\n"
+"PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
 "Language-Team: zh_Hant_TW <LL@li.org>\n"
@@ -18,7 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:10
-msgid "Please refer to file  to customize your 'sett1ngs.py' file."
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/__init__.py:25
+#, python-format
+msgid "Configuration file '%s' was copied to '%s'."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:69
+msgid "Please configure operator."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:169
+#, python-format
+msgid "%s can't change."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:174
+#, python-format
+msgid "%s   can't change."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:189
+#, python-format
+msgid "%s can't change"
 msgstr ""
 
