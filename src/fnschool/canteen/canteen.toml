@@ -1,6 +1,14 @@
 
 [canteen]
-friends = [
-    ['label','name','email','school',["supplier0",'supplier1']],
-    ['label0','name0','email0','school0',["supplier00",'supplier01']],
+profiles = [
+    ['label','name','email','org_name',["supplier0",'supplier1']],
+    ['label0','name0','email0','org_name0',["supplier00",'supplier01']],
 ]
+time_nodes = [
+    [2024-02-26, 2024-02-29],
+    [2024-03-01, 2024-03-01],
+    [2024-03-04, 2024-03-08],
+    [2024-03-11, 2024-03-15]
+]
+
+# The end.

@@ -4,41 +4,45 @@ import colorama
 from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.workbook import *
-from fnschool.canteen.friend import *
+from fnschool.canteen.profile import *
+from fnschool.canteen.path import *
 
 
 class Bill:
     def __init__(self):
-        self.food = Food(self)
-        self._food_list = None
-        self.workbook = WorkBook(self)
-        self.time_nodes = []
+        self._food = None
+        self._checked_foods = None
+        self._workbook = None
+        self._time_nodes = []
         self._quiet = False
-        self._friend = None
-        self.org_name = None
+        self._profile = None
         pass
+    @property
+    def food(self):
+        if not self._food:
+            self._food = Food(self)
+        return self._food
+
+    @property
+    def workbook(self):
+        if not self._workbook:
+            self._workbook = WorkBook(self)
+        return self._workbook
+
+    @property
+    def time_nodes(self):
+       if (self._time_nodes) < 1:
+            with open(canteen_data_fpath, 'r') as f:
+                self._time_nodes = tomllib.load(f)
+
+        return self._time_nodes
 
     def help_friends_via_email(self):
         print_warning("Hello!")
         pass
 
     def make_spreadsheet_of_month(self):
-        # self.set_profile("ly")
-        # self.set_time_nodes(
-        #     [
-        #         (datetime(2024, 2, 26), datetime(2024, 2, 29)),
-        #         # (datetime(2024,3,1), datetime(2024,3,1)),
-        #     ]
-        # )
-
-        # canteen.workbook.get_warehousing_sheet().insert_rows(4,20)
-        # canteen.workbook.copy_workbook()
-
-        # canteen.food.get_foods_from_pre_consuming_sheet_by_time_nodes_m1(
-        #     canteen.get_time_nodes()[0][1]
-        # )
-
-        # print(*canteen.workbook.get_residual_foods_by_month_m1())
+        self.profile = Profile().get_profiles()[0]
 
         # canteen.workbook.update_check_inventory_sheet_from_cen_hang_xlsx()
         # canteen.workbook.update_consuming_sheet_by_time_node_m1()
@@ -53,15 +57,20 @@ class Bill:
         print_info("Hello!")
         pass
 
-    def set_friend(self, label):
-        self._friend = Friend().get_friend_by_label(label)
-
     @property
-    def friend(self):
-        if self._friend:
-            return self._friend
-        print(_("Please configure friends."))
+    def profile(self):
+        if self._profile:
+            return self._profile
         return None
+
+    @profile.setter
+    def profile(self,label):
+        profiles = Profile().get_profiles()
+        for p in profiles:
+            if p.label == label:
+                self._profile = p
+        self._profile = None
+        
 
     def times_are_same_year_month(self, *times):
         time0 = times[0]
@@ -70,25 +79,6 @@ class Bill:
                 return False
         return True
 
-    def set_profile(self, name):
-        friend = None
-        if isinstance(name, str) and name in self.friends.keys():
-            friend = self.friends[name]
-        else:
-            friend= name
-        self.set_org_name(profile[0])
-        self.set_friend(profile[1])
-        self.set_suppliers(profile[2])
-        self.workbook.set_main_spreadsheet_path(profile[3])
-
-    def set_suppliers(self, names):
-        self.suppliers = names
-
-    def set_friend(self, name):
-        self.friend = name
-
-    def set_org_name(self, name):
-        self.org_name = name
 
     def set_quiet(self, value=False):
         self._quiet = value
@@ -103,19 +93,16 @@ class Bill:
     def get_quiet(self):
         return self._quiet
 
-    def get_food_list(self):
-        if not self._food_list:
-            self._food_list = self.food.get_food_list()
-        return self._food_list
+    def get_checked_foods(self):
+        if not self._checked_foods:
+            self._checked_foods = self.food.get_checked_foods()
+        return self._checked_foods
 
     def set_time_nodes(self, time_nodes):
-        self.time_nodes = time_nodes
-
-    def get_time_nodes(self):
-        return self.time_nodes
+        self._time_nodes = time_nodes
 
     def clear_time_nodes(self):
-        self.time_nodes = None
+        self._time_nodes = None
 
     def convert_num_to_cnmoney_chars(self, number=None):
         format_word = [
@@ -151,7 +138,7 @@ class Bill:
                 try:
                     number = int(number)
                 except:
-                    print(_("%s   can't change.") % number)
+                    print(_("%s can't change.") % number)
 
         if type(number) == float:
             real_numbers = []
@@ -166,7 +153,7 @@ class Bill:
                     real_numbers.append(int(round(number / (10**i), 2) % 10))
 
         else:
-            print(_("%s can't change") % number)
+            print(_("%s can't change.") % number)
 
         zflag = 0
         start = len(real_numbers) - 3

@@ -105,7 +105,7 @@ class Food:
     def set_default_food_list_file_path(self, file_path=None):
         self.default_food_list_file_path = file_path
 
-    def get_food_list(self):
+    def get_checked_foods(self):
         food_list = self.get_food_list_from_check_sheet()
         return food_list
 

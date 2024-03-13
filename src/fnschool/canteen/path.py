@@ -15,5 +15,12 @@ if not friends_fpath.exists():
             friends0_fpath, friends_fpath
         )
     )
+    print_warning(
+        _("Please update your configuration file.")
+    )
+    print_info(
+        _("Ok! it was configured. (enter any key)")
+    )
+    input()
 
 
