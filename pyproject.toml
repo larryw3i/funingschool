@@ -8,7 +8,6 @@ dependencies = [
     "numpy",
     "openpyxl",
     "appdirs",
-    "Babel"
 ]
 authors = [
   {name = "larryw3i", email = "larryw3i@163.com"},
@@ -45,7 +44,9 @@ fnschool-cli = "fnschool:read_cli"
 fnschool-gui = "fnschool:show_gui"
 
 [build-system]
-requires = ["setuptools"]
+requires = [
+    "setuptools",
+]
 
 [tool.black]
 line-length = 79

@@ -6,8 +6,3 @@ maintainers = [
     ["Larry W3i",'larryw3i@126.com']
 ]
 
-[canteen]
-operators = [
-    ['label','name','email','school',["supplier0",'supplier1']],
-    ['label0','name0','email0','school0',["supplier00",'supplier01']],
-]

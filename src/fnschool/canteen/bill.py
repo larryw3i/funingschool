@@ -1,72 +1,66 @@
-
 import os
 import sys
-import colorma
-from fnschool import _
-
-class Operator():
-    def __init__(
-        self,
-        label = None,
-        name = None,
-        email = None,
-        school = None,
-        suppliers = None
-    ):
-        self.label = label
-        self.name = name
-        self.email = email
-        self.school = school
-        self.suppliers = suppliers
+import colorama
+from fnschool import *
+from fnschool.canteen.food import *
+from fnschool.canteen.workbook import *
+from fnschool.canteen.friend import *
 
 
-    def get_operator_by_key(self,key):
-        operator = operators.get(key,None)
-        if not operator:
-            return None
-
-        return Operator(
-            label = key,
-            name = operator[0],
-            email = operator[1],
-            school = operator[2],
-            suppliers = operator[3]
-        )
-
-    def get_operators(self):
-        operators = []
-        for key in operator.keys():
-            value = operator.get(key)
-            operators.append(
-                Operator(
-                    label = key,
-                    name = operator[0],
-                    email = operator[1],
-                    school = operator[2],
-                    suppliers = operator[3]
-                )
-            )
-        return operators
-
-class Bill():
+class Bill:
     def __init__(self):
         self.food = Food(self)
         self._food_list = None
         self.workbook = WorkBook(self)
         self.time_nodes = []
         self._quiet = False
-        self._operator = None
+        self._friend = None
         self.org_name = None
         pass
 
-    def set_operator(self,key):
-        self._operator = Operator().get_operator_by_key(key)
-       
+    def help_friends_via_email(self):
+        print_warning("Hello!")
+        pass
+
+    def make_spreadsheet_of_month(self):
+        # self.set_profile("ly")
+        # self.set_time_nodes(
+        #     [
+        #         (datetime(2024, 2, 26), datetime(2024, 2, 29)),
+        #         # (datetime(2024,3,1), datetime(2024,3,1)),
+        #     ]
+        # )
+
+        # canteen.workbook.get_warehousing_sheet().insert_rows(4,20)
+        # canteen.workbook.copy_workbook()
+
+        # canteen.food.get_foods_from_pre_consuming_sheet_by_time_nodes_m1(
+        #     canteen.get_time_nodes()[0][1]
+        # )
+
+        # print(*canteen.workbook.get_residual_foods_by_month_m1())
+
+        # canteen.workbook.update_check_inventory_sheet_from_cen_hang_xlsx()
+        # canteen.workbook.update_consuming_sheet_by_time_node_m1()
+        # canteen.workbook.update_inventory_sheet_by_time_node_m1()
+        # canteen.workbook.update_check_sheet_by_time_node_m1()
+        # canteen.workbook.update_warehousing_sheet_by_time_node_m1()
+        # canteen.workbook.update_unwarehousing_sheet_by_time_node_m1()
+        # canteen.workbook.update_consuming_sum_sheet()
+        # canteen.workbook.update_purchase_sum_sheet_by_time_nodes_m1()
+        # canteen.workbook.update_cover_sheet()
+        # canteen.workbook.update_food_sheets_by_time_nodes_m1()
+        print_info("Hello!")
+        pass
+
+    def set_friend(self, label):
+        self._friend = Friend().get_friend_by_label(label)
+
     @property
-    def operator(self):
-        if self._operator:
-            return self._operator
-        print(_("Please configure operator."))
+    def friend(self):
+        if self._friend:
+            return self._friend
+        print(_("Please configure friends."))
         return None
 
     def times_are_same_year_month(self, *times):
@@ -77,35 +71,21 @@ class Bill():
         return True
 
     def set_profile(self, name):
-        if isinstance(name, str) and name in self.roll.keys():
-            profile = self.roll[name]
+        friend = None
+        if isinstance(name, str) and name in self.friends.keys():
+            friend = self.friends[name]
         else:
-            profile = name
+            friend= name
         self.set_org_name(profile[0])
-        self.set_operator(profile[1])
+        self.set_friend(profile[1])
         self.set_suppliers(profile[2])
         self.workbook.set_main_spreadsheet_path(profile[3])
 
     def set_suppliers(self, names):
         self.suppliers = names
 
-    def set_operator(self, name):
-        self.operator = name
-
-    def print_info(self, *argv, **kwargs):
-        print(Fore.GREEN, end="")
-        print(*argv, **kwargs)
-        print(Style.RESET_ALL, end="")
-
-    def print_error(self, *argv, **kwargs):
-        print(Fore.RED, end="")
-        print(*argv, **kwargs)
-        print(Style.RESET_ALL, end="")
-
-    def print_warning(self, *argv, **kwargs):
-        print(Fore.YELLOW, end="")
-        print(*argv, **kwargs)
-        print(Style.RESET_ALL, end="")
+    def set_friend(self, name):
+        self.friend = name
 
     def set_org_name(self, name):
         self.org_name = name
@@ -209,4 +189,5 @@ class Bill():
             cnmoney_strs.append("整")
 
         return "".join(cnmoney_strs)
-        
+
+# The end.

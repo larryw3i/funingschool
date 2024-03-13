@@ -1,0 +1,6 @@
+
+[canteen]
+friends = [
+    ['label','name','email','school',["supplier0",'supplier1']],
+    ['label0','name0','email0','school0',["supplier00",'supplier01']],
+]

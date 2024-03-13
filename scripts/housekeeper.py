@@ -32,7 +32,11 @@ def install_dependencies():
     with open(pyproject_toml_path, 'rb') as f:
         project_data = tomllib.load(f)
     deps = project_data.get("project").get("dependencies")
+    deps += [
+        "Babel"
+    ]
     deps = '"'+'" "'.join(deps) +'"'    
+    
     cmd = get_activate_cmd()
     cmd += "pip3 install -U "+deps
     print(cmd.replace(';','\n'))
@@ -97,6 +101,10 @@ def set_version(args):
     else:
         print_no_args()
 
+def set_dependencies(args):
+    if args.action == "I":
+        install_dependencies()
+
 parser = argparse.ArgumentParser(
     prog="housekeeper",
     description='Housekeeper of Funingschool.',
@@ -126,6 +134,17 @@ parser_msg.add_argument(
 )
 parser_msg.set_defaults(func=set_message)
 
+parser_deps = subparsers.add_parser(
+    "dependencies",
+    help = "Dependencies related function."
+)
+
+parser_deps.add_argument(
+    "action",
+    help = "'I' for installing all dependencies."
+)
+parser_deps.set_defaults(func=set_dependencies)
+
 parser_version = subparsers.add_parser(
     'version', 
     help=f'Version related functions.'
@@ -140,6 +159,10 @@ parser_version.add_argument(
 parser_version.set_defaults(func=set_version)
 
 args = parser.parse_args()
-args.func(args)
+
+if hasattr(args,'func'):
+    args.func(args)
+else:
+    parser.print_help()    
 
 # The end.
