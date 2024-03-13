@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-08 11:49+0800\n"
+"POT-Creation-Date: 2024-03-13 16:58+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,30 +18,70 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/__init__.py:25
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:17
+msgid "Function is not found."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:27
+msgid "fnschool"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:28
+msgid "Command line interface of fnschool."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:29
+msgid "Enjoy it."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:31
+msgid "The modules to run."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:33
+msgid "Canteen related functions."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:38
+msgid "The functions of canteen."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:14
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/path.py:35
 #, python-format
 msgid "Configuration file '%s' was copied to '%s'."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:69
-msgid "Please configure operator."
-msgstr ""
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:169
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:136
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:141
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:156
 #, python-format
 msgid "%s can't change."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:174
-#, python-format
-msgid "%s   can't change."
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:19
+msgid "Please update your configuration file."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:189
-#, python-format
-msgid "%s can't change"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:22
+msgid "Ok! it was configured. (enter any key)"
 msgstr ""
 
 #~ msgid "Please refer to file  to customize your 'sett1ngs.py' file."
+#~ msgstr ""
+
+#~ msgid "Configuration file '%s' was copied to '%s'."
+#~ msgstr ""
+
+#~ msgid "Please configure operator."
+#~ msgstr ""
+
+#~ msgid "%s can't change."
+#~ msgstr ""
+
+#~ msgid "%s   can't change."
+#~ msgstr ""
+
+#~ msgid "%s can't change"
 #~ msgstr ""
 

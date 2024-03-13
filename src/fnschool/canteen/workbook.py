@@ -14,8 +14,8 @@ from fnschool.canteen.bill import *
 
 
 class WorkBook:
-    def __init__(self, canteen):
-        self.canteen = canteen
+    def __init__(self, bill):
+        self.bill = bill
         self.check_sheet_name = "清点表"
         self.unit_sheet_name = "计量单位表"
         self.warehousing_sheet_name = "入库单"
@@ -52,8 +52,12 @@ class WorkBook:
         )
 
     @property
+    def profile(self):
+        return self.bill.profile
+
+    @property
     def food(self):
-        return self.canteen.food
+        return self.bill.food
 
     def get_conver_sheet(self):
         return self.get_sheet(self.conver_sheet_name)
@@ -107,7 +111,7 @@ class WorkBook:
             return self._base_class_df
 
         base_class_df = pd.read_excel(
-            self.canteen.workbook.get_main_spreadsheet_path(),
+            self.bill.workbook.get_main_spreadsheet_path(),
             sheet_name=sheet_name,
         )
         self._base_class_df = base_class_df.T
@@ -147,7 +151,7 @@ class WorkBook:
         return self.get_sheet(self.pre_consuming_sheet0_name)
 
     def get_consuming_n_by_time_node(self, time_node):
-        time_nodes = self.canteen.get_time_nodes()
+        time_nodes = self.bill.get_time_nodes()
         time_nodes = [t for t in time_nodes if t[0].month == time_node.month]
         n_index = 0
         for time_start, time_end in time_nodes:
@@ -242,7 +246,7 @@ class WorkBook:
         foods = self.food.get_foods_from_pre_consuming_sheet_m1()
         foods = [f for f in foods if f.get_remainder() > 0.0]
         form_indexes = self.get_inventory_form_indexes()
-        time_nodes = self.canteen.get_time_nodes()
+        time_nodes = self.bill.get_time_nodes()
         time_start, time_end = time_nodes[-1]
         form_indexes_n = len(time_nodes) + self.inventory_form_index_offset - 1
         form_index = form_indexes[form_indexes_n]
@@ -256,7 +260,7 @@ class WorkBook:
             form_index_start,
             1,
             f"     "
-            + f"学校名称：{self.canteen.org_name}"
+            + f"学校名称：{self.bill.profile.org_name}"
             + f"                "
             + f"{time_end.year} 年 {time_end.month} 月 {time_end.day} 日"
             + f"              ",
@@ -302,14 +306,14 @@ class WorkBook:
 
         wb = self.get_workbook()
         wb.active = isheet
-        self.canteen.print_info(
+        print_info(
             f"Sheet '{self.inventory_sheet_name}' was updated."
         )
 
     def update_check_sheet_by_time_node_m1(self):
         cksheet = self.get_check_sheet()
         rfoods = self.food.get_foods_from_pre_consuming_sheet_m1()
-        time_node = self.canteen.get_time_nodes_m1()
+        time_node = self.bill.get_time_nodes_m1()
         time_start, time_end = time_node
         rfoods = [f for f in rfoods if f.get_remainder() > 0.0]
 
@@ -349,12 +353,12 @@ class WorkBook:
             sheet.unmerge_cells(str(cell_group))
 
     def update_cover_sheet(self):
-        time_start, time_end = self.canteen.get_time_nodes_m1()
+        time_start, time_end = self.bill.get_time_nodes_m1()
         cvsheet = self.get_conver_sheet()
         cvsheet.cell(
             1,
             1,
-            self.canteen.org_name
+            self.bill.org_name
             + f"{time_end.year}年{time_end.month}月份食堂食品采购统计表",
         )
         foods = self.food.get_food_list_from_check_sheet()
@@ -363,7 +367,7 @@ class WorkBook:
             for f in foods
             if (
                 not f.is_residue
-                and self.canteen.times_are_same_year_month(
+                and self.bill.times_are_same_year_month(
                     f.check_date, time_end
                 )
             )
@@ -405,7 +409,7 @@ class WorkBook:
             f"入库：{w_seasoning_total_price:.2f}元；"
             + f"未入库：{unw_seasoning_total_price:.2f}元",
         )
-        if "昌盛" in self.canteen.suppliers and "雪兰" in self.canteen.suppliers:
+        if "昌盛" in self.bill.suppliers and "雪兰" in self.bill.suppliers:
             self.update_cover_sheet_for_cangsheng_xuelan(
                 cvsheet, foods, wfoods, uwfoods, total_price
             )
@@ -413,12 +417,12 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = cvsheet
 
-        self.canteen.print_info(
+        print_info(
             f"Sheet '{self.conver_sheet_name}' was updated."
         )
 
     def get_food_form_index_by_time_node_m1(self, sheet):
-        _, time_end = self.canteen.get_time_nodes_m1()
+        _, time_end = self.bill.get_time_nodes_m1()
         indexes = self.get_food_form_indexes(sheet)
         _index_range = indexes[time_end.month - 1]
         return _index_range
@@ -436,7 +440,7 @@ class WorkBook:
         return indexes
 
     def get_residual_foods_by_month_m1(self):
-        time_nodes = self.canteen.get_time_nodes()
+        time_nodes = self.bill.get_time_nodes()
         time_start, time_end = time_nodes[-1]
         time_end_mm1 = datetime(time_end.year, time_end.month, 1) + timedelta(
             days=-1
@@ -444,7 +448,7 @@ class WorkBook:
         time_nodes_mm1 = [
             t
             for t in time_nodes
-            if self.canteen.times_are_same_year_month(t[0], time_end_mm1)
+            if self.bill.times_are_same_year_month(t[0], time_end_mm1)
         ]
 
         foods = self.food.get_food_list_from_check_sheet()
@@ -462,7 +466,7 @@ class WorkBook:
 
     def get_food_sheet(self, name):
         sheet = None
-        _, time_end = self.canteen.get_time_nodes_m1()
+        _, time_end = self.bill.get_time_nodes_m1()
         if self.includes_sheet(name):
             sheet = self.get_sheet(name)
         else:
@@ -548,7 +552,7 @@ class WorkBook:
                 )
 
     def update_food_sheets_by_time_nodes_m1(self):
-        time_nodes = self.canteen.get_time_nodes()
+        time_nodes = self.bill.get_time_nodes()
         time_start, time_end = time_nodes[-1]
         cfoods = (
             self.food.get_foods_from_pre_consuming_sheet_by_time_nodes_m1()
@@ -645,7 +649,7 @@ class WorkBook:
             wb = self.get_workbook()
             wb.active = sheet
 
-            self.canteen.print_info(f"Sheet '{sheet.title}' was updated.")
+            print_info(f"Sheet '{sheet.title}' was updated.")
 
         for name in all_food_names:
             if self.includes_sheet(name):
@@ -669,7 +673,7 @@ class WorkBook:
 
             if row[2].value and "合计" in str(row[2].value).replace(" ", ""):
                 indexes[-1][1] = row[0].row - 1
-        _, time_end = self.canteen.get_time_nodes_m1()
+        _, time_end = self.bill.get_time_nodes_m1()
         index_range = indexes[time_end.month - 1]
         return index_range
 
@@ -716,7 +720,7 @@ class WorkBook:
 
     def update_check_inventory_sheet_from_cen_hang_xlsx(self):
         cksheet = self.get_check_sheet()
-        chwb = load_workbook(self.canteen.org_name[-4:] + ".xlsx")
+        chwb = load_workbook(self.bill.org_name[-4:] + ".xlsx")
         chsheet = chwb["客户送货明细报表"]
         is_residue = False
         last_check_date = None
@@ -819,17 +823,17 @@ class WorkBook:
         self.clear_check_df()
         wb = self.get_workbook()
         wb.active = cksheet
-        self.canteen.print_info(
+        print_info(
             f"Sheet '{self.check_sheet_name}' was updated."
         )
 
     def update_purchase_sum_sheet_by_time_nodes_m1(self):
-        time_start, time_end = self.canteen.get_time_nodes_m1()
+        time_start, time_end = self.bill.get_time_nodes_m1()
         pssheet = self.get_purchase_sum_sheet()
         pssheet.cell(
             2,
             1,
-            f"编制单位：{self.canteen.org_name}"
+            f"编制单位：{self.bill.org_name}"
             + f"        "
             + f"单位：元"
             + f"         "
@@ -838,7 +842,7 @@ class WorkBook:
         pssheet.cell(
             20,
             1,
-            f"编制单位：{self.canteen.org_name}"
+            f"编制单位：{self.bill.org_name}"
             + f"        "
             + f"单位：元"
             + f"         "
@@ -850,7 +854,7 @@ class WorkBook:
             for f in foods
             if (
                 not f.is_residue
-                and self.canteen.times_are_same_year_month(
+                and self.bill.times_are_same_year_month(
                     f.check_date, time_end
                 )
             )
@@ -868,27 +872,27 @@ class WorkBook:
                     _total_price += food.count * food.unit_price
             pssheet.cell(row[0].row, 2, _total_price)
             total_price += _total_price
-        total_price_cn = self.canteen.convert_num_to_cnmoney_chars(total_price)
+        total_price_cn = self.bill.convert_num_to_cnmoney_chars(total_price)
         pssheet.cell(11, 1, f"总金额（大写)：{total_price_cn}    ¥{total_price:.2f}")
-        pssheet.cell(12, 1, f"经办人：{self.canteen.operator}  ")
+        pssheet.cell(12, 1, f"经办人：{self.bill.profile.name}  ")
 
         total_price = sum([f.count * f.unit_price for f in uwfoods])
-        total_price_cn = self.canteen.convert_num_to_cnmoney_chars(total_price)
+        total_price_cn = self.bill.convert_num_to_cnmoney_chars(total_price)
         pssheet.cell(27, 2, total_price)
         pssheet.cell(29, 1, f"总金额（大写)：{total_price_cn}    ¥{total_price:.2f}")
 
-        pssheet.cell(30, 1, f"经办人：{self.canteen.operator}  ")
+        pssheet.cell(30, 1, f"经办人：{self.bill.profile.name}  ")
 
         wb = self.get_workbook()
         wb.active = pssheet
 
-        self.canteen.print_info(
+        print_info(
             f"Sheet '{self.purchase_sum_sheet_name}' was updated."
         )
 
     def update_consuming_sum_sheet(self):
         cssheet = self.get_consuming_sum_sheet()
-        time_node = self.canteen.get_time_nodes_m1()
+        time_node = self.bill.get_time_nodes_m1()
         time_start, time_end = time_node
         foods = self.food.get_foods_from_pre_consuming_sheet_by_time_nodes_m1()
 
@@ -912,23 +916,23 @@ class WorkBook:
                 row[0].row, 2
             ).number_format = numbers.FORMAT_NUMBER_00
 
-        total_price_cn = self.canteen.convert_num_to_cnmoney_chars(total_price)
+        total_price_cn = self.bill.convert_num_to_cnmoney_chars(total_price)
         cssheet.cell(
             2,
             1,
-            f"编制单位：{self.canteen.org_name}       "
+            f"编制单位：{self.bill.org_name}       "
             + f"单位：元         "
             + f"{time_end.year}年{time_end.month}月{time_end.day}日",
         )
         cssheet.cell(
             11, 1, (f"总金额（大写)：{total_price_cn}    " + f"¥{total_price:.2f}")
         )
-        cssheet.cell(12, 1, f"经办人：{self.canteen.operator}  ")
+        cssheet.cell(12, 1, f"经办人：{self.bill.profile.name}  ")
 
         wb = self.get_workbook()
         wb.active = cssheet
 
-        self.canteen.print_info(
+        print_info(
             f"Sheet '{self.consuming_sum_sheet_name}' was updated."
         )
 
@@ -936,7 +940,7 @@ class WorkBook:
         self.update_pre_consuming_sheet_m1(quiet)
         csheet = self.get_consuming_sheet()
         form_indexes = self.get_consuming_form_indexes()
-        time_start, time_end = self.canteen.get_time_nodes_m1()
+        time_start, time_end = self.bill.get_time_nodes_m1()
         foods = self.food.get_foods_from_pre_consuming_sheet_m1()
         class_names = self.get_base_class_names()
 
@@ -1099,7 +1103,7 @@ class WorkBook:
         sheet = self.get_pre_consuming_sheet_m1()
         sheet_title = sheet.title
         foods = self.food.get_non_negligible_foods_by_time_node_m1()
-        time_start, time_end = self.canteen.get_time_nodes_m1()
+        time_start, time_end = self.bill.get_time_nodes_m1()
         wb = self.get_workbook()
         row_index_offset = 3
         col_index_offset = 6
@@ -1152,7 +1156,7 @@ class WorkBook:
 
     def get_pre_consuming_sheet_by_time_node_m1(self):
         return self.get_pre_consuming_sheet_by_time_node(
-            self.canteen.get_time_nodes()[-1]
+            self.bill.get_time_nodes()[-1]
         )
 
     def get_pre_consuming_sheet_name_by_time_node(self, time_node):
@@ -1208,7 +1212,7 @@ class WorkBook:
 
     @property
     def food_list(self):
-        return self.canteen.get_food_list()
+        return self.bill.get_food_list()
 
     def get_warehousing_sheet(self):
         return self.get_sheet(self.warehousing_sheet_name)
@@ -1361,7 +1365,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = csheet
 
-        self.canteen.print_info(
+        print_info(
             f"Sheet '{self.consuming_sheet_name}' was formatted."
         )
 
@@ -1432,7 +1436,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = wsheet
 
-        self.canteen.print_info(
+        print_info(
             f"Sheet '{self.warehousing_sheet_name}' was formatted."
         )
 
@@ -1440,7 +1444,7 @@ class WorkBook:
         unwsheet = self.get_unwarehousing_sheet()
         form_indexes = self.get_unwarehousing_form_indexes()
         foods = self.food.get_food_list_from_check_sheet()
-        time_nodes = self.canteen.get_time_nodes()
+        time_nodes = self.bill.get_time_nodes()
         time_node = time_nodes[-1]
         time_start, time_end = time_node
         foods = [
@@ -1449,7 +1453,7 @@ class WorkBook:
             if (
                 not f.is_residue
                 and f.is_negligible
-                and self.canteen.times_are_same_year_month(
+                and self.bill.times_are_same_year_month(
                     f.check_date, time_start
                 )
             )
@@ -1459,7 +1463,7 @@ class WorkBook:
         for form_index in form_indexes:
             form_index_start, form_index_end = form_index
             unwsheet.cell(
-                form_index_start, 1, f" 学校名称：{self.canteen.org_name}"
+                form_index_start, 1, f" 学校名称：{self.bill.org_name}"
             )
             unwsheet.cell(
                 form_index_start,
@@ -1520,7 +1524,7 @@ class WorkBook:
                         break
                 break
 
-        self.canteen.print_info(
+        print_info(
             f"Sheet '{self.unwarehousing_sheet_name}' was updated."
         )
 
@@ -1529,7 +1533,7 @@ class WorkBook:
         foods = self.food.get_food_list_from_check_sheet()
         form_indexes = self.get_warehousing_form_indexes()
         class_names = self.get_base_class_names()
-        time_node = self.canteen.get_time_nodes_m1()
+        time_node = self.bill.get_time_nodes_m1()
 
         self.unmerge_cells_of_sheet(wsheet)
 
@@ -1555,7 +1559,7 @@ class WorkBook:
                     [
                         food.check_date
                         for food in foods
-                        if self.canteen.times_are_same_year_month(
+                        if self.bill.times_are_same_year_month(
                             food.check_date, time_node[1]
                         )
                     ]
@@ -1614,7 +1618,7 @@ class WorkBook:
                     cell.alignment = self.cell_alignment0
                     cell.border = self.cell_border0
 
-            wsheet.cell(form_index_start, 2, self.canteen.org_name)
+            wsheet.cell(form_index_start, 2, self.bill.org_name)
             wsheet.cell(
                 form_index_start,
                 4,
@@ -1689,7 +1693,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = wsheet
 
-        self.canteen.print_info(
+        print_info(
             f"Sheet '{self.warehousing_sheet_name}' was updated."
         )
 

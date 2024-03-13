@@ -7,38 +7,78 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-08 11:49+0800\n"
+"POT-Creation-Date: 2024-03-13 16:58+0800\n"
 "PO-Revision-Date: 2024-03-08 11:52+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
-"Language-Team: zh_Hans_CN <LL@li.org>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_Hans_CN <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.14.0\n"
-"X-Generator: Poedit 3.4\n"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/__init__.py:25
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:17
+msgid "Function is not found."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:27
+msgid "fnschool"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:28
+msgid "Command line interface of fnschool."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:29
+msgid "Enjoy it."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:31
+msgid "The modules to run."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:33
+msgid "Canteen related functions."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:38
+msgid "The functions of canteen."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:14
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/path.py:35
 #, python-format
 msgid "Configuration file '%s' was copied to '%s'."
-msgstr "配置文件 “%s” 被复制到 “%s” 。"
+msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:69
-msgid "Please configure operator."
-msgstr "请设置经办人。"
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:169
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:136
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:141
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:156
 #, python-format
 msgid "%s can't change."
-msgstr "%s 无法转换。"
+msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:174
-#, python-format
-msgid "%s   can't change."
-msgstr "%s  无法转换。"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:19
+msgid "Please update your configuration file."
+msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:189
-#, python-format
-msgid "%s can't change"
-msgstr "%s 无法转换"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:22
+msgid "Ok! it was configured. (enter any key)"
+msgstr ""
+
+#~ msgid "Configuration file '%s' was copied to '%s'."
+#~ msgstr "配置文件 “%s” 被复制到 “%s” 。"
+
+#~ msgid "Please configure operator."
+#~ msgstr "请设置经办人。"
+
+#~ msgid "%s can't change."
+#~ msgstr "%s 无法转换。"
+
+#~ msgid "%s   can't change."
+#~ msgstr "%s  无法转换。"
+
+#~ msgid "%s can't change"
+#~ msgstr "%s 无法转换"
+

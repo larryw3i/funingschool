@@ -31,7 +31,7 @@ class Bill:
 
     @property
     def time_nodes(self):
-       if (self._time_nodes) < 1:
+        if (self._time_nodes) < 1:
             with open(canteen_data_fpath, 'r') as f:
                 self._time_nodes = tomllib.load(f)
 
