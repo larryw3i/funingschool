@@ -738,7 +738,7 @@ class WorkBook:
                 file_path = self.bill.org_name[-4:] + ".xlsx"
 
         if not Path(file_path).exists():
-            print_error(_("File '%s' doesn't exist."))
+            print_error(_("File '%s' doesn't exist.") % (file_path))
             sys.exit()
 
         chwb = load_workbook(file_path)
@@ -824,6 +824,11 @@ class WorkBook:
                 count = row[food_count_index].value
                 unit = row[food_unit_index].value
                 total_price = row[food_total_price_index].value
+
+                print(
+                    name, count, unit, total_price, is_residue
+                )
+
                 if row[food_check_date_index].value:
                     check_date = row[food_check_date_index].value.split("-")
                     check_date = datetime(
@@ -834,6 +839,7 @@ class WorkBook:
                     last_check_date = check_date
                 else:
                     check_date = last_check_date
+
                 if not is_residue:
                     count = self.clean_food_count(name, count, unit)
 
@@ -883,7 +889,10 @@ class WorkBook:
                     r_total_price += total_price
                     isht_entry_index += 1
 
-            if not row[6].value and cssheet.cell(row[0].row + 1, 7).value:
+            if (
+                not row[food_name_index].value 
+                and cssheet.cell(row[0].row + 1, food_name_index +1 ).value
+            ):
                 is_residue = True
 
         isheet.cell(isht_form_index_end, 4, r_total_price)
@@ -1845,12 +1854,38 @@ class WorkBook:
         wb = self.get_workbook()
         wb.save(self.get_main_spreadsheet_path())
         print(f"'{self.get_main_spreadsheet_path()}' saved.")
+    
+    def print_dir_was_created_info(self,dir_path):
+        print_info(
+            _("directory %s was created.") % (dir_path)
+        )
+        
+
+    def get_profile_data_dpath(self):
+        dpath = user_data_dir / self.bill.profile.label
+        if not dpath.exists():
+            os.makedirs(dpath)
+            self.print_dir_was_created_info(dpath)
+        return dpath
+
+    def get_profile_copy_data_dpath(self):
+        dpath = self.get_profile_data_dpath()
+        dpath = dpath / "copy"
+        if not dpath.exists():
+            os.makedirs(dpath)
+            self.print_dir_was_created_info(dpath)
+        return dpath
 
     def copy_workbook(self, file_path=None):
-        file_path = file_path or Path(
-            Path.cwd(),
-            self.get_main_spreadsheet_path()[:-6] + f".{uuid.uuid4()}.xlsx",
-        )
+        if file_path:
+            file_path = file_path
+        else:
+            file_path = self.get_main_spreadsheet_path()
+            file_path = file_path.as_posix()
+            file_path = file_path.split(os.sep)[-1]
+            file_path = file_path[:-5] + f".{uuid.uuid4()}.xlsx"
+            file_path = self.get_profile_copy_data_dpath() / file_path
+        
         wb = self.get_workbook()
         wb.save(file_path)
         print(f"'{file_path}' saved.")
