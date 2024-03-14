@@ -1,4 +1,3 @@
-
 import os
 import sys
 from pathlib import Path
@@ -10,16 +9,20 @@ from fnschool.path import *
 from fnschool.canteen import *
 from fnschool.canteen.path import *
 
+
 class Profile:
     def __init__(
         self, label=None, name=None, email=None, org_name=None, suppliers=None
     ):
-        self.label = label
+        self._label = label
         self.name = name
         self.email = email
         self.org_name = org_name
         self.suppliers = suppliers
 
+    @property
+    def label(self):
+        return self._label.replace(" ", "")
 
     def get_profile_by_label(self, label):
         profiles = self.get_profiles()
@@ -28,22 +31,22 @@ class Profile:
                 return f
 
         return None
-    
+
     def get_profile0(self):
         profiles = self.get_profiles()
         if len(profiles) > 0:
             profile = profiles[0]
             return profile
-        
+
         return None
 
     def get_profiles(self):
         profiles = []
         _profiles = None
-        
-        with open(profiles_fpath,'r') as f:
+
+        with open(canteen_config_fpath, "rb") as f:
             _profiles = tomllib.load(f)
-            _profiles = profiles["canteen"]["profiles"]
+            _profiles = _profiles.get("canteen").get("profiles")
 
         for _f in _profiles:
             profiles.append(

@@ -3,6 +3,8 @@ import sys
 from pathlib import Path
 import shutil
 import getpass
+import platform
+import subprocess
 
 from appdirs import AppDirs
 from fnschool.log import *
@@ -35,3 +37,15 @@ if not config_fpath.exists():
         _("Configuration file '%s' was copied to '%s'.")
         % (config0_fpath, config_fpath)
     )
+
+def open_sys_explorer(dest = None):
+    sys_platform = platform.platform()
+    explorer_bin = (
+        "explorer" if "Windows" in sys_platform else 
+        "open" if "macOS" in sys_platform else
+        "nautilus"
+    )
+    dest = dest if Path(dest).exists() else Path.home()
+    subprocess.Popen([explorer_bin, dest])
+
+

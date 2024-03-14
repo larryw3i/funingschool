@@ -1,6 +1,12 @@
 import os
 import sys
 
+import pandas as pd
+import numpy as np
+import uuid
+
+from datetime import datetime
+from openpyxl import load_workbook
 from openpyxl.styles import *
 from openpyxl.formatting.rule import *
 from openpyxl.styles.differential import *
@@ -11,6 +17,7 @@ from openpyxl.utils import range_boundaries
 from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.bill import *
+from fnschool.canteen.path import *
 
 
 class WorkBook:
@@ -306,9 +313,7 @@ class WorkBook:
 
         wb = self.get_workbook()
         wb.active = isheet
-        print_info(
-            f"Sheet '{self.inventory_sheet_name}' was updated."
-        )
+        print_info(f"Sheet '{self.inventory_sheet_name}' was updated.")
 
     def update_check_sheet_by_time_node_m1(self):
         cksheet = self.get_check_sheet()
@@ -367,9 +372,7 @@ class WorkBook:
             for f in foods
             if (
                 not f.is_residue
-                and self.bill.times_are_same_year_month(
-                    f.check_date, time_end
-                )
+                and self.bill.times_are_same_year_month(f.check_date, time_end)
             )
         ]
         wfoods = [f for f in foods if not f.is_negligible]
@@ -417,9 +420,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = cvsheet
 
-        print_info(
-            f"Sheet '{self.conver_sheet_name}' was updated."
-        )
+        print_info(f"Sheet '{self.conver_sheet_name}' was updated.")
 
     def get_food_form_index_by_time_node_m1(self, sheet):
         _, time_end = self.bill.get_time_nodes_m1()
@@ -718,10 +719,32 @@ class WorkBook:
             else count
         )
 
-    def update_check_inventory_sheet_from_cen_hang_xlsx(self):
+    def update_check_inventory_sheet_from_changsheng(
+        self,
+        file_path=None,
+    ):
         cksheet = self.get_check_sheet()
-        chwb = load_workbook(self.bill.org_name[-4:] + ".xlsx")
-        chsheet = chwb["客户送货明细报表"]
+        cssheet = None
+        cssheet_name = "客户商品销售报表"
+        if not file_path:
+            print_info(
+                _(
+                    "Please enter the file name of spreadsheet "
+                    + "Changsheng provided:"
+                )
+            )
+            file_path = input(">_ ")
+            if not Path(file_path).exists():
+                file_path = self.bill.org_name[-4:] + ".xlsx"
+
+        if not Path(file_path).exists():
+            print_error(_("File '%s' doesn't exist."))
+            sys.exit()
+
+        chwb = load_workbook(file_path)
+
+        cssheet = chwb[cssheet_name]
+
         is_residue = False
         last_check_date = None
         foods = self.food.get_food_list_from_check_sheet()
@@ -746,8 +769,8 @@ class WorkBook:
             for cell in row:
                 cell.value = ""
 
-        for row in chsheet.iter_rows(
-            min_row=2, max_row=chsheet.max_row, min_col=1, max_col=13
+        for row in cssheet.iter_rows(
+            min_row=2, max_row=cssheet.max_row, min_col=1, max_col=13
         ):
             if row[6].value:
                 name = row[6].value
@@ -813,8 +836,9 @@ class WorkBook:
                     r_total_price += total_price
                     isht_entry_index += 1
 
-            if not row[6].value and chsheet.cell(row[0].row + 1, 7).value:
+            if not row[6].value and cssheet.cell(row[0].row + 1, 7).value:
                 is_residue = True
+
         isheet.cell(isht_form_index_end, 4, r_total_price)
         isheet.cell(isht_form_index_end, 6, r_total_price)
 
@@ -823,9 +847,7 @@ class WorkBook:
         self.clear_check_df()
         wb = self.get_workbook()
         wb.active = cksheet
-        print_info(
-            f"Sheet '{self.check_sheet_name}' was updated."
-        )
+        print_info(f"Sheet '{self.check_sheet_name}' was updated.")
 
     def update_purchase_sum_sheet_by_time_nodes_m1(self):
         time_start, time_end = self.bill.get_time_nodes_m1()
@@ -854,9 +876,7 @@ class WorkBook:
             for f in foods
             if (
                 not f.is_residue
-                and self.bill.times_are_same_year_month(
-                    f.check_date, time_end
-                )
+                and self.bill.times_are_same_year_month(f.check_date, time_end)
             )
         ]
         wfoods = [f for f in foods if not f.is_negligible]
@@ -886,9 +906,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = pssheet
 
-        print_info(
-            f"Sheet '{self.purchase_sum_sheet_name}' was updated."
-        )
+        print_info(f"Sheet '{self.purchase_sum_sheet_name}' was updated.")
 
     def update_consuming_sum_sheet(self):
         cssheet = self.get_consuming_sum_sheet()
@@ -932,9 +950,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = cssheet
 
-        print_info(
-            f"Sheet '{self.consuming_sum_sheet_name}' was updated."
-        )
+        print_info(f"Sheet '{self.consuming_sum_sheet_name}' was updated.")
 
     def update_consuming_sheet_by_time_node_m1(self, quiet=False):
         self.update_pre_consuming_sheet_m1(quiet)
@@ -1365,9 +1381,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = csheet
 
-        print_info(
-            f"Sheet '{self.consuming_sheet_name}' was formatted."
-        )
+        print_info(f"Sheet '{self.consuming_sheet_name}' was formatted.")
 
     def format_warehousing_sheet(self):
         wsheet = self.get_warehousing_sheet()
@@ -1436,9 +1450,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = wsheet
 
-        print_info(
-            f"Sheet '{self.warehousing_sheet_name}' was formatted."
-        )
+        print_info(f"Sheet '{self.warehousing_sheet_name}' was formatted.")
 
     def update_unwarehousing_sheet_by_time_node_m1(self):
         unwsheet = self.get_unwarehousing_sheet()
@@ -1462,9 +1474,7 @@ class WorkBook:
         row_indexes = []
         for form_index in form_indexes:
             form_index_start, form_index_end = form_index
-            unwsheet.cell(
-                form_index_start, 1, f" 学校名称：{self.bill.org_name}"
-            )
+            unwsheet.cell(form_index_start, 1, f" 学校名称：{self.bill.org_name}")
             unwsheet.cell(
                 form_index_start,
                 4,
@@ -1524,9 +1534,7 @@ class WorkBook:
                         break
                 break
 
-        print_info(
-            f"Sheet '{self.unwarehousing_sheet_name}' was updated."
-        )
+        print_info(f"Sheet '{self.unwarehousing_sheet_name}' was updated.")
 
     def update_warehousing_sheet_by_time_node_m1(self):
         wsheet = self.get_warehousing_sheet()
@@ -1693,9 +1701,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = wsheet
 
-        print_info(
-            f"Sheet '{self.warehousing_sheet_name}' was updated."
-        )
+        print_info(f"Sheet '{self.warehousing_sheet_name}' was updated.")
 
     def get_unit_df(self):
         if not self._unit_df is None:
@@ -1749,10 +1755,29 @@ class WorkBook:
             unit_sheet.cell(entry_row_index + index, 1, name)
 
     def get_main_spreadsheet_path(self):
-        return self._main_spreadsheet_path or self.get_main_spreadsheet0_path()
+        return (
+            self._main_spreadsheet_path
+            or self.get_main_spreadsheet_path_of_profile()
+        )
+
+    def get_main_spreadsheet_path_of_profile(self):
+        s_fpath = workbook0_fpath
+        ps_fpath = user_data_dir / self.profile.label / "workbook.xlsx"
+        if not ps_fpath.parent.exists():
+            os.makedirs(ps_fpath.parent)
+            print_info(_("Directory '%s' has been made.") % (ps_fpath.parent))
+
+        if not ps_fpath.exists():
+            shutil.copy(s_fpath, ps_fpath)
+            print_info(
+                _("Workbook '%s' was copied to '%s'.") % (s_fpath, ps_fpath)
+            )
+        print_info(_("Workbook '%s' is in use.") % ps_fpath)
+        return ps_fpath
 
     def get_main_spreadsheet0_path(self):
-        return Path(Path.cwd(), "xx小学食堂台账0.xlsx")
+        _path = workbook0_fpath
+        return _path
 
     def set_main_spreadsheet_path(self, file_path=None):
         if not Path(file_path).exists():
@@ -1789,5 +1814,6 @@ class WorkBook:
 
     def get_check_sheet(self):
         return self.get_sheet(self.check_sheet_name)
+
 
 # The end.

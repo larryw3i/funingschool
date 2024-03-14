@@ -34,7 +34,7 @@ def read_cli():
     )
     parser_canteen.add_argument(
         "action",
-        choices=["mk_mspreadsheet","help_friends"],
+        choices=["mk_mspreadsheet", "help_friends"],
         help=_("The functions of canteen."),
     )
     parser_canteen.set_defaults(func=set_canteen)

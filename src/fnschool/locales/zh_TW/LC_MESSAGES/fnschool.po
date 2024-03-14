@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-13 16:58+0800\n"
+"POT-Creation-Date: 2024-03-13 23:04+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -52,9 +52,17 @@ msgstr ""
 msgid "Configuration file '%s' was copied to '%s'."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:136
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:141
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:156
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:53
+msgid "Please update the codes for your supplier."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:66
+msgid "Update completely!"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:152
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:157
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:172
 #, python-format
 msgid "%s can't change."
 msgstr ""
@@ -65,6 +73,30 @@ msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:22
 msgid "Ok! it was configured. (enter any key)"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:732
+msgid "Please enter the file name of spreadsheet Changsheng provided:"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:743
+#, python-format
+msgid "File '%s' doesn't exist."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1792
+#, python-format
+msgid "Directory '%s' has been made."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1798
+#, python-format
+msgid "Workbook '%s' was copied to '%s'."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1803
+#, python-format
+msgid "Workbook '%s' is in use."
 msgstr ""
 
 #~ msgid "Configuration file '%s' was copied to '%s'."
@@ -80,5 +112,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "%s can't change"
+#~ msgstr ""
+
+#~ msgid "Please enter the file name of spreadsheet Changsheng provided."
 #~ msgstr ""
 

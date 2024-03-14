@@ -1,6 +1,9 @@
 import os
 import sys
+from datetime import datetime, date, time
+
 import colorama
+
 from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.workbook import *
@@ -17,6 +20,7 @@ class Bill:
         self._quiet = False
         self._profile = None
         pass
+
     @property
     def food(self):
         if not self._food:
@@ -32,8 +36,15 @@ class Bill:
     @property
     def time_nodes(self):
         if (self._time_nodes) < 1:
-            with open(canteen_data_fpath, 'r') as f:
-                self._time_nodes = tomllib.load(f)
+            with open(canteen_data_fpath, "rb") as f:
+                _time_nodes = tomllib.load(f)
+                self._time_nodes = [
+                    [
+                        datetime.combine(t0, time(0, 0, 0)),
+                        datetime.combine(t1, time(0, 0, 0)),
+                    ]
+                    for t0, t1 in _time_nodes
+                ]
 
         return self._time_nodes
 
@@ -42,19 +53,22 @@ class Bill:
         pass
 
     def make_spreadsheet_of_month(self):
-        self.profile = Profile().get_profiles()[0]
-
-        # canteen.workbook.update_check_inventory_sheet_from_cen_hang_xlsx()
-        # canteen.workbook.update_consuming_sheet_by_time_node_m1()
-        # canteen.workbook.update_inventory_sheet_by_time_node_m1()
-        # canteen.workbook.update_check_sheet_by_time_node_m1()
-        # canteen.workbook.update_warehousing_sheet_by_time_node_m1()
-        # canteen.workbook.update_unwarehousing_sheet_by_time_node_m1()
-        # canteen.workbook.update_consuming_sum_sheet()
-        # canteen.workbook.update_purchase_sum_sheet_by_time_nodes_m1()
-        # canteen.workbook.update_cover_sheet()
-        # canteen.workbook.update_food_sheets_by_time_nodes_m1()
-        print_info("Hello!")
+        self.set_profile(Profile().get_profiles()[0])
+        if "昌盛" in self.profile.suppliers:
+            self.workbook.update_check_inventory_sheet_from_changsheng()
+        else:
+            print_info(_("Please update the codes for your supplier."))
+            return
+        self.workbook.update_consuming_sheet_by_time_node_m1()
+        self.workbook.update_inventory_sheet_by_time_node_m1()
+        self.workbook.update_check_sheet_by_time_node_m1()
+        self.workbook.update_warehousing_sheet_by_time_node_m1()
+        self.workbook.update_unwarehousing_sheet_by_time_node_m1()
+        self.workbook.update_consuming_sum_sheet()
+        self.workbook.update_purchase_sum_sheet_by_time_nodes_m1()
+        self.workbook.update_cover_sheet()
+        self.workbook.update_food_sheets_by_time_nodes_m1()
+        print_info(_("Update completely!"))
         pass
 
     @property
@@ -63,14 +77,20 @@ class Bill:
             return self._profile
         return None
 
-    @profile.setter
-    def profile(self,label):
-        profiles = Profile().get_profiles()
-        for p in profiles:
-            if p.label == label:
-                self._profile = p
-        self._profile = None
-        
+    def set_profile(self, profile):
+        if isinstance(profile, str):
+            profiles = Profile().get_profiles()
+            for p in profiles:
+                if p.label == label:
+                    self._profile = p
+                    break
+        else:
+            self._profile = profile
+
+    def get_year_month_of_time_node_m1(self):
+        tn = self.get_time_nodes_m1()
+        ym = tn.strftime("%Y%m")
+        return ym
 
     def times_are_same_year_month(self, *times):
         time0 = times[0]
@@ -78,7 +98,6 @@ class Bill:
             if time0.strftime("%Y%m") != time.strftime("%Y%m"):
                 return False
         return True
-
 
     def set_quiet(self, value=False):
         self._quiet = value
@@ -176,5 +195,6 @@ class Bill:
             cnmoney_strs.append("整")
 
         return "".join(cnmoney_strs)
+
 
 # The end.
