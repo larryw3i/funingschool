@@ -344,10 +344,8 @@ class WorkBook:
 
         wb = self.get_workbook()
         wb.active = cksheet
-        print(
-            Fore.GREEN
-            + f"Sheet '{self.check_sheet_name}' was updated."
-            + Style.RESET_ALL
+        print_info(
+            f"Sheet '{self.check_sheet_name}' was updated."
         )
 
     def unmerge_cells_of_sheet(self, sheet):
@@ -825,10 +823,6 @@ class WorkBook:
                 unit = row[food_unit_index].value
                 total_price = row[food_total_price_index].value
 
-                print(
-                    name, count, unit, total_price, is_residue
-                )
-
                 if row[food_check_date_index].value:
                     check_date = row[food_check_date_index].value.split("-")
                     check_date = datetime(
@@ -1165,10 +1159,8 @@ class WorkBook:
 
         wb = self.get_workbook()
         wb.active = csheet
-        print(
-            Fore.GREEN
-            + f"Sheet '{self.consuming_sheet_name}' was updated."
-            + Style.RESET_ALL
+        print_info(
+            f"Sheet '{self.consuming_sheet_name}' was updated."
         )
 
     def update_pre_consuming_sheet_m1(self, quiet=False):
@@ -1210,12 +1202,10 @@ class WorkBook:
 
         if not quiet:
             self.save_workbook()
-            print(
-                Fore.GREEN
-                + f"Sheet '{sheet_title}' was updated.\n"
+            print_info(
+                f"Sheet '{sheet_title}' was updated.\n"
                 + f"Press any key to continue when you have "
                 + f"completed the foods allocation."
-                + Style.RESET_ALL
             )
             input()
 
@@ -1850,10 +1840,10 @@ class WorkBook:
         self._workbook = None
 
     def save_workbook(self, info="Saving workbook. . ."):
-        print(info)
+        print_info(info)
         wb = self.get_workbook()
         wb.save(self.get_main_spreadsheet_path())
-        print(f"'{self.get_main_spreadsheet_path()}' saved.")
+        print_info(f"'{self.get_main_spreadsheet_path()}' saved.")
     
     def print_dir_was_created_info(self,dir_path):
         print_info(
@@ -1888,7 +1878,7 @@ class WorkBook:
         
         wb = self.get_workbook()
         wb.save(file_path)
-        print(f"'{file_path}' saved.")
+        print_info(f"'{file_path}' saved.")
 
     def get_sheet(self, name):
         wb = self.get_workbook()

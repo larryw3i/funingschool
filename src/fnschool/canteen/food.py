@@ -122,11 +122,16 @@ class Food:
 
     def convert_text_line_to_food(self, text_line):
         values = re.split("\s+", text_line)
-        content_error_str = f"line '{text_line}' has been discarded."
+        content_error_str = _(f"line '%s' has been discarded.") % (text_line)
+        values_len = 6
         if "" in values:
             values.remove("")
-        if len(values) != 6:
-            print(content_error_str)
+        if len(values) != values_len:
+            print_error(
+                content_error_str,
+                "\n",
+                _("values length is less than %s.") % (values_len)
+            )
             return None
         (
             food_uuid,
@@ -141,11 +146,21 @@ class Food:
             str.isnumeric(food_count.replace(".", ""))
             and str.isnumeric(food_total_price.replace(".", ""))
         ):
-            print(1, content_error_str)
+            print_error(
+                content_error_str,
+                "\n",
+                _("Food count: %s") % (food_count),
+                "\n",
+                _("Food total price: %s") % (food_total_price)
+            )
             return None
 
         if not (str.isnumeric(food_check_date) and len(food_check_date) == 8):
-            print(2, content_error_str)
+            print_error(
+                content_error_str,
+                "\n",
+                _("Food check date: %s") % (food_check_date)
+            )
             return None
 
         food_check_date = datetime(

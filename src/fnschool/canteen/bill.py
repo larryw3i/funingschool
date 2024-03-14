@@ -152,12 +152,12 @@ class Bill:
                 try:
                     number = float(number)
                 except:
-                    print(_("%s can't change.") % number)
+                    print_info(_("%s can't change.") % number)
             else:
                 try:
                     number = int(number)
                 except:
-                    print(_("%s can't change.") % number)
+                    print_info(_("%s can't change.") % number)
 
         if type(number) == float:
             real_numbers = []
@@ -172,7 +172,7 @@ class Bill:
                     real_numbers.append(int(round(number / (10**i), 2) % 10))
 
         else:
-            print(_("%s can't change.") % number)
+            print_info(_("%s can't change.") % number)
 
         zflag = 0
         start = len(real_numbers) - 3
