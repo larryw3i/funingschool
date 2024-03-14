@@ -719,7 +719,7 @@ class WorkBook:
             else count
         )
 
-    def update_check_inventory_sheet_from_changsheng(
+    def update_check_inventory_sheet_from_changsheng_like(
         self,
         file_path=None,
     ):
@@ -760,6 +760,7 @@ class WorkBook:
         r_total_price = 0.0
 
         self.unmerge_cells_of_sheet(isheet)
+
         for row in isheet.iter_rows(
             min_row=isht_food_row_start,
             max_row=isht_food_row_end,
@@ -769,16 +770,62 @@ class WorkBook:
             for cell in row:
                 cell.value = ""
 
+        food_name_index = 0
+        food_count_index = 0
+        food_total_price_index = 0 
+        food_unit_index = 0
+        food_check_date_index = 0
+
+        for col_index in range(1, cssheet.max_column+1):
+            cell = cssheet.cell(1,col_index)
+            cell_value = cell.value
+            col_index = col_index - 1
+            if not cell_value:
+                continue
+            cell_value = str(cell_value.replace(' ',''))
+            if cell_value in [
+                "商品名称"
+            ]:
+                food_name_index = col_index
+                continue
+
+            elif cell_value in [
+                "单位"
+            ]:
+                food_unit_index = col_index
+                continue
+
+            elif cell_value in [
+                "数量"
+            ]:
+                food_count_index = col_index
+                continue
+
+            elif cell_value in [
+                "金额"
+            ]:
+                food_total_price_index = col_index
+                continue
+
+            elif cell_value in [
+                "送货日期"
+            ]:
+                food_check_date_index = col_index
+                continue
+
         for row in cssheet.iter_rows(
-            min_row=2, max_row=cssheet.max_row, min_col=1, max_col=13
+            min_row=2, 
+            max_row=cssheet.max_row,
+            min_col=1, 
+            max_col=cssheet.max_column
         ):
-            if row[6].value:
-                name = row[6].value
-                count = row[9].value
-                unit = row[8].value
-                total_price = row[12].value
-                if row[1].value:
-                    check_date = row[1].value.split("-")
+            if row[food_name_index].value:
+                name = row[food_name_index].value
+                count = row[food_count_index].value
+                unit = row[food_unit_index].value
+                total_price = row[food_total_price_index].value
+                if row[food_check_date_index].value:
+                    check_date = row[food_check_date_index].value.split("-")
                     check_date = datetime(
                         int(check_date[0]),
                         int(check_date[1]),

@@ -55,7 +55,7 @@ class Bill:
     def make_spreadsheet_of_month(self):
         self.set_profile(Profile().get_profiles()[0])
         if "昌盛" in self.profile.suppliers:
-            self.workbook.update_check_inventory_sheet_from_changsheng()
+            self.workbook.update_check_inventory_sheet_from_changsheng_like()
         else:
             print_info(_("Please update the codes for your supplier."))
             return
