@@ -46,7 +46,7 @@ def install_dependencies():
 def update_message():
     os.system(
         get_activate_cmd()
-        + f"pybabel extract  {fnschool_path} -o {pot_path};"
+        + f"pybabel extract {fnschool_path} -o {pot_path};"
         + f"pybabel update -i {pot_path} -d {locale_dir} -D {app_name}"
     )
 

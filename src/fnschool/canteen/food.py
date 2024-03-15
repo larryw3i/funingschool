@@ -9,7 +9,7 @@ from fnschool.canteen.workbook import *
 class Food:
     def __init__(
         self,
-        canteen,
+        bill,
         name=None,
         fid=None,
         unit_price=0.0,
@@ -20,17 +20,17 @@ class Food:
         is_residue=False,
         is_blank=False,
     ):
-        self.canteen = canteen
+        self.bill = bill
         self.name = name
         self.fid = fid
-        self.unit_price = unit_price
-        self.total_price = total_price
+        self._unit_price = unit_price
+        self._total_price = total_price
         self.check_date = check_date
-        self.count = count
+        self._count = count
         self.is_residue = is_residue
         self.consuming_list = consuming_list or []
-        self.default_get_food_list_method = None
-        self.default_food_list_file_path = None
+        self.get_food_list_method0 = None
+        self.food_list_fpath0 = None
         self._main_spreadsheet_path = None
         self._base_class_df = None
         self._check_df = None
@@ -41,8 +41,29 @@ class Food:
         pass
 
     @property
+    def unit_price(self):
+        if self._unit_price:
+            return self._unit_price
+        if self._total_price and self._count:
+            return self._total_price/self._count
+    
+    @property
+    def count(self):
+        if self._count:
+            return self._count
+        if self._total_price and self._unit_price:
+            return self._total_price / self._unit_price
+
+    @property
+    def total_price(self):
+        if self._total_price:
+            return self._total_price
+        if self._unit_price and self._count:
+            return self._unit_price * self._count
+
+    @property
     def workbook(self):
-        return self.canteen.workbook
+        return self.bill.workbook
 
     def get_name_withresidue_mark(self):
         return (
@@ -63,7 +84,7 @@ class Food:
 
     @property
     def workbook(self):
-        return self.canteen.workbook
+        return self.bill.workbook
 
     def get_count(self):
         return self.count
@@ -99,11 +120,11 @@ class Food:
             if self.name in row.to_list():
                 return index
 
-    def set_default_get_food_list_method(self, method_n=None):
-        self.default_get_food_list_method = str(method_n)
+    def set_get_food_list_method0(self, method_n=None):
+        self.get_food_list_method0 = str(method_n)
 
-    def set_default_food_list_file_path(self, file_path=None):
-        self.default_food_list_file_path = file_path
+    def set_food_list_fpath0(self, file_path=None):
+        self.food_list_fpath0 = file_path
 
     def get_checked_foods(self):
         food_list = self.get_food_list_from_check_sheet()
@@ -130,7 +151,7 @@ class Food:
             print_error(
                 content_error_str,
                 "\n",
-                _("values length is less than %s.") % (values_len)
+                _("values length is less than %s.") % (values_len),
             )
             return None
         (
@@ -151,7 +172,7 @@ class Food:
                 "\n",
                 _("Food count: %s") % (food_count),
                 "\n",
-                _("Food total price: %s") % (food_total_price)
+                _("Food total price: %s") % (food_total_price),
             )
             return None
 
@@ -159,7 +180,7 @@ class Food:
             print_error(
                 content_error_str,
                 "\n",
-                _("Food check date: %s") % (food_check_date)
+                _("Food check date: %s") % (food_check_date),
             )
             return None
 
@@ -174,7 +195,7 @@ class Food:
 
         return Food(
             fid=food_uuid,
-            canteen=self.canteen,
+            canteen=self.bill,
             name=food_name,
             check_date=food_check_date,
             count=food_count,
@@ -193,11 +214,11 @@ class Food:
         return self.name in class_list
 
     def get_new_foods_total_price(self):
-        foods = self.canteen.get_food_list()
+        foods = self.bill.get_food_list()
         return sum([food.total_price for food in foods if not food.is_residue])
 
     def get_residue_total_price(self):
-        foods = self.canteen.get_food_list()
+        foods = self.bill.get_food_list()
         return sum([food.total_price for food in foods if food.is_residue])
 
     def get_purchased_count_of_residue(self, fid):
@@ -217,7 +238,7 @@ class Food:
             if not food.name_in_unit_sheet():
                 food_names.append(food.name)
         if len(food_names) > 0:
-            self.canteen.print_warning(
+            self.bill.print_warning(
                 "Adding '" + " ".join(food_names) + "' to unit sheet."
             )
             self.workbook.add_food_names_to_unit_sheet(food_names)
@@ -263,7 +284,7 @@ class Food:
             if not food.get_base_class_name():
                 food_names.append(food.name)
         if len(food_names) > 0:
-            self.canteen.print_error(
+            self.bill.print_error(
                 "Unclassified "
                 + ("Foods" if len(food_list) > 1 else "Food")
                 + ":\n"
@@ -281,12 +302,12 @@ class Food:
     def get_checked_foods_by_time_node_m1(self):
         return self.query_foods_by_time_node(
             self.get_food_list_from_check_sheet(),
-            self.canteen.get_time_nodes()[-1],
+            self.bill.get_time_nodes()[-1],
         )
 
     def query_foods_by_time_node(self, foods, time_node):
         time_start, time_end = time_node
-        time_nodes = self.canteen.get_time_nodes()
+        time_nodes = self.bill.get_time_nodes()
         time_node_index = time_nodes.index(time_node)
 
         if time_node_index < 1:
@@ -308,11 +329,11 @@ class Food:
         return None
 
     def get_foods_from_pre_consuming_sheet_by_time_nodes_m1(self):
-        time_start, time_end = self.canteen.get_time_nodes_m1()
+        time_start, time_end = self.bill.get_time_nodes_m1()
         time_nodes = [
             t
-            for t in self.canteen.get_time_nodes()
-            if self.canteen.times_are_same_year_month(t[0], time_end)
+            for t in self.bill.get_time_nodes()
+            if self.bill.times_are_same_year_month(t[0], time_end)
         ]
         foods = []
         for time_node in time_nodes:
@@ -328,7 +349,7 @@ class Food:
     def get_foods_from_pre_consuming_sheet_m1(self):
         foods = self.get_foods_from_pre_consuming_sheet(
             self.workbook.get_pre_consuming_sheet_name_by_time_node(
-                self.canteen.get_time_nodes()[-1]
+                self.bill.get_time_nodes()[-1]
             )
         )
         return foods

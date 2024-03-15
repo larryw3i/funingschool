@@ -9,7 +9,7 @@ import subprocess
 from appdirs import AppDirs
 from fnschool.log import *
 
-app_name = "fnschool"
+app_name = Path(__file__).parent.as_posix().split(os.sep)[-1]
 app_author = "larryw3i"
 user_name = getpass.getuser()
 
@@ -38,14 +38,15 @@ if not config_fpath.exists():
         % (config0_fpath, config_fpath)
     )
 
-def open_sys_explorer(dest = None):
+
+def open_sys_explorer(dest=None):
     sys_platform = platform.platform()
     explorer_bin = (
-        "explorer" if "Windows" in sys_platform else 
-        "open" if "macOS" in sys_platform else
-        "nautilus"
+        "explorer"
+        if "Windows" in sys_platform
+        else "open"
+        if "macOS" in sys_platform
+        else "nautilus"
     )
     dest = dest if Path(dest).exists() else Path.home()
     subprocess.Popen([explorer_bin, dest])
-
-

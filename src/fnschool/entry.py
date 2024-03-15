@@ -3,6 +3,9 @@ import sys
 
 from fnschool import *
 
+@property
+def verbose():
+    return os.getenv("FNSCHOOL_VERBOSE",False)
 
 def set_canteen(args):
     from fnschool.canteen import Bill

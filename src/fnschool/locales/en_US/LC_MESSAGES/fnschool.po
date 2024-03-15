@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-14 16:30+0800\n"
+"POT-Creation-Date: 2024-03-15 13:10+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -100,33 +100,58 @@ msgstr ""
 msgid "Ok! it was configured. (enter any key)"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:729
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:316
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:347
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:419
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:649
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:888
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:947
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:991
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1150
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1569
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1736
+#, python-format
+msgid "Sheet '%s' was updated."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:727
 msgid "Please enter the file name of spreadsheet Changsheng provided:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:739
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:737
 #, python-format
 msgid "File '%s' doesn't exist."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1814
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1416
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1485
+#, python-format
+msgid "Sheet '%s' was formatted."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1800
 #, python-format
 msgid "Directory '%s' has been made."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1819
-#, python-format
-msgid "Workbook '%s' was copied to '%s'."
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1805
+msgid "Workbook '{0}' was copied to '{1}'."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1821
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1807
 #, python-format
-msgid "Workbook '%s' is in use."
+msgid "Workbook '%s' has been used."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1850
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1832
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1864
 #, python-format
-msgid "directory %s was created."
+msgid "Workbook '%s' was saved."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1835
+#, python-format
+msgid "Directory %s was created."
 msgstr ""
 
 #~ msgid "Please refer to file  to customize your 'sett1ngs.py' file."
@@ -148,5 +173,77 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Please enter the file name of spreadsheet Changsheng provided."
+#~ msgstr ""
+
+#~ msgid "Workbook '%s' is in use."
+#~ msgstr ""
+
+#~ msgid "Function is not found."
+#~ msgstr ""
+
+#~ msgid "fnschool"
+#~ msgstr ""
+
+#~ msgid "Command line interface of fnschool."
+#~ msgstr ""
+
+#~ msgid "Enjoy it."
+#~ msgstr ""
+
+#~ msgid "The modules to run."
+#~ msgstr ""
+
+#~ msgid "Canteen related functions."
+#~ msgstr ""
+
+#~ msgid "The functions of canteen."
+#~ msgstr ""
+
+#~ msgid "Please update the codes for your supplier."
+#~ msgstr ""
+
+#~ msgid "Update completely!"
+#~ msgstr ""
+
+#~ msgid "line '%s' has been discarded."
+#~ msgstr ""
+
+#~ msgid "values length is less than %s."
+#~ msgstr ""
+
+#~ msgid "Food count: %s"
+#~ msgstr ""
+
+#~ msgid "Food total price: %s"
+#~ msgstr ""
+
+#~ msgid "Food check date: %s"
+#~ msgstr ""
+
+#~ msgid "Please update your configuration file."
+#~ msgstr ""
+
+#~ msgid "Ok! it was configured. (enter any key)"
+#~ msgstr ""
+
+#~ msgid "Please enter the file name of spreadsheet Changsheng provided:"
+#~ msgstr ""
+
+#~ msgid "File '%s' doesn't exist."
+#~ msgstr ""
+
+#~ msgid "Directory '%s' has been made."
+#~ msgstr ""
+
+#~ msgid "Workbook '%s' was copied to '%s'."
+#~ msgstr ""
+
+#~ msgid "Workbook '%s' has been used."
+#~ msgstr ""
+
+#~ msgid "directory %s was created."
+#~ msgstr ""
+
+#~ msgid "Workbook '%s' saved."
 #~ msgstr ""
 
