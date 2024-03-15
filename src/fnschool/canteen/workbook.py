@@ -15,6 +15,7 @@ from openpyxl.utils.cell import *
 
 from openpyxl.utils import range_boundaries
 from fnschool import *
+from fnschool.canteen import *
 from fnschool.canteen.food import *
 from fnschool.canteen.bill import *
 from fnschool.canteen.path import *
@@ -836,6 +837,13 @@ class WorkBook:
                     )
                 )
 
+            if (
+                not row[food_name_index].value
+                and cssheet.cell(row[0].row + 1, food_name_index + 1).value
+            ):
+                is_residue = True
+
+
         for csfood in csfoods:
                 added_foods = [
                     f
@@ -882,12 +890,6 @@ class WorkBook:
                         isheet.insert_rows(isht_row_index + 1, 1)
                     r_total_price += total_price
                     isht_entry_index += 1
-
-            if (
-                not row[food_name_index].value
-                and cssheet.cell(row[0].row + 1, food_name_index + 1).value
-            ):
-                is_residue = True
 
         isheet.cell(isht_form_index_end, 4, r_total_price)
         isheet.cell(isht_form_index_end, 6, r_total_price)

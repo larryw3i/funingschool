@@ -2,8 +2,8 @@ import os
 import sys
 
 from fnschool import *
+from fnschool.canteen import *
 from fnschool.canteen.bill import *
-from fnschool.canteen.workbook import *
 
 
 class Food:
@@ -386,3 +386,5 @@ class Food:
                 new_foods.append(food)
 
         return new_foods
+
+# The end.
