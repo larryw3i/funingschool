@@ -314,7 +314,7 @@ class WorkBook:
 
         wb = self.get_workbook()
         wb.active = isheet
-        print_info( _("Sheet '%s' was updated.") % (self.inventory_sheet_name) )
+        print_info(_("Sheet '%s' was updated.") % (self.inventory_sheet_name))
 
     def update_check_sheet_by_time_node_m1(self):
         cksheet = self.get_check_sheet()
@@ -345,7 +345,7 @@ class WorkBook:
 
         wb = self.get_workbook()
         wb.active = cksheet
-        print_info( _("Sheet '%s' was updated.") % ( self.check_sheet_name) )
+        print_info(_("Sheet '%s' was updated.") % (self.check_sheet_name))
 
     def unmerge_cells_of_sheet(self, sheet):
         if isinstance(sheet, str):
@@ -417,7 +417,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = cvsheet
 
-        print_info(_("Sheet '%s' was updated.") % self.cover_sheet_name )
+        print_info(_("Sheet '%s' was updated.") % self.cover_sheet_name)
 
     def get_food_form_index_by_time_node_m1(self, sheet):
         _, time_end = self.bill.get_time_nodes_m1()
@@ -647,7 +647,7 @@ class WorkBook:
             wb = self.get_workbook()
             wb.active = sheet
 
-            print_info(_("Sheet '%s' was updated.") % sheet.title )
+            print_info(_("Sheet '%s' was updated.") % sheet.title)
 
         for name in all_food_names:
             if self.includes_sheet(name):
@@ -798,7 +798,7 @@ class WorkBook:
             elif cell_value in ["送货日期"]:
                 food_check_date_index = col_index
                 continue
-        
+
         csfoods = []
         for row in cssheet.iter_rows(
             min_row=2,
@@ -825,15 +825,15 @@ class WorkBook:
 
                 if not is_residue:
                     count = self.clean_food_count(name, count, unit)
-                
+
                 csfoods.append(
                     Food(
                         self.bill,
-                        name = name,
-                        check_date = check_date,
-                        count = count,
-                        is_residue = is_residue,
-                        total_price = total_price,
+                        name=name,
+                        check_date=check_date,
+                        count=count,
+                        is_residue=is_residue,
+                        total_price=total_price,
                     )
                 )
 
@@ -843,9 +843,11 @@ class WorkBook:
             ):
                 is_residue = True
 
-
         for csfood in csfoods:
-                added_foods = [
+            added_foods = (
+                []
+                if not ckfoods
+                else [
                     f
                     for f in ckfoods
                     if (
@@ -855,41 +857,36 @@ class WorkBook:
                         and f.total_price == csfood.total_price
                     )
                 ]
+            )
 
+            if not ckfoods or len(added_foods) < 1:
+                cksheet.insert_rows(2, 1)
+                cksheet.cell(2, 1, str(uuid.uuid4()))
+                cksheet.cell(2, 1).font = Font(size=8)
+                cksheet.cell(2, 2, csfood.check_date.strftime("%Y%m%d"))
+                cksheet.cell(2, 3, csfood.name)
+                cksheet.cell(2, 4, csfood.count)
+                cksheet.cell(2, 5, csfood.total_price)
+                cksheet.cell(2, 6, "Y" if csfood.is_residue else "")
 
+            if csfood.is_residue:
+                isht_row_index = isht_food_row_start + isht_entry_index
+                isheet.cell(isht_row_index, 1, name)
+                isheet.cell(isht_row_index, 2, self.food.get_unit_name(name))
+                isheet.cell(isht_row_index, 3, count)
+                isheet.cell(isht_row_index, 4, total_price)
+                isheet.cell(isht_row_index, 5, count)
+                isheet.cell(isht_row_index, 6, total_price)
                 if (
-                    not ckfoods
-                    or len(added_foods)  < 1
-                ):
-                    cksheet.insert_rows(2, 1)
-                    cksheet.cell(2, 1, str(uuid.uuid4()))
-                    cksheet.cell(2, 1).font = Font(size=8)
-                    cksheet.cell(2, 2, csfood.check_date.strftime("%Y%m%d"))
-                    cksheet.cell(2, 3, csfood.name)
-                    cksheet.cell(2, 4, csfood.count)
-                    cksheet.cell(2, 5, csfood.total_price)
-                    cksheet.cell(2, 6, "Y" if csfood.is_residue else "")
-
-                if csfood.is_residue:
-                    isht_row_index = isht_food_row_start + isht_entry_index
-                    isheet.cell(isht_row_index, 1, name)
-                    isheet.cell(
-                        isht_row_index, 2, self.food.get_unit_name(name)
+                    isheet.cell(isht_row_index + 1, 1).value
+                    and isheet.cell(isht_row_index + 1, 1).value.replace(
+                        " ", ""
                     )
-                    isheet.cell(isht_row_index, 3, count)
-                    isheet.cell(isht_row_index, 4, total_price)
-                    isheet.cell(isht_row_index, 5, count)
-                    isheet.cell(isht_row_index, 6, total_price)
-                    if (
-                        isheet.cell(isht_row_index + 1, 1).value
-                        and isheet.cell(isht_row_index + 1, 1).value.replace(
-                            " ", ""
-                        )
-                        == "合计"
-                    ):
-                        isheet.insert_rows(isht_row_index + 1, 1)
-                    r_total_price += total_price
-                    isht_entry_index += 1
+                    == "合计"
+                ):
+                    isheet.insert_rows(isht_row_index + 1, 1)
+                r_total_price += total_price
+                isht_entry_index += 1
 
         isheet.cell(isht_form_index_end, 4, r_total_price)
         isheet.cell(isht_form_index_end, 6, r_total_price)
@@ -899,7 +896,7 @@ class WorkBook:
         self.clear_check_df()
         wb = self.get_workbook()
         wb.active = cksheet
-        print_info(_("Sheet '%s' was updated.") % self.check_sheet_name )
+        print_info(_("Sheet '%s' was updated.") % self.check_sheet_name)
 
     def update_purchase_sum_sheet_by_time_nodes_m1(self):
         time_start, time_end = self.bill.get_time_nodes_m1()
@@ -958,7 +955,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = pssheet
 
-        print_info( _("Sheet '%s' was updated.") % self.purchase_sum_sheet_name )
+        print_info(_("Sheet '%s' was updated.") % self.purchase_sum_sheet_name)
 
     def update_consuming_sum_sheet(self):
         cssheet = self.get_consuming_sum_sheet()
@@ -1002,7 +999,9 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = cssheet
 
-        print_info(_("Sheet '%s' was updated.") % self.consuming_sum_sheet_name )
+        print_info(
+            _("Sheet '%s' was updated.") % self.consuming_sum_sheet_name
+        )
 
     def update_consuming_sheet_by_time_node_m1(self, quiet=False):
         self.update_pre_consuming_sheet_m1(quiet)
@@ -1161,7 +1160,7 @@ class WorkBook:
 
         wb = self.get_workbook()
         wb.active = csheet
-        print_info(_("Sheet '%s' was updated.") % self.consuming_sheet_name )
+        print_info(_("Sheet '%s' was updated.") % self.consuming_sheet_name)
 
     def update_pre_consuming_sheet_m1(self, quiet=False):
         sheet = self.get_pre_consuming_sheet_m1()
@@ -1427,7 +1426,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = csheet
 
-        print_info(_("Sheet '%s' was formatted.") % self.consuming_sheet_name )
+        print_info(_("Sheet '%s' was formatted.") % self.consuming_sheet_name)
 
     def format_warehousing_sheet(self):
         wsheet = self.get_warehousing_sheet()
@@ -1496,7 +1495,9 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = wsheet
 
-        print_info(_("Sheet '%s' was formatted.") % self.warehousing_sheet_name )
+        print_info(
+            _("Sheet '%s' was formatted.") % self.warehousing_sheet_name
+        )
 
     def update_unwarehousing_sheet_by_time_node_m1(self):
         unwsheet = self.get_unwarehousing_sheet()
@@ -1580,7 +1581,9 @@ class WorkBook:
                         break
                 break
 
-        print_info(_("Sheet '%s' was updated.") % self.unwarehousing_sheet_name )
+        print_info(
+            _("Sheet '%s' was updated.") % self.unwarehousing_sheet_name
+        )
 
     def update_warehousing_sheet_by_time_node_m1(self):
         wsheet = self.get_warehousing_sheet()
@@ -1747,7 +1750,9 @@ class WorkBook:
         wb = self.get_workbook()
         wb.active = wsheet
 
-        print_info(_("Sheet '%s' was updated.") % (self.warehousing_sheet_name ))
+        print_info(
+            _("Sheet '%s' was updated.") % (self.warehousing_sheet_name)
+        )
 
     def get_unit_df(self):
         if not self._unit_df is None:
@@ -1816,7 +1821,9 @@ class WorkBook:
         if not ps_fpath.exists():
             shutil.copy(s_fpath, ps_fpath)
             print_info(
-                _("Workbook '{0}' was copied to '{1}'.").format(s_fpath, ps_fpath)
+                _("Workbook '{0}' was copied to '{1}'.").format(
+                    s_fpath, ps_fpath
+                )
             )
         print_info(_("Workbook '%s' has been used.") % ps_fpath)
         return ps_fpath
@@ -1843,7 +1850,9 @@ class WorkBook:
         print_info(info)
         wb = self.get_workbook()
         wb.save(self.get_main_spreadsheet_path())
-        print_info(_("Workbook '%s' was saved.") % self.get_main_spreadsheet_path() )
+        print_info(
+            _("Workbook '%s' was saved.") % self.get_main_spreadsheet_path()
+        )
 
     def print_dir_was_created_info(self, dir_path):
         print_info(_("Directory %s was created.") % (dir_path))
@@ -1875,7 +1884,7 @@ class WorkBook:
 
         wb = self.get_workbook()
         wb.save(file_path)
-        print_info(_("Workbook '%s' was saved.") % file_path )
+        print_info(_("Workbook '%s' was saved.") % file_path)
 
     def get_sheet(self, name):
         wb = self.get_workbook()

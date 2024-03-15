@@ -45,8 +45,8 @@ class Food:
         if self._unit_price:
             return self._unit_price
         if self._total_price and self._count:
-            return self._total_price/self._count
-    
+            return self._total_price / self._count
+
     @property
     def count(self):
         if self._count:
@@ -386,5 +386,6 @@ class Food:
                 new_foods.append(food)
 
         return new_foods
+
 
 # The end.

@@ -4,6 +4,7 @@ from pathlib import Path
 import unittest
 
 sys.path.append(Path(__file__).parent.parent.parent.as_posix())
+
 from fnschool import *
 from fnschool.canteen import *
 from fnschool.canteen.bill import *
