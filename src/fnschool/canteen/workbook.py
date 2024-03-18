@@ -48,6 +48,7 @@ class WorkBook:
         self._base_class_df = None
         self.pre_consuming_sheet_col_index_offset = 6
         self.pre_consuming_sheet_row_index_offset = 3
+        self.spreadsheet_ext_names = ["xlsx"]
         self.cell_alignment0 = Alignment(
             horizontal="center", vertical="center"
         )
@@ -717,13 +718,18 @@ class WorkBook:
         )
 
     def update_check_inventory_sheet_from_changsheng_like(
-        self,
-        file_path=None,
+        self, fd_path=None, time_node=None
     ):
+        time_node = time_node or self.bill.time_node
         cksheet = self.get_check_sheet()
+        time_nodes = self.bill.get_time_nodes()
+        check_year = time_nodes[0][0].year
+        check_month = self.bill.month
+
         cssheet = None
-        cssheet_name = "客户商品销售报表"
-        if not file_path:
+        cssheet_names = ["客户商品销售报表", "客户送货明细报表"]
+
+        if not fd_path:
             print_info(
                 _(
                     "Please enter the 'purchase list file path' of "
@@ -732,16 +738,64 @@ class WorkBook:
                     + "read all spreadsheets."
                 ).format(app_name=app_name)
             )
-            file_path = input(">_ ")
-            if not Path(file_path).exists():
-                file_path = self.bill.org_name[-4:] + ".xlsx"
+            fd_path = input(">_ ")
 
-        if not Path(file_path).exists():
-            print_error(_("File '%s' doesn't exist.") % (file_path))
+        if fd_path.replace(" ", "") == "":
+            fd_path = (Path.home() / "Downloads").as_posix()
+
+        if fd_path.startswith("~"):
+            fd_path = Path.home().as_posix() + fd_path[1:]
+        if not Path(fd_path).exists():
+            print_error(_("File or directory '%s' doesn't exist.") % (fd_path))
             sys.exit()
 
-        chwb = load_workbook(file_path)
-        cssheet = chwb[cssheet_name]
+        chwb = None
+        cssheet = None
+
+        if Path(fd_path).is_dir():
+            for _file in os.listdir(fd_path):
+                found = False
+                if _file.split(".")[-1] in self.spreadsheet_ext_names:
+                    chwb_fpath = (Path(fd_path) / _file).as_posix()
+                    print_info(
+                        _("Spreadsheet %s is being tested.") % chwb_fpath
+                    )
+
+                    chwb = load_workbook(chwb_fpath)
+                    for sheet_name in chwb.sheetnames:
+                        if sheet_name in cssheet_names:
+                            cssheet = chwb[sheet_name]
+                            cs_dates = [
+                                str(cssheet.cell(row_index, 2).value)
+                                for row_index in range(1, cssheet.max_row + 1)
+                            ]
+                            cs_dates = [
+                                d.replace("-", "")[:6]
+                                for d in cs_dates
+                                if len(d.replace("-", "")) == 8
+                            ]
+                            if (
+                                str(check_year) + f"{check_month:0>2}"
+                                in cs_dates
+                            ):
+                                found = True
+                            break
+                    if not found:
+                        print_warning(
+                            _("Spreadsheet %s was discarded.") % chwb_fpath
+                        )
+                    else:
+                        print_info(_("Spreadsheet %s was used.") % chwb_fpath)
+
+                if found:
+                    break
+
+            if cssheet is None:
+                print_error(_("No spreadsheet was recognized."))
+                sys.exit()
+        else:
+            chwb = load_workbook(fd_path)
+            cssheet = chwb[cssheet_name]
 
         is_residue = False
         last_check_date = None
@@ -785,7 +839,7 @@ class WorkBook:
                 food_name_index = col_index
                 continue
 
-            elif cell_value in ["单位"]:
+            elif cell_value in ["单位"] or "订货单位" in cell_value:
                 food_unit_index = col_index
                 continue
 

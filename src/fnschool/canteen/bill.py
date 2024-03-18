@@ -24,6 +24,14 @@ class Bill:
         pass
 
     @property
+    def time_node(self):
+        return self._time_node
+
+    @time_node.setter
+    def time_node(self, node):
+        self._time_node = node
+
+    @property
     def month(self):
         return self.get_month()
 
@@ -44,13 +52,13 @@ class Bill:
             + _("Enter the month above to generate spreadsheet:")
         )
 
-        for _ in range(3):
+        for __ in range(3):
             print_info(months_info)
-            _month = input(">_")
+            _month = input(">_ ")
             if not _month in months:
                 continue
             else:
-                self._month = _month
+                self._month = int(_month)
                 return self._month
 
         print_error(_("Unexpected input was got."))
@@ -93,16 +101,15 @@ class Bill:
     def print_time_nodes(self):
         time_nodes_str = []
         _count = 1
-        for t0, t1 in self.time_nodes:
+        for t0, t1 in self.get_time_nodes():
             time_nodes_str.append(
                 str(_count)
                 + "> "
-                + (
-                    _("{0}.{1}.{2}--{3}.{4}.{5}").format(
-                        t0.year, t0.month, t0.day, t1.year, t1.month, t1.day
-                    )
+                + _("{0}.{1}.{2}--{3}.{4}.{5}").format(
+                    t0.year, t0.month, t0.day, t1.year, t1.month, t1.day
                 )
             )
+
             _count += 1
         del _count
 
@@ -113,12 +120,12 @@ class Bill:
         print_info(time_nodes_str)
 
     def print_month(self):
-        print_info(_("Month:") + self.get_month())
+        print_info(_("Month:") + str(self.get_month()))
 
     def print_basic_info(self):
         self.print_time_nodes()
         self.print_profile()
-        sel.print_month()
+        self.print_month()
 
     def print_profile(self):
         print_warning(_("Profile:"))
@@ -134,13 +141,20 @@ class Bill:
             )
         )
 
-    def make_spreadsheet_by_time_node(self):
+    def make_spreadsheet_by_time_nodes(self):
         profile0 = Profile().get_profiles()[0]
         self.set_profile(profile0)
-        self.get_month()
-
         self.print_basic_info()
 
+        time_nodes = self.get_time_nodes()
+        month = self.get_month()
+        time_nodes = [[t0, t1] for t0, t1 in time_nodes if t0.month == month]
+
+        for time_node in time_nodes:
+            self.time_node = time_node
+            self.make_spreadsheet_by_time_node()
+
+    def make_spreadsheet_by_time_node(self):
         if "昌盛" in self.profile.suppliers:
             self.workbook.update_check_inventory_sheet_from_changsheng_like()
         else:
