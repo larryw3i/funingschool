@@ -652,7 +652,7 @@ class WorkBook:
         for name in all_food_names:
             if self.includes_sheet(name):
                 sheet = self.get_sheet(name)
-                sheet.sheet_properties.tabColor = "00000000"
+                sheet.sheet_properties.tabColor = "0" * 8
         for name in cfood_names:
             sheet = self.get_food_sheet(name)
             sheet.sheet_properties.tabColor = secrets.token_hex(4)
@@ -726,9 +726,11 @@ class WorkBook:
         if not file_path:
             print_info(
                 _(
-                    "Please enter the file name of "
-                    + "spreadsheet Changsheng provided:"
-                )
+                    "Please enter the 'purchase list file path' of "
+                    + "spreadsheet Changsheng provided, "
+                    + "or enter the directory path and then {app_name} will "
+                    + "read all spreadsheets."
+                ).format(app_name=app_name)
             )
             file_path = input(">_ ")
             if not Path(file_path).exists():

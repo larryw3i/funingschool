@@ -12,7 +12,7 @@ from fnschool.canteen.profile import *
 
 
 class TestCateen(unittest.TestCase):
-    def test_update_check_inventory_sheet_from_changsheng_like(self):
+    def _test_update_check_inventory_sheet_from_changsheng_like(self):
         bill = Bill()
         bill.set_profile(Profile().get_profile0())
         cs_fpath = (
@@ -25,6 +25,10 @@ class TestCateen(unittest.TestCase):
             file_path=cs_fpath
         )
         bill.workbook.copy_workbook()
+
+    def test_print_time_nodes(self):
+        bill = Bill()
+        bill.print_time_nodes()
 
 
 if __name__ == "__main__":

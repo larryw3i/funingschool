@@ -17,3 +17,5 @@ if not canteen_config_fpath.exists():
     print_warning(_("Please update your configuration file."))
     print_info(_("Ok! it was configured. (enter any key)"))
     input()
+
+# The end.

@@ -10,11 +10,11 @@ def verbose():
 
 
 def set_canteen(args):
-    from fnschool.canteen import Bill
+    from fnschool.canteen.bill import Bill
 
     bill = Bill()
-    if args.action in "mk_mspreadsheet":
-        bill.make_spreadsheet_of_month()
+    if args.action in "mk_tspreadsheet":
+        bill.make_spreadsheet_by_time_node()
     elif args.action in "help_friends":
         bill.help_friends_via_email()
 
@@ -39,7 +39,7 @@ def read_cli():
     )
     parser_canteen.add_argument(
         "action",
-        choices=["mk_mspreadsheet", "help_friends"],
+        choices=["mk_tspreadsheet", "help_friends"],
         help=_("The functions of canteen."),
     )
     parser_canteen.set_defaults(func=set_canteen)
@@ -50,3 +50,6 @@ def read_cli():
         args.func(args)
     else:
         parser.print_help()
+
+
+# The end.

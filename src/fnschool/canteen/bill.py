@@ -17,9 +17,44 @@ class Bill:
         self._checked_foods = None
         self._workbook = None
         self._time_nodes = []
+        self._time_node = None
+        self._month = None
         self._quiet = False
         self._profile = None
         pass
+
+    @property
+    def month(self):
+        return self.get_month()
+
+    def get_month(self):
+        global _
+        if self._month:
+            return self._month
+
+        months = sorted(
+            list(set([t0.month for t0, t1 in self.get_time_nodes()]))
+        )
+        months = [str(m) for m in months]
+
+        months_info = (
+            _("Setted months:")
+            + " ".join(months)
+            + "\n"
+            + _("Enter the month above to generate spreadsheet:")
+        )
+
+        for _ in range(3):
+            print_info(months_info)
+            _month = input(">_")
+            if not _month in months:
+                continue
+            else:
+                self._month = _month
+                return self._month
+
+        print_error(_("Unexpected input was got."))
+        sys.exit()
 
     @property
     def food(self):
@@ -35,9 +70,12 @@ class Bill:
 
     @property
     def time_nodes(self):
-        if (self._time_nodes) < 1:
-            with open(canteen_data_fpath, "rb") as f:
-                _time_nodes = tomllib.load(f)
+        return self.get_time_nodes()
+
+    def get_time_nodes(self):
+        if len(self._time_nodes) < 1:
+            with open(canteen_config_fpath, "rb") as f:
+                _time_nodes = tomllib.load(f).get("canteen").get("time_nodes")
                 self._time_nodes = [
                     [
                         datetime.combine(t0, time(0, 0, 0)),
@@ -52,23 +90,73 @@ class Bill:
         print_warning("Hello!")
         pass
 
-    def make_spreadsheet_of_month(self):
-        self.set_profile(Profile().get_profiles()[0])
+    def print_time_nodes(self):
+        time_nodes_str = []
+        _count = 1
+        for t0, t1 in self.time_nodes:
+            time_nodes_str.append(
+                str(_count)
+                + "> "
+                + (
+                    _("{0}.{1}.{2}--{3}.{4}.{5}").format(
+                        t0.year, t0.month, t0.day, t1.year, t1.month, t1.day
+                    )
+                )
+            )
+            _count += 1
+        del _count
+
+        time_nodes_str = "\t".join(time_nodes_str)
+
+        print_warning(_("Time nodes:"))
+
+        print_info(time_nodes_str)
+
+    def print_month(self):
+        print_info(_("Month:") + self.get_month())
+
+    def print_basic_info(self):
+        self.print_time_nodes()
+        self.print_profile()
+        sel.print_month()
+
+    def print_profile(self):
+        print_warning(_("Profile:"))
+        print_info(
+            "\n\t".join(
+                [
+                    "\t" + _("Label:") + self.profile.label,
+                    _("Name:") + self.profile.name,
+                    _("Email:") + self.profile.email,
+                    _("Organization Name:") + self.profile.org_name,
+                    _("Suppliers:") + "|".join(self.profile.suppliers),
+                ]
+            )
+        )
+
+    def make_spreadsheet_by_time_node(self):
+        profile0 = Profile().get_profiles()[0]
+        self.set_profile(profile0)
+        self.get_month()
+
+        self.print_basic_info()
+
         if "昌盛" in self.profile.suppliers:
             self.workbook.update_check_inventory_sheet_from_changsheng_like()
         else:
-            print_info(_("Please update the codes for your supplier."))
+            print_error(_("Please update the codes for your supplier."))
             return
-        self.workbook.update_consuming_sheet_by_time_node_m1()
-        self.workbook.update_inventory_sheet_by_time_node_m1()
-        self.workbook.update_check_sheet_by_time_node_m1()
-        self.workbook.update_warehousing_sheet_by_time_node_m1()
-        self.workbook.update_unwarehousing_sheet_by_time_node_m1()
-        self.workbook.update_consuming_sum_sheet()
-        self.workbook.update_purchase_sum_sheet_by_time_nodes_m1()
-        self.workbook.update_cover_sheet()
-        self.workbook.update_food_sheets_by_time_nodes_m1()
-        print_info(_("Update completely!"))
+
+        # self.workbook.update_consuming_sheet_by_time_node_m1()
+        # self.workbook.update_inventory_sheet_by_time_node_m1()
+        # self.workbook.update_check_sheet_by_time_node_m1()
+        # self.workbook.update_warehousing_sheet_by_time_node_m1()
+        # self.workbook.update_unwarehousing_sheet_by_time_node_m1()
+        # self.workbook.update_consuming_sum_sheet()
+        # self.workbook.update_purchase_sum_sheet_by_time_nodes_m1()
+        # self.workbook.update_cover_sheet()
+        # self.workbook.update_food_sheets_by_time_nodes_m1()
+        # print_info(_("Update completely!"))
         pass
 
     @property
