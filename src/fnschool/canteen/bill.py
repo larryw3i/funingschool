@@ -1,7 +1,6 @@
 import os
 import sys
-from datetime import datetime, date, time
-
+from datetime import datetime, date, time, timedelta
 import colorama
 
 from fnschool import *
@@ -31,6 +30,21 @@ class Bill:
     def time_node(self, node):
         self._time_node = node
 
+    def get_time_node_index(self):
+        if self.time_node in self.time_nodes:
+            return self.time_nodes.index(self.time_node)
+        return None
+
+    def get_check_time_range(self):
+        if not self._time_node:
+            return None
+        tn_index = self.get_time_node_index()
+        t0, t1 = self.time_node
+        if tn_index > 0:
+            return [self.time_nodes[tn_index - 1][1], t1 + timedelta(days=-1)]
+        else:
+            return [t0 + timedelta(days=-3), t1 + timedelta(days=-1)]
+
     @property
     def month(self):
         return self.get_month()
@@ -46,7 +60,7 @@ class Bill:
         months = [str(m) for m in months]
 
         months_info = (
-            _("Setted months:")
+            _("Recorded months:")
             + " ".join(months)
             + "\n"
             + _("Enter the month above to generate spreadsheet:")
@@ -104,7 +118,7 @@ class Bill:
         for t0, t1 in self.get_time_nodes():
             time_nodes_str.append(
                 str(_count)
-                + "> "
+                + ". "
                 + _("{0}.{1}.{2}--{3}.{4}.{5}").format(
                     t0.year, t0.month, t0.day, t1.year, t1.month, t1.day
                 )
@@ -114,10 +128,21 @@ class Bill:
         del _count
 
         time_nodes_str = "\t".join(time_nodes_str)
-
         print_warning(_("Time nodes:"))
-
         print_info(time_nodes_str)
+
+    def print_check_time_range(self):
+        if not self.time_node:
+            print(_("Time node hasn't been set."))
+            return
+        t0, t1 = self.time_node
+        ckt0, ckt1 = self.get_check_time_range()
+        print_info(
+            _("Food checking time range of {0} is {1}.").format(
+                t0.strftime("%Y.%m.%d") + "-->" + t1.strftime("%Y.%m.%d"),
+                ckt0.strftime("%Y.%m.%d") + "-->" + ckt1.strftime("%Y.%m.%d"),
+            )
+        )
 
     def print_month(self):
         print_info(_("Month:") + str(self.get_month()))
@@ -152,6 +177,7 @@ class Bill:
 
         for time_node in time_nodes:
             self.time_node = time_node
+            self.print_check_time_range()
             self.make_spreadsheet_by_time_node()
 
     def make_spreadsheet_by_time_node(self):

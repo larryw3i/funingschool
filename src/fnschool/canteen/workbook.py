@@ -720,7 +720,9 @@ class WorkBook:
     def update_check_inventory_sheet_from_changsheng_like(
         self, fd_path=None, time_node=None
     ):
+        global Food
         time_node = time_node or self.bill.time_node
+        time_start, time_end = time_node
         cksheet = self.get_check_sheet()
         time_nodes = self.bill.get_time_nodes()
         check_year = time_nodes[0][0].year
@@ -760,24 +762,34 @@ class WorkBook:
                     print_info(
                         _("Spreadsheet %s is being tested.") % chwb_fpath
                     )
-
-                    chwb = load_workbook(chwb_fpath)
-                    for sheet_name in chwb.sheetnames:
+                    ch_ef = pd.ExcelFile(chwb_fpath)
+                    for sheet_name in ch_ef.sheet_names:
                         if sheet_name in cssheet_names:
-                            cssheet = chwb[sheet_name]
+                            chwb0 = load_workbook(chwb_fpath)
+                            cssheet0 = chwb0[sheet_name]
+
                             cs_dates = [
-                                str(cssheet.cell(row_index, 2).value)
-                                for row_index in range(1, cssheet.max_row + 1)
+                                str(cssheet0.cell(row_index, 2).value)
+                                for row_index in range(1, cssheet0.max_row + 1)
                             ]
-                            cs_dates = [
-                                d.replace("-", "")[:6]
-                                for d in cs_dates
-                                if len(d.replace("-", "")) == 8
-                            ]
-                            if (
-                                str(check_year) + f"{check_month:0>2}"
-                                in cs_dates
-                            ):
+                            cs_dates = sorted(
+                                list(
+                                    set(
+                                        [
+                                            datetime.strptime(d, "%Y-%m-%d")
+                                            for d in cs_dates
+                                            if re.search(
+                                                r"\d{4}-\d{2}-\d{2}", d
+                                            )
+                                        ]
+                                    )
+                                )
+                            )
+                            cs_t0, cs_t1 = cs_dates[0], cs_dates[-1]
+                            ck_t0, ck_t1 = self.bill.get_check_time_range()
+                            if ck_t0 <= cs_t0 and cs_t1 <= ck_t1:
+                                chwb = chwb0
+                                cssheet = cssheet0
                                 found = True
                             break
                     if not found:
