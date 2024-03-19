@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-19 23:24+0800\n"
+"POT-Creation-Date: 2024-03-20 01:26+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -188,19 +188,19 @@ msgstr ""
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:357
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:429
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:659
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1164
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1170
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1229
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1274
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1434
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1856
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2025
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1167
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1173
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1232
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1277
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1437
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1859
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2028
 #, python-format
 msgid "Sheet '%s' was updated."
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:779
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:943
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:946
 msgid ""
 "Please enter the 'purchase list file path' of spreadsheet Changsheng "
 "provided, or enter the directory path and then {app_name} will read all "
@@ -208,72 +208,75 @@ msgid ""
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:796
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:960
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:963
 #, python-format
 msgid "File or directory '%s' doesn't exist."
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:802
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:967
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:970
 #, python-format
 msgid "Entered directory: %s"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:806
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:971
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:807
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:974
 #, python-format
 msgid "Spreadsheet %s is being tested."
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:813
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:978
-msgid "The food purchasing time range of preadsheet {0} is {1} ."
+msgid "The food purchasing times of preadsheet {0} is {1} ."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:831
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:993
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:832
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:996
 #, python-format
 msgid "Spreadsheet %s was used."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:833
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:995
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:834
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:998
 #, python-format
 msgid "Spreadsheet %s was discarded."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:836
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:998
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:837
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1001
 msgid "No spreadsheet was recognized."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1700
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1770
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:981
+msgid "The food purchasing time range of preadsheet {0} is {1} ."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1703
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1773
 #, python-format
 msgid "Sheet '%s' was formatted."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2090
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2093
 #, python-format
 msgid "Directory '%s' has been made."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2095
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2098
 msgid "Workbook '{0}' was copied to '{1}'."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2099
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2102
 #, python-format
 msgid "Workbook '%s' has been used."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2125
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2158
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2128
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2161
 #, python-format
 msgid "Workbook '%s' was saved."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2129
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2132
 #, python-format
 msgid "Directory %s was created."
 msgstr ""

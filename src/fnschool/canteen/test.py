@@ -35,16 +35,16 @@ class TestCanteen(unittest.TestCase):
             Path.home() / "Downloads"
         ).as_posix()
         for m in range(2, 4):
-            bill.set_month(m)   
+            bill.set_month(m)
             time_nodes = bill.get_time_nodes_of_month()
             for time_node in time_nodes:
-                bill.time_node = time_node               
+                bill.time_node = time_node
                 bill._foods = None
                 if bill.foods:
                     print(time_node)
                     print(*bill.foods)
                 else:
-                    print(time_node,"Nothing.")
+                    print(time_node, "Nothing.")
 
 
 if __name__ == "__main__":

@@ -62,12 +62,6 @@ class WorkBook:
             bottom=self.cell_side0,
         )
 
-    def get_foods(self):
-        if "昌盛" in self.bill.profile.suppliers:
-            return self.get_foods_from_changsheng()
-        print(_("Please add codes to get foods from your suppliers."))
-        return None
-
     @property
     def profile(self):
         return self.bill.profile
@@ -725,7 +719,7 @@ class WorkBook:
             else count
         )
 
-    def get_purchase_time_range_of_workbook(self, fpath):
+    def get_purchase_times_of_workbook(self, fpath):
         if not fpath.split(".")[-1] in self.spreadsheet_ext_names:
             return None
         chwb_fpath = fpath
@@ -753,12 +747,12 @@ class WorkBook:
                         )
                     )
                 )
-                cs_t0, cs_t1 = cs_dates[0], cs_dates[-1]
                 chwb0.close()
                 ch_ef.close()
-                return [cs_t0, cs_t1]
+                return cs_dates
 
-        return [None, None]
+        ch_ef.close()
+        return None
 
     def get_purchase_sheet_name_of_workbook(self, wb):
         for sn in self.purchase_sheet_names:
@@ -766,7 +760,7 @@ class WorkBook:
                 return sn
         return None
 
-    def get_foods_from_changsheng(self, fd_path=None, time_node=None):
+    def read_foods_from_changsheng(self, fd_path=None, time_node=None):
         global Food
         fd_path = self.purchase_workbook_fd_path or fd_path
         time_node = time_node or self.bill.time_node
@@ -798,28 +792,34 @@ class WorkBook:
 
         chwb = None
         cssheet = None
+        ck_t0, ck_t1 = self.bill.get_check_time_range()
         if Path(fd_path).is_dir():
             print_info(_("Entered directory: %s") % fd_path)
             for _file in os.listdir(fd_path):
                 if _file.split(".")[-1] in self.spreadsheet_ext_names:
                     chwb_fpath = (Path(fd_path) / _file).as_posix()
                     print_info(_("Spreadsheet %s is being tested.") % _file)
-                    cs_t0, cs_t1 = self.get_purchase_time_range_of_workbook(
-                        chwb_fpath
-                    )
-                    if cs_t0:
-                        ck_t0, ck_t1 = self.bill.get_check_time_range()
+                    ptimes = self.get_purchase_times_of_workbook(chwb_fpath)
+                    if ptimes:
                         print_info(
                             _(
-                                "The food purchasing time range of preadsheet {0} is {1} ."
+                                "The food purchasing times of preadsheet {0} is {1} ."
                             ).format(
                                 _file,
-                                cs_t0.strftime("%Y.%m.%d")
-                                + "-->"
-                                + cs_t1.strftime("%Y.%m.%d"),
+                                " | ".join(
+                                    [
+                                        ptime.strftime("%Y.%m.%d")
+                                        for ptime in ptimes
+                                    ]
+                                ),
                             )
                         )
-                        if ck_t0 <= cs_t0 and cs_t1 <= ck_t1:
+                        if any(
+                            [
+                                (ck_t0 <= ptime and ptime <= ck_t1)
+                                for ptime in ptimes
+                            ]
+                        ):
                             chwb = load_workbook(chwb_fpath)
                             _sheet_name = (
                                 self.get_purchase_sheet_name_of_workbook(chwb)
@@ -885,17 +885,19 @@ class WorkBook:
             max_col=cssheet.max_column,
         ):
             if row[food_name_index].value:
+                check_date = row[food_check_date_index].value
+                check_date = (
+                    datetime.strptime(check_date, "%Y-%m-%d")
+                    if "-" in check_date
+                    else datetime.strptime(check_date, "%Y%d%m")
+                )
+                if not (ck_t0 <= check_date <= ck_t1):
+                    continue
+
                 name = row[food_name_index].value
                 count = row[food_count_index].value
                 unit = row[food_unit_index].value
                 total_price = row[food_total_price_index].value
-                check_date = row[food_check_date_index].value
-                check_date = (
-                    datetime.strptime(check_date,"%Y-%m-%d")
-                    if "-" in check_date
-                    else datetime.strptime(check_date,"%Y%d%m")
-                )
-
                 is_negligible = not row[food_neglect_mark_index].value is None
 
                 if not is_residue:
@@ -1858,12 +1860,12 @@ class WorkBook:
             _("Sheet '%s' was updated.") % self.unwarehousing_sheet_name
         )
 
-    def update_warehousing_sheet_by_time_node_m1(self):
+    def update_warehousing_sheet_by_time_node(self):
         wsheet = self.get_warehousing_sheet()
         foods = self.food.get_food_list_from_check_sheet()
         form_indexes = self.get_warehousing_form_indexes()
         class_names = self.get_base_class_names()
-        time_node = self.bill.get_time_nodes_m1()
+        time_node = self.bill.get_time_node()
 
         self.unmerge_cells_of_sheet(wsheet)
 

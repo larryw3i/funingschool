@@ -26,7 +26,7 @@ class Bill:
     @property
     def foods(self):
         if not self._foods:
-            self._foods = self.workbook.get_foods()
+            self._foods = self.food.get_foods()
         return self._foods
 
     @property

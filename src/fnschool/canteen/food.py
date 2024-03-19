@@ -19,7 +19,7 @@ class Food:
         consuming_list=None,
         is_residue=False,
         is_blank=False,
-        is_negligible = False,
+        is_negligible=False,
     ):
         self.bill = bill
         self.name = name
@@ -75,13 +75,13 @@ class Food:
     def __str__(self, newline=True):
         return "\n" + "\n\t".join(
             [
-                _("Food name:")+f" {self.name}",
-                _("Unit price:")+f" {self.unit_price}",
-                _("Count:")+f" {self.count} ({self.unit_name})",
-                _("Total price:")+f" {self.total_price}",
-                _("Is neglibible:")+f" {self.is_negligible}",
-                _("Is residue:")+f" {self.is_residue}",
-                _("Check date:")+f" {self.check_date}",
+                _("Food name:") + f" {self.name}",
+                _("Unit price:") + f" {self.unit_price}",
+                _("Count:") + f" {self.count} ({self.unit_name})",
+                _("Total price:") + f" {self.total_price}",
+                _("Is neglibible:") + f" {self.is_negligible}",
+                _("Is residue:") + f" {self.is_residue}",
+                _("Check date:") + f" {self.check_date}",
             ]
         )
 
@@ -213,13 +213,13 @@ class Food:
 
     @property
     def is_negligible(self):
-        if not self._is_negligible:        
+        if not self._is_negligible:
             class_list = self.workbook.get_negligible_class_list()
-            self._is_negligible =  self.name in class_list
+            self._is_negligible = self.name in class_list
         return self._is_negligible
 
     @is_negligible.setter
-    def is_negligible(self,neglibible):
+    def is_negligible(self, neglibible):
         self._is_negligible = neglibible
 
     def get_new_foods_total_price(self):
@@ -331,10 +331,10 @@ class Food:
         ]
         return foods
 
-    def get_food_from_list_by_id(self, foods, fid):
-        for food in foods:
-            if food.fid == fid:
-                return food
+    def get_foods(self):
+        if "昌盛" in self.bill.profile.suppliers:
+            return self.workbook.read_foods_from_changsheng()
+        print(_("Please add codes to get foods from your suppliers."))
         return None
 
     def get_foods_from_pre_consuming_sheet_by_time_nodes_m1(self):
