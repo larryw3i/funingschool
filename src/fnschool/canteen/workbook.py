@@ -37,6 +37,7 @@ class WorkBook:
         self.pre_consuming_sheet_name_prefix = "出库表"
         self.purchase_sum_sheet_name = "入库、未入库汇总表"
         self.cover_sheet_name = "六大类总封面"
+        self.purchase_sheet_names = ["客户商品销售报表", "客户送货明细报表"]
         self.warehousing_form_index_offset = 0
         self.inventory_form_index_offset = 1
         self._workbook = None
@@ -717,6 +718,45 @@ class WorkBook:
             else count
         )
 
+    def get_purchase_time_range_of_workbook(self, fpath):
+        if not fpath.split(".")[-1] in self.spreadsheet_ext_names:
+            return None
+        chwb_fpath = fpath
+        ch_ef = pd.ExcelFile(chwb_fpath)
+        for sheet_name in ch_ef.sheet_names:
+            if sheet_name in self.purchase_sheet_names:
+                chwb0 = load_workbook(chwb_fpath, read_only=True)
+                cssheet0 = chwb0[sheet_name]
+                cs_dates = []
+                row_index = 1
+                while True:
+                    _date = cssheet0.cell(row_index, 2).value
+                    if not _date:
+                        break
+                    cs_dates.append(str(_date))
+                    row_index += 1
+                cs_dates = sorted(
+                    list(
+                        set(
+                            [
+                                datetime.strptime(d, "%Y-%m-%d")
+                                for d in cs_dates
+                                if re.search(r"\d{4}-\d{2}-\d{2}", d)
+                            ]
+                        )
+                    )
+                )
+                cs_t0, cs_t1 = cs_dates[0], cs_dates[-1]
+                return [cs_t0, cs_t1]
+
+        return [None, None]
+
+    def get_purchase_sheet_name_of_workbook(self, wb):
+        for sn in self.purchase_sheet_names:
+            if sn in wb.sheetnames:
+                return sn
+        return None
+
     def update_check_inventory_sheet_from_changsheng_like(
         self, fd_path=None, time_node=None
     ):
@@ -729,7 +769,9 @@ class WorkBook:
         check_month = self.bill.month
 
         cssheet = None
-        cssheet_names = ["客户商品销售报表", "客户送货明细报表"]
+        cssheet_names = self.purchase_sheet_names
+
+        seeking_dpath0 = (Path.home() / "Downloads").as_posix()
 
         if not fd_path:
             print_info(
@@ -738,15 +780,17 @@ class WorkBook:
                     + "spreadsheet Changsheng provided, "
                     + "or enter the directory path and then {app_name} will "
                     + "read all spreadsheets."
-                ).format(app_name=app_name)
+                    + " (default: '{seeking_dpath0}')"
+                ).format(app_name=app_name, seeking_dpath0=seeking_dpath0)
             )
             fd_path = input(">_ ")
 
         if fd_path.replace(" ", "") == "":
-            fd_path = (Path.home() / "Downloads").as_posix()
+            fd_path = seeking_dpath0
 
         if fd_path.startswith("~"):
             fd_path = Path.home().as_posix() + fd_path[1:]
+
         if not Path(fd_path).exists():
             print_error(_("File or directory '%s' doesn't exist.") % (fd_path))
             sys.exit()
@@ -755,52 +799,34 @@ class WorkBook:
         cssheet = None
 
         if Path(fd_path).is_dir():
+            print_info(_("Entered directory: %s") % fd_path)
             for _file in os.listdir(fd_path):
-                found = False
                 if _file.split(".")[-1] in self.spreadsheet_ext_names:
                     chwb_fpath = (Path(fd_path) / _file).as_posix()
-                    print_info(
-                        _("Spreadsheet %s is being tested.") % chwb_fpath
+                    print_info(_("Spreadsheet %s is being tested.") % _file)
+                    cs_t0, cs_t1 = self.get_purchase_time_range_of_workbook(
+                        chwb_fpath
                     )
-                    ch_ef = pd.ExcelFile(chwb_fpath)
-                    for sheet_name in ch_ef.sheet_names:
-                        if sheet_name in cssheet_names:
-                            chwb0 = load_workbook(chwb_fpath)
-                            cssheet0 = chwb0[sheet_name]
-
-                            cs_dates = [
-                                str(cssheet0.cell(row_index, 2).value)
-                                for row_index in range(1, cssheet0.max_row + 1)
-                            ]
-                            cs_dates = sorted(
-                                list(
-                                    set(
-                                        [
-                                            datetime.strptime(d, "%Y-%m-%d")
-                                            for d in cs_dates
-                                            if re.search(
-                                                r"\d{4}-\d{2}-\d{2}", d
-                                            )
-                                        ]
-                                    )
-                                )
+                    if cs_t0:
+                        ck_t0, ck_t1 = self.bill.get_check_time_range()
+                        print_info(
+                            _(
+                                "The food purchasing time range of preadsheet {0} is {1} ."
+                            ).format(
+                                _file,
+                                cs_t0.strftime("%Y.%m.%d")
+                                + "-->"
+                                + cs_t1.strftime("%Y.%m.%d"),
                             )
-                            cs_t0, cs_t1 = cs_dates[0], cs_dates[-1]
-                            ck_t0, ck_t1 = self.bill.get_check_time_range()
-                            if ck_t0 <= cs_t0 and cs_t1 <= ck_t1:
-                                chwb = chwb0
-                                cssheet = cssheet0
-                                found = True
-                            break
-                    if not found:
-                        print_warning(
-                            _("Spreadsheet %s was discarded.") % chwb_fpath
                         )
-                    else:
-                        print_info(_("Spreadsheet %s was used.") % chwb_fpath)
-
-                if found:
-                    break
+                        if ck_t0 <= cs_t0 and cs_t1 <= ck_t1:
+                            chwb = load_workbook(chwb_fpath)
+                            cssheet = chwb[
+                                self.get_purchase_sheet_name_of_workbook(chwb)
+                            ]
+                            print_info(_("Spreadsheet %s was used.") % _file)
+                            break
+                    print_warning(_("Spreadsheet %s was discarded.") % _file)
 
             if cssheet is None:
                 print_error(_("No spreadsheet was recognized."))

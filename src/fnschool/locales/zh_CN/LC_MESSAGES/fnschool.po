@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-18 17:02+0800\n"
-"PO-Revision-Date: 2024-03-18 17:03+0800\n"
+"POT-Creation-Date: 2024-03-19 11:39+0800\n"
+"PO-Revision-Date: 2024-03-19 14:02+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_CN\n"
@@ -53,61 +53,69 @@ msgstr "“canteen“ 的函数。"
 msgid "Configuration file '%s' was copied to '%s'."
 msgstr "配置文件 “%s” 被复制到 “%s” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:41
-msgid "Setted months:"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:63
+msgid "Recorded months:"
 msgstr "已设置的月份："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:44
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:67
 msgid "Enter the month above to generate spreadsheet:"
 msgstr "输入上面的月份以设计工作簿："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:56
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:79
 msgid "Unexpected input was got."
 msgstr "获取异常输入。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:101
-msgid "{}.{}.{}--{}.{}.{}"
-msgstr "{}年{}月{}日——{年{}月{}日"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:123
+msgid "{0}.{1}.{2}--{3}.{4}.{5}"
+msgstr "{0}年{1}月{2}日——{3}年{4}月{5}日"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:111
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:132
 msgid "Time nodes:"
 msgstr "时间节点："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:116
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:137
+msgid "Time node hasn't been set."
+msgstr "未设置时间节。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:142
+msgid "Food checking time range of {0} is {1}."
+msgstr "在 {0} 时间段 食材的清点时间范围是 {1} 。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:149
 msgid "Month:"
 msgstr "月份："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:124
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:157
 msgid "Profile:"
 msgstr "个人信息："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:128
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:161
 msgid "Label:"
 msgstr "标签："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:129
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:162
 msgid "Name:"
 msgstr "姓名："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:130
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:163
 msgid "Email:"
 msgstr "电子邮箱："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:131
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:164
 msgid "Organization Name:"
 msgstr "机构名："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:132
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:165
 msgid "Suppliers:"
 msgstr "供应商："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:147
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:188
 msgid "Please update the codes for your supplier."
 msgstr "没有与这个供应商相关的解析代码添加代码，你可以添加代码。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:243
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:248
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:263
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:284
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:289
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:304
 #, python-format
 msgid "%s can't change."
 msgstr "%s 无法转换。"
@@ -145,56 +153,79 @@ msgstr "请更新你的配置文件。"
 msgid "Ok! it was configured. (enter any key)"
 msgstr "好的，我已配置。（按任意键继续）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:317
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:348
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:420
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:650
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:901
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:960
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1005
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1165
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1587
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1756
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:318
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:349
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:421
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:651
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:977
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1036
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1081
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1241
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1663
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1832
 #, python-format
 msgid "Sheet '%s' was updated."
-msgstr "“%s” 表已被更新。"
+msgstr "工作表 “%s” 已被更新。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:728
-msgid "Please enter the 'purchase list file path' of spreadsheet Changsheng provided, or enter the directory path and then {app_name} will read all spreadsheets."
-msgstr "请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} 会读取所有的工作簿并获取购入数据。"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:738
+msgid "Please enter the 'purchase list file path' of spreadsheet Changsheng provided, or enter the directory path and then {app_name} will read all spreadsheets. (default: '{seeking_dpath0}')"
+msgstr "请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} 会读取所有的工作簿并获取购入数据。（默认的目录：{seeking_dpath0}）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:740
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:755
 #, python-format
-msgid "File '%s' doesn't exist."
-msgstr "文件 “%s” 不存在。"
+msgid "File or directory '%s' doesn't exist."
+msgstr "文件 或 目录 “%s” 不存在。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1431
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1501
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:767
+#, python-format
+msgid "Spreadsheet %s is being tested."
+msgstr "正在检测工作簿 %s 。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:795
+msgid "The food purchasing time range of preadsheet {0} is {1} ."
+msgstr "工作簿 {0} 的食材购入时间范围是 {1} 。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:807
+#, python-format
+msgid "Spreadsheet %s was discarded."
+msgstr "工作簿 “%s” 已被舍去。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:810
+#, python-format
+msgid "Spreadsheet %s was used."
+msgstr "工作簿 “%s” 被使用。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:816
+msgid "No spreadsheet was recognized."
+msgstr "没有识别到工作簿。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1507
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1577
 #, python-format
 msgid "Sheet '%s' was formatted."
 msgstr "“%s” 表已被格式化。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1821
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1897
 #, python-format
 msgid "Directory '%s' has been made."
 msgstr "目录 “%s” 已创建。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1826
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1902
 msgid "Workbook '{0}' was copied to '{1}'."
 msgstr "工作簿 “{0}” 被复制到 “{1}” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1830
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1906
 #, python-format
 msgid "Workbook '%s' has been used."
 msgstr "使用工作薄 “%s” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1856
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1889
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1932
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1965
 #, python-format
 msgid "Workbook '%s' was saved."
 msgstr "工作簿 “%s” 已保存。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1860
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1936
 #, python-format
 msgid "Directory %s was created."
 msgstr "目录 “%s” 已创建。"

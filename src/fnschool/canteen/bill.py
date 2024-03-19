@@ -61,6 +61,7 @@ class Bill:
 
         months_info = (
             _("Recorded months:")
+            + " "
             + " ".join(months)
             + "\n"
             + _("Enter the month above to generate spreadsheet:")
