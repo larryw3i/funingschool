@@ -19,6 +19,7 @@ class Food:
         consuming_list=None,
         is_residue=False,
         is_blank=False,
+        is_negligible = False,
     ):
         self.bill = bill
         self.name = name
@@ -34,6 +35,7 @@ class Food:
         self._main_spreadsheet_path = None
         self._base_class_df = None
         self._check_df = None
+        self._is_negligible = is_negligible
         self._unit_name = None
         self.consum = self.add_consumption
         self.residue_mark = "(R)"
@@ -73,12 +75,13 @@ class Food:
     def __str__(self, newline=True):
         return "\n" + "\n\t".join(
             [
-                f"Name: {self.name}",
-                f"UnitPrice: {self.unit_price}",
-                f"Count: {self.count} ({self.unit_name})",
-                f"TotalPrice: {self.total_price}",
-                f"IsResidue: {self.is_residue}",
-                f"CheckDate: {self.check_date}",
+                _("Food name:")+f" {self.name}",
+                _("Unit price:")+f" {self.unit_price}",
+                _("Count:")+f" {self.count} ({self.unit_name})",
+                _("Total price:")+f" {self.total_price}",
+                _("Is neglibible:")+f" {self.is_negligible}",
+                _("Is residue:")+f" {self.is_residue}",
+                _("Check date:")+f" {self.check_date}",
             ]
         )
 
@@ -210,8 +213,14 @@ class Food:
 
     @property
     def is_negligible(self):
-        class_list = self.workbook.get_negligible_class_list()
-        return self.name in class_list
+        if not self._is_negligible:        
+            class_list = self.workbook.get_negligible_class_list()
+            self._is_negligible =  self.name in class_list
+        return self._is_negligible
+
+    @is_negligible.setter
+    def is_negligible(self,neglibible):
+        self._is_negligible = neglibible
 
     def get_new_foods_total_price(self):
         foods = self.bill.get_food_list()

@@ -20,7 +20,14 @@ class Bill:
         self._month = None
         self._quiet = False
         self._profile = None
+        self._foods = None
         pass
+
+    @property
+    def foods(self):
+        if not self._foods:
+            self._foods = self.workbook.get_foods()
+        return self._foods
 
     @property
     def time_node(self):
@@ -36,7 +43,7 @@ class Bill:
         return None
 
     def get_check_time_range(self):
-        if not self._time_node:
+        if not self.time_node:
             return None
         tn_index = self.get_time_node_index()
         t0, t1 = self.time_node
@@ -49,8 +56,10 @@ class Bill:
     def month(self):
         return self.get_month()
 
+    def set_month(self, month):
+        self._month = month
+
     def get_month(self):
-        global _
         if self._month:
             return self._month
 
@@ -59,6 +68,7 @@ class Bill:
         )
         months = [str(m) for m in months]
 
+        global _
         months_info = (
             _("Recorded months:")
             + " "
@@ -94,6 +104,17 @@ class Bill:
     @property
     def time_nodes(self):
         return self.get_time_nodes()
+
+    def get_time_nodes_of_month(self, month=None, year=None):
+        time_nodes = self.get_time_nodes()
+        year = year or time_nodes[0][0].year
+        month = month or self.get_month()
+        time_nodes = [
+            tn
+            for tn in time_nodes
+            if tn[0].year == year and tn[0].month == month
+        ]
+        return time_nodes
 
     def get_time_nodes(self):
         if len(self._time_nodes) < 1:
@@ -168,14 +189,12 @@ class Bill:
         )
 
     def make_spreadsheet_by_time_nodes(self):
-        profile0 = Profile().get_profiles()[0]
-        self.set_profile(profile0)
+        self.set_profile_to_index0()
         self.print_basic_info()
 
         time_nodes = self.get_time_nodes()
         month = self.get_month()
-        time_nodes = [[t0, t1] for t0, t1 in time_nodes if t0.month == month]
-
+        time_node = self.get_time_nodes_of_month()
         for time_node in time_nodes:
             self.time_node = time_node
             self.print_check_time_range()
@@ -199,6 +218,9 @@ class Bill:
         # self.workbook.update_food_sheets_by_time_nodes_m1()
         # print_info(_("Update completely!"))
         pass
+
+    def set_profile_to_index0(self):
+        self.set_profile(Profile().get_profiles()[0])
 
     @property
     def profile(self):

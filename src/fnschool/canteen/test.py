@@ -11,25 +11,43 @@ from fnschool.canteen.bill import *
 from fnschool.canteen.profile import *
 
 
-class TestCateen(unittest.TestCase):
-    def _test_update_check_inventory_sheet_from_changsheng_like(self):
+class TestCanteen(unittest.TestCase):
+    def spreadsheet_by_time_nodes(self):
         bill = Bill()
-        bill.set_profile(Profile().get_profile0())
-        cs_fpath = (
-            Path(__file__).parent.parent.parent.parent
-            / "tests"
-            / "files"
-            / "changsheng.3.1-3.15.xlsx"
+        bill.set_profile_to_index0()
+        bill.workbook.purchase_workbook_fd_path = (
+            Path.home() / "Downloads"
         ).as_posix()
-        bill.workbook.update_check_inventory_sheet_from_changsheng_like(
-            file_path=cs_fpath
-        )
-        bill.workbook.copy_workbook()
+        for m in range(2, 4):
+            bill.set_month(m)
+            bill.print_month()
+            bill.make_spreadsheet_by_time_nodes()
+            bill.workbook.copy_workbook()
 
-    def test_print_time_nodes(self):
+    def print_time_nodes(self):
         bill = Bill()
         bill.print_time_nodes()
+
+    def get_foods(self):
+        bill = Bill()
+        bill.set_profile_to_index0()
+        bill.workbook.purchase_workbook_fd_path = (
+            Path.home() / "Downloads"
+        ).as_posix()
+        for m in range(2, 4):
+            bill.set_month(m)   
+            time_nodes = bill.get_time_nodes_of_month()
+            for time_node in time_nodes:
+                bill.time_node = time_node               
+                bill._foods = None
+                if bill.foods:
+                    print(time_node)
+                    print(*bill.foods)
+                else:
+                    print(time_node,"Nothing.")
 
 
 if __name__ == "__main__":
     unittest.main()
+
+# The end.
