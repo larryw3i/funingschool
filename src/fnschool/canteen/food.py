@@ -335,20 +335,24 @@ class Food:
         foods = []
         time_nodes = self.bill.get_time_nodes()
         time_nodes = [t for t in time_nodes if t[0].month == month]
+        time_node_cp = self.bill.time_node
         for time_node in time_nodes:
             self.bill.time_node = time_node
             _foods = self.get_foods_of_time_node()
             if _foods:
                 foods += _foods
+        self.bill.time_node = time_node_cp
         return foods
 
     def get_foods_of_time_nodes(self):
         foods = []
+        time_node_cp = self.bill.time_node
         for time_node in self.bill.get_time_nodes():
             self.bill.time_node = time_node
             _foods = self.get_foods_of_time_node()
             if _foods:
                 foods += _foods
+        self.bill.time_node = time_node_cp
         return foods
 
     def get_foods_of_time_node(self):
@@ -369,8 +373,8 @@ class Food:
         foods = [f for f in foods if f.is_residue]
         return foods
 
-    def get_foods_from_pre_consuming_sheet_by_time_nodes_m1(self):
-        time_start, time_end = self.bill.get_time_nodes_m1()
+    def get_foods_from_pre_consuming_sheet_by_time_node(self):
+        time_start, time_end = self.bill.get_time_node()
         time_nodes = [
             t
             for t in self.bill.get_time_nodes()

@@ -38,6 +38,16 @@ class WorkBook:
         self.purchase_sum_sheet_name = "入库、未入库汇总表"
         self.cover_sheet_name = "六大类总封面"
         self.purchase_sheet_names = ["客户商品销售报表", "客户送货明细报表"]
+        self.residue_col_names = [
+            "上季结余",
+            "是剩余",
+            "是结余",
+            "上年结余",
+            "剩余",
+            "结余",
+        ]
+        self.org_col_names = ["客户名称", "结算客户名称"]
+        self.check_date_col_names = ["送货日期", "送货时间"]
         self.warehousing_form_index_offset = 0
         self.inventory_form_index_offset = 1
         self._workbook = None
@@ -61,6 +71,8 @@ class WorkBook:
             right=self.cell_side0,
             bottom=self.cell_side0,
         )
+        self.purchase_sheets_properties = []
+        self.excluded_purchase_sheets = []
 
     @property
     def profile(self):
@@ -552,12 +564,10 @@ class WorkBook:
                     end_column=13,
                 )
 
-    def update_food_sheets_by_time_nodes_m1(self):
+    def update_food_sheets_by_time_node(self):
         time_nodes = self.bill.get_time_nodes()
         time_start, time_end = time_nodes[-1]
-        cfoods = (
-            self.food.get_foods_from_pre_consuming_sheet_by_time_nodes_m1()
-        )
+        cfoods = self.food.get_foods_from_pre_consuming_sheet_by_time_node()
         cfood_names = list(set([f.name for f in cfoods]))
         u_month = time_end.month
         days_num = calendar.monthrange(time_end.year, u_month)[1]
@@ -732,14 +742,44 @@ class WorkBook:
                 cssheet0 = chwb0[sheet_name]
                 cs_dates = []
                 row_index = 1
-                while True:
-                    _date = cssheet0.cell(row_index, 2).value
-                    if not _date:
-                        break
-                    cs_dates.append(str(_date))
-                    row_index += 1
-                row_index = 1
 
+                header_names = [
+                    str(cssheet0.cell(1, ci).value)
+                    for ci in range(1, cssheet0.max_column + 1)
+                    if cssheet0.cell(1, ci).value
+                ]
+
+                check_date_col_index = 0
+                org_name_col_index = 0
+                for hn in header_names:
+                    if hn in self.check_date_col_names:
+                        check_date_col_index = header_names.index(hn) + 1
+                    elif hn in self.org_col_names:
+                        org_name_col_index = header_names.index(hn) + 1
+                if check_date_col_index == 0:
+                    print_error(
+                        _("Got no check date column index of {0} .").format(
+                            chwb_fpath + "-->" + sheet_name
+                        )
+                    )
+                if org_name_col_index == 0:
+                    print_error(
+                        _("Got no organization name column of {0}").format(
+                            chwb_fpath + "-->" + sheet_name
+                        )
+                    )
+
+                org_names = [
+                    str(cssheet0.cell(org_name_col_index, ci).value)
+                    for ci in range(1, cssheet0.max_row)
+                ]
+                if not self.bill.profile.org_name in org_names:
+                    chwb0.close()
+                    return None
+                cs_dates = [
+                    str(cssheet0.cell(check_date_col_index, ci).value)
+                    for ci in range(1, cssheet0.max_row)
+                ]
                 cs_dates = sorted(
                     list(
                         set(
@@ -778,11 +818,31 @@ class WorkBook:
         for _file in os.listdir(fd_path):
             if _file.split(".")[-1] in self.spreadsheet_ext_names:
                 chwb_fpath = (Path(fd_path) / _file).as_posix()
-                print_info(_("Spreadsheet %s is being tested.") % _file)
-                pinfo = self.get_changsheng_purchase_properties(chwb_fpath)
-                if not pinfo:
+                sheet_name = None
+                ptime = None
+                if chwb_fpath in [
+                    p[0] for p in self.purchase_sheets_properties
+                ]:
+                    pinfo = [
+                        p
+                        for p in self.purchase_sheets_properties
+                        if p[0] == chwb_fpath
+                    ][0]
+                    sheet_name, ptimes = pinfo[1:]
+                elif chwb_fpath in self.excluded_purchase_sheets:
                     continue
-                sheet_name, ptimes = pinfo
+                else:
+                    print_info(_("Spreadsheet %s is being tested.") % _file)
+                    pinfo = self.get_changsheng_purchase_properties(chwb_fpath)
+                    if not pinfo:
+                        self.excluded_purchase_sheets.append(chwb_fpath)
+                        continue
+                    sheet_name, ptimes = pinfo
+                    if not chwb_fpath in self.purchase_sheets_properties:
+                        self.purchase_sheets_properties.append(
+                            [chwb_fpath, sheet_name, ptimes]
+                        )
+
                 if ptimes:
                     print_info(
                         _(
@@ -863,44 +923,37 @@ class WorkBook:
         food_check_date_index = 0
         food_neglect_mark_index = 0
         food_residue_mark_index = 0
+        food_org_name_index = 0
 
         col_index = 1
         break_index = 0
+
         while True:
             cell = cssheet.cell(1, col_index)
             cell_value = cell.value
-            col_index = col_index - 1
-            if not cell_value:
+            if cell_value is None:
                 if break_index > 3:
                     break
                 break_index += 1
-            cell_value = str(cell_value.replace(" ", ""))
-            if cell_value in ["商品名称"]:
-                food_name_index = col_index
-                continue
-
-            elif cell_value in ["单位", "订货单位"]:
-                food_unit_index = col_index
-                continue
-
-            elif cell_value in ["数量", "记账数量"]:
-                food_count_index = col_index
-                continue
-
-            elif cell_value in ["金额", "折前金额"]:
-                food_total_price_index = col_index
-                continue
-
-            elif cell_value in ["送货日期"]:
-                food_check_date_index = col_index
-                continue
-            elif cell_value in ["忽略", "不计", "非入库", "可忽略", "非盘点"]:
-                food_neglect_mark_index = col_index
-                continue
-            elif cell_value in ["上季结余", "是剩余", "是结余", "上年结余", "剩余", "结余"]:
-                food_residue_mark_index = col_index
-                continue
-
+            else:
+                cell_value = str(cell_value.replace(" ", ""))
+                _col_index = col_index - 1
+                if cell_value in ["商品名称"]:
+                    food_name_index = _col_index
+                elif cell_value in ["单位", "订货单位"]:
+                    food_unit_index = _col_index
+                elif cell_value in ["数量", "记账数量"]:
+                    food_count_index = _col_index
+                elif cell_value in ["金额", "折前金额"]:
+                    food_total_price_index = _col_index
+                elif cell_value in self.check_date_col_names:
+                    food_check_date_index = _col_index
+                elif cell_value in ["忽略", "不计", "非入库", "可忽略", "非盘点"]:
+                    food_neglect_mark_index = _col_index
+                elif cell_value in self.residue_col_names:
+                    food_residue_mark_index = _col_index
+                elif cell_value in self.org_col_names:
+                    food_org_name_index = _col_index
             col_index += 1
 
         csfoods = []
@@ -924,6 +977,9 @@ class WorkBook:
                 if not (ck_t0 <= check_date <= ck_t1):
                     continue
 
+                org_name = row[food_org_name_index].value
+                if org_name != self.bill.profile.org_name:
+                    continue
                 name = row[food_name_index].value
                 count = row[food_count_index].value
                 unit = row[food_unit_index].value
@@ -1079,7 +1135,7 @@ class WorkBook:
         cssheet = self.get_consuming_sum_sheet()
         time_node = self.bill.time_node
         time_start, time_end = time_node
-        foods = self.food.get_foods_from_pre_consuming_sheet_by_time_nodes_m1()
+        foods = self.food.get_foods_from_pre_consuming_sheet_by_time_node()
 
         total_price = 0.0
         for row in cssheet.iter_rows(

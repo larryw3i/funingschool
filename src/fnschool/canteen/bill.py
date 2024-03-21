@@ -190,18 +190,27 @@ class Bill:
             )
         )
 
+    @property
     def is_changsheng(self):
         return "昌盛" in self.profile.suppliers
 
     def show_msg(self):
         print_info(
             _(
-                "Tips from Changsheng:\n"
-                + "You need to add the residue of last year or last semester."
-            )
-            if is_changsheng
+                "Tips for Changsheng files:\n"
+                + "You need to add the residue of last year "
+                + "or last semester: Open the first "
+                + "spreadsheet you got from Changsheng, "
+                + "and add the 'residue' column, then "
+                + "insert the 'residue' foods after the end "
+                + "of entered data, the 'residue' column names "
+                + "you could set are:\n\t{0}"
+            ).format(" | ".join(self.workbook.residue_col_names))
+            if self.is_changsheng
             else _("I'm {0}.") % app_name
         )
+        print_warning(_("Ok! I knew that.(press any key to continue)"))
+        input()
 
     def make_spreadsheet_by_time_nodes(self):
         self.set_profile_to_index0()
@@ -220,8 +229,8 @@ class Bill:
             self.make_spreadsheet_by_time_node()
 
     def make_spreadsheet_by_time_node(self):
-        if self.is_changsheng():
-            self.workbook.update_inventory_sheet_from_changsheng_like()
+        if self.is_changsheng:
+            self.workbook.update_sheet_from_changsheng_like()
         else:
             print_error(_("Please update the codes for your supplier."))
             return
@@ -232,9 +241,9 @@ class Bill:
         # self.workbook.update_warehousing_sheet_by_time_node_m1()
         # self.workbook.update_unwarehousing_sheet_by_time_node_m1()
         # self.workbook.update_consuming_sum_sheet()
-        # self.workbook.update_purchase_sum_sheet_by_time_nodes_m1()
+        # self.workbook.update_purchase_sum_sheet_by_time_node()
         # self.workbook.update_cover_sheet()
-        # self.workbook.update_food_sheets_by_time_nodes_m1()
+        # self.workbook.update_food_sheets_by_time_node()
         # print_info(_("Update completely!"))
         pass
 
@@ -258,7 +267,7 @@ class Bill:
             self._profile = profile
 
     def get_year_month_of_time_node_m1(self):
-        tn = self.get_time_nodes_m1()
+        tn = self.get_time_node()
         ym = tn.strftime("%Y%m")
         return ym
 
@@ -272,7 +281,7 @@ class Bill:
     def set_quiet(self, value=False):
         self._quiet = value
 
-    def get_time_nodes_m1(self):
+    def get_time_node(self):
         return self.get_time_nodes()[-1]
 
     @property
