@@ -38,8 +38,9 @@ class WorkBook:
         self.pre_consuming_sheet_name_prefix = "出库表"
         self.purchase_sum_sheet_name = "入库、未入库汇总表"
         self.cover_sheet_name = "六大类总封面"
-        self.recounts = []
+        self._recounts = None
         self.purchase_sheet_names = ["客户商品销售报表", "客户送货明细报表"]
+        self.negligible_col_names = ["忽略", "不计", "非入库", "可忽略", "非盘点"]
         self.residue_col_names = ["上季结余", "是剩余", "是结余", "上年结余", "剩余", "结余"]
         self.org_col_names = ["客户名称"]
         self.check_date_col_names = ["送货日期", "送货时间"]
@@ -68,6 +69,11 @@ class WorkBook:
         )
         self.purchase_sheets_properties = []
         self.excluded_purchase_sheets = []
+
+    def get_recounts(self):
+        if self._recounts is None:
+            self._recounts = get_food_recounts_config()
+        return self._recounts
 
     @property
     def profile(self):
@@ -712,11 +718,11 @@ class WorkBook:
         )
 
     def clean_food_count(self, name, count, unit):
-        if self.recounts == []:
-            self.recounts = get_food_recounts_config()
-        for _name, _unit, _times in self.recounts:
+        for _name, _unit, _times in self.get_recounts():
             if _unit == unit and (
-                _name[:-1] == name if _name.endswith("=") else _name in name
+                (_name[:-1] == name)
+                if _name.endswith("=")
+                else (_name in name)
             ):
                 return count * _times
         return count
@@ -919,36 +925,28 @@ class WorkBook:
         food_residue_mark_index = 0
         food_org_name_index = 0
 
-        col_index = 1
-        break_index = 0
-
-        while True:
-            cell = cssheet.cell(1, col_index)
-            cell_value = cell.value
-            if cell_value is None:
-                if break_index > 3:
-                    break
-                break_index += 1
-            else:
-                cell_value = str(cell_value.replace(" ", ""))
-                _col_index = col_index - 1
-                if cell_value in ["商品名称"]:
-                    food_name_index = _col_index
-                elif cell_value in ["单位", "订货单位"]:
-                    food_unit_index = _col_index
-                elif cell_value in ["数量", "记账数量"]:
-                    food_count_index = _col_index
-                elif cell_value in ["金额", "折前金额"]:
-                    food_total_price_index = _col_index
-                elif cell_value in self.check_date_col_names:
-                    food_check_date_index = _col_index
-                elif cell_value in ["忽略", "不计", "非入库", "可忽略", "非盘点"]:
-                    food_neglect_mark_index = _col_index
-                elif cell_value in self.residue_col_names:
-                    food_residue_mark_index = _col_index
-                elif cell_value in self.org_col_names:
-                    food_org_name_index = _col_index
-            col_index += 1
+        for _col_index, cell_value in enumerate(
+            [
+                str(cssheet.cell(1, ci).value)
+                for ci in range(1, cssheet.max_column + 1)
+            ]
+        ):
+            if cell_value in ["商品名称"]:
+                food_name_index = _col_index
+            elif cell_value in ["单位", "订货单位"]:
+                food_unit_index = _col_index
+            elif cell_value in ["数量", "记账数量"]:
+                food_count_index = _col_index
+            elif cell_value in ["金额", "折前金额"]:
+                food_total_price_index = _col_index
+            elif cell_value in self.check_date_col_names:
+                food_check_date_index = _col_index
+            elif cell_value in self.negligible_col_names:
+                food_neglect_mark_index = _col_index
+            elif cell_value in self.residue_col_names:
+                food_residue_mark_index = _col_index
+            elif cell_value in self.org_col_names:
+                food_org_name_index = _col_index
 
         csfoods = []
         is_residue = False
@@ -989,8 +987,7 @@ class WorkBook:
                     else False
                 )
 
-                if not is_residue:
-                    count = self.clean_food_count(name, count, unit)
+                count = self.clean_food_count(name, count, unit)
 
                 csfoods.append(
                     Food(
@@ -1004,11 +1001,6 @@ class WorkBook:
                     )
                 )
 
-            if (
-                not row[food_name_index].value
-                and cssheet.cell(row[0].row + 1, food_name_index + 1).value
-            ):
-                is_residue = True
         chwb.close()
         return csfoods
 

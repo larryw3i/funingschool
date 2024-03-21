@@ -41,7 +41,14 @@ class TestCanteen(unittest.TestCase):
             print("Foods of Month ", m, ":")
             print(
                 " | ".join(
-                    [f.name + f.check_date.strftime("%Y%m%d") for f in foods]
+                    [
+                        f.name
+                        + "."
+                        + f.check_date.strftime("%Y%m%d")
+                        + "."
+                        + str(f.count)
+                        for f in foods
+                    ]
                 )
             )
 
@@ -49,7 +56,14 @@ class TestCanteen(unittest.TestCase):
         print("All foods:")
         print(
             " | ".join(
-                [f.name + f.check_date.strftime("%Y%m%d") for f in foods]
+                [
+                    f.name
+                    + "."
+                    + f.check_date.strftime("%Y%m%d")
+                    + "."
+                    + str(f.count)
+                    for f in foods
+                ]
             )
         )
 
