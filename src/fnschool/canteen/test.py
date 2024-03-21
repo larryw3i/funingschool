@@ -37,8 +37,10 @@ class TestCanteen(unittest.TestCase):
 
     def get_foods(self):
         for m in range(2, 4):
-            print("Foods of Month ", m)
+            print("Foods of Month ", m, ":")
             print(list(self.bill.food.get_foods_of_month(m)))
+
+        print("All foods:")
         print(list(self.bill.food.get_foods_of_time_nodes()))
 
     def get_foods_by_time_node(self):

@@ -22,6 +22,7 @@ class Bill:
         self._profile = None
         self._foods = None
         self.verbose = 0
+        self.show_init_msg = True
         pass
 
     @property
@@ -189,6 +190,19 @@ class Bill:
             )
         )
 
+    def is_changsheng(self):
+        return "昌盛" in self.profile.suppliers
+
+    def show_msg(self):
+        print_info(
+            _(
+                "Tips from Changsheng:\n"
+                + "You need to add the residue of last year or last semester."
+            )
+            if is_changsheng
+            else _("I'm {0}.") % app_name
+        )
+
     def make_spreadsheet_by_time_nodes(self):
         self.set_profile_to_index0()
         self.print_basic_info()
@@ -196,13 +210,17 @@ class Bill:
         time_nodes = self.get_time_nodes()
         month = self.get_month()
         time_node = self.get_time_nodes_of_month()
+
+        if self.show_init_msg:
+            self.show_msg()
+
         for time_node in time_nodes:
             self.time_node = time_node
             self.print_check_time_range()
             self.make_spreadsheet_by_time_node()
 
     def make_spreadsheet_by_time_node(self):
-        if "昌盛" in self.profile.suppliers:
+        if self.is_changsheng():
             self.workbook.update_inventory_sheet_from_changsheng_like()
         else:
             print_error(_("Please update the codes for your supplier."))

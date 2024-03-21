@@ -853,7 +853,7 @@ class WorkBook:
         else:
             cssheet = self.get_changsheng_sheet_name(fd_path)
 
-        chwb = load_workbook(fd_path)
+        chwb = load_workbook(fd_path, read_only=True)
         cssheet = chwb[cssheet]
 
         food_name_index = 0
@@ -862,13 +862,18 @@ class WorkBook:
         food_unit_index = 0
         food_check_date_index = 0
         food_neglect_mark_index = 0
+        food_residue_mark_index = 0
 
-        for col_index in range(1, cssheet.max_column + 1):
+        col_index = 1
+        break_index = 0
+        while True:
             cell = cssheet.cell(1, col_index)
             cell_value = cell.value
             col_index = col_index - 1
             if not cell_value:
-                continue
+                if break_index > 3:
+                    break
+                break_index += 1
             cell_value = str(cell_value.replace(" ", ""))
             if cell_value in ["商品名称"]:
                 food_name_index = col_index
@@ -892,9 +897,17 @@ class WorkBook:
             elif cell_value in ["忽略", "不计", "非入库", "可忽略", "非盘点"]:
                 food_neglect_mark_index = col_index
                 continue
+            elif cell_value in ["上季结余", "是剩余", "是结余", "上年结余", "剩余", "结余"]:
+                food_residue_mark_index = col_index
+                continue
+
+            col_index += 1
 
         csfoods = []
         is_residue = False
+
+        row_index = 1
+        col_index = 1
         for row in cssheet.iter_rows(
             min_row=2,
             max_row=cssheet.max_row,
@@ -915,7 +928,16 @@ class WorkBook:
                 count = row[food_count_index].value
                 unit = row[food_unit_index].value
                 total_price = row[food_total_price_index].value
-                is_negligible = not row[food_neglect_mark_index].value is None
+                is_negligible = (
+                    not row[food_neglect_mark_index].value is None
+                    if food_neglect_mark_index
+                    else False
+                )
+                is_residue = (
+                    not row[food_residue_mark_index] is None
+                    if food_residue_mark_index
+                    else False
+                )
 
                 if not is_residue:
                     count = self.clean_food_count(name, count, unit)
