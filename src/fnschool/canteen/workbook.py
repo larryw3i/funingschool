@@ -44,9 +44,9 @@ class WorkBook:
             "是结余",
             "上年结余",
             "剩余",
-            "结余",
+            "结余"
         ]
-        self.org_col_names = ["客户名称", "结算客户名称"]
+        self.org_col_names = ["客户名称"]
         self.check_date_col_names = ["送货日期", "送货时间"]
         self.warehousing_form_index_offset = 0
         self.inventory_form_index_offset = 1
@@ -741,7 +741,6 @@ class WorkBook:
                 chwb0 = load_workbook(chwb_fpath, read_only=True)
                 cssheet0 = chwb0[sheet_name]
                 cs_dates = []
-                row_index = 1
 
                 header_names = [
                     str(cssheet0.cell(1, ci).value)
@@ -770,15 +769,15 @@ class WorkBook:
                     )
 
                 org_names = [
-                    str(cssheet0.cell(org_name_col_index, ci).value)
-                    for ci in range(1, cssheet0.max_row)
+                    str(cssheet0.cell(ri,org_name_col_index).value)
+                    for ri in range(1, cssheet0.max_row)
                 ]
                 if not self.bill.profile.org_name in org_names:
                     chwb0.close()
                     return None
                 cs_dates = [
-                    str(cssheet0.cell(check_date_col_index, ci).value)
-                    for ci in range(1, cssheet0.max_row)
+                    str(cssheet0.cell(ri,check_date_col_index).value)
+                    for ri in range(1, cssheet0.max_row)
                 ]
                 cs_dates = sorted(
                     list(
@@ -792,6 +791,7 @@ class WorkBook:
                     )
                 )
                 chwb0.close()
+                print(cs_dates)
                 return (sheet_name, cs_dates)
 
         return None
@@ -838,7 +838,9 @@ class WorkBook:
                         self.excluded_purchase_sheets.append(chwb_fpath)
                         continue
                     sheet_name, ptimes = pinfo
-                    if not chwb_fpath in self.purchase_sheets_properties:
+                    if (
+                        not chwb_fpath in [p[0] for p in self.purchase_sheets_properties ]
+                    ):
                         self.purchase_sheets_properties.append(
                             [chwb_fpath, sheet_name, ptimes]
                         )
