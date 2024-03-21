@@ -21,6 +21,7 @@ class Bill:
         self._quiet = False
         self._profile = None
         self._foods = None
+        self.verbose = 0
         pass
 
     @property
@@ -42,7 +43,7 @@ class Bill:
             return self.time_nodes.index(self.time_node)
         return None
 
-    def get_check_time_range(self):
+    def get_check_times_of_time_node(self):
         if not self.time_node:
             return None
         tn_index = self.get_time_node_index()
@@ -158,7 +159,7 @@ class Bill:
             print(_("Time node hasn't been set."))
             return
         t0, t1 = self.time_node
-        ckt0, ckt1 = self.get_check_time_range()
+        ckt0, ckt1 = self.get_check_times_of_time_node()
         print_info(
             _("Food checking time range of {0} is {1}.").format(
                 t0.strftime("%Y.%m.%d") + "-->" + t1.strftime("%Y.%m.%d"),
@@ -202,7 +203,7 @@ class Bill:
 
     def make_spreadsheet_by_time_node(self):
         if "昌盛" in self.profile.suppliers:
-            self.workbook.update_check_inventory_sheet_from_changsheng_like()
+            self.workbook.update_inventory_sheet_from_changsheng_like()
         else:
             print_error(_("Please update the codes for your supplier."))
             return

@@ -331,11 +331,43 @@ class Food:
         ]
         return foods
 
-    def get_foods(self):
+    def get_foods_of_month(self, month):
+        foods = []
+        time_nodes = self.bill.get_time_nodes()
+        time_nodes = [t for t in time_nodes if t[0].month == month]
+        for time_node in time_nodes:
+            self.bill.time_node = time_node
+            _foods = self.get_foods_of_time_node()
+            if _foods:
+                foods += _foods
+        return foods
+
+    def get_foods_of_time_nodes(self):
+        foods = []
+        for time_node in self.bill.get_time_nodes():
+            self.bill.time_node = time_node
+            _foods = self.get_foods_of_time_node()
+            if _foods:
+                foods += _foods
+        return foods
+
+    def get_foods_of_time_node(self):
         if "昌盛" in self.bill.profile.suppliers:
-            return self.workbook.read_foods_from_changsheng()
+            return self.workbook.read_changsheng_foods_by_time_node()
         print(_("Please add codes to get foods from your suppliers."))
         return None
+
+    @property
+    def time_node_foods(self):
+        return self.get_foods_of_time_node()
+
+    @property
+    def time_node_residue_foods(self):
+        foods = self.time_node_foods
+        if not foods:
+            return None
+        foods = [f for f in foods if f.is_residue]
+        return foods
 
     def get_foods_from_pre_consuming_sheet_by_time_nodes_m1(self):
         time_start, time_end = self.bill.get_time_nodes_m1()

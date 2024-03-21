@@ -322,7 +322,7 @@ class WorkBook:
     def update_check_sheet_by_time_node_m1(self):
         cksheet = self.get_check_sheet()
         rfoods = self.food.get_foods_from_pre_consuming_sheet_m1()
-        time_node = self.bill.get_time_nodes_m1()
+        time_node = self.bill.time_node
         time_start, time_end = time_node
         rfoods = [f for f in rfoods if f.get_remainder() > 0.0]
 
@@ -358,7 +358,7 @@ class WorkBook:
             sheet.unmerge_cells(str(cell_group))
 
     def update_cover_sheet(self):
-        time_start, time_end = self.bill.get_time_nodes_m1()
+        time_start, time_end = self.bill.time_node
         cvsheet = self.get_conver_sheet()
         cvsheet.cell(
             1,
@@ -423,7 +423,7 @@ class WorkBook:
         print_info(_("Sheet '%s' was updated.") % self.cover_sheet_name)
 
     def get_food_form_index_by_time_node_m1(self, sheet):
-        _, time_end = self.bill.get_time_nodes_m1()
+        _, time_end = self.bill.time_node
         indexes = self.get_food_form_indexes(sheet)
         _index_range = indexes[time_end.month - 1]
         return _index_range
@@ -467,7 +467,7 @@ class WorkBook:
 
     def get_food_sheet(self, name):
         sheet = None
-        _, time_end = self.bill.get_time_nodes_m1()
+        _, time_end = self.bill.time_node
         if self.includes_sheet(name):
             sheet = self.get_sheet(name)
         else:
@@ -674,7 +674,7 @@ class WorkBook:
 
             if row[2].value and "合计" in str(row[2].value).replace(" ", ""):
                 indexes[-1][1] = row[0].row - 1
-        _, time_end = self.bill.get_time_nodes_m1()
+        _, time_end = self.bill.time_node
         index_range = indexes[time_end.month - 1]
         return index_range
 
@@ -719,12 +719,14 @@ class WorkBook:
             else count
         )
 
-    def get_purchase_times_of_workbook(self, fpath):
+    def get_changsheng_purchase_properties(self, fpath):
         if not fpath.split(".")[-1] in self.spreadsheet_ext_names:
             return None
         chwb_fpath = fpath
-        ch_ef = pd.ExcelFile(chwb_fpath)
-        for sheet_name in ch_ef.sheet_names:
+        ef = pd.ExcelFile(chwb_fpath)
+        sheet_names = ef.sheet_names
+        ef.close()
+        for sheet_name in sheet_names:
             if sheet_name in self.purchase_sheet_names:
                 chwb0 = load_workbook(chwb_fpath, read_only=True)
                 cssheet0 = chwb0[sheet_name]
@@ -736,6 +738,8 @@ class WorkBook:
                         break
                     cs_dates.append(str(_date))
                     row_index += 1
+                row_index = 1
+
                 cs_dates = sorted(
                     list(
                         set(
@@ -748,26 +752,61 @@ class WorkBook:
                     )
                 )
                 chwb0.close()
-                ch_ef.close()
-                return cs_dates
+                return (sheet_name, cs_dates)
 
-        ch_ef.close()
         return None
 
-    def get_purchase_sheet_name_of_workbook(self, wb):
+    def get_changsheng_sheet_name(self, wb):
+        sheet_names = []
+        if isinstance(wb, str):
+            ef = pd.ExcelFile(wb)
+            sheet_names = ef.sheet_names
+            ef.close()
+        else:
+            sheet_names = wb.sheetnames
         for sn in self.purchase_sheet_names:
-            if sn in wb.sheetnames:
+            if sn in sheet_names:
                 return sn
         return None
 
-    def read_foods_from_changsheng(self, fd_path=None, time_node=None):
+    def get_changsheng_properties_by_dir(self, fdpath=None):
+        fd_path = self.purchase_workbook_fd_path or fdpath
+        properties = []
+        if not Path(fd_path).is_dir():
+            return None
+
+        for _file in os.listdir(fd_path):
+            if _file.split(".")[-1] in self.spreadsheet_ext_names:
+                chwb_fpath = (Path(fd_path) / _file).as_posix()
+                print_info(_("Spreadsheet %s is being tested.") % _file)
+                pinfo = self.get_changsheng_purchase_properties(chwb_fpath)
+                if not pinfo:
+                    continue
+                sheet_name, ptimes = pinfo
+                if ptimes:
+                    print_info(
+                        _(
+                            "The food purchasing times of preadsheet {0} is {1} ."
+                        ).format(
+                            _file,
+                            " | ".join(
+                                [
+                                    ptime.strftime("%Y.%m.%d")
+                                    for ptime in ptimes
+                                ]
+                            ),
+                        )
+                    )
+                    properties.append([_file, sheet_name, chwb_fpath, ptimes])
+
+        return properties if properties else None
+
+    def read_changsheng_foods_by_time_node(self, fd_path=None, time_node=None):
         global Food
         fd_path = self.purchase_workbook_fd_path or fd_path
         time_node = time_node or self.bill.time_node
         time_start, time_end = time_node
-        cssheet_names = self.purchase_sheet_names
         seeking_dpath0 = (Path.home() / "Downloads").as_posix()
-        cssheet = None
         if not fd_path:
             print_info(
                 _(
@@ -792,52 +831,30 @@ class WorkBook:
 
         chwb = None
         cssheet = None
-        ck_t0, ck_t1 = self.bill.get_check_time_range()
+        ck_t0, ck_t1 = self.bill.get_check_times_of_time_node()
+
         if Path(fd_path).is_dir():
             print_info(_("Entered directory: %s") % fd_path)
-            for _file in os.listdir(fd_path):
-                if _file.split(".")[-1] in self.spreadsheet_ext_names:
-                    chwb_fpath = (Path(fd_path) / _file).as_posix()
-                    print_info(_("Spreadsheet %s is being tested.") % _file)
-                    ptimes = self.get_purchase_times_of_workbook(chwb_fpath)
-                    if ptimes:
-                        print_info(
-                            _(
-                                "The food purchasing times of preadsheet {0} is {1} ."
-                            ).format(
-                                _file,
-                                " | ".join(
-                                    [
-                                        ptime.strftime("%Y.%m.%d")
-                                        for ptime in ptimes
-                                    ]
-                                ),
-                            )
-                        )
-                        if any(
-                            [
-                                (ck_t0 <= ptime and ptime <= ck_t1)
-                                for ptime in ptimes
-                            ]
-                        ):
-                            chwb = load_workbook(chwb_fpath)
-                            _sheet_name = (
-                                self.get_purchase_sheet_name_of_workbook(chwb)
-                            )
-                            if not _sheet_name:
-                                continue
-                            cssheet = chwb[_sheet_name]
-                            self.bill.print_check_time_range()
-                            print_info(_("Spreadsheet %s was used.") % _file)
-                            break
-                    print_warning(_("Spreadsheet %s was discarded.") % _file)
-
-            if cssheet is None:
-                print_error(_("No spreadsheet was recognized."))
+            csproperties = self.get_changsheng_properties_by_dir(fd_path)
+            if not csproperties:
                 return None
+            for csproperty in csproperties:
+                file_name, sheet_name, file_path, purchase_times = csproperty
+                for ptime in purchase_times:
+                    if ck_t0 <= ptime <= ck_t1:
+                        fd_path = file_path
+                        cssheet = sheet_name
+                        break
+                if cssheet:
+                    break
+            if not cssheet:
+                return None
+
         else:
-            chwb = load_workbook(fd_path)
-            cssheet = chwb[cssheet_name]
+            cssheet = self.get_changsheng_sheet_name(fd_path)
+
+        chwb = load_workbook(fd_path)
+        cssheet = chwb[cssheet]
 
         food_name_index = 0
         food_count_index = 0
@@ -920,261 +937,65 @@ class WorkBook:
                 and cssheet.cell(row[0].row + 1, food_name_index + 1).value
             ):
                 is_residue = True
-
         chwb.close()
-
         return csfoods
 
-    def update_check_inventory_sheet_from_changsheng_like(
+    def get_inventory_form_index_of_time_node(self):
+        indexes = self.get_inventory_form_indexes()
+        tn_index = (
+            self.bill.get_time_node_index() + self.inventory_form_index_offset
+        )
+        indexes_len = len(indexes)
+        _index = None
+        if indexes_len <= tn_index:
+            return None
+        _index = indexes[tn_index]
+        return _index
+
+    def update_inventory_sheet_of_time_node(
         self, fd_path=None, time_node=None
     ):
-        global Food
         fd_path = self.purchase_workbook_fd_path or fd_path
         time_node = time_node or self.bill.time_node
         time_start, time_end = time_node
-        cksheet = self.get_check_sheet()
-        time_nodes = self.bill.get_time_nodes()
-        check_year = time_nodes[0][0].year
-        check_month = self.bill.month
-
-        cssheet = None
-        cssheet_names = self.purchase_sheet_names
-
-        seeking_dpath0 = (Path.home() / "Downloads").as_posix()
-
-        if not fd_path:
-            print_info(
-                _(
-                    "Please enter the 'purchase list file path' of "
-                    + "spreadsheet Changsheng provided, "
-                    + "or enter the directory path and then {app_name} will "
-                    + "read all spreadsheets."
-                    + " (default: '{seeking_dpath0}')"
-                ).format(app_name=app_name, seeking_dpath0=seeking_dpath0)
-            )
-            fd_path = input(">_ ")
-
-        if fd_path.replace(" ", "") == "":
-            fd_path = seeking_dpath0
-
-        if fd_path.startswith("~"):
-            fd_path = Path.home().as_posix() + fd_path[1:]
-
-        if not Path(fd_path).exists():
-            print_error(_("File or directory '%s' doesn't exist.") % (fd_path))
-            sys.exit()
-
-        chwb = None
-        cssheet = None
-
-        if Path(fd_path).is_dir():
-            print_info(_("Entered directory: %s") % fd_path)
-            for _file in os.listdir(fd_path):
-                if _file.split(".")[-1] in self.spreadsheet_ext_names:
-                    chwb_fpath = (Path(fd_path) / _file).as_posix()
-                    print_info(_("Spreadsheet %s is being tested.") % _file)
-                    cs_t0, cs_t1 = self.get_purchase_time_range_of_workbook(
-                        chwb_fpath
-                    )
-                    if cs_t0:
-                        ck_t0, ck_t1 = self.bill.get_check_time_range()
-                        print_info(
-                            _(
-                                "The food purchasing time range of preadsheet {0} is {1} ."
-                            ).format(
-                                _file,
-                                cs_t0.strftime("%Y.%m.%d")
-                                + "-->"
-                                + cs_t1.strftime("%Y.%m.%d"),
-                            )
-                        )
-                        if ck_t0 <= cs_t0 and cs_t1 <= ck_t1:
-                            chwb = load_workbook(chwb_fpath)
-                            cssheet = chwb[
-                                self.get_purchase_sheet_name_of_workbook(chwb)
-                            ]
-                            self.bill.print_check_time_range()
-                            print_info(_("Spreadsheet %s was used.") % _file)
-                            break
-                    print_warning(_("Spreadsheet %s was discarded.") % _file)
-
-            if cssheet is None:
-                print_error(_("No spreadsheet was recognized."))
-                sys.exit()
-        else:
-            chwb = load_workbook(fd_path)
-            cssheet = chwb[cssheet_name]
-
-        is_residue = False
-        last_check_date = None
-        ckfoods = self.food.get_food_list_from_check_sheet()
-
         isheet = self.get_inventory_sheet()
-        isht_entry_index = 0
+        foods = self.food.time_node_residue_foods
         (
-            isht_form_index_start,
-            isht_form_index_end,
-        ) = self.get_inventory_form_indexes()[0]
-        isht_food_row_start = isht_form_index_start + 3
-        isht_food_row_end = isht_form_index_end - 1
-        r_total_price = 0.0
+            iform_index0,
+            iform_index1,
+        ) = self.get_inventory_form_index_of_time_node()
 
-        for row in isheet.iter_rows(
-            min_row=isht_food_row_start,
-            max_row=isht_food_row_end,
-            min_col=1,
-            max_col=9,
-        ):
-            for cell in row:
-                cell.value = ""
+        if not foods:
+            print_warning(_("There is no residue foods."))
+            return isheet
 
-        food_name_index = 0
-        food_count_index = 0
-        food_total_price_index = 0
-        food_unit_index = 0
-        food_check_date_index = 0
-        food_neglect_mark_index = 0
-
-        for col_index in range(1, cssheet.max_column + 1):
-            cell = cssheet.cell(1, col_index)
-            cell_value = cell.value
-            col_index = col_index - 1
-            if not cell_value:
-                continue
-            cell_value = str(cell_value.replace(" ", ""))
-            if cell_value in ["商品名称"]:
-                food_name_index = col_index
-                continue
-
-            elif cell_value in ["单位", "订货单位"]:
-                food_unit_index = col_index
-                continue
-
-            elif cell_value in ["数量", "记账数量"]:
-                food_count_index = col_index
-                continue
-
-            elif cell_value in ["金额", "折前金额"]:
-                food_total_price_index = col_index
-                continue
-
-            elif cell_value in ["送货日期"]:
-                food_check_date_index = col_index
-                continue
-            elif cell_value in ["忽略", "不计", "非入库", "可忽略", "非盘点"]:
-                food_neglect_mark_index = col_index
-                continue
-
-        csfoods = []
-        for row in cssheet.iter_rows(
-            min_row=2,
-            max_row=cssheet.max_row,
-            min_col=1,
-            max_col=cssheet.max_column,
-        ):
-            if row[food_name_index].value:
-                name = row[food_name_index].value
-                count = row[food_count_index].value
-                unit = row[food_unit_index].value
-                total_price = row[food_total_price_index].value
-
-                if row[food_check_date_index].value:
-                    check_date = row[food_check_date_index].value.split("-")
-                    check_date = datetime(
-                        int(check_date[0]),
-                        int(check_date[1]),
-                        int(check_date[2]),
-                    )
-                    last_check_date = check_date
-                else:
-                    check_date = last_check_date
-
-                if not is_residue:
-                    count = self.clean_food_count(name, count, unit)
-
-                csfoods.append(
-                    Food(
-                        self.bill,
-                        name=name,
-                        check_date=check_date,
-                        count=count,
-                        is_residue=is_residue,
-                        total_price=total_price,
-                    )
-                )
-
+        for food in foods:
+            isheet.cell(iform_index0, 1, name)
+            isheet.cell(iform_index0, 2, self.food.get_unit_name(name))
+            isheet.cell(iform_index0, 3, count)
+            isheet.cell(iform_index0, 4, total_price)
+            isheet.cell(iform_index0, 5, count)
+            isheet.cell(iform_index0, 6, total_price)
             if (
-                not row[food_name_index].value
-                and cssheet.cell(row[0].row + 1, food_name_index + 1).value
+                isheet.cell(iform_index0 + 1, 1).value
+                and isheet.cell(iform_index0 + 1, 1).value.replace(" ", "")
+                == "合计"
             ):
-                is_residue = True
-
-        residue_foods_included = len([f for f in csfoods if f.is_residue]) > 0
-
-        if residue_foods_included:
-            self.unmerge_cells_of_sheet(isheet)
-
-        for csfood in csfoods:
-            added_foods = (
-                []
-                if not ckfoods
-                else [
-                    f
-                    for f in ckfoods
-                    if (
-                        f.name == csfood.name
-                        and f.count == csfood.count
-                        and f.check_date == csfood.check_date
-                        and f.total_price == csfood.total_price
-                    )
-                ]
-            )
-
-            if not ckfoods or len(added_foods) < 1:
-                cksheet.insert_rows(2, 1)
-                cksheet.cell(2, 1, str(uuid.uuid4()))
-                cksheet.cell(2, 1).font = Font(size=8)
-                cksheet.cell(2, 2, csfood.check_date.strftime("%Y%m%d"))
-                cksheet.cell(2, 3, csfood.name)
-                cksheet.cell(2, 4, csfood.count)
-                cksheet.cell(2, 5, csfood.total_price)
-                cksheet.cell(2, 6, "Y" if csfood.is_residue else "")
-
-            if csfood.is_residue:
-                isht_row_index = isht_food_row_start + isht_entry_index
-                isheet.cell(isht_row_index, 1, name)
-                isheet.cell(isht_row_index, 2, self.food.get_unit_name(name))
-                isheet.cell(isht_row_index, 3, count)
-                isheet.cell(isht_row_index, 4, total_price)
-                isheet.cell(isht_row_index, 5, count)
-                isheet.cell(isht_row_index, 6, total_price)
-                if (
-                    isheet.cell(isht_row_index + 1, 1).value
-                    and isheet.cell(isht_row_index + 1, 1).value.replace(
-                        " ", ""
-                    )
-                    == "合计"
-                ):
-                    isheet.insert_rows(isht_row_index + 1, 1)
+                isheet.insert_rows(iform_index0 + 1, 1)
                 r_total_price += total_price
-                isht_entry_index += 1
+                iform_index0 += 1
+                isheet.cell(isht_form_index_end, 4, r_total_price)
+                isheet.cell(isht_form_index_end, 6, r_total_price)
 
-        isheet.cell(isht_form_index_end, 4, r_total_price)
-        isheet.cell(isht_form_index_end, 6, r_total_price)
+        print_info(_("Sheet '%s' was updated.") % self.inventory_sheet_name)
 
-        if residue_foods_included:
-            self.format_inventory_sheet()
-            print_info(
-                _("Sheet '%s' was updated.") % self.inventory_sheet_name
-            )
-
-        self.clear_check_df()
         wb = self.get_workbook()
-        wb.active = cksheet
+        wb.active = isheet
         print_info(_("Sheet '%s' was updated.") % self.check_sheet_name)
+        return isheet
 
-    def update_purchase_sum_sheet_by_time_nodes_m1(self):
-        time_start, time_end = self.bill.get_time_nodes_m1()
+    def update_purchase_sum_sheet_by_time_node(self):
+        time_start, time_end = self.bill.time_node
         pssheet = self.get_purchase_sum_sheet()
         pssheet.cell(
             2,
@@ -1234,7 +1055,7 @@ class WorkBook:
 
     def update_consuming_sum_sheet(self):
         cssheet = self.get_consuming_sum_sheet()
-        time_node = self.bill.get_time_nodes_m1()
+        time_node = self.bill.time_node
         time_start, time_end = time_node
         foods = self.food.get_foods_from_pre_consuming_sheet_by_time_nodes_m1()
 
@@ -1282,7 +1103,7 @@ class WorkBook:
         self.update_pre_consuming_sheet_m1(quiet)
         csheet = self.get_consuming_sheet()
         form_indexes = self.get_consuming_form_indexes()
-        time_start, time_end = self.bill.get_time_nodes_m1()
+        time_start, time_end = self.bill.time_node
         foods = self.food.get_foods_from_pre_consuming_sheet_m1()
         class_names = self.get_base_class_names()
 
@@ -1437,11 +1258,11 @@ class WorkBook:
         wb.active = csheet
         print_info(_("Sheet '%s' was updated.") % self.consuming_sheet_name)
 
-    def update_pre_consuming_sheet_m1(self, quiet=False):
+    def update_pre_consuming_sheet(self, quiet=False):
         sheet = self.get_pre_consuming_sheet_m1()
         sheet_title = sheet.title
         foods = self.food.get_non_negligible_foods_by_time_node_m1()
-        time_start, time_end = self.bill.get_time_nodes_m1()
+        time_start, time_end = self.bill.time_node
         wb = self.get_workbook()
         row_index_offset = 3
         col_index_offset = 6
@@ -1862,10 +1683,10 @@ class WorkBook:
 
     def update_warehousing_sheet_by_time_node(self):
         wsheet = self.get_warehousing_sheet()
-        foods = self.food.get_food_list_from_check_sheet()
+        foods = self.food.time_node_foods
         form_indexes = self.get_warehousing_form_indexes()
         class_names = self.get_base_class_names()
-        time_node = self.bill.get_time_node()
+        time_node = self.bill.time_node
 
         self.unmerge_cells_of_sheet(wsheet)
 
@@ -2160,6 +1981,7 @@ class WorkBook:
         wb = self.get_workbook()
         wb.save(file_path)
         print_info(_("Workbook '%s' was saved.") % file_path)
+        return file_path
 
     def get_sheet(self, name):
         wb = self.get_workbook()
