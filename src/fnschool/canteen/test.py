@@ -39,12 +39,19 @@ class TestCanteen(unittest.TestCase):
         for m in range(2, 4):
             foods = self.bill.food.get_foods_of_month(m)
             print("Foods of Month ", m, ":")
-            print(" | ".join([f.name+f.check_date.strftime("%Y%m%d") for f in foods]))
+            print(
+                " | ".join(
+                    [f.name + f.check_date.strftime("%Y%m%d") for f in foods]
+                )
+            )
 
         foods = self.bill.food.get_foods_of_time_nodes()
         print("All foods:")
-        print(" | ".join([f.name+f.check_date.strftime("%Y%m%d") for f in foods]))
-
+        print(
+            " | ".join(
+                [f.name + f.check_date.strftime("%Y%m%d") for f in foods]
+            )
+        )
 
     def get_foods_by_time_node(self):
         for m in range(2, 4):

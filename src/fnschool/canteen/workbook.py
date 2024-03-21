@@ -19,6 +19,7 @@ from fnschool.canteen import *
 from fnschool.canteen.food import *
 from fnschool.canteen.bill import *
 from fnschool.canteen.path import *
+from fnschool.canteen.config import *
 
 
 class WorkBook:
@@ -37,15 +38,9 @@ class WorkBook:
         self.pre_consuming_sheet_name_prefix = "出库表"
         self.purchase_sum_sheet_name = "入库、未入库汇总表"
         self.cover_sheet_name = "六大类总封面"
+        self.recounts = []
         self.purchase_sheet_names = ["客户商品销售报表", "客户送货明细报表"]
-        self.residue_col_names = [
-            "上季结余",
-            "是剩余",
-            "是结余",
-            "上年结余",
-            "剩余",
-            "结余"
-        ]
+        self.residue_col_names = ["上季结余", "是剩余", "是结余", "上年结余", "剩余", "结余"]
         self.org_col_names = ["客户名称"]
         self.check_date_col_names = ["送货日期", "送货时间"]
         self.warehousing_form_index_offset = 0
@@ -717,17 +712,14 @@ class WorkBook:
         )
 
     def clean_food_count(self, name, count, unit):
-        return (
-            count * 50
-            if unit == "包" and "小町" in name
-            else count * 360
-            if unit == "件" and "大号鸡蛋" == name
-            else count * 8
-            if unit == "件" and "三全奶香馒头" in name
-            else count * 4
-            if unit == "件" and "滇雪菜家村上等菜籽油" in name
-            else count
-        )
+        if self.recounts == []:
+            self.recounts = get_food_recounts_config()
+        for _name, _unit, _times in self.recounts:
+            if _unit == unit and (
+                _name[:-1] == name if _name.endswith("=") else _name in name
+            ):
+                return count * _times
+        return count
 
     def get_changsheng_purchase_properties(self, fpath):
         if not fpath.split(".")[-1] in self.spreadsheet_ext_names:
@@ -769,14 +761,14 @@ class WorkBook:
                     )
 
                 org_names = [
-                    str(cssheet0.cell(ri,org_name_col_index).value)
+                    str(cssheet0.cell(ri, org_name_col_index).value)
                     for ri in range(1, cssheet0.max_row)
                 ]
                 if not self.bill.profile.org_name in org_names:
                     chwb0.close()
                     return None
                 cs_dates = [
-                    str(cssheet0.cell(ri,check_date_col_index).value)
+                    str(cssheet0.cell(ri, check_date_col_index).value)
                     for ri in range(1, cssheet0.max_row)
                 ]
                 cs_dates = sorted(
@@ -838,9 +830,9 @@ class WorkBook:
                         self.excluded_purchase_sheets.append(chwb_fpath)
                         continue
                     sheet_name, ptimes = pinfo
-                    if (
-                        not chwb_fpath in [p[0] for p in self.purchase_sheets_properties ]
-                    ):
+                    if not chwb_fpath in [
+                        p[0] for p in self.purchase_sheets_properties
+                    ]:
                         self.purchase_sheets_properties.append(
                             [chwb_fpath, sheet_name, ptimes]
                         )
