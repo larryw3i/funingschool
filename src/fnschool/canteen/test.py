@@ -62,6 +62,7 @@ class TestCanteen(unittest.TestCase):
                     + f.check_date.strftime("%Y%m%d")
                     + "."
                     + str(f.count)
+                    + f.unit_name
                     for f in foods
                 ]
             )

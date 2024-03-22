@@ -8,17 +8,22 @@ from fnschool.log import *
 from fnschool.external import *
 
 
+def get_food_unit_names_config():
+    cfg = None
+    with open(canteen_config_fpath, "rb") as f:
+        cfg = tomllib.load(f).get("canteen", {}).get("unit_names", [])
+    with open(canteen_config0_fpath, "rb") as f:
+        cfg = cfg + tomllib.load(f).get("canteen", {}).get("unit_names", [])
+    return get_food_recounts_config()
+
+    return None if cfg == [] else cfg
+
+
 def get_food_recounts_config():
     cfg = None
     with open(canteen_config_fpath, "rb") as f:
         cfg = tomllib.load(f).get("canteen", {}).get("recounts", [])
-    if cfg == []:
-        print_error(
-            _("'recounts' hasn't been configured yet. configure it now?(YyNn)")
-        )
-        if input() in "Yy":
-            open_file_via_app0(canteen_config0_fpath)
-            open_file_via_app0(canteen_config_fpath)
-            return get_food_recounts_config()
+    with open(canteen_config0_fpath, "rb") as f:
+        cfg = cfg + tomllib.load(f).get("canteen", {}).get("recounts", [])
 
     return None if cfg == [] else cfg

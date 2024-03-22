@@ -20,6 +20,7 @@ class Food:
         is_residue=False,
         is_blank=False,
         is_negligible=False,
+        unit_name=None,
     ):
         self.bill = bill
         self.name = name
@@ -40,6 +41,9 @@ class Food:
         self.consum = self.add_consumption
         self.residue_mark = "(R)"
         self.is_blank = is_blank
+        self.unit_name = unit_name or "市斤"
+        self.unit_names = None
+        self.recounts = None
         pass
 
     @property
@@ -100,22 +104,36 @@ class Food:
             [count for time_point, count in self.consuming_list]
         )
 
-    @property
-    def unit_name(self):
-        return self.get_unit_name()
+    def clean_count(self, name, count, unit):
+        if not self.recounts:
+            self.recounts = get_food_recounts_config()
+        for _name, _unit, _times in sel.recounts:
+            if _unit == unit and self.strs_are_equal(name, _name):
+                return count * _times
+        return count
 
-    def get_unit_name(self, name=None):
-        unit_df = self.workbook.get_unit_df()
+    def clean_unit_name(self, name=None):
+        if not self.unit_names:
+            self.unit_names = get_food_unit_names_config()
+
         name = name or self.name
-        unit = unit_df[unit_df["Name"] == name]["Unit"].tolist()
-        return (
-            unit[0]
-            if unit
-            else f'=VLOOKUP("{name}",{self.workbook.unit_sheet_name}!A:B,2,0)'
-        )
+        for _name_like, _unit in self.unit_names:
+            if self.strs_are_equal(name, _name_like):
+                return _unit
+        return "市斤"
 
-    def name_in_unit_sheet(self):
-        return self.name in self.workbook.get_unit_name_list()
+    def strs_are_equal(self, str_value, like):
+        return (
+            str_value.endswith(like)
+            if like.startswith("*")
+            else str_value.startswith(like)
+            if like.endswith("*")
+            else str_value == like
+            if like.endswith("=")
+            else like in str_value
+            if (like.startswith("*") and like.endswith("*"))
+            else str_value == like
+        )
 
     def get_base_class_name(self):
         base_class_df = self.workbook.get_base_class_df()

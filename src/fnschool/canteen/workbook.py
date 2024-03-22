@@ -717,16 +717,6 @@ class WorkBook:
             + f"雪兰：{xl_milk_total_price:.2f}元",
         )
 
-    def clean_food_count(self, name, count, unit):
-        for _name, _unit, _times in self.get_recounts():
-            if _unit == unit and (
-                (_name[:-1] == name)
-                if _name.endswith("=")
-                else (_name in name)
-            ):
-                return count * _times
-        return count
-
     def get_changsheng_purchase_properties(self, fpath):
         if not fpath.split(".")[-1] in self.spreadsheet_ext_names:
             return None
@@ -987,7 +977,8 @@ class WorkBook:
                     else False
                 )
 
-                count = self.clean_food_count(name, count, unit)
+                count = self.food.clean_count(name, count, unit)
+                unit = self.food.clean_unit_name(name)
 
                 csfoods.append(
                     Food(
@@ -998,6 +989,7 @@ class WorkBook:
                         is_residue=is_residue,
                         total_price=total_price,
                         is_negligible=is_negligible,
+                        unit_name=unit,
                     )
                 )
 
