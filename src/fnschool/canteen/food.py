@@ -4,6 +4,7 @@ import sys
 from fnschool import *
 from fnschool.canteen import *
 from fnschool.canteen.bill import *
+from fnschool.canteen.config import *
 
 
 class Food:
@@ -77,16 +78,26 @@ class Food:
         )
 
     def __str__(self, newline=True):
-        return "\n" + "\n\t".join(
-            [
-                _("Food name:") + f" {self.name}",
-                _("Unit price:") + f" {self.unit_price}",
-                _("Count:") + f" {self.count} ({self.unit_name})",
-                _("Total price:") + f" {self.total_price}",
-                _("Is neglibible:") + f" {self.is_negligible}",
-                _("Is residue:") + f" {self.is_residue}",
-                _("Check date:") + f" {self.check_date}",
-            ]
+        return (
+            " ".join(
+                [
+                    self.name,
+                    str(self.unit_price)
+                    + self.bill.currency_unit0
+                    + "/"
+                    + self.unit_name
+                    + "*"
+                    + str(self.count)
+                    + "="
+                    + str(self.total_price)
+                    + self.bill.currency_unit0,
+                    _("Is residue") if self.is_residue else "",
+                    _("Is neglibible") if self.is_negligible else "",
+                ]
+            )
+            + "\n"
+            if newline
+            else ""
         )
 
     @property
@@ -107,7 +118,7 @@ class Food:
     def clean_count(self, name, count, unit):
         if not self.recounts:
             self.recounts = get_food_recounts_config()
-        for _name, _unit, _times in sel.recounts:
+        for _name, _unit, _times in self.recounts:
             if _unit == unit and self.strs_are_equal(name, _name):
                 return count * _times
         return count
@@ -124,13 +135,13 @@ class Food:
 
     def strs_are_equal(self, str_value, like):
         return (
-            str_value.endswith(like)
+            str_value.endswith(like[1:])
             if like.startswith("*")
-            else str_value.startswith(like)
+            else str_value.startswith(like[:-1])
             if like.endswith("*")
             else str_value == like
             if like.endswith("=")
-            else like in str_value
+            else like[1:-1] in str_value
             if (like.startswith("*") and like.endswith("*"))
             else str_value == like
         )

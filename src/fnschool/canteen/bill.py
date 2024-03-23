@@ -23,6 +23,7 @@ class Bill:
         self._foods = None
         self.verbose = 0
         self.show_init_msg = True
+        self.currency_unit0 = "元"
         pass
 
     @property

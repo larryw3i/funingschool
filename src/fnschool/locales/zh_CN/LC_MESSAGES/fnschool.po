@@ -5,19 +5,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: fnschool\n"
+"Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-22 02:28+0800\n"
+"POT-Creation-Date: 2024-03-23 22:20+0800\n"
 "PO-Revision-Date: 2024-03-22 02:29+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
-"Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_CN\n"
+"Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.14.0\n"
-"X-Generator: Poedit 3.4\n"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:17
 msgid "Function is not found."
@@ -110,11 +109,18 @@ msgid "Suppliers:"
 msgstr "供应商："
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:199
-msgid "Tips for Changsheng files:\n"
-"You need to add the residue of last year or last semester: Open the first spreadsheet you got from Changsheng, and add the 'residue' column, then insert the 'residue' foods after the end of entered data, the 'residue' column names you could set are:\n"
+msgid ""
+"Tips for Changsheng files:\n"
+"You need to add the residue of last year or last semester: Open the first"
+" spreadsheet you got from Changsheng, and add the 'residue' column, then "
+"insert the 'residue' foods after the end of entered data, the 'residue' "
+"column names you could set are:\n"
 "\t{0}"
-msgstr "关于 昌盛 提供的文件的小提示：\n"
-"你要把 去年 或 上个学期 的结余添加到昌盛提供的这个学期的第一个工作簿里面：打开工作簿，给工作簿添加“结余”列，然后在已有数据的后行中添加结余的所有食材，你可以输入以下之一作为列名:\n"
+msgstr ""
+"关于 昌盛 提供的文件的小提示：\n"
+"你要把 去年 或 上个学期 "
+"的结余添加到昌盛提供的这个学期的第一个工作簿里面：打开工作簿，给工作簿添加“结余”列，然后在已有数据的后行中添加结余的所有食材，你可以输入以下之一作为列名:"
+"\n"
 "\t{0}"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:210
@@ -136,64 +142,60 @@ msgstr "没有与这个供应商相关的解析代码，你可以添加代码。
 msgid "%s can't change."
 msgstr "%s 无法转换。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/config.py:17
-msgid "'recounts' hasn't been configured yet. configure it now?(YyNn)"
-msgstr "没有配置“recounts”（数量调节逻辑），现在配置吗？（YyNn）"
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:78
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:82
 msgid "Food name:"
 msgstr "食材姓名："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:79
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:83
 msgid "Unit price:"
 msgstr "单价："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:80
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:84
 msgid "Count:"
 msgstr "数量："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:81
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:85
 msgid "Total price:"
 msgstr "食材总价："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:82
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:86
 msgid "Is neglibible:"
 msgstr "非入库食材："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:83
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:87
 msgid "Is residue:"
 msgstr "是库存食材："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:84
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:88
 msgid "Check date:"
 msgstr "食材清点日期："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:149
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:167
 #, python-format
 msgid "line '%s' has been discarded."
 msgstr "行 “%s” 被舍去。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:157
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:175
 #, python-format
 msgid "values length is less than %s."
 msgstr "值的长度小于 %s 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:176
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:194
 #, python-format
 msgid "Food count: %s"
 msgstr "食材数量：%s"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:178
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:196
 #, python-format
 msgid "Food total price: %s"
 msgstr "食材总价：%s"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:186
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:204
 #, python-format
 msgid "Food check date: %s"
 msgstr "食材清点日期：%s"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:361
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:379
 msgid "Please add codes to get foods from your suppliers."
 msgstr "没有与这个供应商相关的解析代码，你可以添加代码。"
 
@@ -209,79 +211,84 @@ msgstr "好的，我已配置。（按任意键继续）"
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:364
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:436
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:664
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1054
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1058
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1118
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1163
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1323
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1745
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1914
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1046
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1050
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1110
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1155
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1315
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1737
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1906
 #, python-format
 msgid "Sheet '%s' was updated."
 msgstr "工作表 “%s” 已被更新。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:758
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:748
 msgid "Got no check date column index of {0} ."
 msgstr "未找到 {0} 的清点日期列索引。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:764
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:754
 msgid "Got no organization name column of {0}"
 msgstr "未找到 {0} 的机构名的列索引。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:833
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:823
 #, python-format
 msgid "Spreadsheet %s is being tested."
 msgstr "正在检测工作簿 %s 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:848
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:838
 msgid "The food purchasing times of preadsheet {0} is {1} ."
 msgstr "工作簿 {0} 的食材购入时间集是 {1} 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:872
-msgid "Please enter the 'purchase list file path' of spreadsheet Changsheng provided, or enter the directory path and then {app_name} will read all spreadsheets. (default: '{seeking_dpath0}')"
-msgstr "请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} 会读取所有的工作簿并获取购入数据。（默认的目录：{seeking_dpath0}）"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:862
+msgid ""
+"Please enter the 'purchase list file path' of spreadsheet Changsheng "
+"provided, or enter the directory path and then {app_name} will read all "
+"spreadsheets. (default: '{seeking_dpath0}')"
+msgstr ""
+"请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} "
+"会读取所有的工作簿并获取购入数据。（默认的目录：{seeking_dpath0}）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:889
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:879
 #, python-format
 msgid "File or directory '%s' doesn't exist."
 msgstr "文件 或 目录 “%s” 不存在。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:897
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:887
 #, python-format
 msgid "Entered directory: %s"
 msgstr "键入的目录： %s"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1033
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1025
 msgid "There is no residue foods."
 msgstr "没有结余的食材。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1589
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1659
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1581
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1651
 #, python-format
 msgid "Sheet '%s' was formatted."
 msgstr "“%s” 表已被格式化。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1979
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1971
 #, python-format
 msgid "Directory '%s' has been made."
 msgstr "目录 “%s” 已创建。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1984
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1976
 msgid "Workbook '{0}' was copied to '{1}'."
 msgstr "工作簿 “{0}” 被复制到 “{1}” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1988
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1980
 #, python-format
 msgid "Workbook '%s' has been used."
 msgstr "使用工作薄 “%s” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2014
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2047
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2006
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2039
 #, python-format
 msgid "Workbook '%s' was saved."
 msgstr "工作簿 “%s” 已保存。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2018
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2010
 #, python-format
 msgid "Directory %s was created."
 msgstr "目录 “%s” 已创建。"
@@ -394,3 +401,7 @@ msgstr "目录 “%s” 已创建。"
 #~ " are:\n"
 #~ "\t{0}"
 #~ msgstr ""
+
+#~ msgid "'recounts' hasn't been configured yet. configure it now?(YyNn)"
+#~ msgstr "没有配置“recounts”（数量调节逻辑），现在配置吗？（YyNn）"
+

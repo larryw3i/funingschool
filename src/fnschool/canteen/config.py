@@ -14,7 +14,6 @@ def get_food_unit_names_config():
         cfg = tomllib.load(f).get("canteen", {}).get("unit_names", [])
     with open(canteen_config0_fpath, "rb") as f:
         cfg = cfg + tomllib.load(f).get("canteen", {}).get("unit_names", [])
-    return get_food_recounts_config()
 
     return None if cfg == [] else cfg
 
