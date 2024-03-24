@@ -119,7 +119,7 @@ class Food:
         if not self.recounts:
             self.recounts = get_food_recounts_config()
         for _name, _unit, _times in self.recounts:
-            if _unit == unit and self.strs_are_equal(name, _name):
+            if _unit == unit and self.bill.strs_are_equal(name, _name):
                 return count * _times
         return count
 
@@ -129,22 +129,9 @@ class Food:
 
         name = name or self.name
         for _name_like, _unit in self.unit_names:
-            if self.strs_are_equal(name, _name_like):
+            if self.bill.strs_are_equal(name, _name_like):
                 return _unit
         return "市斤"
-
-    def strs_are_equal(self, str_value, like):
-        return (
-            str_value.endswith(like[1:])
-            if like.startswith("*")
-            else str_value.startswith(like[:-1])
-            if like.endswith("*")
-            else str_value == like
-            if like.endswith("=")
-            else like[1:-1] in str_value
-            if (like.startswith("*") and like.endswith("*"))
-            else str_value == like
-        )
 
     def get_base_class_name(self):
         base_class_df = self.workbook.get_base_class_df()

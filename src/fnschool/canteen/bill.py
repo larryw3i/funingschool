@@ -15,6 +15,7 @@ class Bill:
         self._food = None
         self._checked_foods = None
         self._workbook = None
+        self._config = None
         self._time_nodes = []
         self._time_node = None
         self._month = None
@@ -25,6 +26,37 @@ class Bill:
         self.show_init_msg = True
         self.currency_unit0 = "元"
         pass
+
+    @property
+    def config(self):
+        if not self._config:
+            self._config = Config()
+        return self._config
+
+    def strs_are_equal(self, str_value, like):
+        not_like_list = None
+        if "!" in like:
+            like = like.split("!")
+            not_like_list = like[1:]
+            like = like[1]
+        result = (
+            str_value.endswith(like[1:])
+            if (like.startswith("*") and not like.endswith("*"))
+            else str_value.startswith(like[:-1])
+            if (like.endswith("*") and not like.startswith("*"))
+            else str_value == like
+            if like.startswith("=")
+            else like[1:-1] in str_value
+            if (like.startswith("*") and like.endswith("*"))
+            else str_value == like
+        ) and (
+            True
+            if not not_like_list
+            else not any(
+                [self.strs_are_equal(str_value, nlk) for nlk in not_like_list]
+            )
+        )
+        return result
 
     @property
     def foods(self):
