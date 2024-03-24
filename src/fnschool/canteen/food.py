@@ -28,17 +28,16 @@ class Food:
         self.fid = fid
         self._unit_price = unit_price
         self._total_price = total_price
-        self.check_date = check_date
         self._count = count
         self.is_residue = is_residue
+        self.check_date = check_date
         self.consuming_list = consuming_list or []
         self.get_food_list_method0 = None
         self.food_list_fpath0 = None
         self._main_spreadsheet_path = None
         self._base_class_df = None
         self._check_df = None
-        self._is_negligible = is_negligible
-        self._unit_name = None
+        self.is_negligible = is_negligible
         self.consum = self.add_consumption
         self.residue_mark = "(R)"
         self.is_blank = is_blank
@@ -88,6 +87,7 @@ class Food:
                     + self.unit_name
                     + "*"
                     + str(self.count)
+                    + self.unit_name
                     + "="
                     + str(self.total_price)
                     + self.bill.currency_unit0,
@@ -239,17 +239,6 @@ class Food:
     @property
     def is_new(self):
         return not self.is_residue
-
-    @property
-    def is_negligible(self):
-        if not self._is_negligible:
-            class_list = self.workbook.get_negligible_class_list()
-            self._is_negligible = self.name in class_list
-        return self._is_negligible
-
-    @is_negligible.setter
-    def is_negligible(self, neglibible):
-        self._is_negligible = neglibible
 
     def get_new_foods_total_price(self):
         foods = self.bill.get_food_list()

@@ -36,13 +36,28 @@ class TestCanteen(unittest.TestCase):
         self.bill.print_time_nodes()
 
     def get_foods(self):
+        mfoods = []
         for m in range(2, 4):
             foods = self.bill.food.get_foods_of_month(m)
+            mfoods.append([m, foods])
+
+        time_node = None
+        for m, foods in mfoods:
             print("Foods of Month ", m, ":")
-            print(*foods)
+            for f in foods:
+                if not time_node == f.check_date:
+                    print("\n", time_node)
+                    time_node = f.check_date
+                print(f, end="")
+
+        time_node = None
         foods = self.bill.food.get_foods_of_time_nodes()
         print("All foods:")
-        print(*foods)
+        for f in foods:
+            if not time_node == f.check_date:
+                print("\n", f.check_date)
+                time_node = f.check_date
+            print(f, end="")
 
     def get_foods_by_time_node(self):
         for m in range(2, 4):
