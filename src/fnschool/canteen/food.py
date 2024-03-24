@@ -24,6 +24,7 @@ class Food:
         unit_name=None,
     ):
         self.bill = bill
+        self.config = self.bill.config
         self.name = name
         self.fid = fid
         self._unit_price = unit_price
@@ -35,7 +36,6 @@ class Food:
         self.get_food_list_method0 = None
         self.food_list_fpath0 = None
         self._main_spreadsheet_path = None
-        self._base_class_df = None
         self._check_df = None
         self.is_negligible = is_negligible
         self.consum = self.add_consumption
@@ -81,6 +81,7 @@ class Food:
             " ".join(
                 [
                     self.name,
+                    self.class_name,
                     str(self.unit_price)
                     + self.bill.currency_unit0
                     + "/"
@@ -116,16 +117,15 @@ class Food:
         )
 
     def clean_count(self, name, count, unit):
-        if not self.recounts:
-            self.recounts = get_food_recounts_config()
-        for _name, _unit, _times in self.recounts:
+        recounts = self.config.get_food_recounts()
+        for _name, _unit, _times in recounts:
             if _unit == unit and self.bill.strs_are_equal(name, _name):
                 return count * _times
         return count
 
     def clean_unit_name(self, name=None):
         if not self.unit_names:
-            self.unit_names = get_food_unit_names_config()
+            self.unit_names = self.config.get_food_unit_names()
 
         name = name or self.name
         for _name_like, _unit in self.unit_names:
@@ -133,11 +133,14 @@ class Food:
                 return _unit
         return "市斤"
 
-    def get_base_class_name(self):
-        base_class_df = self.workbook.get_base_class_df()
-        for index, row in base_class_df.iterrows():
-            if self.name in row.to_list():
-                return index
+    @property
+    def class_name(self,name=None):
+        name = name or self.name
+        classes = self.config.get_food_classes()
+        for k,v in classes.items():
+            if any([self.bill.strs_are_equal(name,like) for like in v]):
+                return k
+        return "蔬菜类"
 
     def set_get_food_list_method0(self, method_n=None):
         self.get_food_list_method0 = str(method_n)
@@ -245,65 +248,6 @@ class Food:
                 return float(row["数量"])
         print(f"Couldn't find the food by '{fid}'.")
         return None
-
-    def check_name_in_unit_sheet(self, foods):
-        food_names = []
-        for food in foods:
-            if not food.name_in_unit_sheet():
-                food_names.append(food.name)
-        if len(food_names) > 0:
-            self.bill.print_warning(
-                "Adding '" + " ".join(food_names) + "' to unit sheet."
-            )
-            self.workbook.add_food_names_to_unit_sheet(food_names)
-
-    def get_food_list_from_check_sheet(self):
-        check_df = self.workbook.get_check_df()
-        if check_df is None:
-            return None
-        food_list = []
-        row_index = 2
-        food_id_list = []
-        for index, row in check_df.iterrows():
-            food_id = row["ID"]
-            is_residue = str(row["是盘存"]) in "是Yy"
-            if pd.isnull(food_id):
-                food_id = str(uuid.uuid4())
-                food_id_list.append((row_index, food_id))
-
-            text_line = (
-                f'{food_id} {row["时间"]} {row["材料名"]}'
-                + f' {row["数量"]}'
-                + f' {row["总价"]} '
-                + ("Y" if is_residue else "N")
-            )
-            food_list.append(self.convert_text_line_to_food(text_line))
-            row_index += 1
-
-        if len(food_id_list) > 0:
-            check_sheet = self.workbook.get_check_sheet()
-            for row_index, food_id in food_id_list:
-                check_sheet.cell(row_index, 1, food_id)
-
-        if len(food_list) > 0:
-            self.check_name_in_unit_sheet(food_list)
-            self.check_name_in_base_class_sheet(food_list)
-            return food_list
-
-        return None
-
-    def check_name_in_base_class_sheet(self, food_list):
-        food_names = []
-        for food in food_list:
-            if not food.get_base_class_name():
-                food_names.append(food.name)
-        if len(food_names) > 0:
-            self.bill.print_error(
-                "Unclassified "
-                + ("Foods" if len(food_list) > 1 else "Food")
-                + ":\n"
-                + ("\n".join(food_names))
-            )
 
     def get_negligible_foods_by_time_node_m1(self):
         foods = self.get_checked_foods_by_time_node_m1()

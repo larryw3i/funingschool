@@ -18,28 +18,31 @@ class Config:
         self.food_classes_name = "food_classes"
 
     def get_configs(self):
-        if not self.user_cfg:
+        if not self.user_config:
             with open(canteen_config_fpath, "rb") as f:
-                self.user_cfg = tomllib.load(f) or {}
+                self.user_config = tomllib.load(f) or {}
         if not self.app_config:
             with open(canteen_config0_fpath, "rb") as f:
-                self.app_cfg = tomllib.load(f) or {}
+                self.app_config= tomllib.load(f) or {}
 
-        return (self.user_config, app_config)
+        return (self.user_config, self.app_config)
 
-    def get_configs(self, key):
+    def get_configs_by_key(self, key):
         ucfg, acfg = self.get_configs()
-        cfg = ucfg[key] + acfg[key]
-        return None if cfg == [] else cfg
+        ucfg = ucfg.get(key,None)
+        acfg = acfg.get(key,None)
+        if ucfg:
+            acfg = ucfg + acfg
+        return None if acfg == [] else acfg
 
     def get_food_unit_names(self):
-        return self.get_configs(self.food_unit_names_name)
+        return self.get_configs_by_key(self.food_unit_names_name)
 
     def get_food_recounts(self):
-        return self.get_configs(self.food_recounts_name)
+        return self.get_configs_by_key(self.food_recounts_name)
 
-    def get_food_classes():
-        return self.get_configs(self.food_classes_name)
+    def get_food_classes(self):
+        return self.get_configs_by_key(self.food_classes_name)
 
 
 # The end.

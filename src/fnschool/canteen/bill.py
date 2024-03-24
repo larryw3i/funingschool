@@ -8,6 +8,7 @@ from fnschool.canteen.food import *
 from fnschool.canteen.workbook import *
 from fnschool.canteen.profile import *
 from fnschool.canteen.path import *
+from fnschool.canteen.config import *
 
 
 class Bill:
@@ -30,7 +31,7 @@ class Bill:
     @property
     def config(self):
         if not self._config:
-            self._config = Config()
+            self._config = Config(self)
         return self._config
 
     def strs_are_equal(self, str_value, like):
@@ -38,7 +39,7 @@ class Bill:
         if "!" in like:
             like = like.split("!")
             not_like_list = like[1:]
-            like = like[1]
+            like = like[0]
         result = (
             str_value.endswith(like[1:])
             if (like.startswith("*") and not like.endswith("*"))
@@ -49,13 +50,12 @@ class Bill:
             else like[1:-1] in str_value
             if (like.startswith("*") and like.endswith("*"))
             else str_value == like
-        ) and (
-            True
-            if not not_like_list
-            else not any(
+        )
+        if not_like_list:
+            result = result and not any(
                 [self.strs_are_equal(str_value, nlk) for nlk in not_like_list]
             )
-        )
+
         return result
 
     @property
