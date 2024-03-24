@@ -8,6 +8,7 @@ from fnschool import *
 from fnschool.path import *
 from fnschool.canteen import *
 from fnschool.canteen.path import *
+from fnschool.canteen.config import *
 
 
 class Profile:
@@ -42,11 +43,7 @@ class Profile:
 
     def get_profiles(self):
         profiles = []
-        _profiles = None
-
-        with open(canteen_config_fpath, "rb") as f:
-            _profiles = tomllib.load(f)
-            _profiles = _profiles.get("canteen").get("profiles")
+        _profiles = Config().get_profiles()
 
         for _f in _profiles:
             profiles.append(

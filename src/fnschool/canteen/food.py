@@ -134,11 +134,11 @@ class Food:
         return "市斤"
 
     @property
-    def class_name(self,name=None):
+    def class_name(self, name=None):
         name = name or self.name
         classes = self.config.get_food_classes()
-        for k,v in classes.items():
-            if any([self.bill.strs_are_equal(name,like) for like in v]):
+        for k, v in classes.items():
+            if any([self.bill.strs_are_equal(name, like) for like in v]):
                 return k
         return "蔬菜类"
 
@@ -349,7 +349,7 @@ class Food:
         return foods
 
     def get_foods_from_pre_consuming_sheet(self, name):
-        pcsheet = self.workbook.get_sheet(name)
+        pcsheet = self.workbook.get_bill_sheet(name)
         row_index_offset = self.workbook.pre_consuming_sheet_row_index_offset
         col_index_offset = self.workbook.pre_consuming_sheet_col_index_offset
         foods = self.get_food_list()

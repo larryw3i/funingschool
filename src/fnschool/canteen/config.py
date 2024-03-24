@@ -9,13 +9,14 @@ from fnschool.external import *
 
 
 class Config:
-    def __init__(self, bill):
-        self.bill = bill
+    def __init__(self):
         self.user_config = None
         self.app_config = None
         self.food_recounts_name = "food_recounts"
         self.food_unit_names_name = "food_unit_names"
         self.food_classes_name = "food_classes"
+        self.time_nodes_name = "time_nodes"
+        self.profiles_name = "profiles"
 
     def get_configs(self):
         if not self.user_config:
@@ -23,14 +24,14 @@ class Config:
                 self.user_config = tomllib.load(f) or {}
         if not self.app_config:
             with open(canteen_config0_fpath, "rb") as f:
-                self.app_config= tomllib.load(f) or {}
+                self.app_config = tomllib.load(f) or {}
 
         return (self.user_config, self.app_config)
 
     def get_configs_by_key(self, key):
         ucfg, acfg = self.get_configs()
-        ucfg = ucfg.get(key,None)
-        acfg = acfg.get(key,None)
+        ucfg = ucfg.get(key, None)
+        acfg = acfg.get(key, None)
         if ucfg:
             acfg = ucfg + acfg
         return None if acfg == [] else acfg
@@ -43,6 +44,12 @@ class Config:
 
     def get_food_classes(self):
         return self.get_configs_by_key(self.food_classes_name)
+
+    def get_time_nodes(self):
+        return self.get_configs_by_key(self.time_nodes_name)
+
+    def get_profiles(self):
+        return self.get_configs_by_key(self.profiles_name)
 
 
 # The end.

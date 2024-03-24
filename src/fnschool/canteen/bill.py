@@ -15,7 +15,7 @@ class Bill:
     def __init__(self):
         self._food = None
         self._checked_foods = None
-        self._workbook = None
+        self.bill_workbook = None
         self._config = None
         self._time_nodes = []
         self._time_node = None
@@ -31,7 +31,7 @@ class Bill:
     @property
     def config(self):
         if not self._config:
-            self._config = Config(self)
+            self._config = Config()
         return self._config
 
     def strs_are_equal(self, str_value, like):
@@ -132,9 +132,9 @@ class Bill:
 
     @property
     def workbook(self):
-        if not self._workbook:
-            self._workbook = WorkBook(self)
-        return self._workbook
+        if not self.bill_workbook:
+            self.bill_workbook = WorkBook(self)
+        return self.bill_workbook
 
     @property
     def time_nodes(self):
@@ -153,15 +153,14 @@ class Bill:
 
     def get_time_nodes(self):
         if len(self._time_nodes) < 1:
-            with open(canteen_config_fpath, "rb") as f:
-                _time_nodes = tomllib.load(f).get("canteen").get("time_nodes")
-                self._time_nodes = [
-                    [
-                        datetime.combine(t0, time(0, 0, 0)),
-                        datetime.combine(t1, time(0, 0, 0)),
-                    ]
-                    for t0, t1 in _time_nodes
+            _time_nodes = self.config.get_time_nodes()
+            self._time_nodes = [
+                [
+                    datetime.combine(t0, time(0, 0, 0)),
+                    datetime.combine(t1, time(0, 0, 0)),
                 ]
+                for t0, t1 in _time_nodes
+            ]
 
         return self._time_nodes
 

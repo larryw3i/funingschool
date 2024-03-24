@@ -38,6 +38,7 @@ class WorkBook:
         self.pre_consuming_sheet_name_prefix = "出库表"
         self.purchase_sum_sheet_name = "入库、未入库汇总表"
         self.cover_sheet_name = "六大类总封面"
+        self.pre_consuming_sheet0_name = "出库计划表"
         self._recounts = None
         self.purchase_sheet_names = ["客户商品销售报表", "客户送货明细报表"]
         self.negligible_col_names = ["忽略", "不计", "非入库", "可忽略", "非盘点"]
@@ -46,7 +47,8 @@ class WorkBook:
         self.check_date_col_names = ["送货日期", "送货时间"]
         self.warehousing_form_index_offset = 0
         self.inventory_form_index_offset = 1
-        self._workbook = None
+        self.bill_workbook = None
+        self.consuming_workbook0 = None
         self._main_spreadsheet_path = None
         self._check_df = None
         self._unit_name_list = None
@@ -83,21 +85,65 @@ class WorkBook:
     def food(self):
         return self.bill.food
 
+    def get_consuming_workbook0(self):
+        if not self.consuming_workbook0:
+            self.consuming_workbook0 = load_workbook(self.consuming0_fpath)
+        return self.consuming_workbook0
+
+    def get_consuming_workbook_fpath(self):
+        time_node = time or self.bill.time_node
+        t0, t1 = time_node
+        ext = consuming0_fpath.split(".")[-1]
+        consuming_fpath = (
+            consuming0_fpath[: len(ext) + 1]
+            + t0.strftime("%Y%m%d")
+            + t1.strftime("%Y%m%d")
+            + ext
+        )
+        consuming_fpath = (
+            self.get_profile_copy_data_dpath()
+            / consuming_fpath.split(os.sep)[-1]
+        )
+        return consuming_fpath
+
+    def get_consuming_workbook(self, time_node=None):
+        consuming_fpath = self.get_consuming_workbook_fpath()
+        if not consuming_fpath.exists():
+            print_info(
+                _("Spreadsheet {0} was copied to {1} .").format(
+                    consuming0_fpath, consuming_fpath
+                )
+            )
+            print_warning(
+                _(
+                    "Please design the consumptions of spreadsheet {0} ."
+                ).format(consuming_fpath)
+            )
+            self.update_pre_consuming_sheet()
+            input()
+        workbook = load_workbook(consuming_fpath.as_posix())
+        return workbook
+
+    def get_consuming_sheet(self, time_node=None):
+        wb = self.get_consuming_workbook(time_node)
+        sheet = wb[self.pre_consuming_sheet0_name]
+        return [wb, sheet]
+
     def get_conver_sheet(self):
-        return self.get_sheet(self.cover_sheet_name)
+        return self.get_bill_sheet(self.cover_sheet_name)
 
     def get_purchase_sum_sheet(self):
-        return self.get_sheet(self.purchase_sum_sheet_name)
+        return self.get_bill_sheet(self.purchase_sum_sheet_name)
 
     def get_consuming_sum_sheet(self):
-        return self.get_sheet(self.consuming_sum_sheet_name)
+        return self.get_bill_sheet(self.consuming_sum_sheet_name)
 
     def get_days_of_pre_consuming_sheet(self, name):
         time_start, time_end = self.get_time_node_of_pre_consuming_sheet(name)
         return (time_end - time_start).days + 1
 
     def get_time_node_of_pre_consuming_sheet(self, name):
-        pcsheet = self.get_sheet(name)
+        pcsheet = self.get_bill_sheet(name)
         time_start = pcsheet.cell(
             1, self.pre_consuming_sheet_col_index_offset
         ).value.split(".")
@@ -157,7 +203,7 @@ class WorkBook:
         return self._unit_name_list
 
     def get_sheet_names(self):
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         return wb.sheetnames
 
     def includes_sheet(self, sheet):
@@ -172,7 +218,7 @@ class WorkBook:
         return name in names
 
     def get_pre_consuming_sheet0(self):
-        return self.get_sheet(self.pre_consuming_sheet0_name)
+        return self.get_bill_sheet(self.pre_consuming_sheet0_name)
 
     def get_consuming_n_by_time_node(self, time_node):
         time_nodes = self.bill.get_time_nodes()
@@ -328,7 +374,7 @@ class WorkBook:
 
         self.format_inventory_sheet()
 
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.active = isheet
         print_info(_("Sheet '%s' was updated.") % (self.inventory_sheet_name))
 
@@ -359,13 +405,13 @@ class WorkBook:
             cksheet.cell(2, 5, food.get_remainder() * food.unit_price)
             cksheet.cell(2, 6, "Y")
 
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.active = cksheet
         print_info(_("Sheet '%s' was updated.") % (self.check_sheet_name))
 
     def unmerge_cells_of_sheet(self, sheet):
         if isinstance(sheet, str):
-            sheet = self.get_sheet(sheet)
+            sheet = self.get_bill_sheet(sheet)
         merged_ranges = list(sheet.merged_cells.ranges)
         for cell_group in merged_ranges:
             sheet.unmerge_cells(str(cell_group))
@@ -430,7 +476,7 @@ class WorkBook:
                 cvsheet, foods, wfoods, uwfoods, total_price
             )
 
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.active = cvsheet
 
         print_info(_("Sheet '%s' was updated.") % self.cover_sheet_name)
@@ -482,9 +528,9 @@ class WorkBook:
         sheet = None
         _, time_end = self.bill.time_node
         if self.includes_sheet(name):
-            sheet = self.get_sheet(name)
+            sheet = self.get_bill_sheet(name)
         else:
-            wb = self.get_workbook()
+            wb = self.self.get_bill_workbook()
             sheet = wb.copy_worksheet(self.get_food_sheet0())
             sheet.title = name
             for row in sheet.iter_rows(
@@ -572,7 +618,7 @@ class WorkBook:
         cfood_names = list(set([f.name for f in cfoods]))
         u_month = time_end.month
         days_num = calendar.monthrange(time_end.year, u_month)[1]
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
 
         if len(time_nodes) > 1:
             time_end_m2 = time_nodes[-2][1]
@@ -658,14 +704,14 @@ class WorkBook:
                 f.name for f in self.food.get_food_list_from_check_sheet()
             ]
 
-            wb = self.get_workbook()
+            wb = self.self.get_bill_workbook()
             wb.active = sheet
 
             print_info(_("Sheet '%s' was updated.") % sheet.title)
 
         for name in all_food_names:
             if self.includes_sheet(name):
-                sheet = self.get_sheet(name)
+                sheet = self.get_bill_sheet(name)
                 sheet.sheet_properties.tabColor = "0" * 8
         for name in cfood_names:
             sheet = self.get_food_sheet(name)
@@ -1045,7 +1091,7 @@ class WorkBook:
 
         print_info(_("Sheet '%s' was updated.") % self.inventory_sheet_name)
 
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.active = isheet
         print_info(_("Sheet '%s' was updated.") % self.check_sheet_name)
         return isheet
@@ -1104,7 +1150,7 @@ class WorkBook:
 
         pssheet.cell(30, 1, f"经办人：{self.bill.profile.name}  ")
 
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.active = pssheet
 
         print_info(_("Sheet '%s' was updated.") % self.purchase_sum_sheet_name)
@@ -1148,7 +1194,7 @@ class WorkBook:
         )
         cssheet.cell(12, 1, f"经办人：{self.bill.profile.name}  ")
 
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.active = cssheet
 
         print_info(
@@ -1310,7 +1356,7 @@ class WorkBook:
 
         self.format_consuming_sheet()
 
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.active = csheet
         print_info(_("Sheet '%s' was updated.") % self.consuming_sheet_name)
 
@@ -1319,7 +1365,7 @@ class WorkBook:
         sheet_title = sheet.title
         foods = self.food.get_non_negligible_foods_by_time_node_m1()
         time_start, time_end = self.bill.time_node
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         row_index_offset = 3
         col_index_offset = 6
         rc_index = 0
@@ -1361,7 +1407,7 @@ class WorkBook:
             input()
 
         self.clear_workbook()
-        sheet = self.get_sheet(sheet_title)
+        sheet = self.get_bill_sheet(sheet_title)
         return sheet
 
     def get_pre_consuming_sheet_m1(self):
@@ -1377,7 +1423,7 @@ class WorkBook:
         sheet_name = (
             self.pre_consuming_sheet_name_prefix + time_start.strftime("%m%d")
         )
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
 
         for _name in self.get_sheet_names():
             if _name.startswith(sheet_name):
@@ -1391,11 +1437,11 @@ class WorkBook:
         sheet_name = (
             self.pre_consuming_sheet_name_prefix + time_start.strftime("%m%d")
         )
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
 
         for _name in self.get_sheet_names():
             if _name.startswith(sheet_name):
-                return self.get_sheet(_name)
+                return self.get_bill_sheet(_name)
 
         sheet_name += time_end.strftime("%m%d")
         pre_consuming_sheet = wb.copy_worksheet(
@@ -1428,19 +1474,19 @@ class WorkBook:
         return self.bill.get_food_list()
 
     def get_warehousing_sheet(self):
-        return self.get_sheet(self.warehousing_sheet_name)
+        return self.get_bill_sheet(self.warehousing_sheet_name)
 
     def get_unwarehousing_sheet(self):
-        return self.get_sheet(self.unwarehousing_sheet_name)
+        return self.get_bill_sheet(self.unwarehousing_sheet_name)
 
     def get_consuming_sheet(self):
-        return self.get_sheet(self.consuming_sheet_name)
+        return self.get_bill_sheet(self.consuming_sheet_name)
 
     def get_inventory_sheet(self):
-        return self.get_sheet(self.inventory_sheet_name)
+        return self.get_bill_sheet(self.inventory_sheet_name)
 
     def get_food_sheet0(self):
-        return self.get_sheet(self.food_sheet0_name)
+        return self.get_bill_sheet(self.food_sheet0_name)
 
     def get_consuming_form_indexes(self):
         csheet = self.get_consuming_sheet()
@@ -1575,7 +1621,7 @@ class WorkBook:
                     end_column=8,
                 )
 
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.active = csheet
 
         print_info(_("Sheet '%s' was formatted.") % self.consuming_sheet_name)
@@ -1644,7 +1690,7 @@ class WorkBook:
                     end_column=8,
                 )
 
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.active = wsheet
 
         print_info(
@@ -1899,7 +1945,7 @@ class WorkBook:
                         cell.value = ""
 
         self.format_warehousing_sheet()
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.active = wsheet
 
         print_info(
@@ -1936,7 +1982,7 @@ class WorkBook:
         self._check_df = None
 
     def get_unit_sheet(self):
-        return self.get_sheet(self.unit_sheet_name)
+        return self.get_bill_sheet(self.unit_sheet_name)
 
     def get_entry_row_index_of_unit_sheet(self):
         unit_sheet = self.get_unit_sheet()
@@ -1964,7 +2010,7 @@ class WorkBook:
         )
 
     def get_main_spreadsheet_path_of_profile(self):
-        s_fpath = workbook0_fpath
+        s_fpath = bill0_fpath
         ps_fpath = user_data_dir / self.profile.label / "workbook.xlsx"
         if not ps_fpath.parent.exists():
             os.makedirs(ps_fpath.parent)
@@ -1981,7 +2027,7 @@ class WorkBook:
         return ps_fpath
 
     def get_main_spreadsheet0_path(self):
-        _path = workbook0_fpath
+        _path = bill0_fpath
         return _path
 
     def set_main_spreadsheet_path(self, file_path=None):
@@ -1989,18 +2035,18 @@ class WorkBook:
             shutil.copy(self.get_main_spreadsheet0_path(), file_path)
         self._main_spreadsheet_path = file_path
 
-    def get_workbook(self):
-        if self._workbook:
-            return self._workbook
-        self._workbook = load_workbook(self.get_main_spreadsheet_path())
-        return self._workbook
+    def get_bill_workbook(self):
+        if self.bill_workbook:
+            return self.bill_workbook
+        self.bill_workbook = load_workbook(self.get_main_spreadsheet_path())
+        return self.bill_workbook
 
     def clear_workbook(self):
-        self._workbook = None
+        self.bill_workbook = None
 
     def save_workbook(self, info="Saving workbook. . ."):
         print_info(info)
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.save(self.get_main_spreadsheet_path())
         print_info(
             _("Workbook '%s' was saved.") % self.get_main_spreadsheet_path()
@@ -2034,17 +2080,17 @@ class WorkBook:
             file_path = file_path[:-5] + f".{uuid.uuid4()}.xlsx"
             file_path = self.get_profile_copy_data_dpath() / file_path
 
-        wb = self.get_workbook()
+        wb = self.self.get_bill_workbook()
         wb.save(file_path)
         print_info(_("Workbook '%s' was saved.") % file_path)
         return file_path
 
-    def get_sheet(self, name):
-        wb = self.get_workbook()
+    def get_bill_sheet(self, name):
+        wb = self.self.get_bill_workbook()
         return wb[name]
 
     def get_check_sheet(self):
-        return self.get_sheet(self.check_sheet_name)
+        return self.get_bill_sheet(self.check_sheet_name)
 
 
 # The end.
