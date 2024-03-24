@@ -7,7 +7,7 @@ canteen_config0_fpath = Path(__file__).parent / "canteen.toml"
 canteen_config_fpath = user_config_dir / "canteen.toml"
 canteen_data_dpath = Path(__file__).parent / "data"
 bill0_fpath = canteen_data_dpath / "bill.xlsx"
-consuming0_fpath = canteen_data_dpath / "consuming.xlsx"
+pre_consuming0_fpath = canteen_data_dpath / "consuming.xlsx"
 
 if not canteen_config_fpath.exists():
     shutil.copy(canteen_config0_fpath, canteen_config_fpath)

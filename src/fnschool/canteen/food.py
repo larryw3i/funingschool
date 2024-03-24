@@ -305,10 +305,14 @@ class Food:
         return foods
 
     def get_foods_of_time_node(self):
+        foods = None
         if "昌盛" in self.bill.profile.suppliers:
-            return self.workbook.read_changsheng_foods_by_time_node()
-        print(_("Please add codes to get foods from your suppliers."))
-        return None
+             foods = self.workbook.read_changsheng_foods_by_time_node()
+        else:
+            print_warning(_("Please add codes to get foods from your suppliers."))
+
+        
+        return foods
 
     @property
     def time_node_foods(self):
