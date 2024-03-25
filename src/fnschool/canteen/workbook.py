@@ -87,17 +87,19 @@ class WorkBook:
 
     def get_pre_consuming_workbook0(self):
         if not self.pre_consuming_workbook0:
-            self.pre_consuming_workbook0 = load_workbook(self.pre_consuming0_fpath)
+            self.pre_consuming_workbook0 = load_workbook(pre_consuming0_fpath)
         return self.pre_consuming_workbook0
 
-    def get_pre_consuming_workbook_fpath(self):
-        time_node = time or self.bill.time_node
+    def get_pre_consuming_workbook_fpath(self, time_node=None):
+        time_node = time_node or self.bill.get_time_node()
         t0, t1 = time_node
-        ext = consuming0_fpath.split(".")[-1]
+        ext = pre_consuming0_fpath.as_posix().split(".")[-1]
         consuming_fpath = (
-            consuming0_fpath[: len(ext) + 1]
+            pre_consuming0_fpath.as_posix()[: -len(ext) - 1]
+            + "."
             + t0.strftime("%Y%m%d")
             + t1.strftime("%Y%m%d")
+            + "."
             + ext
         )
         consuming_fpath = (
@@ -106,25 +108,30 @@ class WorkBook:
         )
         return consuming_fpath
 
-    def get_pre_consuming_workbook(self, time_node=None,new_foods = None):
-        consuming_fpath = self.get_pre_consuming_workbook_fpath()
-        if not consuming_fpath.exists():
+    def get_pre_consuming_workbook(self, time_node=None, new_foods=None):
+        pre_consuming_fpath = self.get_pre_consuming_workbook_fpath()
+        if not pre_consuming_fpath.exists():
+            print_warning(_("Workbook {0} doesn't exist."))
+            return None
+        workbook = load_workbook(pre_consuming_fpath.as_posix())
+        return workbook
+
+    def get_pre_consuming_sheet(self, new_foods=None):
+        pre_consuming_fpath = self.get_pre_consuming_workbook_fpath()
+        if not pre_consuming_fpath.exists():
+            shutil.copy(pre_consuming0_fpath, pre_consuming_fpath)
             print_info(
                 _("Spreadsheet {0} was copied to {1} .").format(
-                    consuming0_fpath, consuming_fpath
+                    pre_consuming0_fpath, pre_consuming_fpath
                 )
             )
             print_warning(
                 _(
-                    "Please design the consumptions of spreadsheet {0} ."
-                ).format(consuming_fpath)
+                    "Please design the consumptions of spreadsheet '{0}' ."
+                ).format(pre_consuming_fpath)
             )
-            self.design_pre_consuming_sheet(foods = new_foods)
-        workbook = load_workbook(consuming_fpath.as_posix())
-        return workbook
-
-    def get_pre_consuming_sheet(self, time_node=None,new_foods = None):
-        wb = self.get_pre_consuming_workbook(time_node,new_foods = None)
+            self.design_pre_consuming_sheet(foods=new_foods)
+        wb = load_workbook(pre_consuming_fpath.as_posix())
         sheet = wb[self.pre_consuming_sheet0_name]
         return [wb, sheet]
 
@@ -216,8 +223,6 @@ class WorkBook:
             return any(_name.startswith(name) for _name in names)
         return name in names
 
-    def get_pre_consuming_sheet0(self):
-        return self.get_bill_sheet(self.pre_consuming_sheet0_name)
 
     def get_consuming_n_by_time_node(self, time_node):
         time_nodes = self.bill.get_time_nodes()
@@ -842,6 +847,11 @@ class WorkBook:
                 return sn
         return None
 
+    def update_sheets(self):
+        t0, t1 = self.bill.get_time_node()
+        foods = self.food.get_foods_of_time_node()
+        print(*foods)
+
     def get_changsheng_properties_by_dir(self, fdpath=None):
         fd_path = self.purchase_workbook_fd_path or fdpath
         properties = []
@@ -1042,19 +1052,21 @@ class WorkBook:
         csfoods = self.update_foods_consuming(csfoods)
         return csfoods
 
-    def update_foods_consuming(self,foods):
-        t0,t1 = self.bill.get_time_nodes()
-        wb,sheet = self.get_pre_consuming_sheet(foods)
-        for i,f in enumerate(foods):
-            r = i+self.pre_consuming_sheet_row_index_offset+1
-            for c in range(self.pre_consuming_sheet_col_index_offset,sheet.max_column+1):
-                cell_value = sheet.cell(r,c).value
+    def update_foods_consuming(self, foods):
+        t0, t1 = self.bill.get_time_node()
+        wb, sheet = self.get_pre_consuming_sheet(foods)
+        for i, f in enumerate(foods):
+            r = i + self.pre_consuming_sheet_row_index_offset
+            for c in range(
+                self.pre_consuming_sheet_col_index_offset, sheet.max_column + 1
+            ):
+                cell_value = sheet.cell(r, c).value
                 if cell_value:
-                    cdate = sheet.cell(1,c).value.strptime("%Y.%m.%d")
+                    cdate = sheet.cell(1, c).value.strptime("%Y.%m.%d")
                     ccount = float(cell_value)
-                    f.consume(cdate,ccount)
+                    print(cdate, ccount)
+                    f.consume(cdate, ccount)
         return foods
-        
 
     def get_inventory_form_index_of_time_node(self):
         indexes = self.get_inventory_form_indexes()
@@ -1374,7 +1386,7 @@ class WorkBook:
         wb.active = csheet
         print_info(_("Sheet '%s' was updated.") % self.consuming_sheet_name)
 
-    def design_pre_consuming_sheet(self,foods):
+    def design_pre_consuming_sheet(self, foods):
         t0, t1 = self.bill.time_node
         wb_fpath = self.get_pre_consuming_workbook_fpath()
         wb = load_workbook(wb_fpath)
@@ -1383,12 +1395,10 @@ class WorkBook:
         row_index_offset = 3
         col_index_offset = 6
         rc_index = 0
-        days_difference = (time_end - time_start).days
+        days_difference = (t1 - t0).days
 
         for day in range(0, days_difference + 1):
-            time_header = (time_start + timedelta(days=day)).strftime(
-                "%Y.%m.%d"
-            )
+            time_header = (t0 + timedelta(days=day)).strftime("%Y.%m.%d")
             cell = sheet.cell(1, rc_index + col_index_offset)
             cell.value = time_header
             cell.number_format = numbers.FORMAT_TEXT
@@ -1413,66 +1423,18 @@ class WorkBook:
         wb.save(wb_fpath)
         wb.close()
         print_warning(
-            f"Sheet '{sheet_title}' was updated.\n"
+            f"Sheet '{sheet.title}' was updated.\n"
             + f"Press any key to continue when you have "
             + f"completed the foods allocation."
         )
+        print_info(
+            _("Ok! I have updated spreadsheet '{0}'. (Press any key)").format(
+                wb_fpath
+            )
+        )
         open_file_via_app0(wb_fpath)
         input()
-        return None
 
-    def get_pre_consuming_sheet_m1(self):
-        return self.get_pre_consuming_sheet_by_time_node_m1()
-
-    def get_pre_consuming_sheet_by_time_node_m1(self):
-        return self.get_pre_consuming_sheet_by_time_node(
-            self.bill.get_time_nodes()[-1]
-        )
-
-    def get_pre_consuming_sheet_name_by_time_node(self, time_node):
-        time_start, time_end = time_node
-        sheet_name = (
-            self.pre_consuming_sheet_name_prefix + time_start.strftime("%m%d")
-        )
-        wb = self.self.get_bill_workbook()
-
-        for _name in self.get_sheet_names():
-            if _name.startswith(sheet_name):
-                return _name
-
-        sheet_name += time_end.strftime("%m%d")
-        return sheet_name
-
-    def get_pre_consuming_sheet_by_time_node(self, time_node):
-        time_start, time_end = time_node
-        sheet_name = (
-            self.pre_consuming_sheet_name_prefix + time_start.strftime("%m%d")
-        )
-        wb = self.self.get_bill_workbook()
-
-        for _name in self.get_sheet_names():
-            if _name.startswith(sheet_name):
-                return self.get_bill_sheet(_name)
-
-        sheet_name += time_end.strftime("%m%d")
-        pre_consuming_sheet = wb.copy_worksheet(
-            self.get_pre_consuming_sheet0()
-        )
-        pre_consuming_sheet.title = sheet_name
-        color_fill = PatternFill(
-            start_color="ff00ea", end_color="ff00ea", fill_type="solid"
-        )
-        pre_consuming_sheet.conditional_formatting.add(
-            "D3:D1024",
-            CellIsRule(
-                operator="lessThanOrEqual",
-                formula=["0"],
-                stopIfTrue=True,
-                fill=color_fill,
-            ),
-        )
-        pre_consuming_sheet.sheet_view.zoom = 80
-        return pre_consuming_sheet
 
     def set_warehousing_form_index_offset(self, offset=0):
         self.warehousing_form_index_offset = offset

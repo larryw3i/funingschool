@@ -96,9 +96,17 @@ class Food:
                     _("Is neglibible") if self.is_negligible else "",
                 ]
             )
-            + "\n"
-            if newline
-            else ""
+            + (
+                _("Consuming records:")
+                + "\n\t"
+                + "\n\t".join(
+                    [
+                        d.strftime("%Y%m%d") + "->" + c
+                        for d, c in self.consuming_list
+                    ]
+                )
+            )
+            + ("\n" if newline else "")
         )
 
     @property
@@ -307,11 +315,12 @@ class Food:
     def get_foods_of_time_node(self):
         foods = None
         if "昌盛" in self.bill.profile.suppliers:
-             foods = self.workbook.read_changsheng_foods_by_time_node()
+            foods = self.workbook.read_changsheng_foods_by_time_node()
         else:
-            print_warning(_("Please add codes to get foods from your suppliers."))
+            print_warning(
+                _("Please add codes to get foods from your suppliers.")
+            )
 
-        
         return foods
 
     @property

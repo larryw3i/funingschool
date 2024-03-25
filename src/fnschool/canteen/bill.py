@@ -66,7 +66,7 @@ class Bill:
 
     @property
     def time_node(self):
-        return self._time_node
+        return self.get_time_node()
 
     @time_node.setter
     def time_node(self, node):
@@ -261,12 +261,7 @@ class Bill:
             self.make_spreadsheet_by_time_node()
 
     def make_spreadsheet_by_time_node(self):
-        if self.is_changsheng:
-            self.workbook.update_sheet_from_changsheng_like()
-        else:
-            print_error(_("Please update the codes for your supplier."))
-            return
-
+        self.workbook.update_sheets()
         # self.workbook.update_consuming_sheet_by_time_node_m1()
         # self.workbook.update_inventory_sheet_by_time_node_m1()
         # self.workbook.update_check_sheet_by_time_node_m1()
@@ -277,7 +272,6 @@ class Bill:
         # self.workbook.update_cover_sheet()
         # self.workbook.update_food_sheets_by_time_node()
         # print_info(_("Update completely!"))
-        pass
 
     def set_profile_to_index0(self):
         self.set_profile(Profile().get_profiles()[0])
@@ -314,7 +308,7 @@ class Bill:
         self._quiet = value
 
     def get_time_node(self):
-        return self.get_time_nodes()[-1]
+        return self._time_node
 
     @property
     def quiet(self):
