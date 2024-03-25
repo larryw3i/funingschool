@@ -56,7 +56,7 @@ class WorkBook:
         self._negligible_class_list = None
         self._base_class_df = None
         self.purchase_workbook_fd_path = None
-        self.pre_consuming_sheet_col_index_offset = 6
+        self.pre_consuming_sheet_col_index_offset = 5
         self.pre_consuming_sheet_row_index_offset = 3
         self.spreadsheet_ext_names = ["xlsx"]
         self.cell_alignment0 = Alignment(
@@ -222,7 +222,6 @@ class WorkBook:
             name = name.replace("*", "")
             return any(_name.startswith(name) for _name in names)
         return name in names
-
 
     def get_consuming_n_by_time_node(self, time_node):
         time_nodes = self.bill.get_time_nodes()
@@ -829,7 +828,6 @@ class WorkBook:
                     )
                 )
                 chwb0.close()
-                print(cs_dates)
                 return (sheet_name, cs_dates)
 
         return None
@@ -1023,12 +1021,12 @@ class WorkBook:
                 total_price = row[food_total_price_index].value
                 is_negligible = (
                     not row[food_neglect_mark_index].value is None
-                    if food_neglect_mark_index
+                    if food_neglect_mark_index > 0
                     else False
                 )
                 is_residue = (
-                    not row[food_residue_mark_index] is None
-                    if food_residue_mark_index
+                    not row[food_residue_mark_index].value is None
+                    if food_residue_mark_index > 0
                     else False
                 )
 
@@ -1049,7 +1047,7 @@ class WorkBook:
                 )
 
         chwb.close()
-        csfoods = self.update_foods_consuming(csfoods)
+        self.update_foods_consuming(csfoods)
         return csfoods
 
     def update_foods_consuming(self, foods):
@@ -1064,9 +1062,7 @@ class WorkBook:
                 if cell_value:
                     cdate = sheet.cell(1, c).value.strptime("%Y.%m.%d")
                     ccount = float(cell_value)
-                    print(cdate, ccount)
                     f.consume(cdate, ccount)
-        return foods
 
     def get_inventory_form_index_of_time_node(self):
         indexes = self.get_inventory_form_indexes()
@@ -1392,8 +1388,10 @@ class WorkBook:
         wb = load_workbook(wb_fpath)
         sheet = wb[self.pre_consuming_sheet0_name]
         foods = foods or self.food.get_foods_of_time_node()
-        row_index_offset = 3
-        col_index_offset = 6
+        foods = [f for f in foods.copy() if not f.is_negligible]
+
+        row_index_offset = self.pre_consuming_sheet_row_index_offset
+        col_index_offset = self.pre_consuming_sheet_col_index_offset
         rc_index = 0
         days_difference = (t1 - t0).days
 
@@ -1413,19 +1411,20 @@ class WorkBook:
             if rc_index > len(foods) - 1:
                 break
             food = foods[rc_index]
-            row[0].value = food.fid
-            row[1].value = food.get_name_withresidue_mark()
-            row[2].value = food.count
-            row[4].value = food.unit_price
+            row[0].value = food.get_name_withresidue_mark()
+            row[1].value = food.count
+            row[3].value = food.unit_price
             rc_index += 1
 
         wb.active = sheet
         wb.save(wb_fpath)
         wb.close()
         print_warning(
-            f"Sheet '{sheet.title}' was updated.\n"
-            + f"Press any key to continue when you have "
-            + f"completed the foods allocation."
+            _(
+                "Sheet '{0}' was updated.\n"
+                + "Press any key to continue when you have "
+                + "completed the foods allocation."
+            ).format(sheet.title)
         )
         print_info(
             _("Ok! I have updated spreadsheet '{0}'. (Press any key)").format(
@@ -1434,7 +1433,6 @@ class WorkBook:
         )
         open_file_via_app0(wb_fpath)
         input()
-
 
     def set_warehousing_form_index_offset(self, offset=0):
         self.warehousing_form_index_offset = offset
