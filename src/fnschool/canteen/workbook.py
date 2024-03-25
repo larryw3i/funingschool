@@ -1052,6 +1052,7 @@ class WorkBook:
 
     def update_foods_consuming(self, foods):
         t0, t1 = self.bill.get_time_node()
+        foods = [f for f in foods if not f.is_negligible]
         wb, sheet = self.get_pre_consuming_sheet(foods)
         for i, f in enumerate(foods):
             r = i + self.pre_consuming_sheet_row_index_offset
@@ -1060,7 +1061,9 @@ class WorkBook:
             ):
                 cell_value = sheet.cell(r, c).value
                 if cell_value:
-                    cdate = sheet.cell(1, c).value.strptime("%Y.%m.%d")
+                    cdate = datetime.strptime(
+                        sheet.cell(1, c).value, "%Y.%m.%d"
+                    )
                     ccount = float(cell_value)
                     f.consume(cdate, ccount)
 

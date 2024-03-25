@@ -38,7 +38,7 @@ class Food:
         self._main_spreadsheet_path = None
         self._check_df = None
         self.is_negligible = is_negligible
-        self.consum = self.add_consumption
+        self.consume = self.add_consumption
         self.residue_mark = "(R)"
         self.is_blank = is_blank
         self.unit_name = unit_name or "市斤"
@@ -97,14 +97,18 @@ class Food:
                 ]
             )
             + (
-                _("Consuming records:")
-                + "\n\t"
-                + "\n\t".join(
-                    [
-                        d.strftime("%Y%m%d") + "->" + c
-                        for d, c in self.consuming_list
-                    ]
+                (
+                    _("Consuming records:")
+                    + "\n\t"
+                    + "\n\t".join(
+                        [
+                            d.strftime("%Y%m%d") + "->" + str(c)
+                            for d, c in self.consuming_list
+                        ]
+                    )
                 )
+                if len(self.consuming_list) > 0
+                else ""
             )
             + ("\n" if newline else "")
         )
