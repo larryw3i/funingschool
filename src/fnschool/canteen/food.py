@@ -117,11 +117,30 @@ class Food:
     def workbook(self):
         return self.bill.workbook
 
+    def get_non_negligible_foods_of_time_node(self):
+        foods = self.get_foods_of_time_node()
+        foods = [f for f in foods if not f.is_negligible]
+        return foods
+
+    def get_negligible_foods_of_time_node(self):
+        foods = self.get_foods_of_time_node()
+        foods = [f for f in foods if f.is_negligible]
+        return foods
+
+    def get_residue_foods_of_time_node(self):
+        foods = self.get_non_negligible_foods_of_time_node()
+        foods = [f for f in foods if f.is_residue_of_time_node()]
+        return foods
+
     def get_count(self):
         return self.count
 
     def add_consumption(self, time_point, count):
         self.consuming_list.append([time_point, count])
+
+    @property
+    def remainder(self):
+        return self.get_remainder()
 
     def get_remainder(self):
         return self.get_count() - sum(
@@ -250,6 +269,15 @@ class Food:
         foods = self.bill.get_food_list()
         return sum([food.total_price for food in foods if food.is_residue])
 
+    def is_residue_of_time_node(self):
+        foods = self.get_non_negligible_foods_of_time_node()
+        foods = [
+            f
+            for f in foos
+            if (f.count - sum([c for d, c in f.consuming_list])) > 0
+        ]
+        return foods
+
     def get_purchased_count_of_residue(self, fid):
         check_df = self.workbook.get_check_df()
         if check_df is None:
@@ -260,14 +288,6 @@ class Food:
                 return float(row["数量"])
         print(f"Couldn't find the food by '{fid}'.")
         return None
-
-    def get_negligible_foods_by_time_node_m1(self):
-        foods = self.get_checked_foods_by_time_node_m1()
-        return [food for food in foods if food.is_negligible]
-
-    def get_non_negligible_foods_by_time_node_m1(self):
-        foods = self.get_checked_foods_by_time_node_m1()
-        return [food for food in foods if not food.is_negligible]
 
     def get_checked_foods_by_time_node_m1(self):
         return self.query_foods_by_time_node(
