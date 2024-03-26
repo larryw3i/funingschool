@@ -55,7 +55,7 @@ class WorkBook:
         self._unit_df = None
         self._negligible_class_list = None
         self._base_class_df = None
-        self.purchase_workbook_fd_path = None
+        self.purchase_workbook_fdpath = None
         self.pre_consuming_sheet_col_index_offset = 5
         self.pre_consuming_sheet_row_index_offset = 3
         self.spreadsheet_ext_names = ["xlsx"]
@@ -906,6 +906,129 @@ class WorkBook:
 
         return properties if properties else None
 
+    def read_changsheng_foods(self, dpath=None):
+        global Food
+        dpath = self.purchase_workbook_fdpath or dpath
+        dpath0 = (Path.home() / "Downloads").as_posix()
+        if not dpath:
+            print_info(
+                _(
+                    "Please enter the 'purchase list file path' of "
+                    + "spreadsheet Changsheng provided, "
+                    + "or enter the directory path and then {app_name} will "
+                    + "read all spreadsheets."
+                    + " (default: '{dpath0}')"
+                ).format(app_name=app_name, dpath0=dpath0)
+            )
+            dpath = input(">_ ")
+
+        if dpath.replace(" ", "") == "":
+            dpath = dpath0
+            self.purchase_workbook_fdpath = dpath
+        if dpath.startswith("~"):
+            dpath = Path.home().as_posix() + dpath[1:]
+        if not Path(dpath).exists():
+            print_error(_("File or directory '%s' doesn't exist.") % (dpath))
+            return None
+
+        print_info(_("Entered directory: %s") % dpath)
+
+        for file in os.listdir(dpath):
+            if file.split('.')[-1] in self.spreadsheet_ext_names:
+                wb = load_workbook((Path(dpath)/file).as_posix(),read_only=True)
+                sheetnames = [n for n in wb.sheetnames if n in self.purchase_sheet_names]
+                if len(sheetnames)<1:
+                    continue
+                sheet = wb[sheetnames[0]] 
+
+                food_name_index = 0
+                food_count_index = 0
+                food_total_price_index = 0
+                food_unit_index = 0
+                food_check_date_index = 0
+                food_neglect_mark_index = 0
+                food_residue_mark_index = 0
+                food_org_name_index = 0
+
+                for _col_index, cell_value in enumerate(
+                    [
+                        str(sheet.cell(1, ci).value)
+                        for ci in range(1, sheet.max_column + 1)
+                    ]
+                ):
+                    if cell_value in ["商品名称"]:
+                        food_name_index = _col_index
+                    elif cell_value in ["单位", "订货单位"]:
+                        food_unit_index = _col_index
+                    elif cell_value in ["数量", "记账数量"]:
+                        food_count_index = _col_index
+                    elif cell_value in ["金额", "折前金额"]:
+                        food_total_price_index = _col_index
+                    elif cell_value in self.check_date_col_names:
+                        food_check_date_index = _col_index
+                    elif cell_value in self.negligible_col_names:
+                        food_neglect_mark_index = _col_index
+                    elif cell_value in self.residue_col_names:
+                        food_residue_mark_index = _col_index
+                    elif cell_value in self.org_col_names:
+                        food_org_name_index = _col_index
+
+
+                row_index = 1
+                col_index = 1
+                for row in sheet.iter_rows(
+                    min_row=2,
+                    max_row=sheet.max_row,
+                    min_col=1,
+                    max_col=sheet.max_column,
+                ):
+                    if row[food_name_index].value:
+                        check_date = row[food_check_date_index].value
+                        check_date = (
+                            datetime.strptime(check_date, "%Y-%m-%d")
+                            if "-" in check_date
+                            else datetime.strptime(check_date, "%Y%d%m")
+                        )
+                        org_name = row[food_org_name_index].value
+                    
+                        if org_name != self.bill.profile.org_name:
+                            continue
+
+                        name = row[food_name_index].value
+                        count = row[food_count_index].value
+                        unit = row[food_unit_index].value
+                        total_price = row[food_total_price_index].value
+                        is_negligible = (
+                            not row[food_neglect_mark_index].value is None
+                            if food_neglect_mark_index > 0
+                            else False
+                        )
+                        is_residue = (
+                            not row[food_residue_mark_index].value is None
+                            if food_residue_mark_index > 0
+                            else False
+                        )
+    
+                        count = self.food.clean_count(name, count, unit)
+                        unit = self.food.clean_unit_name(name)
+                    
+                    
+                        _food = Food(
+                            self.bill,
+                            name=name,
+                            check_date=check_date,
+                            count=count,
+                            is_residue=is_residue,
+                            total_price=total_price,
+                            is_negligible=is_negligible,
+                            unit_name=unit,
+                        )
+
+                        if not _food in self.bill.foods:
+                            self.bill.foods.append(_food)
+
+        return self.bill.foods
+        
     def read_changsheng_foods_by_time_node(self, fd_path=None, time_node=None):
         global Food
         fd_path = self.purchase_workbook_fd_path or fd_path

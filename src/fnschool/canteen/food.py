@@ -173,9 +173,9 @@ class Food:
     def class_name(self, name=None):
         name = name or self.name
         classes = self.config.get_food_classes()
-        for k, v in classes.items():
-            if any([self.bill.strs_are_equal(name, like) for like in v]):
-                return k
+        for _class, name_likes in classes.items():
+            if any([self.bill.strs_are_equal(name, like) for like in name_likes]):
+                return _class
         return "蔬菜类"
 
     def set_get_food_list_method0(self, method_n=None):

@@ -17,13 +17,13 @@ class TestCanteen(unittest.TestCase):
         self.bill = Bill()
         self.bill.verbose = 3
         self.bill.set_profile_to_index0()
-        self.bill.workbook.purchase_workbook_fd_path = (
+        self.bill.workbook.purchase_workbook_fdpath = (
             Path.home() / "Downloads"
         ).as_posix()
 
     def spreadsheet_by_time_nodes(self):
         self.bill.set_profile_to_index0()
-        self.bill.workbook.purchase_workbook_fd_path = (
+        self.bill.workbook.purchase_workbook_fdpath = (
             Path.home() / "Downloads"
         ).as_posix()
         for m in range(2, 4):
@@ -34,6 +34,11 @@ class TestCanteen(unittest.TestCase):
 
     def print_time_nodes(self):
         self.bill.print_time_nodes()
+
+    def read_changsheng_foods(self):
+        foods =self.bill.workbook.read_changsheng_foods()
+        print(*foods)
+
 
     def get_foods(self):
         mfoods = []

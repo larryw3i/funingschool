@@ -22,7 +22,7 @@ class Bill:
         self._month = None
         self._quiet = False
         self._profile = None
-        self._foods = None
+        self.foods = []
         self.verbose = 0
         self.show_init_msg = True
         self.currency_unit0 = "元"
@@ -58,11 +58,6 @@ class Bill:
 
         return result
 
-    @property
-    def foods(self):
-        if not self._foods:
-            self._foods = self.food.get_foods()
-        return self._foods
 
     @property
     def time_node(self):
