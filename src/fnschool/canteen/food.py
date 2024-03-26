@@ -75,7 +75,10 @@ class Food:
     def get_name_with_residue_mark(self):
         return (
             (self.name + self.residue_mark)
-            if (self.is_residue or self.is_residue_of_time_node)
+            if (
+                self.is_residue
+                or (self.remainder > 0 and len(self.consuming_list) > 0)
+            )
             else self.name
         )
 
@@ -334,22 +337,23 @@ class Food:
         return foods
 
     def get_purchased_foods(self):
-        if not self.foods or len(self.foods) < 1:
+        if not self.bill.foods or len(self.bill.foods) < 1:
             if "昌盛" in self.bill.profile.suppliers:
-                self.foods = self.workbook.read_changsheng_foods()
+                self.bill.foods = self.workbook.read_changsheng_foods()
             else:
                 print_warning(
                     _("Please add codes to get foods from your suppliers.")
                 )
 
-        return self.foods
+        return self.bill.foods
 
     def get_foods(self):
         self.get_purchased_foods()
         self.set_consumption_of_foods()
+        return self.bill.foods
 
     def set_consumption_of_foods(self):
-        self.workbook.read_consumption_from_pre_consuming_workbooks()
+        self.workbook.read_consumptions_from_pre_consuming_workbooks()
         print_info(_("Consumptions were read."))
 
     def get_foods_of_time_node(self):

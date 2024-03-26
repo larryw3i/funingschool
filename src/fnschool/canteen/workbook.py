@@ -910,16 +910,15 @@ class WorkBook:
         fpaths = []
         for time_node in self.bill.get_time_nodes():
             t0, t1 = time_node
-            fpath.append(
-                Path(self.get_profile_copy_data_dpath())
-                / (
-                    "consuming-"
-                    + t0.strftime("%Y%m%d")
-                    + "-"
-                    + t1.strftime("%Y%m%d")
-                    + self.spreadsheet_ext_names[0]
-                )
+            fpath = Path(self.get_profile_copy_data_dpath()) / (
+                "consuming-"
+                + t0.strftime("%Y%m%d")
+                + "-"
+                + t1.strftime("%Y%m%d")
+                + "."
+                + self.spreadsheet_ext_names[0]
             )
+
             if not fpath.exists():
                 shutil.copy(pre_consuming0_fpath, fpath)
                 print(
@@ -940,9 +939,15 @@ class WorkBook:
             t0, t1 = time_node
             wb = load_workbook(fpath)
             sheet = wb[self.pre_consuming_sheet0_name]
-            ckt0, ckt1 = self.get_check_times(time_node)
+            ckt0, ckt1 = self.bill.get_check_times(time_node)
             _foods = [
-                f for f in foods if (f.check_date <= ck_t1 and f.remainder > 0)
+                f
+                for f in foods
+                if (
+                    f.check_date <= ckt1
+                    and f.remainder > 0
+                    and not f.is_negligible
+                )
             ]
             if not sheet.cell(1, col_index_offset).value:
                 for i, t in enumerate(
@@ -954,9 +959,9 @@ class WorkBook:
                     sheet.cell(1, col_index_offset + i, t.strftime("%Y.%m.%d"))
                 for i, _f in enumerate(_foods):
                     row_index = i + row_index_offset
-                    sheet.cell(row_index, 1, f.name)
-                    sheet.cell(row_index, 2, f.count)
-                    sheet.cell(row_index, 4, f.unit_price)
+                    sheet.cell(row_index, 1, _f.get_name_with_residue_mark())
+                    sheet.cell(row_index, 2, _f.remainder)
+                    sheet.cell(row_index, 4, _f.unit_price)
                 wb.save(fpath)
                 wb.close()
                 print_info(
@@ -1012,15 +1017,44 @@ class WorkBook:
 
         for file in os.listdir(dpath):
             if file.split(".")[-1] in self.spreadsheet_ext_names:
-                wb = load_workbook(
-                    (Path(dpath) / file).as_posix(), read_only=True
-                )
+                wb_fpath = (Path(dpath) / file).as_posix()
+                wb = load_workbook(wb_fpath, read_only=True)
                 sheetnames = [
                     n for n in wb.sheetnames if n in self.purchase_sheet_names
                 ]
                 if len(sheetnames) < 1:
                     continue
                 sheet = wb[sheetnames[0]]
+
+                if not any(
+                    [
+                        (
+                            str(sheet.cell(1, ci).value)
+                            in self.negligible_col_names
+                        )
+                        for ci in range(1, sheet.max_column + 1)
+                    ]
+                ):
+                    print_info(
+                        _(
+                            "It seems you didn't set the 'negligible' mark "
+                            + "for workbook '{0}' , update this workbook "
+                            + "and press ANY key to continue. (Add the "
+                            + "'negligible' column name even though there "
+                            + "is no negligible foods)"
+                        ).format(wb_fpath)
+                    )
+                    print_info(
+                        _(
+                            "The column names of 'negligible' mark are following:"
+                        )
+                        + "\n\t"
+                        + " | ".join(self.negligible_col_names)
+                    )
+                    open_file_via_app0(wb_fpath)
+                    input()
+                    wb = load_workbook(wb_fpath, read_only=True)
+                    sheet = wb[sheetnames[0]]
 
                 food_name_index = 0
                 food_count_index = 0
