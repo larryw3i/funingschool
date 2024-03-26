@@ -932,7 +932,7 @@ class WorkBook:
         return fpaths
 
     def read_consumptions_from_pre_consuming_workbooks(self):
-        foods = self.food.get_purchased_foods()
+        foods = self.bill._foods
         col_index_offset = self.pre_consuming_sheet_col_index_offset
         row_index_offset = self.pre_consuming_sheet_row_index_offset
         for time_node, fpath in self.get_pre_consuming_workbook_fpaths():
@@ -959,7 +959,12 @@ class WorkBook:
                     sheet.cell(1, col_index_offset + i, t.strftime("%Y.%m.%d"))
                 for i, _f in enumerate(_foods):
                     row_index = i + row_index_offset
-                    sheet.cell(row_index, 1, _f.get_name_with_residue_mark())
+                    sheet.cell(
+                        row_index,
+                        1,
+                        f.name
+                        + (f.residue_mark if f.check_date >= ckt0 else ""),
+                    )
                     sheet.cell(row_index, 2, _f.remainder)
                     sheet.cell(row_index, 4, _f.unit_price)
                 wb.save(fpath)
@@ -1006,13 +1011,13 @@ class WorkBook:
 
         if dpath.replace(" ", "") == "":
             dpath = dpath0
-            self.purchase_workbook_fdpath = dpath
         if dpath.startswith("~"):
             dpath = Path.home().as_posix() + dpath[1:]
         if not Path(dpath).exists():
             print_error(_("File or directory '%s' doesn't exist.") % (dpath))
             return None
 
+            self.purchase_workbook_fdpath = dpath
         print_info(_("Entered directory: %s") % dpath)
 
         for file in os.listdir(dpath):
@@ -1137,10 +1142,10 @@ class WorkBook:
                             unit_name=unit,
                         )
 
-                        if not _food in self.bill.foods:
-                            self.bill.foods.append(_food)
+                        if not _food in self.bill._foods:
+                            self.bill._foods.append(_food)
 
-        return self.bill.foods
+        return self.bill._foods
 
     def read_changsheng_foods_by_time_node(self, fd_path=None, time_node=None):
         global Food

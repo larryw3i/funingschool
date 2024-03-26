@@ -305,22 +305,6 @@ class Food:
             self.bill.get_time_nodes()[-1],
         )
 
-    def query_foods_by_time_node(self, foods, time_node):
-        time_start, time_end = time_node
-        time_nodes = self.bill.get_time_nodes()
-        time_node_index = time_nodes.index(time_node)
-
-        if time_node_index < 1:
-            time_start = time_start - timedelta(days=1)
-            time_end = time_end - timedelta(days=1)
-        else:
-            time_start = time_nodes[time_node_index - 1][0]
-            time_start = time_nodes[time_node_index - 1][1]
-
-        foods = [
-            food for food in foods if time_start <= food.check_date <= time_end
-        ]
-        return foods
 
     def get_foods_of_month(self, month):
         foods = []
@@ -337,21 +321,21 @@ class Food:
         return foods
 
     def get_purchased_foods(self):
-        if not self.bill.foods or len(self.bill.foods) < 1:
-            if "昌盛" in self.bill.profile.suppliers:
-                self.bill.foods = self.workbook.read_changsheng_foods()
-            else:
-                print_warning(
-                    _("Please add codes to get foods from your suppliers.")
-                )
+        if "昌盛" in self.bill.profile.suppliers:
+            self.workbook.read_changsheng_foods()
+        else:
+            print_warning(
+                _("Please add codes to get foods from your suppliers.")
+            )
 
-        return self.bill.foods
+        return self.bill._foods
 
     def get_foods(self):
-        self.get_purchased_foods()
-        self.set_consumption_of_foods()
-        return self.bill.foods
-
+        if not self.bill._foods:
+            self.get_purchased_foods()
+            self.set_consumption_of_foods()
+        return self.bill._foods
+        
     def set_consumption_of_foods(self):
         self.workbook.read_consumptions_from_pre_consuming_workbooks()
         print_info(_("Consumptions were read."))

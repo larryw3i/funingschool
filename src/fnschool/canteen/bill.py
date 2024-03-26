@@ -22,11 +22,15 @@ class Bill:
         self._month = None
         self._quiet = False
         self._profile = None
-        self.foods = []
+        self._foods = []
         self.verbose = 0
         self.show_init_msg = True
         self.currency_unit0 = "元"
         pass
+
+    @property
+    def get_foods(self):
+        return self.foods.get_foods()
 
     @property
     def config(self):
