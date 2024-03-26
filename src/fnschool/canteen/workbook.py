@@ -130,7 +130,7 @@ class WorkBook:
                     "Please design the consumptions of spreadsheet '{0}' ."
                 ).format(pre_consuming_fpath)
             )
-            self.design_pre_consuming_sheet(foods=new_foods)
+            self.design_pre_consuming_sheet(new_foods=new_foods)
         wb = load_workbook(pre_consuming_fpath.as_posix())
         sheet = wb[self.pre_consuming_sheet0_name]
         return [wb, sheet]
@@ -847,10 +847,10 @@ class WorkBook:
 
     def update_sheets(self):
         t0, t1 = self.bill.get_time_node()
-        non_negligible_foods = self.food.get_foods_of_time_node()
-        residue_foods = self.food.get_residue_foods_of_time_node()
-        print(*non_negligible_foods)
-        print(*residue_foods)
+        foods = self.food.get_foods()
+        # residue_foods = self.food.get_residue_foods_of_time_node()
+        print(*foods)
+        # print(*residue_foods)
 
     def get_changsheng_properties_by_dir(self, fdpath=None):
         fd_path = self.purchase_workbook_fd_path or fdpath
@@ -926,6 +926,7 @@ class WorkBook:
 
         if fd_path.replace(" ", "") == "":
             fd_path = seeking_dpath0
+            self.purchase_workbook_fd_path = fd_path
         if fd_path.startswith("~"):
             fd_path = Path.home().as_posix() + fd_path[1:]
         if not Path(fd_path).exists():
@@ -1010,10 +1011,10 @@ class WorkBook:
                 )
                 if not (ck_t0 <= check_date <= ck_t1):
                     continue
-
                 org_name = row[food_org_name_index].value
                 if org_name != self.bill.profile.org_name:
                     continue
+
                 name = row[food_name_index].value
                 count = row[food_count_index].value
                 unit = row[food_unit_index].value
@@ -1046,12 +1047,19 @@ class WorkBook:
                 )
 
         chwb.close()
+        if len(csfoods) < 1:
+            print_warning(
+                _("Got no purchased foods of time node %s .").format(
+                    t0.strftime("%Y.%m.%d") + "->" + t1.strftime("%Y.%m.%d")
+                )
+            )
         self.update_foods_consuming(csfoods)
         return csfoods
 
     def update_foods_consuming(self, foods):
         t0, t1 = self.bill.get_time_node()
         foods = [f for f in foods if not f.is_negligible]
+
         if foods is None or len(foods) < 1:
             print_warning(
                 _(
@@ -1065,9 +1073,12 @@ class WorkBook:
                     + self.bill.time_node[1].strftime("%Y.%m.%d")
                 )
             )
+
         residue_foods = self.food.get_residue_foods_of_time_node()
         if residue_foods:
             foods += residue_foods
+        if foods is None:
+            return
         wb, sheet = self.get_pre_consuming_sheet_of_time_node(foods)
 
         for i, f in enumerate(foods):

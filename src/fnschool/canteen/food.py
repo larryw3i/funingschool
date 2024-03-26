@@ -44,6 +44,7 @@ class Food:
         self.unit_name = unit_name or "市斤"
         self.unit_names = None
         self.recounts = None
+        self._foods = []
         pass
 
     @property
@@ -130,6 +131,8 @@ class Food:
         return foods
 
     def get_residue_foods_of_time_node(self):
+        if not self._foods:
+            return []
         foods = self.get_non_negligible_foods_of_time_node()
         foods = [f for f in foods if f.is_residue_of_time_node()]
         return foods
@@ -322,31 +325,38 @@ class Food:
         for time_node in time_nodes:
             self.bill.time_node = time_node
             _foods = self.get_foods_of_time_node()
-            if _foods:
-                foods += _foods
+            for _f in _foods:
+                if not _f in foods:
+                    foods.append(_f)
         self.bill.time_node = time_node_cp
         return foods
 
-    def get_foods_of_time_nodes(self):
-        foods = []
-        time_node_cp = self.bill.time_node
-        for time_node in self.bill.get_time_nodes():
-            self.bill.time_node = time_node
-            _foods = self.get_foods_of_time_node()
-            if _foods:
-                foods += _foods
-        self.bill.time_node = time_node_cp
-        return foods
+    def get_foods(self):
+        if not self._foods or len(self._foods) < 1:
+            time_node_cp = self.bill.time_node
+            for time_node in self.bill.get_time_nodes():
+                self.bill.time_node = time_node
+                if "昌盛" in self.bill.profile.suppliers:
+                    _foods = self.workbook.read_changsheng_foods_by_time_node()
+                    if _foods:
+                        for _f in _foods:
+                            if not _f in self._foods:
+                                self._foods.append(_f)
+
+                else:
+                    print_warning(
+                        _("Please add codes to get foods from your suppliers.")
+                    )
+            self.bill.time_node = time_node_cp
+
+        return self._foods
 
     def get_foods_of_time_node(self):
-        foods = None
-        if "昌盛" in self.bill.profile.suppliers:
-            foods = self.workbook.read_changsheng_foods_by_time_node()
-        else:
-            print_warning(
-                _("Please add codes to get foods from your suppliers.")
-            )
+        foods = self.get_foods()
+        t0, t1 = self.bill.get_time_node()
+        ckt0, ckt1 = self.bill.get_check_times_of_time_node()
 
+        foods = [f for f in foods if (ckt0 <= f.check_date <= ckt1)]
         return foods
 
     @property

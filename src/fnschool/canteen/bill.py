@@ -248,9 +248,10 @@ class Bill:
         self.set_profile_to_index0()
         self.print_basic_info()
 
-        time_nodes = self.get_time_nodes()
-        month = self.get_month()
-        time_node = self.get_time_nodes_of_month()
+        self.get_time_nodes()
+        self.get_month()
+        self.food.get_foods()
+        time_nodes = self.get_time_nodes_of_month()
 
         if self.show_init_msg:
             self.show_msg()
@@ -261,7 +262,7 @@ class Bill:
             self.make_spreadsheet_by_time_node()
 
     def make_spreadsheet_by_time_node(self):
-        self.workbook.update_sheets()
+        # self.workbook.update_sheets()
         # self.workbook.update_consuming_sheet_by_time_node_m1()
         # self.workbook.update_inventory_sheet_by_time_node_m1()
         # self.workbook.update_check_sheet_by_time_node_m1()
@@ -272,6 +273,7 @@ class Bill:
         # self.workbook.update_cover_sheet()
         # self.workbook.update_food_sheets_by_time_node()
         # print_info(_("Update completely!"))
+        pass
 
     def set_profile_to_index0(self):
         self.set_profile(Profile().get_profiles()[0])
