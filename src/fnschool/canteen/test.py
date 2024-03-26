@@ -36,9 +36,14 @@ class TestCanteen(unittest.TestCase):
         self.bill.print_time_nodes()
 
     def read_changsheng_foods(self):
-        foods =self.bill.workbook.read_changsheng_foods()
-        print(*foods)
-
+        foods = self.bill.workbook.read_changsheng_foods()
+        foods = sorted(foods, key=lambda f: f.check_date)
+        check_date = None
+        for f in foods:
+            if check_date != f.check_date:
+                print(f.check_date.strftime("%Y.%m.%d"))
+                check_date = f.check_date
+            print(f, end="")
 
     def get_foods(self):
         mfoods = []

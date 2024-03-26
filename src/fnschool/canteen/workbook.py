@@ -906,6 +906,83 @@ class WorkBook:
 
         return properties if properties else None
 
+    def get_pre_consuming_workbook_fpaths(self):
+        fpaths = []
+        for time_node in self.bill.get_time_nodes():
+            t0, t1 = time_node
+            fpath.append(
+                Path(self.get_profile_copy_data_dpath())
+                / (
+                    "consuming-"
+                    + t0.strftime("%Y%m%d")
+                    + "-"
+                    + t1.strftime("%Y%m%d")
+                    + self.spreadsheet_ext_names[0]
+                )
+            )
+            if not fpath.exists():
+                shutil.copy(pre_consuming0_fpath, fpath)
+                print(
+                    _(
+                        "Workbook '{0}' doesn't exist, "
+                        + "workbook '{1}' was copied to '{2}' ."
+                    ).format(fpath, pre_consuming0_fpath, fpath)
+                )
+            fpaths.append([time_node, fpath])
+
+        return fpaths
+
+    def read_consumptions_from_pre_consuming_workbooks(self):
+        foods = self.food.get_purchased_foods()
+        col_index_offset = self.pre_consuming_sheet_col_index_offset
+        row_index_offset = self.pre_consuming_sheet_row_index_offset
+        for time_node, fpath in self.get_pre_consuming_workbook_fpaths():
+            t0, t1 = time_node
+            wb = load_workbook(fpath)
+            sheet = wb[self.pre_consuming_sheet0_name]
+            ckt0, ckt1 = self.get_check_times(time_node)
+            _foods = [
+                f for f in foods if (f.check_date <= ck_t1 and f.remainder > 0)
+            ]
+            if not sheet.cell(1, col_index_offset).value:
+                for i, t in enumerate(
+                    [
+                        t0 + timedelta(days=a)
+                        for a in range(0, (t1 - t0).days + 1)
+                    ]
+                ):
+                    sheet.cell(1, col_index_offset + i, t.strftime("%Y.%m.%d"))
+                for i, _f in enumerate(_foods):
+                    row_index = i + row_index_offset
+                    sheet.cell(row_index, 1, f.name)
+                    sheet.cell(row_index, 2, f.count)
+                    sheet.cell(row_index, 4, f.unit_price)
+                wb.save(fpath)
+                wb.close()
+                print_info(
+                    _(
+                        "Workbook '{0}' was updated, please design the "
+                        + "daily foods consumption and press ANY key "
+                        + "to continue."
+                    ).format(fpath)
+                )
+                open_file_via_app0(fpath)
+                input()
+                wb = load_workbook(fpath)
+                sheet = wb[self.pre_consuming_sheet0_name]
+            for i, _f in enumerate(_foods):
+                row_index = row_index_offset + i
+                for col_index in range(col_index_offset, sheet.max_column + 1):
+                    cell_value = sheet.cell(row_index, col_index).value
+                    if cell_value:
+                        _date = datetime.strptime(
+                            sheet.cell(1, col_index).value, "%Y.%m.%d"
+                        )
+                        _count = float(cell_value)
+                        _f.consume(_date, _count)
+
+            print_info(_("Read consumption from '{0}' .").format(fpath))
+
     def read_changsheng_foods(self, dpath=None):
         global Food
         dpath = self.purchase_workbook_fdpath or dpath
@@ -934,12 +1011,16 @@ class WorkBook:
         print_info(_("Entered directory: %s") % dpath)
 
         for file in os.listdir(dpath):
-            if file.split('.')[-1] in self.spreadsheet_ext_names:
-                wb = load_workbook((Path(dpath)/file).as_posix(),read_only=True)
-                sheetnames = [n for n in wb.sheetnames if n in self.purchase_sheet_names]
-                if len(sheetnames)<1:
+            if file.split(".")[-1] in self.spreadsheet_ext_names:
+                wb = load_workbook(
+                    (Path(dpath) / file).as_posix(), read_only=True
+                )
+                sheetnames = [
+                    n for n in wb.sheetnames if n in self.purchase_sheet_names
+                ]
+                if len(sheetnames) < 1:
                     continue
-                sheet = wb[sheetnames[0]] 
+                sheet = wb[sheetnames[0]]
 
                 food_name_index = 0
                 food_count_index = 0
@@ -973,7 +1054,6 @@ class WorkBook:
                     elif cell_value in self.org_col_names:
                         food_org_name_index = _col_index
 
-
                 row_index = 1
                 col_index = 1
                 for row in sheet.iter_rows(
@@ -990,7 +1070,7 @@ class WorkBook:
                             else datetime.strptime(check_date, "%Y%d%m")
                         )
                         org_name = row[food_org_name_index].value
-                    
+
                         if org_name != self.bill.profile.org_name:
                             continue
 
@@ -1008,11 +1088,10 @@ class WorkBook:
                             if food_residue_mark_index > 0
                             else False
                         )
-    
+
                         count = self.food.clean_count(name, count, unit)
                         unit = self.food.clean_unit_name(name)
-                    
-                    
+
                         _food = Food(
                             self.bill,
                             name=name,
@@ -1028,7 +1107,7 @@ class WorkBook:
                             self.bill.foods.append(_food)
 
         return self.bill.foods
-        
+
     def read_changsheng_foods_by_time_node(self, fd_path=None, time_node=None):
         global Food
         fd_path = self.purchase_workbook_fd_path or fd_path

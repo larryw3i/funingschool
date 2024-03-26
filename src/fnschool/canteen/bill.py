@@ -58,7 +58,6 @@ class Bill:
 
         return result
 
-
     @property
     def time_node(self):
         return self.get_time_node()
@@ -67,10 +66,19 @@ class Bill:
     def time_node(self, node):
         self._time_node = node
 
-    def get_time_node_index(self):
-        if self.time_node in self.time_nodes:
-            return self.time_nodes.index(self.time_node)
+    def get_time_node_index(self, time_node=None):
+        time_node = time_node or self.time_node
+        if time_node in self.time_nodes:
+            return self.time_nodes.index(time_node)
         return None
+
+    def get_check_times(self, time_node):
+        tn_index = self.get_time_node_index(time_node)
+        t0, t1 = time_node
+        if tn_index > 0:
+            return [self.time_nodes[tn_index - 1][1], t1 + timedelta(days=-1)]
+        else:
+            return [t0 + timedelta(days=-3), t1 + timedelta(days=-1)]
 
     def get_check_times_of_time_node(self):
         if not self.time_node:

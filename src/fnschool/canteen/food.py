@@ -174,7 +174,9 @@ class Food:
         name = name or self.name
         classes = self.config.get_food_classes()
         for _class, name_likes in classes.items():
-            if any([self.bill.strs_are_equal(name, like) for like in name_likes]):
+            if any(
+                [self.bill.strs_are_equal(name, like) for like in name_likes]
+            ):
                 return _class
         return "蔬菜类"
 
@@ -331,25 +333,24 @@ class Food:
         self.bill.time_node = time_node_cp
         return foods
 
+    def get_purchased_foods(self):
+        if not self.foods or len(self.foods) < 1:
+            if "昌盛" in self.bill.profile.suppliers:
+                self.foods = self.workbook.read_changsheng_foods()
+            else:
+                print_warning(
+                    _("Please add codes to get foods from your suppliers.")
+                )
+
+        return self.foods
+
     def get_foods(self):
-        if not self._foods or len(self._foods) < 1:
-            time_node_cp = self.bill.time_node
-            for time_node in self.bill.get_time_nodes():
-                self.bill.time_node = time_node
-                if "昌盛" in self.bill.profile.suppliers:
-                    _foods = self.workbook.read_changsheng_foods_by_time_node()
-                    if _foods:
-                        for _f in _foods:
-                            if not _f in self._foods:
-                                self._foods.append(_f)
+        self.get_purchased_foods()
+        self.set_consumption_of_foods()
 
-                else:
-                    print_warning(
-                        _("Please add codes to get foods from your suppliers.")
-                    )
-            self.bill.time_node = time_node_cp
-
-        return self._foods
+    def set_consumption_of_foods(self):
+        self.workbook.read_consumption_from_pre_consuming_workbooks()
+        print_info(_("Consumptions were read."))
 
     def get_foods_of_time_node(self):
         foods = self.get_foods()
