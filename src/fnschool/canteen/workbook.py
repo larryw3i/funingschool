@@ -116,7 +116,7 @@ class WorkBook:
         workbook = load_workbook(pre_consuming_fpath.as_posix())
         return workbook
 
-    def get_pre_consuming_sheet(self, new_foods=None):
+    def get_pre_consuming_sheet_of_time_node(self, new_foods=None):
         pre_consuming_fpath = self.get_pre_consuming_workbook_fpath()
         if not pre_consuming_fpath.exists():
             shutil.copy(pre_consuming0_fpath, pre_consuming_fpath)
@@ -847,8 +847,10 @@ class WorkBook:
 
     def update_sheets(self):
         t0, t1 = self.bill.get_time_node()
-        foods = self.food.get_foods_of_time_node()
-        print(*foods)
+        non_negligible_foods = self.food.get_foods_of_time_node()
+        residue_foods = self.food.get_residue_foods_of_time_node()
+        print(*non_negligible_foods)
+        print(*residue_foods)
 
     def get_changsheng_properties_by_dir(self, fdpath=None):
         fd_path = self.purchase_workbook_fd_path or fdpath
@@ -924,10 +926,8 @@ class WorkBook:
 
         if fd_path.replace(" ", "") == "":
             fd_path = seeking_dpath0
-
         if fd_path.startswith("~"):
             fd_path = Path.home().as_posix() + fd_path[1:]
-
         if not Path(fd_path).exists():
             print_error(_("File or directory '%s' doesn't exist.") % (fd_path))
             return None
@@ -935,7 +935,6 @@ class WorkBook:
         chwb = None
         cssheet = None
         ck_t0, ck_t1 = self.bill.get_check_times_of_time_node()
-
         if Path(fd_path).is_dir():
             print_info(_("Entered directory: %s") % fd_path)
             csproperties = self.get_changsheng_properties_by_dir(fd_path)
@@ -1053,7 +1052,24 @@ class WorkBook:
     def update_foods_consuming(self, foods):
         t0, t1 = self.bill.get_time_node()
         foods = [f for f in foods if not f.is_negligible]
-        wb, sheet = self.get_pre_consuming_sheet(foods)
+        if foods is None or len(foods) < 1:
+            print_warning(
+                _(
+                    "It seems the residue foods from last "
+                    + "time node are going to be consumed. "
+                    + "The new foods of this time node ({0})"
+                    + "aren't purchased."
+                ).format(
+                    self.bill.time_node[0].strftime("%Y.%m.%d")
+                    + "->"
+                    + self.bill.time_node[1].strftime("%Y.%m.%d")
+                )
+            )
+        residue_foods = self.food.get_residue_foods_of_time_node()
+        if residue_foods:
+            foods += residue_foods
+        wb, sheet = self.get_pre_consuming_sheet_of_time_node(foods)
+
         for i, f in enumerate(foods):
             r = i + self.pre_consuming_sheet_row_index_offset
             for c in range(
@@ -1385,14 +1401,14 @@ class WorkBook:
         wb.active = csheet
         print_info(_("Sheet '%s' was updated.") % self.consuming_sheet_name)
 
-    def design_pre_consuming_sheet(self, foods):
+    def design_pre_consuming_sheet(self, new_foods=None):
         t0, t1 = self.bill.time_node
         wb_fpath = self.get_pre_consuming_workbook_fpath()
         wb = load_workbook(wb_fpath)
         sheet = wb[self.pre_consuming_sheet0_name]
-        foods = foods or self.food.get_foods_of_time_node()
-        foods = [f for f in foods.copy() if not f.is_negligible]
 
+        foods = new_foods
+        foods = [f for f in foods if not f.is_negligible]
         row_index_offset = self.pre_consuming_sheet_row_index_offset
         col_index_offset = self.pre_consuming_sheet_col_index_offset
         rc_index = 0
@@ -1414,7 +1430,7 @@ class WorkBook:
             if rc_index > len(foods) - 1:
                 break
             food = foods[rc_index]
-            row[0].value = food.get_name_withresidue_mark()
+            row[0].value = food.get_name_with_residue_mark()
             row[1].value = food.count
             row[3].value = food.unit_price
             rc_index += 1

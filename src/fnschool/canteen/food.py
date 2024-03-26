@@ -71,9 +71,11 @@ class Food:
     def workbook(self):
         return self.bill.workbook
 
-    def get_name_withresidue_mark(self):
+    def get_name_with_residue_mark(self):
         return (
-            (self.name + self.residue_mark) if self.is_residue else self.name
+            (self.name + self.residue_mark)
+            if (self.is_residue or self.is_residue_of_time_node)
+            else self.name
         )
 
     def __str__(self, newline=True):
