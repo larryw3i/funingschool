@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 import tomllib
 
+from fnschool.path import *
 from fnschool.canteen.path import *
 from fnschool.log import *
 from fnschool.external import *
@@ -46,7 +47,17 @@ class Config:
         return self.get_configs_by_key(self.food_classes_name)
 
     def get_time_nodes(self):
-        return self.get_configs_by_key(self.time_nodes_name)
+        ucfg, acfg = self.get_configs()
+        ucfg = ucfg.get(self.time_nodes_name, None)
+        if ucfg:
+            print_info("Configured time nodes exist and have been used.")
+            return ucfg
+        acfg = acfg.get(self.time_nodes_name, None)
+        if acfg:
+            print_info(
+                _("Default time nodes of {0} have been used.").format(app_name)
+            )
+            return acfg
 
     def get_profiles(self):
         return self.get_configs_by_key(self.profiles_name)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-27 08:16+0800\n"
+"POT-Creation-Date: 2024-03-27 22:16+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -46,7 +46,6 @@ msgstr ""
 msgid "The functions of canteen."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:15
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/path.py:37
 #, python-format
 msgid "Configuration file '%s' was copied to '%s'."
@@ -108,7 +107,11 @@ msgstr ""
 msgid "Suppliers:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:238
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:244
+msgid "Hello! helping information is here for you:"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:247
 msgid ""
 "Tips for Changsheng files:\n"
 "You need to add the residue of last year or last semester: Open the first"
@@ -118,19 +121,26 @@ msgid ""
 "\t{0}"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:249
-msgid "I'm {0}."
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:261
+msgid ""
+"If new Xuelan milks is purchased. you have to add the purchasing "
+"information of them into the end of the purchasing spreadsheet (e.g: the "
+"spreadsheets Changsheng provided)."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:251
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:269
 msgid "Ok! I knew that.(press any key to continue)"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:369
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:374
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:389
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:383
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:388
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:403
 #, python-format
 msgid "%s can't change."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/config.py:58
+msgid "Default time nodes of {0} have been used."
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:101
@@ -141,48 +151,76 @@ msgstr ""
 msgid "Is neglibible"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:107
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:108
 msgid "Consuming records:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:209
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:250
 #, python-format
 msgid "line '%s' has been discarded."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:217
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:258
 #, python-format
 msgid "values length is less than %s."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:236
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:277
 #, python-format
 msgid "Food count: %s"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:238
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:279
 #, python-format
 msgid "Food total price: %s"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:246
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:287
 #, python-format
 msgid "Food check date: %s"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:328
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:368
 msgid "Please add codes to get foods from your suppliers."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:341
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:381
 msgid "Consumptions were read."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:18
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:30
+msgid "Profile label"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:31
+msgid "Operator name"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:32
+msgid "Operator email"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:33
+msgid "Organization name or school name"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:34
+msgid "Supplier name 1"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:35
+msgid "Supplier name 2"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:36
+msgid "The end."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:40
 msgid "Please update your configuration file."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:19
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:41
 msgid "Ok! it was configured. (enter any key)"
 msgstr ""
 
@@ -198,141 +236,145 @@ msgstr ""
 msgid "Please design the consumptions of spreadsheet '{0}' ."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:382
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:413
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:485
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:713
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1385
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1389
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1449
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1494
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1654
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2025
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2194
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:398
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:429
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:501
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:729
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1407
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1411
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1471
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1516
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1683
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2054
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2223
 #, python-format
 msgid "Sheet '%s' was updated."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:797
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:813
 msgid "Got no check date column index of {0} ."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:803
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:819
 msgid "Got no organization name column of {0}"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:878
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:900
 #, python-format
 msgid "Spreadsheet %s is being tested."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:893
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:915
 msgid "The food purchasing times of preadsheet {0} is {1} ."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:925
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:947
 msgid "Workbook '{0}' doesn't exist, workbook '{1}' was copied to '{2}' ."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:973
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:995
 msgid ""
 "Workbook '{0}' was updated, please design the daily foods consumption and"
 " press ANY key to continue."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:994
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1016
 msgid "Read consumption from '{0}' ."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1002
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1024
 msgid ""
 "Please enter the 'purchase list file path' of spreadsheet Changsheng "
 "provided, or enter the directory path and then {app_name} will read all "
 "spreadsheets. (default: '{dpath0}')"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1017
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1174
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1039
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1196
 #, python-format
 msgid "File or directory '%s' doesn't exist."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1021
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1181
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1043
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1203
 #, python-format
 msgid "Entered directory: %s"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1044
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1066
 msgid ""
 "It seems you didn't set the 'negligible' mark for workbook '{0}' , update"
 " this workbook and press ANY key to continue. (Add the 'negligible' "
 "column name even though there is no negligible foods)"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1053
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1075
 msgid "The column names of 'negligible' mark are following:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1158
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1180
 msgid ""
 "Please enter the 'purchase list file path' of spreadsheet Changsheng "
 "provided, or enter the directory path and then {app_name} will read all "
 "spreadsheets. (default: '{seeking_dpath0}')"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1293
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1315
 #, python-format
 msgid "Got no purchased foods of time node %s ."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1306
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1328
 msgid ""
 "It seems the residue foods from last time node are going to be consumed. "
 "The new foods of this time node ({0})aren't purchased."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1364
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1386
 msgid "There is no residue foods."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1694
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1532
+msgid "Consuming days:"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1723
 msgid ""
 "Sheet '{0}' was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1701
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1730
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1869
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1939
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1898
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1968
 #, python-format
 msgid "Sheet '%s' was formatted."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2259
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2288
 #, python-format
 msgid "Directory '%s' has been made."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2264
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2293
 msgid "Workbook '{0}' was copied to '{1}'."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2268
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2297
 #, python-format
 msgid "Workbook '%s' has been used."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2294
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2327
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2323
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2356
 #, python-format
 msgid "Workbook '%s' was saved."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2298
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2327
 #, python-format
 msgid "Directory %s was created."
 msgstr ""
@@ -544,5 +586,25 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Press any key to continue when you have completed the foods allocation."
+#~ msgstr ""
+
+#~ msgid "I'm {0}."
+#~ msgstr ""
+
+#~ msgid "Operator Name"
+#~ msgstr ""
+
+#~ msgid "Organization name or School name"
+#~ msgstr ""
+
+#~ msgid "The end."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If new Xuelan milks is purchased. "
+#~ "you have to add the purchasing "
+#~ "information of them into the end "
+#~ "of the purchasing spreadsheet (e.g: the"
+#~ " spreadsheets Changsheng provided). "
 #~ msgstr ""
 

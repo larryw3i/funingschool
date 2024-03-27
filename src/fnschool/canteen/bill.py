@@ -262,7 +262,7 @@ class Bill:
                     "If new Xuelan milks is purchased. you have to "
                     + "add the purchasing information of them into "
                     + "the end of the purchasing spreadsheet (e.g: "
-                    + "the spreadsheets Changsheng provided). "
+                    + "the spreadsheets Changsheng provided)."
                 )
             )
         if has_tip:
