@@ -431,21 +431,18 @@ class WorkBook:
             sheet.unmerge_cells(str(cell_group))
 
     def update_cover_sheet(self):
-        t0, t1 = self.bill.time_node
+        time_nodes = self.bill.get_time_nodes()
+        t0, t1 = time_nodes[-1]
         cvsheet = self.get_conver_sheet()
         cvsheet.cell(
             1,
             1,
             self.bill.profile.org_name + f"{t1.year}年{t1.month}月份食堂食品采购统计表",
         )
-        foods = self.food.get_food_list_from_check_sheet()
         foods = [
             f
-            for f in foods
-            if (
-                not f.is_residue
-                and self.bill.times_are_same_year_month(f.check_date, t1)
-            )
+            for f in self.food.get_foods()
+            if (not f.is_residue and f.check_date.month == self.bill.month)
         ]
         wfoods = [f for f in foods if not f.is_negligible]
         uwfoods = [f for f in foods if f.is_negligible]
@@ -476,7 +473,8 @@ class WorkBook:
             f"入库：{w_seasoning_total_price:.2f}元；"
             + f"未入库：{unw_seasoning_total_price:.2f}元",
         )
-        if "昌盛" in self.bill.suppliers and "雪兰" in self.bill.suppliers:
+
+        if self.bill.is_changsheng and self.bill.is_xuelan:
             self.update_cover_sheet_for_cangsheng_xuelan(
                 cvsheet, foods, wfoods, uwfoods, total_price
             )
@@ -486,10 +484,9 @@ class WorkBook:
 
         print_info(_("Sheet '%s' was updated.") % self.cover_sheet_name)
 
-    def get_food_form_index_by_time_node_m1(self, sheet):
-        _, t1 = self.bill.time_node
+    def get_food_form_index(self, sheet):
         indexes = self.get_food_form_indexes(sheet)
-        _index_range = indexes[t1.month - 1]
+        _index_range = indexes[self.bill.month - 1]
         return _index_range
 
     def get_food_form_indexes(self, sheet):
@@ -610,24 +607,35 @@ class WorkBook:
                     end_column=13,
                 )
 
-    def update_food_sheets_by_time_node(self):
-        time_nodes = self.bill.get_time_nodes()
+    def update_food_sheets(self):
+        time_nodes = sorted(
+            [
+                tn
+                for tn in self.bill.get_time_nodes()
+                if tn[1].month == self.bill.month
+            ]
+        )
         t0, t1 = time_nodes[-1]
-        cfoods = self.food.get_foods_from_pre_consuming_sheet_by_time_node()
+        cfoods = [
+            f
+            for f in self.food.get_foods()
+            if f.check_date.month == self.bill.month
+        ]
         cfood_names = list(set([f.name for f in cfoods]))
-        u_month = t1.month
-        days_num = calendar.monthrange(t1.year, u_month)[1]
+        days_num = calendar.monthrange(t1.year, self.bill.month)[1]
         wb = self.get_bill_workbook()
 
-        if len(time_nodes) > 1:
-            t1_m2 = time_nodes[-2][1]
-        else:
-            t1_m2 = t0 + timedelta(days=-1)
-        rfoods = self.get_residual_foods_by_month_m1()
+        tn0_dm1 = time_nodes[0][0] + timedelta(days=-1)
+
+        rfoods = [
+            f
+            for f in self.food.get_foods()
+            if f.get_remainder_by_time(tn0_dm1) > 0
+        ]
         rfoods_names = list(set([f.name for f in rfoods]))
         for rfood_name in rfoods_names:
             sheet = self.get_food_sheet(rfood_name)
-            form_index_range = self.get_food_form_index_by_time_node_m1(sheet)
+            form_index_range = self.get_food_form_index(sheet)
             index_start, index_end = form_index_range
             entry_index = 0
             for food in rfoods:
@@ -659,7 +667,9 @@ class WorkBook:
                     if time_node in _dates:
                         row_index = index_start + entry_index
                         _date, _count = [
-                            c for c in food.consuming_list if c[0] == time_node
+                            [d, c]
+                            for d, c in food.consuming_list
+                            if d == time_node
                         ][0]
                         _remainder = food.count - sum(
                             [
@@ -679,6 +689,7 @@ class WorkBook:
                         sheet.cell(row_index, 12, _remainder * food.unit_price)
 
                         entry_index += 1
+
                     if food.check_date == time_node:
                         row_index = index_start + entry_index
 
@@ -699,22 +710,31 @@ class WorkBook:
 
             self.format_food_sheet(sheet)
 
-            all_food_names = [
-                f.name for f in self.food.get_food_list_from_check_sheet()
-            ]
+            food_names = list(set([f.name for f in self.food.get_foods()]))
 
             wb = self.get_bill_workbook()
             wb.active = sheet
 
             print_info(_("Sheet '%s' was updated.") % sheet.title)
 
-        for name in all_food_names:
+        for name in food_names:
             if self.includes_sheet(name):
                 sheet = self.get_bill_sheet(name)
                 sheet.sheet_properties.tabColor = "0" * 8
+                print_info(_("All food sheets have their tab colors reset."))
         for name in cfood_names:
             sheet = self.get_food_sheet(name)
             sheet.sheet_properties.tabColor = secrets.token_hex(4)
+            print_info(
+                _("Food sheets [{0}] have their tab colors recolor.").format(
+                    " ".join(cfood_names)
+                )
+            )
+        print_info(
+            _("Food sheets [{0}] have been updated.").format(
+                " ".join(cfood_names)
+            )
+        )
 
     def get_food_form_day_index_by_time_node_m1(self, sheet):
         indexes = []
@@ -844,10 +864,10 @@ class WorkBook:
         self.update_warehousing_sheet()
         self.update_unwarehousing_sheet()
         self.update_consuming_sum_sheet()
-        # self.update_purchase_sum_sheet()
-        # self.update_cover_sheet()
-        # self.update_food_sheets()
-        # print_info(_("Update completely!"))
+        self.update_purchase_sum_sheet()
+        self.update_cover_sheet()
+        self.update_food_sheets()
+        print_info(_("Update completely!"))
         self.copy_workbook()
 
     def get_changsheng_properties_by_dir(self, fdpath=None):
@@ -1387,8 +1407,13 @@ class WorkBook:
         print_info(_("Sheet '%s' was updated.") % self.check_sheet_name)
         return isheet
 
-    def update_purchase_sum_sheet_by_time_node(self):
-        t0, t1 = self.bill.time_node
+    def update_purchase_sum_sheet(self):
+        time_nodes = [
+            tn
+            for tn in self.bill.get_time_nodes()
+            if tn[1].month == self.bill.month
+        ]
+        t0, t1 = time_nodes[-1]
         pssheet = self.get_purchase_sum_sheet()
         pssheet.cell(
             2,
@@ -1408,14 +1433,10 @@ class WorkBook:
             + f"         "
             + f"{t1.year}年{t1.month}月{t1.day}日",
         )
-        foods = self.food.get_food_list_from_check_sheet()
         foods = [
             f
-            for f in foods
-            if (
-                not f.is_residue
-                and self.bill.times_are_same_year_month(f.check_date, t1)
-            )
+            for f in self.food.get_foods()
+            if (not f.is_residue and f.check_date.month == self.bill.month)
         ]
         wfoods = [f for f in foods if not f.is_negligible]
         uwfoods = [f for f in foods if f.is_negligible]
