@@ -153,9 +153,7 @@ class WorkBook:
         t0 = pcsheet.cell(
             1, self.pre_consuming_sheet_col_index_offset
         ).value.split(".")
-        t0 = datetime(
-            int(t0[0]), int(t0[1]), int(t0[2])
-        )
+        t0 = datetime(int(t0[0]), int(t0[1]), int(t0[2]))
         time_node = [t0, None]
         for col_index in range(
             self.pre_consuming_sheet_col_index_offset, pcsheet.max_column
@@ -163,9 +161,7 @@ class WorkBook:
             cell_value = pcsheet.cell(1, col_index).value
             if not cell_value:
                 t1 = pcsheet.cell(1, col_index - 1).value.split(".")
-                t1 = datetime(
-                    int(t1[0]), int(t1[1]), int(t1[2])
-                )
+                t1 = datetime(int(t1[0]), int(t1[1]), int(t1[2]))
                 time_node[1] = t1
                 return time_node
 
@@ -229,8 +225,7 @@ class WorkBook:
         n_index = 0
         for t0, t1 in time_nodes:
             time_range = [
-                t0 + timedelta(days=i)
-                for i in range((t1 - t0).days + 1)
+                t0 + timedelta(days=i) for i in range((t1 - t0).days + 1)
             ]
             if time_node in time_range:
                 n_index += time_range.index(time_node) + 1
@@ -409,9 +404,9 @@ class WorkBook:
             for row in cksheet.iter_rows(
                 min_row=2, max_row=cksheet.max_row + 1, min_col=1, max_col=2
             ):
-                if row[0].value == food.fid and row[
-                    1
-                ].value == t1.strftime("%Y%m%d"):
+                if row[0].value == food.fid and row[1].value == t1.strftime(
+                    "%Y%m%d"
+                ):
                     food_exists = True
                     break
             if food_exists:
@@ -441,8 +436,7 @@ class WorkBook:
         cvsheet.cell(
             1,
             1,
-            self.bill.profile.org_name
-            + f"{t1.year}年{t1.month}月份食堂食品采购统计表",
+            self.bill.profile.org_name + f"{t1.year}年{t1.month}月份食堂食品采购统计表",
         )
         foods = self.food.get_food_list_from_check_sheet()
         foods = [
@@ -462,7 +456,7 @@ class WorkBook:
             class_name = row[0].value.replace(" ", "")
             _total_price = 0.0
             for f in foods:
-                if f.get_base_class_name() == class_name:
+                if f.class_name == class_name:
                     _total_price += f.count * f.unit_price
             cvsheet.cell(row[0].row, 2, _total_price)
 
@@ -470,18 +464,10 @@ class WorkBook:
         cvsheet.cell(10, 2, total_price)
 
         w_seasoning_total_price = sum(
-            [
-                f.count * f.unit_price
-                for f in wfoods
-                if ("调味" in f.get_base_class_name())
-            ]
+            [f.count * f.unit_price for f in wfoods if ("调味" in f.class_name)]
         )
         unw_seasoning_total_price = sum(
-            [
-                f.count * f.unit_price
-                for f in uwfoods
-                if ("调味" in f.get_base_class_name())
-            ]
+            [f.count * f.unit_price for f in uwfoods if ("调味" in f.class_name)]
         )
 
         cvsheet.cell(
@@ -521,9 +507,7 @@ class WorkBook:
     def get_residual_foods_by_month_m1(self):
         time_nodes = self.bill.get_time_nodes()
         t0, t1 = time_nodes[-1]
-        t1_mm1 = datetime(t1.year, t1.month, 1) + timedelta(
-            days=-1
-        )
+        t1_mm1 = datetime(t1.year, t1.month, 1) + timedelta(days=-1)
         time_nodes_mm1 = [
             t
             for t in time_nodes
@@ -538,9 +522,7 @@ class WorkBook:
             time_nodes_mm1 = sorted(time_nodes_mm1, key=lambda t: t[1])
             t1_mm1 = time_nodes_mm1[-1][1]
 
-        foods = [
-            f for f in foods if (f.is_residue and f.check_date == t1_mm1)
-        ]
+        foods = [f for f in foods if (f.is_residue and f.check_date == t1_mm1)]
         return foods
 
     def get_food_sheet(self, name):
@@ -558,9 +540,7 @@ class WorkBook:
                 if row[0].value and "材料名称" in str(row[0].value).replace(
                     " ", ""
                 ):
-                    row[0].value = (
-                        f"材料名称：{name}" + f"（{self.food.unit_name}）"
-                    )
+                    row[0].value = f"材料名称：{name}" + f"（{self.food.unit_name}）"
                     sheet.cell(row[0].row + 1, 1, f"{t1.year}年")
         return sheet
 
@@ -758,11 +738,7 @@ class WorkBook:
         self, cvsheet, foods, wfoods, uwfoods, total_price
     ):
         egg_milk_total_price = sum(
-            [
-                f.count * f.unit_price
-                for f in foods
-                if "蛋奶" in f.get_base_class_name()
-            ]
+            [f.count * f.unit_price for f in foods if "蛋奶" in f.class_name]
         )
         xl_milk_total_price = sum(
             [f.count * f.unit_price for f in foods if "雪兰" in f.name]
@@ -867,7 +843,7 @@ class WorkBook:
         self.update_consuming_sheet()
         self.update_warehousing_sheet()
         self.update_unwarehousing_sheet()
-        # self.update_consuming_sum_sheet()
+        self.update_consuming_sum_sheet()
         # self.update_purchase_sum_sheet()
         # self.update_cover_sheet()
         # self.update_food_sheets()
@@ -1450,7 +1426,7 @@ class WorkBook:
             class_name = row[0].value.replace(" ", "")
             _total_price = 0.0
             for food in wfoods:
-                if food.get_base_class_name() == class_name:
+                if food.class_name == class_name:
                     _total_price += food.count * food.unit_price
             pssheet.cell(row[0].row, 2, _total_price)
             total_price += _total_price
@@ -1472,9 +1448,19 @@ class WorkBook:
 
     def update_consuming_sum_sheet(self):
         cssheet = self.get_consuming_sum_sheet()
-        time_node = self.bill.time_node
-        t0, t1 = time_node
-        foods = self.food.get_foods_from_pre_consuming_sheet_by_time_node()
+        time_nodes = sorted(
+            [
+                tn
+                for tn in self.bill.get_time_nodes()
+                if tn[1].month == self.bill.month
+            ]
+        )
+        t0, t1 = time_nodes[-1]
+        foods = [
+            f
+            for f in self.food.get_foods()
+            if (self.bill.month in [d.month for d, c in f.consuming_list])
+        ]
 
         total_price = 0.0
         for row in cssheet.iter_rows(
@@ -1483,11 +1469,12 @@ class WorkBook:
             class_name = row[0].value.replace(" ", "")
             _total_price = 0.0
             for food in foods:
-                if food.get_base_class_name() == class_name:
+                if food.class_name == class_name:
                     _total_price += sum(
                         [
                             _count * food.unit_price
                             for _date, _count in food.consuming_list
+                            if _date.month == self.bill.month
                         ]
                     )
             total_price += _total_price
@@ -1972,7 +1959,7 @@ class WorkBook:
         unwsheet = self.get_unwarehousing_sheet()
         form_indexes = self.get_unwarehousing_form_indexes()
         time_nodes = [
-            tn 
+            tn
             for tn in self.bill.get_time_nodes()
             if tn[1].month == self.bill.month
         ]
@@ -1981,16 +1968,15 @@ class WorkBook:
         foods = [
             f
             for f in self.food.get_foods()
-            if (
-                f.is_negligible
-                and f.check_date.month == self.bill.month
-            )
+            if (f.is_negligible and f.check_date.month == self.bill.month)
         ]
         foods = sorted(foods, key=lambda f: f.check_date)
         row_indexes = []
         for form_index in form_indexes:
             form_index0, form_index1 = form_index
-            unwsheet.cell(form_index0, 1, f" 学校名称：{self.bill.profile.org_name}")
+            unwsheet.cell(
+                form_index0, 1, f" 学校名称：{self.bill.profile.org_name}"
+            )
             unwsheet.cell(
                 form_index0,
                 4,
