@@ -135,13 +135,15 @@ class Food:
         for tn in time_nodes:
             _foods.append(
                 [
-                    tn, 
+                    tn,
                     [
-                        f for f in foods if (
+                        f
+                        for f in foods
+                        if (
                             f.check_date < tn[1]
                             and f.get_remainder_by_time(tn[1]) > 0
                         )
-                    ]
+                    ],
                 ]
             )
 

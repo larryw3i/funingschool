@@ -84,7 +84,6 @@ class Bill:
         else:
             return [t0 + timedelta(days=-3), t1 + timedelta(days=-1)]
 
-    
     def get_check_times_of_time_node(self):
         if not self.time_node:
             return None

@@ -318,11 +318,11 @@ class WorkBook:
         isheet = self.get_inventory_sheet()
         tnfoods = self.food.get_residue_foods(self.bill.month)
         form_indexes = self.get_inventory_form_indexes()
-        
-        for tn,foods in tnfoods:
+
+        for tn, foods in tnfoods:
             print(tn[1])
             for food in foods:
-                print("\t",food.name,food.get_remainder_by_time(tn[1]))
+                print("\t", food.name, food.get_remainder_by_time(tn[1]))
 
         for form_index_n in range(0, len(form_indexes)):
             form_index = form_indexes[form_index_n]
@@ -1518,8 +1518,7 @@ class WorkBook:
         )
 
     def update_consuming_sheet(self):
-       
-        foods = self.food.get_foods() 
+        foods = self.food.get_foods()
         csheet = self.get_consuming_sheet()
         form_indexes = self.get_consuming_form_indexes()
 
@@ -1528,13 +1527,12 @@ class WorkBook:
         class_names = self.food.get_class_names()
         for t0, t1 in time_nodes:
             days += [
-                t0+timedelta(days=i) 
-                for i in range(0,(t1-t0).days+1)
+                t0 + timedelta(days=i) for i in range(0, (t1 - t0).days + 1)
             ]
         print_info(
             _("Consuming days:")
-            + "\n\t" 
-            + ' '.join([d.strftime("%Y.%m.%d") for d in days])
+            + "\n\t"
+            + " ".join([d.strftime("%Y.%m.%d") for d in days])
         )
 
         merged_ranges = list(csheet.merged_cells.ranges)
@@ -1544,7 +1542,7 @@ class WorkBook:
         max_day_index = 0
         for day_index in range(0, len(days)):
             max_day_index = day_index + 1
-            day = days[day_index] 
+            day = days[day_index]
             form_index = form_indexes[day_index]
             form_index_start, form_index_end = form_index
             food_index_start = form_index_start + 2
@@ -1553,8 +1551,7 @@ class WorkBook:
             tfoods = [
                 food
                 for food in foods
-                if day
-                in [_date for _date, _count in food.consuming_list]
+                if day in [_date for _date, _count in food.consuming_list]
             ]
             tfoods_classes = [f.class_name for f in tfoods]
 
@@ -1563,12 +1560,12 @@ class WorkBook:
             ]
 
             tfoods_len = len(tfoods)
-            consuming_n = day_index+1 
+            consuming_n = day_index + 1
+            csheet.cell(form_index_start, 2, self.bill.profile.org_name)
             csheet.cell(
                 form_index_start,
                 4,
-                f"{day.year}年 {day.month} 月 {day.day} 日  "
-                + f"单位：元",
+                f"{day.year}年 {day.month} 月 {day.day} 日  " + f"单位：元",
             )
             csheet.cell(
                 form_index_start,
@@ -1602,9 +1599,7 @@ class WorkBook:
 
             for class_name in class_names:
                 class_foods = [
-                    food
-                    for food in tfoods
-                    if (food.class_name == class_name)
+                    food for food in tfoods if (food.class_name == class_name)
                 ]
 
                 fentry_index_start = fentry_index
@@ -1636,7 +1631,7 @@ class WorkBook:
                     consuming_count = [
                         _count
                         for _date, _count in food.consuming_list
-                        if _date == day 
+                        if _date == day
                     ][0]
                     frow_index = fentry_index_start + findex
                     csheet.cell(frow_index, 2, food.name)
@@ -1648,7 +1643,7 @@ class WorkBook:
                     )
                     csheet.cell(
                         frow_index, 4
-                    ).number_format = numbers.FORMAT_NUMBER_00
+                    ).number_format = numbers.FORMAT_NUMBER
                     csheet.cell(
                         frow_index, 5
                     ).number_format = numbers.FORMAT_NUMBER_00
