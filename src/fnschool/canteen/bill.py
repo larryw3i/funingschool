@@ -230,26 +230,44 @@ class Bill:
         )
 
     @property
+    def is_xuelan(self):
+        return "雪兰" in self.profile.suppliers
+
+    @property
     def is_changsheng(self):
         return "昌盛" in self.profile.suppliers
 
     def show_msg(self):
-        print_info(
-            _(
-                "Tips for Changsheng files:\n"
-                + "You need to add the residue of last year "
-                + "or last semester: Open the first "
-                + "spreadsheet you got from Changsheng, "
-                + "and add the 'residue' column, then "
-                + "insert the 'residue' foods after the end "
-                + "of entered data, the 'residue' column names "
-                + "you could set are:\n\t{0}"
-            ).format(" | ".join(self.workbook.residue_col_names))
-            if self.is_changsheng
-            else _("I'm {0}.") % app_name
-        )
-        print_warning(_("Ok! I knew that.(press any key to continue)"))
-        input()
+        has_tip = False
+        if any([self.is_changsheng, self.is_xuelan]):
+            has_tip = True
+            print_warning(_("Hello! helping information is here for you:"))
+        if self.is_changsheng:
+            print_info(
+                _(
+                    "Tips for Changsheng files:\n"
+                    + "You need to add the residue of last year "
+                    + "or last semester: Open the first "
+                    + "spreadsheet you got from Changsheng, "
+                    + "and add the 'residue' column, then "
+                    + "insert the 'residue' foods after the end "
+                    + "of entered data, the 'residue' column names "
+                    + "you could set are:\n\t{0}"
+                ).format(" | ".join(self.workbook.residue_col_names))
+            )
+
+        if self.is_xuelan:
+            print_info(
+                _(
+                    "If new Xuelan milks is purchased. you have to "
+                    + "add the purchasing information of them into "
+                    + "the end of the purchasing spreadsheet (e.g: "
+                    + "the spreadsheets Changsheng provided). "
+                )
+            )
+        if has_tip:
+            print_warning(_("Ok! I knew that.(press any key to continue)"))
+            input()
 
     def make_spreadsheet_by_time_nodes(self):
         self.set_profile_to_index0()
@@ -270,6 +288,7 @@ class Bill:
 
     def make_spreadsheets(self):
         self.set_profile_to_index0()
+        self.show_msg()
         self.print_basic_info()
         self.get_time_nodes()
         self.get_month()

@@ -326,12 +326,12 @@ class WorkBook:
 
         for form_index_n in range(0, len(form_indexes)):
             form_index = form_indexes[form_index_n]
-            form_index_start, form_index_end = form_index
-            food_index_start = form_index_start + 3
-            food_index_end = form_index_end - 1
+            form_index0, form_index1 = form_index
+            food_index0 = form_index0 + 3
+            food_index1 = form_index1 - 1
             for row in isheet.iter_rows(
-                min_row=food_index_start,
-                max_row=food_index_end,
+                min_row=food_index0,
+                max_row=food_index1,
                 min_col=1,
                 max_col=9,
             ):
@@ -865,8 +865,7 @@ class WorkBook:
         foods = self.food.get_foods()
         self.update_inventory_sheet()
         self.update_consuming_sheet()
-        # self.update_check_sheet()
-        # self.update_warehousing_sheet()
+        self.update_warehousing_sheet()
         # self.update_unwarehousing_sheet()
         # self.update_consuming_sum_sheet()
         # self.update_purchase_sum_sheet()
@@ -1402,8 +1401,8 @@ class WorkBook:
                 isheet.insert_rows(iform_index0 + 1, 1)
                 r_total_price += total_price
                 iform_index0 += 1
-                isheet.cell(isht_form_index_end, 4, r_total_price)
-                isheet.cell(isht_form_index_end, 6, r_total_price)
+                isheet.cell(isht_form_index1, 4, r_total_price)
+                isheet.cell(isht_form_index1, 6, r_total_price)
 
         print_info(_("Sheet '%s' was updated.") % self.inventory_sheet_name)
 
@@ -1531,7 +1530,7 @@ class WorkBook:
             ]
         print_info(
             _("Consuming days:")
-            + "\n\t"
+            + " "
             + " ".join([d.strftime("%Y.%m.%d") for d in days])
         )
 
@@ -1544,10 +1543,10 @@ class WorkBook:
             max_day_index = day_index + 1
             day = days[day_index]
             form_index = form_indexes[day_index]
-            form_index_start, form_index_end = form_index
-            food_index_start = form_index_start + 2
-            food_index_end = form_index_end - 1
-            food_index_len = food_index_end - food_index_start + 1
+            form_index0, form_index1 = form_index
+            food_index0 = form_index0 + 2
+            food_index1 = form_index1 - 1
+            food_index_len = food_index1 - food_index0 + 1
             tfoods = [
                 food
                 for food in foods
@@ -1561,14 +1560,14 @@ class WorkBook:
 
             tfoods_len = len(tfoods)
             consuming_n = day_index + 1
-            csheet.cell(form_index_start, 2, self.bill.profile.org_name)
+            csheet.cell(form_index0, 2, self.bill.profile.org_name)
             csheet.cell(
-                form_index_start,
+                form_index0,
                 4,
                 f"{day.year}年 {day.month} 月 {day.day} 日  " + f"单位：元",
             )
             csheet.cell(
-                form_index_start,
+                form_index0,
                 7,
                 f"编号：C{day.month:0>2}{consuming_n:0>2}",
             )
@@ -1578,15 +1577,15 @@ class WorkBook:
             )
 
             if row_difference > 0:
-                csheet.insert_rows(food_index_start + 1, row_difference)
+                csheet.insert_rows(food_index0 + 1, row_difference)
                 form_indexes = self.get_consuming_form_indexes()
-                form_index_end += row_difference
-                food_index_end += row_difference
+                form_index1 += row_difference
+                food_index1 += row_difference
                 row_difference = 0
 
             for row in csheet.iter_rows(
-                min_row=food_index_start,
-                max_row=food_index_end,
+                min_row=food_index0,
+                max_row=food_index1,
                 min_col=1,
                 max_col=8,
             ):
@@ -1595,7 +1594,7 @@ class WorkBook:
                     cell.alignment = self.cell_alignment0
                     cell.border = self.cell_border0
 
-            fentry_index = food_index_start
+            fentry_index = food_index0
 
             for class_name in class_names:
                 class_foods = [
@@ -1658,19 +1657,19 @@ class WorkBook:
                 for _date, _count in food.consuming_list:
                     if _date == day:
                         tfoods_total_price += _count * food.unit_price
-            csheet.cell(form_index_end, 6, tfoods_total_price)
-            csheet.cell(form_index_end, 7, tfoods_total_price)
+            csheet.cell(form_index1, 6, tfoods_total_price)
+            csheet.cell(form_index1, 7, tfoods_total_price)
 
         if len(form_indexes) > max_day_index:
             for time_index in range(max_day_index, len(form_indexes)):
-                form_index_start, form_index_end = form_indexes[time_index]
-                food_index_start, food_index_end = (
-                    form_index_start + 2,
-                    form_index_end - 1,
+                form_index0, form_index1 = form_indexes[time_index]
+                food_index0, food_index1 = (
+                    form_index0 + 2,
+                    form_index1 - 1,
                 )
                 for row in csheet.iter_rows(
-                    min_row=food_index_start,
-                    max_row=food_index_end,
+                    min_row=food_index0,
+                    max_row=food_index1,
                     min_col=2,
                     max_col=7,
                 ):
@@ -1990,18 +1989,18 @@ class WorkBook:
         foods = sorted(foods, key=lambda f: f.check_date)
         row_indexes = []
         for form_index in form_indexes:
-            form_index_start, form_index_end = form_index
-            unwsheet.cell(form_index_start, 1, f" 学校名称：{self.bill.org_name}")
+            form_index0, form_index1 = form_index
+            unwsheet.cell(form_index0, 1, f" 学校名称：{self.bill.org_name}")
             unwsheet.cell(
-                form_index_start,
+                form_index0,
                 4,
                 f"        "
                 + f"{time_end.year} 年 {time_end.month} 月 "
                 + f"{time_end.day} 日"
                 + f"               ",
             )
-            row_index_start = form_index_start + 2
-            row_index_end = form_index_end - 1
+            row_index_start = form_index0 + 2
+            row_index_end = form_index1 - 1
             row_indexes += list(range(row_index_start, row_index_end + 1))
 
         for row_index in row_indexes:
@@ -2055,30 +2054,34 @@ class WorkBook:
             _("Sheet '%s' was updated.") % self.unwarehousing_sheet_name
         )
 
-    def update_warehousing_sheet_by_time_node(self):
+    def update_warehousing_sheet(self):
         wsheet = self.get_warehousing_sheet()
-        foods = self.food.time_node_foods
+        foods = [
+            f
+            for f in self.food.get_foods()
+            if (
+                not f.is_residue
+                and not f.is_negligible
+                and f.check_date.month == self.bill.month
+            )
+        ]
         form_indexes = self.get_warehousing_form_indexes()
-        class_names = self.get_base_class_names()
-        time_node = self.bill.time_node
+        class_names = self.food.get_class_names()
+        time_nodes = self.bill.get_time_nodes()
 
         self.unmerge_cells_of_sheet(wsheet)
 
-        for form_index_start, form_index_end in form_indexes:
-            food_index_start = form_index_start + 2
-            food_index_end = form_index_end - 1
+        for form_index0, form_index1 in form_indexes:
+            food_index0 = form_index0 + 2
+            food_index1 = form_index1 - 1
             for row in wsheet.iter_rows(
-                min_row=food_index_start,
-                max_row=food_index_end,
+                min_row=food_index0,
+                max_row=food_index1,
                 min_col=1,
                 max_col=8,
             ):
                 for cell in row:
                     cell.value = ""
-
-        foods = [
-            f for f in foods if (not f.is_residue and not f.is_negligible)
-        ]
 
         w_times = sorted(
             list(
@@ -2086,9 +2089,7 @@ class WorkBook:
                     [
                         food.check_date
                         for food in foods
-                        if self.bill.times_are_same_year_month(
-                            food.check_date, time_node[1]
-                        )
+                        if food.check_date.month == self.bill.month
                     ]
                 )
             )
@@ -2098,14 +2099,14 @@ class WorkBook:
         for windex, w_time in enumerate(w_times):
             time_point = w_time
             max_time_index = windex + 1
-            form_index_start, form_index_end = form_indexes[windex]
-            food_index_start = form_index_start + 2
-            food_index_end = form_index_end - 1
-            entry_index = food_index_start
+            form_index0, form_index1 = form_indexes[windex]
+            food_index0 = form_index0 + 2
+            food_index1 = form_index1 - 1
+            entry_index = food_index0
             warehousing_n = windex + 1
 
             wfoods = [f for f in foods if (f.check_date == time_point)]
-            foods_class_names = [f.get_base_class_name() for f in wfoods]
+            foods_class_names = [f.class_name for f in wfoods]
             class_names_without_food = [
                 _name
                 for _name in class_names
@@ -2114,14 +2115,14 @@ class WorkBook:
             row_difference = (
                 len(wfoods)
                 + len(class_names_without_food)
-                - (food_index_end - food_index_start + 1)
+                - (food_index1 - food_index0 + 1)
             )
 
             if row_difference > 0:
-                wsheet.insert_rows(food_index_start + 1, row_difference)
+                wsheet.insert_rows(food_index0 + 1, row_difference)
                 for row in wsheet.iter_rows(
-                    min_row=food_index_start + 1,
-                    max_row=food_index_start + 1 + row_difference,
+                    min_row=food_index0 + 1,
+                    max_row=food_index0 + 1 + row_difference,
                     min_col=1,
                     max_col=8,
                 ):
@@ -2130,13 +2131,13 @@ class WorkBook:
                         self.border = self.cell_border0
 
                 form_indexes = self.get_warehousing_form_indexes()
-                form_index_end += row_difference
-                food_index_end = form_index_end - 1
+                form_index1 += row_difference
+                food_index1 = form_index1 - 1
                 row_difference = 0
 
             for row in wsheet.iter_rows(
-                min_row=food_index_start,
-                max_row=food_index_end,
+                min_row=food_index0,
+                max_row=food_index1,
                 min_col=1,
                 max_col=8,
             ):
@@ -2145,23 +2146,21 @@ class WorkBook:
                     cell.alignment = self.cell_alignment0
                     cell.border = self.cell_border0
 
-            wsheet.cell(form_index_start, 2, self.bill.org_name)
+            wsheet.cell(form_index0, 2, self.bill.profile.org_name)
             wsheet.cell(
-                form_index_start,
+                form_index0,
                 4,
                 f"{time_point.year}年 {time_point.month} 月 "
                 + f"{time_point.day} 日  单位：元",
             )
             wsheet.cell(
-                form_index_start,
+                form_index0,
                 7,
                 f"编号：R{time_point.month:0>2}{warehousing_n:0>2}",
             )
 
             for class_name in class_names:
-                cfoods = [
-                    f for f in wfoods if f.get_base_class_name() == class_name
-                ]
+                cfoods = [f for f in wfoods if f.class_name == class_name]
                 cfoods_total_price = sum([f.total_price for f in cfoods])
 
                 wsheet.cell(entry_index, 1, class_name)
@@ -2174,7 +2173,7 @@ class WorkBook:
                 for cfindex, cfood in enumerate(cfoods):
                     cfood_row_index = entry_index + cfindex
                     wsheet.cell(cfood_row_index, 2, cfood.name)
-                    wsheet.cell(cfood_row_index, 3, cfood.get_unit_name())
+                    wsheet.cell(cfood_row_index, 3, cfood.unit_name)
                     wsheet.cell(cfood_row_index, 4, cfood.count)
                     wsheet.cell(cfood_row_index, 5, cfood.unit_price)
                     wsheet.cell(cfood_row_index, 6, cfood.total_price)
@@ -2196,20 +2195,20 @@ class WorkBook:
 
                 entry_index = entry_index_end + 1
             foods_total_price = sum([f.total_price for f in wfoods])
-            wsheet.cell(form_index_end, 6, foods_total_price)
-            wsheet.cell(form_index_end, 7, foods_total_price)
+            wsheet.cell(form_index1, 6, foods_total_price)
+            wsheet.cell(form_index1, 7, foods_total_price)
 
         if len(form_indexes) > max_time_index:
             for time_index in range(max_time_index, len(form_indexes)):
-                form_index_start, form_index_end = form_indexes[time_index]
-                food_index_start, food_index_end = (
-                    form_index_start + 2,
-                    form_index_end - 1,
+                form_index0, form_index1 = form_indexes[time_index]
+                food_index0, food_index1 = (
+                    form_index0 + 2,
+                    form_index1 - 1,
                 )
 
                 for row in wsheet.iter_rows(
-                    min_row=food_index_start,
-                    max_row=food_index_end,
+                    min_row=food_index0,
+                    max_row=food_index1,
                     min_col=2,
                     max_col=7,
                 ):
