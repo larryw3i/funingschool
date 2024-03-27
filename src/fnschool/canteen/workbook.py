@@ -209,7 +209,7 @@ class WorkBook:
         return self._unit_name_list
 
     def get_sheet_names(self):
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         return wb.sheetnames
 
     def includes_sheet(self, sheet):
@@ -314,54 +314,17 @@ class WorkBook:
                     end_column=9,
                 )
 
-    def update_inventory_sheet_by_time_node_m1(self):
+    def update_inventory_sheet(self):
         isheet = self.get_inventory_sheet()
-        foods = self.food.get_foods_from_pre_consuming_sheet_m1()
-        foods = [f for f in foods if f.get_remainder() > 0.0]
+        tnfoods = self.food.get_residue_foods(self.bill.month)
         form_indexes = self.get_inventory_form_indexes()
-        time_nodes = self.bill.get_time_nodes()
-        time_start, time_end = time_nodes[-1]
-        form_indexes_n = len(time_nodes) + self.inventory_form_index_offset - 1
-        form_index = form_indexes[form_indexes_n]
-        form_index_start, form_index_end = form_index
-        fentry_index_start = form_index_start + 3
-        fentry_index_end = form_index_end - 1
+        
+        for tn,foods in tnfoods:
+            print(tn[1])
+            for food in foods:
+                print("\t",food.name,food.get_remainder_by_time(tn[1]))
 
-        self.unmerge_cells_of_sheet(isheet)
-
-        isheet.cell(
-            form_index_start,
-            1,
-            f"     "
-            + f"学校名称：{self.bill.profile.org_name}"
-            + f"                "
-            + f"{time_end.year} 年 {time_end.month} 月 {time_end.day} 日"
-            + f"              ",
-        )
-
-        for row in isheet.iter_rows(
-            min_row=fentry_index_start,
-            max_row=fentry_index_end,
-            min_col=1,
-            max_col=9,
-        ):
-            for cell in row:
-                cell.value = ""
-                cell.alignment = self.cell_alignment0
-                cell.border = self.cell_border0
-
-        for findex, food in enumerate(foods):
-            row_index = fentry_index_start + findex
-            if isheet.cell(row_index + 1, 1).value.replace(" ", "") == "合计":
-                isheet.insert_rows(row_index + 1, 1)
-            isheet.cell(row_index, 1, food.name)
-            isheet.cell(row_index, 2, food.get_unit_name())
-            isheet.cell(row_index, 3, food.get_remainder())
-            isheet.cell(row_index, 4, food.get_remainder() * food.unit_price)
-            isheet.cell(row_index, 5, food.get_remainder())
-            isheet.cell(row_index, 6, food.get_remainder() * food.unit_price)
-
-        for form_index_n in range(form_indexes_n + 1, len(form_indexes)):
+        for form_index_n in range(0, len(form_indexes)):
             form_index = form_indexes[form_index_n]
             form_index_start, form_index_end = form_index
             food_index_start = form_index_start + 3
@@ -375,9 +338,62 @@ class WorkBook:
                 for cell in row:
                     cell.value = ""
 
+        for i, (tn, _foods) in enumerate(tnfoods):
+            form_indexes_n = i
+            t0, t1 = tn
+            form_index = form_indexes[form_indexes_n]
+            form_i0, form_i1 = form_index
+            fentry_i0 = form_i0 + 3
+            fentry_i1 = form_i1 - 1
+
+            self.unmerge_cells_of_sheet(isheet)
+
+            isheet.cell(
+                form_i0,
+                1,
+                f"     "
+                + f"学校名称：{self.bill.profile.org_name}"
+                + f"                "
+                + f"{t1.year} 年 {t1.month} 月 {t1.day} 日"
+                + f"              ",
+            )
+
+            for row in isheet.iter_rows(
+                min_row=fentry_i0,
+                max_row=fentry_i1,
+                min_col=1,
+                max_col=9,
+            ):
+                for cell in row:
+                    cell.value = ""
+                    cell.alignment = self.cell_alignment0
+                    cell.border = self.cell_border0
+
+            for findex, food in enumerate(_foods):
+                row_index = fentry_i0 + findex
+                if (
+                    isheet.cell(row_index + 1, 1).value.replace(" ", "")
+                    == "合计"
+                ):
+                    isheet.insert_rows(row_index + 1, 1)
+                isheet.cell(row_index, 1, food.name)
+                isheet.cell(row_index, 2, food.unit_name)
+                isheet.cell(row_index, 3, food.get_remainder_by_time(tn[1]))
+                isheet.cell(
+                    row_index,
+                    4,
+                    food.get_remainder_by_time(tn[1]) * food.unit_price,
+                )
+                isheet.cell(row_index, 5, food.get_remainder_by_time(tn[1]))
+                isheet.cell(
+                    row_index,
+                    6,
+                    food.get_remainder_by_time(tn[1]) * food.unit_price,
+                )
+
         self.format_inventory_sheet()
 
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.active = isheet
         print_info(_("Sheet '%s' was updated.") % (self.inventory_sheet_name))
 
@@ -408,7 +424,7 @@ class WorkBook:
             cksheet.cell(2, 5, food.get_remainder() * food.unit_price)
             cksheet.cell(2, 6, "Y")
 
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.active = cksheet
         print_info(_("Sheet '%s' was updated.") % (self.check_sheet_name))
 
@@ -479,7 +495,7 @@ class WorkBook:
                 cvsheet, foods, wfoods, uwfoods, total_price
             )
 
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.active = cvsheet
 
         print_info(_("Sheet '%s' was updated.") % self.cover_sheet_name)
@@ -533,7 +549,7 @@ class WorkBook:
         if self.includes_sheet(name):
             sheet = self.get_bill_sheet(name)
         else:
-            wb = self.self.get_bill_workbook()
+            wb = self.get_bill_workbook()
             sheet = wb.copy_worksheet(self.get_food_sheet0())
             sheet.title = name
             for row in sheet.iter_rows(
@@ -621,7 +637,7 @@ class WorkBook:
         cfood_names = list(set([f.name for f in cfoods]))
         u_month = time_end.month
         days_num = calendar.monthrange(time_end.year, u_month)[1]
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
 
         if len(time_nodes) > 1:
             time_end_m2 = time_nodes[-2][1]
@@ -707,7 +723,7 @@ class WorkBook:
                 f.name for f in self.food.get_food_list_from_check_sheet()
             ]
 
-            wb = self.self.get_bill_workbook()
+            wb = self.get_bill_workbook()
             wb.active = sheet
 
             print_info(_("Sheet '%s' was updated.") % sheet.title)
@@ -846,11 +862,18 @@ class WorkBook:
         return None
 
     def update_sheets(self):
-        t0, t1 = self.bill.get_time_node()
         foods = self.food.get_foods()
-        # residue_foods = self.food.get_residue_foods_of_time_node()
-        print(*foods)
-        # print(*residue_foods)
+        self.update_inventory_sheet()
+        self.update_consuming_sheet()
+        # self.update_check_sheet()
+        # self.update_warehousing_sheet()
+        # self.update_unwarehousing_sheet()
+        # self.update_consuming_sum_sheet()
+        # self.update_purchase_sum_sheet()
+        # self.update_cover_sheet()
+        # self.update_food_sheets()
+        # print_info(_("Update completely!"))
+        self.copy_workbook()
 
     def get_changsheng_properties_by_dir(self, fdpath=None):
         fd_path = self.purchase_workbook_fd_path or fdpath
@@ -962,8 +985,8 @@ class WorkBook:
                     sheet.cell(
                         row_index,
                         1,
-                        f.name
-                        + (f.residue_mark if f.check_date >= ckt0 else ""),
+                        _f.name
+                        + (_f.residue_mark if _f.check_date < ckt0 else ""),
                     )
                     sheet.cell(row_index, 2, _f.remainder)
                     sheet.cell(row_index, 4, _f.unit_price)
@@ -1384,7 +1407,7 @@ class WorkBook:
 
         print_info(_("Sheet '%s' was updated.") % self.inventory_sheet_name)
 
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.active = isheet
         print_info(_("Sheet '%s' was updated.") % self.check_sheet_name)
         return isheet
@@ -1443,7 +1466,7 @@ class WorkBook:
 
         pssheet.cell(30, 1, f"经办人：{self.bill.profile.name}  ")
 
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.active = pssheet
 
         print_info(_("Sheet '%s' was updated.") % self.purchase_sum_sheet_name)
@@ -1487,30 +1510,42 @@ class WorkBook:
         )
         cssheet.cell(12, 1, f"经办人：{self.bill.profile.name}  ")
 
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.active = cssheet
 
         print_info(
             _("Sheet '%s' was updated.") % self.consuming_sum_sheet_name
         )
 
-    def update_consuming_sheet_by_time_node_m1(self, quiet=False):
-        self.update_pre_consuming_sheet_m1(quiet)
+    def update_consuming_sheet(self):
+       
+        foods = self.food.get_foods() 
         csheet = self.get_consuming_sheet()
         form_indexes = self.get_consuming_form_indexes()
-        time_start, time_end = self.bill.time_node
-        foods = self.food.get_foods_from_pre_consuming_sheet_m1()
-        class_names = self.get_base_class_names()
+
+        time_nodes = self.bill.get_time_nodes_of_month()
+        days = []
+        class_names = self.food.get_class_names()
+        for t0, t1 in time_nodes:
+            days += [
+                t0+timedelta(days=i) 
+                for i in range(0,(t1-t0).days+1)
+            ]
+        print_info(
+            _("Consuming days:")
+            + "\n\t" 
+            + ' '.join([d.strftime("%Y.%m.%d") for d in days])
+        )
 
         merged_ranges = list(csheet.merged_cells.ranges)
         for cell_group in merged_ranges:
             csheet.unmerge_cells(str(cell_group))
 
-        max_time_index = 0
-        for time_index in range(0, (time_end - time_start).days + 1):
-            max_time_index = time_index + 1
-            time_node = time_start + timedelta(days=time_index)
-            form_index = form_indexes[time_index]
+        max_day_index = 0
+        for day_index in range(0, len(days)):
+            max_day_index = day_index + 1
+            day = days[day_index] 
+            form_index = form_indexes[day_index]
             form_index_start, form_index_end = form_index
             food_index_start = form_index_start + 2
             food_index_end = form_index_end - 1
@@ -1518,27 +1553,27 @@ class WorkBook:
             tfoods = [
                 food
                 for food in foods
-                if time_node
+                if day
                 in [_date for _date, _count in food.consuming_list]
             ]
-            tfoods_classes = [f.get_base_class_name() for f in tfoods]
+            tfoods_classes = [f.class_name for f in tfoods]
 
             classes_without_food = [
                 _name for _name in class_names if not _name in tfoods_classes
             ]
 
             tfoods_len = len(tfoods)
-            consuming_n = self.get_consuming_n_by_time_node(time_node)
+            consuming_n = day_index+1 
             csheet.cell(
                 form_index_start,
                 4,
-                f"{time_node.year}年 {time_node.month} 月 {time_node.day} 日  "
+                f"{day.year}年 {day.month} 月 {day.day} 日  "
                 + f"单位：元",
             )
             csheet.cell(
                 form_index_start,
                 7,
-                f"编号：C{time_node.month:0>2}{consuming_n:0>2}",
+                f"编号：C{day.month:0>2}{consuming_n:0>2}",
             )
 
             row_difference = (
@@ -1569,7 +1604,7 @@ class WorkBook:
                 class_foods = [
                     food
                     for food in tfoods
-                    if (food.get_base_class_name() == class_name)
+                    if (food.class_name == class_name)
                 ]
 
                 fentry_index_start = fentry_index
@@ -1581,7 +1616,7 @@ class WorkBook:
                 class_consuming_count = 0.0
                 for food in class_foods:
                     for _date, _count in food.consuming_list:
-                        if _date == time_node:
+                        if _date == day:
                             class_consuming_count += _count * food.unit_price
 
                 class_foods_len = len(class_foods)
@@ -1601,11 +1636,11 @@ class WorkBook:
                     consuming_count = [
                         _count
                         for _date, _count in food.consuming_list
-                        if _date == time_node
+                        if _date == day 
                     ][0]
                     frow_index = fentry_index_start + findex
                     csheet.cell(frow_index, 2, food.name)
-                    csheet.cell(frow_index, 3, food.get_unit_name())
+                    csheet.cell(frow_index, 3, food.unit_name)
                     csheet.cell(frow_index, 4, consuming_count)
                     csheet.cell(frow_index, 5, food.unit_price)
                     csheet.cell(
@@ -1626,13 +1661,13 @@ class WorkBook:
             tfoods_total_price = 0.0
             for food in tfoods:
                 for _date, _count in food.consuming_list:
-                    if _date == time_node:
+                    if _date == day:
                         tfoods_total_price += _count * food.unit_price
             csheet.cell(form_index_end, 6, tfoods_total_price)
             csheet.cell(form_index_end, 7, tfoods_total_price)
 
-        if len(form_indexes) > max_time_index:
-            for time_index in range(max_time_index, len(form_indexes)):
+        if len(form_indexes) > max_day_index:
+            for time_index in range(max_day_index, len(form_indexes)):
                 form_index_start, form_index_end = form_indexes[time_index]
                 food_index_start, food_index_end = (
                     form_index_start + 2,
@@ -1649,7 +1684,7 @@ class WorkBook:
 
         self.format_consuming_sheet()
 
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.active = csheet
         print_info(_("Sheet '%s' was updated.") % self.consuming_sheet_name)
 
@@ -1863,7 +1898,7 @@ class WorkBook:
                     end_column=8,
                 )
 
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.active = csheet
 
         print_info(_("Sheet '%s' was formatted.") % self.consuming_sheet_name)
@@ -1932,7 +1967,7 @@ class WorkBook:
                     end_column=8,
                 )
 
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.active = wsheet
 
         print_info(
@@ -2187,7 +2222,7 @@ class WorkBook:
                         cell.value = ""
 
         self.format_warehousing_sheet()
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.active = wsheet
 
         print_info(
@@ -2288,7 +2323,7 @@ class WorkBook:
 
     def save_workbook(self, info="Saving workbook. . ."):
         print_info(info)
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.save(self.get_main_spreadsheet_path())
         print_info(
             _("Workbook '%s' was saved.") % self.get_main_spreadsheet_path()
@@ -2322,13 +2357,13 @@ class WorkBook:
             file_path = file_path[:-5] + f".{uuid.uuid4()}.xlsx"
             file_path = self.get_profile_copy_data_dpath() / file_path
 
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         wb.save(file_path)
         print_info(_("Workbook '%s' was saved.") % file_path)
         return file_path
 
     def get_bill_sheet(self, name):
-        wb = self.self.get_bill_workbook()
+        wb = self.get_bill_workbook()
         return wb[name]
 
     def get_check_sheet(self):

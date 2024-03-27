@@ -9,7 +9,7 @@ def set_canteen(args):
 
     bill = Bill()
     if args.action in "mk_tspreadsheet":
-        bill.make_spreadsheet_by_time_nodes()
+        bill.make_spreadsheets()
     elif args.action in "help_friends":
         bill.help_friends_via_email()
 

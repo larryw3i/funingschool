@@ -60,7 +60,6 @@ class TestCanteen(unittest.TestCase):
                     print("\n", time_node)
                 print(f, end="")
 
-
     def get_foods_by_time_node(self):
         for m in range(2, 4):
             self.bill.set_month(m)

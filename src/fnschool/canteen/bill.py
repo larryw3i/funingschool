@@ -84,6 +84,7 @@ class Bill:
         else:
             return [t0 + timedelta(days=-3), t1 + timedelta(days=-1)]
 
+    
     def get_check_times_of_time_node(self):
         if not self.time_node:
             return None
@@ -268,18 +269,13 @@ class Bill:
             self.print_check_time_range()
             self.make_spreadsheet_by_time_node()
 
-    def make_spreadsheet_by_time_node(self):
-        # self.workbook.update_sheets()
-        # self.workbook.update_consuming_sheet_by_time_node_m1()
-        # self.workbook.update_inventory_sheet_by_time_node_m1()
-        # self.workbook.update_check_sheet_by_time_node_m1()
-        # self.workbook.update_warehousing_sheet_by_time_node_m1()
-        # self.workbook.update_unwarehousing_sheet_by_time_node_m1()
-        # self.workbook.update_consuming_sum_sheet()
-        # self.workbook.update_purchase_sum_sheet_by_time_node()
-        # self.workbook.update_cover_sheet()
-        # self.workbook.update_food_sheets_by_time_node()
-        # print_info(_("Update completely!"))
+    def make_spreadsheets(self):
+        self.set_profile_to_index0()
+        self.print_basic_info()
+        self.get_time_nodes()
+        self.get_month()
+
+        self.workbook.update_sheets()
         pass
 
     def set_profile_to_index0(self):

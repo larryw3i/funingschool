@@ -104,7 +104,8 @@ class Food:
             )
             + (
                 (
-                    _("Consuming records:")
+                    "\n\t"
+                    + _("Consuming records:")
                     + "\n\t"
                     + "\n\t".join(
                         [
@@ -119,12 +120,44 @@ class Food:
             + ("\n" if newline else "")
         )
 
+    def get_residue_foods(self, month):
+        foods = self.get_non_negligible_foods()
+        time_nodes = [
+            tn for tn in self.bill.get_time_nodes() if tn[0].month == month
+        ]
+        time_nodes_mm1 = [
+            tn for tn in self.bill.get_time_nodes() if tn[0].month == month - 1
+        ]
+        if len(time_nodes_mm1) > 0:
+            time_nodes = [time_nodes_mm1[-1]] + time_nodes
+
+        _foods = []
+        for tn in time_nodes:
+            _foods.append(
+                [
+                    tn, 
+                    [
+                        f for f in foods if (
+                            f.check_date < tn[1]
+                            and f.get_remainder_by_time(tn[1]) > 0
+                        )
+                    ]
+                ]
+            )
+
+        return _foods
+
+    def get_remainder_by_time(self, time):
+        return self.count - sum(
+            [c for d, c in self.consuming_list if d <= time]
+        )
+
     @property
     def workbook(self):
         return self.bill.workbook
 
-    def get_non_negligible_foods_of_time_node(self):
-        foods = self.get_foods_of_time_node()
+    def get_non_negligible_foods(self):
+        foods = self.get_foods()
         foods = [f for f in foods if not f.is_negligible]
         return foods
 
@@ -171,6 +204,12 @@ class Food:
             if self.bill.strs_are_equal(name, _name_like):
                 return _unit
         return "市斤"
+
+    def get_class_names(self):
+        class_names_cfg = self.bill.config.get_food_classes()
+        class_names = list(class_names_cfg.keys())
+        class_names += ["蔬菜类"]
+        return class_names
 
     @property
     def class_name(self, name=None):
@@ -305,7 +344,6 @@ class Food:
             self.bill.get_time_nodes()[-1],
         )
 
-
     def get_foods_of_month(self, month):
         foods = []
         time_nodes = self.bill.get_time_nodes()
@@ -335,7 +373,7 @@ class Food:
             self.get_purchased_foods()
             self.set_consumption_of_foods()
         return self.bill._foods
-        
+
     def set_consumption_of_foods(self):
         self.workbook.read_consumptions_from_pre_consuming_workbooks()
         print_info(_("Consumptions were read."))
