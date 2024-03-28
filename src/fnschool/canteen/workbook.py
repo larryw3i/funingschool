@@ -316,11 +316,6 @@ class WorkBook:
         tnfoods = self.food.get_residue_foods(self.bill.month)
         form_indexes = self.get_inventory_form_indexes()
 
-        for tn, foods in tnfoods:
-            print(tn[1])
-            for food in foods:
-                print("\t", food.name, food.get_remainder_by_time(tn[1]))
-
         for form_index_n in range(0, len(form_indexes)):
             form_index = form_indexes[form_index_n]
             form_index0, form_index1 = form_index
@@ -723,7 +718,9 @@ class WorkBook:
             if self.includes_sheet(name):
                 sheet = self.get_bill_sheet(name)
                 sheet.sheet_properties.tabColor = "0" * 8
-                print_info(_("All food sheets have their tab colors reset."))
+
+        print_info(_("All food sheets have their tab colors reset."))
+
         for name in cfood_names:
             sheet = self.get_food_sheet(name)
             sheet.sheet_properties.tabColor = secrets.token_hex(4)
