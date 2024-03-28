@@ -727,11 +727,12 @@ class WorkBook:
         for name in cfood_names:
             sheet = self.get_food_sheet(name)
             sheet.sheet_properties.tabColor = secrets.token_hex(4)
-            print_info(
-                _("Food sheets [{0}] have their tab colors recolor.").format(
-                    " ".join(cfood_names)
-                )
+
+        print_info(
+            _("Food sheets [{0}] have their tab colors recolor.").format(
+                " ".join(cfood_names)
             )
+        )
         print_info(
             _("Food sheets [{0}] have been updated.").format(
                 " ".join(cfood_names)
