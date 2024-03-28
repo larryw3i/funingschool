@@ -18,7 +18,7 @@ def set_canteen(args):
 
 
 def show_gui():
-    print_info("Just wait.")
+    print_info(_("Just wait."))
     pass
 
 

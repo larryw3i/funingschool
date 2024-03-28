@@ -5,18 +5,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version:  fnschool\n"
+"Project-Id-Version: fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-03-28 15:19+0800\n"
-"PO-Revision-Date: 2024-03-28 13:43+0800\n"
+"PO-Revision-Date: 2024-03-29 01:22+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
-"Language: zh_CN\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.14.0\n"
+"X-Generator: Poedit 3.4\n"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:17
 msgid "Function is not found."
@@ -112,25 +113,15 @@ msgid "Hello! helping information is here for you:"
 msgstr "您好！这里是给您的帮助信息："
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:247
-msgid ""
-"Tips for Changsheng files:\n"
-"You need to add the residue of last year or last semester: Open the first"
-" spreadsheet you got from Changsheng, and add the 'residue' column, then "
-"insert the 'residue' foods after the end of entered data, the 'residue' "
-"column names you could set are:\n"
+msgid "Tips for Changsheng files:\n"
+"You need to add the residue of last year or last semester: Open the first spreadsheet you got from Changsheng, and add the 'residue' column, then insert the 'residue' foods after the end of entered data, the 'residue' column names you could set are:\n"
 "\t{0}"
-msgstr ""
-"关于 昌盛 提供的文件的小提示：\n"
-"你要把 去年 或 上个学期 "
-"的结余添加到昌盛提供的这个学期的第一个工作簿里面：打开工作簿，给工作簿添加“结余”列，然后在已有数据的后行中添加结余的所有食材，你可以输入以下之一作为列名:"
-"\n"
+msgstr "关于 昌盛 提供的文件的小提示：\n"
+"你要把 去年 或 上个学期 的结余添加到昌盛提供的这个学期的第一个工作簿里面：打开工作簿，给工作簿添加“结余”列，然后在已有数据的后行中添加结余的所有食材，你可以输入以下之一作为列名:\n"
 "\t{0}"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:261
-msgid ""
-"If new Xuelan milks is purchased. you have to add the purchasing "
-"information of them into the end of the purchasing spreadsheet (e.g: the "
-"spreadsheets Changsheng provided)."
+msgid "If new Xuelan milks is purchased. you have to add the purchasing information of them into the end of the purchasing spreadsheet (e.g: the spreadsheets Changsheng provided)."
 msgstr "如果有新购入的雪兰奶，你需要将购入信息添加在购入表单里面（比如添加在“昌盛”提供的表单）。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:269
@@ -199,7 +190,7 @@ msgstr "个人信息标签"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:32
 msgid "Operator name"
-msgstr "组织名（或学校名）"
+msgstr "操作员姓名"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/path.py:33
 msgid "Operator email"
@@ -294,9 +285,7 @@ msgid "Workbook '{0}' doesn't exist, workbook '{1}' was copied to '{2}' ."
 msgstr "工作簿 “{0}” 不存在，工作簿 “{1}” 被复制到 “{2}” 。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:990
-msgid ""
-"Workbook '{0}' was updated, please design the daily foods consumption and"
-" press ANY key to continue."
+msgid "Workbook '{0}' was updated, please design the daily foods consumption and press ANY key to continue."
 msgstr "工作簿 “{0}” 已更新，请设计每天的食材消耗然后按任意键继续。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1011
@@ -304,10 +293,7 @@ msgid "Read consumption from '{0}' ."
 msgstr "已读取 工作簿 “{0}” 每天的消耗。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1019
-msgid ""
-"Please enter the 'purchase list file path' of spreadsheet Changsheng "
-"provided, or enter the directory path and then {app_name} will read all "
-"spreadsheets. (default: '{dpath0}')"
+msgid "Please enter the 'purchase list file path' of spreadsheet Changsheng provided, or enter the directory path and then {app_name} will read all spreadsheets. (default: '{dpath0}')"
 msgstr "请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} 会读取所有的工作簿并获取购入数据。（默认的目录：{dpath0}）"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1034
@@ -323,10 +309,7 @@ msgid "Entered directory: %s"
 msgstr "键入的目录： %s"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1061
-msgid ""
-"It seems you didn't set the 'negligible' mark for workbook '{0}' , update"
-" this workbook and press ANY key to continue. (Add the 'negligible' "
-"column name even though there is no negligible foods)"
+msgid "It seems you didn't set the 'negligible' mark for workbook '{0}' , update this workbook and press ANY key to continue. (Add the 'negligible' column name even though there is no negligible foods)"
 msgstr "好像你没有 在 工作簿 “{0}” 添加 “非入库” 列，请添加 “非入库” 列，然后按任意键继续。（如果没有非入库的食材，只需添加列名）"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1070
@@ -334,13 +317,8 @@ msgid "The column names of 'negligible' mark are following:"
 msgstr "“非入库”食材的列名有以下可供选择（随意选择一个都可以被识别）："
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1175
-msgid ""
-"Please enter the 'purchase list file path' of spreadsheet Changsheng "
-"provided, or enter the directory path and then {app_name} will read all "
-"spreadsheets. (default: '{seeking_dpath0}')"
-msgstr ""
-"请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} "
-"会读取所有的工作簿并获取购入数据。（默认的目录：{seeking_dpath0}）"
+msgid "Please enter the 'purchase list file path' of spreadsheet Changsheng provided, or enter the directory path and then {app_name} will read all spreadsheets. (default: '{seeking_dpath0}')"
+msgstr "请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} 会读取所有的工作簿并获取购入数据。（默认的目录：{seeking_dpath0}）"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1310
 #, python-format
@@ -348,9 +326,7 @@ msgid "Got no purchased foods of time node %s ."
 msgstr "时间节点 %s 没有购入的食材。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1323
-msgid ""
-"It seems the residue foods from last time node are going to be consumed. "
-"The new foods of this time node ({0})aren't purchased."
+msgid "It seems the residue foods from last time node are going to be consumed. The new foods of this time node ({0})aren't purchased."
 msgstr "好像时间节点 {0} 没有新购入的食材，消耗将只从剩余的食材中进行。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1381
@@ -362,11 +338,9 @@ msgid "Consuming days:"
 msgstr "耗材日期："
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1730
-msgid ""
-"Sheet '{0}' was updated.\n"
+msgid "Sheet '{0}' was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
-msgstr ""
-"工作表 “{0}” 已更新。\n"
+msgstr "工作表 “{0}” 已更新。\n"
 "在你完成每天消耗设计后按任意建以继续。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1737
@@ -542,4 +516,3 @@ msgstr "目录 “%s” 已创建。"
 
 #~ msgid "The end."
 #~ msgstr ""
-
