@@ -60,7 +60,9 @@ class Config:
             return acfg
 
     def get_profiles(self):
-        return self.get_configs_by_key(self.profiles_name)
+        ucfg, _ = self.get_configs()
+        ucfg = ucfg.get(self.profiles_name, None)
+        return ucfg
 
 
 # The end.
