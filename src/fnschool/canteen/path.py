@@ -11,7 +11,7 @@ bill0_fpath = canteen_data_dpath / "bill.xlsx"
 pre_consuming0_fpath = canteen_data_dpath / "consuming.xlsx"
 
 if not canteen_config_fpath.exists():
-    with open(canteen_config_fpath, "w") as f:
+    with open(canteen_config_fpath, "w", encoding="utf-8") as f:
         f.write(
             (
                 "\n"

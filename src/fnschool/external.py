@@ -20,10 +20,15 @@ def sys_is_darwin():
 
 
 def open_file_via_app0(file_path):
+    file_path = str(file_path)
     bin_name = (
-        "xdg-open" if sys_is_linux() else "open" if sys_is_darwin else "start"
+        "xdg-open"
+        if sys_is_linux()
+        else "open"
+        if sys_is_darwin()
+        else "start"
     )
-    subprocess.run([bin_name, file_path])
+    os.system(bin_name + " " + file_path)
 
 
 # The end.
