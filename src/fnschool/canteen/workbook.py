@@ -5,7 +5,9 @@ import pandas as pd
 import numpy as np
 import uuid
 
+import secrets
 from datetime import datetime
+import calendar
 from openpyxl import load_workbook
 from openpyxl.styles import *
 from openpyxl.formatting.rule import *
@@ -524,7 +526,7 @@ class WorkBook:
 
     def get_food_sheet(self, name):
         sheet = None
-        _, t1 = self.bill.time_node
+        _, t1 = self.bill.get_time_nodes()[-1]
         if self.includes_sheet(name):
             sheet = self.get_bill_sheet(name)
         else:
@@ -658,7 +660,7 @@ class WorkBook:
             entry_index = 0
             sheet = self.get_food_sheet(cfood_name)
             self.unmerge_cells_of_sheet(sheet)
-            index_range = self.get_food_form_day_index_by_time_node_m1(sheet)
+            index_range = self.get_food_form_day_index(sheet)
             index_start, index_end = index_range
             for day_n in range(1, days_num + 1):
                 time_node = datetime(t1.year, t1.month, day_n)
@@ -736,7 +738,7 @@ class WorkBook:
             )
         )
 
-    def get_food_form_day_index_by_time_node_m1(self, sheet):
+    def get_food_form_day_index(self, sheet):
         indexes = []
         for row in sheet.iter_rows(
             min_row=1, max_row=sheet.max_row, min_col=1, max_col=14
@@ -750,8 +752,7 @@ class WorkBook:
 
             if row[2].value and "合计" in str(row[2].value).replace(" ", ""):
                 indexes[-1][1] = row[0].row - 1
-        _, t1 = self.bill.time_node
-        index_range = indexes[t1.month - 1]
+        index_range = indexes[self.bill.month - 1]
         return index_range
 
     def update_cover_sheet_for_cangsheng_xuelan(
