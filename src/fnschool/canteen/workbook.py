@@ -46,6 +46,9 @@ class WorkBook:
         self.negligible_col_names = ["忽略", "不计", "非入库", "可忽略", "非盘点"]
         self.residue_col_names = ["上季结余", "是剩余", "是结余", "上年结余", "剩余", "结余"]
         self.org_col_names = ["客户名称"]
+        self.total_price_col_names = ["金额", "折前金额", "总价"]
+        self.count_col_names = ["数量", "记账数量", "订货数量", "订货总量", "订货总数量"]
+        self.unit_name_col_names = ["单位", "订货单位"]
         self.check_date_col_names = ["送货日期", "送货时间"]
         self.warehousing_form_index_offset = 0
         self.inventory_form_index_offset = 1
@@ -1095,11 +1098,11 @@ class WorkBook:
                 ):
                     if cell_value in ["商品名称"]:
                         food_name_index = _col_index
-                    elif cell_value in ["单位", "订货单位"]:
+                    elif cell_value in self.unit_name_col_names:
                         food_unit_index = _col_index
-                    elif cell_value in ["数量", "记账数量"]:
+                    elif cell_value in self.count_col_names:
                         food_count_index = _col_index
-                    elif cell_value in ["金额", "折前金额"]:
+                    elif cell_value in self.total_price_col_names:
                         food_total_price_index = _col_index
                     elif cell_value in self.check_date_col_names:
                         food_check_date_index = _col_index

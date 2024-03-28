@@ -22,9 +22,8 @@ description = "Just some school related scripts, without any ambition."
 readme = "README.md"
 license = {file = "LICENSE"}
 classifiers = [
-  "Topic :: Education :: Tools",
-  "License :: OSI Approved :: LGPL v3",
-  "Programming Language :: Python :: 3.9",
+  "Topic :: Education",
+  "Programming Language :: Python :: 3.10",
 ]
 [project.urls]
 Homepage = "https://github.com/larryw3i/funingschool"

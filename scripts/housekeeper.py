@@ -66,9 +66,9 @@ def add_message(language_code):
 
 
 def update_version():
-    version_p = r'__version__ = ["|\'][0-9]{4}.8[0-9]{4}["|\']'
+    version_p = r'__version__ = ["|\'][0-9]{4}.8[0-9]{4}.8[0-9]{6}["|\']'
     _date = datetime.now()
-    version = _date.strftime("%Y.8%m%d")
+    version = _date.strftime("%Y.8%m%d.8%H%M%S")
     init_fpath = fnschool_path / "__init__.py"
     with open(init_fpath, "r+") as f:
         content = f.read()
