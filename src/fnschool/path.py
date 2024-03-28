@@ -49,7 +49,7 @@ def open_sys_explorer(dest=None):
         else "nautilus"
     )
     dest = dest if Path(dest).exists() else Path.home()
-    subprocess.Popen([explorer_bin, dest])
+    os.system(explorer_bin + " " + dest)
 
 
 # The end.
