@@ -37,8 +37,14 @@ if not canteen_config_fpath.exists():
                 the_end=_("The end."),
             )
         )
-
     print_warning(_("Please update your configuration file."))
+    print_info(
+        _(
+            "Profile label for data directory making, "
+            + "it shouldn't contain any space character.\n"
+            + "Supplier names are the supplier's alias."
+        )
+    )
     open_file_via_app0(canteen_config_fpath)
     print_info(_("Ok! it was configured. (enter any key)"))
     input()

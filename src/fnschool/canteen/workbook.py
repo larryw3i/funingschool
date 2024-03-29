@@ -18,6 +18,7 @@ from openpyxl.utils.cell import *
 from openpyxl.utils import range_boundaries
 from fnschool import *
 from fnschool.canteen import *
+from fnschool.language import *
 from fnschool.canteen.food import *
 from fnschool.canteen.bill import *
 from fnschool.canteen.path import *
@@ -969,6 +970,14 @@ class WorkBook:
                     and not f.is_negligible
                 )
             ]
+            if len(_foods) < 1:
+                print_warning(
+                    _(
+                        "There is not food of time node %s ,skip workbook designing."
+                    )
+                )
+                continue
+
             if not sheet.cell(1, col_index_offset).value:
                 for i, t in enumerate(
                     [
@@ -1000,6 +1009,8 @@ class WorkBook:
                 input()
                 wb = load_workbook(fpath)
                 sheet = wb[self.pre_consuming_sheet0_name]
+                print_info(_("Workbook %s was read.") % fpath)
+
             for i, _f in enumerate(_foods):
                 row_index = row_index_offset + i
                 for col_index in range(col_index_offset, sheet.max_column + 1):
@@ -1012,6 +1023,25 @@ class WorkBook:
                         _f.consume(_date, _count)
 
             print_info(_("Read consumption from '{0}' .").format(fpath))
+
+    def clean_food_col_name_index(self, workbook_fpath, col_name_index):
+        cn_index = col_name_index
+        if cn_index < 0:
+            error_msg = _(
+                "Unable to find {0} from {1}, "
+                + "You can input it (1 base) directly or "
+                + "give feedback to the maintainers "
+                + "--> {2} ."
+            ).format(name, workbook_fpath, get_new_issue_url())
+            print_error(error_msg)
+            for _ in range(3):
+                cn_index = input()
+                if cn_index.isnumeric():
+                    cn_index = int(cn_index) - 1
+                    return cn_index
+                else:
+                    print("Unexpected value was got.")
+        return cn_index[1]
 
     def read_changsheng_foods(self, dpath=None):
         global Food
@@ -1081,14 +1111,17 @@ class WorkBook:
                     wb = load_workbook(wb_fpath, read_only=True)
                     sheet = wb[sheetnames[0]]
 
-                food_name_index = 0
-                food_count_index = 0
-                food_total_price_index = 0
-                food_unit_index = 0
-                food_check_date_index = 0
-                food_neglect_mark_index = 0
-                food_residue_mark_index = 0
-                food_org_name_index = 0
+                food_name_index = [_("Food name index"), -1]
+                food_count_index = [_("Food count index"), -1]
+                food_total_price_index = [_("Food total price index"), -1]
+                food_unit_index = [_("Food unit index"), -1]
+                food_check_date_index = [_("Food check date index"), -1]
+                food_neglect_mark_index = [
+                    _("Food 'negligible' mark index"),
+                    -1,
+                ]
+                food_residue_mark_index = [_("Food 'residue' mark index"), -1]
+                food_org_name_index = [_("Food purchaser name index"), -1]
 
                 for _col_index, cell_value in enumerate(
                     [
@@ -1097,21 +1130,46 @@ class WorkBook:
                     ]
                 ):
                     if cell_value in ["商品名称"]:
-                        food_name_index = _col_index
+                        food_name_index[1] = _col_index
                     elif cell_value in self.unit_name_col_names:
-                        food_unit_index = _col_index
+                        food_unit_index[1] = _col_index
                     elif cell_value in self.count_col_names:
-                        food_count_index = _col_index
+                        food_count_index[1] = _col_index
                     elif cell_value in self.total_price_col_names:
-                        food_total_price_index = _col_index
+                        food_total_price_index[1] = _col_index
                     elif cell_value in self.check_date_col_names:
-                        food_check_date_index = _col_index
+                        food_check_date_index[1] = _col_index
                     elif cell_value in self.negligible_col_names:
-                        food_neglect_mark_index = _col_index
+                        food_neglect_mark_index[1] = _col_index
                     elif cell_value in self.residue_col_names:
-                        food_residue_mark_index = _col_index
+                        food_residue_mark_index[1] = _col_index
                     elif cell_value in self.org_col_names:
-                        food_org_name_index = _col_index
+                        food_org_name_index[1] = _col_index
+
+                food_name_index = sel.clean_food_col_name_index(
+                    food_name_index
+                )
+                food_count_index = self.clean_food_col_name_index(
+                    food_count_index
+                )
+                food_total_price_index = self.clean_food_col_name_index(
+                    food_total_price_index
+                )
+                food_unit_index = self.clean_food_col_name_index(
+                    food_unit_index
+                )
+                food_check_date_index = self.clean_food_col_name_index(
+                    food_check_date_index
+                )
+                food_neglect_mark_index = self.clean_food_col_name_index(
+                    food_neglect_mark_index
+                )
+                food_residue_mark_index = self.clean_food_col_name_index(
+                    food_residue_mark_index
+                )
+                food_org_name_index = self.clean_food_col_name_index(
+                    food_org_name_index
+                )
 
                 row_index = 1
                 col_index = 1
