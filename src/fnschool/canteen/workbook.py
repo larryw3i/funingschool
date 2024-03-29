@@ -43,6 +43,7 @@ class WorkBook:
         self.cover_sheet_name = "六大类总封面"
         self.pre_consuming_sheet0_name = "出库计划表"
         self._recounts = None
+        self.food_name_col_names = ["商品名称", "食材名称", "商品名", "食材名"]
         self.purchase_sheet_names = ["客户商品销售报表", "客户送货明细报表"]
         self.negligible_col_names = ["忽略", "不计", "非入库", "可忽略", "非盘点"]
         self.residue_col_names = ["上季结余", "是剩余", "是结余", "上年结余", "剩余", "结余"]
@@ -952,6 +953,57 @@ class WorkBook:
 
         return fpaths
 
+    def get_changsheng_col_indexes(self, sheet):
+        workbook_fpath, sheet = sheet
+        food_name_index = [_("Food name index"), -1]
+        food_count_index = [_("Food count index"), -1]
+        food_total_price_index = [_("Food total price index"), -1]
+        food_unit_index = [_("Food unit index"), -1]
+        food_check_date_index = [_("Food check date index"), -1]
+        food_neglect_mark_index = [
+            _("Food 'negligible' mark index"),
+            -1,
+        ]
+        food_residue_mark_index = [_("Food 'residue' mark index"), -1]
+        food_org_name_index = [_("Food purchaser name index"), -1]
+
+        header_names = [
+            str(sheet.cell(1, ci).value)
+            for ci in range(1, sheet.max_column + 1)
+        ]
+
+        for _col_index, cell_value in enumerate(header_names):
+            if cell_value in ["商品名称"]:
+                food_name_index[1] = _col_index
+            elif cell_value in self.unit_name_col_names:
+                food_unit_index[1] = _col_index
+            elif cell_value in self.count_col_names:
+                food_count_index[1] = _col_index
+            elif cell_value in self.total_price_col_names:
+                food_total_price_index[1] = _col_index
+            elif cell_value in self.check_date_col_names:
+                food_check_date_index[1] = _col_index
+            elif cell_value in self.negligible_col_names:
+                food_neglect_mark_index[1] = _col_index
+            elif cell_value in self.residue_col_names:
+                food_residue_mark_index[1] = _col_index
+            elif cell_value in self.org_col_names:
+                food_org_name_index[1] = _col_index
+
+        indexes = self.clean_supplier_col_indexes(
+            workbook_fpath,
+            [
+                food_name_index,
+                food_count_index,
+                food_total_price_index,
+                food_unit_index,
+                food_check_date_index,
+                food_neglect_mark_index,
+                food_org_name_index,
+            ],
+        ) + [food_residue_mark_index[1]]
+        return indexes
+
     def read_consumptions_from_pre_consuming_workbooks(self):
         foods = self.bill._foods
         col_index_offset = self.pre_consuming_sheet_col_index_offset
@@ -1024,24 +1076,31 @@ class WorkBook:
 
             print_info(_("Read consumption from '{0}' .").format(fpath))
 
-    def clean_food_col_name_index(self, workbook_fpath, col_name_index):
-        cn_index = col_name_index
-        if cn_index < 0:
-            error_msg = _(
-                "Unable to find {0} from {1}, "
-                + "You can input it (1 base) directly or "
-                + "give feedback to the maintainers "
-                + "--> {2} ."
-            ).format(name, workbook_fpath, get_new_issue_url())
-            print_error(error_msg)
-            for _ in range(3):
-                cn_index = input()
-                if cn_index.isnumeric():
-                    cn_index = int(cn_index) - 1
-                    return cn_index
-                else:
-                    print("Unexpected value was got.")
-        return cn_index[1]
+    def clean_supplier_col_indexes(self, workbook_fpath, indexes):
+        global _
+        for i, [name, cn_index] in enumerate(indexes):
+            if cn_index < 0:
+                error_msg = _(
+                    "Unable to find {0} from {1}, "
+                    + "You can input it (1 base) directly or "
+                    + "give feedback to the maintainers "
+                    + "--> {2} ."
+                ).format(name, workbook_fpath, get_new_issue_url())
+                print_error(error_msg)
+                for __ in range(3):
+                    cn_index = input()
+                    if cn_index.isnumeric():
+                        cn_index = int(cn_index) - 1
+                        indexes[i] = [name, cn_index]
+                        break
+                    else:
+                        print("Unexpected value was got.")
+        indexes = [i for __, i in indexes]
+        return indexes
+
+    def clean_quotation_marks(self, value):
+        value = value.replace("‘", "").replace("’", "").replace("'", "")
+        return value
 
     def read_changsheng_foods(self, dpath=None):
         global Food
@@ -1111,65 +1170,16 @@ class WorkBook:
                     wb = load_workbook(wb_fpath, read_only=True)
                     sheet = wb[sheetnames[0]]
 
-                food_name_index = [_("Food name index"), -1]
-                food_count_index = [_("Food count index"), -1]
-                food_total_price_index = [_("Food total price index"), -1]
-                food_unit_index = [_("Food unit index"), -1]
-                food_check_date_index = [_("Food check date index"), -1]
-                food_neglect_mark_index = [
-                    _("Food 'negligible' mark index"),
-                    -1,
-                ]
-                food_residue_mark_index = [_("Food 'residue' mark index"), -1]
-                food_org_name_index = [_("Food purchaser name index"), -1]
-
-                for _col_index, cell_value in enumerate(
-                    [
-                        str(sheet.cell(1, ci).value)
-                        for ci in range(1, sheet.max_column + 1)
-                    ]
-                ):
-                    if cell_value in ["商品名称"]:
-                        food_name_index[1] = _col_index
-                    elif cell_value in self.unit_name_col_names:
-                        food_unit_index[1] = _col_index
-                    elif cell_value in self.count_col_names:
-                        food_count_index[1] = _col_index
-                    elif cell_value in self.total_price_col_names:
-                        food_total_price_index[1] = _col_index
-                    elif cell_value in self.check_date_col_names:
-                        food_check_date_index[1] = _col_index
-                    elif cell_value in self.negligible_col_names:
-                        food_neglect_mark_index[1] = _col_index
-                    elif cell_value in self.residue_col_names:
-                        food_residue_mark_index[1] = _col_index
-                    elif cell_value in self.org_col_names:
-                        food_org_name_index[1] = _col_index
-
-                food_name_index = sel.clean_food_col_name_index(
-                    food_name_index
-                )
-                food_count_index = self.clean_food_col_name_index(
-                    food_count_index
-                )
-                food_total_price_index = self.clean_food_col_name_index(
-                    food_total_price_index
-                )
-                food_unit_index = self.clean_food_col_name_index(
-                    food_unit_index
-                )
-                food_check_date_index = self.clean_food_col_name_index(
-                    food_check_date_index
-                )
-                food_neglect_mark_index = self.clean_food_col_name_index(
-                    food_neglect_mark_index
-                )
-                food_residue_mark_index = self.clean_food_col_name_index(
-                    food_residue_mark_index
-                )
-                food_org_name_index = self.clean_food_col_name_index(
-                    food_org_name_index
-                )
+                (
+                    food_name_index,
+                    food_count_index,
+                    food_total_price_index,
+                    food_unit_index,
+                    food_check_date_index,
+                    food_neglect_mark_index,
+                    food_org_name_index,
+                    food_residue_mark_index,
+                ) = self.get_changsheng_col_indexes([wb_fpath, sheet])
 
                 row_index = 1
                 col_index = 1
@@ -1180,11 +1190,8 @@ class WorkBook:
                     max_col=sheet.max_column,
                 ):
                     if row[food_name_index].value:
-                        check_date = (
-                            row[food_check_date_index]
-                            .value.replace("‘")
-                            .replace("’")
-                            .replace("'")
+                        check_date = self.clean_quotation_marks(
+                            row[food_check_date_index].value
                         )
 
                         check_date = (
@@ -1198,19 +1205,15 @@ class WorkBook:
                             continue
 
                         name = row[food_name_index].value
-                        count = (
-                            row[food_count_index]
-                            .value.replace("‘")
-                            .replace("’")
-                            .replace("'")
-                        )
+                        count = row[food_count_index].value
+                        if isinstance(count, str):
+                            count = float(self.clean_quotation_marks(count))
                         unit = row[food_unit_index].value
-                        total_price = (
-                            row[food_total_price_index]
-                            .value.replace("‘")
-                            .replace("’")
-                            .replace("'")
-                        )
+                        total_price = row[food_total_price_index].value
+                        if isinstance(total_price, str):
+                            total_price = float(
+                                self.clean_quotation_marks(total_price)
+                            )
 
                         is_negligible = (
                             not row[food_neglect_mark_index].value is None

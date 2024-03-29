@@ -8,7 +8,7 @@ from fnschool.path import *
 from fnschool.entry import *
 from fnschool.external import *
 
-__version__ = "20240329.80127.823"
+__version__ = "20240329.81506.844"
 
 
 # The end.
