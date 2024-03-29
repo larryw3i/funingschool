@@ -1180,7 +1180,13 @@ class WorkBook:
                     max_col=sheet.max_column,
                 ):
                     if row[food_name_index].value:
-                        check_date = row[food_check_date_index].value
+                        check_date = (
+                            row[food_check_date_index]
+                            .value.replace("‘")
+                            .replace("’")
+                            .replace("'")
+                        )
+
                         check_date = (
                             datetime.strptime(check_date, "%Y-%m-%d")
                             if "-" in check_date
@@ -1192,9 +1198,20 @@ class WorkBook:
                             continue
 
                         name = row[food_name_index].value
-                        count = row[food_count_index].value
+                        count = (
+                            row[food_count_index]
+                            .value.replace("‘")
+                            .replace("’")
+                            .replace("'")
+                        )
                         unit = row[food_unit_index].value
-                        total_price = row[food_total_price_index].value
+                        total_price = (
+                            row[food_total_price_index]
+                            .value.replace("‘")
+                            .replace("’")
+                            .replace("'")
+                        )
+
                         is_negligible = (
                             not row[food_neglect_mark_index].value is None
                             if food_neglect_mark_index > 0
