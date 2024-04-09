@@ -1140,14 +1140,68 @@ class WorkBook:
                     continue
                 sheet = wb[sheetnames[0]]
 
+                header_row_index = 1
+                header_names = [
+                    str(sheet.cell(header_row_index, ci).value)
+                    for ci in range(1, sheet.max_column + 1)
+                ]
+
+                _org_name_col_index = -1
+
+                for hn in header_names:
+                    if hn in self.org_col_names:
+                        _org_name_col_index = header_names.index(hn)
+
+                if _org_name_col_index < 0:
+                    print_warning(
+                        _(
+                            "{app_name} desn't pick the index of organization name"
+                            + " column, input it (0 base) or '{wb_fpath}' will be ignored."
+                        ).format(app_name=app_name, wb_fpath=wb_fpath)
+                    )
+                    _org_name_col_index = input()
+                    if not _org_name_col_index.isnumeric():
+                        continue
+                    _org_name_col_index = int(_org_name_col_index)
+
+                _org_names = list(
+                    set(
+                        [
+                            str(sheet.cell(ri, _org_name_col_index + 1).value)
+                            for ri in range(
+                                header_row_index + 1, sheet.max_row + 1
+                            )
+                            if sheet.cell(ri, _org_name_col_index + 1).value
+                        ]
+                    )
+                )
+
                 if not any(
-                    [
-                        (
-                            str(sheet.cell(1, ci).value)
-                            in self.negligible_col_names
+                    [o == self.bill.profile.org_name for o in _org_names]
+                ):
+                    print_warning(
+                        _("Organization name read from {wb_fpath}:").format(
+                            wb_fpath=wb_fpath
                         )
-                        for ci in range(1, sheet.max_column + 1)
-                    ]
+                        + " "
+                        + " | ".join(_org_names)
+                    )
+                    print_warning(
+                        _("Organization name of {profile_name}:").format(
+                            profile_name=self.profile.name
+                        )
+                        + " "
+                        + self.profile.org_name
+                    )
+                    print_error(
+                        _("'{wb_fpath}' was discarded.").format(
+                            wb_fpath=wb_fpath
+                        )
+                    )
+                    continue
+
+                if not any(
+                    [(h in self.negligible_col_names) for h in header_names]
                 ):
                     print_info(
                         _(
