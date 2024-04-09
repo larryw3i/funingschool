@@ -3,13 +3,8 @@ import sys
 import gettext
 import locale
 from pathlib import Path
+from fnschool.app import *
 
-app_name = Path(__file__).parent.as_posix()
-app_name = (
-    app_name.split(os.sep)[-1]
-    if os.sep in app_name
-    else app_name.split("/")[-1]
-)
 locale_dir = (Path(__file__).parent / "locales").as_posix()
 
 

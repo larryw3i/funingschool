@@ -8,15 +8,9 @@ import subprocess
 
 from appdirs import AppDirs
 from fnschool.log import *
+from fnschool.app import *
 
-app_name = Path(__file__).parent.as_posix()
-app_name = (
-    app_name.split(os.sep)[-1]
-    if os.sep in app_name
-    else app_name.split("/")[-1]
-)
 
-app_author = "larryw3i"
 user_name = getpass.getuser()
 
 dirs = AppDirs(app_name, app_author)
