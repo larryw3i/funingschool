@@ -1159,6 +1159,7 @@ class WorkBook:
                             + " column, input it (0 base) or '{wb_fpath}' will be ignored."
                         ).format(app_name=app_name, wb_fpath=wb_fpath)
                     )
+                    open_file_via_app0(wb_fpath)
                     _org_name_col_index = input()
                     if not _org_name_col_index.isnumeric():
                         continue
