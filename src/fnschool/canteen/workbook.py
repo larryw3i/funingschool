@@ -1132,11 +1132,15 @@ class WorkBook:
         for file in os.listdir(dpath):
             if file.split(".")[-1] in self.spreadsheet_ext_names:
                 wb_fpath = (Path(dpath) / file).as_posix()
+                if wb_fpath in self.excluded_purchase_sheets:
+                    continue
                 wb = load_workbook(wb_fpath, read_only=True)
                 sheetnames = [
                     n for n in wb.sheetnames if n in self.purchase_sheet_names
                 ]
                 if len(sheetnames) < 1:
+                    if not wb_fpath in self.excluded_purchase_sheets:
+                        self.excluded_purchase_sheets.append(wb_fpath)
                     continue
                 sheet = wb[sheetnames[0]]
 
@@ -1199,6 +1203,8 @@ class WorkBook:
                             wb_fpath=wb_fpath
                         )
                     )
+                    if not wb_fpath in self.excluded_purchase_sheets:
+                        self.excluded_purchase_sheets.append(wb_fpath)
                     continue
 
                 if not any(
@@ -1257,6 +1263,8 @@ class WorkBook:
                         org_name = row[food_org_name_index].value
 
                         if org_name != self.bill.profile.org_name:
+                            if not wb_fpath in self.excluded_purchase_sheets:
+                                self.excluded_purchase_sheets.append(wb_fpath)
                             continue
 
                         name = row[food_name_index].value
