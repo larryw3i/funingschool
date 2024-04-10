@@ -47,13 +47,19 @@ class Bill:
         result = (
             str_value.endswith(like[1:])
             if (like.startswith("*") and not like.endswith("*"))
-            else str_value.startswith(like[:-1])
-            if (like.endswith("*") and not like.startswith("*"))
-            else str_value == like
-            if like.startswith("=")
-            else like[1:-1] in str_value
-            if (like.startswith("*") and like.endswith("*"))
-            else str_value == like
+            else (
+                str_value.startswith(like[:-1])
+                if (like.endswith("*") and not like.startswith("*"))
+                else (
+                    str_value == like
+                    if like.startswith("=")
+                    else (
+                        like[1:-1] in str_value
+                        if (like.startswith("*") and like.endswith("*"))
+                        else str_value == like
+                    )
+                )
+            )
         )
         if not_like_list:
             result = result and not any(
@@ -374,7 +380,18 @@ class Bill:
             "兆",
         ]
 
-        format_num = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"]
+        format_num = [
+            "零",
+            "壹",
+            "贰",
+            "叁",
+            "肆",
+            "伍",
+            "陆",
+            "柒",
+            "捌",
+            "玖",
+        ]
         if type(number) == str:
             if "." in number:
                 try:

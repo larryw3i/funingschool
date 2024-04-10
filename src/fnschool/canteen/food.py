@@ -210,7 +210,7 @@ class Food:
     def get_class_names(self):
         class_names_cfg = self.bill.config.get_food_classes()
         class_names = list(class_names_cfg.keys())
-        class_names += ["蔬菜类"]
+        class_names = ["蔬菜类"] + class_names
         return class_names
 
     @property

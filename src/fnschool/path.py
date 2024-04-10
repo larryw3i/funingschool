@@ -44,9 +44,7 @@ def open_sys_explorer(dest=None):
     explorer_bin = (
         "explorer"
         if "Windows" in sys_platform
-        else "open"
-        if "macOS" in sys_platform
-        else "nautilus"
+        else "open" if "macOS" in sys_platform else "nautilus"
     )
     dest = dest if Path(dest).exists() else Path.home()
     os.system(explorer_bin + " " + dest)

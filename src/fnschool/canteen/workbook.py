@@ -45,11 +45,30 @@ class WorkBook:
         self._recounts = None
         self.food_name_col_names = ["商品名称", "食材名称", "商品名", "食材名"]
         self.purchase_sheet_names = ["客户商品销售报表", "客户送货明细报表"]
-        self.negligible_col_names = ["忽略", "不计", "非入库", "可忽略", "非盘点"]
-        self.residue_col_names = ["上季结余", "是剩余", "是结余", "上年结余", "剩余", "结余"]
+        self.negligible_col_names = [
+            "忽略",
+            "不计",
+            "非入库",
+            "可忽略",
+            "非盘点",
+        ]
+        self.residue_col_names = [
+            "上季结余",
+            "是剩余",
+            "是结余",
+            "上年结余",
+            "剩余",
+            "结余",
+        ]
         self.org_col_names = ["客户名称"]
-        self.total_price_col_names = ["金额", "折前金额", "总价", "折后金额"]
-        self.count_col_names = ["数量", "记账数量", "订货数量", "订货总量", "订货总数量"]
+        self.total_price_col_names = ["金额", "折后金额", "总价", "折前金额"]
+        self.count_col_names = [
+            "数量",
+            "记账数量",
+            "订货数量",
+            "订货总量",
+            "订货总数量",
+        ]
         self.unit_name_col_names = ["单位", "订货单位"]
         self.check_date_col_names = ["送货日期", "送货时间"]
         self.warehousing_form_index_offset = 0
@@ -439,7 +458,8 @@ class WorkBook:
         cvsheet.cell(
             1,
             1,
-            self.bill.profile.org_name + f"{t1.year}年{t1.month}月份食堂食品采购统计表",
+            self.bill.profile.org_name
+            + f"{t1.year}年{t1.month}月份食堂食品采购统计表",
         )
         foods = [
             f
@@ -463,10 +483,18 @@ class WorkBook:
         cvsheet.cell(10, 2, total_price)
 
         w_seasoning_total_price = sum(
-            [f.count * f.unit_price for f in wfoods if ("调味" in f.class_name)]
+            [
+                f.count * f.unit_price
+                for f in wfoods
+                if ("调味" in f.class_name)
+            ]
         )
         unw_seasoning_total_price = sum(
-            [f.count * f.unit_price for f in uwfoods if ("调味" in f.class_name)]
+            [
+                f.count * f.unit_price
+                for f in uwfoods
+                if ("调味" in f.class_name)
+            ]
         )
 
         cvsheet.cell(
@@ -496,7 +524,9 @@ class WorkBook:
         for row in sheet.iter_rows(
             min_row=1, max_row=sheet.max_row, min_col=1, max_col=14
         ):
-            if row[0].value and "材料名称" in str(row[0].value).replace(" ", ""):
+            if row[0].value and "材料名称" in str(row[0].value).replace(
+                " ", ""
+            ):
                 indexes.append([row[0].row + 3, None])
 
             if row[2].value and "合计" in str(row[2].value).replace(" ", ""):
@@ -539,7 +569,9 @@ class WorkBook:
                 if row[0].value and "材料名称" in str(row[0].value).replace(
                     " ", ""
                 ):
-                    row[0].value = f"材料名称：{name}" + f"（{self.food.unit_name}）"
+                    row[0].value = (
+                        f"材料名称：{name}" + f"（{self.food.unit_name}）"
+                    )
                     sheet.cell(row[0].row + 1, 1, f"{t1.year}年")
         return sheet
 
@@ -1026,7 +1058,8 @@ class WorkBook:
                 print_warning(
                     _(
                         "There is not food of time node %s ,skip workbook designing."
-                    ) % (t0.strftime("%Y.%m.%d")+t1.strftime("%Y.%m.%d"))
+                    )
+                    % (t0.strftime("%Y.%m.%d") + t1.strftime("%Y.%m.%d"))
                 )
                 continue
 
@@ -1168,7 +1201,7 @@ class WorkBook:
                     if not _org_name_col_index.isnumeric():
                         continue
                     _org_name_col_index = int(_org_name_col_index)
-                
+
                 print(wb_fpath)
                 _org_names = list(
                     set(
@@ -1596,13 +1629,17 @@ class WorkBook:
             pssheet.cell(row[0].row, 2, _total_price)
             total_price += _total_price
         total_price_cn = self.bill.convert_num_to_cnmoney_chars(total_price)
-        pssheet.cell(11, 1, f"总金额（大写)：{total_price_cn}    ¥{total_price:.2f}")
+        pssheet.cell(
+            11, 1, f"总金额（大写)：{total_price_cn}    ¥{total_price:.2f}"
+        )
         pssheet.cell(12, 1, f"经办人：{self.bill.profile.name}  ")
 
         total_price = sum([f.count * f.unit_price for f in uwfoods])
         total_price_cn = self.bill.convert_num_to_cnmoney_chars(total_price)
         pssheet.cell(27, 2, total_price)
-        pssheet.cell(29, 1, f"总金额（大写)：{total_price_cn}    ¥{total_price:.2f}")
+        pssheet.cell(
+            29, 1, f"总金额（大写)：{total_price_cn}    ¥{total_price:.2f}"
+        )
 
         pssheet.cell(30, 1, f"经办人：{self.bill.profile.name}  ")
 
@@ -1644,9 +1681,9 @@ class WorkBook:
                     )
             total_price += _total_price
             cssheet.cell(row[0].row, 2, _total_price)
-            cssheet.cell(
-                row[0].row, 2
-            ).number_format = numbers.FORMAT_NUMBER_00
+            cssheet.cell(row[0].row, 2).number_format = (
+                numbers.FORMAT_NUMBER_00
+            )
 
         total_price_cn = self.bill.convert_num_to_cnmoney_chars(total_price)
         cssheet.cell(
@@ -1657,7 +1694,9 @@ class WorkBook:
             + f"{t1.year}年{t1.month}月{t1.day}日",
         )
         cssheet.cell(
-            11, 1, (f"总金额（大写)：{total_price_cn}    " + f"¥{total_price:.2f}")
+            11,
+            1,
+            (f"总金额（大写)：{total_price_cn}    " + f"¥{total_price:.2f}"),
         )
         cssheet.cell(12, 1, f"经办人：{self.bill.profile.name}  ")
 
@@ -1717,11 +1756,27 @@ class WorkBook:
                 form_index0,
                 4,
                 f"{day.year}年 {day.month} 月 {day.day} 日  " + f"单位：元",
-            )
+
             csheet.cell(
                 form_index0,
                 7,
                 f"编号：C{day.month:0>2}{consuming_n:0>2}",
+            )
+            csheet.cell(
+                form_index1+2,
+                1,
+                (
+                    "   "
+                    + "审核人："
+                    + "        "
+                    + "经办人："
+                    + "　    " 
+                    + "过称人："
+                    + self.bill.profile.name
+                    + "      "
+                    + "仓管人："
+                    + " 　"
+                )
             )
 
             row_difference = (
@@ -1774,9 +1829,9 @@ class WorkBook:
 
                 csheet.cell(fentry_index_start, 1, class_name)
                 csheet.cell(fentry_index_start, 7, class_consuming_count)
-                csheet.cell(
-                    fentry_index_start, 7
-                ).number_format = numbers.FORMAT_NUMBER_00
+                csheet.cell(fentry_index_start, 7).number_format = (
+                    numbers.FORMAT_NUMBER_00
+                )
 
                 for findex, food in enumerate(class_foods):
                     consuming_count = [
@@ -1792,15 +1847,15 @@ class WorkBook:
                     csheet.cell(
                         frow_index, 6, consuming_count * food.unit_price
                     )
-                    csheet.cell(
-                        frow_index, 4
-                    ).number_format = numbers.FORMAT_NUMBER
-                    csheet.cell(
-                        frow_index, 5
-                    ).number_format = numbers.FORMAT_NUMBER_00
-                    csheet.cell(
-                        frow_index, 6
-                    ).number_format = numbers.FORMAT_NUMBER_00
+                    csheet.cell(frow_index, 4).number_format = (
+                        numbers.FORMAT_NUMBER
+                    )
+                    csheet.cell(frow_index, 5).number_format = (
+                        numbers.FORMAT_NUMBER_00
+                    )
+                    csheet.cell(frow_index, 6).number_format = (
+                        numbers.FORMAT_NUMBER_00
+                    )
 
                 fentry_index = fentry_index_end + 1
 
@@ -1933,7 +1988,9 @@ class WorkBook:
         indexes = []
         row_index = 1
         for row in unwsheet.iter_rows(max_row=unwsheet.max_row + 1, max_col=7):
-            if row[0].value and "未入库明细表" in row[0].value.replace(" ", ""):
+            if row[0].value and "未入库明细表" in row[0].value.replace(
+                " ", ""
+            ):
                 indexes.append([row_index + 1, 0])
 
             if row[1].value and "合计" in row[1].value.replace(" ", ""):
@@ -2170,12 +2227,12 @@ class WorkBook:
             unwsheet.cell(row_index, 4, food.count)
             unwsheet.cell(row_index, 5, food.unit_price)
             unwsheet.cell(row_index, 6, food.total_price)
-            unwsheet.cell(
-                row_index, 5
-            ).number_format = numbers.FORMAT_NUMBER_00
-            unwsheet.cell(
-                row_index, 6
-            ).number_format = numbers.FORMAT_NUMBER_00
+            unwsheet.cell(row_index, 5).number_format = (
+                numbers.FORMAT_NUMBER_00
+            )
+            unwsheet.cell(row_index, 6).number_format = (
+                numbers.FORMAT_NUMBER_00
+            )
             if (
                 str(unwsheet.cell(row_index + 1, 2).value)
                 .replace(" ", "")
@@ -2309,6 +2366,23 @@ class WorkBook:
                 7,
                 f"编号：R{time_point.month:0>2}{warehousing_n:0>2}",
             )
+            
+            wsheet.cell(
+                form_index1+1,
+                1,
+                (
+                    "   "
+                    + "审核人：" 
+                    + "        "
+                    + "经办人："
+                    + self.bill.profile.name
+                    + " 　    "
+                    + "过称人：" 
+                    + "        "
+                    + "仓管人：
+                    + " 　"
+                )
+            )
 
             for class_name in class_names:
                 cfoods = [f for f in wfoods if f.class_name == class_name]
@@ -2328,12 +2402,12 @@ class WorkBook:
                     wsheet.cell(cfood_row_index, 4, cfood.count)
                     wsheet.cell(cfood_row_index, 5, cfood.unit_price)
                     wsheet.cell(cfood_row_index, 6, cfood.total_price)
-                    wsheet.cell(
-                        cfood_row_index, 5
-                    ).number_format = numbers.FORMAT_NUMBER_00
-                    wsheet.cell(
-                        cfood_row_index, 6
-                    ).number_format = numbers.FORMAT_NUMBER_00
+                    wsheet.cell(cfood_row_index, 5).number_format = (
+                        numbers.FORMAT_NUMBER_00
+                    )
+                    wsheet.cell(cfood_row_index, 6).number_format = (
+                        numbers.FORMAT_NUMBER_00
+                    )
 
                 entry_index_end = entry_index + len(cfoods) - 1
 

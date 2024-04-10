@@ -32,9 +32,7 @@ def open_file_via_app0(file_path):
     bin_name = (
         "xdg-open"
         if sys_is_linux()
-        else "open"
-        if sys_is_darwin()
-        else "start"
+        else "open" if sys_is_darwin() else "start"
     )
     os.system(bin_name + " " + file_path)
 
