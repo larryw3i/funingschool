@@ -48,7 +48,7 @@ class WorkBook:
         self.negligible_col_names = ["忽略", "不计", "非入库", "可忽略", "非盘点"]
         self.residue_col_names = ["上季结余", "是剩余", "是结余", "上年结余", "剩余", "结余"]
         self.org_col_names = ["客户名称"]
-        self.total_price_col_names = ["金额", "折前金额", "总价"]
+        self.total_price_col_names = ["金额", "折前金额", "总价", "折后金额"]
         self.count_col_names = ["数量", "记账数量", "订货数量", "订货总量", "订货总数量"]
         self.unit_name_col_names = ["单位", "订货单位"]
         self.check_date_col_names = ["送货日期", "送货时间"]
@@ -1026,7 +1026,7 @@ class WorkBook:
                 print_warning(
                     _(
                         "There is not food of time node %s ,skip workbook designing."
-                    )
+                    ) % (t0.strftime("%Y.%m.%d")+t1.strftime("%Y.%m.%d"))
                 )
                 continue
 
@@ -1168,7 +1168,8 @@ class WorkBook:
                     if not _org_name_col_index.isnumeric():
                         continue
                     _org_name_col_index = int(_org_name_col_index)
-
+                
+                print(wb_fpath)
                 _org_names = list(
                     set(
                         [

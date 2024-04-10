@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-04-10 04:16+0800\n"
+"POT-Creation-Date: 2024-04-10 22:27+0800\n"
 "PO-Revision-Date: 2024-04-10 04:15+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
@@ -258,13 +258,13 @@ msgstr "请给工作簿 “{0}” 设计每天的消耗。"
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:426
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:487
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:720
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1538
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1542
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1603
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1659
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1826
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2196
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2365
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1547
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1551
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1612
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1668
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1835
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2205
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2374
 #, python-format
 msgid "Sheet '%s' was updated."
 msgstr "工作表 “%s” 已被更新。"
@@ -372,47 +372,47 @@ msgid ""
 msgstr "请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} 会读取所有的工作簿并获取购入数据。（默认的目录：{dpath0}）"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1126
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1327
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1336
 #, python-format
 msgid "File or directory '%s' doesn't exist."
 msgstr "文件 或 目录 “%s” 不存在。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1130
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1334
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1343
 #, python-format
 msgid "Entered directory: %s"
 msgstr "键入的目录： %s"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1157
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1161
 msgid ""
 "{app_name} desn't pick the index of organization name column, input it (0"
 " base) or '{wb_fpath}' will be ignored."
 msgstr "{app_name} 找不到机构名（学校名）列的索引，您可以直接输入索引，否则 “{wb_fpath}” 会被忽略。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1184
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1189
 msgid "Organization name read from {wb_fpath}:"
 msgstr "从 “{wb_fpath}” 中得到的 机构名（学校名）："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1191
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1196
 msgid "Organization name of {profile_name}:"
 msgstr "{profile_name} 的组织名（学校名）："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1198
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1203
 msgid "'{wb_fpath}' was discarded."
 msgstr "“{wb_fpath}” 已被舍去。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1208
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1215
 msgid ""
 "It seems you didn't set the 'negligible' mark for workbook '{0}' , update"
 " this workbook and press ANY key to continue. (Add the 'negligible' "
 "column name even though there is no negligible foods)"
 msgstr "好像你没有 在 工作簿 “{0}” 添加 “非入库” 列，请添加 “非入库” 列，然后按任意键继续。（如果没有非入库的食材，只需添加列名）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1217
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1224
 msgid "The column names of 'negligible' mark are following:"
 msgstr "“非入库”食材的列名有以下可供选择（随意选择一个都可以被识别）："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1311
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1320
 msgid ""
 "Please enter the 'purchase list file path' of spreadsheet Changsheng "
 "provided, or enter the directory path and then {app_name} will read all "
@@ -421,26 +421,26 @@ msgstr ""
 "请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} "
 "会读取所有的工作簿并获取购入数据。（默认的目录：{seeking_dpath0}）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1446
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1455
 #, python-format
 msgid "Got no purchased foods of time node %s ."
 msgstr "时间节点 %s 没有购入的食材。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1459
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1468
 msgid ""
 "It seems the residue foods from last time node are going to be consumed. "
 "The new foods of this time node ({0})aren't purchased."
 msgstr "好像时间节点 {0} 没有新购入的食材，消耗将只从剩余的食材中进行。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1517
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1526
 msgid "There is no residue foods."
 msgstr "没有结余的食材。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1675
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1684
 msgid "Consuming days:"
 msgstr "耗材日期："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1866
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1875
 msgid ""
 "Sheet '{0}' was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
@@ -448,37 +448,37 @@ msgstr ""
 "工作表 “{0}” 已更新。\n"
 "在你完成每天消耗设计后按任意建以继续。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1873
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:1882
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr "好的，我已经更新工作簿 “{0}” 了。（按任意键继续）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2041
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2111
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2050
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2120
 #, python-format
 msgid "Sheet '%s' was formatted."
 msgstr "“%s” 表已被格式化。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2430
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2439
 #, python-format
 msgid "Directory '%s' has been made."
 msgstr "目录 “%s” 已创建。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2435
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2444
 msgid "Workbook '{0}' was copied to '{1}'."
 msgstr "工作簿 “{0}” 被复制到 “{1}” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2439
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2448
 #, python-format
 msgid "Workbook '%s' has been used."
 msgstr "使用工作薄 “%s” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2465
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2498
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2474
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2507
 #, python-format
 msgid "Workbook '%s' was saved."
 msgstr "工作簿 “%s” 已保存。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2469
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2478
 #, python-format
 msgid "Directory %s was created."
 msgstr "目录 “%s” 已创建。"
