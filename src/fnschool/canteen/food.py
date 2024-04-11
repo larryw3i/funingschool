@@ -373,6 +373,11 @@ class Food:
     def get_foods(self):
         if not self.bill._foods:
             self.get_purchased_foods()
+            print_info(
+                _("The directory of consuming files is: {0}").format(
+                    self.workbook.get_profile_copy_data_dpath()
+                )
+            )
             self.set_consumption_of_foods()
         return self.bill._foods
 

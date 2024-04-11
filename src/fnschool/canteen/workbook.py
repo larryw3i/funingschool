@@ -1202,7 +1202,6 @@ class WorkBook:
                         continue
                     _org_name_col_index = int(_org_name_col_index)
 
-                print(wb_fpath)
                 _org_names = list(
                     set(
                         [

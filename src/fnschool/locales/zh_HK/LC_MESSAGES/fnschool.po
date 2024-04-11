@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-04-11 14:20+0800\n"
+"POT-Creation-Date: 2024-04-11 15:10+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid "The functions of canteen."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/path.py:37
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/path.py:40
 #, python-format
 msgid "Configuration file '%s' was copied to '%s'."
 msgstr ""
@@ -111,11 +111,15 @@ msgstr ""
 msgid "Suppliers:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:250
-msgid "Hello! helping information is here for you:"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:249
+msgid "The configuration directory is: {0}"
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:253
+msgid "Hello! helping information is here for you:"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:256
 msgid ""
 "Tips for Changsheng files:\n"
 "You need to add the residue of last year or last semester: Open the first"
@@ -132,20 +136,20 @@ msgid ""
 "\t5. The total price."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:275
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:278
 msgid ""
 "If new Xuelan milks is purchased. you have to add the purchasing "
 "information of them into the end of the purchasing spreadsheet (e.g: the "
 "spreadsheets Changsheng provided)."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:283
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:286
 msgid "Ok! I knew that.(press any key to continue)"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:408
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:413
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:428
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:411
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:416
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:431
 #, python-format
 msgid "%s can't change."
 msgstr ""
@@ -195,7 +199,11 @@ msgstr ""
 msgid "Please add codes to get foods from your suppliers."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:381
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:377
+msgid "The directory of consuming files is: {0}"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.py:386
 msgid "Consumptions were read."
 msgstr ""
 

@@ -245,6 +245,9 @@ class Bill:
 
     def show_msg(self):
         has_tip = False
+        print_info(
+            _("The configuration directory is: {0}").format(canteen_config_fpath.parent)
+        )
         if any([self.is_changsheng, self.is_xuelan]):
             has_tip = True
             print_warning(_("Hello! helping information is here for you:"))
