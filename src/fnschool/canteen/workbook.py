@@ -1218,18 +1218,15 @@ class WorkBook:
                     [o == self.bill.profile.org_name for o in _org_names]
                 ):
                     print_warning(
-                        _("Organization name read from {wb_fpath}:").format(
-                            wb_fpath=wb_fpath
+                        (
+                            _('Organization name read from {0} are "{1}",')
+                            if len(_org_names) > 1
+                            else _('Organization name read from {0} is "{1}",')
+                        ).format(wb_fpath, " | ".join(_org_names))
+                        + _('But organization name of {0} is "{1}".').format(
+                            f"{self.profile.label}({self.profile.name})",
+                            self.profile.org_name,
                         )
-                        + " "
-                        + " | ".join(_org_names)
-                    )
-                    print_warning(
-                        _("Organization name of {profile_name}:").format(
-                            profile_name=self.profile.name
-                        )
-                        + " "
-                        + self.profile.org_name
                     )
                     print_error(
                         _("'{wb_fpath}' was discarded.").format(

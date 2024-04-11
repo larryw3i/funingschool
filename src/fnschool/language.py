@@ -28,11 +28,15 @@ app_language_code = get_language_code()
 
 language_code_is_zh_CN = "zh_CN" in app_language_code
 
-translations = gettext.translation(
+T = gettext.translation(
     app_name, locale_dir, fallback=True, languages=[app_language_code]
 )
+T.install()
 
+t = T.gettext
+_ = t
+N_ = T.ngettext
+n_ = N_
+ngettext = N_
 
-T = translations.install()
-t = T
-_ = T
+# The end.

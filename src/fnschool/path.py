@@ -11,7 +11,6 @@ from fnschool.log import *
 from fnschool.app import *
 
 
-
 user_name = getpass.getuser()
 
 dirs = AppDirs(app_name, app_author)
@@ -23,7 +22,6 @@ user_data_dir = Path(dirs.user_data_dir)
 user0_data_dir = user_data_dir / user_name
 config0_fpath = data_dpath / "config0.toml"
 config_fpath = user_config_dir / "config.toml"
-
 
 
 for d in [

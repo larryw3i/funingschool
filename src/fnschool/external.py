@@ -28,14 +28,14 @@ def get_new_issue_url():
 
 
 def open_file_via_app0(file_path):
-    file_path = '"'+str(file_path)+'"'
+    file_path = '"' + str(file_path) + '"'
     bin_name = (
         "xdg-open"
         if sys_is_linux()
         else "open" if sys_is_darwin() else "start"
     )
     if sys_is_win() and file_path.endswith(".toml"):
-        bin_name = 'notepad'
+        bin_name = "notepad"
     os.system(bin_name + " " + file_path)
 
 
