@@ -28,7 +28,7 @@ def get_new_issue_url():
 
 
 def open_file_via_app0(file_path):
-    file_path = '"' + str(file_path) + '"'
+    file_path = str(file_path)
     bin_name = (
         "xdg-open"
         if sys_is_linux()
@@ -36,7 +36,8 @@ def open_file_via_app0(file_path):
     )
     if sys_is_win() and file_path.endswith(".toml"):
         bin_name = "notepad"
-    os.system(bin_name + " " + file_path)
+    _sh = f"{bin_name} \"{file_path}\""
+    os.system(_sh)
 
 
 # The end.
