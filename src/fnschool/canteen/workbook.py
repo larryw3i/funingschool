@@ -1756,27 +1756,29 @@ class WorkBook:
                 form_index0,
                 4,
                 f"{day.year}年 {day.month} 月 {day.day} 日  " + f"单位：元",
+            )
 
             csheet.cell(
                 form_index0,
                 7,
                 f"编号：C{day.month:0>2}{consuming_n:0>2}",
             )
+
             csheet.cell(
-                form_index1+2,
+                form_index1 + 2,
                 1,
                 (
                     "   "
                     + "审核人："
                     + "        "
                     + "经办人："
-                    + "　    " 
+                    + "　    "
                     + "过称人："
                     + self.bill.profile.name
                     + "      "
                     + "仓管人："
                     + " 　"
-                )
+                ),
             )
 
             row_difference = (
@@ -2366,22 +2368,22 @@ class WorkBook:
                 7,
                 f"编号：R{time_point.month:0>2}{warehousing_n:0>2}",
             )
-            
+
             wsheet.cell(
-                form_index1+1,
+                form_index1 + 1,
                 1,
                 (
                     "   "
-                    + "审核人：" 
+                    + "审核人："
                     + "        "
                     + "经办人："
                     + self.bill.profile.name
                     + " 　    "
-                    + "过称人：" 
+                    + "过称人："
                     + "        "
-                    + "仓管人：
+                    + "仓管人："
                     + " 　"
-                )
+                ),
             )
 
             for class_name in class_names:

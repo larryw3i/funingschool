@@ -18,6 +18,18 @@ pot_path = locale_dir / "fnschool.pot"
 lc_messages_path = locale_dir / "en_US" / "LC_MESSAGES"
 mo0_path = lc_messages_path / (app_name + ".mo")
 po0_path = lc_messages_path / (app_name + ".po")
+sha256es_fpath = project_path / "releases" / "SHA256es"
+dist_dpath = project_path / "dist"
+dists_fpath = dist_fpath / "*"
+
+
+def run_sh(sh_txt=""):
+    os.system(sh_txt)
+
+
+def run_sh_venv(sh_txt=""):
+    sh_txt = get_activate_cmd() + sh_txt
+    os.system(sh_txt)
 
 
 def get_activate_cmd():
@@ -107,6 +119,30 @@ def set_dependencies(args):
         install_dependencies()
 
 
+def build(args):
+    _sh = ";".join(
+        [
+            "python3 scripts/housekeeper.py message C",
+            "python3 scripts/housekeeper.py version -u",
+            "rm -rf {dists_fpath}",
+            "python3 -m build",
+        ]
+    )
+    _sh = get_activate_cmd() + _sh
+    os.system(_sh)
+
+    if args.twine:
+        _sh = get_activate_cmd() + "python3 -m twine upload {dists_fpath}"
+        os.system(_sh)
+        sha256_txt = None
+        with open(sha256es_fpath, "r") as f:
+            sha256_txt = f.read()
+        sha256_txt = os.system(f"sha256sum {dists_fpath}") + sha256_txt
+        with open(sha256es_fpath, "w+") as f:
+            f.write(sha256_txt)
+        print(f"SHA256 hash of '{dists_dpath}'  was saved.")
+
+
 parser = argparse.ArgumentParser(
     prog="housekeeper",
     description="Housekeeper of Funingschool.",
@@ -144,11 +180,18 @@ parser_version = subparsers.add_parser(
 parser_version.add_argument(
     "-u",
     "--update",
-    default=set_version,
     action="store_true",
     help="Update version of {app_name} automatically.",
 )
 parser_version.set_defaults(func=set_version)
+
+parser_build = subparsers.add_parser(
+    "build", help=f"Build {app_name} sources."
+)
+parser_build.add_argument(
+    "-t", "--twine", default=False, action="store_true", help="Upload to PYPI."
+)
+parser_build.set_defaults(func=build)
 
 args = parser.parse_args()
 
