@@ -64,9 +64,7 @@ def update_message():
 
 
 def compile_message():
-    run_sh_venv(
-        f"pybabel compile -d {locale_dir} -D {app_name}"
-    )
+    run_sh_venv(f"pybabel compile -d {locale_dir} -D {app_name}")
 
 
 def add_message(language_code):
@@ -117,14 +115,12 @@ def set_dependencies(args):
     if args.action == "I":
         install_dependencies()
 
+
 def get_dists_hash():
     _sh = "cd dist; sha256sum *; cd ..;"
-    _hash = subprocess.check_output(
-        _sh,
-        shell=True, 
-        universal_newlines=True
-    )
+    _hash = subprocess.check_output(_sh, shell=True, universal_newlines=True)
     return _hash
+
 
 def build(args):
     _sh = ";".join(
@@ -143,7 +139,9 @@ def build(args):
         sha256_txt = None
         with open(sha256es_fpath, "r") as f:
             sha256_txt = f.read()
-        sha256_txt = get_dists_hash() + sha256_txt
+        _hash = get_dists_hash()
+        print(_hash)
+        sha256_txt = _hash + sha256_txt
         with open(sha256es_fpath, "w+") as f:
             f.write(sha256_txt)
         print(f"SHA256 hash of '{dists_fpath}'  was saved.")

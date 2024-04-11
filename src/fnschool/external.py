@@ -28,7 +28,7 @@ def get_new_issue_url():
 
 
 def open_file_via_app0(file_path):
-    file_path = str(file_path)
+    file_path = '"'+str(file_path)+'"'
     bin_name = (
         "xdg-open"
         if sys_is_linux()

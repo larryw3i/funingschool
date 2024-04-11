@@ -258,7 +258,15 @@ class Bill:
                     + "and add the 'residue' column, then "
                     + "insert the 'residue' foods after the end "
                     + "of entered data, the 'residue' column names "
-                    + "you could set are:\n\t{0}"
+                    + "you could set are:\n\t{0}\n"
+                    + "The columns need to be updated are:"
+                    + "\n\t1. Inventory time: The time of residue "
+                    + "foods inventorying."
+                    + "\n\t2. The organization name or school name."
+                    + "\n\t3. The food name."
+                    + "\n\t4. The food count, fill in all count related columns if "
+                    + "there are many 'food count columns'."
+                    + "\n\t5. The total price."
                 ).format(" | ".join(self.workbook.residue_col_names))
             )
 
