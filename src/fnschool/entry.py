@@ -8,7 +8,7 @@ def set_canteen(args):
     from fnschool.canteen.bill import Bill
 
     bill = Bill()
-    if args.action in "mk_tspreadsheet":
+    if args.action in "mk_bill":
         bill.make_spreadsheets()
     elif args.action in "help_friends":
         bill.help_friends_via_email()
@@ -34,7 +34,7 @@ def read_cli():
     )
     parser_canteen.add_argument(
         "action",
-        choices=["mk_tspreadsheet", "help_friends"],
+        choices=["mk_bill", "help_friends"],
         help=_("The functions of canteen."),
     )
     parser_canteen.set_defaults(func=set_canteen)
