@@ -4,6 +4,7 @@ from pathlib import Path
 import tomllib
 import re
 import argparse
+import subprocess
 from datetime import datetime
 
 project_path = Path(__file__).parent.parent
@@ -20,16 +21,16 @@ mo0_path = lc_messages_path / (app_name + ".mo")
 po0_path = lc_messages_path / (app_name + ".po")
 sha256es_fpath = project_path / "releases" / "SHA256es"
 dist_dpath = project_path / "dist"
-dists_fpath = dist_fpath / "*"
+dists_fpath = dist_dpath / "*"
 
 
 def run_sh(sh_txt=""):
-    os.system(sh_txt)
+    return os.system(sh_txt)
 
 
 def run_sh_venv(sh_txt=""):
     sh_txt = get_activate_cmd() + sh_txt
-    os.system(sh_txt)
+    return os.system(sh_txt)
 
 
 def get_activate_cmd():
@@ -48,31 +49,29 @@ def install_dependencies():
     deps += ["Babel"]
     deps = '"' + '" "'.join(deps) + '"'
 
-    cmd = get_activate_cmd()
+    cmd = ""
     cmd += "pip3 install -U " + deps
     print(cmd.replace(";", "\n"))
-    os.system(cmd)
+    run_sh_venv(cmd)
     print("Dependencies was installed.")
 
 
 def update_message():
-    os.system(
-        get_activate_cmd()
-        + f"pybabel extract {fnschool_path} -o {pot_path};"
+    run_sh_venv(
+        f"pybabel extract {fnschool_path} -o {pot_path};"
         + f"pybabel update -i {pot_path} -d {locale_dir} -D {app_name}"
     )
 
 
 def compile_message():
-    os.system(
-        get_activate_cmd() + f"pybabel compile -d {locale_dir} -D {app_name}"
+    run_sh_venv(
+        f"pybabel compile -d {locale_dir} -D {app_name}"
     )
 
 
 def add_message(language_code):
-    os.system(
-        get_activate_cmd()
-        + f"pybabel init -d {locale_dir} -l {language_code} "
+    run_sh_venv(
+        f"pybabel init -d {locale_dir} -l {language_code} "
         + f"-i {pot_path} -D {app_name}"
     )
 
@@ -118,29 +117,36 @@ def set_dependencies(args):
     if args.action == "I":
         install_dependencies()
 
+def get_dists_hash():
+    _sh = "cd dist; sha256sum *; cd ..;"
+    _hash = subprocess.check_output(
+        _sh,
+        shell=True, 
+        universal_newlines=True
+    )
+    return _hash
 
 def build(args):
     _sh = ";".join(
         [
             "python3 scripts/housekeeper.py message C",
             "python3 scripts/housekeeper.py version -u",
-            "rm -rf {dists_fpath}",
+            f"rm -rf {dists_fpath}",
             "python3 -m build",
         ]
     )
-    _sh = get_activate_cmd() + _sh
-    os.system(_sh)
-
+    print(_sh)
+    run_sh_venv(_sh)
     if args.twine:
-        _sh = get_activate_cmd() + "python3 -m twine upload {dists_fpath}"
-        os.system(_sh)
+        _sh = f"python3 -m twine upload {dists_fpath}"
+        run_sh_venv(_sh)
         sha256_txt = None
         with open(sha256es_fpath, "r") as f:
             sha256_txt = f.read()
-        sha256_txt = os.system(f"sha256sum {dists_fpath}") + sha256_txt
+        sha256_txt = get_dists_hash() + sha256_txt
         with open(sha256es_fpath, "w+") as f:
             f.write(sha256_txt)
-        print(f"SHA256 hash of '{dists_dpath}'  was saved.")
+        print(f"SHA256 hash of '{dists_fpath}'  was saved.")
 
 
 parser = argparse.ArgumentParser(
