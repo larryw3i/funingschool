@@ -924,7 +924,7 @@ class WorkBook:
                 'If you save updated data to "{0}", '
                 + "data of food sheets will be saved "
                 + "for every month."
-            )
+            ).format(spreadsheet0_fpath)
         )
         _input = input(">_ ")
         if len(_input) > 0 and _input in "Yy":
@@ -2576,7 +2576,8 @@ class WorkBook:
     def clear_workbook(self):
         self.bill_workbook = None
 
-    def save_bill_workbook(self, wb_fpath=None, info="Saving workbook. . ."):
+    def save_bill_workbook(self, wb_fpath=None, info=None):
+        info = info or _("Saving workbook. . .")
         print_info(info)
         wb_fpath = wb_fpath or self.get_main_spreadsheet_path()
         wb = self.get_bill_workbook()
