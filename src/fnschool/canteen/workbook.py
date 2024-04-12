@@ -660,12 +660,19 @@ class WorkBook:
         cfoods = [
             f
             for f in self.food.get_foods()
-            if (f.check_date.month == self.bill.month and not f.is_negligible)
+            if (
+                (
+                    f.check_date.month == self.bill.month
+                    or (
+                        self.bill.month
+                        in [d.month for d, c in f.consuming_list]
+                    )
+                )
+                and not f.is_negligible
+            )
         ]
-        cfood_names = list(set([f.name for f in cfoods]))
-        days_num = calendar.monthrange(t1.year, self.bill.month)[1]
+        food_names = list(set([f.name for f in cfoods]))
         wb = self.get_bill_workbook()
-
         tn0_dm1 = (
             (time_nodes[0][0] + timedelta(days=-1))
             if len(time_nodes_mm1) < 1
@@ -676,72 +683,72 @@ class WorkBook:
             f
             for f in self.food.get_foods()
             if (
-                f.get_remainder_by_time(tn0_dm1) > 0 
+                f.get_remainder_by_time(tn0_dm1) > 0
                 and not f.is_negligible
-                and f.check_date <= tn0_dm1
+                and f.check_date.month < self.bill.month
             )
         ]
-        rfoods_names = list(set([f.name for f in rfoods]))
-        for rfood_name in rfoods_names:
-            sheet = self.get_food_sheet(rfood_name)
+
+        food_names = list(set([f.name for f in rfoods] + food_names))
+
+        sheet = None
+        for food_name in food_names:
+            sheet = self.get_food_sheet(food_name)
             form_index_range = self.get_food_form_index(sheet)
             index_start, index_end = form_index_range
-            entry_index = 0
-            for food in [f for f in rfoods if f.name == rfood_name]:
-                row_index = index_start + entry_index
+
+            for row_index in range(index_start, index_end - 1):
+                for col_index in range(1, 14):
+                    sheet.cell(row_index, col_index).value = ""
+            row_index = index_start 
+            col_index = 1
+
+            _rfoods = [f for f in rfoods if f.name == food_name]
+            _cfoods = [f for f in cfoods if f.name == food_name]
+
+            self.unmerge_cells_of_sheet(sheet)
+
+            sheet.cell(index_start - 2, 1, f"{t1.year}年")
+
+           
+            if len(_rfoods) > 0:
+                for _row_index in range(index_start, index_start + len(_rfoods)):
+                    food = _rfoods[_row_index - index_start]
+                    sheet.cell(
+                        _row_index,
+                        3,
+                        ("上年结转" if t1.month == 1 else "上月结转"),
+                    )
+                    sheet.cell(row_index, 10, food.count)
+                    sheet.cell(row_index, 11, food.unit_price)
+                    sheet.cell(row_index, 12, food.count * food.unit_price)
+                    row_index = _row_index   
+            else:
                 sheet.cell(
                     row_index,
                     3,
                     ("上年结转" if t1.month == 1 else "上月结转"),
                 )
-                for col_index in [1, 2, 4, 5, 6, 7, 8, 9]:
-                    sheet.cell(row_index, col_index, "")
-                sheet.cell(row_index, 10, food.count)
-                sheet.cell(row_index, 11, food.unit_price)
-                sheet.cell(row_index, 12, food.count * food.unit_price)
+                
 
-                entry_index += 1
+            row_index += 1
 
-        for cfood_name in cfood_names:
-            entry_index = 0
-            sheet = self.get_food_sheet(cfood_name)
-            self.unmerge_cells_of_sheet(sheet)
-            index_range = self.get_food_form_day_index(sheet)
-            index_start, index_end = index_range
-            for day_n in range(1, days_num + 1):
-                time_node = datetime(t1.year, t1.month, day_n)
-                for food in [f for f in cfoods if (f.name == cfood_name)]:
-                    _dates = [d for d, c in food.consuming_list]
-                    if time_node in _dates:
-                        row_index = index_start + entry_index
-                        _date, _count = [
-                            [d, c]
-                            for d, c in food.consuming_list
-                            if d == time_node
-                        ][0]
-                        _remainder = food.count - sum(
-                            [
-                                c
-                                for d, c in food.consuming_list
-                                if d <= time_node
-                            ]
-                        )
+            _cdates = []
+            for food in _cfoods:
+                if len(food.consuming_list) > 0:
+                    _cdates += [d for d, c in food.consuming_list]
+                _cdates.append(food.check_date)
+            _cdates = [d for d in _cdates if d.month == self.bill.month]
+            _cdates = sorted(list(set(_cdates)))
+            
+            consuming_n = 1
+            warehousing_n = 1
+            for cdate in _cdates:
+                for food in _cfoods:
 
-                        sheet.cell(row_index, 2, time_node.day)
-                        sheet.cell(row_index, 6, "")
-                        sheet.cell(row_index, 7, _count)
-                        sheet.cell(row_index, 8, food.unit_price)
-                        sheet.cell(row_index, 9, _count * food.unit_price)
-                        sheet.cell(row_index, 10, _remainder)
-                        sheet.cell(row_index, 11, food.unit_price)
-                        sheet.cell(row_index, 12, _remainder * food.unit_price)
-
-                        entry_index += 1
-
-                    if food.check_date == time_node:
-                        row_index = index_start + entry_index
-
-                        sheet.cell(row_index, 2, time_node.day)
+                    if food.check_date == cdate:
+                        sheet.cell(row_index, 1, cdate.month)
+                        sheet.cell(row_index, 2, cdate.day)
                         sheet.cell(row_index, 4, food.count)
                         sheet.cell(row_index, 5, food.unit_price)
                         sheet.cell(row_index, 6, food.count * food.unit_price)
@@ -749,41 +756,61 @@ class WorkBook:
                         sheet.cell(row_index, 10, food.count)
                         sheet.cell(row_index, 11, food.unit_price)
                         sheet.cell(row_index, 12, food.count * food.unit_price)
+                        sheet.cell(row_index, 13, f"R{cdate.month:0>2}{warehousing_n:0>2}")
+                        warehousing_n += 1
 
-                        entry_index += 1
-
-                    if food.check_date == time_node or time_node in _dates:
                         if "合计" in str(sheet.cell(row_index + 1, 3).value):
                             sheet.insert_rows(row_index + 1, 1)
 
+                        row_index += 1
+
+                    if cdate in [ d for d,__ in food.consuming_list]:
+                        _count = [c for d,c in food.consuming_list if d == cdate][0]
+                        _remainder = food.count - sum(
+                            [c for d, c in food.consuming_list if d <= cdate]
+                        )
+                        sheet.cell(row_index, 1, cdate.month)
+                        sheet.cell(row_index, 2, cdate.day)
+                        sheet.cell(row_index, 6, "")
+                        sheet.cell(row_index, 7, _count)
+                        sheet.cell(row_index, 8, food.unit_price)
+                        sheet.cell(row_index, 9, _count * food.unit_price)
+                        sheet.cell(row_index, 10, _remainder)
+                        sheet.cell(row_index, 11, food.unit_price)
+                        sheet.cell(row_index, 12, _remainder * food.unit_price)
+                        sheet.cell(row_index, 13, f"C{cdate.month:0>2}{consuming_n:0>2}")
+                        consuming_n += 1
+
+                        if "合计" in str(sheet.cell(row_index + 1, 3).value):
+                            sheet.insert_rows(row_index + 1, 1)
+
+                        row_index += 1
+
             self.format_food_sheet(sheet)
-
-            food_names = list(set([f.name for f in self.food.get_foods()]))
-
-            wb = self.get_bill_workbook()
-            wb.active = sheet
-
             print_info(_("Sheet '%s' was updated.") % sheet.title)
 
-        for name in food_names:
+        wb.active = sheet
+
+        _food_names = list(set([f.name for f in self.food.get_foods()]))
+        for name in _food_names:
             if self.includes_sheet(name):
                 sheet = self.get_bill_sheet(name)
                 sheet.sheet_properties.tabColor = "0" * 8
 
         print_info(_("All food sheets have their tab colors reset."))
 
-        for name in cfood_names:
+        for name in food_names:
             sheet = self.get_food_sheet(name)
             sheet.sheet_properties.tabColor = secrets.token_hex(4)
 
         print_info(
             _("Food sheets [{0}] have their tab colors recolor.").format(
-                " ".join(cfood_names)
+                " ".join(food_names)
             )
         )
         print_info(
             _("Food sheets [{0}] have been updated.").format(
-                " ".join(cfood_names)
+                " ".join(food_names)
             )
         )
 
@@ -1269,9 +1296,9 @@ class WorkBook:
                         (
                             _('Organization name read from {0} are "{1}",')
                             if len(_org_names) > 1
-                            else _('Organization name read from {0} is "{1}",')
+                            else _('Organization name read from {0} is "{1}", ')
                         ).format(wb_fpath, " | ".join(_org_names))
-                        + _('But organization name of {0} is "{1}".').format(
+                        + _('but organization name of {0} is "{1}".').format(
                             f"{self.profile.label}({self.profile.name})",
                             self.profile.org_name,
                         )
@@ -1336,7 +1363,11 @@ class WorkBook:
                         check_date = (
                             datetime.strptime(check_date, "%Y-%m-%d")
                             if "-" in check_date
-                            else datetime.strptime(check_date, "%Y%d%m")
+                            else (
+                                datetime.strptime(check_date, "%Y/%m/%d")
+                                if "/" in check_date
+                                else datetime.strptime(check_date, "%Y%d%m")
+                            )
                         )
                         org_name = row[food_org_name_index].value
 
@@ -2625,6 +2656,7 @@ class WorkBook:
         return file_path
 
     def copy_bill_workbook(self, wb_fpath=None):
+        print_info(_("Copying workbook..."))
         file_path = wb_fpath or self.get_random_bill_workbook_copy_fpath()
         wb = self.get_bill_workbook()
         wb.save(file_path)
