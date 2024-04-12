@@ -649,24 +649,36 @@ class WorkBook:
                 if tn[1].month == self.bill.month
             ]
         )
+        time_nodes_mm1 = sorted(
+            [
+                tn
+                for tn in self.bill.get_time_nodes()
+                if tn[1].month == self.bill.month - 1
+            ]
+        )
         t0, t1 = time_nodes[-1]
         cfoods = [
             f
             for f in self.food.get_foods()
-            if f.check_date.month == self.bill.month
+            if (f.check_date.month == self.bill.month and not f.is_negligible)
         ]
         cfood_names = list(set([f.name for f in cfoods]))
         days_num = calendar.monthrange(t1.year, self.bill.month)[1]
         wb = self.get_bill_workbook()
 
-        tn0_dm1 = time_nodes[0][0] + timedelta(days=-1)
+        tn0_dm1 = (
+            (time_nodes[0][0] + timedelta(days=-1))
+            if len(time_nodes_mm1) < 1
+            else (time_nodes_mm1[-1][1])
+        )
 
         rfoods = [
             f
             for f in self.food.get_foods()
             if (
-                f.get_remainder_by_time(tn0_dm1) > 0
-                and f.check_date <= time_nodes[-1][1]
+                f.get_remainder_by_time(tn0_dm1) > 0 
+                and not f.is_negligible
+                and f.check_date <= tn0_dm1
             )
         ]
         rfoods_names = list(set([f.name for f in rfoods]))
@@ -675,21 +687,20 @@ class WorkBook:
             form_index_range = self.get_food_form_index(sheet)
             index_start, index_end = form_index_range
             entry_index = 0
-            for food in rfoods:
-                if food.name == rfood_name:
-                    row_index = index_start + entry_index
-                    sheet.cell(
-                        row_index,
-                        3,
-                        ("上年结转" if t1.month == 1 else "上月结转"),
-                    )
-                    for col_index in [1, 2, 4, 5, 6, 7, 8, 9]:
-                        sheet.cell(row_index, col_index, "")
-                    sheet.cell(row_index, 10, food.count)
-                    sheet.cell(row_index, 11, food.unit_price)
-                    sheet.cell(row_index, 12, food.count * food.unit_price)
+            for food in [f for f in rfoods if f.name == rfood_name]:
+                row_index = index_start + entry_index
+                sheet.cell(
+                    row_index,
+                    3,
+                    ("上年结转" if t1.month == 1 else "上月结转"),
+                )
+                for col_index in [1, 2, 4, 5, 6, 7, 8, 9]:
+                    sheet.cell(row_index, col_index, "")
+                sheet.cell(row_index, 10, food.count)
+                sheet.cell(row_index, 11, food.unit_price)
+                sheet.cell(row_index, 12, food.count * food.unit_price)
 
-                    entry_index += 1
+                entry_index += 1
 
         for cfood_name in cfood_names:
             entry_index = 0
