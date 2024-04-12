@@ -15,7 +15,7 @@
   <br>
 </h1>
 
-<h4 align="center"> 一些简单的学校做帐脚本。 </h4>
+<h4 align="center"> 一些简单的学校做账脚本。 </h4>
 
 <p align="center">
   <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/README.zh_CN.md">简体中文</a> •
