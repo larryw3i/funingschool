@@ -46,7 +46,7 @@
 
 Ubuntu：  
 ```bash
-sudo apt-get install -U python3 python3-pip
+sudo apt-get install python3 python3-pip
 ```
 Windows：  
 从 [www.python.org/getit](https://www.python.org/getit/)（或 [mirror.bjtu.edu.cn](https://mirror.bjtu.edu.cn/python/)） 下载 Python3 ，然后安装它。  

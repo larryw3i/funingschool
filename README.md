@@ -47,7 +47,7 @@
 
 Ubuntu: 
 ```bash
-sudo apt-get install -U python3 python3-pip
+sudo apt-get install python3 python3-pip
 ```
 Windows:   
 Install Python3 from [www.python.org/getit](https://www.python.org/getit/).  
