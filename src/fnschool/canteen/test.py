@@ -30,7 +30,7 @@ class TestCanteen(unittest.TestCase):
             self.bill.set_month(m)
             self.bill.print_month()
             self.bill.make_spreadsheet_by_time_nodes()
-            self.bill.workbook.copy_workbook()
+            self.bill.workbook.copy_bill_workbook()
 
     def print_time_nodes(self):
         self.bill.print_time_nodes()

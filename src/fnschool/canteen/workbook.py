@@ -664,7 +664,10 @@ class WorkBook:
         rfoods = [
             f
             for f in self.food.get_foods()
-            if f.get_remainder_by_time(tn0_dm1) > 0
+            if (
+                f.get_remainder_by_time(tn0_dm1) > 0
+                and f.check_date <= time_nodes[-1][1]
+            )
         ]
         rfoods_names = list(set([f.name for f in rfoods]))
         for rfood_name in rfoods_names:
@@ -903,8 +906,42 @@ class WorkBook:
         self.update_purchase_sum_sheet()
         self.update_cover_sheet()
         self.update_food_sheets()
+        self.save_updated_workbooks()
         print_info(_("Update completely!"))
-        self.copy_workbook()
+
+    def save_updated_workbooks(self):
+        spreadsheet0_fpath = self.get_main_spreadsheet_path()
+        random_spreadsheet_fpath = self.get_random_bill_workbook_copy_fpath()
+        print_info(
+            _(
+                "Do you want to save all updated data "
+                + 'to "{0}"? or just save it as a '
+                + 'copy to "{1}". (YyNn)'
+            ).format(spreadsheet0_fpath, random_spreadsheet_fpath)
+        )
+        print_warning(
+            _(
+                'If you save updated data to "{0}", '
+                + "data of food sheets will be saved "
+                + "for every month."
+            )
+        )
+        _input = input(">_ ")
+        if len(_input) > 0 and _input in "Yy":
+            self.save_bill_workbook(wb_fpath=spreadsheet0_fpath)
+            print_info(
+                _(
+                    "You can fill in the monthly missing data "
+                    + "to food sheets, they will be saved "
+                    + "for next updating."
+                )
+            )
+        else:
+            self.copy_bill_workbook(wb_fpath=random_spreadsheet_fpath)
+            spreadsheet0_fpath = random_spreadsheet_fpath
+
+        open_file_via_app0(spreadsheet0_fpath)
+        print_info(_("Updated data was saved."))
 
     def get_changsheng_properties_by_dir(self, fdpath=None):
         fd_path = self.purchase_workbook_fd_path or fdpath
@@ -1588,6 +1625,7 @@ class WorkBook:
         ]
         t0, t1 = time_nodes[-1]
         pssheet = self.get_purchase_sum_sheet()
+
         pssheet.cell(
             2,
             1,
@@ -1761,7 +1799,7 @@ class WorkBook:
             )
 
             csheet.cell(
-                form_index1 + 2,
+                form_index1 + 1,
                 1,
                 (
                     "   "
@@ -2538,10 +2576,11 @@ class WorkBook:
     def clear_workbook(self):
         self.bill_workbook = None
 
-    def save_workbook(self, info="Saving workbook. . ."):
+    def save_bill_workbook(self, wb_fpath=None, info="Saving workbook. . ."):
         print_info(info)
+        wb_fpath = wb_fpath or self.get_main_spreadsheet_path()
         wb = self.get_bill_workbook()
-        wb.save(self.get_main_spreadsheet_path())
+        wb.save(wb_fpath)
         print_info(
             _("Workbook '%s' was saved.") % self.get_main_spreadsheet_path()
         )
@@ -2564,16 +2603,17 @@ class WorkBook:
             self.print_dir_was_created_info(dpath)
         return dpath
 
-    def copy_workbook(self, file_path=None):
-        if file_path:
-            file_path = file_path
-        else:
-            file_path = self.get_main_spreadsheet_path()
-            file_path = file_path.as_posix()
-            file_path = file_path.split(os.sep)[-1]
-            file_path = file_path[:-5] + f".{uuid.uuid4()}.xlsx"
-            file_path = self.get_profile_copy_data_dpath() / file_path
+    def get_random_bill_workbook_copy_fpath(self):
+        file_path = self.get_main_spreadsheet_path()
+        file_path = file_path.as_posix()
+        file_path = file_path.split(os.sep)[-1]
+        file_path = file_path[:-5] + f".{uuid.uuid4()}.xlsx"
+        file_path = self.get_profile_copy_data_dpath() / file_path
 
+        return file_path
+
+    def copy_bill_workbook(self, wb_fpath=None):
+        file_path = wb_fpath or self.get_random_bill_workbook_copy_fpath()
         wb = self.get_bill_workbook()
         wb.save(file_path)
         print_info(_("Workbook '%s' was saved.") % file_path)
