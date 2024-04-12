@@ -18,8 +18,8 @@
 <h4 align="center"> 一些简单的学校做帐脚本。 </h4>
 
 <p align="center">
-  <a href="https://github.com/larryw3i/funingschool/blob/master/Documentation/README.zh_CN.md">简体中文</a> •
-  <a href="https://github.com/larryw3i/funingschool/blob/master/README.md">English</a>
+  <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/README.zh_CN.md">简体中文</a> •
+  <a href="https://gitee.com/larryw3i/funingschool/blob/master/README.md">English</a>
 </p>
 
 <p align="center">
@@ -30,7 +30,7 @@
   <a href="#许可">许可</a>
 </p>
 
-![screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png)
+![screenshot](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/de61adde-f8cc-11ee-ae9d-ff2db36858da.png)
 
 ## 特点
 
@@ -44,11 +44,11 @@
 
 ### 安装 Python3  
 
-Ubuntu: 
+Ubuntu：  
 ```bash
 sudo apt-get install -U python3 python3-pip
 ```
-Windows:   
+Windows：  
 从 [www.python.org/getit](https://www.python.org/getit/)（或 [mirror.bjtu.edu.cn](https://mirror.bjtu.edu.cn/python/)） 下载 Python3 ，然后安装它。  
 
 ### 安装和运行 fnschool   
@@ -78,11 +78,11 @@ fnschool-cli canteen mk_bill
 
 给我买杯“咖啡”：   
 
-![Buy me a coffee](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
+![Buy me a coffee](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
 
 ## 许可  
 
-[GNU LESSER GENERAL PUBLIC LICENSE Version 3](https://github.com/larryw3i/funingschool/blob/master/LICENSE)
+[GNU LESSER GENERAL PUBLIC LICENSE Version 3](https://gitee.com/larryw3i/funingschool/blob/master/LICENSE)
 
 
 

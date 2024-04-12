@@ -76,6 +76,7 @@ This software uses the following open source packages:
 
 
 ## Support
+
 Buy me a `coffee`:  
 
 ![Buy me a coffee](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
