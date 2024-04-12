@@ -53,6 +53,8 @@ Windows：
 
 ### 安装和运行 fnschool   
 ```bash
+# 更换 PYPI 源为镜像站点
+pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple
 # 安装
 pip3 install -U fnschool
 # 运行
