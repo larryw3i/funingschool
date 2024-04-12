@@ -361,6 +361,16 @@ class Food:
         return foods
 
     def get_purchased_foods(self):
+        print_warning(
+            _(
+                "The built-in unit conversion logic is incomplete, "
+                + "so you need to change the units (quantities) in the purchasing "
+                + "list spreadsheets to the basic consumption unit (quantity).\n"
+                + "Okay, I got it? (ANY KEY)"
+            )
+        )
+        input()
+
         if "昌盛" in self.bill.profile.suppliers:
             self.workbook.read_changsheng_foods()
         else:
