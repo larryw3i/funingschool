@@ -723,7 +723,7 @@ class WorkBook:
                     sheet.cell(row_index, 10, food.count)
                     sheet.cell(row_index, 11, food.unit_price)
                     sheet.cell(row_index, 12, food.count * food.unit_price)
-                    row_index = _row_index
+                    row_index += 1
             else:
                 sheet.cell(
                     row_index,
@@ -731,7 +731,7 @@ class WorkBook:
                     ("上年结转" if t1.month == 1 else "上月结转"),
                 )
 
-            row_index += 1
+                row_index += 1
 
             _cdates = []
             for food in _cfoods:
