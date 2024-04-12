@@ -700,7 +700,7 @@ class WorkBook:
             for row_index in range(index_start, index_end - 1):
                 for col_index in range(1, 14):
                     sheet.cell(row_index, col_index).value = ""
-            row_index = index_start 
+            row_index = index_start
             col_index = 1
 
             _rfoods = [f for f in rfoods if f.name == food_name]
@@ -710,9 +710,10 @@ class WorkBook:
 
             sheet.cell(index_start - 2, 1, f"{t1.year}年")
 
-           
             if len(_rfoods) > 0:
-                for _row_index in range(index_start, index_start + len(_rfoods)):
+                for _row_index in range(
+                    index_start, index_start + len(_rfoods)
+                ):
                     food = _rfoods[_row_index - index_start]
                     sheet.cell(
                         _row_index,
@@ -722,14 +723,13 @@ class WorkBook:
                     sheet.cell(row_index, 10, food.count)
                     sheet.cell(row_index, 11, food.unit_price)
                     sheet.cell(row_index, 12, food.count * food.unit_price)
-                    row_index = _row_index   
+                    row_index = _row_index
             else:
                 sheet.cell(
                     row_index,
                     3,
                     ("上年结转" if t1.month == 1 else "上月结转"),
                 )
-                
 
             row_index += 1
 
@@ -740,7 +740,7 @@ class WorkBook:
                 _cdates.append(food.check_date)
             _cdates = [d for d in _cdates if d.month == self.bill.month]
             _cdates = sorted(list(set(_cdates)))
-            
+
             consuming_n = 1
             warehousing_n = 1
             for cdate in _cdates:
@@ -756,7 +756,11 @@ class WorkBook:
                         sheet.cell(row_index, 10, food.count)
                         sheet.cell(row_index, 11, food.unit_price)
                         sheet.cell(row_index, 12, food.count * food.unit_price)
-                        sheet.cell(row_index, 13, f"R{cdate.month:0>2}{warehousing_n:0>2}")
+                        sheet.cell(
+                            row_index,
+                            13,
+                            f"R{cdate.month:0>2}{warehousing_n:0>2}",
+                        )
                         warehousing_n += 1
 
                         if "合计" in str(sheet.cell(row_index + 1, 3).value):
@@ -764,8 +768,10 @@ class WorkBook:
 
                         row_index += 1
 
-                    if cdate in [ d for d,__ in food.consuming_list]:
-                        _count = [c for d,c in food.consuming_list if d == cdate][0]
+                    if cdate in [d for d, __ in food.consuming_list]:
+                        _count = [
+                            c for d, c in food.consuming_list if d == cdate
+                        ][0]
                         _remainder = food.count - sum(
                             [c for d, c in food.consuming_list if d <= cdate]
                         )
@@ -778,7 +784,11 @@ class WorkBook:
                         sheet.cell(row_index, 10, _remainder)
                         sheet.cell(row_index, 11, food.unit_price)
                         sheet.cell(row_index, 12, _remainder * food.unit_price)
-                        sheet.cell(row_index, 13, f"C{cdate.month:0>2}{consuming_n:0>2}")
+                        sheet.cell(
+                            row_index,
+                            13,
+                            f"C{cdate.month:0>2}{consuming_n:0>2}",
+                        )
                         consuming_n += 1
 
                         if "合计" in str(sheet.cell(row_index + 1, 3).value):
@@ -1296,7 +1306,9 @@ class WorkBook:
                         (
                             _('Organization name read from {0} are "{1}",')
                             if len(_org_names) > 1
-                            else _('Organization name read from {0} is "{1}", ')
+                            else _(
+                                'Organization name read from {0} is "{1}", '
+                            )
                         ).format(wb_fpath, " | ".join(_org_names))
                         + _('but organization name of {0} is "{1}".').format(
                             f"{self.profile.label}({self.profile.name})",
