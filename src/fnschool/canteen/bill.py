@@ -236,6 +236,10 @@ class Bill:
         )
 
     @property
+    def is_fncht(self):
+        return "富宁城投" in self.profile.suppliers
+
+    @property
     def is_xuelan(self):
         return "雪兰" in self.profile.suppliers
 

@@ -6,6 +6,10 @@ from fnschool.canteen import *
 from fnschool.canteen.bill import *
 from fnschool.canteen.config import *
 
+class FoodBase():
+    def __init__(self,bill):
+        self.bill = bill
+        self.workbookbase = self.bill.workbookbase
 
 class Food:
     def __init__(
@@ -373,7 +377,11 @@ class Food:
 
         if "昌盛" in self.bill.profile.suppliers:
             self.workbook.read_changsheng_foods()
-        else:
+ 
+        elif "富宁城投" in self.bill.profile.suppliers:
+            self.workbook.read_fncht_foods()
+
+       else:
             print_warning(
                 _("Please add codes to get foods from your suppliers.")
             )
