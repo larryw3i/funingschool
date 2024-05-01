@@ -20,42 +20,66 @@ class Profile:
         self.email = email
         self.org_name = org_name
         self.suppliers = suppliers
+        self.fpath = Path(__file__).parent / "profile.toml"
 
     @property
     def label(self):
-        return self._label.replace(" ", "")
+        label = self._label
+        if " " in label:
+            label = label.replace(" ", "")
+        return label
 
-    def get_profile_by_label(self, label):
-        profiles = self.get_profiles()
-        for f in profiles:
-            if f.label == label:
-                return f
-
-        return None
-
-    def get_profile0(self):
-        profiles = self.get_profiles()
-        if len(profiles) > 0:
-            profile = profiles[0]
-            return profile
-
-        return None
-
-    def get_profiles(self):
-        profiles = []
-        _profiles = Config().get_profiles()
-
-        for _f in _profiles:
-            profiles.append(
-                Profile(
-                    label=_f[0],
-                    name=_f[1],
-                    email=_f[2],
-                    org_name=_f[3],
-                    suppliers=_f[4],
+    def get_profile(self):
+        if not self.fpath.exists():
+            with open(self.fpath, "w", encoding="utf-8") as f:
+                f.write(
+                    (
+                        "\n"
+                        + "profile = [\n"
+                        + "    '{profile_label}',\n"
+                        + "    '{operator_name}',\n"
+                        + "    '{operator_email}',\n"
+                        + "    '{organization_name}',\n"
+                        + "    [\n"
+                        + "        '{supplier_name_1}','{supplier_name_2}'\n"
+                        + "    ]\n"
+                        + "]\n"
+                        + "# {the_end}"
+                    ).format(
+                        profile_label=_("Profile label"),
+                        operator_name=_("Operator name"),
+                        operator_email=_("Operator email"),
+                        organization_name=_("Organization name or school name"),
+                        supplier_name_1=_("Supplier name 1"),
+                        supplier_name_2=_("Supplier name 2"),
+                        the_end=_("The end."),
+                    )
+                )
+            print_warning(_("Please update your profile file."))
+            print_info(
+                _(
+                    "Profile label for data directory making, "
+                    + "it shouldn't contain any space character.\n"
+                    + "Supplier names are the supplier's alias."
                 )
             )
-        return profiles
+            open_file(self.fpath)
+            print_info(_("Ok! it was configured. (enter any key)"))
+            input()
+
+        with open(self.fpath, "r", encoding="utf-8") as f:
+            profile = tomllib.load(f)["profile"]
+            profile = Profile(
+                label=profile[0],
+                name=profile[1],
+                email=profile[2],
+                org_name=profile[3],
+                suppliers=profile[4],
+            )
+            return profile
+
+        print_error(_("No profile information was got."))
+        return None
 
 
 # The end.

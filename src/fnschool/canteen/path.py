@@ -45,7 +45,7 @@ if not canteen_config_fpath.exists():
             + "Supplier names are the supplier's alias."
         )
     )
-    open_file_via_app0(canteen_config_fpath)
+    open_file(canteen_config_fpath)
     print_info(_("Ok! it was configured. (enter any key)"))
     input()
 

@@ -32,7 +32,7 @@ def get_new_issue_url():
     )
 
 
-def open_file_via_app0(file_path):
+def open_file(file_path):
     file_path = str(file_path)
     bin_name = "open" if (sys_is_linux() or sys_is_darwin()) else "start"
     if sys_is_win():

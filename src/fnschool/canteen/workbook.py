@@ -89,9 +89,7 @@ class WorkBook:
         self.pre_consuming_sheet_col_index_offset = 5
         self.pre_consuming_sheet_row_index_offset = 3
         self.spreadsheet_ext_names = ["xlsx"]
-        self.cell_alignment0 = Alignment(
-            horizontal="center", vertical="center"
-        )
+        self.cell_alignment0 = Alignment(horizontal="center", vertical="center")
         self.cell_side0 = Side(border_style="thin")
         self.cell_border0 = Border(
             top=self.cell_side0,
@@ -487,11 +485,7 @@ class WorkBook:
         cvsheet.cell(10, 2, total_price)
 
         w_seasoning_total_price = sum(
-            [
-                f.count * f.unit_price
-                for f in wfoods
-                if ("调味" in f.class_name)
-            ]
+            [f.count * f.unit_price for f in wfoods if ("调味" in f.class_name)]
         )
         unw_seasoning_total_price = sum(
             [
@@ -992,7 +986,7 @@ class WorkBook:
             self.copy_bill_workbook(wb_fpath=random_spreadsheet_fpath)
             spreadsheet0_fpath = random_spreadsheet_fpath
 
-        open_file_via_app0(spreadsheet0_fpath)
+        open_file(spreadsheet0_fpath)
         print_info(_("Updated data was saved."))
 
     def get_changsheng_properties_by_dir(self, fdpath=None):
@@ -1038,10 +1032,7 @@ class WorkBook:
                         ).format(
                             _file,
                             " | ".join(
-                                [
-                                    ptime.strftime("%Y.%m.%d")
-                                    for ptime in ptimes
-                                ]
+                                [ptime.strftime("%Y.%m.%d") for ptime in ptimes]
                             ),
                         )
                     )
@@ -1187,7 +1178,7 @@ class WorkBook:
                         + "to continue."
                     ).format(fpath)
                 )
-                open_file_via_app0(fpath)
+                open_file(fpath)
                 input()
                 wb = load_workbook(fpath)
                 sheet = wb[self.pre_consuming_sheet0_name]
@@ -1293,7 +1284,7 @@ class WorkBook:
                             + " column, input it (0 base) or '{wb_fpath}' will be ignored."
                         ).format(app_name=app_name, wb_fpath=wb_fpath)
                     )
-                    open_file_via_app0(wb_fpath)
+                    open_file(wb_fpath)
                     _org_name_col_index = input()
                     if not _org_name_col_index.isnumeric():
                         continue
@@ -1318,9 +1309,7 @@ class WorkBook:
                         (
                             _('Organization name read from {0} are "{1}",')
                             if len(_org_names) > 1
-                            else _(
-                                'Organization name read from {0} is "{1}", '
-                            )
+                            else _('Organization name read from {0} is "{1}", ')
                         ).format(wb_fpath, " | ".join(_org_names))
                         + _('but organization name of {0} is "{1}".').format(
                             f"{self.profile.label}({self.profile.name})",
@@ -1355,7 +1344,7 @@ class WorkBook:
                         + "\n\t"
                         + " | ".join(self.negligible_col_names)
                     )
-                    open_file_via_app0(wb_fpath)
+                    open_file(wb_fpath)
                     input()
                     wb = load_workbook(wb_fpath, read_only=True)
                     sheet = wb[sheetnames[0]]
@@ -1640,9 +1629,7 @@ class WorkBook:
         _index = indexes[tn_index]
         return _index
 
-    def update_inventory_sheet_of_time_node(
-        self, fd_path=None, time_node=None
-    ):
+    def update_inventory_sheet_of_time_node(self, fd_path=None, time_node=None):
         fd_path = self.purchase_workbook_fd_path or fd_path
         time_node = time_node or self.bill.time_node
         t0, t1 = time_node
@@ -1780,9 +1767,7 @@ class WorkBook:
                     )
             total_price += _total_price
             cssheet.cell(row[0].row, 2, _total_price)
-            cssheet.cell(row[0].row, 2).number_format = (
-                numbers.FORMAT_NUMBER_00
-            )
+            cssheet.cell(row[0].row, 2).number_format = numbers.FORMAT_NUMBER_00
 
         total_price_cn = self.bill.convert_num_to_cnmoney_chars(total_price)
         cssheet.cell(
@@ -1802,9 +1787,7 @@ class WorkBook:
         wb = self.get_bill_workbook()
         wb.active = cssheet
 
-        print_info(
-            _("Sheet '%s' was updated.") % self.consuming_sum_sheet_name
-        )
+        print_info(_("Sheet '%s' was updated.") % self.consuming_sum_sheet_name)
 
     def update_consuming_sheet(self):
         foods = self.food.get_foods()
@@ -2039,7 +2022,7 @@ class WorkBook:
                 wb_fpath
             )
         )
-        open_file_via_app0(wb_fpath)
+        open_file(wb_fpath)
         input()
 
     def set_warehousing_form_index_offset(self, offset=0):
@@ -2089,9 +2072,7 @@ class WorkBook:
         indexes = []
         row_index = 1
         for row in unwsheet.iter_rows(max_row=unwsheet.max_row + 1, max_col=7):
-            if row[0].value and "未入库明细表" in row[0].value.replace(
-                " ", ""
-            ):
+            if row[0].value and "未入库明细表" in row[0].value.replace(" ", ""):
                 indexes.append([row_index + 1, 0])
 
             if row[1].value and "合计" in row[1].value.replace(" ", ""):
@@ -2274,9 +2255,7 @@ class WorkBook:
         wb = self.get_bill_workbook()
         wb.active = wsheet
 
-        print_info(
-            _("Sheet '%s' was formatted.") % self.warehousing_sheet_name
-        )
+        print_info(_("Sheet '%s' was formatted.") % self.warehousing_sheet_name)
 
     def update_unwarehousing_sheet(self):
         unwsheet = self.get_unwarehousing_sheet()
@@ -2328,12 +2307,8 @@ class WorkBook:
             unwsheet.cell(row_index, 4, food.count)
             unwsheet.cell(row_index, 5, food.unit_price)
             unwsheet.cell(row_index, 6, food.total_price)
-            unwsheet.cell(row_index, 5).number_format = (
-                numbers.FORMAT_NUMBER_00
-            )
-            unwsheet.cell(row_index, 6).number_format = (
-                numbers.FORMAT_NUMBER_00
-            )
+            unwsheet.cell(row_index, 5).number_format = numbers.FORMAT_NUMBER_00
+            unwsheet.cell(row_index, 6).number_format = numbers.FORMAT_NUMBER_00
             if (
                 str(unwsheet.cell(row_index + 1, 2).value)
                 .replace(" ", "")
@@ -2359,9 +2334,7 @@ class WorkBook:
                         break
                 break
 
-        print_info(
-            _("Sheet '%s' was updated.") % self.unwarehousing_sheet_name
-        )
+        print_info(_("Sheet '%s' was updated.") % self.unwarehousing_sheet_name)
 
     def update_warehousing_sheet(self):
         wsheet = self.get_warehousing_sheet()
@@ -2417,9 +2390,7 @@ class WorkBook:
             wfoods = [f for f in foods if (f.check_date == time_point)]
             foods_class_names = [f.class_name for f in wfoods]
             class_names_without_food = [
-                _name
-                for _name in class_names
-                if not _name in foods_class_names
+                _name for _name in class_names if not _name in foods_class_names
             ]
             row_difference = (
                 len(wfoods)
@@ -2545,9 +2516,7 @@ class WorkBook:
         wb = self.get_bill_workbook()
         wb.active = wsheet
 
-        print_info(
-            _("Sheet '%s' was updated.") % (self.warehousing_sheet_name)
-        )
+        print_info(_("Sheet '%s' was updated.") % (self.warehousing_sheet_name))
 
     def get_unit_df(self):
         if not self._unit_df is None:

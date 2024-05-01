@@ -6,10 +6,12 @@ from fnschool.canteen import *
 from fnschool.canteen.bill import *
 from fnschool.canteen.config import *
 
-class FoodBase():
-    def __init__(self,bill):
+
+class FoodBase:
+    def __init__(self, bill):
         self.bill = bill
         self.workbookbase = self.bill.workbookbase
+
 
 class Food:
     def __init__(
@@ -365,26 +367,7 @@ class Food:
         return foods
 
     def get_purchased_foods(self):
-        print_warning(
-            _(
-                "The built-in unit conversion logic is incomplete, "
-                + "so you need to change the units (quantities) in the purchasing "
-                + "list spreadsheets to the basic consumption unit (quantity).\n"
-                + "Okay, I got it? (ANY KEY)"
-            )
-        )
-        input()
-
-        if "昌盛" in self.bill.profile.suppliers:
-            self.workbook.read_changsheng_foods()
- 
-        elif "富宁城投" in self.bill.profile.suppliers:
-            self.workbook.read_fncht_foods()
-
-       else:
-            print_warning(
-                _("Please add codes to get foods from your suppliers.")
-            )
+        self.workbook.read_changsheng_foods()
 
         return self.bill._foods
 
