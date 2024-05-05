@@ -1,5 +1,6 @@
 import os
 import sys
+import calendar
 from datetime import datetime, date, time, timedelta
 import colorama
 
@@ -111,19 +112,10 @@ class Bill:
         if self._month:
             return self._month
 
-        months = sorted(
-            list(set([t0.month for t0, t1 in self.get_time_nodes()]))
-        )
-        months = [str(m) for m in months]
-
-        global _
-        months_info = (
-            _("Recorded months:")
-            + " "
-            + " ".join(months)
-            + "\n"
-            + _("Enter the month above to generate spreadsheet:")
-        )
+        months_info = _(
+            "Enter the month (1~12) to generate spreadsheet: (default: {0})"
+        ).format(datetime.now().month)
+        months = [str(i) for i in range(1, 13)] + [""]
 
         for __ in range(3):
             print_info(months_info)
@@ -131,7 +123,10 @@ class Bill:
             if not _month in months:
                 continue
             else:
-                self._month = int(_month)
+                if _month == "":
+                    self._month = datetime.now().month
+                else:
+                    self._month = int(_month)
                 return self._month
 
         print_error(_("Unexpected input was got."))
@@ -153,26 +148,28 @@ class Bill:
     def time_nodes(self):
         return self.get_time_nodes()
 
-    def get_time_nodes_of_month(self, month=None, year=None):
-        time_nodes = self.get_time_nodes()
-        year = year or time_nodes[0][0].year
-        month = month or self.get_month()
-        time_nodes = [
-            tn
-            for tn in time_nodes
-            if tn[0].year == year and tn[0].month == month
-        ]
-        return time_nodes
-
     def get_time_nodes(self):
         if len(self._time_nodes) < 1:
-            _time_nodes = self.config.get_time_nodes()
+            d_now = datetime.now()
+            _time_nodes = calendar.monthcalendar(d_now.year, self.get_month())
+
+            if 0 in _time_nodes[0]:
+                _time_nodes[0] = [d for d in _time_nodes[0] if d > 0]
+            if 0 in _time_nodes[-1]:
+                _time_nodes[-1] = [d for d in _time_nodes[-1] if d > 0]
+
             self._time_nodes = [
                 [
-                    datetime.combine(t0, time(0, 0, 0)),
-                    datetime.combine(t1, time(0, 0, 0)),
+                    datetime.combine(
+                        datetime(d_now.year, self.get_month(), tn[0]),
+                        time(0, 0, 0),
+                    ),
+                    datetime.combine(
+                        datetime(d_now.year, self.get_month(), tn[-1]),
+                        time(0, 0, 0),
+                    ),
                 ]
-                for t0, t1 in _time_nodes
+                for tn in _time_nodes
             ]
 
         return self._time_nodes

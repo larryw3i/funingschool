@@ -1794,7 +1794,7 @@ class WorkBook:
         csheet = self.get_consuming_sheet()
         form_indexes = self.get_consuming_form_indexes()
 
-        time_nodes = self.bill.get_time_nodes_of_month()
+        time_nodes = self.bill.get_time_nodes()
         days = []
         class_names = self.food.get_class_names()
         for t0, t1 in time_nodes:
