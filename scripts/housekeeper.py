@@ -189,9 +189,7 @@ parser_version.add_argument(
 )
 parser_version.set_defaults(func=set_version)
 
-parser_build = subparsers.add_parser(
-    "build", help=f"Build {app_name} sources."
-)
+parser_build = subparsers.add_parser("build", help=f"Build {app_name} sources.")
 parser_build.add_argument(
     "-t", "--twine", default=False, action="store_true", help="Upload to PYPI."
 )

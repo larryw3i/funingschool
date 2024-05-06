@@ -35,8 +35,5 @@ T.install()
 
 t = T.gettext
 _ = t
-N_ = T.ngettext
-n_ = N_
-ngettext = N_
 
 # The end.

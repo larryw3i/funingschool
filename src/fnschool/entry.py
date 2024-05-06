@@ -10,8 +10,6 @@ def set_canteen(args):
     bill = Bill()
     if args.action in "mk_bill":
         bill.make_spreadsheets()
-    elif args.action in "help_friends":
-        bill.help_friends_via_email()
 
     else:
         print_info(_("Function is not found."))
@@ -34,7 +32,9 @@ def read_cli():
     )
     parser_canteen.add_argument(
         "action",
-        choices=["mk_bill", "help_friends"],
+        choices=[
+            "mk_bill",
+        ],
         help=_("The functions of canteen."),
     )
     parser_canteen.set_defaults(func=set_canteen)
