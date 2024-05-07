@@ -43,11 +43,20 @@ class Food:
         self.purchaser = purchaser
         self.is_abandoned = is_abandoned
         self.is_inventory = is_inventory
+        self.consumings = []
         pass
 
     @property
     def unit_price(self):
         return self.total_price / self.count
+
+    def get_remmainer(self,cdate):
+        return self.count - sum(
+            [
+                c for d,c in self.consumings
+                if d < cdate
+            ]
+        )
 
 
 # The end.

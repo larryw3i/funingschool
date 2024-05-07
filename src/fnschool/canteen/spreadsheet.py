@@ -15,6 +15,9 @@ class SpreadSheet:
     def __init__(self, bill):
         self.bill = bill
         self._path = None
+        self.pre_consuming_sheet_name = "出库计划表"
+        self.pre_consuming_sheet_row_index_offset = 3
+        self.pre_consuming_sheet_col_index_offset = 5
         self.food_name_cols = ["商品名称", "食材名称", "食品名称"]
         self.food_name_col_name = None
         self.unit_name_cols = ["订货单位", "食材单位", "订购单位", "计量单位"]
@@ -130,11 +133,11 @@ class SpreadSheet:
 
         foods = _foods
         foods = sorted(foods, key=lambda f: f.xdate)
-        self.consuming(foods)
+        self.consuming_foods(foods)
         return foods
         pass
 
-    def consuming(self, foods):
+    def consuming_foods(self, foods):
         year = foods[-1].xdate.year
         month = foods[-1].xdate.month
         time_nodes = sorted(
@@ -152,55 +155,97 @@ class SpreadSheet:
             )
         )
 
-        wb_fpath = self.get_pre_consuming_workbook_fpath()
-        wb = load_workbook(wb_fpath)
-        sheet = wb[self.pre_consuming_sheet0_name]
-
-        foods = new_foods
-        foods = [f for f in foods if not f.is_negligible]
+        foods = [f for f in foods if not f.is_abandoned]
         row_index_offset = self.pre_consuming_sheet_row_index_offset
         col_index_offset = self.pre_consuming_sheet_col_index_offset
-        rc_index = 0
-        days_difference = (t1 - t0).days
 
-        for day in range(0, days_difference + 1):
-            time_header = (t0 + timedelta(days=day)).strftime("%Y.%m.%d")
+        wb = None
+        sheet = None
+        for d in range(1, time_nodes[-1].day + 1):
+            d_date = datetime(year, month, d)
+
+            if d_date in time_nodes or time_nodes.index(d_date) < 1:
+                d_date_index = time_nodes.index(d_date)
+
+                if d_date_index > 0:
+                    tn_m1 = time_nodes[d_date_index - 1]
+                    foods = [
+                        f for f in foods if (
+                            f.xdate == tn_m1
+                            or (f.xdate < tn_m1 and f.get_remmainer(tn_m1) > 0)
+                        )
+                    ]
+                    rc_index = 0
+                    for row in sheet.iter_rows(
+                        max_col=5,
+                        min_row=row_index_offset,
+                        max_row=row_index_offset + len(foods),
+                    ):
+                        if rc_index > len(foods) - 1:
+                            break
+                        food = foods[rc_index]
+                        row[0].value = food.name
+                        row[1].value = food.count
+                        row[3].value = food.unit_price
+                        rc_index += 1
+
+                    wb_fpath = self.bill.operator_consuming_dpath / (
+                        f"consuming"
+                        + f"-{tn_m1.year}.{tn_m1.month}.{tn_m1.day}"
+                        + f"-{year}.{month}.{day}"
+                    ).as_posix()
+                    wb.save(wb_fpath)
+                    print_warning(
+                        _(
+                            "Sheet '{0}' was updated.\n"
+                            + "Press any key to continue when you have "
+                            + "completed the foods allocation."
+                        ).format(sheet.title)
+                    )
+                    wb.close()
+                    open_file(wb_fpath)
+                    print_info(
+                        _("Ok! I have updated spreadsheet '{0}'. (Press any key)").format(
+                            wb_fpath
+                        )
+                    )
+                    input()
+                    wb = load_workbook(wb_fpath)
+                    sheet = wb[self.pre_consuming_sheet_name]
+                    
+                    rc_index = 0
+                    for row in sheet.iter_rows(
+                        min_row = row_index_offset,
+                        min_col = col_index_offset,
+                        max_row = sheet.max_row,
+                        max_col = sheet.max_col
+                    ):
+                        c_index = col_index_offset
+                        for cell in row:
+                            food = foods[rc_index]
+                            if cell.value:
+                                cdate = sheet.cell(1,c_index).value.split('.')
+                                food.consumptions.append([
+                                    datetime(cdate[0],cdate[1],cdate[2]),
+                                    float(cell.value)
+                                ])
+                            c_index += 1
+                        rc_index += 1
+                    wb.close()
+                    sheet = None
+
+
+ 
+
+                wb = load_workbook(pre_consuming0_fpath)
+                sheet = wb[self.pre_consuming_sheet_name]
+                rc_index = 0
+
+            time_header = f"{year}.{month}.{d}"
             cell = sheet.cell(1, rc_index + col_index_offset)
             cell.value = time_header
             cell.number_format = numbers.FORMAT_TEXT
             rc_index += 1
-
-        rc_index = 0
-        for row in sheet.iter_rows(
-            max_col=5,
-            min_row=row_index_offset,
-            max_row=row_index_offset + len(foods),
-        ):
-            if rc_index > len(foods) - 1:
-                break
-            food = foods[rc_index]
-            row[0].value = food.get_name_with_residue_mark()
-            row[1].value = food.count
-            row[3].value = food.unit_price
-            rc_index += 1
-
-        wb.active = sheet
-        wb.save(wb_fpath)
-        wb.close()
-        print_warning(
-            _(
-                "Sheet '{0}' was updated.\n"
-                + "Press any key to continue when you have "
-                + "completed the foods allocation."
-            ).format(sheet.title)
-        )
-        print_info(
-            _("Ok! I have updated spreadsheet '{0}'. (Press any key)").format(
-                wb_fpath
-            )
-        )
-        open_file(wb_fpath)
-        input()
 
         pass
 
