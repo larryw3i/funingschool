@@ -1,6 +1,9 @@
 import os
 import sys
 
+import pandas as pd
+import numpy as np
+
 from fnschool import *
 
 
@@ -24,9 +27,9 @@ class Food:
         self.purchaser = purchaser
         pass
 
+
     @property
     def unit_price(self):
         return self.total_price / self.count
-
 
 # The end.

@@ -17,7 +17,7 @@ class Bill:
         return self._spreadsheet
 
     def make_spreadsheets(self):
-
+        self.spreadsheet.read_foods()
         pass
 
 

@@ -32,6 +32,8 @@ class SpreadSheet:
         return self._path
 
     def read_foods(self):
+        foods = pd.read_excel(self.path)
+        print(foods)
         pass
 
     def design_consuming(self):
