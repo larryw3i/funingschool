@@ -2,6 +2,7 @@ import os
 import sys
 import argparse
 
+from openpyxl import load_workbook
 from fnschool.language import *
 from fnschool.log import *
 from fnschool.path import *

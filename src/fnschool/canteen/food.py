@@ -54,9 +54,9 @@ class Food:
         return self.count - sum(
             [
                 c for d,c in self.consumptions
-                if d < cdate
+                if d <= cdate
             ]
-        ) if self.xdate < cdate else 0
+        ) if self.xdate <= cdate else 0
 
 
 # The end.

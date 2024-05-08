@@ -2,7 +2,9 @@ import os
 import sys
 from pathlib import Path
 import shutil
+import calendar
 import pandas as pd
+from datetime import datetime, timedelta
 import numpy as np
 
 
@@ -135,18 +137,18 @@ class SpreadSheet:
 
         foods = _foods
         foods = sorted(foods, key=lambda f: f.xdate)
-        self.consuming_foods(foods)
+        self.consume_foods(foods)
         return foods
         pass
 
-    def consuming_foods(self, foods):
-        foods = [f for f in foods if not f.is_abandoned]
-        year = foods[-1].xdate.year
-        month = foods[-1].xdate.month
+    def consume_foods(self, foods):
+        cfoods = [f for f in foods if not f.is_abandoned]
+        year = cfoods[-1].xdate.year
+        month = cfoods[-1].xdate.month
         time_nodes = sorted(
             list(
                 set(
-                    [f.xdate for f in foods]
+                    [f.xdate for f in cfoods]
                     + [
                         datetime(
                             year,
@@ -157,23 +159,26 @@ class SpreadSheet:
                 )
             )
         )
+        print(time_nodes)
 
         wb_fpathes = []
-        for i in range(1,len(time_nodes)+1):
+        for i in range(1,len(time_nodes)):
             tn0, tn1 = time_nodes[i-1], time_nodes[i]
             if tn0.month != tn1.month:
                 tn0 = datetime(tn1.year,tn1.month,1)
             wb_fpath = (self.bill.operator_consuming_dpath / (
                 f"consuming-"
-                + t0.strftime("%Y.%m.%d")+"-"
-                + t1.strftime("%Y.%m.%d")+".xlsx"
+                + tn0.strftime("%Y.%m.%d")+"-"
+                + tn1.strftime("%Y.%m.%d")+".xlsx"
             )).as_posix()
 
             wb_fpathes.append(wb_fpath)
 
+        print(wb_fpathes)
+
         foods_list = []
-        for xdate in list(set([f.xdate for f in foods])):
-            foods_list.append([f for f in foods if f.xdate == xdate])
+        for xdate in list(set([f.xdate for f in cfoods])):
+            foods_list.append([f for f in cfoods if f.xdate == xdate])
 
         for i,wb_fpath in enumerate(wb_fpathes):
             shutil.copy(pre_consuming0_fpath,wb_fpath)
@@ -183,14 +188,20 @@ class SpreadSheet:
                 )
             )
             wb = load_workbook(wb_fpath)
-            tn1 = self.bill.time_nodes[i+1]
-            tn0 = self.bill.time_nodes[i]
+            sheet = wb[self.pre_consuming_sheet_name]
+            tn1 = time_nodes[i+1]
+            tn0 = time_nodes[i]
             if not tn0.month == tn1.month:
                 tn0 = datetime(tn1.year, tn1.month,1)
 
-            wbfoods = [f for f in foods_list[i] if f.get_remmainer(tn0) > 0]
+            wbfoods = foods_list[i]
+            wbfoods0 = [f for f in cfoods if f.get_remmainer(tn0) > 0]
+            for wbfood in wbfoods0:
+                wbfood.name = wbfood.name + _("(Residual)")
+            wbfoods += wbfoods0
+
             for d_index in range(
-                1,
+                0,
                 (tn1 - tn0).days + 1
             ):
                 d_date = tn0+timedelta(days = d_index)
@@ -205,7 +216,7 @@ class SpreadSheet:
                 len(wbfoods)
             ):
                 wbfood = wbfoods[f_index]
-                row_index = self.pre_consuming_sheet_col_index_offset+f_index
+                row_index = self.pre_consuming_sheet_row_index_offset+f_index
                 sheet.cell(row_index,1, wbfood.name)
                 sheet.cell(row_index,2, wbfood.get_remmainer(tn0))
                 sheet.cell(row_index,4, wbfood.unit_price)
