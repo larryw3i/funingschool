@@ -43,7 +43,7 @@ class Food:
         self.purchaser = purchaser
         self.is_abandoned = is_abandoned
         self.is_inventory = is_inventory
-        self.consumings = []
+        self.consumptions = []
         pass
 
     @property
@@ -53,7 +53,7 @@ class Food:
     def get_remmainer(self,cdate):
         return self.count - sum(
             [
-                c for d,c in self.consumings
+                c for d,c in self.consumptions
                 if d < cdate
             ]
         ) if self.xdate < cdate else 0

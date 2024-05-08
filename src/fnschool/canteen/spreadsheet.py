@@ -166,13 +166,14 @@ class SpreadSheet:
             wb_fpath = (self.bill.operator_consuming_dpath / (
                 f"consuming-"
                 + t0.strftime("%Y.%m.%d")+"-"
-                + t1.strftime("%Y.%m.%d")
+                + t1.strftime("%Y.%m.%d")+".xlsx"
             )).as_posix()
+
             wb_fpathes.append(wb_fpath)
 
         foods_list = []
         for xdate in list(set([f.xdate for f in foods])):
-            foods_list.append([f for f in foods_list if f.xdate == xdate])
+            foods_list.append([f for f in foods if f.xdate == xdate])
 
         for i,wb_fpath in enumerate(wb_fpathes):
             shutil.copy(pre_consuming0_fpath,wb_fpath)
@@ -187,8 +188,7 @@ class SpreadSheet:
             if not tn0.month == tn1.month:
                 tn0 = datetime(tn1.year, tn1.month,1)
 
-            foods = foods_list[i]
-            foods = [f for f in foods if f.get_remmainer(tn0) > 0]
+            wbfoods = [f for f in foods_list[i] if f.get_remmainer(tn0) > 0]
             for d_index in range(
                 1,
                 (tn1 - tn0).days + 1
@@ -202,13 +202,13 @@ class SpreadSheet:
 
             for f_index in range(
                 0,
-                len(foods)
+                len(wbfoods)
             ):
-                food = foods[f_index]
+                wbfood = wbfoods[f_index]
                 row_index = self.pre_consuming_sheet_col_index_offset+f_index
-                sheet.cell(row_index,1, food.name)
-                sheet.cell(row_index,2, food.get_remmainer(tn0))
-                sheet.cell(row_index,4, food.unit_price)
+                sheet.cell(row_index,1, wbfood.name)
+                sheet.cell(row_index,2, wbfood.get_remmainer(tn0))
+                sheet.cell(row_index,4, wbfood.unit_price)
                 
             wb.save(wb_fpath)
             print_warning(
@@ -236,17 +236,19 @@ class SpreadSheet:
                 max_row = sheet.max_row,
                 max_col = sheet.max_col
             ):
-                col_index = col_index_offset
+                if f_index > len(foods) -1:
+                    break
+                food = foods[f_index]
+                col_index = self.pre_consuming_sheet_col_index_offset
                 for cell in row:
-                    food = foods[f_index]
                     if cell.value:
-                        cdate = sheet.cell(1,c_index).value.split('.')
+                        cdate = sheet.cell(1,col_index).value
                         food.consumptions.append([
-                            datetime(cdate[0],cdate[1],cdate[2]),
+                            datetime.strptime(cdate,"%Y.%m.%d"),
                             float(cell.value)
                         ])
-                        col_index += 1
-                        f_index += 1
+                    col_index += 1
+                f_index += 1
             wb.close()
             sheet = None
 
