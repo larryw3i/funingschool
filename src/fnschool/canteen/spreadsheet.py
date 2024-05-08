@@ -1,12 +1,14 @@
 import os
 import sys
 from pathlib import Path
+import shutil
 import pandas as pd
 import numpy as np
 
 
 from fnschool import *
 from fnschool.canteen.food import *
+from fnschool.canteen.path import *
 
 from tkinter import filedialog
 
@@ -138,6 +140,7 @@ class SpreadSheet:
         pass
 
     def consuming_foods(self, foods):
+        foods = [f for f in foods if not f.is_abandoned]
         year = foods[-1].xdate.year
         month = foods[-1].xdate.month
         time_nodes = sorted(
@@ -155,97 +158,97 @@ class SpreadSheet:
             )
         )
 
-        foods = [f for f in foods if not f.is_abandoned]
-        row_index_offset = self.pre_consuming_sheet_row_index_offset
-        col_index_offset = self.pre_consuming_sheet_col_index_offset
+        wb_fpathes = []
+        for i in range(1,len(time_nodes)+1):
+            tn0, tn1 = time_nodes[i-1], time_nodes[i]
+            if tn0.month != tn1.month:
+                tn0 = datetime(tn1.year,tn1.month,1)
+            wb_fpath = (self.bill.operator_consuming_dpath / (
+                f"consuming-"
+                + t0.strftime("%Y.%m.%d")+"-"
+                + t1.strftime("%Y.%m.%d")
+            )).as_posix()
+            wb_fpathes.append(wb_fpath)
 
-        wb = None
-        sheet = None
-        for d in range(1, time_nodes[-1].day + 1):
-            d_date = datetime(year, month, d)
+        foods_list = []
+        for xdate in list(set([f.xdate for f in foods])):
+            foods_list.append([f for f in foods_list if f.xdate == xdate])
 
-            if d_date in time_nodes or time_nodes.index(d_date) < 1:
-                d_date_index = time_nodes.index(d_date)
+        for i,wb_fpath in enumerate(wb_fpathes):
+            shutil.copy(pre_consuming0_fpath,wb_fpath)
+            print_info(
+                _("Spreadsheet \"{0}\" was copied to \"{1}\".").format(
+                    pre_consuming0_fpath,wb_fpath
+                )
+            )
+            wb = load_workbook(wb_fpath)
+            tn1 = self.bill.time_nodes[i+1]
+            tn0 = self.bill.time_nodes[i]
+            if not tn0.month == tn1.month:
+                tn0 = datetime(tn1.year, tn1.month,1)
 
-                if d_date_index > 0:
-                    tn_m1 = time_nodes[d_date_index - 1]
-                    foods = [
-                        f for f in foods if (
-                            f.xdate == tn_m1
-                            or (f.xdate < tn_m1 and f.get_remmainer(tn_m1) > 0)
-                        )
-                    ]
-                    rc_index = 0
-                    for row in sheet.iter_rows(
-                        max_col=5,
-                        min_row=row_index_offset,
-                        max_row=row_index_offset + len(foods),
-                    ):
-                        if rc_index > len(foods) - 1:
-                            break
-                        food = foods[rc_index]
-                        row[0].value = food.name
-                        row[1].value = food.count
-                        row[3].value = food.unit_price
-                        rc_index += 1
+            foods = foods_list[i]
+            foods = [f for f in foods if f.get_remmainer(tn0) > 0]
+            for d_index in range(
+                1,
+                (tn1 - tn0).days + 1
+            ):
+                d_date = tn0+timedelta(days = d_index)
+                sheet.cell(
+                    1,
+                    self.pre_consuming_sheet_col_index_offset+d_index,
+                    d_date.strftime("%Y.%m.%d")
+                )
 
-                    wb_fpath = self.bill.operator_consuming_dpath / (
-                        f"consuming"
-                        + f"-{tn_m1.year}.{tn_m1.month}.{tn_m1.day}"
-                        + f"-{year}.{month}.{day}"
-                    ).as_posix()
-                    wb.save(wb_fpath)
-                    print_warning(
-                        _(
-                            "Sheet '{0}' was updated.\n"
-                            + "Press any key to continue when you have "
-                            + "completed the foods allocation."
-                        ).format(sheet.title)
-                    )
-                    wb.close()
-                    open_file(wb_fpath)
-                    print_info(
-                        _("Ok! I have updated spreadsheet '{0}'. (Press any key)").format(
-                            wb_fpath
-                        )
-                    )
-                    input()
-                    wb = load_workbook(wb_fpath)
-                    sheet = wb[self.pre_consuming_sheet_name]
-                    
-                    rc_index = 0
-                    for row in sheet.iter_rows(
-                        min_row = row_index_offset,
-                        min_col = col_index_offset,
-                        max_row = sheet.max_row,
-                        max_col = sheet.max_col
-                    ):
-                        c_index = col_index_offset
-                        for cell in row:
-                            food = foods[rc_index]
-                            if cell.value:
-                                cdate = sheet.cell(1,c_index).value.split('.')
-                                food.consumptions.append([
-                                    datetime(cdate[0],cdate[1],cdate[2]),
-                                    float(cell.value)
-                                ])
-                            c_index += 1
-                        rc_index += 1
-                    wb.close()
-                    sheet = None
+            for f_index in range(
+                0,
+                len(foods)
+            ):
+                food = foods[f_index]
+                row_index = self.pre_consuming_sheet_col_index_offset+f_index
+                sheet.cell(row_index,1, food.name)
+                sheet.cell(row_index,2, food.get_remmainer(tn0))
+                sheet.cell(row_index,4, food.unit_price)
+                
+            wb.save(wb_fpath)
+            print_warning(
+                _(
+                    "Sheet '{0}' was updated.\n"
+                    + "Press any key to continue when you have "
+                    + "completed the foods allocation."
+                ).format(sheet.title)
+            )
+            wb.close()
+            open_file(wb_fpath)
+            print_info(
+                _("Ok! I have updated spreadsheet '{0}'. (Press any key)").format(
+                    wb_fpath
+                )
+            )
+            input()
+            wb = load_workbook(wb_fpath)
+            sheet = wb[self.pre_consuming_sheet_name]
 
-
- 
-
-                wb = load_workbook(pre_consuming0_fpath)
-                sheet = wb[self.pre_consuming_sheet_name]
-                rc_index = 0
-
-            time_header = f"{year}.{month}.{d}"
-            cell = sheet.cell(1, rc_index + col_index_offset)
-            cell.value = time_header
-            cell.number_format = numbers.FORMAT_TEXT
-            rc_index += 1
+            f_index = 0
+            for row in sheet.iter_rows(
+                min_row = row_index_offset,
+                min_col = col_index_offset,
+                max_row = sheet.max_row,
+                max_col = sheet.max_col
+            ):
+                col_index = col_index_offset
+                for cell in row:
+                    food = foods[f_index]
+                    if cell.value:
+                        cdate = sheet.cell(1,c_index).value.split('.')
+                        food.consumptions.append([
+                            datetime(cdate[0],cdate[1],cdate[2]),
+                            float(cell.value)
+                        ])
+                        col_index += 1
+                        f_index += 1
+            wb.close()
+            sheet = None
 
         pass
 

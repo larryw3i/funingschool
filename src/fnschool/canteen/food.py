@@ -56,7 +56,7 @@ class Food:
                 c for d,c in self.consumings
                 if d < cdate
             ]
-        )
+        ) if self.xdate < cdate else 0
 
 
 # The end.
