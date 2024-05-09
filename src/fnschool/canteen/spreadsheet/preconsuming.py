@@ -1,121 +1,24 @@
 
 import os
 import sys
+import calendar
+from datetime import datetime, timedelta
 
 from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.path import *
+from fnschool.canteen.spreadsheet.base import *
 
-class PreConsuming():
+class PreConsuming(SpreadsheetBase):
     def __init__(self,bill):
-        self._path0 = pre_consuming0_fpath
-        self.sheet_name0 = "出库计划表"
+        super().__init__(bill)
+        self.path0 = pre_consuming0_fpath
         self.row_index_offset = 3
         self.col_index_offset = 5
-        self.food_name_cols = ["商品名称", "食材名称", "食品名称"]
-        self.food_name_col_name = None
-        self.unit_name_cols = ["订货单位", "食材单位", "订购单位", "计量单位"]
-        self.unit_name_col_name = None
-        self.total_price_cols = ["总价", "折前金额", "折后金额", "总金额"]
-        self.total_price_col_name = None
-        self.xdate_cols = ["送货日期", "检查日期", "清点日期", "x日期", "日期"]
-        self.xdate_col_name = None
-        self.purchaser_name_cols = [
-            "客户名称",
-            "购买者",
-            "购买者名称",
-            "顾客名称",
-            "下单单位名",
-            "购入单位名",
-        ]
-        self.purchaser_name_col_name = None
-        self.count_cols = ["总数", "数量", "下单数量", "订货数量", "发货数量"]
-        self.count_col_name = None
-        self.abandoned_cols = [
-            "不计",
-            "未入库",
-            "非入库",
-            "不需入库",
-            "是非入库",
-        ]
-        self.abandoned_col_name = None
-        self.inventory_cols = [
-            "盘存",
-            "存余",
-            "结余",
-            "剩余",
-            "是剩余",
-            "是盘存",
-            "是结余",
-        ]
-        self.inventory_col_name = None
+ 
+        self.sheet_name0 = "出库计划表"
 
-
-    def set_col_names(self, columns):
-        columns = list(columns)
-        for column_name in columns:
-            if column_name in self.food_name_cols:
-                self.food_name_col_name = column_name
-            if column_name in self.unit_name_cols:
-                self.unit_name_col_name = column_name
-            if column_name in self.count_cols:
-                self.count_col_name = column_name
-            if column_name in self.total_price_cols:
-                self.total_price_col_name = column_name
-            if column_name in self.abandoned_cols:
-                self.abandoned_col_name = column_name
-            if column_name in self.inventory_cols:
-                self.inventory_col_name = column_name
-            if column_name in self.purchaser_name_cols:
-                self.purchaser_name_col_name = column_name
-            if column_name in self.xdate_cols:
-                self.xdate_col_name = column_name
-
-        for col_name, col_names in [
-            (self.food_name_col_name, self.food_name_cols),
-            (self.unit_name_col_name, self.unit_name_cols),
-            (self.count_col_name, self.count_cols),
-            (self.total_price_col_name, self.total_price_cols),
-            # (self.inventory_col_name,self.inventory_cols),
-            # (self.abandoned_col_name,self.abandoned_cols),
-            (self.xdate_col_name, self.xdate_cols),
-            (self.purchaser_name_col_name, self.purchaser_name_cols),
-        ]:
-            if not col_name:
-                print_error(
-                    _("There should be column ({0}), please add it.").format(
-                        "|".join(col_names)
-                    )
-                )
-                exit()
-
-    def read_foods(self):
-        foods = pd.read_excel(self.path)
-        self.set_col_names(foods.columns)
-        _foods = []
-        for __, food in foods.iterrows():
-            _food = Food(
-                self.bill,
-                name=food[self.food_name_col_name],
-                unit_name=food[self.unit_name_col_name],
-                count=food[self.count_col_name],
-                total_price=food[self.total_price_col_name],
-                xdate=food[self.xdate_col_name],
-                purchaser=food[self.purchaser_name_col_name],
-            )
-            if self.abandoned_col_name:
-                _food.is_abandoned = not food[self.abandoned_col_name] is np.nan
-            if self.inventory_col_name:
-                _food.is_inventory = not food[self.inventory_col_name] is np.nan
-            _foods.append(_food)
-
-        foods = _foods
-        foods = sorted(foods, key=lambda f: f.xdate)
-        self.consume_foods(foods)
-        return foods
-        pass
-
-    def consume_foods(self, foods):
+    def pre_consume_foods(self, foods):
         cfoods = [f for f in foods if not f.is_abandoned]
         year = cfoods[-1].xdate.year
         month = cfoods[-1].xdate.month
@@ -133,7 +36,6 @@ class PreConsuming():
                 )
             )
         )
-        print(time_nodes)
 
         wb_fpathes = []
         for i in range(1, len(time_nodes)):
@@ -141,7 +43,7 @@ class PreConsuming():
             if tn0.month != tn1.month:
                 tn0 = datetime(tn1.year, tn1.month, 1)
             wb_fpath = (
-                self.bill.operator_consuming_dpath
+                self.bill.operator.preconsuming_dpath
                 / (
                     f"consuming-"
                     + tn0.strftime("%Y.%m.%d")
@@ -153,18 +55,12 @@ class PreConsuming():
 
             wb_fpathes.append(wb_fpath)
 
-        print(wb_fpathes)
-
-        foods_list = []
-        for xdate in list(set([f.xdate for f in cfoods])):
-            foods_list.append([f for f in cfoods if f.xdate == xdate])
-
         for i, wb_fpath in enumerate(wb_fpathes):
             if not Path(wb_fpath).exists():
-                shutil.copy(_path0, wb_fpath)
+                shutil.copy(self.path0, wb_fpath)
                 print_info(
                     _('Spreadsheet "{0}" was copied to "{1}".').format(
-                        _path0, wb_fpath
+                        self.path0, wb_fpath
                     )
                 )
             wb = load_workbook(wb_fpath)
@@ -174,26 +70,40 @@ class PreConsuming():
             if not tn0.month == tn1.month:
                 tn0 = datetime(tn1.year, tn1.month, 1)
 
-            wbfoods = foods_list[i]
-            wbfoods0 = [f for f in cfoods if f.get_remmainer(tn0) > 0]
-            for wbfood in wbfoods0:
-                wbfood.name = wbfood.name + _("(Residual)")
-            wbfoods += wbfoods0
 
+            wbfoods = [f for f in cfoods if f.get_remmainer(tn0) > 0 and f.xdate <= tn0]
+            for wbfood in [f for f in wbfoods if f.xdate < tn0]:
+                residual_mark = _("(Remaining)")
+                if not wbfood.name.endswith(residual_mark):
+                    wbfood.name = wbfood.name + residual_mark
+            
+            col_index = 0
             for d_index in range(0, (tn1 - tn0).days + 1):
                 d_date = tn0 + timedelta(days=d_index)
+                col_index = self.col_index_offset + d_index
                 sheet.cell(
                     1,
-                    self.sheet_col_index_offset + d_index,
+                    col_index,
                     d_date.strftime("%Y.%m.%d"),
                 )
 
+            for col_index in range(col_index+1,sheet.max_column):
+                    sheet.cell(1,col_index,'')
+            
+            row_index = 0
             for f_index in range(0, len(wbfoods)):
                 wbfood = wbfoods[f_index]
-                row_index = self.sheet_row_index_offset + f_index
+                row_index = self.row_index_offset + f_index
                 sheet.cell(row_index, 1, wbfood.name)
-                sheet.cell(row_index, 2, wbfood.get_remmainer(tn1))
+                sheet.cell(row_index, 2, wbfood.get_remmainer(tn0))
                 sheet.cell(row_index, 4, wbfood.unit_price)
+
+            for row_index in range(row_index+1,sheet.max_row+1):
+                sheet.cell(row_index, 1, "")
+                sheet.cell(row_index, 2, "")
+                sheet.cell(row_index, 4, "")
+
+
 
             wb.save(wb_fpath)
             print_warning(
@@ -216,15 +126,15 @@ class PreConsuming():
 
             f_index = 0
             for row in sheet.iter_rows(
-                min_row=row_index_offset,
-                min_col=col_index_offset,
+                min_row=self.row_index_offset,
+                min_col=self.col_index_offset,
                 max_row=sheet.max_row,
-                max_col=sheet.max_col,
+                max_col=sheet.max_column,
             ):
                 if f_index > len(foods) - 1:
                     break
                 food = foods[f_index]
-                col_index = self.sheet_col_index_offset
+                col_index = self.col_index_offset
                 for cell in row:
                     if cell.value:
                         cdate = sheet.cell(1, col_index).value
@@ -240,7 +150,6 @@ class PreConsuming():
             sheet = None
 
         pass
-
 
 
 # The end.

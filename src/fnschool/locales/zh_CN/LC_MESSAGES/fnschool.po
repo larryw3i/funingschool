@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-09 23:39+0800\n"
-"PO-Revision-Date: 2024-05-09 23:44+0800\n"
+"POT-Creation-Date: 2024-05-10 03:14+0800\n"
+"PO-Revision-Date: 2024-05-10 03:15+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: en_US\n"
 "Language-Team: English - United States <larryw3i@163.com>\n"
@@ -169,10 +169,6 @@ msgstr "好的，我知道了。（按任意键继续）"
 msgid "%s can't change."
 msgstr "%s 无法转换。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:75
-msgid "Tell me your name please:"
-msgstr "请输入您的名字（通常为操作员/经办人的姓名）："
-
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/config.py:58
 msgid "Default time nodes of {0} have been used."
 msgstr "{0} 的默认时间节点被使用。"
@@ -221,6 +217,10 @@ msgstr "出库设计文件所在的目录是：{0}"
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.cp.py:387
 msgid "Consumptions were read."
 msgstr "每日食材消耗已被读取。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:22
+msgid "Tell me your name please:"
+msgstr "请输入您的名字（通常为操作员/经办人的姓名）："
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/profile.py:49
 msgid "Profile label"
@@ -511,7 +511,7 @@ msgstr "没有结余的食材。"
 msgid "Consuming days:"
 msgstr "耗材日期："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:200
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:110
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2014
 msgid ""
 "Sheet '{0}' was updated.\n"
@@ -520,7 +520,7 @@ msgstr ""
 "工作表 “{0}” 已更新。\n"
 "在你完成每天消耗设计后按任意建以继续。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:209
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:119
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2021
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr "好的，我已经更新工作簿 “{0}” 了。（按任意键继续）"
@@ -564,29 +564,29 @@ msgstr "目录 “%s” 已创建。"
 msgid "Copying workbook..."
 msgstr "正在复制工作簿......"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:86
-msgid "There should be column ({0}), please add it."
-msgstr "没有找到 {0} 列，请先添加它。"
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:166
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:62
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr "工作簿 “{0}” 已被复制到 “{1}” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:180
-msgid "(Residual)"
-msgstr "（盘存）"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:76
+msgid "(Remaining)"
+msgstr "（余下）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:15
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:83
+msgid "There should be column ({0}), please add it."
+msgstr "没有找到 {0} 列，请先添加它。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:93
 msgid "Spreadsheet Files"
 msgstr "工作簿文件。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:18
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:96
 msgid "Select the purchasing file"
-msgstr "选择购入食材列表的文件"
+msgstr "选择购入食材的列表文件"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:23
-msgid "No file was selected."
-msgstr "未选择文件。"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:101
+msgid "No file was selected, exit."
+msgstr "未选择文件，退出。"
 
 #~ msgid "Please configure operator."
 #~ msgstr "请设置经办人。"
@@ -666,3 +666,6 @@ msgstr "未选择文件。"
 
 #~ msgid "Please update your configuration file."
 #~ msgstr "请更新你的配置文件。"
+
+#~ msgid "(Residual)"
+#~ msgstr "（盘存）"

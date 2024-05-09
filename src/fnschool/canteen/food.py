@@ -1,6 +1,6 @@
 import os
 import sys
-from datetime import datetime
+from datetime import datetime,timedelta
 
 import pandas as pd
 import numpy as np
@@ -53,7 +53,7 @@ class Food:
     def get_remmainer(self, cdate):
         remainer = self.count
         if self.xdate < cdate:
-            remainer = self.count - sum(
+            remainer = remainer - sum(
                 [c for d, c in self.consumptions if d < cdate]
             )
         if self.xdate > cdate:

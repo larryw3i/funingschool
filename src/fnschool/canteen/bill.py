@@ -4,6 +4,7 @@ import calendar
 from fnschool import *
 
 from fnschool.canteen.spreadsheet.ctspreadsheet import *
+from fnschool.canteen.operator import *
 from fnschool.canteen.path import *
 
 
@@ -14,19 +15,20 @@ class Bill:
         self._time_nodes = None
         self._operator_name = None
         self._food_classes = None
+        self._operator = None
 
         pass
 
     @property
     def spreadsheet(self):
         if not self._spreadsheet:
-            self._spreadsheet = SpreadSheet(self)
+            self._spreadsheet = CtSpreadSheet(self)
         return self._spreadsheet
 
     @property
     def foods(self):
         if not self._foods:
-            self._foods = self.spreadsheet.read_foods()
+            self._foods = self.spreadsheet.purchasing.read_pfoods()
         return self._foods
 
     def make_spreadsheets(self):
@@ -60,37 +62,16 @@ class Bill:
     @property
     def food_classes(self):
         if not self._food_classes:
-            config_fpath = get_food_classes_config_fpath(self.operator_name)
+            config_fpath = get_food_classes_config_fpath(self.operator.name)
             with open(config_fpath, "r", encoding="utf-8") as f:
                 self._food_classes = tomllib.load(f)
 
         return self._food_classes
 
     @property
-    def operator_name(self):
-        if not self._operator_name:
-            with open(operator_name_fpath, "r", encoding="utf-8") as f:
-                self._operator_name = f.read()
-            if self._operator_name == "":
-                print_info(_("Tell me your name please:"))
-                self._operator_name = input(">_ ")
-                with open(operator_name_fpath, "w", encoding="utf-8") as f:
-                    f.write(self._operator_name)
-        return self._operator_name
-
-    @property
-    def operator_dpath(self):
-        dpath = user_config_dir / self.operator_name
-        if not dpath.exists():
-            os.makedirs(dpath, exist_ok=True)
-        return dpath
-
-    @property
-    def operator_consuming_dpath(self):
-        dpath = self.operator_dpath / "consuming"
-        if not dpath.exists():
-            os.makedirs(dpath, exist_ok=True)
-        return dpath
-
+    def operator(self):
+        if not self._operator:
+            self._operator = Operator(self)
+        return self._operator
 
 # The end.

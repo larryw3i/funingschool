@@ -3,8 +3,10 @@ import sys
 import argparse
 from pathlib import Path
 
+import pandas as pd
+import numpy as np
 from openpyxl import load_workbook
-from fnschool.language import *
+from fnschool.language import _
 from fnschool.log import *
 from fnschool.path import *
 from fnschool.entry import *

@@ -29,24 +29,25 @@ class CtSpreadSheet:
     @property
     def purchasing(self):
         if not self._purchasing:
-            self._purchasing = Purchasing(self)
+            self._purchasing = Purchasing(self.bill)
         return self._purchasing
     
     @property
     def preconsuming(self):
         if not self._preconsuming:
-            self._preconsuming = PreConsuming(self)
+            self._preconsuming = PreConsuming(self.bill)
+        return self._preconsuming
 
     @property
     def consuming(self):
         if not self._consuming:
-            self._consuming = Consuming(self)
+            self._consuming = Consuming(self.bill)
         return self._consuming
 
     @property
     def inventory(self):
         if not self._inventory:
-            self._inventory =  Inventory(self)
+            self._inventory =  Inventory(self.bill)
         return self._inventory
 
 # The end.

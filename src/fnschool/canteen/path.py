@@ -27,17 +27,13 @@ if not operator_name_fpath.exists():
     os.link(operator_name_fpath.as_posix(), operator_name_link_fpath.as_posix())
 
 
+
 def get_food_classes_config_fpath(user_name):
     fpath = user_config_dir / user_name / "food_classes.toml"
 
     if not fpath.exists():
         shutil.copy(food_classes_config0_fpath, fpath)
-
-    if not os.path.islink(food_classes_config_link_fpath):
-        os.link(fpath.as_posix(), food_classes_config_link_fpath.as_posix())
-    elif not os.readlink(food_classes_config_link_fpath.as_posix()) == fpath:
-        os.remove(food_classes_config_link_fpath.as_posix())
-        os.link(fpath.as_posix(), food_classes_config_link_fpath.as_posix())
+        make_link(fpath.as_posix(), food_classes_config_link_fpath.as_posix())
 
 
 # The end.

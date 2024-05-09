@@ -1,6 +1,6 @@
 import os
 import sys
-from pathlib import Path
+from pathlib import Path, PosixPath
 import shutil
 import getpass
 import platform
@@ -39,6 +39,19 @@ if not config_fpath.exists():
         % (config0_fpath, config_fpath)
     )
 
+def make_link(src,link):
+    if isinstance(src,PosixPath):
+        src = src.as_posix()
+    if isinstance(link,PosixPath):
+        link = link.as_posix()
+
+    if not os.path.islink(link):
+        os.symlink(src, link,target_is_directory = os.path.isdir(src))
+    elif not os.readlink(link) == src:
+        os.remove(link)
+        os.link(src, link, target_is_directory = os.path.isdir(src))
+
+ 
 
 def open_sys_explorer(dest=None):
     sys_platform = platform.platform()
