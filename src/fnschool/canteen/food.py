@@ -51,14 +51,14 @@ class Food:
         return self.total_price / self.count
 
     def get_remmainer(self, cdate):
-        remainer = self.count
         if self.xdate < cdate:
-            remainer = remainer - sum(
-                [c for d, c in self.consumptions if d < cdate]
+            return self.count - sum(
+                [c for d, c in self.consumptions if d <= cdate]
             )
+        if self.xdate == cdate:
+            return self.count
         if self.xdate > cdate:
             return 0
-        return remainer
 
 
 # The end.

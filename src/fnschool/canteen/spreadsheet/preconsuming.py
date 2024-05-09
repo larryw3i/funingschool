@@ -40,13 +40,18 @@ class PreConsuming(SpreadsheetBase):
         wb_fpathes = []
         for i in range(1, len(time_nodes)):
             tn0, tn1 = time_nodes[i - 1], time_nodes[i]
+            tn0_cp = tn0
             if tn0.month != tn1.month:
                 tn0 = datetime(tn1.year, tn1.month, 1)
             wb_fpath = (
                 self.bill.operator.preconsuming_dpath
                 / (
                     f"consuming-"
-                    + tn0.strftime("%Y.%m.%d")
+                    + (
+                        tn0.strftime("%Y.%m.%d")
+                        if not tn0_cp.month == tn1.month
+                        else (tn0 + timedelta(days=1)).strftime("%Y.%m.%d")
+                    )
                     + "-"
                     + tn1.strftime("%Y.%m.%d")
                     + ".xlsx"
@@ -67,6 +72,7 @@ class PreConsuming(SpreadsheetBase):
             sheet = wb[self.sheet_name0]
             tn1 = time_nodes[i + 1]
             tn0 = time_nodes[i]
+            tn0_cp = tn0
             if not tn0.month == tn1.month:
                 tn0 = datetime(tn1.year, tn1.month, 1)
 
@@ -80,13 +86,17 @@ class PreConsuming(SpreadsheetBase):
 
             col_index = 0
             for d_index in range(0, (tn1 - tn0).days + 1):
-                d_date = tn0 + timedelta(days=d_index)
+                d_date = tn0 + timedelta(
+                    days=d_index + (1 if tn0_cp.month == tn1.month else 0)
+                )
                 col_index = self.col_index_offset + d_index
                 sheet.cell(
                     1,
                     col_index,
                     d_date.strftime("%Y.%m.%d"),
                 )
+                if d_date == tn1:
+                    break
 
             for col_index in range(col_index + 1, sheet.max_column):
                 sheet.cell(1, col_index, "")
@@ -136,7 +146,8 @@ class PreConsuming(SpreadsheetBase):
             print_error(
                 _(
                     "There is no need to design for "
-                    + "dates without food consumption. (Ok, I know [press any key to continue])"
+                    + "dates without food consumption. "
+                    + "(Ok, I know [press any key to continue])"
                 )
             )
             input()
@@ -158,9 +169,9 @@ class PreConsuming(SpreadsheetBase):
                 max_row=sheet.max_row,
                 max_col=sheet.max_column,
             ):
-                if f_index > len(foods) - 1:
+                if f_index == len(wbfoods):
                     break
-                food = foods[f_index]
+                food = wbfoods[f_index]
                 col_index = self.col_index_offset
                 for cell in row:
                     if cell.value:

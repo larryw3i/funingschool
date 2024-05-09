@@ -33,7 +33,15 @@ class Bill:
 
     def make_spreadsheets(self):
         for f in self.foods:
-            print(f.xdate, f.name, f.count, f.total_price, f.unit_price)
+            print(
+                f.xdate.strftime("%Y.%m.%d"),
+                f.name,
+                f.count,
+                f.total_price,
+                f.unit_price,
+            )
+            for d, c in f.consumptions:
+                print("\t", d.strftime("%Y.%m.%d"), c)
         print(self.time_nodes)
         pass
 
