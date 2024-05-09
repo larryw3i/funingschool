@@ -82,14 +82,14 @@ class Bill:
     def operator_dpath(self):
         dpath = user_config_dir / self.operator_name
         if not dpath.exists():
-            os.makedirs(dpath,exist_ok=True)
+            os.makedirs(dpath, exist_ok=True)
         return dpath
 
     @property
     def operator_consuming_dpath(self):
         dpath = self.operator_dpath / "consuming"
         if not dpath.exists():
-            os.makedirs(dpath, exist_ok = True)
+            os.makedirs(dpath, exist_ok=True)
         return dpath
 
 
