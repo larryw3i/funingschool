@@ -1,4 +1,3 @@
-
 import os
 import sys
 import calendar
@@ -9,13 +8,14 @@ from fnschool.canteen.food import *
 from fnschool.canteen.path import *
 from fnschool.canteen.spreadsheet.base import *
 
+
 class PreConsuming(SpreadsheetBase):
-    def __init__(self,bill):
+    def __init__(self, bill):
         super().__init__(bill)
         self.path0 = pre_consuming0_fpath
         self.row_index_offset = 3
         self.col_index_offset = 5
- 
+
         self.sheet_name0 = "出库计划表"
 
     def pre_consume_foods(self, foods):
@@ -70,13 +70,14 @@ class PreConsuming(SpreadsheetBase):
             if not tn0.month == tn1.month:
                 tn0 = datetime(tn1.year, tn1.month, 1)
 
-
-            wbfoods = [f for f in cfoods if f.get_remmainer(tn0) > 0 and f.xdate <= tn0]
+            wbfoods = [
+                f for f in cfoods if f.get_remmainer(tn0) > 0 and f.xdate <= tn0
+            ]
             for wbfood in [f for f in wbfoods if f.xdate < tn0]:
                 residual_mark = _("(Remaining)")
                 if not wbfood.name.endswith(residual_mark):
                     wbfood.name = wbfood.name + residual_mark
-            
+
             col_index = 0
             for d_index in range(0, (tn1 - tn0).days + 1):
                 d_date = tn0 + timedelta(days=d_index)
@@ -87,9 +88,9 @@ class PreConsuming(SpreadsheetBase):
                     d_date.strftime("%Y.%m.%d"),
                 )
 
-            for col_index in range(col_index+1,sheet.max_column):
-                    sheet.cell(1,col_index,'')
-            
+            for col_index in range(col_index + 1, sheet.max_column):
+                sheet.cell(1, col_index, "")
+
             row_index = 0
             for f_index in range(0, len(wbfoods)):
                 wbfood = wbfoods[f_index]
@@ -98,12 +99,10 @@ class PreConsuming(SpreadsheetBase):
                 sheet.cell(row_index, 2, wbfood.get_remmainer(tn0))
                 sheet.cell(row_index, 4, wbfood.unit_price)
 
-            for row_index in range(row_index+1,sheet.max_row+1):
+            for row_index in range(row_index + 1, sheet.max_row + 1):
                 sheet.cell(row_index, 1, "")
                 sheet.cell(row_index, 2, "")
                 sheet.cell(row_index, 4, "")
-
-
 
             wb.save(wb_fpath)
             print_warning(
@@ -111,29 +110,34 @@ class PreConsuming(SpreadsheetBase):
                     "Sheet '{0}' of \"{1}\" was updated.\n"
                     + "Press any key to continue when you have "
                     + "completed the foods allocation."
-                ).format(
-                    sheet.title,
-                    wb_fpath
-                )
+                ).format(sheet.title, wb_fpath)
             )
-            new_wbfoods = [f for f in cfoods if f.get_remmainer(tn1)>0 and f.xdate == tn1]
+            new_wbfoods = [
+                f for f in cfoods if f.get_remmainer(tn1) > 0 and f.xdate == tn1
+            ]
             print_info(
                 (
                     _("New purchased foods for date {0} is:")
-                    if len(new_wbfoods)>0 else 
-                    _("New purchased foods for date {0} are:")
+                    if len(new_wbfoods) > 0
+                    else _("New purchased foods for date {0} are:")
                 ).format(tn1.strftime("%Y.%m.%d"))
             )
 
-            for f in new_wbfoods:
-                print(f.name, f.count, f.unit_name,end='\t')
-            print()
+            print_info(
+                "  ".join(
+                    [
+                        f"({i+1}){f.name} {f.count} {f.unit_name}"
+                        for i, f in enumerate(new_wbfoods)
+                    ]
+                )
+            )
+
             print_warning(_("Negligible foods are not listed."))
             print_error(
                 _(
                     "There is no need to design for "
                     + "dates without food consumption. (Ok, I know [press any key to continue])"
-                )            
+                )
             )
             input()
             wb.close()

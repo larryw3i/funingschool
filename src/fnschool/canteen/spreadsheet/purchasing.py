@@ -1,4 +1,3 @@
-
 import os
 import sys
 from tkinter import filedialog
@@ -8,7 +7,7 @@ from fnschool.canteen.spreadsheet.base import *
 
 
 class Purchasing(SpreadsheetBase):
-    def __init__(self,bill):
+    def __init__(self, bill):
         super().__init__(bill)
         self._path = None
         self.food_name_cols = ["商品名称", "食材名称", "食品名称"]
@@ -49,7 +48,6 @@ class Purchasing(SpreadsheetBase):
         ]
         self.inventory_col_name = None
 
-
     def set_col_names(self, columns):
         columns = list(columns)
         for column_name in columns:
@@ -86,7 +84,6 @@ class Purchasing(SpreadsheetBase):
                 )
                 exit()
 
-
     @property
     def path(self):
         if not self._path:
@@ -104,7 +101,6 @@ class Purchasing(SpreadsheetBase):
 
             self._path = filename
         return self._path
-
 
     def read_pfoods(self):
         foods = pd.read_excel(self.path)
@@ -131,4 +127,3 @@ class Purchasing(SpreadsheetBase):
         self.spreadsheet.preconsuming.pre_consume_foods(foods)
         return foods
         pass
-

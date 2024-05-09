@@ -1,4 +1,3 @@
-
-class UnWarehousing():
+class UnWarehousing:
     def __init__(self):
         pass

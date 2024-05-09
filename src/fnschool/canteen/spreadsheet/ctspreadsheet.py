@@ -12,7 +12,7 @@ from tkinter import filedialog
 from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.path import *
-from fnschool.canteen.spreadsheet.purchasing  import Purchasing
+from fnschool.canteen.spreadsheet.purchasing import Purchasing
 from fnschool.canteen.spreadsheet.consuming import Consuming
 from fnschool.canteen.spreadsheet.preconsuming import PreConsuming
 from fnschool.canteen.spreadsheet.inventory import Inventory
@@ -31,7 +31,7 @@ class CtSpreadSheet:
         if not self._purchasing:
             self._purchasing = Purchasing(self.bill)
         return self._purchasing
-    
+
     @property
     def preconsuming(self):
         if not self._preconsuming:
@@ -47,7 +47,8 @@ class CtSpreadSheet:
     @property
     def inventory(self):
         if not self._inventory:
-            self._inventory =  Inventory(self.bill)
+            self._inventory = Inventory(self.bill)
         return self._inventory
+
 
 # The end.

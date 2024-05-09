@@ -74,4 +74,5 @@ class Bill:
             self._operator = Operator(self)
         return self._operator
 
+
 # The end.

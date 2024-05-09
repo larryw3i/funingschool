@@ -27,7 +27,6 @@ if not operator_name_fpath.exists():
     os.link(operator_name_fpath.as_posix(), operator_name_link_fpath.as_posix())
 
 
-
 def get_food_classes_config_fpath(user_name):
     fpath = user_config_dir / user_name / "food_classes.toml"
 

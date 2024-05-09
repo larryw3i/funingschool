@@ -1,12 +1,12 @@
-
 import os
 import sys
 
 from fnschool import *
 from fnschool.canteen.path import *
 
-class Operator():
-    def __init__(self,bill):
+
+class Operator:
+    def __init__(self, bill):
         self.bill = bill
         self._name = None
         self._dpath = None
@@ -36,11 +36,9 @@ class Operator():
     @property
     def preconsuming_dpath(self):
         if not self._preconsuming_dpath:
-            dpath = self.dpath  / "preconsuming"
+            dpath = self.dpath / "preconsuming"
             if not dpath.exists():
                 os.makedirs(dpath, exist_ok=True)
             make_link(dpath, canteen_links_dpath / "preconsuming")
             self._preconsuming_dpath = dpath
         return self._preconsuming_dpath
-
-
