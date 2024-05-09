@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-10 03:14+0800\n"
+"POT-Creation-Date: 2024-05-10 03:55+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -488,7 +488,7 @@ msgid ""
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:119
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:126
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2021
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
@@ -538,6 +538,12 @@ msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:76
 msgid "(Remaining)"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:117
+msgid ""
+"There is no need to design for dates without food consumption. (Ok, I "
+"know [press any key to continue])"
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:83
@@ -888,5 +894,22 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "(Residual)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Sheet '{0}' was updated.\n"
+#~ "Press any key to continue when you"
+#~ " have completed the foods allocation. "
+#~ "(There is no need to design for"
+#~ " dates without food consumption)"
+#~ msgstr ""
+
+#~ msgid "(There is no need to design for dates without food consumption)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "There is no need to design for "
+#~ "dates without food consumption. (Ok, I"
+#~ " know)"
 #~ msgstr ""
 

@@ -111,8 +111,15 @@ class PreConsuming(SpreadsheetBase):
                     "Sheet '{0}' was updated.\n"
                     + "Press any key to continue when you have "
                     + "completed the foods allocation."
+                )
+            )
+            print_error(
+                _(
+                    "There is no need to design for "
+                    + "dates without food consumption. (Ok, I know [press any key to continue])"
                 ).format(sheet.title)
             )
+            input()
             wb.close()
             open_file(wb_fpath)
             print_info(
