@@ -108,16 +108,32 @@ class PreConsuming(SpreadsheetBase):
             wb.save(wb_fpath)
             print_warning(
                 _(
-                    "Sheet '{0}' was updated.\n"
+                    "Sheet '{0}' of \"{1}\" was updated.\n"
                     + "Press any key to continue when you have "
                     + "completed the foods allocation."
+                ).format(
+                    sheet.title,
+                    wb_fpath
                 )
             )
+            new_wbfoods = [f for f in cfoods if f.get_remmainer(tn1)>0 and f.xdate == tn1]
+            print_info(
+                (
+                    _("New purchased foods for date {0} is:")
+                    if len(new_wbfoods)>0 else 
+                    _("New purchased foods for date {0} are:")
+                ).format(tn1.strftime("%Y.%m.%d"))
+            )
+
+            for f in new_wbfoods:
+                print(f.name, f.count, f.unit_name,end='\t')
+            print()
+            print_warning(_("Negligible foods are not listed."))
             print_error(
                 _(
                     "There is no need to design for "
                     + "dates without food consumption. (Ok, I know [press any key to continue])"
-                ).format(sheet.title)
+                )            
             )
             input()
             wb.close()

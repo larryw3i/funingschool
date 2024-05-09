@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-10 03:55+0800\n"
+"POT-Creation-Date: 2024-05-10 04:23+0800\n"
 "PO-Revision-Date: 2024-03-07 22:18+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_SG\n"
@@ -481,14 +481,13 @@ msgstr ""
 msgid "Consuming days:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:110
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2014
 msgid ""
 "Sheet '{0}' was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:126
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:138
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2021
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
@@ -540,7 +539,25 @@ msgstr ""
 msgid "(Remaining)"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:117
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:110
+msgid ""
+"Sheet '{0}' of \"{1}\" was updated.\n"
+"Press any key to continue when you have completed the foods allocation."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:121
+msgid "New purchased foods for date {0} is:"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:123
+msgid "New purchased foods for date {0} are:"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:127
+msgid "Negligible foods are not listed."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:129
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I "
 "know [press any key to continue])"
@@ -911,5 +928,10 @@ msgstr ""
 #~ "There is no need to design for "
 #~ "dates without food consumption. (Ok, I"
 #~ " know)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Sheet '{0}' of  was updated.\n"
+#~ "Press any key to continue when you have completed the foods allocation."
 #~ msgstr ""
 

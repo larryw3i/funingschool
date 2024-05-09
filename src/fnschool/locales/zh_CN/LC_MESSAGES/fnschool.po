@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-10 03:55+0800\n"
-"PO-Revision-Date: 2024-05-10 03:56+0800\n"
+"POT-Creation-Date: 2024-05-10 04:23+0800\n"
+"PO-Revision-Date: 2024-05-10 04:31+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: en_US\n"
 "Language-Team: English - United States <larryw3i@163.com>\n"
@@ -511,7 +511,6 @@ msgstr "没有结余的食材。"
 msgid "Consuming days:"
 msgstr "耗材日期："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:110
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2014
 msgid ""
 "Sheet '{0}' was updated.\n"
@@ -520,7 +519,7 @@ msgstr ""
 "工作表 “{0}” 已更新。\n"
 "在你完成每天消耗设计后按任意建以继续。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:126
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:138
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2021
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr "好的，我已经更新工作簿 “{0}” 了。（按任意键继续）"
@@ -572,7 +571,27 @@ msgstr "工作簿 “{0}” 已被复制到 “{1}” 。"
 msgid "(Remaining)"
 msgstr "（余下）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:117
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:110
+msgid ""
+"Sheet '{0}' of \"{1}\" was updated.\n"
+"Press any key to continue when you have completed the foods allocation."
+msgstr ""
+"工作簿 “{1}” 的工作表 ‘{0}’ 已更新。\n"
+"在你完成每天消耗设计后按任意建以继续。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:121
+msgid "New purchased foods for date {0} is:"
+msgstr "{0} 新购入的食材："
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:123
+msgid "New purchased foods for date {0} are:"
+msgstr "{0} 新购入的食材："
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:127
+msgid "Negligible foods are not listed."
+msgstr "无需入库的食材未列出。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:129
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I know "
 "[press any key to continue])"
