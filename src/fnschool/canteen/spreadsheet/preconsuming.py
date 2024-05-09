@@ -6,7 +6,7 @@ from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.path import *
 
-class PreConsumingSpreadSheet():
+class PreConsuming():
     def __init__(self,bill):
         self._path0 = pre_consuming0_fpath
         self.sheet_name0 = "出库计划表"

@@ -1,0 +1,52 @@
+import os
+import sys
+from pathlib import Path
+import shutil
+import calendar
+import pandas as pd
+from datetime import datetime, timedelta
+import numpy as np
+
+from tkinter import filedialog
+
+from fnschool import *
+from fnschool.canteen.food import *
+from fnschool.canteen.path import *
+from fnschool.canteen.spreadsheet.purchasing  import Purchasing
+from fnschool.canteen.spreadsheet.consuming import Consuming
+from fnschool.canteen.spreadsheet.preconsuming import PreConsuming
+from fnschool.canteen.spreadsheet.inventory import Inventory
+
+
+class CtSpreadSheet:
+    def __init__(self, bill):
+        self.bill = bill
+        self._preconsuming = None
+        self._purchasing = None
+        self._consuming = None
+        self._inventory = None
+
+    @property
+    def purchasing(self):
+        if not self._purchasing:
+            self._purchasing = Purchasing(self)
+        return self._purchasing
+    
+    @property
+    def preconsuming(self):
+        if not self._preconsuming:
+            self._preconsuming = PreConsuming(self)
+
+    @property
+    def consuming(self):
+        if not self._consuming:
+            self._consuming = Consuming(self)
+        return self._consuming
+
+    @property
+    def inventory(self):
+        if not self._inventory:
+            self._inventory =  Inventory(self)
+        return self._inventory
+
+# The end.

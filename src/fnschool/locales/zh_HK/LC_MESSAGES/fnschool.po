@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-09 22:43+0800\n"
+"POT-Creation-Date: 2024-05-09 23:39+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -254,42 +254,6 @@ msgstr ""
 msgid "No profile information was got."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet.py:66
-msgid "Spreadsheet Files"
-msgstr ""
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet.py:69
-msgid "Select a file"
-msgstr ""
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet.py:74
-msgid "No file was selected."
-msgstr ""
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet.py:112
-msgid "There should be column ({0}), please add it."
-msgstr ""
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet.py:192
-msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
-msgstr ""
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet.py:206
-msgid "(Residual)"
-msgstr ""
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet.py:227
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2014
-msgid ""
-"Sheet '{0}' was updated.\n"
-"Press any key to continue when you have completed the foods allocation."
-msgstr ""
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet.py:236
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2021
-msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
-msgstr ""
-
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:142
 msgid "Workbook {0} doesn't exist."
 msgstr ""
@@ -517,6 +481,18 @@ msgstr ""
 msgid "Consuming days:"
 msgstr ""
 
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:200
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2014
+msgid ""
+"Sheet '{0}' was updated.\n"
+"Press any key to continue when you have completed the foods allocation."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:209
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2021
+msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
+msgstr ""
+
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2189
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2258
 #, python-format
@@ -554,6 +530,30 @@ msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2651
 msgid "Copying workbook..."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:86
+msgid "There should be column ({0}), please add it."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:166
+msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:180
+msgid "(Residual)"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:15
+msgid "Spreadsheet Files"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:18
+msgid "Select the purchasing file"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:23
+msgid "No file was selected."
 msgstr ""
 
 #~ msgid "Please refer to file  to customize your 'sett1ngs.py' file."
@@ -879,5 +879,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Please add codes to get foods from your suppliers."
+#~ msgstr ""
+
+#~ msgid "Select a file"
 #~ msgstr ""
 

@@ -3,7 +3,7 @@ import sys
 import calendar
 from fnschool import *
 
-from fnschool.canteen.spreadsheet import *
+from fnschool.canteen.spreadsheet.ctspreadsheet import *
 from fnschool.canteen.path import *
 
 
