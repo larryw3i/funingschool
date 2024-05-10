@@ -1,16 +1,15 @@
-
 import os
 import sys
 from fnschool import *
 
 from fnschool.canteen.spreadsheet.base import SpreadsheetBase
 
+
 class Warehousing(SpreadsheetBase):
-    def __init__(self,bill):
+    def __init__(self, bill):
         super().__init__(bill)
         pass
 
- 
     def format(self):
         wsheet = self.get_warehousing_sheet()
         merged_ranges = list(wsheet.merged_cells.ranges)
@@ -79,7 +78,6 @@ class Warehousing(SpreadsheetBase):
         wb.active = wsheet
 
         print_info(_("Sheet '%s' was formatted.") % self.warehousing_sheet_name)
-
 
     def update(self):
         wsheet = self.get_warehousing_sheet()
@@ -263,6 +261,5 @@ class Warehousing(SpreadsheetBase):
 
         print_info(_("Sheet '%s' was updated.") % (self.warehousing_sheet_name))
 
-       pass
 
 # The end.

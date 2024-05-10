@@ -1136,11 +1136,7 @@ class WorkBook:
             _foods = [
                 f
                 for f in foods
-                if (
-                    f.xdate <= ckt1
-                    and f.remainder > 0
-                    and not f.is_negligible
-                )
+                if (f.xdate <= ckt1 and f.remainder > 0 and not f.is_negligible)
             ]
             if len(_foods) < 1:
                 print_warning(
@@ -1164,8 +1160,7 @@ class WorkBook:
                     sheet.cell(
                         row_index,
                         1,
-                        _f.name
-                        + (_f.residue_mark if _f.xdate < ckt0 else ""),
+                        _f.name + (_f.residue_mark if _f.xdate < ckt0 else ""),
                     )
                     sheet.cell(row_index, 2, _f.remainder)
                     sheet.cell(row_index, 4, _f.unit_price)

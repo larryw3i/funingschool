@@ -17,6 +17,11 @@ from fnschool.canteen.spreadsheet.consuming import Consuming
 from fnschool.canteen.spreadsheet.preconsuming import PreConsuming
 from fnschool.canteen.spreadsheet.inventory import Inventory
 from fnschool.canteen.spreadsheet.warehousing import Warehousing
+from fnschool.canteen.spreadsheet.unwarehousing import Unwarehousing
+from fnschool.canteen.spreadsheet.unwarehousingsum import UnwarehousingSum
+from fnschool.canteen.spreadsheet.food import Food as SFood
+from fnschool.canteen.spreadsheet.purchasingsum import PurchaseSum
+from fnschool.canteen.spreadsheet.consumingsum import ConsumingSum
 from fnschool.canteen.spreadsheet.cover import Cover
 
 
@@ -28,18 +33,47 @@ class CtSpreadSheet:
         self._consuming = None
         self._inventory = None
         self._warehousing = None
+        self._unwareshousing = None
+        self._purchasingsum = None
+        self._consumingsum = None
+        self._sfood = None
         self._cover = None
+
+    @property
+    def consumingsum(self):
+        if not self._consumingsum:
+            self._consumingsum = ConsumingSum(self.bill)
+        self._consumingsum
+
+    @property
+    def purchasingsum(self):
+        if not self._purchasingsum:
+            self._purchasingsum = PurchaseSum(self.bill)
+        return self._purchasingsum
+
+    @property
+    def sfood(self):
+        if not self._sfood:
+            self._sfood = SFood(self.bill)
+        return self._sfood
+
+    @property
+    def unwarehousing(self):
+        if not self._unwareshousing:
+            self._unwareshousing = Unwarehousing(self.bill)
+        return self._unwareshousing
 
     @property
     def cover(self):
         if not self._cover:
             self._cover = Cover(self.bill)
-        return self._cover
+
+    return self._cover
 
     @property
     def warehousing(self):
-       if not self._warehousing:
-           sel._warehousing = Warehousing(self.bill)
+        if not self._warehousing:
+            sel._warehousing = Warehousing(self.bill)
         return self._warehousing
 
     @property
@@ -65,9 +99,16 @@ class CtSpreadSheet:
         if not self._inventory:
             self._inventory = Inventory(self.bill)
         return self._inventory
-    
+
     def update(self):
-        self.
-        pass
+        self.warehousing.update()
+        self.unwarehousing.update()
+        self.consuming.update()
+        self.inventory.update()
+        self.sfood.update()
+        self.purchasingsum.update()
+        self.consumingsum.update()
+        self.cover.update()
+
 
 # The end.

@@ -1,11 +1,11 @@
-
 import os
 import sys
 from fnschool import *
 from fnschool.canteen.spreadsheet.base import SpreadsheetBase
 
+
 class Cover(SpreadsheetBase):
-    def __init__(self,bill):
+    def __init__(self, bill):
         super().__init__(bill)
         pass
 
@@ -67,5 +67,3 @@ class Cover(SpreadsheetBase):
         wb.active = cvsheet
 
         print_info(_("Sheet '%s' was updated.") % self.cover_sheet_name)
-
-

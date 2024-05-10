@@ -7,7 +7,6 @@ class Consuming(SpreadsheetBase):
 
         pass
 
-
     def update(self):
         foods = self.food.get_foods()
         csheet = self.get_consuming_sheet()
@@ -191,7 +190,6 @@ class Consuming(SpreadsheetBase):
         wb = self.get_bill_workbook()
         wb.active = csheet
         print_info(_("Sheet '%s' was updated.") % self.consuming_sheet_name)
-
 
     def format(self):
         csheet = self.get_consuming_sheet()

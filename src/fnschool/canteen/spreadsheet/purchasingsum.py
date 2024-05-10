@@ -1,12 +1,12 @@
-
 import os
 import sys
 
 from fnschool import *
 from fnschool.canteen.spreadsheet.base import SpreadsheetBase
 
-class PurchaseSum(SpreadsheetBase):
-    def __init__(self,bill):
+
+class PurchasingSum(SpreadsheetBase):
+    def __init__(self, bill):
         super().__init__(bill)
         pass
 

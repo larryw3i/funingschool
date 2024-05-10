@@ -4,8 +4,9 @@ import sys
 from fnschool import *
 from fnschool.canteen.spreadsheet.base import SpreadsheetBase
 
+
 class Food(SpreadsheetBase):
-    def __init__(self,bill):
+    def __init__(self, bill):
         super().__init__(bill)
         pass
 
@@ -258,4 +259,5 @@ class Food(SpreadsheetBase):
             )
         )
 
-       pass
+
+# The end

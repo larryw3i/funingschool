@@ -6,7 +6,7 @@ from fnschool.canteen.food import *
 from fnschool.canteen.spreadsheet.base import *
 
 
-class Purchase(SpreadsheetBase):
+class Purchasing(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
         self._path = None
