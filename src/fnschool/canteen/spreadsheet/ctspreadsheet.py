@@ -16,6 +16,7 @@ from fnschool.canteen.spreadsheet.purchasing import Purchasing
 from fnschool.canteen.spreadsheet.consuming import Consuming
 from fnschool.canteen.spreadsheet.preconsuming import PreConsuming
 from fnschool.canteen.spreadsheet.inventory import Inventory
+from fnschool.canteen.spreadsheet.warehousing import Warehousing
 
 
 class CtSpreadSheet:
@@ -25,6 +26,11 @@ class CtSpreadSheet:
         self._purchasing = None
         self._consuming = None
         self._inventory = None
+        self._warehousing = None
+
+    @property
+    def warehousing(self):
+        
 
     @property
     def purchasing(self):
@@ -49,6 +55,9 @@ class CtSpreadSheet:
         if not self._inventory:
             self._inventory = Inventory(self.bill)
         return self._inventory
-
+    
+    def update(self):
+        self.
+        pass
 
 # The end.
