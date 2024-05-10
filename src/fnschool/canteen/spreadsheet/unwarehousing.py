@@ -10,7 +10,6 @@ class UnWarehousing(SpreadsheetBase):
         super().__init__(bill)
         pass
 
-
     def update(self):
         unwsheet = self.get_unwarehousing_sheet()
         form_indexes = self.get_unwarehousing_form_indexes()

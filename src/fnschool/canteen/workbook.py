@@ -74,7 +74,7 @@ class WorkBook:
             "订货总数量",
         ]
         self.unit_name_col_names = ["单位", "订货单位"]
-        self.check_date_col_names = ["送货日期", "送货时间"]
+        self.xdate_col_names = ["送货日期", "送货时间"]
         self.warehousing_form_index_offset = 0
         self.inventory_form_index_offset = 1
         self.bill_workbook = None
@@ -466,7 +466,7 @@ class WorkBook:
         foods = [
             f
             for f in self.food.get_foods()
-            if (not f.is_residue and f.check_date.month == self.bill.month)
+            if (not f.is_residue and f.xdate.month == self.bill.month)
         ]
         wfoods = [f for f in foods if not f.is_negligible]
         uwfoods = [f for f in foods if f.is_negligible]
@@ -549,7 +549,7 @@ class WorkBook:
             time_nodes_mm1 = sorted(time_nodes_mm1, key=lambda t: t[1])
             t1_mm1 = time_nodes_mm1[-1][1]
 
-        foods = [f for f in foods if (f.is_residue and f.check_date == t1_mm1)]
+        foods = [f for f in foods if (f.is_residue and f.xdate == t1_mm1)]
         return foods
 
     def get_food_sheet(self, name):
@@ -660,7 +660,7 @@ class WorkBook:
             for f in self.food.get_foods()
             if (
                 (
-                    f.check_date.month == self.bill.month
+                    f.xdate.month == self.bill.month
                     or (
                         self.bill.month
                         in [d.month for d, c in f.consuming_list]
@@ -683,7 +683,7 @@ class WorkBook:
             if (
                 f.get_remainder_by_time(tn0_dm1) > 0
                 and not f.is_negligible
-                and f.check_date.month < self.bill.month
+                and f.xdate.month < self.bill.month
             )
         ]
 
@@ -735,7 +735,7 @@ class WorkBook:
             for food in _cfoods:
                 if len(food.consuming_list) > 0:
                     _cdates += [d for d, c in food.consuming_list]
-                _cdates.append(food.check_date)
+                _cdates.append(food.xdate)
             _cdates = [d for d in _cdates if d.month == self.bill.month]
             _cdates = sorted(list(set(_cdates)))
 
@@ -744,7 +744,7 @@ class WorkBook:
             for cdate in _cdates:
                 for food in _cfoods:
 
-                    if food.check_date == cdate:
+                    if food.xdate == cdate:
                         sheet.cell(row_index, 1, cdate.month)
                         sheet.cell(row_index, 2, cdate.day)
                         sheet.cell(row_index, 4, food.count)
@@ -882,14 +882,14 @@ class WorkBook:
                     if cssheet0.cell(1, ci).value
                 ]
 
-                check_date_col_index = 0
+                xdate_col_index = 0
                 org_name_col_index = 0
                 for hn in header_names:
-                    if hn in self.check_date_col_names:
-                        check_date_col_index = header_names.index(hn) + 1
+                    if hn in self.xdate_col_names:
+                        xdate_col_index = header_names.index(hn) + 1
                     elif hn in self.org_col_names:
                         org_name_col_index = header_names.index(hn) + 1
-                if check_date_col_index == 0:
+                if xdate_col_index == 0:
                     print_error(
                         _("Got no check date column index of {0} .").format(
                             chwb_fpath + "-->" + sheet_name
@@ -910,7 +910,7 @@ class WorkBook:
                     chwb0.close()
                     return None
                 cs_dates = [
-                    str(cssheet0.cell(ri, check_date_col_index).value)
+                    str(cssheet0.cell(ri, xdate_col_index).value)
                     for ri in range(1, cssheet0.max_row)
                 ]
                 cs_dates = sorted(
@@ -1071,7 +1071,7 @@ class WorkBook:
         food_count_index = [_("Food count index"), -1]
         food_total_price_index = [_("Food total price index"), -1]
         food_unit_index = [_("Food unit index"), -1]
-        food_check_date_index = [_("Food check date index"), -1]
+        food_xdate_index = [_("Food check date index"), -1]
         food_neglect_mark_index = [
             _("Food 'negligible' mark index"),
             -1,
@@ -1097,8 +1097,8 @@ class WorkBook:
             elif cell_value in self.total_price_col_names:
                 food_total_price_index[1] = _col_index
                 pass
-            elif cell_value in self.check_date_col_names:
-                food_check_date_index[1] = _col_index
+            elif cell_value in self.xdate_col_names:
+                food_xdate_index[1] = _col_index
                 pass
             elif cell_value in self.negligible_col_names:
                 food_neglect_mark_index[1] = _col_index
@@ -1117,7 +1117,7 @@ class WorkBook:
                 food_count_index,
                 food_total_price_index,
                 food_unit_index,
-                food_check_date_index,
+                food_xdate_index,
                 food_neglect_mark_index,
                 food_org_name_index,
             ],
@@ -1137,7 +1137,7 @@ class WorkBook:
                 f
                 for f in foods
                 if (
-                    f.check_date <= ckt1
+                    f.xdate <= ckt1
                     and f.remainder > 0
                     and not f.is_negligible
                 )
@@ -1165,7 +1165,7 @@ class WorkBook:
                         row_index,
                         1,
                         _f.name
-                        + (_f.residue_mark if _f.check_date < ckt0 else ""),
+                        + (_f.residue_mark if _f.xdate < ckt0 else ""),
                     )
                     sheet.cell(row_index, 2, _f.remainder)
                     sheet.cell(row_index, 4, _f.unit_price)
@@ -1356,7 +1356,7 @@ class WorkBook:
                     food_count_index,
                     food_total_price_index,
                     food_unit_index,
-                    food_check_date_index,
+                    food_xdate_index,
                     food_neglect_mark_index,
                     food_org_name_index,
                     food_residue_mark_index,
@@ -1371,17 +1371,17 @@ class WorkBook:
                     max_col=sheet.max_column,
                 ):
                     if row[food_name_index].value:
-                        check_date = self.clean_quotation_marks(
-                            row[food_check_date_index].value
+                        xdate = self.clean_quotation_marks(
+                            row[food_xdate_index].value
                         )
 
-                        check_date = (
-                            datetime.strptime(check_date, "%Y-%m-%d")
-                            if "-" in check_date
+                        xdate = (
+                            datetime.strptime(xdate, "%Y-%m-%d")
+                            if "-" in xdate
                             else (
-                                datetime.strptime(check_date, "%Y/%m/%d")
-                                if "/" in check_date
-                                else datetime.strptime(check_date, "%Y%d%m")
+                                datetime.strptime(xdate, "%Y/%m/%d")
+                                if "/" in xdate
+                                else datetime.strptime(xdate, "%Y%d%m")
                             )
                         )
                         org_name = row[food_org_name_index].value
@@ -1419,7 +1419,7 @@ class WorkBook:
                         _food = Food(
                             self.bill,
                             name=name,
-                            check_date=check_date,
+                            xdate=xdate,
                             count=count,
                             is_residue=is_residue,
                             total_price=total_price,
@@ -1489,7 +1489,7 @@ class WorkBook:
         food_count_index = 0
         food_total_price_index = 0
         food_unit_index = 0
-        food_check_date_index = 0
+        food_xdate_index = 0
         food_neglect_mark_index = 0
         food_residue_mark_index = 0
         food_org_name_index = 0
@@ -1508,8 +1508,8 @@ class WorkBook:
                 food_count_index = _col_index
             elif cell_value in ["金额", "折前金额"]:
                 food_total_price_index = _col_index
-            elif cell_value in self.check_date_col_names:
-                food_check_date_index = _col_index
+            elif cell_value in self.xdate_col_names:
+                food_xdate_index = _col_index
             elif cell_value in self.negligible_col_names:
                 food_neglect_mark_index = _col_index
             elif cell_value in self.residue_col_names:
@@ -1529,13 +1529,13 @@ class WorkBook:
             max_col=cssheet.max_column,
         ):
             if row[food_name_index].value:
-                check_date = row[food_check_date_index].value
-                check_date = (
-                    datetime.strptime(check_date, "%Y-%m-%d")
-                    if "-" in check_date
-                    else datetime.strptime(check_date, "%Y%d%m")
+                xdate = row[food_xdate_index].value
+                xdate = (
+                    datetime.strptime(xdate, "%Y-%m-%d")
+                    if "-" in xdate
+                    else datetime.strptime(xdate, "%Y%d%m")
                 )
-                if not (ck_t0 <= check_date <= ck_t1):
+                if not (ck_t0 <= xdate <= ck_t1):
                     continue
                 org_name = row[food_org_name_index].value
                 if org_name != self.bill.profile.org_name:
@@ -1560,7 +1560,7 @@ class WorkBook:
                     Food(
                         self.bill,
                         name=name,
-                        check_date=check_date,
+                        xdate=xdate,
                         count=count,
                         is_residue=is_residue,
                         total_price=total_price,
@@ -1699,7 +1699,7 @@ class WorkBook:
         foods = [
             f
             for f in self.food.get_foods()
-            if (not f.is_residue and f.check_date.month == self.bill.month)
+            if (not f.is_residue and f.xdate.month == self.bill.month)
         ]
         wfoods = [f for f in foods if not f.is_negligible]
         uwfoods = [f for f in foods if f.is_negligible]
@@ -2270,9 +2270,9 @@ class WorkBook:
         foods = [
             f
             for f in self.food.get_foods()
-            if (f.is_negligible and f.check_date.month == self.bill.month)
+            if (f.is_negligible and f.xdate.month == self.bill.month)
         ]
-        foods = sorted(foods, key=lambda f: f.check_date)
+        foods = sorted(foods, key=lambda f: f.xdate)
         row_indexes = []
         for form_index in form_indexes:
             form_index0, form_index1 = form_index
@@ -2301,7 +2301,7 @@ class WorkBook:
         for _index, row_index in enumerate(row_indexes):
             food = foods[_index]
             total_price += food.total_price
-            unwsheet.cell(row_index, 1, food.check_date.strftime("%Y.%m.%d"))
+            unwsheet.cell(row_index, 1, food.xdate.strftime("%Y.%m.%d"))
             unwsheet.cell(row_index, 2, food.name)
             unwsheet.cell(row_index, 3, food.unit_name)
             unwsheet.cell(row_index, 4, food.count)
@@ -2344,7 +2344,7 @@ class WorkBook:
             if (
                 not f.is_residue
                 and not f.is_negligible
-                and f.check_date.month == self.bill.month
+                and f.xdate.month == self.bill.month
             )
         ]
         form_indexes = self.get_warehousing_form_indexes()
@@ -2369,9 +2369,9 @@ class WorkBook:
             list(
                 set(
                     [
-                        food.check_date
+                        food.xdate
                         for food in foods
-                        if food.check_date.month == self.bill.month
+                        if food.xdate.month == self.bill.month
                     ]
                 )
             )
@@ -2387,7 +2387,7 @@ class WorkBook:
             entry_index = food_index0
             warehousing_n = windex + 1
 
-            wfoods = [f for f in foods if (f.check_date == time_point)]
+            wfoods = [f for f in foods if (f.xdate == time_point)]
             foods_class_names = [f.class_name for f in wfoods]
             class_names_without_food = [
                 _name for _name in class_names if not _name in foods_class_names
