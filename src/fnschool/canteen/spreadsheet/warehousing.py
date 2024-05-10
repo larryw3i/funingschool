@@ -89,7 +89,7 @@ class Warehousing(SpreadsheetBase):
             if (
                 not f.is_residue
                 and not f.is_negligible
-                and f.check_date.month == self.bill.month
+                and f.xdate.month == self.bill.month
             )
         ]
         form_indexes = self.get_warehousing_form_indexes()
@@ -114,9 +114,9 @@ class Warehousing(SpreadsheetBase):
             list(
                 set(
                     [
-                        food.check_date
+                        food.xdate
                         for food in foods
-                        if food.check_date.month == self.bill.month
+                        if food.xdate.month == self.bill.month
                     ]
                 )
             )
@@ -132,7 +132,7 @@ class Warehousing(SpreadsheetBase):
             entry_index = food_index0
             warehousing_n = windex + 1
 
-            wfoods = [f for f in foods if (f.check_date == time_point)]
+            wfoods = [f for f in foods if (f.xdate == time_point)]
             foods_class_names = [f.class_name for f in wfoods]
             class_names_without_food = [
                 _name for _name in class_names if not _name in foods_class_names
