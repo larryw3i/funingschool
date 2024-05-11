@@ -7,10 +7,11 @@ class SpreadsheetBase:
         self.bill = bill
         self.spreadsheet = self.bill.spreadsheet
         self.s = self.spreadsheet
-        self.bill_workbook = self.spreadsheet.bill_.workbook
+        self.bill_workbook = self.spreadsheet.bill_workbook
         self.bwb = self.bill_workbook 
         self.sheet_name = None
         self._sheet = None
+        self.operator = self.bill.operator
     
     @property
     def bill_foods(self):

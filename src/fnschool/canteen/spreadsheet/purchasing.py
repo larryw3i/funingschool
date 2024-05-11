@@ -1,9 +1,12 @@
 import os
 import sys
+from openpyxl.utils.cell import get_column_letter
+import tomllib
 from tkinter import filedialog
 from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.spreadsheet.base import *
+from openpyxl.worksheet.datavalidation import DataValidation
 
 
 class Purchasing(SpreadsheetBase):
@@ -46,7 +49,53 @@ class Purchasing(SpreadsheetBase):
             "是盘存",
             "是结余",
         ]
+        self.food_class_col_name = "食材大类"
         self.inventory_col_name = None
+        self._food_classes = None
+
+    @property
+    def food_classes(self):
+        if not self._food_classes:
+            with open(self.operator.food_classes_fpath, 'rb') as f:            
+                self._food_classes = tomllib.load(f)
+                print_info(
+                    _("Food classes were read from \"{0}\".").format(
+                        self.operator.food_classes_fpath
+                    )
+                )
+        return self._food_classes
+
+    def food_name_like(self,name,like):
+        not_likes = None
+        if '!' in like:
+            like = like.split('!')
+            not_likes = like[1:]
+            like = like[0]
+
+        result = None
+        like_value = like.replace("*","")
+        if like.startswith('*') and not like.endswith("*"):
+            result = name.endswith(like_value)
+        elif like.endswith("*") and not like.startswith("*"):
+            result = name.startswith(like_value)
+        elif not '*' in like:
+            result = like_value == name
+        elif like.startswith("*") and like.endswith("*"):
+            result = like_value in name
+
+        if not_likes:
+            result = result and not any([ self.food_name_like(name,nl) for nl in not_likes])
+        return result
+        pass
+
+    def get_food_class(self,name):
+        food_classes = self.food_classes
+        f_class = "蔬菜类"
+        for fclass,name_likes in food_classes.items():
+            for name_like in name_likes:
+                if self.food_name_like(name,name_like):
+                    f_class =  fclass
+        return f_class
 
     def set_col_names(self, columns):
         columns = list(columns)
@@ -106,9 +155,53 @@ class Purchasing(SpreadsheetBase):
         wb = load_workbook(self.path) 
         sheet = wb.active
         headers = [h for h in [sheet.cell(1,ci).value for ci in range(1,sheet.max_column+1)] if h ]
-        print(headers)
+        if self.food_class_col_name in headers:
+            wb.close
+            return
+
+        merged_ranges = list(sheet.merged_cells.ranges)
+        for cell_group in merged_ranges:
+            sheet.unmerge_cells(str(cell_group))
+        
+        food_name_col_index = -1
+        for h in headers:
+            food_name_col_index += 1
+            if h in self.food_name_cols:
+                break
+        if food_name_col_index < 0:
+            print_error(
+                _("Unable to find food name column, exitt.")
+            )
+            exit()
+        food_class_col_index = food_name_col_index + 1 + 1
+        food_class_col_letter = get_column_letter(food_class_col_index)
+         
+        food_class_list_dv = DataValidation(
+            type = 'list',
+            formula1 = "\""+','.join(["蔬菜类"]+list(self.food_classes.keys()))+"\""
+        )
+        sheet.add_data_validation(food_class_list_dv)
+
+        sheet.insert_cols(food_class_col_index ,1)
+        sheet.cell(1,food_class_col_index, self.food_class_col_name)
+        food_len = 0
+        for row_index in range(2,sheet.max_row+1):
+            food_name = sheet.cell(row_index,food_class_col_index+1).value
+            if not food_name:
+                break
+            sheet.cell(row_index, food_class_col_index, self.get_food_class(food_name))
+            food_class_list_dv.add(sheet.cell(row_index,food_class_col_index))
+            food_len += 1
+        wb.save(self.path)
+        wb.close()
+        print_info(
+            _("Food class column has been updated, please verify/modify it. (Press any key to continue)")
+        )
+        open_file(self.path)
+        input()
         pass
         
+
     def read_pfoods(self):
         self.update_fclass()
         foods = pd.read_excel(self.path)

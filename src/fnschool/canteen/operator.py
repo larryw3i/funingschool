@@ -67,13 +67,13 @@ class Operator:
     @property
     def bill_dpath(self):
         dpath = self.dpath / "bill"
-        if not dpath.exists:
+        if not dpath.exists():
             os.makedirs(dpath)
         return dpath
         
     @property
     def bill_fpath(self):
-        fpath =  self.bill_fpath / "bill.xlsx"
+        fpath =  self.bill_dpath / "bill.xlsx"
         if not fpath.exists():
             shutil.copy(bill0_fpath, fpath)
         return fpath
