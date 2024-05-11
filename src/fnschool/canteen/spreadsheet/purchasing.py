@@ -101,8 +101,16 @@ class Purchasing(SpreadsheetBase):
 
             self._path = filename
         return self._path
-
+    
+    def update_fclass(self):
+        wb = load_workbook(self.path) 
+        sheet = wb.active
+        headers = [h for h in [sheet.cell(1,ci).value for ci in range(1,sheet.max_column+1)] if h ]
+        print(headers)
+        pass
+        
     def read_pfoods(self):
+        self.update_fclass()
         foods = pd.read_excel(self.path)
         self.set_col_names(foods.columns)
         _foods = []

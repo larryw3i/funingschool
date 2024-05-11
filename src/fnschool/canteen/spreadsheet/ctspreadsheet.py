@@ -68,7 +68,7 @@ class CtSpreadSheet:
         if not self._cover:
             self._cover = Cover(self.bill)
 
-    return self._cover
+        return self._cover
 
     @property
     def warehousing(self):
@@ -101,25 +101,26 @@ class CtSpreadSheet:
         return self._inventory
 
     def update(self):
+        self.inventory.update()
         self.warehousing.update()
         self.unwarehousing.update()
         self.consuming.update()
-        self.inventory.update()
         self.sfood.update()
         self.purchasingsum.update()
         self.consumingsum.update()
         self.cover.update()
 
-        foods = self.food.get_foods()
-        self.update_inventory_sheet()
-        self.update_consuming_sheet()
-        self.update_warehousing_sheet()
-        self.update_unwarehousing_sheet()
-        self.update_consuming_sum_sheet()
-        self.update_purchase_sum_sheet()
-        self.update_cover_sheet()
-        self.update_food_sheets()
-        self.save_updated_workbooks()
+
+        # foods = self.food.get_foods()
+        # self.update_inventory_sheet()
+        # self.update_consuming_sheet()
+        # self.update_warehousing_sheet()
+        # self.update_unwarehousing_sheet()
+        # self.update_consuming_sum_sheet()
+        # self.update_purchase_sum_sheet()
+        # self.update_cover_sheet()
+        # self.update_food_sheets()
+        # self.save_updated_workbooks()
         print_info(_("Update completely!"))
 
 
