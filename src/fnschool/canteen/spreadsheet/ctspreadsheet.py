@@ -20,7 +20,7 @@ from fnschool.canteen.spreadsheet.warehousing import Warehousing
 from fnschool.canteen.spreadsheet.unwarehousing import Unwarehousing
 from fnschool.canteen.spreadsheet.unwarehousingsum import UnwarehousingSum
 from fnschool.canteen.spreadsheet.food import Food as SFood
-from fnschool.canteen.spreadsheet.purchasingsum import PurchaseSum
+from fnschool.canteen.spreadsheet.purchasingsum import PurchasingSum
 from fnschool.canteen.spreadsheet.consumingsum import ConsumingSum
 from fnschool.canteen.spreadsheet.cover import Cover
 
@@ -28,6 +28,10 @@ from fnschool.canteen.spreadsheet.cover import Cover
 class CtSpreadSheet:
     def __init__(self, bill):
         self.bill = bill
+        self._bill_fpath = None
+        self._purchasing_fpath = None
+        self._bwb = None
+        self._pwb = None
         self._preconsuming = None
         self._purchasing = None
         self._consuming = None
@@ -38,6 +42,25 @@ class CtSpreadSheet:
         self._consumingsum = None
         self._sfood = None
         self._cover = None
+    
+    @property
+    def bill_fpath(self):
+        if not self._bill_fpath:
+            self._bill_fpath = self.bill.operator.bill_fpath
+        return self._bill_fpath
+
+    @property
+    def bill_workbook(self):
+        if not self._bwb:
+            self._bwb = load_workbook(self.bill_fpath)
+            print_info(
+                _("Spreadsheet \"{0}\" is in use.").format(self.bill_fpath)
+            )
+        return self._bwb
+
+    @property
+    def bwb(self):
+        return self.bill_workbook
 
     @property
     def consumingsum(self):

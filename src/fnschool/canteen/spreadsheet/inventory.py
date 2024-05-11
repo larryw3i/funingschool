@@ -7,10 +7,11 @@ from fnschool.canteen.spreadsheet.base import SpreadsheetBase
 class Inventory(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
+        self.sheet_name = "食材盘存表"
         pass
 
     def format(self):
-        isheet = self.get_inventory_sheet()
+        isheet = self.sheet
         self.unmerge_cells_of_sheet(isheet)
 
         for row in isheet.iter_rows(
@@ -84,11 +85,32 @@ class Inventory(SpreadsheetBase):
                     start_column=1,
                     end_column=9,
                 )
+    
+    @property
+    def form_indexes(self):
+        isheet = self.sheet
+        indexes = []
+        row_index = 1
+        for row in isheet.iter_rows(max_row=isheet.max_row + 1, max_col=8):
+            if row[0].value:
+                if row[0].value.replace(" ", "") == "食材盘存表":
+                    indexes.append([row_index + 1, 0])
+                if row[0].value.replace(" ", "") == "合计":
+                    indexes[-1][1] = row_index
+            row_index += 1
+
+        if len(indexes) > 0:
+            return indexes
+
+        return None
+
+
 
     def update(self):
-        isheet = self.get_inventory_sheet()
-        tnfoods = self.food.get_residue_foods(self.bill.month)
-        form_indexes = self.get_inventory_form_indexes()
+        isheet = self.sheet
+        tnfoods = self.bfoods
+
+        form_indexes = self.form_indexes
 
         for form_index_n in range(0, len(form_indexes)):
             form_index = form_indexes[form_index_n]

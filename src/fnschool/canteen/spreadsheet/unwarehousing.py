@@ -5,7 +5,7 @@ from fnschool import *
 from fnschool.canteen.spreadsheet.base import SpreadsheetBase
 
 
-class UnWarehousing(SpreadsheetBase):
+class Unwarehousing(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
         pass

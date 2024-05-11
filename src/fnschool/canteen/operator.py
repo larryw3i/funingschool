@@ -10,7 +10,6 @@ class Operator:
         self.bill = bill
         self._name = None
         self._dpath = None
-        self._preconsuming_dpath = None
         pass
 
     @property
@@ -23,6 +22,9 @@ class Operator:
                 self._name = input(">_ ")
                 with open(operator_name_fpath, "w", encoding="utf-8") as f:
                     f.write(self._name)
+                print_info(
+                    _("Your name has been saved to \"{0}\".").format(operator_name_fpath)
+                )
         return self._name
 
     @property
@@ -31,14 +33,49 @@ class Operator:
             self._dpath = user_config_dir / self.name
             if not self._dpath.exists():
                 os.makedirs(self._dpath, exist_ok=True)
+        make_link(self._dpath,self.link_dpath)
         return self._dpath
 
     @property
     def preconsuming_dpath(self):
-        if not self._preconsuming_dpath:
-            dpath = self.dpath / "preconsuming"
-            if not dpath.exists():
-                os.makedirs(dpath, exist_ok=True)
-            make_link(dpath, canteen_links_dpath / "preconsuming")
-            self._preconsuming_dpath = dpath
-        return self._preconsuming_dpath
+        dpath = self.dpath / "preconsuming"
+        if not dpath.exists():
+            os.makedirs(dpath, exist_ok=True)
+        return dpath
+
+    @property
+    def link_dpath(self):
+        dpath0 = canteen_links_dpath / self.name
+        dpath1 = user_documents_dpath / app_name / self.name
+        dpath = dpath0
+        return dpath
+
+    @property
+    def config_dpath(self):
+        dpath = self.dpath / "config"
+        if not dpath.exists():
+            os.makedirs(dpath,exist_ok=True)
+        return dpath
+    
+    @property
+    def food_classes_fpath(self):
+        fpath = self.config_dpath / "food_classes.toml"
+        if not fpath.exists():
+            shutil.copy(food_classes_config0_fpath,fpath)
+        return fpath
+
+    @property
+    def bill_dpath(self):
+        dpath = self.dpath / "bill"
+        if not dpath.exists:
+            os.makedirs(dpath)
+        return dpath
+        
+    @property
+    def bill_fpath(self):
+        fpath =  self.bill_fpath / "bill.xlsx"
+        if not fpath.exists():
+            shutil.copy(bill0_fpath, fpath)
+        return fpath
+
+# The end.
