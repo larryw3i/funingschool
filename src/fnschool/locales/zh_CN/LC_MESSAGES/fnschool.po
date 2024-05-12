@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-12 08:39+0800\n"
-"PO-Revision-Date: 2024-05-12 08:41+0800\n"
+"POT-Creation-Date: 2024-05-12 12:20+0800\n"
+"PO-Revision-Date: 2024-05-12 12:22+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: en_US\n"
 "Language-Team: English - United States <larryw3i@163.com>\n"
@@ -291,7 +291,7 @@ msgstr "请给工作簿 “{0}” 设计每天的消耗。"
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/consumingsum.py:65
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/cover.py:69
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/food.py:235
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/inventory.py:184
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/inventory.py:208
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasingsum.py:76
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/unwarehousing.py:90
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/warehousing.py:262
@@ -536,7 +536,7 @@ msgstr ""
 "工作表 “{0}” 已更新。\n"
 "在你完成每天消耗设计后按任意建以继续。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:157
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:158
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2016
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr "好的，我已经更新工作簿 “{0}” 了。（按任意键继续）"
@@ -590,15 +590,15 @@ msgstr "单元格 “{0}” 被取消合并。"
 msgid "Spreadsheet \"{0}\" is in use."
 msgstr "工作簿 “{0}” 被使用。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:67
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:68
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr "工作簿 “{0}” 已被复制到 “{1}” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:83
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:84
 msgid "(Remaining)"
 msgstr "（余下）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:119
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:120
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
@@ -606,19 +606,19 @@ msgstr ""
 "工作簿 “{1}” 的工作表 ‘{0}’ 已更新。\n"
 "在你完成每天消耗设计后按任意建以继续。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:130
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:131
 msgid "New purchased foods for date {0} is:"
 msgstr "{0} 新购入的食材："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:132
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:133
 msgid "New purchased foods for date {0} are:"
 msgstr "{0} 新购入的食材："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:145
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:146
 msgid "Negligible foods are not listed."
 msgstr "无需入库的食材未列出。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:147
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:148
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I know "
 "[press any key to continue])"
@@ -632,35 +632,39 @@ msgstr "食材大类文件："
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr "您的食材大类已从 “{0}”  读取。它会被优先匹配。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:78
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:81
 msgid "Preset food classes were read from \"{0}\"."
 msgstr "预置的食材大类已从 “{0}” 读取。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:157
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:160
 msgid "There should be column ({0}), please add it."
 msgstr "没有找到 {0} 列，请先添加它。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:166
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:169
 msgid "Select a purchasing file, please!"
 msgstr "请您选择一个购入食材的列表文件"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:167
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:170
 msgid "Spreadsheet Files"
 msgstr "工作簿文件。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:170
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:173
 msgid "Please select the purchasing file"
 msgstr "请选择购入食材的列表文件"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:175
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:178
 msgid "No file was selected, exit."
 msgstr "未选择文件，退出。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:206
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:182
+msgid "Purchasing list file \"{0}\" has been selected."
+msgstr "已选择购入列表文件 “{0}” 。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:211
 msgid "Unable to find food name column, exitt."
 msgstr "未找到食材名称列，退出。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:234
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:239
 msgid ""
 "Food class column has been updated, please verify/modify it. Feel free to "
 "open new issue if some food with the wrong class ({new_issue_url}).(Ok, I "

@@ -1,5 +1,7 @@
 import os
 import sys
+import calendar
+from datetime import datetime
 from fnschool import *
 from fnschool.canteen.spreadsheet.base import SpreadsheetBase
 
@@ -11,16 +13,16 @@ class Inventory(SpreadsheetBase):
         pass
 
     def format(self):
-        isheet = self.sheet
-        self.unmerge_cells_of_sheet(isheet)
+        sheet = self.sheet
+        self.unmerge_sheet_cells(sheet)
 
-        for row in isheet.iter_rows(
-            min_row=1, max_row=isheet.max_row, min_col=1, max_col=9
+        for row in sheet.iter_rows(
+            min_row=1, max_row=sheet.max_row, min_col=1, max_col=9
         ):
-            isheet.row_dimensions[row[0].row].height = 14.25
+            sheet.row_dimensions[row[0].row].height = 14.25
 
             if row[8].value and "原因" in str(row[8].value).replace(" ", ""):
-                isheet.merge_cells(
+                sheet.merge_cells(
                     start_row=row[0].row,
                     end_row=row[0].row + 1,
                     start_column=9,
@@ -28,7 +30,7 @@ class Inventory(SpreadsheetBase):
                 )
 
             if row[6].value and str(row[6].value).replace(" ", "") == "差额栏":
-                isheet.merge_cells(
+                sheet.merge_cells(
                     start_row=row[0].row,
                     end_row=row[0].row,
                     start_column=7,
@@ -36,7 +38,7 @@ class Inventory(SpreadsheetBase):
                 )
 
             if row[4].value and str(row[4].value).replace(" ", "") == "盘点栏":
-                isheet.merge_cells(
+                sheet.merge_cells(
                     start_row=row[0].row,
                     end_row=row[0].row,
                     start_column=5,
@@ -44,7 +46,7 @@ class Inventory(SpreadsheetBase):
                 )
 
             if row[2].value and str(row[2].value).replace(" ", "") == "账面栏":
-                isheet.merge_cells(
+                sheet.merge_cells(
                     start_row=row[0].row,
                     end_row=row[0].row,
                     start_column=3,
@@ -52,7 +54,7 @@ class Inventory(SpreadsheetBase):
                 )
 
             if row[0].value and row[0].value.replace(" ", "") == "食材名称":
-                isheet.merge_cells(
+                sheet.merge_cells(
                     start_row=row[0].row,
                     end_row=row[0].row + 1,
                     start_column=1,
@@ -63,7 +65,7 @@ class Inventory(SpreadsheetBase):
                 "备注" in row[0].value.replace(" ", "")
                 or "审核人" in row[0].value.replace(" ", "")
             ):
-                isheet.merge_cells(
+                sheet.merge_cells(
                     start_row=row[0].row,
                     end_row=row[0].row,
                     start_column=1,
@@ -71,27 +73,31 @@ class Inventory(SpreadsheetBase):
                 )
 
             if row[0].value and row[0].value.replace(" ", "") == "食材盘存表":
-                isheet.merge_cells(
+                sheet.merge_cells(
                     start_row=row[0].row,
                     end_row=row[0].row,
                     start_column=1,
                     end_column=9,
                 )
-                isheet.row_dimensions[row[0].row].height = 22.5
+                sheet.row_dimensions[row[0].row].height = 22.5
 
-                isheet.merge_cells(
+                sheet.merge_cells(
                     start_row=row[0].row + 1,
                     end_row=row[0].row + 1,
                     start_column=1,
                     end_column=9,
                 )
 
+        print_info(
+            _("Sheet \"{0}\" has been reformatted.").format(sheet.title)
+        )
+
     @property
     def form_indexes(self):
-        isheet = self.sheet
+        sheet = self.sheet
         indexes = []
         row_index = 1
-        for row in isheet.iter_rows(max_row=isheet.max_row + 1, max_col=8):
+        for row in sheet.iter_rows(max_row=sheet.max_row + 1, max_col=8):
             if row[0].value:
                 if row[0].value.replace(" ", "") == "食材盘存表":
                     indexes.append([row_index + 1, 0])
@@ -108,8 +114,8 @@ class Inventory(SpreadsheetBase):
     def foods(self):
         foods = []
         bfoods = [ f for f in self.bfoods if not f.is_abandoned]
-        year = bfoods[0].year
-        month = bfoods[0].month
+        year = bfoods[-1].xdate.year
+        month = bfoods[-1].xdate.month
 
         consuming_dates = []
         for bfood in bfoods:
@@ -117,26 +123,34 @@ class Inventory(SpreadsheetBase):
                 consuming_dates.append(d)
         consuming_dates = list(set(consuming_dates))
 
-        for tn in calendar.monthcalendar(year,month)
+        for tn in calendar.monthcalendar(year,month):
+            if 0 in tn:
+                tn = list(set(tn))
+                tn.remove(0)
             tn0,tn1 = tn[0],tn[-1]
             for d in range(tn1,tn0-1,-1):
                 d_date = datetime(year,month,d)
                 if d_date in consuming_dates:
-                    foods[tn1] = [f for f in bfoods if f.get_remmainer(tn1)]
+                    foods.append([d_date, [f for f in bfoods if f.get_remainder(d_date)]])
                     break
+        return foods
             
 
     def update(self):
-        isheet = self.sheet
+        sheet = self.sheet
         tnfoods = self.foods
+        for tn1, foods in tnfoods:
+            print(tn1,[(f.name,f.get_remainder(tn1)) for f in foods])
         form_indexes = self.form_indexes
+
+        self.unmerge_sheet_cells()
 
         for form_index_n in range(0, len(form_indexes)):
             form_index = form_indexes[form_index_n]
             form_index0, form_index1 = form_index
             food_index0 = form_index0 + 3
             food_index1 = form_index1 - 1
-            for row in isheet.iter_rows(
+            for row in sheet.iter_rows(
                 min_row=food_index0,
                 max_row=food_index1,
                 min_col=1,
@@ -145,27 +159,25 @@ class Inventory(SpreadsheetBase):
                 for cell in row:
                     cell.value = ""
 
-        for i, (tn, _foods) in enumerate(tnfoods):
+        for i, (t1, _foods) in enumerate(tnfoods):
             form_indexes_n = i
-            t0, t1 = tn
             form_index = form_indexes[form_indexes_n]
             form_i0, form_i1 = form_index
             fentry_i0 = form_i0 + 3
             fentry_i1 = form_i1 - 1
 
-            self.unmerge_cells_of_sheet(isheet)
 
-            isheet.cell(
+            sheet.cell(
                 form_i0,
                 1,
                 f"     "
-                + f"学校名称：{self.bill.profile.org_name}"
+                + f"学校名称：{self.purchaser}"
                 + f"                "
                 + f"{t1.year} 年 {t1.month} 月 {t1.day} 日"
                 + f"              ",
             )
 
-            for row in isheet.iter_rows(
+            for row in sheet.iter_rows(
                 min_row=fentry_i0,
                 max_row=fentry_i1,
                 min_col=1,
@@ -179,30 +191,30 @@ class Inventory(SpreadsheetBase):
             for findex, food in enumerate(_foods):
                 row_index = fentry_i0 + findex
                 if (
-                    isheet.cell(row_index + 1, 1).value.replace(" ", "")
+                    sheet.cell(row_index + 1, 1).value.replace(" ", "")
                     == "合计"
                 ):
-                    isheet.insert_rows(row_index + 1, 1)
-                isheet.cell(row_index, 1, food.name)
-                isheet.cell(row_index, 2, food.unit_name)
-                isheet.cell(row_index, 3, food.get_remainder_by_time(tn[1]))
-                isheet.cell(
+                    sheet.insert_rows(row_index + 1, 1)
+                sheet.cell(row_index, 1, food.name)
+                sheet.cell(row_index, 2, food.unit_name)
+                sheet.cell(row_index, 3, food.get_remainder(t1))
+                sheet.cell(
                     row_index,
                     4,
-                    food.get_remainder_by_time(tn[1]) * food.unit_price,
+                    food.get_remainder(t1) * food.unit_price,
                 )
-                isheet.cell(row_index, 5, food.get_remainder_by_time(tn[1]))
-                isheet.cell(
+                sheet.cell(row_index, 5, food.get_remainder(t1))
+                sheet.cell(
                     row_index,
                     6,
-                    food.get_remainder_by_time(tn[1]) * food.unit_price,
+                    food.get_remainder(t1) * food.unit_price,
                 )
 
-        self.format_inventory_sheet()
+        self.format()
 
-        wb = self.get_bill_workbook()
-        wb.active = isheet
-        print_info(_("Sheet '%s' was updated.") % (self.inventory_sheet_name))
+        wb = self.bwb
+        wb.active = sheet
+        print_info(_("Sheet '%s' was updated.") % (self.sheet_name))
 
 
 # The end.

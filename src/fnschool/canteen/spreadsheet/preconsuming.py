@@ -23,6 +23,7 @@ class PreConsuming(SpreadsheetBase):
         cfoods = [f for f in foods if not f.is_abandoned]
         year = cfoods[-1].xdate.year
         month = cfoods[-1].xdate.month
+        residual_mark = _("(Remaining)")
         time_nodes = sorted(
             list(
                 set(
@@ -78,10 +79,9 @@ class PreConsuming(SpreadsheetBase):
                 tn0 = datetime(tn1.year, tn1.month, 1)
 
             wbfoods = [
-                f for f in cfoods if f.get_remmainer(tn0) > 0 and f.xdate <= tn0
+                f for f in cfoods if f.get_remainder(tn0) > 0 and f.xdate <= tn0
             ]
             for wbfood in [f for f in wbfoods if f.xdate < tn0]:
-                residual_mark = _("(Remaining)")
                 if not wbfood.name.endswith(residual_mark):
                     wbfood.name = wbfood.name + residual_mark
 
@@ -107,8 +107,10 @@ class PreConsuming(SpreadsheetBase):
                 wbfood = wbfoods[f_index]
                 row_index = self.row_index_offset + f_index
                 sheet.cell(row_index, 1, wbfood.name)
-                sheet.cell(row_index, 2, wbfood.get_remmainer(tn0))
+                sheet.cell(row_index, 2, wbfood.get_remainder(tn0))
                 sheet.cell(row_index, 4, wbfood.unit_price)
+                if wbfood.name.endswith(residual_mark):
+                    wbfood.name = wbfood.name.replace(residual_mark,'')
 
             for row_index in range(row_index + 1, sheet.max_row + 1):
                 sheet.cell(row_index, 1, "")
@@ -124,7 +126,7 @@ class PreConsuming(SpreadsheetBase):
                 ).format(sheet.title, wb_fpath)
             )
             new_wbfoods = [
-                f for f in cfoods if f.get_remmainer(tn1) > 0 and f.xdate == tn1
+                f for f in cfoods if f.get_remainder(tn1) > 0 and f.xdate == tn1
             ]
             print_info(
                 (

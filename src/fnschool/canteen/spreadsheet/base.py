@@ -1,6 +1,12 @@
 import os
 import sys
+from openpyxl.styles import *
+from openpyxl.formatting.rule import *
+from openpyxl.styles.differential import *
+from openpyxl.utils.cell import *
 
+
+from fnschool import *
 
 class SpreadsheetBase:
     def __init__(self, bill):
@@ -12,6 +18,15 @@ class SpreadsheetBase:
         self.sheet_name = None
         self._sheet = None
         self.operator = self.bill.operator
+        self.cell_alignment0 = Alignment(horizontal="center", vertical="center")
+        self.cell_side0 = Side(border_style="thin")
+        self.cell_border0 = Border(
+            top=self.cell_side0,
+            left=self.cell_side0,
+            right=self.cell_side0,
+            bottom=self.cell_side0,
+        )
+ 
 
     @property
     def bill_foods(self):
@@ -20,13 +35,17 @@ class SpreadsheetBase:
     @property
     def bfoods(self):
         return self.bill_foods
+    
+    @property
+    def purchaser(self):
+        return self.bill.purchaser
 
     def get_bill_sheet(self, name):
         sheet = self.bwb[name]
         return sheet
 
-    def unmerge_sheet_cells(self):
-        sheet = self.sheet
+    def unmerge_sheet_cells(self,sheet = None):
+        sheet = sheet or self.sheet
         if isinstance(sheet, str):
             sheet = self.get_bill_sheet(sheet)
         merged_ranges = list(sheet.merged_cells.ranges)

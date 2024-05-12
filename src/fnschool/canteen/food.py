@@ -18,6 +18,7 @@ class Food:
         total_price,
         xdate,
         purchaser,
+        fclass,
         is_abandoned=False,
         is_inventory=False,
     ):
@@ -50,7 +51,7 @@ class Food:
     def unit_price(self):
         return self.total_price / self.count
 
-    def get_remmainer(self, cdate):
+    def get_remainder(self, cdate):
         if self.xdate < cdate:
             return self.count - sum(
                 [c for d, c in self.consumptions if d <= cdate]

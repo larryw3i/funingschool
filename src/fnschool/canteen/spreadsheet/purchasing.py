@@ -178,7 +178,9 @@ class Purchasing(SpreadsheetBase):
                 print_warning(_("No file was selected, exit."))
                 exit()
                 return None
-
+            print_info(
+                _("Purchasing list file \"{0}\" has been selected.").format(filename)
+            )
             self._path = filename
         return self._path
 
@@ -261,6 +263,7 @@ class Purchasing(SpreadsheetBase):
                 total_price=food[self.total_price_col_name],
                 xdate=food[self.xdate_col_name],
                 purchaser=food[self.purchaser_name_col_name],
+                fclass = food[self.food_class_col_name]
             )
             if self.abandoned_col_name:
                 _food.is_abandoned = not food[self.abandoned_col_name] is np.nan

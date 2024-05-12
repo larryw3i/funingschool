@@ -31,6 +31,11 @@ class Bill:
             self._foods = self.spreadsheet.purchasing.read_pfoods()
         return self._foods
 
+    @property
+    def purchaser(self):
+        purchaser = self.foods[-1].purchaser
+        return purchaser
+
     def make_spreadsheets(self):
         self.spreadsheet.update()
         pass

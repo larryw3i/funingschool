@@ -94,7 +94,7 @@ class Warehousing(SpreadsheetBase):
         class_names = self.food.get_class_names()
         time_nodes = self.bill.get_time_nodes()
 
-        self.unmerge_cells_of_sheet(wsheet)
+        self.unmerge_sheet_cells(wsheet)
 
         for form_index0, form_index1 in form_indexes:
             food_index0 = form_index0 + 2

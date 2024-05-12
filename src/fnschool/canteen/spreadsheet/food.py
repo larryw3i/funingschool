@@ -13,7 +13,7 @@ class Food(SpreadsheetBase):
     def format(self, sheet):
         if isinstance(sheet, str):
             sheet = self.get_food_sheet(sheet)
-        self.unmerge_cells_of_sheet(sheet)
+        self.unmerge_sheet_cells(sheet)
         for row in sheet.iter_rows(
             min_row=1,
             max_row=sheet.max_row,
@@ -141,7 +141,7 @@ class Food(SpreadsheetBase):
             _rfoods = [f for f in rfoods if f.name == food_name]
             _cfoods = [f for f in cfoods if f.name == food_name]
 
-            self.unmerge_cells_of_sheet(sheet)
+            self.unmerge_sheet_cells(sheet)
 
             sheet.cell(index_start - 2, 1, f"{t1.year}年")
 
