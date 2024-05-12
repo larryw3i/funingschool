@@ -161,7 +161,7 @@ class Bill:
 
     @property
     def food_class_names(self):
-        fclass_names = ["蔬菜类"]+ list(self.food_classes.keys())
+        fclass_names = ["蔬菜类"] + list(self.food_classes.keys())
         return fclass_names
 
     @property

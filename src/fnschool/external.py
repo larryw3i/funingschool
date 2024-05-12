@@ -47,14 +47,18 @@ def get_sponsor_url():
 def open_file(file_path):
     file_path = str(file_path)
     bin_name = "open" if (sys_is_linux() or sys_is_darwin()) else "start"
+    file_path = '"' + file_path + '"'
     if sys_is_win():
-        if file_path.endswith(".toml"):
+        if file_path.endswith(".toml\""):
             bin_name = "notepad"
-    else:
-        file_path = "'" + file_path + "'"
+        else:
+            os.startfile(file_path)
+            
+            return None
 
-    _sh = f"{bin_name} {file_path}"
-    os.system(_sh)
+    os.system(f"{bin_name} {file_path}")
+
+    return None
 
 
 # The end.

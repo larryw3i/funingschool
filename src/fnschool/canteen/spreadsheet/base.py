@@ -45,7 +45,6 @@ class SpreadsheetBase:
             dates += [d for d, __ in f.consumptions]
         date = max(dates)
         return date.day
-        
 
     @property
     def bill_foods(self):

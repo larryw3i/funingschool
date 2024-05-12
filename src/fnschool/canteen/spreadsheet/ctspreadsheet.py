@@ -142,7 +142,7 @@ class CtSpreadSheet:
         )
 
         s_input = input(">_ ")
-        
+
         print()
         print_info(_("Saving. . ."))
 

@@ -210,7 +210,7 @@ class Consuming(SpreadsheetBase):
                         cell.value = ""
 
         self.format()
-        
+
         wb = self.bwb
         wb.active = csheet
         print_info(_("Sheet '%s' was updated.") % self.sheet.title)
