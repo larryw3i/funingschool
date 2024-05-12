@@ -49,11 +49,11 @@ def open_file(file_path):
     bin_name = "open" if (sys_is_linux() or sys_is_darwin()) else "start"
     file_path = '"' + file_path + '"'
     if sys_is_win():
-        if file_path.endswith(".toml\""):
+        if file_path.endswith('.toml"'):
             bin_name = "notepad"
         else:
             os.startfile(file_path)
-            
+
             return None
 
     os.system(f"{bin_name} {file_path}")
