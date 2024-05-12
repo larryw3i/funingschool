@@ -28,6 +28,7 @@ from fnschool.canteen.spreadsheet.cover import Cover
 class CtSpreadSheet:
     def __init__(self, bill):
         self.bill = bill
+        self.operator = self.bill.operator
         self._bill_fpath = None
         self._purchasing_fpath = None
         self._bwb = None
@@ -141,7 +142,8 @@ class CtSpreadSheet:
         )
 
         s_input = input(">_ ")
-
+        
+        print()
         print_info("Saving. . .")
 
         if len(s_input) > 0 and s_input in "Yy":

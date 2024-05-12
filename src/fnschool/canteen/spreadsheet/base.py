@@ -37,10 +37,12 @@ class SpreadsheetBase:
 
     @property
     def consuming_day_m1(self):
-        days = []
+        dates = []
         for f in self.bfoods:
-            days += [d for d, __ in f.consumptions]
-        return max(days)
+            dates += [d for d, __ in f.consumptions]
+        date = max(days)
+        return date.day
+        
 
     @property
     def bill_foods(self):

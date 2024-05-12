@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-05-13 03:54+0800\n"
-"PO-Revision-Date: 2024-05-13 03:55+0800\n"
+"PO-Revision-Date: 2024-05-13 04:02+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: en_US\n"
 "Language-Team: English - United States <larryw3i@163.com>\n"
@@ -617,7 +617,7 @@ msgstr "工作表 “{1}” 的 第{0}行 正在插入新行，请稍作等待�
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/base.py:72
 msgid "Cells of {0} was unmerged."
-msgstr "单元格 “{0}” 被取消合并。"
+msgstr "工作表 “{0}” 的所有单元格被取消合并。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:57
 msgid "Spreadsheet \"{0}\" is in use."
@@ -679,7 +679,7 @@ msgstr "没有找到 {0} 列，请先添加它。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:133
 msgid "Select a purchasing file, please!"
-msgstr "请您选择一个购入食材的列表文件"
+msgstr "请您选择一个购入食材的列表文件。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:134
 msgid "Spreadsheet Files"
