@@ -139,10 +139,8 @@ class Inventory(SpreadsheetBase):
     def update(self):
         sheet = self.sheet
         tnfoods = self.foods
-        for tn1, foods in tnfoods:
-            print(tn1,[(f.name,f.get_remainder(tn1)) for f in foods])
         form_indexes = self.form_indexes
-
+        print(form_indexes)
         self.unmerge_sheet_cells()
 
         for form_index_n in range(0, len(form_indexes)):
@@ -195,6 +193,7 @@ class Inventory(SpreadsheetBase):
                     == "合计"
                 ):
                     sheet.insert_rows(row_index + 1, 1)
+                print(row_index,food.name,food.unit_name,food.get_remainder(t1))
                 sheet.cell(row_index, 1, food.name)
                 sheet.cell(row_index, 2, food.unit_name)
                 sheet.cell(row_index, 3, food.get_remainder(t1))
