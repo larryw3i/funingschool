@@ -127,7 +127,7 @@ class Bill:
         print_info(
             _(
                 "If you feel {0} is great, "
-                + "please sponsor it."
+                + "please sponsor it. "
                 + "Your sponsorship will keep "
                 + "the project alive."
             ).format(app_name)

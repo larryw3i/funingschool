@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-13 03:34+0800\n"
+"POT-Creation-Date: 2024-05-13 03:54+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -159,7 +159,7 @@ msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:128
 msgid ""
-"If you feel {0} is great, please sponsor it.Your sponsorship will keep "
+"If you feel {0} is great, please sponsor it. Your sponsorship will keep "
 "the project alive."
 msgstr ""
 
