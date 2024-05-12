@@ -15,4 +15,19 @@ from fnschool.external import *
 __version__ = "20240412.2301.19"
 
 
+def print_app_name():
+    app_name0 = [
+        r" _____ _   _ ____   ____ _   _  ___   ___  _     ",
+        r"|  ___| \ | / ___| / ___| | | |/ _ \ / _ \| |    ",
+        r"| |_  |  \| \___ \| |   | |_| | | | | | | | |    ",
+        r"|  _| | |\  |___) | |___|  _  | |_| | |_| | |___ ",
+        r"|_|   |_| \_|____/ \____|_| |_|\___/ \___/|_____|",
+        r"",
+    ]
+    app_name0_len = max([len(l) for l in app_name0])
+    version = "v" + __version__
+    print("\n".join(app_name0))
+    print(f"{version: >{app_name0_len}}")
+
+
 # The end.

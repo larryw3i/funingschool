@@ -1,7 +1,7 @@
 import os
 import sys
 from fnschool import *
-from fnschool.canteen.spreadsheet.base import SpreadsheetBase
+from fnschool.canteen.spreadsheet.base import *
 
 
 class Cover(SpreadsheetBase):
@@ -11,45 +11,38 @@ class Cover(SpreadsheetBase):
         pass
 
     def update(self):
-        time_nodes = self.bill.get_time_nodes()
-        t0, t1 = time_nodes[-1]
-        cvsheet = self.get_conver_sheet()
+        year = self.bfoods[-1].xdate.year
+        month = self.bfoods[-1].xdate.month
+        day = self.consuming_day_m1
+
+        cvsheet = self.sheet
         cvsheet.cell(
             1,
             1,
-            self.bill.profile.org_name
-            + f"{t1.year}年{t1.month}月份食堂食品采购统计表",
+            self.purchaser + f"{year}年{month}月份食堂食品采购统计表",
         )
-        foods = [
-            f
-            for f in self.food.get_foods()
-            if (not f.is_residue and f.check_date.month == self.bill.month)
-        ]
-        wfoods = [f for f in foods if not f.is_negligible]
-        uwfoods = [f for f in foods if f.is_negligible]
+        foods = [f for f in self.bfoods if (not f.is_inventory)]
+        wfoods = [f for f in foods if not f.is_abandoned]
+        uwfoods = [f for f in foods if f.is_abandoned]
         total_price = 0.0
         for row in cvsheet.iter_rows(
             min_row=3, max_row=9, min_col=1, max_col=3
         ):
             class_name = row[0].value.replace(" ", "")
-            _total_price = 0.0
+            m_total_price = 0.0
             for f in foods:
                 if f.fclass == class_name:
-                    _total_price += f.count * f.unit_price
-            cvsheet.cell(row[0].row, 2, _total_price)
+                    m_total_price += f.count * f.unit_price
+            cvsheet.cell(row[0].row, 2, m_total_price)
 
-            total_price += _total_price
+            total_price += m_total_price
         cvsheet.cell(10, 2, total_price)
 
         w_seasoning_total_price = sum(
             [f.count * f.unit_price for f in wfoods if ("调味" in f.fclass)]
         )
         unw_seasoning_total_price = sum(
-            [
-                f.count * f.unit_price
-                for f in uwfoods
-                if ("调味" in f.fclass)
-            ]
+            [f.count * f.unit_price for f in uwfoods if ("调味" in f.fclass)]
         )
 
         cvsheet.cell(
@@ -59,12 +52,10 @@ class Cover(SpreadsheetBase):
             + f"未入库：{unw_seasoning_total_price:.2f}元",
         )
 
-        if self.bill.is_changsheng and self.bill.is_xuelan:
-            self.update_cover_sheet_for_cangsheng_xuelan(
-                cvsheet, foods, wfoods, uwfoods, total_price
-            )
-
-        wb = self.get_bill_workbook()
+        wb = self.bwb
         wb.active = cvsheet
 
-        print_info(_("Sheet '%s' was updated.") % self.cover_sheet_name)
+        print_info(_("Sheet '%s' was updated.") % self.sheet.title)
+
+
+# The end.

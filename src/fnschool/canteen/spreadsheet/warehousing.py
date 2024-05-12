@@ -8,7 +8,7 @@ from openpyxl.utils.cell import *
 
 from fnschool import *
 
-from fnschool.canteen.spreadsheet.base import SpreadsheetBase
+from fnschool.canteen.spreadsheet.base import *
 
 
 class Warehousing(SpreadsheetBase):
@@ -152,6 +152,7 @@ class Warehousing(SpreadsheetBase):
             )
 
             if row_difference > 0:
+                self.row_inserting_tip(food_index0 + 1)
                 wsheet.insert_rows(food_index0 + 1, row_difference)
                 for row in wsheet.iter_rows(
                     min_row=food_index0 + 1,

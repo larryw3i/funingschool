@@ -7,22 +7,45 @@ class Consuming(SpreadsheetBase):
         self.sheet_name = "出库单"
         pass
 
-    def update(self):
-        foods = self.food.get_foods()
-        csheet = self.get_consuming_sheet()
-        form_indexes = self.get_consuming_form_indexes()
+    @property
+    def form_indexes(self):
+        if not self._form_indexes:
+            csheet = self.sheet
+            indexes = []
+            row_index = 1
+            for row in csheet.iter_rows(max_row=csheet.max_row + 1, max_col=9):
+                if row[0].value:
+                    if row[0].value.replace(" ", "") == "出库单":
+                        indexes.append([row_index + 1, 0])
+                    if row[0].value.replace(" ", "") == "合计":
+                        indexes[-1][1] = row_index
+                row_index += 1
 
-        time_nodes = self.bill.get_time_nodes()
-        days = []
-        class_names = self.food.get_class_names()
-        for t0, t1 in time_nodes:
-            days += [
-                t0 + timedelta(days=i) for i in range(0, (t1 - t0).days + 1)
-            ]
+            if len(indexes) > 0:
+                self._form_indexes = indexes
+            else:
+                return None
+
+        return self._form_indexes
+
+    def update(self):
+        foods = [f for f in self.bfoods if not f.is_abandoned]
+        csheet = self.sheet
+        form_indexes = self.form_indexes
+
+        class_names = self.bill.food_class_names
+
+        cdays = []
+        for f in foods:
+            for d, __ in f.consumptions:
+                if not d in cdays:
+                    cdays.append(d)
+        cdays = sorted(cdays)
+
         print_info(
             _("Consuming days:")
             + " "
-            + " ".join([d.strftime("%Y.%m.%d") for d in days])
+            + " ".join([d.strftime("%Y.%m.%d") for d in cdays])
         )
 
         merged_ranges = list(csheet.merged_cells.ranges)
@@ -30,9 +53,9 @@ class Consuming(SpreadsheetBase):
             csheet.unmerge_cells(str(cell_group))
 
         max_day_index = 0
-        for day_index in range(0, len(days)):
+        for day_index in range(0, len(cdays)):
             max_day_index = day_index + 1
-            day = days[day_index]
+            day = cdays[day_index]
             form_index = form_indexes[day_index]
             form_index0, form_index1 = form_index
             food_index0 = form_index0 + 2
@@ -41,7 +64,7 @@ class Consuming(SpreadsheetBase):
             tfoods = [
                 food
                 for food in foods
-                if day in [_date for _date, _count in food.consuming_list]
+                if day in [d for d, __ in food.consumptions]
             ]
             tfoods_classes = [f.fclass for f in tfoods]
 
@@ -51,7 +74,7 @@ class Consuming(SpreadsheetBase):
 
             tfoods_len = len(tfoods)
             consuming_n = day_index + 1
-            csheet.cell(form_index0, 2, self.bill.profile.org_name)
+            csheet.cell(form_index0, 2, self.purchaser)
             csheet.cell(
                 form_index0,
                 4,
@@ -74,7 +97,7 @@ class Consuming(SpreadsheetBase):
                     + "经办人："
                     + "　    "
                     + "过称人："
-                    + self.bill.profile.name
+                    + self.operator.name
                     + "      "
                     + "仓管人："
                     + " 　"
@@ -86,6 +109,7 @@ class Consuming(SpreadsheetBase):
             )
 
             if row_difference > 0:
+                self.row_inserting_tip(food_index0 + 1)
                 csheet.insert_rows(food_index0 + 1, row_difference)
                 form_indexes = self.get_consuming_form_indexes()
                 form_index1 += row_difference
@@ -118,7 +142,7 @@ class Consuming(SpreadsheetBase):
 
                 class_consuming_count = 0.0
                 for food in class_foods:
-                    for _date, _count in food.consuming_list:
+                    for _date, _count in food.consumptions:
                         if _date == day:
                             class_consuming_count += _count * food.unit_price
 
@@ -138,7 +162,7 @@ class Consuming(SpreadsheetBase):
                 for findex, food in enumerate(class_foods):
                     consuming_count = [
                         _count
-                        for _date, _count in food.consuming_list
+                        for _date, _count in food.consumptions
                         if _date == day
                     ][0]
                     frow_index = fentry_index_start + findex
@@ -163,7 +187,7 @@ class Consuming(SpreadsheetBase):
 
             tfoods_total_price = 0.0
             for food in tfoods:
-                for _date, _count in food.consuming_list:
+                for _date, _count in food.consumptions:
                     if _date == day:
                         tfoods_total_price += _count * food.unit_price
             csheet.cell(form_index1, 6, tfoods_total_price)
@@ -185,14 +209,14 @@ class Consuming(SpreadsheetBase):
                     for cell in row:
                         cell.value = ""
 
-        self.format_consuming_sheet()
+        self.format()
 
-        wb = self.get_bill_workbook()
+        wb = self.bwb
         wb.active = csheet
-        print_info(_("Sheet '%s' was updated.") % self.consuming_sheet_name)
+        print_info(_("Sheet '%s' was updated.") % self.sheet.title)
 
     def format(self):
-        csheet = self.get_consuming_sheet()
+        csheet = self.sheet
         merged_ranges = list(csheet.merged_cells.ranges)
         for cell_group in merged_ranges:
             csheet.unmerge_cells(str(cell_group))
@@ -255,10 +279,10 @@ class Consuming(SpreadsheetBase):
                     end_column=8,
                 )
 
-        wb = self.get_bill_workbook()
+        wb = self.bwb
         wb.active = csheet
 
-        print_info(_("Sheet '%s' was formatted.") % self.consuming_sheet_name)
+        print_info(_("Sheet '%s' was formatted.") % self.sheet.title)
 
 
 # The end.

@@ -32,6 +32,18 @@ def get_new_issue_url():
     )
 
 
+def get_sponsor_url():
+    return (
+        (
+            "https://gitee.com/larryw3i/funingschool"
+            + "/blob/master/Documentation/"
+            + "README.zh_CN.md#赞助"
+        )
+        if is_zh_CN
+        else ""
+    )
+
+
 def open_file(file_path):
     file_path = str(file_path)
     bin_name = "open" if (sys_is_linux() or sys_is_darwin()) else "start"

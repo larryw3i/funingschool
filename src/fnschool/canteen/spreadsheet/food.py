@@ -1,8 +1,9 @@
 import os
 import sys
+import secrets
 
 from fnschool import *
-from fnschool.canteen.spreadsheet.base import SpreadsheetBase
+from fnschool.canteen.spreadsheet.base import *
 
 
 class Food(SpreadsheetBase):
@@ -11,10 +12,21 @@ class Food(SpreadsheetBase):
         self.sheet_name = "材料台账母表"
         pass
 
+    def get_sheet(self, name=None):
+        sheet = None
+        if name in self.bwb.sheetnames:
+            sheet = self.bwb[name]
+        else:
+            sheet = self.bwb.copy_worksheet(self.bwb[self.sheet_name])
+            sheet.title = name
+        return sheet
+
     def format(self, sheet):
         if isinstance(sheet, str):
-            sheet = self.get_food_sheet(sheet)
+            sheet = self.get_sheet(sheet)
+
         self.unmerge_sheet_cells(sheet)
+
         for row in sheet.iter_rows(
             min_row=1,
             max_row=sheet.max_row,
@@ -77,60 +89,47 @@ class Food(SpreadsheetBase):
                     end_column=13,
                 )
 
-    def update(self):
-        time_nodes = sorted(
-            [
-                tn
-                for tn in self.bill.get_time_nodes()
-                if tn[1].month == self.bill.month
-            ]
-        )
-        time_nodes_mm1 = sorted(
-            [
-                tn
-                for tn in self.bill.get_time_nodes()
-                if tn[1].month == self.bill.month - 1
-            ]
-        )
-        t0, t1 = time_nodes[-1]
-        cfoods = [
-            f
-            for f in self.food.get_foods()
-            if (
-                (
-                    f.xdate.month == self.bill.month
-                    or (
-                        self.bill.month
-                        in [d.month for d, c in f.consuming_list]
-                    )
-                )
-                and not f.is_negligible
-            )
-        ]
-        food_names = list(set([f.name for f in cfoods]))
-        wb = self.get_bill_workbook()
-        tn0_dm1 = (
-            (time_nodes[0][0] + timedelta(days=-1))
-            if len(time_nodes_mm1) < 1
-            else (time_nodes_mm1[-1][1])
+        print_info(
+            _("Sheet {0} has been reformatted.").format(self.sheet.title)
         )
 
+    def get_form_index(self, sheet):
+        indexes = self.get_form_indexes(sheet)
+        index_range = indexes[self.bfoods[-1].xdate.month - 1]
+        return index_range
+
+    def get_form_indexes(self, sheet):
+        indexes = []
+        for row in sheet.iter_rows(
+            min_row=1, max_row=sheet.max_row, min_col=1, max_col=14
+        ):
+            if row[0].value and "材料名称" in str(row[0].value).replace(
+                " ", ""
+            ):
+                indexes.append([row[0].row + 3, None])
+
+            if row[2].value and "合计" in str(row[2].value).replace(" ", ""):
+                indexes[-1][1] = row[0].row + 1
+        return indexes
+
+    def update(self):
+
+        year = self.bfoods[-1].xdate.year
+        month = self.bfoods[-1].xdate.month
+        cfoods = [f for f in self.bfoods if not f.is_abandoned]
+        food_names = list(set([f.name for f in cfoods]))
+        wb = self.bwb
+
         rfoods = [
-            f
-            for f in self.food.get_foods()
-            if (
-                f.get_remainder_by_time(tn0_dm1) > 0
-                and not f.is_negligible
-                and f.xdate.month < self.bill.month
-            )
+            f for f in self.bfoods if (not f.is_abandoned and f.is_inventory)
         ]
 
         food_names = list(set([f.name for f in rfoods] + food_names))
 
         sheet = None
         for food_name in food_names:
-            sheet = self.get_food_sheet(food_name)
-            form_index_range = self.get_food_form_index(sheet)
+            sheet = self.get_sheet(food_name)
+            form_index_range = self.get_form_index(sheet)
             index_start, index_end = form_index_range
 
             for row_index in range(index_start, index_end - 1):
@@ -139,22 +138,22 @@ class Food(SpreadsheetBase):
             row_index = index_start
             col_index = 1
 
-            _rfoods = [f for f in rfoods if f.name == food_name]
-            _cfoods = [f for f in cfoods if f.name == food_name]
+            m_rfoods = [f for f in rfoods if f.name == food_name]
+            m_cfoods = [f for f in cfoods if f.name == food_name]
 
             self.unmerge_sheet_cells(sheet)
 
-            sheet.cell(index_start - 2, 1, f"{t1.year}年")
+            sheet.cell(index_start - 2, 1, f"{year}年")
 
-            if len(_rfoods) > 0:
-                for _row_index in range(
-                    index_start, index_start + len(_rfoods)
+            if len(m_rfoods) > 0:
+                for m_row_index in range(
+                    index_start, index_start + len(m_rfoods)
                 ):
-                    food = _rfoods[_row_index - index_start]
+                    food = m_rfoods[m_row_index - index_start]
                     sheet.cell(
-                        _row_index,
+                        m_row_index,
                         3,
-                        ("上年结转" if t1.month == 1 else "上月结转"),
+                        ("上年结转" if month == 1 else "上月结转"),
                     )
                     sheet.cell(row_index, 10, food.count)
                     sheet.cell(row_index, 11, food.unit_price)
@@ -164,23 +163,22 @@ class Food(SpreadsheetBase):
                 sheet.cell(
                     row_index,
                     3,
-                    ("上年结转" if t1.month == 1 else "上月结转"),
+                    ("上年结转" if month == 1 else "上月结转"),
                 )
 
                 row_index += 1
 
-            _cdates = []
-            for food in _cfoods:
-                if len(food.consuming_list) > 0:
-                    _cdates += [d for d, c in food.consuming_list]
-                _cdates.append(food.xdate)
-            _cdates = [d for d in _cdates if d.month == self.bill.month]
-            _cdates = sorted(list(set(_cdates)))
+            cdates = []
+            for food in m_cfoods:
+                if len(food.consumptions) > 0:
+                    cdates += [d for d, c in food.consumptions]
+                cdates.append(food.xdate)
+            cdates = sorted(list(set(cdates)))
 
             consuming_n = 1
             warehousing_n = 1
-            for cdate in _cdates:
-                for food in _cfoods:
+            for cdate in cdates:
+                for food in m_cfoods:
 
                     if food.xdate == cdate:
                         sheet.cell(row_index, 1, cdate.month)
@@ -204,22 +202,22 @@ class Food(SpreadsheetBase):
 
                         row_index += 1
 
-                    if cdate in [d for d, __ in food.consuming_list]:
-                        _count = [
-                            c for d, c in food.consuming_list if d == cdate
+                    if cdate in [d for d, __ in food.consumptions]:
+                        ccount = [
+                            c for d, c in food.consumptions if d == cdate
                         ][0]
-                        _remainder = food.count - sum(
-                            [c for d, c in food.consuming_list if d <= cdate]
+                        cremainder = food.count - sum(
+                            [c for d, c in food.consumptions if d <= cdate]
                         )
                         sheet.cell(row_index, 1, cdate.month)
                         sheet.cell(row_index, 2, cdate.day)
                         sheet.cell(row_index, 6, "")
-                        sheet.cell(row_index, 7, _count)
+                        sheet.cell(row_index, 7, ccount)
                         sheet.cell(row_index, 8, food.unit_price)
-                        sheet.cell(row_index, 9, _count * food.unit_price)
-                        sheet.cell(row_index, 10, _remainder)
+                        sheet.cell(row_index, 9, ccount * food.unit_price)
+                        sheet.cell(row_index, 10, cremainder)
                         sheet.cell(row_index, 11, food.unit_price)
-                        sheet.cell(row_index, 12, _remainder * food.unit_price)
+                        sheet.cell(row_index, 12, cremainder * food.unit_price)
                         sheet.cell(
                             row_index,
                             13,
@@ -228,25 +226,26 @@ class Food(SpreadsheetBase):
                         consuming_n += 1
 
                         if "合计" in str(sheet.cell(row_index + 1, 3).value):
+                            self.row_inserting_tip(row_index + 1)
                             sheet.insert_rows(row_index + 1, 1)
 
                         row_index += 1
 
-            self.format_food_sheet(sheet)
+            self.format(sheet)
             print_info(_("Sheet '%s' was updated.") % sheet.title)
 
         wb.active = sheet
 
-        _food_names = list(set([f.name for f in self.food.get_foods()]))
-        for name in _food_names:
-            if self.includes_sheet(name):
-                sheet = self.get_bill_sheet(name)
+        bfood_names = list(set([f.name for f in self.bfoods]))
+        for name in bfood_names:
+            if name in self.bwb.sheetnames:
+                sheet = self.get_sheet(name)
                 sheet.sheet_properties.tabColor = "0" * 8
 
         print_info(_("All food sheets have their tab colors reset."))
 
         for name in food_names:
-            sheet = self.get_food_sheet(name)
+            sheet = self.get_sheet(name)
             sheet.sheet_properties.tabColor = secrets.token_hex(4)
 
         print_info(

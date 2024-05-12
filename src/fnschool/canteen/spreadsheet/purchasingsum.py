@@ -2,7 +2,7 @@ import os
 import sys
 
 from fnschool import *
-from fnschool.canteen.spreadsheet.base import SpreadsheetBase
+from fnschool.canteen.spreadsheet.base import *
 
 
 class PurchasingSum(SpreadsheetBase):
@@ -12,40 +12,36 @@ class PurchasingSum(SpreadsheetBase):
         pass
 
     def update(self):
-        time_nodes = [
-            tn
-            for tn in self.bill.get_time_nodes()
-            if tn[1].month == self.bill.month
-        ]
-        t0, t1 = time_nodes[-1]
-        pssheet = self.get_purchase_sum_sheet()
+
+        pssheet = self.sheet
+        year = self.bfoods[-1].xdate.year
+        month = self.bfoods[-1].xdate.month
+        day = self.consuming_day_m1
 
         pssheet.cell(
             2,
             1,
-            f"编制单位：{self.bill.profile.org_name}"
+            f"编制单位：{self.purchaser}"
             + f"        "
             + f"单位：元"
             + f"         "
-            + f"{t1.year}年{t1.month}月{t1.day}日",
+            + f"{year}年{month}月{day}日",
         )
         pssheet.cell(
             20,
             1,
-            f"编制单位：{self.bill.profile.org_name}"
+            f"编制单位：{self.purchaser}"
             + f"        "
             + f"单位：元"
             + f"         "
-            + f"{t1.year}年{t1.month}月{t1.day}日",
+            + f"{year}年{month}月{day}日",
         )
-        foods = [
-            f
-            for f in self.food.get_foods()
-            if (not f.is_residue and f.check_date.month == self.bill.month)
-        ]
-        wfoods = [f for f in foods if not f.is_negligible]
-        uwfoods = [f for f in foods if f.is_negligible]
+        foods = [f for f in self.bfoods if (not f.is_inventory)]
+
+        wfoods = [f for f in foods if not f.is_abandoned]
+        uwfoods = [f for f in foods if f.is_abandoned]
         total_price = 0.0
+
         for row in pssheet.iter_rows(
             min_row=4, max_row=10, min_col=1, max_col=3
         ):
@@ -56,25 +52,26 @@ class PurchasingSum(SpreadsheetBase):
                     _total_price += food.count * food.unit_price
             pssheet.cell(row[0].row, 2, _total_price)
             total_price += _total_price
-        total_price_cn = self.bill.convert_num_to_cnmoney_chars(total_price)
+
+        total_price_CNY = self.bill.get_CNY_chars(total_price)
         pssheet.cell(
-            11, 1, f"总金额（大写)：{total_price_cn}    ¥{total_price:.2f}"
+            11, 1, f"总金额（大写)：{total_price_CNY}    ¥{total_price:.2f}"
         )
-        pssheet.cell(12, 1, f"经办人：{self.bill.profile.name}  ")
+        pssheet.cell(12, 1, f"经办人：{self.operator.name}  ")
 
         total_price = sum([f.count * f.unit_price for f in uwfoods])
-        total_price_cn = self.bill.convert_num_to_cnmoney_chars(total_price)
+        total_price_CNY = self.bill.get_CNY_chars(total_price)
         pssheet.cell(27, 2, total_price)
         pssheet.cell(
-            29, 1, f"总金额（大写)：{total_price_cn}    ¥{total_price:.2f}"
+            29, 1, f"总金额（大写)：{total_price_CNY}    ¥{total_price:.2f}"
         )
 
-        pssheet.cell(30, 1, f"经办人：{self.bill.profile.name}  ")
+        pssheet.cell(30, 1, f"经办人：{self.operator.name}  ")
 
-        wb = self.get_bill_workbook()
+        wb = self.bwb
         wb.active = pssheet
 
-        print_info(_("Sheet '%s' was updated.") % self.purchase_sum_sheet_name)
+        print_info(_("Sheet '%s' was updated.") % self.sheet.title)
 
 
 # The end.

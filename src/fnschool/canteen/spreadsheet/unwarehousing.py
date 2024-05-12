@@ -1,8 +1,13 @@
 import os
 import sys
+from openpyxl.styles import *
+from openpyxl.formatting.rule import *
+from openpyxl.styles.differential import *
+from openpyxl.utils.cell import *
+
 
 from fnschool import *
-from fnschool.canteen.spreadsheet.base import SpreadsheetBase
+from fnschool.canteen.spreadsheet.base import *
 
 
 class Unwarehousing(SpreadsheetBase):
@@ -10,17 +15,21 @@ class Unwarehousing(SpreadsheetBase):
         super().__init__(bill)
         self.sheet_name = "未入库明细表"
         pass
-    
+
     @property
     def form_indexes(self):
         if not self._form_indexes:
             unwsheet = self.sheet
             indexes = []
             row_index = 1
-            for row in unwsheet.iter_rows(max_row=unwsheet.max_row + 1, max_col=7):
-                if row[0].value and "未入库明细表" in row[0].value.replace(" ", ""):
+            for row in unwsheet.iter_rows(
+                max_row=unwsheet.max_row + 1, max_col=7
+            ):
+                if row[0].value and "未入库明细表" in row[0].value.replace(
+                    " ", ""
+                ):
                     indexes.append([row_index + 1, 0])
-    
+
                 if row[1].value and "合计" in row[1].value.replace(" ", ""):
                     indexes[-1][1] = row_index
 
@@ -31,34 +40,26 @@ class Unwarehousing(SpreadsheetBase):
             else:
                 return None
 
-
         return self._form_indexes
-        
 
     def update(self):
         unwsheet = self.sheet
         form_indexes = self.form_indexes
 
-        foods = [
-            f
-            for f in self.bfoods
-            if f.is_abandoned 
-        ]
+        foods = [f for f in self.bfoods if f.is_abandoned]
         foods = sorted(foods, key=lambda f: f.xdate)
 
         t1 = []
-        
+
         for bf in self.bfoods:
-            for d,__ in bf.consumptions:
+            for d, __ in bf.consumptions:
                 t1.append(d)
         t1 = sorted(t1)[-1]
 
         row_indexes = []
         for form_index in form_indexes:
             form_index0, form_index1 = form_index
-            unwsheet.cell(
-                form_index0, 1, f" 学校名称：{self.bill.profile.org_name}"
-            )
+            unwsheet.cell(form_index0, 1, f" 学校名称：{self.purchaser}")
             unwsheet.cell(
                 form_index0,
                 4,
@@ -114,7 +115,7 @@ class Unwarehousing(SpreadsheetBase):
                         break
                 break
 
-        print_info(_("Sheet '%s' was updated.") % self.unwarehousing_sheet_name)
+        print_info(_("Sheet '%s' was updated.") % self.sheet.title)
 
 
 # The end.

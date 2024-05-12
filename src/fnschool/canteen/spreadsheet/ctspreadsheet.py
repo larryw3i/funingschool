@@ -66,12 +66,12 @@ class CtSpreadSheet:
     def consumingsum(self):
         if not self._consumingsum:
             self._consumingsum = ConsumingSum(self.bill)
-        self._consumingsum
+        return self._consumingsum
 
     @property
     def purchasingsum(self):
         if not self._purchasingsum:
-            self._purchasingsum = PurchaseSum(self.bill)
+            self._purchasingsum = PurchasingSum(self.bill)
         return self._purchasingsum
 
     @property
@@ -123,6 +123,44 @@ class CtSpreadSheet:
             self._inventory = Inventory(self.bill)
         return self._inventory
 
+    def save_workbook(self):
+        bill_fpath0 = self.operator.bill_fpath_uuid
+        print_info(
+            _(
+                "Do you want to save all updated data "
+                + 'to "{0}"? or just save it as a '
+                + 'copy to "{1}". (YyNn)'
+            ).format(self.operator.bill_fpath, bill_fpath0)
+        )
+        print_warning(
+            _(
+                'If you save updated data to "{0}", '
+                + "data of food sheets will be saved "
+                + "for every month."
+            ).format(self.operator.bill_fpath)
+        )
+
+        s_input = input(">_ ")
+
+        print_info("Saving. . .")
+
+        if len(s_input) > 0 and s_input in "Yy":
+            self.bwb.save(self.operator.bill_fpath)
+            bill_fpath0 = sefl.operator.bill_fpath
+            print_info(
+                _(
+                    "You can fill in the monthly missing data "
+                    + "to food sheets, they will be saved "
+                    + "for next updating."
+                )
+            )
+        else:
+            self.bwb.save(bill_fpath0)
+
+        open_file(bill_fpath0)
+
+        print_info(_("Updated data was saved."))
+
     def update(self):
         self.inventory.update()
         self.warehousing.update()
@@ -133,16 +171,8 @@ class CtSpreadSheet:
         self.consumingsum.update()
         self.cover.update()
 
-        # foods = self.food.get_foods()
-        # self.update_inventory_sheet()
-        # self.update_consuming_sheet()
-        # self.update_warehousing_sheet()
-        # self.update_unwarehousing_sheet()
-        # self.update_consuming_sum_sheet()
-        # self.update_purchase_sum_sheet()
-        # self.update_cover_sheet()
-        # self.update_food_sheets()
-        # self.save_updated_workbooks()
+        self.save_workbook()
+
         print_info(_("Update completely!"))
 
 

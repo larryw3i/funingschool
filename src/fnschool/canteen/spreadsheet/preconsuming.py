@@ -47,7 +47,8 @@ class PreConsuming(SpreadsheetBase):
             wb_fpath = (
                 self.bill.operator.preconsuming_dpath
                 / (
-                    f"consuming-"
+                    _("food_consuming")
+                    + "-"
                     + (
                         tn0.strftime("%Y.%m.%d")
                         if not tn0_cp.month == tn1.month
@@ -127,7 +128,7 @@ class PreConsuming(SpreadsheetBase):
             new_wbfoods = [
                 f for f in cfoods if f.get_remainder(tn1) > 0 and f.xdate == tn1
             ]
-            if len(new_wbfoods)>0:
+            if len(new_wbfoods) > 0:
                 print_info(
                     (
                         _("New purchased food for date {0} is:")
@@ -135,7 +136,7 @@ class PreConsuming(SpreadsheetBase):
                         else _("New purchased foods for date {0} are:")
                     ).format(tn1.strftime("%Y.%m.%d"))
                 )
-    
+
                 print_info(
                     "  ".join(
                         [
@@ -147,7 +148,9 @@ class PreConsuming(SpreadsheetBase):
                 print_warning(_("Negligible foods are not listed."))
             else:
                 print_info(
-                    _("There is no purchased food for {0}.").format(tn1.strftime("%Y.%m.%d"))
+                    _("There is no purchased food for {0}.").format(
+                        tn1.strftime("%Y.%m.%d")
+                    )
                 )
 
             print_error(

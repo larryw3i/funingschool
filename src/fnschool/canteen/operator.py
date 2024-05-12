@@ -1,5 +1,6 @@
 import os
 import sys
+import uuid
 
 from fnschool import *
 from fnschool.canteen.path import *
@@ -81,6 +82,11 @@ class Operator:
         fpath = self.bill_dpath / "bill.xlsx"
         if not fpath.exists():
             shutil.copy(bill0_fpath, fpath)
+        return fpath
+
+    @property
+    def bill_fpath_uuid(self):
+        fpath = self.bill_fpath.parent / ("bill." + str(uuid.uuid4()) + ".xlsx")
         return fpath
 
 

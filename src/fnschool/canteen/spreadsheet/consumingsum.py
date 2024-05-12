@@ -1,7 +1,7 @@
 import os
 import sys
 from fnschool.canteen.food import *
-from fnschool.canteen.spreadsheet.base import SpreadsheetBase
+from fnschool.canteen.spreadsheet.base import *
 
 
 class ConsumingSum(SpreadsheetBase):
@@ -11,59 +11,49 @@ class ConsumingSum(SpreadsheetBase):
         pass
 
     def update(self):
-        cssheet = self.get_consuming_sum_sheet()
-        time_nodes = sorted(
-            [
-                tn
-                for tn in self.bill.get_time_nodes()
-                if tn[1].month == self.bill.month
-            ]
-        )
-        t0, t1 = time_nodes[-1]
-        foods = [
-            f
-            for f in self.food.get_foods()
-            if (self.bill.month in [d.month for d, c in f.consuming_list])
-        ]
+        cssheet = self.sheet
+        year = self.bfoods[-1].xdate.year
+        month = self.bfoods[-1].xdate.month
+        day = self.consuming_day_m1
+        foods = [f for f in self.bfoods if not f.is_abandoned]
 
         total_price = 0.0
         for row in cssheet.iter_rows(
             min_row=4, max_row=10, min_col=1, max_col=3
         ):
             class_name = row[0].value.replace(" ", "")
-            _total_price = 0.0
+            m_total_price = 0.0
             for food in foods:
                 if food.fclass == class_name:
-                    _total_price += sum(
+                    m_total_price += sum(
                         [
                             _count * food.unit_price
-                            for _date, _count in food.consuming_list
-                            if _date.month == self.bill.month
+                            for _date, _count in food.consumptions
                         ]
                     )
-            total_price += _total_price
-            cssheet.cell(row[0].row, 2, _total_price)
+            total_price += m_total_price
+            cssheet.cell(row[0].row, 2, m_total_price)
             cssheet.cell(row[0].row, 2).number_format = numbers.FORMAT_NUMBER_00
 
-        total_price_cn = self.bill.convert_num_to_cnmoney_chars(total_price)
+        total_price_CNY = self.bill.get_CNY_chars(total_price)
         cssheet.cell(
             2,
             1,
-            f"编制单位：{self.bill.profile.org_name}       "
+            f"编制单位：{self.purchaser}       "
             + f"单位：元         "
-            + f"{t1.year}年{t1.month}月{t1.day}日",
+            + f"{year}年{month}月{day}日",
         )
         cssheet.cell(
             11,
             1,
-            (f"总金额（大写)：{total_price_cn}    " + f"¥{total_price:.2f}"),
+            (f"总金额（大写)：{total_price_CNY}    " + f"¥{total_price:.2f}"),
         )
-        cssheet.cell(12, 1, f"经办人：{self.bill.profile.name}  ")
+        cssheet.cell(12, 1, f"经办人：{self.operator.name}  ")
 
-        wb = self.get_bill_workbook()
+        wb = self.bwb
         wb.active = cssheet
 
-        print_info(_("Sheet '%s' was updated.") % self.consuming_sum_sheet_name)
+        print_info(_("Sheet '%s' was updated.") % self.sheet.title)
 
 
 # The end.

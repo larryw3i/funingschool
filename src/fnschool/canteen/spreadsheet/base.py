@@ -28,6 +28,20 @@ class SpreadsheetBase:
             bottom=self.cell_side0,
         )
 
+    def row_inserting_tip(self, row_index):
+        print_error(
+            _(
+                "Row {0} of {1} is being inserted, " + "please wait a moment."
+            ).format(row_index, self.sheet.title)
+        )
+
+    @property
+    def consuming_day_m1(self):
+        days = []
+        for f in self.bfoods:
+            days += [d for d, __ in f.consumptions]
+        return max(days)
+
     @property
     def bill_foods(self):
         return self.bill.foods
@@ -39,6 +53,7 @@ class SpreadsheetBase:
     @property
     def purchaser(self):
         return self.bill.purchaser
+
     @property
     def operator(self):
         return self.bill.operator

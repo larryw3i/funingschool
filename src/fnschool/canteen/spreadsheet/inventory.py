@@ -3,7 +3,7 @@ import sys
 import calendar
 from datetime import datetime
 from fnschool import *
-from fnschool.canteen.spreadsheet.base import SpreadsheetBase
+from fnschool.canteen.spreadsheet.base import *
 
 
 class Inventory(SpreadsheetBase):
@@ -192,6 +192,7 @@ class Inventory(SpreadsheetBase):
                     sheet.cell(row_index + 1, 1).value.replace(" ", "")
                     == "合计"
                 ):
+                    self.row_inserting_tip(row_index + 1)
                     sheet.insert_rows(row_index + 1, 1)
                 sheet.cell(row_index, 1, food.name)
                 sheet.cell(row_index, 2, food.unit_name)
