@@ -124,6 +124,7 @@ class Bill:
 
     def make_spreadsheets(self):
         self.spreadsheet.update()
+        print()
         print_info(
             _(
                 "If you feel {0} is great, "
@@ -133,6 +134,7 @@ class Bill:
             ).format(app_name)
         )
         print_warning("\t" + _("Sponsor URL: {0}").format(get_sponsor_url()))
+        print()
         pass
 
     @property
@@ -159,7 +161,7 @@ class Bill:
 
     @property
     def food_class_names(self):
-        fclass_names = list(self.food_classes.keys())
+        fclass_names = ["蔬菜类"]+ list(self.food_classes.keys())
         return fclass_names
 
     @property

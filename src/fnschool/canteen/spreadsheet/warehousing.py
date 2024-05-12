@@ -267,6 +267,7 @@ class Warehousing(SpreadsheetBase):
                         cell.value = ""
 
         self.format()
+
         wb = self.bwb
         wb.active = wsheet
 

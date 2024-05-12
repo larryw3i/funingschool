@@ -12,7 +12,7 @@ from fnschool.path import *
 from fnschool.entry import *
 from fnschool.external import *
 
-__version__ = "20240412.2301.19"
+__version__ = "20240513.0500.10"
 
 
 def print_app_name():
