@@ -23,7 +23,9 @@ class Operator:
                 with open(operator_name_fpath, "w", encoding="utf-8") as f:
                     f.write(self._name)
                 print_info(
-                    _("Your name has been saved to \"{0}\".").format(operator_name_fpath)
+                    _('Your name has been saved to "{0}".').format(
+                        operator_name_fpath
+                    )
                 )
         return self._name
 
@@ -33,7 +35,7 @@ class Operator:
             self._dpath = user_config_dir / self.name
             if not self._dpath.exists():
                 os.makedirs(self._dpath, exist_ok=True)
-        make_link(self._dpath,self.link_dpath)
+        make_link(self._dpath, self.link_dpath)
         return self._dpath
 
     @property
@@ -54,14 +56,14 @@ class Operator:
     def config_dpath(self):
         dpath = self.dpath / "config"
         if not dpath.exists():
-            os.makedirs(dpath,exist_ok=True)
+            os.makedirs(dpath, exist_ok=True)
         return dpath
-    
+
     @property
     def food_classes_fpath(self):
         fpath = self.config_dpath / "food_classes.toml"
         if not fpath.exists():
-            shutil.copy(food_classes_config0_fpath,fpath)
+            shutil.copy(food_classes_config0_fpath, fpath)
         return fpath
 
     @property
@@ -70,12 +72,13 @@ class Operator:
         if not dpath.exists():
             os.makedirs(dpath)
         return dpath
-        
+
     @property
     def bill_fpath(self):
-        fpath =  self.bill_dpath / "bill.xlsx"
+        fpath = self.bill_dpath / "bill.xlsx"
         if not fpath.exists():
             shutil.copy(bill0_fpath, fpath)
         return fpath
+
 
 # The end.

@@ -42,7 +42,7 @@ class CtSpreadSheet:
         self._consumingsum = None
         self._sfood = None
         self._cover = None
-    
+
     @property
     def bill_fpath(self):
         if not self._bill_fpath:
@@ -54,7 +54,7 @@ class CtSpreadSheet:
         if not self._bwb:
             self._bwb = load_workbook(self.bill_fpath)
             print_info(
-                _("Spreadsheet \"{0}\" is in use.").format(self.bill_fpath)
+                _('Spreadsheet "{0}" is in use.').format(self.bill_fpath)
             )
         return self._bwb
 
@@ -132,7 +132,6 @@ class CtSpreadSheet:
         self.purchasingsum.update()
         self.consumingsum.update()
         self.cover.update()
-
 
         # foods = self.food.get_foods()
         # self.update_inventory_sheet()

@@ -27,6 +27,7 @@ def get_language_code():
 app_language_code = get_language_code()
 
 language_code_is_zh_CN = "zh_CN" in app_language_code
+is_zh_CN = language_code_is_zh_CN
 
 T = gettext.translation(
     app_name, locale_dir, fallback=True, languages=[app_language_code]

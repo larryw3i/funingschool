@@ -17,6 +17,7 @@ class PreConsuming(SpreadsheetBase):
         self.col_index_offset = 5
 
         self.sheet_name0 = "出库计划表"
+        
 
     def pre_consume_foods(self, foods):
         cfoods = [f for f in foods if not f.is_abandoned]

@@ -4,6 +4,7 @@ from openpyxl.utils.cell import get_column_letter
 import tomllib
 from tkinter import filedialog
 from fnschool import *
+from fnschool.canteen.path import *
 from fnschool.canteen.food import *
 from fnschool.canteen.spreadsheet.base import *
 from openpyxl.worksheet.datavalidation import DataValidation
@@ -56,46 +57,75 @@ class Purchasing(SpreadsheetBase):
     @property
     def food_classes(self):
         if not self._food_classes:
-            with open(self.operator.food_classes_fpath, 'rb') as f:            
+            print_info(_("Food classes files:"))
+            for f in [
+                self.operator.food_classes_fpath,
+                food_classes_config0_fpath,
+            ]:
+                print("\t", f)
+            with open(self.operator.food_classes_fpath, "rb") as f:
                 self._food_classes = tomllib.load(f)
                 print_info(
-                    _("Food classes were read from \"{0}\".").format(
+                    _(
+                        'Your food classes were read from "{0}". '
+                        + 'It will be used first.'
+                    ).format(
                         self.operator.food_classes_fpath
                     )
                 )
+ 
+            food_classes0 = None
+            with open(food_classes_config0_fpath,'rb') as f:
+                food_classes0 = tomllib.load(f)
+                print_info(
+                    _('Preset food classes were read from "{0}".').format(
+                        food_classes_config0_fpath
+                    )
+                )
+            for fclass, name_likes in food_classes0.items():
+                if fclass in self._food_classes.keys():
+                    user_name_likes = self._food_classes.get(fclass)
+                    for name_like in name_likes:
+                        if not name_like in user_name_likes:
+                            user_name_likes.append(name_like)
+                    self._food_classes[fclass] = user_name_likes
+                else:
+                    self._food_classes[fclass] = name_likes
+            
         return self._food_classes
 
-    def food_name_like(self,name,like):
+    def food_name_like(self, name, like):
         not_likes = None
-        if '!' in like:
-            like = like.split('!')
+        if "!" in like:
+            like = like.split("!")
             not_likes = like[1:]
             like = like[0]
 
         result = None
-        like_value = like.replace("*","")
-        if like.startswith('*') and not like.endswith("*"):
+        like_value = like.replace("*", "")
+        if like.startswith("*") and not like.endswith("*"):
             result = name.endswith(like_value)
         elif like.endswith("*") and not like.startswith("*"):
             result = name.startswith(like_value)
-        elif not '*' in like:
+        elif not "*" in like:
             result = like_value == name
         elif like.startswith("*") and like.endswith("*"):
             result = like_value in name
 
         if not_likes:
-            result = result and not any([ self.food_name_like(name,nl) for nl in not_likes])
+            result = result and not any(
+                [self.food_name_like(name, nl) for nl in not_likes]
+            )
         return result
         pass
 
-    def get_food_class(self,name):
+    def get_food_class(self, name):
         food_classes = self.food_classes
-        f_class = "蔬菜类"
-        for fclass,name_likes in food_classes.items():
+        for fclass, name_likes in food_classes.items():
             for name_like in name_likes:
-                if self.food_name_like(name,name_like):
-                    f_class =  fclass
-        return f_class
+                if self.food_name_like(name, name_like):
+                    return fclass
+        return "蔬菜类"
 
     def set_col_names(self, columns):
         columns = list(columns)
@@ -136,10 +166,11 @@ class Purchasing(SpreadsheetBase):
     @property
     def path(self):
         if not self._path:
+            print_info(_("Select a purchasing file, please!"))
             filetypes = ((_("Spreadsheet Files"), "*.xlsx"),)
 
             filename = filedialog.askopenfilename(
-                title=_("Select the purchasing file"),
+                title=_("Please select the purchasing file"),
                 initialdir=(Path.home() / "Downloads").as_posix(),
                 filetypes=filetypes,
             )
@@ -150,11 +181,17 @@ class Purchasing(SpreadsheetBase):
 
             self._path = filename
         return self._path
-    
+
     def update_fclass(self):
-        wb = load_workbook(self.path) 
+        wb = load_workbook(self.path)
         sheet = wb.active
-        headers = [h for h in [sheet.cell(1,ci).value for ci in range(1,sheet.max_column+1)] if h ]
+        headers = [
+            h
+            for h in [
+                sheet.cell(1, ci).value for ci in range(1, sheet.max_column + 1)
+            ]
+            if h
+        ]
         if self.food_class_col_name in headers:
             wb.close
             return
@@ -162,45 +199,53 @@ class Purchasing(SpreadsheetBase):
         merged_ranges = list(sheet.merged_cells.ranges)
         for cell_group in merged_ranges:
             sheet.unmerge_cells(str(cell_group))
-        
+
         food_name_col_index = -1
         for h in headers:
             food_name_col_index += 1
             if h in self.food_name_cols:
                 break
         if food_name_col_index < 0:
-            print_error(
-                _("Unable to find food name column, exitt.")
-            )
+            print_error(_("Unable to find food name column, exitt."))
             exit()
         food_class_col_index = food_name_col_index + 1 + 1
         food_class_col_letter = get_column_letter(food_class_col_index)
-         
+
         food_class_list_dv = DataValidation(
-            type = 'list',
-            formula1 = "\""+','.join(["蔬菜类"]+list(self.food_classes.keys()))+"\""
+            type="list",
+            formula1='"'
+            + ",".join(["蔬菜类"] + list(self.food_classes.keys()))
+            + '"',
         )
         sheet.add_data_validation(food_class_list_dv)
 
-        sheet.insert_cols(food_class_col_index ,1)
-        sheet.cell(1,food_class_col_index, self.food_class_col_name)
+        sheet.insert_cols(food_class_col_index, 1)
+        sheet.cell(1, food_class_col_index, self.food_class_col_name)
         food_len = 0
-        for row_index in range(2,sheet.max_row+1):
-            food_name = sheet.cell(row_index,food_class_col_index+1).value
+        for row_index in range(2, sheet.max_row + 1):
+            food_name = sheet.cell(row_index, food_name_col_index + 1).value
             if not food_name:
                 break
-            sheet.cell(row_index, food_class_col_index, self.get_food_class(food_name))
-            food_class_list_dv.add(sheet.cell(row_index,food_class_col_index))
+            sheet.cell(
+                row_index, food_class_col_index, self.get_food_class(food_name)
+            )
+            food_class_list_dv.add(sheet.cell(row_index, food_class_col_index))
             food_len += 1
         wb.save(self.path)
         wb.close()
         print_info(
-            _("Food class column has been updated, please verify/modify it. (Press any key to continue)")
+            _(
+                "Food class column has been updated, "
+                + "please verify/modify it. "
+                + "Feel free to open new issue if some "
+                + "food with the wrong class ({new_issue_url})."
+                + "(Ok, I checked it. "
+                + "[press any key to continue])"
+            ).format(new_issue_url=get_new_issue_url())
         )
         open_file(self.path)
         input()
         pass
-        
 
     def read_pfoods(self):
         self.update_fclass()

@@ -27,7 +27,7 @@ os_is_darwin = sys_is_darwin()
 def get_new_issue_url():
     return (
         "https://gitee.com/larryw3i/funingschool/issues"
-        if language_code_is_zh_CN
+        if is_zh_CN
         else "https://github.com/larryw3i/funingschool/issues/new"
     )
 

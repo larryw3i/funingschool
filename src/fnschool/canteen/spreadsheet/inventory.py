@@ -85,7 +85,7 @@ class Inventory(SpreadsheetBase):
                     start_column=1,
                     end_column=9,
                 )
-    
+
     @property
     def form_indexes(self):
         isheet = self.sheet
@@ -104,12 +104,31 @@ class Inventory(SpreadsheetBase):
 
         return None
 
+    @property
+    def foods(self):
+        foods = []
+        bfoods = [ f for f in self.bfoods if not f.is_abandoned]
+        year = bfoods[0].year
+        month = bfoods[0].month
 
+        consuming_dates = []
+        for bfood in bfoods:
+            for d,__ in bfood.consumptions:
+                consuming_dates.append(d)
+        consuming_dates = list(set(consuming_dates))
+
+        for tn in calendar.monthcalendar(year,month)
+            tn0,tn1 = tn[0],tn[-1]
+            for d in range(tn1,tn0-1,-1):
+                d_date = datetime(year,month,d)
+                if d_date in consuming_dates:
+                    foods[tn1] = [f for f in bfoods if f.get_remmainer(tn1)]
+                    break
+            
 
     def update(self):
         isheet = self.sheet
-        tnfoods = self.bfoods
-
+        tnfoods = self.foods
         form_indexes = self.form_indexes
 
         for form_index_n in range(0, len(form_indexes)):
