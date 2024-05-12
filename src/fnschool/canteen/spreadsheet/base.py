@@ -35,12 +35,15 @@ class SpreadsheetBase:
             ).format(row_index, self.sheet.title)
         )
 
+    def del_form_indexes(self):
+        self._form_indexes = None
+
     @property
     def consuming_day_m1(self):
         dates = []
         for f in self.bfoods:
             dates += [d for d, __ in f.consumptions]
-        date = max(days)
+        date = max(dates)
         return date.day
         
 

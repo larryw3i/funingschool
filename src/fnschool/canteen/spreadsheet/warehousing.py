@@ -143,7 +143,7 @@ class Warehousing(SpreadsheetBase):
             wfoods = [f for f in foods if (f.xdate == w_time)]
             w_class_names = [f.fclass for f in wfoods]
             w_class_names_no_food = [
-                _name for _name in class_names if not _name in w_class_names
+                name for name in class_names if not name in w_class_names
             ]
             row_difference = (
                 len(wfoods)
@@ -163,7 +163,7 @@ class Warehousing(SpreadsheetBase):
                     for cell in row:
                         cell.alignment = self.cell_alignment0
                         self.border = self.cell_border0
-
+                self.del_form_indexes()
                 form_indexes = self.form_indexes
                 form_index1 += row_difference
                 food_index1 = form_index1 - 1

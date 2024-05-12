@@ -45,6 +45,9 @@ class Cover(SpreadsheetBase):
             [f.count * f.unit_price for f in uwfoods if ("调味" in f.fclass)]
         )
 
+        for row_index in range(3,11):
+            cvsheet.cell(row_index,3,"")
+
         cvsheet.cell(
             8,
             3,

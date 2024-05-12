@@ -126,7 +126,7 @@ class CtSpreadSheet:
 
     def save_workbook(self):
         bill_fpath0 = self.operator.bill_fpath_uuid
-        print_info(
+        print_error(
             _(
                 "Do you want to save all updated data "
                 + 'to "{0}"? or just save it as a '
@@ -144,7 +144,7 @@ class CtSpreadSheet:
         s_input = input(">_ ")
         
         print()
-        print_info("Saving. . .")
+        print_info(_("Saving. . ."))
 
         if len(s_input) > 0 and s_input in "Yy":
             self.bwb.save(self.operator.bill_fpath)

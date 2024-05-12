@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-13 03:54+0800\n"
-"PO-Revision-Date: 2024-05-13 04:02+0800\n"
+"POT-Creation-Date: 2024-05-13 04:18+0800\n"
+"PO-Revision-Date: 2024-05-13 04:18+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: en_US\n"
 "Language-Team: English - United States <larryw3i@163.com>\n"
@@ -314,7 +314,7 @@ msgstr "请给工作簿 “{0}” 设计每天的消耗。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/consuming.py:216
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/consumingsum.py:56
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/cover.py:58
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/cover.py:61
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/food.py:235
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/inventory.py:216
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasingsum.py:74
@@ -358,12 +358,12 @@ msgstr "未找到 {0} 的清点日期列索引。"
 msgid "Got no organization name column of {0}"
 msgstr "未找到 {0} 的机构名的列索引。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:176
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:178
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:956
 msgid "Update completely!"
 msgstr "更新完成！"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:129
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:130
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:962
 msgid ""
 "Do you want to save all updated data to \"{0}\"? or just save it as a copy "
@@ -372,14 +372,14 @@ msgstr ""
 "保存被更新的数据到 “{0}” 吗？或者仅保存为副本到 “{1}” 。 （YyNn：“Y” 或 “y” "
 "为 “是”，其它为“否”）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:136
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:137
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:969
 msgid ""
 "If you save updated data to \"{0}\", data of food sheets will be saved for "
 "every month."
 msgstr "如果您把已更新的数据保存到 “{0}”，那每个月的食材台账表都会被保存下来。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:151
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:153
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:979
 msgid ""
 "You can fill in the monthly missing data to food sheets, they will be saved "
@@ -387,7 +387,7 @@ msgid ""
 msgstr ""
 "您可以把 食材台账表 里面没有更新的月份的数据更新了，这些数据会被保存下来的。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:162
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:164
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:990
 msgid "Updated data was saved."
 msgstr "被更改的数据已保存。"
@@ -615,13 +615,17 @@ msgstr "正在复制工作簿......"
 msgid "Row {0} of {1} is being inserted, please wait a moment."
 msgstr "工作表 “{1}” 的 第{0}行 正在插入新行，请稍作等待。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/base.py:72
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/base.py:74
 msgid "Cells of {0} was unmerged."
 msgstr "工作表 “{0}” 的所有单元格被取消合并。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:57
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:58
 msgid "Spreadsheet \"{0}\" is in use."
 msgstr "工作簿 “{0}” 被使用。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:147
+msgid "Saving. . ."
+msgstr "正在保存......"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/food.py:93
 msgid "Sheet {0} has been reformatted."
