@@ -17,7 +17,6 @@ class PreConsuming(SpreadsheetBase):
         self.col_index_offset = 5
 
         self.sheet_name0 = "出库计划表"
-        
 
     def pre_consume_foods(self, foods):
         cfoods = [f for f in foods if not f.is_abandoned]
@@ -110,7 +109,7 @@ class PreConsuming(SpreadsheetBase):
                 sheet.cell(row_index, 2, wbfood.get_remainder(tn0))
                 sheet.cell(row_index, 4, wbfood.unit_price)
                 if wbfood.name.endswith(residual_mark):
-                    wbfood.name = wbfood.name.replace(residual_mark,'')
+                    wbfood.name = wbfood.name.replace(residual_mark, "")
 
             for row_index in range(row_index + 1, sheet.max_row + 1):
                 sheet.cell(row_index, 1, "")

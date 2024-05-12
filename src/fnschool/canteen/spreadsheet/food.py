@@ -8,6 +8,7 @@ from fnschool.canteen.spreadsheet.base import SpreadsheetBase
 class Food(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
+        self.sheet_name = "材料台账母表"
         pass
 
     def format(self, sheet):

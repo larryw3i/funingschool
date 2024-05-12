@@ -96,7 +96,7 @@ class CtSpreadSheet:
     @property
     def warehousing(self):
         if not self._warehousing:
-            sel._warehousing = Warehousing(self.bill)
+            self._warehousing = Warehousing(self.bill)
         return self._warehousing
 
     @property

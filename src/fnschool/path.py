@@ -50,7 +50,7 @@ def make_link(src, link):
         os.symlink(src, link, target_is_directory=os.path.isdir(src))
     elif not os.readlink(link) == src:
         os.remove(link)
-        os.link(src, link, target_is_directory=os.path.isdir(src))
+        os.symlink(src, link, target_is_directory=os.path.isdir(src))
 
 
 def open_sys_explorer(dest=None):

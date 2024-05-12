@@ -88,12 +88,12 @@ class Inventory(SpreadsheetBase):
                     end_column=9,
                 )
 
-        print_info(
-            _("Sheet \"{0}\" has been reformatted.").format(sheet.title)
-        )
+        print_info(_('Sheet "{0}" has been reformatted.').format(sheet.title))
 
     @property
     def form_indexes(self):
+        if self._form_indexes:
+            return self._form_indexes
         sheet = self.sheet
         indexes = []
         row_index = 1
@@ -106,35 +106,37 @@ class Inventory(SpreadsheetBase):
             row_index += 1
 
         if len(indexes) > 0:
-            return indexes
+            self._form_indexes = indexes
+            return self._form_indexes
 
         return None
 
     @property
     def foods(self):
         foods = []
-        bfoods = [ f for f in self.bfoods if not f.is_abandoned]
+        bfoods = [f for f in self.bfoods if not f.is_abandoned]
         year = bfoods[-1].xdate.year
         month = bfoods[-1].xdate.month
 
         consuming_dates = []
         for bfood in bfoods:
-            for d,__ in bfood.consumptions:
+            for d, __ in bfood.consumptions:
                 consuming_dates.append(d)
         consuming_dates = list(set(consuming_dates))
 
-        for tn in calendar.monthcalendar(year,month):
+        for tn in calendar.monthcalendar(year, month):
             if 0 in tn:
                 tn = list(set(tn))
                 tn.remove(0)
-            tn0,tn1 = tn[0],tn[-1]
-            for d in range(tn1,tn0-1,-1):
-                d_date = datetime(year,month,d)
+            tn0, tn1 = tn[0], tn[-1]
+            for d in range(tn1, tn0 - 1, -1):
+                d_date = datetime(year, month, d)
                 if d_date in consuming_dates:
-                    foods.append([d_date, [f for f in bfoods if f.get_remainder(d_date)]])
+                    foods.append(
+                        [d_date, [f for f in bfoods if f.get_remainder(d_date)]]
+                    )
                     break
         return foods
-            
 
     def update(self):
         sheet = self.sheet
@@ -164,7 +166,6 @@ class Inventory(SpreadsheetBase):
             fentry_i0 = form_i0 + 3
             fentry_i1 = form_i1 - 1
 
-
             sheet.cell(
                 form_i0,
                 1,
@@ -193,7 +194,9 @@ class Inventory(SpreadsheetBase):
                     == "合计"
                 ):
                     sheet.insert_rows(row_index + 1, 1)
-                print(row_index,food.name,food.unit_name,food.get_remainder(t1))
+                print(
+                    row_index, food.name, food.unit_name, food.get_remainder(t1)
+                )
                 sheet.cell(row_index, 1, food.name)
                 sheet.cell(row_index, 2, food.unit_name)
                 sheet.cell(row_index, 3, food.get_remainder(t1))

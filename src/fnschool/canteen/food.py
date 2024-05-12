@@ -27,25 +27,29 @@ class Food:
         self.unit_name = unit_name
         self.count = float(count)
         self.total_price = float(total_price)
-        xdate = (
-            xdate.split("-")
-            if "-" in xdate
-            else (
-                xdate.split(".")
-                if "." in xdate
-                else (
-                    xdate.split("/")
-                    if "/" in xdate
-                    else [xdate[:4], xdate[4:6], xdate[6:]]
-                )
-            )
-        )
-        self.xdate = datetime(int(xdate[0]), int(xdate[1]), int(xdate[2]))
+        self.xdate = self.datefstr(xdate)
         self.purchaser = purchaser
         self.is_abandoned = is_abandoned
         self.is_inventory = is_inventory
         self.consumptions = []
         pass
+
+    def datefstr(self, value):
+        value = (
+            value.split("-")
+            if "-" in value
+            else (
+                value.split(".")
+                if "." in value
+                else (
+                    value.split("/")
+                    if "/" in value
+                    else [value[:4], value[4:6], value[6:]]
+                )
+            )
+        )
+        value = datetime(int(value[0]), int(value[1]), int(value[2]))
+        return value
 
     @property
     def unit_price(self):

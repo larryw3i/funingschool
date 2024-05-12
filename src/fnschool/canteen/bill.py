@@ -63,6 +63,11 @@ class Bill:
         return self._time_nodes
 
     @property
+    def food_class_names(self):
+        fclass_names = self.food_classes.keys()
+        return fclass_names
+
+    @property
     def food_classes(self):
         if not self._food_classes:
             config_fpath = get_food_classes_config_fpath(self.operator.name)

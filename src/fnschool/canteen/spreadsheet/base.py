@@ -8,6 +8,7 @@ from openpyxl.utils.cell import *
 
 from fnschool import *
 
+
 class SpreadsheetBase:
     def __init__(self, bill):
         self.bill = bill
@@ -17,6 +18,7 @@ class SpreadsheetBase:
         self.bwb = self.bill_workbook
         self.sheet_name = None
         self._sheet = None
+        self._form_indexes = None
         self.operator = self.bill.operator
         self.cell_alignment0 = Alignment(horizontal="center", vertical="center")
         self.cell_side0 = Side(border_style="thin")
@@ -26,7 +28,6 @@ class SpreadsheetBase:
             right=self.cell_side0,
             bottom=self.cell_side0,
         )
- 
 
     @property
     def bill_foods(self):
@@ -35,7 +36,7 @@ class SpreadsheetBase:
     @property
     def bfoods(self):
         return self.bill_foods
-    
+
     @property
     def purchaser(self):
         return self.bill.purchaser
@@ -44,7 +45,7 @@ class SpreadsheetBase:
         sheet = self.bwb[name]
         return sheet
 
-    def unmerge_sheet_cells(self,sheet = None):
+    def unmerge_sheet_cells(self, sheet=None):
         sheet = sheet or self.sheet
         if isinstance(sheet, str):
             sheet = self.get_bill_sheet(sheet)

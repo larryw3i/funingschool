@@ -8,13 +8,12 @@ from fnschool.canteen.spreadsheet.base import SpreadsheetBase
 class Warehousing(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
+        self.sheet_name = "入库单"
         pass
 
     def format(self):
-        wsheet = self.get_warehousing_sheet()
-        merged_ranges = list(wsheet.merged_cells.ranges)
-        for cell_group in merged_ranges:
-            wsheet.unmerge_cells(str(cell_group))
+        wsheet = self.sheet
+        self.unmerge_sheet_cells()
 
         for row in wsheet.iter_rows(
             min_row=1, max_row=wsheet.max_row, min_col=1, max_col=8
@@ -74,25 +73,41 @@ class Warehousing(SpreadsheetBase):
                     end_column=8,
                 )
 
-        wb = self.get_bill_workbook()
+        wb = self.bwb
         wb.active = wsheet
 
         print_info(_("Sheet '%s' was formatted.") % self.warehousing_sheet_name)
 
+    @property
+    def form_indexes(self):
+        if self._form_indexes:
+            return self._form_indexes
+        wsheet = self.sheet
+        indexes = []
+        row_index = 1
+        for row in wsheet.iter_rows(max_row=wsheet.max_row + 1, max_col=8):
+            if row[0].value:
+                if row[0].value.replace(" ", "") == "入库单":
+                    indexes.append([row_index + 1, 0])
+                if row[0].value.replace(" ", "") == "合计":
+                    indexes[-1][1] = row_index
+            row_index += 1
+
+        if len(indexes) > 0:
+            slef._form_indexes = indexes
+            return self._form_indexes
+
+        return None
+
     def update(self):
-        wsheet = self.get_warehousing_sheet()
+        wsheet = self.sheet
         foods = [
             f
-            for f in self.food.get_foods()
-            if (
-                not f.is_residue
-                and not f.is_negligible
-                and f.xdate.month == self.bill.month
-            )
+            for f in self.bfoods
+            if (not f.is_inventory and not f.is_abandoned)
         ]
-        form_indexes = self.get_warehousing_form_indexes()
-        class_names = self.food.get_class_names()
-        time_nodes = self.bill.get_time_nodes()
+        form_indexes = self.form_indexes
+        class_names = self.bill.food_class_names
 
         self.unmerge_sheet_cells(wsheet)
 
@@ -108,21 +123,10 @@ class Warehousing(SpreadsheetBase):
                 for cell in row:
                     cell.value = ""
 
-        w_times = sorted(
-            list(
-                set(
-                    [
-                        food.xdate
-                        for food in foods
-                        if food.xdate.month == self.bill.month
-                    ]
-                )
-            )
-        )
+        w_times = sorted(list(set([f.xdate for f in foods])))
 
         max_time_index = 0
         for windex, w_time in enumerate(w_times):
-            time_point = w_time
             max_time_index = windex + 1
             form_index0, form_index1 = form_indexes[windex]
             food_index0 = form_index0 + 2
@@ -130,7 +134,7 @@ class Warehousing(SpreadsheetBase):
             entry_index = food_index0
             warehousing_n = windex + 1
 
-            wfoods = [f for f in foods if (f.xdate == time_point)]
+            wfoods = [f for f in foods if (f.xdate == w_time)]
             foods_class_names = [f.class_name for f in wfoods]
             class_names_without_food = [
                 _name for _name in class_names if not _name in foods_class_names
@@ -153,7 +157,7 @@ class Warehousing(SpreadsheetBase):
                         cell.alignment = self.cell_alignment0
                         self.border = self.cell_border0
 
-                form_indexes = self.get_warehousing_form_indexes()
+                form_indexes = self.form_indexes
                 form_index1 += row_difference
                 food_index1 = form_index1 - 1
                 row_difference = 0
@@ -173,13 +177,13 @@ class Warehousing(SpreadsheetBase):
             wsheet.cell(
                 form_index0,
                 4,
-                f"{time_point.year}年 {time_point.month} 月 "
-                + f"{time_point.day} 日  单位：元",
+                f"{w_time.year}年 {w_time.month} 月 "
+                + f"{w_time.day} 日  单位：元",
             )
             wsheet.cell(
                 form_index0,
                 7,
-                f"编号：R{time_point.month:0>2}{warehousing_n:0>2}",
+                f"编号：R{w_time.month:0>2}{warehousing_n:0>2}",
             )
 
             wsheet.cell(
@@ -256,7 +260,7 @@ class Warehousing(SpreadsheetBase):
                         cell.value = ""
 
         self.format_warehousing_sheet()
-        wb = self.get_bill_workbook()
+        wb = self.bwb
         wb.active = wsheet
 
         print_info(_("Sheet '%s' was updated.") % (self.warehousing_sheet_name))

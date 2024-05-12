@@ -68,14 +68,12 @@ class Purchasing(SpreadsheetBase):
                 print_info(
                     _(
                         'Your food classes were read from "{0}". '
-                        + 'It will be used first.'
-                    ).format(
-                        self.operator.food_classes_fpath
-                    )
+                        + "It will be used first."
+                    ).format(self.operator.food_classes_fpath)
                 )
- 
+
             food_classes0 = None
-            with open(food_classes_config0_fpath,'rb') as f:
+            with open(food_classes_config0_fpath, "rb") as f:
                 food_classes0 = tomllib.load(f)
                 print_info(
                     _('Preset food classes were read from "{0}".').format(
@@ -91,7 +89,7 @@ class Purchasing(SpreadsheetBase):
                     self._food_classes[fclass] = user_name_likes
                 else:
                     self._food_classes[fclass] = name_likes
-            
+
         return self._food_classes
 
     def food_name_like(self, name, like):
@@ -179,7 +177,9 @@ class Purchasing(SpreadsheetBase):
                 exit()
                 return None
             print_info(
-                _("Purchasing list file \"{0}\" has been selected.").format(filename)
+                _('Purchasing list file "{0}" has been selected.').format(
+                    filename
+                )
             )
             self._path = filename
         return self._path
@@ -263,7 +263,7 @@ class Purchasing(SpreadsheetBase):
                 total_price=food[self.total_price_col_name],
                 xdate=food[self.xdate_col_name],
                 purchaser=food[self.purchaser_name_col_name],
-                fclass = food[self.food_class_col_name]
+                fclass=food[self.food_class_col_name],
             )
             if self.abandoned_col_name:
                 _food.is_abandoned = not food[self.abandoned_col_name] is np.nan
