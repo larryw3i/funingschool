@@ -10,23 +10,49 @@ class Unwarehousing(SpreadsheetBase):
         super().__init__(bill)
         self.sheet_name = "未入库明细表"
         pass
+    
+    @property
+    def form_indexes(self):
+        if not self._form_indexes:
+            unwsheet = self.sheet
+            indexes = []
+            row_index = 1
+            for row in unwsheet.iter_rows(max_row=unwsheet.max_row + 1, max_col=7):
+                if row[0].value and "未入库明细表" in row[0].value.replace(" ", ""):
+                    indexes.append([row_index + 1, 0])
+    
+                if row[1].value and "合计" in row[1].value.replace(" ", ""):
+                    indexes[-1][1] = row_index
+
+                row_index += 1
+
+            if len(indexes) > 0:
+                self._form_indexes = indexes
+            else:
+                return None
+
+
+        return self._form_indexes
+        
 
     def update(self):
-        unwsheet = self.get_unwarehousing_sheet()
-        form_indexes = self.get_unwarehousing_form_indexes()
-        time_nodes = [
-            tn
-            for tn in self.bill.get_time_nodes()
-            if tn[1].month == self.bill.month
-        ]
+        unwsheet = self.sheet
+        form_indexes = self.form_indexes
 
-        t0, t1 = time_nodes[-1]
         foods = [
             f
-            for f in self.food.get_foods()
-            if (f.is_negligible and f.xdate.month == self.bill.month)
+            for f in self.bfoods
+            if f.is_abandoned 
         ]
         foods = sorted(foods, key=lambda f: f.xdate)
+
+        t1 = []
+        
+        for bf in self.bfoods:
+            for d,__ in bf.consumptions:
+                t1.append(d)
+        t1 = sorted(t1)[-1]
+
         row_indexes = []
         for form_index in form_indexes:
             form_index0, form_index1 = form_index

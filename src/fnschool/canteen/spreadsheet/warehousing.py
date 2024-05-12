@@ -1,5 +1,11 @@
 import os
 import sys
+from openpyxl.styles import *
+from openpyxl.formatting.rule import *
+from openpyxl.styles.differential import *
+from openpyxl.utils.cell import *
+
+
 from fnschool import *
 
 from fnschool.canteen.spreadsheet.base import SpreadsheetBase
@@ -76,7 +82,7 @@ class Warehousing(SpreadsheetBase):
         wb = self.bwb
         wb.active = wsheet
 
-        print_info(_("Sheet '%s' was formatted.") % self.warehousing_sheet_name)
+        print_info(_("Sheet '%s' was formatted.") % self.sheet.title)
 
     @property
     def form_indexes(self):
@@ -94,7 +100,7 @@ class Warehousing(SpreadsheetBase):
             row_index += 1
 
         if len(indexes) > 0:
-            slef._form_indexes = indexes
+            self._form_indexes = indexes
             return self._form_indexes
 
         return None
@@ -135,13 +141,13 @@ class Warehousing(SpreadsheetBase):
             warehousing_n = windex + 1
 
             wfoods = [f for f in foods if (f.xdate == w_time)]
-            foods_class_names = [f.class_name for f in wfoods]
-            class_names_without_food = [
-                _name for _name in class_names if not _name in foods_class_names
+            w_class_names = [f.fclass for f in wfoods]
+            w_class_names_no_food = [
+                _name for _name in class_names if not _name in w_class_names
             ]
             row_difference = (
                 len(wfoods)
-                + len(class_names_without_food)
+                + len(w_class_names_no_food)
                 - (food_index1 - food_index0 + 1)
             )
 
@@ -173,7 +179,7 @@ class Warehousing(SpreadsheetBase):
                     cell.alignment = self.cell_alignment0
                     cell.border = self.cell_border0
 
-            wsheet.cell(form_index0, 2, self.bill.profile.org_name)
+            wsheet.cell(form_index0, 2, self.purchaser)
             wsheet.cell(
                 form_index0,
                 4,
@@ -194,7 +200,7 @@ class Warehousing(SpreadsheetBase):
                     + "审核人："
                     + "        "
                     + "经办人："
-                    + self.bill.profile.name
+                    + self.operator.name
                     + " 　    "
                     + "过称人："
                     + "        "
@@ -204,7 +210,7 @@ class Warehousing(SpreadsheetBase):
             )
 
             for class_name in class_names:
-                cfoods = [f for f in wfoods if f.class_name == class_name]
+                cfoods = [f for f in wfoods if f.fclass == class_name]
                 cfoods_total_price = sum([f.total_price for f in cfoods])
 
                 wsheet.cell(entry_index, 1, class_name)
@@ -234,7 +240,7 @@ class Warehousing(SpreadsheetBase):
                     entry_index_end = (
                         entry_index_end
                         + abs(row_difference)
-                        - len(class_names_without_food)
+                        - len(w_class_names_no_food)
                     )
 
                 entry_index = entry_index_end + 1
@@ -259,11 +265,11 @@ class Warehousing(SpreadsheetBase):
                     for cell in row:
                         cell.value = ""
 
-        self.format_warehousing_sheet()
+        self.format()
         wb = self.bwb
         wb.active = wsheet
 
-        print_info(_("Sheet '%s' was updated.") % (self.warehousing_sheet_name))
+        print_info(_("Sheet '%s' was updated.") % (self.sheet.title))
 
 
 # The end.

@@ -19,7 +19,6 @@ class SpreadsheetBase:
         self.sheet_name = None
         self._sheet = None
         self._form_indexes = None
-        self.operator = self.bill.operator
         self.cell_alignment0 = Alignment(horizontal="center", vertical="center")
         self.cell_side0 = Side(border_style="thin")
         self.cell_border0 = Border(
@@ -40,6 +39,9 @@ class SpreadsheetBase:
     @property
     def purchaser(self):
         return self.bill.purchaser
+    @property
+    def operator(self):
+        return self.bill.operator
 
     def get_bill_sheet(self, name):
         sheet = self.bwb[name]

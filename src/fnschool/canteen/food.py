@@ -26,6 +26,7 @@ class Food:
         self.name = name
         self.unit_name = unit_name
         self.count = float(count)
+        self.fclass = fclass
         self.total_price = float(total_price)
         self.xdate = self.datefstr(xdate)
         self.purchaser = purchaser

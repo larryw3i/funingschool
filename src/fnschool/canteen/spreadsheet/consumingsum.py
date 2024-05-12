@@ -33,7 +33,7 @@ class ConsumingSum(SpreadsheetBase):
             class_name = row[0].value.replace(" ", "")
             _total_price = 0.0
             for food in foods:
-                if food.class_name == class_name:
+                if food.fclass == class_name:
                     _total_price += sum(
                         [
                             _count * food.unit_price

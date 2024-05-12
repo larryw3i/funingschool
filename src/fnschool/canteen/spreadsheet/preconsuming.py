@@ -127,24 +127,29 @@ class PreConsuming(SpreadsheetBase):
             new_wbfoods = [
                 f for f in cfoods if f.get_remainder(tn1) > 0 and f.xdate == tn1
             ]
-            print_info(
-                (
-                    _("New purchased foods for date {0} is:")
-                    if len(new_wbfoods) > 0
-                    else _("New purchased foods for date {0} are:")
-                ).format(tn1.strftime("%Y.%m.%d"))
-            )
-
-            print_info(
-                "  ".join(
-                    [
-                        f"({i+1}){f.name} {f.count} {f.unit_name}"
-                        for i, f in enumerate(new_wbfoods)
-                    ]
+            if len(new_wbfoods)>0:
+                print_info(
+                    (
+                        _("New purchased food for date {0} is:")
+                        if len(new_wbfoods) > 1
+                        else _("New purchased foods for date {0} are:")
+                    ).format(tn1.strftime("%Y.%m.%d"))
                 )
-            )
+    
+                print_info(
+                    "  ".join(
+                        [
+                            f"({i+1}){f.name} {f.count} {f.unit_name}"
+                            for i, f in enumerate(new_wbfoods)
+                        ]
+                    )
+                )
+                print_warning(_("Negligible foods are not listed."))
+            else:
+                print_info(
+                    _("There is no purchased food for {0}.").format(tn1.strftime("%Y.%m.%d"))
+                )
 
-            print_warning(_("Negligible foods are not listed."))
             print_error(
                 _(
                     "There is no need to design for "

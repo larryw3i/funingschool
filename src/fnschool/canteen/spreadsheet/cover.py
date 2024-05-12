@@ -34,7 +34,7 @@ class Cover(SpreadsheetBase):
             class_name = row[0].value.replace(" ", "")
             _total_price = 0.0
             for f in foods:
-                if f.class_name == class_name:
+                if f.fclass == class_name:
                     _total_price += f.count * f.unit_price
             cvsheet.cell(row[0].row, 2, _total_price)
 
@@ -42,13 +42,13 @@ class Cover(SpreadsheetBase):
         cvsheet.cell(10, 2, total_price)
 
         w_seasoning_total_price = sum(
-            [f.count * f.unit_price for f in wfoods if ("调味" in f.class_name)]
+            [f.count * f.unit_price for f in wfoods if ("调味" in f.fclass)]
         )
         unw_seasoning_total_price = sum(
             [
                 f.count * f.unit_price
                 for f in uwfoods
-                if ("调味" in f.class_name)
+                if ("调味" in f.fclass)
             ]
         )
 

@@ -64,17 +64,47 @@ class Bill:
 
     @property
     def food_class_names(self):
-        fclass_names = self.food_classes.keys()
+        fclass_names = list(self.food_classes.keys())
         return fclass_names
 
     @property
     def food_classes(self):
         if not self._food_classes:
-            config_fpath = get_food_classes_config_fpath(self.operator.name)
-            with open(config_fpath, "r", encoding="utf-8") as f:
+            print_info(_("Food classes files:"))
+            for f in [
+                self.operator.food_classes_fpath,
+                food_classes_config0_fpath,
+            ]:
+                print("\t", f)
+            with open(self.operator.food_classes_fpath, "rb") as f:
                 self._food_classes = tomllib.load(f)
+                print_info(
+                    _(
+                        'Your food classes were read from "{0}". '
+                        + "It will be used first."
+                    ).format(self.operator.food_classes_fpath)
+                )
+
+            food_classes0 = None
+            with open(food_classes_config0_fpath, "rb") as f:
+                food_classes0 = tomllib.load(f)
+                print_info(
+                    _('Preset food classes were read from "{0}".').format(
+                        food_classes_config0_fpath
+                    )
+                )
+            for fclass, name_likes in food_classes0.items():
+                if fclass in self._food_classes.keys():
+                    user_name_likes = self._food_classes.get(fclass)
+                    for name_like in name_likes:
+                        if not name_like in user_name_likes:
+                            user_name_likes.append(name_like)
+                    self._food_classes[fclass] = user_name_likes
+                else:
+                    self._food_classes[fclass] = name_likes
 
         return self._food_classes
+
 
     @property
     def operator(self):

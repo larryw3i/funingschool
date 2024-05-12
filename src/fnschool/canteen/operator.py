@@ -12,6 +12,9 @@ class Operator:
         self._dpath = None
         pass
 
+    def __str__(self):
+        return self.name
+
     @property
     def name(self):
         if not self._name:

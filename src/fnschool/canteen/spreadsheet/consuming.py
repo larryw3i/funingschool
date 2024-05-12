@@ -43,7 +43,7 @@ class Consuming(SpreadsheetBase):
                 for food in foods
                 if day in [_date for _date, _count in food.consuming_list]
             ]
-            tfoods_classes = [f.class_name for f in tfoods]
+            tfoods_classes = [f.fclass for f in tfoods]
 
             classes_without_food = [
                 _name for _name in class_names if not _name in tfoods_classes
@@ -107,7 +107,7 @@ class Consuming(SpreadsheetBase):
 
             for class_name in class_names:
                 class_foods = [
-                    food for food in tfoods if (food.class_name == class_name)
+                    food for food in tfoods if (food.fclass == class_name)
                 ]
 
                 fentry_index_start = fentry_index

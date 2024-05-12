@@ -52,45 +52,11 @@ class Purchasing(SpreadsheetBase):
         ]
         self.food_class_col_name = "食材大类"
         self.inventory_col_name = None
-        self._food_classes = None
 
     @property
     def food_classes(self):
-        if not self._food_classes:
-            print_info(_("Food classes files:"))
-            for f in [
-                self.operator.food_classes_fpath,
-                food_classes_config0_fpath,
-            ]:
-                print("\t", f)
-            with open(self.operator.food_classes_fpath, "rb") as f:
-                self._food_classes = tomllib.load(f)
-                print_info(
-                    _(
-                        'Your food classes were read from "{0}". '
-                        + "It will be used first."
-                    ).format(self.operator.food_classes_fpath)
-                )
-
-            food_classes0 = None
-            with open(food_classes_config0_fpath, "rb") as f:
-                food_classes0 = tomllib.load(f)
-                print_info(
-                    _('Preset food classes were read from "{0}".').format(
-                        food_classes_config0_fpath
-                    )
-                )
-            for fclass, name_likes in food_classes0.items():
-                if fclass in self._food_classes.keys():
-                    user_name_likes = self._food_classes.get(fclass)
-                    for name_like in name_likes:
-                        if not name_like in user_name_likes:
-                            user_name_likes.append(name_like)
-                    self._food_classes[fclass] = user_name_likes
-                else:
-                    self._food_classes[fclass] = name_likes
-
-        return self._food_classes
+        food_classes = self.bill.food_classes
+        return food_classes
 
     def food_name_like(self, name, like):
         not_likes = None
