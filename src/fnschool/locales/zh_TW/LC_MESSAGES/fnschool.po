@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-13 10:02+0800\n"
+"POT-Creation-Date: 2024-05-13 10:52+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -301,7 +301,7 @@ msgstr ""
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/food.py:235
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/inventory.py:216
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasingsum.py:74
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/unwarehousing.py:118
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/unwarehousing.py:127
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/warehousing.py:274
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:416
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:447
@@ -680,6 +680,10 @@ msgid ""
 "Food class column has been updated, please verify/modify it. Feel free to"
 " open new issue if some food with the wrong class ({new_issue_url}).(Ok, "
 "I checked it. [press any key to continue])"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/unwarehousing.py:52
+msgid "There is no abandoned food. Sheet {0} updating skipped."
 msgstr ""
 
 #~ msgid "Configuration file '%s' was copied to '%s'."
@@ -1490,5 +1494,8 @@ msgstr ""
 #~ "with the wrong class ({new_issue_url}).(Ok,"
 #~ " I checked it. [press any key "
 #~ "to continue])"
+#~ msgstr ""
+
+#~ msgid "There is no abandoned food. Unwarehousing sheet updating skipped."
 #~ msgstr ""
 

@@ -47,6 +47,15 @@ class Unwarehousing(SpreadsheetBase):
         form_indexes = self.form_indexes
 
         foods = [f for f in self.bfoods if f.is_abandoned]
+        if len(foods) < 1:
+            print_info(
+                _(
+                    "There is no abandoned food. "
+                    + "Sheet {0} updating skipped."
+                ).format(self.sheet.title)
+            )
+            return None
+
         foods = sorted(foods, key=lambda f: f.xdate)
 
         t1 = []
