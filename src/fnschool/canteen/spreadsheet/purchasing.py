@@ -203,15 +203,18 @@ class Purchasing(SpreadsheetBase):
         wb.close()
         print_info(
             _(
-                "Food class column has been updated, "
+                "Column \"{0}\" has been updated, "
                 + "please verify/modify it. "
                 + "Feel free to open new issue if some "
-                + "food with the wrong class ({new_issue_url})."
-                + "(Ok, I checked it. "
-                + "[press any key to continue])"
-            ).format(new_issue_url=get_new_issue_url())
+                + "food with the wrong class ({1}). "
+                + "(Press any key to check it)"
+            ).format(self.food_class_col_name,get_new_issue_url())
         )
+        input()
         open_file(self.path)
+        print_info(
+            _("Ok, I checked it, it's ok. (Press any key to continue)")
+        )
         input()
         pass
 

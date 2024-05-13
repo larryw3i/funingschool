@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-13 10:52+0800\n"
-"PO-Revision-Date: 2024-05-13 10:52+0800\n"
+"POT-Creation-Date: 2024-05-13 19:48+0800\n"
+"PO-Revision-Date: 2024-05-13 19:49+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: en_US\n"
 "Language-Team: English - United States <larryw3i@163.com>\n"
@@ -316,9 +316,9 @@ msgstr "请给工作簿 “{0}” 设计每天的消耗。"
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/consumingsum.py:56
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/cover.py:61
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/food.py:235
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/inventory.py:216
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/inventory.py:225
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasingsum.py:74
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/unwarehousing.py:127
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/unwarehousing.py:135
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/warehousing.py:274
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:416
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:447
@@ -711,12 +711,16 @@ msgstr "未找到食材名称列，退出。"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:205
 msgid ""
-"Food class column has been updated, please verify/modify it. Feel free to "
-"open new issue if some food with the wrong class ({new_issue_url}).(Ok, I "
-"checked it. [press any key to continue])"
+"Column \"{0}\" has been updated, please verify/modify it. Feel free to open "
+"new issue if some food with the wrong class ({1}). (Press any key to check "
+"it)"
 msgstr ""
-"“食材大类”列已更新，请检查/更改它。如果食材的大类名有错误，还请您随时提交反馈"
-"（{new_issue_url}）。（好的，我已经检查好了。【按任意键继续】）"
+"“{0}”列已添加，请检查/更改它。如果食材的大类名有错误，还请您随时提交反馈"
+"（{1}）。（按任意键打开文件检查）"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:216
+msgid "Ok, I checked it, it's ok. (Press any key to continue)"
+msgstr "好了，我已经检查每个食材的大类了，它们都是对的。（按任意键继续）"
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/unwarehousing.py:52
 msgid "There is no abandoned food. Sheet {0} updating skipped."
