@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-13 19:48+0800\n"
-"PO-Revision-Date: 2024-05-13 19:49+0800\n"
+"POT-Creation-Date: 2024-05-13 23:49+0800\n"
+"PO-Revision-Date: 2024-05-13 23:53+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: en_US\n"
 "Language-Team: English - United States <larryw3i@163.com>\n"
@@ -681,35 +681,67 @@ msgid ""
 "[press any key to continue])"
 msgstr "没有食材消耗的日期不需要设计出库。（好的，知道了的【按任意键继续】）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:124
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:125
 msgid "There should be column ({0}), please add it."
 msgstr "没有找到 {0} 列，请先添加它。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:133
-msgid "Select a purchasing file, please!"
-msgstr "请您选择一个购入食材的列表文件。"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:135
+msgid ""
+"{0} need a purchasing list file, and it's file type should be '.xlsx'. The "
+"column names of it:"
+msgstr ""
+"{0} 需要一个购入食材的列表文件，这个列表文件的类型应为 “.xlsx”。它的列（表"
+"头）为："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:134
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:142
+msgid ""
+"\n"
+"\tcolumn   type    example\n"
+"\t送货日期 Text    2024-03-01\n"
+"\t食材名称 Text    香菜\n"
+"\t数量     Number  20\n"
+"\t计量单位 Text    斤\n"
+"\t总价     Number  20.0\n"
+"\t购买者   Text    \n"
+"\t是不计   Text    y\n"
+"\t是结余   Text    y"
+msgstr ""
+"\n"
+"　　列名　　　类型　样例\n"
+"　　送货日期　文本　2024-03-01\n"
+"　　食材名称　文本　香菜\n"
+"　　数量　　　数字　20\n"
+"　　计量单位　文本　斤\n"
+"　　总价　　　数字　20.0\n"
+"　　购买者　　文本\n"
+"　　不计　　　文本　y\n"
+"　　结余　　　文本　y"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:155
+msgid "Please select a purchasing file."
+msgstr "请选择购入食材的列表文件。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:156
 msgid "Spreadsheet Files"
 msgstr "工作簿文件。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:137
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:159
 msgid "Please select the purchasing file"
 msgstr "请选择购入食材的列表文件"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:142
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:164
 msgid "No file was selected, exit."
 msgstr "未选择文件，退出。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:146
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:168
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr "已选择购入列表文件 “{0}” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:177
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:199
 msgid "Unable to find food name column, exitt."
 msgstr "未找到食材名称列，退出。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:205
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:227
 msgid ""
 "Column \"{0}\" has been updated, please verify/modify it. Feel free to open "
 "new issue if some food with the wrong class ({1}). (Press any key to check "
@@ -718,7 +750,7 @@ msgstr ""
 "“{0}”列已添加，请检查/更改它。如果食材的大类名有错误，还请您随时提交反馈"
 "（{1}）。（按任意键打开文件检查）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:216
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:238
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr "好了，我已经检查每个食材的大类了，它们都是对的。（按任意键继续）"
 
@@ -815,3 +847,6 @@ msgstr "没有不计（无需入库）的食材，{0} 表的更新被跳过。"
 #~ msgstr ""
 #~ "工作表 “{0}” 已更新。\n"
 #~ "在你完成每天消耗设计后按任意建以继续。（没有消耗食材的日期不需要设计出库）"
+
+#~ msgid "Select a purchasing file, please!"
+#~ msgstr "请您选择一个购入食材的列表文件。"

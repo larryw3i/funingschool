@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-13 19:48+0800\n"
+"POT-Creation-Date: 2024-05-13 23:49+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -647,42 +647,62 @@ msgid ""
 "know [press any key to continue])"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:124
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:125
 msgid "There should be column ({0}), please add it."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:133
-msgid "Select a purchasing file, please!"
-msgstr ""
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:134
-msgid "Spreadsheet Files"
-msgstr ""
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:137
-msgid "Please select the purchasing file"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:135
+msgid ""
+"{0} need a purchasing list file, and it's file type should be '.xlsx'. "
+"The column names of it:"
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:142
+msgid ""
+"\n"
+"\tcolumn   type    example\n"
+"\t送货日期 Text    2024-03-01\n"
+"\t食材名称 Text    香菜\n"
+"\t数量     Number  20\n"
+"\t计量单位 Text    斤\n"
+"\t总价     Number  20.0\n"
+"\t购买者   Text    \n"
+"\t是不计   Text    y\n"
+"\t是结余   Text    y"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:155
+msgid "Please select a purchasing file."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:156
+msgid "Spreadsheet Files"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:159
+msgid "Please select the purchasing file"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:164
 msgid "No file was selected, exit."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:146
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:168
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:177
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:199
 msgid "Unable to find food name column, exitt."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:205
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:227
 msgid ""
 "Column \"{0}\" has been updated, please verify/modify it. Feel free to "
 "open new issue if some food with the wrong class ({1}). (Press any key to"
 " check it)"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:216
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:238
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
@@ -1512,5 +1532,18 @@ msgstr ""
 #~ " open new issue if some food "
 #~ "with the wrong class ({new_issue_url}). "
 #~ "(Press any key to check it)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "\n"
+#~ "\tcolumn   type    example\n"
+#~ "\t送货日期 Text    2024-03-01\n"
+#~ "\t食材名称 Text    香菜\n"
+#~ "\t数量     Number  20\n"
+#~ "\t计量单位 Text    斤\n"
+#~ "\t总价     Number  20.0\n"
+#~ "\t购买者   Text    \n"
+#~ "\t不计     Text    y\n"
+#~ "\t结余     Text    y"
 #~ msgstr ""
 

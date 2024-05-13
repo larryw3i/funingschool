@@ -43,6 +43,7 @@ def get_sponsor_url():
         else ""
     )
 
+
 def open_file(file_path):
     file_path = str(file_path)
     bin_name = "open" if (sys_is_linux() or sys_is_darwin()) else "start"

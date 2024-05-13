@@ -99,13 +99,11 @@ class Unwarehousing(SpreadsheetBase):
             unwsheet.cell(row_index, 6, food.total_price)
             unwsheet.cell(row_index, 5).number_format = numbers.FORMAT_NUMBER_00
             unwsheet.cell(row_index, 6).number_format = numbers.FORMAT_NUMBER_00
-            
-            for u_col_index in range(1,7):
-                cell = unwsheet.cell(row_index,u_col_index)
+
+            for u_col_index in range(1, 7):
+                cell = unwsheet.cell(row_index, u_col_index)
                 cell.alignment = self.cell_alignment0
                 cell.border = self.cell_border0
-
-
 
             if (
                 str(unwsheet.cell(row_index + 1, 2).value)

@@ -35,6 +35,7 @@ class Purchasing(SpreadsheetBase):
         self.count_col_name = None
         self.abandoned_cols = [
             "不计",
+            "是不计",
             "未入库",
             "非入库",
             "不需入库",
@@ -45,10 +46,10 @@ class Purchasing(SpreadsheetBase):
             "盘存",
             "存余",
             "结余",
+            "是结余",
             "剩余",
             "是剩余",
             "是盘存",
-            "是结余",
         ]
         self.food_class_col_name = "食材大类"
         self.inventory_col_name = None
@@ -130,7 +131,26 @@ class Purchasing(SpreadsheetBase):
     @property
     def path(self):
         if not self._path:
-            print_info(_("Select a purchasing file, please!"))
+            print_info(
+                _(
+                    "{0} need a purchasing list file, "
+                    + "and it's file type should be '.xlsx'. "
+                    + "The column names of it:"
+                ).format(app_name)
+                + _(
+                    ""
+                    + "\n\tcolumn   type    example"
+                    + "\n\t送货日期 Text    2024-03-01"
+                    + "\n\t食材名称 Text    香菜"
+                    + "\n\t数量     Number  20"
+                    + "\n\t计量单位 Text    斤"
+                    + "\n\t总价     Number  20.0"
+                    + "\n\t购买者   Text    "
+                    + "\n\t是不计   Text    y"
+                    + "\n\t是结余   Text    y"
+                )
+            )
+            print_info(_("Please select a purchasing file."))
             filetypes = ((_("Spreadsheet Files"), "*.xlsx"),)
 
             filename = filedialog.askopenfilename(
@@ -203,18 +223,16 @@ class Purchasing(SpreadsheetBase):
         wb.close()
         print_info(
             _(
-                "Column \"{0}\" has been updated, "
+                'Column "{0}" has been updated, '
                 + "please verify/modify it. "
                 + "Feel free to open new issue if some "
                 + "food with the wrong class ({1}). "
                 + "(Press any key to check it)"
-            ).format(self.food_class_col_name,get_new_issue_url())
+            ).format(self.food_class_col_name, get_new_issue_url())
         )
         input()
         open_file(self.path)
-        print_info(
-            _("Ok, I checked it, it's ok. (Press any key to continue)")
-        )
+        print_info(_("Ok, I checked it, it's ok. (Press any key to continue)"))
         input()
         pass
 

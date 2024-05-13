@@ -195,9 +195,9 @@ class Inventory(SpreadsheetBase):
                     i_row_index = row_index + 1
                     self.row_inserting_tip(i_row_index)
                     sheet.insert_rows(i_row_index, 1)
-                    
-                    for i_col_index in range(1,10):
-                        cell = sheet.cell(i_row_index,i_col_index)
+
+                    for i_col_index in range(1, 10):
+                        cell = sheet.cell(i_row_index, i_col_index)
                         cell.alignment = self.cell_alignment0
                         cell.border = self.cell_border0
 
