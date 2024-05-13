@@ -148,7 +148,7 @@ class CtSpreadSheet:
 
         if len(s_input) > 0 and s_input in "Yy":
             self.bwb.save(self.operator.bill_fpath)
-            bill_fpath0 = sefl.operator.bill_fpath
+            bill_fpath0 = self.operator.bill_fpath
             print_info(
                 _(
                     "You can fill in the monthly missing data "
