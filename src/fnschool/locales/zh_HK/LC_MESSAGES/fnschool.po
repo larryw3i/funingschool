@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-13 04:18+0800\n"
+"POT-Creation-Date: 2024-05-13 10:02+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -157,25 +157,25 @@ msgstr ""
 msgid "%s can't change."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:128
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:129
 msgid ""
 "If you feel {0} is great, please sponsor it. Your sponsorship will keep "
 "the project alive."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:135
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:136
 msgid "Sponsor URL: {0}"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:168
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:170
 msgid "Food classes files:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:177
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:179
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:187
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:189
 msgid "Preset food classes were read from \"{0}\"."
 msgstr ""
 
@@ -302,7 +302,7 @@ msgstr ""
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/inventory.py:216
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasingsum.py:74
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/unwarehousing.py:118
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/warehousing.py:273
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/warehousing.py:274
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:416
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:447
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:513
@@ -533,7 +533,7 @@ msgid ""
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:167
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:170
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2016
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
@@ -583,7 +583,7 @@ msgstr ""
 msgid "Row {0} of {1} is being inserted, please wait a moment."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/base.py:74
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/base.py:76
 msgid "Cells of {0} was unmerged."
 msgstr ""
 
@@ -603,41 +603,45 @@ msgstr ""
 msgid "Sheet \"{0}\" has been reformatted."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:25
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:24
+msgid "No food found, exit."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:28
 msgid "(Remaining)"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:50
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:53
 msgid "food_consuming"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:69
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:72
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:122
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:125
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:134
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:137
 msgid "New purchased food for date {0} is:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:136
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:139
 msgid "New purchased foods for date {0} are:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:148
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:151
 msgid "Negligible foods are not listed."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:151
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:154
 msgid "There is no purchased food for {0}."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:157
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:160
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I "
 "know [press any key to continue])"

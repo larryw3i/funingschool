@@ -20,6 +20,9 @@ class PreConsuming(SpreadsheetBase):
 
     def pre_consume_foods(self, foods):
         cfoods = [f for f in foods if not f.is_abandoned]
+        if len(cfoods) < 1:
+            print_error(_("No food found, exit."))
+            exit()
         year = cfoods[-1].xdate.year
         month = cfoods[-1].xdate.month
         residual_mark = _("(Remaining)")

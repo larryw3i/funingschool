@@ -232,9 +232,9 @@ class Purchasing(SpreadsheetBase):
                 fclass=food[self.food_class_col_name],
             )
             if self.abandoned_col_name:
-                _food.is_abandoned = not food[self.abandoned_col_name] is np.nan
+                _food.is_abandoned = not pd.isna(food[self.abandoned_col_name]) 
             if self.inventory_col_name:
-                _food.is_inventory = not food[self.inventory_col_name] is np.nan
+                _food.is_inventory = not pd.isna(food[self.inventory_col_name])
             _foods.append(_food)
 
         foods = _foods
