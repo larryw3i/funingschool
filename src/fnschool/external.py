@@ -37,12 +37,11 @@ def get_sponsor_url():
         (
             "https://gitee.com/larryw3i/funingschool"
             + "/blob/master/Documentation/"
-            + "README.zh_CN.md#赞助"
+            + "README.zh_CN.md#%E8%B5%9E%E5%8A%A9"
         )
         if is_zh_CN
         else ""
     )
-
 
 def open_file(file_path):
     file_path = str(file_path)

@@ -192,8 +192,17 @@ class Inventory(SpreadsheetBase):
                     sheet.cell(row_index + 1, 1).value.replace(" ", "")
                     == "合计"
                 ):
-                    self.row_inserting_tip(row_index + 1)
-                    sheet.insert_rows(row_index + 1, 1)
+                    i_row_index = row_index + 1
+                    self.row_inserting_tip(i_row_index)
+                    sheet.insert_rows(i_row_index, 1)
+                    
+                    for i_col_index in range(1,10):
+                        cell = sheet.cell(i_row_index,i_col_index)
+                        cell.alignment = self.cell_alignment0
+                        cell.border = self.cell_border0
+
+                    self.del_form_indexes()
+                    form_indexes = self.form_indexes
                 sheet.cell(row_index, 1, food.name)
                 sheet.cell(row_index, 2, food.unit_name)
                 sheet.cell(row_index, 3, food.get_remainder(t1))
