@@ -4,7 +4,8 @@ from fnschool.canteen.spreadsheet.base import *
 class Consuming(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
-        self.sheet_name = "出库单"
+        self.sheet_name = self.s.consuming_name
+        self.entry_row_len0 = 21
         pass
 
     @property
@@ -208,6 +209,8 @@ class Consuming(SpreadsheetBase):
                 ):
                     for cell in row:
                         cell.value = ""
+
+        self.del_form_empty_row(2)
 
         self.format()
 

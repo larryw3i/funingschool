@@ -176,7 +176,8 @@ class Purchasing(SpreadsheetBase):
         headers = [
             h
             for h in [
-                sheet.cell(1, ci).value for ci in range(1, sheet.max_column + 1)
+                sheet.cell(1, ci).value
+                for ci in range(1, sheet.max_column + 1)
             ]
             if h
         ]
@@ -230,10 +231,10 @@ class Purchasing(SpreadsheetBase):
                 + "(Press any key to check it)"
             ).format(self.food_class_col_name, get_new_issue_url())
         )
-        input()
+        input(">_ ")
         open_file(self.path)
         print_info(_("Ok, I checked it, it's ok. (Press any key to continue)"))
-        input()
+        input(">_ ")
         pass
 
     def read_pfoods(self):

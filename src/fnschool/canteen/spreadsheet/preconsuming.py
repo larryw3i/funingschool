@@ -16,7 +16,7 @@ class PreConsuming(SpreadsheetBase):
         self.row_index_offset = 3
         self.col_index_offset = 5
 
-        self.sheet_name0 = "出库计划表"
+        self.sheet_name0 = self.s.preconsuming_name0
 
     def pre_consume_foods(self, foods):
         cfoods = [f for f in foods if not f.is_abandoned]
@@ -82,7 +82,9 @@ class PreConsuming(SpreadsheetBase):
                 tn0 = datetime(tn1.year, tn1.month, 1)
 
             wbfoods = [
-                f for f in cfoods if f.get_remainder(tn0) > 0 and f.xdate <= tn0
+                f
+                for f in cfoods
+                if f.get_remainder(tn0) > 0 and f.xdate <= tn0
             ]
             for wbfood in [f for f in wbfoods if f.xdate < tn0]:
                 if not wbfood.name.endswith(residual_mark):
@@ -129,7 +131,9 @@ class PreConsuming(SpreadsheetBase):
                 ).format(sheet.title, wb_fpath)
             )
             new_wbfoods = [
-                f for f in cfoods if f.get_remainder(tn1) > 0 and f.xdate == tn1
+                f
+                for f in cfoods
+                if f.get_remainder(tn1) > 0 and f.xdate == tn1
             ]
             if len(new_wbfoods) > 0:
                 print_info(
@@ -163,7 +167,7 @@ class PreConsuming(SpreadsheetBase):
                     + "(Ok, I know [press any key to continue])"
                 )
             )
-            input()
+            input(">_ ")
             wb.close()
             open_file(wb_fpath)
             print_info(
@@ -171,7 +175,7 @@ class PreConsuming(SpreadsheetBase):
                     "Ok! I have updated spreadsheet '{0}'. (Press any key)"
                 ).format(wb_fpath)
             )
-            input()
+            input(">_ ")
             wb = load_workbook(wb_fpath)
             sheet = wb[self.sheet_name0]
 

@@ -7,7 +7,7 @@ from fnschool.canteen.spreadsheet.base import *
 class ConsumingSum(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
-        self.sheet_name = "出库汇总表"
+        self.sheet_name = self.s.consumingsum_name
         pass
 
     def update(self):
@@ -33,7 +33,9 @@ class ConsumingSum(SpreadsheetBase):
                     )
             total_price += m_total_price
             cssheet.cell(row[0].row, 2, m_total_price)
-            cssheet.cell(row[0].row, 2).number_format = numbers.FORMAT_NUMBER_00
+            cssheet.cell(row[0].row, 2).number_format = (
+                numbers.FORMAT_NUMBER_00
+            )
 
         total_price_CNY = self.bill.get_CNY_chars(total_price)
         cssheet.cell(

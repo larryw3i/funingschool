@@ -200,6 +200,11 @@ class Bill:
                 else:
                     self._food_classes[fclass] = name_likes
 
+            print_info(
+                _("Ok! I know it. (Press any key to continue)")
+            )
+            input(">_ ")
+
         return self._food_classes
 
     @property

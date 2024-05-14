@@ -8,7 +8,7 @@ from fnschool.canteen.spreadsheet.base import *
 class PurchasingSum(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
-        self.sheet_name = "入库、未入库汇总表"
+        self.sheet_name = self.s.purchasingsum_name
         pass
 
     def update(self):

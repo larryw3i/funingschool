@@ -40,7 +40,7 @@ def get_sponsor_url():
             + "README.zh_CN.md#%E8%B5%9E%E5%8A%A9"
         )
         if is_zh_CN
-        else ""
+        else ("https://github.com/larryw3i/" + "funingschool#support")
     )
 
 

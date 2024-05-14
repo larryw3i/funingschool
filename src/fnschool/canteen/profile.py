@@ -49,7 +49,9 @@ class Profile:
                         profile_label=_("Profile label"),
                         operator_name=_("Operator name"),
                         operator_email=_("Operator email"),
-                        organization_name=_("Organization name or school name"),
+                        organization_name=_(
+                            "Organization name or school name"
+                        ),
                         supplier_name_1=_("Supplier name 1"),
                         supplier_name_2=_("Supplier name 2"),
                         the_end=_("The end."),
@@ -65,7 +67,7 @@ class Profile:
             )
             open_file(self.fpath)
             print_info(_("Ok! it was configured. (enter any key)"))
-            input()
+            input(">_ ")
 
         with open(self.fpath, "r", encoding="utf-8") as f:
             profile = tomllib.load(f)["profile"]

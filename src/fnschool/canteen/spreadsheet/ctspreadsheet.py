@@ -44,6 +44,17 @@ class CtSpreadSheet:
         self._sfood = None
         self._cover = None
 
+        self.preconsuming_name0 = "出库计划表"
+        self.purchasing_name = None
+        self.consuming_name = "出库单"
+        self.inventory_name = "食材盘存表"
+        self.warehousing_name = "入库单"
+        self.unwarehousing_name = "未入库明细表"
+        self.purchasingsum_name = "入库、未入库汇总表"
+        self.consumingsum_name = "出库汇总表"
+        self.sfood_name = "材料台账母表"
+        self.cover_name = "六大类总封面"
+
     @property
     def bill_fpath(self):
         if not self._bill_fpath:

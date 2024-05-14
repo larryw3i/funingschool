@@ -19,7 +19,9 @@ class SpreadsheetBase:
         self.sheet_name = None
         self._sheet = None
         self._form_indexes = None
-        self.cell_alignment0 = Alignment(horizontal="center", vertical="center")
+        self.cell_alignment0 = Alignment(
+            horizontal="center", vertical="center"
+        )
         self.cell_side0 = Side(border_style="thin")
         self.cell_border0 = Border(
             top=self.cell_side0,
@@ -82,6 +84,46 @@ class SpreadsheetBase:
         if not self._sheet:
             self._sheet = self.get_bill_sheet(self.sheet_name)
         return self._sheet
+
+    def get_entry_index(self, form_index):
+
+        sheet_title = self.sheet.title
+
+        form_index0, form_index1 = form_index
+        if sheet_title == self.s.unwarehousing_name:
+            entry_index0, entry_index1 = form_index0 + 2, form_index1 - 1
+        elif sheet_title == self.s.warehousing_name:
+            entry_index0, entry_index1 = form_index0 + 2, form_index1 - 1
+        elif sheet_title == self.s.consuming_name:
+            entry_index0, entry_index1 = form_index0 + 2, form_index1 - 1
+        elif sheet_title == self.s.inventory_name:
+            entry_index0, entry_index1 = form_index0 + 3, form_index1 - 1
+
+        return [entry_index0, entry_index1]
+
+    def del_form_empty_row(self, col_index):
+        col_index = col_index
+        self.del_form_indexes()
+        form_indexes = self.form_indexes
+
+        for form_index in form_indexes:
+            entry_index0, entry_index1 = self.get_entry_index(form_index)
+
+            entry_len = (entry_index1 - entry_index0) + 1
+            len_diff = entry_len - self.entry_row_len0
+            if len_diff > 0:
+                for row_index in range(entry_index0, entry_index1 + 1):
+                    if not self.sheet.cell(row_index, col_index).value:
+                        self.sheet.delete_rows(row_index, 1)
+                        print_warning(
+                            _(
+                                'Empty row {0} of sheet "{1}" has been deleted.'
+                            ).format(row_index, self.sheet.title)
+                        )
+                        entry_index1 = entry_index1 - 1
+                        len_diff = len_diff - 1
+                        if row_index == entry_index1 or len_diff < 1:
+                            break
 
 
 # The end.

@@ -31,6 +31,23 @@ class Operator:
                         operator_name_fpath
                     )
                 )
+            else:
+                print_info(
+                    _(
+                        "Hi, your name is \"{0}\"? (Yes: 'Y' 'y' '', or enter your name)"
+                    ).format(self._name)
+                )
+                n_input = input(">_ ").replace(" ", "")
+                if len(n_input) > 1:
+                    with open(operator_name_fpath, "w", encoding="utf-8") as f:
+                        f.write(n_input)
+                    print_info(
+                        _('Ok, your name has been saved to "{0}".').format(
+                            operator_name_fpath
+                        )
+                    )
+                    self._name = n_input
+
         return self._name
 
     @property
@@ -44,7 +61,7 @@ class Operator:
 
     @property
     def preconsuming_dpath(self):
-        dpath = self.dpath / "preconsuming"
+        dpath = self.dpath / _("preconsuming")
         if not dpath.exists():
             os.makedirs(dpath, exist_ok=True)
         return dpath
@@ -58,7 +75,7 @@ class Operator:
 
     @property
     def config_dpath(self):
-        dpath = self.dpath / "config"
+        dpath = self.dpath / _("config")
         if not dpath.exists():
             os.makedirs(dpath, exist_ok=True)
         return dpath
@@ -72,21 +89,23 @@ class Operator:
 
     @property
     def bill_dpath(self):
-        dpath = self.dpath / "bill"
+        dpath = self.dpath / _("bill")
         if not dpath.exists():
             os.makedirs(dpath)
         return dpath
 
     @property
     def bill_fpath(self):
-        fpath = self.bill_dpath / "bill.xlsx"
+        fpath = self.bill_dpath / (_("bill") + ".xlsx")
         if not fpath.exists():
             shutil.copy(bill0_fpath, fpath)
         return fpath
 
     @property
     def bill_fpath_uuid(self):
-        fpath = self.bill_fpath.parent / ("bill." + str(uuid.uuid4()) + ".xlsx")
+        fpath = self.bill_fpath.parent / (
+            _("bill") + "." + str(uuid.uuid4()) + ".xlsx"
+        )
         return fpath
 
 

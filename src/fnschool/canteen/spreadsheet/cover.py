@@ -7,7 +7,7 @@ from fnschool.canteen.spreadsheet.base import *
 class Cover(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
-        self.sheet_name = "六大类总封面"
+        self.sheet_name = self.s.cover_name
         pass
 
     def update(self):

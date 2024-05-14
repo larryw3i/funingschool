@@ -9,7 +9,8 @@ from fnschool.canteen.spreadsheet.base import *
 class Inventory(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
-        self.sheet_name = "食材盘存表"
+        self.sheet_name = self.s.inventory_name
+        self.entry_row_len0 = 17
         pass
 
     def format(self):
@@ -133,7 +134,10 @@ class Inventory(SpreadsheetBase):
                 d_date = datetime(year, month, d)
                 if d_date in consuming_dates:
                     foods.append(
-                        [d_date, [f for f in bfoods if f.get_remainder(d_date)]]
+                        [
+                            d_date,
+                            [f for f in bfoods if f.get_remainder(d_date)],
+                        ]
                     )
                     break
         return foods
@@ -173,6 +177,22 @@ class Inventory(SpreadsheetBase):
                 + f"                "
                 + f"{t1.year} 年 {t1.month} 月 {t1.day} 日"
                 + f"              ",
+            )
+            sheet.cell(
+                form_i1 + 2,
+                1,
+                (
+                    "   "
+                    + "审核人："
+                    + "        "
+                    + "经办人："
+                    + self.operator.name
+                    + "　    "
+                    + "过称人："
+                    + "        "
+                    + "仓管人："
+                    + " 　     "
+                ),
             )
 
             for row in sheet.iter_rows(
@@ -218,6 +238,7 @@ class Inventory(SpreadsheetBase):
                     food.get_remainder(t1) * food.unit_price,
                 )
 
+        self.del_form_empty_row(1)
         self.format()
 
         wb = self.bwb

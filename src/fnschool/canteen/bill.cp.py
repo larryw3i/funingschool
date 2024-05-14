@@ -290,7 +290,7 @@ class Bill:
             )
         if has_tip:
             print_warning(_("Ok! I knew that.(press any key to continue)"))
-            input()
+            input(">_ ")
 
     def make_spreadsheet_by_time_nodes(self):
         self.set_profile_to_index0()
