@@ -12,9 +12,10 @@ from fnschool.canteen.spreadsheet.base import *
 
 
 class Warehousing(SpreadsheetBase):
-    def __init__(self, bill):
+    def __init__(self, bill,form_row_len=21):
         super().__init__(bill)
         self.sheet_name = "入库单"
+        self.form_row_len0 = form_row_len
         pass
 
     def format(self):
@@ -265,6 +266,15 @@ class Warehousing(SpreadsheetBase):
                 ):
                     for cell in row:
                         cell.value = ""
+        
+        self.del_form_indexes()
+        form_indexes = self.form_indexes
+        for form_index_n,(form_index0, form_index1) in enumerate(form_indexes):
+            form_len = (form_index1-form_index0)+1
+            if form_len > self.form_row_len0:
+                for row_index in range(form_index0,form_index1+1):
+                    if not sheet.cell(row_index,2).value:
+                        shett.delete_rows(row_index,1)
 
         self.format()
 
