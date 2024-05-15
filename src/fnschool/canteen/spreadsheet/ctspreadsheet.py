@@ -174,7 +174,113 @@ class CtSpreadSheet:
 
         print_info(_("Updated data was saved."))
 
+    def print_summary(self,foods = None):
+        bfoods = foods or self.bill.foods
+        cfoods = [f for f in bfoods if not f.is_abandoned]
+        currency_mark = self.bill.currency.mark
+        summary = []
+        summary_len = 0
+        inventory_mm1 = sum([f.total_price for f in cfoods if f.is_inventory])
+        inventory_mm1 = (
+            _("Inventory of last month: ") + currency_mark + str(inventory_mm1)
+        )
+
+        warehousing_m = sum(
+            [f.total_price for f in cfoods if not f.is_inventory]
+        )
+        warehousing_m_cp = warehousing_m
+        warehousing_m = (
+            _("Warehousing of this month: ")
+            + currency_mark
+            + str(warehousing_m)
+        )
+        inventory_mm1_warehousing_m = (
+            _("Total: ")
+            + currency_mark
+            + str(sum([f.total_price for f in cfoods]))
+        )
+        consuming_m = 0
+        for f in cfoods:
+            consuming_m += sum([c for __, c in f.consumptions])
+
+        consuming_m_cp = consuming_m
+        consuming_m = (
+            _("Consuming of this month: ") + currency_mark + str(consuming_m)
+        )
+
+        month_day_m1 = sorted([f.xdate for f in cfoods])[0]
+        for f in cfoods:
+            month_day_m1 = max(
+                [d for d, __ in f.consumptions] + [month_day_m1]
+            )
+
+        inventory_m = sum(
+            [
+                f.get_remainder(month_day_m1)
+                for f in cfoods
+                if f.get_remainder(month_day_m1) > 0
+            ]
+        )
+        inventory_m_cp = inventory_m
+        inventory_m = (
+            _("Inventory of this month: ") + currency_mark + str(inventory_m)
+        )
+
+        consuming_m_inventory_m = (
+            _("Total: ") + currency_mark + str(consuming_m_cp + inventory_m_cp)
+        )
+        
+        afoods = [f for f in bfoods if f.is_abandoned]
+        unwarehousing_m = (
+            _("Unwarehousing of this month: ")
+            + currency_mark
+            + str(
+                sum([f.total_price for f in afoods])
+            )
+        )
+
+        total_purchasing_m = (
+            _("Total purchasing of this month: ")
+            + currency_mark
+            + str(
+                sum(
+                    [
+                        f.total_price
+                        for f in self.bill.foods
+                        if not f.is_abandoned
+                    ]
+                )
+            )
+        )
+        summary = [
+            inventory_mm1,
+            warehousing_m,
+            inventory_mm1_warehousing_m,
+            consuming_m,
+            inventory_m,
+            consuming_m_inventory_m,
+            warehousing_m,
+            unwarehousing_m,
+            total_purchasing_m,
+        ]
+
+        summary_len = max([len(s) for s in summary])
+        summary_sep = "-" * summary_len
+        summary = (
+            summary[:3]
+            + [summary_sep]
+            + summary[3:6]
+            + [summary_sep]
+            + summary[6:]
+        )
+        summary = "\n".join(summary)
+
+        print_info(_("Summary:"))
+        print_info(summary)
+        print()
+
     def update(self):
+
         self.inventory.update()
         self.warehousing.update()
         self.unwarehousing.update()
@@ -183,6 +289,8 @@ class CtSpreadSheet:
         self.purchasingsum.update()
         self.consumingsum.update()
         self.cover.update()
+
+        self.print_summary()
 
         self.save_workbook()
 

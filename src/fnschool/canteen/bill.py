@@ -6,6 +6,7 @@ from fnschool import *
 from fnschool.canteen.spreadsheet.ctspreadsheet import *
 from fnschool.canteen.operator import *
 from fnschool.canteen.path import *
+from fnschool.canteen.currency import Currency
 
 
 class Bill:
@@ -16,6 +17,7 @@ class Bill:
         self._operator_name = None
         self._food_classes = None
         self._operator = None
+        self.currency = Currency().CNY
 
         print_app_name()
         pass
@@ -115,6 +117,7 @@ class Bill:
     def foods(self):
         if not self._foods:
             self._foods = self.spreadsheet.purchasing.read_pfoods()
+            self.spreadsheet.print_summary(self._foods)
         return self._foods
 
     @property
@@ -200,9 +203,7 @@ class Bill:
                 else:
                     self._food_classes[fclass] = name_likes
 
-            print_info(
-                _("Ok! I know it. (Press any key to continue)")
-            )
+            print_info(_("Ok! I know it. (Press any key to continue)"))
             input(">_ ")
 
         return self._food_classes
