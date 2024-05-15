@@ -174,7 +174,7 @@ class CtSpreadSheet:
 
         print_info(_("Updated data was saved."))
 
-    def print_summary(self,foods = None):
+    def print_summary(self, foods=None):
         bfoods = foods or self.bill.foods
         cfoods = [f for f in bfoods if not f.is_abandoned]
         currency_mark = self.bill.currency.mark
@@ -201,7 +201,8 @@ class CtSpreadSheet:
         )
         consuming_m = 0
         for f in cfoods:
-            consuming_m += sum([c for __, c in f.consumptions])
+            f_consuming_m = sum([c for __, c in f.consumptions])
+            consuming_m += f_consuming_m * f.unit_price
 
         consuming_m_cp = consuming_m
         consuming_m = (
@@ -216,7 +217,7 @@ class CtSpreadSheet:
 
         inventory_m = sum(
             [
-                f.get_remainder(month_day_m1)
+                f.get_remainder(month_day_m1) * f.unit_price
                 for f in cfoods
                 if f.get_remainder(month_day_m1) > 0
             ]
@@ -229,14 +230,12 @@ class CtSpreadSheet:
         consuming_m_inventory_m = (
             _("Total: ") + currency_mark + str(consuming_m_cp + inventory_m_cp)
         )
-        
+
         afoods = [f for f in bfoods if f.is_abandoned]
         unwarehousing_m = (
             _("Unwarehousing of this month: ")
             + currency_mark
-            + str(
-                sum([f.total_price for f in afoods])
-            )
+            + str(sum([f.total_price for f in afoods]))
         )
 
         total_purchasing_m = (
@@ -246,8 +245,8 @@ class CtSpreadSheet:
                 sum(
                     [
                         f.total_price
-                        for f in self.bill.foods
-                        if not f.is_abandoned
+                        for f in bfoods
+                        if not f.is_inventory
                     ]
                 )
             )
@@ -274,7 +273,7 @@ class CtSpreadSheet:
             + summary[6:]
         )
         summary = "\n".join(summary)
-
+        print()
         print_info(_("Summary:"))
         print_info(summary)
         print()

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-15 03:02+0800\n"
+"POT-Creation-Date: 2024-05-15 10:50+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -150,36 +150,36 @@ msgstr ""
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.cp.py:417
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.cp.py:422
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.cp.py:437
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:63
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:68
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:83
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:65
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:70
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:85
 #, python-format
 msgid "%s can't change."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:129
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:131
 msgid ""
 "If you feel {0} is great, please sponsor it. Your sponsorship will keep "
 "the project alive."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:136
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:138
 msgid "Sponsor URL: {0}"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:170
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:172
 msgid "Food classes files:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:179
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:181
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:189
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:191
 msgid "Preset food classes were read from \"{0}\"."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:204
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:205
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr ""
 
@@ -367,7 +367,7 @@ msgstr ""
 msgid "Got no organization name column of {0}"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:189
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:296
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:962
 msgid "Update completely!"
 msgstr ""
@@ -623,6 +623,39 @@ msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:158
 msgid "Saving. . ."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:185
+msgid "Inventory of last month: "
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:193
+msgid "Warehousing of this month: "
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:198
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:231
+msgid "Total: "
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:209
+msgid "Consuming of this month: "
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:227
+msgid "Inventory of this month: "
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:236
+msgid "Unwarehousing of this month: "
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:242
+msgid "Total purchasing of this month: "
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:277
+msgid "Summary:"
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/food.py:93

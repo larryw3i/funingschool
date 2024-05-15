@@ -117,7 +117,6 @@ class Bill:
     def foods(self):
         if not self._foods:
             self._foods = self.spreadsheet.purchasing.read_pfoods()
-            self.spreadsheet.print_summary(self._foods)
         return self._foods
 
     @property
