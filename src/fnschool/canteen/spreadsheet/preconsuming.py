@@ -144,14 +144,17 @@ class PreConsuming(SpreadsheetBase):
                     ).format(tn1.strftime("%Y.%m.%d"))
                 )
 
+                new_wbfood_tips = [
+                    f"({i+1}){f.name} {f.count} {f.unit_name}"
+                    for i, f in enumerate(new_wbfoods)
+                ]
+                new_wbfood_tip_len = max([len(t) for t in new_wbfood_tips])
                 print_info(
-                    "  ".join(
-                        [
-                            f"({i+1}){f.name} {f.count} {f.unit_name}"
-                            for i, f in enumerate(new_wbfoods)
-                        ]
+                    "".join(
+                        [f"{t: <{new_wbfood_tip_len+1}}" for t in new_wbfood_tips]
                     )
                 )
+
                 print_warning(_("Negligible foods are not listed."))
             else:
                 print_info(
