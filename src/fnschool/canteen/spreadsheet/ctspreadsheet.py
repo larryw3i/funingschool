@@ -241,15 +241,7 @@ class CtSpreadSheet:
         total_purchasing_m = (
             _("Total purchasing of this month: ")
             + currency_mark
-            + str(
-                sum(
-                    [
-                        f.total_price
-                        for f in bfoods
-                        if not f.is_inventory
-                    ]
-                )
-            )
+            + str(sum([f.total_price for f in bfoods if not f.is_inventory]))
         )
         summary = [
             inventory_mm1,
