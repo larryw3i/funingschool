@@ -2,6 +2,7 @@ import os
 import sys
 import calendar
 from datetime import datetime, timedelta
+import math
 
 from fnschool import *
 from fnschool.canteen.food import *
@@ -148,12 +149,16 @@ class PreConsuming(SpreadsheetBase):
                     f"({i+1}){f.name} {f.count} {f.unit_name}"
                     for i, f in enumerate(new_wbfoods)
                 ]
-                new_wbfood_tip_len = max([len(t) for t in new_wbfood_tips])
-                print_info(
-                    "".join(
-                        [f"{t: <{new_wbfood_tip_len+1}}" for t in new_wbfood_tips]
-                    )
+                new_wbfood_tips_len_sqrt = math.ceil(
+                    len(new_wbfood_tips) ** 0.5
                 )
+                new_wbfood_tip_len = max([len(t) for t in new_wbfood_tips])
+                new_wbfood_tips_value = ""
+                for i, t in enumerate(new_wbfood_tips):
+                    new_wbfood_tips_value += f"{t: <{new_wbfood_tip_len+1}}"
+                    if (i + 1) % new_wbfood_tips_len_sqrt == 0:
+                        new_wbfood_tips_value += "\n"
+                print_warning(new_wbfood_tips_value)
 
                 print_warning(_("Negligible foods are not listed."))
             else:
