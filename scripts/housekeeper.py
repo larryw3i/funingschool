@@ -10,7 +10,6 @@ from datetime import datetime
 project_path = Path(__file__).parent.parent
 pyproject_toml_path = project_path / "pyproject.toml"
 pyvenv_path = project_path / "venv"
-pyvenv_activate_path = (pyvenv_path / "bin" / "activate").as_posix()
 src_path = project_path / "src"
 app_name = "fnschool"
 fnschool_path = src_path / app_name
@@ -23,7 +22,12 @@ sha256es_fpath = project_path / "releases" / "SHA256es"
 dist_dpath = project_path / "dist"
 dists_fpath = dist_dpath / "*"
 
+is_win = sys.platform.startswith("win")
 
+pyvenv_activate_path = (
+    (pyvenv_path / "Scripts" / "activate" ).as_posix() if is_win else
+    (pyvenv_path / "bin" / "activate").as_posix() 
+)
 def run_sh(sh_txt=""):
     return os.system(sh_txt)
 

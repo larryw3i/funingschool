@@ -261,7 +261,8 @@ class Purchasing(SpreadsheetBase):
 
         foods = _foods
         foods = sorted(foods, key=lambda f: f.xdate)
-        self.spreadsheet.preconsuming.pre_consume_foods(foods)
+        self.bill.foods = foods
+        self.spreadsheet.preconsuming.pre_consume_foods()
 
         return foods
         pass

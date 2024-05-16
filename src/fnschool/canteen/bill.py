@@ -7,6 +7,7 @@ from fnschool.canteen.spreadsheet.ctspreadsheet import *
 from fnschool.canteen.operator import *
 from fnschool.canteen.path import *
 from fnschool.canteen.currency import Currency
+from fnschool.canteen.consuming import Consuming
 
 
 class Bill:
@@ -18,11 +19,16 @@ class Bill:
         self._food_classes = None
         self._operator = None
         self.currency = Currency().CNY
-        self._consuming_year = None
-        self._consuming_month = None
+        self._consuming = None
 
         print_app_name()
         pass
+
+    @property
+    def consuming(self):
+        if not self._consuming:
+            self._consuming = Consuming(self)
+        return self._consuming
 
     def get_CNY_chars(self, value):
         format_word = [
@@ -115,25 +121,15 @@ class Bill:
             self._spreadsheet = CtSpreadSheet(self)
         return self._spreadsheet
 
-    def get_consuming_year(self, foods=None):
-        if not self._consuming_year:
-            foods = foods or self.foods
-            foods = sorted(foods, key=lambda f: f.xdate)
-            self._consuming_year = foods[-1].xdate.year
-        return self._consuming_year
-
-    def get_consuming_month(self, foods=None):
-        if not self._consuming_month:
-            foods = foods or self.foods
-            foods = sorted(foods, key=lambda f: f.xdate)
-            self._consuming_month = foods[-1].xdate.month
-        return self._consuming_month
-
     @property
     def foods(self):
         if not self._foods:
             self._foods = self.spreadsheet.purchasing.read_pfoods()
         return self._foods
+
+    @foods.setter
+    def foods(self, foods):
+        self._foods = foods
 
     @property
     def purchaser(self):

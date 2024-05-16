@@ -1,5 +1,6 @@
 import os
 import sys
+import random
 import calendar
 from datetime import datetime, timedelta
 import math
@@ -19,13 +20,14 @@ class PreConsuming(SpreadsheetBase):
 
         self.sheet_name0 = self.s.preconsuming_name0
 
-    def pre_consume_foods(self, foods):
+    def pre_consume_foods(self):
+        foods = self.bill.foods
         cfoods = [f for f in foods if not f.is_abandoned]
         if len(cfoods) < 1:
             print_error(_("No food found, exit."))
             exit()
-        year = self.bill.get_consuming_year(foods)
-        month = self.bill.get_consuming_month(foods)
+        year = self.bill.consuming.year
+        month = self.bill.consuming.month
         residual_mark = _("(Remaining)")
         time_nodes = sorted(
             list(
@@ -146,8 +148,16 @@ class PreConsuming(SpreadsheetBase):
                 )
 
                 new_wbfoods_count_len = len(str(len(new_wbfoods)))
+
+                number_mark = random.choice(
+                    [" ", ".", ">", "-", ")", ":", "|"]
+                )
                 new_wbfood_tips = [
-                    f"{i+1:0>{new_wbfoods_count_len}} {f.name} {f.count} {f.unit_name}"
+                    (
+                        f"{i+1:>{new_wbfoods_count_len}}"
+                        + number_mark
+                        + f"{f.name} {f.count} {f.unit_name}"
+                    )
                     for i, f in enumerate(new_wbfoods)
                 ]
                 new_wbfood_tips_len = len(new_wbfood_tips)
@@ -250,8 +260,8 @@ class PreConsuming(SpreadsheetBase):
 
     def print_consuming_days(self, foods):
         consumption_days = []
-        year = self.bill.get_consuming_year(foods)
-        month = self.bill.get_consuming_month(foods)
+        year = self.bill.consuming.year
+        month = self.bill.consuming.month
         year_month = f"{year}.{month:0>2}"
 
         for f in foods:
@@ -265,9 +275,10 @@ class PreConsuming(SpreadsheetBase):
                 if d == 0:
                     consumption_days_value += " " * space_len
                 elif d in consumption_days:
-                    consumption_day = f"({d})"
+                    consumption_day = f"({d:>2})"
                     consumption_days_value += f"{consumption_day:>{space_len}}"
                 else:
+                    d = f" {d:>2} "
                     consumption_days_value += f"{d:>{space_len}}"
             consumption_days_value += "\n"
 

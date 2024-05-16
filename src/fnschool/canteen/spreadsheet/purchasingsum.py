@@ -14,8 +14,8 @@ class PurchasingSum(SpreadsheetBase):
     def update(self):
 
         pssheet = self.sheet
-        year = self.bill.get_consuming_year()
-        month = self.bill.get_consuming_month()
+        year = self.bill.consuming.year
+        month = self.bill.consuming.month
         day = self.consuming_day_m1
 
         pssheet.cell(

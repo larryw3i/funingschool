@@ -1,4 +1,5 @@
 import os
+import random
 import sys
 from pathlib import Path
 import shutil
@@ -262,7 +263,17 @@ class CtSpreadSheet:
         summary_len = max(
             [len(s) + len([c for c in s if is_zh_CN_char(c)]) for s in summary]
         )
-        summary_sep = "-" * summary_len
+        summary_sep = (
+            random.choice(
+                ["-", "_", "*", "#", ".", "`", "'", '"', "o", "x", "~"]
+            )
+            * summary_len
+        )
+        consuming_date_m1 = (
+            f"{self.bill.consuming.year}"
+            + f".{self.bill.consuming.month:0>2}"
+            + f".{self.bill.consuming.day_m1:0>2}"
+        )
         summary = (
             [summary_sep]
             + summary[:3]
@@ -271,6 +282,7 @@ class CtSpreadSheet:
             + [summary_sep]
             + summary[6:]
             + [summary_sep]
+            + [f"{consuming_date_m1:>{summary_len}}"]
         )
         summary = "\n".join(summary)
         print()
