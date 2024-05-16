@@ -171,12 +171,16 @@ class PreConsuming(SpreadsheetBase):
                         if i % new_wbfood_tips_col_count == col_index
                     ]
 
-                    row_len = max(
-                        [
-                            len(v) + len([cc for cc in v if is_zh_CN_char(cc)])
-                            for i, v in col_values
-                        ]
-                    )+1
+                    row_len = (
+                        max(
+                            [
+                                len(v)
+                                + len([cc for cc in v if is_zh_CN_char(cc)])
+                                for i, v in col_values
+                            ]
+                        )
+                        + 1
+                    )
                     for i, v in col_values:
                         v_len = row_len - len(
                             [c for c in v if is_zh_CN_char(c)]
@@ -186,7 +190,7 @@ class PreConsuming(SpreadsheetBase):
                 for i, new_wbfood_tip in enumerate(new_wbfood_tips):
                     if i % new_wbfood_tips_col_count == 0 and i != 0:
                         new_wbfood_tips_value += "\n"
-                    new_wbfood_tips_value += new_wbfood_tip 
+                    new_wbfood_tips_value += new_wbfood_tip
 
                 print_warning(new_wbfood_tips_value)
 
