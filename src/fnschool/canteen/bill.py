@@ -18,6 +18,8 @@ class Bill:
         self._food_classes = None
         self._operator = None
         self.currency = Currency().CNY
+        self._consuming_year = None
+        self._consuming_month = None
 
         print_app_name()
         pass
@@ -113,6 +115,23 @@ class Bill:
             self._spreadsheet = CtSpreadSheet(self)
         return self._spreadsheet
 
+    def get_consuming_year(self,foods = None):
+        if not self._consuming_year:
+            foods = foods or self.foods
+            foods = sorted(foods, key=lambda f: f.xdate)
+            self._consuming_year = foods[-1].xdate.year
+        return self._consuming_year
+
+    def get_consuming_month(self,foods = None):
+        if not self._consuming_month:
+            foods = foods or self.foods
+            foods = sorted(foods, key=lambda f: f.xdate)
+            self._consuming_month = foods[-1].xdate.month
+        return self._consuming_month
+
+            
+        
+
     @property
     def foods(self):
         if not self._foods:
@@ -142,8 +161,8 @@ class Bill:
     @property
     def time_nodes(self):
         if not self._time_nodes:
-            year = self.foods[-1].xdate.year
-            month = self.foods[-1].xdate.month
+            year = self.get_consuming_year() 
+            month = self.get_consuming_month() 
             self._time_nodes = sorted(
                 list(
                     set(

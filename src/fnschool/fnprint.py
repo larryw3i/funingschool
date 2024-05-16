@@ -10,6 +10,15 @@ if platform.system() == "Windows":
     just_fix_windows_console()
 
 
+def is_zh_CN_char(value):
+    result = (
+        0x4E00 <= ord(value) <= 0x9FA5
+        or 0xFF00 <= ord(value) <= 0xFFEF
+        or 0x3000 <= ord(value) <= 0x303F
+    )
+    return result
+
+
 def print_info(*args, **kwargs):
     print(Fore.GREEN, end="")
     print(*args, **kwargs, end="")

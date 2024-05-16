@@ -5,7 +5,7 @@ import tomllib
 
 from fnschool.path import *
 from fnschool.canteen.path import *
-from fnschool.log import *
+from fnschool.fnprint import *
 from fnschool.external import *
 
 

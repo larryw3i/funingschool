@@ -259,18 +259,20 @@ class CtSpreadSheet:
             total_purchasing_m,
         ]
 
-        summary_len = max([len(s) for s in summary])
+        summary_len = max([len(s)+len([c for c in s if is_zh_CN_char(c)]) for s in summary])
         summary_sep = "-" * summary_len
         summary = (
-            summary[:3]
+            [summary_sep]
+            + summary[:3]
             + [summary_sep]
             + summary[3:6]
             + [summary_sep]
             + summary[6:]
+            + [summary_sep]
         )
         summary = "\n".join(summary)
         print()
-        print_info(_("Summary:"))
+        print_error(_("Summary:"))
         print_info(summary)
         print()
 

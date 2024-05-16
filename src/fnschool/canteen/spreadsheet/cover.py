@@ -11,8 +11,8 @@ class Cover(SpreadsheetBase):
         pass
 
     def update(self):
-        year = self.bfoods[-1].xdate.year
-        month = self.bfoods[-1].xdate.month
+        year = self.bill.get_consuming_year() 
+        month = self.bill.get_consuming_month() 
         day = self.consuming_day_m1
 
         cvsheet = self.sheet

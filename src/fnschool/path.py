@@ -7,7 +7,7 @@ import platform
 import subprocess
 
 from appdirs import AppDirs
-from fnschool.log import *
+from fnschool.fnprint import *
 from fnschool.app import *
 
 

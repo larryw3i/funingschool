@@ -24,8 +24,8 @@ class PreConsuming(SpreadsheetBase):
         if len(cfoods) < 1:
             print_error(_("No food found, exit."))
             exit()
-        year = cfoods[-1].xdate.year
-        month = cfoods[-1].xdate.month
+        year = self.bill.get_consuming_year(foods) 
+        month = self.bill.get_consuming_month(foods) 
         residual_mark = _("(Remaining)")
         time_nodes = sorted(
             list(
@@ -152,12 +152,18 @@ class PreConsuming(SpreadsheetBase):
                 new_wbfood_tips_len_sqrt = math.ceil(
                     len(new_wbfood_tips) ** 0.5
                 )
-                new_wbfood_tip_len = max([len(t) for t in new_wbfood_tips])
+                new_wbfood_tip_len = max(
+                    [
+                        len(t) + len([c for c in t if is_zh_CN_char(c)])
+                        for t in new_wbfood_tips
+                    ]
+                )+1
                 new_wbfood_tips_value = ""
                 for i, t in enumerate(new_wbfood_tips):
-                    new_wbfood_tips_value += f"{t: <{new_wbfood_tip_len+1}}"
+                    tip_len = new_wbfood_tip_len - len([c for c in t if is_zh_CN_char(c)])
+                    new_wbfood_tips_value += f"{t:<{tip_len}}"
                     if (i + 1) % new_wbfood_tips_len_sqrt == 0:
-                        new_wbfood_tips_value += "\n"
+                        new_wbfood_tips_value = new_wbfood_tips_value.strip() + "\n"
                 print_warning(new_wbfood_tips_value)
 
                 print_warning(_("Negligible foods are not listed."))
@@ -211,8 +217,43 @@ class PreConsuming(SpreadsheetBase):
                 f_index += 1
             wb.close()
             sheet = None
-
+        self.print_consuming_days(cfoods)
         pass
+
+    def print_consuming_days(self,foods):
+        consumption_days = []
+        year =  self.bill.get_consuming_year(foods)
+        month = self.bill.get_consuming_month(foods)
+        year_month = f"{year}.{month}"
+
+        for f in foods:
+            for d,c in f.consumptions:
+                if not d in consumption_days:
+                    consumption_days.append(d.day)
+        consumption_days_value = ""
+        space_len = 5
+        for week in calendar.monthcalendar(
+           year,month        ):
+            for d in week:
+                if d == 0:
+                    consumption_days_value += " "*space_len
+                elif d in consumption_days:
+                    consumption_day = f"({d})"
+                    consumption_days_value += f"{consumption_day:>{space_len}}"
+                else:
+                    consumption_days_value += f"{d:>{space_len}}"
+            consumption_days_value += "\n"
+        
+        print()
+        print_error(
+            _("Consuming days of {0}:").format(year_month)
+        )
+        print_warning(f"{year_month:^{space_len*7}}")
+        print_info(consumption_days_value)
+        print_info(_("Yes, they are all right. (Press any key to continue)"))
+        input(">_")
+        return 
+
 
 
 # The end.

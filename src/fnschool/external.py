@@ -3,7 +3,7 @@ import sys
 import subprocess
 
 from fnschool.language import *
-from fnschool.log import *
+from fnschool.fnprint import *
 from fnschool.path import *
 
 

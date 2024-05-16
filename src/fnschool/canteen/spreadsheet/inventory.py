@@ -116,8 +116,8 @@ class Inventory(SpreadsheetBase):
     def foods(self):
         foods = []
         bfoods = [f for f in self.bfoods if not f.is_abandoned]
-        year = bfoods[-1].xdate.year
-        month = bfoods[-1].xdate.month
+        year = self.bill.get_consuming_year() 
+        month = self.bill.get_consuming_month() 
 
         consuming_dates = []
         for bfood in bfoods:
