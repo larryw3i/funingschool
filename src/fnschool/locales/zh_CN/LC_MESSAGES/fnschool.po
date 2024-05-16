@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-16 13:44+0800\n"
-"PO-Revision-Date: 2024-05-16 13:44+0800\n"
+"POT-Creation-Date: 2024-05-16 19:40+0800\n"
+"PO-Revision-Date: 2024-05-16 19:40+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -172,29 +172,29 @@ msgstr "好的，我知道了。（按任意键继续）"
 msgid "%s can't change."
 msgstr "%s 无法转换。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:150
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:147
 msgid ""
 "If you feel {0} is great, please sponsor it. Your sponsorship will keep the "
 "project alive."
 msgstr "如果您觉得 {0} 项目很棒，请您赞助它。您的赞助会让项目继续活下去。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:157
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:154
 msgid "Sponsor URL: {0}"
 msgstr "赞助链接：{0}"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:191
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:188
 msgid "Food classes files:"
 msgstr "食材大类文件："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:200
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:197
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr "您的食材大类已从 “{0}”  读取。它会被优先匹配。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:210
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:207
 msgid "Preset food classes were read from \"{0}\"."
 msgstr "预置的食材大类已从 “{0}” 读取。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:224
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:221
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr "好的，我知道了。（按任意键继续）"
 
@@ -384,7 +384,7 @@ msgstr "未找到 {0} 的清点日期列索引。"
 msgid "Got no organization name column of {0}"
 msgstr "未找到 {0} 的机构名的列索引。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:294
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:296
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:962
 msgid "Update completely!"
 msgstr "更新完成！"
@@ -591,7 +591,7 @@ msgstr ""
 "工作表 “{0}” 已更新。\n"
 "在您完成每天消耗设计后按任意建以继续。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:188
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:195
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:2035
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr "好的，我已经更新工作簿 “{0}” 了。（按任意键继续）"
@@ -690,7 +690,7 @@ msgstr "本月未入库："
 msgid "Total purchasing of this month: "
 msgstr "本月总购入："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:275
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/ctspreadsheet.py:277
 msgid "Summary:"
 msgstr "汇总："
 
@@ -734,25 +734,33 @@ msgstr "{0} 新购入的食材："
 msgid "New purchased foods for date {0} are:"
 msgstr "{0} 新购入的食材："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:169
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:176
 msgid "Negligible foods are not listed."
 msgstr "无需入库的食材未列出。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:172
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:179
 msgid "There is no purchased food for {0}."
 msgstr "{0} 没有新购入的食材。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:178
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:185
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I know "
 "[press any key to continue])"
 msgstr "没有食材消耗的日期不需要设计出库。（好的，知道了的【按任意键继续】）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:249
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:254
 msgid "Consuming days of {0}:"
 msgstr "{0} 的出库日期："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:253
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:258
+msgid "{0} days in total."
+msgstr "共 {0} 天。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:258
+msgid "{0} day in total."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/preconsuming.py:260
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr "是的，都是对的。（按任意键继续）"
 

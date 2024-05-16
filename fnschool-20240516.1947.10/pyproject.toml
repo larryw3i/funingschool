@@ -1,0 +1,61 @@
+[project]
+name = "fnschool"
+dynamic = ["version"]
+requires-python = ">= 3.9"
+dependencies = [
+    "colorama",
+    "pandas",
+    "numpy",
+    "openpyxl",
+    "appdirs",
+]
+authors = [
+  {name = "larryw3i", email = "larryw3i@163.com"},
+  {name = "Larry Wei", email = "larryw3i@126.com"},
+  {name = "Larry W3i", email = "larryw3i@yeah.net"},
+]
+maintainers = [
+  {name = "larryw3i", email = "larryw3i@163.com"},
+  {name = "Larry Wei", email = "larryw3i@126.com"}
+]
+description = "Just some school related scripts, without any ambition."
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+  "Topic :: Education",
+  "Programming Language :: Python :: 3.10",
+]
+[project.urls]
+Homepage = "https://github.com/larryw3i/funingschool"
+Documentation = "https://github.com/larryw3i/funingschool/docs"
+Repository = "https://github.com/larryw3i/funingschool.git"
+Issues = "https://github.com/larryw3i/funingschool/issues"
+Changelog = "https://github.com/larryw3i/funingschool/CHANGELOG.md"
+
+[project.optional-dependencies]
+gui=[]
+cli=[]
+
+[project.scripts]
+fnschool-cli = "fnschool:read_cli"
+
+[project.gui-scripts]
+fnschool-gui = "fnschool:show_gui"
+
+[build-system]
+requires = [
+    "setuptools",
+]
+
+[tool.black]
+line-length = 79
+
+[tool.setuptools.dynamic]
+version = {attr = "fnschool.__version__"}
+
+[tool.setuptools.package-data]
+"*" = ["*.mo","*.xlsx","*.toml"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["*.po"]
+# The end.
