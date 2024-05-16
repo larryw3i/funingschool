@@ -145,13 +145,13 @@ class PreConsuming(SpreadsheetBase):
                     ).format(tn1.strftime("%Y.%m.%d"))
                 )
 
+                new_wbfoods_count_len = len(str(len(new_wbfoods)))
                 new_wbfood_tips = [
-                    f"({i+1}){f.name} {f.count} {f.unit_name}"
+                    f"{i+1:0>{new_wbfoods_count_len}} {f.name} {f.count} {f.unit_name}"
                     for i, f in enumerate(new_wbfoods)
                 ]
-                new_wbfood_tips_len_sqrt = math.ceil(
-                    len(new_wbfood_tips) ** 0.5
-                )
+                new_wbfood_tips_len = len(new_wbfood_tips)
+                new_wbfood_tips_len_sqrt = math.ceil(new_wbfood_tips_len**0.5)
                 new_wbfood_tip_len = (
                     max(
                         [
@@ -162,15 +162,32 @@ class PreConsuming(SpreadsheetBase):
                     + 1
                 )
                 new_wbfood_tips_value = ""
-                for i, t in enumerate(new_wbfood_tips):
-                    tip_len = new_wbfood_tip_len - len(
-                        [c for c in t if is_zh_CN_char(c)]
-                    )
-                    new_wbfood_tips_value += f"{t:<{tip_len}}"
-                    if (i + 1) % new_wbfood_tips_len_sqrt == 0:
-                        new_wbfood_tips_value = (
-                            new_wbfood_tips_value.strip() + "\n"
+                new_wbfood_tips_col_count = new_wbfood_tips_len_sqrt
+
+                for col_index in range(0, new_wbfood_tips_col_count):
+                    col_values = [
+                        (i, new_wbfood_tips[i])
+                        for i in range(0, new_wbfood_tips_len)
+                        if i % new_wbfood_tips_col_count == col_index
+                    ]
+
+                    row_len = max(
+                        [
+                            len(v) + len([cc for cc in v if is_zh_CN_char(cc)])
+                            for i, v in col_values
+                        ]
+                    )+1
+                    for i, v in col_values:
+                        v_len = row_len - len(
+                            [c for c in v if is_zh_CN_char(c)]
                         )
+                        new_wbfood_tips[i] = f"{v:<{v_len}}"
+
+                for i, new_wbfood_tip in enumerate(new_wbfood_tips):
+                    if i % new_wbfood_tips_col_count == 0 and i != 0:
+                        new_wbfood_tips_value += "\n"
+                    new_wbfood_tips_value += new_wbfood_tip 
+
                 print_warning(new_wbfood_tips_value)
 
                 print_warning(_("Negligible foods are not listed."))
@@ -257,7 +274,11 @@ class PreConsuming(SpreadsheetBase):
             consumption_days_value = consumption_days_value[:-1]
         print_info(consumption_days_value[:-1])
         consumption_days_len = len(consumption_days)
-        total_days =(_("{0} days in total.") if consumption_days_len > 1 else _("{0} day in total.")).format(consumption_days_len)
+        total_days = (
+            _("{0} days in total.")
+            if consumption_days_len > 1
+            else _("{0} day in total.")
+        ).format(consumption_days_len)
         print_warning(f"{total_days:^{space_len*7}}")
         print_info(_("Yes, they are all right. (Press any key to continue)"))
         input(">_")
