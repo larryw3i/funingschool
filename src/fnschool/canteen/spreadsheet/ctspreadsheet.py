@@ -259,7 +259,9 @@ class CtSpreadSheet:
             total_purchasing_m,
         ]
 
-        summary_len = max([len(s)+len([c for c in s if is_zh_CN_char(c)]) for s in summary])
+        summary_len = max(
+            [len(s) + len([c for c in s if is_zh_CN_char(c)]) for s in summary]
+        )
         summary_sep = "-" * summary_len
         summary = (
             [summary_sep]

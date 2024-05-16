@@ -95,7 +95,7 @@ class Food(SpreadsheetBase):
 
     def get_form_index(self, sheet):
         indexes = self.get_form_indexes(sheet)
-        index_range = indexes[self.bill.get_consuming_month()  - 1]
+        index_range = indexes[self.bill.get_consuming_month() - 1]
         return index_range
 
     def get_form_indexes(self, sheet):
@@ -114,8 +114,8 @@ class Food(SpreadsheetBase):
 
     def update(self):
 
-        year = self.bill.get_consuming_year() 
-        month = self.bill.get_consuming_month() 
+        year = self.bill.get_consuming_year()
+        month = self.bill.get_consuming_month()
         cfoods = [f for f in self.bfoods if not f.is_abandoned]
         food_names = list(set([f.name for f in cfoods]))
         wb = self.bwb
@@ -180,7 +180,7 @@ class Food(SpreadsheetBase):
             for cdate in cdates:
                 for food in m_cfoods:
 
-                    if (food.xdate == cdate and food.xdate.month == month):
+                    if food.xdate == cdate and food.xdate.month == month:
                         sheet.cell(row_index, 1, cdate.month)
                         sheet.cell(row_index, 2, cdate.day)
                         sheet.cell(row_index, 4, food.count)
