@@ -15,7 +15,7 @@
   <br>
 </h1>
 
-<h4 align="center"> 一些简单的学校做账脚本。 </h4>
+<h4 align="center"> 一些简单的做账脚本。 </h4>
 
 <p align="center">
   <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/README.zh_CN.md">简体中文</a> •
@@ -49,7 +49,7 @@ Ubuntu：
 sudo apt-get install python3 python3-pip
 ```
 Windows：  
-从 [www.python.org/getit](https://www.python.org/getit/)（或 [mirror.bjtu.edu.cn](https://mirror.bjtu.edu.cn/python/)） 下载 Python3 ，然后安装它。  
+从 [www.python.org/getit](https://www.python.org/getit/) 下载 Python3 ，然后安装它。  
 
 ### 安装和运行 fnschool   
 ```bash
