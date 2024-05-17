@@ -24,9 +24,7 @@ if not canteen_links_dpath.exists():
 if not operator_name_fpath.exists():
     with open(operator_name_fpath, "w", encoding="utf-8") as f:
         f.write("")
-    os.link(
-        operator_name_fpath.as_posix(), operator_name_link_fpath.as_posix()
-    )
+    os.link(operator_name_fpath.as_posix(), operator_name_link_fpath.as_posix())
 
 
 def get_food_classes_config_fpath(user_name):

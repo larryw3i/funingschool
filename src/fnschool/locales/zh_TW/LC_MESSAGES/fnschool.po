@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-17 00:43+0800\n"
+"POT-Creation-Date: 2024-05-18 00:29+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -18,35 +18,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:15
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:17
 msgid "Function is not found."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:19
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:21
 msgid "Just wait."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:25
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:27
 msgid "fnschool"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:26
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:28
 msgid "Command line interface of fnschool."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:27
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:29
 msgid "Enjoy it."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:29
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:31
 msgid "The modules to run."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:31
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:33
 msgid "Canteen related functions."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:38
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:40
 msgid "The functions of canteen."
 msgstr ""
 
@@ -150,36 +150,36 @@ msgstr ""
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.cp.py:417
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.cp.py:422
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.cp.py:437
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:73
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:78
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:93
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:72
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:77
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:92
 #, python-format
 msgid "%s can't change."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:143
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:142
 msgid ""
 "If you feel {0} is great, please sponsor it. Your sponsorship will keep "
 "the project alive."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:150
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:149
 msgid "Sponsor URL: {0}"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:184
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:183
 msgid "Food classes files:"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:193
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:192
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:203
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:202
 msgid "Preset food classes were read from \"{0}\"."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:217
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:216
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-17 00:43+0800\n"
+"POT-Creation-Date: 2024-05-18 00:29+0800\n"
 "PO-Revision-Date: 2024-05-16 21:56+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
@@ -19,35 +19,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:15
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:17
 msgid "Function is not found."
 msgstr "找不到函数。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:19
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:21
 msgid "Just wait."
 msgstr "敬请期待。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:25
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:27
 msgid "fnschool"
 msgstr "fnschool"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:26
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:28
 msgid "Command line interface of fnschool."
 msgstr "“fnschool“ 的命令行接口。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:27
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:29
 msgid "Enjoy it."
 msgstr "请慢用。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:29
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:31
 msgid "The modules to run."
 msgstr "要运行的模块。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:31
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:33
 msgid "Canteen related functions."
 msgstr "Cateen 的相关函数。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:38
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/entry.py:40
 msgid "The functions of canteen."
 msgstr "“canteen“ 的函数。"
 
@@ -162,36 +162,36 @@ msgstr "好的，我知道了。（按任意键继续）"
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.cp.py:417
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.cp.py:422
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.cp.py:437
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:73
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:78
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:93
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:72
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:77
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:92
 #, python-format
 msgid "%s can't change."
 msgstr "%s 无法转换。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:143
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:142
 msgid ""
 "If you feel {0} is great, please sponsor it. Your sponsorship will keep "
 "the project alive."
 msgstr "如果您觉得 {0} 项目很棒，请您赞助它。您的赞助会让项目继续活下去。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:150
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:149
 msgid "Sponsor URL: {0}"
 msgstr "赞助链接：{0}"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:184
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:183
 msgid "Food classes files:"
 msgstr "食材大类文件："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:193
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:192
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr "您的食材大类已从 “{0}”  读取。它会被优先匹配。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:203
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:202
 msgid "Preset food classes were read from \"{0}\"."
 msgstr "预置的食材大类已从 “{0}” 读取。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:217
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/bill.py:216
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr "好的，我知道了。（按任意键继续）"
 

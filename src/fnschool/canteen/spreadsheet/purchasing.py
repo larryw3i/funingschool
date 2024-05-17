@@ -176,8 +176,7 @@ class Purchasing(SpreadsheetBase):
         headers = [
             h
             for h in [
-                sheet.cell(1, ci).value
-                for ci in range(1, sheet.max_column + 1)
+                sheet.cell(1, ci).value for ci in range(1, sheet.max_column + 1)
             ]
             if h
         ]

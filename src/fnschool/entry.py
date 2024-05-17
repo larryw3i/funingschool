@@ -7,6 +7,8 @@ from fnschool import *
 def set_canteen(args):
     from fnschool.canteen.bill import Bill
 
+    print_app()
+
     bill = Bill()
     if args.action in "mk_bill":
         bill.make_spreadsheets()

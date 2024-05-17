@@ -21,7 +21,6 @@ class Bill:
         self.currency = Currency().CNY
         self._consuming = None
 
-        print_app_name()
         pass
 
     @property

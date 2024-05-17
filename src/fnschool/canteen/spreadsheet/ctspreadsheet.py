@@ -216,9 +216,7 @@ class CtSpreadSheet:
 
         month_day_m1 = sorted([f.xdate for f in cfoods])[0]
         for f in cfoods:
-            month_day_m1 = max(
-                [d for d, __ in f.consumptions] + [month_day_m1]
-            )
+            month_day_m1 = max([d for d, __ in f.consumptions] + [month_day_m1])
 
         inventory_m = sum(
             [

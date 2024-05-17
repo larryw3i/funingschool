@@ -25,9 +25,12 @@ dists_fpath = dist_dpath / "*"
 is_win = sys.platform.startswith("win")
 
 pyvenv_activate_path = (
-    (pyvenv_path / "Scripts" / "activate" ).as_posix() if is_win else
-    (pyvenv_path / "bin" / "activate").as_posix() 
+    (pyvenv_path / "Scripts" / "activate").as_posix()
+    if is_win
+    else (pyvenv_path / "bin" / "activate").as_posix()
 )
+
+
 def run_sh(sh_txt=""):
     return os.system(sh_txt)
 
@@ -193,9 +196,7 @@ parser_version.add_argument(
 )
 parser_version.set_defaults(func=set_version)
 
-parser_build = subparsers.add_parser(
-    "build", help=f"Build {app_name} sources."
-)
+parser_build = subparsers.add_parser("build", help=f"Build {app_name} sources.")
 parser_build.add_argument(
     "-t", "--twine", default=False, action="store_true", help="Upload to PYPI."
 )

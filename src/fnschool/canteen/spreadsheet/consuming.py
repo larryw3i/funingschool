@@ -94,14 +94,14 @@ class Consuming(SpreadsheetBase):
                 (
                     "   "
                     + "审核人："
-                    + "        "
+                    + "          "
                     + "经办人："
+                    + self.operator.name
                     + "　    "
                     + "过称人："
-                    + self.operator.name
-                    + "      "
+                    + "         "
                     + "仓管人："
-                    + " 　"
+                    + " 　      "
                 ),
             )
 
