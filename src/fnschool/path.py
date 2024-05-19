@@ -40,17 +40,6 @@ if not config_fpath.exists():
     )
 
 
-def make_link(src, link):
-    if isinstance(src, PosixPath):
-        src = src.as_posix()
-    if isinstance(link, PosixPath):
-        link = link.as_posix()
-
-    if not os.path.islink(link):
-        os.symlink(src, link, target_is_directory=os.path.isdir(src))
-    elif not os.readlink(link) == src:
-        os.remove(link)
-        os.symlink(src, link, target_is_directory=os.path.isdir(src))
 
 
 def open_sys_explorer(dest=None):

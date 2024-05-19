@@ -13,7 +13,7 @@ class Operator:
         self._name = None
         self._dpath = None
         self._profile = {}
-        self._superior_department_key = _("superior department")
+        self.dpath_showed = False
         pass
 
     def __str__(self):
@@ -61,7 +61,17 @@ class Operator:
             self._dpath = dpath1
             if not self._dpath.exists():
                 os.makedirs(self._dpath, exist_ok=True)
-        make_link(self._dpath, self.link_dpath)
+        if not self.dpath_showed:
+            print_info(
+                _(
+                    "Hey! {0}, all of your files will be" 
+                    +" saved to {1}, show it now? (Yes: 'Y','y')."
+                )
+            )
+            o_input = input().replace(' ','')
+            if o_input in 'Yy':
+                open_file(self._dpath)
+            self.dpath_showed = True
         return self._dpath
 
     @property
@@ -71,12 +81,6 @@ class Operator:
             os.makedirs(dpath, exist_ok=True)
         return dpath
 
-    @property
-    def link_dpath(self):
-        dpath0 = canteen_links_dpath / self.name
-        dpath1 = user_documents_dpath / app_name / self.name
-        dpath = dpath0
-        return dpath
 
     @property
     def config_dpath(self):
