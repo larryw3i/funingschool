@@ -19,6 +19,22 @@ class PurchasingSum(SpreadsheetBase):
         day = self.consuming_day_m1
 
         pssheet.cell(
+            1,
+            1,
+            (
+                self.bill.operator.superior_department
+                + "食堂食品、材料入库汇总报销单"
+            ),
+        )
+        pssheet.cell(
+            19,
+            1,
+            (
+                self.bill.operator.superior_department
+                + "食堂食品、材料未入库汇总报销单"
+            ),
+        )
+        pssheet.cell(
             2,
             1,
             f"编制单位：{self.purchaser}"

@@ -37,6 +37,14 @@ class ConsumingSum(SpreadsheetBase):
 
         total_price_CNY = self.bill.get_CNY_chars(total_price)
         cssheet.cell(
+            1,
+            1,
+            (
+                self.bill.operator.superior_department
+                + "食堂食品、材料出库汇总报销单"
+            ),
+        )
+        cssheet.cell(
             2,
             1,
             f"编制单位：{self.purchaser}       "

@@ -12,6 +12,7 @@ def get_app_version():
     global app_version
     if not app_version:
         from fnschool import __version__
+
         app_version = __version__
     return app_version
 
