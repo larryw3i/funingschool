@@ -65,12 +65,15 @@ class Operator:
             print_info(
                 _(
                     "Hey! {0}, all of your files will be" 
-                    +" saved to {1}, show it now? (Yes: 'Y','y')."
+                    +" saved to {1}, show it now? (Yes: 'Y','y')"
+                ).format(
+                    self.name,
+                    self._dpath
                 )
             )
-            o_input = input().replace(' ','')
-            if o_input in 'Yy':
-                open_file(self._dpath)
+            o_input = input(">_").replace(' ','')
+            if len(o_input) > 0 and o_input in 'Yy':
+                open_path(self._dpath)
             self.dpath_showed = True
         return self._dpath
 

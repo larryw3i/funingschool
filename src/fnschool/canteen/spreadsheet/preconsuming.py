@@ -215,7 +215,7 @@ class PreConsuming(SpreadsheetBase):
             )
             input(">_ ")
             wb.close()
-            open_file(wb_fpath)
+            open_path(wb_fpath)
             print_info(
                 _(
                     "Ok! I have updated spreadsheet '{0}'. (Press any key)"

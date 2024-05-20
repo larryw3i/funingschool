@@ -175,7 +175,7 @@ class CtSpreadSheet:
             _('Updated data has been saved to "{0}".').format(bill_fpath0)
         )
 
-        open_file(bill_fpath0)
+        open_path(bill_fpath0)
 
         print_info(_("Updated data was saved."))
 

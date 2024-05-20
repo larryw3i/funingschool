@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-19 16:09+0800\n"
+"POT-Creation-Date: 2024-05-20 07:36+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -232,11 +232,6 @@ msgstr ""
 msgid "Consumptions were read."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:16
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:123
-msgid "superior department"
-msgstr ""
-
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:28
 msgid "Tell me your name please:"
 msgstr ""
@@ -253,39 +248,49 @@ msgstr ""
 msgid "Ok, your name has been saved to \"{0}\"."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:69
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:66
+msgid ""
+"Hey! {0}, all of your files will be saved to {1}, show it now? (Yes: "
+"'Y','y')"
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:82
 msgid "preconsuming"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:83
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:90
 msgid "config"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:90
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:97
 msgid "food_classes"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:103
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:110
 msgid "profile"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:118
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:125
 msgid ""
 "Please tell {0} your superior department, {0} will use it as the form "
 "title."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:131
-msgid "Please tell {0} the {1}."
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:130
+msgid "superior department"
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:138
+msgid "Please tell {0} the {1}."
+msgstr ""
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:145
 msgid "Unexpected value got."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:146
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:153
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:161
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:160
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:168
 msgid "bill"
 msgstr ""
 
@@ -1658,5 +1663,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Consuming days of this month:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Hey! {0}, all of your files will"
+#~ " be saved to {1}, show it now?"
+#~ " (Yes: 'Y','y')."
 #~ msgstr ""
 

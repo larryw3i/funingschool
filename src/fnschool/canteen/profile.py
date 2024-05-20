@@ -63,7 +63,7 @@ class Profile:
                     + "Supplier names are the supplier's alias."
                 )
             )
-            open_file(self.fpath)
+            open_path(self.fpath)
             print_info(_("Ok! it was configured. (enter any key)"))
             input(">_ ")
 

@@ -231,7 +231,7 @@ class Purchasing(SpreadsheetBase):
             ).format(self.food_class_col_name, get_new_issue_url())
         )
         input(">_ ")
-        open_file(self.path)
+        open_path(self.path)
         print_info(_("Ok, I checked it, it's ok. (Press any key to continue)"))
         input(">_ ")
         pass

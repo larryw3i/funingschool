@@ -986,7 +986,7 @@ class WorkBook:
             self.copy_bill_workbook(wb_fpath=random_spreadsheet_fpath)
             spreadsheet0_fpath = random_spreadsheet_fpath
 
-        open_file(spreadsheet0_fpath)
+        open_path(spreadsheet0_fpath)
         print_info(_("Updated data was saved."))
 
     def get_changsheng_properties_by_dir(self, fdpath=None):
@@ -1173,7 +1173,7 @@ class WorkBook:
                         + "to continue."
                     ).format(fpath)
                 )
-                open_file(fpath)
+                open_path(fpath)
                 input(">_ ")
                 wb = load_workbook(fpath)
                 sheet = wb[self.pre_consuming_sheet0_name]
@@ -1279,7 +1279,7 @@ class WorkBook:
                             + " column, input it (0 base) or '{wb_fpath}' will be ignored."
                         ).format(app_name=app_name, wb_fpath=wb_fpath)
                     )
-                    open_file(wb_fpath)
+                    open_path(wb_fpath)
                     _org_name_col_index = input(">_ ")
                     if not _org_name_col_index.isnumeric():
                         continue
@@ -1339,7 +1339,7 @@ class WorkBook:
                         + "\n\t"
                         + " | ".join(self.negligible_col_names)
                     )
-                    open_file(wb_fpath)
+                    open_path(wb_fpath)
                     input(">_ ")
                     wb = load_workbook(wb_fpath, read_only=True)
                     sheet = wb[sheetnames[0]]
@@ -2017,7 +2017,7 @@ class WorkBook:
                 wb_fpath
             )
         )
-        open_file(wb_fpath)
+        open_path(wb_fpath)
         input(">_ ")
 
     def set_warehousing_form_index_offset(self, offset=0):

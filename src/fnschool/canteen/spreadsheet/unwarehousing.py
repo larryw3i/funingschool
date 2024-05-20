@@ -59,12 +59,7 @@ class Unwarehousing(SpreadsheetBase):
 
         foods = sorted(foods, key=lambda f: f.xdate)
 
-        t1 = []
-
-        for bf in self.bfoods:
-            for d, __ in bf.consumptions:
-                t1.append(d)
-        t1 = sorted(t1)[-1]
+        t1 = self.bill.consuming.date_m1
 
         row_indexes = []
         for form_index in form_indexes:
