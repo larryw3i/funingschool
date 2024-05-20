@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-20 07:36+0800\n"
+"POT-Creation-Date: 2024-05-20 11:21+0800\n"
 "PO-Revision-Date: 2024-03-07 22:18+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_SG\n"
@@ -187,6 +187,12 @@ msgstr ""
 msgid "Default time nodes of {0} have been used."
 msgstr ""
 
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/consuming.py:51
+msgid ""
+"It seems you didn't design the consumptions, please restart {0} and "
+"design the consumptions."
+msgstr ""
+
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/food.cp.py:107
 msgid "Is residue"
 msgstr ""
@@ -250,47 +256,47 @@ msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:66
 msgid ""
-"Hey! {0}, all of your files will be saved to {1}, show it now? (Yes: "
+"Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
 "'Y','y')"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:82
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:83
 msgid "preconsuming"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:90
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:91
 msgid "config"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:97
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:98
 msgid "food_classes"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:110
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:111
 msgid "profile"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:125
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:126
 msgid ""
 "Please tell {0} your superior department, {0} will use it as the form "
 "title."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:130
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:131
 msgid "superior department"
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:138
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:139
 msgid "Please tell {0} the {1}."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:145
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:146
 msgid "Unexpected value got."
 msgstr ""
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:153
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:160
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:168
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:154
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:161
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/operator.py:169
 msgid "bill"
 msgstr ""
 
@@ -359,7 +365,7 @@ msgstr ""
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/food.py:235
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/inventory.py:246
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasingsum.py:90
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/unwarehousing.py:134
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/unwarehousing.py:129
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/warehousing.py:276
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:416
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/workbook.py:447
@@ -1669,5 +1675,23 @@ msgstr ""
 #~ "Hey! {0}, all of your files will"
 #~ " be saved to {1}, show it now?"
 #~ " (Yes: 'Y','y')."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Hey! {0}, all of your files will"
+#~ " be saved to {1}, show it now?"
+#~ " (Yes: 'Y','y')"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "It seems you didn't design the "
+#~ "consumption, please restart {0} and "
+#~ "design the consumptions"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "It seems you didn't design the "
+#~ "consumption, please restart {0} and "
+#~ "design the consumptions."
 #~ msgstr ""
 

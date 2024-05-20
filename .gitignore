@@ -142,3 +142,6 @@ cython_debug/
 src/canteen/sett1ngs.py
 .*.swp
 .~lock*#
+*.out
+
+# The end.

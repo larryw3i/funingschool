@@ -65,7 +65,8 @@ class Operator:
             print_info(
                 _(
                     "Hey! {0}, all of your files will be" 
-                    +" saved to {1}, show it now? (Yes: 'Y','y')"
+                    +" saved to \"{1}\", show it now? "
+                    + "(Yes: 'Y','y')"
                 ).format(
                     self.name,
                     self._dpath
@@ -138,11 +139,14 @@ class Operator:
                 info or _("Please tell {0} the {1}.").format(app_name, key)
             )
             superior_department = None
-            for __ in range(0, 3):
+            for i in range(0, 3):
                 i_value = input(">_").replace(" ", "")
                 if len(i_value) > 0:
                     break
                 print_error(_("Unexpected value got."))
+                if i >= 2:
+                    exit()
+                    
 
             self.profile[key] = i_value
             self.save_profile()

@@ -15,7 +15,7 @@ from fnschool.entry import *
 from fnschool.external import *
 
 
-__version__ = "20240520.80901.843"
+__version__ = "20240520.81132.858"
 
 
 # The end.

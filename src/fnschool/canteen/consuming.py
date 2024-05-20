@@ -49,9 +49,9 @@ class Consuming:
             if self._day_m1 < 1:
                 print_error(
                     _(
-                        "It seems you didn't design the consumption, "
+                        "It seems you didn't design the consumptions, "
                         + "please restart {0} and design "
-                        + "the consumptions"
+                        + "the consumptions."
                     ).format(app_name)
                 )
                 exit()
