@@ -51,7 +51,7 @@ def open_path(file_path):
     if sys_is_win():
         if file_path.endswith('.toml"'):
             bin_name = "notepad"
-        elif Path(file_path).isdir():
+        elif Path(file_path).is_dir():
             bin_name = 'explorer'
         else:
             os.startfile(file_path)
