@@ -40,8 +40,6 @@ if not config_fpath.exists():
     )
 
 
-
-
 def open_sys_explorer(dest=None):
     sys_platform = platform.platform()
     explorer_bin = (

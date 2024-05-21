@@ -33,7 +33,9 @@ class ConsumingSum(SpreadsheetBase):
                     )
             total_price += m_total_price
             cssheet.cell(row[0].row, 2, m_total_price)
-            cssheet.cell(row[0].row, 2).number_format = numbers.FORMAT_NUMBER_00
+            cssheet.cell(row[0].row, 2).number_format = (
+                numbers.FORMAT_NUMBER_00
+            )
 
         total_price_CNY = self.bill.get_CNY_chars(total_price)
         cssheet.cell(

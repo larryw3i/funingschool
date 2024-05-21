@@ -10,7 +10,6 @@ class Consuming:
         self._year = None
         self._month = None
         self._day_m1 = None
-        
 
     @property
     def year(self):
@@ -30,11 +29,7 @@ class Consuming:
 
     @property
     def date_m1(self):
-        date_m1 = datetime(
-            self.year,
-            self.month,
-            self.day_m1
-        )
+        date_m1 = datetime(self.year, self.month, self.day_m1)
         return date_m1
 
     @property

@@ -19,12 +19,11 @@ def is_zh_CN_char(value):
     )
     return result
 
-def sqr_slist(
-        slist
-    ):
-    if not isinstance(slist,list):
+
+def sqr_slist(slist):
+    if not isinstance(slist, list):
         return slist
-        
+
     slist_len = len(slist)
     slist_len_sqrt = math.ceil(slist_len**0.5)
 
@@ -37,30 +36,25 @@ def sqr_slist(
         ]
 
         rc_len = (
-             max(
+            max(
                 [
-                    len(v)
-                    + len([cc for cc in v if is_zh_CN_char(cc)])
+                    len(v) + len([cc for cc in v if is_zh_CN_char(cc)])
                     for i, v in col_values
                 ]
-            )+1
-            
+            )
+            + 1
         )
         for i, v in col_values:
-            v_len = rc_len - len(
-                [c for c in v if is_zh_CN_char(c)]
-            )
+            v_len = rc_len - len([c for c in v if is_zh_CN_char(c)])
             slist[i] = f"{v:<{v_len}}"
 
     s_value = ""
     for i, v in enumerate(slist):
-            if i % slist_col_count == 0 and i != 0:
-                s_value += "\n"
-            s_value += v
+        if i % slist_col_count == 0 and i != 0:
+            s_value += "\n"
+        s_value += v
 
     return s_value
-
-
 
 
 def print_info(*args, **kwargs):

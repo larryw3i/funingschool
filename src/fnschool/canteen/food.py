@@ -36,7 +36,7 @@ class Food:
         pass
 
     def datefstr(self, value):
-        if instance(value,datetime):
+        if isinstance(value, datetime):
             return value
 
         value = (

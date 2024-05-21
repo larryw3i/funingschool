@@ -176,7 +176,8 @@ class Purchasing(SpreadsheetBase):
         headers = [
             h
             for h in [
-                sheet.cell(1, ci).value for ci in range(1, sheet.max_column + 1)
+                sheet.cell(1, ci).value
+                for ci in range(1, sheet.max_column + 1)
             ]
             if h
         ]
@@ -188,7 +189,9 @@ class Purchasing(SpreadsheetBase):
         for cell_group in merged_ranges:
             sheet.unmerge_cells(str(cell_group))
 
-        food_name_col_index = max([headers.index(n) for n in headers if n in self.food_name_cols])
+        food_name_col_index = max(
+            [headers.index(n) for n in headers if n in self.food_name_cols]
+        )
 
         if food_name_col_index < 0:
             print_error(_("Unable to find food name column, exitt."))
@@ -204,46 +207,100 @@ class Purchasing(SpreadsheetBase):
         )
         sheet.add_data_validation(food_class_list_dv)
 
-        inventory_col_index =  max([headers.index(n) for n in headers if n in self.inventory_cols ])+1
-        inventories_len = len([
-            sheet.cell(inventory_col_index,row_index).value
-            for row_index in range(2,sheet.max_row+1) 
-                if sheet.cell(inventory_col_index,row_index).value
-        ])
-        if inventories_len < 1: 
+        inventory_col_index = (
+            max(
+                [headers.index(n) for n in headers if n in self.inventory_cols]
+            )
+            + 1
+        )
+        inventories_len = len(
+            [
+                row_index
+                for row_index in range(2, sheet.max_row + 1)
+                if sheet.cell(inventory_col_index, row_index).value
+            ]
+        )
+        if inventories_len < 1:
             print_warning(
-                _(
-                    "The remaining food wasn't read "
-                    + "from \"{0}\"."
-                ).format(
+                _("The remaining food wasn't read " + 'from "{0}".').format(
                     self.path,
                 )
-            )       
+            )
             inventory = self.bill.inventory
             i_saved_foods = inventory.saved_foods
             if i_saved_foods:
                 print_warning(
-                    _(
-                        "Some remaining foods has been read "
-                        + "from sheet {0} of spreadsheet {1}:"
-                    ).format(
-                        inventory.sheet_name,
-                        self.operator.bill_fpath
-                    )
+                    (
+                        _(
+                            "Some remaining foods have been read "
+                            + "from sheet {0} of spreadsheet {1}:"
+                        )
+                        if len(i_saved_foods) > 1
+                        else _(
+                            "The remaining food has been read"
+                            + "from sheet {0} of spreadsheet {1}:"
+                        )
+                    ).format(inventory.sheet_name, self.operator.bill_fpath)
                 )
-                print_info(
-                    
-                )
-                print_info(
-                        " Fill them in \"{2}\"?"
-                    ).format(
-                        self.path
+
+                i_saved_foods_s = [
+                    (
+                        f"({i:>2}) {f.name}: {f.count} {f.unit_name} "
+                        + "x {f.unit_price} {self.bill.currency.unit}/"
+                        + "{f.unit_name} = {f.total_price} "
+                        + "{self.bill.currency.unit}"
                     )
-                ) 
-                f_input = input(">_ ").replace(" ",'')
+                    for i, f in enumerate(i_saved_foods)
+                ]
+
+                print_info(i_saved_foods_s)
+                print_warning(
+                    (
+                        _('Fill them in "{2}"? (YyNn)')
+                        if len(i_saved_foods) > 1
+                        else _('Fill it in "{2}" (YyNn)')
+                    ).format(self.path)
+                )
+
+                f_input = input(">_ ").replace(" ", "")
                 if f_input in "Yy":
+                    max_row = len(
+                        [
+                            row_index
+                            for row_index in range(1, sheet.max_row + 1)
+                            if sheet.cell(row_index, 1).value
+                        ]
+                    )
+                    for row_index in range(
+                        max_row, max_row + len(i_saved_foods) + 1
+                    ):
+                        sheet.cell(row_index, 1, f.xdate)
+                        sheet.cell(row_index, 1).number_format = (
+                            numbers.FORMAT_TEXT
+                        )
+                        sheet.cell(row_index, 2, f.purchaser)
+                        sheet.cell(row_index, 3, f.name)
+                        sheet.cell(row_index, 4, f.fclass)
+                        sheet.cell(row_index, 5, f.unit_name)
+                        sheet.cell(row_index, 6, f.count)
+                        sheet.cell(row_index, 6).number_format = (
+                            numbers.FORMAT_NUMBER_00
+                        )
+                        sheet.cell(row_index, 7, f.total_price)
+                        sheet.cell(row_index, 7).number_format = (
+                            numbers.FORMAT_NUMBER_00
+                        )
+                        sheet.cell(row_index, 9, "y")
 
-
+                    print_info(
+                        (
+                            _('The remaining foods have been added to "{0}".')
+                            if len(i_saved_foods) > 1
+                            else _(
+                                'The remaining food has been added to "{0}".'
+                            )
+                        ).format(self.path)
+                    )
 
         sheet.insert_cols(food_class_col_index, 1)
         sheet.cell(1, food_class_col_index, self.food_class_col_name)
@@ -274,7 +331,9 @@ class Purchasing(SpreadsheetBase):
         input(">_ ")
         pass
 
-    def read_pfoods(self):
+    def read_pfoods(self): 
+        print([ f.name for f in self.bill.spreadsheet.inventory.saved_foods])
+        input()
         self.update_info()
         foods = pd.read_excel(self.path)
         self.set_col_names(foods.columns)

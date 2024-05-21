@@ -4,6 +4,7 @@ import re
 import calendar
 from datetime import datetime
 from fnschool import *
+from fnschool.canteen.food import Food
 from fnschool.canteen.spreadsheet.base import *
 
 
@@ -116,53 +117,52 @@ class Inventory(SpreadsheetBase):
     @property
     def saved_foods(self):
         bill_fpath = self.bill.operator.bill_fpath
-        wb = load_workbook(bill_fpath)
+        wb = load_workbook(bill_fpath,read_only=True)
         sheet = wb[self.sheet_name]
-        purchasing = self.bill.purchasing
+        purchasing = self.bill.spreadsheet.purchasing
 
         food_index_m1 = []
-        for row_index in range(1,sheet.max_row):
-            if "食材名称" in sheet.cell(row_index,1).value:
-                if sheet.cell(row_index+2,1).value:
-                    food_index_m1 = [row_index+2,None]
+        for row_index in range(1, sheet.max_row):
+            if "食材名称" in str(sheet.cell(row_index, 1).value):
+                if sheet.cell(row_index + 2, 1).value:
+                    food_index_m1 = [row_index + 2, None]
                 else:
                     break
-            if '合计' in sheet.cell(row_index,1).value:
+            if "合计" in str(sheet.cell(row_index, 1).value):
                 food_index_m1[1] = row_index - 1
 
         foods = []
-        header_info = sheet.cell(food_index_m1[0]-3,1).value
-        header_info = re.split('\s+',header_info)
+        header_info = str(sheet.cell(food_index_m1[0] - 3, 1).value)
+        header_info = re.split("\s+", header_info)
 
-        purchaser = header_info[1].split('：')[1]
+        purchaser = header_info[1].split("：")[1]
         year = header_info[2]
         month = header_info[4]
         day = header_info[6]
 
-        for row_index in range(food_index_m1[0],food_index_m1[1]+1):
-            fname = sheet.cell(row_index,1).value
+        for row_index in range(food_index_m1[0], food_index_m1[1] + 1):
+            fname = sheet.cell(row_index, 1).value
             if not fname:
                 break
-            funit_name = sheet.cell(row_index,2).value
-            fcount = sheet.cell(row_index,5).value
-            ftotal_price = sheet.cell(row_index,6).value
+            funit_name = sheet.cell(row_index, 2).value
+            fcount = sheet.cell(row_index, 5).value
+            ftotal_price = sheet.cell(row_index, 6).value
             food = Food(
                 self.bill,
-                name = fname,
-                unit_name = funit_name,
-                fclass = purchasing.get_food_class(fname),
-                count = fcount,
-                total_price = ftotal_price,
-                xdate = f"{year}-{month}-{day}",
-                purchaser = purchaser,
-                is_inventory = True,
-                is_abandoned = False
+                name=fname,
+                unit_name=funit_name,
+                fclass=purchasing.get_food_class(fname),
+                count=fcount,
+                total_price=ftotal_price,
+                xdate=f"{year}-{month}-{day}",
+                purchaser=purchaser,
+                is_inventory=True,
+                is_abandoned=False,
             )
             foods.append(food)
         if len(foods) < 1:
             return None
         return foods
-
 
     @property
     def foods(self):

@@ -64,16 +64,13 @@ class Operator:
         if not self.dpath_showed:
             print_info(
                 _(
-                    "Hey! {0}, all of your files will be" 
-                    +" saved to \"{1}\", show it now? "
+                    "Hey! {0}, all of your files will be"
+                    + ' saved to "{1}", show it now? '
                     + "(Yes: 'Y','y')"
-                ).format(
-                    self.name,
-                    self._dpath
-                )
+                ).format(self.name, self._dpath)
             )
-            o_input = input(">_").replace(' ','')
-            if len(o_input) > 0 and o_input in 'Yy':
+            o_input = input(">_").replace(" ", "")
+            if len(o_input) > 0 and o_input in "Yy":
                 open_path(self._dpath)
             self.dpath_showed = True
         return self._dpath
@@ -85,7 +82,6 @@ class Operator:
             os.makedirs(dpath, exist_ok=True)
         return dpath
 
-
     @property
     def config_dpath(self):
         dpath = self.dpath / _("config")
@@ -95,7 +91,7 @@ class Operator:
 
     @property
     def food_classes_fpath(self):
-        fpath = self.config_dpath / (_("food_classes")+".toml")
+        fpath = self.config_dpath / (_("food_classes") + ".toml")
         if not fpath.exists():
             shutil.copy(food_classes_config0_fpath, fpath)
         return fpath
@@ -105,7 +101,7 @@ class Operator:
         with open(self.profile_fpath, "w", encoding="utf-8") as f:
             f.write("\n".join([f'"{k}"="{v}"\n' for k, v in profile.items()]))
         return profile
-    
+
     @property
     def profile_fpath(self):
         fpath = self.config_dpath / (_("profile") + ".toml")
@@ -146,7 +142,6 @@ class Operator:
                 print_error(_("Unexpected value got."))
                 if i >= 2:
                     exit()
-                    
 
             self.profile[key] = i_value
             self.save_profile()

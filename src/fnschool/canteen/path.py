@@ -14,7 +14,6 @@ user_documents_dpath = Path.home() / "Documents"
 operator_name_fpath = user_config_dir / "operator_name.txt"
 
 
-
 if not operator_name_fpath.exists():
     with open(operator_name_fpath, "w", encoding="utf-8") as f:
         f.write("")

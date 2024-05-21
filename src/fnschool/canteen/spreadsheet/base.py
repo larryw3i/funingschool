@@ -19,7 +19,9 @@ class SpreadsheetBase:
         self.sheet_name = None
         self._sheet = None
         self._form_indexes = None
-        self.cell_alignment0 = Alignment(horizontal="center", vertical="center")
+        self.cell_alignment0 = Alignment(
+            horizontal="center", vertical="center"
+        )
         self.cell_side0 = Side(border_style="thin")
         self.cell_border0 = Border(
             top=self.cell_side0,

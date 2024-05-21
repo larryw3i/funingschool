@@ -85,7 +85,9 @@ class PreConsuming(SpreadsheetBase):
                 tn0 = datetime(tn1.year, tn1.month, 1)
 
             wbfoods = [
-                f for f in cfoods if f.get_remainder(tn0) > 0 and f.xdate <= tn0
+                f
+                for f in cfoods
+                if f.get_remainder(tn0) > 0 and f.xdate <= tn0
             ]
             for wbfood in [f for f in wbfoods if f.xdate < tn0]:
                 if not wbfood.name.endswith(residual_mark):
@@ -132,7 +134,9 @@ class PreConsuming(SpreadsheetBase):
                 ).format(sheet.title, wb_fpath)
             )
             new_wbfoods = [
-                f for f in cfoods if f.get_remainder(tn1) > 0 and f.xdate == tn1
+                f
+                for f in cfoods
+                if f.get_remainder(tn1) > 0 and f.xdate == tn1
             ]
             if len(new_wbfoods) > 0:
                 print_info(
@@ -145,7 +149,9 @@ class PreConsuming(SpreadsheetBase):
 
                 new_wbfoods_count_len = len(str(len(new_wbfoods)))
 
-                number_mark = random.choice([" ", ".", ">", "-", ")", ":", "|"])
+                number_mark = random.choice(
+                    [" ", ".", ">", "-", ")", ":", "|"]
+                )
                 new_wbfood_tips = [
                     (
                         f"{i+1:>{new_wbfoods_count_len}}"

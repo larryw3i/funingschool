@@ -93,8 +93,12 @@ class Unwarehousing(SpreadsheetBase):
             unwsheet.cell(row_index, 4, food.count)
             unwsheet.cell(row_index, 5, food.unit_price)
             unwsheet.cell(row_index, 6, food.total_price)
-            unwsheet.cell(row_index, 5).number_format = numbers.FORMAT_NUMBER_00
-            unwsheet.cell(row_index, 6).number_format = numbers.FORMAT_NUMBER_00
+            unwsheet.cell(row_index, 5).number_format = (
+                numbers.FORMAT_NUMBER_00
+            )
+            unwsheet.cell(row_index, 6).number_format = (
+                numbers.FORMAT_NUMBER_00
+            )
 
             for u_col_index in range(1, 7):
                 cell = unwsheet.cell(row_index, u_col_index)

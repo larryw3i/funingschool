@@ -1,6 +1,8 @@
 import os
 import sys
 
+from fnschool import *
+
 
 class Currency:
     def __init__(self, name=None, unit=None, mark=None):
@@ -10,6 +12,6 @@ class Currency:
 
     @property
     def CNY(self):
-        CNY = Currency("CNY", "CNY", "¥")
+        CNY = Currency("CNY", _("CNY"), "¥")
 
         return CNY
