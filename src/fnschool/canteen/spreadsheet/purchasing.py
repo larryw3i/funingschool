@@ -170,7 +170,7 @@ class Purchasing(SpreadsheetBase):
             self._path = filename
         return self._path
 
-    def update_fclass(self):
+    def update_info(self):
         wb = load_workbook(self.path)
         sheet = wb.active
         headers = [
@@ -188,11 +188,8 @@ class Purchasing(SpreadsheetBase):
         for cell_group in merged_ranges:
             sheet.unmerge_cells(str(cell_group))
 
-        food_name_col_index = -1
-        for h in headers:
-            food_name_col_index += 1
-            if h in self.food_name_cols:
-                break
+        food_name_col_index = max([headers.index(n) for n in headers if n in self.food_name_cols])
+
         if food_name_col_index < 0:
             print_error(_("Unable to find food name column, exitt."))
             exit()
@@ -206,6 +203,47 @@ class Purchasing(SpreadsheetBase):
             + '"',
         )
         sheet.add_data_validation(food_class_list_dv)
+
+        inventory_col_index =  max([headers.index(n) for n in headers if n in self.inventory_cols ])+1
+        inventories_len = len([
+            sheet.cell(inventory_col_index,row_index).value
+            for row_index in range(2,sheet.max_row+1) 
+                if sheet.cell(inventory_col_index,row_index).value
+        ])
+        if inventories_len < 1: 
+            print_warning(
+                _(
+                    "The remaining food wasn't read "
+                    + "from \"{0}\"."
+                ).format(
+                    self.path,
+                )
+            )       
+            inventory = self.bill.inventory
+            i_saved_foods = inventory.saved_foods
+            if i_saved_foods:
+                print_warning(
+                    _(
+                        "Some remaining foods has been read "
+                        + "from sheet {0} of spreadsheet {1}:"
+                    ).format(
+                        inventory.sheet_name,
+                        self.operator.bill_fpath
+                    )
+                )
+                print_info(
+                    
+                )
+                print_info(
+                        " Fill them in \"{2}\"?"
+                    ).format(
+                        self.path
+                    )
+                ) 
+                f_input = input(">_ ").replace(" ",'')
+                if f_input in "Yy":
+
+
 
         sheet.insert_cols(food_class_col_index, 1)
         sheet.cell(1, food_class_col_index, self.food_class_col_name)
@@ -237,7 +275,7 @@ class Purchasing(SpreadsheetBase):
         pass
 
     def read_pfoods(self):
-        self.update_fclass()
+        self.update_info()
         foods = pd.read_excel(self.path)
         self.set_col_names(foods.columns)
         _foods = []

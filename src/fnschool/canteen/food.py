@@ -36,6 +36,9 @@ class Food:
         pass
 
     def datefstr(self, value):
+        if instance(value,datetime):
+            return value
+
         value = (
             value.split("-")
             if "-" in value

@@ -154,47 +154,8 @@ class PreConsuming(SpreadsheetBase):
                     )
                     for i, f in enumerate(new_wbfoods)
                 ]
-                new_wbfood_tips_len = len(new_wbfood_tips)
-                new_wbfood_tips_len_sqrt = math.ceil(new_wbfood_tips_len**0.5)
-                new_wbfood_tip_len = (
-                    max(
-                        [
-                            len(t) + len([c for c in t if is_zh_CN_char(c)])
-                            for t in new_wbfood_tips
-                        ]
-                    )
-                    + 1
-                )
-                new_wbfood_tips_value = ""
-                new_wbfood_tips_col_count = new_wbfood_tips_len_sqrt
 
-                for col_index in range(0, new_wbfood_tips_col_count):
-                    col_values = [
-                        (i, new_wbfood_tips[i])
-                        for i in range(0, new_wbfood_tips_len)
-                        if i % new_wbfood_tips_col_count == col_index
-                    ]
-
-                    row_len = (
-                        max(
-                            [
-                                len(v)
-                                + len([cc for cc in v if is_zh_CN_char(cc)])
-                                for i, v in col_values
-                            ]
-                        )
-                        + 1
-                    )
-                    for i, v in col_values:
-                        v_len = row_len - len(
-                            [c for c in v if is_zh_CN_char(c)]
-                        )
-                        new_wbfood_tips[i] = f"{v:<{v_len}}"
-
-                for i, new_wbfood_tip in enumerate(new_wbfood_tips):
-                    if i % new_wbfood_tips_col_count == 0 and i != 0:
-                        new_wbfood_tips_value += "\n"
-                    new_wbfood_tips_value += new_wbfood_tip
+                new_wbfood_tips_value = sqr_slist(new_wbfood_tips)
 
                 print_warning(new_wbfood_tips_value)
 
