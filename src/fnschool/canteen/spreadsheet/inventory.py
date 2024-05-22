@@ -117,7 +117,7 @@ class Inventory(SpreadsheetBase):
     @property
     def saved_foods(self):
         bill_fpath = self.bill.operator.bill_fpath
-        wb = load_workbook(bill_fpath,read_only=True)
+        wb = load_workbook(bill_fpath, read_only=True)
         sheet = wb[self.sheet_name]
         purchasing = self.bill.spreadsheet.purchasing
 
@@ -134,6 +134,14 @@ class Inventory(SpreadsheetBase):
         foods = []
         header_info = str(sheet.cell(food_index_m1[0] - 3, 1).value)
         header_info = re.split("\s+", header_info)
+        if len(header_info) < 6 - 1:
+            print_error(
+                _(
+                    "Failed to read remaining foods from "
+                    + "Sheet {0} of Spreadsheet {1}."
+                ).format(self.sheet_name, self.operator.bill_fpath)
+            )
+            return None
 
         purchaser = header_info[1].split("：")[1]
         year = header_info[2]
@@ -145,8 +153,8 @@ class Inventory(SpreadsheetBase):
             if not fname:
                 break
             funit_name = sheet.cell(row_index, 2).value
-            fcount = sheet.cell(row_index, 5).value
-            ftotal_price = sheet.cell(row_index, 6).value
+            fcount = float(sheet.cell(row_index, 5).value)
+            ftotal_price = float(sheet.cell(row_index, 6).value)
             food = Food(
                 self.bill,
                 name=fname,

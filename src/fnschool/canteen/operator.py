@@ -69,7 +69,7 @@ class Operator:
                     + "(Yes: 'Y','y')"
                 ).format(self.name, self._dpath)
             )
-            o_input = input(">_").replace(" ", "")
+            o_input = input(">_ ").replace(" ", "")
             if len(o_input) > 0 and o_input in "Yy":
                 open_path(self._dpath)
             self.dpath_showed = True
@@ -136,7 +136,7 @@ class Operator:
             )
             superior_department = None
             for i in range(0, 3):
-                i_value = input(">_").replace(" ", "")
+                i_value = input(">_ ").replace(" ", "")
                 if len(i_value) > 0:
                     break
                 print_error(_("Unexpected value got."))

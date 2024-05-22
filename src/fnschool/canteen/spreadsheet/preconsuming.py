@@ -257,7 +257,7 @@ class PreConsuming(SpreadsheetBase):
         ).format(consumption_days_len)
         print_warning(f"{total_days:^{space_len*7}}")
         print_info(_("Yes, they are all right. (Press any key to continue)"))
-        input(">_")
+        input(">_ ")
         return
 
 
