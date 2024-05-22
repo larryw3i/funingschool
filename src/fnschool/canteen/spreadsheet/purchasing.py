@@ -418,7 +418,7 @@ class Purchasing(SpreadsheetBase):
                     (
                         _('Fill them in "{0}"? (YyNn)')
                         if len(saved_ifoods) > 1
-                        else _('Fill it in "{0}" (YyNn)')
+                        else _('Fill it in "{0}"? (YyNn)')
                     ).format(self.path)
                 )
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-23 00:49+0800\n"
+"POT-Creation-Date: 2024-05-23 01:17+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -869,7 +869,7 @@ msgid "Fill them in \"{0}\"? (YyNn)"
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:421
-msgid "Fill it in \"{0}\" (YyNn)"
+msgid "Fill it in \"{0}\"? (YyNn)"
 msgstr ""
 
 #: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:482
@@ -1777,5 +1777,11 @@ msgstr ""
 #~ "I have checked it, and all classes"
 #~ " of food are right. (Press any "
 #~ "key to continue)"
+#~ msgstr ""
+
+#~ msgid "Fill it in \"{0}\" (YyNn)"
+#~ msgstr ""
+
+#~ msgid "Fill it in \"{0}?\" (YyNn)"
 #~ msgstr ""
 
