@@ -14,51 +14,89 @@ class Purchasing(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
         self._path = None
-        self._food_name_col = [None,None,["商品名称", "食材名称", "食品名称"]]
-        self._unit_name_col = [None,None,["订货单位", "食材单位", "订购单位", "计量单位"]]
-        self._total_price_col = [None,None,["总价", "折前金额", "折后金额", "总金额"]]
-        self._xdate_col = [None,None,["送货日期", "检查日期", "清点日期", "x日期", "日期"]]
+        self._food_name_col = [
+            None,
+            None,
+            ["商品名称", "食材名称", "食品名称"],
+        ]
+        self._unit_name_col = [
+            None,
+            None,
+            ["订货单位", "食材单位", "订购单位", "计量单位"],
+        ]
+        self._total_price_col = [
+            None,
+            None,
+            ["总价", "折前金额", "折后金额", "总金额"],
+        ]
+        self._xdate_col = [
+            None,
+            None,
+            ["送货日期", "检查日期", "清点日期", "x日期", "日期"],
+        ]
         self._purchaser_col = [
-            None.None,[
-            "客户名称",
-            "购买者",
-            "购买者名称",
-            "顾客名称",
-            "下单单位名",
-            "购入单位名",
-        ]]
-        self._count_col = [None,None,["总数", "数量", "下单数量", "订货数量", "发货数量"]]
-        self._abandoned_col = [None,None,[
-            "不计",
-            "是不计",
-            "未入库",
-            "非入库",
-            "不需入库",
-            "是非入库",
-        ]]
-        self._inventory_col = [None,None,[
-            "盘存",
-            "存余",
-            "结余",
-            "是结余",
-            "剩余",
-            "是剩余",
-            "是盘存",
-        ]]
+            None,
+            None,
+            [
+                "客户名称",
+                "购买者",
+                "购买者名称",
+                "顾客名称",
+                "下单单位名",
+                "购入单位名",
+            ],
+        ]
+        self._count_col = [
+            None,
+            None,
+            ["总数", "数量", "下单数量", "订货数量", "发货数量"],
+        ]
+        self._abandoned_col = [
+            None,
+            None,
+            [
+                "不计",
+                "是不计",
+                "未入库",
+                "非入库",
+                "不需入库",
+                "是非入库",
+            ],
+        ]
+        self._inventory_col = [
+            None,
+            None,
+            [
+                "盘存",
+                "存余",
+                "结余",
+                "是结余",
+                "剩余",
+                "是剩余",
+                "是盘存",
+            ],
+        ]
 
-        self._food_class_col = ["食材大类",None,["食材大类","大类","食材分类","食材主类"]]
+        self._food_class_col = [
+            "食材大类",
+            None,
+            ["食材大类", "大类", "食材分类", "食材主类"],
         ]
         self._wb = None
         self._sheet = None
         self._headers = None
 
-    def get_col(self,col):
+    def get_col(self, col):
         if not col[1]:
-            col0 = [ (n, self.headers.index(n)+1) for n in self.headers if n in col[2]][-1]
+            col0 = [
+                (n, self.headers.index(n) + 1)
+                for n in self.headers
+                if n in col[2]
+            ][-1]
             col[0] = col0[0]
             col[1] = col0[1]
         return col
-    
+
     @property
     def xdate_col(self):
         return self.get_col(self._xdate_col)
@@ -67,7 +105,6 @@ class Purchasing(SpreadsheetBase):
     def purchaser_col(self):
         return self.get_col(self._purchaser_col)
 
-       
     @property
     def food_name_col(self):
         return self.get_col(self._food_name_col)
@@ -76,7 +113,6 @@ class Purchasing(SpreadsheetBase):
     def food_class_col(self):
         return self.get_col(self._food_class_col)
 
-    
     @property
     def unit_name_col(self):
         return self.get_col(self._unit_name_col)
@@ -85,7 +121,6 @@ class Purchasing(SpreadsheetBase):
     def count_col(self):
         return self.get_col(self._count_col)
 
-    
     @property
     def total_price_col(self):
         return self.get_col(self._total_price_col)
@@ -94,17 +129,18 @@ class Purchasing(SpreadsheetBase):
     def abandoned_col(self):
         return self.get_col(self._abandoned_col)
 
-    
     @property
     def inventory_col(self):
         return self.get_col(self._inventory_col)
 
+    @wb.deleter
+    def wb(self):
+        del self._wb
+
     @property
     def wb(self):
         if not self._wb:
-            print_info(
-                _("Loading data from \"{0}\".").format(self.path)
-            )
+            print_info(_('Loading data from "{0}".').format(self.path))
             self._wb = load_workbook(self.path)
         return self._wb
 
@@ -114,72 +150,67 @@ class Purchasing(SpreadsheetBase):
             self._sheet = self.wb.active
         return self._sheet
 
-
-
     @property
     def headers(self):
         if not self._headers:
             self._headers = [
-                v for v in [
-                    self.sheet.cell(1,col_index).value 
-                    for col_index in range(1,self.sheet.max_column+1)
+                v
+                for v in [
+                    self.sheet.cell(1, col_index).value
+                    for col_index in range(1, self.sheet.max_column + 1)
                 ]
                 if v
             ]
-            if not any(
-                [
-                    fclass in self._headers for fclass in self.food_class_col[2]
-                ]
-            ):
-                fname_col_index = max([self._headers.index(n) for n in self._headers if n in self._food_name_col[2]])+1
-                fclass_col_index = fname_col_index+1
-                self.sheet.insert_cols(fclass_col_index,1)
-                self.sheet.cell(1,fclass_col_index,self._food_class_col[0])
-                for row_index in range(2,self.sheet.max_row+1):
-                    fname = self.sheet.cell(row_index,fname_col_index).value
-                    if not fname:
-                        break
-                    self.sheet.cell(row_index,fclass_col_index,self.get_food_class(fname))
-                self.wb.save(self.path)
-                self.wb.close()
-                print_info(
-                    _(
-                        'Column "{0}" has been updated, '
-                        + "feel free to open new issue if some "
-                        + "food with the wrong class ({1}). "
-                    ).format(self._food_class_col[0], get_new_issue_url())
-                )
-                print_warning(
-                    _(
-                        "Ok, I'd like to check and update it. " 
-                        + "(Press any key to check the file)"
-                    )
-                )
-                input()
-                open_path(self.path)
-                print_info(
-                    _(
-                        "I have checked it, and all classes of "
-                        + "food are right. (Press any key to continue)"
-                    )
-                )
-                del self._wb
-                self._headers = [
-                    v for v in [
-                        self.sheet.cell(1,col_index).value 
-                        for col_index in range(1,self.sheet.max_column+1)
-                    ]
-                    if v
-                ]
         return self._headers
- 
 
-    def get_col(self,name):
-        for (col_name,col_index,optional_names in self.cols:
-            if name in optional_names:
-
-
-
+    def add_class_col(self):
+        if not any(
+            [fclass in self.headers for fclass in self.food_class_col[2]]
+        ):
+            fname_col_index = (
+                max(
+                    [
+                        self._headers.index(n)
+                        for n in self._headers
+                        if n in self._food_name_col[2]
+                    ]
+                )
+                + 1
+            )
+            fclass_col_index = fname_col_index + 1
+            self.sheet.insert_cols(fclass_col_index, 1)
+            self.sheet.cell(1, fclass_col_index, self._food_class_col[0])
+            for row_index in range(2, self.sheet.max_row + 1):
+                fname = self.sheet.cell(row_index, fname_col_index).value
+                if not fname:
+                    break
+                self.sheet.cell(
+                    row_index, fclass_col_index, self.get_food_class(fname)
+                )
+            self.wb.save(self.path)
+            self.wb.close()
+            del self.wb
+            print_info(
+                _(
+                    'Column "{0}" has been updated, '
+                    + "feel free to open new issue if some "
+                    + "food with the wrong class ({1}). "
+                ).format(self._food_class_col[0], get_new_issue_url())
+            )
+            print_warning(
+                _(
+                    "Ok, I'd like to check and update it. "
+                    + "(Press any key to check the file)"
+                )
+            )
+            input()
+            open_path(self.path)
+            print_info(
+                _(
+                    "I have checked it, and all classes of "
+                    + "food are right. (Press any key to continue)"
+                )
+            )
 
     @property
     def food_classes(self):
@@ -259,9 +290,10 @@ class Purchasing(SpreadsheetBase):
                 )
             )
             self._path = filename
-        return self._path 
+        return self._path
 
     def update(self):
+        self.add_class_col()
         self.update_inventories()
 
     def update_inventories(self):
@@ -269,7 +301,6 @@ class Purchasing(SpreadsheetBase):
         merged_ranges = list(self.sheet.merged_cells.ranges)
         for cell_group in merged_ranges:
             sheet.unmerge_cells(str(cell_group))
-        
 
         inventories_len = len(
             [
@@ -278,7 +309,6 @@ class Purchasing(SpreadsheetBase):
                 if self.sheet.cell(row_index, self.inventory_col[1]).value
             ]
         )
-
 
         if inventories_len < 1:
             print_warning(
@@ -349,13 +379,23 @@ class Purchasing(SpreadsheetBase):
                         max_row + 1, max_row + 1 + len(saved_ifoods)
                     ):
                         f = saved_ifoods[row_index - max_row - 1]
-                        self.sheet.cell(row_index, self.xdate_col[1]).number_format = (
-                            numbers.FORMAT_TEXT
+                        self.sheet.cell(
+                            row_index, self.xdate_col[1]
+                        ).number_format = numbers.FORMAT_TEXT
+                        self.sheet.cell(
+                            row_index,
+                            self.xdate_col[1],
+                            f.xdate.strftime("%Y-%m-%d"),
                         )
-                        self.sheet.cell(row_index, self.xdate_col[1], f.xdate.strftime("%Y-%m-%d"))
-                        self.sheet.cell(row_index, self.purchaser_col[1], f.purchaser)
-                        self.sheet.cell(row_index, self.food_name_col[1], f.name)
-                        self.sheet.cell(row_index, self.food_class_col[1], f.fclass)
+                        self.sheet.cell(
+                            row_index, self.purchaser_col[1], f.purchaser
+                        )
+                        self.sheet.cell(
+                            row_index, self.food_name_col[1], f.name
+                        )
+                        self.sheet.cell(
+                            row_index, self.food_class_col[1], f.fclass
+                        )
                         self.sheet.cell(
                             row_index,
                             self.unit_name_col[1],
@@ -364,22 +404,14 @@ class Purchasing(SpreadsheetBase):
                         self.sheet.cell(
                             row_index, self.count_col[1]
                         ).number_format = numbers.FORMAT_NUMBER_00
+                        self.sheet.cell(row_index, self.count_col[1], f.count)
                         self.sheet.cell(
-                            row_index, self.count_col[1], f.count
-                        )
-                        self.sheet.cell(
-                            row_index, 
-                            self.total_price_col[1]
+                            row_index, self.total_price_col[1]
                         ).number_format = numbers.FORMAT_NUMBER_00
                         self.sheet.cell(
-                            row_index,
-                            self.total_price_col[1]
-                            f.total_price,
+                            row_index, self.total_price_col[1], f.total_price
                         )
-                       self.sheet.cell(
-                            row_index, self.inventory_col[1], "y"
-                        )
-
+                        self.sheet.cell(row_index, self.inventory_col[1], "y")
 
                     print_info(
                         (
@@ -403,7 +435,9 @@ class Purchasing(SpreadsheetBase):
                     input(">_ ")
                     open_path(self.path)
                     print_info(
-                        _("Ok, I checked it, it's ok. (Press any key to continue)")
+                        _(
+                            "Ok, I checked it, it's ok. (Press any key to continue)"
+                        )
                     )
                     input(">_ ")
         pass
@@ -437,5 +471,6 @@ class Purchasing(SpreadsheetBase):
 
         return foods
         pass
+
 
 # The end.
