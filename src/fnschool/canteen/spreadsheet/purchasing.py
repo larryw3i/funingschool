@@ -87,6 +87,20 @@ class Purchasing(SpreadsheetBase):
         self._headers = None
         self.edited_cell_font = Font(color="00FF0000")
         self._cols = None
+        self._food_class_dv = None
+
+    @property
+    def food_class_dv(self):
+        if not self._food_class_dv:
+            self._food_class_dv = DataValidation(
+                type="list",
+                formula1=(
+                    '"'
+                    + ",".join(["蔬菜类"] + list(self.food_classes.keys()))
+                    + '"'
+                ),
+            )
+        return self._food_class_dv
 
     def get_col(self, col):
         if not col[1]:
@@ -175,7 +189,6 @@ class Purchasing(SpreadsheetBase):
         if not self._sheet:
             self._sheet = self.wb.active
         return self._sheet
-    
 
     @property
     def headers(self):
@@ -211,12 +224,10 @@ class Purchasing(SpreadsheetBase):
                 fname = self.sheet.cell(row_index, fname_col_index).value
                 if not fname:
                     break
-                self.sheet.cell(
-                    row_index, fclass_col_index, self.get_food_class(fname)
-                )
-                self.sheet.cell(row_index, fclass_col_index).font = (
-                    self.edited_cell_font
-                )
+                cell = self.sheet.cell(row_index, fclass_col_index)
+                cell.value = self.get_food_class(fname)
+                cell.font = self.edited_cell_font
+                self.food_class_dv.add(cell)
             self.wb.save(self.path)
             self.wb.close()
             del self.wb
@@ -237,8 +248,9 @@ class Purchasing(SpreadsheetBase):
             open_path(self.path)
             print_info(
                 _(
-                    "I have checked it, and all classes of "
-                    + "food are right. (Press any key to continue)"
+                    "I have checked it, all classes of "
+                    + "food are right, and I closed the "
+                    + "file. (Press any key to continue)"
                 )
             )
             input(">_ ")
@@ -323,7 +335,12 @@ class Purchasing(SpreadsheetBase):
             self._path = filename
         return self._path
 
+    def update_data_validations(self):
+        if not self.food_class_dv in self.sheet.data_validations:
+            self.sheet.add_data_validation(self.food_class_dv)
+
     def update(self):
+        self.update_data_validations()
         self.add_class_col()
         self.update_inventories()
 
@@ -387,8 +404,16 @@ class Purchasing(SpreadsheetBase):
                         for i, f0 in enumerate(saved_ifoods)
                     ]
                 )
-
+                
+                saved_ifoods_s_len = max([len(s) for s in saved_ifoods_s.split('\n')])
+                saved_ifoods_info = (
+                    _("Purchaser: ")+saved_ifoods[0].purchaser
+                    + "\n"
+                    + _("Inventory data: ")+saved_ifoods[0].xdate.strftime('%Y.%m.%d')
+                    + "\n"
+                ) 
                 print_info(saved_ifoods_s)
+                print_warning(saved_ifoods_info)
                 print_warning(
                     (
                         _('Fill them in "{0}"? (YyNn)')
@@ -398,7 +423,7 @@ class Purchasing(SpreadsheetBase):
                 )
 
                 f_input = input(">_ ").replace(" ", "")
-                if f_input in "Yy":
+                if len(f_input) > 0 and f_input in "Yy":
                     max_row = len(
                         [
                             row_index
@@ -426,6 +451,9 @@ class Purchasing(SpreadsheetBase):
                         )
                         self.sheet.cell(
                             row_index, self.food_class_col[1], f.fclass
+                        )
+                        self.food_class_dv.add(
+                            self.sheet.cell(row_index, self.food_class_col[1])
                         )
                         self.sheet.cell(
                             row_index,

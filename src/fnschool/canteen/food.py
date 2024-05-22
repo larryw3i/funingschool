@@ -38,6 +38,11 @@ class Food:
     def datefstr(self, value):
         if isinstance(value, datetime):
             return value
+        if isinstance(value, str):
+            if "'" in value:
+                value = value.replace("'", "")
+            if "=" in value:
+                value = value.replace("=", "")
 
         value = (
             value.split("-")
