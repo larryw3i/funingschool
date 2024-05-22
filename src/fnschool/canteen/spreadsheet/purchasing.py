@@ -85,6 +85,8 @@ class Purchasing(SpreadsheetBase):
         self._wb = None
         self._sheet = None
         self._headers = None
+        self.edited_cell_font = Font(color="00FF0000")
+        self._cols = None
 
     def get_col(self, col):
         if not col[1]:
@@ -96,6 +98,28 @@ class Purchasing(SpreadsheetBase):
             col[0] = col0[0]
             col[1] = col0[1]
         return col
+
+    @property
+    def col_indexes(self):
+        indexes = [c[1] for c in self.cols]
+        indexes = sorted(indexes)
+        return indexes
+
+    @property
+    def cols(self):
+        if not self._cols:
+            self._cols = [
+                self.xdate_col,
+                self.purchaser_col,
+                self.food_name_col,
+                self.food_class_col,
+                self.unit_name_col,
+                self.count_col,
+                self.total_price_col,
+                self.abandoned_col,
+                self.inventory_col,
+            ]
+        return self._cols
 
     @property
     def xdate_col(self):
@@ -133,10 +157,6 @@ class Purchasing(SpreadsheetBase):
     def inventory_col(self):
         return self.get_col(self._inventory_col)
 
-    @wb.deleter
-    def wb(self):
-        del self._wb
-
     @property
     def wb(self):
         if not self._wb:
@@ -144,11 +164,18 @@ class Purchasing(SpreadsheetBase):
             self._wb = load_workbook(self.path)
         return self._wb
 
+    @wb.deleter
+    def wb(self):
+        self._wb = None
+        self._sheet = None
+        self._headers = None
+
     @property
     def sheet(self):
         if not self._sheet:
             self._sheet = self.wb.active
         return self._sheet
+    
 
     @property
     def headers(self):
@@ -165,7 +192,7 @@ class Purchasing(SpreadsheetBase):
 
     def add_class_col(self):
         if not any(
-            [fclass in self.headers for fclass in self.food_class_col[2]]
+            [fclass in self.headers for fclass in self._food_class_col[2]]
         ):
             fname_col_index = (
                 max(
@@ -187,6 +214,9 @@ class Purchasing(SpreadsheetBase):
                 self.sheet.cell(
                     row_index, fclass_col_index, self.get_food_class(fname)
                 )
+                self.sheet.cell(row_index, fclass_col_index).font = (
+                    self.edited_cell_font
+                )
             self.wb.save(self.path)
             self.wb.close()
             del self.wb
@@ -203,7 +233,7 @@ class Purchasing(SpreadsheetBase):
                     + "(Press any key to check the file)"
                 )
             )
-            input()
+            input(">_ ")
             open_path(self.path)
             print_info(
                 _(
@@ -211,6 +241,7 @@ class Purchasing(SpreadsheetBase):
                     + "food are right. (Press any key to continue)"
                 )
             )
+            input(">_ ")
 
     @property
     def food_classes(self):
@@ -413,6 +444,11 @@ class Purchasing(SpreadsheetBase):
                         )
                         self.sheet.cell(row_index, self.inventory_col[1], "y")
 
+                        for col_index in self.col_indexes:
+                            self.sheet.cell(row_index, col_index).font = (
+                                self.edited_cell_font
+                            )
+
                     print_info(
                         (
                             _('The remaining foods have been added to "{0}".')
@@ -424,6 +460,7 @@ class Purchasing(SpreadsheetBase):
                     )
                     self.wb.save(self.path)
                     self.wb.close()
+                    del self.wb
                     print_info(
                         (
                             _(
@@ -445,7 +482,6 @@ class Purchasing(SpreadsheetBase):
     def read_pfoods(self):
         self.update()
         foods = pd.read_excel(self.path)
-        self.set_col_names(foods.columns)
         _foods = []
         for __, food in foods.iterrows():
             _food = Food(
@@ -458,9 +494,9 @@ class Purchasing(SpreadsheetBase):
                 purchaser=food[self.purchaser_col[0]],
                 fclass=food[self.food_class_col[0]],
             )
-            if self.abandoned_col_name:
+            if self.abandoned_col[0]:
                 _food.is_abandoned = not pd.isna(food[self.abandoned_col[0]])
-            if self.inventory_col_name:
+            if self.inventory_col[0]:
                 _food.is_inventory = not pd.isna(food[self.inventory_col[0]])
             _foods.append(_food)
 

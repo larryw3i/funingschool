@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-22 14:23+0800\n"
-"PO-Revision-Date: 2024-05-22 14:24+0800\n"
+"POT-Creation-Date: 2024-05-22 23:10+0800\n"
+"PO-Revision-Date: 2024-05-22 23:12+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -811,11 +811,27 @@ msgstr "共 {0} 天。"
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr "是的，都是对的。（按任意键继续）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:125
-msgid "There should be column ({0}), please add it."
-msgstr "没有找到 {0} 列，请先添加它。"
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:163
+msgid "Loading data from \"{0}\"."
+msgstr "正在从 “{0}” 中加载数据。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:135
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:224
+msgid ""
+"Column \"{0}\" has been updated, feel free to open new issue if some food "
+"with the wrong class ({1}). "
+msgstr "“{0}”列已添加，如果食材的大类名有错误，还请您随时提交反馈（{1}）。"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:231
+msgid "Ok, I'd like to check and update it. (Press any key to check the file)"
+msgstr "好的，我想检查更新的数据。（按任意键打开文件）"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:239
+msgid ""
+"I have checked it, and all classes of food are right. (Press any key to "
+"continue)"
+msgstr "我已经检查了，每个食材的大类都是对的。（按任意键继续）"
+
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:288
 msgid ""
 "{0} need a purchasing list file, and it's file type should be '.xlsx'. The "
 "column names of it:"
@@ -823,7 +839,7 @@ msgstr ""
 "{0} 需要一个购入食材的列表文件，这个列表文件的类型应为 “.xlsx”。它的列（表"
 "头）为："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:140
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:293
 msgid ""
 "\n"
 "\tcolumn   type    example\n"
@@ -847,78 +863,68 @@ msgstr ""
 "　　不计　　　文本　y\n"
 "　　结余　　　文本　y"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:153
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:306
 msgid "Please select a purchasing file."
 msgstr "请选择购入食材的列表文件。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:154
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:307
 msgid "Spreadsheet Files"
 msgstr "工作簿文件。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:157
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:310
 msgid "Please select the purchasing file"
 msgstr "请选择购入食材的列表文件"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:162
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:315
 msgid "No file was selected, exit."
 msgstr "未选择文件，退出。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:166
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:319
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr "已选择购入列表文件 “{0}” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:207
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:346
 msgid "The remaining food wasn't read from \"{0}\"."
 msgstr "从 “{0}” 中没有读取到剩余的食材。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:213
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:352
 msgid ""
 "{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet "
 "\"{2}\" ......"
 msgstr "{0} 正在从 工作簿 “{2}” 的 工作表 “{1}” 中读取剩余的食材 ......"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:227
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:366
 msgid ""
 "Some remaining foods have been read from sheet \"{0}\" of spreadsheet "
 "\"{1}\":"
 msgstr "已经从 工作簿 “{1}” 的 工作表 “{0}” 中一些剩余的食材："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:232
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:371
 msgid ""
 "The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
 msgstr "已经从 工作簿 “{1}” 的 工作表 “{0}” 中一个剩余的食材："
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:255
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:394
 msgid "Fill them in \"{0}\"? (YyNn)"
 msgstr "把它们填入 “{0}” 吗？（是的：“Y”，“y”）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:257
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:396
 msgid "Fill it in \"{0}\" (YyNn)"
 msgstr "把它填入 “{0}” 吗？（是的：“Y”，“y”）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:311
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:454
 msgid "The remaining foods have been added to \"{0}\"."
 msgstr "剩余的食材已经被添加到 “{0}” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:313
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:456
 msgid "The remaining food has been added to \"{0}\"."
 msgstr "剩余的食材已经被添加到 “{0}” 。"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:326
-msgid "Unable to find food name column, exitt."
-msgstr "未找到食材名称列，退出。"
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:362
-msgid ""
-"Column \"{0}\" has been updated, feel free to open new issue if some food "
-"with the wrong class ({1}). "
-msgstr "“{0}”列已添加，如果食材的大类名有错误，还请您随时提交反馈（{1}）。"
-
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:374
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:466
 msgid "Please check/modify the updated data. (Press any key to open the file)"
 msgstr "请您 检查/更正被更新的内容。（按任意键打开文件）"
 
-#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:383
+#: /home/larry/fun/larryw3i/funingschool/src/fnschool/canteen/spreadsheet/purchasing.py:475
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr "好了，我已经检查每个食材的大类了，它们都是对的。（按任意键继续）"
 
@@ -1021,3 +1027,9 @@ msgstr "没有不计（无需入库）的食材，{0} 表的更新被跳过。"
 
 #~ msgid "Consuming days of this month:"
 #~ msgstr "本月出库日期："
+
+#~ msgid "There should be column ({0}), please add it."
+#~ msgstr "没有找到 {0} 列，请先添加它。"
+
+#~ msgid "Unable to find food name column, exitt."
+#~ msgstr "未找到食材名称列，退出。"

@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 from openpyxl import load_workbook
 from openpyxl.styles import numbers
+from openpyxl.styles import Font
 from fnschool.app import *
 from fnschool.language import _
 from fnschool.fnprint import *
