@@ -2,6 +2,7 @@ import os
 import sys
 import platform
 import math
+import random
 
 from colorama import Fore, Style
 
@@ -9,6 +10,12 @@ if platform.system() == "Windows":
     from colorama import just_fix_windows_console
 
     just_fix_windows_console()
+
+def get_random_sep_char():
+    sep_char = random.choice([
+        '-','+',"=",'|','o','`','.','x','z','#','^','*'
+    ])
+    return sep_char
 
 
 def is_zh_CN_char(value):
