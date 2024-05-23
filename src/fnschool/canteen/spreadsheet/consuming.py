@@ -45,8 +45,8 @@ class Consuming(SpreadsheetBase):
 
         print_info(
             _("Consuming days:")
-            + " "
-            + " ".join([d.strftime("%Y.%m.%d") for d in cdays])
+            + "\n"
+            + sqr_slist([d.strftime("%Y.%m.%d") for d in cdays])
         )
 
         merged_ranges = list(csheet.merged_cells.ranges)

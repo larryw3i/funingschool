@@ -404,14 +404,18 @@ class Purchasing(SpreadsheetBase):
                         for i, f0 in enumerate(saved_ifoods)
                     ]
                 )
-                
-                saved_ifoods_s_len = max([len(s) for s in saved_ifoods_s.split('\n')])
+
+                saved_ifoods_s_len = max(
+                    [len(s) for s in saved_ifoods_s.split("\n")]
+                )
                 saved_ifoods_info = (
-                    _("Purchaser: ")+saved_ifoods[0].purchaser
+                    _("Purchaser: ")
+                    + saved_ifoods[0].purchaser
                     + "\n"
-                    + _("Inventory data: ")+saved_ifoods[0].xdate.strftime('%Y.%m.%d')
+                    + _("Inventory data: ")
+                    + saved_ifoods[0].xdate.strftime("%Y.%m.%d")
                     + "\n"
-                ) 
+                )
                 print_info(saved_ifoods_s)
                 print_warning(saved_ifoods_info)
                 print_warning(

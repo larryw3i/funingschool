@@ -248,16 +248,10 @@ class Food(SpreadsheetBase):
             sheet = self.get_sheet(name)
             sheet.sheet_properties.tabColor = secrets.token_hex(4)
 
-        print_info(
-            _("Food sheets [{0}] have their tab colors recolor.").format(
-                " ".join(food_names)
-            )
-        )
-        print_info(
-            _("Food sheets [{0}] have been updated.").format(
-                " ".join(food_names)
-            )
-        )
+        print_warning(_("Food sheets have their tab colors recolor:"))
+        print_info(sqr_slist(food_names))
+        print_warning(_("Updated food sheets:"))
+        print_info(sqr_slist(food_names))
 
 
 # The end
