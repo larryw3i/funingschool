@@ -13,6 +13,7 @@ pyvenv_path = project_path / "venv"
 src_path = project_path / "src"
 app_name = "fnschool"
 fnschool_path = src_path / app_name
+fnschool_path_r = fnschool_path.relative_to(Path.cwd())
 locale_dir = fnschool_path / "locales"
 pot_path = locale_dir / "fnschool.pot"
 lc_messages_path = locale_dir / "en_US" / "LC_MESSAGES"
@@ -65,7 +66,7 @@ def install_dependencies():
 
 def update_message():
     run_sh_venv(
-        f"pybabel extract {fnschool_path} -o {pot_path};"
+        f"pybabel extract {fnschool_path_r} -o {pot_path};"
         + f"pybabel update -i {pot_path} -d {locale_dir} -D {app_name}"
     )
 
@@ -154,59 +155,84 @@ def build(args):
         print(f"SHA256 hash of '{dists_fpath}'  was saved.")
 
 
-parser = argparse.ArgumentParser(
-    prog="housekeeper",
-    description="Housekeeper of Funingschool.",
-    epilog=f"Some functions fo {app_name} project.",
-)
+def parse_msg(subparsers):
+    parser_msg = subparsers.add_parser(
+        "message", help="Gettext message related functions."
+    )
+    parser_msg.add_argument(
+        "do",
+        choices=["U", "A", "C"],
+        help=(
+            "'U' for updating messages,"
+            + "'A' for adding message to specified language code,"
+            + "'C' for compile messages."
+        ),
+    )
+    parser_msg.add_argument(
+        "-l", "--local", help="language code for adding message."
+    )
+    parser_msg.set_defaults(func=set_message)
 
-subparsers = parser.add_subparsers(help="The functions to run.")
-parser_msg = subparsers.add_parser(
-    "message", help="Gettext message related functions."
-)
-parser_msg.add_argument(
-    "do",
-    choices=["U", "A", "C"],
-    help=(
-        "'U' for updating messages,"
-        + "'A' for adding message to specified language code,"
-        + "'C' for compile messages."
-    ),
-)
-parser_msg.add_argument(
-    "-l", "--local", help="language code for adding message."
-)
-parser_msg.set_defaults(func=set_message)
 
-parser_deps = subparsers.add_parser(
-    "dependencies", help="Dependencies related function."
-)
+def parse_dep(subparsers):
+    parser_deps = subparsers.add_parser(
+        "dep", help="Dependencies related function."
+    )
 
-parser_deps.add_argument("action", help="'I' for installing all dependencies.")
-parser_deps.set_defaults(func=set_dependencies)
+    parser_deps.add_argument(
+        "action", help="'I' for installing all dependencies."
+    )
+    parser_deps.set_defaults(func=set_dependencies)
 
-parser_version = subparsers.add_parser(
-    "version", help=f"Version related functions."
-)
-parser_version.add_argument(
-    "-u",
-    "--update",
-    action="store_true",
-    help="Update version of {app_name} automatically.",
-)
-parser_version.set_defaults(func=set_version)
 
-parser_build = subparsers.add_parser("build", help=f"Build {app_name} sources.")
-parser_build.add_argument(
-    "-t", "--twine", default=False, action="store_true", help="Upload to PYPI."
-)
-parser_build.set_defaults(func=build)
+def parser_ver(subparsers):
+    parser_version = subparsers.add_parser(
+        "version", help=f"Version related functions."
+    )
+    parser_version.add_argument(
+        "-u",
+        "--update",
+        action="store_true",
+        help="Update version of {app_name} automatically.",
+    )
+    parser_version.set_defaults(func=set_version)
 
-args = parser.parse_args()
 
-if hasattr(args, "func"):
-    args.func(args)
-else:
-    parser.print_help()
+def parse_build(subparsers):
+    parser_build = subparsers.add_parser(
+        "build", help=f"Build {app_name} sources."
+    )
+    parser_build.add_argument(
+        "-t",
+        "--twine",
+        default=False,
+        action="store_true",
+        help="Upload to PYPI.",
+    )
+    parser_build.set_defaults(func=build)
+
+
+def parse_cli():
+    parser = argparse.ArgumentParser(
+        prog="housekeeper",
+        description="Housekeeper of Funingschool.",
+        epilog=f"Some functions fo {app_name} project.",
+    )
+
+    subparsers = parser.add_subparsers(help="The functions to run.")
+    parse_msg(subparsers)
+    parse_build(subparsers)
+    parse_dep(subparsers)
+    parser_ver(subparsers)
+
+    args = parser.parse_args()
+
+    if hasattr(args, "func"):
+        args.func(args)
+    else:
+        parser.print_help()
+
+
+parse_cli()
 
 # The end.

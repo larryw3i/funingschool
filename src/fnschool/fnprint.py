@@ -11,10 +11,11 @@ if platform.system() == "Windows":
 
     just_fix_windows_console()
 
+
 def get_random_sep_char():
-    sep_char = random.choice([
-        '-','+',"=",'|','o','`','.','x','z','#','^','*'
-    ])
+    sep_char = random.choice(
+        ["-", "+", "=", "|", "o", "`", ".", "x", "z", "#", "^", "*"]
+    )
     return sep_char
 
 

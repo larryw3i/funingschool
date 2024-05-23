@@ -249,7 +249,12 @@ class Food(SpreadsheetBase):
             sheet = self.get_sheet(name)
             sheet.sheet_properties.tabColor = secrets.token_hex(4)
         food_names_s = sqr_slist(food_names)
-        sep_s = get_random_sep_char()*max([len(s)+ len([c for c in s if is_zh_CN_char(c)]) for s in food_names_s.split('\n') ])
+        sep_s = get_random_sep_char() * max(
+            [
+                len(s) + len([c for c in s if is_zh_CN_char(c)])
+                for s in food_names_s.split("\n")
+            ]
+        )
 
         print_error(sep_s)
         print_warning(_("Food sheets have their tab colors recolor:"))

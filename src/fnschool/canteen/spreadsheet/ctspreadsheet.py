@@ -261,7 +261,7 @@ class CtSpreadSheet:
         summary_len = max(
             [len(s) + len([c for c in s if is_zh_CN_char(c)]) for s in summary]
         )
-        summary_sep = get_random_sep_char()*summary_len
+        summary_sep = get_random_sep_char() * summary_len
         consuming_date_m1 = (
             f"{self.bill.consuming.year}"
             + f".{self.bill.consuming.month:0>2}"
