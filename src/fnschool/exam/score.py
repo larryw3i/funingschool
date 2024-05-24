@@ -8,4 +8,5 @@ class FnScore():
         pass
 
     def enter(self):
+        print_app() 
         pass

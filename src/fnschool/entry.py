@@ -3,6 +3,7 @@ import sys
 
 from fnschool import *
 from fnschool.canteen.entry import *
+from fnschool.exam.entry import *
 
 
 def show_gui():
@@ -19,6 +20,7 @@ def read_cli():
     subparsers = parser.add_subparsers(help=_("The modules to run."))
 
     parse_canteen(subparsers)
+    parse_exam(subparsers)
 
     args = parser.parse_args()
 

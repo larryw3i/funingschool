@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-23 23:02+0800\n"
+"POT-Creation-Date: 2024-05-24 13:24+0800\n"
 "PO-Revision-Date: 2024-03-07 22:18+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_SG\n"
@@ -18,126 +18,33 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: src/fnschool/entry.py:9
+#: src/fnschool/entry.py:10
 msgid "Just wait."
 msgstr ""
 
-#: src/fnschool/entry.py:15
+#: src/fnschool/entry.py:16
 msgid "fnschool"
 msgstr ""
 
-#: src/fnschool/entry.py:16
+#: src/fnschool/entry.py:17
 msgid "Command line interface of fnschool."
 msgstr ""
 
-#: src/fnschool/entry.py:17
+#: src/fnschool/entry.py:18
 msgid "Enjoy it."
 msgstr ""
 
-#: src/fnschool/entry.py:19
+#: src/fnschool/entry.py:20
 msgid "The modules to run."
 msgstr ""
 
-#: src/fnschool/path.py:38
+#: src/fnschool/path.py:39
 #, python-format
 msgid "Configuration file '%s' was copied to '%s'."
 msgstr ""
 
-#: src/fnschool/canteen/bill.cp.py:115
-msgid "Enter the month (1~12) to generate spreadsheet: (default: {0})"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:132
-msgid "Unexpected input was got."
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:152
-msgid "Please input the year for design consuming"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:191
-msgid "{0}.{1}.{2}--{3}.{4}.{5}"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:200
-msgid "Time nodes:"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:205
-msgid "Time node hasn't been set."
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:210
-msgid "Food checking time range of {0} is {1}."
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:217
-msgid "Month:"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:225
-msgid "Profile:"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:229
-msgid "Label:"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:230
-msgid "Name:"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:231
-msgid "Email:"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:232
-msgid "Organization Name:"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:233
-msgid "Suppliers:"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:253
-msgid "The configuration directory is: {0}"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:259
-msgid "Hello! helping information is here for you:"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:262
-msgid ""
-"Tips for Changsheng files:\n"
-"You need to add the residue of last year or last semester: Open the first"
-" spreadsheet you got from Changsheng, and add the 'residue' column, then "
-"insert the 'residue' foods after the end of entered data, the 'residue' "
-"column names you could set are:\n"
-"\t{0}\n"
-"The columns need to be updated are:\n"
-"\t1. Inventory time: The time of residue foods inventorying.\n"
-"\t2. The organization name or school name.\n"
-"\t3. The food name.\n"
-"\t4. The food count, fill in all count related columns if there are many "
-"'food count columns'.\n"
-"\t5. The total price."
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:284
-msgid ""
-"If new Xuelan milks is purchased. you have to add the purchasing "
-"information of them into the end of the purchasing spreadsheet (e.g: the "
-"spreadsheets Changsheng provided)."
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:292
-msgid "Ok! I knew that.(press any key to continue)"
-msgstr ""
-
-#: src/fnschool/canteen/bill.cp.py:417 src/fnschool/canteen/bill.cp.py:422
-#: src/fnschool/canteen/bill.cp.py:437 src/fnschool/canteen/bill.py:72
-#: src/fnschool/canteen/bill.py:77 src/fnschool/canteen/bill.py:92
+#: src/fnschool/canteen/bill.py:72 src/fnschool/canteen/bill.py:77
+#: src/fnschool/canteen/bill.py:92
 #, python-format
 msgid "%s can't change."
 msgstr ""
@@ -168,10 +75,6 @@ msgstr ""
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/config.py:58
-msgid "Default time nodes of {0} have been used."
-msgstr ""
-
 #: src/fnschool/canteen/consuming.py:46
 msgid ""
 "It seems you didn't design the consumptions, please restart {0} and "
@@ -182,7 +85,7 @@ msgstr ""
 msgid "CNY"
 msgstr ""
 
-#: src/fnschool/canteen/entry.py:16
+#: src/fnschool/canteen/entry.py:16 src/fnschool/exam/entry.py:16
 msgid "Function is not found."
 msgstr ""
 
@@ -887,6 +790,14 @@ msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:53
 msgid "There is no abandoned food. Sheet {0} updating skipped."
+msgstr ""
+
+#: src/fnschool/exam/entry.py:21
+msgid "Examination related functions."
+msgstr ""
+
+#: src/fnschool/exam/entry.py:28
+msgid "Enter the examination scores."
 msgstr ""
 
 #~ msgid "Please refer to file  to customize your 'sett1ngs.py' file."
@@ -1780,5 +1691,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Fill it in \"{0}?\" (YyNn)"
+#~ msgstr ""
+
+#~ msgid "The functions of examination."
 #~ msgstr ""
 

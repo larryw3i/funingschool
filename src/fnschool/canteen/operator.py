@@ -56,8 +56,8 @@ class Operator:
     @property
     def dpath(self):
         if not self._dpath:
-            dpath0 = user_config_dir / self.name
-            dpath1 = user_data_dir / self.name
+            dpath0 = user_config_dir / "canteen" /self.name
+            dpath1 = user_canteen_dpath / self.name
             self._dpath = dpath1
             if not self._dpath.exists():
                 os.makedirs(self._dpath, exist_ok=True)

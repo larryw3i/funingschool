@@ -8,8 +8,8 @@ def set_exam(args):
 
     print_app()
 
-    score = FnScore()
     if args.action in "enter_score":
+        score = FnScore()
         score.enter()
 
     else:
@@ -25,6 +25,6 @@ def parse_exam(subparsers):
         choices=[
             "enter_score",
         ],
-        help=_("The functions of examination."),
+        help=_("Enter the examination scores."),
     )
     parser_canteen.set_defaults(func=set_exam)
