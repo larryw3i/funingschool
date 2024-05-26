@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-24 13:24+0800\n"
+"POT-Creation-Date: 2024-05-27 01:39+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -41,6 +41,44 @@ msgstr ""
 #: src/fnschool/path.py:39
 #, python-format
 msgid "Configuration file '%s' was copied to '%s'."
+msgstr ""
+
+#: src/fnschool/user.py:40
+msgid "{0} is reading names from {1}"
+msgstr ""
+
+#: src/fnschool/user.py:45
+msgid "The names saved by {0} are as follows:"
+msgstr ""
+
+#: src/fnschool/user.py:55 src/fnschool/user.py:107
+msgid "Unexpected value was got. Exit."
+msgstr ""
+
+#: src/fnschool/user.py:59
+msgid "Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
+msgstr ""
+
+#: src/fnschool/user.py:92 src/fnschool/user.py:112 src/fnschool/user.py:132
+msgid "Your name has been saved to \"{0}\""
+msgstr ""
+
+#: src/fnschool/user.py:97
+msgid "Enter your name, please!"
+msgstr ""
+
+#: src/fnschool/user.py:105
+msgid "Unexpected value was got."
+msgstr ""
+
+#: src/fnschool/user.py:121
+msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
+msgstr ""
+
+#: src/fnschool/user.py:149
+msgid ""
+"Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
+"'Y','y')"
 msgstr ""
 
 #: src/fnschool/canteen/bill.py:72 src/fnschool/canteen/bill.py:77
@@ -142,69 +180,51 @@ msgstr ""
 msgid "Consumptions were read."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:28
-msgid "Tell me your name please:"
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:33
-msgid "Your name has been saved to \"{0}\"."
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:39
-msgid "Hi, your name is \"{0}\"? (Yes: 'Y' 'y' '', or enter your name)"
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:48
-msgid "Ok, your name has been saved to \"{0}\"."
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:66
-msgid ""
-"Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
-"'Y','y')"
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:80
+#: src/fnschool/canteen/operator.py:21
 msgid "preconsuming"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:87
+#: src/fnschool/canteen/operator.py:28
 msgid "config"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:94
+#: src/fnschool/canteen/operator.py:35
 msgid "food_classes"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:107
+#: src/fnschool/canteen/operator.py:48
 msgid "profile"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:122
+#: src/fnschool/canteen/operator.py:63
 msgid ""
 "Please tell {0} your superior department, {0} will use it as the form "
 "title."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:127
+#: src/fnschool/canteen/operator.py:68
 msgid "superior department"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:135
+#: src/fnschool/canteen/operator.py:76
 msgid "Please tell {0} the {1}."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:142
+#: src/fnschool/canteen/operator.py:83
 msgid "Unexpected value got."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:152 src/fnschool/canteen/operator.py:159
-#: src/fnschool/canteen/operator.py:167
+#: src/fnschool/canteen/operator.py:93 src/fnschool/canteen/operator.py:100
+#: src/fnschool/canteen/operator.py:108
 msgid "bill"
 msgstr ""
 
-#: src/fnschool/canteen/path.py:14
+#: src/fnschool/canteen/path.py:13
 msgid "operator_name"
+msgstr ""
+
+#: src/fnschool/canteen/path.py:15
+msgid "canteen"
 msgstr ""
 
 #: src/fnschool/canteen/profile.py:49
@@ -676,33 +696,33 @@ msgstr ""
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:177
+#: src/fnschool/canteen/spreadsheet/purchasing.py:179
 msgid "Loading data from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:235
+#: src/fnschool/canteen/spreadsheet/purchasing.py:237
 msgid ""
 "Column \"{0}\" has been updated, feel free to open new issue if some food"
 " with the wrong class ({1}). "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:242
+#: src/fnschool/canteen/spreadsheet/purchasing.py:244
 msgid "Ok, I'd like to check and update it. (Press any key to check the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:250
+#: src/fnschool/canteen/spreadsheet/purchasing.py:252
 msgid ""
 "I have checked it, all classes of food are right, and I closed the file. "
 "(Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:300
+#: src/fnschool/canteen/spreadsheet/purchasing.py:302
 msgid ""
 "{0} need a purchasing list file, and it's file type should be '.xlsx'. "
 "The column names of it:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:305
+#: src/fnschool/canteen/spreadsheet/purchasing.py:307
 msgid ""
 "\n"
 "\tcolumn   type    example\n"
@@ -716,75 +736,75 @@ msgid ""
 "\t是结余   Text    y"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:318
+#: src/fnschool/canteen/spreadsheet/purchasing.py:320
 msgid "Please select a purchasing file."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:319
+#: src/fnschool/canteen/spreadsheet/purchasing.py:321
 msgid "Spreadsheet Files"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:322
+#: src/fnschool/canteen/spreadsheet/purchasing.py:327
 msgid "Please select the purchasing file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:327
+#: src/fnschool/canteen/spreadsheet/purchasing.py:333
 msgid "No file was selected, exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:331
+#: src/fnschool/canteen/spreadsheet/purchasing.py:337
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:363
+#: src/fnschool/canteen/spreadsheet/purchasing.py:369
 msgid "The remaining food wasn't read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:369
+#: src/fnschool/canteen/spreadsheet/purchasing.py:375
 msgid ""
 "{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet \"{2}\" "
 "......"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:383
+#: src/fnschool/canteen/spreadsheet/purchasing.py:389
 msgid ""
 "Some remaining foods have been read from sheet \"{0}\" of spreadsheet "
 "\"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:388
+#: src/fnschool/canteen/spreadsheet/purchasing.py:394
 msgid "The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:412
+#: src/fnschool/canteen/spreadsheet/purchasing.py:418
 msgid "Purchaser: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:415
+#: src/fnschool/canteen/spreadsheet/purchasing.py:421
 msgid "Inventory data: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:423
+#: src/fnschool/canteen/spreadsheet/purchasing.py:429
 msgid "Fill them in \"{0}\"? (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:425
+#: src/fnschool/canteen/spreadsheet/purchasing.py:431
 msgid "Fill it in \"{0}\"? (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:486
+#: src/fnschool/canteen/spreadsheet/purchasing.py:492
 msgid "The remaining foods have been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:488
+#: src/fnschool/canteen/spreadsheet/purchasing.py:494
 msgid "The remaining food has been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:498
+#: src/fnschool/canteen/spreadsheet/purchasing.py:504
 msgid "Please check/modify the updated data. (Press any key to open the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:507
+#: src/fnschool/canteen/spreadsheet/purchasing.py:513
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
@@ -798,6 +818,14 @@ msgstr ""
 
 #: src/fnschool/exam/entry.py:28
 msgid "Enter the examination scores."
+msgstr ""
+
+#: src/fnschool/exam/path.py:6
+msgid "exam"
+msgstr ""
+
+#: src/fnschool/exam/path.py:7
+msgid "teacher_name"
 msgstr ""
 
 #~ msgid "Please refer to file  to customize your 'sett1ngs.py' file."
@@ -1694,5 +1722,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "The functions of examination."
+#~ msgstr ""
+
+#~ msgid "Hi, your name is \"{0}\"? (Yes: 'Y' 'y' '', or enter your name)"
+#~ msgstr ""
+
+#~ msgid "Ok, your name has been saved to \"{0}\"."
 #~ msgstr ""
 

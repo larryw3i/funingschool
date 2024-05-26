@@ -1,12 +1,9 @@
 import os
 import sys
+
 from fnschool import *
 
 
-class Score:
+class Subject:
     def __init__(self):
-        pass
-
-    def enter(self):
-        print_app()
         pass

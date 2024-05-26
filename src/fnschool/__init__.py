@@ -15,6 +15,7 @@ from fnschool.fnprint import *
 from fnschool.path import *
 from fnschool.entry import *
 from fnschool.external import *
+from fnschool.user import *
 
 
 __version__ = "20240523.81411.825"

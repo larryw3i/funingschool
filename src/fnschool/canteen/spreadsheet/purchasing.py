@@ -2,7 +2,9 @@ import os
 import sys
 from openpyxl.utils.cell import get_column_letter
 import tomllib
-from tkinter import filedialog
+from tkinter import filedialog, ttk
+import tkinter as tk
+
 from fnschool import *
 from fnschool.canteen.path import *
 from fnschool.canteen.food import *
@@ -318,11 +320,15 @@ class Purchasing(SpreadsheetBase):
             print_info(_("Please select a purchasing file."))
             filetypes = ((_("Spreadsheet Files"), "*.xlsx"),)
 
+            tkroot = tk.Tk()
+            tkroot.withdraw()
+
             filename = filedialog.askopenfilename(
                 title=_("Please select the purchasing file"),
                 initialdir=(Path.home() / "Downloads").as_posix(),
                 filetypes=filetypes,
             )
+
             if filename is None or filename == ():
                 print_warning(_("No file was selected, exit."))
                 exit()

@@ -4,12 +4,12 @@ from fnschool import *
 
 
 def set_exam(args):
-    from fnschool.exam.score import FnScore
+    from fnschool.exam.score import Score
 
     print_app()
 
     if args.action in "enter_score":
-        score = FnScore()
+        score = Score()
         score.enter()
 
     else:

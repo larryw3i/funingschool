@@ -7,73 +7,14 @@ from fnschool import *
 from fnschool.canteen.path import *
 
 
-class Operator:
+class Operator(User):
     def __init__(self, bill):
+        super().__init__(user_canteen_dpath, operator_name_fpath)
         self.bill = bill
         self._name = None
         self._dpath = None
         self._profile = {}
-        self.dpath_showed = False
         pass
-
-    def __str__(self):
-        return self.name
-
-    @property
-    def name(self):
-        if not self._name:
-            with open(operator_name_fpath, "r", encoding="utf-8") as f:
-                self._name = f.read()
-            if self._name == "":
-                print_info(_("Tell me your name please:"))
-                self._name = input(">_ ")
-                with open(operator_name_fpath, "w", encoding="utf-8") as f:
-                    f.write(self._name)
-                print_info(
-                    _('Your name has been saved to "{0}".').format(
-                        operator_name_fpath
-                    )
-                )
-            else:
-                print_info(
-                    _(
-                        "Hi, your name is \"{0}\"? (Yes: 'Y' 'y' '', or enter your name)"
-                    ).format(self._name)
-                )
-                n_input = input(">_ ").replace(" ", "")
-                if len(n_input) > 1:
-                    with open(operator_name_fpath, "w", encoding="utf-8") as f:
-                        f.write(n_input)
-                    print_info(
-                        _('Ok, your name has been saved to "{0}".').format(
-                            operator_name_fpath
-                        )
-                    )
-                    self._name = n_input
-
-        return self._name
-
-    @property
-    def dpath(self):
-        if not self._dpath:
-            dpath0 = user_config_dir / "canteen" /self.name
-            dpath1 = user_canteen_dpath / self.name
-            self._dpath = dpath1
-            if not self._dpath.exists():
-                os.makedirs(self._dpath, exist_ok=True)
-        if not self.dpath_showed:
-            print_info(
-                _(
-                    "Hey! {0}, all of your files will be"
-                    + ' saved to "{1}", show it now? '
-                    + "(Yes: 'Y','y')"
-                ).format(self.name, self._dpath)
-            )
-            o_input = input(">_ ").replace(" ", "")
-            if len(o_input) > 0 and o_input in "Yy":
-                open_path(self._dpath)
-            self.dpath_showed = True
-        return self._dpath
 
     @property
     def preconsuming_dpath(self):
