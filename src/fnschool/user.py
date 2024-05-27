@@ -63,10 +63,10 @@ class User:
                     )
                     n_input = input(">_ ")
                     if n_input.isnumeric():
-                        n_input = int(n_input)
-                        if n_input - 1 > names_len or n_input < 0:
+                        n_input = int(n_input) - 1
+                        if n_input  > names_len or n_input < 0:
                             continue
-                        name0 = names[n_input - 1]
+                        name0 = names[n_input]
                         if name0.startswith(">"):
                             name0 = name0[1:]
                         break

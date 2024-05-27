@@ -62,7 +62,9 @@ class Operator(User):
     def superior_department(self):
         info = _(
             "Please tell {0} your superior department, "
-            + "{0} will use it as the form title."
+            + "{0} will use it as the form title. "
+            + "(\"purchasing summary\" form, "
+            + "\"consuming summary\" form, etc.)"
         ).format(app_name)
         superior_department0 = self.get_profile(
             key=_("superior department"), info=info
@@ -75,7 +77,6 @@ class Operator(User):
             print_warning(
                 info or _("Please tell {0} the {1}.").format(app_name, key)
             )
-            superior_department = None
             for i in range(0, 3):
                 i_value = input(">_ ").replace(" ", "")
                 if len(i_value) > 0:
@@ -86,6 +87,10 @@ class Operator(User):
 
             self.profile[key] = i_value
             self.save_profile()
+        else:
+            print_info(
+                _("\"{0}\" has been read from \"{1}\".").format(key,self.profile_fpath)
+            )
         return self.profile[key]
 
     @property

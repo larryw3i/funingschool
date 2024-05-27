@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-27 01:39+0800\n"
-"PO-Revision-Date: 2024-05-27 01:44+0800\n"
+"POT-Creation-Date: 2024-05-27 09:07+0800\n"
+"PO-Revision-Date: 2024-05-27 09:08+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -62,7 +62,7 @@ msgid ""
 "Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
 msgstr "输入您的名字的序号，或者输入您的名字。（“回车”即为“{0}”）"
 
-#: src/fnschool/user.py:92 src/fnschool/user.py:112 src/fnschool/user.py:132
+#: src/fnschool/user.py:92 src/fnschool/user.py:113 src/fnschool/user.py:133
 msgid "Your name has been saved to \"{0}\""
 msgstr "您的名字被保存到 “{0}”。"
 
@@ -74,12 +74,12 @@ msgstr "请输入您的名字！（通常为操作员/经办人的姓名）"
 msgid "Unexpected value was got."
 msgstr "获取到未预期的值。"
 
-#: src/fnschool/user.py:121
+#: src/fnschool/user.py:122
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 "您好！请问您的名字是 “{0}” 吗？如果不是请输入您的名字！（是的：“Y”，“y”，“”）"
 
-#: src/fnschool/user.py:149
+#: src/fnschool/user.py:152
 msgid ""
 "Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
 "'Y','y')"
@@ -203,33 +203,40 @@ msgstr "个人信息"
 
 #: src/fnschool/canteen/operator.py:63
 msgid ""
-"Please tell {0} your superior department, {0} will use it as the form title."
-msgstr "请您告诉 {0} 您的上级部门叫什么，{0} 会使用它来制作表单的表头。"
+"Please tell {0} your superior department, {0} will use it as the form title. "
+"(\"purchasing summary\" form, \"consuming summary\" form, etc.)"
+msgstr ""
+"请您告诉 {0} 您的上级部门叫什么，{0} 会使用它来制作表单的表头。（“入库、未入"
+"库汇总表”、“出库汇总表” 等表单制作表头时需要 “上级部门名”）"
 
-#: src/fnschool/canteen/operator.py:68
+#: src/fnschool/canteen/operator.py:70
 msgid "superior department"
 msgstr "上级部门"
 
-#: src/fnschool/canteen/operator.py:76
+#: src/fnschool/canteen/operator.py:78
 msgid "Please tell {0} the {1}."
 msgstr "请您告诉 {0} 您的 {1} 是什么。"
 
-#: src/fnschool/canteen/operator.py:83
+#: src/fnschool/canteen/operator.py:84
 msgid "Unexpected value got."
 msgstr "获取到未预期的值。"
 
-#: src/fnschool/canteen/operator.py:93 src/fnschool/canteen/operator.py:100
-#: src/fnschool/canteen/operator.py:108
+#: src/fnschool/canteen/operator.py:92
+msgid "\"{0}\" has been read from \"{1}\"."
+msgstr "已从 “{1}” 中读取 “{0}”。"
+
+#: src/fnschool/canteen/operator.py:98 src/fnschool/canteen/operator.py:105
+#: src/fnschool/canteen/operator.py:113
 msgid "bill"
 msgstr "账单"
 
-#: src/fnschool/canteen/path.py:13
-msgid "operator_name"
-msgstr "操作员姓名"
-
-#: src/fnschool/canteen/path.py:15
+#: src/fnschool/canteen/path.py:14
 msgid "canteen"
 msgstr "食堂"
+
+#: src/fnschool/canteen/path.py:16
+msgid "operator_name"
+msgstr "操作员姓名"
 
 #: src/fnschool/canteen/profile.py:49
 msgid "Profile label"
@@ -1066,3 +1073,6 @@ msgstr "教师名"
 
 #~ msgid "Ok, your name has been saved to \"{0}\"."
 #~ msgstr "好了，您的名字被保存到 “{0}”。"
+
+#~ msgid "Read {0} from {0}."
+#~ msgstr "已从 “{1}” 读取 “{0}”。"

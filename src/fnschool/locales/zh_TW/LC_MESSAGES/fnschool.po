@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-27 01:39+0800\n"
+"POT-Creation-Date: 2024-05-27 09:07+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -59,7 +59,7 @@ msgstr ""
 msgid "Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
 msgstr ""
 
-#: src/fnschool/user.py:92 src/fnschool/user.py:112 src/fnschool/user.py:132
+#: src/fnschool/user.py:92 src/fnschool/user.py:113 src/fnschool/user.py:133
 msgid "Your name has been saved to \"{0}\""
 msgstr ""
 
@@ -71,11 +71,11 @@ msgstr ""
 msgid "Unexpected value was got."
 msgstr ""
 
-#: src/fnschool/user.py:121
+#: src/fnschool/user.py:122
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 
-#: src/fnschool/user.py:149
+#: src/fnschool/user.py:152
 msgid ""
 "Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
 "'Y','y')"
@@ -199,32 +199,36 @@ msgstr ""
 #: src/fnschool/canteen/operator.py:63
 msgid ""
 "Please tell {0} your superior department, {0} will use it as the form "
-"title."
+"title. (\"purchasing summary\" form, \"consuming summary\" form, etc.)"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:68
+#: src/fnschool/canteen/operator.py:70
 msgid "superior department"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:76
+#: src/fnschool/canteen/operator.py:78
 msgid "Please tell {0} the {1}."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:83
+#: src/fnschool/canteen/operator.py:84
 msgid "Unexpected value got."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:93 src/fnschool/canteen/operator.py:100
-#: src/fnschool/canteen/operator.py:108
+#: src/fnschool/canteen/operator.py:92
+msgid "\"{0}\" has been read from \"{1}\"."
+msgstr ""
+
+#: src/fnschool/canteen/operator.py:98 src/fnschool/canteen/operator.py:105
+#: src/fnschool/canteen/operator.py:113
 msgid "bill"
 msgstr ""
 
-#: src/fnschool/canteen/path.py:13
-msgid "operator_name"
+#: src/fnschool/canteen/path.py:14
+msgid "canteen"
 msgstr ""
 
-#: src/fnschool/canteen/path.py:15
-msgid "canteen"
+#: src/fnschool/canteen/path.py:16
+msgid "operator_name"
 msgstr ""
 
 #: src/fnschool/canteen/profile.py:49
@@ -1725,5 +1729,17 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Ok, your name has been saved to \"{0}\"."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Please tell {0} your superior "
+#~ "department, {0} will use it as the"
+#~ " form title."
+#~ msgstr ""
+
+#~ msgid "Read {0} from {0}."
+#~ msgstr ""
+
+#~ msgid "\"{0}\" has been read from \"{0}\"."
 #~ msgstr ""
 
