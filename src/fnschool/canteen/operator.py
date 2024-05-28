@@ -63,8 +63,8 @@ class Operator(User):
         info = _(
             "Please tell {0} your superior department, "
             + "{0} will use it as the form title. "
-            + "(\"purchasing summary\" form, "
-            + "\"consuming summary\" form, etc.)"
+            + '("purchasing summary" form, '
+            + '"consuming summary" form, etc.)'
         ).format(app_name)
         superior_department0 = self.get_profile(
             key=_("superior department"), info=info
@@ -73,7 +73,7 @@ class Operator(User):
 
     def get_profile(self, key, info=None):
         profile = self.profile
-        if not key in profile.keys():
+        if not key in profile.keys() or profile.get(key).strip() == "":
             print_warning(
                 info or _("Please tell {0} the {1}.").format(app_name, key)
             )
@@ -87,10 +87,15 @@ class Operator(User):
 
             self.profile[key] = i_value
             self.save_profile()
-        else:
             print_info(
-                _("\"{0}\" has been read from \"{1}\".").format(key,self.profile_fpath)
+                _(
+                    '"{0}" has been saved to "{1}". '
+                    + "(Ok! I know that. "
+                    + "[Press any key to continue])"
+                ).format(key, self.profile_fpath)
             )
+            input(">_ ")
+
         return self.profile[key]
 
     @property

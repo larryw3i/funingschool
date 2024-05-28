@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-27 09:07+0800\n"
+"POT-Creation-Date: 2024-05-27 12:29+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -206,20 +206,22 @@ msgstr ""
 msgid "superior department"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:78
+#: src/fnschool/canteen/operator.py:81
 msgid "Please tell {0} the {1}."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:84
+#: src/fnschool/canteen/operator.py:87
 msgid "Unexpected value got."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:92
-msgid "\"{0}\" has been read from \"{1}\"."
+#: src/fnschool/canteen/operator.py:94
+msgid ""
+"\"{0}\" has been saved to \"{1}\". (Ok! I know that. [Press any key to "
+"continue])"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:98 src/fnschool/canteen/operator.py:105
-#: src/fnschool/canteen/operator.py:113
+#: src/fnschool/canteen/operator.py:107 src/fnschool/canteen/operator.py:114
+#: src/fnschool/canteen/operator.py:122
 msgid "bill"
 msgstr ""
 
@@ -1744,5 +1746,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "\"{0}\" has been read from \"{0}\"."
+#~ msgstr ""
+
+#~ msgid "\"{0}\" has been saved to \"{1}\"."
+#~ msgstr ""
+
+#~ msgid "\"{0}\" has been read from \"{1}\"."
 #~ msgstr ""
 

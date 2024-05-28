@@ -21,6 +21,10 @@ class User:
 
     @property
     def name(self):
+        name_writed_s = _('Your name has been saved to "{0}"').format(
+            self.name_fpath
+        )
+
         if not self._name:
             name = None
             with open(self.name_fpath, "r", encoding="utf-8") as f:
@@ -64,7 +68,7 @@ class User:
                     n_input = input(">_ ")
                     if n_input.isnumeric():
                         n_input = int(n_input) - 1
-                        if n_input  > names_len or n_input < 0:
+                        if n_input > names_len or n_input < 0:
                             continue
                         name0 = names[n_input]
                         if name0.startswith(">"):
@@ -81,18 +85,16 @@ class User:
                     if name0 in names:
                         names.remove(name0)
                     elif (">" + name0) in names:
-                        names.remove(">" + name0)
+                        names.remove((">" + name0))
 
                     self._name = name0
                     name0 = ">" + name0
                     names = [n.replace(">", "") for n in names]
+
                     with open(self.name_fpath, "w", encoding="utf-8") as f:
                         f.write("\n".join([name0] + names))
-                    print_info(
-                        _('Your name has been saved to "{0}"').format(
-                            self.name_fpath
-                        )
-                    )
+
+                    print_info(name_writed_s)
             elif name == "":
                 print_warning(_("Enter your name, please!"))
                 for i in range(0, 3):
@@ -109,6 +111,7 @@ class User:
 
                 with open(self.name_fpath, "w", encoding="utf-8") as f:
                     f.write(">" + self._name)
+
                 print_info(
                     _('Your name has been saved to "{0}"').format(
                         self.name_fpath
@@ -118,22 +121,22 @@ class User:
             else:
                 if ">" in name:
                     name = name[1:]
+
                 print_warning(
                     _(
                         "Hi~ is {0} your name? or enter your "
                         + "name, please! (Yes: 'Y','y','')"
                     ).format(name)
                 )
+
                 n_input = input("> ").replace(" ", "")
                 if not n_input in "Yy":
                     name0 = ">" + n_input
+
                     with open(self.name_fpath, "w", encoding="utf-8") as f:
                         f.write("\n".join([name0, name]))
-                    print_info(
-                        _('Your name has been saved to "{0}"').format(
-                            self.name_fpath
-                        )
-                    )
+
+                    print_info(name_writed_s)
                     self._name = n_input
                 else:
                     self._name = name
