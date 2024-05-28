@@ -143,5 +143,6 @@ src/canteen/sett1ngs.py
 .*.swp
 .~lock*#
 *.out
+.idea/
 
 # The end.
