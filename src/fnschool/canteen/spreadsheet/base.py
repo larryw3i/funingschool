@@ -62,6 +62,10 @@ class SpreadsheetBase:
     def operator(self):
         return self.bill.operator
 
+    @property
+    def config(self):
+        return self.operator.config
+
     def get_bill_sheet(self, name):
         sheet = self.bwb[name]
         return sheet

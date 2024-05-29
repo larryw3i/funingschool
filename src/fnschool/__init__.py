@@ -3,6 +3,7 @@ import sys
 import argparse
 import random
 from pathlib import Path
+import tomllib
 
 import pandas as pd
 import numpy as np
@@ -16,9 +17,10 @@ from fnschool.path import *
 from fnschool.entry import *
 from fnschool.external import *
 from fnschool.user import *
+from fnschool.config import *
 
 
-__version__ = "20240523.81411.825"
+__version__ = "20240530.80012.827"
 
 
 # The end.

@@ -13,6 +13,7 @@ pre_consuming0_fpath = canteen_data_dpath / "consuming.xlsx"
 
 user_canteen_dpath = user_data_dir / _("canteen")
 
+
 operator_name_fpath = user_canteen_dpath / (_("operator_name") + ".txt")
 
 if not operator_name_fpath.exists():

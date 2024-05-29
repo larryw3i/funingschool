@@ -223,6 +223,7 @@ class PreConsuming(SpreadsheetBase):
             for d, c in f.consumptions:
                 if not d.day in consumption_days:
                     consumption_days.append(d.day)
+
         consumption_days_value = ""
         space_len = 5
         for week in calendar.monthcalendar(year, month):

@@ -15,6 +15,7 @@ from openpyxl.worksheet.datavalidation import DataValidation
 class Purchasing(SpreadsheetBase):
     def __init__(self, bill):
         super().__init__(bill)
+        self.p_path_key = _("parent_path_of_purchasing_file")
         self._path = None
         self._food_name_col = [
             None,
@@ -297,6 +298,12 @@ class Purchasing(SpreadsheetBase):
 
     @property
     def path(self):
+        p_dpath = self.config.get(self.p_path_key)
+        initialdir = (
+            p_dpath
+            if (p_dpath and Path(p_dpath).exists())
+            else ((Path.home() / "Downloads").as_posix())
+        )
         if not self._path:
             print_info(
                 _(
@@ -325,7 +332,7 @@ class Purchasing(SpreadsheetBase):
 
             filename = filedialog.askopenfilename(
                 title=_("Please select the purchasing file"),
-                initialdir=(Path.home() / "Downloads").as_posix(),
+                initialdir=initialdir,
                 filetypes=filetypes,
             )
 
@@ -339,6 +346,7 @@ class Purchasing(SpreadsheetBase):
                 )
             )
             self._path = filename
+        self.config.save(self.p_path_key, Path(self._path).parent.as_posix())
         return self._path
 
     def update_data_validations(self):

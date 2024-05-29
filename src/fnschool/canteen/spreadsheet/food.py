@@ -125,6 +125,18 @@ class Food(SpreadsheetBase):
             f for f in self.bfoods if (not f.is_abandoned and f.is_inventory)
         ]
 
+        consuming_days = []
+        for f in cfoods:
+            for d, c in f.consumptions:
+                if (not d in consuming_days) and (d.month == month):
+                    consuming_days.append(d)
+
+        consuming_days = sorted(consuming_days)
+
+        warehousing_days = sorted(
+            list(set([f.xdate for f in cfoods if f.xdate.month == month]))
+        )
+
         food_names = list(set([f.name for f in rfoods] + food_names))
 
         sheet = None
@@ -176,12 +188,13 @@ class Food(SpreadsheetBase):
                 cdates.append(food.xdate)
             cdates = sorted(list(set(cdates)))
 
-            consuming_n = 1
-            warehousing_n = 1
+            consuming_n = None
+            warehousing_n = None
             for cdate in cdates:
                 for food in m_cfoods:
 
                     if food.xdate == cdate and food.xdate.month == month:
+                        warehousing_n = warehousing_days.index(cdate) + 1
                         sheet.cell(row_index, 1, cdate.month)
                         sheet.cell(row_index, 2, cdate.day)
                         sheet.cell(row_index, 4, food.count)
@@ -204,6 +217,7 @@ class Food(SpreadsheetBase):
                         row_index += 1
 
                     if cdate in [d for d, __ in food.consumptions]:
+                        consuming_n = consuming_days.index(cdate) + 1
                         ccount = [
                             c for d, c in food.consumptions if d == cdate
                         ][0]

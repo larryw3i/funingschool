@@ -1,0 +1,123 @@
+[4mGPASTE-CLIENT[24m(1)                                                                                                         General Commands Manual                                                                                                         [4mGPASTE-CLIENT[24m(1)
+
+[1mNAME[0m
+       GPaste - A lightweight clipboard manager for the Gnome desktop
+
+[1mSYNOPSIS[0m
+       [1m[command |] gpaste-client [options...][0m
+
+[1mDESCRIPTION[0m
+       GPaste is a modular clipboard management system with a fully DBus-based daemon, a CLI client and a gtk+ tray icon.
+
+[1mCOMMANDS[0m
+       [1mgpaste-client [history][0m
+              Display the history with indexes
+
+       [1mgpaste-client history-size[0m
+              Display this size of the history
+
+       [1mgpaste-client get-history[0m
+              Get the name of the current history
+
+       [1mgpaste-client backup-history[0m
+              Backup the current history
+
+       [1mgpaste-client switch-history[0m
+              Switch to another history
+
+       [1mgpaste-client delete-history[0m
+              Delete a history
+
+       [1mgpaste-client list-histories[0m
+              List available histories
+
+       [1mgpaste-client add <text>[0m
+              Add the text into the history
+
+       [1mgpaste-client add-password <name> <password>[0m
+              Add the name - password couple to the history
+
+       [1mgpaste-client delete-password <name>[0m
+              Delete the password <name>
+
+       [1mgpaste-client set-password <uuid> <name>[0m
+              Mark the item matching <uuid> from the history as being a password named <name>
+
+       [1mgpaste-client rename-password <old name> <new name>[0m
+              Rename the password
+
+       [1mgpaste-client get <uuid>[0m
+              Get the item matching <uuid> from the history
+
+       [1mgpaste-client select <uuid>[0m
+              Put the item matching <uuid> from the history into the clipboard
+
+       [1mgpaste-client replace <uuid> <contents>[0m
+              Replace the contents of the item matching <uuid> from the history with the provided one
+
+       [1mgpaste-client merge [--decoration|-d <string>] [--separator|-s <string>] <uuid> … <uuid>[0m
+              Merge the items matching the uuids from the history and put the result in the clipboard
+              If foo bar and baz are respectively uuids 5cb227f9-857d-490b-8ea1-f5f33f59f04e b4a7aa02-ef9a-4c29-b951-ebbdb4ed279b and 99da883b-0544-4cb4-92dd-733420a9db6d in history and you run
+              gpaste-client merge -d '"' -s ',' 5cb227f9-857d-490b-8ea1-f5f33f59f04e b4a7aa02-ef9a-4c29-b951-ebbdb4ed279b 99da883b-0544-4cb4-92dd-733420a9db6d
+              You will end up with "foo","bar","baz" in your clipboard
+
+       [1mgpaste-client delete <uuid>[0m
+              Delete the item matching <uuid> from the history
+
+       [1mgpaste-client file <path>[0m
+              Put the content of the file at <path> into the clipboard
+
+       [1mcommand | gpaste-client[0m
+              Put the output of the command into the history
+
+       [1mgpaste-client empty[0m
+              Empty the history
+
+       [1mgpaste-client start[0m
+              Start tracking clipboard changes
+
+       [1mgpaste-client stop[0m
+              Stop tracking clipboard changes
+
+       [1mgpaste-client upload <uuid>[0m
+              Upload the item matching <uuid> to a pastebin service
+
+       [1mgpaste-client ui[0m
+              Launch the graphical tool
+
+       [1mgpaste-client daemon-reexec[0m
+              Reexecute the daemon, for example after upgrading GPaste
+
+       [1mgpaste-client settings[0m
+              Launch the configuration tool
+
+       [1mgpaste-client version[0m
+              Display the version
+
+       [1mgpaste-client daemon-version[0m
+              Display the daemon version
+
+       [1mgpaste-client help[0m
+              Display the help
+
+       [1mgpaste-client about[0m
+              Display the about dialog
+
+       [1mgpaste-client show-history[0m
+              Make the applet or extension display the history
+
+[1mOPTIONS[0m
+       [1m--use-index[0m
+              Use the item index instead of its uuid
+
+       [1m--oneline[0m
+              Display each item on one line, without new lines
+
+       [1m--raw  [22mDisplay the item raw (without index)
+
+       [1m--reverse[0m
+              Display the items in reverse order
+
+       [1m--zero [22mUse NUL character instead of new lines between each item
+
+                                                                                                                                                                                                                                                         [4mGPASTE-CLIENT[24m(1)

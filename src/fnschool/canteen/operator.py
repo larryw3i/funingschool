@@ -5,6 +5,7 @@ import tomllib
 
 from fnschool import *
 from fnschool.canteen.path import *
+from fnschool.canteen.config import *
 
 
 class Operator(User):
@@ -14,7 +15,17 @@ class Operator(User):
         self._name = None
         self._dpath = None
         self._profile = {}
+        self._config = None
         pass
+
+    @property
+    def config(self):
+        if not self._config:
+            self._config = Config(
+                (self.config_dpath / (_("app_config") + ".toml"))
+            )
+
+        return self._config
 
     @property
     def preconsuming_dpath(self):
