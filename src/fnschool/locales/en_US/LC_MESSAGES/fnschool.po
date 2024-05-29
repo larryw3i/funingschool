@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-29 23:00+0800\n"
+"POT-Creation-Date: 2024-05-30 02:53+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -47,39 +47,47 @@ msgstr ""
 msgid "Configuration file '%s' was copied to '%s'."
 msgstr ""
 
-#: src/fnschool/user.py:24 src/fnschool/user.py:116
-msgid "Your name has been saved to \"{0}\""
+#: src/fnschool/user.py:24
+msgid "Your name has been saved to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/user.py:44
-msgid "{0} is reading names from {1}"
+#: src/fnschool/user.py:35
+msgid "The saved names have been read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/user.py:49
+#: src/fnschool/user.py:37
+msgid "The saved name has been read from \"{0}\"."
+msgstr ""
+
+#: src/fnschool/user.py:53
 msgid "The names saved by {0} are as follows:"
 msgstr ""
 
-#: src/fnschool/user.py:59 src/fnschool/user.py:109
+#: src/fnschool/user.py:64 src/fnschool/user.py:115
 msgid "Unexpected value was got. Exit."
 msgstr ""
 
-#: src/fnschool/user.py:63
+#: src/fnschool/user.py:68
 msgid "Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
 msgstr ""
 
-#: src/fnschool/user.py:99
+#: src/fnschool/user.py:105
 msgid "Enter your name, please!"
 msgstr ""
 
-#: src/fnschool/user.py:107
+#: src/fnschool/user.py:113
 msgid "Unexpected value was got."
 msgstr ""
 
-#: src/fnschool/user.py:126
+#: src/fnschool/user.py:122
+msgid "Your name has been saved to \"{0}\""
+msgstr ""
+
+#: src/fnschool/user.py:133
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 
-#: src/fnschool/user.py:155
+#: src/fnschool/user.py:162
 msgid ""
 "Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
 "'Y','y')"
@@ -1764,5 +1772,14 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "\"{0}\" has been read from \"{1}\"."
+#~ msgstr ""
+
+#~ msgid "{0} is reading names from {1}"
+#~ msgstr ""
+
+#~ msgid "The saved names have been read from {0}."
+#~ msgstr ""
+
+#~ msgid "The saved name has been read from {0}."
 #~ msgstr ""
 

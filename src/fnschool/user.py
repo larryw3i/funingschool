@@ -21,7 +21,7 @@ class User:
 
     @property
     def name(self):
-        name_writed_s = _('Your name has been saved to "{0}"').format(
+        name_writed_s = _('Your name has been saved to "{0}".').format(
             self.name_fpath
         )
 
@@ -29,6 +29,15 @@ class User:
             name = None
             with open(self.name_fpath, "r", encoding="utf-8") as f:
                 name = f.read().replace(" ", "").strip()
+
+            print_info(
+                (
+                    _("The saved names have been read from \"{0}\".")
+                    if "\n" in name
+                    else _("The saved name has been read from \"{0}\".")
+                ).format(self.name_fpath)
+            )
+
             if "\n" in name:
                 names = name.split("\n")
 
@@ -41,13 +50,9 @@ class User:
                     name0 = names[0]
 
                 print_info(
-                    _("{0} is reading names from {1}").format(
-                        app_name, self.name_fpath
-                    )
-                )
-                print_info(
                     _("The names saved by {0} are as follows:").format(app_name)
                 )
+
                 names_len = len(names)
                 names_len2 = len(str(names_len))
                 name_s = sqr_slist(
@@ -95,6 +100,7 @@ class User:
                         f.write("\n".join([name0] + names))
 
                     print_info(name_writed_s)
+
             elif name == "":
                 print_warning(_("Enter your name, please!"))
                 for i in range(0, 3):
@@ -119,6 +125,7 @@ class User:
                 )
 
             else:
+
                 if ">" in name:
                     name = name[1:]
 
