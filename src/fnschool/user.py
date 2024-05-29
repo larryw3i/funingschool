@@ -32,9 +32,9 @@ class User:
 
             print_info(
                 (
-                    _("The saved names have been read from \"{0}\".")
+                    _('The saved names have been read from "{0}".')
                     if "\n" in name
-                    else _("The saved name has been read from \"{0}\".")
+                    else _('The saved name has been read from "{0}".')
                 ).format(self.name_fpath)
             )
 
@@ -59,6 +59,7 @@ class User:
                     [f"({i+1:>{names_len2}}) {n}" for i, n in enumerate(names)]
                 )
                 print_warning(name_s)
+
                 for i in range(0, 3):
                     if i > 2:
                         print_error(_("Unexpected value was got. Exit."))
@@ -70,7 +71,9 @@ class User:
                             + 'or enter your name. ("Enter" for "{0}")'
                         ).format(name0)
                     )
+
                     n_input = input(">_ ")
+
                     if n_input.isnumeric():
                         n_input = int(n_input) - 1
                         if n_input > names_len or n_input < 0:
@@ -79,6 +82,7 @@ class User:
                         if name0.startswith(">"):
                             name0 = name0[1:]
                         break
+
                     elif n_input == "":
                         self._name = name0
                         break
@@ -101,30 +105,7 @@ class User:
 
                     print_info(name_writed_s)
 
-            elif name == "":
-                print_warning(_("Enter your name, please!"))
-                for i in range(0, 3):
-                    n_input = input(">_ ").replace(" ", "")
-                    n_input_len = len(n_input)
-                    if n_input_len > 0:
-                        self._name = n_input
-                        break
-                    elif n_input_len < 1 and i < 3:
-                        print_error(_("Unexpected value was got."))
-                    else:
-                        print_error(_("Unexpected value was got. Exit."))
-                        exit()
-
-                with open(self.name_fpath, "w", encoding="utf-8") as f:
-                    f.write(">" + self._name)
-
-                print_info(
-                    _('Your name has been saved to "{0}"').format(
-                        self.name_fpath
-                    )
-                )
-
-            else:
+            elif len(name) > 0:
 
                 if ">" in name:
                     name = name[1:]
@@ -147,6 +128,26 @@ class User:
                     self._name = n_input
                 else:
                     self._name = name
+
+            else:
+
+                print_warning(_("Enter your name, please!"))
+                for i in range(0, 3):
+                    n_input = input(">_ ").replace(" ", "")
+                    n_input_len = len(n_input)
+                    if n_input_len > 0:
+                        self._name = n_input
+                        break
+                    elif n_input_len < 1 and i < 3:
+                        print_error(_("Unexpected value was got."))
+                    else:
+                        print_error(_("Unexpected value was got. Exit."))
+                        exit()
+
+                with open(self.name_fpath, "w", encoding="utf-8") as f:
+                    f.write(">" + self._name)
+
+                print_info(name_writed_s)
 
         return self._name
 
