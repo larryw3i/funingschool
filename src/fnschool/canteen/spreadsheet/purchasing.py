@@ -111,9 +111,16 @@ class Purchasing(SpreadsheetBase):
                 (n, self.headers.index(n) + 1)
                 for n in self.headers
                 if n in col[2]
-            ][-1]
+            ]
+            if len(col0) < 1:
+                print_error(
+                    _('Column "{0}" was not found. Exit').format(col[2][0])
+                )
+                exit()
+            col0 = col0[-1]
             col[0] = col0[0]
             col[1] = col0[1]
+
         return col
 
     @property

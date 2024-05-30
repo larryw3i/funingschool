@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-30 03:12+0800\n"
+"POT-Creation-Date: 2024-05-30 13:50+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -83,11 +83,7 @@ msgstr ""
 msgid "Unexpected value was got."
 msgstr ""
 
-#: src/fnschool/user.py:151
-msgid "Your name has been saved to \"{0}\""
-msgstr ""
-
-#: src/fnschool/user.py:168
+#: src/fnschool/user.py:163
 msgid ""
 "Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
 "'Y','y')"
@@ -722,33 +718,37 @@ msgstr ""
 msgid "parent_path_of_purchasing_file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:180
+#: src/fnschool/canteen/spreadsheet/purchasing.py:117
+msgid "Column \"{0}\" was not found. Exit"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:187
 msgid "Loading data from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:238
+#: src/fnschool/canteen/spreadsheet/purchasing.py:245
 msgid ""
 "Column \"{0}\" has been updated, feel free to open new issue if some food"
 " with the wrong class ({1}). "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:245
+#: src/fnschool/canteen/spreadsheet/purchasing.py:252
 msgid "Ok, I'd like to check and update it. (Press any key to check the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:253
+#: src/fnschool/canteen/spreadsheet/purchasing.py:260
 msgid ""
 "I have checked it, all classes of food are right, and I closed the file. "
 "(Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:309
+#: src/fnschool/canteen/spreadsheet/purchasing.py:316
 msgid ""
 "{0} need a purchasing list file, and it's file type should be '.xlsx'. "
 "The column names of it:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:314
+#: src/fnschool/canteen/spreadsheet/purchasing.py:321
 msgid ""
 "\n"
 "\tcolumn   type    example\n"
@@ -762,75 +762,75 @@ msgid ""
 "\t是结余   Text    y"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:327
+#: src/fnschool/canteen/spreadsheet/purchasing.py:334
 msgid "Please select a purchasing file."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:328
+#: src/fnschool/canteen/spreadsheet/purchasing.py:335
 msgid "Spreadsheet Files"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:334
+#: src/fnschool/canteen/spreadsheet/purchasing.py:341
 msgid "Please select the purchasing file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:340
+#: src/fnschool/canteen/spreadsheet/purchasing.py:347
 msgid "No file was selected, exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:344
+#: src/fnschool/canteen/spreadsheet/purchasing.py:351
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:377
+#: src/fnschool/canteen/spreadsheet/purchasing.py:384
 msgid "The remaining food wasn't read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:383
+#: src/fnschool/canteen/spreadsheet/purchasing.py:390
 msgid ""
 "{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet \"{2}\" "
 "......"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:397
+#: src/fnschool/canteen/spreadsheet/purchasing.py:404
 msgid ""
 "Some remaining foods have been read from sheet \"{0}\" of spreadsheet "
 "\"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:402
+#: src/fnschool/canteen/spreadsheet/purchasing.py:409
 msgid "The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:426
+#: src/fnschool/canteen/spreadsheet/purchasing.py:433
 msgid "Purchaser: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:429
+#: src/fnschool/canteen/spreadsheet/purchasing.py:436
 msgid "Inventory data: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:437
+#: src/fnschool/canteen/spreadsheet/purchasing.py:444
 msgid "Fill them in \"{0}\"? (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:439
+#: src/fnschool/canteen/spreadsheet/purchasing.py:446
 msgid "Fill it in \"{0}\"? (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:500
+#: src/fnschool/canteen/spreadsheet/purchasing.py:507
 msgid "The remaining foods have been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:502
+#: src/fnschool/canteen/spreadsheet/purchasing.py:509
 msgid "The remaining food has been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:512
+#: src/fnschool/canteen/spreadsheet/purchasing.py:519
 msgid "Please check/modify the updated data. (Press any key to open the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:521
+#: src/fnschool/canteen/spreadsheet/purchasing.py:528
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
@@ -1781,5 +1781,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "The saved name has been read from {0}."
+#~ msgstr ""
+
+#~ msgid "Your name has been saved to \"{0}\""
 #~ msgstr ""
 
