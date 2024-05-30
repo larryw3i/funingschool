@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-30 17:27+0800\n"
-"PO-Revision-Date: 2024-05-30 17:28+0800\n"
+"POT-Creation-Date: 2024-05-30 21:32+0800\n"
+"PO-Revision-Date: 2024-05-30 21:33+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -43,10 +43,6 @@ msgstr "请慢用。"
 #: src/fnschool/entry.py:20
 msgid "The modules to run."
 msgstr "要运行的模块。"
-
-#: src/fnschool/path.py:19
-msgid "data_dir"
-msgstr "数据"
 
 #: src/fnschool/user.py:24
 msgid "Your name has been saved to \"{0}\"."
@@ -560,7 +556,7 @@ msgstr ""
 "工作表 “{0}” 已更新。\n"
 "在您完成每天消耗设计后按任意建以继续。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:181
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:195
 #: src/fnschool/canteen/workbook.py:2016
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr "好的，我已经更新工作簿 “{0}” 了。（按任意键继续）"
@@ -690,15 +686,20 @@ msgstr "未读取到食材，退出。"
 msgid "(Remaining)"
 msgstr "（余下）"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:56
-msgid "food_consuming"
-msgstr "食材出库"
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:61
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:66
+msgid "{year}.{month}.{day}"
+msgstr "{year}年{month}月{day}日"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:75
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:76
+msgid "food_consuming--{t0}--{t1}.xlsx"
+msgstr "食材出库（{t0}到{t1}）.xlsx"
+
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:89
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr "工作簿 “{0}” 已被复制到 “{1}” 。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:128
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:142
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
@@ -706,41 +707,45 @@ msgstr ""
 "工作簿 “{1}” 的工作表 ‘{0}’ 已更新。\n"
 "在您完成每天消耗设计后按任意建以继续。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:140
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:154
 msgid "New purchased food for date {0} is:"
 msgstr "{0} 新购入的食材："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:142
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:156
 msgid "New purchased foods for date {0} are:"
 msgstr "{0} 新购入的食材："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:162
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:176
 msgid "Negligible foods are not listed."
 msgstr "无需入库的食材未列出。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:165
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:179
 msgid "There is no purchased food for {0}."
 msgstr "{0} 没有新购入的食材。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:171
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:185
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I know "
 "[press any key to continue])"
 msgstr "没有食材消耗的日期不需要设计出库。（好的，知道了的【按任意键继续】）"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:242
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:234
+msgid "{year}.{month}"
+msgstr "{year}年{month}月"
+
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:259
 msgid "Consuming days of {0}:"
 msgstr "{0} 的出库日期："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:249
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:266
 msgid "{0} days in total."
 msgstr "共 {0} 天。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:251
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:268
 msgid "{0} day in total."
 msgstr "共 {0} 天。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:254
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:271
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr "是的，都是对的。（按任意键继续）"
 
@@ -1116,3 +1121,6 @@ msgstr "教师名"
 
 #~ msgid "Configuration file '%s' was copied to '%s'."
 #~ msgstr "配置文件 “%s” 被复制到 “%s” 。"
+
+#~ msgid "data_dir"
+#~ msgstr "数据"

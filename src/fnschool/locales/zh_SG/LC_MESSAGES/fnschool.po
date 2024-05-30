@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-30 17:27+0800\n"
+"POT-Creation-Date: 2024-05-30 21:32+0800\n"
 "PO-Revision-Date: 2024-03-07 22:18+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_SG\n"
@@ -40,10 +40,6 @@ msgstr ""
 
 #: src/fnschool/entry.py:20
 msgid "The modules to run."
-msgstr ""
-
-#: src/fnschool/path.py:19
-msgid "data_dir"
 msgstr ""
 
 #: src/fnschool/user.py:24
@@ -536,7 +532,7 @@ msgid ""
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:181
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:195
 #: src/fnschool/canteen/workbook.py:2016
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
@@ -665,55 +661,64 @@ msgstr ""
 msgid "(Remaining)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:56
-msgid "food_consuming"
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:61
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:66
+msgid "{year}.{month}.{day}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:75
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:76
+msgid "food_consuming--{t0}--{t1}.xlsx"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:89
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:128
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:142
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:140
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:154
 msgid "New purchased food for date {0} is:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:142
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:156
 msgid "New purchased foods for date {0} are:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:162
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:176
 msgid "Negligible foods are not listed."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:165
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:179
 msgid "There is no purchased food for {0}."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:171
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:185
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I "
 "know [press any key to continue])"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:242
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:234
+msgid "{year}.{month}"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:259
 msgid "Consuming days of {0}:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:249
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:266
 msgid "{0} days in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:251
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:268
 msgid "{0} day in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:254
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:271
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
@@ -1787,5 +1792,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Your name has been saved to \"{0}\""
+#~ msgstr ""
+
+#~ msgid "data_dir"
 #~ msgstr ""
 
