@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-30 13:50+0800\n"
+"POT-Creation-Date: 2024-05-30 17:14+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -55,35 +55,39 @@ msgstr ""
 msgid "The saved names have been read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/user.py:37
+#: src/fnschool/user.py:38
+msgid "No name was read from \"{0}\"."
+msgstr ""
+
+#: src/fnschool/user.py:40
 msgid "The saved name has been read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/user.py:53
+#: src/fnschool/user.py:57
 msgid "The names saved by {0} are as follows:"
 msgstr ""
 
-#: src/fnschool/user.py:65 src/fnschool/user.py:144
+#: src/fnschool/user.py:69 src/fnschool/user.py:148
 msgid "Unexpected value was got. Exit."
 msgstr ""
 
-#: src/fnschool/user.py:69
+#: src/fnschool/user.py:73
 msgid "Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
 msgstr ""
 
-#: src/fnschool/user.py:114
+#: src/fnschool/user.py:118
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 
-#: src/fnschool/user.py:134
+#: src/fnschool/user.py:138
 msgid "Enter your name, please!"
 msgstr ""
 
-#: src/fnschool/user.py:142
+#: src/fnschool/user.py:146
 msgid "Unexpected value was got."
 msgstr ""
 
-#: src/fnschool/user.py:163
+#: src/fnschool/user.py:167
 msgid ""
 "Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
 "'Y','y')"
@@ -237,11 +241,11 @@ msgstr ""
 msgid "bill"
 msgstr ""
 
-#: src/fnschool/canteen/path.py:14
+#: src/fnschool/canteen/path.py:13
 msgid "canteen"
 msgstr ""
 
-#: src/fnschool/canteen/path.py:17
+#: src/fnschool/canteen/path.py:14
 msgid "operator_name"
 msgstr ""
 

@@ -34,7 +34,11 @@ class User:
                 (
                     _('The saved names have been read from "{0}".')
                     if "\n" in name
-                    else _('The saved name has been read from "{0}".')
+                    else (
+                        _('No name was read from "{0}".')
+                        if len(name) < 1
+                        else _('The saved name has been read from "{0}".')
+                    )
                 ).format(self.name_fpath)
             )
 
