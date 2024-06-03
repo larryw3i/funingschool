@@ -45,7 +45,7 @@ class Operator(User):
     def bill_dpath(self):
         dpath = self.dpath / _("bill")
         if not dpath.exists():
-            os.makedirs(dpath)
+            os.makedirs(dpath,exist_ok=True)
         return dpath
 
     @property

@@ -15,20 +15,11 @@ class FnExam:
         self.teacher = teacher
         self.fpath0 = score_fpath0
         self._grade = None
-        self._fpath = None
         pass
 
     @property
     def name_fpath(self):
         return self.teacher.dpath / (_("exam_names") + ".txt")
-
-    @property
-    def exam_fpath(self):
-        if not self._fpath:
-            self._fpath = self.teacher.exam_dpath / (Path(self.name)+".xlsx")
-            if not self._fpath.exists():
-                shutil.copy(self.fpath0,self._fpath)
-        return self._fpath
 
     @property
     def name(self):
@@ -117,18 +108,6 @@ class FnExam:
                 with open(self.name_fpath, "w", encoding="utf-8") as f:
                     f.write(">" + self._name)
                 print_info(name_writed_s)
-
-        if self._name.startswith("/"):
-            self._name = re.sub(r"^/+","",self._name)
-        if self._name.startswith("\\"):
-            self._name = re.sub(r"^\\+","",self._name)
-        if '..' in self._name:
-            self._name = re.sub("..",'',self._name)
-
-        if '/' in self._name:
-            dpath = (self.teacher.exam_dpath / Path(self._name)).parent
-            if not dpath.exists():
-                os.makedirs(dpath,exist_ok=True)
 
         return self._name
 
