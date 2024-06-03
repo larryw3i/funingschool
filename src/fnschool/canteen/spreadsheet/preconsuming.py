@@ -51,31 +51,25 @@ class PreConsuming(SpreadsheetBase):
             if tn0.month != tn1.month:
                 tn0 = datetime(tn1.year, tn1.month, 1)
 
-            file_t0 =  (
-                        tn0
-                        if not tn0_cp.month == tn1.month
-                        else (tn0 + timedelta(days=1))
-                    )
+            file_t0 = (
+                tn0
+                if not tn0_cp.month == tn1.month
+                else (tn0 + timedelta(days=1))
+            )
             file_t1 = tn1
 
-            file_t0 =  _("{year}.{month}.{day}").format(
-                        year = file_t0.year,
-                        month = file_t0.month,
-                        day = file_t0.day
-                    )
-            file_t1 =  _("{year}.{month}.{day}").format(
-                        year = file_t1.year,
-                        month = file_t1.month,
-                        day = file_t1.day
-                    )
-
+            file_t0 = _("{year}.{month}.{day}").format(
+                year=file_t0.year, month=file_t0.month, day=file_t0.day
+            )
+            file_t1 = _("{year}.{month}.{day}").format(
+                year=file_t1.year, month=file_t1.month, day=file_t1.day
+            )
 
             wb_fpath = (
                 self.bill.operator.preconsuming_dpath
                 / (
                     _("food_consuming--{t0}--{t1}.xlsx").format(
-                        t0 = file_t0,
-                        t1 = file_t1
+                        t0=file_t0, t1=file_t1
                     )
                 )
             ).as_posix()
@@ -231,10 +225,7 @@ class PreConsuming(SpreadsheetBase):
         consumption_days = []
         year = self.bill.consuming.year
         month = self.bill.consuming.month
-        year_month = _("{year}.{month}").format(
-            year = year,
-            month = month
-        )
+        year_month = _("{year}.{month}").format(year=year, month=month)
 
         for f in foods:
             for d, c in f.consumptions:
