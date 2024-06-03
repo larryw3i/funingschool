@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-05-30 21:32+0800\n"
+"POT-Creation-Date: 2024-06-04 00:24+0800\n"
 "PO-Revision-Date: 2024-03-07 22:18+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_SG\n"
@@ -42,50 +42,78 @@ msgstr ""
 msgid "The modules to run."
 msgstr ""
 
-#: src/fnschool/user.py:24
-msgid "Your name has been saved to \"{0}\"."
-msgstr ""
-
-#: src/fnschool/user.py:35
-msgid "The saved names have been read from \"{0}\"."
-msgstr ""
-
-#: src/fnschool/user.py:38
-msgid "No name was read from \"{0}\"."
-msgstr ""
-
-#: src/fnschool/user.py:40
-msgid "The saved name has been read from \"{0}\"."
-msgstr ""
-
-#: src/fnschool/user.py:57
-msgid "The names saved by {0} are as follows:"
-msgstr ""
-
-#: src/fnschool/user.py:69 src/fnschool/user.py:148
-msgid "Unexpected value was got. Exit."
-msgstr ""
-
-#: src/fnschool/user.py:73
-msgid "Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
-msgstr ""
-
-#: src/fnschool/user.py:118
-msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
-msgstr ""
-
-#: src/fnschool/user.py:138
+#: src/fnschool/user.py:17
 msgid "Enter your name, please!"
 msgstr ""
 
-#: src/fnschool/user.py:146
+#: src/fnschool/user.py:36
+msgid "profile"
+msgstr ""
+
+#: src/fnschool/user.py:53
+msgid "Please tell {0} the {1}."
+msgstr ""
+
+#: src/fnschool/user.py:59
+msgid "Unexpected value got."
+msgstr ""
+
+#: src/fnschool/user.py:66
+msgid ""
+"\"{0}\" has been saved to \"{1}\". (Ok! I know that. [Press any key to "
+"continue])"
+msgstr ""
+
+#: src/fnschool/user.py:78
+msgid "Your name has been saved to \"{0}\"."
+msgstr ""
+
+#: src/fnschool/user.py:89
+msgid "The saved names have been read from \"{0}\"."
+msgstr ""
+
+#: src/fnschool/user.py:92
+msgid "No name was read from \"{0}\"."
+msgstr ""
+
+#: src/fnschool/user.py:94
+msgid "The saved name has been read from \"{0}\"."
+msgstr ""
+
+#: src/fnschool/user.py:111
+msgid "The names saved by {0} are as follows:"
+msgstr ""
+
+#: src/fnschool/exam/score.py:120 src/fnschool/exam/score.py:148
+#: src/fnschool/user.py:123 src/fnschool/user.py:202
+msgid "Unexpected value was got. Exit."
+msgstr ""
+
+#: src/fnschool/user.py:127
+msgid "Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
+msgstr ""
+
+#: src/fnschool/user.py:172
+msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
+msgstr ""
+
+#: src/fnschool/exam/score.py:110 src/fnschool/exam/score.py:146
+#: src/fnschool/user.py:200
 msgid "Unexpected value was got."
 msgstr ""
 
-#: src/fnschool/user.py:167
+#: src/fnschool/user.py:221
 msgid ""
 "Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
 "'Y','y')"
+msgstr ""
+
+#: src/fnschool/user.py:237
+msgid "app_config"
+msgstr ""
+
+#: src/fnschool/user.py:244
+msgid "config"
 msgstr ""
 
 #: src/fnschool/canteen/bill.py:72 src/fnschool/canteen/bill.py:77
@@ -187,52 +215,26 @@ msgstr ""
 msgid "Consumptions were read."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:25
-msgid "app_config"
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:32
+#: src/fnschool/canteen/operator.py:19
 msgid "preconsuming"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:39
-msgid "config"
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:46
+#: src/fnschool/canteen/operator.py:26
 msgid "food_classes"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:59
-msgid "profile"
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:74
+#: src/fnschool/canteen/operator.py:33
 msgid ""
 "Please tell {0} your superior department, {0} will use it as the form "
 "title. (\"purchasing summary\" form, \"consuming summary\" form, etc.)"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:81
+#: src/fnschool/canteen/operator.py:40
 msgid "superior department"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:89
-msgid "Please tell {0} the {1}."
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:95
-msgid "Unexpected value got."
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:102
-msgid ""
-"\"{0}\" has been saved to \"{1}\". (Ok! I know that. [Press any key to "
-"continue])"
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:114 src/fnschool/canteen/operator.py:121
-#: src/fnschool/canteen/operator.py:129
+#: src/fnschool/canteen/operator.py:46 src/fnschool/canteen/operator.py:53
+#: src/fnschool/canteen/operator.py:61
 msgid "bill"
 msgstr ""
 
@@ -532,7 +534,7 @@ msgid ""
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:195
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:189
 #: src/fnschool/canteen/workbook.py:2016
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
@@ -662,63 +664,63 @@ msgid "(Remaining)"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/preconsuming.py:61
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:66
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:64
 msgid "{year}.{month}.{day}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:76
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:71
 msgid "food_consuming--{t0}--{t1}.xlsx"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:89
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:83
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:142
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:136
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:154
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:148
 msgid "New purchased food for date {0} is:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:156
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:150
 msgid "New purchased foods for date {0} are:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:176
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:170
 msgid "Negligible foods are not listed."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:179
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:173
 msgid "There is no purchased food for {0}."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:185
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:179
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I "
 "know [press any key to continue])"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:234
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:228
 msgid "{year}.{month}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:259
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:250
 msgid "Consuming days of {0}:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:266
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:257
 msgid "{0} days in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:268
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:259
 msgid "{0} day in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:271
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:262
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
@@ -854,12 +856,48 @@ msgstr ""
 msgid "Enter the examination scores."
 msgstr ""
 
-#: src/fnschool/exam/path.py:6
+#: src/fnschool/exam/path.py:7 src/fnschool/exam/teacher.py:20
 msgid "exam"
 msgstr ""
 
-#: src/fnschool/exam/path.py:7
+#: src/fnschool/exam/path.py:8
 msgid "teacher_name"
+msgstr ""
+
+#: src/fnschool/exam/score.py:33
+msgid ""
+"Please update the question titles of \"{0}\" according to the comments. "
+"(Ok, open it for me [Press any key to open file])"
+msgstr ""
+
+#: src/fnschool/exam/score.py:43
+msgid "Ok, I have updated it. (Press any key to continue)"
+msgstr ""
+
+#: src/fnschool/exam/score.py:49
+msgid "exam_names"
+msgstr ""
+
+#: src/fnschool/exam/score.py:79
+msgid "The name of examination has been saved to \"{0}\"."
+msgstr ""
+
+#: src/fnschool/exam/score.py:85
+msgid "The saved examination names {0} are as follow:"
+msgstr ""
+
+#: src/fnschool/exam/score.py:87
+msgid "The saved examination name {0}is as follow:"
+msgstr ""
+
+#: src/fnschool/exam/score.py:96
+msgid ""
+"Select the examination name you entered (index), or enter new examination"
+" name, please! (default: {0})"
+msgstr ""
+
+#: src/fnschool/exam/score.py:135
+msgid "Hello~ tell {0} the examination name, please!"
 msgstr ""
 
 #~ msgid "Please refer to file  to customize your 'sett1ngs.py' file."
@@ -1795,5 +1833,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "data_dir"
+#~ msgstr ""
+
+#~ msgid "Hello~ tell {0} your name, please!"
 #~ msgstr ""
 

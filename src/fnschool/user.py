@@ -6,24 +6,19 @@ from fnschool.config import *
 
 
 class User:
-    def __init__(
-        self,
-        parent_dpath=None,
-        name_fpath=None,
-    ):
+    def __init__(self, parent_dpath=None, name_fpath=None, ask_name_s=None):
         self.parent_dpath = parent_dpath
         self.name_fpath = name_fpath
+        self.ask_name_s = ask_name_s or _("Enter your name, please!")
 
         self._name = None
-        self.dpath_showed = False        
+        self.dpath_showed = False
         self._dpath = None
         self._profile = {}
         self._config = None
 
-
     def __str__(self):
         return self.name
-
 
     def save_profile(self):
         profile = self.profile
@@ -45,7 +40,6 @@ class User:
             with open(self.profile_fpath, "rb") as f:
                 self._profile = tomllib.load(f)
         return self._profile
-
 
     def get_profile(self, key, info=None):
         profile = self.profile
@@ -73,7 +67,6 @@ class User:
             input(">_ ")
 
         return self.profile[key]
-
 
     @property
     def name(self):
@@ -191,7 +184,7 @@ class User:
 
             else:
 
-                print_warning(_("Enter your name, please!"))
+                print_warning(self.ask_name_s)
                 for i in range(0, 3):
                     n_input = input(">_ ").replace(" ", "")
                     n_input_len = len(n_input)

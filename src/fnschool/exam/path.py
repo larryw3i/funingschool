@@ -13,3 +13,11 @@ for d in [
 ]:
     if not d.exists():
         os.makedirs(d.as_posix(), exist_ok=True)
+
+if not teach_name_fpath.exists():
+    if not teach_name_fpath.parent.exists():
+        os.makedirs(teach_name_fpath.parent.as_posix(), exist_ok=True)
+    with open(teach_name_fpath, "w", encoding="utf-8") as f:
+        f.write("")
+
+# The end.
