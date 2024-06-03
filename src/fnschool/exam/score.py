@@ -16,6 +16,8 @@ class Score:
         self.fpath0 = score_fpath0
         self._grade = None
         self._fpath = None
+        self._fpaths = None
+        self.fext = ".xlsx"
         pass
 
     @property
@@ -25,7 +27,34 @@ class Score:
         return self._teacher
 
     def enter(self):
-        self.update_questions()
+        # self.update_questions()
+        print(self.fpaths)
+
+    @property
+    def fpaths(self):
+        if not self._fpaths:
+            dpath = self.fpath.parent.as_posix()
+            fpaths = []
+            for f in os.listdir(dpath):
+                if f.endswith(self.fext):
+                    fpath = Path(dpath)/f
+                    wb = load_workbook(fpath)
+                    sheet = wb.active
+                    test_time = sheet.cell(1,1).value.split('\n')
+                    if len(test_time) > 3:
+                        test_time = datetime.strptime(test_time[4],"%Y%m%d%H%M")
+                    
+                    else:
+                        wb.close()
+                        sheet = None
+                        test_time = datetime.ctime(
+                            os.path.getctime(fpath)
+                        )
+                    fpaths.append([fpath,test_time])
+            self._fpaths = fpaths
+        return self._fpaths
+
+
 
     def update_questions(self):
         fpath = self.fpath
@@ -55,11 +84,12 @@ class Score:
     @property
     def fpath(self):
         if not self._fpath:
-            self._fpath = self.teacher.exam_dpath / (Path(self.name).as_posix() + ".xlsx")
+            self._fpath = self.teacher.exam_dpath / (Path(self.name).as_posix() + self.fext)
             if not self._fpath.parent.exists():
                 os.makedirs(self._fpath.parent.as_posix(),exist_ok=True)
             if not self._fpath.exists():
                 shutil.copy(self.fpath0, self._fpath)
+
         return self._fpath
 
     @property
@@ -86,12 +116,12 @@ class Score:
                 )
                 print_error(
                     (
-                        _("The saved examination names {0} " + "are as follow:")
+                        _("The saved examination names are as follow:")
                         if names_len > 1
                         else _(
-                            "The saved examination name {0}" + "is as follow:"
+                            "The saved examination name is as follow:"
                         )
-                    ).format(app_name)
+                    )
                 )
 
                 print_warning(sqr_slist(names))
@@ -108,7 +138,7 @@ class Score:
                 for i in range(0, 3):
                     n_input = input(">_ ").replace(" ", "")
                     if len(n_input) > 0:
-                        if n_input.is_numeric():
+                        if n_input.isnumeric():
                             n_input = int(n_input) - 1
                             if n_input >=0 and n_input <= names_len:
                                 name_i = names[n_input]

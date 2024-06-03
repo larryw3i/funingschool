@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-04 00:24+0800\n"
-"PO-Revision-Date: 2024-06-04 00:24+0800\n"
+"POT-Creation-Date: 2024-06-04 01:07+0800\n"
+"PO-Revision-Date: 2024-06-04 01:07+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -44,80 +44,80 @@ msgstr "请慢用。"
 msgid "The modules to run."
 msgstr "要运行的模块。"
 
-#: src/fnschool/user.py:17
+#: src/fnschool/user.py:12
 msgid "Enter your name, please!"
 msgstr "请输入您的名字！"
 
-#: src/fnschool/user.py:36
+#: src/fnschool/user.py:31
 msgid "profile"
 msgstr "个人信息"
 
-#: src/fnschool/user.py:53
+#: src/fnschool/user.py:48
 msgid "Please tell {0} the {1}."
 msgstr "请您告诉 {0} 您的 {1} 是什么。"
 
-#: src/fnschool/user.py:59
+#: src/fnschool/user.py:54
 msgid "Unexpected value got."
 msgstr "获取到未预期的值。"
 
-#: src/fnschool/user.py:66
+#: src/fnschool/user.py:61
 msgid ""
 "\"{0}\" has been saved to \"{1}\". (Ok! I know that. [Press any key to "
 "continue])"
 msgstr "“{0}” 已被保存到 “{1}”。（好的，我知道了。【按任意键继续】）"
 
-#: src/fnschool/user.py:78
+#: src/fnschool/user.py:73
 msgid "Your name has been saved to \"{0}\"."
 msgstr "您的名字被保存到 “{0}”。"
 
-#: src/fnschool/user.py:89
+#: src/fnschool/user.py:84
 msgid "The saved names have been read from \"{0}\"."
 msgstr "已从 “{0}” 读取到一些被保存的名字。"
 
-#: src/fnschool/user.py:92
+#: src/fnschool/user.py:87
 msgid "No name was read from \"{0}\"."
 msgstr "从 “{0}” 中未读取到被保存的名字。"
 
-#: src/fnschool/user.py:94
+#: src/fnschool/user.py:89
 msgid "The saved name has been read from \"{0}\"."
 msgstr "已从 “{0}” 读取到一个被保存的名字。"
 
-#: src/fnschool/user.py:111
+#: src/fnschool/user.py:106
 msgid "The names saved by {0} are as follows:"
 msgstr "被 {0} 保存的名字如下："
 
-#: src/fnschool/exam/score.py:120 src/fnschool/exam/score.py:148
-#: src/fnschool/user.py:123 src/fnschool/user.py:202
+#: src/fnschool/exam/score.py:125 src/fnschool/exam/score.py:154
+#: src/fnschool/user.py:118 src/fnschool/user.py:197
 msgid "Unexpected value was got. Exit."
 msgstr "获取到未预期的值。退出。"
 
-#: src/fnschool/user.py:127
+#: src/fnschool/user.py:122
 msgid ""
 "Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
 msgstr "输入您的名字的序号，或者输入您的名字。（“回车”即为“{0}”）"
 
-#: src/fnschool/user.py:172
+#: src/fnschool/user.py:167
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 "您好！请问您的名字是 “{0}” 吗？如果不是请输入您的名字！（是的：“Y”，“y”，“”）"
 
-#: src/fnschool/exam/score.py:110 src/fnschool/exam/score.py:146
-#: src/fnschool/user.py:200
+#: src/fnschool/exam/score.py:128 src/fnschool/exam/score.py:152
+#: src/fnschool/user.py:195
 msgid "Unexpected value was got."
 msgstr "获取到未预期的值。"
 
-#: src/fnschool/user.py:221
+#: src/fnschool/user.py:216
 msgid ""
 "Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
 "'Y','y')"
 msgstr ""
 "您好～ {0}，您的所有文件将会被保存到 “{1}” 文件夹，打开它？（打开：“Y”、“y”）"
 
-#: src/fnschool/user.py:237
+#: src/fnschool/user.py:232
 msgid "app_config"
 msgstr "应用配置"
 
-#: src/fnschool/user.py:244
+#: src/fnschool/user.py:239
 msgid "config"
 msgstr "配置"
 
@@ -898,7 +898,7 @@ msgstr "“考试” 的相关函数。"
 msgid "Enter the examination scores."
 msgstr "录入考试成绩。"
 
-#: src/fnschool/exam/path.py:7 src/fnschool/exam/teacher.py:20
+#: src/fnschool/exam/path.py:7 src/fnschool/exam/teacher.py:21
 msgid "exam"
 msgstr "测试"
 
@@ -922,26 +922,26 @@ msgstr "好了，我已经更新了。（按任意键继续）"
 msgid "exam_names"
 msgstr "测试名"
 
-#: src/fnschool/exam/score.py:79
+#: src/fnschool/exam/score.py:74
 msgid "The name of examination has been saved to \"{0}\"."
 msgstr "测试名已被保存到 “{0}”。"
 
-#: src/fnschool/exam/score.py:85
-msgid "The saved examination names {0} are as follow:"
-msgstr "被 {0} 保存的一些测试名如下："
+#: src/fnschool/exam/score.py:89
+msgid "The saved examination names are as follow:"
+msgstr "被保存的一些测试名如下："
 
-#: src/fnschool/exam/score.py:87
-msgid "The saved examination name {0}is as follow:"
-msgstr "仅有一个被 {0} 保存的测试名，它是："
+#: src/fnschool/exam/score.py:91
+msgid "The saved examination name is as follow:"
+msgstr "仅有一个被保存的测试名，它是："
 
-#: src/fnschool/exam/score.py:96
+#: src/fnschool/exam/score.py:100
 msgid ""
 "Select the examination name you entered (index), or enter new examination "
 "name, please! (default: {0})"
 msgstr ""
 "选择以前你输入的测试名（输入序号），或者输入新的测试名。（默认：“{0}”）"
 
-#: src/fnschool/exam/score.py:135
+#: src/fnschool/exam/score.py:142
 msgid "Hello~ tell {0} the examination name, please!"
 msgstr "您好～ 请告诉 {0} 您需要录入的测试名。"
 
