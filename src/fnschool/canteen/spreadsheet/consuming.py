@@ -112,9 +112,20 @@ class Consuming(SpreadsheetBase):
             if row_difference > 0:
                 self.row_inserting_tip(food_index0 + 1)
                 csheet.insert_rows(food_index0 + 1, row_difference)
-                form_indexes = self.get_consuming_form_indexes()
+                for row in csheet.iter_rows(
+                    min_row=food_index0 + 1,
+                    max_row=food_index0 + 1 + row_difference,
+                    min_col=1,
+                    max_col=8,
+                ):
+                    for cell in row:
+                        cell.alignment = self.cell_alignment0
+                        self.border = self.cell_border0
+
+                self.del_form_indexes()
+                form_indexes = self.form_indexes
                 form_index1 += row_difference
-                food_index1 += row_difference
+                food_index1 = form_index1 - 1
                 row_difference = 0
 
             for row in csheet.iter_rows(
@@ -169,19 +180,19 @@ class Consuming(SpreadsheetBase):
                     frow_index = fentry_index_start + findex
                     csheet.cell(frow_index, 2, food.name)
                     csheet.cell(frow_index, 3, food.unit_name)
-                    csheet.cell(frow_index, 4, consuming_count)
-                    csheet.cell(frow_index, 5, food.unit_price)
-                    csheet.cell(
-                        frow_index, 6, consuming_count * food.unit_price
-                    )
                     csheet.cell(frow_index, 4).number_format = (
-                        numbers.FORMAT_NUMBER
+                        numbers.FORMAT_NUMBER_00
                     )
+                    csheet.cell(frow_index, 4, consuming_count)
                     csheet.cell(frow_index, 5).number_format = (
                         numbers.FORMAT_NUMBER_00
                     )
+                    csheet.cell(frow_index, 5, food.unit_price)
                     csheet.cell(frow_index, 6).number_format = (
                         numbers.FORMAT_NUMBER_00
+                    )
+                    csheet.cell(
+                        frow_index, 6, consuming_count * food.unit_price
                     )
 
                 fentry_index = fentry_index_end + 1

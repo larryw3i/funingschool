@@ -15,11 +15,22 @@ class Food(SpreadsheetBase):
 
     def get_sheet(self, name=None):
         sheet = None
+        bfoods = self.bfoods
+        
         if name in self.bwb.sheetnames:
             sheet = self.bwb[name]
         else:
             sheet = self.bwb.copy_worksheet(self.bwb[self.sheet_name])
             sheet.title = name
+
+        for row_index in range(1, sheet.max_row + 1):
+            rc1_value = sheet.cell(row_index, 1).value
+            rc1_value = str(rc1_value)
+            if rc1_value and "材料名称：（）" in rc1_value:
+                unit = [f.unit_name for f in bfoods if f.name == name]
+                unit = unit[0] if len(unit) > 0 else "斤"
+                sheet.cell(row_index, 1, f"材料名称：{name}（{unit}）")
+
         return sheet
 
     def format(self, sheet):
@@ -201,7 +212,11 @@ class Food(SpreadsheetBase):
                         sheet.cell(row_index, 5, food.unit_price)
                         sheet.cell(row_index, 6, food.count * food.unit_price)
                         sheet.cell(row_index, 9, "")
+                        sheet.cell(row_index, 10).number_format = (
+                            numbers.FORMAT_NUMBER_00
+                        )
                         sheet.cell(row_index, 10, food.count)
+
                         sheet.cell(row_index, 11, food.unit_price)
                         sheet.cell(row_index, 12, food.count * food.unit_price)
                         sheet.cell(
@@ -227,7 +242,11 @@ class Food(SpreadsheetBase):
                         sheet.cell(row_index, 1, cdate.month)
                         sheet.cell(row_index, 2, cdate.day)
                         sheet.cell(row_index, 6, "")
+                        sheet.cell(row_index, 7).number_format = (
+                            numbers.FORMAT_NUMBER_00
+                        )
                         sheet.cell(row_index, 7, ccount)
+
                         sheet.cell(row_index, 8, food.unit_price)
                         sheet.cell(row_index, 9, ccount * food.unit_price)
                         sheet.cell(row_index, 10, cremainder)

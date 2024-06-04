@@ -33,7 +33,7 @@ class Score:
         return self._teacher
 
     def enter(self):
-        self.update()
+        pass
 
     @property
     def fpaths(self):

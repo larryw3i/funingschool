@@ -30,8 +30,15 @@ class Unwarehousing(SpreadsheetBase):
                     " ", ""
                 ):
                     indexes.append([row_index + 1, 0])
-
-                if row[1].value and "合计" in row[1].value.replace(" ", ""):
+                
+                r1_value = row[1].value
+                if (
+                    r1_value
+                    and (
+                        "合计" in r1_value.replace(" ", "")
+                        or "总合计" in r1_value.replace(" ","")
+                    )
+                ):
                     indexes[-1][1] = row_index
 
                 row_index += 1
@@ -58,6 +65,7 @@ class Unwarehousing(SpreadsheetBase):
             return None
 
         foods = sorted(foods, key=lambda f: f.xdate)
+        foods_len = len(foods)
 
         t1 = self.bill.consuming.date_m1
 
@@ -90,12 +98,16 @@ class Unwarehousing(SpreadsheetBase):
             unwsheet.cell(row_index, 1, food.xdate.strftime("%Y.%m.%d"))
             unwsheet.cell(row_index, 2, food.name)
             unwsheet.cell(row_index, 3, food.unit_name)
+
+            unwsheet.cell(row_index, 4).number_format = numbers.FORMAT_NUMBER_00
             unwsheet.cell(row_index, 4, food.count)
-            unwsheet.cell(row_index, 5, food.unit_price)
-            unwsheet.cell(row_index, 6, food.total_price)
+
             unwsheet.cell(row_index, 5).number_format = numbers.FORMAT_NUMBER_00
             unwsheet.cell(row_index, 6).number_format = numbers.FORMAT_NUMBER_00
 
+            unwsheet.cell(row_index, 5, food.unit_price)
+            unwsheet.cell(row_index, 6, food.total_price)
+ 
             for u_col_index in range(1, 7):
                 cell = unwsheet.cell(row_index, u_col_index)
                 cell.alignment = self.cell_alignment0
@@ -105,7 +117,7 @@ class Unwarehousing(SpreadsheetBase):
                 str(unwsheet.cell(row_index + 1, 2).value)
                 .replace(" ", "")
                 .endswith("合计")
-                and len(foods) - 1 > _index
+                and foods_len > _index
             ):
                 unwsheet.cell(row_index + 1, 2, "合计")
                 unwsheet.cell(row_index + 1, 6, total_price)
@@ -118,11 +130,12 @@ class Unwarehousing(SpreadsheetBase):
                     min_col=1,
                     max_col=7,
                 ):
-                    if row[2].value and str(row[2].value).replace(
+                    r1_value = row[1].value
+                    if r1_value and str(r1_value).replace(
                         " ", ""
                     ).endswith("合计"):
-                        row[2].value = "总合计" if use_forms else "合计"
-                        row[6].value = total_price
+                        row[1].value = "总合计" if use_forms else "合计"
+                        row[5].value = total_price
                         break
                 break
 

@@ -164,6 +164,7 @@ class Warehousing(SpreadsheetBase):
                     for cell in row:
                         cell.alignment = self.cell_alignment0
                         self.border = self.cell_border0
+
                 self.del_form_indexes()
                 form_indexes = self.form_indexes
                 form_index1 += row_difference
@@ -226,15 +227,18 @@ class Warehousing(SpreadsheetBase):
                     cfood_row_index = entry_index + cfindex
                     wsheet.cell(cfood_row_index, 2, cfood.name)
                     wsheet.cell(cfood_row_index, 3, cfood.unit_name)
+                    wsheet.cell(cfood_row_index, 4).number_format = (
+                        numbers.FORMAT_NUMBER_00
+                    )
                     wsheet.cell(cfood_row_index, 4, cfood.count)
-                    wsheet.cell(cfood_row_index, 5, cfood.unit_price)
-                    wsheet.cell(cfood_row_index, 6, cfood.total_price)
                     wsheet.cell(cfood_row_index, 5).number_format = (
                         numbers.FORMAT_NUMBER_00
                     )
+                    wsheet.cell(cfood_row_index, 5, cfood.unit_price)
                     wsheet.cell(cfood_row_index, 6).number_format = (
                         numbers.FORMAT_NUMBER_00
                     )
+                    wsheet.cell(cfood_row_index, 6, cfood.total_price)
 
                 entry_index_end = entry_index + len(cfoods) - 1
 
