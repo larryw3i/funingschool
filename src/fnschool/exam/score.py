@@ -15,9 +15,15 @@ class Score:
         self._teacher = None
         self.fpath0 = score_fpath0
         self._grade = None
+        self._subject = None
+        self._name0 = None
+        self._test_t0 = None
+        self._test_t1 = None
         self._fpath = None
         self._fpaths = None
+        self._scores = None
         self.fext = ".xlsx"
+
         pass
 
     @property
@@ -66,7 +72,11 @@ class Score:
 
         return self._fpaths
 
-    def update(self):
+    def read_scores(self):
+
+        if self._scores:
+            return
+
         fpath = self.fpath
         fpaths = self.fpaths
         fpath1 = None if len(fpaths) < 2 else fpaths[1]
@@ -133,6 +143,22 @@ class Score:
             )
         )
         input(">_ ")
+
+        scores = pd.read_excel(fpath)
+        scores_col_0 = scores.columns[0].split("\n")
+        self._grade = scores_col_0[0]
+        self._subject = scores_col_0[1]
+        self._name0 = scores_col_0[2]
+
+        if len(scores_col_0) > 3:
+            self._test_t0 = datetime.strptime(scores_col_0[3], "%Y%m%d%H%M")
+            self._test_t1 = datetime.strptime(scores_col_0[4], "%Y%m%d%H%M")
+
+        scores.rename(columns={scores.columns[0]: "姓名"}, inplace=True)
+        scores.drop(scores.tail(1).index, inplace=True)
+
+        self._scores = scores
+
         return
 
     @property
