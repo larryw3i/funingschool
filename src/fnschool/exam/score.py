@@ -96,9 +96,8 @@ class Score:
         for row_index in range(2, sheet.max_row + 1):
             name = sheet.cell(row_index, 1).value
             if name:
-                score = (
-                    [s for n, s in scores1 if n == name][0] if scores1 else 0
-                ) or 0
+                score = [s for n, s in scores1 if n == name] if scores1 else []
+                score = score[0] if len(score) > 0 else 0
                 sheet.cell(row_index, 3, score)
 
         print_info(
@@ -128,8 +127,8 @@ class Score:
         print_warning(
             _(
                 "Ok, I have updated the question"
-                + " titles and closed the file, "
-                + "please update other data for me. "
+                + " titles and scores, and I closed "
+                + "the file. "
                 + "(Press any key to continue)"
             )
         )
