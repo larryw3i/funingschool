@@ -27,8 +27,7 @@ class Score:
         return self._teacher
 
     def enter(self):
-        # self.update_questions()
-        print(self.fpaths)
+        self.update()
 
     @property
     def fpaths(self):
@@ -62,10 +61,58 @@ class Score:
                         )
                         fpaths.append([fpath, test_time])
             self._fpaths = fpaths
+
+        self._fpaths = sorted(self._fpaths, key=lambda f: f[-1])
+
         return self._fpaths
 
-    def update_questions(self):
+    def update(self):
         fpath = self.fpath
+        fpaths = self.fpaths
+        fpath1 = None if len(fpaths) < 2 else fpaths[1]
+
+        scores1 = None
+        scores1_name = None
+        if fpath1:
+            wb = load_workbook(fpath1)
+            sheet = wb.active
+            scores1_name = sheet.cell(1, 1).value().split("\n")[2]
+            scores1 = [
+                [sheet.cell(row_index, 1).value, sheet.cell(row_index, 2).value]
+                for row_index in range(2, sheet.max_row + 1)
+            ]
+            scores1 = [
+                [n, s]
+                for n, s in scores1
+                if ((not "平均分" in n) and len(n.strip()) > 0)
+            ]
+            wb.close()
+            sheet = None
+
+        wb = load_workbook(fpath)
+        sheet = wb.active
+
+        sheet.cell(1, 3, scores1_name if scores1_name else _("No recent tests"))
+        for row_index in range(2, sheet.max_row + 1):
+            name = sheet.cell(row_index, 1).value
+            if name:
+                score = (
+                    [s for n, s in scores1 if n == name][0] if scores1 else 0
+                ) or 0
+                sheet.cell(row_index, 3, score)
+
+        print_info(
+            _(
+                "The recent examination scores " + 'have been added to "{0}".'
+            ).format(fpath)
+            if scores1
+            else _("There is no recent tests.")
+        )
+        wb.save(fpath)
+        print_info(_('Spreadsheet "{0}" has been saved.').format(fpath))
+        wb.close()
+        sheet = None
+
         print_info(
             _(
                 "Please update the question titles "
@@ -77,7 +124,14 @@ class Score:
         )
         input(">_ ")
         open_path(fpath)
-        print_warning(_("Ok, I have updated it. (Press any key to continue)"))
+        print_warning(
+            _(
+                "Ok, I have updated the question"
+                + " titles and closed the file, "
+                + "please update other data for me. "
+                + "(Press any key to continue)"
+            )
+        )
         input(">_ ")
         return
 
@@ -131,7 +185,12 @@ class Score:
                     )
                 )
 
-                print_warning(sqr_slist(names))
+                names_len2 = len(str(names_len))
+                print_warning(
+                    sqr_slist(
+                        [f"{i:>{names_len2}} {n}" for i, n in enumerate(names)]
+                    )
+                )
                 names = [n.replace(">", "") for n in names]
                 print_info(
                     _(
