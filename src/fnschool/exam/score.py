@@ -116,6 +116,7 @@ class Score:
         print_info(
             _(
                 "Please update the question titles "
+                + "and scores "
                 + 'of "{0}" '
                 + "according to the comments. "
                 + "(Ok, open it for me [Press any "
