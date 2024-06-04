@@ -99,7 +99,10 @@ class PreConsuming(SpreadsheetBase):
                 if not wbfood.name.endswith(residual_mark):
                     wbfood.name = wbfood.name + residual_mark
 
-            wbfoods = sorted(wbfoods, key=lambda f: (-f.is_inventory, f.name))
+            wbfoods = sorted(
+                wbfoods, 
+                key=lambda f: (f.xdate , f.name)
+            )
 
             col_index = 0
             for d_index in range(0, (tn1 - tn0).days + 1):
