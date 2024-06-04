@@ -1,6 +1,6 @@
 import os
 import sys
-
+import time
 from fnschool import *
 from fnschool.exam import *
 from fnschool.exam.path import *
@@ -37,24 +37,32 @@ class Score:
             fpaths = []
             for f in os.listdir(dpath):
                 if f.endswith(self.fext):
-                    fpath = Path(dpath)/f
+                    fpath = Path(dpath) / f
                     wb = load_workbook(fpath)
                     sheet = wb.active
-                    test_time = sheet.cell(1,1).value.split('\n')
+                    test_time = (
+                        sheet.cell(1, 1).value.split("\n")
+                        if sheet.cell(1, 1).value
+                        else []
+                    )
                     if len(test_time) > 3:
-                        test_time = datetime.strptime(test_time[4],"%Y%m%d%H%M")
-                    
+                        fpaths.append(
+                            [
+                                fpath,
+                                datetime.strptime(test_time[3], "%Y%m%d%H%M"),
+                                datetime.strptime(test_time[4], "%Y%m%d%H%M"),
+                            ]
+                        )
+
                     else:
                         wb.close()
                         sheet = None
-                        test_time = datetime.ctime(
+                        test_time = datetime.fromtimestamp(
                             os.path.getctime(fpath)
                         )
-                    fpaths.append([fpath,test_time])
+                        fpaths.append([fpath, test_time])
             self._fpaths = fpaths
         return self._fpaths
-
-
 
     def update_questions(self):
         fpath = self.fpath
@@ -84,9 +92,11 @@ class Score:
     @property
     def fpath(self):
         if not self._fpath:
-            self._fpath = self.teacher.exam_dpath / (Path(self.name).as_posix() + self.fext)
+            self._fpath = self.teacher.exam_dpath / (
+                Path(self.name).as_posix() + self.fext
+            )
             if not self._fpath.parent.exists():
-                os.makedirs(self._fpath.parent.as_posix(),exist_ok=True)
+                os.makedirs(self._fpath.parent.as_posix(), exist_ok=True)
             if not self._fpath.exists():
                 shutil.copy(self.fpath0, self._fpath)
 
@@ -105,7 +115,6 @@ class Score:
                 "The name of examination " + 'has been saved to "{0}".'
             ).format(self.name_fpath)
 
-
             if names_len > 0:
                 name0 = (
                     names[0]
@@ -118,9 +127,7 @@ class Score:
                     (
                         _("The saved examination names are as follow:")
                         if names_len > 1
-                        else _(
-                            "The saved examination name is as follow:"
-                        )
+                        else _("The saved examination name is as follow:")
                     )
                 )
 
@@ -140,7 +147,7 @@ class Score:
                     if len(n_input) > 0:
                         if n_input.isnumeric():
                             n_input = int(n_input) - 1
-                            if n_input >=0 and n_input <= names_len:
+                            if n_input >= 0 and n_input <= names_len:
                                 name_i = names[n_input]
                                 break
                             break

@@ -14,7 +14,7 @@ class Teacher(User):
         self._dpath = None
         self._exam_dpath = None
         pass
-    
+
     @property
     def exam_dpath(self):
         if not self._exam_dpath:
