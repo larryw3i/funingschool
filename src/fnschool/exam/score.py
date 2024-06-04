@@ -72,6 +72,42 @@ class Score:
 
         return self._fpaths
 
+    @property
+    def scores(self):
+        if not self._scores:
+            self.read_scores()
+        return self._scores
+
+    @property
+    def grade(self):
+        if not self._grade:
+            self.read_scores()
+        return self._grade
+
+    @property
+    def subject(self):
+        if not self._subject:
+            self.read_scores()
+        return self._subject
+
+    @property
+    def test_t0(self):
+        if not self._test_t0:
+            self.read_scores()
+        return self._test_t0
+
+    @property
+    def test_t1(self):
+        if not self._test_t1:
+            self.read_scores()
+        return self._test_t1
+
+    @property
+    def name0(self):
+        if not self._name0:
+            self.read_scores()
+        return self._name0
+
     def read_scores(self):
 
         if self._scores:
