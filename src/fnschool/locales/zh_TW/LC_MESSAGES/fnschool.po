@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-04 14:25+0800\n"
+"POT-Creation-Date: 2024-06-06 08:55+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -84,7 +84,7 @@ msgstr ""
 msgid "The names saved by {0} are as follows:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:247 src/fnschool/exam/score.py:276
+#: src/fnschool/exam/score.py:283 src/fnschool/exam/score.py:312
 #: src/fnschool/user.py:118 src/fnschool/user.py:197
 msgid "Unexpected value was got. Exit."
 msgstr ""
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 
-#: src/fnschool/exam/score.py:250 src/fnschool/exam/score.py:274
+#: src/fnschool/exam/score.py:286 src/fnschool/exam/score.py:310
 #: src/fnschool/user.py:195
 msgid "Unexpected value was got."
 msgstr ""
@@ -225,16 +225,18 @@ msgstr ""
 
 #: src/fnschool/canteen/operator.py:33
 msgid ""
-"Please tell {0} your superior department, {0} will use it as the form "
-"title. (\"purchasing summary\" form, \"consuming summary\" form, etc.)"
+"Please tell {0} the alias of your superior department, {0} will use it as"
+" the form title (\"purchasing summary\" form, \"consuming summary\" form,"
+" etc). e.g: \"富宁县那能乡中小学\". If you haven't noticed it, you can check the "
+"previous bill first and then let {0} know."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:40
+#: src/fnschool/canteen/operator.py:45
 msgid "superior department"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:46 src/fnschool/canteen/operator.py:53
-#: src/fnschool/canteen/operator.py:61
+#: src/fnschool/canteen/operator.py:51 src/fnschool/canteen/operator.py:58
+#: src/fnschool/canteen/operator.py:66
 msgid "bill"
 msgstr ""
 
@@ -305,14 +307,14 @@ msgstr ""
 msgid "Please design the consumptions of spreadsheet '{0}' ."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/consuming.py:219
+#: src/fnschool/canteen/spreadsheet/consuming.py:230
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:64
 #: src/fnschool/canteen/spreadsheet/cover.py:61
-#: src/fnschool/canteen/spreadsheet/food.py:250
+#: src/fnschool/canteen/spreadsheet/food.py:269
 #: src/fnschool/canteen/spreadsheet/inventory.py:306
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:90
-#: src/fnschool/canteen/spreadsheet/unwarehousing.py:129
-#: src/fnschool/canteen/spreadsheet/warehousing.py:276
+#: src/fnschool/canteen/spreadsheet/unwarehousing.py:139
+#: src/fnschool/canteen/spreadsheet/warehousing.py:280
 #: src/fnschool/canteen/workbook.py:416 src/fnschool/canteen/workbook.py:447
 #: src/fnschool/canteen/workbook.py:513 src/fnschool/canteen/workbook.py:798
 #: src/fnschool/canteen/workbook.py:1660 src/fnschool/canteen/workbook.py:1664
@@ -323,7 +325,7 @@ msgstr ""
 msgid "Sheet '%s' was updated."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:260
+#: src/fnschool/canteen/spreadsheet/food.py:279
 #: src/fnschool/canteen/workbook.py:808
 msgid "All food sheets have their tab colors reset."
 msgstr ""
@@ -534,12 +536,12 @@ msgid ""
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:189
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:191
 #: src/fnschool/canteen/workbook.py:2016
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/consuming.py:288
+#: src/fnschool/canteen/spreadsheet/consuming.py:299
 #: src/fnschool/canteen/spreadsheet/warehousing.py:86
 #: src/fnschool/canteen/workbook.py:2184 src/fnschool/canteen/workbook.py:2253
 #, python-format
@@ -635,15 +637,15 @@ msgstr ""
 msgid "Summary:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:94
+#: src/fnschool/canteen/spreadsheet/food.py:105
 msgid "Sheet {0} has been reformatted."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:274
+#: src/fnschool/canteen/spreadsheet/food.py:293
 msgid "Food sheets have their tab colors recolor:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:278
+#: src/fnschool/canteen/spreadsheet/food.py:297
 msgid "Updated food sheets:"
 msgstr ""
 
@@ -676,51 +678,51 @@ msgstr ""
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:136
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:138
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:148
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:150
 msgid "New purchased food for date {0} is:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:150
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:152
 msgid "New purchased foods for date {0} are:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:170
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:172
 msgid "Negligible foods are not listed."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:173
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:175
 msgid "There is no purchased food for {0}."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:179
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:181
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I "
 "know [press any key to continue])"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:228
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:230
 msgid "{year}.{month}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:250
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:252
 msgid "Consuming days of {0}:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:257
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:259
 msgid "{0} days in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:259
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:261
 msgid "{0} day in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:262
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
@@ -844,7 +846,7 @@ msgstr ""
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/unwarehousing.py:53
+#: src/fnschool/canteen/spreadsheet/unwarehousing.py:57
 msgid "There is no abandoned food. Sheet {0} updating skipped."
 msgstr ""
 
@@ -864,57 +866,57 @@ msgstr ""
 msgid "teacher_name"
 msgstr ""
 
-#: src/fnschool/exam/score.py:105
+#: src/fnschool/exam/score.py:141
 msgid "No recent tests"
 msgstr ""
 
-#: src/fnschool/exam/score.py:114
+#: src/fnschool/exam/score.py:150
 msgid "The recent examination scores have been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:118
+#: src/fnschool/exam/score.py:154
 msgid "There is no recent tests."
 msgstr ""
 
-#: src/fnschool/exam/score.py:121
+#: src/fnschool/exam/score.py:157
 msgid "Spreadsheet \"{0}\" has been saved."
 msgstr ""
 
-#: src/fnschool/exam/score.py:126
+#: src/fnschool/exam/score.py:162
 msgid ""
 "Please update the question titles and scores of \"{0}\" according to the "
 "comments. (Ok, open it for me [Press any key to open file])"
 msgstr ""
 
-#: src/fnschool/exam/score.py:138
+#: src/fnschool/exam/score.py:174
 msgid ""
 "Ok, I have updated the question titles and scores, and I closed the file."
 " (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:166
+#: src/fnschool/exam/score.py:202
 msgid "exam_names"
 msgstr ""
 
-#: src/fnschool/exam/score.py:194
+#: src/fnschool/exam/score.py:230
 msgid "The name of examination has been saved to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:208
+#: src/fnschool/exam/score.py:244
 msgid "The saved examination names are as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:210
+#: src/fnschool/exam/score.py:246
 msgid "The saved examination name is as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:222
+#: src/fnschool/exam/score.py:258
 msgid ""
 "Select the examination name you entered (index), or enter new examination"
 " name, please! (default: {0})"
 msgstr ""
 
-#: src/fnschool/exam/score.py:264
+#: src/fnschool/exam/score.py:300
 msgid "Hello~ tell {0} the examination name, please!"
 msgstr ""
 
@@ -1885,5 +1887,12 @@ msgstr ""
 #~ "the file, please update other data "
 #~ "for me. (Press any key to "
 #~ "continue)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Please tell {0} your superior "
+#~ "department, {0} will use it as the"
+#~ " form title. (\"purchasing summary\" form,"
+#~ " \"consuming summary\" form, etc.)"
 #~ msgstr ""
 

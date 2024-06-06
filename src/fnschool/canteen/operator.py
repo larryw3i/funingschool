@@ -31,10 +31,15 @@ class Operator(User):
     @property
     def superior_department(self):
         info = _(
-            "Please tell {0} your superior department, "
-            + "{0} will use it as the form title. "
-            + '("purchasing summary" form, '
-            + '"consuming summary" form, etc.)'
+            "Please tell {0} the alias of your "
+            + "superior department, "
+            + "{0} will use it as the form title ("
+            + '"purchasing summary" form, '
+            + '"consuming summary" form, etc). '
+            + 'e.g: "富宁县那能乡中小学". '
+            + "If you haven't noticed it, "
+            + "you can check the previous bill "
+            + "first and then let {0} know."
         ).format(app_name)
         superior_department0 = self.get_profile(
             key=_("superior department"), info=info

@@ -16,7 +16,7 @@ class Food(SpreadsheetBase):
     def get_sheet(self, name=None):
         sheet = None
         bfoods = self.bfoods
-        
+
         if name in self.bwb.sheetnames:
             sheet = self.bwb[name]
         else:

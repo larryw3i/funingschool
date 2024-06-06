@@ -30,14 +30,11 @@ class Unwarehousing(SpreadsheetBase):
                     " ", ""
                 ):
                     indexes.append([row_index + 1, 0])
-                
+
                 r1_value = row[1].value
-                if (
-                    r1_value
-                    and (
-                        "合计" in r1_value.replace(" ", "")
-                        or "总合计" in r1_value.replace(" ","")
-                    )
+                if r1_value and (
+                    "合计" in r1_value.replace(" ", "")
+                    or "总合计" in r1_value.replace(" ", "")
                 ):
                     indexes[-1][1] = row_index
 
@@ -107,7 +104,7 @@ class Unwarehousing(SpreadsheetBase):
 
             unwsheet.cell(row_index, 5, food.unit_price)
             unwsheet.cell(row_index, 6, food.total_price)
- 
+
             for u_col_index in range(1, 7):
                 cell = unwsheet.cell(row_index, u_col_index)
                 cell.alignment = self.cell_alignment0
@@ -131,9 +128,9 @@ class Unwarehousing(SpreadsheetBase):
                     max_col=7,
                 ):
                     r1_value = row[1].value
-                    if r1_value and str(r1_value).replace(
-                        " ", ""
-                    ).endswith("合计"):
+                    if r1_value and str(r1_value).replace(" ", "").endswith(
+                        "合计"
+                    ):
                         row[1].value = "总合计" if use_forms else "合计"
                         row[5].value = total_price
                         break
