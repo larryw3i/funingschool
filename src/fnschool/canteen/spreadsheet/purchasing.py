@@ -417,8 +417,10 @@ class Purchasing(SpreadsheetBase):
                 saved_ifoods_s = sqr_slist(
                     [
                         (
-                            f"({i+1:>{saved_ifoods_len2}}) {f0.name}:{f0.count} {f0.unit_name}"
-                            + f"\u2a09 {f0.unit_price:.2f} {self.bill.currency.unit}/"
+                            f"({i+1:>{saved_ifoods_len2}}) "
+                            + f"{f0.name}:{f0.count} {f0.unit_name}"
+                            + f"\u2a09 {f0.unit_price:.2f} "
+                            + f"{self.bill.currency.unit}/"
                             + f"{f0.unit_name}={f0.total_price:.2f} "
                             + f"{self.bill.currency.unit}"
                         )

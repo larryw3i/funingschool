@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-06 08:55+0800\n"
+"POT-Creation-Date: 2024-06-06 14:36+0800\n"
 "PO-Revision-Date: 2024-03-07 22:18+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_SG\n"
@@ -311,7 +311,7 @@ msgstr ""
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:64
 #: src/fnschool/canteen/spreadsheet/cover.py:61
 #: src/fnschool/canteen/spreadsheet/food.py:269
-#: src/fnschool/canteen/spreadsheet/inventory.py:306
+#: src/fnschool/canteen/spreadsheet/inventory.py:309
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:90
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:139
 #: src/fnschool/canteen/spreadsheet/warehousing.py:280
@@ -653,8 +653,8 @@ msgstr ""
 msgid "Sheet \"{0}\" has been reformatted."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/inventory.py:139
-msgid "Failed to read remaining foods from Sheet {0} of Spreadsheet {1}."
+#: src/fnschool/canteen/spreadsheet/inventory.py:147
+msgid "No unit"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/preconsuming.py:27
@@ -1897,5 +1897,8 @@ msgstr ""
 #~ "department, {0} will use it as the"
 #~ " form title. (\"purchasing summary\" form,"
 #~ " \"consuming summary\" form, etc.)"
+#~ msgstr ""
+
+#~ msgid "Failed to read remaining foods from Sheet {0} of Spreadsheet {1}."
 #~ msgstr ""
 

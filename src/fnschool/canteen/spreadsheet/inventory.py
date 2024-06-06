@@ -133,28 +133,21 @@ class Inventory(SpreadsheetBase):
 
         foods = []
         header_info = str(sheet.cell(food_index_m1[0] - 3, 1).value)
-        header_info = re.split("\s+", header_info)
-        if len(header_info) < 6 - 1:
-            print_error(
-                _(
-                    "Failed to read remaining foods from "
-                    + "Sheet {0} of Spreadsheet {1}."
-                ).format(self.sheet_name, self.operator.bill_fpath)
-            )
-            return None
+        header_info0 = header_info.replace(" ", "")
 
-        purchaser = header_info[1].split("：")[1]
-        year = header_info[2]
-        month = header_info[4]
-        day = header_info[6]
+        purchaser = re.split(r"\d+", re.split(r"：\s*", header_info0)[1])[0]
+        year = int(re.split(r"\D+", re.split(r"年", header_info0)[0].strip())[-1])
+        month = int(re.split(r"月", re.split(r"年", header_info0)[-1])[0])
+        day = int(re.split(r"月", re.split(r"日", header_info0)[0])[-1])
 
         for row_index in range(food_index_m1[0], food_index_m1[1] + 1):
             fname = sheet.cell(row_index, 1).value
             if not fname:
                 break
-            funit_name = sheet.cell(row_index, 2).value
+            funit_name = sheet.cell(row_index, 2).value or _("No unit")
             fcount = float(sheet.cell(row_index, 5).value)
             ftotal_price = float(sheet.cell(row_index, 6).value)
+
             food = Food(
                 self.bill,
                 name=fname,
