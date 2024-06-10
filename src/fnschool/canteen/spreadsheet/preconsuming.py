@@ -220,6 +220,7 @@ class PreConsuming(SpreadsheetBase):
                 f_index += 1
             wb.close()
             sheet = None
+        self.eliminate_infinite_decimals(cfoods)
         self.print_consuming_days(cfoods)
         pass
 

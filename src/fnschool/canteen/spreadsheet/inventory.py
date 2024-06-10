@@ -136,7 +136,9 @@ class Inventory(SpreadsheetBase):
         header_info0 = header_info.replace(" ", "")
 
         purchaser = re.split(r"\d+", re.split(r"：\s*", header_info0)[1])[0]
-        year = int(re.split(r"\D+", re.split(r"年", header_info0)[0].strip())[-1])
+        year = int(
+            re.split(r"\D+", re.split(r"年", header_info0)[0].strip())[-1]
+        )
         month = int(re.split(r"月", re.split(r"年", header_info0)[-1])[0])
         day = int(re.split(r"月", re.split(r"日", header_info0)[0])[-1])
 

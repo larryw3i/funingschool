@@ -62,7 +62,7 @@ class Food:
 
     @property
     def unit_price(self):
-        return 0 if not self.count else self.total_price / self.count
+        return 0 if not self.count else (self.total_price / self.count)
 
     def get_remainder(self, cdate):
         if self.xdate < cdate:
