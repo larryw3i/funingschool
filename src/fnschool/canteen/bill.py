@@ -20,6 +20,7 @@ class Bill:
         self._operator = None
         self.currency = Currency().CNY
         self._consuming = None
+        self.significant_digits = 2
 
         pass
 
