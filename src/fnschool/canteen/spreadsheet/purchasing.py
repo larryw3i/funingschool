@@ -555,7 +555,7 @@ class Purchasing(SpreadsheetBase):
                 if s_input in "Yy":
                     f0 = foods[i]
                     f0.count = threshold
-                    f0.total_price = up0 * threshold
+                    f0.total_price = up1 * threshold
                     f0._count_threshold = None
                     f1_count = f_count - threshold
                     f1 = Food(
@@ -563,7 +563,7 @@ class Purchasing(SpreadsheetBase):
                         name=f0.name,
                         unit_name=f0.unit_name,
                         count=f1_count,
-                        total_price=f1_count * up1,
+                        total_price=f1_count * up0,
                         xdate=f0.xdate,
                         purchaser=f0.purchaser,
                         fclass=f0.fclass,

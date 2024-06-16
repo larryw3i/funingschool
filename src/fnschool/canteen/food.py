@@ -77,6 +77,11 @@ class Food:
                 else total_price1
             )
 
+            total_price1_sd = sd - count_sd
+            total_price1 = math.floor(total_price1 * 10**total_price1_sd) / (
+                10**total_price1_sd
+            )
+
             count1 = count0 / scale
             count1 = int(count1) if re.search(dot_0_r, str(count1)) else count1
             count1_s = str(count1)
@@ -113,9 +118,7 @@ class Food:
                         total_price_diff * 10**total_price_d_sd
                     )
 
-                count2_len2 = len(str(count2)) + 1
-
-                unit_price3 = round(unit_price1 / 10**count1_sd, sd + 1)
+                unit_price3 = round(unit_price1, sd + 1)
                 unit_price4 = round(unit_price3 + total_price_diff2_p, sd + 1)
                 count_threshold = round(total_price_diff2 / count_scale, sd + 1)
 
