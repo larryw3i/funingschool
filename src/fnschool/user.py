@@ -52,12 +52,12 @@ class User:
                 i_value = input(">_ ").replace(" ", "")
                 if len(i_value) > 0:
                     break
+                if allow_blank:
+                    i_value = ""
+                    break
                 print_error(_("Unexpected value got."))
                 if i >= 2:
-                    if allow_blank:
-                        i_value = ""
-                    else:
-                        exit()
+                    exit()
 
             self.profile[key] = i_value
             self.save_profile()
