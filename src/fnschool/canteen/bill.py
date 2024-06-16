@@ -21,9 +21,13 @@ class Bill:
         self.currency = Currency().CNY
         self._consuming = None
         self.significant_digits = 2
+        self.disable_infinite_decimal = None
 
         pass
 
+    @property
+    def disable_infinite_decimal(self):
+        
     @property
     def consuming(self):
         if not self._consuming:

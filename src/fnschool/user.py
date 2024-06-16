@@ -41,19 +41,23 @@ class User:
                 self._profile = tomllib.load(f)
         return self._profile
 
-    def get_profile(self, key, info=None):
+    def get_profile(self, key, info=None, allow_blank=False):
         profile = self.profile
         if not key in profile.keys() or profile.get(key).strip() == "":
             print_warning(
                 info or _("Please tell {0} the {1}.").format(app_name, key)
             )
+            i_value = None
             for i in range(0, 3):
                 i_value = input(">_ ").replace(" ", "")
                 if len(i_value) > 0:
                     break
                 print_error(_("Unexpected value got."))
                 if i >= 2:
-                    exit()
+                    if allow_blank:
+                        i_value = ""
+                    else:
+                        exit()
 
             self.profile[key] = i_value
             self.save_profile()

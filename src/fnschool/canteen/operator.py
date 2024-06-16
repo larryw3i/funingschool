@@ -47,6 +47,37 @@ class Operator(User):
         return superior_department0
 
     @property
+    def disable_infinite_decimal(self):
+        info = _(
+            "A story about the infinite decimal:"
+            + "\n\tIn the process of handling bills "
+            + "\n\tby authors and many bill operators"
+            + "\n\t, infinite decimals and the "
+            + "\n\trounding display of spreadsheet "
+            + "\n\thave always been the biggest "
+            + "\n\ttrouble. So, We can eliminate it "
+            + "\n\tthrough a simple mean. Firstly, "
+            + "\n\twe take the unit price with " 
+            + "\n\tsignificant digits and multiply " 
+            + "\n\tit by the quantity to obtain a " 
+            + "\n\tnumber less than the total " 
+            + "\n\tprice. Subtract this number "
+            + "\n\tfrom the total price. Then, "
+            + "\n\twe obtain their difference and "
+            + "\n\tallocate this difference to some "
+            + "\n\tunit prices. Finally, we "
+            + "\n\teliminated it."
+        )
+        disable_infinite_decimal = self.get_profile(
+            key=_("disable infinite decimals"),
+            info = info,
+            allow_blank=True
+        )
+
+        return self.disable_infinite_decimal in "Yy" and len(self.disable_infinite_decimal)>0
+
+
+    @property
     def bill_dpath(self):
         dpath = self.dpath / _("bill")
         if not dpath.exists():
