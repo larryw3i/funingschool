@@ -36,9 +36,8 @@ class Food:
         self._count_threshold = None
         pass
 
-    @property
     def get_remainder_total_price_c(self, cdate):
-        remainder = get_remainder(cdate)
+        remainder = self.get_remainder(cdate)
         consuming_count = self.get_consuming_count(cdate)
 
         unit_price_l, unit_price_m, count_threshold = self.count_threshold
@@ -54,7 +53,6 @@ class Food:
 
         return total_price
 
-    @property
     def get_unit_price_c(self, cdate):
         if not self.bill.disable_infinite_decimal:
             return self.unit_price

@@ -50,7 +50,7 @@ class Operator(User):
     def disable_infinite_decimal(self):
         info = _(
             "A story about the infinite decimal:"
-            + "In the process of handling bills "
+            + "\nIn the process of handling bills "
             + "by authors and many bill operators"
             + ", infinite decimals and the "
             + "rounding display of spreadsheet "
@@ -82,8 +82,8 @@ class Operator(User):
         )
 
         return (
-            self.disable_infinite_decimal in "Yy"
-            and len(self.disable_infinite_decimal) > 0
+            disable_infinite_decimal in "Yy"
+            and len(disable_infinite_decimal) > 0
         )
 
     @property
