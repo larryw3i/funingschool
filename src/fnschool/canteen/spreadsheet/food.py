@@ -232,13 +232,12 @@ class Food(SpreadsheetBase):
                         row_index += 1
 
                     if cdate in [d for d, __ in food.consumptions]:
+                        unit_price_c = food.get_unit_price_c(cdate)
+                        r_total_price = food.get_remainder_total_price_c(cdate)
                         consuming_n = consuming_days.index(cdate) + 1
                         ccount = [
                             c for d, c in food.consumptions if d == cdate
                         ][0]
-                        cremainder = food.count - sum(
-                            [c for d, c in food.consumptions if d <= cdate]
-                        )
                         sheet.cell(row_index, 1, cdate.month)
                         sheet.cell(row_index, 2, cdate.day)
                         sheet.cell(row_index, 6, "")
@@ -247,11 +246,15 @@ class Food(SpreadsheetBase):
                         )
                         sheet.cell(row_index, 7, ccount)
 
-                        sheet.cell(row_index, 8, food.unit_price)
-                        sheet.cell(row_index, 9, ccount * food.unit_price)
-                        sheet.cell(row_index, 10, cremainder)
-                        sheet.cell(row_index, 11, food.unit_price)
-                        sheet.cell(row_index, 12, cremainder * food.unit_price)
+                        sheet.cell(row_index, 8, unit_price_c)
+                        sheet.cell(row_index, 9, ccount * unit_price_c)
+                        sheet.cell(row_index, 10, food.get_remainder(cdate))
+                        sheet.cell(
+                            row_index,
+                            11,
+                            r_total_price / food.get_remainder(cdate),
+                        )
+                        sheet.cell(row_index, 12, r_total_price)
                         sheet.cell(
                             row_index,
                             13,

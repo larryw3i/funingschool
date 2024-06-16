@@ -27,7 +27,7 @@ class ConsumingSum(SpreadsheetBase):
                 if food.fclass == class_name:
                     m_total_price += sum(
                         [
-                            _count * food.unit_price
+                            _count * food.get_unit_price_c(_date)
                             for _date, _count in food.consumptions
                         ]
                     )

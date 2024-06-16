@@ -33,23 +33,44 @@ class Food:
         self.is_abandoned = is_abandoned
         self.is_inventory = is_inventory
         self.consumptions = []
-        self._unit_price_c = None
-        self._consuming_counter = 0
+        self._count_threshold = None
         pass
 
-    def reset_consuming_counter(self):
-        self._consuming_counter = 0
+    @property
+    def get_remainder_total_price_c(self, cdate):
+        remainder = get_remainder(cdate)
+        consuming_count = self.get_consuming_count(cdate)
+
+        unit_price_l, unit_price_m, count_threshold = self.count_threshold
+
+        total_price = (
+            (
+                (count_threshold - consuming_count) * unit_price_m
+                + (self.count - count_threshold) * unit_price_l
+            )
+            if consuming_count <= count_threshold
+            else remainder * unit_price_l
+        )
+
+        return total_price
 
     @property
-    def consuming_counter(self):
-        return self._consuming_counter
+    def get_unit_price_c(self, cdate):
+        if not self.bill.disable_infinite_decimal:
+            return self.unit_price
 
-    def add_consuming_counter(self, count):
-        self._consuming_counter += count
+        unit_price_l, unit_price_m, count_threshold = self.count_threshold
+
+        consuming_count = self.get_consuming_count(cdate)
+        unit_price_c = (
+            unit_price_m if consuming_count <= count_threshold else unit_price_l
+        )
+
+        return unit_price_c
 
     @property
-    def get_unit_price_c(self, consuming_count):
-        if not self._unit_price_c:
+    def count_threshold(self):
+        if not self._count_threshold:
 
             sd = self.bill.significant_digits or 2
             total_price = self.total_price
@@ -125,19 +146,8 @@ class Food:
             unit_price4 = round(unit_price3 + total_price_diff2_p, sd + 1)
             count_threshold = round(total_price_diff2 / count_scale, sd + 1)
 
-            self._unit_price_c = (unit_price3, unit_price4, count_threshold)
-
-        unit_price_l, unit_price_m, count_threshold = self._unit_price_c
-
-        self.add_consuming_counter(consuming_count)
-
-        unit_price_c = (
-            unit_price_m
-            if self.consuming_counter <= count_threshold
-            else unit_price_l
-        )
-
-        return unit_price_c
+            self._count_threshold = (unit_price3, unit_price4, count_threshold)
+        return self._count_threshold
 
     def datefstr(self, value):
         if isinstance(value, datetime):
@@ -177,6 +187,10 @@ class Food:
             return self.count
         if self.xdate > cdate:
             return 0
+
+    def get_consuming_count(self, cdate):
+        consuming_count = self.count - self.get_remainder(cdate)
+        return consuming_count
 
 
 # The end.
