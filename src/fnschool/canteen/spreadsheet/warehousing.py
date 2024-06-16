@@ -79,11 +79,12 @@ class Warehousing(SpreadsheetBase):
                     min_col=1,
                     max_col=6,
                 ):
+
                     fname0 = _row[1].value
+
                     if fname0 and fname0 == fdata[1]:
                         fdata[0] = fdata[0] + 1
                         fdata[2] = fdata[2] + _row[5].value
-                        wsheet.cell(row[0].row, 6, fdata[2])
                         wsheet.cell(_row[0].row, 6, "")
                     else:
                         if fdata[0] > 0:
@@ -93,6 +94,7 @@ class Warehousing(SpreadsheetBase):
                                 start_column=6,
                                 end_column=6,
                             )
+                            wsheet.cell(row[0].row, 6, fdata[2])
                             fdata[0] = 0
                             fdata[2] = 0.0
                         fdata[1] = fname0
