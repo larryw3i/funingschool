@@ -557,6 +557,7 @@ class Purchasing(SpreadsheetBase):
                     f0.count = threshold
                     f0.total_price = up1 * threshold
                     f0._count_threshold = None
+
                     f1_count = f_count - threshold
                     f1 = Food(
                         self.bill,
@@ -567,8 +568,13 @@ class Purchasing(SpreadsheetBase):
                         xdate=f0.xdate,
                         purchaser=f0.purchaser,
                         fclass=f0.fclass,
+                        is_inventory=f0.is_inventory,
+                        is_abandoned=f0.is_abandoned,
                     )
 
+                    total_price0 = round(
+                        up1 * threshold + f1_count * up0, self.sd + 1
+                    )
                     print_info(
                         _('"{0}" was split:').format(f0.name)
                         + f"\n\t{f0.unit_price} "
@@ -581,6 +587,8 @@ class Purchasing(SpreadsheetBase):
                         + f"/{f1.unit_name} "
                         + f"\u2a09 {f1.count} "
                         + f"{f1.unit_name} = "
+                        + f"{total_price0} "
+                        + f"{self.bill.currency.unit} = "
                         + f"{f_unit_price} "
                         + f"{self.bill.currency.unit}"
                         + f"/{f.unit_name} "

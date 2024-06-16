@@ -249,7 +249,7 @@ class Food(SpreadsheetBase):
 
                         sheet.cell(row_index, 8, unit_price)
                         sheet.cell(row_index, 9, ccount * unit_price)
-                        sheet.cell(row_index, 10, remainder or "")
+                        sheet.cell(row_index, 10, remainder)
                         sheet.cell(
                             row_index,
                             11,

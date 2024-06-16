@@ -72,35 +72,36 @@ class Warehousing(SpreadsheetBase):
                         )
                         break
 
-                fdata = [0, row[1].value, 0]
+                fdata = [0, row[1].value, row[5].value]
                 for _row in wsheet.iter_rows(
                     min_row=row[0].row + 1,
                     max_row=wsheet.max_row + 1,
                     min_col=1,
                     max_col=6,
                 ):
+                    fname0 = _row[1].value
+                    if fname0 and fname0 == fdata[1]:
+                        fdata[0] = fdata[0] + 1
+                        fdata[2] = fdata[2] + _row[5].value
+                        wsheet.cell(row[0].row, 6, fdata[2])
+                        wsheet.cell(_row[0].row, 6, "")
+                    else:
+                        if fdata[0] > 0:
+                            wsheet.merge_cells(
+                                start_row=_row[0].row - 1 - fdata[0],
+                                end_row=_row[0].row - 1,
+                                start_column=6,
+                                end_column=6,
+                            )
+                            fdata[0] = 0
+                            fdata[2] = 0.0
+                        fdata[1] = fname0
+
                     if _row[0].value and (
                         _row[0].value.replace(" ", "").endswith("类")
                         or _row[0].value.replace(" ", "") == "合计"
                     ):
                         break
-
-                    fname0 = _row[1].value
-                    if fname0 == fdata[1]:
-                        fdata[0] = fdata[0] + 1
-                        fdate[2] = fdate[2] + _row[6].value
-                        wsheet.cell(_row[0].row, 6, "")
-                    else:
-                        if f[0] > 0:
-                            wsheet.merge_cells(
-                                start_row=_row[0].row - 1 - fdate[0],
-                                end_row=_row[0].row - 1,
-                                start_column=6,
-                                end_column=6,
-                            )
-                        fdate[0] = 0
-                        fdate[1] = fname0
-                        fdate[2] = 0.0
 
             if row[0].value and "审核人" in row[0].value.replace(" ", ""):
                 wsheet.merge_cells(
@@ -244,6 +245,8 @@ class Warehousing(SpreadsheetBase):
 
             for class_name in class_names:
                 cfoods = [f for f in wfoods if f.fclass == class_name]
+                cfoods = sorted(cfoods, key=lambda f: f.name)
+
                 cfoods_total_price = sum([f.total_price for f in cfoods])
 
                 wsheet.cell(entry_index, 1, class_name)

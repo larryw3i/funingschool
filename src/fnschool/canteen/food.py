@@ -45,6 +45,7 @@ class Food:
             count = self.count
 
             dot_0_r = r"[.|0]+$"
+
             count_s = str(count)
             count_s = re.sub(dot_0_r, "", count_s)
             count_sd = len(count_s.split(".")[1]) if "." in count_s else 0
@@ -77,19 +78,15 @@ class Food:
                 else total_price1
             )
 
-            total_price1_sd = sd - count_sd
-            total_price1 = math.floor(total_price1 * 10**total_price1_sd) / (
-                10**total_price1_sd
-            )
-
             count1 = count0 / scale
             count1 = int(count1) if re.search(dot_0_r, str(count1)) else count1
             count1_s = str(count1)
             count1_sd = len(count1_s.split(".")[1]) if "." in count1_s else 0
+            count1_scale = 10**count1_sd
 
             count2 = count1
             if count1_sd > 0:
-                count2 = math.floor(count1 * 10**count1_sd)
+                count2 = math.floor(count1 * count1_scale)
 
             unit_price1 = unit_price0
             unit_price1 = (
@@ -112,13 +109,15 @@ class Food:
                 )
 
                 total_price_diff2 = total_price_diff
-                total_price_diff2_p = 1 / (10**total_price_d_sd)
+                total_price_diff2_scale = 10 ** (total_price_d_sd - count_sd)
+                total_price_diff2_p = 1 / (total_price_diff2_scale)
                 if total_price_diff2 > 0.0:
                     total_price_diff2 = math.floor(
                         total_price_diff * 10**total_price_d_sd
                     )
+                unit_price3_scale = 10 ** (count1_sd - count_sd)
+                unit_price3 = round(unit_price1 / unit_price3_scale, sd + 1)
 
-                unit_price3 = round(unit_price1, sd + 1)
                 unit_price4 = round(unit_price3 + total_price_diff2_p, sd + 1)
                 count_threshold = round(total_price_diff2 / count_scale, sd + 1)
 
