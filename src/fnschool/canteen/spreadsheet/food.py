@@ -255,10 +255,13 @@ class Food(SpreadsheetBase):
                             row_index,
                             11,
                             (
-                                "" if not remainder else 
-                                (r_total_price / remainder)
-                                if remainder > 0 else
-                                unit_price_c
+                                ""
+                                if not remainder
+                                else (
+                                    (r_total_price / remainder)
+                                    if remainder > 0
+                                    else unit_price_c
+                                )
                             ),
                         )
                         sheet.cell(row_index, 12, r_total_price)
