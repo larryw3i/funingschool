@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-16 20:08+0800\n"
+"POT-Creation-Date: 2024-06-17 00:24+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -54,7 +54,7 @@ msgstr ""
 msgid "Please tell {0} the {1}."
 msgstr ""
 
-#: src/fnschool/user.py:55
+#: src/fnschool/user.py:58
 msgid "Unexpected value got."
 msgstr ""
 
@@ -190,29 +190,8 @@ msgstr ""
 msgid "superior department"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:51
-msgid ""
-"A story about the infinite decimal:\n"
-"In the process of handling bills by authors and many bill operators, "
-"infinite decimals and the rounding display of spreadsheet have always "
-"been the biggest trouble. So, We can eliminate it through a simple mean. "
-"Firstly, we take the unit price with significant digits and multiply it "
-"by the quantity to obtain a number less than the total price. Subtract "
-"this number from the total price. Then, we obtain their difference and "
-"allocate this difference to some unit prices. Finally, we eliminated it "
-"in \"consuming\" sheet. \n"
-"Although we have made some efforts, we are still unable to solve some "
-"difficult problems (\"Remainder total prices\" of \"food\" sheets, etc)."
-"\n"
-"[Ok! I know that, disable the infinite decimals for me? (Yes:'Y','y') ]"
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:81
-msgid "disable infinite decimals"
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:91 src/fnschool/canteen/operator.py:98
-#: src/fnschool/canteen/operator.py:106
+#: src/fnschool/canteen/operator.py:51 src/fnschool/canteen/operator.py:58
+#: src/fnschool/canteen/operator.py:66
 msgid "bill"
 msgstr ""
 
@@ -222,53 +201,6 @@ msgstr ""
 
 #: src/fnschool/canteen/path.py:14
 msgid "operator_name"
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:49
-msgid "Profile label"
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:50
-msgid "Operator name"
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:51
-msgid "Operator email"
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:52
-msgid "Organization name or school name"
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:53
-msgid "Supplier name 1"
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:54
-msgid "Supplier name 2"
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:55
-msgid "The end."
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:58
-msgid "Please update your profile file."
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:60
-msgid ""
-"Profile label for data directory making, it shouldn't contain any space "
-"character.\n"
-"Supplier names are the supplier's alias."
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:67
-msgid "Ok! it was configured. (enter any key)"
-msgstr ""
-
-#: src/fnschool/canteen/profile.py:81
-msgid "No profile information was got."
 msgstr ""
 
 #: src/fnschool/canteen/workbook.py:142
@@ -283,10 +215,10 @@ msgstr ""
 msgid "Please design the consumptions of spreadsheet '{0}' ."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/consuming.py:237
+#: src/fnschool/canteen/spreadsheet/consuming.py:233
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:64
 #: src/fnschool/canteen/spreadsheet/cover.py:61
-#: src/fnschool/canteen/spreadsheet/food.py:272
+#: src/fnschool/canteen/spreadsheet/food.py:274
 #: src/fnschool/canteen/spreadsheet/inventory.py:302
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:90
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:139
@@ -301,7 +233,7 @@ msgstr ""
 msgid "Sheet '%s' was updated."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:282
+#: src/fnschool/canteen/spreadsheet/food.py:284
 #: src/fnschool/canteen/workbook.py:808
 msgid "All food sheets have their tab colors reset."
 msgstr ""
@@ -517,7 +449,7 @@ msgstr ""
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/consuming.py:306
+#: src/fnschool/canteen/spreadsheet/consuming.py:302
 #: src/fnschool/canteen/spreadsheet/warehousing.py:86
 #: src/fnschool/canteen/workbook.py:2184 src/fnschool/canteen/workbook.py:2253
 #, python-format
@@ -617,11 +549,11 @@ msgstr ""
 msgid "Sheet {0} has been reformatted."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:296
+#: src/fnschool/canteen/spreadsheet/food.py:298
 msgid "Food sheets have their tab colors recolor:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:300
+#: src/fnschool/canteen/spreadsheet/food.py:302
 msgid "Updated food sheets:"
 msgstr ""
 
@@ -682,23 +614,23 @@ msgid ""
 "know [press any key to continue])"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:231
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:230
 msgid "{year}.{month}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:253
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:252
 msgid "Consuming days of {0}:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:260
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:259
 msgid "{0} days in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:262
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:261
 msgid "{0} day in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:265
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
@@ -820,6 +752,16 @@ msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:530
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:545
+msgid ""
+"The unit price of \"{0}\" is an infinite decimal, split \"{0}\"?(Yes: "
+"\"Y\",\"y\",\"\")"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:569
+msgid "\"{0}\" was split:"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:57
@@ -1900,5 +1842,32 @@ msgstr ""
 #~ " difficult problems (\"Remainder total "
 #~ "prices\" of \"food\" sheets, etc).\n"
 #~ "[Ok! I know that, disable the infinite decimals for me? (Yes:'Y','y') ]"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "A story about the infinite decimal:\n"
+#~ "In the process of handling bills "
+#~ "by authors and many bill operators, "
+#~ "infinite decimals and the rounding "
+#~ "display of spreadsheet have always been"
+#~ " the biggest trouble. So, We can "
+#~ "eliminate it through a simple mean. "
+#~ "Firstly, we take the unit price "
+#~ "with significant digits and multiply it"
+#~ " by the quantity to obtain a "
+#~ "number less than the total price. "
+#~ "Subtract this number from the total "
+#~ "price. Then, we obtain their difference"
+#~ " and allocate this difference to some"
+#~ " unit prices. Finally, we eliminated "
+#~ "it in \"consuming\" sheet. \n"
+#~ "Although we have made some efforts, "
+#~ "we are still unable to solve some"
+#~ " difficult problems (\"Remainder total "
+#~ "prices\" of \"food\" sheets, etc).\n"
+#~ "[Ok! I know that, disable the infinite decimals for me? (Yes:'Y','y') ]"
+#~ msgstr ""
+
+#~ msgid "disable infinite decimals"
 #~ msgstr ""
 

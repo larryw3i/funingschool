@@ -278,20 +278,20 @@ class Inventory(SpreadsheetBase):
 
                     self.del_form_indexes()
                     form_indexes = self.form_indexes
-                unit_price_c = food.get_unit_price_c(t1)
+                unit_price = food.unit_price
                 sheet.cell(row_index, 1, food.name)
                 sheet.cell(row_index, 2, food.unit_name)
                 sheet.cell(row_index, 3, food.get_remainder(t1))
                 sheet.cell(
                     row_index,
                     4,
-                    food.get_remainder(t1) * unit_price_c,
+                    food.get_remainder(t1) * unit_price,
                 )
                 sheet.cell(row_index, 5, food.get_remainder(t1))
                 sheet.cell(
                     row_index,
                     6,
-                    food.get_remainder(t1) * unit_price_c,
+                    food.get_remainder(t1) * unit_price,
                 )
 
         self.del_form_empty_row(1)

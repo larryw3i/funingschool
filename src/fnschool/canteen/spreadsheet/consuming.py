@@ -157,9 +157,7 @@ class Consuming(SpreadsheetBase):
                 for food in class_foods:
                     for _date, _count in food.consumptions:
                         if _date == day:
-                            class_consuming_count += (
-                                _count * food.get_unit_price_c(day)
-                            )
+                            class_consuming_count += _count * food.unit_price
 
                 class_foods_len = len(class_foods)
                 if class_name == class_names[0] and row_difference < 0:
@@ -190,14 +188,14 @@ class Consuming(SpreadsheetBase):
                     csheet.cell(frow_index, 5).number_format = (
                         numbers.FORMAT_NUMBER_00
                     )
-                    csheet.cell(frow_index, 5, food.get_unit_price_c(day))
+                    csheet.cell(frow_index, 5, food.unit_price)
                     csheet.cell(frow_index, 6).number_format = (
                         numbers.FORMAT_NUMBER_00
                     )
                     csheet.cell(
                         frow_index,
                         6,
-                        consuming_count * food.get_unit_price_c(day),
+                        consuming_count * food.unit_price,
                     )
 
                 fentry_index = fentry_index_end + 1
@@ -206,9 +204,7 @@ class Consuming(SpreadsheetBase):
             for food in tfoods:
                 for _date, _count in food.consumptions:
                     if _date == day:
-                        tfoods_total_price += _count * food.get_unit_price_c(
-                            day
-                        )
+                        tfoods_total_price += _count * food.unit_price
             csheet.cell(form_index1, 6, tfoods_total_price)
             csheet.cell(form_index1, 7, tfoods_total_price)
 

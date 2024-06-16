@@ -15,6 +15,7 @@ class SpreadsheetBase:
         self.spreadsheet = self.bill.spreadsheet
         self.s = self.spreadsheet
         self.bill_workbook = self.spreadsheet.bill_workbook
+        self.sd = self.bill.significant_digits
         self.bwb = self.bill_workbook
         self.sheet_name = None
         self._sheet = None

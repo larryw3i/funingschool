@@ -534,6 +534,64 @@ class Purchasing(SpreadsheetBase):
                     input(">_ ")
         pass
 
+    def split_foods(self):
+        foods_cp = self.bill.foods.copy()
+        foods = self.bill.foods
+
+        for i, f in enumerate(foods_cp):
+            up0, up1, threshold = f.count_threshold
+            f_count = f.count
+            f_total_price = f.total_price
+            f_unit_price = f.unit_price
+            if threshold:
+                print_info(
+                    _(
+                        'The unit price of "{0}" is an '
+                        + 'infinite decimal, split "{0}"?'
+                        + '(Yes: "Y","y","")'
+                    ).format(f.name)
+                )
+                s_input = input(">_ ").strip()
+                if s_input in "Yy":
+                    f0 = foods[i]
+                    f0.count = threshold
+                    f0.total_price = up0 * threshold
+                    f0._count_threshold = None
+                    f1_count = f_count - threshold
+                    f1 = Food(
+                        self.bill,
+                        name=f0.name,
+                        unit_name=f0.unit_name,
+                        count=f1_count,
+                        total_price=f1_count * up1,
+                        xdate=f0.xdate,
+                        purchaser=f0.purchaser,
+                        fclass=f0.fclass,
+                    )
+
+                    print_info(
+                        _('"{0}" was split:').format(f0.name)
+                        + f"\n\t{f0.unit_price} "
+                        + f"{self.bill.currency.unit}"
+                        + f"/{f0.unit_name} "
+                        + f"\u2a09 {f0.count} "
+                        + f"{f0.unit_name} + "
+                        + f"{f1.unit_price} "
+                        + f"{self.bill.currency.unit}"
+                        + f"/{f1.unit_name} "
+                        + f"\u2a09 {f1.count} "
+                        + f"{f1.unit_name} = "
+                        + f"{f_unit_price} "
+                        + f"{self.bill.currency.unit}"
+                        + f"/{f.unit_name} "
+                        + f"\u2a09 {f_count} "
+                        + f"{f.unit_name} = "
+                        + f"{f_total_price}"
+                        + f"{self.bill.currency.unit}"
+                    )
+
+                    foods.append(f1)
+
     def read_pfoods(self):
         self.update()
         foods = pd.read_excel(self.path)
@@ -558,6 +616,9 @@ class Purchasing(SpreadsheetBase):
         foods = _foods
         foods = sorted(foods, key=lambda f: f.xdate)
         self.bill.foods = foods
+
+        self.split_foods()
+
         self.spreadsheet.preconsuming.pre_consume_foods()
 
         return foods

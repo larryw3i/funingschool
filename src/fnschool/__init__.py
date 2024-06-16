@@ -6,6 +6,7 @@ from pathlib import Path
 import tomllib
 import re
 import math
+import copy
 from datetime import datetime, timedelta
 
 import pandas as pd

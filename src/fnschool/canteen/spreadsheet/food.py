@@ -233,9 +233,8 @@ class Food(SpreadsheetBase):
 
                     if cdate in [d for d, __ in food.consumptions]:
 
-                        unit_price_c = food.get_unit_price_c(cdate)
+                        unit_price = food.unit_price
                         remainder = food.get_remainder(cdate)
-                        r_total_price = food.get_remainder_total_price_c(cdate)
                         consuming_n = consuming_days.index(cdate) + 1
                         ccount = [
                             c for d, c in food.consumptions if d == cdate
@@ -248,23 +247,16 @@ class Food(SpreadsheetBase):
                         )
                         sheet.cell(row_index, 7, ccount)
 
-                        sheet.cell(row_index, 8, unit_price_c)
-                        sheet.cell(row_index, 9, ccount * unit_price_c)
+                        sheet.cell(row_index, 8, unit_price)
+                        sheet.cell(row_index, 9, ccount * unit_price)
                         sheet.cell(row_index, 10, remainder or "")
                         sheet.cell(
                             row_index,
                             11,
-                            (
-                                ""
-                                if not remainder
-                                else (
-                                    (r_total_price / remainder)
-                                    if remainder > 0
-                                    else unit_price_c
-                                )
-                            ),
+                            (food.unit_price if remainder else ""),
                         )
-                        sheet.cell(row_index, 12, r_total_price)
+                        sheet.cell(row_index, 12, remainder * ccount)
+
                         sheet.cell(
                             row_index,
                             13,

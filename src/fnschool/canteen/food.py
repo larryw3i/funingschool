@@ -23,11 +23,12 @@ class Food:
         is_inventory=False,
     ):
         self.bill = bill
+        self.sd = self.bill.significant_digits
         self.name = name
         self.unit_name = unit_name
-        self.count = float(count)
+        self.count = round(float(count), self.sd + 1)
         self.fclass = fclass
-        self.total_price = float(total_price)
+        self.total_price = round(float(total_price), self.sd + 1)
         self.xdate = self.datefstr(xdate)
         self.purchaser = purchaser
         self.is_abandoned = is_abandoned
@@ -36,40 +37,9 @@ class Food:
         self._count_threshold = None
         pass
 
-    def get_remainder_total_price_c(self, cdate):
-        remainder = self.get_remainder(cdate)
-        consuming_count = self.get_consuming_count(cdate)
-
-        unit_price_l, unit_price_m, count_threshold = self.count_threshold
-
-        total_price = (
-            (
-                (count_threshold - consuming_count) * unit_price_m
-                + (self.count - count_threshold) * unit_price_l
-            )
-            if consuming_count <= count_threshold
-            else remainder * unit_price_l
-        )
-
-        return total_price
-
-    def get_unit_price_c(self, cdate):
-        if not self.bill.disable_infinite_decimal:
-            return self.unit_price
-
-        unit_price_l, unit_price_m, count_threshold = self.count_threshold
-
-        consuming_count = self.get_consuming_count(cdate)
-        unit_price_c = (
-            unit_price_m if consuming_count <= count_threshold else unit_price_l
-        )
-
-        return unit_price_c
-
     @property
     def count_threshold(self):
         if not self._count_threshold:
-
             sd = self.bill.significant_digits or 2
             total_price = self.total_price
             count = self.count
@@ -124,27 +94,37 @@ class Food:
             )
 
             total_price_diff = round(total_price - total_price1, sd + 1)
-            total_price_d_s = str(total_price_diff)
-            total_price_d_sd = (
-                len(total_price_d_s.split(".")[1])
-                if "." in total_price_d_s
-                else 0
-            )
 
-            total_price_diff2 = total_price_diff
-            total_price_diff2_p = 1 / (10**total_price_d_sd)
-            if total_price_diff2 > 0.0:
-                total_price_diff2 = math.floor(
-                    total_price_diff * 10**total_price_d_sd
+            if not total_price_diff:
+                self._count_threshold = (self.unit_price, self.unit_price, 0)
+            else:
+                total_price_d_s = str(total_price_diff)
+
+                total_price_d_sd = (
+                    len(total_price_d_s.split(".")[1])
+                    if "." in total_price_d_s
+                    else 0
                 )
 
-            count2_len2 = len(str(count2)) + 1
+                total_price_diff2 = total_price_diff
+                total_price_diff2_p = 1 / (10**total_price_d_sd)
+                if total_price_diff2 > 0.0:
+                    total_price_diff2 = math.floor(
+                        total_price_diff * 10**total_price_d_sd
+                    )
 
-            unit_price3 = round(unit_price1 / 10**count1_sd, sd + 1)
-            unit_price4 = round(unit_price3 + total_price_diff2_p, sd + 1)
-            count_threshold = round(total_price_diff2 / count_scale, sd + 1)
+                count2_len2 = len(str(count2)) + 1
 
-            self._count_threshold = (unit_price3, unit_price4, count_threshold)
+                unit_price3 = round(unit_price1 / 10**count1_sd, sd + 1)
+                unit_price4 = round(unit_price3 + total_price_diff2_p, sd + 1)
+                count_threshold = round(total_price_diff2 / count_scale, sd + 1)
+
+                self._count_threshold = (
+                    unit_price3,
+                    unit_price4,
+                    count_threshold,
+                )
+
         return self._count_threshold
 
     def datefstr(self, value):
@@ -174,20 +154,26 @@ class Food:
 
     @property
     def unit_price(self):
-        return 0 if not self.count else (self.total_price / self.count)
+        value = 0 if not self.count else (self.total_price / self.count)
+        value = round(value, self.sd + 1)
+        return value
 
     def get_remainder(self, cdate):
+        value = None
         if self.xdate < cdate:
-            return self.count - sum(
+            value = self.count - sum(
                 [c for d, c in self.consumptions if d <= cdate]
             )
         if self.xdate == cdate:
-            return self.count
+            value = self.count
         if self.xdate > cdate:
-            return 0
+            value = 0
+        value = round(value, self.sd + 1)
+        return value
 
     def get_consuming_count(self, cdate):
         consuming_count = self.count - self.get_remainder(cdate)
+        consuming_count = round(consuming_count, self.sd + 1)
         return consuming_count
 
 
