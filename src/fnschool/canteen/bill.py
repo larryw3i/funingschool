@@ -27,7 +27,8 @@ class Bill:
 
     @property
     def disable_infinite_decimal(self):
-        
+        return self.operator.disable_infinite_decimal
+
     @property
     def consuming(self):
         if not self._consuming:

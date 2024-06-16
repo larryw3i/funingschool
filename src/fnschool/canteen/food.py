@@ -44,11 +44,11 @@ class Food:
     def consuming_counter(self):
         return self._consuming_counter
 
-    def add_consuming_counter(self,count):
+    def add_consuming_counter(self, count):
         self._consuming_counter += count
 
     @property
-    def get_unit_price_c(self,consuming_count):
+    def get_unit_price_c(self, consuming_count):
         if not self._unit_price_c:
 
             sd = self.bill.significant_digits or 2
@@ -96,7 +96,7 @@ class Food:
             count2 = count1
             if count1_sd > 0:
                 count2 = math.floor(count1 * 10**count1_sd)
-    
+
             unit_price1 = unit_price0
             unit_price1 = (
                 int(unit_price1)
@@ -107,7 +107,9 @@ class Food:
             total_price_diff = round(total_price - total_price1, sd + 1)
             total_price_d_s = str(total_price_diff)
             total_price_d_sd = (
-                len(total_price_d_s.split(".")[1]) if "." in total_price_d_s else 0
+                len(total_price_d_s.split(".")[1])
+                if "." in total_price_d_s
+                else 0
             )
 
             total_price_diff2 = total_price_diff
@@ -129,7 +131,11 @@ class Food:
 
         self.add_consuming_counter(consuming_count)
 
-        unit_price_c = unit_price_m if self.consuming_counter <= count_threshold else unit_price_l
+        unit_price_c = (
+            unit_price_m
+            if self.consuming_counter <= count_threshold
+            else unit_price_l
+        )
 
         return unit_price_c
 

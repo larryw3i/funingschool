@@ -57,10 +57,10 @@ class Operator(User):
             + "\n\thave always been the biggest "
             + "\n\ttrouble. So, We can eliminate it "
             + "\n\tthrough a simple mean. Firstly, "
-            + "\n\twe take the unit price with " 
-            + "\n\tsignificant digits and multiply " 
-            + "\n\tit by the quantity to obtain a " 
-            + "\n\tnumber less than the total " 
+            + "\n\twe take the unit price with "
+            + "\n\tsignificant digits and multiply "
+            + "\n\tit by the quantity to obtain a "
+            + "\n\tnumber less than the total "
             + "\n\tprice. Subtract this number "
             + "\n\tfrom the total price. Then, "
             + "\n\twe obtain their difference and "
@@ -69,13 +69,13 @@ class Operator(User):
             + "\n\teliminated it."
         )
         disable_infinite_decimal = self.get_profile(
-            key=_("disable infinite decimals"),
-            info = info,
-            allow_blank=True
+            key=_("disable infinite decimals"), info=info, allow_blank=True
         )
 
-        return self.disable_infinite_decimal in "Yy" and len(self.disable_infinite_decimal)>0
-
+        return (
+            self.disable_infinite_decimal in "Yy"
+            and len(self.disable_infinite_decimal) > 0
+        )
 
     @property
     def bill_dpath(self):
