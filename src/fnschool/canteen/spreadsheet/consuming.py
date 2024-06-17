@@ -224,7 +224,7 @@ class Consuming(SpreadsheetBase):
                     for cell in row:
                         cell.value = ""
 
-        self.del_form_empty_row(2)
+        self.del_form_empty_rows([1,2])
 
         self.format()
 

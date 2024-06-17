@@ -54,6 +54,7 @@ class Warehousing(SpreadsheetBase):
                     min_col=1,
                     max_col=1,
                 ):
+                    wsheet.row_dimensions[row[0].row].height = self.row_height
                     if _row[0].value and (
                         _row[0].value.replace(" ", "").endswith("类")
                         or _row[0].value.replace(" ", "") == "合计"
@@ -71,39 +72,63 @@ class Warehousing(SpreadsheetBase):
                             end_column=7,
                         )
                         break
-
-                fdata = [0, row[1].value, row[5].value]
+                
+                ci0,ci1 = row[0].row,0
                 for _row in wsheet.iter_rows(
                     min_row=row[0].row + 1,
                     max_row=wsheet.max_row + 1,
                     min_col=1,
-                    max_col=6,
+                    max_col=7,
                 ):
-
-                    fname0 = _row[1].value
-
-                    if fname0 and fname0 == fdata[1]:
-                        fdata[0] = fdata[0] + 1
-                        fdata[2] = fdata[2] + _row[5].value
-                        wsheet.cell(_row[0].row, 6, "")
-                    else:
-                        if fdata[0] > 0:
-                            wsheet.merge_cells(
-                                start_row=_row[0].row - 1 - fdata[0],
-                                end_row=_row[0].row - 1,
-                                start_column=6,
-                                end_column=6,
-                            )
-                            wsheet.cell(row[0].row, 6, fdata[2])
-                            fdata[0] = 0
-                            fdata[2] = 0.0
-                        fdata[1] = fname0
-
                     if _row[0].value and (
-                        _row[0].value.replace(" ", "").endswith("类")
-                        or _row[0].value.replace(" ", "") == "合计"
+                        str(_row[0].value).endswith("类")
+                        or "合计" in str(_row[0].value)
                     ):
-                        break
+
+                        ci1 = _row[0].row-1
+                        
+                        fnames = [wsheet.cell(r,2).value for r in range(ci0,ci1+1)]
+                        fnames_d = list(set([n for n in fnames if fnames.count(n)>1 and n]))
+
+                        for dn in fnames_d:
+                            row_index0_d = row[0].row+fnames.index(dn)
+                            row_index1_d = row_index0_d + fnames.count(dn)-1
+                            fname = dn
+                            funit_name = wsheet.cell(row_index0_d,3).value
+                            ftotal = sum([wsheet.cell(r,6).value for r in range(row_index0_d,row_index1_d+1)])
+
+                            for r in range(row_index0_d,row_index1_d+1):
+                                wsheet.cell(r,2,"")
+                                wsheet.cell(r,3,"")
+                                wsheet.cell(r,6,"")
+                            
+
+                            wsheet.merge_cells(
+                                start_row = row_index0_d,
+                                end_row = row_index1_d,
+                                start_column = 2,
+                                end_column = 2
+                            )
+                            wsheet.merge_cells(
+                                start_row = row_index0_d,
+                                end_row = row_index1_d,
+                                start_column = 3,
+                                end_column = 3
+                            )
+                            wsheet.merge_cells(
+                                start_row = row_index0_d,
+                                end_row = row_index1_d,
+                                start_column = 6,
+                                end_column = 6
+                            )
+                            wsheet.cell(row_index0_d,2,fname)
+                            wsheet.cell(row_index0_d,3,funit_name)
+                            wsheet.cell(row_index0_d,6,ftotal)
+
+
+                        break 
+                  
+                
 
             if row[0].value and "审核人" in row[0].value.replace(" ", ""):
                 wsheet.merge_cells(
@@ -312,7 +337,7 @@ class Warehousing(SpreadsheetBase):
                     for cell in row:
                         cell.value = ""
 
-        # self.del_form_empty_row(2)
+        self.del_form_empty_rows([1,2])
         self.format()
 
         wb = self.bwb

@@ -28,6 +28,7 @@ class SpreadsheetBase:
             right=self.cell_side0,
             bottom=self.cell_side0,
         )
+        self.row_height = 12.75
 
     def row_inserting_tip(self, row_index):
         print_error(
@@ -104,11 +105,13 @@ class SpreadsheetBase:
 
         return [entry_index0, entry_index1]
 
-    def del_form_empty_row(self, col_index):
-        col_index = col_index
-        self.del_form_indexes()
-        form_indexes = self.form_indexes
+    def del_form_empty_rows(self, empty_cols):
 
+        self.del_form_indexes()
+        form_indexes = self.form_indexes 
+        
+        empty_cols = [empty_cols] if not isinstance(empty_cols,list) else empty_cols
+    
         for form_index in form_indexes:
             entry_index0, entry_index1 = self.get_entry_index(form_index)
 
@@ -116,7 +119,9 @@ class SpreadsheetBase:
             len_diff = entry_len - self.entry_row_len0
             if len_diff > 0:
                 for row_index in range(entry_index0, entry_index1 + 1):
-                    if not self.sheet.cell(row_index, col_index).value:
+                    if (
+                        not any([self.sheet.cell(row_index, col_index).value for col_index in empty_cols])
+                    ):
                         self.sheet.delete_rows(row_index, 1)
                         print_warning(
                             _(

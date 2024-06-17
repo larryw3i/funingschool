@@ -294,7 +294,7 @@ class Inventory(SpreadsheetBase):
                     food.get_remainder(t1) * unit_price,
                 )
 
-        self.del_form_empty_row(1)
+        self.del_form_empty_rows([1])
         self.format()
 
         wb = self.bwb
