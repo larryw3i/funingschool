@@ -200,8 +200,12 @@ class Warehousing(SpreadsheetBase):
 
                 self.del_form_indexes()
                 form_indexes = self.form_indexes
-                form_index1 += row_difference
+
+                form_index0, form_index1 = form_indexes[windex]
+                food_index0 = form_index0 + 2
                 food_index1 = form_index1 - 1
+                entry_index = food_index0
+
                 row_difference = 0
 
             for row in wsheet.iter_rows(
@@ -226,23 +230,6 @@ class Warehousing(SpreadsheetBase):
                 form_index0,
                 7,
                 f"编号：R{w_time.month:0>2}{warehousing_n:0>2}",
-            )
-
-            wsheet.cell(
-                form_index1 + 1,
-                1,
-                (
-                    "   "
-                    + "审核人："
-                    + "        "
-                    + "经办人："
-                    + self.operator.name
-                    + " 　    "
-                    + "过称人："
-                    + "        "
-                    + "仓管人："
-                    + " 　"
-                ),
             )
 
             for class_name in class_names:
@@ -289,6 +276,25 @@ class Warehousing(SpreadsheetBase):
             wsheet.cell(form_index1, 6, foods_total_price)
             wsheet.cell(form_index1, 7, foods_total_price)
 
+            wsheet.cell(
+                form_index1 + 1,
+                1,
+                (
+                    "   "
+                    + "审核人："
+                    + "        "
+                    + "经办人："
+                    + self.operator.name
+                    + " 　    "
+                    + "过称人："
+                    + "        "
+                    + "仓管人："
+                    + " 　"
+                ),
+            )
+
+
+
         if len(form_indexes) > max_time_index:
             for time_index in range(max_time_index, len(form_indexes)):
                 form_index0, form_index1 = form_indexes[time_index]
@@ -306,7 +312,7 @@ class Warehousing(SpreadsheetBase):
                     for cell in row:
                         cell.value = ""
 
-        self.del_form_empty_row(2)
+        # self.del_form_empty_row(2)
         self.format()
 
         wb = self.bwb
