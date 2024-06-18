@@ -25,9 +25,14 @@ class Score:
         self._scores = None
         self._wb = None
         self._sheet0 = None
+        self.p_path_key = _("scores_parent_directory")
         self.fext = ".xlsx"
 
         pass
+
+    @property
+    def config(self):
+        return self.teacher.config
 
     @property
     def teacher(self):
@@ -39,6 +44,38 @@ class Score:
         scores = self.scores
         print(scores)
         pass
+
+    def read(self):
+
+        p_dpath = self.config.get(self.p_path_key)
+        initialdir = (
+            p_dpath
+            if (p_dpath and Path(p_dpath).exists())
+            else ((Path.home() / "Downloads").as_posix())
+        )
+
+        filetypes = ((_("Spreadsheet Files"), "*.xlsx"),)
+
+        tkroot = tk.Tk()
+        tkroot.withdraw()
+
+        filename = filedialog.askopenfilename(
+            title=_("Please select the scores file"),
+            initialdir=initialdir,
+            filetypes=filetypes,
+        )
+
+        if filename is None or filename == ():
+            print_warning(_("No file was selected, exit."))
+            exit()
+
+        print_info(_('Scores file "{0}" has been selected.').format(filename))
+        self.config.save(self.p_path_key, Path(self._path).parent.as_posix())
+
+        self.name = filename
+
+        scores = self.scores
+        print(scores)
 
     @property
     def fpaths(self):
@@ -305,6 +342,13 @@ class Score:
                 shutil.copy(self.fpath0, self._fpath)
 
         return self._fpath
+
+    @name.setter
+    def name(self, value):
+        exam_dpath = self.teacher.exam_dpath.as_posix()
+        if exam_dpath in value:
+            value = value.replace(exam_dpath, "")
+        self._name = value
 
     @property
     def name(self):
