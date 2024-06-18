@@ -25,6 +25,9 @@ def parse_exam(subparsers):
     parser_canteen.add_argument(
         "action",
         choices=["enter", "read"],
-        help=_("Enter the examination scores."),
+        help=_(
+            '"enter": Enter the examination scores. '
+            + '"read":Read the examination scores.'
+        ),
     )
     parser_canteen.set_defaults(func=set_exam)

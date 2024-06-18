@@ -48,6 +48,8 @@ class Score:
     def read(self):
 
         p_dpath = self.config.get(self.p_path_key)
+        if p_dpath == ".":
+            p_dpath = None
         initialdir = (
             p_dpath
             if (p_dpath and Path(p_dpath).exists())
@@ -65,12 +67,17 @@ class Score:
             filetypes=filetypes,
         )
 
-        if filename is None or filename == ():
+        if (
+            filename is None
+            or filename == ()
+            or filename == "."
+            or filename == ""
+        ):
             print_warning(_("No file was selected, exit."))
             exit()
 
         print_info(_('Scores file "{0}" has been selected.').format(filename))
-        self.config.save(self.p_path_key, Path(self._path).parent.as_posix())
+        self.config.save(self.p_path_key, Path(filename).parent.as_posix())
 
         self.name = filename
 
