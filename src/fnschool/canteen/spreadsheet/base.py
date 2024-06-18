@@ -109,8 +109,9 @@ class SpreadsheetBase:
             entry_len = (entry_index1 - entry_index0) + 1
             len_diff = entry_len - self.entry_row_len0
 
-            entry_index1_0 = entry_index1
             if len_diff > 0:
+
+                entry_index1_0 = entry_index1 + 1
                 for row_index in range(entry_index0, entry_index1 + 1):
                     if all(
                         [

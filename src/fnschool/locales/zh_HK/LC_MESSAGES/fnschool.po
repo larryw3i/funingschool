@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-17 00:24+0800\n"
+"POT-Creation-Date: 2024-06-18 11:51+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -116,35 +116,35 @@ msgstr ""
 msgid "config"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:78 src/fnschool/canteen/bill.py:83
-#: src/fnschool/canteen/bill.py:98
+#: src/fnschool/canteen/bill.py:73 src/fnschool/canteen/bill.py:78
+#: src/fnschool/canteen/bill.py:93
 #, python-format
 msgid "%s can't change."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:148
+#: src/fnschool/canteen/bill.py:143
 msgid ""
 "If you feel {0} is great, please sponsor it. Your sponsorship will keep "
 "the project alive."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:155
+#: src/fnschool/canteen/bill.py:150
 msgid "Sponsor URL: {0}"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:189
+#: src/fnschool/canteen/bill.py:184
 msgid "Food classes files:"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:198
+#: src/fnschool/canteen/bill.py:193
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:208
+#: src/fnschool/canteen/bill.py:203
 msgid "Preset food classes were read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:222
+#: src/fnschool/canteen/bill.py:217
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr ""
 
@@ -215,14 +215,14 @@ msgstr ""
 msgid "Please design the consumptions of spreadsheet '{0}' ."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/consuming.py:233
+#: src/fnschool/canteen/spreadsheet/consuming.py:238
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:64
 #: src/fnschool/canteen/spreadsheet/cover.py:61
 #: src/fnschool/canteen/spreadsheet/food.py:274
-#: src/fnschool/canteen/spreadsheet/inventory.py:302
+#: src/fnschool/canteen/spreadsheet/inventory.py:307
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:90
-#: src/fnschool/canteen/spreadsheet/unwarehousing.py:139
-#: src/fnschool/canteen/spreadsheet/warehousing.py:280
+#: src/fnschool/canteen/spreadsheet/unwarehousing.py:144
+#: src/fnschool/canteen/spreadsheet/warehousing.py:357
 #: src/fnschool/canteen/workbook.py:416 src/fnschool/canteen/workbook.py:447
 #: src/fnschool/canteen/workbook.py:513 src/fnschool/canteen/workbook.py:798
 #: src/fnschool/canteen/workbook.py:1660 src/fnschool/canteen/workbook.py:1664
@@ -433,7 +433,7 @@ msgstr ""
 msgid "There is no residue foods."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/consuming.py:47
+#: src/fnschool/canteen/spreadsheet/consuming.py:52
 #: src/fnschool/canteen/workbook.py:1800
 msgid "Consuming days:"
 msgstr ""
@@ -444,13 +444,13 @@ msgid ""
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:191
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:193
 #: src/fnschool/canteen/workbook.py:2016
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/consuming.py:302
-#: src/fnschool/canteen/spreadsheet/warehousing.py:86
+#: src/fnschool/canteen/spreadsheet/consuming.py:307
+#: src/fnschool/canteen/spreadsheet/warehousing.py:158
 #: src/fnschool/canteen/workbook.py:2184 src/fnschool/canteen/workbook.py:2253
 #, python-format
 msgid "Sheet '%s' was formatted."
@@ -488,15 +488,15 @@ msgstr ""
 msgid "Copying workbook..."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:33
+#: src/fnschool/canteen/spreadsheet/base.py:35
 msgid "Row {0} of {1} is being inserted, please wait a moment."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:80
+#: src/fnschool/canteen/spreadsheet/base.py:82
 msgid "Cells of {0} was unmerged."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:121
+#: src/fnschool/canteen/spreadsheet/base.py:124
 msgid "Empty row {0} of sheet \"{1}\" has been deleted."
 msgstr ""
 
@@ -557,11 +557,11 @@ msgstr ""
 msgid "Updated food sheets:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/inventory.py:94
+#: src/fnschool/canteen/spreadsheet/inventory.py:99
 msgid "Sheet \"{0}\" has been reformatted."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/inventory.py:149
+#: src/fnschool/canteen/spreadsheet/inventory.py:154
 msgid "No unit"
 msgstr ""
 
@@ -586,51 +586,51 @@ msgstr ""
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:138
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:140
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:150
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:152
 msgid "New purchased food for date {0} is:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:152
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:154
 msgid "New purchased foods for date {0} are:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:172
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:174
 msgid "Negligible foods are not listed."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:175
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:177
 msgid "There is no purchased food for {0}."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:181
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:183
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I "
 "know [press any key to continue])"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:230
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:232
 msgid "{year}.{month}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:252
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:254
 msgid "Consuming days of {0}:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:259
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:261
 msgid "{0} days in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:261
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:263
 msgid "{0} day in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:266
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
@@ -754,17 +754,18 @@ msgstr ""
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:545
+#: src/fnschool/canteen/spreadsheet/purchasing.py:550
 msgid ""
 "The unit price of \"{0}\" is an infinite decimal, split \"{0}\"?(Yes: "
-"\"Y\",\"y\",\"\")"
+"\"Y\",\"y\",\"\". Split all foods with infinite decimal unit price: "
+"\"A\",\"a\")"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:569
+#: src/fnschool/canteen/spreadsheet/purchasing.py:588
 msgid "\"{0}\" was split:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/unwarehousing.py:57
+#: src/fnschool/canteen/spreadsheet/unwarehousing.py:62
 msgid "There is no abandoned food. Sheet {0} updating skipped."
 msgstr ""
 
@@ -1869,5 +1870,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "disable infinite decimals"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The unit price of \"{0}\" is an"
+#~ " infinite decimal, split \"{0}\"?(Yes: "
+#~ "\"Y\",\"y\",\"\")"
 #~ msgstr ""
 

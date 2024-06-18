@@ -537,6 +537,7 @@ class Purchasing(SpreadsheetBase):
     def split_foods(self):
         foods_cp = self.bill.foods.copy()
         foods = self.bill.foods
+        split_all = False
 
         for i, f in enumerate(foods_cp):
             up0, up1, threshold = f.count_threshold
@@ -544,14 +545,22 @@ class Purchasing(SpreadsheetBase):
             f_total_price = f.total_price
             f_unit_price = f.unit_price
             if threshold:
-                print_info(
-                    _(
-                        'The unit price of "{0}" is an '
-                        + 'infinite decimal, split "{0}"?'
-                        + '(Yes: "Y","y","")'
-                    ).format(f.name)
-                )
-                s_input = input(">_ ").strip()
+                if not split_all:
+                    print_info(
+                        _(
+                            'The unit price of "{0}" is an '
+                            + 'infinite decimal, split "{0}"?'
+                            + '(Yes: "Y","y","". Split all '
+                            + "foods with infinite decimal "
+                            + 'unit price: "A","a")'
+                        ).format(f.name)
+                    )
+                s_input = "y" if split_all else input(">_ ").strip()
+
+                if s_input and s_input in "Aa":
+                    s_input = "y"
+                    split_all = True
+
                 if s_input in "Yy":
                     f0 = foods[i]
                     f0.count = threshold
