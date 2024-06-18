@@ -44,6 +44,7 @@ class CtSpreadSheet:
         self._consumingsum = None
         self._sfood = None
         self._cover = None
+        self.sd = self.bill.significant_digits
 
         self.preconsuming_name0 = "出库计划表"
         self.purchasing_name = None
@@ -185,7 +186,10 @@ class CtSpreadSheet:
         currency_mark = self.bill.currency.mark
         summary = []
         summary_len = 0
+
         inventory_mm1 = sum([f.total_price for f in cfoods if f.is_inventory])
+        inventory_mm1 = round(inventory_mm1, self.sd + 1)
+
         inventory_mm1 = (
             _("Inventory of last month: ") + currency_mark + str(inventory_mm1)
         )
@@ -193,6 +197,7 @@ class CtSpreadSheet:
         warehousing_m = sum(
             [f.total_price for f in cfoods if not f.is_inventory]
         )
+
         warehousing_m_cp = warehousing_m
         warehousing_m = (
             _("Warehousing of this month: ")
@@ -208,6 +213,7 @@ class CtSpreadSheet:
         for f in cfoods:
             f_consuming_m = sum([c for __, c in f.consumptions])
             consuming_m += f_consuming_m * f.unit_price
+        consuming_m = round(consuming_m, self.sd + 1)
 
         consuming_m_cp = consuming_m
         consuming_m = (
@@ -225,6 +231,8 @@ class CtSpreadSheet:
                 if f.get_remainder(month_day_m1) > 0
             ]
         )
+        inventory_m = round(inventory_m, self.sd + 1)
+
         inventory_m_cp = inventory_m
         inventory_m = (
             _("Inventory of this month: ") + currency_mark + str(inventory_m)
