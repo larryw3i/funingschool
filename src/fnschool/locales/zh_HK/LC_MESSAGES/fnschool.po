@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-18 11:51+0800\n"
+"POT-Creation-Date: 2024-06-19 00:54+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -84,7 +84,7 @@ msgstr ""
 msgid "The names saved by {0} are as follows:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:283 src/fnschool/exam/score.py:312
+#: src/fnschool/exam/score.py:384 src/fnschool/exam/score.py:416
 #: src/fnschool/user.py:122 src/fnschool/user.py:201
 msgid "Unexpected value was got. Exit."
 msgstr ""
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 
-#: src/fnschool/exam/score.py:286 src/fnschool/exam/score.py:310
+#: src/fnschool/exam/score.py:387 src/fnschool/exam/score.py:414
 #: src/fnschool/user.py:199
 msgid "Unexpected value was got."
 msgstr ""
@@ -254,33 +254,33 @@ msgstr ""
 msgid "Got no organization name column of {0}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:301
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:309
 #: src/fnschool/canteen/workbook.py:956
 msgid "Update completely!"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:142
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:143
 #: src/fnschool/canteen/workbook.py:962
 msgid ""
 "Do you want to save all updated data to \"{0}\"? or just save it as a "
 "copy to \"{1}\". (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:149
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:150
 #: src/fnschool/canteen/workbook.py:969
 msgid ""
 "If you save updated data to \"{0}\", data of food sheets will be saved "
 "for every month."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:165
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:166
 #: src/fnschool/canteen/workbook.py:979
 msgid ""
 "You can fill in the monthly missing data to food sheets, they will be "
 "saved for next updating."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:180
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:181
 #: src/fnschool/canteen/workbook.py:990
 msgid "Updated data was saved."
 msgstr ""
@@ -500,48 +500,48 @@ msgstr ""
 msgid "Empty row {0} of sheet \"{1}\" has been deleted."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:70
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:71
 msgid "Spreadsheet \"{0}\" is in use."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:159
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:160
 msgid "Saving. . ."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:175
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:176
 msgid "Updated data has been saved to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:190
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:194
 msgid "Inventory of last month: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:198
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:203
 msgid "Warehousing of this month: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:203
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:234
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:208
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:242
 msgid "Total: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:214
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:220
 msgid "Consuming of this month: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:230
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:238
 msgid "Inventory of this month: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:239
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:247
 msgid "Unwarehousing of this month: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:245
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:253
 msgid "Total purchasing of this month: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:282
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:290
 msgid "Summary:"
 msgstr ""
 
@@ -785,57 +785,74 @@ msgstr ""
 msgid "teacher_name"
 msgstr ""
 
-#: src/fnschool/exam/score.py:141
+#: src/fnschool/exam/score.py:142
+msgid "Failed to get examination start time from \"{0}\"."
+msgstr ""
+
+#: src/fnschool/exam/score.py:160
+msgid "Failed to get examination end time from \"{0}\"."
+msgstr ""
+
+#: src/fnschool/exam/score.py:170
+msgid "The examination end time is set to \"{0}\"."
+msgstr ""
+
+#: src/fnschool/exam/score.py:229
 msgid "No recent tests"
 msgstr ""
 
-#: src/fnschool/exam/score.py:150
-msgid "The recent examination scores have been added to \"{0}\"."
+#: src/fnschool/exam/score.py:240
+msgid "The recent examination scores ({0}) have been added to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:154
+#: src/fnschool/exam/score.py:245
 msgid "There is no recent tests."
 msgstr ""
 
-#: src/fnschool/exam/score.py:157
+#: src/fnschool/exam/score.py:248
 msgid "Spreadsheet \"{0}\" has been saved."
 msgstr ""
 
-#: src/fnschool/exam/score.py:162
+#: src/fnschool/exam/score.py:253
 msgid ""
-"Please update the question titles and scores of \"{0}\" according to the "
-"comments. (Ok, open it for me [Press any key to open file])"
+"Please update the question titles , student names and scores of \"{0}\" "
+"according to the comments. (Ok, open it for me [Press any key to open "
+"file])"
 msgstr ""
 
-#: src/fnschool/exam/score.py:174
+#: src/fnschool/exam/score.py:268
 msgid ""
-"Ok, I have updated the question titles and scores, and I closed the file."
-" (Press any key to continue)"
+"Ok, I have updated the question titles, student names and scores, and I "
+"CLOSED the file. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:202
+#: src/fnschool/exam/score.py:288
 msgid "exam_names"
 msgstr ""
 
-#: src/fnschool/exam/score.py:230
-msgid "The name of examination has been saved to \"{0}\"."
+#: src/fnschool/exam/score.py:325
+msgid "The examination name \"{0}\" has been saved to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:244
+#: src/fnschool/exam/score.py:330
+msgid "The examination name has been saved to \"{0}\"."
+msgstr ""
+
+#: src/fnschool/exam/score.py:345
 msgid "The saved examination names are as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:246
+#: src/fnschool/exam/score.py:347
 msgid "The saved examination name is as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:258
+#: src/fnschool/exam/score.py:359
 msgid ""
 "Select the examination name you entered (index), or enter new examination"
 " name, please! (default: {0})"
 msgstr ""
 
-#: src/fnschool/exam/score.py:300
+#: src/fnschool/exam/score.py:401
 msgid "Hello~ tell {0} the examination name, please!"
 msgstr ""
 
@@ -1876,5 +1893,31 @@ msgstr ""
 #~ "The unit price of \"{0}\" is an"
 #~ " infinite decimal, split \"{0}\"?(Yes: "
 #~ "\"Y\",\"y\",\"\")"
+#~ msgstr ""
+
+#~ msgid "The recent examination scores have been added to \"{0}\"."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Please update the question titles and"
+#~ " scores of \"{0}\" according to the"
+#~ " comments. (Ok, open it for me "
+#~ "[Press any key to open file])"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Ok, I have updated the question "
+#~ "titles and scores, and I closed "
+#~ "the file. (Press any key to "
+#~ "continue)"
+#~ msgstr ""
+
+#~ msgid "The name of examination has been saved to \"{0}\"."
+#~ msgstr ""
+
+#~ msgid "have been added to \"{1}\"."
+#~ msgstr ""
+
+#~ msgid "The examination name\"{0}\" has been saved to \"{1}\"."
 #~ msgstr ""
 

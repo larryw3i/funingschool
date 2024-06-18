@@ -8,7 +8,7 @@ def set_exam(args):
 
     print_app()
 
-    if args.action in "enter_score":
+    if args.action in "enter":
         score = Score()
         score.enter()
 
@@ -23,7 +23,7 @@ def parse_exam(subparsers):
     parser_canteen.add_argument(
         "action",
         choices=[
-            "enter_score",
+            "enter",
         ],
         help=_("Enter the examination scores."),
     )
