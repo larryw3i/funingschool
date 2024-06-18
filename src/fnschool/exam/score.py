@@ -51,7 +51,7 @@ class Score:
         initialdir = (
             p_dpath
             if (p_dpath and Path(p_dpath).exists())
-            else ((Path.home() / "Downloads").as_posix())
+            else self.teacher.exam_dpath
         )
 
         filetypes = ((_("Spreadsheet Files"), "*.xlsx"),)
@@ -343,13 +343,6 @@ class Score:
 
         return self._fpath
 
-    @name.setter
-    def name(self, value):
-        exam_dpath = self.teacher.exam_dpath.as_posix()
-        if exam_dpath in value:
-            value = value.replace(exam_dpath, "")
-        self._name = value
-
     @property
     def name(self):
         if not self._name:
@@ -469,6 +462,13 @@ class Score:
                 os.makedirs(dpath, exist_ok=True)
 
         return self._name
+
+    @name.setter
+    def name(self, value):
+        exam_dpath = self.teacher.exam_dpath.as_posix()
+        if exam_dpath in value:
+            value = value.replace(exam_dpath, "")
+        self._name = value
 
 
 # The end.

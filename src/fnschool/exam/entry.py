@@ -11,7 +11,9 @@ def set_exam(args):
     if args.action in "enter":
         score = Score()
         score.enter()
-
+    elif args.action in "read":
+        score = Score()
+        score.read()
     else:
         print_info(_("Function is not found."))
 
@@ -22,9 +24,7 @@ def parse_exam(subparsers):
     )
     parser_canteen.add_argument(
         "action",
-        choices=[
-            "enter",
-        ],
+        choices=["enter", "read"],
         help=_("Enter the examination scores."),
     )
     parser_canteen.set_defaults(func=set_exam)
