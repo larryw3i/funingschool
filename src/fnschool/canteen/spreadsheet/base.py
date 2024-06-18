@@ -89,38 +89,34 @@ class SpreadsheetBase:
             self._sheet = self.get_bill_sheet(self.sheet_name)
         return self._sheet
 
-    def get_entry_index(self, form_index):
-
-        sheet_title = self.sheet.title
-
-        form_index0, form_index1 = form_index
-        if sheet_title == self.s.unwarehousing_name:
-            entry_index0, entry_index1 = form_index0 + 2, form_index1 - 1
-        elif sheet_title == self.s.warehousing_name:
-            entry_index0, entry_index1 = form_index0 + 2, form_index1 - 1
-        elif sheet_title == self.s.consuming_name:
-            entry_index0, entry_index1 = form_index0 + 2, form_index1 - 1
-        elif sheet_title == self.s.inventory_name:
-            entry_index0, entry_index1 = form_index0 + 3, form_index1 - 1
-
-        return [entry_index0, entry_index1]
-
     def del_form_empty_rows(self, empty_cols):
 
         self.del_form_indexes()
-        form_indexes = self.form_indexes 
-        
-        empty_cols = [empty_cols] if not isinstance(empty_cols,list) else empty_cols
-    
-        for form_index in form_indexes:
+        form_indexes = self.form_indexes
+
+        empty_cols = (
+            [empty_cols] if not isinstance(empty_cols, list) else empty_cols
+        )
+
+        form_indexes_len = len(form_indexes)
+        for i in range(form_indexes_len):
+
+            self.del_form_indexes()
+
+            form_index = self.form_indexes[i]
             entry_index0, entry_index1 = self.get_entry_index(form_index)
 
             entry_len = (entry_index1 - entry_index0) + 1
             len_diff = entry_len - self.entry_row_len0
+
+            entry_index1_0 = entry_index1
             if len_diff > 0:
                 for row_index in range(entry_index0, entry_index1 + 1):
-                    if (
-                        not any([self.sheet.cell(row_index, col_index).value for col_index in empty_cols])
+                    if all(
+                        [
+                            self.sheet.cell(row_index, col_index).value is None
+                            for col_index in empty_cols
+                        ]
                     ):
                         self.sheet.delete_rows(row_index, 1)
                         print_warning(
@@ -128,9 +124,10 @@ class SpreadsheetBase:
                                 'Empty row {0} of sheet "{1}" has been deleted.'
                             ).format(row_index, self.sheet.title)
                         )
-                        entry_index1 = entry_index1 - 1
-                        len_diff = len_diff - 1
-                        if row_index == entry_index1 or len_diff < 1:
+                        entry_index1_0 -= 1
+                        len_diff -= 1
+
+                        if row_index >= entry_index1_0 or len_diff < 1:
                             break
 
 

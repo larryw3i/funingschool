@@ -15,6 +15,11 @@ class Inventory(SpreadsheetBase):
         self.entry_row_len0 = 17
         pass
 
+    def get_entry_index(self, form_index):
+        form_index0, form_index1 = form_index
+        entry_index = [form_index0 + 3, form_index1 - 1]
+        return entry_index
+
     def format(self):
         sheet = self.sheet
         self.unmerge_sheet_cells(sheet)

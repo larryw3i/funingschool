@@ -18,6 +18,11 @@ class Warehousing(SpreadsheetBase):
         self.entry_row_len0 = 21
         pass
 
+    def get_entry_index(self, form_index):
+        form_index0, form_index1 = form_index
+        entry_index = [form_index0 + 2, form_index1 - 1]
+        return entry_index
+
     def format(self):
         wsheet = self.sheet
         self.unmerge_sheet_cells()
@@ -72,8 +77,8 @@ class Warehousing(SpreadsheetBase):
                             end_column=7,
                         )
                         break
-                
-                ci0,ci1 = row[0].row,0
+
+                ci0, ci1 = row[0].row, 0
                 for _row in wsheet.iter_rows(
                     min_row=row[0].row + 1,
                     max_row=wsheet.max_row + 1,
@@ -85,50 +90,59 @@ class Warehousing(SpreadsheetBase):
                         or "合计" in str(_row[0].value)
                     ):
 
-                        ci1 = _row[0].row-1
-                        
-                        fnames = [wsheet.cell(r,2).value for r in range(ci0,ci1+1)]
-                        fnames_d = list(set([n for n in fnames if fnames.count(n)>1 and n]))
+                        ci1 = _row[0].row - 1
+
+                        fnames = [
+                            wsheet.cell(r, 2).value for r in range(ci0, ci1 + 1)
+                        ]
+                        fnames_d = list(
+                            set(
+                                [n for n in fnames if fnames.count(n) > 1 and n]
+                            )
+                        )
 
                         for dn in fnames_d:
-                            row_index0_d = row[0].row+fnames.index(dn)
-                            row_index1_d = row_index0_d + fnames.count(dn)-1
+                            row_index0_d = row[0].row + fnames.index(dn)
+                            row_index1_d = row_index0_d + fnames.count(dn) - 1
                             fname = dn
-                            funit_name = wsheet.cell(row_index0_d,3).value
-                            ftotal = sum([wsheet.cell(r,6).value for r in range(row_index0_d,row_index1_d+1)])
+                            funit_name = wsheet.cell(row_index0_d, 3).value
+                            ftotal = sum(
+                                [
+                                    wsheet.cell(r, 6).value
+                                    for r in range(
+                                        row_index0_d, row_index1_d + 1
+                                    )
+                                ]
+                            )
 
-                            for r in range(row_index0_d,row_index1_d+1):
-                                wsheet.cell(r,2,"")
-                                wsheet.cell(r,3,"")
-                                wsheet.cell(r,6,"")
-                            
+                            for r in range(row_index0_d, row_index1_d + 1):
+                                wsheet.cell(r, 2, "")
+                                wsheet.cell(r, 3, "")
+                                wsheet.cell(r, 6, "")
 
                             wsheet.merge_cells(
-                                start_row = row_index0_d,
-                                end_row = row_index1_d,
-                                start_column = 2,
-                                end_column = 2
+                                start_row=row_index0_d,
+                                end_row=row_index1_d,
+                                start_column=2,
+                                end_column=2,
                             )
                             wsheet.merge_cells(
-                                start_row = row_index0_d,
-                                end_row = row_index1_d,
-                                start_column = 3,
-                                end_column = 3
+                                start_row=row_index0_d,
+                                end_row=row_index1_d,
+                                start_column=3,
+                                end_column=3,
                             )
                             wsheet.merge_cells(
-                                start_row = row_index0_d,
-                                end_row = row_index1_d,
-                                start_column = 6,
-                                end_column = 6
+                                start_row=row_index0_d,
+                                end_row=row_index1_d,
+                                start_column=6,
+                                end_column=6,
                             )
-                            wsheet.cell(row_index0_d,2,fname)
-                            wsheet.cell(row_index0_d,3,funit_name)
-                            wsheet.cell(row_index0_d,6,ftotal)
+                            wsheet.cell(row_index0_d, 2, fname)
+                            wsheet.cell(row_index0_d, 3, funit_name)
+                            wsheet.cell(row_index0_d, 6, ftotal)
 
-
-                        break 
-                  
-                
+                        break
 
             if row[0].value and "审核人" in row[0].value.replace(" ", ""):
                 wsheet.merge_cells(
@@ -318,8 +332,6 @@ class Warehousing(SpreadsheetBase):
                 ),
             )
 
-
-
         if len(form_indexes) > max_time_index:
             for time_index in range(max_time_index, len(form_indexes)):
                 form_index0, form_index1 = form_indexes[time_index]
@@ -337,9 +349,8 @@ class Warehousing(SpreadsheetBase):
                     for cell in row:
                         cell.value = ""
 
-        self.del_form_empty_rows([1,2])
+        self.del_form_empty_rows([1, 2])
         self.format()
-
         wb = self.bwb
         wb.active = wsheet
 

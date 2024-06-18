@@ -8,6 +8,11 @@ class Consuming(SpreadsheetBase):
         self.entry_row_len0 = 21
         pass
 
+    def get_entry_index(self, form_index):
+        form_index0, form_index1 = form_index
+        entry_index = [form_index0 + 2, form_index1 - 1]
+        return entry_index
+
     @property
     def form_indexes(self):
         if not self._form_indexes:
@@ -224,7 +229,7 @@ class Consuming(SpreadsheetBase):
                     for cell in row:
                         cell.value = ""
 
-        self.del_form_empty_rows([1,2])
+        self.del_form_empty_rows([1, 2])
 
         self.format()
 

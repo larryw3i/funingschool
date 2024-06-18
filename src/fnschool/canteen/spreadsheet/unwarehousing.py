@@ -17,6 +17,11 @@ class Unwarehousing(SpreadsheetBase):
         self.entry_row_len0 = 11
         pass
 
+    def get_entry_index(self, form_index):
+        form_index0, form_index1 = form_index
+        entry_index = [form_index0 + 2, form_index1 - 1]
+        return entry_index
+
     @property
     def form_indexes(self):
         if not self._form_indexes:
