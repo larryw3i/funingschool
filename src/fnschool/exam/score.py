@@ -314,6 +314,8 @@ class Score:
             scores.rename(columns={scores.columns[0]: "姓名"}, inplace=True)
             scores.drop(scores.tail(1).index, inplace=True)
             scores.set_index("姓名", inplace=True)
+            scores["考试纪律"] = scores["考试纪律"].fillna(0)
+
             self._scores = scores
 
         return self._scores
@@ -321,13 +323,17 @@ class Score:
     @property
     def question_titles(self):
         if not self._question_titles:
-            question_titles = self.scores.columns.to_list()
-            i0, i1 = question_titles.index(name_m1), question_titles.index(
-                "考试纪律"
-            )
-            question_titles = question_titles[i0 + 1 : i1]
-            self._question_titles = question_titles
+            self._question_titles = self.get_question_titles(self.scores)
+
         return self._question_titles
+    
+    def get_question_titles(self,scores):
+        question_titles = scores.columns.to_list()
+        i0, i1 = question_titles.index(name_m1), question_titles.index(
+            "考试纪律"
+        )
+        question_titles = question_titles[i0 + 1 : i1]
+        return question_titles
 
     @property
     def name_fpath(self):
