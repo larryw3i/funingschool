@@ -26,6 +26,7 @@ class Score:
         self._wb = None
         self._sheet0 = None
         self.p_path_key = _("scores_parent_directory")
+        self._question_titles = None
         self.fext = ".xlsx"
 
         pass
@@ -227,6 +228,7 @@ class Score:
             fpath = self.fpath
             fpaths = self.fpaths
             fpath1 = self.fpath_m1
+            name_m1 = self.name_m1 or _("No recent tests")
 
             scores_m1 = None
             if fpath1:
@@ -243,11 +245,7 @@ class Score:
                 scores_m1 = [
                     [name, s_score]
                     for name, s_score in scores_m1
-                    if (
-                        name
-                        and len(name.strip()) > 0
-                        and (not "平均分" in name)
-                    )
+                    if (name and len(name.strip()) > 0)
                 ]
                 wb.close()
                 sheet = None
@@ -255,34 +253,32 @@ class Score:
             wb = self.wb
             sheet = self.sheet0
 
-            sheet.cell(
-                2, 3, self.name_m1 if self.name_m1 else _("No recent tests")
-            )
+            sheet.cell(2, 3, self.name_m1)
 
-            if fpath1:
-                for row_index in range(3, sheet.max_row + 1):
-                    name = sheet.cell(row_index, 1).value
-                    if name:
-                        score = (
-                            [
-                                s_score
-                                for s_name, s_score in scores_m1
-                                if s_name == name
-                            ]
-                            if scores_m1
-                            else []
-                        )
-                        score = score[0] if len(score) > 0 else 0
-                        sheet.cell(row_index, 3, score)
+            for row_index in range(3, sheet.max_row + 1):
+                name = sheet.cell(row_index, 1).value
+                if name:
+                    score = (
+                        [
+                            s_score
+                            for s_name, s_score in scores_m1
+                            if s_name == name
+                        ]
+                        if scores_m1
+                        else []
+                    )
+                    score = score[0] if len(score) > 0 else 0
+                    sheet.cell(row_index, 3, score)
 
-            print_info(
-                _(
-                    "The recent examination scores ({0}) "
-                    + 'have been added to "{1}".'
-                ).format(name_m1, fpath)
-                if scores_m1
-                else _("There is no recent tests.")
-            )
+            if name_m1:
+                print_info(
+                    _(
+                        "The recent examination scores ({0}) "
+                        + 'have been added to "{1}".'
+                    ).format(name_m1, fpath)
+                    if scores_m1
+                    else _("There is no recent tests.")
+                )
             wb.save(fpath)
             print_info(_('Spreadsheet "{0}" has been saved.').format(fpath))
             wb.close()
@@ -317,10 +313,21 @@ class Score:
 
             scores.rename(columns={scores.columns[0]: "姓名"}, inplace=True)
             scores.drop(scores.tail(1).index, inplace=True)
-
+            scores.set_index("姓名", inplace=True)
             self._scores = scores
 
         return self._scores
+
+    @property
+    def question_titles(self):
+        if not self._question_titles:
+            question_titles = self.scores.columns.to_list()
+            i0, i1 = question_titles.index(name_m1), question_titles.index(
+                "考试纪律"
+            )
+            question_titles = question_titles[i0 + 1 : i1]
+            self._question_titles = question_titles
+        return self._question_titles
 
     @property
     def name_fpath(self):
@@ -475,6 +482,7 @@ class Score:
         exam_dpath = self.teacher.exam_dpath.as_posix()
         if exam_dpath in value:
             value = value.replace(exam_dpath, "")
+        value = os.path.splitext(value)[0]
         self._name = value
 
 
