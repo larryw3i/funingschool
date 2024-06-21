@@ -52,7 +52,7 @@ class Cover(SpreadsheetBase):
             8,
             3,
             f"入库：{w_seasoning_total_price:.2f}元；"
-            + f"未入库：{unw_seasoning_total_price:.2f}元",
+            + f"未入库：{unw_seasoning_total_price:.2f}元。",
         )
 
         wb = self.bwb
