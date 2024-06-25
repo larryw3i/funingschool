@@ -70,6 +70,17 @@ class Score:
             self._src_dpath = src_dpath
         return self._src_dpath
 
+    def get_rotation(self, xticks):
+        locs, labels = xticks
+
+        boxes = [l.get_window_extent().get_points() for l in labels]
+
+        x0, x1 = boxes[0][0][0], boxes[-1][-1][0]
+        label_w = (x1 - x0) / (len(labels))
+        label_hx = max([b[-1][1] - b[0][1] for b in boxes])
+        rotation = math.degrees(math.sin((label_hx / 2) / (label_w / 2)))
+        return rotation
+
     def plot_scores(self, max_test_num=None):
         scores = self.scores
         scores = scores[scores.columns[::-1]]
@@ -94,20 +105,10 @@ class Score:
             s_scores = s_scores[:max_test_num]
             img = plt.plot(range(s_scores.size), s_scores)
             plt.title(_("The scores of Student {0}").format(student_name0))
-            locs, labels = plt.xticks(
-                range(s_scores.size), self.test_names[::-1]
-            )
+            xticks = plt.xticks(range(s_scores.size), self.test_names[::-1])
 
             if not labelrotation:
-                boxes = [l.get_window_extent().get_points() for l in labels]
-
-                x0, x1 = boxes[0][0][0], boxes[-1][-1][0]
-                label_w = (x1 - x0) / (s_scores.size)
-                label_hx = max([b[-1][1] - b[0][1] for b in boxes])
-                labelrotation = math.degrees(
-                    math.sin((label_hx / 2) / (label_w / 2))
-                )
-
+                labelrotation = self.get_rotation(xticks)
             plt.tick_params(axis="x", labelrotation=labelrotation)
 
             plt.xlabel(_("Examination names"))
