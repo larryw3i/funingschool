@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-19 01:45+0800\n"
-"PO-Revision-Date: 2024-06-19 01:52+0800\n"
+"POT-Creation-Date: 2024-06-25 14:46+0800\n"
+"PO-Revision-Date: 2024-06-25 14:47+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -86,7 +86,7 @@ msgstr "已从 “{0}” 读取到一个被保存的名字。"
 msgid "The names saved by {0} are as follows:"
 msgstr "被 {0} 保存的名字如下："
 
-#: src/fnschool/exam/score.py:417 src/fnschool/exam/score.py:449
+#: src/fnschool/exam/score.py:507 src/fnschool/exam/score.py:539
 #: src/fnschool/user.py:122 src/fnschool/user.py:201
 msgid "Unexpected value was got. Exit."
 msgstr "获取到未预期的值。退出。"
@@ -101,7 +101,7 @@ msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 "您好！请问您的名字是 “{0}” 吗？如果不是请输入您的名字！（是的：“Y”，“y”，“”）"
 
-#: src/fnschool/exam/score.py:420 src/fnschool/exam/score.py:447
+#: src/fnschool/exam/score.py:510 src/fnschool/exam/score.py:537
 #: src/fnschool/user.py:199
 msgid "Unexpected value was got."
 msgstr "获取到未预期的值。"
@@ -727,7 +727,7 @@ msgid "Please select a purchasing file."
 msgstr "请选择购入食材的列表文件。"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:335
-#: src/fnschool/exam/score.py:57
+#: src/fnschool/exam/score.py:73
 msgid "Spreadsheet Files"
 msgstr "工作簿文件。"
 
@@ -736,7 +736,7 @@ msgid "Please select the purchasing file"
 msgstr "请选择购入食材的列表文件"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:347
-#: src/fnschool/exam/score.py:69
+#: src/fnschool/exam/score.py:90
 msgid "No file was selected, exit."
 msgstr "未选择文件，退出。"
 
@@ -831,47 +831,57 @@ msgstr "测试"
 msgid "teacher_name"
 msgstr "教师名"
 
-#: src/fnschool/exam/score.py:28
+#: src/fnschool/exam/score.py:31
 msgid "scores_parent_directory"
 msgstr "成绩文件父目录"
 
-#: src/fnschool/exam/score.py:63
-msgid "Please select the scores file"
-msgstr "请选择成绩文件"
-
-#: src/fnschool/exam/score.py:72
-msgid "Scores file \"{0}\" has been selected."
-msgstr "已选择成绩文件 “{0}” 。"
-
-#: src/fnschool/exam/score.py:165
-msgid "Failed to get examination start time from \"{0}\"."
-msgstr "从 “{0}” 获取测试开始时间失败。"
-
-#: src/fnschool/exam/score.py:179
-msgid "Failed to get examination end time from \"{0}\"."
-msgstr "从 “{0}” 获取测试结束时间失败。"
-
-#: src/fnschool/exam/score.py:186
-msgid "The examination end time is set to \"{0}\"."
-msgstr "测试结束时间被设置为 “{0}”。"
-
-#: src/fnschool/exam/score.py:252
+#: src/fnschool/exam/score.py:34
 msgid "No recent tests"
 msgstr "近期无测试"
 
-#: src/fnschool/exam/score.py:272
+#: src/fnschool/exam/score.py:79
+msgid "Please select the scores file"
+msgstr "请选择成绩文件"
+
+#: src/fnschool/exam/score.py:93
+msgid "Scores file \"{0}\" has been selected."
+msgstr "已选择成绩文件 “{0}” 。"
+
+#: src/fnschool/exam/score.py:233
+msgid "Failed to get examination start time from \"{0}\"."
+msgstr "从 “{0}” 获取测试开始时间失败。"
+
+#: src/fnschool/exam/score.py:246
+msgid "Failed to get examination end time from \"{0}\"."
+msgstr "从 “{0}” 获取测试结束时间失败。"
+
+#: src/fnschool/exam/score.py:253
+msgid "The examination end time is set to \"{0}\"."
+msgstr "测试结束时间被设置为 “{0}”。"
+
+#: src/fnschool/exam/score.py:336
+msgid "exam_names"
+msgstr "测试名"
+
+#: src/fnschool/exam/score.py:361
+msgid ""
+"Scores spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" was copied to "
+"\"{0}\"."
+msgstr "测试分数工作簿 “{0}” 不存在，已将工作簿 “{1}” 复制到 “{0}” 。"
+
+#: src/fnschool/exam/score.py:399
 msgid "The recent examination scores ({0}) have been added to \"{1}\"."
 msgstr "上一次的测试分数（\"{0}\" 测试）已被添加到 “{0}”。"
 
-#: src/fnschool/exam/score.py:277
+#: src/fnschool/exam/score.py:404
 msgid "There is no recent tests."
 msgstr "近期无测试。"
 
-#: src/fnschool/exam/score.py:280
+#: src/fnschool/exam/score.py:408
 msgid "Spreadsheet \"{0}\" has been saved."
 msgstr "已保存 工作簿 “{0}”。"
 
-#: src/fnschool/exam/score.py:285
+#: src/fnschool/exam/score.py:412
 msgid ""
 "Please update the question titles , student names and scores of \"{0}\" "
 "according to the comments. (Ok, open it for me [Press any key to open file])"
@@ -879,7 +889,7 @@ msgstr ""
 "请按照备注更新 “{0}” 文件的题目标题、学生姓名和分数。（好的，打开文件吧～【按"
 "任意键打开文件】）"
 
-#: src/fnschool/exam/score.py:300
+#: src/fnschool/exam/score.py:425
 msgid ""
 "Ok, I have updated the question titles, student names and scores, and I "
 "CLOSED the file. (Press any key to continue)"
@@ -887,34 +897,30 @@ msgstr ""
 "好了，我已经更新试题的标题、学生姓名和学生的分数了，然后也关闭了文件～ （按任"
 "意键继续）"
 
-#: src/fnschool/exam/score.py:320
-msgid "exam_names"
-msgstr "测试名"
-
-#: src/fnschool/exam/score.py:356
+#: src/fnschool/exam/score.py:446
 msgid "The examination name \"{0}\" has been saved to \"{1}\"."
 msgstr "测试名 “{0}” 已被保存到 “{1}”。"
 
-#: src/fnschool/exam/score.py:360
+#: src/fnschool/exam/score.py:450
 msgid "The examination name has been saved to \"{0}\"."
 msgstr "测试名已被保存到 “{0}”。"
 
-#: src/fnschool/exam/score.py:375
+#: src/fnschool/exam/score.py:465
 msgid "The saved examination names are as follow:"
 msgstr "被保存的一些测试名如下："
 
-#: src/fnschool/exam/score.py:377
+#: src/fnschool/exam/score.py:467
 msgid "The saved examination name is as follow:"
 msgstr "仅有一个被保存的测试名，它是："
 
-#: src/fnschool/exam/score.py:392
+#: src/fnschool/exam/score.py:482
 msgid ""
 "Select the examination name you entered (index), or enter new examination "
 "name, please! (default: {0})"
 msgstr ""
 "选择以前你输入的测试名（输入序号），或者输入新的测试名。（默认：“{0}”）"
 
-#: src/fnschool/exam/score.py:434
+#: src/fnschool/exam/score.py:524
 msgid "Hello~ tell {0} the examination name, please!"
 msgstr "您好～ 请告诉 {0} 您需要录入的测试名。"
 

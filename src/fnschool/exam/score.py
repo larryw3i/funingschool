@@ -17,13 +17,13 @@ class Score:
         self._grade = None
         self._subject = None
         self._short_name = None
-        self._short_name_m1 = None
+        self._short_name_m2 = None
         self._test_t = None
         self._fpath = None
         self._dpath = None
         self._fpath_m2 = None
         self._fpaths = None
-        self._scores_m1= None
+        self._scores_m1 = None
         self._wb = None
         self._total_points = None
         self._sheet0 = None
@@ -31,14 +31,18 @@ class Score:
         self.p_path_key = _("scores_parent_directory")
         self._question_titles = None
         self.fext = ".xlsx"
-        self.no_test_m1_s = _("No recent tests")
+        self.no_test_m2_s = _("No recent tests")
         self.name_index0 = 3
         self.question_index0 = 4
         self.points_index0 = self.question_index0 - 1
 
         pass
 
-    def dpath
+    @property
+    def dpath(self):
+        if not self._dpath:
+            self._dpath = self.fpath.parent
+        return self._dpath
 
     @property
     def config(self):
@@ -92,58 +96,52 @@ class Score:
         print(self.scores)
         print(self.scores)
 
-    def get_scores(self,fpath):
+    def get_scores(self, fpath):
         if not Path(fpath).exists():
             return None
 
-        scores = pd.read_excel(fpath, skiprows=[0,2])
+        scores = pd.read_excel(fpath, skiprows=[0, 2])
         scores.rename(columns={scores.columns[0]: "姓名"}, inplace=True)
         scores.set_index("姓名", inplace=True)
         scores["考试纪律"] = scores["考试纪律"].fillna(0)
-        point_cols = scores.columns[self.points_index0:].to_list()
+        point_cols = scores.columns[self.points_index0 :].to_list()
         scores["总分"] = scores.loc[:, point_cols].sum(axis=1)
-        scores.drop([scores.columns[2]], axis=1,inplace=True)
+        scores.drop([scores.columns[2]], axis=1, inplace=True)
 
         return scores
-
-       
 
     @property
     def scores(self):
         if not self._scores:
-           fpaths = self.fpaths
-            
+            fpaths = self.fpaths
+
             if len(fpaths) < 1:
                 return None
+
             fpaths = fpaths[::-1]
-            scores = []
-            scores_cols = []
+            scores_cols = ["Name"]
             scores_rows = None
- 
+
             for fi, (f, __) in enumerate(fpaths):
                 name = Path(f).stem
                 scores_cols.append(name)
                 f_scores = self.get_scores(f)
-                s_index =  f_scores.index.to_list()
+                s_index = f_scores.index.to_list()
                 if not scores_rows:
-                    scores_rows = [
-                        [n] for n in s_index
-                    ]
+                    scores_rows = [[n] for n in s_index]
 
                 for i in range(len(scores_rows)):
                     r = scores_rows[i]
                     s_name = r[0]
 
                     if s_name in s_index:
-                        r.append(
-                            f_scores.iloc[r[0],1]]
-                        )
+                        r.append(f_scores.loc[r[0], f_scores.columns[1]])
                         scores_rows[i] = r
                     else:
                         r.append(0)
 
-                
-
+            scores = pd.DataFrame(scores_rows,columns = scores_cols) 
+            scores.set_index('Name', inplace=True)
 
             self._scores = scores
 
@@ -201,15 +199,15 @@ class Score:
         return value
 
     @property
-    def short_name_m1(self):
-        if not self._short_name_m1:
+    def short_name_m2(self):
+        if not self._short_name_m2:
             if len(self.fpaths) > 1:
-                name, __ = self.fpaths[-1]
-                self._short_name_m1 = Path(name).stem
+                name, __ = self.fpaths[-2]
+                self._short_name_m2 = Path(name).stem
             else:
                 return None
 
-        return self._short_name_m1
+        return self._short_name_m2
 
     @property
     def test_t(self):
@@ -354,7 +352,7 @@ class Score:
     def fpath(self):
         if not self._fpath:
             self._fpath = self.teacher.exam_dpath / (
-                Path(self.name).as_posix() + self.fext
+                Path(self.full_name).as_posix() + self.fext
             )
             if not self._fpath.parent.exists():
                 os.makedirs(self._fpath.parent.as_posix(), exist_ok=True)
@@ -370,14 +368,14 @@ class Score:
                 )
 
                 fpath1 = self.fpath_m2
-                name_m2 = self.name_m2 or self.no_test_m2_s
-                scores_m2 = self.scores[-1][1] if self.scores else None
+                name_m2 = self.short_name_m2 or self.no_test_m2_s
+                scores_m2 = self.scores[-1][1] if self.scores is None else None
                 names_len = len(scores_m2) - 1 if scores_m2 else None
 
                 wb = self.wb
                 sheet = self.sheet0
 
-                sheet.cell(2, 3, self.name_m2)
+                sheet.cell(2, 3, name_m2)
                 new_names_len = (
                     len(
                         [
@@ -388,22 +386,23 @@ class Score:
                     )
                     - 1
                 )
-                len_diff = names_len - new_names_len
-                if len_diff > 0:
-                    sheet.insert_rows(self.name_index0 + 1, len_diff)
-                elif len_diff < 0:
-                    sheet.delete_rows(self.name_index0 + 1, -len_diff)
+                if names_len:
+                    len_diff = names_len - new_names_len
+                    if len_diff > 0:
+                        sheet.insert_rows(self.name_index0 + 1, len_diff)
+                    elif len_diff < 0:
+                        sheet.delete_rows(self.name_index0 + 1, -len_diff)
 
                 for i, (s_name, s_score) in enumerate(scores_m2):
                     sheet.cell(self.name_index0 + i, 1, s_name)
                     sheet.cell(self.name_index0 + i, 3, s_score)
 
-                if name_m1:
+                if name_m2:
                     print_info(
                         _(
                             "The recent examination scores ({0}) "
                             + 'have been added to "{1}".'
-                        ).format(name_m1, fpath)
+                        ).format(name_m2, fpath)
                         if scores_m2
                         else _("There is no recent tests.")
                     )
