@@ -25,8 +25,8 @@ class Score:
         self._fpaths = None
         self._scores_m1 = None
         self._wb = None
-        self._total_points = None
         self._sheet0 = None
+        self._total_points = None
         self._scores = None
         self.p_path_key = _("scores_parent_directory")
         self._question_titles = None
