@@ -35,8 +35,69 @@ class Score:
         self.name_index0 = 3
         self.question_index0 = 4
         self.points_index0 = self.question_index0 - 1
+        self._test_names = None
+        self._student_names = None
+        self._src_dpath = None
 
         pass
+
+    @property
+    def test_names(self):
+        if not self._test_names:
+            scores = self.scores
+            test_names = scores.columns.to_list()
+            self._test_names = test_names
+        return self._test_names
+
+    @property
+    def student_names(self):
+        if not self._student_names:
+            scores = self.scores
+            student_names = scores.index.to_list()
+            self._student_names = student_names
+        return self._student_names
+    
+    @property
+    def src_dpath(self):
+        return self.get_src_dpath()
+        
+    def get_src_dpath(self,fpath=None):
+        if fpath or not self._src_dpath:
+            src_dpath = fpath or self.fpath
+            src_dpath = Path(os.path.splitext(src_dpath)[0])
+            if fpath:
+                return src_dpath
+            self._src_dpath = src_dpath
+        return self._src_dpath
+
+    def plot_scores(self,max_test_num = None):
+        scores = self.scores
+        scores = scores[scores.columns[::-1]]
+        max_test_num = max_test_num or scores.columns.size
+        
+        s_index = 1
+        s_total = scores.shape[0]
+        s_total_len2 = len(str(s_total))
+        for index,s_scores in scores.iterrows():
+            img_name = (self.src_dpath/(_("scores_of_{0}").format(index)+".png")).as_posix()
+            s_scores = s_scores[:max_test_num]
+            img = plt.plot(range(s_scores.size), s_scores)
+            plt.title(_("The scores of Student {0}").format(index))
+            plt.xticks(range(s_scores.size), self.test_names[::-1])
+            plt.xlabel(_("Examination names"))
+            plt.ylabel(_("Examination Points"))
+            plt.savefig(
+                img_name
+            )
+            print_info(
+                _(
+                    "[{0}] \"{1}\" has been saved."
+                ).format(f"{s_index:>{s_total_len2}}/{s_total}",img_name)
+            )
+            s_index += 1
+ 
+
+        
 
     @property
     def dpath(self):
@@ -55,8 +116,7 @@ class Score:
         return self._teacher
 
     def enter(self):
-        scores = self.scores
-        print(scores)
+        self.plot_scores()
         pass
 
     def read(self):
@@ -452,6 +512,10 @@ class Score:
                     )
                 )
                 input(">_ ")
+        
+        src_dpath = Path(self.get_src_dpath(self._fpath))
+        if not src_dpath.exists():
+            os.makedirs(src_dpath,exist_ok=True)
 
         return self._fpath
 

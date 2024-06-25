@@ -5,6 +5,7 @@ requires-python = ">= 3.9"
 dependencies = [
     "colorama",
     "pandas",
+    "matplotlib",
     "numpy",
     "openpyxl",
     "appdirs",
