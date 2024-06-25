@@ -11,31 +11,33 @@ class Score:
     def __init__(
         self,
     ):
-        self._name = None
+        self._full_name = None
         self._teacher = None
         self.fpath0 = score_fpath0
         self._grade = None
         self._subject = None
-        self._name0 = None
-        self._name_m1 = None
+        self._short_name = None
+        self._short_name_m1 = None
         self._test_t = None
         self._fpath = None
-        self._fpath_m1 = None
+        self._dpath = None
+        self._fpath_m2 = None
         self._fpaths = None
-        self._scores = None
+        self._scores_m1= None
         self._wb = None
         self._total_points = None
         self._sheet0 = None
-        self._prev_scores = None
+        self._scores_0_m2 = None
         self.p_path_key = _("scores_parent_directory")
         self._question_titles = None
         self.fext = ".xlsx"
         self.no_test_m1_s = _("No recent tests")
         self.name_index0 = 3
         self.question_index0 = 4
-        self.fpath_is_new = False
 
         pass
+
+    def dpath
 
     @property
     def config(self):
@@ -85,16 +87,27 @@ class Score:
 
         print_info(_('Scores file "{0}" has been selected.').format(filename))
         self.config.save(self.p_path_key, Path(filename).parent.as_posix())
-
         self.name = filename
-
         print(self.scores)
+        print(self.scores_0_m2)
 
-        print(self.prev_scores)
+    def get_scores(self,fpath):
+        if not Path(fpath).exists():
+            return None
+
+        scores = pd.read_excel(fpath, skiprows=[0,2])
+        scores.rename(columns={scores.columns[0]: "姓名"}, inplace=True)
+        scores.set_index("姓名", inplace=True)
+        scores["考试纪律"] = scores["考试纪律"].fillna(0)
+        point_cols = scores.columns[3:].to_list()
+        scores["总分"] = scores.loc[:, point_cols].sum(axis=1)
+        return scores
+
+       
 
     @property
-    def prev_scores(self):
-        if not self._prev_scores:
+    def scores_0_m2(self):
+        if not self._scores_0_m2:
             scores = []
             fpaths = (
                 fpaths[:-2] if self.fpath in self.fpaths else self.fpaths[:-1]
@@ -104,42 +117,11 @@ class Score:
 
             for f, __ in fpaths:
                 name = Path(f).stem
-                wb = load_workbook(f)
-                sheet = wb[wb.sheetnames[0]]
+                scores.append([name,get_scores(f)])
+            self._scores_m1 = scores
+            self._scores_0_m2 = scores
 
-                headers = [
-                    sheet.cell(2, c).value
-                    for c in range(1, sheet.max_column + 1)
-                    if sheet.cell(2, c).value
-                ]
-                max_col0 = headers.index("考试纪律") + 1
-                print(max_col0)
-                sub_scores = [
-                    (
-                        sheet.cell(r, 1).value,
-                        sum(
-                            [
-                                float(sheet.cell(r, c).value)
-                                for c in range(self.question_index0,max_col0 )
-                                if sheet.cell(r, c).value
-                            ]
-                        )
-                        - (
-                            float(sheet.cell(r, max_col0).value)
-                            if sheet.cell(r, max_col0).value
-                            else 0
-                        )
-                    )
-                    for r in range(self.name_index0, sheet.max_row + 1)
-                    if (
-                        sheet.cell(r, 2).value
-                        and not "平均分" in sheet.cell(r,1).value
-                    )
-                ]
-                scores.append((name, sub_scores))
-            self._prev_scores = scores
-
-        return self._prev_scores
+        return self._scores_0_m2
 
     @property
     def fpaths(self):
@@ -193,15 +175,15 @@ class Score:
         return value
 
     @property
-    def name_m1(self):
-        if not self._name_m1:
+    def short_name_m1(self):
+        if not self._short_name_m1:
             if len(self.fpaths) > 1:
                 name, __ = self.fpaths[-1]
-                self._name_m1 = Path(name).stem
+                self._short_name_m1 = Path(name).stem
             else:
                 return None
 
-        return self._name_m1
+        return self._short_name_m1
 
     @property
     def test_t(self):
@@ -257,11 +239,11 @@ class Score:
         return test_t
 
     @property
-    def name0(self):
-        if not self._name0:
-            self._name0 = Path(self.fpath).stem
+    def short_name(self):
+        if not self._short_name:
+            self._short_name = Path(self.fpath).stem
 
-        return self._name0
+        return self.short_name
 
     @property
     def wb(self):
@@ -277,108 +259,15 @@ class Score:
         return self._sheet0
 
     @property
-    def scores(self):
+    def scores_m1(self):
 
-        if self._scores is None:
+        if self._scores_m1 is None:
 
             fpath = self.fpath
-            fpaths = self.fpaths
-            fpath1 = self.fpath_m1
-            name_m1 = self.name_m1 or self.no_test_m1_s
-            scores_m1 = self.prev_scores[-1][1] if self.prev_scores else None
-            names_len = len(scores_m1) - 1 if scores_m1 else None
+            scores = self.get_scores(fpath)
+            self._scores_m1 = scores
 
-            wb = self.wb
-            sheet = self.sheet0
-
-            sheet.cell(2, 3, self.name_m1)
-            sheet_names_len = (
-                len(
-                    [
-                        sheet.cell(r, 1).value
-                        for r in range(self.name_index0, sheet.max_row + 1)
-                        if sheet.cell(r, 1).value
-                    ]
-                )
-                - 1
-            )
-            len_diff = names_len - sheet_names_len
-            if len_diff > 0:
-                sheet.insert_rows(self.name_index0 + 1, len_diff)
-            elif len_diff < 0:
-                sheet.delete_rows(self.name_index0 + 1, -len_diff)
-
-            if self.fpath_is_new:
-                for i, (s_name, s_score) in enumerate(scores_m1):
-                    sheet.cell(self.name_index0 + i, 1, s_name)
-                    sheet.cell(self.name_index0 + i, 3, s_score)
-            else:
-                for row_index in range(self.name_index0, sheet.max_row + 1):
-                    name = sheet.cell(row_index, 1).value
-                    if name:
-                        score = 0
-                        if scores_m1:
-                            score = (
-                                [
-                                    s_score
-                                    for s_name, s_score in scores_m1
-                                    if s_name == name
-                                ]
-                            )
-                            score = score[0] if len(score)>0 else 0
-                        sheet.cell(row_index, 3, score)
-
-            if name_m1:
-                print_info(
-                    _(
-                        "The recent examination scores ({0}) "
-                        + 'have been added to "{1}".'
-                    ).format(name_m1, fpath)
-                    if scores_m1
-                    else _("There is no recent tests.")
-                )
-            wb.save(fpath)
-            print_info(_('Spreadsheet "{0}" has been saved.').format(fpath))
-            wb.close()
-            sheet = None
-
-            print_info(
-                _(
-                    "Please update the question titles "
-                    + ", student names "
-                    + "and scores "
-                    + 'of "{0}" '
-                    + "according to the comments. "
-                    + "(Ok, open it for me [Press any "
-                    + "key to open file])"
-                ).format(fpath)
-            )
-
-            input(">_ ")
-            open_path(fpath)
-
-            print_warning(
-                _(
-                    "Ok, I have updated the question"
-                    + " titles, student names and scores, and I CLOSED "
-                    + "the file. "
-                    + "(Press any key to continue)"
-                )
-            )
-            input(">_ ")
-
-            scores = pd.read_excel(fpath, skiprows=[0])
-
-            scores.rename(columns={scores.columns[0]: "姓名"}, inplace=True)
-            scores.drop(scores.tail(1).index, inplace=True)
-            scores.set_index("姓名", inplace=True)
-            scores["考试纪律"] = scores["考试纪律"].fillna(0)
-            question_titles = self.get_question_titles(scores)
-            scores["总分"] = scores.loc[:, question_titles].sum(axis=1)
-
-            self._scores = scores
-
-        return self._scores
+        return self._scores_m1
 
     def get_points(self, question):
         points = question
@@ -418,14 +307,11 @@ class Score:
 
     def get_question_titles(self, scores):
         question_titles = scores.columns.to_list()
-        i0, i1 = question_titles.index(
-            self.name_m1 or self.no_test_m1_s
-        ), question_titles.index("考试纪律")
-        question_titles = question_titles[i0 + 1 : i1]
+        question_titles = question_titles[1:]
         return question_titles
 
     @property
-    def name_fpath(self):
+    def names_fpath(self):
         fpath = self.teacher.dpath / (_("exam_names") + ".txt")
         if not fpath.exists():
             with open(fpath, "w", encoding="utf-8") as f:
@@ -433,11 +319,11 @@ class Score:
         return fpath
 
     @property
-    def fpath_m1(self):
-        if not self._fpath_m1:
-            path = self.fpaths[-1][0] if len(self.fpaths) > 1 else None
-            self._fpath_m1 = path
-        return self._fpath_m1
+    def fpath_m2(self):
+        if not self._fpath_m2:
+            path = self.fpaths[-2][0] if len(self.fpaths) > 1 else None
+            self._fpath_m2 = path
+        return self._fpath_m2
 
     @property
     def fpath(self):
@@ -447,6 +333,7 @@ class Score:
             )
             if not self._fpath.parent.exists():
                 os.makedirs(self._fpath.parent.as_posix(), exist_ok=True)
+
             if not self._fpath.exists():
                 shutil.copy(self.fpath0, self._fpath)
                 print_info(
@@ -456,15 +343,80 @@ class Score:
                         + 'copied to "{0}".'
                     ).format(self._fpath, self.fpath0)
                 )
-                sef.fpath_is_new = True
+
+                fpath1 = self.fpath_m2
+                name_m2 = self.name_m2 or self.no_test_m2_s
+                scores_m2 = self.scores_0_m2[-1][1] if self.scores_0_m2 else None
+                names_len = len(scores_m2) - 1 if scores_m2 else None
+
+                wb = self.wb
+                sheet = self.sheet0
+
+                sheet.cell(2, 3, self.name_m2)
+                new_names_len = (
+                    len(
+                        [
+                            sheet.cell(r, 1).value
+                            for r in range(self.name_index0, sheet.max_row + 1)
+                            if sheet.cell(r, 1).value
+                        ]
+                    )
+                    - 1
+                )
+                len_diff = names_len - new_names_len
+                if len_diff > 0:
+                    sheet.insert_rows(self.name_index0 + 1, len_diff)
+                elif len_diff < 0:
+                    sheet.delete_rows(self.name_index0 + 1, -len_diff)
+
+                for i, (s_name, s_score) in enumerate(scores_m2):
+                    sheet.cell(self.name_index0 + i, 1, s_name)
+                    sheet.cell(self.name_index0 + i, 3, s_score)
+
+                if name_m1:
+                    print_info(
+                        _(
+                            "The recent examination scores ({0}) "
+                            + 'have been added to "{1}".'
+                        ).format(name_m1, fpath)
+                        if scores_m2
+                        else _("There is no recent tests.")
+                    )
+
+                wb.save(fpath)
+                print_info(_('Spreadsheet "{0}" has been saved.').format(fpath))
+                wb.close()
+                sheet = None
+                print_info(
+                    _(
+                        "Please update the question titles "
+                        + ", student names "
+                        + "and scores "
+                        + 'of "{0}" '
+                        + "according to the comments. "
+                        + "(Ok, open it for me [Press any "
+                        + "key to open file])"
+                    ).format(fpath)
+                )
+                input(">_ ")
+                open_path(fpath)
+                print_warning(
+                    _(
+                        "Ok, I have updated the question"
+                        + " titles, student names and scores, and I CLOSED "
+                        + "the file. "
+                        + "(Press any key to continue)"
+                    )
+                )
+                input(">_ ")
 
         return self._fpath
 
     @property
-    def name(self):
-        if not self._name:
+    def full_name(self):
+        if not self._full_name:
             names = None
-            with open(self.name_fpath, "r", encoding="utf-8") as f:
+            with open(self.names_fpath, "r", encoding="utf-8") as f:
                 names = f.read().replace(" ", "").strip().split("\n")
             names = [n for n in names if (len(n) > 0)]
             names_len = len(names)
@@ -472,10 +424,10 @@ class Score:
             name_writed_s = lambda name=None: (
                 _(
                     'The examination name "{0}" ' + 'has been saved to "{1}".'
-                ).format(name, self.name_fpath)
+                ).format(name, self.names_fpath)
                 if name
                 else _('The examination name has been saved to "{0}".').format(
-                    self.name_fpath
+                    self.names_fpath
                 )
             )
 
@@ -539,12 +491,12 @@ class Score:
                 if name_i != name0:
                     if name_i in names:
                         names.remove(name_i)
-                    with open(self.name_fpath, "w", encoding="utf-8") as f:
+                    with open(self.names_fpath, "w", encoding="utf-8") as f:
                         f.write("\n".join([">" + name_i] + names))
                     name0 = name_i
                     print_info(name_writed_s(name0))
 
-                self._name = name0
+                self._full_name = name0
 
             else:
                 print_info(
@@ -555,10 +507,10 @@ class Score:
                 for i in range(0, 3):
                     name0 = input(">_ ").replace(" ", "")
                     if len(name0) > 0:
-                        with open(self.name_fpath, "w", encoding="utf-8") as f:
-                            f.write(">" + self._name)
+                        with open(self.names_fpath, "w", encoding="utf-8") as f:
+                            f.write(">" + self._full_name)
                         print_info(name_writed_s(name0))
-                        self._name = name0
+                        self._full_name = name0
                         break
                     else:
                         print_error(_("Unexpected value was got."))
@@ -566,27 +518,28 @@ class Score:
                         print_error(_("Unexpected value was got." + " Exit."))
                         exit()
 
-        if self._name.startswith("/"):
-            self._name = re.sub(r"^/+", "", self._name)
-        if self._name.startswith("\\"):
-            self._name = re.sub(r"^\\+", "", self._name)
-        if ".." in self._name:
-            self._name = re.sub("..", "", self._name)
+        if self._full_name.startswith("/"):
+            self._full_name = re.sub(r"^/+", "", self._full_name)
+        if self._full_name.startswith("\\"):
+            self._full_name = re.sub(r"^\\+", "", self._full_name)
+        if ".." in self._full_name:
+            self._full_name = re.sub("..", "", self._full_name)
 
-        if "/" in self._name:
-            dpath = (self.teacher.exam_dpath / Path(self._name)).parent
+        if "/" in self._full_name:
+            dpath = (self.teacher.exam_dpath / Path(self._full_name)).parent
             if not dpath.exists():
                 os.makedirs(dpath, exist_ok=True)
 
-        return self._name
+        return self._full_name
 
-    @name.setter
-    def name(self, value):
+    @full_name.setter
+    def full_name(self, value):
         exam_dpath = self.teacher.exam_dpath.as_posix()
+        value = Path(value).as_posix()
         if exam_dpath in value:
             value = value.replace(exam_dpath, "")
         value = os.path.splitext(value)[0]
-        self._name = value
+        self._full_name = value
 
 
 # The end.
