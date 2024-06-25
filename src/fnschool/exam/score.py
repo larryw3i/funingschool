@@ -38,6 +38,7 @@ class Score:
         self._test_names = None
         self._student_names = None
         self._src_dpath = None
+        self.plot_alpha0 = 0.16
 
         pass
 
@@ -80,6 +81,15 @@ class Score:
         rotation = math.degrees(math.sin(label_hx / label_w))
         return rotation
 
+    def plot(self):
+        print_info(
+            _('Generate the scores and scoring rate plots now ? (Yes: "Y","y")')
+        )
+        p_input = input(">_ ")
+        if p_input and p_input in "Yy":
+            self.plot_scores()
+            self.plot_scores_m1()
+
     def plot_scores(self, max_test_num=None):
         scores = self.scores
         scores = scores[scores.columns[::-1]]
@@ -114,7 +124,14 @@ class Score:
             plt.ylabel(_("Examination Points"))
             for test_name, point in s_scores.items():
                 plt.text(
-                    *(test_names.index(test_name), point), point, va="bottom"
+                    *(test_names.index(test_name), point),
+                    point,
+                    va="bottom",
+                    bbox=dict(
+                        facecolor="red",
+                        alpha=self.plot_alpha0,
+                        boxstyle="round",
+                    ),
                 )
 
             plt.savefig(img_name, bbox_inches="tight")
@@ -177,6 +194,11 @@ class Score:
                     f"{s_rate}%",
                     va="bottom",
                     ha="center",
+                    bbox=dict(
+                        facecolor="red",
+                        alpha=self.plot_alpha0,
+                        boxstyle="round",
+                    ),
                 )
 
             comment_value = ""
@@ -185,7 +207,7 @@ class Score:
                 comment_value += comment
 
             if not discipline_points == 0.0:
-                comment_value += "\n" + (
+                comment_value += ("\n" if comment else "") + (
                     _("Discipline point: {0}.")
                     if discipline_points == 1.0
                     else _("Discipline points: {0}.")
@@ -242,7 +264,8 @@ class Score:
         return self._teacher
 
     def enter(self):
-        self.plot_scores_m1()
+        __ = self.scores
+        self.plot()
         pass
 
     def read(self):
@@ -278,18 +301,21 @@ class Score:
 
         print_info(_('Scores file "{0}" has been selected.').format(filename))
         self.config.save(self.p_path_key, Path(filename).parent.as_posix())
+
         self.name = filename
-        print(self.scores)
-        print(self.scores)
+
+        self.plot()
 
     def get_scores(self, fpath):
         if not Path(fpath).exists():
             return None
 
         discipline_text = "考试纪律"
+        name_text = "姓名"
         scores = pd.read_excel(fpath, skiprows=[0, 2])
-        scores.rename(columns={scores.columns[0]: "姓名"}, inplace=True)
-        scores.set_index("姓名", inplace=True)
+        scores.rename(columns={scores.columns[0]: name_text}, inplace=True)
+        scores.dropna(subset=[name_text], inplace=True)
+        scores.set_index(name_text, inplace=True)
         scores[discipline_text] = scores[discipline_text].fillna(0)
         point_cols = scores.columns[self.points_index0 :].to_list()
         scores["总分"] = (
@@ -616,13 +642,15 @@ class Score:
                         _(
                             "The recent examination scores ({0}) "
                             + 'have been added to "{1}".'
-                        ).format(name_m2, fpath)
+                        ).format(name_m2, self._fpath)
                         if scores_m2
                         else _("There is no recent tests.")
                     )
 
                 wb.save(fpath)
-                print_info(_('Spreadsheet "{0}" has been saved.').format(fpath))
+                print_info(
+                    _('Spreadsheet "{0}" has been saved.').format(self._fpath)
+                )
                 wb.close()
                 sheet = None
                 print_info(
@@ -634,20 +662,21 @@ class Score:
                         + "according to the comments. "
                         + "(Ok, open it for me [Press any "
                         + "key to open file])"
-                    ).format(fpath)
+                    ).format(self._fpath)
                 )
                 input(">_ ")
-                open_path(fpath)
-                print_warning(
-                    _(
-                        "Ok, I have updated the question"
-                        + " titles, student names and scores, and I CLOSED "
-                        + "the file. "
-                        + "(Press any key to continue)"
-                    )
+
+            open_path(self._fpath)
+            print_warning(
+                _(
+                    "Ok, I have updated the question"
+                    + " titles, student names and scores, and I CLOSED "
+                    + "the file. "
+                    + "(Press any key to continue)"
                 )
-                input(">_ ")
-                self._scores = None
+            )
+            input(">_ ")
+            self._scores = None
 
         src_dpath = Path(self.get_src_dpath(self._fpath))
         if not src_dpath.exists():
