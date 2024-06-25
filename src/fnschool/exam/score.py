@@ -112,7 +112,7 @@ class Score:
 
     @property
     def scores(self):
-        if not self._scores:
+        if self._scores is None:
             fpaths = self.fpaths
 
             if len(fpaths) < 1:
@@ -135,13 +135,12 @@ class Score:
                     s_name = r[0]
 
                     if s_name in s_index:
-                        r.append(f_scores.loc[r[0], f_scores.columns[1]])
+                        r.append(f_scores.loc[s_name, f_scores.columns[0]])
                         scores_rows[i] = r
                     else:
                         r.append(0)
-
-            scores = pd.DataFrame(scores_rows,columns = scores_cols) 
-            scores.set_index('Name', inplace=True)
+            scores = pd.DataFrame(scores_rows, columns=scores_cols)
+            scores.set_index("Name", inplace=True)
 
             self._scores = scores
 
@@ -216,17 +215,34 @@ class Score:
 
         return self._test_t
 
+    def get_cell_time(self, value):
+        value = str(value)
+        time = (
+            (
+                datetime.strptime(value, "%Y/%m/%d %H：%M")
+                if "：" in value
+                else datetime.strptime(value, "%Y/%m/%d %H:%M")
+            )
+            if "/" in value
+            else (
+                (
+                    datetime.strptime(value, "%Y%m%d %H：%M")
+                    if "：" in value
+                    else datetime.strptime(value, "%Y%m%d %H:%M")
+                )
+                if " " in value
+                else datetime.strptime(value, "%Y%m%d%H%M")
+            )
+        )
+
+        return time
+
     def get_test_t(self, sheet):
 
         test_t = None
         test_t0 = sheet.cell(1, 2).value
         test_t1 = sheet.cell(1, 5).value
-        time_from_cell_value = lambda value: (
-            datetime.strptime(str(value), "%Y/%m%d %H:%M")
-            if "/" in value
-            else datetime.strptime(str(value), "%Y%m%d%H%M")
-        )
-
+        time_from_cell_value = self.get_cell_time
         if test_t0:
             try:
                 test_t0 = time_from_cell_value(test_t0)
@@ -253,7 +269,7 @@ class Score:
             test_t1 = test_t0 + timedelta(minutes=90)
             print_warning(
                 _('The examination end time is set to "{0}".').format(
-                    test_t1.strftime("%Y/%m/%d %H:%M")
+                    test_t1.strftime("%Y/%m/%d %H%M")
                 )
             )
 
@@ -369,8 +385,12 @@ class Score:
 
                 fpath1 = self.fpath_m2
                 name_m2 = self.short_name_m2 or self.no_test_m2_s
-                scores_m2 = self.scores[-1][1] if self.scores is None else None
-                names_len = len(scores_m2) - 1 if scores_m2 else None
+                scores_m2 = (
+                    self.scores[-1][1] if (not self.scores is None) else None
+                )
+                names_len = (
+                    len(scores_m2) - 1 if not (scores_m2 is None) else None
+                )
 
                 wb = self.wb
                 sheet = self.sheet0
@@ -386,18 +406,17 @@ class Score:
                     )
                     - 1
                 )
-                if names_len:
+                if scores_m2:
                     len_diff = names_len - new_names_len
                     if len_diff > 0:
                         sheet.insert_rows(self.name_index0 + 1, len_diff)
                     elif len_diff < 0:
                         sheet.delete_rows(self.name_index0 + 1, -len_diff)
 
-                for i, (s_name, s_score) in enumerate(scores_m2):
-                    sheet.cell(self.name_index0 + i, 1, s_name)
-                    sheet.cell(self.name_index0 + i, 3, s_score)
+                    for i, (s_name, s_score) in enumerate(scores_m2):
+                        sheet.cell(self.name_index0 + i, 1, s_name)
+                        sheet.cell(self.name_index0 + i, 3, s_score)
 
-                if name_m2:
                     print_info(
                         _(
                             "The recent examination scores ({0}) "
