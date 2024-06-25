@@ -27,13 +27,14 @@ class Score:
         self._wb = None
         self._total_points = None
         self._sheet0 = None
-        self._scores_0_m2 = None
+        self._scores = None
         self.p_path_key = _("scores_parent_directory")
         self._question_titles = None
         self.fext = ".xlsx"
         self.no_test_m1_s = _("No recent tests")
         self.name_index0 = 3
         self.question_index0 = 4
+        self.points_index0 = self.question_index0 - 1
 
         pass
 
@@ -89,7 +90,7 @@ class Score:
         self.config.save(self.p_path_key, Path(filename).parent.as_posix())
         self.name = filename
         print(self.scores)
-        print(self.scores_0_m2)
+        print(self.scores)
 
     def get_scores(self,fpath):
         if not Path(fpath).exists():
@@ -99,29 +100,54 @@ class Score:
         scores.rename(columns={scores.columns[0]: "姓名"}, inplace=True)
         scores.set_index("姓名", inplace=True)
         scores["考试纪律"] = scores["考试纪律"].fillna(0)
-        point_cols = scores.columns[3:].to_list()
+        point_cols = scores.columns[self.points_index0:].to_list()
         scores["总分"] = scores.loc[:, point_cols].sum(axis=1)
+        scores.drop([scores.columns[2]], axis=1,inplace=True)
+
         return scores
 
        
 
     @property
-    def scores_0_m2(self):
-        if not self._scores_0_m2:
-            scores = []
-            fpaths = (
-                fpaths[:-2] if self.fpath in self.fpaths else self.fpaths[:-1]
-            )
+    def scores(self):
+        if not self._scores:
+           fpaths = self.fpaths
+            
             if len(fpaths) < 1:
                 return None
-
-            for f, __ in fpaths:
+            fpaths = fpaths[::-1]
+            scores = []
+            scores_cols = []
+            scores_rows = None
+ 
+            for fi, (f, __) in enumerate(fpaths):
                 name = Path(f).stem
-                scores.append([name,get_scores(f)])
-            self._scores_m1 = scores
-            self._scores_0_m2 = scores
+                scores_cols.append(name)
+                f_scores = self.get_scores(f)
+                s_index =  f_scores.index.to_list()
+                if not scores_rows:
+                    scores_rows = [
+                        [n] for n in s_index
+                    ]
 
-        return self._scores_0_m2
+                for i in range(len(scores_rows)):
+                    r = scores_rows[i]
+                    s_name = r[0]
+
+                    if s_name in s_index:
+                        r.append(
+                            f_scores.iloc[r[0],1]]
+                        )
+                        scores_rows[i] = r
+                    else:
+                        r.append(0)
+
+                
+
+
+            self._scores = scores
+
+        return self._scores
 
     @property
     def fpaths(self):
@@ -212,7 +238,6 @@ class Score:
                         "Failed to get examination " + 'start time from "{0}".'
                     ).format(test_t0)
                 )
-
                 return None
         else:
             return None
@@ -346,7 +371,7 @@ class Score:
 
                 fpath1 = self.fpath_m2
                 name_m2 = self.name_m2 or self.no_test_m2_s
-                scores_m2 = self.scores_0_m2[-1][1] if self.scores_0_m2 else None
+                scores_m2 = self.scores[-1][1] if self.scores else None
                 names_len = len(scores_m2) - 1 if scores_m2 else None
 
                 wb = self.wb
