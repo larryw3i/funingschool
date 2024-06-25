@@ -74,11 +74,10 @@ class Score:
         locs, labels = xticks
 
         boxes = [l.get_window_extent().get_points() for l in labels]
-
-        x0, x1 = boxes[0][0][0], boxes[-1][-1][0]
+        x0, x1 = boxes[0][0][0], boxes[-1][0][0]
         label_w = (x1 - x0) / (len(labels))
         label_hx = max([b[-1][1] - b[0][1] for b in boxes])
-        rotation = math.degrees(math.sin((label_hx / 2) / (label_w / 2)))
+        rotation = math.degrees(math.sin(label_hx / label_w))
         return rotation
 
     def plot_scores(self, max_test_num=None):
@@ -132,12 +131,96 @@ class Score:
         scores_m1_t = scores_m1.loc[:, scores_m1.columns[0]]
         scores_m1_d = scores_m1.loc[:, scores_m1.columns[1]]
         scores_m1_q = scores_m1.loc[:, scores_m1.columns[2:]]
+        scores_m1_q = scores_m1_q.astype(float)
+
+        for student_name, q_points in scores_m1_q.iterrows():
+            for q_title, q_point in q_points.items():
+                q_point_t = self.get_points(q_title)
+                scores_m1_q.loc[student_name, q_title] = round(
+                    q_point * 100 / q_point_t, 1
+                )
+
+        labelrotation = None
+        s_index = 1
+        s_total = len(scores_m1_q.index.to_list())
+        s_total_len2 = len(str(s_total))
+        for student_name, q_point_rates in scores_m1_q.iterrows():
+            comment = self.get_comment(student_name)
+            discipline_points = scores_m1_d.loc[student_name]
+            total_points = scores_m1_t.loc[student_name]
+
+            student_name0 = (
+                student_name
+                if len(student_name) > 2
+                else (student_name[0] + "　" + student_name[1])
+            )
+
+            img_name = (
+                self.src_dpath
+                / (_("scoring_rate_of_{0}").format(student_name) + ".png")
+            ).as_posix()
+            img = plt.bar(range(q_point_rates.size), q_point_rates)
+            plt.title(
+                _("The scoring rate of Student {0}").format(student_name0)
+            )
+            xticks = plt.xticks(range(q_point_rates.size), self.question_titles)
+
+            if not labelrotation:
+                labelrotation = self.get_rotation(xticks)
+            plt.tick_params(axis="x", labelrotation=labelrotation)
+
+            plt.xlabel(_("Question titles of {0}").format(self.short_name))
+            plt.ylabel(_("Scoring rate(%)"))
+            for q_title, s_rate in q_point_rates.items():
+                plt.text(
+                    *(self.question_titles.index(q_title), s_rate),
+                    f"{s_rate}%",
+                    va="bottom",
+                    ha="center",
+                )
+
+            comment_value = ""
+
+            if comment:
+                comment_value += comment
+
+            if not discipline_points == 0.0:
+                comment_value += "\n" + (
+                    _("Discipline point: {0}.")
+                    if discipline_points == 1.0
+                    else _("Discipline points: {0}.")
+                ).format(discipline_points)
+
+            if comment_value:
+                plt.text(
+                    *(0, q_point_rates.max()),
+                    comment_value,
+                    ha="left",
+                    va="top",
+                    bbox=dict(
+                        facecolor="white",
+                        alpha=0.5,
+                        boxstyle="round",
+                        edgecolor="red",
+                    ),
+                )
+
+            plt.savefig(img_name, bbox_inches="tight")
+            print_info(
+                _('[{0}] "{1}" has been saved.').format(
+                    f"{s_index:>{s_total_len2}}/{s_total}", img_name
+                )
+            )
+            plt.cla()
+            s_index += 1
 
     def get_comment(self, student_name):
         comment = _("comment:") + "\n"
         for row in self.sheet0.iter_rows():
-            if student_name == row[0]:
-                comment += row[0].comment
+            if student_name == row[0].value:
+                if not row[0].comment:
+                    return None
+                comment += row[0].comment.text
                 return comment
 
         return None
@@ -159,7 +242,7 @@ class Score:
         return self._teacher
 
     def enter(self):
-        self.plot_scores()
+        self.plot_scores_m1()
         pass
 
     def read(self):
@@ -203,12 +286,15 @@ class Score:
         if not Path(fpath).exists():
             return None
 
+        discipline_text = "考试纪律"
         scores = pd.read_excel(fpath, skiprows=[0, 2])
         scores.rename(columns={scores.columns[0]: "姓名"}, inplace=True)
         scores.set_index("姓名", inplace=True)
-        scores["考试纪律"] = scores["考试纪律"].fillna(0)
-        point_cols = scores.columns[self.points_index0 - 1 :].to_list()
-        scores["总分"] = scores.loc[:, point_cols].sum(axis=1)
+        scores[discipline_text] = scores[discipline_text].fillna(0)
+        point_cols = scores.columns[self.points_index0 :].to_list()
+        scores["总分"] = (
+            scores.loc[:, point_cols].sum(axis=1) + scores[discipline_text]
+        )
         scores.drop([scores.columns[1]], axis=1, inplace=True)
 
         return scores
@@ -393,7 +479,7 @@ class Score:
         if not self._short_name:
             self._short_name = Path(self.fpath).stem
 
-        return self.short_name
+        return self._short_name
 
     @property
     def wb(self):
@@ -451,13 +537,13 @@ class Score:
     @property
     def question_titles(self):
         if not self._question_titles:
-            self._question_titles = self.get_question_titles(self.scores)
+            self._question_titles = self.get_question_titles(self.scores_m1)
 
         return self._question_titles
 
     def get_question_titles(self, scores):
         question_titles = scores.columns.to_list()
-        question_titles = question_titles[1:]
+        question_titles = question_titles[2:]
         return question_titles
 
     @property
