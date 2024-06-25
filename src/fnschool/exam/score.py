@@ -56,12 +56,12 @@ class Score:
             student_names = scores.index.to_list()
             self._student_names = student_names
         return self._student_names
-    
+
     @property
     def src_dpath(self):
         return self.get_src_dpath()
-        
-    def get_src_dpath(self,fpath=None):
+
+    def get_src_dpath(self, fpath=None):
         if fpath or not self._src_dpath:
             src_dpath = fpath or self.fpath
             src_dpath = Path(os.path.splitext(src_dpath)[0])
@@ -70,34 +70,76 @@ class Score:
             self._src_dpath = src_dpath
         return self._src_dpath
 
-    def plot_scores(self,max_test_num = None):
+    def plot_scores(self, max_test_num=None):
         scores = self.scores
         scores = scores[scores.columns[::-1]]
         max_test_num = max_test_num or scores.columns.size
-        
+        test_names = self.test_names[::-1]
+
         s_index = 1
         s_total = scores.shape[0]
         s_total_len2 = len(str(s_total))
-        for index,s_scores in scores.iterrows():
-            img_name = (self.src_dpath/(_("scores_of_{0}").format(index)+".png")).as_posix()
+        labelrotation = None
+        for student_name, s_scores in scores.iterrows():
+            student_name0 = (
+                student_name
+                if len(student_name) > 2
+                else (student_name[0] + "　" + student_name[1])
+            )
+
+            img_name = (
+                self.src_dpath
+                / (_("scores_of_{0}").format(student_name) + ".png")
+            ).as_posix()
             s_scores = s_scores[:max_test_num]
             img = plt.plot(range(s_scores.size), s_scores)
-            plt.title(_("The scores of Student {0}").format(index))
-            plt.xticks(range(s_scores.size), self.test_names[::-1])
+            plt.title(_("The scores of Student {0}").format(student_name0))
+            locs, labels = plt.xticks(
+                range(s_scores.size), self.test_names[::-1]
+            )
+
+            if not labelrotation:
+                boxes = [l.get_window_extent().get_points() for l in labels]
+
+                x0, x1 = boxes[0][0][0], boxes[-1][-1][0]
+                label_w = (x1 - x0) / (s_scores.size)
+                label_hx = max([b[-1][1] - b[0][1] for b in boxes])
+                labelrotation = math.degrees(
+                    math.sin((label_hx / 2) / (label_w / 2))
+                )
+
+            plt.tick_params(axis="x", labelrotation=labelrotation)
+
             plt.xlabel(_("Examination names"))
             plt.ylabel(_("Examination Points"))
-            plt.savefig(
-                img_name
-            )
-            print_info(
-                _(
-                    "[{0}] \"{1}\" has been saved."
-                ).format(f"{s_index:>{s_total_len2}}/{s_total}",img_name)
-            )
-            s_index += 1
- 
+            for test_name, point in s_scores.items():
+                plt.text(
+                    *(test_names.index(test_name), point), point, va="bottom"
+                )
 
-        
+            plt.savefig(img_name, bbox_inches="tight")
+            print_info(
+                _('[{0}] "{1}" has been saved.').format(
+                    f"{s_index:>{s_total_len2}}/{s_total}", img_name
+                )
+            )
+            plt.cla()
+            s_index += 1
+
+    def plot_scores_m1(self):
+        scores_m1 = self.scores_m1.copy()
+        scores_m1_t = scores_m1.loc[:, scores_m1.columns[0]]
+        scores_m1_d = scores_m1.loc[:, scores_m1.columns[1]]
+        scores_m1_q = scores_m1.loc[:, scores_m1.columns[2:]]
+
+    def get_comment(self, student_name):
+        comment = _("comment:") + "\n"
+        for row in self.sheet0.iter_rows():
+            if student_name == row[0]:
+                comment += row[0].comment
+                return comment
+
+        return None
 
     @property
     def dpath(self):
@@ -164,9 +206,9 @@ class Score:
         scores.rename(columns={scores.columns[0]: "姓名"}, inplace=True)
         scores.set_index("姓名", inplace=True)
         scores["考试纪律"] = scores["考试纪律"].fillna(0)
-        point_cols = scores.columns[self.points_index0 :].to_list()
+        point_cols = scores.columns[self.points_index0 - 1 :].to_list()
         scores["总分"] = scores.loc[:, point_cols].sum(axis=1)
-        scores.drop([scores.columns[2]], axis=1, inplace=True)
+        scores.drop([scores.columns[1]], axis=1, inplace=True)
 
         return scores
 
@@ -281,14 +323,22 @@ class Score:
             (
                 datetime.strptime(value, "%Y/%m/%d %H：%M")
                 if "：" in value
-                else datetime.strptime(value, "%Y/%m/%d %H:%M")
+                else (
+                    datetime.strptime(value, "%Y/%m/%d %H:%M")
+                    if ":" in value
+                    else datetime.strptime(value, "%Y/%m/%d %H%M")
+                )
             )
             if "/" in value
             else (
                 (
                     datetime.strptime(value, "%Y%m%d %H：%M")
                     if "：" in value
-                    else datetime.strptime(value, "%Y%m%d %H:%M")
+                    else (
+                        datetime.strptime(value, "%Y%m%d %H:%M")
+                        if ":" in value
+                        else datetime.strptime(value, "%Y%m%d %H%M")
+                    )
                 )
                 if " " in value
                 else datetime.strptime(value, "%Y%m%d%H%M")
@@ -446,11 +496,9 @@ class Score:
                 fpath1 = self.fpath_m2
                 name_m2 = self.short_name_m2 or self.no_test_m2_s
                 scores_m2 = (
-                    self.scores[-1][1] if (not self.scores is None) else None
+                    self.scores[-2][1] if (not self.scores is None) else None
                 )
-                names_len = (
-                    len(scores_m2) - 1 if not (scores_m2 is None) else None
-                )
+                names_len = len(scores_m2) if not (scores_m2 is None) else None
 
                 wb = self.wb
                 sheet = self.sheet0
@@ -512,10 +560,11 @@ class Score:
                     )
                 )
                 input(">_ ")
-        
+                self._scores = None
+
         src_dpath = Path(self.get_src_dpath(self._fpath))
         if not src_dpath.exists():
-            os.makedirs(src_dpath,exist_ok=True)
+            os.makedirs(src_dpath, exist_ok=True)
 
         return self._fpath
 
