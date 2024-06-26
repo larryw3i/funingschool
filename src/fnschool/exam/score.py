@@ -369,6 +369,7 @@ class Score:
             scores.loc[:, point_cols].sum(axis=1) + scores[discipline_text]
         )
         scores.drop([scores.columns[1]], axis=1, inplace=True)
+        scores = scores.loc[:, ~scores.columns.str.contains("^Unnamed")]
 
         return scores
 
@@ -637,26 +638,30 @@ class Score:
     @property
     def fpath(self):
         if not self._fpath:
-            self._fpath = self.teacher.exam_dpath / (
+            fpath = self.teacher.exam_dpath / (
                 Path(self.full_name).as_posix() + self.fext
             )
-            if not self._fpath.parent.exists():
-                os.makedirs(self._fpath.parent.as_posix(), exist_ok=True)
+            if not fpath.parent.exists():
+                os.makedirs(fpath.parent.as_posix(), exist_ok=True)
 
-            if not self._fpath.exists():
-                shutil.copy(self.fpath0, self._fpath)
+            if not fpath.exists():
+                shutil.copy(self.fpath0, fpath)
                 print_info(
                     _(
                         'Scores spreadsheet "{0}" doesn\'t '
                         + 'exist, spreadsheet "{1}" was '
                         + 'copied to "{0}".'
-                    ).format(self._fpath, self.fpath0)
+                    ).format(fpath, self.fpath0)
                 )
 
                 fpath1 = self.fpath_m2
                 name_m2 = self.short_name_m2 or self.no_test_m2_s
                 scores_m2 = (
-                    self.scores[-2][1] if (not self.scores is None and len(self.scores.columns) > 1) else None
+                    self.scores[-2][1]
+                    if (
+                        not self.scores is None and len(self.scores.columns) > 1
+                    )
+                    else None
                 )
                 names_len = len(scores_m2) if not (scores_m2 is None) else None
 
@@ -689,16 +694,14 @@ class Score:
                         _(
                             "The recent examination scores ({0}) "
                             + 'have been added to "{1}".'
-                        ).format(name_m2, self._fpath)
+                        ).format(name_m2, fpath)
                         if scores_m2
                         else _("There is no recent tests.")
                     )
 
-                wb.save(self._fpath)
+                wb.save(fpath)
 
-                print_info(
-                    _('Spreadsheet "{0}" has been saved.').format(self._fpath)
-                )
+                print_info(_('Spreadsheet "{0}" has been saved.').format(fpath))
                 wb.close()
                 sheet = None
                 print_info(
@@ -710,11 +713,11 @@ class Score:
                         + "according to the comments. "
                         + "(Ok, open it for me [Press any "
                         + "key to open file])"
-                    ).format(self._fpath)
+                    ).format(fpath)
                 )
                 input0()
 
-            open_path(self._fpath)
+            open_path(fpath)
             print_warning(
                 _(
                     "Ok, I have updated the question"
@@ -725,6 +728,8 @@ class Score:
             )
             input0()
             self._scores = None
+
+            self._fpath = fpath
 
         src_dpath = Path(self.get_src_dpath(self._fpath))
         if not src_dpath.exists():
@@ -821,7 +826,10 @@ class Score:
             else:
                 print_info(
                     _(
-                        "Hello~ tell {0} the examination" + " name, please!"
+                        "Hello~ tell {0} the examination" 
+                        + " name, please!"
+                        + " (e.g: Class 5(1)/English Volume "
+                        + "1/Unit 1 Testing)"
                     ).format(app_name)
                 )
                 for i in range(0, 3):
