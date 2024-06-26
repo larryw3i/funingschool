@@ -116,14 +116,15 @@ class Score:
         return img_path
 
     def plot_scores(self, max_test_num=None):
-        scores = self.scores
+        scores = self.scores.copy()
+        scores = scores[scores.columns[::-1]]
         scores.loc[self.average_points_s] = scores.mean(axis=0)
         scores = scores[scores.columns[::-1]]
         scores_m1 = self.scores_m1
         scores_m1.loc[self.average_points_s] = scores_m1.mean(axis=0)
         scores_m1_d = scores_m1.loc[:, scores_m1.columns[1]]
         max_test_num = max_test_num or scores.columns.size
-        test_names = self.test_names[::-1]
+        test_names = self.test_names
         img_paths_lenx = max(
             [
                 get_len(self.get_scores_img_path(name))
@@ -157,13 +158,13 @@ class Score:
                 if not student_name == self.average_points_s
                 else _("The average scores")
             )
-            xticks = plt.xticks(range(s_scores.size), self.test_names[::-1])
+            xticks = plt.xticks(range(s_scores.size), self.test_names)
 
             if not labelrotation:
                 labelrotation = self.get_rotation(xticks)
             plt.tick_params(axis="x", labelrotation=labelrotation)
 
-            plt.xlabel(_("Examination names"))
+            plt.xlabel(_("Examination names of {0}").format(self.subject))
             plt.ylabel(
                 (
                     _("Examination Points " + "({0} points in total)")
@@ -263,7 +264,7 @@ class Score:
         s_total_len2 = len(str(s_total))
         for student_name, q_point_rates in scores_m1_q.iterrows():
 
-            total_points = scores_m1_t.loc[student_name]
+            s_total_points = scores_m1_t.loc[student_name]
 
             student_name0 = (
                 student_name
@@ -281,7 +282,9 @@ class Score:
             img = plt.bar(range(q_point_rates.size), q_point_rates)
             plt.title(
                 (
-                    _("The scoring rate of Student {0}").format(student_name0)
+                    _("The scoring rate of Student {0} ({1})").format(
+                        student_name0, f"{s_total_points}/{self.total_points}"
+                    )
                     if student_name != self.average_points_s
                     else _("The average scoring rate")
                 )
@@ -297,7 +300,7 @@ class Score:
                     _("Question titles of {0} ({1} point in total)")
                     if self.total_points == 1.0
                     else _("Question titles of {0} ({1} points in total)")
-                ).format(self.short_name, self.total_points)
+                ).format(f"{self.subject}/{self.short_name}", self.total_points)
             )
             plt.ylabel(_("Scoring rate(%)"))
             for q_title, s_rate in q_point_rates.items():
@@ -422,7 +425,6 @@ class Score:
             if len(fpaths) < 1:
                 return None
 
-            fpaths = fpaths[::-1]
             scores_cols = ["Name"]
             scores_rows = None
 
@@ -481,6 +483,7 @@ class Score:
                 return None
 
         self._fpaths = sorted(self._fpaths, key=lambda f: (f[1], f[0]))
+        
 
         return self._fpaths
 
