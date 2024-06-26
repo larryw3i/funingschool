@@ -38,6 +38,7 @@ class Score:
         self._test_names = None
         self._student_names = None
         self._src_dpath = None
+        self.average_points_s = _("Average")
         self.plot_alpha0 = 0.16
 
         pass
@@ -102,14 +103,25 @@ class Score:
 
     def get_scores_img_path(self, student_name):
         img_path = (
-            self.src_dpath / (_("scores_of_{0}").format(student_name) + ".png")
+            self.src_dpath
+            / (
+                (
+                    _("scores_of_{0}").format(student_name)
+                    if student_name != self.average_points_s
+                    else _("average_scores")
+                )
+                + ".png"
+            )
         ).as_posix()
         return img_path
 
     def plot_scores(self, max_test_num=None):
         scores = self.scores
+        scores.loc[self.average_points_s] = scores.mean(axis=0)
         scores = scores[scores.columns[::-1]]
-        scores_m1_d = self.scores_m1.loc[:, self.scores_m1.columns[1]]
+        scores_m1 = self.scores_m1
+        scores_m1.loc[self.average_points_s] = scores_m1.mean(axis=0)
+        scores_m1_d = scores_m1.loc[:, scores_m1.columns[1]]
         max_test_num = max_test_num or scores.columns.size
         test_names = self.test_names[::-1]
         img_paths_lenx = max(
@@ -140,7 +152,11 @@ class Score:
 
             s_scores = s_scores[:max_test_num]
             img = plt.plot(range(s_scores.size), s_scores)
-            plt.title(_("The scores of Student {0}").format(student_name0))
+            plt.title(
+                _("The scores of Student {0}").format(student_name0)
+                if not student_name == self.average_points_s
+                else _("The average scores")
+            )
             xticks = plt.xticks(range(s_scores.size), self.test_names[::-1])
 
             if not labelrotation:
@@ -148,11 +164,17 @@ class Score:
             plt.tick_params(axis="x", labelrotation=labelrotation)
 
             plt.xlabel(_("Examination names"))
-            plt.ylabel(_("Examination Points"))
+            plt.ylabel(
+                (
+                    _("Examination Points " + "({0} points in total)")
+                    if self.total_points != 1.0
+                    else _("Examination Points " + "({0} point in total)")
+                ).format(self.total_points)
+            )
             for test_name, point in s_scores.items():
                 plt.text(
                     *(test_names.index(test_name), point),
-                    point,
+                    round(point, 2),
                     va="bottom",
                     bbox=dict(
                         facecolor="red",
@@ -201,13 +223,21 @@ class Score:
     def get_scores_m1_img_fpath(self, student_name):
         img_fpath = (
             self.src_dpath
-            / (_("scoring_rate_of_{0}").format(student_name) + ".png")
+            / (
+                (
+                    _("scoring_rate_of_{0}").format(student_name)
+                    if not student_name == self.average_points_s
+                    else _("average_scoring_rate")
+                )
+                + ".png"
+            )
         ).as_posix()
 
         return img_fpath
 
     def plot_scores_m1(self):
         scores_m1 = self.scores_m1.copy()
+        scores_m1.loc[self.average_points_s] = scores_m1.mean(axis=0)
         scores_m1_t = scores_m1.loc[:, scores_m1.columns[0]]
         scores_m1_d = scores_m1.loc[:, scores_m1.columns[1]]
         scores_m1_q = scores_m1.loc[:, scores_m1.columns[2:]]
@@ -219,6 +249,7 @@ class Score:
                 scores_m1_q.loc[student_name, q_title] = round(
                     q_point * 100 / q_point_t, 1
                 )
+
         img_fpaths_lenx = max(
             [
                 get_len(self.get_scores_m1_img_fpath(v))
@@ -249,7 +280,11 @@ class Score:
 
             img = plt.bar(range(q_point_rates.size), q_point_rates)
             plt.title(
-                _("The scoring rate of Student {0}").format(student_name0)
+                (
+                    _("The scoring rate of Student {0}").format(student_name0)
+                    if student_name != self.average_points_s
+                    else _("The average scoring rate")
+                )
             )
             xticks = plt.xticks(range(q_point_rates.size), self.question_titles)
 
@@ -660,26 +695,23 @@ class Score:
 
                 scores_m2 = (
                     self.scores[self.scores.columns[-2]]
-                    if (
-                        len(self.scores.columns)>1
-                    )
+                    if (len(self.scores.columns) > 1)
                     else None
                 )
-                student_names_len = len(scores_m2.index) if not (scores_m2 is None) else None
+                student_names_len = (
+                    len(scores_m2.index) if not (scores_m2 is None) else None
+                )
 
                 wb = self.wb
                 sheet = self.sheet0
 
                 sheet.cell(2, 3, name_m2)
-                student_names_len0 = (
-                    len(
-                        [
-                            sheet.cell(r, 1).value
-                            for r in range(self.name_index0, sheet.max_row + 1)
-                            if sheet.cell(r, 1).value
-                        ]
-                    )
-                    
+                student_names_len0 = len(
+                    [
+                        sheet.cell(r, 1).value
+                        for r in range(self.name_index0, sheet.max_row + 1)
+                        if sheet.cell(r, 1).value
+                    ]
                 )
                 if not scores_m2 is None:
                     len_diff = student_names_len - student_names_len0
@@ -687,8 +719,8 @@ class Score:
                         sheet.insert_rows(self.name_index0 + 1, len_diff)
                     elif len_diff < 0:
                         sheet.delete_rows(self.name_index0 + 1, -len_diff)
-                     
-                    for i,(s_name,s_score) in enumerate(scores_m2.items()):
+
+                    for i, (s_name, s_score) in enumerate(scores_m2.items()):
                         sheet.cell(self.name_index0 + i, 1, s_name)
                         sheet.cell(self.name_index0 + i, 3, s_score)
 
@@ -827,7 +859,7 @@ class Score:
             else:
                 print_info(
                     _(
-                        "Hello~ tell {0} the examination" 
+                        "Hello~ tell {0} the examination"
                         + " name, please!"
                         + " (e.g: Class 5(1)/English Volume "
                         + "1/Unit 1 Testing)"
