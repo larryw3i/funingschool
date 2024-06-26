@@ -972,7 +972,7 @@ class WorkBook:
                 + "for every month."
             ).format(spreadsheet0_fpath)
         )
-        _input = input(">_ ")
+        _input = input0()
         if len(_input) > 0 and _input in "Yy":
             self.save_bill_workbook(wb_fpath=spreadsheet0_fpath)
             print_info(
@@ -1174,7 +1174,7 @@ class WorkBook:
                     ).format(fpath)
                 )
                 open_path(fpath)
-                input(">_ ")
+                input0()
                 wb = load_workbook(fpath)
                 sheet = wb[self.pre_consuming_sheet0_name]
                 print_info(_("Workbook %s was read.") % fpath)
@@ -1204,7 +1204,7 @@ class WorkBook:
                 ).format(name, workbook_fpath, get_new_issue_url())
                 print_error(error_msg)
                 for __ in range(3):
-                    cn_index = input(">_ ")
+                    cn_index = input0()
                     if cn_index.isnumeric():
                         cn_index = int(cn_index) - 1
                         indexes[i] = [name, cn_index]
@@ -1232,7 +1232,7 @@ class WorkBook:
                     + " (default: '{dpath0}')"
                 ).format(app_name=app_name, dpath0=dpath0)
             )
-            dpath = input(">_ ")
+            dpath = input0()
 
         if dpath.replace(" ", "") == "":
             dpath = dpath0
@@ -1280,7 +1280,7 @@ class WorkBook:
                         ).format(app_name=app_name, wb_fpath=wb_fpath)
                     )
                     open_path(wb_fpath)
-                    _org_name_col_index = input(">_ ")
+                    _org_name_col_index = input0()
                     if not _org_name_col_index.isnumeric():
                         continue
                     _org_name_col_index = int(_org_name_col_index)
@@ -1340,7 +1340,7 @@ class WorkBook:
                         + " | ".join(self.negligible_col_names)
                     )
                     open_path(wb_fpath)
-                    input(">_ ")
+                    input0()
                     wb = load_workbook(wb_fpath, read_only=True)
                     sheet = wb[sheetnames[0]]
 
@@ -1443,7 +1443,7 @@ class WorkBook:
                     + " (default: '{seeking_dpath0}')"
                 ).format(app_name=app_name, seeking_dpath0=seeking_dpath0)
             )
-            fd_path = input(">_ ")
+            fd_path = input0()
 
         if fd_path.replace(" ", "") == "":
             fd_path = seeking_dpath0
@@ -2018,7 +2018,7 @@ class WorkBook:
             )
         )
         open_path(wb_fpath)
-        input(">_ ")
+        input0()
 
     def set_warehousing_form_index_offset(self, offset=0):
         self.warehousing_form_index_offset = offset

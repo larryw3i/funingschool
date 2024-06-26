@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-26 07:39+0800\n"
+"POT-Creation-Date: 2024-06-26 16:38+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -84,7 +84,7 @@ msgstr ""
 msgid "The names saved by {0} are as follows:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:756 src/fnschool/exam/score.py:788
+#: src/fnschool/exam/score.py:795 src/fnschool/exam/score.py:827
 #: src/fnschool/user.py:122 src/fnschool/user.py:201
 msgid "Unexpected value was got. Exit."
 msgstr ""
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 
-#: src/fnschool/exam/score.py:759 src/fnschool/exam/score.py:786
+#: src/fnschool/exam/score.py:798 src/fnschool/exam/score.py:825
 #: src/fnschool/user.py:199
 msgid "Unexpected value was got."
 msgstr ""
@@ -687,7 +687,7 @@ msgid "Please select a purchasing file."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:335
-#: src/fnschool/exam/score.py:282
+#: src/fnschool/exam/score.py:319
 msgid "Spreadsheet Files"
 msgstr ""
 
@@ -696,7 +696,7 @@ msgid "Please select the purchasing file"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:347
-#: src/fnschool/exam/score.py:299
+#: src/fnschool/exam/score.py:336
 msgid "No file was selected, exit."
 msgstr ""
 
@@ -797,136 +797,140 @@ msgstr ""
 msgid "No recent tests"
 msgstr ""
 
-#: src/fnschool/exam/score.py:86
+#: src/fnschool/exam/score.py:87
 msgid "Generate the scores and scoring rate plots now ? (Yes: \"Y\",\"y\")"
 msgstr ""
 
-#: src/fnschool/exam/score.py:112
+#: src/fnschool/exam/score.py:92
+msgid "Generate the scoring rate plots now ? (Yes: \"Y\",\"y\")"
+msgstr ""
+
+#: src/fnschool/exam/score.py:106
 msgid "scores_of_{0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:116
+#: src/fnschool/exam/score.py:139
 msgid "The scores of Student {0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:123
+#: src/fnschool/exam/score.py:146
 msgid "Examination names"
 msgstr ""
 
-#: src/fnschool/exam/score.py:124
+#: src/fnschool/exam/score.py:147
 msgid "Examination Points"
 msgstr ""
 
-#: src/fnschool/exam/score.py:139 src/fnschool/exam/score.py:232
-msgid "[{0}] \"{1}\" has been saved."
+#: src/fnschool/exam/score.py:162 src/fnschool/exam/score.py:269
+msgid "[{0}] \"{1}\" {2}has been saved."
 msgstr ""
 
-#: src/fnschool/exam/score.py:177
+#: src/fnschool/exam/score.py:174
 msgid "scoring_rate_of_{0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:181
+#: src/fnschool/exam/score.py:218
 msgid "The scoring rate of Student {0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:189
+#: src/fnschool/exam/score.py:226
 msgid "Question titles of {0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:190
+#: src/fnschool/exam/score.py:227
 msgid "Scoring rate(%)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:211
+#: src/fnschool/exam/score.py:248
 msgid "Discipline point: {0}."
 msgstr ""
 
-#: src/fnschool/exam/score.py:213
+#: src/fnschool/exam/score.py:250
 msgid "Discipline points: {0}."
 msgstr ""
 
-#: src/fnschool/exam/score.py:240
+#: src/fnschool/exam/score.py:277
 msgid "comment:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:288
+#: src/fnschool/exam/score.py:325
 msgid "Please select the scores file"
 msgstr ""
 
-#: src/fnschool/exam/score.py:302
+#: src/fnschool/exam/score.py:339
 msgid "Scores file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/exam/score.py:474
+#: src/fnschool/exam/score.py:511
 msgid "Failed to get examination start time from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:487
+#: src/fnschool/exam/score.py:524
 msgid "Failed to get examination end time from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:494
+#: src/fnschool/exam/score.py:531
 msgid "The examination end time is set to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:577
+#: src/fnschool/exam/score.py:614
 msgid "exam_names"
 msgstr ""
 
-#: src/fnschool/exam/score.py:602
+#: src/fnschool/exam/score.py:639
 msgid ""
 "Scores spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" was copied "
 "to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:642
+#: src/fnschool/exam/score.py:679
 msgid "The recent examination scores ({0}) have been added to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:647
+#: src/fnschool/exam/score.py:684
 msgid "There is no recent tests."
 msgstr ""
 
-#: src/fnschool/exam/score.py:651
+#: src/fnschool/exam/score.py:689
 msgid "Spreadsheet \"{0}\" has been saved."
 msgstr ""
 
-#: src/fnschool/exam/score.py:655
+#: src/fnschool/exam/score.py:694
 msgid ""
 "Please update the question titles , student names and scores of \"{0}\" "
 "according to the comments. (Ok, open it for me [Press any key to open "
 "file])"
 msgstr ""
 
-#: src/fnschool/exam/score.py:669
+#: src/fnschool/exam/score.py:708
 msgid ""
 "Ok, I have updated the question titles, student names and scores, and I "
 "CLOSED the file. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:695
+#: src/fnschool/exam/score.py:734
 msgid "The examination name \"{0}\" has been saved to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:699
+#: src/fnschool/exam/score.py:738
 msgid "The examination name has been saved to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:714
+#: src/fnschool/exam/score.py:753
 msgid "The saved examination names are as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:716
+#: src/fnschool/exam/score.py:755
 msgid "The saved examination name is as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:731
+#: src/fnschool/exam/score.py:770
 msgid ""
 "Select the examination name you entered (index), or enter new examination"
 " name, please! (default: {0})"
 msgstr ""
 
-#: src/fnschool/exam/score.py:773
+#: src/fnschool/exam/score.py:812
 msgid "Hello~ tell {0} the examination name, please!"
 msgstr ""
 
@@ -2005,5 +2009,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Scoring rate"
+#~ msgstr ""
+
+#~ msgid "[{0}] \"{1}\" has been saved."
 #~ msgstr ""
 

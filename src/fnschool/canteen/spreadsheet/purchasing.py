@@ -254,7 +254,7 @@ class Purchasing(SpreadsheetBase):
                     + "(Press any key to check the file)"
                 )
             )
-            input(">_ ")
+            input0()
             open_path(self.path)
             print_info(
                 _(
@@ -263,7 +263,7 @@ class Purchasing(SpreadsheetBase):
                     + "file. (Press any key to continue)"
                 )
             )
-            input(">_ ")
+            input0()
 
     @property
     def food_classes(self):
@@ -449,7 +449,7 @@ class Purchasing(SpreadsheetBase):
                     ).format(self.path)
                 )
 
-                f_input = input(">_ ").replace(" ", "")
+                f_input = input0().replace(" ", "")
                 if len(f_input) > 0 and f_input in "Yy":
                     max_row = len(
                         [
@@ -524,14 +524,14 @@ class Purchasing(SpreadsheetBase):
                             )
                         )
                     )
-                    input(">_ ")
+                    input0()
                     open_path(self.path)
                     print_info(
                         _(
                             "Ok, I checked it, it's ok. (Press any key to continue)"
                         )
                     )
-                    input(">_ ")
+                    input0()
         pass
 
     def split_foods(self):
@@ -555,7 +555,7 @@ class Purchasing(SpreadsheetBase):
                             + 'unit price: "A","a")'
                         ).format(f.name)
                     )
-                s_input = "y" if split_all else input(">_ ").strip()
+                s_input = "y" if split_all else input0().strip()
 
                 if s_input and s_input in "Aa":
                     s_input = "y"

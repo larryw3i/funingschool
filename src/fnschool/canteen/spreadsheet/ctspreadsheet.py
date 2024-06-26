@@ -154,7 +154,7 @@ class CtSpreadSheet:
             ).format(self.operator.bill_fpath)
         )
 
-        s_input = input(">_ ")
+        s_input = input0()
 
         print()
         print_info(_("Saving. . ."))

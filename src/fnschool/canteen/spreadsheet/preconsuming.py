@@ -186,7 +186,7 @@ class PreConsuming(SpreadsheetBase):
                     + "(Ok, I know [press any key to continue])"
                 )
             )
-            input(">_ ")
+            input0()
             wb.close()
             open_path(wb_fpath)
             print_info(
@@ -194,7 +194,7 @@ class PreConsuming(SpreadsheetBase):
                     "Ok! I have updated spreadsheet '{0}'. (Press any key)"
                 ).format(wb_fpath)
             )
-            input(">_ ")
+            input0()
             wb = load_workbook(wb_fpath)
             sheet = wb[self.sheet_name0]
 
@@ -264,7 +264,7 @@ class PreConsuming(SpreadsheetBase):
         ).format(consumption_days_len)
         print_warning(f"{total_days:^{space_len*7}}")
         print_info(_("Yes, they are all right. (Press any key to continue)"))
-        input(">_ ")
+        input0()
         return
 
 

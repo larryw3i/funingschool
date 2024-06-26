@@ -49,7 +49,7 @@ class User:
             )
             i_value = None
             for i in range(0, 3):
-                i_value = input(">_ ").replace(" ", "")
+                i_value = input0().replace(" ", "")
                 if len(i_value) > 0:
                     break
                 if allow_blank:
@@ -68,7 +68,7 @@ class User:
                     + "[Press any key to continue])"
                 ).format(key, self.profile_fpath)
             )
-            input(">_ ")
+            input0()
 
         return self.profile[key]
 
@@ -129,7 +129,7 @@ class User:
                         ).format(name0)
                     )
 
-                    n_input = input(">_ ")
+                    n_input = input0()
 
                     if n_input.isnumeric():
                         n_input = int(n_input) - 1
@@ -190,7 +190,7 @@ class User:
 
                 print_warning(self.ask_name_s)
                 for i in range(0, 3):
-                    n_input = input(">_ ").replace(" ", "")
+                    n_input = input0().replace(" ", "")
                     n_input_len = len(n_input)
                     if n_input_len > 0:
                         self._name = n_input
@@ -223,7 +223,7 @@ class User:
                     + "(Yes: 'Y','y')"
                 ).format(self.name, self._dpath)
             )
-            o_input = input(">_ ").replace(" ", "")
+            o_input = input0().replace(" ", "")
             if len(o_input) > 0 and o_input in "Yy":
                 open_path(self._dpath)
             self.dpath_showed = True

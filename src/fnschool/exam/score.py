@@ -94,33 +94,50 @@ class Score:
                 )
             )
         )
-        p_input = input(">_ ")
+        p_input = input0()
         if p_input and p_input in "Yy":
             if len(self.scores.columns) > 1:
                 self.plot_scores()
             self.plot_scores_m1()
 
+    def get_scores_img_path(self, student_name):
+        img_path = (
+            self.src_dpath / (_("scores_of_{0}").format(student_name) + ".png")
+        ).as_posix()
+        return img_path
+
     def plot_scores(self, max_test_num=None):
         scores = self.scores
         scores = scores[scores.columns[::-1]]
+        scores_m1_d = self.scores_m1.loc[:, self.scores_m1.columns[1]]
         max_test_num = max_test_num or scores.columns.size
         test_names = self.test_names[::-1]
+        img_paths_lenx = max(
+            [
+                get_len(self.get_scores_img_path(name))
+                for name in self.student_names
+            ]
+        )
 
         s_index = 1
         s_total = scores.shape[0]
         s_total_len2 = len(str(s_total))
         labelrotation = None
         for student_name, s_scores in scores.iterrows():
+
+            comment = self.get_comment(student_name)
+            discipline_points = scores_m1_d.loc[student_name]
             student_name0 = (
                 student_name
                 if len(student_name) > 2
                 else (student_name[0] + "　" + student_name[1])
             )
 
-            img_name = (
-                self.src_dpath
-                / (_("scores_of_{0}").format(student_name) + ".png")
-            ).as_posix()
+            img_fpath = self.get_scores_img_path(student_name)
+            img_fpath_len_diff = (
+                img_paths_lenx - get_zh_CN_chars_len(img_fpath) - len(img_fpath)
+            )
+
             s_scores = s_scores[:max_test_num]
             img = plt.plot(range(s_scores.size), s_scores)
             plt.title(_("The scores of Student {0}").format(student_name0))
@@ -144,14 +161,50 @@ class Score:
                     ),
                 )
 
-            plt.savefig(img_name, bbox_inches="tight")
+            comment_value = ""
+
+            if comment:
+                comment_value += comment
+
+            if not discipline_points == 0.0:
+                comment_value += ("\n" if comment else "") + (
+                    _("Discipline point: {0}.")
+                    if discipline_points == 1.0
+                    else _("Discipline points: {0}.")
+                ).format(discipline_points)
+
+            if comment_value:
+                plt.text(
+                    *(0, s_scores.max()),
+                    comment_value,
+                    ha="left",
+                    va="top",
+                    bbox=dict(
+                        facecolor="white",
+                        alpha=0.5,
+                        boxstyle="round",
+                        edgecolor="red",
+                    ),
+                )
+
+            plt.savefig(img_fpath, bbox_inches="tight")
             print_info(
-                _('[{0}] "{1}" has been saved.').format(
-                    f"{s_index:>{s_total_len2}}/{s_total}", img_name
+                _('[{0}] "{1}" {2}has been saved.').format(
+                    f"{s_index:>{s_total_len2}}/{s_total}",
+                    img_fpath,
+                    " " * img_fpath_len_diff,
                 )
             )
             plt.cla()
             s_index += 1
+
+    def get_scores_m1_img_fpath(self, student_name):
+        img_fpath = (
+            self.src_dpath
+            / (_("scoring_rate_of_{0}").format(student_name) + ".png")
+        ).as_posix()
+
+        return img_fpath
 
     def plot_scores_m1(self):
         scores_m1 = self.scores_m1.copy()
@@ -166,14 +219,19 @@ class Score:
                 scores_m1_q.loc[student_name, q_title] = round(
                     q_point * 100 / q_point_t, 1
                 )
+        img_fpaths_lenx = max(
+            [
+                get_len(self.get_scores_m1_img_fpath(v))
+                for v in self.student_names
+            ]
+        )
 
         labelrotation = None
         s_index = 1
         s_total = len(scores_m1_q.index.to_list())
         s_total_len2 = len(str(s_total))
         for student_name, q_point_rates in scores_m1_q.iterrows():
-            comment = self.get_comment(student_name)
-            discipline_points = scores_m1_d.loc[student_name]
+
             total_points = scores_m1_t.loc[student_name]
 
             student_name0 = (
@@ -182,10 +240,13 @@ class Score:
                 else (student_name[0] + "　" + student_name[1])
             )
 
-            img_name = (
-                self.src_dpath
-                / (_("scoring_rate_of_{0}").format(student_name) + ".png")
-            ).as_posix()
+            img_fpath = self.get_scores_m1_img_fpath(student_name)
+            img_fpath_len_diff = (
+                img_fpaths_lenx
+                - get_zh_CN_chars_len(img_fpath)
+                - len(img_fpath)
+            )
+
             img = plt.bar(range(q_point_rates.size), q_point_rates)
             plt.title(
                 _("The scoring rate of Student {0}").format(student_name0)
@@ -211,36 +272,12 @@ class Score:
                     ),
                 )
 
-            comment_value = ""
-
-            if comment:
-                comment_value += comment
-
-            if not discipline_points == 0.0:
-                comment_value += ("\n" if comment else "") + (
-                    _("Discipline point: {0}.")
-                    if discipline_points == 1.0
-                    else _("Discipline points: {0}.")
-                ).format(discipline_points)
-
-            if comment_value:
-                plt.text(
-                    *(0, q_point_rates.max()),
-                    comment_value,
-                    ha="left",
-                    va="top",
-                    bbox=dict(
-                        facecolor="white",
-                        alpha=0.5,
-                        boxstyle="round",
-                        edgecolor="red",
-                    ),
-                )
-
-            plt.savefig(img_name, bbox_inches="tight")
+            plt.savefig(img_fpath, bbox_inches="tight")
             print_info(
-                _('[{0}] "{1}" has been saved.').format(
-                    f"{s_index:>{s_total_len2}}/{s_total}", img_name
+                _('[{0}] "{1}" {2}has been saved.').format(
+                    f"{s_index:>{s_total_len2}}/{s_total}",
+                    img_fpath,
+                    " " * img_fpath_len_diff,
                 )
             )
             plt.cla()
@@ -674,7 +711,7 @@ class Score:
                         + "key to open file])"
                     ).format(self._fpath)
                 )
-                input(">_ ")
+                input0()
 
             open_path(self._fpath)
             print_warning(
@@ -685,7 +722,7 @@ class Score:
                     + "(Press any key to continue)"
                 )
             )
-            input(">_ ")
+            input0()
             self._scores = None
 
         src_dpath = Path(self.get_src_dpath(self._fpath))
@@ -749,7 +786,7 @@ class Score:
                 )
                 name_i = None
                 for i in range(0, 3):
-                    n_input = input(">_ ").replace(" ", "")
+                    n_input = input0().replace(" ", "")
                     if len(n_input) > 0:
                         if n_input.isnumeric():
                             n_input = int(n_input) - 1
@@ -787,7 +824,7 @@ class Score:
                     ).format(app_name)
                 )
                 for i in range(0, 3):
-                    name0 = input(">_ ").replace(" ", "")
+                    name0 = input0().replace(" ", "")
                     if len(name0) > 0:
                         with open(self.names_fpath, "w", encoding="utf-8") as f:
                             f.write(">" + self._full_name)
