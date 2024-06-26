@@ -292,7 +292,11 @@ class Score:
                 labelrotation = self.get_rotation(xticks)
             plt.tick_params(axis="x", labelrotation=labelrotation)
 
-            plt.xlabel(_("Question titles of {0}").format(self.short_name))
+            plt.xlabel(
+                _("Question titles of {0} ({1} points in total)").format(
+                    self.short_name, self.total_points
+                )
+            )
             plt.ylabel(_("Scoring rate(%)"))
             for q_title, s_rate in q_point_rates.items():
                 plt.text(
