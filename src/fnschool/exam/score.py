@@ -656,7 +656,7 @@ class Score:
                 fpath1 = self.fpath_m2
                 name_m2 = self.short_name_m2 or self.no_test_m2_s
                 scores_m2 = (
-                    self.scores[-2][1] if (not self.scores is None) else None
+                    self.scores[-2][1] if (not self.scores is None and len(self.scores.columns) > 1) else None
                 )
                 names_len = len(scores_m2) if not (scores_m2 is None) else None
 
@@ -694,7 +694,8 @@ class Score:
                         else _("There is no recent tests.")
                     )
 
-                wb.save(fpath)
+                wb.save(self._fpath)
+
                 print_info(
                     _('Spreadsheet "{0}" has been saved.').format(self._fpath)
                 )
@@ -827,7 +828,7 @@ class Score:
                     name0 = input0().replace(" ", "")
                     if len(name0) > 0:
                         with open(self.names_fpath, "w", encoding="utf-8") as f:
-                            f.write(">" + self._full_name)
+                            f.write(">" + name0)
                         print_info(name_writed_s(name0))
                         self._full_name = name0
                         break
