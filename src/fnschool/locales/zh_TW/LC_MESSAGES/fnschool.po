@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-26 19:45+0800\n"
+"POT-Creation-Date: 2024-06-26 21:31+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -861,51 +861,51 @@ msgstr ""
 msgid "Scores file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/exam/score.py:522
+#: src/fnschool/exam/score.py:523
 msgid "Failed to get examination start time from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:535
+#: src/fnschool/exam/score.py:536
 msgid "Failed to get examination end time from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:542
+#: src/fnschool/exam/score.py:543
 msgid "The examination end time is set to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:625
+#: src/fnschool/exam/score.py:626
 msgid "exam_names"
 msgstr ""
 
-#: src/fnschool/exam/score.py:650
+#: src/fnschool/exam/score.py:651
 msgid ""
 "Scores spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" was copied "
 "to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:694
+#: src/fnschool/exam/score.py:695
 msgid "The recent examination scores ({0}) have been added to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:699
+#: src/fnschool/exam/score.py:700
 msgid "There is no recent tests."
 msgstr ""
 
-#: src/fnschool/exam/score.py:704
+#: src/fnschool/exam/score.py:705
 msgid "Spreadsheet \"{0}\" has been saved."
 msgstr ""
 
-#: src/fnschool/exam/score.py:708
+#: src/fnschool/exam/score.py:709
 msgid ""
 "Please update the question titles , student names and scores of \"{0}\" "
 "according to the comments. (Ok, open it for me [Press any key to open "
 "file])"
 msgstr ""
 
-#: src/fnschool/exam/score.py:722
+#: src/fnschool/exam/score.py:723
 msgid ""
-"Ok, I have updated the question titles, student names and scores, and I "
-"CLOSED the file. (Press any key to continue)"
+"Ok, I have updated the question titles, student names and scores. (Press "
+"any key to continue)"
 msgstr ""
 
 #: src/fnschool/exam/score.py:750
@@ -2023,5 +2023,12 @@ msgstr ""
 #~ "Hello~ tell {0} the examination name,"
 #~ " please! (e.g: Grade 5/English Volume "
 #~ "1/Unit 1 Testing)"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Ok, I have updated the question "
+#~ "titles, student names and scores, and"
+#~ " I CLOSED the file. (Press any "
+#~ "key to continue)"
 #~ msgstr ""
 

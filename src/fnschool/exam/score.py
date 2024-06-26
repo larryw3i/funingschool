@@ -32,7 +32,7 @@ class Score:
         self._question_titles = None
         self.fext = ".xlsx"
         self.no_test_m2_s = _("No recent tests")
-        self.name_index0 = 3
+        self.name_index0 = 4
         self.question_index0 = 4
         self.points_index0 = self.question_index0 - 1
         self._test_names = None
@@ -349,7 +349,7 @@ class Score:
         print_info(_('Scores file "{0}" has been selected.').format(filename))
         self.config.save(self.p_path_key, Path(filename).parent.as_posix())
 
-        self.name = filename
+        self.full_name = filename
 
         self.plot()
 
@@ -402,6 +402,7 @@ class Score:
                         scores_rows[i] = r
                     else:
                         r.append(0)
+
             scores = pd.DataFrame(scores_rows, columns=scores_cols)
             scores.set_index("Name", inplace=True)
 
@@ -444,7 +445,7 @@ class Score:
 
     @property
     def grade(self):
-        value = self.name.split("/")
+        value = self.full_name.split("/")
         if len(value) > 2:
             value = value[0]
         else:
@@ -453,7 +454,7 @@ class Score:
 
     @property
     def subject(self):
-        value = self.name.split("/")
+        value = self.full_name.split("/")
         if len(value) > 2:
             value = value[1]
         else:
@@ -656,20 +657,21 @@ class Score:
 
                 fpath1 = self.fpath_m2
                 name_m2 = self.short_name_m2 or self.no_test_m2_s
+
                 scores_m2 = (
-                    self.scores[-2][1]
+                    self.scores[self.scores.columns[-2]]
                     if (
-                        not self.scores is None and len(self.scores.columns) > 1
+                        len(self.scores.columns)>1
                     )
                     else None
                 )
-                names_len = len(scores_m2) if not (scores_m2 is None) else None
+                student_names_len = len(scores_m2.index) if not (scores_m2 is None) else None
 
                 wb = self.wb
                 sheet = self.sheet0
 
                 sheet.cell(2, 3, name_m2)
-                new_names_len = (
+                student_names_len0 = (
                     len(
                         [
                             sheet.cell(r, 1).value
@@ -677,16 +679,16 @@ class Score:
                             if sheet.cell(r, 1).value
                         ]
                     )
-                    - 1
+                    
                 )
-                if scores_m2:
-                    len_diff = names_len - new_names_len
+                if not scores_m2 is None:
+                    len_diff = student_names_len - student_names_len0
                     if len_diff > 0:
                         sheet.insert_rows(self.name_index0 + 1, len_diff)
                     elif len_diff < 0:
                         sheet.delete_rows(self.name_index0 + 1, -len_diff)
-
-                    for i, (s_name, s_score) in enumerate(scores_m2):
+                     
+                    for i,(s_name,s_score) in enumerate(scores_m2.items()):
                         sheet.cell(self.name_index0 + i, 1, s_name)
                         sheet.cell(self.name_index0 + i, 3, s_score)
 
@@ -695,7 +697,7 @@ class Score:
                             "The recent examination scores ({0}) "
                             + 'have been added to "{1}".'
                         ).format(name_m2, fpath)
-                        if scores_m2
+                        if not scores_m2 is None
                         else _("There is no recent tests.")
                     )
 
@@ -717,17 +719,16 @@ class Score:
                 )
                 input0()
 
-            open_path(fpath)
-            print_warning(
-                _(
-                    "Ok, I have updated the question"
-                    + " titles, student names and scores, and I CLOSED "
-                    + "the file. "
-                    + "(Press any key to continue)"
+                open_path(fpath)
+                print_warning(
+                    _(
+                        "Ok, I have updated the question"
+                        + " titles, student names and scores."
+                        + " (Press any key to continue)"
+                    )
                 )
-            )
-            input0()
-            self._scores = None
+                input0()
+                self._scores = None
 
             self._fpath = fpath
 
@@ -866,6 +867,13 @@ class Score:
         value = Path(value).as_posix()
         if exam_dpath in value:
             value = value.replace(exam_dpath, "")
+            if value.startswith("/"):
+                value = re.sub(r"^/+", "", value)
+            if value.startswith("\\"):
+                value = re.sub(r"^\\+", "", value)
+            if ".." in value:
+                value = re.sub("..", "", value)
+
         value = os.path.splitext(value)[0]
         self._full_name = value
 

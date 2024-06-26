@@ -8,10 +8,12 @@ if is_zh_CN:
         f.name
         for f in ttves
         if (
-            "cjk" in f.name.lower()
+            "hei" in f.name.lower()
+            or "cjk" in f.name.lower()
             or "kai" in f.name.lower()
             or "song" in f.name.lower()
             or "ming" in f.name.lower()
         )
     ]
+    random.shuffle(ttves)
     matplotlib.rcParams["font.family"] = ttves
