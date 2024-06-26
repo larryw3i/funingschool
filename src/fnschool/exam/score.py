@@ -83,11 +83,21 @@ class Score:
 
     def plot(self):
         print_info(
-            _('Generate the scores and scoring rate plots now ? (Yes: "Y","y")')
+            (
+                _(
+                    "Generate the scores and scoring "
+                    + 'rate plots now ? (Yes: "Y","y")'
+                )
+                if len(self.scores.columns) > 1
+                else _(
+                    "Generate the scoring " + 'rate plots now ? (Yes: "Y","y")'
+                )
+            )
         )
         p_input = input(">_ ")
         if p_input and p_input in "Yy":
-            self.plot_scores()
+            if len(self.scores.columns) > 1:
+                self.plot_scores()
             self.plot_scores_m1()
 
     def plot_scores(self, max_test_num=None):
