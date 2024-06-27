@@ -639,15 +639,15 @@ class Score:
     def get_points(self, question):
         points = question
         if "（" in points:
-            points = points.split("（")[1]
+            points = points.split("（")[-1]
         if "(" in points:
-            points = points.split("(")[1]
+            points = points.split("(")[-1]
         if "分" in points:
-            points = points.split("分")[0]
+            points = points.split("分")[-2]
         if "）" in points:
-            points = points.split("）")[0]
+            points = points.split("）")[-2]
         if ")" in points:
-            points = points.split(")")[0]
+            points = points.split(")")[-2]
         points = points.strip()
 
         if str.isnumeric(points.replace(".", "")):

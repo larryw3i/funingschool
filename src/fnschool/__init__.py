@@ -26,7 +26,7 @@ from fnschool.user import *
 from fnschool.config import *
 
 
-__version__ = "20240627.81104.840"
+__version__ = "20240627.81416.800"
 
 
 # The end.
