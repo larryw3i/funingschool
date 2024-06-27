@@ -286,7 +286,7 @@ class Score:
                         student_name0, f"{s_total_points}/{self.total_points}"
                     )
                     if student_name != self.average_points_s
-                    else _("The average scoring rate")
+                    else _("The average scoring rate ({0})").format(f"{s_total_points:.2f}/{self.total_points}")
                 )
             )
             xticks = plt.xticks(range(q_point_rates.size), self.question_titles)
@@ -441,7 +441,9 @@ class Score:
                     s_name = r[0]
 
                     if s_name in s_index:
-                        r.append(f_scores.loc[s_name, f_scores.columns[0]])
+                        s_points = f_scores.loc[s_name, f_scores.columns[0]]
+                        s_points = 0 if pd.isna(s_points) else s_points
+                        r.append(s_points)
                         scores_rows[i] = r
                     else:
                         r.append(0)
@@ -452,6 +454,12 @@ class Score:
             self._scores = scores
 
         return self._scores
+
+    @scores.deleter
+    def scores(self):
+        self._scores = None
+        del self.total_points
+        del self.scores_m1
 
     @property
     def fpaths(self):
@@ -483,7 +491,6 @@ class Score:
                 return None
 
         self._fpaths = sorted(self._fpaths, key=lambda f: (f[1], f[0]))
-        
 
         return self._fpaths
 
@@ -621,8 +628,13 @@ class Score:
             fpath = self.fpath
             scores = self.get_scores(fpath)
             self._scores_m1 = scores
+            self._scores_m1.fillna(0,axis=1,inplace=True)
 
         return self._scores_m1
+
+    @scores_m1.deleter
+    def scores_m1(self):
+        self._scores_m1 = None
 
     def get_points(self, question):
         points = question
@@ -652,6 +664,10 @@ class Score:
             self._total_points = total_points
 
         return self._total_points
+
+    @total_points.deleter
+    def total_points(self):
+        self._total_points = None
 
     @property
     def question_titles(self):
@@ -711,8 +727,8 @@ class Score:
                     len(scores_m2.index) if not (scores_m2 is None) else None
                 )
 
-                wb = self.wb
-                sheet = self.sheet0
+                wb = load_workbook(fpath)
+                sheet = wb[wb.sheetnames[0]]
 
                 sheet.cell(2, 3, name_m2)
                 student_names_len0 = len(
@@ -760,16 +776,47 @@ class Score:
                 )
                 input0()
 
-                open_path(fpath)
-                print_warning(
-                    _(
-                        "Ok, I have updated the question"
-                        + " titles, student names and scores."
-                        + " (Press any key to continue)"
+                y_input_n = 64
+                for i in range(y_input_n):
+                    open_path(fpath)
+                    print_warning(
+                        _(
+                            "Ok, I have updated the question"
+                            + " titles, student names and scores."
+                            + " (Press any key to continue)"
+                        )
                     )
-                )
-                input0()
-                self._scores = None
+                    input0()
+                    wb = load_workbook(fpath)
+                    sheet = wb[wb.sheetnames[0]]
+
+                    total_points = sum(
+                        [
+                            self.get_points(q)
+                            for q in [
+                                sheet.cell(2, c).value
+                                for c in range(1,sheet.max_column + 1)
+                            ]
+                            if (q and ("(" in q or "（" in q))
+                        ]
+                    )
+                    print_warning(
+                        (
+                            _("Is the total score {0} points?")
+                            if total_points != 1.0
+                            else _("Is the total score {0} point?")
+                        ).format(self.total_points)
+                        + _(' (Yes: "Y","y")')
+                    )
+                    y_input = input0()
+                    if y_input and y_input in "Yy":
+                        del self.scores
+                        break
+                    else:
+                        wb.close()
+                        sheet = None
+                    if i >= y_input_n:
+                        exit()
 
             self._fpath = fpath
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-27 01:22+0800\n"
+"POT-Creation-Date: 2024-06-27 11:01+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -84,7 +84,7 @@ msgstr ""
 msgid "The names saved by {0} are as follows:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:853 src/fnschool/exam/score.py:888
+#: src/fnschool/exam/score.py:900 src/fnschool/exam/score.py:935
 #: src/fnschool/user.py:122 src/fnschool/user.py:201
 msgid "Unexpected value was got. Exit."
 msgstr ""
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 
-#: src/fnschool/exam/score.py:856 src/fnschool/exam/score.py:886
+#: src/fnschool/exam/score.py:903 src/fnschool/exam/score.py:933
 #: src/fnschool/user.py:199
 msgid "Unexpected value was got."
 msgstr ""
@@ -817,52 +817,52 @@ msgstr ""
 msgid "average_scores"
 msgstr ""
 
-#: src/fnschool/exam/score.py:156
+#: src/fnschool/exam/score.py:157
 msgid "The scores of Student {0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:158
+#: src/fnschool/exam/score.py:159
 msgid "The average scores"
 msgstr ""
 
-#: src/fnschool/exam/score.py:166
+#: src/fnschool/exam/score.py:167
 msgid "Examination names of {0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:169
+#: src/fnschool/exam/score.py:170
 msgid "Examination Points ({0} points in total)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:171
+#: src/fnschool/exam/score.py:172
 msgid "Examination Points ({0} point in total)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:193
+#: src/fnschool/exam/score.py:194
 msgid "Discipline point: {0}."
 msgstr ""
 
-#: src/fnschool/exam/score.py:195
+#: src/fnschool/exam/score.py:196
 msgid "Discipline points: {0}."
 msgstr ""
 
-#: src/fnschool/exam/score.py:214 src/fnschool/exam/score.py:321
+#: src/fnschool/exam/score.py:215 src/fnschool/exam/score.py:321
 msgid "[{0}] \"{1}\" {2}has been saved."
 msgstr ""
 
-#: src/fnschool/exam/score.py:228
+#: src/fnschool/exam/score.py:229
 msgid "scoring_rate_of_{0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:230
+#: src/fnschool/exam/score.py:231
 msgid "average_scoring_rate"
 msgstr ""
 
-#: src/fnschool/exam/score.py:284
+#: src/fnschool/exam/score.py:285
 msgid "The scoring rate of Student {0} ({1})"
 msgstr ""
 
 #: src/fnschool/exam/score.py:289
-msgid "The average scoring rate"
+msgid "The average scoring rate ({0})"
 msgstr ""
 
 #: src/fnschool/exam/score.py:300
@@ -889,76 +889,88 @@ msgstr ""
 msgid "Scores file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/exam/score.py:567
+#: src/fnschool/exam/score.py:574
 msgid "Failed to get examination start time from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:580
+#: src/fnschool/exam/score.py:587
 msgid "Failed to get examination end time from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:587
+#: src/fnschool/exam/score.py:594
 msgid "The examination end time is set to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:670
+#: src/fnschool/exam/score.py:686
 msgid "exam_names"
 msgstr ""
 
-#: src/fnschool/exam/score.py:695
+#: src/fnschool/exam/score.py:711
 msgid ""
 "Scores spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" was copied "
 "to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:737
+#: src/fnschool/exam/score.py:753
 msgid "The recent examination scores ({0}) have been added to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:742
+#: src/fnschool/exam/score.py:758
 msgid "There is no recent tests."
 msgstr ""
 
-#: src/fnschool/exam/score.py:747
+#: src/fnschool/exam/score.py:763
 msgid "Spreadsheet \"{0}\" has been saved."
 msgstr ""
 
-#: src/fnschool/exam/score.py:751
+#: src/fnschool/exam/score.py:767
 msgid ""
 "Please update the question titles , student names and scores of \"{0}\" "
 "according to the comments. (Ok, open it for me [Press any key to open "
 "file])"
 msgstr ""
 
-#: src/fnschool/exam/score.py:765
+#: src/fnschool/exam/score.py:783
 msgid ""
 "Ok, I have updated the question titles, student names and scores. (Press "
 "any key to continue)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:792
+#: src/fnschool/exam/score.py:805
+msgid "Is the total score {0} points?"
+msgstr ""
+
+#: src/fnschool/exam/score.py:807
+msgid "Is the total score {0} point?"
+msgstr ""
+
+#: src/fnschool/exam/score.py:809
+msgid " (Yes: \"Y\",\"y\")"
+msgstr ""
+
+#: src/fnschool/exam/score.py:839
 msgid "The examination name \"{0}\" has been saved to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:796
+#: src/fnschool/exam/score.py:843
 msgid "The examination name has been saved to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:811
+#: src/fnschool/exam/score.py:858
 msgid "The saved examination names are as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:813
+#: src/fnschool/exam/score.py:860
 msgid "The saved examination name is as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:828
+#: src/fnschool/exam/score.py:875
 msgid ""
 "Select the examination name you entered (index), or enter new examination"
 " name, please! (default: {0})"
 msgstr ""
 
-#: src/fnschool/exam/score.py:870
+#: src/fnschool/exam/score.py:917
 msgid ""
 "Hello~ tell {0} the examination name, please! (e.g: Class 5(1)/English "
 "Volume 1/Unit 1 Testing)"
@@ -2079,5 +2091,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "The scoring rate of Student {0}"
+#~ msgstr ""
+
+#~ msgid "The average scoring rate"
 #~ msgstr ""
 
