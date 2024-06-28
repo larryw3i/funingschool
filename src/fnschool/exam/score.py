@@ -40,6 +40,8 @@ class Score:
         self._src_dpath = None
         self.average_points_s = _("Average")
         self.plot_alpha0 = 0.16
+        self.discipline_s = _("Discipline Points")
+        self.name_s = _("Student Name")
 
         pass
 
@@ -101,14 +103,19 @@ class Score:
                 self.plot_scores()
             self.plot_scores_m1()
 
-    def get_scores_img_path(self, student_name):
+    def get_scores_img_path(self, student_name=None):
+
         img_path = (
             self.src_dpath
             / (
                 (
-                    _("scores_of_{0}").format(student_name)
-                    if student_name != self.average_points_s
-                    else _("average_scores")
+                    _("scores_of_all_students")
+                    if not student_name
+                    else (
+                        _("scores_of_{0}").format(student_name)
+                        if student_name != self.average_points_s
+                        else _("average_scores")
+                    )
                 )
                 + ".png"
             )
@@ -138,7 +145,8 @@ class Score:
             [get_len(s) for s in scores_m1_t_s.split("\n")]
         )
         summary_s = (
-            _("Summary of {0}:").format(self.full_name)
+            "\n"
+            + _("Summary of {0}:").format(self.full_name)
             + "\n"
             + sep
             + "\n"
@@ -156,23 +164,23 @@ class Score:
         scores = self.scores
         scores = scores[scores.columns[::-1]]
         scores = scores[scores.columns[::-1]]
+
         scores_m1 = self.scores_m1.copy()
         scores_m1_d = scores_m1.loc[:, scores_m1.columns[1]]
         max_test_num = max_test_num or scores.columns.size
         test_names = self.test_names
-        img_paths_lenx = max(
-            [
-                get_len(self.get_scores_img_path(name))
-                for name in self.student_names
-            ]
-        )
+        img_saved_s = _('[{0}] "{1}" {2}has been saved.')
+        img_fpaths = [
+            self.get_scores_img_path(name) for name in self.student_names
+        ] + [self.get_scores_img_path()]
 
-        s_index = 1
-        s_total = scores.shape[0]
-        s_total_len2 = len(str(s_total))
+        img_paths_lenx = max(get_len(f) for f in img_fpaths)
+
+        i_index = 0
+        img_fpaths_len = len(img_fpaths)
+        img_fpaths_len2 = len(str(img_fpaths_len))
         labelrotation = None
         for student_name, s_scores in scores.iterrows():
-
             comment = self.get_comment(student_name)
             discipline_points = scores_m1_d.loc[student_name]
             student_name0 = (
@@ -187,7 +195,7 @@ class Score:
             )
 
             s_scores = s_scores[:max_test_num]
-            img = plt.plot(range(s_scores.size), s_scores)
+            plt.plot(range(s_scores.size), s_scores)
             plt.title(
                 _("The scores of Student {0}").format(student_name0)
                 if not student_name == self.average_points_s
@@ -247,14 +255,49 @@ class Score:
 
             plt.savefig(img_fpath, bbox_inches="tight")
             print_info(
-                _('[{0}] "{1}" {2}has been saved.').format(
-                    f"{s_index:>{s_total_len2}}/{s_total}",
+                img_saved_s.format(
+                    f"{i_index+1:>{img_fpaths_len2}}/{img_fpaths_len}",
                     img_fpath,
                     " " * img_fpath_len_diff,
                 )
             )
             plt.cla()
-            s_index += 1
+            i_index += 1
+
+        plt.cla()
+        student_scores_img_fpath = img_fpaths[-1]
+        scores0 = scores.T
+        scores0.columns.name = self.name_s
+        img_fpath_len_diff = (
+            img_paths_lenx
+            - get_zh_CN_chars_len(student_scores_img_fpath)
+            - len(student_scores_img_fpath)
+        )
+
+        scores0.plot()
+        plt.title(_("The scores of all students"))
+        xticks = plt.xticks(range(s_scores.size), self.test_names)
+
+        if not labelrotation:
+            labelrotation = self.get_rotation(xticks)
+        plt.tick_params(axis="x", labelrotation=labelrotation)
+
+        plt.xlabel(_("Examination names of {0}").format(self.subject))
+        plt.ylabel(
+            (
+                _("Examination Points " + "({0} points in total)")
+                if self.total_points != 1.0
+                else _("Examination Points " + "({0} point in total)")
+            ).format(self.total_points)
+        )
+        plt.savefig(student_scores_img_fpath, bbox_inches="tight")
+        print_info(
+            img_saved_s.format(
+                f"{i_index+1:>{img_fpaths_len2}}/{img_fpaths_len}",
+                student_scores_img_fpath,
+                " " * img_fpath_len_diff,
+            )
+        )
 
     def get_scores_m1_img_fpath(self, student_name):
         img_fpath = (
@@ -278,6 +321,7 @@ class Score:
         scores_m1_d = scores_m1.loc[:, scores_m1.columns[1]]
         scores_m1_q = scores_m1.loc[:, scores_m1.columns[2:]]
         scores_m1_q = scores_m1_q.astype(float)
+        img_saved_s = _('[{0}] "{1}" {2}has been saved.')
 
         for student_name, q_points in scores_m1_q.iterrows():
             for q_title, q_point in q_points.items():
@@ -285,18 +329,16 @@ class Score:
                 scores_m1_q.loc[student_name, q_title] = round(
                     q_point * 100 / q_point_t, 1
                 )
+        img_fpaths = [
+            self.get_scores_m1_img_fpath(v) for v in self.student_names
+        ]
 
-        img_fpaths_lenx = max(
-            [
-                get_len(self.get_scores_m1_img_fpath(v))
-                for v in self.student_names
-            ]
-        )
+        img_fpaths_lenx = max(get_len(f) for f in img_fpaths)
 
         labelrotation = None
-        s_index = 1
-        s_total = len(scores_m1_q.index.to_list())
-        s_total_len2 = len(str(s_total))
+        i_index = 0
+        img_fpaths_len = len(img_fpaths)
+        img_fpaths_len2 = len(str(img_fpaths_len))
         for student_name, q_point_rates in scores_m1_q.iterrows():
 
             s_total_points = scores_m1_t.loc[student_name]
@@ -355,14 +397,15 @@ class Score:
 
             plt.savefig(img_fpath, bbox_inches="tight")
             print_info(
-                _('[{0}] "{1}" {2}has been saved.').format(
-                    f"{s_index:>{s_total_len2}}/{s_total}",
+                img_saved_s.format(
+                    f"{i_index+1:>{img_fpaths_len2}}/{img_fpaths_len}",
                     img_fpath,
                     " " * img_fpath_len_diff,
                 )
             )
             plt.cla()
-            s_index += 1
+            i_index += 1
+        i_index = 0
 
     def get_comment(self, student_name):
         comment = _("comment:") + "\n"
@@ -439,16 +482,15 @@ class Score:
         if not Path(fpath).exists():
             return None
 
-        discipline_text = "考试纪律"
-        name_text = "姓名"
+        discipline_s = "考试纪律"
         scores = pd.read_excel(fpath, skiprows=[0, 2])
-        scores.rename(columns={scores.columns[0]: name_text}, inplace=True)
-        scores.dropna(subset=[name_text], inplace=True)
-        scores.set_index(name_text, inplace=True)
-        scores[discipline_text] = scores[discipline_text].fillna(0)
+        scores.rename(columns={scores.columns[0]: self.name_s}, inplace=True)
+        scores.dropna(subset=[self.name_s], inplace=True)
+        scores.set_index(self.name_s, inplace=True)
+        scores[discipline_s] = scores[discipline_s].fillna(0)
         point_cols = scores.columns[self.points_index0 :].to_list()
         scores["总分"] = (
-            scores.loc[:, point_cols].sum(axis=1) + scores[discipline_text]
+            scores.loc[:, point_cols].sum(axis=1) + scores[discipline_s]
         )
         scores.drop([scores.columns[1]], axis=1, inplace=True)
         scores = scores.loc[:, ~scores.columns.str.contains("^Unnamed")]
