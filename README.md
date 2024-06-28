@@ -2,20 +2,20 @@
 <h1 align="center">
   <br>
   
-  <pre> _____ _   _ ____   ____ _   _  ___   ___  _     
+  <pre>
+ _____ _   _ ____   ____ _   _  ___   ___  _     
 |  ___| \ | / ___| / ___| | | |/ _ \ / _ \| |    
 | |_  |  \| \___ \| |   | |_| | | | | | | | |    
 |  _| | |\  |___) | |___|  _  | |_| | |_| | |___ 
 |_|   |_| \_|____/ \____|_| |_|\___/ \___/|_____|
                                                  
 </pre>
-
   <br>
   funingschool
   <br>
 </h1>
 
-<h4 align="center"> Some simple scripts for warehousing and consuming. </h4>
+<h4 align="center"> NO Just some simple scripts for warehousing and consuming. </h4>
 
 <p align="center">
   <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/README.zh_CN.md">简体中文</a> •
@@ -35,11 +35,18 @@
 
 ## Key Features
 
+### warehousing and consuming
 * Read food spreadsheets automatically.  
 * The simplest and most straightforward `consuming sheets`.  
 * Update sheets (warehousing, consuming, summing, etc) automatically.  
 * Reduce calculation errors.  
-* Easy to use.  
+* Effectively eliminate unit prices containing infinite decimals.
+* Easy to use.   
+### Test statistics
+* An easy-to-use "test score entry form".
+* Clear test results at a glance, converting table data into Intuitive images.
+* Display comments.
+* Effectively assist testers, especially teachers and students.
 
 ## How To Use
 
@@ -56,8 +63,10 @@ Install Python3 from [www.python.org/getit](https://www.python.org/getit/).
 ```bash
 # install
 pip3 install -U fnschool
-# run
+# run `warehousing and consuming` module
 fnschool-cli canteen mk_bill
+# run `test statistics` module
+fnschool-cli exam enter
 ```
 
 > **Note**  
@@ -73,6 +82,7 @@ This software uses the following open source packages:
 - [numpy](https://numpy.org/)  
 - [openpyxl](https://openpyxl.readthedocs.io/)  
 - [appdirs](http://github.com/ActiveState/appdirs)  
+- [matplotlib](https://matplotlib.org/)  
 
 
 ## Support
@@ -84,6 +94,7 @@ Buy me a `coffee`:
 ## License
 
 [GNU LESSER GENERAL PUBLIC LICENSE Version 3](https://github.com/larryw3i/funingschool/blob/master/LICENSE)
+
 
 
 
