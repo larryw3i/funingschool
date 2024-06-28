@@ -138,7 +138,7 @@ class Score:
             [get_len(s) for s in scores_m1_t_s.split("\n")]
         )
         summary_s = (
-            _("Summary:")
+            _("Summary of {0}:").format(self.full_name)
             + "\n"
             + sep
             + "\n"

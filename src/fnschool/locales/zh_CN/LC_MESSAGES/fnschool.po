@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-28 09:11+0800\n"
-"PO-Revision-Date: 2024-06-28 09:13+0800\n"
+"POT-Creation-Date: 2024-06-28 09:23+0800\n"
+"PO-Revision-Date: 2024-06-28 09:23+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -566,7 +566,6 @@ msgid "Total purchasing of this month: "
 msgstr "本月总购入："
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:290
-#: src/fnschool/exam/score.py:141
 msgid "Summary:"
 msgstr "汇总："
 
@@ -859,6 +858,10 @@ msgstr "{0}的历次测试"
 #: src/fnschool/exam/score.py:111
 msgid "average_scores"
 msgstr "平均分"
+
+#: src/fnschool/exam/score.py:141
+msgid "Summary of {0}:"
+msgstr "{0} 的汇总："
 
 #: src/fnschool/exam/score.py:145
 msgid "Scores:"

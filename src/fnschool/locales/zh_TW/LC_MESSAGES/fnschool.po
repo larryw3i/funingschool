@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-28 09:11+0800\n"
+"POT-Creation-Date: 2024-06-28 09:23+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -542,7 +542,6 @@ msgid "Total purchasing of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:290
-#: src/fnschool/exam/score.py:141
 msgid "Summary:"
 msgstr ""
 
@@ -816,6 +815,10 @@ msgstr ""
 
 #: src/fnschool/exam/score.py:111
 msgid "average_scores"
+msgstr ""
+
+#: src/fnschool/exam/score.py:141
+msgid "Summary of {0}:"
 msgstr ""
 
 #: src/fnschool/exam/score.py:145
