@@ -115,13 +115,48 @@ class Score:
         ).as_posix()
         return img_path
 
+    def print_summary(self):
+        scores_m1 = self.scores_m1.copy()
+        scores_m1_t = scores_m1[scores_m1.columns[0]]
+        scores_m1_index = scores_m1.index.to_list()
+        scores_m1_index_lenx = max([len(i) for i in scores_m1_index])
+        if scores_m1_index_lenx == 3:
+            scores_m1_index = [
+                (i if len(i) > 2 else i[0] + "  " + i[1])
+                for i in scores_m1_index
+            ]
+            scores_m1_t = pd.Series(scores_m1_t.values, index=scores_m1_index)
+        scores_m1_t = scores_m1_t.sort_values(ascending=False)
+        scores_m1_t_len2 = len(str(scores_m1_t.size))
+        scores_m1_t_s = sqr_slist(
+            [
+                f"{i+1:>{scores_m1_t_len2}}. {s_name} ({s_point:.2f})"
+                for i, (s_name, s_point) in enumerate(scores_m1_t.items())
+            ]
+        )
+        sep = get_random_sep_char() * max(
+            [get_len(s) for s in scores_m1_t_s.split("\n")]
+        )
+        summary_s = (
+            _("Summary:")
+            + "\n"
+            + sep
+            + "\n"
+            + _("Scores:")
+            + "\n"
+            + scores_m1_t_s
+            + "\n"
+            + sep
+        )
+        print_info(summary_s)
+
+        pass
+
     def plot_scores(self, max_test_num=None):
-        scores = self.scores.copy()
+        scores = self.scores
         scores = scores[scores.columns[::-1]]
-        scores.loc[self.average_points_s] = scores.mean(axis=0)
         scores = scores[scores.columns[::-1]]
-        scores_m1 = self.scores_m1
-        scores_m1.loc[self.average_points_s] = scores_m1.mean(axis=0)
+        scores_m1 = self.scores_m1.copy()
         scores_m1_d = scores_m1.loc[:, scores_m1.columns[1]]
         max_test_num = max_test_num or scores.columns.size
         test_names = self.test_names
@@ -237,7 +272,7 @@ class Score:
         return img_fpath
 
     def plot_scores_m1(self):
-        scores_m1 = self.scores_m1.copy()
+        scores_m1 = self.scores_m1
         scores_m1.loc[self.average_points_s] = scores_m1.mean(axis=0)
         scores_m1_t = scores_m1.loc[:, scores_m1.columns[0]]
         scores_m1_d = scores_m1.loc[:, scores_m1.columns[1]]
@@ -286,7 +321,9 @@ class Score:
                         student_name0, f"{s_total_points}/{self.total_points}"
                     )
                     if student_name != self.average_points_s
-                    else _("The average scoring rate ({0})").format(f"{s_total_points:.2f}/{self.total_points}")
+                    else _("The average scoring rate ({0})").format(
+                        f"{s_total_points:.2f}/{self.total_points}"
+                    )
                 )
             )
             xticks = plt.xticks(range(q_point_rates.size), self.question_titles)
@@ -357,6 +394,7 @@ class Score:
     def enter(self):
         __ = self.scores
         self.plot()
+        self.print_summary()
         pass
 
     def read(self):
@@ -450,6 +488,7 @@ class Score:
 
             scores = pd.DataFrame(scores_rows, columns=scores_cols)
             scores.set_index("Name", inplace=True)
+            scores.loc[self.average_points_s] = scores.mean(axis=0)
 
             self._scores = scores
 
@@ -627,8 +666,10 @@ class Score:
 
             fpath = self.fpath
             scores = self.get_scores(fpath)
-            self._scores_m1 = scores
-            self._scores_m1.fillna(0,axis=1,inplace=True)
+            scores_m1 = scores
+            scores_m1.fillna(0, axis=1, inplace=True)
+            scores_m1.loc[self.average_points_s] = scores_m1.mean(axis=0)
+            self._scores_m1 = scores_m1
 
         return self._scores_m1
 
@@ -795,7 +836,7 @@ class Score:
                             self.get_points(q)
                             for q in [
                                 sheet.cell(2, c).value
-                                for c in range(1,sheet.max_column + 1)
+                                for c in range(1, sheet.max_column + 1)
                             ]
                             if (q and ("(" in q or "（" in q))
                         ]
