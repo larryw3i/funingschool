@@ -298,6 +298,7 @@ class Score:
                 " " * img_fpath_len_diff,
             )
         )
+        plt.cla()
 
     def get_scores_m1_img_fpath(self, student_name):
         img_fpath = (
