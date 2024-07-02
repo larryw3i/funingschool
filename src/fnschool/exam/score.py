@@ -613,6 +613,7 @@ class Score:
 
     def get_cell_time(self, value):
         value = str(value)
+        value = re.sub(r"\s+", " ", value)
         time = (
             (
                 datetime.strptime(value, "%Y/%m/%d %H：%M")
@@ -761,7 +762,22 @@ class Score:
 
     def get_question_titles(self, scores):
         question_titles = scores.columns.to_list()
-        question_titles = question_titles[2:]
+        question_titles = [
+            q
+            for q in question_titles
+            if (
+                ("(" in q or "（" in q)
+                and bool(
+                    re.search(
+                        r"\d",
+                        q.split("(")[-1]
+                        .split("（")[-1]
+                        .split(")")[0]
+                        .split("）")[0],
+                    )
+                )
+            )
+        ]
         return question_titles
 
     @property
@@ -806,31 +822,27 @@ class Score:
                     if (len(self.scores.columns) > 1)
                     else None
                 )
-                student_names_len = (
-                    len(scores_m2.index) if not (scores_m2 is None) else None
-                )
+
+                if not scores_m2 is None:
+                    scores_m2 = scores_m2.copy()
+                    scores_m2.drop(
+                        [self.average_points_s], axis=0, inplace=True
+                    )
 
                 wb = load_workbook(fpath)
                 sheet = wb[wb.sheetnames[0]]
-
                 sheet.cell(2, 3, name_m2)
-                student_names_len0 = len(
-                    [
-                        sheet.cell(r, 1).value
-                        for r in range(self.name_index0, sheet.max_row + 1)
-                        if sheet.cell(r, 1).value
-                    ]
-                )
-                if not scores_m2 is None:
-                    len_diff = student_names_len - student_names_len0
-                    if len_diff > 0:
-                        sheet.insert_rows(self.name_index0 + 1, len_diff)
-                    elif len_diff < 0:
-                        sheet.delete_rows(self.name_index0 + 1, -len_diff)
 
+                if not scores_m2 is None:
+                    r_index = 0
                     for i, (s_name, s_score) in enumerate(scores_m2.items()):
                         sheet.cell(self.name_index0 + i, 1, s_name)
                         sheet.cell(self.name_index0 + i, 3, s_score)
+                        r_index = self.name_index0 + i
+
+                    for row_index in range(r_index + 1, sheet.max_row + 1):
+                        sheet.cell(row_index, 1, "")
+                        sheet.cell(row_index, 3, "")
 
                     print_info(
                         _(
