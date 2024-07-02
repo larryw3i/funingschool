@@ -207,7 +207,7 @@ class CtSpreadSheet:
         inventory_mm1_warehousing_m = (
             _("Total: ")
             + currency_mark
-            + str(sum([f.total_price for f in cfoods]))
+            + str(round(sum([f.total_price for f in cfoods]),2))
         )
         consuming_m = 0
         for f in cfoods:
@@ -239,7 +239,7 @@ class CtSpreadSheet:
         )
 
         consuming_m_inventory_m = (
-            _("Total: ") + currency_mark + str(consuming_m_cp + inventory_m_cp)
+            _("Total: ") + currency_mark + str(round(consuming_m_cp + inventory_m_cp,self.sd+1))
         )
 
         afoods = [f for f in bfoods if f.is_abandoned]
