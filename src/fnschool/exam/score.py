@@ -162,8 +162,6 @@ class Score:
 
     def plot_scores(self, max_test_num=None):
         scores = self.scores
-        scores = scores[scores.columns[::-1]]
-        scores = scores[scores.columns[::-1]]
 
         scores_m1 = self.scores_m1.copy()
         scores_m1_d = scores_m1.loc[:, scores_m1.columns[1]]
@@ -501,14 +499,15 @@ class Score:
     @property
     def scores(self):
         if self._scores is None:
-            fpaths = self.fpaths
+            fpaths = self.fpaths[::-1]
 
             if len(fpaths) < 1:
                 return None
 
             scores_cols = ["Name"]
             scores_rows = None
-
+            
+            
             for fi, (f, __) in enumerate(fpaths):
                 name = Path(f).stem
                 scores_cols.append(name)
@@ -533,7 +532,7 @@ class Score:
             scores.set_index("Name", inplace=True)
             scores.loc[self.average_points_s] = scores.mean(axis=0)
 
-            self._scores = scores
+            self._scores = scores[scores.columns[::-1]]
 
         return self._scores
 
