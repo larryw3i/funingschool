@@ -43,6 +43,10 @@ class Score:
         self.plot_alpha0 = 0.16
         self.discipline_s = _("Discipline Points")
         self.name_s = _("Student Name")
+        self._scores_m1_img_fpaths = None
+        self._scores_m1_img_afpaths = None
+        self._scores_img_fpaths = None
+        self._scores_img_afpaths = None
 
         pass
 
@@ -113,7 +117,7 @@ class Score:
                 self.plot_scores()
             self.plot_scores_m1()
 
-    def get_scores_img_path(self, student_name=None):
+    def get_scores_img_fpath(self, student_name=None):
 
         img_path = (
             self.src_dpath
@@ -170,6 +174,23 @@ class Score:
 
         pass
 
+    @property
+    def scores_img_fpaths(self):
+        if not self._scores_img_fpaths:
+            self._scores_img_fpaths =  [
+                [name,self.get_scores_img_fpath(name)] for name in self.student_names
+            ]
+        return self._scores_img_fpaths
+
+
+    @property
+    def scores_img_afpaths(self):
+        if not self._scores_img_afpaths:
+            self._scores_img_afpaths =  [
+                [name,self.get_scores_img_fpath(name)] for name in self.astudent_names
+            ]
+        return self._scores_img_afpaths
+
     def plot_scores(self, max_test_num=None):
         scores = self.scores
 
@@ -179,8 +200,8 @@ class Score:
         test_names = self.test_names
         img_saved_s = _('[{0}] "{1}" {2}has been saved.')
         img_fpaths = [
-            self.get_scores_img_path(name) for name in self.astudent_names
-        ] + [self.get_scores_img_path()]
+            f for __, f in self.scores_img_afpaths
+        ]+ [self.get_scores_img_fpath()]
 
         img_paths_lenx = max(get_len(f) for f in img_fpaths)
 
@@ -197,7 +218,7 @@ class Score:
                 else (student_name[0] + "　" + student_name[1])
             )
 
-            img_fpath = self.get_scores_img_path(student_name)
+            img_fpath = self.get_scores_img_fpath(student_name)
             img_fpath_len_diff = (
                 img_paths_lenx - get_zh_CN_chars_len(img_fpath) - len(img_fpath)
             )
@@ -323,6 +344,28 @@ class Score:
 
         return img_fpath
 
+    @property
+    def scores_m1_img_fpaths(self):
+        if not self._scores_m1_img_fpaths:
+            fpaths =  [
+                [v,self.get_scores_m1_img_fpath(v)]
+                for v in self.student_names
+            ]
+            self._scores_m1_img_fpaths = fpaths
+        return self._scores_m1_img_fpaths
+
+
+    @property
+    def scores_m1_img_afpaths(self):
+        if not self._scores_m1_img_afpaths:
+            fpaths =  [
+                [v,self.get_scores_m1_img_fpath(v)]
+                for v in self.astudent_names
+            ]
+            self._scores_m1_img_afpaths = fpaths
+        return self._scores_m1_img_afpaths
+
+
     def plot_scores_m1(self):
         scores_m1 = self.scores_m1
         scores_m1.loc[self.average_points_s] = scores_m1.mean(axis=0)
@@ -338,10 +381,7 @@ class Score:
                 scores_m1_q.loc[student_name, q_title] = round(
                     q_point * 100 / q_point_t, 1
                 )
-        img_fpaths = [
-            self.get_scores_m1_img_fpath(v) for v in self.astudent_names
-        ]
-
+        img_fpaths = [f for __,f inself.scores_m1_img_afpaths]
         img_fpaths_lenx = max(get_len(f) for f in img_fpaths)
 
         labelrotation = None

@@ -1,4 +1,13 @@
 
+import smtplib
+import email.utils
+from email import encoders
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+from email.mime.base import MIMEBase
+
+
 import shutil
 from fnschool import *
 from fnschool.exam import *
@@ -13,6 +22,39 @@ class FnEmail():
         self._wb = None
         self._sheet0 = None
         pass
+
+
+    def send_scores(self):
+        message = MIMEMultipart()
+        message['To'] = email.utils.formataddr(('接收者显示的姓名', '7jjw@163.com'))
+        message['From'] = email.utils.formataddr(('发送者显示的姓名', '594372682@qq.com'))
+        message['Subject'] = '我是邮件的标题'
+
+        for img_file in []
+        img_file = open(r'1.jpg', 'rb')
+        img_data = img_file.read()
+        img_file.close()
+        img = MIMEImage(img_data)
+        message.attach(img)
+        img.add_header('Content-ID', 'dns_config')  
+        mail_content = """
+            <html>
+              <body>
+                <p>我给你发送的图片</p>
+                <img src="cid:dns_config">
+              </body>
+            </html>
+        """
+        message.attach(MIMEText(mail_content, 'html', 'utf-8'))
+
+        smtp_obj = smtplib.SMTP_SSL('smtp.qq.com', 465)
+        smtp_obj.login('594372682@qq.com', '授权码')
+        smtp_obj.set_debuglevel(True)
+        try:
+            smtp_obj.sendmail('594372682@qq.com', ['7jjw@163.com'], msg=message.as_string())
+        finally:
+            smtp_obj.quit()
+
 
     @property
     def wb(self):
@@ -64,6 +106,7 @@ class FnEmail():
 
         if not emails:
             return None
+
         return emails
 
 
