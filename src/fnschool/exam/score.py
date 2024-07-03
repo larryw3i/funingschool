@@ -5,7 +5,7 @@ from fnschool import *
 from fnschool.exam import *
 from fnschool.exam.path import *
 from fnschool.exam.teacher import *
-from fnschool.exam.email import FnEmail 
+from fnschool.exam.email import FnEmail
 
 
 class Score:
@@ -48,6 +48,7 @@ class Score:
         self._scores_img_afpaths = None
         self._scores_img_fpaths = None
         self._email = None
+        self._sclass_dpath = None
 
         pass
 
@@ -76,12 +77,12 @@ class Score:
 
     @property
     def student_names(self):
-        if not student_names:
-            names = self.astudent_names()
+        if not self._student_names:
+            names = self.astudent_names
             if self.average_points_s in names:
                 names.remove(self.average_points_s)
-            self.student_names = names
-        return self.student_names
+            self._student_names = names
+        return self._student_names
 
     @property
     def src_dpath(self):
@@ -182,15 +183,16 @@ class Score:
 
         pass
 
+    @property
     def scores_img_fpaths(self):
         if not self._scores_img_fpaths:
             fpaths = []
             for name in self.student_names:
-                fpaths.eppend(
+                fpaths.append(
                     [
                         name,
-                        get_scores_m1_img_fpath(name),
-                        get_scores_img_fpath(name),
+                        self.get_scores_m1_img_fpath(name),
+                        self.get_scores_img_fpath(name),
                     ]
                 )
             self._scores_img_fpaths = fpaths
@@ -643,7 +645,7 @@ class Score:
     def sclass_dpath(self):
         if not self._sclass_dpath:
             sclass_dpath = self.teacher.exam_dpath / self.sclass
-            if not sclass.exists():
+            if not sclass_dpath.exists():
                 os.makedirs(sclass_dpath, exist_ok=True)
             self._sclass_dpath = sclass_dpath
         return self._sclass_dpath

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-04 00:47+0800\n"
+"POT-Creation-Date: 2024-07-04 02:19+0800\n"
 "PO-Revision-Date: 2024-03-07 22:18+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hans_SG\n"
@@ -94,7 +94,7 @@ msgstr ""
 msgid "The names saved by {0} are as follows:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:1049 src/fnschool/exam/score.py:1084
+#: src/fnschool/exam/score.py:1061 src/fnschool/exam/score.py:1096
 #: src/fnschool/user.py:135 src/fnschool/user.py:214
 msgid "Unexpected value was got. Exit."
 msgstr ""
@@ -107,7 +107,7 @@ msgstr ""
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
 msgstr ""
 
-#: src/fnschool/exam/score.py:1052 src/fnschool/exam/score.py:1082
+#: src/fnschool/exam/score.py:1064 src/fnschool/exam/score.py:1094
 #: src/fnschool/user.py:212
 msgid "Unexpected value was got."
 msgstr ""
@@ -697,7 +697,7 @@ msgid "Please select a purchasing file."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:335
-#: src/fnschool/exam/score.py:497
+#: src/fnschool/exam/score.py:509
 msgid "Spreadsheet Files"
 msgstr ""
 
@@ -706,7 +706,7 @@ msgid "Please select the purchasing file"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:347
-#: src/fnschool/exam/score.py:514
+#: src/fnschool/exam/score.py:526
 msgid "No file was selected, exit."
 msgstr ""
 
@@ -813,56 +813,58 @@ msgstr ""
 msgid "Tell {0} your password for SMTP server, please!"
 msgstr ""
 
-#: src/fnschool/exam/email.py:95
-msgid "Hey! {0}, do you want to send these scores of students to chaperones?"
+#: src/fnschool/exam/email.py:97
+msgid ""
+"Hey! {0}, do you want to send these scores of students to chaperones? "
+"(Yes: 'Y','y')"
 msgstr ""
 
-#: src/fnschool/exam/email.py:104
+#: src/fnschool/exam/email.py:106
 msgid "The scores of Test \"{0}\""
 msgstr ""
 
-#: src/fnschool/exam/email.py:115
+#: src/fnschool/exam/email.py:117
 msgid "There is no emails of chaperones for {0}. Skip."
 msgstr ""
 
-#: src/fnschool/exam/email.py:142
-msgid "The scores of \"{0}\" are: "
+#: src/fnschool/exam/email.py:144
+msgid "The \"{0}\" scores of {1} are: "
 msgstr ""
 
-#: src/fnschool/exam/email.py:146
+#: src/fnschool/exam/email.py:148
 msgid "Teacher {0}"
 msgstr ""
 
-#: src/fnschool/exam/email.py:149
+#: src/fnschool/exam/email.py:151
 msgid "Mr. {0}"
 msgstr ""
 
-#: src/fnschool/exam/email.py:151
+#: src/fnschool/exam/email.py:153
 msgid "Ms. {0}"
 msgstr ""
 
-#: src/fnschool/exam/email.py:157
+#: src/fnschool/exam/email.py:159
 msgid "The scores information of \"{0}\" has been sent to {1}"
 msgstr ""
 
-#: src/fnschool/exam/email.py:219
+#: src/fnschool/exam/email.py:215
 msgid "parental_emails"
 msgstr ""
 
-#: src/fnschool/exam/email.py:225
+#: src/fnschool/exam/email.py:221
 msgid ""
 "Parental emails spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" "
 "was copied to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/email.py:239
+#: src/fnschool/exam/email.py:236
 msgid ""
 "The student's name has been filled in spreadsheet \"{0}\". Please fill in"
 " the email addresses according to the comments. (Ok! open the file for "
 "me. [Press any key to open it])"
 msgstr ""
 
-#: src/fnschool/exam/email.py:251
+#: src/fnschool/exam/email.py:250
 msgid "(Ok! I have filled them in? [Press any key to continue])"
 msgstr ""
 
@@ -884,227 +886,227 @@ msgstr ""
 msgid "teacher_name"
 msgstr ""
 
-#: src/fnschool/exam/score.py:31
+#: src/fnschool/exam/score.py:32
 msgid "scores_parent_directory"
 msgstr ""
 
-#: src/fnschool/exam/score.py:34
+#: src/fnschool/exam/score.py:35
 msgid "No recent tests"
 msgstr ""
 
-#: src/fnschool/exam/score.py:42
+#: src/fnschool/exam/score.py:43
 msgid "Average"
 msgstr ""
 
-#: src/fnschool/exam/score.py:44
+#: src/fnschool/exam/score.py:45
 msgid "Discipline Points"
 msgstr ""
 
-#: src/fnschool/exam/score.py:45
+#: src/fnschool/exam/score.py:46
 msgid "Student Name"
 msgstr ""
 
-#: src/fnschool/exam/score.py:103
+#: src/fnschool/exam/score.py:113
 msgid "Generate the scores and scoring rate plots now ? (Yes: \"Y\",\"y\")"
 msgstr ""
 
-#: src/fnschool/exam/score.py:108
+#: src/fnschool/exam/score.py:118
 msgid "Generate the scoring rate plots now ? (Yes: \"Y\",\"y\")"
 msgstr ""
 
-#: src/fnschool/exam/score.py:125
+#: src/fnschool/exam/score.py:135
 msgid "scores_of_all_students"
 msgstr ""
 
-#: src/fnschool/exam/score.py:128
+#: src/fnschool/exam/score.py:138
 msgid "scores_of_{0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:130
+#: src/fnschool/exam/score.py:140
 msgid "average_scores"
 msgstr ""
 
-#: src/fnschool/exam/score.py:162
+#: src/fnschool/exam/score.py:172
 msgid "Summary of {0}:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:166
+#: src/fnschool/exam/score.py:176
 msgid "Scores:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:206 src/fnschool/exam/score.py:369
+#: src/fnschool/exam/score.py:217 src/fnschool/exam/score.py:380
 msgid "[{0}] \"{1}\" {2}has been saved."
 msgstr ""
 
-#: src/fnschool/exam/score.py:234
+#: src/fnschool/exam/score.py:245
 msgid "The scores of Student {0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:236
+#: src/fnschool/exam/score.py:247
 msgid "The average scores"
 msgstr ""
 
-#: src/fnschool/exam/score.py:244 src/fnschool/exam/score.py:319
+#: src/fnschool/exam/score.py:255 src/fnschool/exam/score.py:330
 msgid "Examination names of {0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:247 src/fnschool/exam/score.py:322
+#: src/fnschool/exam/score.py:258 src/fnschool/exam/score.py:333
 msgid "Examination Points ({0} points in total)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:249 src/fnschool/exam/score.py:324
+#: src/fnschool/exam/score.py:260 src/fnschool/exam/score.py:335
 msgid "Examination Points ({0} point in total)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:271
+#: src/fnschool/exam/score.py:282
 msgid "Discipline point: {0}."
 msgstr ""
 
-#: src/fnschool/exam/score.py:273
+#: src/fnschool/exam/score.py:284
 msgid "Discipline points: {0}."
 msgstr ""
 
-#: src/fnschool/exam/score.py:312
+#: src/fnschool/exam/score.py:323
 msgid "The scores of all students"
 msgstr ""
 
-#: src/fnschool/exam/score.py:342
+#: src/fnschool/exam/score.py:353
 msgid "scoring_rate_of_{0}"
 msgstr ""
 
-#: src/fnschool/exam/score.py:344
+#: src/fnschool/exam/score.py:355
 msgid "average_scoring_rate"
 msgstr ""
 
-#: src/fnschool/exam/score.py:404
+#: src/fnschool/exam/score.py:415
 msgid "The scoring rate of Student {0} ({1})"
 msgstr ""
 
-#: src/fnschool/exam/score.py:408
+#: src/fnschool/exam/score.py:419
 msgid "The average scoring rate ({0})"
 msgstr ""
 
-#: src/fnschool/exam/score.py:421
+#: src/fnschool/exam/score.py:432
 msgid "Question titles of {0} ({1} point in total)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:423
+#: src/fnschool/exam/score.py:434
 msgid "Question titles of {0} ({1} points in total)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:426
+#: src/fnschool/exam/score.py:437
 msgid "Scoring rate(%)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:453
+#: src/fnschool/exam/score.py:464
 msgid "comment:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:503
+#: src/fnschool/exam/score.py:515
 msgid "Please select the scores file"
 msgstr ""
 
-#: src/fnschool/exam/score.py:517
+#: src/fnschool/exam/score.py:529
 msgid "Scores file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/exam/score.py:710
+#: src/fnschool/exam/score.py:722
 msgid "Failed to get examination start time from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:723
+#: src/fnschool/exam/score.py:735
 msgid "Failed to get examination end time from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:730
+#: src/fnschool/exam/score.py:742
 msgid "The examination end time is set to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:839
+#: src/fnschool/exam/score.py:851
 msgid "exam_names"
 msgstr ""
 
-#: src/fnschool/exam/score.py:864
+#: src/fnschool/exam/score.py:876
 msgid ""
 "Scores spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" was copied "
 "to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:902
+#: src/fnschool/exam/score.py:914
 msgid "The recent examination scores ({0}) have been added to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:907
+#: src/fnschool/exam/score.py:919
 msgid "There is no recent tests."
 msgstr ""
 
-#: src/fnschool/exam/score.py:912
+#: src/fnschool/exam/score.py:924
 msgid "Spreadsheet \"{0}\" has been saved."
 msgstr ""
 
-#: src/fnschool/exam/score.py:916
+#: src/fnschool/exam/score.py:928
 msgid ""
 "Please update the question titles , student names and scores of \"{0}\" "
 "according to the comments. (Ok, open it for me [Press any key to open "
 "file])"
 msgstr ""
 
-#: src/fnschool/exam/score.py:932
+#: src/fnschool/exam/score.py:944
 msgid ""
 "Ok, I have updated the question titles, student names and scores. (Press "
 "any key to continue)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:954
+#: src/fnschool/exam/score.py:966
 msgid "Is the total score {0} points?"
 msgstr ""
 
-#: src/fnschool/exam/score.py:956
+#: src/fnschool/exam/score.py:968
 msgid "Is the total score {0} point?"
 msgstr ""
 
-#: src/fnschool/exam/score.py:958
+#: src/fnschool/exam/score.py:970
 msgid " (Yes: \"Y\",\"y\")"
 msgstr ""
 
-#: src/fnschool/exam/score.py:988
+#: src/fnschool/exam/score.py:1000
 msgid "The examination name \"{0}\" has been saved to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:992
+#: src/fnschool/exam/score.py:1004
 msgid "The examination name has been saved to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:1007
+#: src/fnschool/exam/score.py:1019
 msgid "The saved examination names are as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:1009
+#: src/fnschool/exam/score.py:1021
 msgid "The saved examination name is as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:1024
+#: src/fnschool/exam/score.py:1036
 msgid ""
 "Select the examination name you entered (index), or enter new examination"
 " name, please! (default: {0})"
 msgstr ""
 
-#: src/fnschool/exam/score.py:1066
+#: src/fnschool/exam/score.py:1078
 msgid ""
 "Hello~ tell {0} the examination name, please! (e.g: Class 5(1)/English "
 "Volume 1/Unit 1 Testing)"
 msgstr ""
 
-#: src/fnschool/exam/teacher.py:30
+#: src/fnschool/exam/teacher.py:31
 msgid "scores_info"
 msgstr ""
 
-#: src/fnschool/exam/teacher.py:36
+#: src/fnschool/exam/teacher.py:37
 msgid "Hello!"
 msgstr ""
 
-#: src/fnschool/exam/teacher.py:41
-msgid "Kind regards"
+#: src/fnschool/exam/teacher.py:42
+msgid "Kind regards!"
 msgstr ""
 
 #~ msgid "Please refer to file  to customize your 'sett1ngs.py' file."
@@ -2243,5 +2245,14 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "scores_html"
+#~ msgstr ""
+
+#~ msgid "Hey! {0}, do you want to send these scores of students to chaperones?"
+#~ msgstr ""
+
+#~ msgid "The scores of \"{0}\" are: "
+#~ msgstr ""
+
+#~ msgid "Kind regards"
 #~ msgstr ""
 

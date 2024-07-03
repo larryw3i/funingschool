@@ -24,7 +24,7 @@ class User:
     def save_profile(self):
         profile = self.profile
         with open(self.profile_fpath, "w", encoding="utf-8") as f:
-            f.write("\n".join([f'"{k}"="{v}"\n' for k, v in profile.items()]))
+            f.write("\n".join([f'"{k}"="{v}"' for k, v in profile.items()]))
         return profile
 
     @property

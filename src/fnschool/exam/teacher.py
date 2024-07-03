@@ -27,25 +27,27 @@ class Teacher(User):
 
     @property
     def scores_html_fpath(self):
-        f = self.exam_dpath / (_("scores_info") + ".html")
-        if not f.exists():
-            with open(f, "w+", encoding="utf-8") as f:
-                f.write(
-                    "\n".join(
-                        [
-                            "<h1>" + _("Hello!") + " {{ chaperone }}:</h1>"
-                            "<p>{{ scores_s }}</p>"
-                            '<img src="{{ scores_m1_img.src }}" width=100%>'
-                            '<img src="{{ scores_img.src }}" width=100%>'
-                            "<p>"
-                            "   " + _("Kind regards") + ","
-                            "   <br>"
-                            "   {{ sender }}"
-                            "</p>"
-                        ]
+        if not self._scores_html_fpath:
+            fpath = self.exam_dpath / (_("scores_info") + ".html")
+            if not fpath.exists():
+                with open(fpath, "w+", encoding="utf-8") as f:
+                    f.write(
+                        "\n".join(
+                            [
+                                "<h1>" + _("Hello!") + " {{ chaperone }}:</h1>",
+                                "<p>{{ scores_s }}</p>",
+                                '<img src="{{ scores_m1_img.src }}" width=100%>',
+                                '<img src="{{ scores_img.src }}" width=100%>',
+                                "<p>",
+                                "   " + _("Kind regards!"),
+                                "</p>",
+                                '<p style="text-align: right;">',
+                                "   {{ sender }}",
+                                "</p>",
+                            ]
+                        )
                     )
-                )
-            self._scores_html_fpath = f
+            self._scores_html_fpath = fpath
         return self._scores_html_fpath
 
 

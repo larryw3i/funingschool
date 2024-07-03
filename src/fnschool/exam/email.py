@@ -81,11 +81,14 @@ class FnEmail:
     @property
     def email(self):
         if not self._email:
+            from smtplib import SMTP_SSL, SMTP, LMTP
+
             email = EmailSender(
                 host=self.host,
                 port=self.port,
                 username=self.user_name,
                 password=self.passw0rd,
+                use_starttls=True,
             )
             self._email = email
         return self._email
@@ -95,7 +98,7 @@ class FnEmail:
             _(
                 "Hey! {0}, do you want to "
                 + "send these scores of students"
-                + " to chaperones?"
+                + " to chaperones? (Yes: 'Y','y')"
             ).format(self.teacher.name)
         )
         s_input = input0()
@@ -104,6 +107,7 @@ class FnEmail:
             msg_subject = _('The scores of Test "{0}"').format(
                 self.score.full_name
             )
+            student_names_lenx = max([len(n) for n in self.score.student_names])
             for (
                 student_name,
                 scores_m1_img_fpath,
@@ -140,8 +144,8 @@ class FnEmail:
                             body_params={
                                 "chaperone": chaperone,
                                 "scores_s": _(
-                                    'The scores of "{0}" are: '
-                                ).format(self.score.full_name),
+                                    'The "{0}" scores of {1} are: '
+                                ).format(self.score.full_name, student_name),
                                 "sender": (
                                     _("Teacher {0}")
                                     if is_zh_CN
@@ -157,7 +161,22 @@ class FnEmail:
                             _(
                                 'The scores information of "{0}" has been '
                                 + "sent to {1}"
-                            ).format(student_name, cemail + f"({chaperone})")
+                            ).format(
+                                (
+                                    (
+                                        student_name
+                                        if len(student_name) == 3
+                                        else (
+                                            student_name[0]
+                                            + "  "
+                                            + student_name[1]
+                                        )
+                                    )
+                                    if student_names_lenx == 3
+                                    else (student_name)
+                                ),
+                                cemail + f"({chaperone})",
+                            )
                         )
 
     @property
@@ -190,12 +209,14 @@ class FnEmail:
                     if cemails:
                         chaperone = sheet.cell(row_i, 1).value
                         cemails = (
-                            cemails.split("/")
-                            .split("、")
-                            .split("|")
-                            .split(";")
-                            .split("：")
-                            .split("\n")
+                            cemails.replace("/", " ")
+                            .replace("、", " ")
+                            .replace("|", " ")
+                            .replace(";", " ")
+                            .replace("：", " ")
+                            .replace("\n", " ")
+                            .strip()
+                            .split(" ")
                         )
                         emails.append([chaperone, cemails])
 
@@ -211,20 +232,19 @@ class FnEmail:
                 _("parental_emails") + self.fext0
             )
             if not fpath.exists():
-                fpath0 = fpath0
+                fpath0 = parental_emails_fpath0
                 shutil.copy(fpath0, fpath)
                 print_warning(
                     _(
                         'Parental emails spreadsheet "{0}"'
                         + ' doesn\'t exist, spreadsheet "{1}"'
                         + ' was copied to "{0}".'
-                    )
+                    ).format(fpath, fpath0)
                 )
                 wb = load_workbook(fpath)
                 sheet = wb[wb.sheetnames[0]]
                 for i, sname in enumerate(self.score.student_names):
-                    for col_i in range(2, sheet.max_column + 1):
-                        sheet.cell(1, col_i, sname)
+                    sheet.cell(1, 2 + i, sname)
                 wb.save(fpath)
 
                 print_info(
@@ -235,10 +255,10 @@ class FnEmail:
                         + "addresses according to the "
                         + "comments. (Ok! open the file for "
                         + "me. [Press any key to open it])"
-                    )
+                    ).format(fpath)
                 )
                 input0()
-
+                open_path(fpath)
                 print_info(
                     _(
                         "(Ok! I have filled them in? [Press any key to continue])"
