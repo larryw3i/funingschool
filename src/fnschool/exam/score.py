@@ -14,7 +14,7 @@ class Score:
         self._full_name = None
         self._teacher = None
         self.fpath0 = score_fpath0
-        self._grade = None
+        self._sclass = None
         self._subject = None
         self._short_name = None
         self._short_name_m2 = None
@@ -36,6 +36,7 @@ class Score:
         self.question_index0 = 4
         self.points_index0 = self.question_index0 - 1
         self._test_names = None
+        self._astudent_names = None
         self._student_names = None
         self._src_dpath = None
         self.average_points_s = _("Average")
@@ -54,12 +55,21 @@ class Score:
         return self._test_names
 
     @property
-    def student_names(self):
-        if not self._student_names:
+    def astudent_names(self):
+        if not self._astudent_names:
             scores = self.scores
-            student_names = scores.index.to_list()
-            self._student_names = student_names
-        return self._student_names
+            astudent_names = scores.index.to_list()
+            self._astudent_names = astudent_names
+        return self._astudent_names
+
+    @property
+    def student_names(self):
+        if not student_names:
+            names = self.astudent_names()
+            if self.average_points_s in names:
+                names.remove(self.average_points_s)
+            self.student_names = names
+        return self.student_names
 
     @property
     def src_dpath(self):
@@ -169,7 +179,7 @@ class Score:
         test_names = self.test_names
         img_saved_s = _('[{0}] "{1}" {2}has been saved.')
         img_fpaths = [
-            self.get_scores_img_path(name) for name in self.student_names
+            self.get_scores_img_path(name) for name in self.astudent_names
         ] + [self.get_scores_img_path()]
 
         img_paths_lenx = max(get_len(f) for f in img_fpaths)
@@ -329,7 +339,7 @@ class Score:
                     q_point * 100 / q_point_t, 1
                 )
         img_fpaths = [
-            self.get_scores_m1_img_fpath(v) for v in self.student_names
+            self.get_scores_m1_img_fpath(v) for v in self.astudent_names
         ]
 
         img_fpaths_lenx = max(get_len(f) for f in img_fpaths)
@@ -421,6 +431,7 @@ class Score:
     def dpath(self):
         if not self._dpath:
             self._dpath = self.fpath.parent
+        print(self._dpath)
         return self._dpath
 
     @property
@@ -576,13 +587,24 @@ class Score:
         return self._fpaths
 
     @property
-    def grade(self):
-        value = self.full_name.split("/")
-        if len(value) > 2:
-            value = value[0]
-        else:
-            return None
-        return value
+    def sclass(self):
+        if not self._sclass:
+            value = self.full_name.split("/")
+            if len(value) > 2:
+                value = value[0]
+            else:
+                return None
+            self._sclass = value
+        return self._sclass
+
+    @property
+    def sclass_dpath(self):
+        if not self._sclass_dpath:
+            sclass_dpath = self.teacher.exam_dpath / self.sclass
+            if not sclass.exists():
+                os.makedirs(sclass_dpath,exist_ok=True)
+            self._sclass_dpath = sclass_dpath
+        return self._sclass_dpath
 
     @property
     def subject(self):

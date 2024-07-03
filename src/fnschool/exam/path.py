@@ -7,6 +7,7 @@ exam_data_dpath = exam_dpath / "data"
 user_exam_dpath = user_data_dir / _("exam")
 teach_name_fpath = user_exam_dpath / (_("teacher_name") + ".txt")
 score_fpath0 = exam_data_dpath / "score.xlsx"
+parental_emails_fpath0 = exam_data_dpath / "parental_emails.xlsx"
 
 for d in [
     user_exam_dpath,
