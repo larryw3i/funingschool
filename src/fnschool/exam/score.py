@@ -5,6 +5,7 @@ from fnschool import *
 from fnschool.exam import *
 from fnschool.exam.path import *
 from fnschool.exam.teacher import *
+from fnschool.exam.email import FnEmail 
 
 
 class Score:
@@ -43,12 +44,19 @@ class Score:
         self.plot_alpha0 = 0.16
         self.discipline_s = _("Discipline Points")
         self.name_s = _("Student Name")
-        self._scores_m1_img_fpaths = None
         self._scores_m1_img_afpaths = None
-        self._scores_img_fpaths = None
         self._scores_img_afpaths = None
+        self._scores_img_fpaths = None
+        self._email = None
 
         pass
+
+    @property
+    def email(self):
+        if not self._email:
+            email = FnEmail(self)
+            self._email = email
+        return self._email
 
     @property
     def test_names(self):
@@ -174,20 +182,26 @@ class Score:
 
         pass
 
-    @property
     def scores_img_fpaths(self):
         if not self._scores_img_fpaths:
-            self._scores_img_fpaths =  [
-                [name,self.get_scores_img_fpath(name)] for name in self.student_names
-            ]
+            fpaths = []
+            for name in self.student_names:
+                fpaths.eppend(
+                    [
+                        name,
+                        get_scores_m1_img_fpath(name),
+                        get_scores_img_fpath(name),
+                    ]
+                )
+            self._scores_img_fpaths = fpaths
         return self._scores_img_fpaths
-
 
     @property
     def scores_img_afpaths(self):
         if not self._scores_img_afpaths:
-            self._scores_img_afpaths =  [
-                [name,self.get_scores_img_fpath(name)] for name in self.astudent_names
+            self._scores_img_afpaths = [
+                [name, self.get_scores_img_fpath(name)]
+                for name in self.astudent_names
             ]
         return self._scores_img_afpaths
 
@@ -199,9 +213,9 @@ class Score:
         max_test_num = max_test_num or scores.columns.size
         test_names = self.test_names
         img_saved_s = _('[{0}] "{1}" {2}has been saved.')
-        img_fpaths = [
-            f for __, f in self.scores_img_afpaths
-        ]+ [self.get_scores_img_fpath()]
+        img_fpaths = [f for __, f in self.scores_img_afpaths] + [
+            self.get_scores_img_fpath()
+        ]
 
         img_paths_lenx = max(get_len(f) for f in img_fpaths)
 
@@ -345,26 +359,14 @@ class Score:
         return img_fpath
 
     @property
-    def scores_m1_img_fpaths(self):
-        if not self._scores_m1_img_fpaths:
-            fpaths =  [
-                [v,self.get_scores_m1_img_fpath(v)]
-                for v in self.student_names
-            ]
-            self._scores_m1_img_fpaths = fpaths
-        return self._scores_m1_img_fpaths
-
-
-    @property
     def scores_m1_img_afpaths(self):
         if not self._scores_m1_img_afpaths:
-            fpaths =  [
-                [v,self.get_scores_m1_img_fpath(v)]
+            fpaths = [
+                [v, self.get_scores_m1_img_fpath(v)]
                 for v in self.astudent_names
             ]
             self._scores_m1_img_afpaths = fpaths
         return self._scores_m1_img_afpaths
-
 
     def plot_scores_m1(self):
         scores_m1 = self.scores_m1
@@ -381,7 +383,7 @@ class Score:
                 scores_m1_q.loc[student_name, q_title] = round(
                     q_point * 100 / q_point_t, 1
                 )
-        img_fpaths = [f for __,f inself.scores_m1_img_afpaths]
+        img_fpaths = [f for __, f in self.scores_m1_img_afpaths]
         img_fpaths_lenx = max(get_len(f) for f in img_fpaths)
 
         labelrotation = None
@@ -488,6 +490,7 @@ class Score:
         __ = self.scores
         self.plot()
         self.print_summary()
+        self.email.send_scores()
         pass
 
     def read(self):
@@ -557,8 +560,7 @@ class Score:
 
             scores_cols = ["Name"]
             scores_rows = None
-            
-            
+
             for fi, (f, __) in enumerate(fpaths):
                 name = Path(f).stem
                 scores_cols.append(name)
@@ -642,7 +644,7 @@ class Score:
         if not self._sclass_dpath:
             sclass_dpath = self.teacher.exam_dpath / self.sclass
             if not sclass.exists():
-                os.makedirs(sclass_dpath,exist_ok=True)
+                os.makedirs(sclass_dpath, exist_ok=True)
             self._sclass_dpath = sclass_dpath
         return self._sclass_dpath
 

@@ -16,6 +16,7 @@ class User:
         self._dpath = None
         self._profile = {}
         self._config = None
+        self.is_male_key = _("is_male")
 
     def __str__(self):
         return self.name
@@ -71,6 +72,18 @@ class User:
             input0()
 
         return self.profile[key]
+
+    @property
+    def is_male(self):
+        m = self.get_profile(
+            self.is_male_key,
+            info=_(
+                "Excuse me, could you tell me your gender? "
+                + "('F' for \"Female\", 'M' for \"Male\","
+                + "default: 'F')"
+            ),
+        )
+        return m.lower() == "m"
 
     @property
     def name(self):

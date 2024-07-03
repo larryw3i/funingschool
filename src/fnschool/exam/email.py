@@ -1,4 +1,3 @@
-
 import smtplib
 import email.utils
 from email import encoders
@@ -7,54 +6,159 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.base import MIMEBase
 
+from redmail import EmailSender
 
 import shutil
 from fnschool import *
 from fnschool.exam import *
 from fnschool.exam.path import *
 
-class FnEmail():
-    def __init__(self,score=None):
+
+class FnEmail:
+    def __init__(self, score=None):
         self._fpath = None
-        self._score = score
+        self.score = score
         self._teacher = None
-        self.fext0=".xlsx"
+        self.fext0 = ".xlsx"
         self._wb = None
         self._sheet0 = None
+        self._email = None
+        self._html = None
+        self.host_key = _("smtp_host")
+        self.port_key = _("smtp_port")
+        self.user_name_key = _("smtp_user_name")
+        self.passw0rd_key = _("smtp_password")
         pass
 
+    @property
+    def html(self):
+        if not self._html:
+            html = None
+            with open(
+                self.teacher.scores_html_fpath, "r+", encoding="utf-8"
+            ) as f:
+                html = f.read()
+            self._html = html
+        return self._html
+
+    @property
+    def host(self):
+        h = self.teacher.get_profile(
+            self.host_key,
+            info=_("Tell {0} your SMTP server host, please!").format(app_name),
+        )
+        return h
+
+    @property
+    def port(self):
+        p = self.teacher.get_profile(
+            self.port_key,
+            info=_("Tell {0} your SMTP server port, please!").format(app_name),
+        )
+        p = int(p)
+        return p
+
+    @property
+    def user_name(self):
+        u = self.teacher.get_profile(
+            self.user_name_key,
+            info=_("Tell {0} your user name at SMTP server, please!").format(
+                app_name
+            ),
+        )
+        return u
+
+    @property
+    def passw0rd(self):
+        p = self.teacher.get_profile(
+            self.passw0rd_key,
+            _("Tell {0} your password for SMTP server, please!").format(
+                app_name
+            ),
+        )
+        return p
+
+    @property
+    def email(self):
+        if not self._email:
+            email = EmailSender(
+                host=self.host,
+                port=self.port,
+                username=self.user_name,
+                password=self.passw0rd,
+            )
+            self._email = email
+        return self._email
 
     def send_scores(self):
-        message = MIMEMultipart()
-        message['To'] = email.utils.formataddr(('接收者显示的姓名', '7jjw@163.com'))
-        message['From'] = email.utils.formataddr(('发送者显示的姓名', '594372682@qq.com'))
-        message['Subject'] = '我是邮件的标题'
-
-        for img_file in []
-        img_file = open(r'1.jpg', 'rb')
-        img_data = img_file.read()
-        img_file.close()
-        img = MIMEImage(img_data)
-        message.attach(img)
-        img.add_header('Content-ID', 'dns_config')  
-        mail_content = """
-            <html>
-              <body>
-                <p>我给你发送的图片</p>
-                <img src="cid:dns_config">
-              </body>
-            </html>
-        """
-        message.attach(MIMEText(mail_content, 'html', 'utf-8'))
-
-        smtp_obj = smtplib.SMTP_SSL('smtp.qq.com', 465)
-        smtp_obj.login('594372682@qq.com', '授权码')
-        smtp_obj.set_debuglevel(True)
-        try:
-            smtp_obj.sendmail('594372682@qq.com', ['7jjw@163.com'], msg=message.as_string())
-        finally:
-            smtp_obj.quit()
-
+        print_info(
+            _(
+                "Hey! {0}, do you want to "
+                + "send these scores of students"
+                + " to chaperones?"
+            ).format(self.teacher.name)
+        )
+        s_input = input0()
+        if s_input and s_input in "Yy":
+            scores_img_fpaths = self.score.scores_img_fpaths
+            msg_subject = _('The scores of Test "{0}"').format(
+                self.score.full_name
+            )
+            for (
+                student_name,
+                scores_m1_img_fpath,
+                scores_img_fpath,
+            ) in scores_img_fpaths:
+                chaperones_emails = self.get_chaperones_emails(student_name)
+                if not chaperones_emails:
+                    print_warning(
+                        _(
+                            "There is no emails of "
+                            + "chaperones for {0}. Skip."
+                        )
+                    )
+                    continue
+                for chaperone, cemails in chaperones_emails:
+                    for cemail in cemails:
+                        chaperone = (
+                            student_name + " " + chaperone
+                            if is_zh_CN
+                            else (
+                                student_name + "' " + chaperone
+                                if student_name.endswith("s")
+                                else student_name + "s' " + chaperone
+                            )
+                        )
+                        self.email.send(
+                            subject=msg_subject,
+                            receivers=[cemail],
+                            html=self.html,
+                            body_images={
+                                "scores_img": scores_m1_img_fpath,
+                                "scores_m1_img": scores_img_fpath,
+                            },
+                            body_params={
+                                "chaperone": chaperone,
+                                "scores_s": _(
+                                    'The scores of "{0}" are: '
+                                ).format(self.score.full_name),
+                                "sender": (
+                                    _("Teacher {0}")
+                                    if is_zh_CN
+                                    else (
+                                        _("Mr. {0}")
+                                        if self.teacher.is_male
+                                        else _("Ms. {0}")
+                                    )
+                                ).format(self.teacher.name),
+                            },
+                        )
+                        print_info(
+                            _(
+                                'The scores information of "{0}" has been '
+                                + "sent to {1}"
+                            ).format(student_name, cemail + f"({chaperone})")
+                        )
 
     @property
     def wb(self):
@@ -75,71 +179,62 @@ class FnEmail():
             self._teacher = self.score.teacher
         return self._teacher
 
-    @property
-    def scores(self):
-        if not self._scores:
-            from fnschool.exam import Score as FnScore
-            self._score = FnScore()
-        return self._score
-
-    def get_emails(self,student_name):
+    def get_chaperones_emails(self, student_name):
         emails = []
         student_name = student_name
         sheet = self.sheet0
-        for col_i in range(2,sheet.max_column+1):
-            if sheet.cell(1,col_i).value == student_name:
-                for row_i in range(2,sheet.max_row+1):
-                    cemails = sheet.cell(row_i,col_i).value
+        for col_i in range(2, sheet.max_column + 1):
+            if sheet.cell(1, col_i).value == student_name:
+                for row_i in range(2, sheet.max_row + 1):
+                    cemails = sheet.cell(row_i, col_i).value
                     if cemails:
-                        chaperones = sheet.cell(row_i,1).value
+                        chaperone = sheet.cell(row_i, 1).value
                         cemails = (
-                            cemails
-                            .split("/")
+                            cemails.split("/")
                             .split("、")
                             .split("|")
                             .split(";")
                             .split("：")
                             .split("\n")
                         )
-                        emails.append([chaperones,cemails])
-
+                        emails.append([chaperone, cemails])
 
         if not emails:
             return None
 
         return emails
 
-
     @property
     def fpath(self):
         if not self._fpath:
-            fpath = self.score.sclass_dpath/(_("parental_emails")+self.fext0)
+            fpath = self.score.sclass_dpath / (
+                _("parental_emails") + self.fext0
+            )
             if not fpath.exists():
-                fpath0 = fpath0 
-                shutil.copy(fpath0,fpath)
+                fpath0 = fpath0
+                shutil.copy(fpath0, fpath)
                 print_warning(
                     _(
-                        "Parental emails spreadsheet \"{0}\""
-                        + " doesn't exist, spreadsheet \"{1}\""
-                        + " was copied to \"{0}\"."
+                        'Parental emails spreadsheet "{0}"'
+                        + ' doesn\'t exist, spreadsheet "{1}"'
+                        + ' was copied to "{0}".'
                     )
                 )
                 wb = load_workbook(fpath)
                 sheet = wb[wb.sheetnames[0]]
-                for i,sname in enumerate(self.score.student_names):
-                    for col_i in range(2,sheet.max_column+1):
-                        sheet.cell(1,col_i,sname)
+                for i, sname in enumerate(self.score.student_names):
+                    for col_i in range(2, sheet.max_column + 1):
+                        sheet.cell(1, col_i, sname)
                 wb.save(fpath)
 
                 print_info(
                     _(
                         "The student's name has been filled "
-                        + "in spreadsheet \"{0}\"."
+                        + 'in spreadsheet "{0}".'
                         + " Please fill in the email "
                         + "addresses according to the "
                         + "comments. (Ok! open the file for "
                         + "me. [Press any key to open it])"
-
                     )
                 )
                 input0()
@@ -148,11 +243,12 @@ class FnEmail():
                     _(
                         "(Ok! I have filled them in? [Press any key to continue])"
                     )
-                ) 
+                )
                 input0()
 
             self._fpath = fpath
 
         return self._fpath
+
 
 # The end.

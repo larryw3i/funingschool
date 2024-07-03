@@ -9,6 +9,7 @@ dependencies = [
     "numpy",
     "openpyxl",
     "appdirs",
+    "redmail",
 ]
 authors = [
   {name = "larryw3i", email = "larryw3i@163.com"},
