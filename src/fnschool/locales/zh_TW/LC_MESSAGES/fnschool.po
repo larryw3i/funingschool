@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-04 10:43+0800\n"
+"POT-Creation-Date: 2024-07-04 18:27+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -823,48 +823,36 @@ msgstr ""
 msgid "The scores of Test \"{0}\""
 msgstr ""
 
-#: src/fnschool/exam/email.py:123
+#: src/fnschool/exam/email.py:118
+msgid "'s"
+msgstr ""
+
+#: src/fnschool/exam/email.py:150
 msgid "There is no emails of chaperones for {0}. Skip."
 msgstr ""
 
-#: src/fnschool/exam/email.py:166
-msgid "The \"{0}\" scores of {1} are: "
-msgstr ""
-
-#: src/fnschool/exam/email.py:170
-msgid "Teacher {0}"
-msgstr ""
-
-#: src/fnschool/exam/email.py:173
-msgid "Mr. {0}"
-msgstr ""
-
-#: src/fnschool/exam/email.py:175
-msgid "Ms. {0}"
-msgstr ""
-
-#: src/fnschool/exam/email.py:183
+#: src/fnschool/exam/email.py:202
 msgid "The scores information of \"{0}\" has been sent to {2}{1}"
 msgstr ""
 
-#: src/fnschool/exam/email.py:255
+#: src/fnschool/exam/email.py:262
 msgid "parental_emails"
 msgstr ""
 
-#: src/fnschool/exam/email.py:261
+#: src/fnschool/exam/email.py:268
 msgid ""
 "Parental emails spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" "
 "was copied to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/email.py:274
+#: src/fnschool/exam/email.py:281
 msgid ""
 "The student's name has been filled in spreadsheet \"{0}\". Please fill in"
 " the email addresses according to the comments. (Ok! open the file for "
 "me. [Press any key to open it])"
 msgstr ""
 
-#: src/fnschool/exam/email.py:286
+#: src/fnschool/exam/email.py:293
 msgid "(Ok! I have filled them in? [Press any key to continue])"
 msgstr ""
 
@@ -2254,5 +2242,17 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "The scores information of \"{0}\" has been sent to {1}"
+#~ msgstr ""
+
+#~ msgid "The \"{0}\" scores of {1} are: "
+#~ msgstr ""
+
+#~ msgid "Teacher {0}"
+#~ msgstr ""
+
+#~ msgid "Mr. {0}"
+#~ msgstr ""
+
+#~ msgid "Ms. {0}"
 #~ msgstr ""
 

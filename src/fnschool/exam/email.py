@@ -107,15 +107,15 @@ class FnEmail:
             msg_subject = _('The scores of Test "{0}"').format(
                 self.score.full_name
             )
+            
+            student_names = self.score.student_names
             scores_img_fpaths_len = len(scores_img_fpaths)
             scores_img_fpaths_len2 = len(str(scores_img_fpaths_len))
-
-            student_names_lenx = max([len(n) for n in self.score.student_names])
-
+            student_names_lenx = max([get_len(n) for n in student_names])
             chaperone_lenx = 0
 
             get_full_chaperone = lambda chaperone: (
-                student_name + "的" + chaperone
+                student_name + _("'s") + chaperone
                 if is_zh_CN
                 else (
                     student_name + "' " + chaperone
@@ -154,6 +154,21 @@ class FnEmail:
                     )
                     continue
 
+                student_name0 = (
+                    student_name[0]+"  "+student_name[1] 
+                    if (
+                        all([is_zh_CN_char(c) for c in student_name]) 
+                        and len(student_name) == 2
+                    ) else student_name
+                )
+                student_name_len_diff = (
+                    student_names_lenx 
+                    - get_zh_CN_chars_len(student_name0) 
+                    - len(student_name0)
+                )
+                student_name0 = " "*student_name_len_diff+student_name0
+
+
                 for chaperone, cemails in chaperones_emails:
                     for cemail in cemails:
                         chaperone = get_full_chaperone(chaperone)
@@ -163,7 +178,7 @@ class FnEmail:
                             - get_zh_CN_chars_len(chaperone0)
                             - len(chaperone0)
                         )
-
+                        '''
                         self.email.send(
                             subject=msg_subject,
                             receivers=[cemail],
@@ -188,25 +203,14 @@ class FnEmail:
                                 ).format(self.teacher.name),
                             },
                         )
+                        '''
                         print_info(
                             f"[{i+1:>{scores_img_fpaths_len2}}/{scores_img_fpaths_len}] "
                             + _(
                                 'The scores information of "{0}" has been '
                                 + "sent to {2}{1}"
                             ).format(
-                                (
-                                    (
-                                        student_name
-                                        if len(student_name) == 3
-                                        else (
-                                            student_name[0]
-                                            + "  "
-                                            + student_name[1]
-                                        )
-                                    )
-                                    if student_names_lenx == 3
-                                    else (student_name)
-                                ),
+                                student_name0,
                                 chaperone0,
                                 " " * chaperone_len_diff,
                             )
