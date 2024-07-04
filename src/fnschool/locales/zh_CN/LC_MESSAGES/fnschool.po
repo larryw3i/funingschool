@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-04 02:19+0800\n"
-"PO-Revision-Date: 2024-07-04 02:19+0800\n"
+"POT-Creation-Date: 2024-07-04 10:43+0800\n"
+"PO-Revision-Date: 2024-07-04 10:44+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -855,51 +855,51 @@ msgstr "请告诉 {0} 你的邮件服务器用户名！"
 msgid "Tell {0} your password for SMTP server, please!"
 msgstr "请告诉 {0} 你的邮件服务器密码！"
 
-#: src/fnschool/exam/email.py:97
+#: src/fnschool/exam/email.py:98
 msgid ""
 "Hey! {0}, do you want to send these scores of students to chaperones? (Yes: "
 "'Y','y')"
 msgstr "哈楼～ {0}，您要把这些学生成绩发送给家长吗？（是的：“Y”、“y”）"
 
-#: src/fnschool/exam/email.py:106
+#: src/fnschool/exam/email.py:107
 msgid "The scores of Test \"{0}\""
 msgstr "{0} 成绩"
 
-#: src/fnschool/exam/email.py:117
+#: src/fnschool/exam/email.py:123
 msgid "There is no emails of chaperones for {0}. Skip."
 msgstr "{0} 同学的家长邮箱地址没有获取到。跳过。"
 
-#: src/fnschool/exam/email.py:144
+#: src/fnschool/exam/email.py:166
 msgid "The \"{0}\" scores of {1} are: "
 msgstr "{1} 同学的 {0} 分数如下："
 
-#: src/fnschool/exam/email.py:148
+#: src/fnschool/exam/email.py:170
 msgid "Teacher {0}"
 msgstr "{0} 老师"
 
-#: src/fnschool/exam/email.py:151
+#: src/fnschool/exam/email.py:173
 msgid "Mr. {0}"
 msgstr "{0} 老师"
 
-#: src/fnschool/exam/email.py:153
+#: src/fnschool/exam/email.py:175
 msgid "Ms. {0}"
 msgstr "{0} 老师"
 
-#: src/fnschool/exam/email.py:159
-msgid "The scores information of \"{0}\" has been sent to {1}"
-msgstr "{0} 的分数信息已被发送给 {1} 。"
+#: src/fnschool/exam/email.py:183
+msgid "The scores information of \"{0}\" has been sent to {2}{1}"
+msgstr "{0} 的分数信息已被发送给 {2}{1} 。"
 
-#: src/fnschool/exam/email.py:215
+#: src/fnschool/exam/email.py:255
 msgid "parental_emails"
 msgstr "家长邮箱"
 
-#: src/fnschool/exam/email.py:221
+#: src/fnschool/exam/email.py:261
 msgid ""
 "Parental emails spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" was "
 "copied to \"{0}\"."
 msgstr "“家长邮箱” 工作簿 “{0}” 不存在，已将工作簿 “{1}” 复制到 “{0}” 。"
 
-#: src/fnschool/exam/email.py:236
+#: src/fnschool/exam/email.py:274
 msgid ""
 "The student's name has been filled in spreadsheet \"{0}\". Please fill in "
 "the email addresses according to the comments. (Ok! open the file for me. "
@@ -908,7 +908,7 @@ msgstr ""
 "学生姓名已填入 “{0}”。请按照备注更新电子邮件地址。（好的，打开文件【按任意键"
 "打开文件】）"
 
-#: src/fnschool/exam/email.py:250
+#: src/fnschool/exam/email.py:286
 msgid "(Ok! I have filled them in? [Press any key to continue])"
 msgstr "（好了，我已经填写完邮件地址了？【按任意键继续】）"
 

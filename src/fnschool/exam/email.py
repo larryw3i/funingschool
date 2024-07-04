@@ -107,32 +107,63 @@ class FnEmail:
             msg_subject = _('The scores of Test "{0}"').format(
                 self.score.full_name
             )
+            scores_img_fpaths_len = len(scores_img_fpaths)
+            scores_img_fpaths_len2 = len(str(scores_img_fpaths_len))
+
             student_names_lenx = max([len(n) for n in self.score.student_names])
-            for (
+
+            chaperone_lenx = 0
+
+            get_full_chaperone = lambda chaperone: (
+                student_name + "的" + chaperone
+                if is_zh_CN
+                else (
+                    student_name + "' " + chaperone
+                    if student_name.endswith("s")
+                    else student_name + "s' " + chaperone
+                )
+            )
+            get_full_chaperone0 = lambda chaperone, email: (
+                f"{email}({chaperone})"
+            )
+
+            for student_name, __, __0 in scores_img_fpaths:
+                chaperones_emails = self.get_chaperones_emails(student_name)
+                for chaperone, cemails in chaperones_emails:
+                    for cemail in cemails:
+                        chaperone0 = get_full_chaperone0(
+                            get_full_chaperone(chaperone), cemail
+                        )
+                        lenx = get_len(chaperone0)
+                        if lenx > chaperone_lenx:
+                            chaperone_lenx = lenx
+
+            for i, (
                 student_name,
                 scores_m1_img_fpath,
                 scores_img_fpath,
-            ) in scores_img_fpaths:
+            ) in enumerate(scores_img_fpaths):
                 chaperones_emails = self.get_chaperones_emails(student_name)
                 if not chaperones_emails:
                     print_warning(
-                        _(
+                        f"[{i+1:>{scores_img_fpaths_len2}}] "
+                        + _(
                             "There is no emails of "
                             + "chaperones for {0}. Skip."
                         )
                     )
                     continue
+
                 for chaperone, cemails in chaperones_emails:
                     for cemail in cemails:
-                        chaperone = (
-                            student_name + " " + chaperone
-                            if is_zh_CN
-                            else (
-                                student_name + "' " + chaperone
-                                if student_name.endswith("s")
-                                else student_name + "s' " + chaperone
-                            )
+                        chaperone = get_full_chaperone(chaperone)
+                        chaperone0 = get_full_chaperone0(chaperone, cemail)
+                        chaperone_len_diff = (
+                            chaperone_lenx
+                            - get_zh_CN_chars_len(chaperone0)
+                            - len(chaperone0)
                         )
+
                         self.email.send(
                             subject=msg_subject,
                             receivers=[cemail],
@@ -158,9 +189,10 @@ class FnEmail:
                             },
                         )
                         print_info(
-                            _(
+                            f"[{i+1:>{scores_img_fpaths_len2}}/{scores_img_fpaths_len}] "
+                            + _(
                                 'The scores information of "{0}" has been '
-                                + "sent to {1}"
+                                + "sent to {2}{1}"
                             ).format(
                                 (
                                     (
@@ -175,7 +207,8 @@ class FnEmail:
                                     if student_names_lenx == 3
                                     else (student_name)
                                 ),
-                                cemail + f"({chaperone})",
+                                chaperone0,
+                                " " * chaperone_len_diff,
                             )
                         )
 
