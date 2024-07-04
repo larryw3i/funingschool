@@ -50,7 +50,7 @@ requires = [
 ]
 
 [tool.black]
-line-length = 79
+line-length = 80
 
 [tool.setuptools.dynamic]
 version = {attr = "fnschool.__version__"}
@@ -60,4 +60,5 @@ version = {attr = "fnschool.__version__"}
 
 [tool.setuptools.exclude-package-data]
 "*" = ["*.po"]
+
 # The end.

@@ -107,7 +107,7 @@ class FnEmail:
             msg_subject = _('The scores of Test "{0}"').format(
                 self.score.full_name
             )
-            
+
             student_names = self.score.student_names
             scores_img_fpaths_len = len(scores_img_fpaths)
             scores_img_fpaths_len2 = len(str(scores_img_fpaths_len))
@@ -155,19 +155,19 @@ class FnEmail:
                     continue
 
                 student_name0 = (
-                    student_name[0]+"  "+student_name[1] 
+                    student_name[0] + "  " + student_name[1]
                     if (
-                        all([is_zh_CN_char(c) for c in student_name]) 
+                        all([is_zh_CN_char(c) for c in student_name])
                         and len(student_name) == 2
-                    ) else student_name
+                    )
+                    else student_name
                 )
                 student_name_len_diff = (
-                    student_names_lenx 
-                    - get_zh_CN_chars_len(student_name0) 
+                    student_names_lenx
+                    - get_zh_CN_chars_len(student_name0)
                     - len(student_name0)
                 )
-                student_name0 = " "*student_name_len_diff+student_name0
-
+                student_name0 = " " * student_name_len_diff + student_name0
 
                 for chaperone, cemails in chaperones_emails:
                     for cemail in cemails:
@@ -178,7 +178,7 @@ class FnEmail:
                             - get_zh_CN_chars_len(chaperone0)
                             - len(chaperone0)
                         )
-                        '''
+                        """
                         self.email.send(
                             subject=msg_subject,
                             receivers=[cemail],
@@ -203,7 +203,7 @@ class FnEmail:
                                 ).format(self.teacher.name),
                             },
                         )
-                        '''
+                        """
                         print_info(
                             f"[{i+1:>{scores_img_fpaths_len2}}/{scores_img_fpaths_len}] "
                             + _(

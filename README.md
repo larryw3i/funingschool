@@ -83,6 +83,7 @@ This software uses the following open source packages:
 - [openpyxl](https://openpyxl.readthedocs.io/)  
 - [appdirs](http://github.com/ActiveState/appdirs)  
 - [matplotlib](https://matplotlib.org/)  
+- [redmail](https://github.com/Miksus/red-mail)
 
 
 ## Support
