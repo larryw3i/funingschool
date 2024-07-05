@@ -22,6 +22,8 @@ class Msg:
 
     def get_locales_dpath(self, dpath):
         dpath = dpath / "locales"
+        if not dpath.exists():
+            os.makedirs(dpath, exist_ok=True)
         return dpath
 
     @property
@@ -38,8 +40,12 @@ class Msg:
             pot_path = self.get_pot_fpath(dpath)
             locales_dpath = self.get_locales_dpath(dpath)
             sh_value = (
-                f"pybabel extract {dpath_r} -o {pot_path};"
-                + f"pybabel update -i {pot_path} -d {locales_dpath} -D {module_name}"
+                f"pybabel extract {dpath_r}"
+                + f" -o {pot_path};"
+                + f"pybabel update"
+                + f" -i {pot_path}"
+                + f" -d {locales_dpath}"
+                + f" -D {module_name}"
             )
             sh(sh_value)
 
@@ -50,10 +56,15 @@ class Msg:
             pot_path = self.get_pot_fpath(dpath)
             locales_dpath = self.get_locales_dpath(dpath)
 
-            sh_value = f"pybabel compile -d {locales_dpath} -D {module_name}"
+            sh_value = (
+                f"pybabel compile"
+                + f" -d {locales_dpath}"
+                + f" -D {module_name}"
+            )
             sh(sh_value)
 
     def add(self, language_code):
+        language_code = language_code
         for dpath in self.project_dpaths:
             module_name = dpath.stem
             dpath_r = dpath.relative_to(project_dpath)
@@ -61,8 +72,11 @@ class Msg:
             locales_dpath = self.get_locales_dpath(dpath)
 
             sh_value = (
-                f"pybabel init -d {locales_dpath} -l {language_code} "
-                + f"-i {pot_path} -D {module_name}"
+                f"pybabel init"
+                + f" -d {locales_dpath}"
+                + f" -l {language_code}"
+                + f" -i {pot_path}"
+                + f" -D {module_name}"
             )
             sh(sh_value)
 
