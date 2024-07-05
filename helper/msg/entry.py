@@ -37,7 +37,8 @@ def parse_msg(subparsers):
         help=_(
             '"update": Update message catalogs.'
             + '"compile": Compile message catalogs. '
-            + '"add": Add locale message catalogs.'
+            + '"add": Add locale message catalogs '
+            + '("locale" argument is required).'
         ),
     )
     parser.add_argument(

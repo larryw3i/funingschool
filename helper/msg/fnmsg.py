@@ -5,7 +5,9 @@ from helper.project.fnproject import Project
 class Msg:  
     def __init__(self):
         self._proj = None
+        self._project_dpaths = None
         pass
+
     @property
     def proj(self):
         if not self._proj:
@@ -21,8 +23,17 @@ class Msg:
         dpath = dpath / "locales"
         return dpath
 
+    @property
+    def project_dpaths(self):
+        if not self._project_dpaths:
+            dpaths = self.proj.dpaths + [
+                helper_dpath
+            ]
+            self._project_dpaths = dpaths
+        return self._project_dpaths
+
     def update(self):
-        for dpath in self.proj.dpaths:
+        for dpath in self.project_dpaths:
             module_name = dpath.stem
             dpath_r = dpath.relative_to(project_dpath)
             pot_path = self.get_pot_fpath(dpath)
@@ -36,7 +47,7 @@ class Msg:
 
 
     def compile(self):
-        for dpath in self.proj.dpaths:
+        for dpath in self.project_dpaths:
             module_name = dpath.stem
             dpath_r = dpath.relative_to(project_dpath)
             pot_path = self.get_pot_fpath(dpath)
@@ -47,7 +58,7 @@ class Msg:
 
 
     def add(self,language_code):
-        for dpath in self.proj.dpaths:
+        for dpath in self.project_dpaths:
             module_name = dpath.stem
             dpath_r = dpath.relative_to(project_dpath)
             pot_path = self.get_pot_fpath(dpath)
