@@ -55,6 +55,9 @@ line-length = 80
 [tool.setuptools.dynamic]
 version = {attr = "fnschool.__version__"}
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.setuptools.package-data]
 "*" = ["*.mo","*.xlsx","*.toml"]
 

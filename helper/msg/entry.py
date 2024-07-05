@@ -19,10 +19,10 @@ def set_msg(args):
 
 
 def parse_msg(subparsers):
-    parser_canteen = subparsers.add_parser(
+    parser = subparsers.add_parser(
         "msg", help=_("'gettext' related functions.")
     )
-    parser_canteen.add_argument(
+    parser.add_argument(
         "action",
         choices=["update", "compile"],
         help=_(
@@ -30,7 +30,7 @@ def parse_msg(subparsers):
             + '"compile": Compile message catalogs.'
         ),
     )
-    parser_canteen.set_defaults(func=set_msg)
+    parser.set_defaults(func=set_msg)
 
 
 # The end.

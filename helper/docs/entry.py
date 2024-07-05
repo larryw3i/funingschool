@@ -13,12 +13,12 @@ def set_docs(args):
 
 
 def parse_docs(subparsers):
-    parser_canteen = subparsers.add_parser(
+    parser = subparsers.add_parser(
         "docs", help=_("Documentation related functions.")
     )
-    parser_canteen.add_argument(
+    parser.add_argument(
         "action",
         choices=["readme"],
         help=_('"readme": Generate README.md and README.*.md.'),
     )
-    parser_canteen.set_defaults(func=set_docs)
+    parser.set_defaults(func=set_docs)
