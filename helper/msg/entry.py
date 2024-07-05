@@ -6,7 +6,7 @@ from helper import *
 def set_msg(args):
     from helper.msg.fnmsg import Msg
 
-    if args.action in "updte":
+    if args.action in "update":
         msg = Msg()
         msg.update()
         pass
@@ -14,8 +14,17 @@ def set_msg(args):
         msg = Msg()
         msg.compile()
         pass
+    elif args.action in "add":
+        msg = Msg()
+        if not args.locale:
+            print(
+                _('The "add" function need a "locale" argument.')
+            )
+        msg.add(args.locale)
+        pass
+
     else:
-        print_info(_("Function is not found."))
+        print(_("Function is not found."))
 
 
 def parse_msg(subparsers):
@@ -24,12 +33,23 @@ def parse_msg(subparsers):
     )
     parser.add_argument(
         "action",
-        choices=["update", "compile"],
+        choices=["update", "compile", "add"],
         help=_(
             '"update": Update message catalogs.'
-            + '"compile": Compile message catalogs.'
+            + '"compile": Compile message catalogs. '
+            + '"add": Add locale message catalogs.'
         ),
     )
+    parser.add_argument(
+        "-l",
+        "--locale",
+        required=False,
+        help=_(
+            'The locale language code for '
+            + 'adding message catalogs.'
+        )
+    )
+
     parser.set_defaults(func=set_msg)
 
 

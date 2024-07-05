@@ -22,8 +22,7 @@ def parse_dep(subparsers):
         "action",
         choices=["install"],
         help=_(
-            '"install": Install all dependencies '
-            + "in virtual environment."
+            '"install": Install all dependencies ' + "in virtual environment."
         ),
     )
     parser.set_defaults(func=set_dep)

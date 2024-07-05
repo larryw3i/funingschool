@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-04 18:27+0800\n"
+"POT-Creation-Date: 2024-07-05 16:29+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.15.0\n"
+"Generated-By: Babel 2.10.3\n"
 
 #: src/fnschool/config.py:26
 msgid "Configurations has been read from \"{0}\"."
@@ -831,28 +831,28 @@ msgstr ""
 msgid "There is no emails of chaperones for {0}. Skip."
 msgstr ""
 
-#: src/fnschool/exam/email.py:202
+#: src/fnschool/exam/email.py:209
 msgid "The scores information of \"{0}\" has been sent to {2}{1}"
 msgstr ""
 
-#: src/fnschool/exam/email.py:262
+#: src/fnschool/exam/email.py:269
 msgid "parental_emails"
 msgstr ""
 
-#: src/fnschool/exam/email.py:268
+#: src/fnschool/exam/email.py:275
 msgid ""
 "Parental emails spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" "
 "was copied to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/email.py:281
+#: src/fnschool/exam/email.py:288
 msgid ""
 "The student's name has been filled in spreadsheet \"{0}\". Please fill in"
 " the email addresses according to the comments. (Ok! open the file for "
 "me. [Press any key to open it])"
 msgstr ""
 
-#: src/fnschool/exam/email.py:293
+#: src/fnschool/exam/email.py:300
 msgid "(Ok! I have filled them in? [Press any key to continue])"
 msgstr ""
 

@@ -5,6 +5,7 @@ import tomllib
 
 from helper.path import *
 
+
 def sys_is_linux():
     return "inux" in sys.platform
 
@@ -31,13 +32,13 @@ activate_fpath = (
 if not Path(activate_fpath).exists():
     sh_value = f"python3 -m venv {venv_dpath}"
     os.system(sh_value)
-    print(
-        _("Virtual Environment \"{0}\" has been made.").format(venv_dpath)
-    ) 
+    print(_('Virtual Environment "{0}" has been made.').format(venv_dpath))
+
 
 def sh(sh_value):
     sh_value = f". {activate_fpath}; " + sh_value
     os.system(sh_value)
     pass
+
 
 # The end.
