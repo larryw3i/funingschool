@@ -7,8 +7,8 @@ def set_dep(args):
     from helper.dep.fndep import Dep
 
     if args.action in "install":
-        pass
-    elif args.action in "venv":
+        dep = Dep()
+        dep.install()
         pass
     else:
         print_info(_("Function is not found."))
@@ -20,11 +20,10 @@ def parse_dep(subparsers):
     )
     parser.add_argument(
         "action",
-        choices=["install", "venv"],
+        choices=["install"],
         help=_(
             '"install": Install all dependencies '
-            + "in virtual environment. "
-            + '"venv": Make virtual environment.'
+            + "in virtual environment."
         ),
     )
     parser.set_defaults(func=set_dep)
