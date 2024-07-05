@@ -3,31 +3,21 @@ import sys
 from fnschool import *
 
 
-def set_exam(args):
-    from fnschool.exam.score import Score
+def set_docs(args):
 
-    print_app()
-
-    if args.action in "enter":
-        score = Score()
-        score.enter()
-    elif args.action in "read":
-        score = Score()
-        score.read()
+    if args.action in "readme":
+        pass
     else:
         print_info(_("Function is not found."))
 
 
 def parse_exam(subparsers):
     parser_canteen = subparsers.add_parser(
-        "exam", help=_("Examination related functions.")
+        "docs", help=_("Documentation related functions.")
     )
     parser_canteen.add_argument(
         "action",
-        choices=["enter", "read"],
-        help=_(
-            '"enter": Enter the examination scores. '
-            + '"read":Read the examination scores.'
-        ),
+        choices=["readme"],
+        help=_('"readme": Generate README.md and README.*.md.'),
     )
-    parser_canteen.set_defaults(func=set_exam)
+    parser_canteen.set_defaults(func=set_docs)

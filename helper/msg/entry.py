@@ -3,31 +3,26 @@ import sys
 from fnschool import *
 
 
-def set_exam(args):
-    from fnschool.exam.score import Score
+def set_msg(args):
 
-    print_app()
-
-    if args.action in "enter":
-        score = Score()
-        score.enter()
-    elif args.action in "read":
-        score = Score()
-        score.read()
+    if args.action in "updte":
+        pass
+    elif args.action in "compile":
+        pass
     else:
         print_info(_("Function is not found."))
 
 
-def parse_exam(subparsers):
+def parse_msg(subparsers):
     parser_canteen = subparsers.add_parser(
-        "exam", help=_("Examination related functions.")
+        "msg", help=_("'gettext' related functions.")
     )
     parser_canteen.add_argument(
         "action",
-        choices=["enter", "read"],
+        choices=["update", "compile"],
         help=_(
-            '"enter": Enter the examination scores. '
-            + '"read":Read the examination scores.'
+            '"update": Update message catalogs.'
+            + '"compile": Compile message catalogs.'
         ),
     )
-    parser_canteen.set_defaults(func=set_exam)
+    parser_canteen.set_defaults(func=set_msg)
