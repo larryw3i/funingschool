@@ -3,6 +3,7 @@ import tomllib
 from helper import *
 from helper.project import *
 
+
 class Project:
     def __init__(self):
         self._data = None

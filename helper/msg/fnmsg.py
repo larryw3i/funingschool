@@ -2,7 +2,8 @@ from helper import *
 
 from helper.project.fnproject import Project
 
-class Msg:  
+
+class Msg:
     def __init__(self):
         self._proj = None
         self._project_dpaths = None
@@ -14,21 +15,19 @@ class Msg:
             proj = Project()
             self._proj = proj
         return self._proj
-    
-    def get_pot_fpath(self,dpath):
-        fpath = self.get_locales_dpath(dpath) / (dpath.stem+".pot")
+
+    def get_pot_fpath(self, dpath):
+        fpath = self.get_locales_dpath(dpath) / (dpath.stem + ".pot")
         return fpath
 
-    def get_locales_dpath(self,dpath):
+    def get_locales_dpath(self, dpath):
         dpath = dpath / "locales"
         return dpath
 
     @property
     def project_dpaths(self):
         if not self._project_dpaths:
-            dpaths = self.proj.dpaths + [
-                helper_dpath
-            ]
+            dpaths = self.proj.dpaths + [helper_dpath]
             self._project_dpaths = dpaths
         return self._project_dpaths
 
@@ -44,20 +43,17 @@ class Msg:
             )
             sh(sh_value)
 
-
-
     def compile(self):
         for dpath in self.project_dpaths:
             module_name = dpath.stem
             dpath_r = dpath.relative_to(project_dpath)
             pot_path = self.get_pot_fpath(dpath)
             locales_dpath = self.get_locales_dpath(dpath)
-            
-            sh_value = (f"pybabel compile -d {locales_dpath} -D {module_name}")
+
+            sh_value = f"pybabel compile -d {locales_dpath} -D {module_name}"
             sh(sh_value)
 
-
-    def add(self,language_code):
+    def add(self, language_code):
         for dpath in self.project_dpaths:
             module_name = dpath.stem
             dpath_r = dpath.relative_to(project_dpath)

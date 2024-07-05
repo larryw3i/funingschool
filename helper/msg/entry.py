@@ -17,9 +17,7 @@ def set_msg(args):
     elif args.action in "add":
         msg = Msg()
         if not args.locale:
-            print(
-                _('The "add" function need a "locale" argument.')
-            )
+            print(_('The "add" function need a "locale" argument.'))
         msg.add(args.locale)
         pass
 
@@ -46,9 +44,9 @@ def parse_msg(subparsers):
         "--locale",
         required=False,
         help=_(
-            'The locale language code for '
-            + 'adding message catalogs.'
-        )
+            "The locale language code for "
+            + "adding message catalogs (e.g: en_US)."
+        ),
     )
 
     parser.set_defaults(func=set_msg)
