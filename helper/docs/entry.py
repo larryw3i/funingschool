@@ -1,6 +1,7 @@
 import os
 import sys
-from fnschool import *
+
+from helper import *
 
 
 def set_docs(args):
@@ -11,7 +12,7 @@ def set_docs(args):
         print_info(_("Function is not found."))
 
 
-def parse_exam(subparsers):
+def parse_docs(subparsers):
     parser_canteen = subparsers.add_parser(
         "docs", help=_("Documentation related functions.")
     )

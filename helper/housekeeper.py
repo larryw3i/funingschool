@@ -233,6 +233,4 @@ def parse_cli():
         parser.print_help()
 
 
-parse_cli()
-
 # The end.
