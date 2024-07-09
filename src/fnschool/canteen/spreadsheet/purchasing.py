@@ -537,7 +537,7 @@ class Purchasing(SpreadsheetBase):
     def split_foods(self):
         foods_cp = self.bill.foods.copy()
         foods = self.bill.foods
-        split_all = False
+        split_mode = ""
 
         for i, f in enumerate(foods_cp):
             up0, up1, threshold = f.count_threshold
@@ -545,23 +545,24 @@ class Purchasing(SpreadsheetBase):
             f_total_price = f.total_price
             f_unit_price = f.unit_price
             if threshold:
-                if not split_all:
+                if split_mode in "YyNn":
                     print_info(
                         _(
                             'The unit price of "{0}" is an '
                             + 'infinite decimal, split "{0}"?'
-                            + '(Yes: "Y","y","". Split all '
-                            + "foods with infinite decimal "
-                            + 'unit price: "A","a")'
+                            + '(Yes: "Y","y","".'
+                            + ' Yes for rest: "A","a".'
+                            + ' No: "N","n".'
+                            + ' No for rest: "S","s").'
                         ).format(f.name)
                     )
-                s_input = "y" if split_all else input0().strip()
+                    split_mode = input0()
 
-                if s_input and s_input in "Aa":
-                    s_input = "y"
-                    split_all = True
+                if split_mode and split_mode in "Ss":
+                    return
 
-                if s_input in "Yy":
+                if split_mode in "YyAa":
+                    times_char = "\u2a09"
                     f0 = foods[i]
                     f0.count = threshold
                     f0.total_price = up1 * threshold
@@ -589,25 +590,26 @@ class Purchasing(SpreadsheetBase):
                         + f"\n\t{f0.unit_price} "
                         + f"{self.bill.currency.unit}"
                         + f"/{f0.unit_name} "
-                        + f"\u2a09 {f0.count} "
+                        + f"{times_char} {f0.count} "
                         + f"{f0.unit_name} + "
                         + f"{f1.unit_price} "
                         + f"{self.bill.currency.unit}"
                         + f"/{f1.unit_name} "
-                        + f"\u2a09 {f1.count} "
+                        + f"{times_char} {f1.count} "
                         + f"{f1.unit_name} = "
                         + f"{total_price0} "
                         + f"{self.bill.currency.unit} = "
                         + f"{f_unit_price} "
                         + f"{self.bill.currency.unit}"
                         + f"/{f.unit_name} "
-                        + f"\u2a09 {f_count} "
+                        + f"{times_char} {f_count} "
                         + f"{f.unit_name} = "
                         + f"{f_total_price}"
                         + f"{self.bill.currency.unit}"
                     )
 
                     foods.append(f1)
+        return
 
     def read_pfoods(self):
         self.update()

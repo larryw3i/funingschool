@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-05 20:06+0800\n"
+"POT-Creation-Date: 2024-07-09 15:14+0800\n"
 "PO-Revision-Date: 2024-07-05 19:20+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
@@ -39,20 +39,28 @@ msgstr "要运行的工具。"
 msgid "Virtual Environment \"{0}\" has been made."
 msgstr "虚拟环境 “{0}” 已被创建。"
 
-#: helper/build/entry.py:12 helper/dep/entry.py:14 helper/docs/entry.py:12
+#: helper/build/entry.py:16 helper/dep/entry.py:14 helper/docs/entry.py:12
 #: helper/msg/entry.py:25
 msgid "Function is not found."
 msgstr "未找到函数。"
 
-#: helper/build/entry.py:17
+#: helper/build/entry.py:21
 msgid "'build' related functions."
 msgstr "编译 相关函数。"
 
-#: helper/build/entry.py:22
+#: helper/build/entry.py:26
 msgid ""
 "\"now\": Build \"fnschool\" now. \"upload\": Build and upload "
 "\"fnschool\" via \"twine\"."
 msgstr "“now”：编译 “fnschool” 项目。“upload”：编译 “fnschool” 并将安装包上传到 twine 。"
+
+#: helper/build/fnbuild.py:46
+msgid "The hash value of distribution is:"
+msgstr ""
+
+#: helper/build/fnbuild.py:47
+msgid "The hash values of distributions are:"
+msgstr ""
 
 #: helper/dep/entry.py:19
 msgid "'dependencies' related functions."
@@ -96,4 +104,12 @@ msgstr "“update”：更新翻译文本目录。“compile”：编译含义�
 #: helper/msg/entry.py:46
 msgid "The locale language code for adding message catalogs (e.g: en_US)."
 msgstr "本地翻译文本的语言码（例如：zh_CN）。"
+
+#: helper/project/fnproject.py:29
+msgid "Version was updated."
+msgstr ""
+
+#: helper/project/fnproject.py:31
+msgid "Versions were updated."
+msgstr ""
 

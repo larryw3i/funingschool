@@ -196,7 +196,14 @@ class Inventory(SpreadsheetBase):
                     foods.append(
                         [
                             d_date,
-                            [f for f in bfoods if f.get_remainder(d_date) > 0],
+                            [
+                                f 
+                                for f in bfoods 
+                                if (
+                                    f.get_remainder(d_date) > 0
+                                    and f.xdate != d_date
+                                )
+                            ],
                         ]
                     )
                     break
