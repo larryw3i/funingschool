@@ -43,7 +43,7 @@ class PreConsuming(SpreadsheetBase):
                 )
             )
         )
-        if len(time_nodes)>1:
+        if len(time_nodes) > 1:
             t1 = time_nodes[1]
             if t1.day == 1:
                 del time_nodes[1]
