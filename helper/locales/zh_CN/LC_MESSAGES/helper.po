@@ -8,17 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-23 15:44+0800\n"
-"PO-Revision-Date: 2024-08-23 15:44+0800\n"
+"POT-Creation-Date: 2024-08-23 23:55+0800\n"
+"PO-Revision-Date: 2024-08-23 23:52+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.10.3\n"
-"X-Generator: Gtranslator 46.0\n"
 
 #: helper/entry.py:18
 msgid "Helper of fnschool project"
@@ -51,11 +50,9 @@ msgstr "编译 相关函数。"
 
 #: helper/build/entry.py:26
 msgid ""
-"\"now\": Build \"fnschool\" now. \"upload\": Build and upload \"fnschool\" "
-"via \"twine\"."
-msgstr ""
-"“now”：编译 “fnschool” 项目。“upload”：编译 “fnschool” 并将安装包上传到 "
-"twine 。"
+"\"now\": Build \"fnschool\" now. \"upload\": Build and upload "
+"\"fnschool\" via \"twine\"."
+msgstr "“now”：编译 “fnschool” 项目。“upload”：编译 “fnschool” 并将安装包上传到 twine 。"
 
 #: helper/build/fnbuild.py:46
 msgid "The hash value of distribution is:"
@@ -89,134 +86,137 @@ msgstr "文档 相关函数。"
 msgid "\"readme\": \"README\" files related functions."
 msgstr "“readme”：“README”文件的 相关函数。"
 
-#: helper/docs/readme/content.py:27
+#: helper/docs/readme/content.py:31
 msgid "README file \"{0}\" was updated."
 msgstr "README 文件 “{0}” 已更新。"
 
-#: helper/docs/readme/content.py:46
-msgid "funingschool"
-msgstr "funingschool"
-
-#: helper/docs/readme/content.py:51
+#: helper/docs/readme/content.py:55
 msgid "NO Just some simple scripts for warehousing and consuming."
 msgstr "不只是一些出入库脚本。"
 
-#: helper/docs/readme/content.py:63 helper/docs/readme/content.py:86
+#: helper/docs/readme/content.py:67 helper/docs/readme/content.py:91
 msgid "Key Features"
 msgstr "特性"
 
-#: helper/docs/readme/content.py:66 helper/docs/readme/content.py:136
+#: helper/docs/readme/content.py:71 helper/docs/readme/content.py:121
 msgid "How To Use"
 msgstr "如何使用"
 
-#: helper/docs/readme/content.py:69 helper/docs/readme/content.py:172
+#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:158
 msgid "Credits"
 msgstr "致谢（声明）"
 
-#: helper/docs/readme/content.py:72 helper/docs/readme/content.py:187
+#: helper/docs/readme/content.py:79 helper/docs/readme/content.py:174
 msgid "Support"
 msgstr "赞助"
 
-#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:196
+#: helper/docs/readme/content.py:83 helper/docs/readme/content.py:186
 msgid "License"
 msgstr "授权"
 
-#: helper/docs/readme/content.py:89
+#: helper/docs/readme/content.py:87
+msgid "Screenshot"
+msgstr "截图"
+
+#: helper/docs/readme/content.py:95
 msgid "warehousing and consuming"
 msgstr "食材出入库"
 
-#: helper/docs/readme/content.py:93
+#: helper/docs/readme/content.py:98
 msgid "Read food spreadsheets automatically."
 msgstr "自动读取食材表单。"
 
-#: helper/docs/readme/content.py:96
+#: helper/docs/readme/content.py:99
 msgid "The simplest and most straightforward `consuming sheets`."
 msgstr "更简单更直观食材出库设计。"
 
-#: helper/docs/readme/content.py:99
+#: helper/docs/readme/content.py:100
 msgid "Update sheets (warehousing, consuming, summing, etc) automatically."
 msgstr "自动更新表单（入库、出库、汇总等等）。"
 
-#: helper/docs/readme/content.py:105
+#: helper/docs/readme/content.py:104
 msgid "Reduce calculation errors."
 msgstr "减少计算误差。"
 
-#: helper/docs/readme/content.py:108
+#: helper/docs/readme/content.py:105
 msgid "Effectively eliminate unit prices containing infinite decimals."
 msgstr "有效地“消除”含有无限小数的单价。"
 
-#: helper/docs/readme/content.py:111
+#: helper/docs/readme/content.py:106
 msgid "Easy to use."
 msgstr "易用。"
 
-#: helper/docs/readme/content.py:115
+#: helper/docs/readme/content.py:109
 msgid "Test statistics"
 msgstr "测试统计"
 
-#: helper/docs/readme/content.py:119
+#: helper/docs/readme/content.py:112
 msgid "An easy-to-use \"test score entry form\"."
 msgstr "易用的“测试登记”表单。"
 
-#: helper/docs/readme/content.py:122
+#: helper/docs/readme/content.py:113
 msgid ""
-"Clear test results at a glance, converting table data into Intuitive images."
+"Clear test results at a glance, converting table data into Intuitive "
+"images."
 msgstr "直观展示测试结果，生成直观的图片方便发送给学生家长。"
 
-#: helper/docs/readme/content.py:128
+#: helper/docs/readme/content.py:117
 msgid "Display comments."
 msgstr "显示测试备注。"
 
-#: helper/docs/readme/content.py:131
+#: helper/docs/readme/content.py:118
 msgid "Effectively assist testers, especially teachers and students."
 msgstr "有效协助测试相关人员，尤其是老师和学生。"
 
-#: helper/docs/readme/content.py:139
+#: helper/docs/readme/content.py:125
 msgid "Install Python3"
 msgstr "安装 Python3"
 
-#: helper/docs/readme/content.py:146
-msgid ""
-"For `Windows`, you can install Python3 from https://www.python.org/getit/ ."
+#: helper/docs/readme/content.py:128
+msgid "on Ubuntu:"
 msgstr ""
-"在 Windows 上，你可以从以下链接获得二进制安装程序（请自行检验哈希值）：\n"
-"https://registry.npmmirror.com/binary.html?path=python/\n"
-"https://mirrors.huaweicloud.com/python/\n"
-"https://mirror.bjtu.edu.cn/python/"
 
-#: helper/docs/readme/content.py:152
+#: helper/docs/readme/content.py:133
+msgid ""
+"For `Windows`, you can install Python3 from https://www.python.org/getit/"
+" ."
+msgstr ""
+"在 Windows 上，你可以从以下链接获得二进制安装程序（请自行检验哈希值）：  \n"
+"https://registry.npmmirror.com/binary.html?path=python/  \n"
+"https://mirrors.huaweicloud.com/python/  \n"
+"https://mirror.bjtu.edu.cn/python/  "
+
+#: helper/docs/readme/content.py:140
 msgid "Install fnschool and run it"
 msgstr "安装 和 运行 fnschool "
 
-#: helper/docs/readme/content.py:155
+#: helper/docs/readme/content.py:144
 msgid "install"
 msgstr "安装"
 
-#: helper/docs/readme/content.py:157
+#: helper/docs/readme/content.py:146
 msgid "run `warehousing and consuming` module"
 msgstr "运行“出入库”模块"
 
-#: helper/docs/readme/content.py:159
+#: helper/docs/readme/content.py:148
 msgid "run `test statistics` module"
 msgstr "运行“测试”模块"
 
-#: helper/docs/readme/content.py:164
-msgid "Note:"
-msgstr "备注："
-
-#: helper/docs/readme/content.py:165
+#: helper/docs/readme/content.py:152
 msgid ""
-"Read the information it prompts carefully, which is the key to using it well."
-msgstr "细心耐心阅读它打印的提示，这是你能使用好它的关键。"
+"Note: Read the information it prompts carefully, which is the key to "
+"using it well."
+msgstr "备注：细心耐心阅读它打印的提示，这是你能使用好它的关键。"
 
-#: helper/docs/readme/content.py:175
+#: helper/docs/readme/content.py:161
 msgid "This software uses the following open source packages:"
 msgstr "此软件使用了如下的开源软件包（项目）："
 
-#: helper/docs/readme/content.py:189
+#: helper/docs/readme/content.py:177
 msgid "Buy me a `coffee`:"
 msgstr "给我买一杯“咖啡”："
 
-#: helper/docs/readme/content.py:193
+#: helper/docs/readme/content.py:180
 msgid "Buy me a \"coffee\"."
 msgstr "给我买一杯“咖啡”。"
 
@@ -230,11 +230,10 @@ msgstr "“gettext” 相关函数。"
 
 #: helper/msg/entry.py:35
 msgid ""
-"\"update\": Update message catalogs.\"compile\": Compile message catalogs. "
-"\"add\": Add locale message catalogs (\"locale\" argument is required)."
-msgstr ""
-"“update”：更新翻译文本目录。“compile”：编译含义文本目录。“add”：增加一个本地"
-"翻译文本（需要 “locale” 参数）。"
+"\"update\": Update message catalogs.\"compile\": Compile message "
+"catalogs. \"add\": Add locale message catalogs (\"locale\" argument is "
+"required)."
+msgstr "“update”：更新翻译文本目录。“compile”：编译含义文本目录。“add”：增加一个本地翻译文本（需要 “locale” 参数）。"
 
 #: helper/msg/entry.py:46
 msgid "The locale language code for adding message catalogs (e.g: en_US)."
@@ -250,3 +249,10 @@ msgstr "版本已更新。"
 
 #~ msgid "\"readme\": Generate README.md and README.*.md."
 #~ msgstr "“readme”：生成 README.md 和 README.*.md 文档。"
+
+#~ msgid "funingschool"
+#~ msgstr "funingschool"
+
+#~ msgid "Note:"
+#~ msgstr "备注："
+
