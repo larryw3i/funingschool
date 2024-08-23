@@ -34,7 +34,12 @@ class Content:
     def get_content(self, t_func = None):
         _ = t_func
         return f"""
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{_("README")}</title>
+</head>
+<body>
 <h1 align="center">
   <br>
   
@@ -82,8 +87,8 @@ English</a>
 
 <img 
 src="https://raw.githubusercontent.com/larryw3i/funingschool/master/\
-Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png" \
-alt="Screenshot"
+Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png"\
+ alt="Screenshot"
 />
 
 <h2 name="key-features">
@@ -193,7 +198,7 @@ alt="Screenshot"
     {_("Buy me a `coffee`:")}
 <img 
     src="https://raw.githubusercontent.com/larryw3i/funingschool/master\
-/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg" \
+/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"\
     alt='{_("Buy me a \"coffee\".")}'/>
 
 <h2 name="license">
@@ -203,7 +208,7 @@ alt="Screenshot"
 <a href="https://github.com/larryw3i/funingschool/blob/master/LICENSE">
     GNU LESSER GENERAL PUBLIC LICENSE Version 3
 </a>
-
+</body>
 """
 
 
