@@ -25,7 +25,7 @@ class Content:
             if lc == "en_US":
                 with open(readme0_fpath,"w+",encoding="utf-8") as f:
                     f.write(content)
-            readme_fpath = readme_dpath / f"README.{lc}.md"
+            readme_fpath = readme_dpath / f"{lc}.md"
             with open(readme_fpath,"w+",encoding="utf-8") as f:
                 f.write(content)
             print(_("README file \"{0}\" was updated.").format(readme_fpath))

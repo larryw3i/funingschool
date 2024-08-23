@@ -17,7 +17,7 @@
 </h1>
 
 <h4 align="center">
-    NO Just some simple scripts for warehousing and consuming.
+    不只是一些出入库脚本。
 </h4>
 
 <p align="center">
@@ -27,88 +27,91 @@
 
 <p align="center">
     <a href="#key-features">
-        Key Features
+        特性
     </a>
     •
     <a href="#how-to-use">
-        How To Use
+        如何使用
     </a>
     •
     <a href="#credits">
-        Credits
+        致谢（声明）
     </a>
     •
     <a href="#support">
-        Support
+        赞助
     </a>
     •
     <a href="#license">
-        License
+        授权
     </a>
 </p>
 
-![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png)
+![截图](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png)
 
 <h2 id="key-features">
-    Key Features
+    特性
 </h2>
 
 <h3>
-    warehousing and consuming
+    食材出入库
 </h3>
 
-* Read food spreadsheets automatically.
-* The simplest and most straightforward `consuming sheets`.
-* Update sheets (warehousing, consuming, summing, etc) automatically.
-* Reduce calculation errors.
-* Effectively eliminate unit prices containing infinite decimals.
-* Easy to use.
+* 自动读取食材表单。
+* 更简单更直观食材出库设计。
+* 自动更新表单（入库、出库、汇总等等）。
+* 减少计算误差。
+* 有效地“消除”含有无限小数的单价。
+* 易用。
 
 <h3>
-    Test statistics
+    测试统计
 </h3>
 
-* An easy-to-use "test score entry form".
-* Clear test results at a glance, converting table data into Intuitive images.
-* Display comments.
-* Effectively assist testers, especially teachers and students.
+* 易用的“测试登记”表单。
+* 直观展示测试结果，生成直观的图片方便发送给学生家长。
+* 显示测试备注。
+* 有效协助测试相关人员，尤其是老师和学生。
 
 <h2 id="how-to-use">
-    How To Use
+    如何使用
 </h2>
 
 <h3>
-    Install Python3
+    安装 Python3
 </h3>
 <p>
-    on Ubuntu:
+    在 Ubuntu 上：
 
 ```bash
 sudo apt-get install python3 python3-pip
 ```  
-For `Windows`, you can install Python3 from https://www.python.org/getit/ .
+在 Windows 上，你可以从以下链接获得二进制安装程序（请自行检验哈希值）：  
+https://registry.npmmirror.com/binary.html?path=python/  
+https://mirrors.huaweicloud.com/python/  
+https://mirror.bjtu.edu.cn/python/  
 </p>
 
 <h3>
-    Install fnschool and run it
+    安装 和 运行 fnschool 
 </h3>
 
 ```bash
-# install
+# 安装
 pip3 install -U fnschool
-# run `warehousing and consuming` module
+# 运行“出入库”模块
 fnschool-cli canteen mk_bill
-# run `test statistics` module
+# 运行“测试”模块
 fnschool-cli exam enter
 ```
 
->Note: Read the information it prompts carefully, which is the key to using it well.
+>备注：细心耐心阅读它打印的提示，这是你能使用好它的关键。
 
 <h2 id="credits">
-    Credits
+    致谢（声明）
 </h2>
 <p>
-    This software uses the following open source packages:
+    此软件使用了如下的开源软件包（项目）：
     <ul>
         <li><a href="https://github.com/tartley/colorama">colorama</a></li>
         <li><a href="https://pandas.pydata.org/">pandas</a></li>
@@ -121,16 +124,16 @@ fnschool-cli exam enter
 </p>
 
 <h2 id="support">
-    Support
+    赞助
 </h2>
 <h3>
-    Buy me a `coffee`:
+    给我买一杯“咖啡”：
 </h3>  
 
-![Buy me a "coffee".](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
+![给我买一杯“咖啡”。](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
 
 <h2 id="license">
-    License
+    授权
 </h2>
 
 <a href="https://github.com/larryw3i/funingschool/blob/master/LICENSE">
