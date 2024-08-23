@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-07-09 15:14+0800\n"
+"POT-Creation-Date: 2024-08-23 15:44+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Virtual Environment \"{0}\" has been made."
 msgstr ""
 
-#: helper/build/entry.py:16 helper/dep/entry.py:14 helper/docs/entry.py:12
+#: helper/build/entry.py:16 helper/dep/entry.py:14 helper/docs/entry.py:15
 #: helper/msg/entry.py:25
 msgid "Function is not found."
 msgstr ""
@@ -77,12 +77,142 @@ msgstr ""
 msgid "Dependencies ({0}) have been installed."
 msgstr ""
 
-#: helper/docs/entry.py:17
+#: helper/docs/entry.py:20
 msgid "Documentation related functions."
 msgstr ""
 
-#: helper/docs/entry.py:22
-msgid "\"readme\": Generate README.md and README.*.md."
+#: helper/docs/entry.py:25
+msgid "\"readme\": \"README\" files related functions."
+msgstr ""
+
+#: helper/docs/readme/content.py:27
+msgid "README file \"{0}\" was updated."
+msgstr ""
+
+#: helper/docs/readme/content.py:46
+msgid "funingschool"
+msgstr ""
+
+#: helper/docs/readme/content.py:51
+msgid "NO Just some simple scripts for warehousing and consuming."
+msgstr ""
+
+#: helper/docs/readme/content.py:63 helper/docs/readme/content.py:86
+msgid "Key Features"
+msgstr ""
+
+#: helper/docs/readme/content.py:66 helper/docs/readme/content.py:136
+msgid "How To Use"
+msgstr ""
+
+#: helper/docs/readme/content.py:69 helper/docs/readme/content.py:172
+msgid "Credits"
+msgstr ""
+
+#: helper/docs/readme/content.py:72 helper/docs/readme/content.py:187
+msgid "Support"
+msgstr ""
+
+#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:196
+msgid "License"
+msgstr ""
+
+#: helper/docs/readme/content.py:89
+msgid "warehousing and consuming"
+msgstr ""
+
+#: helper/docs/readme/content.py:93
+msgid "Read food spreadsheets automatically."
+msgstr ""
+
+#: helper/docs/readme/content.py:96
+msgid "The simplest and most straightforward `consuming sheets`."
+msgstr ""
+
+#: helper/docs/readme/content.py:99
+msgid "Update sheets (warehousing, consuming, summing, etc) automatically."
+msgstr ""
+
+#: helper/docs/readme/content.py:105
+msgid "Reduce calculation errors."
+msgstr ""
+
+#: helper/docs/readme/content.py:108
+msgid "Effectively eliminate unit prices containing infinite decimals."
+msgstr ""
+
+#: helper/docs/readme/content.py:111
+msgid "Easy to use."
+msgstr ""
+
+#: helper/docs/readme/content.py:115
+msgid "Test statistics"
+msgstr ""
+
+#: helper/docs/readme/content.py:119
+msgid "An easy-to-use \"test score entry form\"."
+msgstr ""
+
+#: helper/docs/readme/content.py:122
+msgid ""
+"Clear test results at a glance, converting table data into Intuitive "
+"images."
+msgstr ""
+
+#: helper/docs/readme/content.py:128
+msgid "Display comments."
+msgstr ""
+
+#: helper/docs/readme/content.py:131
+msgid "Effectively assist testers, especially teachers and students."
+msgstr ""
+
+#: helper/docs/readme/content.py:139
+msgid "Install Python3"
+msgstr ""
+
+#: helper/docs/readme/content.py:146
+msgid ""
+"For `Windows`, you can install Python3 from https://www.python.org/getit/"
+" ."
+msgstr ""
+
+#: helper/docs/readme/content.py:152
+msgid "Install fnschool and run it"
+msgstr ""
+
+#: helper/docs/readme/content.py:155
+msgid "install"
+msgstr ""
+
+#: helper/docs/readme/content.py:157
+msgid "run `warehousing and consuming` module"
+msgstr ""
+
+#: helper/docs/readme/content.py:159
+msgid "run `test statistics` module"
+msgstr ""
+
+#: helper/docs/readme/content.py:164
+msgid "Note:"
+msgstr ""
+
+#: helper/docs/readme/content.py:165
+msgid ""
+"Read the information it prompts carefully, which is the key to using it "
+"well."
+msgstr ""
+
+#: helper/docs/readme/content.py:175
+msgid "This software uses the following open source packages:"
+msgstr ""
+
+#: helper/docs/readme/content.py:189
+msgid "Buy me a `coffee`:"
+msgstr ""
+
+#: helper/docs/readme/content.py:193
+msgid "Buy me a \"coffee\"."
 msgstr ""
 
 #: helper/msg/entry.py:20
@@ -1820,5 +1950,16 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "The locale language code for adding message catalogs."
+#~ msgstr ""
+
+#~ msgid "\"readme\": Generate README.md and README.*.md."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "For `Windows`, you can install Python3"
+#~ " from [www.python.org/getit](https://www.python.org/getit/)."
+#~ msgstr ""
+
+#~ msgid "Buy me a coffee."
 #~ msgstr ""
 
