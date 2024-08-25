@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-24 00:14+0800\n"
+"POT-Creation-Date: 2024-08-25 10:10+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Virtual Environment \"{0}\" has been made."
 msgstr ""
 
-#: helper/build/entry.py:16 helper/dep/entry.py:14 helper/docs/entry.py:15
+#: helper/build/entry.py:16 helper/dep/entry.py:14 helper/docs/entry.py:16
 #: helper/msg/entry.py:25
 msgid "Function is not found."
 msgstr ""
@@ -77,11 +77,11 @@ msgstr ""
 msgid "Dependencies ({0}) have been installed."
 msgstr ""
 
-#: helper/docs/entry.py:20
+#: helper/docs/entry.py:21
 msgid "Documentation related functions."
 msgstr ""
 
-#: helper/docs/entry.py:25
+#: helper/docs/entry.py:26
 msgid "\"readme\": \"README\" files related functions."
 msgstr ""
 
@@ -89,130 +89,142 @@ msgstr ""
 msgid "README file \"{0}\" was updated."
 msgstr ""
 
-#: helper/docs/readme/content.py:55
+#: helper/docs/readme/content.py:56
 msgid "NO Just some simple scripts for warehousing and consuming."
 msgstr ""
 
-#: helper/docs/readme/content.py:67 helper/docs/readme/content.py:91
+#: helper/docs/readme/content.py:68 helper/docs/readme/content.py:92
 msgid "Key Features"
 msgstr ""
 
-#: helper/docs/readme/content.py:71 helper/docs/readme/content.py:121
+#: helper/docs/readme/content.py:72 helper/docs/readme/content.py:122
 msgid "How To Use"
 msgstr ""
 
-#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:158
+#: helper/docs/readme/content.py:76 helper/docs/readme/content.py:159
 msgid "Credits"
 msgstr ""
 
-#: helper/docs/readme/content.py:79 helper/docs/readme/content.py:174
+#: helper/docs/readme/content.py:80 helper/docs/readme/content.py:175
 msgid "Support"
 msgstr ""
 
-#: helper/docs/readme/content.py:83 helper/docs/readme/content.py:186
+#: helper/docs/readme/content.py:84 helper/docs/readme/content.py:186
 msgid "License"
 msgstr ""
 
-#: helper/docs/readme/content.py:87
+#: helper/docs/readme/content.py:88
 msgid "Screenshot"
 msgstr ""
 
-#: helper/docs/readme/content.py:95
+#: helper/docs/readme/content.py:88
+msgid ""
+"https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132"
+"-f8cd-11ee-8ee6-f37309efa64b.png"
+msgstr ""
+
+#: helper/docs/readme/content.py:96
 msgid "warehousing and consuming"
 msgstr ""
 
-#: helper/docs/readme/content.py:98
+#: helper/docs/readme/content.py:99
 msgid "Read food spreadsheets automatically."
 msgstr ""
 
-#: helper/docs/readme/content.py:99
+#: helper/docs/readme/content.py:100
 msgid "The simplest and most straightforward `consuming sheets`."
 msgstr ""
 
-#: helper/docs/readme/content.py:100
+#: helper/docs/readme/content.py:101
 msgid "Update sheets (warehousing, consuming, summing, etc) automatically."
 msgstr ""
 
-#: helper/docs/readme/content.py:104
+#: helper/docs/readme/content.py:105
 msgid "Reduce calculation errors."
 msgstr ""
 
-#: helper/docs/readme/content.py:105
+#: helper/docs/readme/content.py:106
 msgid "Effectively eliminate unit prices containing infinite decimals."
 msgstr ""
 
-#: helper/docs/readme/content.py:106
+#: helper/docs/readme/content.py:107
 msgid "Easy to use."
 msgstr ""
 
-#: helper/docs/readme/content.py:109
+#: helper/docs/readme/content.py:110
 msgid "Test statistics"
 msgstr ""
 
-#: helper/docs/readme/content.py:112
+#: helper/docs/readme/content.py:113
 msgid "An easy-to-use \"test score entry form\"."
 msgstr ""
 
-#: helper/docs/readme/content.py:113
+#: helper/docs/readme/content.py:114
 msgid ""
 "Clear test results at a glance, converting table data into Intuitive "
 "images."
 msgstr ""
 
-#: helper/docs/readme/content.py:117
+#: helper/docs/readme/content.py:118
 msgid "Display comments."
 msgstr ""
 
-#: helper/docs/readme/content.py:118
+#: helper/docs/readme/content.py:119
 msgid "Effectively assist testers, especially teachers and students."
 msgstr ""
 
-#: helper/docs/readme/content.py:125
+#: helper/docs/readme/content.py:126
 msgid "Install Python3"
 msgstr ""
 
-#: helper/docs/readme/content.py:128
+#: helper/docs/readme/content.py:129
 msgid "on Ubuntu:"
 msgstr ""
 
-#: helper/docs/readme/content.py:133
+#: helper/docs/readme/content.py:134
 msgid ""
 "For `Windows`, you can install Python3 from https://www.python.org/getit/"
 " ."
 msgstr ""
 
-#: helper/docs/readme/content.py:140
+#: helper/docs/readme/content.py:141
 msgid "Install fnschool and run it"
 msgstr ""
 
-#: helper/docs/readme/content.py:144
+#: helper/docs/readme/content.py:145
 msgid "install"
 msgstr ""
 
-#: helper/docs/readme/content.py:146
+#: helper/docs/readme/content.py:147
 msgid "run `warehousing and consuming` module"
 msgstr ""
 
-#: helper/docs/readme/content.py:148
+#: helper/docs/readme/content.py:149
 msgid "run `test statistics` module"
 msgstr ""
 
-#: helper/docs/readme/content.py:152
+#: helper/docs/readme/content.py:153
 msgid ""
 "Note: Read the information it prompts carefully, which is the key to "
 "using it well."
 msgstr ""
 
-#: helper/docs/readme/content.py:161
+#: helper/docs/readme/content.py:162
 msgid "This software uses the following open source packages:"
 msgstr ""
 
-#: helper/docs/readme/content.py:177
+#: helper/docs/readme/content.py:178
 msgid "Buy me a `coffee`:"
 msgstr ""
 
-#: helper/docs/readme/content.py:180
+#: helper/docs/readme/content.py:181
 msgid "Buy me a \"coffee\"."
+msgstr ""
+
+#: helper/docs/readme/content.py:182
+msgid ""
+"https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images"
+"/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
 msgstr ""
 
 #: helper/msg/entry.py:20

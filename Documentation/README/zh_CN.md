@@ -2,14 +2,13 @@
 
 <h1 align="center">
   <br>
-  
   <pre>
  _____ _   _ ____   ____ _   _  ___   ___  _     
 |  ___| \ | / ___| / ___| | | |/ _ \ / _ \| |    
 | |_  |  \| \___ \| |   | |_| | | | | | | | |    
 |  _| | |\  |___) | |___|  _  | |_| | |_| | |___ 
 |_|   |_| \_|____/ \____|_| |_|\___/ \___/|_____|
-                                                 
+
 </pre>
   <br>
   funingschool
@@ -47,7 +46,7 @@
     </a>
 </p>
 
-![截图](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png)
+![截图](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png)
 
 <h2 id="key-features">
     特性
@@ -130,7 +129,7 @@ fnschool-cli exam enter
     给我买一杯“咖啡”：
 </h3>  
 
-![给我买一杯“咖啡”。](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
+![给我买一杯“咖啡”。](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
 
 <h2 id="license">
     授权

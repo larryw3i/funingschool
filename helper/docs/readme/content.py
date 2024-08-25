@@ -21,30 +21,31 @@ class Content:
             content = self.get_content(t_func=t)
 
             _ = _cp
-            
+
             if lc == "en_US":
-                with open(readme0_fpath,"w+",encoding="utf-8") as f:
+                with open(readme0_fpath, "w+", encoding="utf-8") as f:
                     f.write(content)
             readme_fpath = readme_dpath / f"{lc}.md"
-            with open(readme_fpath,"w+",encoding="utf-8") as f:
+            with open(readme_fpath, "w+", encoding="utf-8") as f:
                 f.write(content)
-            print(_("README file \"{0}\" was updated.").format(readme_fpath))
+            print(_('README file "{0}" was updated.').format(readme_fpath))
 
-    
-    def get_content(self, t_func = None):
+    def get_content(self, t_func=None):
         _ = t_func
-        return f"""
+        return (
+            f"""
 
 <h1 align="center">
   <br>
-  
-  <pre>
+  <pre>"""
+            + r"""
  _____ _   _ ____   ____ _   _  ___   ___  _     
-|  ___| \\ | / ___| / ___| | | |/ _ \\ / _ \\| |    
-| |_  |  \\| \\___ \\| |   | |_| | | | | | | | |    
-|  _| | |\\  |___) | |___|  _  | |_| | |_| | |___ 
-|_|   |_| \\_|____/ \\____|_| |_|\\___/ \\___/|_____|
-                                                 
+|  ___| \ | / ___| / ___| | | |/ _ \ / _ \| |    
+| |_  |  \| \___ \| |   | |_| | | | | | | | |    
+|  _| | |\  |___) | |___|  _  | |_| | |_| | |___ 
+|_|   |_| \_|____/ \____|_| |_|\___/ \___/|_____|
+"""
+            + f"""
 </pre>
   <br>
   funingschool
@@ -84,8 +85,8 @@ Documentation/README.zh_CN.md">简体中文</a> •
     </a>
 </p>
 
-![{_("Screenshot")}](https://raw.githubusercontent.com/larryw3i/funingschool/master/\
-Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png)
+![{_("Screenshot")}]({_("https://raw.githubusercontent.com/larryw3i/funingschool/master/"+
+"Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png")})
 
 <h2 id="key-features">
     {_("Key Features")}
@@ -178,9 +179,8 @@ fnschool-cli exam enter
 </h3>  
 
 ![{_("Buy me a \"coffee\".")}]\
-(https://raw.githubusercontent.com/larryw3i/funingschool/master\
-/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg\
-)
+({_("https://raw.githubusercontent.com/larryw3i/funingschool/master"+
+"/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg")})
 
 <h2 id="license">
     {_("License")}
@@ -190,5 +190,7 @@ fnschool-cli exam enter
     GNU LESSER GENERAL PUBLIC LICENSE Version 3
 </a>
 """
+        )
+
 
 # The end.

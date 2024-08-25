@@ -8,6 +8,7 @@ def set_docs(args):
 
     if args.action in "readme":
         from helper.docs.readme.content import Content
+
         content = Content()
         content.update()
         pass

@@ -6,13 +6,14 @@ from pathlib import Path
 
 locale_dir = (Path(__file__).parent / "locales").as_posix()
 
+
 def get_language_codes():
     lang_codes = os.listdir(locale_dir)
     lang_codes = [
-        l for l in lang_codes
-        if (Path(locale_dir)/l/"LC_MESSAGES").is_dir()
+        l for l in lang_codes if (Path(locale_dir) / l / "LC_MESSAGES").is_dir()
     ]
     return lang_codes
+
 
 def get_language_code():
     locale.setlocale(locale.LC_ALL, "")
