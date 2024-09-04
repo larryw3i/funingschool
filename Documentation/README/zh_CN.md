@@ -135,6 +135,6 @@ fnschool-cli exam enter
     授权
 </h2>
 
-<a href="https://github.com/larryw3i/funingschool/blob/master/LICENSE">
+<a href="https://gitee.com/larryw3i/funingschool/blob/master/LICENSE">
     GNU LESSER GENERAL PUBLIC LICENSE Version 3
 </a>

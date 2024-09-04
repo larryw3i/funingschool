@@ -9,6 +9,7 @@ class Content:
         pass
 
     def update(self):
+
         lang_codes = get_language_codes()
         global _
         _cp = _
