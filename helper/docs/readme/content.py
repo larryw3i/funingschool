@@ -186,7 +186,7 @@ fnschool-cli exam enter
     {_("License")}
 </h2>
 
-<a href="https://github.com/larryw3i/funingschool/blob/master/LICENSE">
+<a href="{_("https://github.com/larryw3i/funingschool/blob/master/LICENSE")}">
     GNU LESSER GENERAL PUBLIC LICENSE Version 3
 </a>
 """

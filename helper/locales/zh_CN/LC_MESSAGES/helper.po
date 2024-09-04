@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-25 10:10+0800\n"
-"PO-Revision-Date: 2024-08-25 10:12+0800\n"
+"POT-Creation-Date: 2024-08-25 10:29+0800\n"
+"PO-Revision-Date: 2024-08-25 10:30+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -236,6 +236,10 @@ msgid ""
 msgstr ""
 "https://gitee.com/larryw3i/funingschool/raw/master/Documentation/"
 "images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
+
+#: helper/docs/readme/content.py:189
+msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
+msgstr "https://gitee.com/larryw3i/funingschool/blob/master/LICENSE"
 
 #: helper/msg/entry.py:20
 msgid "The \"add\" function need a \"locale\" argument."

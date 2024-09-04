@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-25 10:10+0800\n"
+"POT-Creation-Date: 2024-08-25 10:29+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -225,6 +225,10 @@ msgstr ""
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images"
 "/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
+msgstr ""
+
+#: helper/docs/readme/content.py:189
+msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr ""
 
 #: helper/msg/entry.py:20
