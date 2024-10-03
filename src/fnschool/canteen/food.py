@@ -19,7 +19,7 @@ class Food:
         xdate,
         purchaser,
         fclass,
-        meal_type = None,
+        meal_type=None,
         is_abandoned=False,
         is_inventory=False,
     ):
@@ -38,6 +38,20 @@ class Food:
         self.meal_type = meal_type
         self._count_threshold = None
         pass
+
+    @property
+    def display_name(self, is_residual=False, time_node0=None):
+        name = (
+            (_("({0})").format(self.meal_type) if self.meal_type else "")
+            + self.name
+            + (
+                _("(Remaining)")
+                if (is_residual or (time_node0 and self.xdate < time_node0))
+                else ""
+            )
+        )
+
+        return name
 
     @property
     def count_threshold(self):

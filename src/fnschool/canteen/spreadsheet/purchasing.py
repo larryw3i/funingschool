@@ -52,14 +52,12 @@ class Purchasing(SpreadsheetBase):
         self._count_col = [
             None,
             None,
-            ["总数", "数量", "下单数量", "订货数量", "发货数量","记账数量"],
+            ["总数", "数量", "下单数量", "订货数量", "发货数量", "记账数量"],
         ]
         self._meal_type_col = [
             None,
             None,
-            [
-                "餐类","订单类型","餐型"
-            ],
+            ["餐类", "订单类型", "餐型"],
         ]
         self._abandoned_col = [
             None,
@@ -130,7 +128,7 @@ class Purchasing(SpreadsheetBase):
 
         return col
 
-    def get_optional_col(self,col):
+    def get_optional_col(self, col):
         if not col[1]:
             col0 = [
                 (n, self.headers.index(n) + 1)
@@ -655,7 +653,7 @@ class Purchasing(SpreadsheetBase):
                 xdate=food[self.xdate_col[0]],
                 purchaser=food[self.purchaser_col[0]],
                 fclass=food[self.food_class_col[0]],
-                meal_type=food[self.meal_type[0]]
+                meal_type=food[self.meal_type[0]],
             )
             if self.abandoned_col[0]:
                 _food.is_abandoned = not pd.isna(food[self.abandoned_col[0]])

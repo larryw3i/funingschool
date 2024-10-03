@@ -99,9 +99,6 @@ class PreConsuming(SpreadsheetBase):
             wbfoods = [
                 f for f in cfoods if f.get_remainder(tn0) > 0 and f.xdate <= tn0
             ]
-            for wbfood in [f for f in wbfoods if f.xdate < tn0]:
-                if not wbfood.name.endswith(residual_mark):
-                    wbfood.name = wbfood.name + residual_mark
 
             wbfoods = sorted(
                 wbfoods, key=lambda f: (f.xdate, f.name, f.unit_price)
@@ -128,11 +125,9 @@ class PreConsuming(SpreadsheetBase):
             for f_index in range(0, len(wbfoods)):
                 wbfood = wbfoods[f_index]
                 row_index = self.row_index_offset + f_index
-                sheet.cell(row_index, 1, wbfood.name)
+                sheet.cell(row_index, 1, wbfood.display_name(time_node0=tn0))
                 sheet.cell(row_index, 2, wbfood.get_remainder(tn0))
                 sheet.cell(row_index, 4, wbfood.unit_price)
-                if wbfood.name.endswith(residual_mark):
-                    wbfood.name = wbfood.name.replace(residual_mark, "")
 
             for row_index in range(row_index + 1, sheet.max_row + 1):
                 sheet.cell(row_index, 1, "")
