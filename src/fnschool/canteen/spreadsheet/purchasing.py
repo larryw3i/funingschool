@@ -52,7 +52,14 @@ class Purchasing(SpreadsheetBase):
         self._count_col = [
             None,
             None,
-            ["总数", "数量", "下单数量", "订货数量", "发货数量"],
+            ["总数", "数量", "下单数量", "订货数量", "发货数量","记账数量"],
+        ]
+        self._meal_type_col = [
+            None,
+            None,
+            [
+                "餐类","订单类型","餐型"
+            ],
         ]
         self._abandoned_col = [
             None,
@@ -123,6 +130,21 @@ class Purchasing(SpreadsheetBase):
 
         return col
 
+    def get_optional_col(self,col):
+        if not col[1]:
+            col0 = [
+                (n, self.headers.index(n) + 1)
+                for n in self.headers
+                if n in col[2]
+            ]
+            if len(col0) < 1:
+                return None
+            col0 = col0[-1]
+            col[0] = col0[0]
+            col[1] = col0[1]
+
+        return col
+
     @property
     def col_indexes(self):
         indexes = [c[1] for c in self.cols]
@@ -142,6 +164,7 @@ class Purchasing(SpreadsheetBase):
                 self.total_price_col,
                 self.abandoned_col,
                 self.inventory_col,
+                self.meal_type_col,
             ]
         return self._cols
 
@@ -152,6 +175,10 @@ class Purchasing(SpreadsheetBase):
     @property
     def purchaser_col(self):
         return self.get_col(self._purchaser_col)
+
+    @property
+    def meal_type_col(self):
+        return self.get_col(self._meal_type_col)
 
     @property
     def food_name_col(self):
@@ -323,6 +350,7 @@ class Purchasing(SpreadsheetBase):
                     + "\n\tcolumn   type    example"
                     + "\n\t送货日期 Text    2024-03-01"
                     + "\n\t食材名称 Text    香菜"
+                    + "\n\t餐类     Text    正餐        (Optional)"
                     + "\n\t数量     Number  20"
                     + "\n\t计量单位 Text    斤"
                     + "\n\t总价     Number  20.0"
@@ -500,6 +528,8 @@ class Purchasing(SpreadsheetBase):
                         self.sheet.cell(row_index, self.inventory_col[1], "y")
 
                         for col_index in self.col_indexes:
+                            if not col_index:
+                                continue
                             self.sheet.cell(row_index, col_index).font = (
                                 self.edited_cell_font
                             )
@@ -625,11 +655,15 @@ class Purchasing(SpreadsheetBase):
                 xdate=food[self.xdate_col[0]],
                 purchaser=food[self.purchaser_col[0]],
                 fclass=food[self.food_class_col[0]],
+                meal_type=food[self.meal_type[0]]
             )
             if self.abandoned_col[0]:
                 _food.is_abandoned = not pd.isna(food[self.abandoned_col[0]])
             if self.inventory_col[0]:
                 _food.is_inventory = not pd.isna(food[self.inventory_col[0]])
+            if self.meal_type_col[0]:
+                _food.meal_type = food[self.meal_type[0]]
+
             _foods.append(_food)
 
         foods = _foods

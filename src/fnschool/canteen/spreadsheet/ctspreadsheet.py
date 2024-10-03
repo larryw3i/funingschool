@@ -137,6 +137,10 @@ class CtSpreadSheet:
             self._inventory = Inventory(self.bill)
         return self._inventory
 
+    @property
+    def meal_type(self):
+        return self.bill.meal_type
+
     def save_workbook(self):
         bill_fpath0 = self.operator.bill_fpath_uuid
         print_error(
@@ -257,6 +261,7 @@ class CtSpreadSheet:
             + str(sum([f.total_price for f in bfoods if not f.is_inventory]))
         )
         summary = [
+            self.bill.meal_type,
             inventory_mm1,
             warehousing_m,
             inventory_mm1_warehousing_m,
@@ -294,19 +299,24 @@ class CtSpreadSheet:
         print()
 
     def update(self):
+        foods0 = self.bill.foods.copy()
+        meal_types = list(set([f.meal_type for f in foods0]))
+        for t in meal_types:
+            _foods = [f for f in foods0 if f.meal_type == t]
+            self.bill.foods = _foods
 
-        self.inventory.update()
-        self.warehousing.update()
-        self.unwarehousing.update()
-        self.consuming.update()
-        self.sfood.update()
-        self.purchasingsum.update()
-        self.consumingsum.update()
-        self.cover.update()
+            self.inventory.update()
+            self.warehousing.update()
+            self.unwarehousing.update()
+            self.consuming.update()
+            self.sfood.update()
+            self.purchasingsum.update()
+            self.consumingsum.update()
+            self.cover.update()
 
-        self.print_summary()
+            self.print_summary()
 
-        self.save_workbook()
+            self.save_workbook()
 
         print_info(_("Update completely!"))
 

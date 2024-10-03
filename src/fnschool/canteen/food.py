@@ -19,6 +19,7 @@ class Food:
         xdate,
         purchaser,
         fclass,
+        meal_type = None,
         is_abandoned=False,
         is_inventory=False,
     ):
@@ -34,6 +35,7 @@ class Food:
         self.is_abandoned = is_abandoned
         self.is_inventory = is_inventory
         self.consumptions = []
+        self.meal_type = meal_type
         self._count_threshold = None
         pass
 

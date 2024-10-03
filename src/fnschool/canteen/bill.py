@@ -132,6 +132,10 @@ class Bill:
         self._foods = foods
 
     @property
+    def meal_type(self):
+        return self.foods[0].meal_type
+
+    @property
     def purchaser(self):
         purchaser = self.foods[-1].purchaser
         return purchaser
