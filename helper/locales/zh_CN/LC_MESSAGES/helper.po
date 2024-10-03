@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-04 21:37+0800\n"
+"POT-Creation-Date: 2024-10-04 01:03+0800\n"
 "PO-Revision-Date: 2024-08-25 10:30+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.10.3\n"
+"Generated-By: Babel 2.14.0\n"
 
 #: helper/entry.py:18
 msgid "Helper of fnschool project"
@@ -86,39 +86,39 @@ msgstr "文档 相关函数。"
 msgid "\"readme\": \"README\" files related functions."
 msgstr "“readme”：“README”文件的 相关函数。"
 
-#: helper/docs/readme/content.py:31
+#: helper/docs/readme/content.py:32
 msgid "README file \"{0}\" was updated."
 msgstr "README 文件 “{0}” 已更新。"
 
-#: helper/docs/readme/content.py:56
+#: helper/docs/readme/content.py:57
 msgid "NO Just some simple scripts for warehousing and consuming."
 msgstr "不只是一些出入库脚本。"
 
-#: helper/docs/readme/content.py:68 helper/docs/readme/content.py:92
+#: helper/docs/readme/content.py:69 helper/docs/readme/content.py:93
 msgid "Key Features"
 msgstr "特性"
 
-#: helper/docs/readme/content.py:72 helper/docs/readme/content.py:122
+#: helper/docs/readme/content.py:73 helper/docs/readme/content.py:123
 msgid "How To Use"
 msgstr "如何使用"
 
-#: helper/docs/readme/content.py:76 helper/docs/readme/content.py:159
+#: helper/docs/readme/content.py:77 helper/docs/readme/content.py:160
 msgid "Credits"
 msgstr "致谢（声明）"
 
-#: helper/docs/readme/content.py:80 helper/docs/readme/content.py:175
+#: helper/docs/readme/content.py:81 helper/docs/readme/content.py:176
 msgid "Support"
 msgstr "赞助"
 
-#: helper/docs/readme/content.py:84 helper/docs/readme/content.py:186
+#: helper/docs/readme/content.py:85 helper/docs/readme/content.py:187
 msgid "License"
 msgstr "授权"
 
-#: helper/docs/readme/content.py:88
+#: helper/docs/readme/content.py:89
 msgid "Screenshot"
 msgstr "截图"
 
-#: helper/docs/readme/content.py:88
+#: helper/docs/readme/content.py:89
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132"
 "-f8cd-11ee-8ee6-f37309efa64b.png"
@@ -126,65 +126,65 @@ msgstr ""
 "https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/9432e132"
 "-f8cd-11ee-8ee6-f37309efa64b.png"
 
-#: helper/docs/readme/content.py:96
+#: helper/docs/readme/content.py:97
 msgid "warehousing and consuming"
 msgstr "食材出入库"
 
-#: helper/docs/readme/content.py:99
+#: helper/docs/readme/content.py:100
 msgid "Read food spreadsheets automatically."
 msgstr "自动读取食材表单。"
 
-#: helper/docs/readme/content.py:100
+#: helper/docs/readme/content.py:101
 msgid "The simplest and most straightforward `consuming sheets`."
 msgstr "更简单更直观食材出库设计。"
 
-#: helper/docs/readme/content.py:101
+#: helper/docs/readme/content.py:102
 msgid "Update sheets (warehousing, consuming, summing, etc) automatically."
 msgstr "自动更新表单（入库、出库、汇总等等）。"
 
-#: helper/docs/readme/content.py:105
+#: helper/docs/readme/content.py:106
 msgid "Reduce calculation errors."
 msgstr "减少计算误差。"
 
-#: helper/docs/readme/content.py:106
+#: helper/docs/readme/content.py:107
 msgid "Effectively eliminate unit prices containing infinite decimals."
 msgstr "有效地“消除”含有无限小数的单价。"
 
-#: helper/docs/readme/content.py:107
+#: helper/docs/readme/content.py:108
 msgid "Easy to use."
 msgstr "易用。"
 
-#: helper/docs/readme/content.py:110
+#: helper/docs/readme/content.py:111
 msgid "Test statistics"
 msgstr "测试统计"
 
-#: helper/docs/readme/content.py:113
+#: helper/docs/readme/content.py:114
 msgid "An easy-to-use \"test score entry form\"."
 msgstr "易用的“测试登记”表单。"
 
-#: helper/docs/readme/content.py:114
+#: helper/docs/readme/content.py:115
 msgid ""
 "Clear test results at a glance, converting table data into Intuitive "
 "images."
 msgstr "直观展示测试结果，生成直观的图片方便发送给学生家长。"
 
-#: helper/docs/readme/content.py:118
+#: helper/docs/readme/content.py:119
 msgid "Display comments."
 msgstr "显示测试备注。"
 
-#: helper/docs/readme/content.py:119
+#: helper/docs/readme/content.py:120
 msgid "Effectively assist testers, especially teachers and students."
 msgstr "有效协助测试相关人员，尤其是老师和学生。"
 
-#: helper/docs/readme/content.py:126
+#: helper/docs/readme/content.py:127
 msgid "Install Python3"
 msgstr "安装 Python3"
 
-#: helper/docs/readme/content.py:129
+#: helper/docs/readme/content.py:130
 msgid "on Ubuntu:"
 msgstr "在 Ubuntu 上："
 
-#: helper/docs/readme/content.py:134
+#: helper/docs/readme/content.py:135
 msgid ""
 "For `Windows`, you can install Python3 from https://www.python.org/getit/"
 " ."
@@ -194,41 +194,41 @@ msgstr ""
 "https://mirrors.huaweicloud.com/python/  \n"
 "https://mirror.bjtu.edu.cn/python/  "
 
-#: helper/docs/readme/content.py:141
+#: helper/docs/readme/content.py:142
 msgid "Install fnschool and run it"
 msgstr "安装 和 运行 fnschool "
 
-#: helper/docs/readme/content.py:145
+#: helper/docs/readme/content.py:146
 msgid "install"
 msgstr "安装"
 
-#: helper/docs/readme/content.py:147
+#: helper/docs/readme/content.py:148
 msgid "run `warehousing and consuming` module"
 msgstr "运行“出入库”模块"
 
-#: helper/docs/readme/content.py:149
+#: helper/docs/readme/content.py:150
 msgid "run `test statistics` module"
 msgstr "运行“测试”模块"
 
-#: helper/docs/readme/content.py:153
+#: helper/docs/readme/content.py:154
 msgid ""
 "Note: Read the information it prompts carefully, which is the key to "
 "using it well."
 msgstr "备注：细心耐心阅读它打印的提示，这是你能使用好它的关键。"
 
-#: helper/docs/readme/content.py:162
+#: helper/docs/readme/content.py:163
 msgid "This software uses the following open source packages:"
 msgstr "此软件使用了如下的开源软件包（项目）："
 
-#: helper/docs/readme/content.py:178
+#: helper/docs/readme/content.py:179
 msgid "Buy me a `coffee`:"
 msgstr "给我买一杯“咖啡”："
 
-#: helper/docs/readme/content.py:181
+#: helper/docs/readme/content.py:182
 msgid "Buy me a \"coffee\"."
 msgstr "给我买一杯“咖啡”。"
 
-#: helper/docs/readme/content.py:182
+#: helper/docs/readme/content.py:183
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images"
 "/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
@@ -236,7 +236,7 @@ msgstr ""
 "https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images"
 "/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
 
-#: helper/docs/readme/content.py:189
+#: helper/docs/readme/content.py:190
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr "https://gitee.com/larryw3i/funingschool/blob/master/LICENSE"
 

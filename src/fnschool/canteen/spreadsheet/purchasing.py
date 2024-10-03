@@ -608,6 +608,7 @@ class Purchasing(SpreadsheetBase):
                         fclass=f0.fclass,
                         is_inventory=f0.is_inventory,
                         is_abandoned=f0.is_abandoned,
+                        meal_type=f0.meal_type
                     )
 
                     total_price0 = round(
@@ -653,14 +654,13 @@ class Purchasing(SpreadsheetBase):
                 xdate=food[self.xdate_col[0]],
                 purchaser=food[self.purchaser_col[0]],
                 fclass=food[self.food_class_col[0]],
-                meal_type=food[self.meal_type[0]],
             )
             if self.abandoned_col[0]:
                 _food.is_abandoned = not pd.isna(food[self.abandoned_col[0]])
             if self.inventory_col[0]:
                 _food.is_inventory = not pd.isna(food[self.inventory_col[0]])
             if self.meal_type_col[0]:
-                _food.meal_type = food[self.meal_type[0]]
+                _food.meal_type = food[self.meal_type_col[0]]
 
             _foods.append(_food)
 

@@ -35,12 +35,11 @@ class Food:
         self.is_abandoned = is_abandoned
         self.is_inventory = is_inventory
         self.consumptions = []
-        self.meal_type = meal_type
+        self.meal_type = meal_type or ""
         self._count_threshold = None
         pass
 
-    @property
-    def display_name(self, is_residual=False, time_node0=None):
+    def get_display_name(self, is_residual=False, time_node0=None):
         name = (
             (_("({0})").format(self.meal_type) if self.meal_type else "")
             + self.name
