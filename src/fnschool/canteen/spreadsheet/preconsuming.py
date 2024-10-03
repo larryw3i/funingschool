@@ -28,7 +28,6 @@ class PreConsuming(SpreadsheetBase):
             exit()
         year = self.bill.consuming.year
         month = self.bill.consuming.month
-        residual_mark = _("(Remaining)")
         time_nodes = sorted(
             list(
                 set(
@@ -101,7 +100,7 @@ class PreConsuming(SpreadsheetBase):
             ]
 
             wbfoods = sorted(
-                wbfoods, key=lambda f: (f.xdate, f.name, f.unit_price)
+                wbfoods, key=lambda f: (f.meal_type, f.xdate, f.name, f.unit_price)
             )
 
             col_index = 0

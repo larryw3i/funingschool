@@ -261,7 +261,6 @@ class CtSpreadSheet:
             + str(sum([f.total_price for f in bfoods if not f.is_inventory]))
         )
         summary = [
-            self.bill.meal_type,
             inventory_mm1,
             warehousing_m,
             inventory_mm1_warehousing_m,
@@ -284,6 +283,8 @@ class CtSpreadSheet:
         )
         summary = (
             [summary_sep]
+            + self.meal_type
+            + [summary_sep]
             + summary[:3]
             + [summary_sep]
             + summary[3:6]
