@@ -323,7 +323,7 @@ class CtSpreadSheet:
 
         for t in meal_types:
 
-            print_info(_("Update sheets for {0}.").format(t))
+            print_info(_("Updating sheets for {0}.").format(t))
 
             _foods = [f for f in foods0 if f.meal_type == t]
 
