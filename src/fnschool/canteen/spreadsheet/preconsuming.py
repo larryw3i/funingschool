@@ -100,7 +100,8 @@ class PreConsuming(SpreadsheetBase):
             ]
 
             wbfoods = sorted(
-                wbfoods, key=lambda f: (f.meal_type, f.xdate, f.name, f.unit_price)
+                wbfoods,
+                key=lambda f: (f.meal_type, f.xdate, f.name, f.unit_price),
             )
 
             col_index = 0
@@ -124,7 +125,9 @@ class PreConsuming(SpreadsheetBase):
             for f_index in range(0, len(wbfoods)):
                 wbfood = wbfoods[f_index]
                 row_index = self.row_index_offset + f_index
-                sheet.cell(row_index, 1, wbfood.get_display_name(time_node0=tn0))
+                sheet.cell(
+                    row_index, 1, wbfood.get_display_name(time_node0=tn0)
+                )
                 sheet.cell(row_index, 2, wbfood.get_remainder(tn0))
                 sheet.cell(row_index, 4, wbfood.unit_price)
 

@@ -608,7 +608,7 @@ class Purchasing(SpreadsheetBase):
                         fclass=f0.fclass,
                         is_inventory=f0.is_inventory,
                         is_abandoned=f0.is_abandoned,
-                        meal_type=f0.meal_type
+                        meal_type=f0.meal_type,
                     )
 
                     total_price0 = round(

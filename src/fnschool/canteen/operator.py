@@ -55,15 +55,25 @@ class Operator(User):
 
     @property
     def bill_fpath(self):
-        fpath = self.bill_dpath / (_("bill") + ".xlsx")
+        fpath = self.bill_dpath / (
+            _("bill")
+            + (
+                _("({0})").format(self.bill.meal_type)
+                if self.bill.meal_type
+                else ""
+            )
+            + ".xlsx"
+        )
         if not fpath.exists():
             shutil.copy(bill0_fpath, fpath)
         return fpath
 
     @property
     def bill_fpath_uuid(self):
-        fpath = self.bill_fpath.parent / (
-            _("bill") + "." + str(uuid.uuid4()) + ".xlsx"
+        fpath = (
+            str(self.bill_fpath).rpartition(".")[0]
+            + str(uuid.uuid4)
+            + self.bill_fpath.suffix()
         )
         return fpath
 

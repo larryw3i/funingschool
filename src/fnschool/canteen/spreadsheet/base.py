@@ -14,9 +14,9 @@ class SpreadsheetBase:
         self.bill = bill
         self.spreadsheet = self.bill.spreadsheet
         self.s = self.spreadsheet
-        self.bill_workbook = self.spreadsheet.bill_workbook
+        self._bill_workbook = None
         self.sd = self.bill.significant_digits
-        self.bwb = self.bill_workbook
+        self._bwb = None
         self.sheet_name = None
         self._sheet = None
         self._form_indexes = None
@@ -30,6 +30,19 @@ class SpreadsheetBase:
         )
         self.row_height = 12.75
 
+    @property
+    def bill_workbook(self):
+        if not self._bill_workbook:
+            self._bill_workbook = self.spreadsheet.bill_workbook
+        return self._bill_workbook
+
+    @property
+    def bwb(self):
+        if not self._bwb:
+            self._bwb = self.bill_workbook
+        return self._bwb
+
+    @property
     def row_inserting_tip(self, row_index):
         print_error(
             _(
