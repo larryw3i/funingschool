@@ -76,6 +76,13 @@ class CtSpreadSheet:
     def bwb(self):
         return self.bill_workbook
 
+    def del_bill_workbook(self):
+        self._bwb = None
+        self._bill_fpath = None
+
+    def del_bwb(self):
+        self.del_bill_workbook()
+
     @property
     def consumingsum(self):
         if not self._consumingsum:
@@ -283,7 +290,7 @@ class CtSpreadSheet:
         )
         summary = (
             [summary_sep]
-            + self.meal_type
+            + [self.meal_type]
             + [summary_sep]
             + summary[:3]
             + [summary_sep]
@@ -299,11 +306,27 @@ class CtSpreadSheet:
         print_info(summary)
         print()
 
+    def del_sheets_var(self):
+        self._inventory = None
+        self._warehousing = None
+        self._unwareshousing = None
+        self._consuming = None
+        self._sfood = None
+        self._purchasingsum = None
+        self._consumingsum = None
+        self._cover = None
+
     def update(self):
+        
         foods0 = self.bill.foods.copy()
         meal_types = list(set([f.meal_type for f in foods0]))
+
         for t in meal_types:
+
+            print_info(_("Update sheets for {0}.").format(t))
+
             _foods = [f for f in foods0 if f.meal_type == t]
+
             self.bill.foods = _foods
 
             self.inventory.update()
@@ -318,6 +341,9 @@ class CtSpreadSheet:
             self.print_summary()
 
             self.save_workbook()
+
+            self.del_sheets_var()
+            self.del_bwb()
 
         print_info(_("Update completely!"))
 

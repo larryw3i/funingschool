@@ -73,7 +73,7 @@ class Operator(User):
         fpath = (
             str(self.bill_fpath).rpartition(".")[0]
             + str(uuid.uuid4)
-            + self.bill_fpath.suffix()
+            + self.bill_fpath.suffix
         )
         return fpath
 

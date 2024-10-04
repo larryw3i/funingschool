@@ -42,7 +42,6 @@ class SpreadsheetBase:
             self._bwb = self.bill_workbook
         return self._bwb
 
-    @property
     def row_inserting_tip(self, row_index):
         print_error(
             _(

@@ -43,7 +43,7 @@ class Food:
         name = self.name + (
             _("({0})").format(
                 (
-                    (_("Remaining")+"|")
+                    (_("Remaining") + "|")
                     if (is_residual or (time_node0 and self.xdate < time_node0))
                     else ""
                 )
