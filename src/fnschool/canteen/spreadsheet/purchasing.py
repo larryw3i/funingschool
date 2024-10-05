@@ -581,13 +581,18 @@ class Purchasing(SpreadsheetBase):
                             + '(Yes: "Y","y","".'
                             + ' Yes for rest: "A","a".'
                             + ' No: "N","n".'
-                            + ' No for rest: "S","s").'
+                            + ' No for rest: "S","s".'
+                            + ' Default: Yes for rest, "A/a".'
+                            + ')'
                         ).format(f.name)
                     )
                     split_mode = input0()
 
                 if split_mode and split_mode in "Ss":
                     return
+
+                if split_mode and split_mode == "":
+                    split_mode = "A"
 
                 if split_mode in "YyAa":
                     times_char = "\u2a09"
