@@ -4,7 +4,7 @@ from helper import *
 
 
 def set_msg(args):
-    from helper.msg.fnmsg import Msg
+    from helper.msg.msg import Msg
 
     if args.action in "update":
         msg = Msg()

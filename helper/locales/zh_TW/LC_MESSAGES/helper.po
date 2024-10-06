@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-05 23:11+0800\n"
+"POT-Creation-Date: 2024-10-07 00:31+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -61,20 +61,20 @@ msgstr ""
 msgid "The hash values of distributions are:"
 msgstr ""
 
+#: helper/dep/dep.py:24 helper/dep/fndep.py:24
+msgid "Dependency ({0}) has been installed."
+msgstr ""
+
+#: helper/dep/dep.py:26 helper/dep/fndep.py:26
+msgid "Dependencies ({0}) have been installed."
+msgstr ""
+
 #: helper/dep/entry.py:19
 msgid "'dependencies' related functions."
 msgstr ""
 
 #: helper/dep/entry.py:24
 msgid "\"install\": Install all dependencies in virtual environment."
-msgstr ""
-
-#: helper/dep/fndep.py:24
-msgid "Dependency ({0}) has been installed."
-msgstr ""
-
-#: helper/dep/fndep.py:26
-msgid "Dependencies ({0}) have been installed."
 msgstr ""
 
 #: helper/docs/entry.py:21
@@ -250,11 +250,11 @@ msgstr ""
 msgid "The locale language code for adding message catalogs (e.g: en_US)."
 msgstr ""
 
-#: helper/project/fnproject.py:29
+#: helper/project/fnproject.py:30 helper/project/project.py:30
 msgid "Version was updated."
 msgstr ""
 
-#: helper/project/fnproject.py:31
+#: helper/project/fnproject.py:32 helper/project/project.py:32
 msgid "Versions were updated."
 msgstr ""
 

@@ -3,7 +3,7 @@ import sys
 import calendar
 from fnschool import *
 
-from fnschool.canteen.spreadsheet.ctspreadsheet import *
+from fnschool.canteen.spreadsheet.spreadsheet import *
 from fnschool.canteen.operator import *
 from fnschool.canteen.path import *
 from fnschool.canteen.currency import Currency
@@ -118,7 +118,7 @@ class Bill:
     @property
     def spreadsheet(self):
         if not self._spreadsheet:
-            self._spreadsheet = CtSpreadSheet(self)
+            self._spreadsheet = SpreadSheet(self)
         return self._spreadsheet
 
     @property
