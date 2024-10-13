@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-11 06:12+0800\n"
+"POT-Creation-Date: 2024-10-14 07:43+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -126,35 +126,35 @@ msgstr ""
 msgid "config"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:73 src/fnschool/canteen/bill.py:78
-#: src/fnschool/canteen/bill.py:93
+#: src/fnschool/canteen/bill.py:74 src/fnschool/canteen/bill.py:79
+#: src/fnschool/canteen/bill.py:94
 #, python-format
 msgid "%s can't change."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:147
+#: src/fnschool/canteen/bill.py:160
 msgid ""
 "If you feel {0} is great, please sponsor it. Your sponsorship will keep "
 "the project alive."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:154
+#: src/fnschool/canteen/bill.py:167
 msgid "Sponsor URL: {0}"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:188
+#: src/fnschool/canteen/bill.py:201
 msgid "Food classes files:"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:197
+#: src/fnschool/canteen/bill.py:210
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:207
+#: src/fnschool/canteen/bill.py:220
 msgid "Preset food classes were read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:221
+#: src/fnschool/canteen/bill.py:234
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr ""
 
@@ -180,12 +180,18 @@ msgstr ""
 msgid "The functions of canteen."
 msgstr ""
 
-#: src/fnschool/canteen/food.py:44 src/fnschool/canteen/operator.py:61
+#: src/fnschool/canteen/food.py:44 src/fnschool/canteen/operator.py:66
+#: src/fnschool/canteen/operator.py:71
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:167
 msgid "({0})"
 msgstr ""
 
 #: src/fnschool/canteen/food.py:46
 msgid "Remaining"
+msgstr ""
+
+#: src/fnschool/canteen/food.py:60
+msgid "The count of \"{0}\" is 0, you need to delete it maybe."
 msgstr ""
 
 #: src/fnschool/canteen/operator.py:19
@@ -208,7 +214,7 @@ msgstr ""
 msgid "superior department"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:51 src/fnschool/canteen/operator.py:59
+#: src/fnschool/canteen/operator.py:51 src/fnschool/canteen/operator.py:63
 msgid "bill"
 msgstr ""
 
@@ -236,7 +242,7 @@ msgstr ""
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:64
 #: src/fnschool/canteen/spreadsheet/cover.py:61
 #: src/fnschool/canteen/spreadsheet/food.py:274
-#: src/fnschool/canteen/spreadsheet/inventory.py:314
+#: src/fnschool/canteen/spreadsheet/inventory.py:333
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:90
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:144
 #: src/fnschool/canteen/spreadsheet/warehousing.py:357
@@ -466,7 +472,7 @@ msgid ""
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:194
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:196
 #: src/fnschool/canteen/workbook.py:2016
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
@@ -600,8 +606,12 @@ msgstr ""
 msgid "Sheet \"{0}\" has been reformatted."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/inventory.py:154
+#: src/fnschool/canteen/spreadsheet/inventory.py:162
 msgid "No unit"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/inventory.py:244
+msgid "There is no inventories for \"{0}\"."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/preconsuming.py:27
@@ -635,37 +645,37 @@ msgstr ""
 msgid "New purchased foods for date {0} are:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:175
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:177
 msgid "Negligible foods are not listed."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:178
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:180
 msgid "There is no purchased food for {0}."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:184
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:186
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I "
 "know [press any key to continue])"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:233
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:235
 msgid "{year}.{month}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:255
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:257
 msgid "Consuming days of {0}:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:262
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
 msgid "{0} days in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:266
 msgid "{0} day in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:267
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:269
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
@@ -673,37 +683,37 @@ msgstr ""
 msgid "parent_path_of_purchasing_file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:122
+#: src/fnschool/canteen/spreadsheet/purchasing.py:130
 msgid "Column \"{0}\" was not found. Exit"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:212
+#: src/fnschool/canteen/spreadsheet/purchasing.py:220
 msgid "Loading data from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:270
+#: src/fnschool/canteen/spreadsheet/purchasing.py:278
 msgid ""
 "Column \"{0}\" has been updated, feel free to open new issue if some food"
 " with the wrong class ({1}). "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:277
+#: src/fnschool/canteen/spreadsheet/purchasing.py:285
 msgid "Ok, I'd like to check and update it. (Press any key to check the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:285
+#: src/fnschool/canteen/spreadsheet/purchasing.py:293
 msgid ""
 "I have checked it, all classes of food are right, and I closed the file. "
 "(Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:341
+#: src/fnschool/canteen/spreadsheet/purchasing.py:349
 msgid ""
 "{0} need a purchasing list file, and it's file type should be '.xlsx'. "
 "The column names of it:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:346
+#: src/fnschool/canteen/spreadsheet/purchasing.py:354
 msgid ""
 "\n"
 "\tcolumn   type    example\n"
@@ -718,88 +728,92 @@ msgid ""
 "\t是结余   Text    y"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:360
+#: src/fnschool/canteen/spreadsheet/purchasing.py:368
 msgid "Please select a purchasing file."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:361
+#: src/fnschool/canteen/spreadsheet/purchasing.py:369
 #: src/fnschool/exam/score.py:509
 msgid "Spreadsheet Files"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:367
+#: src/fnschool/canteen/spreadsheet/purchasing.py:375
 msgid "Please select the purchasing file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:373
+#: src/fnschool/canteen/spreadsheet/purchasing.py:381
 #: src/fnschool/exam/score.py:526
 msgid "No file was selected, exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:377
+#: src/fnschool/canteen/spreadsheet/purchasing.py:385
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:410
+#: src/fnschool/canteen/spreadsheet/purchasing.py:430
 msgid "The remaining food wasn't read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:416
+#: src/fnschool/canteen/spreadsheet/purchasing.py:441
 msgid ""
 "{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet \"{2}\" "
 "......"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:430
+#: src/fnschool/canteen/spreadsheet/purchasing.py:454
+msgid "There is no saved inventories from \"{0}\""
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:462
 msgid ""
 "Some remaining foods have been read from sheet \"{0}\" of spreadsheet "
 "\"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:435
+#: src/fnschool/canteen/spreadsheet/purchasing.py:467
 msgid "The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:461
+#: src/fnschool/canteen/spreadsheet/purchasing.py:493
 msgid "Purchaser: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:464
+#: src/fnschool/canteen/spreadsheet/purchasing.py:496
 msgid "Inventory data: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:472
+#: src/fnschool/canteen/spreadsheet/purchasing.py:504
 msgid "Fill them in \"{0}\"? (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:474
+#: src/fnschool/canteen/spreadsheet/purchasing.py:506
 msgid "Fill it in \"{0}\"? (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:537
+#: src/fnschool/canteen/spreadsheet/purchasing.py:567
 msgid "The remaining foods have been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:539
+#: src/fnschool/canteen/spreadsheet/purchasing.py:569
 msgid "The remaining food has been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:549
+#: src/fnschool/canteen/spreadsheet/purchasing.py:580
 msgid "Please check/modify the updated data. (Press any key to open the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:558
+#: src/fnschool/canteen/spreadsheet/purchasing.py:589
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:578
+#: src/fnschool/canteen/spreadsheet/purchasing.py:608
 msgid ""
 "The unit price of \"{0}\" is an infinite decimal, split \"{0}\"?(Yes: "
 "\"Y\",\"y\",\"\". Yes for rest: \"A\",\"a\". No: \"N\",\"n\". No for "
 "rest: \"S\",\"s\". Default: Yes for rest, \"A/a\".)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:623
+#: src/fnschool/canteen/spreadsheet/purchasing.py:653
 msgid "\"{0}\" was split:"
 msgstr ""
 

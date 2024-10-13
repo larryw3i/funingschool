@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-11 06:12+0800\n"
+"POT-Creation-Date: 2024-10-14 07:43+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -192,15 +192,15 @@ msgid "Install fnschool and run it"
 msgstr ""
 
 #: helper/docs/readme/content.py:146
-msgid "install"
+msgid "install fnschool."
 msgstr ""
 
 #: helper/docs/readme/content.py:148
-msgid "run `warehousing and consuming` module"
+msgid "run `warehousing and consuming` module."
 msgstr ""
 
 #: helper/docs/readme/content.py:150
-msgid "run `test statistics` module"
+msgid "run `test statistics` module."
 msgstr ""
 
 #: helper/docs/readme/content.py:154
@@ -1989,5 +1989,14 @@ msgstr ""
 #~ "Read the information it prompts "
 #~ "carefully, which is the key to "
 #~ "using it well."
+#~ msgstr ""
+
+#~ msgid "install"
+#~ msgstr ""
+
+#~ msgid "run `warehousing and consuming` module"
+#~ msgstr ""
+
+#~ msgid "run `test statistics` module"
 #~ msgstr ""
 

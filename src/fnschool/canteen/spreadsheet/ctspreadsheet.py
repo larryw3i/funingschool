@@ -317,7 +317,7 @@ class CtSpreadSheet:
         self._cover = None
 
     def update(self):
-        
+
         foods0 = self.bill.foods.copy()
         meal_types = list(set([f.meal_type for f in foods0]))
 

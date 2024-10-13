@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-11 06:12+0800\n"
-"PO-Revision-Date: 2024-08-25 10:30+0800\n"
+"POT-Creation-Date: 2024-10-14 07:43+0800\n"
+"PO-Revision-Date: 2024-10-14 07:41+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -199,16 +199,24 @@ msgid "Install fnschool and run it"
 msgstr "安装 和 运行 fnschool "
 
 #: helper/docs/readme/content.py:146
-msgid "install"
-msgstr "安装"
+msgid "install fnschool."
+msgstr ""
+"设置安装源为镜像站\n"
+"pip config set global.index-url "
+"https://mirrors.bfsu.edu.cn/pypi/web/simple # 或\n"
+"pip config set global.index-url https://mirror.nju.edu.cn/pypi/web/simple"
+" # 或\n"
+"pip config set global.index-url "
+"https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple\n"
+"# 安装 fnschool"
 
 #: helper/docs/readme/content.py:148
-msgid "run `warehousing and consuming` module"
-msgstr "运行“出入库”模块"
+msgid "run `warehousing and consuming` module."
+msgstr "运行“出入库”模块。"
 
 #: helper/docs/readme/content.py:150
-msgid "run `test statistics` module"
-msgstr "运行“测试”模块"
+msgid "run `test statistics` module."
+msgstr "运行“测试”模块。"
 
 #: helper/docs/readme/content.py:154
 msgid ""
@@ -275,4 +283,7 @@ msgstr "版本已更新。"
 
 #~ msgid "Note:"
 #~ msgstr "备注："
+
+#~ msgid "install"
+#~ msgstr "安装"
 

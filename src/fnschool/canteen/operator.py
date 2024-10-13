@@ -55,12 +55,20 @@ class Operator(User):
 
     @property
     def bill_fpath(self):
+        fpath = self.get_bill_fpath()
+        return fpath
+
+    def get_bill_fpath(self, mtype=None):
         fpath = self.bill_dpath / (
             _("bill")
             + (
-                _("({0})").format(self.bill.meal_type)
-                if self.bill.meal_type
-                else ""
+                (
+                    _("({0})").format(self.bill.meal_type)
+                    if self.bill.meal_type
+                    else ""
+                )
+                if not mtype
+                else _("({0})").format(mtype)
             )
             + ".xlsx"
         )
@@ -72,7 +80,7 @@ class Operator(User):
     def bill_fpath_uuid(self):
         fpath = (
             str(self.bill_fpath).rpartition(".")[0]
-            + str(uuid.uuid4())
+            + "." +str(uuid.uuid4())
             + self.bill_fpath.suffix
         )
         return fpath

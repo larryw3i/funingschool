@@ -96,11 +96,15 @@ https://mirror.bjtu.edu.cn/python/
 </h3>
 
 ```bash
-# 安装
+# 设置安装源为镜像站
+pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple # 或
+pip config set global.index-url https://mirror.nju.edu.cn/pypi/web/simple # 或
+pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+# 安装 fnschool
 pip3 install -U fnschool
-# 运行“出入库”模块
+# 运行“出入库”模块。
 fnschool-cli canteen mk_bill
-# 运行“测试”模块
+# 运行“测试”模块。
 fnschool-cli exam enter
 ```
 

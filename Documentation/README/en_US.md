@@ -93,11 +93,11 @@ For `Windows`, you can install Python3 from https://www.python.org/getit/ .
 </h3>
 
 ```bash
-# install
+# install fnschool.
 pip3 install -U fnschool
-# run `warehousing and consuming` module
+# run `warehousing and consuming` module.
 fnschool-cli canteen mk_bill
-# run `test statistics` module
+# run `test statistics` module.
 fnschool-cli exam enter
 ```
 

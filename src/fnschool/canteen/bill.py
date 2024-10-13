@@ -21,6 +21,7 @@ class Bill:
         self.currency = Currency().CNY
         self._consuming = None
         self.significant_digits = 2
+        self._meal_type = None
 
         pass
 
@@ -133,7 +134,19 @@ class Bill:
 
     @property
     def meal_type(self):
-        return self.foods[0].meal_type
+        if not self._meal_type:
+            if len(self.foods) > 0:
+                self._meal_type = self.foods[0].meal_type
+
+        return self._meal_type
+
+    @meal_type.setter
+    def meal_type(self, mtype):
+        self._meal_type = mtype
+
+    @meal_type.deleter
+    def meal_type(self):
+        self._meal_type = None
 
     @property
     def purchaser(self):

@@ -121,12 +121,17 @@ class Inventory(SpreadsheetBase):
 
     @property
     def saved_foods(self):
-        bill_fpath = self.bill.operator.bill_fpath
+        _foods = self.get_save_foods()
+        return _foods
+
+    def get_save_foods(self, meal_type=None):
+        bill_fpath = self.bill.operator.get_bill_fpath(meal_type)
         wb = load_workbook(bill_fpath, read_only=True)
         sheet = wb[self.sheet_name]
         purchasing = self.bill.spreadsheet.purchasing
 
         food_index_m1 = []
+
         for row_index in range(1, sheet.max_row):
             if "食材名称" in str(sheet.cell(row_index, 1).value):
                 if sheet.cell(row_index + 2, 1).value:
@@ -135,6 +140,9 @@ class Inventory(SpreadsheetBase):
                     break
             if "合计" in str(sheet.cell(row_index, 1).value):
                 food_index_m1[1] = row_index - 1
+
+        if len(food_index_m1) < 1:
+            return []
 
         foods = []
         header_info = str(sheet.cell(food_index_m1[0] - 3, 1).value)
@@ -230,6 +238,15 @@ class Inventory(SpreadsheetBase):
                     cell.value = ""
 
         for i, (t1, _foods) in enumerate(tnfoods):
+            
+            if len(_foods) < 1:
+                print_warning(
+                    _("There is no inventories for \"{0}\".").format(
+                        t1.strftime("%Y-%m-%d")
+                    )
+                )
+                continue
+
             form_indexes_n = i
             form_index = form_indexes[form_indexes_n]
             form_i0, form_i1 = form_index
@@ -276,8 +293,10 @@ class Inventory(SpreadsheetBase):
             for findex, food in enumerate(_foods):
                 row_index = fentry_i0 + findex
                 if (
-                    sheet.cell(row_index + 1, 1).value.replace(" ", "")
-                    == "合计"
+                    sheet.cell(row_index + 1, 1).value and (
+                        sheet.cell(row_index + 1, 1).value.replace(" ", "")
+                        == "合计"
+                    )
                 ):
                     i_row_index = row_index + 1
                     self.row_inserting_tip(i_row_index)

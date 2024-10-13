@@ -143,11 +143,11 @@ sudo apt-get install python3 python3-pip
 </h3>
 
 ```bash
-# {_("install")}
+# {_("install fnschool.")}
 pip3 install -U fnschool
-# {_("run `warehousing and consuming` module")}
+# {_("run `warehousing and consuming` module.")}
 fnschool-cli canteen mk_bill
-# { _("run `test statistics` module")}
+# { _("run `test statistics` module.")}
 fnschool-cli exam enter
 ```
 

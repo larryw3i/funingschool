@@ -96,6 +96,14 @@ class Purchasing(SpreadsheetBase):
         self.edited_cell_font = Font(color="00FF0000")
         self._cols = None
         self._food_class_dv = None
+        self._pd_date = None
+        self._meal_types = None
+
+    @property
+    def pd_data(self):
+        if self._pd_date is None:
+            self._pd_date = pd.read_excel(self.path)
+        return self._pd_date
 
     @property
     def food_class_dv(self):
@@ -176,7 +184,7 @@ class Purchasing(SpreadsheetBase):
 
     @property
     def meal_type_col(self):
-        return self.get_col(self._meal_type_col)
+        return self.get_optional_col(self._meal_type_col)
 
     @property
     def food_name_col(self):
@@ -391,6 +399,16 @@ class Purchasing(SpreadsheetBase):
         self.add_class_col()
         self.update_inventories()
 
+    def get_meal_types(self):
+        data = self.pd_data
+        col = self.meal_type_col
+        if not col:
+            return []
+        self._meal_types = list(set(data.loc[:, col[0]]))
+        if len(self._meal_types) > 0:
+            return self._meal_types
+        return None
+
     def update_inventories(self):
 
         merged_ranges = list(self.sheet.merged_cells.ranges)
@@ -405,13 +423,20 @@ class Purchasing(SpreadsheetBase):
             ]
         )
 
-        if inventories_len < 1:
-            print_warning(
-                _("The remaining food wasn't read " + 'from "{0}".').format(
-                    self.path,
-                )
+        if inventories_len > 0:
+            return
+
+        print_warning(
+            _("The remaining food wasn't read " + 'from "{0}".').format(
+                self.path,
             )
-            inventory = self.bill.spreadsheet.inventory
+        )
+
+        meal_types = self.get_meal_types()
+        inventory = self.bill.spreadsheet.inventory
+
+        for meal_type in meal_types:
+            bill_fpath = self.operator.get_bill_fpath(meal_type)
             print_info(
                 _(
                     "{0} is reading remaining foods from "
@@ -419,147 +444,152 @@ class Purchasing(SpreadsheetBase):
                 ).format(
                     app_name,
                     inventory.sheet_name,
-                    self.bill.operator.bill_fpath,
+                    bill_fpath,
                 )
             )
-            saved_ifoods = inventory.saved_foods
+            saved_ifoods = inventory.get_save_foods(meal_type)
             saved_ifoods_len = len(saved_ifoods)
-            if saved_ifoods:
+            if saved_ifoods_len < 1:
                 print_warning(
-                    (
-                        _(
-                            "Some remaining foods have been read "
-                            + 'from sheet "{0}" of spreadsheet "{1}":'
-                        )
-                        if len(saved_ifoods) > 1
-                        else _(
-                            "The remaining food has been read"
-                            + 'from sheet "{0}" of spreadsheet "{1}":'
-                        )
-                    ).format(inventory.sheet_name, self.operator.bill_fpath)
+                    _('There is no saved inventories from "{0}"').format(
+                        bill_fpath
+                    )
                 )
+                return
 
-                saved_ifoods_len2 = len(str(saved_ifoods_len))
-                saved_ifoods_s = sqr_slist(
+            print_warning(
+                (
+                    _(
+                        "Some remaining foods have been read "
+                        + 'from sheet "{0}" of spreadsheet "{1}":'
+                    )
+                    if len(saved_ifoods) > 1
+                    else _(
+                        "The remaining food has been read"
+                        + 'from sheet "{0}" of spreadsheet "{1}":'
+                    )
+                ).format(inventory.sheet_name, bill_fpath)
+            )
+
+            saved_ifoods_len2 = len(str(saved_ifoods_len))
+            saved_ifoods_s = sqr_slist(
+                [
+                    (
+                        f"({i+1:>{saved_ifoods_len2}}) "
+                        + f"{f0.name}:{f0.count} {f0.unit_name}"
+                        + f"\u2a09 {f0.unit_price:.2f} "
+                        + f"{self.bill.currency.unit}/"
+                        + f"{f0.unit_name}={f0.total_price:.2f} "
+                        + f"{self.bill.currency.unit}"
+                    )
+                    for i, f0 in enumerate(saved_ifoods)
+                ]
+            )
+
+            saved_ifoods_s_len = max(
+                [len(s) for s in saved_ifoods_s.split("\n")]
+            )
+            saved_ifoods_info = (
+                _("Purchaser: ")
+                + saved_ifoods[0].purchaser
+                + "\n"
+                + _("Inventory data: ")
+                + saved_ifoods[0].xdate.strftime("%Y.%m.%d")
+                + "\n"
+            )
+            print_info(saved_ifoods_s)
+            print_warning(saved_ifoods_info)
+            print_warning(
+                (
+                    _('Fill them in "{0}"? (YyNn)')
+                    if len(saved_ifoods) > 1
+                    else _('Fill it in "{0}"? (YyNn)')
+                ).format(self.path)
+            )
+
+            f_input = input0().replace(" ", "")
+            if len(f_input) > 0 and f_input in "Yy":
+                max_row = len(
                     [
-                        (
-                            f"({i+1:>{saved_ifoods_len2}}) "
-                            + f"{f0.name}:{f0.count} {f0.unit_name}"
-                            + f"\u2a09 {f0.unit_price:.2f} "
-                            + f"{self.bill.currency.unit}/"
-                            + f"{f0.unit_name}={f0.total_price:.2f} "
-                            + f"{self.bill.currency.unit}"
-                        )
-                        for i, f0 in enumerate(saved_ifoods)
+                        row_index
+                        for row_index in range(1, self.sheet.max_row + 1)
+                        if self.sheet.cell(row_index, 1).value
                     ]
                 )
+                for row_index in range(
+                    max_row + 1, max_row + 1 + len(saved_ifoods)
+                ):
+                    f = saved_ifoods[row_index - max_row - 1]
+                    self.sheet.cell(
+                        row_index, self.xdate_col[1]
+                    ).number_format = numbers.FORMAT_TEXT
+                    self.sheet.cell(
+                        row_index,
+                        self.xdate_col[1],
+                        f.xdate.strftime("%Y-%m-%d"),
+                    )
+                    self.sheet.cell(
+                        row_index, self.purchaser_col[1], f.purchaser
+                    )
+                    self.sheet.cell(row_index, self.food_name_col[1], f.name)
+                    self.sheet.cell(row_index, self.food_class_col[1], f.fclass)
+                    self.food_class_dv.add(
+                        self.sheet.cell(row_index, self.food_class_col[1])
+                    )
+                    self.sheet.cell(
+                        row_index,
+                        self.unit_name_col[1],
+                        f.unit_name,
+                    )
+                    self.sheet.cell(
+                        row_index, self.count_col[1]
+                    ).number_format = numbers.FORMAT_NUMBER_00
+                    self.sheet.cell(row_index, self.count_col[1], f.count)
+                    self.sheet.cell(
+                        row_index, self.total_price_col[1]
+                    ).number_format = numbers.FORMAT_NUMBER_00
+                    self.sheet.cell(
+                        row_index,
+                        self.total_price_col[1],
+                        f.total_price,
+                    )
+                    self.sheet.cell(row_index, self.inventory_col[1], "y")
 
-                saved_ifoods_s_len = max(
-                    [len(s) for s in saved_ifoods_s.split("\n")]
-                )
-                saved_ifoods_info = (
-                    _("Purchaser: ")
-                    + saved_ifoods[0].purchaser
-                    + "\n"
-                    + _("Inventory data: ")
-                    + saved_ifoods[0].xdate.strftime("%Y.%m.%d")
-                    + "\n"
-                )
-                print_info(saved_ifoods_s)
-                print_warning(saved_ifoods_info)
-                print_warning(
+                    for col_index in self.col_indexes:
+                        if not col_index:
+                            continue
+                        self.sheet.cell(row_index, col_index).font = (
+                            self.edited_cell_font
+                        )
+
+                print_info(
                     (
-                        _('Fill them in "{0}"? (YyNn)')
+                        _("The remaining foods have been " + 'added to "{0}".')
                         if len(saved_ifoods) > 1
-                        else _('Fill it in "{0}"? (YyNn)')
+                        else _('The remaining food has been added to "{0}".')
                     ).format(self.path)
                 )
 
-                f_input = input0().replace(" ", "")
-                if len(f_input) > 0 and f_input in "Yy":
-                    max_row = len(
-                        [
-                            row_index
-                            for row_index in range(1, self.sheet.max_row + 1)
-                            if self.sheet.cell(row_index, 1).value
-                        ]
-                    )
-                    for row_index in range(
-                        max_row + 1, max_row + 1 + len(saved_ifoods)
-                    ):
-                        f = saved_ifoods[row_index - max_row - 1]
-                        self.sheet.cell(
-                            row_index, self.xdate_col[1]
-                        ).number_format = numbers.FORMAT_TEXT
-                        self.sheet.cell(
-                            row_index,
-                            self.xdate_col[1],
-                            f.xdate.strftime("%Y-%m-%d"),
-                        )
-                        self.sheet.cell(
-                            row_index, self.purchaser_col[1], f.purchaser
-                        )
-                        self.sheet.cell(
-                            row_index, self.food_name_col[1], f.name
-                        )
-                        self.sheet.cell(
-                            row_index, self.food_class_col[1], f.fclass
-                        )
-                        self.food_class_dv.add(
-                            self.sheet.cell(row_index, self.food_class_col[1])
-                        )
-                        self.sheet.cell(
-                            row_index,
-                            self.unit_name_col[1],
-                            f.unit_name,
-                        )
-                        self.sheet.cell(
-                            row_index, self.count_col[1]
-                        ).number_format = numbers.FORMAT_NUMBER_00
-                        self.sheet.cell(row_index, self.count_col[1], f.count)
-                        self.sheet.cell(
-                            row_index, self.total_price_col[1]
-                        ).number_format = numbers.FORMAT_NUMBER_00
-                        self.sheet.cell(
-                            row_index, self.total_price_col[1], f.total_price
-                        )
-                        self.sheet.cell(row_index, self.inventory_col[1], "y")
+                pass
 
-                        for col_index in self.col_indexes:
-                            if not col_index:
-                                continue
-                            self.sheet.cell(row_index, col_index).font = (
-                                self.edited_cell_font
-                            )
+        self.wb.save(self.path)
+        self.wb.close()
+        del self.wb
+        print_info(
+            (
+                _(
+                    "Please check/modify the updated data. "
+                    + "(Press any key to open the file)"
+                )
+            )
+        )
+        input0()
+        open_path(self.path)
+        print_info(
+            _("Ok, I checked it, it's ok. " + "(Press any key to continue)")
+        )
+        input0()
 
-                    print_info(
-                        (
-                            _('The remaining foods have been added to "{0}".')
-                            if len(saved_ifoods) > 1
-                            else _(
-                                'The remaining food has been added to "{0}".'
-                            )
-                        ).format(self.path)
-                    )
-                    self.wb.save(self.path)
-                    self.wb.close()
-                    del self.wb
-                    print_info(
-                        (
-                            _(
-                                "Please check/modify the updated data. "
-                                + "(Press any key to open the file)"
-                            )
-                        )
-                    )
-                    input0()
-                    open_path(self.path)
-                    print_info(
-                        _(
-                            "Ok, I checked it, it's ok. (Press any key to continue)"
-                        )
-                    )
-                    input0()
         pass
 
     def split_foods(self):
@@ -583,7 +613,7 @@ class Purchasing(SpreadsheetBase):
                             + ' No: "N","n".'
                             + ' No for rest: "S","s".'
                             + ' Default: Yes for rest, "A/a".'
-                            + ')'
+                            + ")"
                         ).format(f.name)
                     )
                     split_mode = input0()
@@ -591,7 +621,7 @@ class Purchasing(SpreadsheetBase):
                 if split_mode and split_mode in "Ss":
                     return
 
-                if split_mode and split_mode == "":
+                if split_mode == "":
                     split_mode = "A"
 
                 if split_mode in "YyAa":
@@ -647,7 +677,7 @@ class Purchasing(SpreadsheetBase):
 
     def read_pfoods(self):
         self.update()
-        foods = pd.read_excel(self.path)
+        foods = self.pd_data
         _foods = []
         for __, food in foods.iterrows():
             _food = Food(

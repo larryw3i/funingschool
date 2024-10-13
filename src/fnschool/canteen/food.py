@@ -55,6 +55,12 @@ class Food:
 
     @property
     def count_threshold(self):
+        if not self.count:
+            print_error(
+                _('The count of "{0}" is 0, you need to delete it maybe.')
+            )
+            return [0, 0, 0]
+
         if not self._count_threshold:
             sd = self.bill.significant_digits or 2
             total_price = self.total_price

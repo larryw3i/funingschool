@@ -163,7 +163,9 @@ class PreConsuming(SpreadsheetBase):
                     (
                         f"{i+1:>{new_wbfoods_count_len}}"
                         + number_mark
-                        + f"{f.name} {f.count} {f.unit_name}"
+                        + f"{f.name}"
+                        + _("({0})").format(f.meal_type)
+                        + f" {f.count} {f.unit_name}"
                     )
                     for i, f in enumerate(new_wbfoods)
                 ]
