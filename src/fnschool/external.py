@@ -37,7 +37,7 @@ def get_sponsor_url():
         (
             "https://gitee.com/larryw3i/funingschool"
             + "/blob/master/Documentation/"
-            + "README.zh_CN.md#%E8%B5%9E%E5%8A%A9"
+            + "README.zh_CN.md#support"
         )
         if is_zh_CN
         else ("https://github.com/larryw3i/" + "funingschool#support")
