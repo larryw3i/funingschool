@@ -81,9 +81,9 @@
 在 `Ubuntu` 上：
 
 ```bash
-sudo apt-get install python3 python3-pip
+sudo apt-get install python3 python3-pip python3-tk
 ```  
-在 `Windows 10` 和 `Windows 11` 上，您可以从以下链接获得二进制安装程序（请自行检验哈希值）：  
+在 `Windows 10` 或 `Windows 11` 上，您可以从以下链接获得二进制安装程序（请自行检验哈希值）：  
 * https://registry.npmmirror.com/binary.html?path=python/  
 * https://mirrors.huaweicloud.com/python/  
 * https://mirror.bjtu.edu.cn/python/  

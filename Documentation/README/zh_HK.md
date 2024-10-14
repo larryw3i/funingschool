@@ -81,7 +81,7 @@
 on `Ubuntu`:
 
 ```bash
-sudo apt-get install python3 python3-pip
+sudo apt-get install python3 python3-pip python3-tk
 ```  
 For `Windows 10` and `Windows 11`, you can install Python3 from https://www.python.org/getit/ .
 </p>
