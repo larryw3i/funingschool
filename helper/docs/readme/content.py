@@ -141,6 +141,7 @@ sudo apt-get install python3 python3-pip
 <h3>
     {_("Install fnschool and run it")}
 </h3>
+
 <p>
     {_(
         "Run the command line application "
@@ -148,6 +149,7 @@ sudo apt-get install python3 python3-pip
         + " and enter the following commands:"
     )}
 </p>
+
 ```bash
 # {_("install fnschool.")}
 pip3 install -U fnschool

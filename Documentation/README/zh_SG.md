@@ -91,9 +91,11 @@ For `Windows 10` and `Windows 11`, you can install Python3 from https://www.pyth
 <h3>
     Install fnschool and run it
 </h3>
+
 <p>
     Run the command line application (`Ubuntu`: `Ctrl+Alt+T`. `Windows`: `Win+R, powershell, Enter`), and enter the following commands:
 </p>
+
 ```bash
 # install fnschool.
 pip3 install -U fnschool
