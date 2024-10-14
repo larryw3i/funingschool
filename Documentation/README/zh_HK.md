@@ -48,7 +48,7 @@
 
 ![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png)
 
-<h2 id="key-features">
+<h2 name="key-features">
     Key Features
 </h2>
 
@@ -72,7 +72,7 @@
 * Display comments.
 * Effectively assist testers, especially teachers and students.
 
-<h2 id="how-to-use">
+<h2 name="how-to-use">
     How To Use
 </h2>
 
@@ -103,7 +103,7 @@ fnschool-cli exam enter
 
 >Note: Read the information it prompts carefully, which is the key to using it well.
 
-<h2 id="credits">
+<h2 name="credits">
     Credits
 </h2>
 <p>
@@ -119,7 +119,7 @@ fnschool-cli exam enter
     </ul>
 </p>
 
-<h2 id="support">
+<h2 name="support">
     Support
 </h2>
 <h3>
@@ -128,7 +128,7 @@ fnschool-cli exam enter
 
 ![Buy me a "coffee".](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
 
-<h2 id="license">
+<h2 name="license">
     License
 </h2>
 

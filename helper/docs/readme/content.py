@@ -89,7 +89,7 @@ README.md">English</a>
 ![{_("Screenshot")}]({_("https://raw.githubusercontent.com/larryw3i/funingschool/master/"+
 "Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png")})
 
-<h2 id="key-features">
+<h2 name="key-features">
     {_("Key Features")}
 </h2>
 
@@ -119,7 +119,7 @@ README.md">English</a>
 * {_("Display comments.")}
 * {_("Effectively assist testers, especially teachers and students.")}
 
-<h2 id="how-to-use">
+<h2 name="how-to-use">
     {_("How To Use")}
 </h2>
 
@@ -156,7 +156,7 @@ fnschool-cli exam enter
     + "which is the key to using it well."
 )}
 
-<h2 id="credits">
+<h2 name="credits">
     {_("Credits")}
 </h2>
 <p>
@@ -172,7 +172,7 @@ fnschool-cli exam enter
     </ul>
 </p>
 
-<h2 id="support">
+<h2 name="support">
     {_("Support")}
 </h2>
 <h3>
@@ -183,7 +183,7 @@ fnschool-cli exam enter
 ({_("https://raw.githubusercontent.com/larryw3i/funingschool/master"+
 "/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg")})
 
-<h2 id="license">
+<h2 name="license">
     {_("License")}
 </h2>
 

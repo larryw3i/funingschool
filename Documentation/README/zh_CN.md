@@ -48,7 +48,7 @@
 
 ![截图](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png)
 
-<h2 id="key-features">
+<h2 name="key-features">
     特性
 </h2>
 
@@ -72,7 +72,7 @@
 * 显示测试备注。
 * 有效协助测试相关人员，尤其是老师和学生。
 
-<h2 id="how-to-use">
+<h2 name="how-to-use">
     如何使用
 </h2>
 
@@ -110,7 +110,7 @@ fnschool-cli exam enter
 
 >备注：细心耐心阅读它打印的提示，这是你能使用好它的关键。
 
-<h2 id="credits">
+<h2 name="credits">
     致谢（声明）
 </h2>
 <p>
@@ -126,7 +126,7 @@ fnschool-cli exam enter
     </ul>
 </p>
 
-<h2 id="support">
+<h2 name="support">
     赞助
 </h2>
 <h3>
@@ -135,7 +135,7 @@ fnschool-cli exam enter
 
 ![给我买一杯“咖啡”。](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
 
-<h2 id="license">
+<h2 name="license">
     授权
 </h2>
 
