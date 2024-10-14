@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-14 07:43+0800\n"
+"POT-Creation-Date: 2024-10-14 12:55+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -183,8 +183,8 @@ msgstr ""
 
 #: helper/docs/readme/content.py:135
 msgid ""
-"For `Windows`, you can install Python3 from https://www.python.org/getit/"
-" ."
+"For `Windows 10` and `Windows 11`, you can install Python3 from "
+"https://www.python.org/getit/ ."
 msgstr ""
 
 #: helper/docs/readme/content.py:142
@@ -1998,5 +1998,10 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "run `test statistics` module"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "For `Windows`, you can install Python3"
+#~ " from https://www.python.org/getit/ ."
 #~ msgstr ""
 
