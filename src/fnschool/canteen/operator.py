@@ -80,7 +80,8 @@ class Operator(User):
     def bill_fpath_uuid(self):
         fpath = (
             str(self.bill_fpath).rpartition(".")[0]
-            + "." +str(uuid.uuid4())
+            + "."
+            + str(uuid.uuid4())
             + self.bill_fpath.suffix
         )
         return fpath

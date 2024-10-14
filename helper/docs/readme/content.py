@@ -34,9 +34,8 @@ class Content:
     def get_content(self, t_func=None):
         _ = t_func
         return (
-            f"""
-
-<h1 align="center">
+            r"""
+<div align="center">
   <br>
   <pre>"""
             + r"""
@@ -47,11 +46,11 @@ class Content:
 |_|   |_| \_|____/ \____|_| |_|\___/ \___/|_____|
 """
             + f"""
-</pre>
+  </pre>
   <br>
   funingschool
   <br>
-</h1>
+</div>
 
 <h4 align="center">
     {_("NO Just some simple scripts for warehousing and consuming.")}
@@ -147,7 +146,7 @@ sudo apt-get install python3 python3-pip
 
 {_(
     "Run the command line application "
-    + "(`Ubuntu`: `Ctrl+Alt+T`. `Windows`: `Win+R, powershell, Enter`),"
+    + "(`Ubuntu`: `Ctrl+Alt+T`. `Windows`: \"`Win+R, powershell, Enter`\"),"
     + " and enter the following commands:"
 )}
 

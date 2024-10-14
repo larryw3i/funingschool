@@ -1,6 +1,5 @@
 
-
-<h1 align="center">
+<div align="center">
   <br>
   <pre>
  _____ _   _ ____   ____ _   _  ___   ___  _     
@@ -9,11 +8,11 @@
 |  _| | |\  |___) | |___|  _  | |_| | |_| | |___ 
 |_|   |_| \_|____/ \____|_| |_|\___/ \___/|_____|
 
-</pre>
+  </pre>
   <br>
   funingschool
   <br>
-</h1>
+</div>
 
 <h4 align="center">
     不只是一些出入库脚本。
@@ -98,7 +97,7 @@ https://mirror.bjtu.edu.cn/python/
 
 <p>
 
-运行 命令行 应用（`Ubuntu`：`Ctrl+Alt+T`，`Windows`：`Win+R, powershell, 回车`），然后执行如下命令：
+Run the command line application (`Ubuntu`: `Ctrl+Alt+T`. `Windows`: "`Win+R, powershell, Enter`"), and enter the following commands:
 
 </p>
 

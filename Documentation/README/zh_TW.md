@@ -1,6 +1,5 @@
 
-
-<h1 align="center">
+<div align="center">
   <br>
   <pre>
  _____ _   _ ____   ____ _   _  ___   ___  _     
@@ -9,11 +8,11 @@
 |  _| | |\  |___) | |___|  _  | |_| | |_| | |___ 
 |_|   |_| \_|____/ \____|_| |_|\___/ \___/|_____|
 
-</pre>
+  </pre>
   <br>
   funingschool
   <br>
-</h1>
+</div>
 
 <h4 align="center">
     NO Just some simple scripts for warehousing and consuming.
@@ -95,7 +94,7 @@ For `Windows 10` and `Windows 11`, you can install Python3 from https://www.pyth
 
 <p>
 
-Run the command line application (`Ubuntu`: `Ctrl+Alt+T`. `Windows`: `Win+R, powershell, Enter`), and enter the following commands:
+Run the command line application (`Ubuntu`: `Ctrl+Alt+T`. `Windows`: "`Win+R, powershell, Enter`"), and enter the following commands:
 
 </p>
 

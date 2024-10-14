@@ -238,10 +238,10 @@ class Inventory(SpreadsheetBase):
                     cell.value = ""
 
         for i, (t1, _foods) in enumerate(tnfoods):
-            
+
             if len(_foods) < 1:
                 print_warning(
-                    _("There is no inventories for \"{0}\".").format(
+                    _('There is no inventories for "{0}".').format(
                         t1.strftime("%Y-%m-%d")
                     )
                 )
@@ -292,11 +292,9 @@ class Inventory(SpreadsheetBase):
 
             for findex, food in enumerate(_foods):
                 row_index = fentry_i0 + findex
-                if (
-                    sheet.cell(row_index + 1, 1).value and (
-                        sheet.cell(row_index + 1, 1).value.replace(" ", "")
-                        == "合计"
-                    )
+                if sheet.cell(row_index + 1, 1).value and (
+                    sheet.cell(row_index + 1, 1).value.replace(" ", "")
+                    == "合计"
                 ):
                     i_row_index = row_index + 1
                     self.row_inserting_tip(i_row_index)
