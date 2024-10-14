@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-14 14:00+0800\n"
+"POT-Creation-Date: 2024-10-14 16:15+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -178,7 +178,7 @@ msgid "Install Python3"
 msgstr ""
 
 #: helper/docs/readme/content.py:130
-msgid "on Ubuntu:"
+msgid "on `Ubuntu`:"
 msgstr ""
 
 #: helper/docs/readme/content.py:135
@@ -2016,5 +2016,8 @@ msgstr ""
 #~ "(`Ubuntu`: `Ctrl+Alt+T`. `Windows`: `Win+R, "
 #~ "powershell, Enter`), and enter the "
 #~ "following commands."
+#~ msgstr ""
+
+#~ msgid "on Ubuntu:"
 #~ msgstr ""
 

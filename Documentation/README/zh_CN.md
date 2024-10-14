@@ -80,7 +80,8 @@
     安装 Python3
 </h3>
 <p>
-    在 Ubuntu 上：
+
+在 `Ubuntu` 上：
 
 ```bash
 sudo apt-get install python3 python3-pip
@@ -96,7 +97,9 @@ https://mirror.bjtu.edu.cn/python/
 </h3>
 
 <p>
-    运行 命令行 应用（`Ubuntu`：`Ctrl+Alt+T`，`Windows`：`Win+R, powershell, 回车`），然后执行如下命令：
+
+运行 命令行 应用（`Ubuntu`：`Ctrl+Alt+T`，`Windows`：`Win+R, powershell, 回车`），然后执行如下命令：
+
 </p>
 
 ```bash

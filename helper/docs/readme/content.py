@@ -127,7 +127,8 @@ README.md">English</a>
     {_("Install Python3")}
 </h3>
 <p>
-    {_("on Ubuntu:")}
+
+{_("on `Ubuntu`:")}
 
 ```bash
 sudo apt-get install python3 python3-pip
@@ -143,11 +144,13 @@ sudo apt-get install python3 python3-pip
 </h3>
 
 <p>
-    {_(
-        "Run the command line application "
-        + "(`Ubuntu`: `Ctrl+Alt+T`. `Windows`: `Win+R, powershell, Enter`),"
-        + " and enter the following commands:"
-    )}
+
+{_(
+    "Run the command line application "
+    + "(`Ubuntu`: `Ctrl+Alt+T`. `Windows`: `Win+R, powershell, Enter`),"
+    + " and enter the following commands:"
+)}
+
 </p>
 
 ```bash
