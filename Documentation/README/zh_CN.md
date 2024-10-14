@@ -94,7 +94,9 @@ https://mirror.bjtu.edu.cn/python/
 <h3>
     安装 和 运行 fnschool 
 </h3>
-
+<p>
+    运行 命令行 应用（`Ubuntu`：`Ctrl+Alt+T`，`Windows`：`Win+R, powershell, 回车`），然后执行如下命令：
+</p>
 ```bash
 # 设置安装源为镜像站。
 pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple # 或

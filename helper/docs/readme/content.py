@@ -141,7 +141,13 @@ sudo apt-get install python3 python3-pip
 <h3>
     {_("Install fnschool and run it")}
 </h3>
-
+<p>
+    {_(
+        "Run the command line application "
+        + "(`Ubuntu`: `Ctrl+Alt+T`. `Windows`: `Win+R, powershell, Enter`),"
+        + " and enter the following commands:"
+    )}
+</p>
 ```bash
 # {_("install fnschool.")}
 pip3 install -U fnschool

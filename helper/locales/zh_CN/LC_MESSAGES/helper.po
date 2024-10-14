@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-14 12:55+0800\n"
-"PO-Revision-Date: 2024-10-14 12:58+0800\n"
+"POT-Creation-Date: 2024-10-14 13:54+0800\n"
+"PO-Revision-Date: 2024-10-14 13:54+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -105,15 +105,15 @@ msgstr "特性"
 msgid "How To Use"
 msgstr "如何使用"
 
-#: helper/docs/readme/content.py:77 helper/docs/readme/content.py:160
+#: helper/docs/readme/content.py:77 helper/docs/readme/content.py:166
 msgid "Credits"
 msgstr "致谢（声明）"
 
-#: helper/docs/readme/content.py:81 helper/docs/readme/content.py:176
+#: helper/docs/readme/content.py:81 helper/docs/readme/content.py:182
 msgid "Support"
 msgstr "赞助"
 
-#: helper/docs/readme/content.py:85 helper/docs/readme/content.py:187
+#: helper/docs/readme/content.py:85 helper/docs/readme/content.py:193
 msgid "License"
 msgstr "授权"
 
@@ -201,7 +201,15 @@ msgstr ""
 msgid "Install fnschool and run it"
 msgstr "安装 和 运行 fnschool "
 
-#: helper/docs/readme/content.py:146
+#: helper/docs/readme/content.py:145
+msgid ""
+"Run the command line application (`Ubuntu`: `Ctrl+Alt+T`. `Windows`: `Win+R, "
+"powershell, Enter`), and enter the following commands:"
+msgstr ""
+"运行 命令行 应用（`Ubuntu`：`Ctrl+Alt+T`，`Windows`：`Win+R, powershell, 回车"
+"`），然后执行如下命令："
+
+#: helper/docs/readme/content.py:152
 msgid "install fnschool."
 msgstr ""
 "设置安装源为镜像站。\n"
@@ -213,33 +221,33 @@ msgstr ""
 "web/simple\n"
 "# 安装 fnschool 。"
 
-#: helper/docs/readme/content.py:148
+#: helper/docs/readme/content.py:154
 msgid "run `warehousing and consuming` module."
 msgstr "运行“出入库”模块。"
 
-#: helper/docs/readme/content.py:150
+#: helper/docs/readme/content.py:156
 msgid "run `test statistics` module."
 msgstr "运行“测试”模块。"
 
-#: helper/docs/readme/content.py:154
+#: helper/docs/readme/content.py:160
 msgid ""
 "Note: Read the information it prompts carefully, which is the key to using "
 "it well."
 msgstr "备注：细心耐心阅读它打印的提示，这是您能使用好它的关键。"
 
-#: helper/docs/readme/content.py:163
+#: helper/docs/readme/content.py:169
 msgid "This software uses the following open source packages:"
 msgstr "此软件使用了如下的开源软件包（项目）："
 
-#: helper/docs/readme/content.py:179
+#: helper/docs/readme/content.py:185
 msgid "Buy me a `coffee`:"
 msgstr "给我买一杯“咖啡”："
 
-#: helper/docs/readme/content.py:182
+#: helper/docs/readme/content.py:188
 msgid "Buy me a \"coffee\"."
 msgstr "给我买一杯“咖啡”。"
 
-#: helper/docs/readme/content.py:183
+#: helper/docs/readme/content.py:189
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/"
 "images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
@@ -247,7 +255,7 @@ msgstr ""
 "https://gitee.com/larryw3i/funingschool/raw/master/Documentation/"
 "images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
 
-#: helper/docs/readme/content.py:190
+#: helper/docs/readme/content.py:196
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr "https://gitee.com/larryw3i/funingschool/blob/master/LICENSE"
 
