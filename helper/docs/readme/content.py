@@ -36,8 +36,7 @@ class Content:
         return (
             r"""
 <div align="center">
-  <br>
-  <pre>"""
+    <pre>"""
             + r"""
  _____ _   _ ____   ____ _   _  ___   ___  _     
 |  ___| \ | / ___| / ___| | | |/ _ \ / _ \| |    
@@ -46,10 +45,10 @@ class Content:
 |_|   |_| \_|____/ \____|_| |_|\___/ \___/|_____|
 """
             + f"""
-  </pre>
-  <br>
-  funingschool
-  <br>
+    </pre>
+    <p>
+        funingschool
+    </p>
 </div>
 
 <h4 align="center">
