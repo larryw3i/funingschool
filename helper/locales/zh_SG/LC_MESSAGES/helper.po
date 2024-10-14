@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-14 16:15+0800\n"
+"POT-Creation-Date: 2024-10-14 22:54+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -89,151 +89,154 @@ msgstr ""
 msgid "README file \"{0}\" was updated."
 msgstr ""
 
-#: helper/docs/readme/content.py:57
+#: helper/docs/readme/content.py:55
 msgid "NO Just some simple scripts for warehousing and consuming."
 msgstr ""
 
-#: helper/docs/readme/content.py:69 helper/docs/readme/content.py:93
+#: helper/docs/readme/content.py:67 helper/docs/readme/content.py:94
 msgid "Key Features"
 msgstr ""
 
-#: helper/docs/readme/content.py:73 helper/docs/readme/content.py:123
+#: helper/docs/readme/content.py:71 helper/docs/readme/content.py:124
 msgid "How To Use"
 msgstr ""
 
-#: helper/docs/readme/content.py:77 helper/docs/readme/content.py:168
+#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:173
 msgid "Credits"
 msgstr ""
 
-#: helper/docs/readme/content.py:81 helper/docs/readme/content.py:184
+#: helper/docs/readme/content.py:79 helper/docs/readme/content.py:189
 msgid "Support"
 msgstr ""
 
-#: helper/docs/readme/content.py:85 helper/docs/readme/content.py:195
+#: helper/docs/readme/content.py:83 helper/docs/readme/content.py:200
 msgid "License"
 msgstr ""
 
-#: helper/docs/readme/content.py:89
+#: helper/docs/readme/content.py:87
 msgid "Screenshot"
 msgstr ""
 
-#: helper/docs/readme/content.py:89
+#: helper/docs/readme/content.py:87
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132"
 "-f8cd-11ee-8ee6-f37309efa64b.png"
 msgstr ""
 
-#: helper/docs/readme/content.py:97
+#: helper/docs/readme/content.py:98
 msgid "warehousing and consuming"
 msgstr ""
 
-#: helper/docs/readme/content.py:100
+#: helper/docs/readme/content.py:101
 msgid "Read food spreadsheets automatically."
 msgstr ""
 
-#: helper/docs/readme/content.py:101
+#: helper/docs/readme/content.py:102
 msgid "The simplest and most straightforward `consuming sheets`."
 msgstr ""
 
-#: helper/docs/readme/content.py:102
+#: helper/docs/readme/content.py:103
 msgid "Update sheets (warehousing, consuming, summing, etc) automatically."
 msgstr ""
 
-#: helper/docs/readme/content.py:106
+#: helper/docs/readme/content.py:107
 msgid "Reduce calculation errors."
 msgstr ""
 
-#: helper/docs/readme/content.py:107
+#: helper/docs/readme/content.py:108
 msgid "Effectively eliminate unit prices containing infinite decimals."
 msgstr ""
 
-#: helper/docs/readme/content.py:108
+#: helper/docs/readme/content.py:109
 msgid "Easy to use."
 msgstr ""
 
-#: helper/docs/readme/content.py:111
+#: helper/docs/readme/content.py:112
 msgid "Test statistics"
 msgstr ""
 
-#: helper/docs/readme/content.py:114
+#: helper/docs/readme/content.py:115
 msgid "An easy-to-use \"test score entry form\"."
 msgstr ""
 
-#: helper/docs/readme/content.py:115
+#: helper/docs/readme/content.py:116
 msgid ""
 "Clear test results at a glance, converting table data into Intuitive "
 "images."
 msgstr ""
 
-#: helper/docs/readme/content.py:119
+#: helper/docs/readme/content.py:120
 msgid "Display comments."
 msgstr ""
 
-#: helper/docs/readme/content.py:120
+#: helper/docs/readme/content.py:121
 msgid "Effectively assist testers, especially teachers and students."
 msgstr ""
 
-#: helper/docs/readme/content.py:127
+#: helper/docs/readme/content.py:128
 msgid "Install Python3"
 msgstr ""
 
-#: helper/docs/readme/content.py:130
+#: helper/docs/readme/content.py:132
 msgid "on `Ubuntu`:"
 msgstr ""
 
-#: helper/docs/readme/content.py:135
+#: helper/docs/readme/content.py:137
 msgid ""
 "For `Windows 10` and `Windows 11`, you can install Python3 from "
 "https://www.python.org/getit/ ."
 msgstr ""
 
-#: helper/docs/readme/content.py:142
+#: helper/docs/readme/content.py:144
 msgid "Install fnschool and run it"
 msgstr ""
 
-#: helper/docs/readme/content.py:146
+#: helper/docs/readme/content.py:149
 msgid ""
-"Run the command line application (`Ubuntu`: `Ctrl+Alt+T`. `Windows`: "
-"`Win+R, powershell, Enter`), and enter the following commands:"
+"Run the command line application:\n"
+"* `Ubuntu`: `Ctrl+Alt+T`.  \n"
+"* `Windows`: \"`Win+R, powershell, Enter`\".  \n"
+"\n"
+"Enter the following commands:"
 msgstr ""
 
-#: helper/docs/readme/content.py:154
+#: helper/docs/readme/content.py:159
 msgid "install fnschool."
 msgstr ""
 
-#: helper/docs/readme/content.py:156
+#: helper/docs/readme/content.py:161
 msgid "run `warehousing and consuming` module."
 msgstr ""
 
-#: helper/docs/readme/content.py:158
+#: helper/docs/readme/content.py:163
 msgid "run `test statistics` module."
 msgstr ""
 
-#: helper/docs/readme/content.py:162
+#: helper/docs/readme/content.py:167
 msgid ""
 "Note: Read the information it prompts carefully, which is the key to "
 "using it well."
 msgstr ""
 
-#: helper/docs/readme/content.py:171
+#: helper/docs/readme/content.py:176
 msgid "This software uses the following open source packages:"
 msgstr ""
 
-#: helper/docs/readme/content.py:187
+#: helper/docs/readme/content.py:192
 msgid "Buy me a `coffee`:"
 msgstr ""
 
-#: helper/docs/readme/content.py:190
+#: helper/docs/readme/content.py:195
 msgid "Buy me a \"coffee\"."
 msgstr ""
 
-#: helper/docs/readme/content.py:191
+#: helper/docs/readme/content.py:196
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images"
 "/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
 msgstr ""
 
-#: helper/docs/readme/content.py:198
+#: helper/docs/readme/content.py:203
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr ""
 
@@ -2019,5 +2022,33 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "on Ubuntu:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Run the command line application "
+#~ "(`Ubuntu`: `Ctrl+Alt+T`. `Windows`: `Win+R, "
+#~ "powershell, Enter`), and enter the "
+#~ "following commands:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Run the command line application "
+#~ "(`Ubuntu`: `Ctrl+Alt+T`. `Windows`: \"`Win+R, "
+#~ "powershell, Enter`\"), and enter the "
+#~ "following commands:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Run the command line application:* "
+#~ "`Ubuntu`: `Ctrl+Alt+T`.  * `Windows`: "
+#~ "\"`Win+R, powershell, Enter`\".  Enter the "
+#~ "following commands:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Run the command line application:\n"
+#~ "* `Ubuntu`: `Ctrl+Alt+T`.  \n"
+#~ "* `Windows`: \"`Win+R, powershell, Enter`\".  \n"
+#~ "Enter the following commands:"
 #~ msgstr ""
 

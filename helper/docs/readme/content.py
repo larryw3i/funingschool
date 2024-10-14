@@ -84,8 +84,11 @@ README.md">English</a>
     </a>
 </p>
 
-![{_("Screenshot")}]({_("https://raw.githubusercontent.com/larryw3i/funingschool/master/"+
-"Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png")})
+![{_("Screenshot")}]({_(
+    "https://raw.githubusercontent.com/larryw3i"
+    +"/funingschool/master/"
+    +"Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png"
+)})
 
 <h2 id="key-features">
     {_("Key Features")}
@@ -144,9 +147,10 @@ sudo apt-get install python3 python3-pip
 <p>
 
 {_(
-    "Run the command line application "
-    + "(`Ubuntu`: `Ctrl+Alt+T`. `Windows`: \"`Win+R, powershell, Enter`\"),"
-    + " and enter the following commands:"
+    "Run the command line application:\n"
+    + "* `Ubuntu`: `Ctrl+Alt+T`.  \n"
+    + "* `Windows`: \"`Win+R, powershell, Enter`\".  \n\n"
+    + "Enter the following commands:"
 )}
 
 </p>

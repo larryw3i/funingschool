@@ -84,9 +84,9 @@
 sudo apt-get install python3 python3-pip
 ```  
 在 `Windows 10` 和 `Windows 11` 上，您可以从以下链接获得二进制安装程序（请自行检验哈希值）：  
-https://registry.npmmirror.com/binary.html?path=python/  
-https://mirrors.huaweicloud.com/python/  
-https://mirror.bjtu.edu.cn/python/  
+* https://registry.npmmirror.com/binary.html?path=python/  
+* https://mirrors.huaweicloud.com/python/  
+* https://mirror.bjtu.edu.cn/python/  
 </p>
 
 <h3>
@@ -95,7 +95,11 @@ https://mirror.bjtu.edu.cn/python/
 
 <p>
 
-Run the command line application (`Ubuntu`: `Ctrl+Alt+T`. `Windows`: "`Win+R, powershell, Enter`"), and enter the following commands:
+运行 命令行 应用：
+* `Ubuntu`：`Ctrl+Alt+T`；  
+* `Windows`：“`Win+R，powershell，回车`”。  
+
+然后执行如下命令：
 
 </p>
 
@@ -137,7 +141,7 @@ fnschool-cli exam enter
     给我买一杯“咖啡”：
 </h3>  
 
-![给我买一杯“咖啡”。](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
+![给我买一杯“咖啡”。](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/5ec0296a-8a3b-11ef-8e0b-efbca71f7f1a.png)
 
 <h2 id="license">
     授权

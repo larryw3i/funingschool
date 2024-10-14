@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-14 16:15+0800\n"
-"PO-Revision-Date: 2024-10-14 16:17+0800\n"
+"POT-Creation-Date: 2024-10-14 22:54+0800\n"
+"PO-Revision-Date: 2024-10-14 22:54+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -93,35 +93,35 @@ msgstr "“readme”：“README”文件的 相关函数。"
 msgid "README file \"{0}\" was updated."
 msgstr "README 文件 “{0}” 已更新。"
 
-#: helper/docs/readme/content.py:57
+#: helper/docs/readme/content.py:55
 msgid "NO Just some simple scripts for warehousing and consuming."
 msgstr "不只是一些出入库脚本。"
 
-#: helper/docs/readme/content.py:69 helper/docs/readme/content.py:93
+#: helper/docs/readme/content.py:67 helper/docs/readme/content.py:94
 msgid "Key Features"
 msgstr "特性"
 
-#: helper/docs/readme/content.py:73 helper/docs/readme/content.py:123
+#: helper/docs/readme/content.py:71 helper/docs/readme/content.py:124
 msgid "How To Use"
 msgstr "如何使用"
 
-#: helper/docs/readme/content.py:77 helper/docs/readme/content.py:168
+#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:173
 msgid "Credits"
 msgstr "致谢（声明）"
 
-#: helper/docs/readme/content.py:81 helper/docs/readme/content.py:184
+#: helper/docs/readme/content.py:79 helper/docs/readme/content.py:189
 msgid "Support"
 msgstr "赞助"
 
-#: helper/docs/readme/content.py:85 helper/docs/readme/content.py:195
+#: helper/docs/readme/content.py:83 helper/docs/readme/content.py:200
 msgid "License"
 msgstr "授权"
 
-#: helper/docs/readme/content.py:89
+#: helper/docs/readme/content.py:87
 msgid "Screenshot"
 msgstr "截图"
 
-#: helper/docs/readme/content.py:89
+#: helper/docs/readme/content.py:87
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/"
 "images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png"
@@ -129,87 +129,93 @@ msgstr ""
 "https://gitee.com/larryw3i/funingschool/raw/master/Documentation/"
 "images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png"
 
-#: helper/docs/readme/content.py:97
+#: helper/docs/readme/content.py:98
 msgid "warehousing and consuming"
 msgstr "食材出入库"
 
-#: helper/docs/readme/content.py:100
+#: helper/docs/readme/content.py:101
 msgid "Read food spreadsheets automatically."
 msgstr "自动读取食材表单。"
 
-#: helper/docs/readme/content.py:101
+#: helper/docs/readme/content.py:102
 msgid "The simplest and most straightforward `consuming sheets`."
 msgstr "更简单更直观食材出库设计。"
 
-#: helper/docs/readme/content.py:102
+#: helper/docs/readme/content.py:103
 msgid "Update sheets (warehousing, consuming, summing, etc) automatically."
 msgstr "自动更新表单（入库、出库、汇总等等）。"
 
-#: helper/docs/readme/content.py:106
+#: helper/docs/readme/content.py:107
 msgid "Reduce calculation errors."
 msgstr "减少计算误差。"
 
-#: helper/docs/readme/content.py:107
+#: helper/docs/readme/content.py:108
 msgid "Effectively eliminate unit prices containing infinite decimals."
 msgstr "有效地“消除”含有无限小数的单价。"
 
-#: helper/docs/readme/content.py:108
+#: helper/docs/readme/content.py:109
 msgid "Easy to use."
 msgstr "易用。"
 
-#: helper/docs/readme/content.py:111
+#: helper/docs/readme/content.py:112
 msgid "Test statistics"
 msgstr "测试统计"
 
-#: helper/docs/readme/content.py:114
+#: helper/docs/readme/content.py:115
 msgid "An easy-to-use \"test score entry form\"."
 msgstr "易用的“测试登记”表单。"
 
-#: helper/docs/readme/content.py:115
+#: helper/docs/readme/content.py:116
 msgid ""
 "Clear test results at a glance, converting table data into Intuitive images."
 msgstr "直观展示测试结果，生成直观的图片方便发送给学生家长。"
 
-#: helper/docs/readme/content.py:119
+#: helper/docs/readme/content.py:120
 msgid "Display comments."
 msgstr "显示测试备注。"
 
-#: helper/docs/readme/content.py:120
+#: helper/docs/readme/content.py:121
 msgid "Effectively assist testers, especially teachers and students."
 msgstr "有效协助测试相关人员，尤其是老师和学生。"
 
-#: helper/docs/readme/content.py:127
+#: helper/docs/readme/content.py:128
 msgid "Install Python3"
 msgstr "安装 Python3"
 
-#: helper/docs/readme/content.py:130
+#: helper/docs/readme/content.py:132
 msgid "on `Ubuntu`:"
 msgstr "在 `Ubuntu` 上："
 
-#: helper/docs/readme/content.py:135
+#: helper/docs/readme/content.py:137
 msgid ""
 "For `Windows 10` and `Windows 11`, you can install Python3 from https://www."
 "python.org/getit/ ."
 msgstr ""
 "在 `Windows 10` 和 `Windows 11` 上，您可以从以下链接获得二进制安装程序（请自"
 "行检验哈希值）：  \n"
-"https://registry.npmmirror.com/binary.html?path=python/  \n"
-"https://mirrors.huaweicloud.com/python/  \n"
-"https://mirror.bjtu.edu.cn/python/  "
+"* https://registry.npmmirror.com/binary.html?path=python/  \n"
+"* https://mirrors.huaweicloud.com/python/  \n"
+"* https://mirror.bjtu.edu.cn/python/  "
 
-#: helper/docs/readme/content.py:142
+#: helper/docs/readme/content.py:144
 msgid "Install fnschool and run it"
 msgstr "安装 和 运行 fnschool "
 
-#: helper/docs/readme/content.py:146
+#: helper/docs/readme/content.py:149
 msgid ""
-"Run the command line application (`Ubuntu`: `Ctrl+Alt+T`. `Windows`: `Win+R, "
-"powershell, Enter`), and enter the following commands:"
+"Run the command line application:\n"
+"* `Ubuntu`: `Ctrl+Alt+T`.  \n"
+"* `Windows`: \"`Win+R, powershell, Enter`\".  \n"
+"\n"
+"Enter the following commands:"
 msgstr ""
-"运行 命令行 应用（`Ubuntu`：`Ctrl+Alt+T`，`Windows`：`Win+R, powershell, 回车"
-"`），然后执行如下命令："
+"运行 命令行 应用：\n"
+"* `Ubuntu`：`Ctrl+Alt+T`；  \n"
+"* `Windows`：“`Win+R，powershell，回车`”。  \n"
+"\n"
+"然后执行如下命令："
 
-#: helper/docs/readme/content.py:154
+#: helper/docs/readme/content.py:159
 msgid "install fnschool."
 msgstr ""
 "设置安装源为镜像站。\n"
@@ -221,41 +227,41 @@ msgstr ""
 "web/simple\n"
 "# 安装 fnschool 。"
 
-#: helper/docs/readme/content.py:156
+#: helper/docs/readme/content.py:161
 msgid "run `warehousing and consuming` module."
 msgstr "运行“出入库”模块。"
 
-#: helper/docs/readme/content.py:158
+#: helper/docs/readme/content.py:163
 msgid "run `test statistics` module."
 msgstr "运行“测试”模块。"
 
-#: helper/docs/readme/content.py:162
+#: helper/docs/readme/content.py:167
 msgid ""
 "Note: Read the information it prompts carefully, which is the key to using "
 "it well."
 msgstr "备注：细心耐心阅读它打印的提示，这是您能使用好它的关键。"
 
-#: helper/docs/readme/content.py:171
+#: helper/docs/readme/content.py:176
 msgid "This software uses the following open source packages:"
 msgstr "此软件使用了如下的开源软件包（项目）："
 
-#: helper/docs/readme/content.py:187
+#: helper/docs/readme/content.py:192
 msgid "Buy me a `coffee`:"
 msgstr "给我买一杯“咖啡”："
 
-#: helper/docs/readme/content.py:190
+#: helper/docs/readme/content.py:195
 msgid "Buy me a \"coffee\"."
 msgstr "给我买一杯“咖啡”。"
 
-#: helper/docs/readme/content.py:191
+#: helper/docs/readme/content.py:196
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/"
 "images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
 msgstr ""
 "https://gitee.com/larryw3i/funingschool/raw/master/Documentation/"
-"images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
+"images/5ec0296a-8a3b-11ef-8e0b-efbca71f7f1a.png"
 
-#: helper/docs/readme/content.py:198
+#: helper/docs/readme/content.py:203
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr "https://gitee.com/larryw3i/funingschool/blob/master/LICENSE"
 

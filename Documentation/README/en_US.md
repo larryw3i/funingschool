@@ -92,7 +92,11 @@ For `Windows 10` and `Windows 11`, you can install Python3 from https://www.pyth
 
 <p>
 
-Run the command line application (`Ubuntu`: `Ctrl+Alt+T`. `Windows`: "`Win+R, powershell, Enter`"), and enter the following commands:
+Run the command line application:
+* `Ubuntu`: `Ctrl+Alt+T`.  
+* `Windows`: "`Win+R, powershell, Enter`".  
+
+Enter the following commands:
 
 </p>
 
