@@ -35,6 +35,7 @@ class Content:
         _ = t_func
         return (
             r"""
+<hr/>
 <div align="center">
     <pre>"""
             + r"""
@@ -44,17 +45,16 @@ class Content:
 |  _| | |\  |___) | |___|  _  | |_| | |_| | |___ 
 |_|   |_| \_|____/ \____|_| |_|\___/ \___/|_____|
 """
-            + f"""
+            + f"""\
     </pre>
-    <p>
-        funingschool
-    </p>
 </div>
-
+<p align="center">
+    funingschool
+</p>
 <h4 align="center">
     {_("NO Just some simple scripts for warehousing and consuming.")}
 </h4>
-
+<hr/>
 <p align="center">
     <a href="https://gitee.com/larryw3i/funingschool/blob/master/\
 Documentation/README/zh_CN.md">简体中文</a> •
