@@ -265,7 +265,7 @@ class SpreadSheet:
         total_purchasing_m = (
             _("Total purchasing of this month: ")
             + currency_mark
-            + str(sum([f.total_price for f in bfoods if not f.is_inventory]))
+            + str(round(sum([f.total_price for f in bfoods if not f.is_inventory]),self.sd+1))
         )
         summary = [
             inventory_mm1,
@@ -327,6 +327,8 @@ class SpreadSheet:
 
             _foods = [f for f in foods0 if f.meal_type == t]
 
+
+            del self.bill.meal_type
             self.bill.foods = _foods
 
             self.inventory.update()

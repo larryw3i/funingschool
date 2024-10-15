@@ -30,7 +30,7 @@ class Purchasing(SpreadsheetBase):
         self._total_price_col = [
             None,
             None,
-            ["总价", "折前金额", "折后金额", "总金额"],
+            ["总价", "折前金额", "总金额"],
         ]
         self._xdate_col = [
             None,
@@ -52,7 +52,9 @@ class Purchasing(SpreadsheetBase):
         self._count_col = [
             None,
             None,
-            ["总数", "数量", "下单数量", "订货数量", "发货数量", "记账数量"],
+            [
+                "总数", "数量", "发货数量", "记账数量", 
+            ],
         ]
         self._meal_type_col = [
             None,
@@ -130,6 +132,7 @@ class Purchasing(SpreadsheetBase):
                     _('Column "{0}" was not found. Exit').format(col[2][0])
                 )
                 exit()
+
             col0 = col0[-1]
             col[0] = col0[0]
             col[1] = col0[1]

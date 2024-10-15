@@ -102,7 +102,7 @@ Enter the following commands:
 
 ```bash
 # install fnschool.
-pip3 install -U fnschool
+pip install -U fnschool
 # run `warehousing and consuming` module.
 fnschool-cli canteen mk_bill
 # run `test statistics` module.

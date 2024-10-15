@@ -111,7 +111,7 @@ pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple # �
 pip config set global.index-url https://mirror.nju.edu.cn/pypi/web/simple # 或
 pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 # 安装 fnschool 。
-pip3 install -U fnschool
+pip install -U fnschool
 # 运行“出入库”模块。
 fnschool-cli canteen mk_bill
 # 运行“测试”模块。
