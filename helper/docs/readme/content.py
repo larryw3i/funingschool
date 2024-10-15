@@ -136,7 +136,8 @@ sudo apt-get install python3 python3-pip python3-tk
 ```  
 {_(
     "For `Windows 10` and `Windows 11`, you can install Python3 from "
-    + "https://www.python.org/getit/ ."
+    + "https://www.python.org/getit/ . (`fnschool` requires Python 3.12 "
+    + "or later)"
 )}
 </p>
 

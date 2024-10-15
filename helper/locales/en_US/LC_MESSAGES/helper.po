@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-14 23:05+0800\n"
+"POT-Creation-Date: 2024-10-15 23:14+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -101,15 +101,15 @@ msgstr ""
 msgid "How To Use"
 msgstr ""
 
-#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:173
+#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:174
 msgid "Credits"
 msgstr ""
 
-#: helper/docs/readme/content.py:79 helper/docs/readme/content.py:189
+#: helper/docs/readme/content.py:79 helper/docs/readme/content.py:190
 msgid "Support"
 msgstr ""
 
-#: helper/docs/readme/content.py:83 helper/docs/readme/content.py:200
+#: helper/docs/readme/content.py:83 helper/docs/readme/content.py:201
 msgid "License"
 msgstr ""
 
@@ -184,14 +184,15 @@ msgstr ""
 #: helper/docs/readme/content.py:137
 msgid ""
 "For `Windows 10` and `Windows 11`, you can install Python3 from "
-"https://www.python.org/getit/ ."
+"https://www.python.org/getit/ . (`fnschool` requires Python 3.12 or "
+"later)"
 msgstr ""
 
-#: helper/docs/readme/content.py:144
+#: helper/docs/readme/content.py:145
 msgid "Install fnschool and run it"
 msgstr ""
 
-#: helper/docs/readme/content.py:149
+#: helper/docs/readme/content.py:150
 msgid ""
 "Run the command line application:\n"
 "* `Ubuntu`: `Ctrl+Alt+T`.  \n"
@@ -200,43 +201,43 @@ msgid ""
 "Enter the following commands:"
 msgstr ""
 
-#: helper/docs/readme/content.py:159
+#: helper/docs/readme/content.py:160
 msgid "install fnschool."
 msgstr ""
 
-#: helper/docs/readme/content.py:161
+#: helper/docs/readme/content.py:162
 msgid "run `warehousing and consuming` module."
 msgstr ""
 
-#: helper/docs/readme/content.py:163
+#: helper/docs/readme/content.py:164
 msgid "run `test statistics` module."
 msgstr ""
 
-#: helper/docs/readme/content.py:167
+#: helper/docs/readme/content.py:168
 msgid ""
 "Note: Read the information it prompts carefully, which is the key to "
 "using it well."
 msgstr ""
 
-#: helper/docs/readme/content.py:176
+#: helper/docs/readme/content.py:177
 msgid "This software uses the following open source packages:"
 msgstr ""
 
-#: helper/docs/readme/content.py:192
+#: helper/docs/readme/content.py:193
 msgid "Buy me a `coffee`:"
 msgstr ""
 
-#: helper/docs/readme/content.py:195
+#: helper/docs/readme/content.py:196
 msgid "Buy me a \"coffee\"."
 msgstr ""
 
-#: helper/docs/readme/content.py:196
+#: helper/docs/readme/content.py:197
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images"
 "/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
 msgstr ""
 
-#: helper/docs/readme/content.py:203
+#: helper/docs/readme/content.py:204
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr ""
 
@@ -2050,5 +2051,11 @@ msgstr ""
 #~ "* `Ubuntu`: `Ctrl+Alt+T`.  \n"
 #~ "* `Windows`: \"`Win+R, powershell, Enter`\".  \n"
 #~ "Enter the following commands:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "For `Windows 10` and `Windows 11`, "
+#~ "you can install Python3 from "
+#~ "https://www.python.org/getit/ ."
 #~ msgstr ""
 

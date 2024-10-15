@@ -83,7 +83,7 @@ on `Ubuntu`:
 ```bash
 sudo apt-get install python3 python3-pip python3-tk
 ```  
-For `Windows 10` and `Windows 11`, you can install Python3 from https://www.python.org/getit/ .
+For `Windows 10` and `Windows 11`, you can install Python3 from https://www.python.org/getit/ . (`fnschool` requires Python 3.12 or later)
 </p>
 
 <h3>
