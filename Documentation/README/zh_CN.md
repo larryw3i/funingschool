@@ -88,7 +88,7 @@ sudo apt-get install python3 python3-pip python3-tk
 * https://mirrors.huaweicloud.com/python/  
 * https://mirror.bjtu.edu.cn/python/  
 
-（`fnschool` 需要 Python 3.12 或以上 的运行环境。）
+（`fnschool` 需要 Python 3.12 或 3.12 以上 的运行环境。）
 </p>
 
 <h3>
