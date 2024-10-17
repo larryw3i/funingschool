@@ -9,7 +9,7 @@ from openpyxl.utils.cell import *
 from fnschool import *
 
 
-class SpreadsheetBase:
+class  Base :
     def __init__(self, bill):
         self.bill = bill
         self.spreadsheet = self.bill.spreadsheet
@@ -29,7 +29,7 @@ class SpreadsheetBase:
             bottom=self.cell_side0,
         )
         self.row_height = 12.75
-
+        self.filetypes_xlsx = ((_("Spreadsheet Files"), "*.xlsx")
     @property
     def bill_workbook(self):
         if not self._bill_workbook:

@@ -12,7 +12,7 @@ from fnschool.canteen.spreadsheet.base import *
 from openpyxl.worksheet.datavalidation import DataValidation
 
 
-class Purchasing(SpreadsheetBase):
+class Purchasing( Base ):
     def __init__(self, bill):
         super().__init__(bill)
         self.p_path_key = _("parent_path_of_purchasing_file")

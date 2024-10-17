@@ -4,7 +4,7 @@ from fnschool import *
 from fnschool.canteen.spreadsheet.base import *
 
 
-class Cover(SpreadsheetBase):
+class Cover( Base ):
     def __init__(self, bill):
         super().__init__(bill)
         self.sheet_name = self.s.cover_name

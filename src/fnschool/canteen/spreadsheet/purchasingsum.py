@@ -5,7 +5,7 @@ from fnschool import *
 from fnschool.canteen.spreadsheet.base import *
 
 
-class PurchasingSum(SpreadsheetBase):
+class PurchasingSum( Base ):
     def __init__(self, bill):
         super().__init__(bill)
         self.sheet_name = self.s.purchasingsum_name
