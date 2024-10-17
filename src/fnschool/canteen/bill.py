@@ -168,6 +168,10 @@ class Bill:
         print()
         pass
 
+    def merge_spreadsheets(self):
+        
+        pass
+
     @property
     def time_nodes(self):
         if not self._time_nodes:

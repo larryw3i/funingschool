@@ -94,6 +94,7 @@ class Consuming(SpreadsheetBase):
                 f"编号：C{day.month:0>2}{consuming_n:0>2}",
             )
 
+
             csheet.cell(
                 form_index1 + 1,
                 1,

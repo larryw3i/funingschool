@@ -154,7 +154,7 @@ class SpreadSheet:
             _(
                 "Do you want to save all updated data "
                 + 'to "{0}"? or just save it as a '
-                + 'copy to "{1}". (YyNn)'
+                + 'copy to "{1}". (Yy[N]n)'
             ).format(self.operator.bill_fpath, bill_fpath0)
         )
         print_warning(

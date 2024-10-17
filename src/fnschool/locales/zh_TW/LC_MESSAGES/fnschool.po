@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 23:14+0800\n"
+"POT-Creation-Date: 2024-10-17 20:39+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -278,13 +278,12 @@ msgid "Got no organization name column of {0}"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:348
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:348
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:350
 #: src/fnschool/canteen/workbook.py:956
 msgid "Update completely!"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:154
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:154
 #: src/fnschool/canteen/workbook.py:962
 msgid ""
 "Do you want to save all updated data to \"{0}\"? or just save it as a "
@@ -683,37 +682,49 @@ msgstr ""
 msgid "parent_path_of_purchasing_file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:130
+#: src/fnschool/canteen/spreadsheet/purchasing.py:146
+msgid "Column \"{0}\" was no found."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:150
+msgid "Columns \"{0}\" were no found."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:151
+msgid ","
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:173
 msgid "Column \"{0}\" was not found. Exit"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:220
+#: src/fnschool/canteen/spreadsheet/purchasing.py:264
 msgid "Loading data from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:278
+#: src/fnschool/canteen/spreadsheet/purchasing.py:322
 msgid ""
 "Column \"{0}\" has been updated, feel free to open new issue if some food"
 " with the wrong class ({1}). "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:285
+#: src/fnschool/canteen/spreadsheet/purchasing.py:329
 msgid "Ok, I'd like to check and update it. (Press any key to check the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:293
+#: src/fnschool/canteen/spreadsheet/purchasing.py:337
 msgid ""
 "I have checked it, all classes of food are right, and I closed the file. "
 "(Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:349
+#: src/fnschool/canteen/spreadsheet/purchasing.py:393
 msgid ""
 "{0} need a purchasing list file, and it's file type should be '.xlsx'. "
 "The column names of it:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:354
+#: src/fnschool/canteen/spreadsheet/purchasing.py:398
 msgid ""
 "\n"
 "\tcolumn   type    example\n"
@@ -728,93 +739,99 @@ msgid ""
 "\t是结余   Text    y"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:368
+#: src/fnschool/canteen/spreadsheet/purchasing.py:412
 msgid "Please select a purchasing file."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:369
+#: src/fnschool/canteen/spreadsheet/purchasing.py:413
 #: src/fnschool/exam/score.py:509
 msgid "Spreadsheet Files"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:375
+#: src/fnschool/canteen/spreadsheet/purchasing.py:419
 msgid "Please select the purchasing file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:381
+#: src/fnschool/canteen/spreadsheet/purchasing.py:425
 #: src/fnschool/exam/score.py:526
 msgid "No file was selected, exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:385
+#: src/fnschool/canteen/spreadsheet/purchasing.py:429
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:430
+#: src/fnschool/canteen/spreadsheet/purchasing.py:474
 msgid "The remaining food wasn't read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:441
+#: src/fnschool/canteen/spreadsheet/purchasing.py:485
 msgid ""
 "{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet \"{2}\" "
 "......"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:454
+#: src/fnschool/canteen/spreadsheet/purchasing.py:498
 msgid "There is no saved inventories from \"{0}\""
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:462
+#: src/fnschool/canteen/spreadsheet/purchasing.py:506
 msgid ""
 "Some remaining foods have been read from sheet \"{0}\" of spreadsheet "
 "\"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:467
+#: src/fnschool/canteen/spreadsheet/purchasing.py:511
 msgid "The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:493
+#: src/fnschool/canteen/spreadsheet/purchasing.py:537
 msgid "Purchaser: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:496
+#: src/fnschool/canteen/spreadsheet/purchasing.py:540
 msgid "Inventory data: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:504
+#: src/fnschool/canteen/spreadsheet/purchasing.py:548
 msgid "Fill them in \"{0}\"? (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:506
+#: src/fnschool/canteen/spreadsheet/purchasing.py:550
 msgid "Fill it in \"{0}\"? (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:567
+#: src/fnschool/canteen/spreadsheet/purchasing.py:611
 msgid "The remaining foods have been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:569
+#: src/fnschool/canteen/spreadsheet/purchasing.py:613
 msgid "The remaining food has been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:580
+#: src/fnschool/canteen/spreadsheet/purchasing.py:624
 msgid "Please check/modify the updated data. (Press any key to open the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:589
+#: src/fnschool/canteen/spreadsheet/purchasing.py:633
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:608
+#: src/fnschool/canteen/spreadsheet/purchasing.py:652
 msgid ""
 "The unit price of \"{0}\" is an infinite decimal, split \"{0}\"?(Yes: "
 "\"Y\",\"y\",\"\". Yes for rest: \"A\",\"a\". No: \"N\",\"n\". No for "
 "rest: \"S\",\"s\". Default: Yes for rest, \"A/a\".)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:653
+#: src/fnschool/canteen/spreadsheet/purchasing.py:697
 msgid "\"{0}\" was split:"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:154
+msgid ""
+"Do you want to save all updated data to \"{0}\"? or just save it as a "
+"copy to \"{1}\". (Yy[N]n)"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:62

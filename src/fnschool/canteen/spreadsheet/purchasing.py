@@ -41,11 +41,11 @@ class Purchasing(SpreadsheetBase):
             None,
             None,
             [
+                "下单单位名",
                 "客户名称",
                 "购买者",
                 "购买者名称",
                 "顾客名称",
-                "下单单位名",
                 "购入单位名",
             ],
         ]
@@ -53,7 +53,7 @@ class Purchasing(SpreadsheetBase):
             None,
             None,
             [
-                "总数", "数量", "发货数量", "记账数量", 
+                "总数", "数量", "发货数量", "记账数量", "总数量", "菜品数量"
             ],
         ]
         self._meal_type_col = [
@@ -101,6 +101,18 @@ class Purchasing(SpreadsheetBase):
         self._pd_date = None
         self._meal_types = None
 
+        self.essential_cols = [
+            False, [
+                self._food_name_col,
+                self._unit_name_col,
+                self._total_price_col,
+                self._xdate_col,
+                self._purchaser_col,
+                self._count_col,
+                # self._food_class_col,
+            ]
+        ]
+
     @property
     def pd_data(self):
         if self._pd_date is None:
@@ -120,13 +132,42 @@ class Purchasing(SpreadsheetBase):
             )
         return self._food_class_dv
 
+    def essential_cols_pass(self):
+        check_pass, cols = self.essential_cols
+        if check_pass:
+            return True
+        missed_cols = []
+        for col in cols:
+            col0 = self.get_optional_col(col)
+            if not col[1]:
+                missed_cols.append(col[-1][0])
+        if len(missed_cols) > 0:
+            print_error(
+                _("Column \"{0}\" was no found.").format(
+                    "".join(missed_cols)
+                )
+                if len(col) == 1 else 
+                _("Columns \"{0}\" were no found.").format(
+                    _(",").join(missed_cols)
+                )
+            )
+            self.essential_cols[0] = False
+            return False
+        self.essential_cols[0] = True
+        return True
+
     def get_col(self, col):
+        
+        if not self.essential_cols_pass():
+            exit()
+
         if not col[1]:
             col0 = [
                 (n, self.headers.index(n) + 1)
                 for n in self.headers
                 if n in col[2]
             ]
+
             if len(col0) < 1:
                 print_error(
                     _('Column "{0}" was not found. Exit').format(col[2][0])

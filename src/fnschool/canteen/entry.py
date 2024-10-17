@@ -12,6 +12,9 @@ def set_canteen(args):
     if args.action in "mk_bill":
         bill.make_spreadsheets()
 
+    elif args.action in "merge_bills":
+        bill.merge_spreadsheets()
+
     else:
         print_info(_("Function is not found."))
 
