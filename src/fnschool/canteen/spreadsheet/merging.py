@@ -110,7 +110,58 @@ class Merging( Base ):
         self._current_fpath = fpath
         pass
 
-    
+    def get_sheet(self, name=None, wb=None):
+        sheet = None
+        wb = wb or self.bwb
+
+        if name in wb.sheetnames:
+            sheet = wb[name]
+        else:
+            sheet = wb.copy_worksheet(wb[self.sheet_name])
+            sheet.title = name
+
+        for row_index in range(1, sheet.max_row + 1):
+            rc1_value = sheet.cell(row_index, 1).value
+            rc1_value = str(rc1_value)
+            if rc1_value and "材料名称：（）" in rc1_value:
+                unit = [f.unit_name for f in bfoods if f.name == name]
+                unit = unit[0] if len(unit) > 0 else "斤"
+                sheet.cell(row_index, 1, f"材料名称：{name}（{unit}）")
+
+        return sheet
+
+    def get_data_rows_list(self,sheet):
+        rows = []
+        for row in sheet.iter_rows(
+            min_row=1, 
+            max_row=sheet.max_row,  
+            min_col=1,
+            max_col=14
+        ):
+            cell3 = row[2]
+            if "摘要" in str(cell3.value):
+                rows.append([row.row+1,None])
+                continue
+            elif "本月合计" in str(cell3.value):
+                row_m1 = rows[-1]
+                row_m1[-1] = row.row-1
+                rows[-1] = row_m1
+                continue
+            pass
+        return rows
+
+    def make_row_counts_same(self):
+        ldata_rows = self.get_data_rows_list(lsheet) 
+        cdata_rows = self.get_data_rows_list(csheet)
+
+            for i,(crow0,crow1) in enumerate(cdata_rows):
+                lrow0,lrow1 = ldata_rows[i]
+                row_diff =  (lrow1-lrow0) - (crow1-crow0):
+                if row_diff > 0:
+                    csheet.insert_rows(crow0+1,row_diff)
+                pass        
+        pass
+
 
     def start(self):
         lwb = self.last_wb
@@ -118,10 +169,31 @@ class Merging( Base ):
 
         lwb_sheet_names = self.get_food_sheet_names(lwb)
         cwb_sheet_names = self.get_food_sheet_names(cwb)
+
         
         for name in lwb_sheet_names:
             if not name in cwb_sheet_names:
-                pass 
+                sheet = lwb[name] 
+                cwb.copy_worksheet(sheet)
+                pass
+            else
+                lsheet = lwb[name]
+                csheet = cwb[name]
+                ldata_rows = self.get_data_rows_list(lsheet) 
+                cdata_rows = self.get_data_rows_list(csheet)
+                
+                for i,(crow0,crow1) in enumerate(cdata_rows):
+                    lrow0,lrow1 = ldata_rows[i]
+                    row_diff =  (lrow1-lrow0) - (crow1-crow0):
+
+                    if row_diff > 0:
+                        csheet.insert_rows(crow0+1,row_diff)
+                    
+                    pass
+                
+
+
+                
 
         
     pass

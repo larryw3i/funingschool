@@ -12,15 +12,17 @@ class Food( Base ):
         super().__init__(bill)
         self.sheet_name = self.s.sfood_name
         pass
+    
 
-    def get_sheet(self, name=None):
+    def get_sheet(self, name=None, wb=None):
         sheet = None
         bfoods = self.bfoods
+        wb = wb or self.bwb
 
-        if name in self.bwb.sheetnames:
-            sheet = self.bwb[name]
+        if name in wb.sheetnames:
+            sheet = wb[name]
         else:
-            sheet = self.bwb.copy_worksheet(self.bwb[self.sheet_name])
+            sheet = wb.copy_worksheet(wb[self.sheet_name])
             sheet.title = name
 
         for row_index in range(1, sheet.max_row + 1):
