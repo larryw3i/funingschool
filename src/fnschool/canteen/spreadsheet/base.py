@@ -30,6 +30,8 @@ class  Base :
         )
         self.row_height = 12.75
         self.filetypes_xlsx = ((_("Spreadsheet Files"), "*.xlsx")
+        food_sheet0_name = "材料台账母表"
+        food_sheet_title_like = "材料入库、出库台账"
     @property
     def bill_workbook(self):
         if not self._bill_workbook:
