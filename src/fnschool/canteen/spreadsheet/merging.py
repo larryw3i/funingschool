@@ -15,6 +15,8 @@ from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.path import *
 
+from fnschool.canteen.spreadsheet.food import Food as FoodSheet
+
 class Merging( Base ):
     def __init__(self,bill):
         super.__init__(bill)
@@ -24,7 +26,14 @@ class Merging( Base ):
         self.current_fpath_dpath_key = _("current_bill_dpath")
         self._last_wb = None
         self._current_wb = None
+        self._food_sheet = None
         pass
+
+    @property
+    def food_sheet(self):
+        if not self._food_sheet:
+            self._food_sheet = FoodSheet(self.bill)
+        return self._food_sheet
     
     @property
     def last_wb(self):
@@ -150,51 +159,93 @@ class Merging( Base ):
             pass
         return rows
 
-    def make_row_counts_same(self):
-        ldata_rows = self.get_data_rows_list(lsheet) 
-        cdata_rows = self.get_data_rows_list(csheet)
+    def make_row_counts_same(self, last_sheet, current_sheet):
+        ldata_rows = self.get_data_rows_list(last_sheet) 
+        cdata_rows = self.get_data_rows_list(current_sheet)
 
-            for i,(crow0,crow1) in enumerate(cdata_rows):
-                lrow0,lrow1 = ldata_rows[i]
-                row_diff =  (lrow1-lrow0) - (crow1-crow0):
-                if row_diff > 0:
-                    csheet.insert_rows(crow0+1,row_diff)
-                pass        
+        for i,(crow0,crow1) in enumerate(cdata_rows):
+            lrow0,lrow1 = ldata_rows[i]
+            row_diff =  (lrow1-lrow0) - (crow1-crow0):
+            if row_diff > 0:
+                csheet.insert_rows(crow0+1,row_diff)
+                    self.make_row_counts_same()
+                break
+            pass        
+
         pass
 
 
-    def start(self):
+    def start(self,current_wb = [None,None]):
         lwb = self.last_wb
+
+        if current_wb:
+            current_wb, current_fpath = current_wb
+
+            self.current_fpath = current_fpath
+            self.current_wb = current_wb
+
         cwb = self.current_wb
 
         lwb_sheet_names = self.get_food_sheet_names(lwb)
         cwb_sheet_names = self.get_food_sheet_names(cwb)
-
+        
         
         for name in lwb_sheet_names:
             if not name in cwb_sheet_names:
-                sheet = lwb[name] 
-                cwb.copy_worksheet(sheet)
+                lsheet = lwb[name] 
+                csheet = cwb.create_sheet(lsheet.title,-1)
+                for row in lsheet.iter_rows(max_col = 14):
+                    for lcell in row:
+                        ccell = csheet.cell(lcell.row, lcell.column)
+                        ccell.value = lcell.value
+                    csheet.row_dimensions[row[0].row].height = self.row_height
+                self.food_sheet.format(csheet)
+
                 pass
             else
                 lsheet = lwb[name]
                 csheet = cwb[name]
-                ldata_rows = self.get_data_rows_list(lsheet) 
-                cdata_rows = self.get_data_rows_list(csheet)
-                
-                for i,(crow0,crow1) in enumerate(cdata_rows):
-                    lrow0,lrow1 = ldata_rows[i]
-                    row_diff =  (lrow1-lrow0) - (crow1-crow0):
+                self.make_row_counts_same(lsheet,csheet)
+                ldata_rows = self.get_data_rows_list(last_sheet) 
+                cdata_rows = self.get_data_rows_list(current_sheet)
 
-                    if row_diff > 0:
-                        csheet.insert_rows(crow0+1,row_diff)
-                    
+                for (lrow0,lrow1),(crow0, crow1) in list(
+                    zip(ldata_rows,cdata_rows)
+                ):
+                    for row_i in range(lrow1-lrow0):
+                        lrow = lrow0+row_i
+                        crow = crow0+row_i
+
+                        for col_i in range(1,14):
+                            ccell = csheet.cell(
+                                crow,
+                                col_i,
+                            )
+                            ccell.value = lsheet.cell(lrow,col_i).value
+                            pass
+
+                        csheet.row_dimensions[crow0+row_i].height = (
+                            self.row_height
+                        )
+
+                        pass
+
                     pass
-                
 
-
-                
-
+                print_info(
+                    _(
+                        "Data from Sheet \"{0}\" of Workbook \"{1}\" was "
+                        + "copied to Sheet\"{2}\" of Workbook \"{3}\"."
+                    ).format(
+                        lsheet.title,
+                        self.last_fpath,
+                        csheet.title,
+                        self.current_fpath
+                    )
+                )
+            pass
+        
+        print_info(_("Merge completed！"))
         
     pass
 
