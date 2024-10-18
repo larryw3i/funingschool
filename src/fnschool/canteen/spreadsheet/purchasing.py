@@ -12,7 +12,7 @@ from fnschool.canteen.spreadsheet.base import *
 from openpyxl.worksheet.datavalidation import DataValidation
 
 
-class Purchasing( Base ):
+class Purchasing(Base):
     def __init__(self, bill):
         super().__init__(bill)
         self.p_path_key = _("parent_path_of_purchasing_file")
@@ -52,9 +52,7 @@ class Purchasing( Base ):
         self._count_col = [
             None,
             None,
-            [
-                "总数", "数量", "发货数量", "记账数量", "总数量", "菜品数量"
-            ],
+            ["总数", "数量", "发货数量", "记账数量", "总数量", "菜品数量"],
         ]
         self._meal_type_col = [
             None,
@@ -102,7 +100,8 @@ class Purchasing( Base ):
         self._meal_types = None
 
         self.essential_cols = [
-            False, [
+            False,
+            [
                 self._food_name_col,
                 self._unit_name_col,
                 self._total_price_col,
@@ -110,7 +109,7 @@ class Purchasing( Base ):
                 self._purchaser_col,
                 self._count_col,
                 # self._food_class_col,
-            ]
+            ],
         ]
 
     @property
@@ -143,11 +142,9 @@ class Purchasing( Base ):
                 missed_cols.append(col[-1][0])
         if len(missed_cols) > 0:
             print_error(
-                _("Column \"{0}\" was no found.").format(
-                    "".join(missed_cols)
-                )
-                if len(col) == 1 else 
-                _("Columns \"{0}\" were no found.").format(
+                _('Column "{0}" was no found.').format("".join(missed_cols))
+                if len(col) == 1
+                else _('Columns "{0}" were no found.').format(
                     _(",").join(missed_cols)
                 )
             )
@@ -157,7 +154,7 @@ class Purchasing( Base ):
         return True
 
     def get_col(self, col):
-        
+
         if not self.essential_cols_pass():
             exit()
 

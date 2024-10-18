@@ -17,8 +17,9 @@ from fnschool.canteen.path import *
 
 from fnschool.canteen.spreadsheet.food import Food as FoodSheet
 
-class Merging( Base ):
-    def __init__(self,bill):
+
+class Merging(Base):
+    def __init__(self, bill):
         super.__init__(bill)
         self._last_fpath = None
         self._current_fpath = None
@@ -34,7 +35,7 @@ class Merging( Base ):
         if not self._food_sheet:
             self._food_sheet = FoodSheet(self.bill)
         return self._food_sheet
-    
+
     @property
     def last_wb(self):
         if not self._last_wb:
@@ -50,7 +51,7 @@ class Merging( Base ):
         return self._current_wb
 
     @current_wb.setter
-    def current_wb(self,wb):
+    def current_wb(self, wb):
         self._current_wb = wb
         pass
 
@@ -60,38 +61,30 @@ class Merging( Base ):
             root = tk.Tk()
             conf_initialdir = self.config.get(self.last_fpath_dpath_key)
             conf_initialdir = Path(conf_initialdir) if conf_initialdir else None
-            initialdir = (
-                conf_initialdir
-                or documents_dpath 
-                or Path.home()
-            )
+            initialdir = conf_initialdir or documents_dpath or Path.home()
             fpath = filedialog.askopenfile(
                 root,
-                title = _("Select the last bill spreadsheet"),
-                initialdir = initialdir,
-                filetypes = self.filetypes_xlsx,
+                title=_("Select the last bill spreadsheet"),
+                initialdir=initialdir,
+                filetypes=self.filetypes_xlsx,
             )
             self._last_fpath = fpath
 
         return self._last_fpath
         pass
-    
+
     @property
     def current_fpath(self):
         if not self._current_fpath:
             root = tk.Tk()
             conf_initialdir = self.config.get(self.last_fpath_dpath_key)
             conf_initialdir = Path(conf_initialdir) if conf_initialdir else None
-            initialdir = (
-                conf_initialdir
-                or documents_dpath 
-                or Path.home()
-            )
+            initialdir = conf_initialdir or documents_dpath or Path.home()
             fpath = filedialog.askopenfile(
                 root,
-                title = _("Select the last bill spreadsheet"),
-                initialdir = initialdir,
-                filetypes = self.filetypes_xlsx,
+                title=_("Select the last bill spreadsheet"),
+                initialdir=initialdir,
+                filetypes=self.filetypes_xlsx,
             )
 
             self._current_fpath = fpath
@@ -100,11 +93,10 @@ class Merging( Base ):
 
     def get_food_sheet_names(self, wb):
         names = []
-        for name in wb.sheetnames
+        for name in wb.sheetnames:
             sheet = wb[sheet]
-            if (
-                sheet.cell(1,1).value 
-                and self.food_sheet_title_like in str(sheet.cell(1,1).value)
+            if sheet.cell(1, 1).value and self.food_sheet_title_like in str(
+                sheet.cell(1, 1).value
             ):
                 names.append(name)
 
@@ -113,7 +105,6 @@ class Merging( Base ):
 
         return names
 
-    
     @current_fpath.setter
     def current_fpath(self, fpath):
         self._current_fpath = fpath
@@ -139,43 +130,39 @@ class Merging( Base ):
 
         return sheet
 
-    def get_data_rows_list(self,sheet):
+    def get_data_rows_list(self, sheet):
         rows = []
         for row in sheet.iter_rows(
-            min_row=1, 
-            max_row=sheet.max_row,  
-            min_col=1,
-            max_col=14
+            min_row=1, max_row=sheet.max_row, min_col=1, max_col=14
         ):
             cell3 = row[2]
             if "摘要" in str(cell3.value):
-                rows.append([row.row+1,None])
+                rows.append([row.row + 1, None])
                 continue
             elif "本月合计" in str(cell3.value):
                 row_m1 = rows[-1]
-                row_m1[-1] = row.row-1
+                row_m1[-1] = row.row - 1
                 rows[-1] = row_m1
                 continue
             pass
         return rows
 
     def make_row_counts_same(self, last_sheet, current_sheet):
-        ldata_rows = self.get_data_rows_list(last_sheet) 
+        ldata_rows = self.get_data_rows_list(last_sheet)
         cdata_rows = self.get_data_rows_list(current_sheet)
 
-        for i,(crow0,crow1) in enumerate(cdata_rows):
-            lrow0,lrow1 = ldata_rows[i]
-            row_diff =  (lrow1-lrow0) - (crow1-crow0):
+        for i, (crow0, crow1) in enumerate(cdata_rows):
+            lrow0, lrow1 = ldata_rows[i]
+            row_diff = (lrow1 - lrow0) - (crow1 - crow0)
             if row_diff > 0:
-                csheet.insert_rows(crow0+1,row_diff)
-                    self.make_row_counts_same()
+                csheet.insert_rows(crow0 + 1, row_diff)
+                self.make_row_counts_same()
                 break
-            pass        
+            pass
 
         pass
 
-
-    def start(self,current_wb = [None,None]):
+    def start(self, current_wb=[None, None]):
         lwb = self.last_wb
 
         if current_wb:
@@ -188,43 +175,41 @@ class Merging( Base ):
 
         lwb_sheet_names = self.get_food_sheet_names(lwb)
         cwb_sheet_names = self.get_food_sheet_names(cwb)
-        
-        
+
         for name in lwb_sheet_names:
             if not name in cwb_sheet_names:
-                lsheet = lwb[name] 
-                csheet = cwb.create_sheet(lsheet.title,-1)
-                for row in lsheet.iter_rows(max_col = 14):
+                lsheet = lwb[name]
+                csheet = cwb.create_sheet(lsheet.title, -1)
+                for row in lsheet.iter_rows(max_col=14):
                     for lcell in row:
                         ccell = csheet.cell(lcell.row, lcell.column)
                         ccell.value = lcell.value
                     csheet.row_dimensions[row[0].row].height = self.row_height
                 self.food_sheet.format(csheet)
-
                 pass
-            else
+            else:
                 lsheet = lwb[name]
                 csheet = cwb[name]
-                self.make_row_counts_same(lsheet,csheet)
-                ldata_rows = self.get_data_rows_list(last_sheet) 
+                self.make_row_counts_same(lsheet, csheet)
+                ldata_rows = self.get_data_rows_list(last_sheet)
                 cdata_rows = self.get_data_rows_list(current_sheet)
 
-                for (lrow0,lrow1),(crow0, crow1) in list(
-                    zip(ldata_rows,cdata_rows)
+                for (lrow0, lrow1), (crow0, crow1) in list(
+                    zip(ldata_rows, cdata_rows)
                 ):
-                    for row_i in range(lrow1-lrow0):
-                        lrow = lrow0+row_i
-                        crow = crow0+row_i
+                    for row_i in range(lrow1 - lrow0):
+                        lrow = lrow0 + row_i
+                        crow = crow0 + row_i
 
-                        for col_i in range(1,14):
+                        for col_i in range(1, 14):
                             ccell = csheet.cell(
                                 crow,
                                 col_i,
                             )
-                            ccell.value = lsheet.cell(lrow,col_i).value
+                            ccell.value = lsheet.cell(lrow, col_i).value
                             pass
 
-                        csheet.row_dimensions[crow0+row_i].height = (
+                        csheet.row_dimensions[crow0 + row_i].height = (
                             self.row_height
                         )
 
@@ -234,19 +219,20 @@ class Merging( Base ):
 
                 print_info(
                     _(
-                        "Data from Sheet \"{0}\" of Workbook \"{1}\" was "
-                        + "copied to Sheet\"{2}\" of Workbook \"{3}\"."
+                        'Data from Sheet "{0}" of Workbook "{1}" was '
+                        + 'copied to Sheet"{2}" of Workbook "{3}".'
                     ).format(
                         lsheet.title,
                         self.last_fpath,
                         csheet.title,
-                        self.current_fpath
+                        self.current_fpath,
                     )
                 )
             pass
-        
+
         print_info(_("Merge completed！"))
-        
+
     pass
+
 
 # The end.

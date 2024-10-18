@@ -11,7 +11,7 @@ from fnschool.canteen.path import *
 from fnschool.canteen.spreadsheet.base import *
 
 
-class PreConsuming( Base ):
+class PreConsuming(Base):
     def __init__(self, bill):
         super().__init__(bill)
         self.path0 = pre_consuming0_fpath

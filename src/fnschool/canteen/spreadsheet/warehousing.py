@@ -11,7 +11,7 @@ from fnschool import *
 from fnschool.canteen.spreadsheet.base import *
 
 
-class Warehousing( Base ):
+class Warehousing(Base):
     def __init__(self, bill, form_row_len=21):
         super().__init__(bill)
         self.sheet_name = self.s.warehousing_name

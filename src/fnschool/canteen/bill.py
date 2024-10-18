@@ -169,7 +169,7 @@ class Bill:
         pass
 
     def merge_spreadsheets(self):
-        
+
         pass
 
     @property

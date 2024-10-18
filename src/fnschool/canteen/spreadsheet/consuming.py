@@ -1,7 +1,7 @@
 from fnschool.canteen.spreadsheet.base import *
 
 
-class Consuming( Base ):
+class Consuming(Base):
     def __init__(self, bill):
         super().__init__(bill)
         self.sheet_name = self.s.consuming_name
@@ -93,7 +93,6 @@ class Consuming( Base ):
                 7,
                 f"编号：C{day.month:0>2}{consuming_n:0>2}",
             )
-
 
             csheet.cell(
                 form_index1 + 1,

@@ -4,7 +4,7 @@ from fnschool.canteen.food import *
 from fnschool.canteen.spreadsheet.base import *
 
 
-class ConsumingSum( Base ):
+class ConsumingSum(Base):
     def __init__(self, bill):
         super().__init__(bill)
         self.sheet_name = self.s.consumingsum_name
