@@ -322,11 +322,10 @@ class SpreadSheet:
         self._consumingsum = None
         self._cover = None
 
-    def merge(self,*args, **kwargs):
+    def merge(self):
         merging = Merging(self.bill)
-        merging.start(args,kwargs)
+        merging.start()
         pass
-        
 
     def update(self):
 

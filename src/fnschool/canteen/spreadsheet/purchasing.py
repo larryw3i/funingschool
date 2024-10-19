@@ -413,6 +413,7 @@ class Purchasing(Base):
             tkroot.withdraw()
 
             filename = filedialog.askopenfilename(
+                parent=tkroot,
                 title=_("Please select the purchasing file"),
                 initialdir=initialdir,
                 filetypes=filetypes,

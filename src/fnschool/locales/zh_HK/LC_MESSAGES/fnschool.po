@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-17 20:39+0800\n"
+"POT-Creation-Date: 2024-10-19 23:59+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -132,7 +132,7 @@ msgstr ""
 msgid "%s can't change."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:160
+#: src/fnschool/canteen/bill.py:159
 msgid ""
 "If you feel {0} is great, please sponsor it. Your sponsorship will keep "
 "the project alive."
@@ -142,19 +142,19 @@ msgstr ""
 msgid "Sponsor URL: {0}"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:201
+#: src/fnschool/canteen/bill.py:210
 msgid "Food classes files:"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:210
+#: src/fnschool/canteen/bill.py:219
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:220
+#: src/fnschool/canteen/bill.py:229
 msgid "Preset food classes were read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:234
+#: src/fnschool/canteen/bill.py:243
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr ""
 
@@ -168,16 +168,18 @@ msgstr ""
 msgid "CNY"
 msgstr ""
 
-#: src/fnschool/canteen/entry.py:16 src/fnschool/exam/entry.py:18
+#: src/fnschool/canteen/entry.py:19 src/fnschool/exam/entry.py:18
 msgid "Function is not found."
 msgstr ""
 
-#: src/fnschool/canteen/entry.py:21
+#: src/fnschool/canteen/entry.py:24
 msgid "Canteen related functions."
 msgstr ""
 
-#: src/fnschool/canteen/entry.py:28
-msgid "The functions of canteen."
+#: src/fnschool/canteen/entry.py:29
+msgid ""
+"The functions of canteen. \"mk_bill\": Make bill. \"merge_foodsheets\": "
+"Merge food sheets."
 msgstr ""
 
 #: src/fnschool/canteen/food.py:44 src/fnschool/canteen/operator.py:66
@@ -241,7 +243,7 @@ msgstr ""
 #: src/fnschool/canteen/spreadsheet/consuming.py:238
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:64
 #: src/fnschool/canteen/spreadsheet/cover.py:61
-#: src/fnschool/canteen/spreadsheet/food.py:274
+#: src/fnschool/canteen/spreadsheet/food.py:286
 #: src/fnschool/canteen/spreadsheet/inventory.py:331
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:90
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:144
@@ -256,7 +258,7 @@ msgstr ""
 msgid "Sheet '%s' was updated."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:284
+#: src/fnschool/canteen/spreadsheet/food.py:296
 #: src/fnschool/canteen/workbook.py:808
 msgid "All food sheets have their tab colors reset."
 msgstr ""
@@ -278,7 +280,7 @@ msgid "Got no organization name column of {0}"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:348
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:350
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:360
 #: src/fnschool/canteen/workbook.py:956
 msgid "Update completely!"
 msgstr ""
@@ -291,7 +293,7 @@ msgid ""
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:161
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:161
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:162
 #: src/fnschool/canteen/workbook.py:969
 msgid ""
 "If you save updated data to \"{0}\", data of food sheets will be saved "
@@ -299,7 +301,7 @@ msgid ""
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:177
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:177
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:178
 #: src/fnschool/canteen/workbook.py:979
 msgid ""
 "You can fill in the monthly missing data to food sheets, they will be "
@@ -307,7 +309,7 @@ msgid ""
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:192
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:192
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:193
 #: src/fnschool/canteen/workbook.py:990
 msgid "Updated data was saved."
 msgstr ""
@@ -515,89 +517,95 @@ msgstr ""
 msgid "Copying workbook..."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:47
+#: src/fnschool/canteen/spreadsheet/base.py:32
+#: src/fnschool/canteen/spreadsheet/purchasing.py:410
+#: src/fnschool/exam/score.py:509
+msgid "Spreadsheet Files"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/base.py:50
 msgid "Row {0} of {1} is being inserted, please wait a moment."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:94
+#: src/fnschool/canteen/spreadsheet/base.py:97
 msgid "Cells of {0} was unmerged."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:136
+#: src/fnschool/canteen/spreadsheet/base.py:139
 msgid "Empty row {0} of sheet \"{1}\" has been deleted."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:71
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:71
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:72
 msgid "Spreadsheet \"{0}\" is in use."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:171
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:171
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:172
 msgid "Saving. . ."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:187
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:187
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:188
 msgid "Updated data has been saved to \"{0}\"."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:205
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:205
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:206
 msgid "Inventory of last month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:214
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:214
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:215
 msgid "Warehousing of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:219
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:253
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:219
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:253
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:220
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:254
 msgid "Total: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:231
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:231
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:232
 msgid "Consuming of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:249
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:249
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:250
 msgid "Inventory of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:260
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:260
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:261
 msgid "Unwarehousing of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:266
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:266
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:267
 msgid "Total purchasing of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:305
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:305
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:311
 msgid "Summary:"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:326
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:326
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:337
 msgid "Updating sheets for {0}."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:105
+#: src/fnschool/canteen/spreadsheet/food.py:118
 msgid "Sheet {0} has been reformatted."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:298
+#: src/fnschool/canteen/spreadsheet/food.py:310
 msgid "Food sheets have their tab colors recolor:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:302
+#: src/fnschool/canteen/spreadsheet/food.py:314
 msgid "Updated food sheets:"
 msgstr ""
 
@@ -611,6 +619,47 @@ msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/inventory.py:244
 msgid "There is no inventories for \"{0}\"."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/merging.py:28
+msgid "last_bill_dpath"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/merging.py:29
+msgid "current_bill_dpath"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/merging.py:44
+#: src/fnschool/canteen/spreadsheet/merging.py:52
+#: src/fnschool/canteen/spreadsheet/purchasing.py:261
+msgid "Loading data from \"{0}\"."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/merging.py:72
+msgid "Select the last bill spreadsheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/merging.py:77
+#: src/fnschool/canteen/spreadsheet/merging.py:105
+msgid "there is not file selected. Exit."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/merging.py:99
+msgid "Select the current bill spreadsheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/merging.py:259
+msgid ""
+"Data from Sheet \"{0}\" of Workbook \"{1}\" was copied to Sheet\"{2}\" of"
+" Workbook \"{3}\"."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/merging.py:272
+msgid "Food sheet \"{0}\" has its color recolor."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/merging.py:282
+msgid "Merge completed！Saving \"{0}\"."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/preconsuming.py:27
@@ -682,49 +731,45 @@ msgstr ""
 msgid "parent_path_of_purchasing_file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:146
+#: src/fnschool/canteen/spreadsheet/purchasing.py:145
 msgid "Column \"{0}\" was no found."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:150
+#: src/fnschool/canteen/spreadsheet/purchasing.py:147
 msgid "Columns \"{0}\" were no found."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:151
+#: src/fnschool/canteen/spreadsheet/purchasing.py:148
 msgid ","
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:173
+#: src/fnschool/canteen/spreadsheet/purchasing.py:170
 msgid "Column \"{0}\" was not found. Exit"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:264
-msgid "Loading data from \"{0}\"."
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:322
+#: src/fnschool/canteen/spreadsheet/purchasing.py:319
 msgid ""
 "Column \"{0}\" has been updated, feel free to open new issue if some food"
 " with the wrong class ({1}). "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:329
+#: src/fnschool/canteen/spreadsheet/purchasing.py:326
 msgid "Ok, I'd like to check and update it. (Press any key to check the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:337
+#: src/fnschool/canteen/spreadsheet/purchasing.py:334
 msgid ""
 "I have checked it, all classes of food are right, and I closed the file. "
 "(Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:393
+#: src/fnschool/canteen/spreadsheet/purchasing.py:390
 msgid ""
 "{0} need a purchasing list file, and it's file type should be '.xlsx'. "
 "The column names of it:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:398
+#: src/fnschool/canteen/spreadsheet/purchasing.py:395
 msgid ""
 "\n"
 "\tcolumn   type    example\n"
@@ -739,96 +784,91 @@ msgid ""
 "\t是结余   Text    y"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:412
+#: src/fnschool/canteen/spreadsheet/purchasing.py:409
 msgid "Please select a purchasing file."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:413
-#: src/fnschool/exam/score.py:509
-msgid "Spreadsheet Files"
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:419
+#: src/fnschool/canteen/spreadsheet/purchasing.py:417
 msgid "Please select the purchasing file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:425
+#: src/fnschool/canteen/spreadsheet/purchasing.py:423
 #: src/fnschool/exam/score.py:526
 msgid "No file was selected, exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:429
+#: src/fnschool/canteen/spreadsheet/purchasing.py:427
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:474
+#: src/fnschool/canteen/spreadsheet/purchasing.py:472
 msgid "The remaining food wasn't read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:485
+#: src/fnschool/canteen/spreadsheet/purchasing.py:483
 msgid ""
 "{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet \"{2}\" "
 "......"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:498
+#: src/fnschool/canteen/spreadsheet/purchasing.py:496
 msgid "There is no saved inventories from \"{0}\""
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:506
+#: src/fnschool/canteen/spreadsheet/purchasing.py:504
 msgid ""
 "Some remaining foods have been read from sheet \"{0}\" of spreadsheet "
 "\"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:511
+#: src/fnschool/canteen/spreadsheet/purchasing.py:509
 msgid "The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:537
+#: src/fnschool/canteen/spreadsheet/purchasing.py:535
 msgid "Purchaser: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:540
+#: src/fnschool/canteen/spreadsheet/purchasing.py:538
 msgid "Inventory data: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:548
+#: src/fnschool/canteen/spreadsheet/purchasing.py:546
 msgid "Fill them in \"{0}\"? (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:550
+#: src/fnschool/canteen/spreadsheet/purchasing.py:548
 msgid "Fill it in \"{0}\"? (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:611
+#: src/fnschool/canteen/spreadsheet/purchasing.py:609
 msgid "The remaining foods have been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:613
+#: src/fnschool/canteen/spreadsheet/purchasing.py:611
 msgid "The remaining food has been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:624
+#: src/fnschool/canteen/spreadsheet/purchasing.py:622
 msgid "Please check/modify the updated data. (Press any key to open the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:633
+#: src/fnschool/canteen/spreadsheet/purchasing.py:631
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:652
+#: src/fnschool/canteen/spreadsheet/purchasing.py:650
 msgid ""
 "The unit price of \"{0}\" is an infinite decimal, split \"{0}\"?(Yes: "
 "\"Y\",\"y\",\"\". Yes for rest: \"A\",\"a\". No: \"N\",\"n\". No for "
 "rest: \"S\",\"s\". Default: Yes for rest, \"A/a\".)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:697
+#: src/fnschool/canteen/spreadsheet/purchasing.py:695
 msgid "\"{0}\" was split:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:154
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:155
 msgid ""
 "Do you want to save all updated data to \"{0}\"? or just save it as a "
 "copy to \"{1}\". (Yy[N]n)"
@@ -2362,5 +2402,11 @@ msgstr ""
 #~ " No: \"N\",\"n\". No for rest: "
 #~ "\"S\",\"s\". Default: Yes for rest, "
 #~ "\"A/a\".)."
+#~ msgstr ""
+
+#~ msgid "Merge completed！"
+#~ msgstr ""
+
+#~ msgid "there is not file selected."
 #~ msgstr ""
 

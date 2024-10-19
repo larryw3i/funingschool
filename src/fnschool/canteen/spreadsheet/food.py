@@ -5,6 +5,7 @@ import random
 
 from fnschool import *
 from fnschool.canteen.spreadsheet.base import *
+from openpyxl.styles import *
 
 
 class Food(Base):
@@ -102,9 +103,18 @@ class Food(Base):
                     end_column=13,
                 )
 
-        print_info(
-            _("Sheet {0} has been reformatted.").format(self.sheet.title)
-        )
+            if row[0].value and self.food_form_title_like in str(row[0].value):
+                sheet.merge_cells(
+                    start_row=row[0].row,
+                    end_row=row[0].row,
+                    start_column=1,
+                    end_column=13,
+                )
+                row[0].font = Font(size=18, bold=True)
+                row[0].alignment = self.cell_alignment0
+                row[0].border = self.cell_border0
+
+        print_info(_("Sheet {0} has been reformatted.").format(sheet.title))
 
     def get_form_index(self, sheet):
         indexes = self.get_form_indexes(sheet)
