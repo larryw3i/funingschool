@@ -106,6 +106,7 @@ README.md">English</a>
 )}
 * {_("Reduce calculation errors.")}
 * {_("Effectively eliminate unit prices containing infinite decimals.")}
+* {_("Merge food sheets between spreadsheets.")}  
 * {_("Easy to use.")}
 
 <h3>
