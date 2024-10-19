@@ -8,16 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-19 23:59+0800\n"
-"PO-Revision-Date: 2024-10-16 02:58+0800\n"
+"POT-Creation-Date: 2024-10-20 01:51+0800\n"
+"PO-Revision-Date: 2024-10-20 01:53+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
+"X-Generator: Gtranslator 47.0\n"
 
 #: helper/entry.py:18
 msgid "Helper of fnschool project"
@@ -50,9 +51,11 @@ msgstr "编译 相关函数。"
 
 #: helper/build/entry.py:26
 msgid ""
-"\"now\": Build \"fnschool\" now. \"upload\": Build and upload "
-"\"fnschool\" via \"twine\"."
-msgstr "“now”：编译 “fnschool” 项目。“upload”：编译 “fnschool” 并将安装包上传到 twine 。"
+"\"now\": Build \"fnschool\" now. \"upload\": Build and upload \"fnschool\" "
+"via \"twine\"."
+msgstr ""
+"“now”：编译 “fnschool” 项目。“upload”：编译 “fnschool” 并将安装包上传到 "
+"twine 。"
 
 #: helper/build/fnbuild.py:46
 msgid "The hash value of distribution is:"
@@ -102,15 +105,15 @@ msgstr "特性"
 msgid "How To Use"
 msgstr "如何使用"
 
-#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:174
+#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:177
 msgid "Credits"
 msgstr "致谢（声明）"
 
-#: helper/docs/readme/content.py:79 helper/docs/readme/content.py:190
+#: helper/docs/readme/content.py:79 helper/docs/readme/content.py:193
 msgid "Support"
 msgstr "赞助"
 
-#: helper/docs/readme/content.py:83 helper/docs/readme/content.py:201
+#: helper/docs/readme/content.py:83 helper/docs/readme/content.py:204
 msgid "License"
 msgstr "授权"
 
@@ -120,11 +123,11 @@ msgstr "截图"
 
 #: helper/docs/readme/content.py:87
 msgid ""
-"https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132"
-"-f8cd-11ee-8ee6-f37309efa64b.png"
+"https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/"
+"images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png"
 msgstr ""
-"https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/9432e132"
-"-f8cd-11ee-8ee6-f37309efa64b.png"
+"https://gitee.com/larryw3i/funingschool/raw/master/Documentation/"
+"images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png"
 
 #: helper/docs/readme/content.py:98
 msgid "warehousing and consuming"
@@ -164,8 +167,7 @@ msgstr "易用的“测试登记”表单。"
 
 #: helper/docs/readme/content.py:116
 msgid ""
-"Clear test results at a glance, converting table data into Intuitive "
-"images."
+"Clear test results at a glance, converting table data into Intuitive images."
 msgstr "直观展示测试结果，生成直观的图片方便发送给学生家长。"
 
 #: helper/docs/readme/content.py:120
@@ -186,11 +188,11 @@ msgstr "在 `Ubuntu` 上："
 
 #: helper/docs/readme/content.py:137
 msgid ""
-"For `Windows 10` and `Windows 11`, you can install Python3 from "
-"https://www.python.org/getit/ . (`fnschool` requires Python 3.12 or "
-"later)"
+"For `Windows 10` and `Windows 11`, you can install Python3 from https://www."
+"python.org/getit/ . (`fnschool` requires Python 3.12 or later)"
 msgstr ""
-"在 `Windows 10` 或 `Windows 11` 上，您可以从以下链接获得二进制安装程序（请自行检验哈希值）：  \n"
+"在 `Windows 10` 或 `Windows 11` 上，您可以从以下链接获得二进制安装程序（请自"
+"行检验哈希值）：  \n"
 "* https://registry.npmmirror.com/binary.html?path=python/  \n"
 "* https://mirrors.huaweicloud.com/python/  \n"
 "* https://mirror.bjtu.edu.cn/python/  \n"
@@ -219,49 +221,53 @@ msgstr ""
 msgid "install fnschool."
 msgstr ""
 "设置安装源为镜像站。\n"
-"pip config set global.index-url "
-"https://mirrors.bfsu.edu.cn/pypi/web/simple # 或\n"
-"pip config set global.index-url https://mirror.nju.edu.cn/pypi/web/simple"
-" # 或\n"
-"pip config set global.index-url "
-"https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple\n"
+"pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple "
+"# 或\n"
+"pip config set global.index-url https://mirror.nju.edu.cn/pypi/web/simple # "
+"或\n"
+"pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/"
+"web/simple\n"
 "# 安装 fnschool 。"
 
 #: helper/docs/readme/content.py:162
-msgid "run `warehousing and consuming` module."
-msgstr "运行“出入库”模块。"
+msgid "Making bill of \"canteen\" module."
+msgstr "“食堂”模块的账单生成命令。"
 
 #: helper/docs/readme/content.py:164
+msgid "Merging food sheets of \"canteen\" module."
+msgstr "“食堂”模块的合并食材台账命令。"
+
+#: helper/docs/readme/content.py:167
 msgid "run `test statistics` module."
 msgstr "运行“测试”模块。"
 
-#: helper/docs/readme/content.py:168
+#: helper/docs/readme/content.py:171
 msgid ""
-"Note: Read the information it prompts carefully, which is the key to "
-"using it well."
+"Note: Read the information it prompts carefully, which is the key to using "
+"it well."
 msgstr "备注：细心耐心阅读它打印的提示，这是您能使用好它的关键。"
 
-#: helper/docs/readme/content.py:177
+#: helper/docs/readme/content.py:180
 msgid "This software uses the following open source packages:"
 msgstr "此软件使用了如下的开源软件包（项目）："
 
-#: helper/docs/readme/content.py:193
+#: helper/docs/readme/content.py:196
 msgid "Buy me a `coffee`:"
 msgstr "给我买一杯“咖啡”："
 
-#: helper/docs/readme/content.py:196
+#: helper/docs/readme/content.py:199
 msgid "Buy me a \"coffee\"."
 msgstr "给我买一杯“咖啡”。"
 
-#: helper/docs/readme/content.py:197
+#: helper/docs/readme/content.py:200
 msgid ""
-"https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images"
-"/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
+"https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/"
+"images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
 msgstr ""
-"https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images"
-"/5ec0296a-8a3b-11ef-8e0b-efbca71f7f1a.png"
+"https://gitee.com/larryw3i/funingschool/raw/master/Documentation/"
+"images/5ec0296a-8a3b-11ef-8e0b-efbca71f7f1a.png"
 
-#: helper/docs/readme/content.py:204
+#: helper/docs/readme/content.py:207
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr "https://gitee.com/larryw3i/funingschool/blob/master/LICENSE"
 
@@ -275,10 +281,11 @@ msgstr "“gettext” 相关函数。"
 
 #: helper/msg/entry.py:35
 msgid ""
-"\"update\": Update message catalogs.\"compile\": Compile message "
-"catalogs. \"add\": Add locale message catalogs (\"locale\" argument is "
-"required)."
-msgstr "“update”：更新翻译文本目录。“compile”：编译含义文本目录。“add”：增加一个本地翻译文本（需要 “locale” 参数）。"
+"\"update\": Update message catalogs.\"compile\": Compile message catalogs. "
+"\"add\": Add locale message catalogs (\"locale\" argument is required)."
+msgstr ""
+"“update”：更新翻译文本目录。“compile”：编译含义文本目录。“add”：增加一个本地"
+"翻译文本（需要 “locale” 参数）。"
 
 #: helper/msg/entry.py:46
 msgid "The locale language code for adding message catalogs (e.g: en_US)."
@@ -304,3 +311,5 @@ msgstr "版本已更新。"
 #~ msgid "install"
 #~ msgstr "安装"
 
+#~ msgid "run `warehousing and consuming` module."
+#~ msgstr "运行“出入库”模块。"

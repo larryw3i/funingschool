@@ -112,8 +112,11 @@ pip config set global.index-url https://mirror.nju.edu.cn/pypi/web/simple # 或
 pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 # 安装 fnschool 。
 pip install -U fnschool
-# 运行“出入库”模块。
+# “食堂”模块的账单生成命令。
 fnschool-cli canteen mk_bill
+# “食堂”模块的合并食材台账命令。
+fnschool-cli canteen merge_foodsheets
+
 # 运行“测试”模块。
 fnschool-cli exam enter
 ```

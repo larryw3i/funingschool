@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-19 23:59+0800\n"
+"POT-Creation-Date: 2024-10-20 01:51+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -243,7 +243,7 @@ msgstr ""
 #: src/fnschool/canteen/spreadsheet/consuming.py:238
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:64
 #: src/fnschool/canteen/spreadsheet/cover.py:61
-#: src/fnschool/canteen/spreadsheet/food.py:286
+#: src/fnschool/canteen/spreadsheet/food.py:310
 #: src/fnschool/canteen/spreadsheet/inventory.py:331
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:90
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:144
@@ -258,7 +258,7 @@ msgstr ""
 msgid "Sheet '%s' was updated."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:296
+#: src/fnschool/canteen/spreadsheet/food.py:322
 #: src/fnschool/canteen/workbook.py:808
 msgid "All food sheets have their tab colors reset."
 msgstr ""
@@ -597,15 +597,15 @@ msgstr ""
 msgid "Updating sheets for {0}."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:118
+#: src/fnschool/canteen/spreadsheet/food.py:140
 msgid "Sheet {0} has been reformatted."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:310
+#: src/fnschool/canteen/spreadsheet/food.py:336
 msgid "Food sheets have their tab colors recolor:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:314
+#: src/fnschool/canteen/spreadsheet/food.py:340
 msgid "Updated food sheets:"
 msgstr ""
 
@@ -658,7 +658,7 @@ msgstr ""
 msgid "Food sheet \"{0}\" has its color recolor."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/merging.py:282
+#: src/fnschool/canteen/spreadsheet/merging.py:285
 msgid "Merge completed！Saving \"{0}\"."
 msgstr ""
 
