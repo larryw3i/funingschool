@@ -24,6 +24,7 @@ from fnschool.canteen.spreadsheet.food import Food as SFood
 from fnschool.canteen.spreadsheet.purchasingsum import PurchasingSum
 from fnschool.canteen.spreadsheet.consumingsum import ConsumingSum
 from fnschool.canteen.spreadsheet.cover import Cover
+from fnschool.canteen.spreadsheet.merging import Merging
 
 
 class SpreadSheet:
@@ -320,6 +321,12 @@ class SpreadSheet:
         self._purchasingsum = None
         self._consumingsum = None
         self._cover = None
+
+    def merge(self,*args, **kwargs):
+        merging = Merging(self.bill)
+        merging.start(args,kwargs)
+        pass
+        
 
     def update(self):
 

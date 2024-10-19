@@ -10,6 +10,7 @@ from fnschool.canteen.currency import Currency
 from fnschool.canteen.consuming import Consuming
 
 
+
 class Bill:
     def __init__(self):
         self._spreadsheet = None
@@ -153,23 +154,29 @@ class Bill:
         purchaser = self.foods[-1].purchaser
         return purchaser
 
-    def make_spreadsheets(self):
-        self.spreadsheet.update()
+    def print_sponsor(self):
         print()
         print_info(
             _(
-                "If you feel {0} is great, "
+                    "If you feel {0} is great, "
                 + "please sponsor it. "
                 + "Your sponsorship will keep "
                 + "the project alive."
             ).format(app_name)
         )
+
         print_warning("\t" + _("Sponsor URL: {0}").format(get_sponsor_url()))
         print()
+
+
+    def make_spreadsheets(self):
+        self.spreadsheet.update()
+        self.print_sponsor()
         pass
 
-    def merge_spreadsheets(self):
-
+    def merge_foodsheets(self):
+        self.spreadsheet.merge()
+        self.print_sponsor()
         pass
 
     @property

@@ -15,6 +15,7 @@ from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.path import *
 
+from fnschool.canteen.spreadsheet.base import Base
 from fnschool.canteen.spreadsheet.food import Food as FoodSheet
 
 
@@ -162,6 +163,8 @@ class Merging(Base):
 
         pass
 
+        return self._last_month
+
     def start(self, current_wb=[None, None]):
         lwb = self.last_wb
 
@@ -190,6 +193,9 @@ class Merging(Base):
             else:
                 lsheet = lwb[name]
                 csheet = cwb[name]
+
+                self.unmerge_sheet_cells(csheet)
+
                 self.make_row_counts_same(lsheet, csheet)
                 ldata_rows = self.get_data_rows_list(last_sheet)
                 cdata_rows = self.get_data_rows_list(current_sheet)
@@ -202,12 +208,22 @@ class Merging(Base):
                         crow = crow0 + row_i
 
                         for col_i in range(1, 14):
-                            ccell = csheet.cell(
-                                crow,
-                                col_i,
-                            )
-                            ccell.value = lsheet.cell(lrow, col_i).value
-                            pass
+
+                            cell_value = csheet.cell(crow, col_i).value
+
+                            if not (
+                                cell_value
+                                or str(cell_value)
+                                .replace(" ", "")
+                                .replace("　", "")
+                                == ""
+                            ):
+                                ccell = csheet.cell(
+                                    crow,
+                                    col_i,
+                                )
+                                ccell.value = lsheet.cell(lrow, col_i).value
+                                pass
 
                         csheet.row_dimensions[crow0 + row_i].height = (
                             self.row_height
@@ -228,7 +244,12 @@ class Merging(Base):
                         self.current_fpath,
                     )
                 )
+
+                self.food_sheet.format(csheet)
+
             pass
+
+        cwb.save(self.current_fpath)
 
         print_info(_("Merge completed！"))
 

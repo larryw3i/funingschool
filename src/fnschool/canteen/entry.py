@@ -12,8 +12,8 @@ def set_canteen(args):
     if args.action in "mk_bill":
         bill.make_spreadsheets()
 
-    elif args.action in "merge_bills":
-        bill.merge_spreadsheets()
+    elif args.action in "merge_foodsheets":
+        bill.merge_foodsheets()
 
     else:
         print_info(_("Function is not found."))
@@ -27,7 +27,11 @@ def parse_canteen(subparsers):
         "action",
         choices=[
             "mk_bill",
+            "merge_foodsheets"
         ],
-        help=_("The functions of canteen."),
+        help=_(
+            "The functions of canteen. \"mk_bill\": Make bill. "
+            + "\"merge_foodsheets\": Merge food sheets."
+        ),
     )
     parser_canteen.set_defaults(func=set_canteen)
