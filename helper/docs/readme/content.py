@@ -159,8 +159,11 @@ sudo apt-get install python3 python3-pip python3-tk
 ```bash
 # {_("install fnschool.")}
 pip install -U fnschool
-# {_("run `warehousing and consuming` module.")}
+# {_("Making bill of \"canteen\" module.")}
 fnschool-cli canteen mk_bill
+# {_("Merging food sheets of \"canteen\" module.")}
+fnschool-cli canteen merge_foodsheets
+
 # { _("run `test statistics` module.")}
 fnschool-cli exam enter
 ```

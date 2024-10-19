@@ -12,6 +12,7 @@ class Food(Base):
     def __init__(self, bill):
         super().__init__(bill)
         self.sheet_name = self.s.sfood_name
+        self._food_sheet0 = None
         pass
 
     def get_sheet(self, name=None, wb=None):
@@ -56,6 +57,7 @@ class Food(Base):
                     start_column=1,
                     end_column=13,
                 )
+                row[0].border = self.cell_border0
 
             if row[0].value and "年" in str(row[0].value):
                 sheet.merge_cells(
@@ -64,6 +66,7 @@ class Food(Base):
                     start_column=1,
                     end_column=2,
                 )
+                row[0].border = self.cell_border0
 
             if row[3].value and "入库" in str(row[3].value).replace(
                 " ", ""
@@ -74,6 +77,7 @@ class Food(Base):
                     start_column=4,
                     end_column=6,
                 )
+                row[3].border = self.cell_border0
 
             if row[6].value and "出库" in str(row[6].value).replace(
                 " ", ""
@@ -84,6 +88,7 @@ class Food(Base):
                     start_column=7,
                     end_column=9,
                 )
+                row[6].border = self.cell_border0
 
             if row[9].value and "库存" in str(row[9].value).replace(
                 " ", ""
@@ -94,6 +99,7 @@ class Food(Base):
                     start_column=10,
                     end_column=12,
                 )
+                row[9].border = self.cell_border0
 
             if row[12].value and "编号" in str(row[12].value).replace(" ", ""):
                 sheet.merge_cells(
@@ -102,6 +108,7 @@ class Food(Base):
                     start_column=13,
                     end_column=13,
                 )
+                row[12].border = self.cell_border0
 
             if row[0].value and self.food_form_title_like in str(row[0].value):
                 sheet.merge_cells(
@@ -113,6 +120,22 @@ class Food(Base):
                 row[0].font = Font(size=18, bold=True)
                 row[0].alignment = self.cell_alignment0
                 row[0].border = self.cell_border0
+                if row[0].row - 1 > 0:
+                    note_cell = sheet.cell(row[0].row - 1, 2)
+                    note_cell.value = (
+                        "注：《学校食堂材料入库、出库台账》"
+                        + "是以入库单、出库单为依据按日进行登记。"
+                    )
+                    note_cell.alignment = Alignment(
+                        horizontal="left", vertical="center"
+                    )
+                    note_cell.border = self.cell_border0
+                    sheet.merge_cells(
+                        start_row=note_cell.row,
+                        end_row=note_cell.row,
+                        start_column=2,
+                        end_column=13,
+                    )
 
         print_info(_("Sheet {0} has been reformatted.").format(sheet.title))
 
@@ -142,6 +165,8 @@ class Food(Base):
         cfoods = [f for f in self.bfoods if not f.is_abandoned]
         food_names = list(set([f.name for f in cfoods]))
         wb = self.bwb
+
+        wb[self.sheet_name].sheet_state = "visible"
 
         rfoods = [
             f for f in self.bfoods if (not f.is_abandoned and f.is_inventory)
@@ -283,6 +308,8 @@ class Food(Base):
 
             self.format(sheet)
             print_info(_("Sheet '%s' was updated.") % sheet.title)
+
+        wb[self.sheet_name].sheet_state = "hidden"
 
         wb.active = sheet
 
