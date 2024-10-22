@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-20 02:18+0800\n"
+"POT-Creation-Date: 2024-10-22 15:29+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -101,15 +101,15 @@ msgstr ""
 msgid "How To Use"
 msgstr ""
 
-#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:178
+#: helper/docs/readme/content.py:75 helper/docs/readme/content.py:179
 msgid "Credits"
 msgstr ""
 
-#: helper/docs/readme/content.py:79 helper/docs/readme/content.py:194
+#: helper/docs/readme/content.py:79 helper/docs/readme/content.py:195
 msgid "Support"
 msgstr ""
 
-#: helper/docs/readme/content.py:83 helper/docs/readme/content.py:205
+#: helper/docs/readme/content.py:83 helper/docs/readme/content.py:206
 msgid "License"
 msgstr ""
 
@@ -209,43 +209,43 @@ msgstr ""
 msgid "install fnschool."
 msgstr ""
 
-#: helper/docs/readme/content.py:163
+#: helper/docs/readme/content.py:164
 msgid "Making bill of \"canteen\" module."
 msgstr ""
 
-#: helper/docs/readme/content.py:165
+#: helper/docs/readme/content.py:166
 msgid "Merging food sheets of \"canteen\" module."
 msgstr ""
 
-#: helper/docs/readme/content.py:168
+#: helper/docs/readme/content.py:169
 msgid "run `test statistics` module."
 msgstr ""
 
-#: helper/docs/readme/content.py:172
+#: helper/docs/readme/content.py:173
 msgid ""
 "Note: Read the information it prompts carefully, which is the key to "
 "using it well."
 msgstr ""
 
-#: helper/docs/readme/content.py:181
+#: helper/docs/readme/content.py:182
 msgid "This software uses the following open source packages:"
 msgstr ""
 
-#: helper/docs/readme/content.py:197
+#: helper/docs/readme/content.py:198
 msgid "Buy me a `coffee`:"
 msgstr ""
 
-#: helper/docs/readme/content.py:200
+#: helper/docs/readme/content.py:201
 msgid "Buy me a \"coffee\"."
 msgstr ""
 
-#: helper/docs/readme/content.py:201
+#: helper/docs/readme/content.py:202
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images"
 "/9237879a-f8d5-11ee-8411-23057db0a773.jpeg"
 msgstr ""
 
-#: helper/docs/readme/content.py:208
+#: helper/docs/readme/content.py:209
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr ""
 

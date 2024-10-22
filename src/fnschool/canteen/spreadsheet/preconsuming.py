@@ -237,9 +237,6 @@ class PreConsuming(Base):
         meal_types = list(set([f.meal_type for f in foods]))
 
         for meal_type in meal_types:
-            
-            print()
-            print_warning(meal_type)
 
             for f in foods:
                 for d, c in f.consumptions:
@@ -261,7 +258,11 @@ class PreConsuming(Base):
                 consumption_days_value += "\n"
 
             print()
-            print_error(_("Consuming days of {0}:").format(year_month))
+            print_error(
+                _("Consuming days of {0} ({1}):").format(year_month, meal_type) 
+                if meal_type else
+                _("Consuming days of {0}:").format(year_month)
+            )
             print_warning(f"{year_month:^{space_len*7}}")
             if consumption_days_value.endswith("\n"):
                 consumption_days_value = consumption_days_value[:-1]
