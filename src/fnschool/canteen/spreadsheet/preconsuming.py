@@ -234,40 +234,51 @@ class PreConsuming(Base):
         month = self.bill.consuming.month
         year_month = _("{year}.{month}").format(year=year, month=month)
 
-        for f in foods:
-            for d, c in f.consumptions:
-                if not d.day in consumption_days:
-                    consumption_days.append(d.day)
+        meal_types = list(set([f.meal_type for f in foods]))
 
-        consumption_days_value = ""
-        space_len = 5
-        for week in calendar.monthcalendar(year, month):
-            for d in week:
-                if d == 0:
-                    consumption_days_value += " " * space_len
-                elif d in consumption_days:
-                    consumption_day = f"({d:>2})"
-                    consumption_days_value += f"{consumption_day:>{space_len}}"
-                else:
-                    d = f" {d:>2} "
-                    consumption_days_value += f"{d:>{space_len}}"
-            consumption_days_value += "\n"
+        for meal_type in meal_types:
+            
+            print()
+            print_warning(meal_type)
 
-        print()
-        print_error(_("Consuming days of {0}:").format(year_month))
-        print_warning(f"{year_month:^{space_len*7}}")
-        if consumption_days_value.endswith("\n"):
-            consumption_days_value = consumption_days_value[:-1]
-        print_info(consumption_days_value[:-1])
-        consumption_days_len = len(consumption_days)
-        total_days = (
-            _("{0} days in total.")
-            if consumption_days_len > 1
-            else _("{0} day in total.")
-        ).format(consumption_days_len)
-        print_warning(f"{total_days:^{space_len*7}}")
-        print_info(_("Yes, they are all right. (Press any key to continue)"))
-        input0()
+            for f in foods:
+                for d, c in f.consumptions:
+                    if not d.day in consumption_days:
+                        consumption_days.append(d.day)
+
+            consumption_days_value = ""
+            space_len = 5
+            for week in calendar.monthcalendar(year, month):
+                for d in week:
+                    if d == 0:
+                        consumption_days_value += " " * space_len
+                    elif d in consumption_days:
+                        consumption_day = f"({d:>2})"
+                        consumption_days_value += f"{consumption_day:>{space_len}}"
+                    else:
+                        d = f" {d:>2} "
+                        consumption_days_value += f"{d:>{space_len}}"
+                consumption_days_value += "\n"
+
+            print()
+            print_error(_("Consuming days of {0}:").format(year_month))
+            print_warning(f"{year_month:^{space_len*7}}")
+            if consumption_days_value.endswith("\n"):
+                consumption_days_value = consumption_days_value[:-1]
+            print_info(consumption_days_value[:-1])
+            consumption_days_len = len(consumption_days)
+            total_days = (
+                _("{0} days in total.")
+                if consumption_days_len > 1
+                else _("{0} day in total.")
+            ).format(consumption_days_len)
+            print_warning(f"{total_days:^{space_len*7}}")
+            print_info(_("Yes, they are all right. (Press any key to continue)"))
+
+            input0()
+
+            pass
+
         return
 
 
