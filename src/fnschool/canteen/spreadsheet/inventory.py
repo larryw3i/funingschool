@@ -17,7 +17,7 @@ class Inventory(Base):
 
     def get_entry_index(self, form_index):
         form_index0, form_index1 = form_index
-        entry_index = [form_index0 + 3, form_index1 - 1]
+        entry_index = [form_index0 + 4, form_index1 - 3]
         return entry_index
 
     def format(self):
@@ -100,24 +100,20 @@ class Inventory(Base):
 
     @property
     def form_indexes(self):
-        if self._form_indexes:
-            return self._form_indexes
-        sheet = self.sheet
-        indexes = []
-        row_index = 1
-        for row in sheet.iter_rows(max_row=sheet.max_row + 1, max_col=8):
-            if row[0].value:
-                if row[0].value.replace(" ", "") == "食材盘存表":
-                    indexes.append([row_index + 1, 0])
-                if row[0].value.replace(" ", "") == "合计":
-                    indexes[-1][1] = row_index
-            row_index += 1
+        if not self._form_indexes:
+            sheet = self.sheet
+            indexes = []
+            for row in sheet.iter_rows(max_row=sheet.max_row + 1, max_col=8):
+                if row[0].value:
+                    cell0_value = str(row[0].value).replace(" ", "")
+                    if  "食材盘存表" in cell0_value:
+                        indexes.append([row[0].row, 0])
+                    if "审核人" in  cell0_value:
+                        indexes[-1][1] = row[0].row
 
-        if len(indexes) > 0:
             self._form_indexes = indexes
-            return self._form_indexes
 
-        return None
+        return self._form_indexes
 
     @property
     def saved_foods(self):
@@ -226,8 +222,7 @@ class Inventory(Base):
         for form_index_n in range(0, len(form_indexes)):
             form_index = form_indexes[form_index_n]
             form_index0, form_index1 = form_index
-            food_index0 = form_index0 + 3
-            food_index1 = form_index1 - 1
+            food_index0 ,food_index1 = self.get_entry_index(form_index)
             for row in sheet.iter_rows(
                 min_row=food_index0,
                 max_row=food_index1,
@@ -250,11 +245,10 @@ class Inventory(Base):
             form_indexes_n = i
             form_index = form_indexes[form_indexes_n]
             form_i0, form_i1 = form_index
-            fentry_i0 = form_i0 + 3
-            fentry_i1 = form_i1 - 1
+            fentry_i0 ,  fentry_i1 = self.get_entry_index(form_index)
 
             sheet.cell(
-                form_i0,
+                form_i0+1,
                 1,
                 f"     "
                 + f"学校名称：{self.purchaser}"
@@ -263,7 +257,7 @@ class Inventory(Base):
                 + f"              ",
             )
             sheet.cell(
-                form_i1 + 2,
+                form_i1 ,
                 1,
                 (
                     "   "
