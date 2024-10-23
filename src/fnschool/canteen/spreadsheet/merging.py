@@ -205,7 +205,10 @@ class Merging(Base):
 
         lwb_sheet_names = self.get_food_sheet_names(lwb)
         cwb_sheet_names = self.get_food_sheet_names(cwb)
-
+        
+        names_len = len(lwb_sheet_names)
+        names_len2 = len(str(names_len))
+        name_index = 0
         for name in lwb_sheet_names:
             lsheet = None
             csheet = None
@@ -264,9 +267,14 @@ class Merging(Base):
                         pass
 
                     pass
-
-            print_info(
-                _(
+            
+            name_index += 1
+            print(
+                Fore.RED
+                + f"[{name_index:>{names_len2}}/{names_len}] "
+                + Style.RESET_ALL
+                + Fore.GREEN
+                + _(
                     'Data from Sheet "{0}" of Workbook "{1}" was '
                     + 'copied to Sheet"{2}" of Workbook "{3}".'
                 ).format(
@@ -275,6 +283,7 @@ class Merging(Base):
                     csheet.title,
                     self.current_fpath,
                 )
+                + Style.RESET_ALL
             )
 
             csheet.sheet_properties.tabColor = secrets.token_hex(4)
