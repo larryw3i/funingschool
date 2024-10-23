@@ -251,7 +251,9 @@ class PreConsuming(Base):
                         consumption_days_value += " " * space_len
                     elif d in consumption_days:
                         consumption_day = f"({d:>2})"
-                        consumption_days_value += f"{consumption_day:>{space_len}}"
+                        consumption_days_value += (
+                            f"{consumption_day:>{space_len}}"
+                        )
                     else:
                         d = f" {d:>2} "
                         consumption_days_value += f"{d:>{space_len}}"
@@ -259,9 +261,9 @@ class PreConsuming(Base):
 
             print()
             print_error(
-                _("Consuming days of {0} ({1}):").format(year_month, meal_type) 
-                if meal_type else
-                _("Consuming days of {0}:").format(year_month)
+                _("Consuming days of {0} ({1}):").format(year_month, meal_type)
+                if meal_type
+                else _("Consuming days of {0}:").format(year_month)
             )
             print_warning(f"{year_month:^{space_len*7}}")
             if consumption_days_value.endswith("\n"):
@@ -274,7 +276,9 @@ class PreConsuming(Base):
                 else _("{0} day in total.")
             ).format(consumption_days_len)
             print_warning(f"{total_days:^{space_len*7}}")
-            print_info(_("Yes, they are all right. (Press any key to continue)"))
+            print_info(
+                _("Yes, they are all right. (Press any key to continue)")
+            )
 
             input0()
 

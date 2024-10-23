@@ -154,7 +154,9 @@ class Food(Base):
             ):
                 indexes.append([row[0].row + 3, None])
 
-            if row[2].value and "合计" in str(row[2].value).replace(" ", ""):
+            if row[2].value and "本月合计" in str(row[2].value).replace(
+                " ", ""
+            ):
                 indexes[-1][1] = row[0].row + 1
         return indexes
 
@@ -228,6 +230,8 @@ class Food(Base):
 
                 row_index += 1
 
+            row_count_form = index_end - index_start - 1
+
             cdates = []
             for food in m_cfoods:
                 if len(food.consumptions) > 0:
@@ -237,7 +241,33 @@ class Food(Base):
 
             consuming_n = None
             warehousing_n = None
+
+            row_offset = 0
+
+            row_count_foods = 0
+            for f in m_cfoods:
+                row_count_foods += len([d for d, __ in f.consumptions])
+            row_count_foods += len([f.xdate for f in m_cfoods])
+
+            row_count_diff = row_count_foods - row_count_form
+            if row_count_diff > 0:
+                self.row_inserting_tip(row_index + 1)
+                sheet.insert_rows(row_index + 1, row_count_diff + 1)
+                for col_index in range(1, 14):
+                    for row_index_b in range(
+                        row_index + 1, row_index + 1 + row_count_diff + 1
+                    ):
+
+                        cell = sheet.cell(row_index_b, col_index)
+                        cell.border = (
+                            self.cell_border0
+                        )
+                        cell.alignment = self.cell_alignment0
+
+                pass
+
             for cdate in cdates:
+
                 for food in m_cfoods:
 
                     if food.xdate == cdate and food.xdate.month == month:
@@ -261,10 +291,6 @@ class Food(Base):
                             f"R{cdate.month:0>2}{warehousing_n:0>2}",
                         )
                         warehousing_n += 1
-
-                        if "合计" in str(sheet.cell(row_index + 1, 3).value):
-                            sheet.insert_rows(row_index + 1, 1)
-
                         row_index += 1
 
                     if cdate in [d for d, __ in food.consumptions]:
@@ -291,7 +317,7 @@ class Food(Base):
                             11,
                             (food.unit_price if remainder else ""),
                         )
-                        sheet.cell(row_index, 12, remainder * ccount)
+                        sheet.cell(row_index, 12, remainder * unit_price)
 
                         sheet.cell(
                             row_index,
@@ -299,11 +325,6 @@ class Food(Base):
                             f"C{cdate.month:0>2}{consuming_n:0>2}",
                         )
                         consuming_n += 1
-
-                        if "合计" in str(sheet.cell(row_index + 1, 3).value):
-                            self.row_inserting_tip(row_index + 1)
-                            sheet.insert_rows(row_index + 1, 1)
-
                         row_index += 1
 
             self.format(sheet)

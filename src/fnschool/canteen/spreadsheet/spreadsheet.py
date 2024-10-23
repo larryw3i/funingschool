@@ -340,7 +340,7 @@ class SpreadSheet:
 
             del self.bill.meal_type
             self.bill.foods = _foods
-            
+
             self.inventory.update()
             self.warehousing.update()
             self.unwarehousing.update()

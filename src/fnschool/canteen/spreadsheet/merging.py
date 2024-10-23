@@ -42,7 +42,7 @@ class Merging(Base):
     def last_wb(self):
         if not self._last_wb:
             print_info(_('Loading data from "{0}".').format(self.last_fpath))
-            wb = load_workbook(self.last_fpath)
+            wb = load_workbook(self.last_fpath, data_only=True)
             self._last_wb = wb
         return self._last_wb
 
@@ -171,15 +171,22 @@ class Merging(Base):
         return rows
 
     def make_row_counts_same(self, last_sheet, current_sheet):
-        ldata_rows = self.get_data_rows_list(last_sheet)
-        cdata_rows = self.get_data_rows_list(current_sheet)
+        lsheet = last_sheet
+        csheet = current_sheet
+        ldata_rows = self.get_data_rows_list(lsheet)
+        cdata_rows = self.get_data_rows_list(csheet)
 
         for i, (crow0, crow1) in enumerate(cdata_rows):
             lrow0, lrow1 = ldata_rows[i]
             row_diff = (lrow1 - lrow0) - (crow1 - crow0)
             if row_diff > 0:
                 csheet.insert_rows(crow0 + 1, row_diff)
-                self.make_row_counts_same()
+                for row_index_f in range(crow0+1,crow0+1+row_diff):
+                    for col_index_f in range(1,14):
+                        cell = csheet.cell(row_index_f,col_index_f)
+                        cell.border = self.cell_border0
+                        cell.alignment = self.cell_alignment0
+                self.make_row_counts_same(lsheet,csheet)
                 break
             pass
 
@@ -209,6 +216,8 @@ class Merging(Base):
                     for lcell in row:
                         ccell = csheet.cell(lcell.row, lcell.column)
                         ccell.value = lcell.value
+                        ccell.alignment = self.cell_alignment0
+                        ccell.border = self.cell_border0
                     csheet.row_dimensions[row[0].row].height = self.row_height
                 self.food_sheet.format(csheet)
                 pass
@@ -221,11 +230,12 @@ class Merging(Base):
                 self.make_row_counts_same(lsheet, csheet)
                 ldata_rows = self.get_data_rows_list(lsheet)
                 cdata_rows = self.get_data_rows_list(csheet)
+                row_offset = 2
 
                 for (lrow0, lrow1), (crow0, crow1) in list(
                     zip(ldata_rows, cdata_rows)
                 ):
-                    for row_i in range(lrow1 - lrow0):
+                    for row_i in range(lrow1 + row_offset - lrow0):
                         lrow = lrow0 + row_i
                         crow = crow0 + row_i
 
