@@ -104,6 +104,7 @@ Enter the following commands:
 ```bash
 # install fnschool.
 pip install -U fnschool
+
 # Making bill of "canteen" module.
 fnschool-cli canteen mk_bill
 # Merging food sheets of "canteen" module.
