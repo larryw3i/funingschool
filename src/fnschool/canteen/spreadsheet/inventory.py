@@ -211,6 +211,14 @@ class Inventory(Base):
                         ]
                     )
                     break
+        ifoods = [f for f in bfoods if f.is_inventory]
+        foods = (
+            [
+                ifoods[0].xdate,
+                ifoods
+            ]
+            + foods
+        )
         return foods
 
     def update(self):
