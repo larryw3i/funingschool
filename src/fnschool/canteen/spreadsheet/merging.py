@@ -181,12 +181,12 @@ class Merging(Base):
             row_diff = (lrow1 - lrow0) - (crow1 - crow0)
             if row_diff > 0:
                 csheet.insert_rows(crow0 + 1, row_diff)
-                for row_index_f in range(crow0+1,crow0+1+row_diff):
-                    for col_index_f in range(1,14):
-                        cell = csheet.cell(row_index_f,col_index_f)
+                for row_index_f in range(crow0 + 1, crow0 + 1 + row_diff):
+                    for col_index_f in range(1, 14):
+                        cell = csheet.cell(row_index_f, col_index_f)
                         cell.border = self.cell_border0
                         cell.alignment = self.cell_alignment0
-                self.make_row_counts_same(lsheet,csheet)
+                self.make_row_counts_same(lsheet, csheet)
                 break
             pass
 
@@ -205,7 +205,7 @@ class Merging(Base):
 
         lwb_sheet_names = self.get_food_sheet_names(lwb)
         cwb_sheet_names = self.get_food_sheet_names(cwb)
-        
+
         names_len = len(lwb_sheet_names)
         names_len2 = len(str(names_len))
         name_index = 0
@@ -267,7 +267,7 @@ class Merging(Base):
                         pass
 
                     pass
-            
+
             name_index += 1
             print(
                 Fore.RED
