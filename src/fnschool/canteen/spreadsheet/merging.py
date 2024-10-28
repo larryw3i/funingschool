@@ -215,7 +215,7 @@ class Merging(Base):
             if not name in cwb_sheet_names:
                 lsheet = lwb[name]
                 csheet = cwb.create_sheet(lsheet.title, -1)
-                for row in lsheet.iter_rows(max_col=14):
+                for row in lsheet.iter_rows(max_col=13):
                     for lcell in row:
                         ccell = csheet.cell(lcell.row, lcell.column)
                         ccell.value = lcell.value

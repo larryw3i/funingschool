@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-22 15:29+0800\n"
+"POT-Creation-Date: 2024-10-28 23:11+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -243,8 +243,8 @@ msgstr ""
 #: src/fnschool/canteen/spreadsheet/consuming.py:238
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:64
 #: src/fnschool/canteen/spreadsheet/cover.py:61
-#: src/fnschool/canteen/spreadsheet/food.py:310
-#: src/fnschool/canteen/spreadsheet/inventory.py:331
+#: src/fnschool/canteen/spreadsheet/food.py:420
+#: src/fnschool/canteen/spreadsheet/inventory.py:328
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:90
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:144
 #: src/fnschool/canteen/spreadsheet/warehousing.py:357
@@ -258,7 +258,7 @@ msgstr ""
 msgid "Sheet '%s' was updated."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:322
+#: src/fnschool/canteen/spreadsheet/food.py:432
 #: src/fnschool/canteen/workbook.py:808
 msgid "All food sheets have their tab colors reset."
 msgstr ""
@@ -601,11 +601,19 @@ msgstr ""
 msgid "Sheet {0} has been reformatted."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:336
+#: src/fnschool/canteen/spreadsheet/food.py:329
+msgid "Update monthly and annual accumulation for \"{0}\"."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/food.py:407
+msgid "Update completed."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/food.py:446
 msgid "Food sheets have their tab colors recolor:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:340
+#: src/fnschool/canteen/spreadsheet/food.py:450
 msgid "Updated food sheets:"
 msgstr ""
 
@@ -613,11 +621,11 @@ msgstr ""
 msgid "Sheet \"{0}\" has been reformatted."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/inventory.py:162
+#: src/fnschool/canteen/spreadsheet/inventory.py:158
 msgid "No unit"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/inventory.py:244
+#: src/fnschool/canteen/spreadsheet/inventory.py:242
 msgid "There is no inventories for \"{0}\"."
 msgstr ""
 
@@ -648,17 +656,17 @@ msgstr ""
 msgid "Select the current bill spreadsheet"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/merging.py:259
+#: src/fnschool/canteen/spreadsheet/merging.py:277
 msgid ""
 "Data from Sheet \"{0}\" of Workbook \"{1}\" was copied to Sheet\"{2}\" of"
 " Workbook \"{3}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/merging.py:272
+#: src/fnschool/canteen/spreadsheet/merging.py:291
 msgid "Food sheet \"{0}\" has its color recolor."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/merging.py:285
+#: src/fnschool/canteen/spreadsheet/merging.py:304
 msgid "Merge completed！Saving \"{0}\"."
 msgstr ""
 
@@ -711,23 +719,23 @@ msgstr ""
 msgid "{year}.{month}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:262
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
 msgid "Consuming days of {0} ({1}):"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:266
 msgid "Consuming days of {0}:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:272
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:274
 msgid "{0} days in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:274
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:276
 msgid "{0} day in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:277
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:280
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 

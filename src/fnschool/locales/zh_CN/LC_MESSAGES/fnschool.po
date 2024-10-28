@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-22 15:29+0800\n"
-"PO-Revision-Date: 2024-10-22 15:30+0800\n"
+"POT-Creation-Date: 2024-10-28 23:11+0800\n"
+"PO-Revision-Date: 2024-10-28 23:13+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -253,8 +253,8 @@ msgstr "请给工作簿 “{0}” 设计每天的消耗。"
 #: src/fnschool/canteen/spreadsheet/consuming.py:238
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:64
 #: src/fnschool/canteen/spreadsheet/cover.py:61
-#: src/fnschool/canteen/spreadsheet/food.py:310
-#: src/fnschool/canteen/spreadsheet/inventory.py:331
+#: src/fnschool/canteen/spreadsheet/food.py:420
+#: src/fnschool/canteen/spreadsheet/inventory.py:328
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:90
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:144
 #: src/fnschool/canteen/spreadsheet/warehousing.py:357
@@ -268,7 +268,7 @@ msgstr "请给工作簿 “{0}” 设计每天的消耗。"
 msgid "Sheet '%s' was updated."
 msgstr "工作表 “%s” 已被更新。"
 
-#: src/fnschool/canteen/spreadsheet/food.py:322
+#: src/fnschool/canteen/spreadsheet/food.py:432
 #: src/fnschool/canteen/workbook.py:808
 msgid "All food sheets have their tab colors reset."
 msgstr "所有食材台账表标签颜色已被重置。"
@@ -626,11 +626,19 @@ msgstr "正在为 {0} 更新表单。"
 msgid "Sheet {0} has been reformatted."
 msgstr "“{0}” 表已被重新格式化。"
 
-#: src/fnschool/canteen/spreadsheet/food.py:336
+#: src/fnschool/canteen/spreadsheet/food.py:329
+msgid "Update monthly and annual accumulation for \"{0}\"."
+msgstr "为 “{0}” 表更新每月累积数据和每年累积数据。"
+
+#: src/fnschool/canteen/spreadsheet/food.py:407
+msgid "Update completed."
+msgstr "更新完成！"
+
+#: src/fnschool/canteen/spreadsheet/food.py:446
 msgid "Food sheets have their tab colors recolor:"
 msgstr "标签已被重新上色的食材台账表："
 
-#: src/fnschool/canteen/spreadsheet/food.py:340
+#: src/fnschool/canteen/spreadsheet/food.py:450
 msgid "Updated food sheets:"
 msgstr "被更新的食材台账表："
 
@@ -638,11 +646,11 @@ msgstr "被更新的食材台账表："
 msgid "Sheet \"{0}\" has been reformatted."
 msgstr "“{0}” 表已被重新格式化。"
 
-#: src/fnschool/canteen/spreadsheet/inventory.py:162
+#: src/fnschool/canteen/spreadsheet/inventory.py:158
 msgid "No unit"
 msgstr "无单位"
 
-#: src/fnschool/canteen/spreadsheet/inventory.py:244
+#: src/fnschool/canteen/spreadsheet/inventory.py:242
 msgid "There is no inventories for \"{0}\"."
 msgstr "“{0}” 没有盘存的食材。"
 
@@ -673,18 +681,18 @@ msgstr "没有选择文件。退出。"
 msgid "Select the current bill spreadsheet"
 msgstr "选择当前账单文件"
 
-#: src/fnschool/canteen/spreadsheet/merging.py:259
+#: src/fnschool/canteen/spreadsheet/merging.py:277
 msgid ""
 "Data from Sheet \"{0}\" of Workbook \"{1}\" was copied to Sheet\"{2}\" of "
 "Workbook \"{3}\"."
 msgstr ""
 "工作簿 “{1}” 的 表 “{0}” 的 数据已被复制到 工作薄 “{3}” 的 表 \"{2}\"。"
 
-#: src/fnschool/canteen/spreadsheet/merging.py:272
+#: src/fnschool/canteen/spreadsheet/merging.py:291
 msgid "Food sheet \"{0}\" has its color recolor."
 msgstr "食材台账表 “{0}” 的标签颜色已被重新上色。"
 
-#: src/fnschool/canteen/spreadsheet/merging.py:285
+#: src/fnschool/canteen/spreadsheet/merging.py:304
 msgid "Merge completed！Saving \"{0}\"."
 msgstr "合并完成。正在保存 “{0}”。"
 
@@ -739,23 +747,23 @@ msgstr "没有食材消耗的日期不需要设计出库。（好的，知道了
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:262
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
 msgid "Consuming days of {0} ({1}):"
 msgstr "{0} 的出库日期（{1}）："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:266
 msgid "Consuming days of {0}:"
 msgstr "{0} 的出库日期："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:272
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:274
 msgid "{0} days in total."
 msgstr "共 {0} 天。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:274
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:276
 msgid "{0} day in total."
 msgstr "共 {0} 天。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:277
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:280
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr "是的，都是对的。（按任意键继续）"
 
