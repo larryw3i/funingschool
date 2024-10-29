@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-28 23:11+0800\n"
+"POT-Creation-Date: 2024-10-29 14:10+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -184,7 +184,7 @@ msgstr ""
 
 #: src/fnschool/canteen/food.py:44 src/fnschool/canteen/operator.py:66
 #: src/fnschool/canteen/operator.py:71
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:167
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:195
 msgid "({0})"
 msgstr ""
 
@@ -473,7 +473,7 @@ msgid ""
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:196
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:224
 #: src/fnschool/canteen/workbook.py:2016
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
@@ -517,21 +517,21 @@ msgstr ""
 msgid "Copying workbook..."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:32
+#: src/fnschool/canteen/spreadsheet/base.py:33
 #: src/fnschool/canteen/spreadsheet/purchasing.py:410
 #: src/fnschool/exam/score.py:509
 msgid "Spreadsheet Files"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:50
+#: src/fnschool/canteen/spreadsheet/base.py:51
 msgid "Row {0} of {1} is being inserted, please wait a moment."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:97
+#: src/fnschool/canteen/spreadsheet/base.py:98
 msgid "Cells of {0} was unmerged."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:139
+#: src/fnschool/canteen/spreadsheet/base.py:140
 msgid "Empty row {0} of sheet \"{1}\" has been deleted."
 msgstr ""
 
@@ -670,72 +670,72 @@ msgstr ""
 msgid "Merge completed！Saving \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:27
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:34
 msgid "No food found, exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:64
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:67
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:71
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:74
 msgid "{year}.{month}.{day}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:74
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:81
 msgid "food_consuming--{t0}--{t1}.xlsx"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:86
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:93
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:141
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:169
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:153
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:181
 msgid "New purchased food for date {0} is:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:155
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:183
 msgid "New purchased foods for date {0} are:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:177
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:205
 msgid "Negligible foods are not listed."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:180
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:208
 msgid "There is no purchased food for {0}."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:186
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:214
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I "
 "know [press any key to continue])"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:235
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
 msgid "{year}.{month}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:293
 msgid "Consuming days of {0} ({1}):"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:266
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:295
 msgid "Consuming days of {0}:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:274
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:303
 msgid "{0} days in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:276
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:305
 msgid "{0} day in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:280
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:309
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
@@ -846,11 +846,11 @@ msgid "Inventory data: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:546
-msgid "Fill them in \"{0}\"? (YyNn)"
+msgid "Fill them in \"{0}\"? (YyNn, default: \"No\")"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:548
-msgid "Fill it in \"{0}\"? (YyNn)"
+msgid "Fill it in \"{0}\"? (YyNn, default: \"No\")"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:609
@@ -2420,5 +2420,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "there is not file selected."
+#~ msgstr ""
+
+#~ msgid "Fill them in \"{0}\"? (YyNn)"
+#~ msgstr ""
+
+#~ msgid "Fill it in \"{0}\"? (YyNn)"
 #~ msgstr ""
 

@@ -543,9 +543,9 @@ class Purchasing(Base):
             print_warning(saved_ifoods_info)
             print_warning(
                 (
-                    _('Fill them in "{0}"? (YyNn)')
+                    _('Fill them in "{0}"? (YyNn, default: \"No\")')
                     if len(saved_ifoods) > 1
-                    else _('Fill it in "{0}"? (YyNn)')
+                    else _('Fill it in "{0}"? (YyNn, default: \"No\")')
                 ).format(self.path)
             )
 

@@ -28,6 +28,7 @@ class Base:
             right=self.cell_side0,
             bottom=self.cell_side0,
         )
+        self.cell_fill0 = PatternFill("solid", start_color="ffccff")
         self.row_height = 12.75
         self.filetypes_xlsx = [(_("Spreadsheet Files"), "*.xlsx")]
         self.food_sheet0_name = "材料台账母表"

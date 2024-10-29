@@ -4,6 +4,7 @@ import random
 import calendar
 from datetime import datetime, timedelta
 import math
+from openpyxl.styles import PatternFill
 
 from fnschool import *
 from fnschool.canteen.food import *
@@ -19,6 +20,12 @@ class PreConsuming(Base):
         self.col_index_offset = 5
 
         self.sheet_name0 = self.s.preconsuming_name0
+
+    def get_colored_cols(self, days_diff):
+        days_diff += 4
+        colored_cols = list(range(1, days_diff + 1))
+        colored_cols.remove(3)
+        return colored_cols
 
     def pre_consume_foods(self):
         foods = self.bill.foods
@@ -92,6 +99,9 @@ class PreConsuming(Base):
             tn1 = time_nodes[i + 1]
             tn0 = time_nodes[i]
             tn0_cp = tn0
+
+            new_meal_type_rows = []
+
             if not tn0.month == tn1.month:
                 tn0 = datetime(tn1.year, tn1.month, 1)
 
@@ -105,9 +115,13 @@ class PreConsuming(Base):
             )
 
             col_index = 0
-            for d_index in range(0, (tn1 - tn0).days + 1):
+            tn1_r = calendar.monthrange(tn1.year, tn1.month)
+            tn1_r = datetime(tn1.year, tn1.month, tn1_r[-1])
+            days_diff = (tn1_r - tn0).days
+
+            for d_index in range(0, days_diff + 1):
                 d_date = tn0 + timedelta(
-                    days=d_index + (1 if tn0_cp.month == tn1.month else 0)
+                    days=d_index + (1 if tn0_cp.month == tn1_r.month else 0)
                 )
                 col_index = self.col_index_offset + d_index
                 sheet.cell(
@@ -115,13 +129,14 @@ class PreConsuming(Base):
                     col_index,
                     d_date.strftime("%Y.%m.%d"),
                 )
-                if d_date == tn1:
+                if d_date == tn1_r:
                     break
 
             for col_index in range(col_index + 1, sheet.max_column):
                 sheet.cell(1, col_index, "")
 
             row_index = 0
+            last_meal_type = None
             for f_index in range(0, len(wbfoods)):
                 wbfood = wbfoods[f_index]
                 row_index = self.row_index_offset + f_index
@@ -130,11 +145,24 @@ class PreConsuming(Base):
                 )
                 sheet.cell(row_index, 2, wbfood.get_remainder(tn0))
                 sheet.cell(row_index, 4, wbfood.unit_price)
+                if wbfood.meal_type and not last_meal_type == wbfood.meal_type:
+                    last_meal_type = wbfood.meal_type
+                    new_meal_type_rows.append(row_index)
 
             for row_index in range(row_index + 1, sheet.max_row + 1):
                 sheet.cell(row_index, 1, "")
                 sheet.cell(row_index, 2, "")
                 sheet.cell(row_index, 4, "")
+
+            new_meal_type_rows = [
+                [new_meal_type_rows[i], new_meal_type_rows[i + 1]]
+                for i in range(0, len(new_meal_type_rows), 2)
+            ]
+            for [row_index0, row_index1] in new_meal_type_rows:
+                for row_index in range(row_index0, row_index1):
+                    for col_index in self.get_colored_cols(days_diff):
+                        cell = sheet.cell(row_index, col_index)
+                        cell.fill = self.cell_fill0
 
             wb.save(wb_fpath)
             print_warning(
@@ -198,6 +226,7 @@ class PreConsuming(Base):
                 ).format(wb_fpath)
             )
             input0()
+
             wb = load_workbook(wb_fpath)
             sheet = wb[self.sheet_name0]
 

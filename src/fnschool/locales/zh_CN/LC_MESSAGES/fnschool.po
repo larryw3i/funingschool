@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-28 23:11+0800\n"
-"PO-Revision-Date: 2024-10-28 23:13+0800\n"
+"POT-Creation-Date: 2024-10-29 14:10+0800\n"
+"PO-Revision-Date: 2024-10-29 14:11+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
@@ -190,7 +190,7 @@ msgstr ""
 
 #: src/fnschool/canteen/food.py:44 src/fnschool/canteen/operator.py:66
 #: src/fnschool/canteen/operator.py:71
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:167
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:195
 msgid "({0})"
 msgstr "（{0}）"
 
@@ -498,7 +498,7 @@ msgstr ""
 "工作表 “{0}” 已更新。\n"
 "在您完成每天消耗设计后按任意建以继续。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:196
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:224
 #: src/fnschool/canteen/workbook.py:2016
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr "好的，我已经更新工作簿 “{0}” 了。（按任意键继续）"
@@ -542,21 +542,21 @@ msgstr "目录 “%s” 已创建。"
 msgid "Copying workbook..."
 msgstr "正在复制工作簿......"
 
-#: src/fnschool/canteen/spreadsheet/base.py:32
+#: src/fnschool/canteen/spreadsheet/base.py:33
 #: src/fnschool/canteen/spreadsheet/purchasing.py:410
 #: src/fnschool/exam/score.py:509
 msgid "Spreadsheet Files"
 msgstr "工作簿文件。"
 
-#: src/fnschool/canteen/spreadsheet/base.py:50
+#: src/fnschool/canteen/spreadsheet/base.py:51
 msgid "Row {0} of {1} is being inserted, please wait a moment."
 msgstr "工作表 “{1}” 的 第{0}行 正在插入新行，请稍作等待。"
 
-#: src/fnschool/canteen/spreadsheet/base.py:97
+#: src/fnschool/canteen/spreadsheet/base.py:98
 msgid "Cells of {0} was unmerged."
 msgstr "工作表 “{0}” 的所有单元格被取消合并。"
 
-#: src/fnschool/canteen/spreadsheet/base.py:139
+#: src/fnschool/canteen/spreadsheet/base.py:140
 msgid "Empty row {0} of sheet \"{1}\" has been deleted."
 msgstr "{1} 表的 空行 （第{0}行）已被删除。"
 
@@ -696,24 +696,24 @@ msgstr "食材台账表 “{0}” 的标签颜色已被重新上色。"
 msgid "Merge completed！Saving \"{0}\"."
 msgstr "合并完成。正在保存 “{0}”。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:27
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:34
 msgid "No food found, exit."
 msgstr "未读取到食材，退出。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:64
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:67
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:71
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:74
 msgid "{year}.{month}.{day}"
 msgstr "{year}年{month}月{day}日"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:74
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:81
 msgid "food_consuming--{t0}--{t1}.xlsx"
 msgstr "食材出库（{t0}到{t1}）.xlsx"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:86
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:93
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr "工作簿 “{0}” 已被复制到 “{1}” 。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:141
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:169
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
@@ -721,49 +721,49 @@ msgstr ""
 "工作簿 “{1}” 的工作表 ‘{0}’ 已更新。\n"
 "在您完成每天消耗设计后按任意建以继续。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:153
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:181
 msgid "New purchased food for date {0} is:"
 msgstr "{0} 新购入的食材："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:155
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:183
 msgid "New purchased foods for date {0} are:"
 msgstr "{0} 新购入的食材："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:177
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:205
 msgid "Negligible foods are not listed."
 msgstr "无需入库的食材未列出。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:180
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:208
 msgid "There is no purchased food for {0}."
 msgstr "{0} 没有新购入的食材。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:186
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:214
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I know "
 "[press any key to continue])"
 msgstr "没有食材消耗的日期不需要设计出库。（好的，知道了的【按任意键继续】）"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:235
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:264
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:293
 msgid "Consuming days of {0} ({1}):"
 msgstr "{0} 的出库日期（{1}）："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:266
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:295
 msgid "Consuming days of {0}:"
 msgstr "{0} 的出库日期："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:274
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:303
 msgid "{0} days in total."
 msgstr "共 {0} 天。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:276
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:305
 msgid "{0} day in total."
 msgstr "共 {0} 天。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:280
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:309
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr "是的，都是对的。（按任意键继续）"
 
@@ -890,12 +890,12 @@ msgid "Inventory data: "
 msgstr "盘存时间："
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:546
-msgid "Fill them in \"{0}\"? (YyNn)"
-msgstr "把它们填入 “{0}” 吗？（是的：“Y”，“y”）"
+msgid "Fill them in \"{0}\"? (YyNn, default: \"No\")"
+msgstr "把它们填入 “{0}” 吗？（是的：“Y” 或 “y”，默认为“否”）"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:548
-msgid "Fill it in \"{0}\"? (YyNn)"
-msgstr "把它填入 “{0}” 吗？（是的：“Y”，“y”）"
+msgid "Fill it in \"{0}\"? (YyNn, default: \"No\")"
+msgstr "把它填入 “{0}” 吗？（是的：“Y” 或 “y”，默认为“否”）"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:609
 msgid "The remaining foods have been added to \"{0}\"."

@@ -11,6 +11,9 @@ from datetime import datetime, timedelta
 from tkinter import filedialog, ttk
 import tkinter as tk
 
+import calendar
+from datetime import datetime
+
 import pandas as pd
 import numpy as np
 from openpyxl import load_workbook
@@ -26,7 +29,7 @@ from fnschool.user import *
 from fnschool.config import *
 
 
-__version__ = "20241023.81047.857"
+__version__ = "20241029.80614.841"
 
 
 # The end.
