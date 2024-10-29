@@ -213,7 +213,7 @@ class Inventory(Base):
                     break
         ifoods = [f for f in bfoods if f.is_inventory]
         if len(ifoods) > 0:
-            foods = [ifoods[0].xdate, ifoods] + foods
+            foods = [[ifoods[0].xdate, ifoods]] + foods
         return foods
 
     def update(self):

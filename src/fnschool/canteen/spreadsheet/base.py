@@ -28,6 +28,13 @@ class Base:
             right=self.cell_side0,
             bottom=self.cell_side0,
         )
+        self.cell_side1 = Side(border_style="thin", color="ff0066")
+        self.cell_border1 = Border(
+            top=self.cell_side1,
+            left=self.cell_side1,
+            right=self.cell_side1,
+            bottom=self.cell_side1,
+        )
         self.cell_fill0 = PatternFill("solid", start_color="ffccff")
         self.row_height = 12.75
         self.filetypes_xlsx = [(_("Spreadsheet Files"), "*.xlsx")]

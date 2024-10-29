@@ -163,6 +163,7 @@ class PreConsuming(Base):
                     for col_index in self.get_colored_cols(days_diff):
                         cell = sheet.cell(row_index, col_index)
                         cell.fill = self.cell_fill0
+                        cell.border = self.cell_border1
 
             wb.save(wb_fpath)
             print_warning(
