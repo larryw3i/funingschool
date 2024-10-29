@@ -110,9 +110,10 @@ sudo apt-get install python3 python3-pip python3-tk
 # 设置安装源为镜像站。
 pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple # 或
 pip config set global.index-url https://mirror.nju.edu.cn/pypi/web/simple # 或
-pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple  
+
 # 安装 fnschool 。
-pip install -U fnschool  
+pip install -U fnschool
 
 # “食堂”模块的账单生成命令。
 fnschool-cli canteen mk_bill
