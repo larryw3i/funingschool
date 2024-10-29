@@ -159,7 +159,7 @@ sudo apt-get install python3 python3-pip python3-tk
 
 ```bash
 # {_("install fnschool.")}
-pip install -U fnschool
+pip install -U fnschool  
 
 # {_("Making bill of \"canteen\" module.")}
 fnschool-cli canteen mk_bill
