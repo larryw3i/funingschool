@@ -285,7 +285,7 @@ class Merging(Base):
                 )
                 + Style.RESET_ALL
             )
-            
+
             self.food_sheet.update_summation(csheet)
 
             csheet.sheet_properties.tabColor = secrets.token_hex(4)

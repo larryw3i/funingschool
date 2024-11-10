@@ -160,9 +160,95 @@ class Food(Base):
                 indexes[-1][1] = row[0].row + 1
         return indexes
 
-    
+    def update_inventories(self, sheet):
+        for row in sheet.iter_rows(max_col=14):
+            row_index0 = None
+            row_index1 = None
+
+            if str(row[2].value) == "摘要":
+                row_index0 = row[2].row
+
+            elif str(row[2].value) == "本月合计":
+                row_index1 = row[2].row
+
+                for row0 in sheet.iter_rows(
+                    min_row=row_index0, max_row=row_index1 - 1
+                ):
+
+                    w_count_n = sheet(row0[3].row + 1, 4).value
+                    w_unit_price_n = sheet(row0[4].row + 1, 5).value
+                    if str(w_count_n).replace(".", "").isnumeric():
+                        w_count_n = float(w_count_n)
+                    else:
+                        w_count_n = 0
+                    if str(w_unit_price_n).replace(".", "").isnumeric():
+                        w_unit_price_n = float(w_unit_price_n)
+                    else:
+                        w_unit_price_n = 0
+
+                    w_total_price_n = w_count_n * w_unit_price_n
+
+                    c_count_n = sheet(row0[6].row + 1, 7).value
+                    c_unit_price_n = sheet(row0[7].row + 1, 8).value
+                    if str(c_count_n).replace(".", "").isnumeric():
+                        c_count_n = float(c_count_n)
+                    else:
+                        c_count_n = 0
+                    if str(c_unit_price_n).replace(".", "").isnumeric():
+                        c_unit_price_n = float(c_unit_price_n)
+                    else:
+                        c_unit_price_n = 0
+
+                    c_total_price_n = c_count_n * c_unit_price_n
+
+                    i_count_n = sheet(row0[9].row + 1, 10).value
+                    i_unit_price_n = sheet(row0[10].row + 1, 11).value
+                    if str(i_count_n).replace(".", "").isnumeric():
+                        i_count_n = float(i_count_n)
+                    else:
+                        i_count_n = 0
+                    if str(i_unit_price_n).replace(".", "").isnumeric():
+                        i_unit_price_n = floatc(i_unit_price_n)
+                    else:
+                        i_unit_price_n = 0
+
+                    i_total_price_n = i_count_n * i_unit_price_n
+
+                    i_count = row0[9].value
+                    i_unit_price = row0[10].value
+                    if str(i_count).replace(".", "").isnumeric():
+                        i_count = float(i_count)
+                    else:
+                        i_count = 0
+                    if str(i_unit_price).replace(".", "").isnumeric():
+                        i_unit_price = float(i_unit_price)
+                    else:
+                        i_unit_price = 0
+
+                    i_total_price = i_count * i_unit_price
+
+                    if (
+                        i_unit_price == w_unit_price_n
+                        and not i_count_n == (i_count + w_count_n - c_count_n)
+                        and not (w_count_n == 0 and c_count_n == 0)
+                    ):
+                        sheet.cell(
+                            row0[9].row + 1, 10, i_count + w_count_n - c_count_n
+                        )
+                        sheet.cell(
+                            row0[10].row + 1,
+                            11,
+                            i_unit_price * (i_count + w_count_n - c_count_n),
+                        )
+
+                        pass
+                    pass
+                pass
+
+        pass
+
     def update_summation(self, sheet):
-    
+
         print_info(
             _('Update monthly and annual accumulation for "{0}".').format(
                 sheet.title
@@ -190,36 +276,65 @@ class Food(Base):
 
                 current_row_index = row[0].row
                 row_index_end = None
-                for row_index in range(
-                    current_row_index, sheet.max_row + 1
-                ):
+                for row_index in range(current_row_index, sheet.max_row + 1):
                     if str(sheet.cell(row_index, 3).value) == "本月合计":
                         row_index_end = row_index
                         break
 
                 for row_index in range(current_row_index, row_index_end):
-                    cell3_value = str(
-                        sheet.cell(row_index, 4).value
-                    ).replace(".", "")
+                    cell3_value = str(sheet.cell(row_index, 4).value).replace(
+                        ".", ""
+                    )
+
                     if cell3_value.isnumeric():
+                        cell3_value = str(sheet.cell(row_index, 4).value)
+
                         warehousing_count_m += float(cell3_value)
 
-                    cell5_value = str(
-                        sheet.cell(row_index, 6).value
-                    ).replace(".", "")
+                        cell4_value = str(
+                            sheet.cell(row_index, 5).value
+                        ).replace(".", "")
+
+                        if cell4_value.isnumeric():
+                            cell4_value = str(sheet.cell(row_index, 5).value)
+                            sheet.cell(
+                                row_index,
+                                6,
+                                float(cell3_value) * float(cell4_value),
+                            )
+
+                    cell5_value = str(sheet.cell(row_index, 6).value).replace(
+                        ".", ""
+                    )
                     if cell5_value.isnumeric():
+                        cell5_value = str(sheet.cell(row_index, 6).value)
+
                         warehousing_sum_m += float(cell5_value)
 
-                    cell6_value = str(
-                        sheet.cell(row_index, 7).value
-                    ).replace(".", "")
+                    cell6_value = str(sheet.cell(row_index, 7).value).replace(
+                        ".", ""
+                    )
                     if cell6_value.isnumeric():
+                        cell6_value = str(sheet.cell(row_index, 7).value)
                         consuming_count_m += float(cell6_value)
 
-                    cell8_value = str(
-                        sheet.cell(row_index, 9).value
-                    ).replace(".", "")
+                        cell7_value = str(
+                            sheet.cell(row_index, 8).value
+                        ).replace(".", "")
+                        if cell7_value.isnumeric():
+                            cell7_value = str(sheet.cell(row_index, 8).value)
+                            sheet.cell(
+                                row_index,
+                                9,
+                                float(cell6_value) * float(cell7_value),
+                            )
+
+                    cell8_value = str(sheet.cell(row_index, 9).value).replace(
+                        ".", ""
+                    )
                     if cell8_value.isnumeric():
+                        cell8_value = str(sheet.cell(row_index, 9).value)
+
                         consuming_sum_m += float(cell8_value)
 
                 warehousing_count_y += warehousing_count_m
@@ -235,17 +350,19 @@ class Food(Base):
                 row[8].value = consuming_sum_y
                 pass
 
-            if str(row[2].value) == "本月合计":
+            elif str(row[2].value) == "本月合计":
                 row[3].value = warehousing_count_m
                 row[5].value = warehousing_sum_m
                 row[6].value = consuming_count_m
                 row[8].value = consuming_sum_m
-                
+
                 warehousing_count_m = None
                 warehousing_sum_m = None
                 consuming_sum_m = None
                 consuming_count_m = None
+                pass
 
+            else:
                 pass
 
         warehousing_sum_y = None
@@ -253,11 +370,7 @@ class Food(Base):
         consuming_sum_y = None
         consuming_count_y = None
 
-
         print_warning(_("Update completed."))
-
-
-
 
     def update(self):
 
