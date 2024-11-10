@@ -160,6 +160,105 @@ class Food(Base):
                 indexes[-1][1] = row[0].row + 1
         return indexes
 
+    
+    def update_summation(self, sheet):
+    
+        print_info(
+            _('Update monthly and annual accumulation for "{0}".').format(
+                sheet.title
+            )
+        )
+        warehousing_sum_m = 0
+        warehousing_sum_y = 0
+
+        warehousing_count_m = 0
+        warehousing_count_y = 0
+
+        consuming_sum_m = 0
+        consuming_sum_y = 0
+
+        consuming_count_m = 0
+        consuming_count_y = 0
+
+        for row in sheet.iter_rows(max_col=14):
+            if str(row[3].value) == "数量":
+                warehousing_count_m = 0
+                warehousing_sum_m = 0
+
+                consuming_count_m = 0
+                consuming_sum_m = 0
+
+                current_row_index = row[0].row
+                row_index_end = None
+                for row_index in range(
+                    current_row_index, sheet.max_row + 1
+                ):
+                    if str(sheet.cell(row_index, 3).value) == "本月合计":
+                        row_index_end = row_index
+                        break
+
+                for row_index in range(current_row_index, row_index_end):
+                    cell3_value = str(
+                        sheet.cell(row_index, 4).value
+                    ).replace(".", "")
+                    if cell3_value.isnumeric():
+                        warehousing_count_m += float(cell3_value)
+
+                    cell5_value = str(
+                        sheet.cell(row_index, 6).value
+                    ).replace(".", "")
+                    if cell5_value.isnumeric():
+                        warehousing_sum_m += float(cell5_value)
+
+                    cell6_value = str(
+                        sheet.cell(row_index, 7).value
+                    ).replace(".", "")
+                    if cell6_value.isnumeric():
+                        consuming_count_m += float(cell6_value)
+
+                    cell8_value = str(
+                        sheet.cell(row_index, 9).value
+                    ).replace(".", "")
+                    if cell8_value.isnumeric():
+                        consuming_sum_m += float(cell8_value)
+
+                warehousing_count_y += warehousing_count_m
+                warehousing_sum_y += warehousing_sum_m
+
+                consuming_count_y += consuming_count_m
+                consuming_sum_y += consuming_sum_m
+
+            if str(row[2].value) == "本年累计":
+                row[3].value = warehousing_count_y
+                row[5].value = warehousing_sum_y
+                row[6].value = consuming_count_y
+                row[8].value = consuming_sum_y
+                pass
+
+            if str(row[2].value) == "本月合计":
+                row[3].value = warehousing_count_m
+                row[5].value = warehousing_sum_m
+                row[6].value = consuming_count_m
+                row[8].value = consuming_sum_m
+                
+                warehousing_count_m = None
+                warehousing_sum_m = None
+                consuming_sum_m = None
+                consuming_count_m = None
+
+                pass
+
+        warehousing_sum_y = None
+        warehousing_count_y = None
+        consuming_sum_y = None
+        consuming_count_y = None
+
+
+        print_warning(_("Update completed."))
+
+
+
+
     def update(self):
 
         year = self.bill.consuming.year
@@ -324,97 +423,6 @@ class Food(Base):
                         )
                         consuming_n += 1
                         row_index += 1
-
-            print_info(
-                _('Update monthly and annual accumulation for "{0}".').format(
-                    sheet.title
-                )
-            )
-            warehousing_sum_m = 0
-            warehousing_sum_y = 0
-
-            warehousing_count_m = 0
-            warehousing_count_y = 0
-
-            consuming_sum_m = 0
-            consuming_sum_y = 0
-
-            consuming_count_m = 0
-            consuming_count_y = 0
-
-            for row in sheet.iter_rows(max_col=14):
-                if str(row[3].value) == "数量":
-                    warehousing_count_m = 0
-                    warehousing_sum_m = 0
-
-                    consuming_count_m = 0
-                    consuming_sum_m = 0
-
-                    current_row_index = row[0].row
-                    row_index_end = None
-                    for row_index in range(
-                        current_row_index, sheet.max_row + 1
-                    ):
-                        if str(sheet.cell(row_index, 3).value) == "本月合计":
-                            row_index_end = row_index
-                            break
-
-                    for row_index in range(current_row_index, row_index_end):
-                        cell3_value = str(
-                            sheet.cell(row_index, 4).value
-                        ).replace(".", "")
-                        if cell3_value.isnumeric():
-                            warehousing_count_m += float(cell3_value)
-
-                        cell5_value = str(
-                            sheet.cell(row_index, 6).value
-                        ).replace(".", "")
-                        if cell5_value.isnumeric():
-                            warehousing_sum_m += float(cell5_value)
-
-                        cell6_value = str(
-                            sheet.cell(row_index, 7).value
-                        ).replace(".", "")
-                        if cell6_value.isnumeric():
-                            consuming_count_m += float(cell6_value)
-
-                        cell8_value = str(
-                            sheet.cell(row_index, 9).value
-                        ).replace(".", "")
-                        if cell8_value.isnumeric():
-                            consuming_sum_m += float(cell8_value)
-
-                    warehousing_count_y += warehousing_count_m
-                    warehousing_sum_y += warehousing_sum_m
-
-                    consuming_count_y += consuming_count_m
-                    consuming_sum_y += consuming_sum_m
-
-                if str(row[2].value) == "本年累计":
-                    row[3].value = warehousing_count_y
-                    row[5].value = warehousing_sum_y
-                    row[6].value = consuming_count_y
-                    row[8].value = consuming_sum_y
-                    pass
-
-                if str(row[2].value) == "本月合计":
-                    row[3].value = warehousing_count_m
-                    row[5].value = warehousing_sum_m
-                    row[6].value = consuming_count_m
-                    row[8].value = consuming_sum_m
-                    pass
-
-            print_warning(_("Update completed."))
-
-            warehousing_sum_m = None
-            warehousing_sum_y = None
-            warehousing_count_y = None
-            warehousing_count_m = None
-
-            consuming_sum_m = None
-            consuming_sum_y = None
-            consuming_count_y = None
-            consuming_count_m = None
 
             self.format(sheet)
             print_info(_("Sheet '%s' was updated.") % sheet.title)
