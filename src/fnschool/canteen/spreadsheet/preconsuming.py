@@ -35,6 +35,8 @@ class PreConsuming(Base):
             exit()
         year = self.bill.consuming.year
         month = self.bill.consuming.month
+        __, last_day = calendar.monthrange(year, month)
+        mday_m1 = datetime(year, month, last_day)
         time_nodes = sorted(
             list(
                 set(
@@ -106,7 +108,9 @@ class PreConsuming(Base):
                 tn0 = datetime(tn1.year, tn1.month, 1)
 
             wbfoods = [
-                f for f in cfoods if f.get_remainder(tn0) > 0 and f.xdate <= tn0
+                f
+                for f in cfoods
+                if f.get_remainder(mday_m1) > 0 and f.xdate <= tn0
             ]
 
             wbfoods = sorted(
@@ -143,7 +147,7 @@ class PreConsuming(Base):
                 sheet.cell(
                     row_index, 1, wbfood.get_display_name(time_node0=tn0)
                 )
-                sheet.cell(row_index, 2, wbfood.get_remainder(tn0))
+                sheet.cell(row_index, 2, wbfood.get_remainder(mday_m1))
                 sheet.cell(row_index, 4, wbfood.unit_price)
                 if wbfood.meal_type and not last_meal_type == wbfood.meal_type:
                     last_meal_type = wbfood.meal_type

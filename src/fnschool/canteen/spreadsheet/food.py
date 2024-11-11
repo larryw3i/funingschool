@@ -161,48 +161,70 @@ class Food(Base):
         return indexes
 
     def update_inventories(self, sheet):
-        
-        row_indexes = []
-        for row in sheet.iter_rows(max_col=14):
-            row_index0 = None
-            row_index1 = None
 
+        print_warning(_('Updating inventories for "{0}"').format(sheet.title))
+
+        row_indexes = []
+        row_index0 = None
+        row_index1 = None
+        for row in sheet.iter_rows(max_col=14):
             if str(row[2].value) == "摘要":
-                row_index0 = row[2].row+1
+                row_index0 = row[2].row + 1
 
             elif str(row[2].value) == "本月合计":
-                row_index1 = row[2].row-1
-
-            row_indexes.append([row_index0,row_index1])
+                row_index1 = row[2].row - 1
+                if not row_index0:
+                    print_error(
+                        _(
+                            "cannot find the starting index of form in "
+                            + '"{0}". (row {1})'
+                        ).format(sheet.title, row[0].row)
+                    )
+                if not row_index1:
+                    print_error(
+                        _(
+                            "cannot find the ending index of form in "
+                            + '"{0}". (row {1})'
+                        ).form(sheet.title, row[0].row)
+                    )
+                if row_index0 and row_index1:
+                    row_indexes.append([row_index0, row_index1])
+                row_index0 = None
+                row_index1 = None
             pass
 
-        for ri0 , ri1 in row_indexes:
+        for ri0, ri1 in row_indexes:
 
-            unit_prices = [sheet.cell(ri,11).value for ri in range(ri0,ri1+1)]
             unit_prices = [
-                float(u) 
-                for u in unit_prices 
-                if str(u).replace(".","").isnumeric()
+                sheet.cell(ri, 11).value for ri in range(ri0, ri1 + 1)
+            ]
+            unit_prices = [
+                float(u)
+                for u in unit_prices
+                if str(u).replace(".", "").isnumeric()
             ]
 
             unit_price_rows = []
             for u in unit_prices:
                 u_rows = []
-                for ri in range(row_index0,row_index1+1):
-                    cell10_value = sheet.cell(ri,11).value
-                    if str(cell10_value).replace(".",'').isnumeric():
+                for ri in range(ri0, ri1 + 1):
+                    cell10_value = sheet.cell(ri, 11).value
+                    if str(cell10_value).replace(".", "").isnumeric():
                         if float(cell10_value) == u:
                             u_rows.append(ri)
-                unit_price_rows.append([u,u_rows])
+                unit_price_rows.append([u, u_rows])
 
             for unit_price, rows in unit_price_rows:
                 rows_len = len(rows)
 
                 for row_i in range(rows_len):
+                    if row_i + 1 >= rows_len:
+                        break
                     row_index = rows[row_i]
+                    row_indexp1 = rows[row_i + 1]
 
-                    w_count_n = sheet.cell(row_index+1, 4).value
-                    w_unit_price_n = sheet.cell(row_index + 1, 5).value
+                    w_count_n = sheet.cell(row_indexp1, 4).value
+                    w_unit_price_n = sheet.cell(row_indexp1, 5).value
                     if str(w_count_n).replace(".", "").isnumeric():
                         w_count_n = float(w_count_n)
                     else:
@@ -213,8 +235,8 @@ class Food(Base):
                         w_unit_price_n = 0
                     w_total_price_n = w_count_n * w_unit_price_n
 
-                    c_count_n = sheet.cell(row_index + 1, 7).value
-                    c_unit_price_n = sheet.cell(row_index + 1, 8).value
+                    c_count_n = sheet.cell(row_indexp1, 7).value
+                    c_unit_price_n = sheet.cell(row_indexp1, 8).value
                     if str(c_count_n).replace(".", "").isnumeric():
                         c_count_n = float(c_count_n)
                     else:
@@ -225,20 +247,20 @@ class Food(Base):
                         c_unit_price_n = 0
                     c_total_price_n = c_count_n * c_unit_price_n
 
-                    i_count_n = sheet.cell(row_index + 1, 10).value
-                    i_unit_price_n = sheet.cell(row_index + 1, 11).value
+                    i_count_n = sheet.cell(row_indexp1, 10).value
+                    i_unit_price_n = sheet.cell(row_indexp1, 11).value
                     if str(i_count_n).replace(".", "").isnumeric():
                         i_count_n = float(i_count_n)
                     else:
                         i_count_n = 0
                     if str(i_unit_price_n).replace(".", "").isnumeric():
-                        i_unit_price_n = floatc(i_unit_price_n)
+                        i_unit_price_n = float(i_unit_price_n)
                     else:
                         i_unit_price_n = 0
                     i_total_price_n = i_count_n * i_unit_price_n
 
-                    i_count = sheet.cell(row_index,10).value
-                    i_unit_price = sheet.cell(row_index,11).value
+                    i_count = sheet.cell(row_index, 10).value
+                    i_unit_price = sheet.cell(row_index, 11).value
                     if str(i_count).replace(".", "").isnumeric():
                         i_count = float(i_count)
                     else:
@@ -255,18 +277,18 @@ class Food(Base):
                         and not (w_count_n == 0 and c_count_n == 0)
                     ):
                         sheet.cell(
-                            row0[9].row + 1, 10, i_count + w_count_n - c_count_n
+                            row_indexp1, 10, i_count + w_count_n - c_count_n
                         )
                         sheet.cell(
-                            row0[10].row + 1,
-                            11,
+                            row_indexp1,
+                            12,
                             i_unit_price * (i_count + w_count_n - c_count_n),
                         )
 
                         pass
                     pass
                 pass
-
+        print_info(_("Update completed!"))
         pass
 
     def update_summation(self, sheet):
@@ -547,7 +569,7 @@ class Food(Base):
                         sheet.cell(
                             row_index,
                             11,
-                            (food.unit_price if remainder else ""),
+                            food.unit_price,
                         )
                         sheet.cell(row_index, 12, remainder * unit_price)
 
@@ -558,6 +580,9 @@ class Food(Base):
                         )
                         consuming_n += 1
                         row_index += 1
+
+            self.update_summation(sheet)
+            self.update_inventories(sheet)
 
             self.format(sheet)
             print_info(_("Sheet '%s' was updated.") % sheet.title)

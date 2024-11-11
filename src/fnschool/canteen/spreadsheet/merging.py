@@ -188,6 +188,17 @@ class Merging(Base):
                         cell.alignment = self.cell_alignment0
                 self.make_row_counts_same(lsheet, csheet)
                 break
+            elif row_diff < 0:
+                row_diff = abs(row_diff)
+                lsheet.insert_rows(lrow0 + 1, row_diff)
+                for row_index_f in range(lrow0 + 1, lrow0 + 1 + row_diff):
+                    for col_index_f in range(1, 14):
+                        cell = lsheet.cell(row_index_f, col_index_f)
+                        cell.border = self.cell_border0
+                        cell.alignment = self.cell_alignment0
+                self.make_row_counts_same(lsheet, csheet)
+                break
+
             pass
 
         pass
@@ -287,6 +298,7 @@ class Merging(Base):
             )
 
             self.food_sheet.update_summation(csheet)
+            self.food_sheet.update_inventories(csheet)
 
             csheet.sheet_properties.tabColor = secrets.token_hex(4)
             print_info(
