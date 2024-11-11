@@ -161,22 +161,48 @@ class Food(Base):
         return indexes
 
     def update_inventories(self, sheet):
+        
+        row_indexes = []
         for row in sheet.iter_rows(max_col=14):
             row_index0 = None
             row_index1 = None
 
             if str(row[2].value) == "摘要":
-                row_index0 = row[2].row
+                row_index0 = row[2].row+1
 
             elif str(row[2].value) == "本月合计":
-                row_index1 = row[2].row
+                row_index1 = row[2].row-1
 
-                for row0 in sheet.iter_rows(
-                    min_row=row_index0, max_row=row_index1 - 1
-                ):
+            row_indexes.append([row_index0,row_index1])
+            pass
 
-                    w_count_n = sheet(row0[3].row + 1, 4).value
-                    w_unit_price_n = sheet(row0[4].row + 1, 5).value
+        for ri0 , ri1 in row_indexes:
+
+            unit_prices = [sheet.cell(ri,11).value for ri in range(ri0,ri1+1)]
+            unit_prices = [
+                float(u) 
+                for u in unit_prices 
+                if str(u).replace(".","").isnumeric()
+            ]
+
+            unit_price_rows = []
+            for u in unit_prices:
+                u_rows = []
+                for ri in range(row_index0,row_index1+1):
+                    cell10_value = sheet.cell(ri,11).value
+                    if str(cell10_value).replace(".",'').isnumeric():
+                        if float(cell10_value) == u:
+                            u_rows.append(ri)
+                unit_price_rows.append([u,u_rows])
+
+            for unit_price, rows in unit_price_rows:
+                rows_len = len(rows)
+
+                for row_i in range(rows_len):
+                    row_index = rows[row_i]
+
+                    w_count_n = sheet.cell(row_index+1, 4).value
+                    w_unit_price_n = sheet.cell(row_index + 1, 5).value
                     if str(w_count_n).replace(".", "").isnumeric():
                         w_count_n = float(w_count_n)
                     else:
@@ -185,11 +211,10 @@ class Food(Base):
                         w_unit_price_n = float(w_unit_price_n)
                     else:
                         w_unit_price_n = 0
-
                     w_total_price_n = w_count_n * w_unit_price_n
 
-                    c_count_n = sheet(row0[6].row + 1, 7).value
-                    c_unit_price_n = sheet(row0[7].row + 1, 8).value
+                    c_count_n = sheet.cell(row_index + 1, 7).value
+                    c_unit_price_n = sheet.cell(row_index + 1, 8).value
                     if str(c_count_n).replace(".", "").isnumeric():
                         c_count_n = float(c_count_n)
                     else:
@@ -198,11 +223,10 @@ class Food(Base):
                         c_unit_price_n = float(c_unit_price_n)
                     else:
                         c_unit_price_n = 0
-
                     c_total_price_n = c_count_n * c_unit_price_n
 
-                    i_count_n = sheet(row0[9].row + 1, 10).value
-                    i_unit_price_n = sheet(row0[10].row + 1, 11).value
+                    i_count_n = sheet.cell(row_index + 1, 10).value
+                    i_unit_price_n = sheet.cell(row_index + 1, 11).value
                     if str(i_count_n).replace(".", "").isnumeric():
                         i_count_n = float(i_count_n)
                     else:
@@ -211,11 +235,10 @@ class Food(Base):
                         i_unit_price_n = floatc(i_unit_price_n)
                     else:
                         i_unit_price_n = 0
-
                     i_total_price_n = i_count_n * i_unit_price_n
 
-                    i_count = row0[9].value
-                    i_unit_price = row0[10].value
+                    i_count = sheet.cell(row_index,10).value
+                    i_unit_price = sheet.cell(row_index,11).value
                     if str(i_count).replace(".", "").isnumeric():
                         i_count = float(i_count)
                     else:
@@ -224,7 +247,6 @@ class Food(Base):
                         i_unit_price = float(i_unit_price)
                     else:
                         i_unit_price = 0
-
                     i_total_price = i_count * i_unit_price
 
                     if (
