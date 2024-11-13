@@ -584,6 +584,7 @@ class Score:
                         r.append(0)
 
             scores = pd.DataFrame(scores_rows, columns=scores_cols)
+
             scores.set_index("Name", inplace=True)
             scores.loc[self.average_points_s] = scores.mean(axis=0)
 
@@ -599,8 +600,13 @@ class Score:
 
     @property
     def fpaths(self):
+        fpaths = self.get_fpaths()
+        return fpaths
+        pass
+
+    def get_fpaths(self, dpath=None):
         if not self._fpaths:
-            dpath = self.fpath.parent.as_posix()
+            dpath = dpath or self.fpath.parent.as_posix()
             fpaths = []
             for f in os.listdir(dpath):
                 if f.endswith(self.fext):
@@ -871,7 +877,14 @@ class Score:
                 os.makedirs(fpath.parent.as_posix(), exist_ok=True)
 
             if not fpath.exists():
+                dpath = fpath.parent.as_posix()
+                fpaths = self.get_fpaths(dpath)
+                self._fpath, __ = fpaths[-1]
+                scores = self.scores
+                self._fpath = None
+                self._fpaths = None
                 shutil.copy(self.fpath0, fpath)
+
                 print_info(
                     _(
                         'Scores spreadsheet "{0}" doesn\'t '
@@ -880,12 +893,11 @@ class Score:
                     ).format(fpath, self.fpath0)
                 )
 
-                fpath1 = self.fpath_m2
                 name_m2 = self.short_name_m2 or self.no_test_m2_s
 
                 scores_m2 = (
-                    self.scores[self.scores.columns[-2]]
-                    if (len(self.scores.columns) > 1)
+                    scores[scores.columns[-2]]
+                    if (len(scores.columns) > 1)
                     else None
                 )
 
