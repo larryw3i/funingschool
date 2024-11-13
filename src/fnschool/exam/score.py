@@ -604,6 +604,11 @@ class Score:
         return fpaths
         pass
 
+    @fpaths.setter
+    def fpaths(self, paths):
+        self._fpaths = paths
+        pass
+
     def get_fpaths(self, dpath=None):
         if not self._fpaths:
             dpath = dpath or self.fpath.parent.as_posix()
@@ -879,10 +884,10 @@ class Score:
             if not fpath.exists():
                 dpath = fpath.parent.as_posix()
                 fpaths = self.get_fpaths(dpath)
-                self._fpath, __ = fpaths[-1]
+                self.fpath, __ = fpaths[-1]
                 scores = self.scores
-                self._fpath = None
-                self._fpaths = None
+                self.fpath = None
+                self.fpaths = None
                 shutil.copy(self.fpath0, fpath)
 
                 print_info(
@@ -998,6 +1003,10 @@ class Score:
             os.makedirs(src_dpath, exist_ok=True)
 
         return self._fpath
+
+    @fpath.setter
+    def fpath(self, path):
+        self._fpath = path
 
     @property
     def full_name(self):

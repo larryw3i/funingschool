@@ -31,3 +31,6 @@ def parse_exam(subparsers):
         ),
     )
     parser_canteen.set_defaults(func=set_exam)
+
+
+# The end.

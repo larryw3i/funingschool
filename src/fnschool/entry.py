@@ -1,9 +1,27 @@
 import os
 import sys
+import importlib
+import inspect
 
 from fnschool import *
 from fnschool.canteen.entry import *
 from fnschool.exam.entry import *
+
+
+module_dpath = Path(__file__).parent
+entry_name = "entry.py"
+
+
+def get_entries():
+    entries = [
+        ".".join(
+            os.path.splitext(p.relative_to(module_dpath.parent))[0]
+            .replace("\\", "/")
+            .split("/")
+        )
+        for p in module_dpath.glob(f"*/{entry_name}")
+    ]
+    return entries
 
 
 def show_gui():
@@ -18,9 +36,16 @@ def read_cli():
         epilog=_("Enjoy it."),
     )
     subparsers = parser.add_subparsers(help=_("The modules to run."))
+    entries = get_entries()
 
-    parse_canteen(subparsers)
-    parse_exam(subparsers)
+    for entry in entries:
+        entry = importlib.import_module(entry)
+        names = dir(entry)
+        for name in names:
+            attr = getattr(entry, name)
+            if inspect.isfunction(attr):
+                if name.startswith("parse_"):
+                    attr(subparsers)
 
     args = parser.parse_args()
 
