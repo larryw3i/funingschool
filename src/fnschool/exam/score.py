@@ -564,7 +564,12 @@ class Score:
         edit_yn = input0()
         if edit_yn and edit_yn in "Yy":
             open_path(fpath_m1)
-            print_info(_("Ok, I have edited and closed it?"))
+            print_info(
+                _(
+                    "Ok, I have edited and closed it? (Enter any key "
+                    + "to continue)"
+                )
+            )
             input0()
             pass
         pass
