@@ -29,4 +29,16 @@ for d in [
         os.makedirs(d)
 
 
+def get_file_mtime(path):
+    mtime = os.path.getmtime(path)
+    mdatetime = datetime.fromtimestamp(mtime)
+    return mdatetime
+
+
+def get_file_ctime(path):
+    ctime = os.path.getctime(path)
+    cdatetime = datetime.fromtimestamp(ctime)
+    return cdatetime
+
+
 # The end.

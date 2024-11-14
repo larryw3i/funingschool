@@ -613,6 +613,7 @@ class Score:
         if not self._fpaths:
             dpath = dpath or self.fpath.parent.as_posix()
             fpaths = []
+            fpath_time = None
             for f in os.listdir(dpath):
                 if f.endswith(self.fext):
                     fpath = (Path(dpath) / f).as_posix()
@@ -621,23 +622,24 @@ class Score:
                     test_t1 = self.get_test_t(sheet)
                     if test_t1:
                         test_t1 = test_t1[1]
-
-                    if test_t1:
-                        fpaths.append([fpath, test_t1])
-
                     else:
-                        wb.close()
-                        sheet = None
-                        test_t1 = datetime.fromtimestamp(
-                            os.path.getctime(fpath)
-                        )
-                        fpaths.append([fpath, test_t1])
+                        test_t1 = get_file_ctime(fpath)
+
+                    if not dpath and fpath == self.fpath:
+                        fpath_time = test_t1
+
+                    fpaths.append([fpath, test_t1])
+
             self._fpaths = fpaths
 
             if len(self._fpaths) < 1:
                 return None
 
-        self._fpaths = sorted(self._fpaths, key=lambda f: (f[1], f[0]))
+        fpaths = sorted(self._fpaths, key=lambda f: (f[1], f[0]))
+        if not dpath:
+            fpaths = [f for f, t in fpaths if t <= test_t1]
+
+        self._fpaths = fpaths
 
         return self._fpaths
 
@@ -719,7 +721,7 @@ class Score:
 
         return time
 
-    def get_test_t(self, sheet):
+    def get_test_t(self, sheet, interval=90):
 
         test_t = None
         test_t0 = sheet.cell(1, 2).value
@@ -747,8 +749,11 @@ class Score:
                         "Failed to get examination " + 'end time from "{0}".'
                     ).format(test_t1)
                 )
+        else:
+            pass
+
         if test_t0 and not test_t1:
-            test_t1 = test_t0 + timedelta(minutes=90)
+            test_t1 = test_t0 + timedelta(minutes=interval)
             print_warning(
                 _('The examination end time is set to "{0}".').format(
                     test_t1.strftime("%Y/%m/%d %H%M")
