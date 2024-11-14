@@ -14,7 +14,7 @@ from fnschool.exam import *
 from fnschool.exam.path import *
 
 
-class FnEmail:
+class Email:
     def __init__(self, score=None):
         self._fpath = None
         self.score = score
@@ -28,6 +28,34 @@ class FnEmail:
         self.port_key = _("smtp_port")
         self.user_name_key = _("smtp_user_name")
         self.passw0rd_key = _("smtp_password")
+        self._chaperones = None
+        pass
+
+    @property
+    def chaperones(self):
+        if not self._chaperones:
+            _chaperones0 = [
+                _("self"),
+                _("dad"),
+                _("mum"),
+                _("father’s father"),
+                _("father's mother"),
+                _("mother's father"),
+                _("mother's mother"),
+                _("father's older brother"),
+                _("father's younger brother"),
+                _("father's sister"),
+                _("father's sister's husband"),
+                _("mother's sister"),
+                _("mother's sister's husband"),
+                _("relative"),
+                _("friend"),
+                _("parent"),
+                _("chaperone"),
+            ]
+            _chaperones = _chaperones0 if is_zh_CN else _chaperones0
+            self._chaperones = _chaperones
+        return self._chaperones
         pass
 
     @property
@@ -115,7 +143,12 @@ class FnEmail:
             chaperone_lenx = 0
 
             get_full_chaperone = lambda chaperone: (
-                student_name + _("'s") + chaperone
+                student_name
+                + (
+                    ""
+                    if chaperone == self.chaperones[0]
+                    else _("'s") + chaperone
+                )
                 if is_zh_CN
                 else (
                     student_name + "' " + chaperone
@@ -172,13 +205,22 @@ class FnEmail:
                 for chaperone, cemails in chaperones_emails:
                     for cemail in cemails:
                         chaperone = get_full_chaperone(chaperone)
+                        sender = (
+                            _("Teacher {0}")
+                            if is_zh_CN
+                            else (
+                                _("Mr. {0}")
+                                if self.teacher.is_male
+                                else _("Ms. {0}")
+                            )
+                        ).format(self.teacher.name)
                         chaperone0 = get_full_chaperone0(chaperone, cemail)
                         chaperone_len_diff = (
                             chaperone_lenx
                             - get_zh_CN_chars_len(chaperone0)
                             - len(chaperone0)
                         )
-                        """
+
                         self.email.send(
                             subject=msg_subject,
                             receivers=[cemail],
@@ -192,18 +234,10 @@ class FnEmail:
                                 "scores_s": _(
                                     'The "{0}" scores of {1} are: '
                                 ).format(self.score.full_name, student_name),
-                                "sender": (
-                                    _("Teacher {0}")
-                                    if is_zh_CN
-                                    else (
-                                        _("Mr. {0}")
-                                        if self.teacher.is_male
-                                        else _("Ms. {0}")
-                                    )
-                                ).format(self.teacher.name),
+                                "sender": sender,
                             },
                         )
-                        """
+
                         print_info(
                             f"[{i+1:>{scores_img_fpaths_len2}}/{scores_img_fpaths_len}] "
                             + _(
@@ -282,6 +316,10 @@ class FnEmail:
                 sheet = wb[wb.sheetnames[0]]
                 for i, sname in enumerate(self.score.student_names):
                     sheet.cell(1, 2 + i, sname)
+
+                chaperone_row_offset = 2
+                for i, chaperone in enumerate(self.chaperones):
+                    sheet.cell(i + chaperone_row_offset, 1, chaperone)
                 wb.save(fpath)
 
                 print_info(

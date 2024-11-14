@@ -30,12 +30,12 @@ class Purchasing(Base):
         self._total_price_col = [
             None,
             None,
-            ["总价", "折前金额", "总金额"],
+            ["总价", "折后金额", "总金额"],
         ]
         self._xdate_col = [
             None,
             None,
-            ["送货日期", "检查日期", "清点日期", "x日期", "日期"],
+            ["入库日期", "送货日期", "检查日期", "清点日期", "x日期", "日期"],
         ]
         self._purchaser_col = [
             None,
@@ -338,6 +338,7 @@ class Purchasing(Base):
                 )
             )
             input0()
+        pass
 
     @property
     def food_classes(self):
@@ -477,6 +478,8 @@ class Purchasing(Base):
         meal_types = self.get_meal_types()
         inventory = self.bill.spreadsheet.inventory
 
+        update_yn = False
+
         for meal_type in meal_types:
             bill_fpath = self.operator.get_bill_fpath(meal_type)
             print_info(
@@ -551,6 +554,7 @@ class Purchasing(Base):
 
             f_input = input0().replace(" ", "")
             if len(f_input) > 0 and f_input in "Yy":
+                update_yn = True
                 max_row = len(
                     [
                         row_index
@@ -617,20 +621,23 @@ class Purchasing(Base):
         self.wb.save(self.path)
         self.wb.close()
         del self.wb
-        print_info(
-            (
-                _(
-                    "Please check/modify the updated data. "
-                    + "(Press any key to open the file)"
+
+        if update_yn:
+            print_info(
+                (
+                    _(
+                        "Please check/modify the updated data. "
+                        + "(Press any key to open the file)"
+                    )
                 )
             )
-        )
-        input0()
-        open_path(self.path)
-        print_info(
-            _("Ok, I checked it, it's ok. " + "(Press any key to continue)")
-        )
-        input0()
+            input0()
+            open_path(self.path)
+            print_info(
+                _("Ok, I checked it, it's ok. " + "(Press any key to continue)")
+            )
+            input0()
+            pass
 
         pass
 

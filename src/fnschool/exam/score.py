@@ -5,7 +5,7 @@ from fnschool import *
 from fnschool.exam import *
 from fnschool.exam.path import *
 from fnschool.exam.teacher import *
-from fnschool.exam.email import FnEmail
+from fnschool.exam.email import Email as FnEmail
 
 
 class Score:
@@ -427,13 +427,23 @@ class Score:
                 labelrotation = self.get_rotation(xticks)
             plt.tick_params(axis="x", labelrotation=labelrotation)
 
+            showed_test_name = f"{self.subject}/{self.short_name}"
             plt.xlabel(
-                (
-                    _("Question titles of {0} ({1} point in total)")
-                    if self.total_points == 1.0
-                    else _("Question titles of {0} ({1} points in total)")
-                ).format(f"{self.subject}/{self.short_name}", self.total_points)
+                _("Question titles of {0} ({1})").format(
+                    showed_test_name,
+                    (
+                        _("{0} point in total, ")
+                        if self.total_points == 1
+                        else _("{0} points in total, ")
+                    ).format(self.total_points)
+                    + (
+                        _("{0} point got")
+                        if s_total_points == 1
+                        else _("{0} points got")
+                    ).format(s_total_points),
+                )
             )
+
             plt.ylabel(_("Scoring rate(%)"))
             for q_title, s_rate in q_point_rates.items():
                 plt.text(
@@ -632,7 +642,7 @@ class Score:
         pass
 
     def get_fpaths(self, dpath=None):
-        test_t1 = None
+        fpath_time = None
         if not self._fpaths:
             dpath = dpath or self.fpath.parent.as_posix()
             fpaths = []
@@ -648,22 +658,17 @@ class Score:
                     else:
                         test_t1 = get_file_ctime(fpath)
 
-                    if not dpath and fpath == self.fpath:
+                    if fpath == self.fpath.as_posix():
                         fpath_time = test_t1
 
                     fpaths.append([fpath, test_t1])
-
             self._fpaths = fpaths
-
             if len(self._fpaths) < 1:
                 return None
 
-        fpaths = sorted(self._fpaths, key=lambda f: (f[1], f[0]))
-        if not dpath and test_t1:
-            fpaths = [f for f, t in fpaths if t <= test_t1]
-
-        self._fpaths = fpaths
-
+        self._fpaths = sorted(self._fpaths, key=lambda f: (f[1], f[0]))
+        if fpath_time:
+            self._fpaths = [[f, t] for f, t in fpaths if t <= fpath_time]
         return self._fpaths
 
     @property
