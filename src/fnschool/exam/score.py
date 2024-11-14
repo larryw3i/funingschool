@@ -552,11 +552,28 @@ class Score:
 
         return scores
 
+    def edit_test_m1(self):
+        fpaths = self.fpaths
+        fpath_m1, __ = fpaths[-1]
+        print_warning(
+            _(
+                "Would you like to edit \"{0}\" ? (\"Yes\": 'Y' or 'y'. "
+                + "Default: No)"
+            ).format(fpath_m1)
+        )
+        edit_yn = input0()
+        if edit_yn and edit_yn in "Yy":
+            open_path(fpath_m1)
+            print_info(_("Ok, I have edited and closed it?"))
+            input0()
+            pass
+        pass
+
     @property
     def scores(self):
         if self._scores is None:
+            self.edit_test_m1()
             fpaths = self.fpaths[::-1]
-
             if len(fpaths) < 1:
                 return None
 
@@ -610,6 +627,7 @@ class Score:
         pass
 
     def get_fpaths(self, dpath=None):
+        test_t1 = None
         if not self._fpaths:
             dpath = dpath or self.fpath.parent.as_posix()
             fpaths = []
@@ -636,7 +654,7 @@ class Score:
                 return None
 
         fpaths = sorted(self._fpaths, key=lambda f: (f[1], f[0]))
-        if not dpath:
+        if not dpath and test_t1:
             fpaths = [f for f, t in fpaths if t <= test_t1]
 
         self._fpaths = fpaths

@@ -5,6 +5,7 @@ import shutil
 import getpass
 import platform
 import subprocess
+from datetime import datetime
 
 from appdirs import AppDirs
 from fnschool.fnprint import *
