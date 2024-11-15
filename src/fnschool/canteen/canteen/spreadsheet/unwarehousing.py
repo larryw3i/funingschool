@@ -15,7 +15,7 @@ class Unwarehousing(Base):
         super().__init__(bill)
         self.sheet_name = self.s.unwarehousing_name
         self.entry_row_len0 = 11
-        self.form_title0 = "未入库明细表"
+        self.form_title0 = _("Table_Unwarehousing Form")
         pass
 
     def get_entry_index(self, form_index):
@@ -53,7 +53,7 @@ class Unwarehousing(Base):
 
         return self._form_indexes
 
-    def get_form_title(self, fclass="调味类"):
+    def get_form_title(self, fclass=_("condiment class")):
         title = _("{0} ({1})").format(self.form_title0, fclass)
         return title
 
@@ -72,33 +72,17 @@ class Unwarehousing(Base):
             return None
 
         food_classes = list(set([f.fclass for f in ufoods]))
-        used_form_index0 = None
-        used_form_index1 = None
         for fclass in food_classes:
             foods = [f for f in ufoods if f.fclass == fclass]
             foods = sorted(foods, key=lambda f: f.xdate)
             foods_len = len(foods)
 
             t1 = self.bill.consuming.date_m1
-            c_row_count = 0
-            used_form_index0 = used_form_index1 + 1 if used_form_index1 else 0
-            used_form_index1 = (
-                -1 if used_form_index1 == None else used_form_index1
-            )
-            c_form_indexes = form_indexes[used_form_index0:]
-            for i0, i1 in c_form_indexes:
-                c_row_count += (i1 - 1) - (i0 + 1)
-                used_form_index1 += 1
-                if c_row_count >= foods_len:
-                    break
-            c_form_indexes = form_indexes[
-                used_form_index0 : used_form_index1 + 1
-            ]
 
             row_indexes = []
-            for form_index in c_form_indexes:
+            for form_index in form_indexes:
                 form_index0, form_index1 = form_index
-                unwsheet.cell(form_index0 - 1, 1, self.get_form_title(fclass))
+                unwsheet.cell(form_index0 - 1, 1, f"未入库明细表（{fclass}）")
                 unwsheet.cell(form_index0, 1, f" 学校名称：{self.purchaser}")
                 unwsheet.cell(
                     form_index0,

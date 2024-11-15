@@ -917,10 +917,12 @@ class Score:
             if not fpath.exists():
                 dpath = fpath.parent.as_posix()
                 fpaths = self.get_fpaths(dpath)
-                self.fpath, __ = fpaths[-1]
-                scores = self.scores
-                self.fpath = None
-                self.fpaths = None
+                scores = None
+                if fpaths:
+                    self.fpath, __ = fpaths[-1]
+                    scores = self.scores
+                    self.fpath = None
+                    self.fpaths = None
                 shutil.copy(self.fpath0, fpath)
 
                 print_info(
@@ -935,7 +937,7 @@ class Score:
 
                 scores_m2 = (
                     scores[scores.columns[-2]]
-                    if (len(scores.columns) > 1)
+                    if scores and (len(scores.columns) > 1)
                     else None
                 )
 

@@ -18,7 +18,16 @@ class Purchasing(Base):
         self.p_path_key = _("parent_path_of_purchasing_file")
         self._path = None
 
-        condiment_class_names = ["调味类", "调味品类", "调味"]
+        condiment_class_names = [
+            _("condiment"),
+            _("condiments"),
+            _("condiment class"),
+            _("condiments class"),
+            _("seasoning"),
+            _("flavouring class"),
+            _("flavouring"),
+            _("seasoning class"),
+        ]
         self.condiment_class_names = (
             condiment_class_names if is_zh_CN else condiment_class_names
         )
