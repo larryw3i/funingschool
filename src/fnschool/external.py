@@ -48,14 +48,20 @@ def print_sponsor():
     from fnschool.app import app_name
 
     print()
-    print_info(
-        _(
+    u2764 = Fore.RED + "\u2764" + Style.RESET_ALL
+    print(u2764, end=" ")
+    print(
+        Fore.GREEN
+        + _(
             "If you feel {0} is great, "
             + "please sponsor it. "
             + "Your sponsorship will keep "
             + "the project alive."
         ).format(app_name)
+        + Style.RESET_ALL,
+        end="",
     )
+    print(u2764)
 
     print_warning("\t" + _("Sponsor URL: {0}").format(get_sponsor_url()))
     print()
