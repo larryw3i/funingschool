@@ -21,7 +21,7 @@ from openpyxl.styles import numbers
 from openpyxl.styles import Font
 from fnschool.app import *
 from fnschool.language import _
-from fnschool.fnprint import *
+from fnschool.print import *
 from fnschool.path import *
 from fnschool.entry import *
 from fnschool.external import *

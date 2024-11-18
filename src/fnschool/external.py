@@ -3,7 +3,7 @@ import sys
 import subprocess
 
 from fnschool.language import *
-from fnschool.fnprint import *
+from fnschool.print import *
 from fnschool.path import *
 
 
@@ -42,6 +42,23 @@ def get_sponsor_url():
         if is_zh_CN
         else ("https://github.com/larryw3i/" + "funingschool#support")
     )
+
+
+def print_sponsor():
+    from fnschool.app import app_name
+
+    print()
+    print_info(
+        _(
+            "If you feel {0} is great, "
+            + "please sponsor it. "
+            + "Your sponsorship will keep "
+            + "the project alive."
+        ).format(app_name)
+    )
+
+    print_warning("\t" + _("Sponsor URL: {0}").format(get_sponsor_url()))
+    print()
 
 
 def open_path(file_path):

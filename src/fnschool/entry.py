@@ -6,6 +6,7 @@ import inspect
 from fnschool import *
 from fnschool.canteen.entry import *
 from fnschool.exam.entry import *
+from fnschool.external import *
 
 
 module_dpath = Path(__file__).parent
@@ -53,6 +54,8 @@ def read_cli():
         args.func(args)
     else:
         parser.print_help()
+
+    print_sponsor()
 
 
 # The end.

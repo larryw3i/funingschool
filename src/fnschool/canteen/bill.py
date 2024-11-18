@@ -153,20 +153,6 @@ class Bill:
         purchaser = self.foods[-1].purchaser
         return purchaser
 
-    def print_sponsor(self):
-        print()
-        print_info(
-            _(
-                "If you feel {0} is great, "
-                + "please sponsor it. "
-                + "Your sponsorship will keep "
-                + "the project alive."
-            ).format(app_name)
-        )
-
-        print_warning("\t" + _("Sponsor URL: {0}").format(get_sponsor_url()))
-        print()
-
     def make_spreadsheets(self):
         self.spreadsheet.update()
         self.print_sponsor()
