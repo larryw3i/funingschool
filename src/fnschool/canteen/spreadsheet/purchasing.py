@@ -36,7 +36,12 @@ class Purchasing(Base):
         self._total_price_col = [
             None,
             None,
-            ["总价", "折后金额", "总金额"],
+            [
+                "总价",
+                "折后金额",
+                "总金额",
+                "折前金额",
+            ],
         ]
         self._xdate_col = [
             None,
@@ -655,6 +660,49 @@ class Purchasing(Base):
     def split_foods(self):
         foods_cp = self.bill.foods.copy()
         foods = self.bill.foods
+
+        bad_total_price_foods = []
+        for f in foods:
+            total_price_s = str(f.total_price)
+            if "." in total_price_s and len(total_price_s.split(".")[1]) > 2:
+                bad_total_price_foods.append(f)
+        if len(bad_total_price_foods) > 0:
+            bad_total_price_foods_len = len(bad_total_price_foods)
+            print_error(
+                (
+                    _(
+                        "The total price of the following food has more than "
+                        + "two decimal places, and {0} cannot process it."
+                    )
+                    if bad_total_price_foods_len == 1
+                    else _(
+                        "The total price of the following foods have more than "
+                        + "two decimal places, and {0} cannot process them."
+                    )
+                ).format(app_name)
+            )
+            bad_total_price_foods_len2 = len(str(bad_total_price_foods_len + 1))
+            print_error(
+                sqr_slist(
+                    [
+                        (
+                            f"{i+1:>{bad_total_price_foods_len2}} "
+                            + _("{0}({1})").format(
+                                f.name,
+                                (
+                                    f"{f.xdate.year}.{f.xdate.month:0>2}"
+                                    + f".{f.xdate.day:0>2}"
+                                ),
+                            )
+                            + f" {f.total_price}"
+                        )
+                        for i, f in enumerate(bad_total_price_foods)
+                    ]
+                )
+            )
+            print_error(_("Exit."))
+            exit()
+
         split_mode = ""
 
         for i, f in enumerate(foods_cp):

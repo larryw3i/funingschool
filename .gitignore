@@ -145,7 +145,7 @@ src/canteen/sett1ngs.py
 *.out
 .idea/
 
-# Not
+# Not helper/build/
 !helper/build/
 
 # The end.

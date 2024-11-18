@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-16 07:22+0800\n"
+"POT-Creation-Date: 2024-11-17 22:40+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -518,7 +518,7 @@ msgid "Copying workbook..."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/base.py:40
-#: src/fnschool/canteen/spreadsheet/purchasing.py:422
+#: src/fnschool/canteen/spreadsheet/purchasing.py:427
 #: src/fnschool/exam/score.py:519
 msgid "Spreadsheet Files"
 msgstr ""
@@ -655,7 +655,7 @@ msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/merging.py:44
 #: src/fnschool/canteen/spreadsheet/merging.py:52
-#: src/fnschool/canteen/spreadsheet/purchasing.py:272
+#: src/fnschool/canteen/spreadsheet/purchasing.py:277
 msgid "Loading data from \"{0}\"."
 msgstr ""
 
@@ -759,45 +759,45 @@ msgstr ""
 msgid "parent_path_of_purchasing_file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:156
+#: src/fnschool/canteen/spreadsheet/purchasing.py:161
 msgid "Column \"{0}\" was no found."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:158
+#: src/fnschool/canteen/spreadsheet/purchasing.py:163
 msgid "Columns \"{0}\" were no found."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:159
+#: src/fnschool/canteen/spreadsheet/purchasing.py:164
 msgid ","
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:181
+#: src/fnschool/canteen/spreadsheet/purchasing.py:186
 msgid "Column \"{0}\" was not found. Exit"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:330
+#: src/fnschool/canteen/spreadsheet/purchasing.py:335
 msgid ""
 "Column \"{0}\" has been updated, feel free to open new issue if some food"
 " with the wrong class ({1}). "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:337
+#: src/fnschool/canteen/spreadsheet/purchasing.py:342
 msgid "Ok, I'd like to check and update it. (Press any key to check the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:345
+#: src/fnschool/canteen/spreadsheet/purchasing.py:350
 msgid ""
 "I have checked it, all classes of food are right, and I closed the file. "
 "(Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:402
+#: src/fnschool/canteen/spreadsheet/purchasing.py:407
 msgid ""
 "{0} need a purchasing list file, and it's file type should be '.xlsx'. "
 "The column names of it:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:407
+#: src/fnschool/canteen/spreadsheet/purchasing.py:412
 msgid ""
 "\n"
 "\tcolumn   type    example\n"
@@ -812,121 +812,138 @@ msgid ""
 "\t是结余   Text    y"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:421
+#: src/fnschool/canteen/spreadsheet/purchasing.py:426
 msgid "Please select a purchasing file."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:429
+#: src/fnschool/canteen/spreadsheet/purchasing.py:434
 msgid "Please select the purchasing file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:435
+#: src/fnschool/canteen/spreadsheet/purchasing.py:440
 #: src/fnschool/exam/score.py:536
 msgid "No file was selected, exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:439
+#: src/fnschool/canteen/spreadsheet/purchasing.py:444
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:484
+#: src/fnschool/canteen/spreadsheet/purchasing.py:489
 msgid "The remaining food wasn't read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:497
+#: src/fnschool/canteen/spreadsheet/purchasing.py:502
 msgid ""
 "{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet \"{2}\" "
 "......"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:510
+#: src/fnschool/canteen/spreadsheet/purchasing.py:515
 msgid "There is no saved inventories from \"{0}\""
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:518
+#: src/fnschool/canteen/spreadsheet/purchasing.py:523
 msgid ""
 "Some remaining foods have been read from sheet \"{0}\" of spreadsheet "
 "\"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:523
+#: src/fnschool/canteen/spreadsheet/purchasing.py:528
 msgid "The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:549
+#: src/fnschool/canteen/spreadsheet/purchasing.py:554
 msgid "Purchaser: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:552
+#: src/fnschool/canteen/spreadsheet/purchasing.py:557
 msgid "Inventory data: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:560
+#: src/fnschool/canteen/spreadsheet/purchasing.py:565
 msgid "Fill them in \"{0}\"? (YyNn, default: \"No\")"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:562
+#: src/fnschool/canteen/spreadsheet/purchasing.py:567
 msgid "Fill it in \"{0}\"? (YyNn, default: \"No\")"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:624
+#: src/fnschool/canteen/spreadsheet/purchasing.py:629
 msgid "The remaining foods have been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:626
+#: src/fnschool/canteen/spreadsheet/purchasing.py:631
 msgid "The remaining food has been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:639
+#: src/fnschool/canteen/spreadsheet/purchasing.py:644
 msgid "Please check/modify the updated data. (Press any key to open the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:648
+#: src/fnschool/canteen/spreadsheet/purchasing.py:653
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:668
+#: src/fnschool/canteen/spreadsheet/purchasing.py:673
+msgid ""
+"The total price of the following food has more than two decimal places, "
+"and {0} cannot process it."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:678
+msgid ""
+"The total price of the following foods have more than two decimal places,"
+" and {0} cannot process them."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:690
+#: src/fnschool/canteen/spreadsheet/purchasing.py:811
+msgid "{0}({1})"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:703
+msgid "Exit."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasing.py:716
 msgid ""
 "The unit price of \"{0}\" is an infinite decimal, split \"{0}\"?(Yes: "
 "\"Y\",\"y\",\"\". Yes for rest: \"A\",\"a\". No: \"N\",\"n\". No for "
 "rest: \"S\",\"s\". Default: Yes for rest, \"A/a\".)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:713
+#: src/fnschool/canteen/spreadsheet/purchasing.py:761
 msgid "\"{0}\" was split:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:748
+#: src/fnschool/canteen/spreadsheet/purchasing.py:796
 msgid ""
 "Normally, {0} only considers non-warehoused foods as seasonings, but {0} "
 "has found that the following food is non-warehoused, but it is not "
 "seasonings:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:754
+#: src/fnschool/canteen/spreadsheet/purchasing.py:802
 msgid ""
 "Normally, {0} only considers non-warehoused foods as seasonings, but {0} "
 "has found that the following foods are non-warehoused, but they are not "
 "seasonings:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:763
-msgid "{0}({1})"
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:767
+#: src/fnschool/canteen/spreadsheet/purchasing.py:815
 msgid "You may need to modify its food class, otherwise {0} will go wrong."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:772
+#: src/fnschool/canteen/spreadsheet/purchasing.py:820
 msgid "You may need to modify their food classes, otherwise {0} will go wrong."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:777
+#: src/fnschool/canteen/spreadsheet/purchasing.py:825
 msgid " Do you want to re-edit \"{0}\"? (Yes: 'Y' or 'y'. Default: No.)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:786
+#: src/fnschool/canteen/spreadsheet/purchasing.py:834
 msgid "Ok, I have re-edited and closed it? (Press any key to continue)"
 msgstr ""
 
@@ -2623,5 +2640,19 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Table_Unwarehousing Form"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The total price of the following "
+#~ "food has more than two decimal "
+#~ "places, and {0} cannot process it. "
+#~ "Exit."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The total price of the following "
+#~ "foods have more than two decimal "
+#~ "places, and {0} cannot process them. "
+#~ "Exit."
 #~ msgstr ""
 

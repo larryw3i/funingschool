@@ -563,7 +563,7 @@ class Score:
         return scores
 
     def edit_test_m1(self):
-        fpaths = self.fpaths
+        fpaths = self.get_fpaths()
         fpath_m1, __ = fpaths[-1]
         print_warning(
             _(
@@ -587,7 +587,8 @@ class Score:
     @property
     def scores(self):
         if self._scores is None:
-            self.edit_test_m1()
+            if not self.fpath == self.fpaths[-1][0]:
+                self.edit_test_m1()
             fpaths = self.fpaths[::-1]
             if len(fpaths) < 1:
                 return None
@@ -916,7 +917,9 @@ class Score:
 
             if not fpath.exists():
                 dpath = fpath.parent.as_posix()
+                self.fpath = fpath
                 fpaths = self.get_fpaths(dpath)
+                self.fpath = None
                 scores = None
                 if fpaths:
                     self.fpath, __ = fpaths[-1]
@@ -937,7 +940,7 @@ class Score:
 
                 scores_m2 = (
                     scores[scores.columns[-2]]
-                    if scores and (len(scores.columns) > 1)
+                    if not scores is None and (len(scores.columns) > 1)
                     else None
                 )
 
