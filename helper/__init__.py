@@ -9,6 +9,7 @@ from pathlib import Path
 from helper.language import *
 from helper.external import *
 from helper.path import *
+from helper.package import *
 
 
 # The end.

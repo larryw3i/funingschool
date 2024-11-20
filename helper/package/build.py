@@ -5,7 +5,7 @@ from helper import *
 from helper.msg.fnmsg import Msg
 from helper.project.fnproject import Project
 
-class FnBuild():
+class Build():
     def __init__(self):
         pass
 

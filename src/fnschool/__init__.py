@@ -21,7 +21,7 @@ from openpyxl.styles import numbers
 from openpyxl.styles import Font
 from fnschool.app import *
 from fnschool.language import _
-from fnschool.print import *
+from fnschool.show import *
 from fnschool.path import *
 from fnschool.entry import *
 from fnschool.external import *
@@ -29,7 +29,7 @@ from fnschool.user import *
 from fnschool.config import *
 
 
-__version__ = "20241118.81142.858"
+__version__ = "20241120.81216.814"
 
 
 # The end.

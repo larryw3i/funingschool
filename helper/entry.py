@@ -4,7 +4,7 @@ import sys
 from helper import *
 
 from helper.msg.entry import parse_msg
-from helper.build.entry import parse_build
+from helper.package.entry import parse_build
 from helper.docs.entry import parse_docs
 from helper.dep.entry import parse_dep
 

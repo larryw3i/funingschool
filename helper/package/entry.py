@@ -3,13 +3,13 @@ import sys
 from helper import *
 
 def set_build(args):
-    from helper.build.fnbuild import FnBuild
+    from helper.package.build import Build
     if args.action in "now":
-        build = FnBuild()
+        build = Build()
         build.build()
         pass
     elif args.action in "upload":
-        build = FnBuild()
+        build = Build()
         build.build(upload=True)
         pass
     else:
