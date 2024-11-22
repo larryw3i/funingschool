@@ -155,12 +155,10 @@ class Bill:
 
     def make_spreadsheets(self):
         self.spreadsheet.update()
-        self.print_sponsor()
         pass
 
     def merge_foodsheets(self):
         self.spreadsheet.merge()
-        self.print_sponsor()
         pass
 
     @property

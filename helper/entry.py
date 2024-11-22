@@ -1,16 +1,37 @@
 import os
 import sys
+import importlib
+import inspect
 
 from helper import *
 
 from helper.msg.entry import parse_msg
-from helper.package.entry import parse_build
+from helper.packing.entry import parse_build
 from helper.docs.entry import parse_docs
 from helper.dep.entry import parse_dep
 
 p_dpath = (Path(__file__).parent.parent).as_posix()
 if not p_dpath in sys.path:
     sys.path.append(p_dpath)
+
+
+module_dpath = Path(__file__).parent
+entry_name = "entry.py"
+
+
+
+def get_entries():
+    entries = [
+        ".".join(
+            os.path.splitext(p.relative_to(module_dpath.parent))[0]
+            .replace("\\", "/")
+            .split("/")
+        )
+        for p in module_dpath.glob(f"*/{entry_name}")
+    ]
+    return entries
+
+
 
 
 def read_cli():
@@ -20,11 +41,16 @@ def read_cli():
         epilog=_("Enj0y 1t."),
     )
     subparsers = parser.add_subparsers(help=_("The tools to run."))
+    entries = get_entries()
 
-    parse_msg(subparsers)
-    parse_build(subparsers)
-    parse_docs(subparsers)
-    parse_dep(subparsers)
+    for entry in entries:
+        entry = importlib.import_module(entry)
+        names = dir(entry)
+        for name in names:
+            attr = getattr(entry, name)
+            if inspect.isfunction(attr):
+                if name.startswith("parse_"):
+                    attr(subparsers)
 
     args = parser.parse_args()
 

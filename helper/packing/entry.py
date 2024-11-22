@@ -3,7 +3,7 @@ import sys
 from helper import *
 
 def set_build(args):
-    from helper.package.build import Build
+    from helper.packing.build import Build
     if args.action in "now":
         build = Build()
         build.build()
