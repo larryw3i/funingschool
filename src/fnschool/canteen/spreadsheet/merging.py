@@ -80,7 +80,10 @@ class Merging(Base):
                 fpath = Path(fpath)
 
             if not conf_initialdir == fpath:
-                self.config.save(self.last_fpath_dpath_key, fpath.parent)
+                self.config.save(
+                    self.last_fpath_dpath_key, 
+                    fpath.parent.as_posix()
+                )
             self._last_fpath = fpath
 
         return self._last_fpath
@@ -108,7 +111,10 @@ class Merging(Base):
                 fpath = Path(fpath)
 
             if not conf_initialdir == fpath:
-                self.config.save(self.current_fpath_dpath_key, fpath.parent)
+                self.config.save(
+                    self.current_fpath_dpath_key, 
+                    fpath.parent.as_posix()
+                )
 
             self._current_fpath = fpath
         return self._current_fpath
