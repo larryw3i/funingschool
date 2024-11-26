@@ -178,8 +178,9 @@ class Inventory(Base):
 
     @property
     def foods(self):
-        foods = []
-        bfoods = [f for f in self.bfoods if not f.is_abandoned]
+        tnfoods = []
+        bfoods = self.bfoods.copy()
+        bfoods = [f for f in bfoods if not f.is_abandoned]
         year = self.bill.consuming.year
         month = self.bill.consuming.month
 
@@ -197,7 +198,7 @@ class Inventory(Base):
             for d in range(tn1, tn0 - 1, -1):
                 d_date = datetime(year, month, d)
                 if d_date in consuming_dates:
-                    foods.append(
+                    tnfoods.append(
                         [
                             d_date,
                             [
@@ -213,8 +214,23 @@ class Inventory(Base):
                     break
         ifoods = [f for f in bfoods if f.is_inventory]
         if len(ifoods) > 0:
-            foods = [[ifoods[0].xdate, ifoods]] + foods
-        return foods
+            tnfoods = [[ifoods[0].xdate, ifoods]] + tnfoods
+
+        tnfoods0 = []
+        for tn, tfoods in tnfoods:
+            tfoods0 = [[], []]
+            for f in tfoods:
+                if not (f.name, f.unit_price) in tfoods0[1]:
+                    tfoods0[0].append(f)
+                    tfoods0[1].append((f.name, f.unit_price))
+                else:
+                    f0 = [f00 for f00 in tfoods0[0] is f00.name == f.name][0]
+                    f0.count += f.count
+                    f0.consumptions += f.consumptions
+
+            tnfoods0.append([tn, tfoods0[0]])
+
+        return tnfoods0
 
     def update(self):
         sheet = self.sheet

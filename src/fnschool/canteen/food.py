@@ -40,15 +40,17 @@ class Food:
         pass
 
     def get_display_name(self, is_residual=False, time_node0=None):
+        is_residual = is_residual or (time_node0 and self.xdate < time_node0)
+
         name = self.name + (
-            _("({0})").format(
-                (
-                    (_("Remaining") + "|")
-                    if (is_residual or (time_node0 and self.xdate < time_node0))
-                    else ""
+            (
+                _("({0})").format(
+                    ((_("Remaining") + "|") if is_residual else "")
+                    + (self.meal_type if self.meal_type else "")
                 )
-                + (self.meal_type if self.meal_type else "")
             )
+            if (is_residual or self.meal_type)
+            else ""
         )
 
         return name
