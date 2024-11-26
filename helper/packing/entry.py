@@ -2,8 +2,10 @@ import os
 import sys
 from helper import *
 
+
 def set_build(args):
     from helper.packing.build import Build
+
     if args.action in "now":
         build = Build()
         build.build()

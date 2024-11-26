@@ -19,7 +19,6 @@ module_dpath = Path(__file__).parent
 entry_name = "entry.py"
 
 
-
 def get_entries():
     entries = [
         ".".join(
@@ -30,8 +29,6 @@ def get_entries():
         for p in module_dpath.glob(f"*/{entry_name}")
     ]
     return entries
-
-
 
 
 def read_cli():

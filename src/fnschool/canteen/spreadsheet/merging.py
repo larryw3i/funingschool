@@ -30,6 +30,7 @@ class Merging(Base):
         self._last_wb = None
         self._current_wb = None
         self._food_sheet = None
+        self.cover_sheet_title = self.s.cover_name
         pass
 
     @property
@@ -81,8 +82,7 @@ class Merging(Base):
 
             if not conf_initialdir == fpath:
                 self.config.save(
-                    self.last_fpath_dpath_key, 
-                    fpath.parent.as_posix()
+                    self.last_fpath_dpath_key, fpath.parent.as_posix()
                 )
             self._last_fpath = fpath
 
@@ -112,8 +112,7 @@ class Merging(Base):
 
             if not conf_initialdir == fpath:
                 self.config.save(
-                    self.current_fpath_dpath_key, 
-                    fpath.parent.as_posix()
+                    self.current_fpath_dpath_key, fpath.parent.as_posix()
                 )
 
             self._current_fpath = fpath
@@ -209,6 +208,22 @@ class Merging(Base):
 
         pass
 
+    def get_bill_year(self, wb):
+        cover_sheet = wb[self.cover_sheet_title]
+        year = str(cover_sheet.cell(1, 1).value)
+        year0 = ""
+        year_char = "年"
+        year = year.split(year_char)[0]
+        for i in range(len(year) - 1, -1, -1):
+            if year[i].isnumeric():
+                year0 = year[i] + year0
+            else:
+                break
+
+        bill_year = year0
+
+        return bill_year
+
     def start(self, current_wb=[None, None]):
         lwb = self.last_wb
 
@@ -226,6 +241,9 @@ class Merging(Base):
         names_len = len(lwb_sheet_names)
         names_len2 = len(str(names_len))
         name_index = 0
+
+        bill_year = self.get_bill_year(cwb)
+
         for name in lwb_sheet_names:
             lsheet = None
             csheet = None
@@ -274,8 +292,12 @@ class Merging(Base):
                                     crow,
                                     col_i,
                                 )
-                                ccell.value = lsheet.cell(lrow, col_i).value
+                                lcell_value = lsheet.cell(lrow, col_i).value
+                                ccell.value = lcell_value
                                 pass
+
+                            if str(cell_value).startswith("="):
+                                csheet.cell(crow, col_i, "")
 
                         csheet.row_dimensions[crow0 + row_i].height = (
                             self.row_height
@@ -284,6 +306,14 @@ class Merging(Base):
                         pass
 
                     pass
+                pass
+
+            for row_index in range(1, csheet.max_row + 1):
+                cell0_value = str(csheet.cell(row_index, 1).value).replace(
+                    " ", ""
+                )
+                if cell0_value.endswith("年") and cell0_value[:-1].isnumeric():
+                    csheet.cell(row_index, 1, bill_year + "年")
 
             name_index += 1
             print(

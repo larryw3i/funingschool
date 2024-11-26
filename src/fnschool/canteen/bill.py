@@ -196,7 +196,7 @@ class Bill:
                 self.operator.food_classes_fpath,
                 food_classes_config0_fpath,
             ]:
-                
+
                 print("\t", f)
 
             with open(self.operator.food_classes_fpath, "rb") as f:
