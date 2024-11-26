@@ -865,7 +865,7 @@ class Purchasing(Base):
                 _food.is_abandoned = not pd.isna(food[self.abandoned_col[0]])
             if self.inventory_col[0]:
                 _food.is_inventory = not pd.isna(food[self.inventory_col[0]])
-            if self.meal_type_col[0]:
+            if self.meal_type_col and self.meal_type_col[0]:
                 _food.meal_type = food[self.meal_type_col[0]]
 
             _foods.append(_food)
