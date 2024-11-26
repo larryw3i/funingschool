@@ -161,6 +161,7 @@ class PreConsuming(Base):
             new_meal_type_rows = [
                 [new_meal_type_rows[i], new_meal_type_rows[i + 1]]
                 for i in range(0, len(new_meal_type_rows), 2)
+                if i + 1 < len(new_meal_type_rows)
             ]
             for [row_index0, row_index1] in new_meal_type_rows:
                 for row_index in range(row_index0, row_index1):

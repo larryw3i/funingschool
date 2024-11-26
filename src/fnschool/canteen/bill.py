@@ -110,7 +110,10 @@ class Bill:
             else:
                 zflag += 1
 
-        if CNY_chars[-1] not in (format_word[0], format_word[1]):
+        if CNY_chars[-1] not in (
+            format_word[0],
+            # format_word[1]
+        ):
             CNY_chars.append("整")
 
         result = "".join(CNY_chars)

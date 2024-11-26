@@ -31,10 +31,13 @@ class ConsumingSum(Base):
                             for _date, _count in food.consumptions
                         ]
                     )
+
+            m_total_price = round(m_total_price, self.sd + 1)
             total_price += m_total_price
             cssheet.cell(row[0].row, 2, m_total_price)
             cssheet.cell(row[0].row, 2).number_format = numbers.FORMAT_NUMBER_00
 
+        total_price = round(total_price, self.sd + 1)
         total_price_CNY = self.bill.get_CNY_chars(total_price)
         cssheet.cell(
             1,
@@ -54,7 +57,7 @@ class ConsumingSum(Base):
         cssheet.cell(
             11,
             1,
-            (f"总金额（大写)：{total_price_CNY}    " + f"¥{total_price:.2f}"),
+            (f"总金额（大写)：{total_price_CNY}    " + f"¥{total_price}"),
         )
         cssheet.cell(12, 1, f"经办人：{self.operator.name}  ")
 

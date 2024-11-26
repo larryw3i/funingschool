@@ -66,12 +66,15 @@ class PurchasingSum(Base):
             for food in wfoods:
                 if food.fclass == class_name:
                     _total_price += food.count * food.unit_price
+                    _total_price = round(_total_price, self.sd + 1)
+
             pssheet.cell(row[0].row, 2, _total_price)
             total_price += _total_price
 
+        total_price = round(total_price, self.sd + 1)
         total_price_CNY = self.bill.get_CNY_chars(total_price)
         pssheet.cell(
-            11, 1, f"总金额（大写)：{total_price_CNY}    ¥{total_price:.2f}"
+            11, 1, f"总金额（大写)：{total_price_CNY}    ¥{total_price}"
         )
         pssheet.cell(12, 1, f"经办人：{self.operator.name}  ")
 
@@ -79,7 +82,7 @@ class PurchasingSum(Base):
         total_price_CNY = self.bill.get_CNY_chars(total_price)
         pssheet.cell(27, 2, total_price)
         pssheet.cell(
-            29, 1, f"总金额（大写)：{total_price_CNY}    ¥{total_price:.2f}"
+            29, 1, f"总金额（大写)：{total_price_CNY}    ¥{total_price}"
         )
 
         pssheet.cell(30, 1, f"经办人：{self.operator.name}  ")

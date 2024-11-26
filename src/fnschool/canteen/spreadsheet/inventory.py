@@ -344,14 +344,14 @@ class Inventory(Base):
                         " ", ""
                     )
 
-                    if rcell2_value.replace(".","").isnumeric():
+                    if rcell2_value.replace(".", "").isnumeric():
                         rcell2_value = float(rcell2_value)
                         rcell2_value += food.get_remainder(t1)
                         sheet.cell(wrow_index, 3, rcell2_value)
                         sheet.cell(wrow_index, 5, rcell2_value)
                         pass
 
-                    if rcell3_value.replace(".","").isnumeric():
+                    if rcell3_value.replace(".", "").isnumeric():
                         rcell3_value = float(rcell3_value)
                         rcell3_value += food.get_remainder(t1) * unit_price
                         sheet.cell(wrow_index, 4, rcell3_value)
