@@ -91,6 +91,8 @@ class Score:
     def get_src_dpath(self, fpath=None):
         if fpath or not self._src_dpath:
             src_dpath = fpath or self.fpath
+            if isinstance(src_dpath, Path):
+                src_dpath = src_dpath.as_posix()
             src_dpath = Path(os.path.splitext(src_dpath)[0])
             if fpath:
                 return src_dpath

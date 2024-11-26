@@ -16,7 +16,7 @@ entry_name = "entry.py"
 def get_entries():
     entries = [
         ".".join(
-            os.path.splitext(p.relative_to(module_dpath.parent))[0]
+            os.path.splitext(p.relative_to(module_dpath.parent.as_posix()))[0]
             .replace("\\", "/")
             .split("/")
         )

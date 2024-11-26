@@ -277,6 +277,11 @@ class Inventory(Base):
                     + " 　     "
                 ),
             )
+            rtotal_price = sum(
+                [f.get_remainder(t1) * f.unit_price for f in _foods]
+            )
+            sheet.cell(form_i1 - 2, 4, rtotal_price)
+            sheet.cell(form_i1 - 2, 6, rtotal_price)
 
             for row in sheet.iter_rows(
                 min_row=fentry_i0,
@@ -290,8 +295,9 @@ class Inventory(Base):
                     cell.border = self.cell_border0
 
             writed_foods = []
+            row_offset = 0
             for findex, food in enumerate(_foods):
-                row_index = fentry_i0 + findex
+                row_index = fentry_i0 + findex + row_offset
                 if sheet.cell(row_index + 1, 1).value and (
                     sheet.cell(row_index + 1, 1).value.replace(" ", "")
                     == "合计"
@@ -309,11 +315,12 @@ class Inventory(Base):
                     form_indexes = self.form_indexes
 
                 unit_price = food.unit_price
-                sheet.cell(row_index, 1, food.name)
-                sheet.cell(row_index, 2, food.unit_name)
 
                 writed_food_names = [wname for wname, wrow in writed_foods]
                 if not food.name in writed_food_names:
+
+                    sheet.cell(row_index, 1, food.name)
+                    sheet.cell(row_index, 2, food.unit_name)
 
                     sheet.cell(row_index, 3, food.get_remainder(t1))
                     sheet.cell(row_index, 5, food.get_remainder(t1))
@@ -322,7 +329,7 @@ class Inventory(Base):
                     sheet.cell(row_index, 4, f_total_price)
                     sheet.cell(row_index, 6, f_total_price)
 
-                    writed_food_names.append((food.name, row_index))
+                    writed_foods.append((food.name, row_index))
                     pass
 
                 else:
@@ -337,23 +344,20 @@ class Inventory(Base):
                         " ", ""
                     )
 
-                    if rcell2_value.isnumeric():
+                    if rcell2_value.replace(".","").isnumeric():
                         rcell2_value = float(rcell2_value)
                         rcell2_value += food.get_remainder(t1)
-
-                        sheet.cell(wrow_index, 3, rcell_value)
-
-                        sheet.cell(wrow_index, 5, rcell_value)
+                        sheet.cell(wrow_index, 3, rcell2_value)
+                        sheet.cell(wrow_index, 5, rcell2_value)
                         pass
 
-                    if rcell3_value.isnumeric():
+                    if rcell3_value.replace(".","").isnumeric():
                         rcell3_value = float(rcell3_value)
                         rcell3_value += food.get_remainder(t1) * unit_price
-
                         sheet.cell(wrow_index, 4, rcell3_value)
-
                         sheet.cell(wrow_index, 6, rcell3_value)
                         pass
+                    row_offset -= 1
                     pass
 
                 pass
