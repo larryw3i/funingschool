@@ -216,21 +216,7 @@ class Inventory(Base):
         if len(ifoods) > 0:
             tnfoods = [[ifoods[0].xdate, ifoods]] + tnfoods
 
-        tnfoods0 = []
-        for tn, tfoods in tnfoods:
-            tfoods0 = [[], []]
-            for f in tfoods:
-                if not (f.name, f.unit_price) in tfoods0[1]:
-                    tfoods0[0].append(f)
-                    tfoods0[1].append((f.name, f.unit_price))
-                else:
-                    f0 = [f00 for f00 in tfoods0[0] is f00.name == f.name][0]
-                    f0.count += f.count
-                    f0.consumptions += f.consumptions
-
-            tnfoods0.append([tn, tfoods0[0]])
-
-        return tnfoods0
+        return tnfoods
 
     def update(self):
         sheet = self.sheet
@@ -303,6 +289,7 @@ class Inventory(Base):
                     cell.alignment = self.cell_alignment0
                     cell.border = self.cell_border0
 
+            writed_foods = []
             for findex, food in enumerate(_foods):
                 row_index = fentry_i0 + findex
                 if sheet.cell(row_index + 1, 1).value and (
@@ -320,21 +307,58 @@ class Inventory(Base):
 
                     self.del_form_indexes()
                     form_indexes = self.form_indexes
+
                 unit_price = food.unit_price
                 sheet.cell(row_index, 1, food.name)
                 sheet.cell(row_index, 2, food.unit_name)
-                sheet.cell(row_index, 3, food.get_remainder(t1))
-                sheet.cell(
-                    row_index,
-                    4,
-                    food.get_remainder(t1) * unit_price,
-                )
-                sheet.cell(row_index, 5, food.get_remainder(t1))
-                sheet.cell(
-                    row_index,
-                    6,
-                    food.get_remainder(t1) * unit_price,
-                )
+
+                writed_food_names = [wname for wname, wrow in writed_foods]
+                if not food.name in writed_food_names:
+
+                    sheet.cell(row_index, 3, food.get_remainder(t1))
+                    sheet.cell(row_index, 5, food.get_remainder(t1))
+
+                    f_total_price = food.get_remainder(t1) * unit_price
+                    sheet.cell(row_index, 4, f_total_price)
+                    sheet.cell(row_index, 6, f_total_price)
+
+                    writed_food_names.append((food.name, row_index))
+                    pass
+
+                else:
+                    wrow_index = [r for n, r in writed_foods if n == food.name][
+                        0
+                    ]
+                    rcell2_value = str(sheet.cell(wrow_index, 3).value).replace(
+                        " ", ""
+                    )
+
+                    rcell3_value = str(sheet.cell(wrow_index, 4).value).replace(
+                        " ", ""
+                    )
+
+                    if rcell2_value.isnumeric():
+                        rcell2_value = float(rcell2_value)
+                        rcell2_value += food.get_remainder(t1)
+
+                        sheet.cell(wrow_index, 3, rcell_value)
+
+                        sheet.cell(wrow_index, 5, rcell_value)
+                        pass
+
+                    if rcell3_value.isnumeric():
+                        rcell3_value = float(rcell3_value)
+                        rcell3_value += food.get_remainder(t1) * unit_price
+
+                        sheet.cell(wrow_index, 4, rcell3_value)
+
+                        sheet.cell(wrow_index, 6, rcell3_value)
+                        pass
+                    pass
+
+                pass
+
+            pass
 
         self.del_form_empty_rows([1])
         self.format()

@@ -585,6 +585,7 @@ class Food(Base):
             self.update_inventories(sheet)
 
             self.format(sheet)
+            self.update_food_sheet_year(sheet)
             print_info(_("Sheet '%s' was updated.") % sheet.title)
 
         wb[self.sheet_name].sheet_state = "hidden"

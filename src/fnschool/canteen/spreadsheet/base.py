@@ -112,6 +112,34 @@ class Base:
             self._sheet = self.get_bill_sheet(self.sheet_name)
         return self._sheet
 
+    def get_bill_year(self, wb=None):
+        wb = wb or self.bwb
+        cover_sheet = wb[self.s.cover_name]
+        year = str(cover_sheet.cell(1, 1).value)
+        year0 = ""
+        year_char = "年"
+        year = year.split(year_char)[0]
+        for i in range(len(year) - 1, -1, -1):
+            if year[i].isnumeric():
+                year0 = year[i] + year0
+            else:
+                break
+
+        bill_year = year0
+
+        return bill_year
+
+    def update_food_sheet_year(self, sheet):
+        wb = sheet.parent
+        bill_year = self.get_bill_year(wb)
+        csheet = sheet
+        for row_index in range(1, csheet.max_row + 1):
+            cell0_value = str(csheet.cell(row_index, 1).value).replace(" ", "")
+            if cell0_value.endswith("年") and cell0_value[:-1].isnumeric():
+                csheet.cell(row_index, 1, bill_year + "年")
+            pass
+        pass
+
     def del_form_empty_rows(self, empty_cols):
 
         self.del_form_indexes()
@@ -153,6 +181,11 @@ class Base:
 
                         if row_index >= entry_index1_0 or len_diff < 1:
                             break
+                            pass
+                        pass
+                    pass
+                pass
+            pass
 
 
 # The end.

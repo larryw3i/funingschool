@@ -208,22 +208,6 @@ class Merging(Base):
 
         pass
 
-    def get_bill_year(self, wb):
-        cover_sheet = wb[self.cover_sheet_title]
-        year = str(cover_sheet.cell(1, 1).value)
-        year0 = ""
-        year_char = "年"
-        year = year.split(year_char)[0]
-        for i in range(len(year) - 1, -1, -1):
-            if year[i].isnumeric():
-                year0 = year[i] + year0
-            else:
-                break
-
-        bill_year = year0
-
-        return bill_year
-
     def start(self, current_wb=[None, None]):
         lwb = self.last_wb
 
@@ -241,8 +225,6 @@ class Merging(Base):
         names_len = len(lwb_sheet_names)
         names_len2 = len(str(names_len))
         name_index = 0
-
-        bill_year = self.get_bill_year(cwb)
 
         for name in lwb_sheet_names:
             lsheet = None
@@ -308,12 +290,7 @@ class Merging(Base):
                     pass
                 pass
 
-            for row_index in range(1, csheet.max_row + 1):
-                cell0_value = str(csheet.cell(row_index, 1).value).replace(
-                    " ", ""
-                )
-                if cell0_value.endswith("年") and cell0_value[:-1].isnumeric():
-                    csheet.cell(row_index, 1, bill_year + "年")
+            self.update_food_sheet_year(csheet)
 
             name_index += 1
             print(

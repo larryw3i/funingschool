@@ -12,6 +12,7 @@ class Operator(User):
     def __init__(self, bill):
         super().__init__(user_canteen_dpath, operator_name_fpath)
         self.bill = bill
+        self.workbook_ext = ".xlsx"
         pass
 
     @property
@@ -70,7 +71,7 @@ class Operator(User):
                 if not mtype
                 else _("({0})").format(mtype)
             )
-            + ".xlsx"
+            + self.workbook_ext
         )
         if not fpath.exists():
             shutil.copy(bill0_fpath, fpath)
