@@ -195,12 +195,7 @@ class Merging(Base):
                 break
             elif row_diff < 0:
                 row_diff = abs(row_diff)
-                lsheet.insert_rows(lrow0 + 1, row_diff)
-                for row_index_f in range(lrow0 + 1, lrow0 + 1 + row_diff):
-                    for col_index_f in range(1, 14):
-                        cell = lsheet.cell(row_index_f, col_index_f)
-                        cell.border = self.cell_border0
-                        cell.alignment = self.cell_alignment0
+                csheet.delete_rows(lrow0 + 1, row_diff)
                 self.make_row_counts_same(lsheet, csheet)
                 break
 

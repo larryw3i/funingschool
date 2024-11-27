@@ -128,12 +128,15 @@ class Base:
         )
 
     def get_zh_CN_bill_year(self, wb=None):
+        return self.get_bill_year_by_x_year(wb, "年")
+
+    def get_bill_year_by_x_year(self, wb=None, year_word="年"):
         wb = wb or self.bwb
         cover_sheet = wb[self.s.cover_name]
         year = str(cover_sheet.cell(1, 1).value)
         year0 = ""
-        year_char = "年"
-        year = year.split(year_char)[0]
+        year_word = year_word
+        year = year.split(year_word)[0]
         for i in range(len(year) - 1, -1, -1):
             if year[i].isnumeric():
                 year0 = year[i] + year0
