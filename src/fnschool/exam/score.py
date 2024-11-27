@@ -122,7 +122,7 @@ class Score:
                 )
             )
         )
-        p_input = input0()
+        p_input = get_input()
         if p_input and p_input in "Yy":
             if len(self.scores.columns) > 1:
                 self.plot_scores()
@@ -573,7 +573,7 @@ class Score:
                 + "Default: No)"
             ).format(fpath_m1)
         )
-        edit_yn = input0()
+        edit_yn = get_input()
         if edit_yn and edit_yn in "Yy":
             open_path(fpath_m1)
             print_info(
@@ -582,7 +582,7 @@ class Score:
                     + "to continue)"
                 )
             )
-            input0()
+            get_input()
             pass
         pass
 
@@ -992,7 +992,7 @@ class Score:
                         + "key to open file])"
                     ).format(fpath)
                 )
-                input0()
+                get_input()
 
                 y_input_n = 64
                 for i in range(y_input_n):
@@ -1004,7 +1004,7 @@ class Score:
                             + " (Press any key to continue)"
                         )
                     )
-                    input0()
+                    get_input()
                     wb = load_workbook(fpath)
                     sheet = wb[wb.sheetnames[0]]
 
@@ -1026,7 +1026,7 @@ class Score:
                         ).format(self.total_points)
                         + _(' (Yes: "Y","y")')
                     )
-                    y_input = input0()
+                    y_input = get_input()
                     if y_input and y_input in "Yy":
                         del self.scores
                         break
@@ -1103,7 +1103,7 @@ class Score:
                 )
                 name_i = None
                 for i in range(0, 3):
-                    n_input = input0().replace(" ", "")
+                    n_input = get_input().replace(" ", "")
                     if len(n_input) > 0:
                         if n_input.isnumeric():
                             n_input = int(n_input) - 1
@@ -1144,7 +1144,7 @@ class Score:
                     ).format(app_name)
                 )
                 for i in range(0, 3):
-                    name0 = input0().replace(" ", "")
+                    name0 = get_input().replace(" ", "")
                     if len(name0) > 0:
                         with open(self.names_fpath, "w", encoding="utf-8") as f:
                             f.write(">" + name0)

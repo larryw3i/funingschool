@@ -129,7 +129,7 @@ class Email:
                 + " to chaperones? (Yes: 'Y','y')"
             ).format(self.teacher.name)
         )
-        s_input = input0()
+        s_input = get_input()
         if s_input and s_input in "Yy":
             scores_img_fpaths = self.score.scores_img_fpaths
             msg_subject = _('The scores of Test "{0}"').format(
@@ -332,14 +332,14 @@ class Email:
                         + "me. [Press any key to open it])"
                     ).format(fpath)
                 )
-                input0()
+                get_input()
                 open_path(fpath)
                 print_info(
                     _(
                         "(Ok! I have filled them in? [Press any key to continue])"
                     )
                 )
-                input0()
+                get_input()
 
             self._fpath = fpath
 

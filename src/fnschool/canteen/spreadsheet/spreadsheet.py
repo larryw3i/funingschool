@@ -166,7 +166,7 @@ class SpreadSheet:
             ).format(self.operator.bill_fpath)
         )
 
-        s_input = input0()
+        s_input = get_input()
 
         print()
         print_info(_("Saving. . ."))

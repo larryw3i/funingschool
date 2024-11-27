@@ -37,22 +37,24 @@ class PurchasingSum(Base):
         pssheet.cell(
             2,
             1,
-            _("编制单位：") 
+            _("编制单位：")
             + f"{self.purchaser}"
             + f"        "
             + _("单位：")
-            + f"元"
+            + f"{self.currency.unit}"
             + f"         "
-            + f"{year}年{month}月{day}日",
+            + _("{0}年{1}月{2}日").format(year, month, day),
         )
         pssheet.cell(
             20,
             1,
-            _("编制单位：")+ f"{self.purchaser}"
+            _("编制单位：")
+            + f"{self.purchaser}"
             + f"        "
-            + _("单位：")+ self.currency.unit
+            + _("单位：")
+            + self.currency.unit
             + f"         "
-            + f"{year}年{month}月{day}日",
+            + _("{0}年{1}月{2}日").format(year, month, day),
         )
         foods = [f for f in self.bfoods if (not f.is_inventory)]
 
@@ -76,25 +78,25 @@ class PurchasingSum(Base):
         total_price = round(total_price, self.sd + 1)
         local_total_price = self.get_local_total_price(total_price)
         pssheet.cell(
-            11, 
-            1, 
+            11,
+            1,
             (
-                _("总金额（大写)：")
+                _("总金额（大写）：")
                 + f"{local_total_price}    "
                 + f"{self.currency.mark}{total_price}"
-            )
+            ),
         )
-        pssheet.cell(12, 1, _("经办人：")+f"{self.operator.name}  ")
+        pssheet.cell(12, 1, _("经办人：") + f"{self.operator.name}  ")
 
         total_price = sum([f.count * f.unit_price for f in uwfoods])
         local_total_price = self.bill.get_CNY_chars(total_price)
         pssheet.cell(27, 2, total_price)
         pssheet.cell(
-            29, 
-            1, 
+            29,
+            1,
             _("总金额（大写）：")
             + f"{local_total_price}    "
-            + f"{self.currency.mark}{total_price}"
+            + f"{self.currency.mark}{total_price}",
         )
 
         pssheet.cell(30, 1, _("经办人：") + f"{self.operator.name}  ")

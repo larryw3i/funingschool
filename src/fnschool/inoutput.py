@@ -28,7 +28,7 @@ def is_zh_CN_char(value):
     return result
 
 
-def input0():
+def get_input():
     i_value = input(">_ ")
     return i_value
 

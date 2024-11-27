@@ -223,7 +223,7 @@ class PreConsuming(Base):
                     + "(Ok, I know [press any key to continue])"
                 )
             )
-            input0()
+            get_input()
             wb.close()
             open_path(wb_fpath)
             print_info(
@@ -231,7 +231,7 @@ class PreConsuming(Base):
                     "Ok! I have updated spreadsheet '{0}'. (Press any key)"
                 ).format(wb_fpath)
             )
-            input0()
+            get_input()
 
             wb = load_workbook(wb_fpath)
             sheet = wb[self.sheet_name0]
@@ -315,7 +315,7 @@ class PreConsuming(Base):
                 _("Yes, they are all right. (Press any key to continue)")
             )
 
-            input0()
+            get_input()
 
             pass
 

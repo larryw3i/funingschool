@@ -44,22 +44,28 @@ class ConsumingSum(Base):
             1,
             (
                 self.bill.operator.superior_department
-                + "食堂食品、材料出库汇总报销单"
+                + _("食堂食品、材料出库汇总报销单")
             ),
         )
         cssheet.cell(
             2,
             1,
-            f"编制单位：{self.purchaser}       "
-            + f"单位：元         "
-            + f"{year}年{month}月{day}日",
+            _("编制单位：")
+            + f"{self.purchaser}       "
+            + _("单位：元")
+            + f"         "
+            + _("{0}年{1}月{2}日").format(year, month, day),
         )
         cssheet.cell(
             11,
             1,
-            (f"总金额（大写)：{local_total_price}    " + f"{self.currency.mark}{total_price}"),
+            (
+                _("总金额（大写）")
+                + f"：{local_total_price}    "
+                + f"{self.currency.mark}{total_price}"
+            ),
         )
-        cssheet.cell(12, 1, f"经办人：{self.operator.name}  ")
+        cssheet.cell(12, 1, _("经办人：") + f"{self.operator.name}  ")
 
         wb = self.bwb
         wb.active = cssheet

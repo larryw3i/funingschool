@@ -344,7 +344,7 @@ class Purchasing(Base):
                     + "(Press any key to check the file)"
                 )
             )
-            input0()
+            get_input()
             open_path(self.path)
             print_info(
                 _(
@@ -353,7 +353,7 @@ class Purchasing(Base):
                     + "file. (Press any key to continue)"
                 )
             )
-            input0()
+            get_input()
         pass
 
     @property
@@ -568,7 +568,7 @@ class Purchasing(Base):
                 ).format(self.path)
             )
 
-            f_input = input0().replace(" ", "")
+            f_input = get_input().replace(" ", "")
             if len(f_input) > 0 and f_input in "Yy":
                 update_yn = True
                 max_row = len(
@@ -647,12 +647,12 @@ class Purchasing(Base):
                     )
                 )
             )
-            input0()
+            get_input()
             open_path(self.path)
             print_info(
                 _("Ok, I checked it, it's ok. " + "(Press any key to continue)")
             )
-            input0()
+            get_input()
             pass
 
         pass
@@ -724,7 +724,7 @@ class Purchasing(Base):
                             + ")"
                         ).format(f.name)
                     )
-                    split_mode = input0()
+                    split_mode = get_input()
 
                 if split_mode and split_mode in "Ss":
                     return
@@ -827,7 +827,7 @@ class Purchasing(Base):
                 + "(Yes: 'Y' or 'y'. Default: No.)"
             ).format(self.path)
         )
-        re_edit_yn = input0()
+        re_edit_yn = get_input()
         if re_edit_yn and re_edit_yn in "Yy":
             open_path(self.path)
             print_info(
@@ -836,7 +836,7 @@ class Purchasing(Base):
                     + "(Press any key to continue)"
                 )
             )
-            input0()
+            get_input()
             return False
 
         return True

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-27 21:16+0800\n"
+"POT-Creation-Date: 2024-11-27 22:19+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -136,25 +136,25 @@ msgstr ""
 msgid "config"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:82 src/fnschool/canteen/bill.py:87
-#: src/fnschool/canteen/bill.py:102
+#: src/fnschool/canteen/bill.py:80 src/fnschool/canteen/bill.py:85
+#: src/fnschool/canteen/bill.py:100
 #, python-format
 msgid "%s can't change."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:205
+#: src/fnschool/canteen/bill.py:203
 msgid "Food classes files:"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:216
+#: src/fnschool/canteen/bill.py:214
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:226
+#: src/fnschool/canteen/bill.py:224
 msgid "Preset food classes were read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:240
+#: src/fnschool/canteen/bill.py:238
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr ""
 
@@ -234,15 +234,15 @@ msgstr ""
 msgid "Spreadsheet Files"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:65
+#: src/fnschool/canteen/spreadsheet/base.py:66
 msgid "Row {0} of {1} is being inserted, please wait a moment."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:112
+#: src/fnschool/canteen/spreadsheet/base.py:113
 msgid "Cells of {0} was unmerged."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:182
+#: src/fnschool/canteen/spreadsheet/base.py:183
 msgid "Empty row {0} of sheet \"{1}\" has been deleted."
 msgstr ""
 
@@ -251,11 +251,11 @@ msgid "Consuming days:"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/consuming.py:238
-#: src/fnschool/canteen/spreadsheet/consumingsum.py:67
+#: src/fnschool/canteen/spreadsheet/consumingsum.py:73
 #: src/fnschool/canteen/spreadsheet/cover.py:61
 #: src/fnschool/canteen/spreadsheet/food.py:589
 #: src/fnschool/canteen/spreadsheet/inventory.py:372
-#: src/fnschool/canteen/spreadsheet/purchasingsum.py:105
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:111
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:175
 #: src/fnschool/canteen/spreadsheet/warehousing.py:357
 #, python-format
@@ -266,6 +266,36 @@ msgstr ""
 #: src/fnschool/canteen/spreadsheet/warehousing.py:158
 #, python-format
 msgid "Sheet '%s' was formatted."
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/consumingsum.py:47
+msgid "食堂食品、材料出库汇总报销单"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/consumingsum.py:53
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:40
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:53
+msgid "编制单位："
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/consumingsum.py:55
+msgid "单位：元"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/consumingsum.py:57
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:46
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:59
+msgid "{0}年{1}月{2}日"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/consumingsum.py:63
+msgid "总金额（大写）"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/consumingsum.py:68
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:93
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:106
+msgid "经办人："
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:71
@@ -726,26 +756,13 @@ msgstr ""
 msgid "食堂食品、材料未入库汇总报销单"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasingsum.py:40
-#: src/fnschool/canteen/spreadsheet/purchasingsum.py:51
-msgid "编制单位："
-msgstr ""
-
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:43
-#: src/fnschool/canteen/spreadsheet/purchasingsum.py:53
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:56
 msgid "单位："
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasingsum.py:82
-msgid "总金额（大写)："
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasingsum.py:87
-#: src/fnschool/canteen/spreadsheet/purchasingsum.py:100
-msgid "经办人："
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasingsum.py:95
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:88
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:101
 msgid "总金额（大写）："
 msgstr ""
 
@@ -2453,5 +2470,8 @@ msgstr ""
 #~ "foods have more than two decimal "
 #~ "places, and {0} cannot process them. "
 #~ "Exit."
+#~ msgstr ""
+
+#~ msgid "总金额（大写)："
 #~ msgstr ""
 

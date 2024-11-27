@@ -43,9 +43,10 @@ class Base:
         self.food_form_title_like = "材料入库、出库台账"
 
     def get_local_total_price(self, total_price):
-         return (
-            self.bill.get_cny_chars(total_price) if is_zh_CN else  
-            self.bill.get_cny_chars(total_price) 
+        return (
+            self.bill.get_CNY_chars(total_price)
+            if is_zh_CN
+            else self.bill.get_CNY_chars(total_price)
         )
 
     @property
@@ -120,6 +121,13 @@ class Base:
         return self._sheet
 
     def get_bill_year(self, wb=None):
+        return (
+            self.get_zh_CN_bill_year(wb)
+            if is_zh_CN
+            else self.get_zh_CN_bill_year(wb)
+        )
+
+    def get_zh_CN_bill_year(self, wb=None):
         wb = wb or self.bwb
         cover_sheet = wb[self.s.cover_name]
         year = str(cover_sheet.cell(1, 1).value)
@@ -193,6 +201,9 @@ class Base:
                     pass
                 pass
             pass
+        pass
+
+    pass
 
 
 # The end.

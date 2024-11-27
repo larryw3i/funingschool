@@ -28,9 +28,7 @@ class Bill:
     @property
     def currency(self):
         if not self._currency:
-            self._currency = (
-                Currency().CNY if is_zh_CN else Currency().CNY
-            )
+            self._currency = Currency().CNY if is_zh_CN else Currency().CNY
         return self._currency
 
     @property
@@ -238,7 +236,7 @@ class Bill:
                     self._food_classes[fclass] = name_likes
 
             print_info(_("Ok! I know it. (Press any key to continue)"))
-            input0()
+            get_input()
 
         return self._food_classes
 

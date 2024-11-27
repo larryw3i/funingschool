@@ -12,6 +12,6 @@ class Currency:
 
     @property
     def CNY(self):
-        CNY = Currency("CNY", _("CNY"), "¥")
+        CNY = Currency("CNY", _("CNY"), "\u00a5")
 
         return CNY
