@@ -38,7 +38,7 @@ class ConsumingSum(Base):
             cssheet.cell(row[0].row, 2).number_format = numbers.FORMAT_NUMBER_00
 
         total_price = round(total_price, self.sd + 1)
-        total_price_CNY = self.bill.get_CNY_chars(total_price)
+        local_total_price = self.get_local_total_price(total_price)
         cssheet.cell(
             1,
             1,
@@ -57,7 +57,7 @@ class ConsumingSum(Base):
         cssheet.cell(
             11,
             1,
-            (f"总金额（大写)：{total_price_CNY}    " + f"¥{total_price}"),
+            (f"总金额（大写)：{local_total_price}    " + f"{self.currency.mark}{total_price}"),
         )
         cssheet.cell(12, 1, f"经办人：{self.operator.name}  ")
 

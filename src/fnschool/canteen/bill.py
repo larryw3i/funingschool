@@ -18,12 +18,20 @@ class Bill:
         self._operator_name = None
         self._food_classes = None
         self._operator = None
-        self.currency = Currency().CNY
+        self._currency = None
         self._consuming = None
         self.significant_digits = 2
         self._meal_type = None
 
         pass
+
+    @property
+    def currency(self):
+        if not self._currency:
+            self._currency = (
+                Currency().CNY if is_zh_CN else Currency().CNY
+            )
+        return self._currency
 
     @property
     def consuming(self):

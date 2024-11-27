@@ -23,7 +23,7 @@ class PurchasingSum(Base):
             1,
             (
                 self.bill.operator.superior_department
-                + "食堂食品、材料入库汇总报销单"
+                + _("食堂食品、材料入库汇总报销单")
             ),
         )
         pssheet.cell(
@@ -31,24 +31,26 @@ class PurchasingSum(Base):
             1,
             (
                 self.bill.operator.superior_department
-                + "食堂食品、材料未入库汇总报销单"
+                + _("食堂食品、材料未入库汇总报销单")
             ),
         )
         pssheet.cell(
             2,
             1,
-            f"编制单位：{self.purchaser}"
+            _("编制单位：") 
+            + f"{self.purchaser}"
             + f"        "
-            + f"单位：元"
+            + _("单位：")
+            + f"元"
             + f"         "
             + f"{year}年{month}月{day}日",
         )
         pssheet.cell(
             20,
             1,
-            f"编制单位：{self.purchaser}"
+            _("编制单位：")+ f"{self.purchaser}"
             + f"        "
-            + f"单位：元"
+            + _("单位：")+ self.currency.unit
             + f"         "
             + f"{year}年{month}月{day}日",
         )
@@ -72,20 +74,30 @@ class PurchasingSum(Base):
             total_price += _total_price
 
         total_price = round(total_price, self.sd + 1)
-        total_price_CNY = self.bill.get_CNY_chars(total_price)
+        local_total_price = self.get_local_total_price(total_price)
         pssheet.cell(
-            11, 1, f"总金额（大写)：{total_price_CNY}    ¥{total_price}"
+            11, 
+            1, 
+            (
+                _("总金额（大写)：")
+                + f"{local_total_price}    "
+                + f"{self.currency.mark}{total_price}"
+            )
         )
-        pssheet.cell(12, 1, f"经办人：{self.operator.name}  ")
+        pssheet.cell(12, 1, _("经办人：")+f"{self.operator.name}  ")
 
         total_price = sum([f.count * f.unit_price for f in uwfoods])
-        total_price_CNY = self.bill.get_CNY_chars(total_price)
+        local_total_price = self.bill.get_CNY_chars(total_price)
         pssheet.cell(27, 2, total_price)
         pssheet.cell(
-            29, 1, f"总金额（大写)：{total_price_CNY}    ¥{total_price}"
+            29, 
+            1, 
+            _("总金额（大写）：")
+            + f"{local_total_price}    "
+            + f"{self.currency.mark}{total_price}"
         )
 
-        pssheet.cell(30, 1, f"经办人：{self.operator.name}  ")
+        pssheet.cell(30, 1, _("经办人：") + f"{self.operator.name}  ")
 
         wb = self.bwb
         wb.active = pssheet

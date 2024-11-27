@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-17 22:40+0800\n"
+"POT-Creation-Date: 2024-11-27 21:16+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -18,47 +18,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
 
-#: helper/entry.py:18
+#: helper/entry.py:36
 msgid "Helper of fnschool project"
 msgstr ""
 
-#: helper/entry.py:19
+#: helper/entry.py:37
 msgid "Command line interface of fnschool project tools."
 msgstr ""
 
-#: helper/entry.py:20
+#: helper/entry.py:38
 msgid "Enj0y 1t."
 msgstr ""
 
-#: helper/entry.py:22
+#: helper/entry.py:40
 msgid "The tools to run."
 msgstr ""
 
 #: helper/external.py:35
 msgid "Virtual Environment \"{0}\" has been made."
-msgstr ""
-
-#: helper/build/entry.py:16 helper/dep/entry.py:14 helper/docs/entry.py:16
-#: helper/msg/entry.py:25
-msgid "Function is not found."
-msgstr ""
-
-#: helper/build/entry.py:21
-msgid "'build' related functions."
-msgstr ""
-
-#: helper/build/entry.py:26
-msgid ""
-"\"now\": Build \"fnschool\" now. \"upload\": Build and upload "
-"\"fnschool\" via \"twine\"."
-msgstr ""
-
-#: helper/build/fnbuild.py:46
-msgid "The hash value of distribution is:"
-msgstr ""
-
-#: helper/build/fnbuild.py:47
-msgid "The hash values of distributions are:"
 msgstr ""
 
 #: helper/dep/dep.py:24 helper/dep/fndep.py:24
@@ -67,6 +44,11 @@ msgstr ""
 
 #: helper/dep/dep.py:26 helper/dep/fndep.py:26
 msgid "Dependencies ({0}) have been installed."
+msgstr ""
+
+#: helper/dep/entry.py:14 helper/docs/entry.py:16 helper/msg/entry.py:25
+#: helper/packing/entry.py:18
+msgid "Function is not found."
 msgstr ""
 
 #: helper/dep/entry.py:19
@@ -266,6 +248,24 @@ msgstr ""
 
 #: helper/msg/entry.py:46
 msgid "The locale language code for adding message catalogs (e.g: en_US)."
+msgstr ""
+
+#: helper/packing/build.py:41
+msgid "The hash value of distribution is:"
+msgstr ""
+
+#: helper/packing/build.py:43
+msgid "The hash values of distributions are:"
+msgstr ""
+
+#: helper/packing/entry.py:23
+msgid "'build' related functions."
+msgstr ""
+
+#: helper/packing/entry.py:28
+msgid ""
+"\"now\": Build \"fnschool\" now. \"upload\": Build and upload "
+"\"fnschool\" via \"twine\"."
 msgstr ""
 
 #: helper/project/fnproject.py:30 helper/project/project.py:30

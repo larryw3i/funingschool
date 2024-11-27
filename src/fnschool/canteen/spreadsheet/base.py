@@ -12,6 +12,7 @@ from fnschool import *
 class Base:
     def __init__(self, bill):
         self.bill = bill
+        self.currency = self.bill.currency
         self.spreadsheet = self.bill.spreadsheet
         self.s = self.spreadsheet
         self._bill_workbook = None
@@ -40,6 +41,12 @@ class Base:
         self.filetypes_xlsx = [(_("Spreadsheet Files"), "*.xlsx")]
         self.food_sheet0_name = "材料台账母表"
         self.food_form_title_like = "材料入库、出库台账"
+
+    def get_local_total_price(self, total_price):
+         return (
+            self.bill.get_cny_chars(total_price) if is_zh_CN else  
+            self.bill.get_cny_chars(total_price) 
+        )
 
     @property
     def bill_workbook(self):

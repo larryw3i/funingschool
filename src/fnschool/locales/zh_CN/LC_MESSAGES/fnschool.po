@@ -8,41 +8,50 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  fnschool\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-17 22:40+0800\n"
+"POT-Creation-Date: 2024-11-27 21:16+0800\n"
 "PO-Revision-Date: 2024-11-18 13:00+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
 "Language-Team: Chinese - China <larryw3i@163.com>\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
-"X-Generator: Gtranslator 47.0\n"
 
 #: src/fnschool/config.py:26
 msgid "Configurations has been read from \"{0}\"."
 msgstr "应用配置已从 “{0}” 读取。"
 
-#: src/fnschool/entry.py:28
+#: src/fnschool/entry.py:29
 msgid "Just wait."
 msgstr "敬请期待。"
 
-#: src/fnschool/entry.py:34
+#: src/fnschool/entry.py:35
 msgid "fnschool"
 msgstr "fnschool"
 
-#: src/fnschool/entry.py:35
+#: src/fnschool/entry.py:36
 msgid "Command line interface of fnschool."
 msgstr "“fnschool“ 的命令行接口。"
 
-#: src/fnschool/entry.py:36
+#: src/fnschool/entry.py:37
 msgid "Enjoy it."
 msgstr "请慢用。"
 
-#: src/fnschool/entry.py:38
+#: src/fnschool/entry.py:39
 msgid "The modules to run."
 msgstr "要运行的模块。"
+
+#: src/fnschool/external.py:55
+msgid ""
+"If you feel {0} is great, please sponsor it. Your sponsorship will keep "
+"the project alive."
+msgstr "如果您觉得 {0} 项目很棒，请您赞助它。您的赞助会让项目继续活下去。"
+
+#: src/fnschool/external.py:66
+msgid "Sponsor URL: {0}"
+msgstr "赞助链接：{0}"
 
 #: src/fnschool/user.py:12
 msgid "Enter your name, please!"
@@ -96,22 +105,20 @@ msgstr "已从 “{0}” 读取到一个被保存的名字。"
 msgid "The names saved by {0} are as follows:"
 msgstr "被 {0} 保存的名字如下："
 
-#: src/fnschool/exam/score.py:1117 src/fnschool/exam/score.py:1152
+#: src/fnschool/exam/score.py:1122 src/fnschool/exam/score.py:1157
 #: src/fnschool/user.py:135 src/fnschool/user.py:214
 msgid "Unexpected value was got. Exit."
 msgstr "获取到未预期的值。退出。"
 
 #: src/fnschool/user.py:139
-msgid ""
-"Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
+msgid "Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
 msgstr "输入您的名字的序号，或者输入您的名字。（“回车”即为“{0}”）"
 
 #: src/fnschool/user.py:184
 msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
-msgstr ""
-"您好！请问您的名字是 “{0}” 吗？如果不是请输入您的名字！（是的：“Y”，“y”，“”）"
+msgstr "您好！请问您的名字是 “{0}” 吗？如果不是请输入您的名字！（是的：“Y”，“y”，“”）"
 
-#: src/fnschool/exam/score.py:1120 src/fnschool/exam/score.py:1150
+#: src/fnschool/exam/score.py:1125 src/fnschool/exam/score.py:1155
 #: src/fnschool/user.py:212
 msgid "Unexpected value was got."
 msgstr "获取到未预期的值。"
@@ -120,8 +127,7 @@ msgstr "获取到未预期的值。"
 msgid ""
 "Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
 "'Y','y')"
-msgstr ""
-"您好～ {0}，您的所有文件将会被保存到 “{1}” 文件夹，打开它？（打开：“Y”、“y”）"
+msgstr "您好～ {0}，您的所有文件将会被保存到 “{1}” 文件夹，打开它？（打开：“Y”、“y”）"
 
 #: src/fnschool/user.py:249
 msgid "app_config"
@@ -131,42 +137,32 @@ msgstr "应用配置"
 msgid "config"
 msgstr "配置"
 
-#: src/fnschool/canteen/bill.py:74 src/fnschool/canteen/bill.py:79
-#: src/fnschool/canteen/bill.py:94
+#: src/fnschool/canteen/bill.py:82 src/fnschool/canteen/bill.py:87
+#: src/fnschool/canteen/bill.py:102
 #, python-format
 msgid "%s can't change."
 msgstr "%s 无法转换。"
 
-#: src/fnschool/canteen/bill.py:159
-msgid ""
-"If you feel {0} is great, please sponsor it. Your sponsorship will keep the "
-"project alive."
-msgstr "如果您觉得 {0} 项目很棒，请您赞助它。您的赞助会让项目继续活下去。"
-
-#: src/fnschool/canteen/bill.py:167
-msgid "Sponsor URL: {0}"
-msgstr "赞助链接：{0}"
-
-#: src/fnschool/canteen/bill.py:210
+#: src/fnschool/canteen/bill.py:205
 msgid "Food classes files:"
 msgstr "食材大类文件："
 
-#: src/fnschool/canteen/bill.py:219
+#: src/fnschool/canteen/bill.py:216
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr "您的食材大类已从 “{0}”  读取。它会被优先匹配。"
 
-#: src/fnschool/canteen/bill.py:229
+#: src/fnschool/canteen/bill.py:226
 msgid "Preset food classes were read from \"{0}\"."
 msgstr "预置的食材大类已从 “{0}” 读取。"
 
-#: src/fnschool/canteen/bill.py:243
+#: src/fnschool/canteen/bill.py:240
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr "好的，我知道了。（按任意键继续）"
 
 #: src/fnschool/canteen/consuming.py:46
 msgid ""
-"It seems you didn't design the consumptions, please restart {0} and design "
-"the consumptions."
+"It seems you didn't design the consumptions, please restart {0} and "
+"design the consumptions."
 msgstr "好像您没有设计每天的出库，请重新运行 {0} 然后设计每天的出库。"
 
 #: src/fnschool/canteen/currency.py:15
@@ -185,48 +181,45 @@ msgstr "“食堂” 的相关函数。"
 msgid ""
 "The functions of canteen. \"mk_bill\": Make bill. \"merge_foodsheets\": "
 "Merge food sheets."
-msgstr ""
-"“食堂”的相关函数。“mk_bill”： 生成账单。“merge_foodsheets”：合并食材台账表。"
+msgstr "“食堂”的相关函数。“mk_bill”： 生成账单。“merge_foodsheets”：合并食材台账表。"
 
-#: src/fnschool/canteen/food.py:44 src/fnschool/canteen/operator.py:66
-#: src/fnschool/canteen/operator.py:71
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:200
+#: src/fnschool/canteen/food.py:47 src/fnschool/canteen/operator.py:67
+#: src/fnschool/canteen/operator.py:72
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:201
 msgid "({0})"
 msgstr "（{0}）"
 
-#: src/fnschool/canteen/food.py:46
+#: src/fnschool/canteen/food.py:48
 msgid "Remaining"
 msgstr "余下"
 
-#: src/fnschool/canteen/food.py:60
+#: src/fnschool/canteen/food.py:62
 msgid "The count of \"{0}\" is 0, you need to delete it maybe."
 msgstr "“{0}” 的数量是 0 ，您尽可能删除它。"
 
-#: src/fnschool/canteen/operator.py:19
+#: src/fnschool/canteen/operator.py:20
 msgid "preconsuming"
 msgstr "预出库"
 
-#: src/fnschool/canteen/operator.py:26
+#: src/fnschool/canteen/operator.py:27
 msgid "food_classes"
 msgstr "食材大类"
 
-#: src/fnschool/canteen/operator.py:33
+#: src/fnschool/canteen/operator.py:34
 msgid ""
-"Please tell {0} the alias of your superior department, {0} will use it as "
-"the form title (\"purchasing summary\" form, \"consuming summary\" form, "
-"etc). e.g: \"富宁县那能乡中小学\". If you haven't noticed it, you can check "
-"the previous bill first and then let {0} know."
+"Please tell {0} the alias of your superior department, {0} will use it as"
+" the form title (\"purchasing summary\" form, \"consuming summary\" form,"
+" etc). e.g: \"富宁县那能乡中小学\". If you haven't noticed it, you can check the "
+"previous bill first and then let {0} know."
 msgstr ""
-"请您告诉 {0} 您的上级部门的别称叫什么，{0} 会使用它来制作表单的表头（“入库、"
-"未入库汇总表”、“出库汇总表” 等表单制作表头时需要 “上级部门名别称”）。例"
-"如：“富宁县那能乡中小学”。如果您以前没留意它，您可以先看看以前的账单，再告诉 "
-"{0} 。"
+"请您告诉 {0} 您的上级部门的别称叫什么，{0} 会使用它来制作表单的表头（“入库、未入库汇总表”、“出库汇总表” 等表单制作表头时需要 "
+"“上级部门名别称”）。例如：“富宁县那能乡中小学”。如果您以前没留意它，您可以先看看以前的账单，再告诉 {0} 。"
 
-#: src/fnschool/canteen/operator.py:45
+#: src/fnschool/canteen/operator.py:46
 msgid "superior department"
 msgstr "上级部门"
 
-#: src/fnschool/canteen/operator.py:51 src/fnschool/canteen/operator.py:63
+#: src/fnschool/canteen/operator.py:52 src/fnschool/canteen/operator.py:64
 msgid "bill"
 msgstr "账单"
 
@@ -238,342 +231,85 @@ msgstr "食堂"
 msgid "operator_name"
 msgstr "操作员姓名"
 
-#: src/fnschool/canteen/workbook.py:142
-msgid "Workbook {0} doesn't exist."
-msgstr "工作簿 {0} 不存在。"
+#: src/fnschool/canteen/spreadsheet/base.py:41
+#: src/fnschool/canteen/spreadsheet/purchasing.py:427
+#: src/fnschool/exam/score.py:521
+msgid "Spreadsheet Files"
+msgstr "工作簿文件。"
 
-#: src/fnschool/canteen/workbook.py:152
-msgid "Spreadsheet {0} was copied to {1} ."
-msgstr "工作簿 “{0}” 被复制到 “{1}” 。"
+#: src/fnschool/canteen/spreadsheet/base.py:65
+msgid "Row {0} of {1} is being inserted, please wait a moment."
+msgstr "工作表 “{1}” 的 第{0}行 正在插入新行，请稍作等待。"
 
-#: src/fnschool/canteen/workbook.py:157
-msgid "Please design the consumptions of spreadsheet '{0}' ."
-msgstr "请给工作簿 “{0}” 设计每天的消耗。"
+#: src/fnschool/canteen/spreadsheet/base.py:112
+msgid "Cells of {0} was unmerged."
+msgstr "工作表 “{0}” 的所有单元格被取消合并。"
+
+#: src/fnschool/canteen/spreadsheet/base.py:182
+msgid "Empty row {0} of sheet \"{1}\" has been deleted."
+msgstr "{1} 表的 空行 （第{0}行）已被删除。"
+
+#: src/fnschool/canteen/spreadsheet/consuming.py:52
+msgid "Consuming days:"
+msgstr "耗材（出库）日期："
 
 #: src/fnschool/canteen/spreadsheet/consuming.py:238
-#: src/fnschool/canteen/spreadsheet/consumingsum.py:64
+#: src/fnschool/canteen/spreadsheet/consumingsum.py:67
 #: src/fnschool/canteen/spreadsheet/cover.py:61
-#: src/fnschool/canteen/spreadsheet/food.py:588
-#: src/fnschool/canteen/spreadsheet/inventory.py:328
-#: src/fnschool/canteen/spreadsheet/purchasingsum.py:90
+#: src/fnschool/canteen/spreadsheet/food.py:589
+#: src/fnschool/canteen/spreadsheet/inventory.py:372
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:105
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:175
 #: src/fnschool/canteen/spreadsheet/warehousing.py:357
-#: src/fnschool/canteen/workbook.py:416 src/fnschool/canteen/workbook.py:447
-#: src/fnschool/canteen/workbook.py:513 src/fnschool/canteen/workbook.py:798
-#: src/fnschool/canteen/workbook.py:1660 src/fnschool/canteen/workbook.py:1664
-#: src/fnschool/canteen/workbook.py:1730 src/fnschool/canteen/workbook.py:1785
-#: src/fnschool/canteen/workbook.py:1969 src/fnschool/canteen/workbook.py:2332
-#: src/fnschool/canteen/workbook.py:2514
 #, python-format
 msgid "Sheet '%s' was updated."
 msgstr "工作表 “%s” 已被更新。"
 
-#: src/fnschool/canteen/spreadsheet/food.py:600
-#: src/fnschool/canteen/workbook.py:808
-msgid "All food sheets have their tab colors reset."
-msgstr "所有食材台账表标签颜色已被重置。"
-
-#: src/fnschool/canteen/workbook.py:815
-msgid "Food sheets [{0}] have their tab colors recolor."
-msgstr "这些食材台账表 [ {0} ] 的标签颜色已被重新上色。"
-
-#: src/fnschool/canteen/workbook.py:820
-msgid "Food sheets [{0}] have been updated."
-msgstr "食材台账表 {0} 已被更新。"
-
-#: src/fnschool/canteen/workbook.py:894
-msgid "Got no check date column index of {0} ."
-msgstr "未找到 {0} 的清点日期列索引。"
-
-#: src/fnschool/canteen/workbook.py:900
-msgid "Got no organization name column of {0}"
-msgstr "未找到 {0} 的机构名的列索引。"
-
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:348
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:360
-#: src/fnschool/canteen/workbook.py:956
-msgid "Update completely!"
-msgstr "更新完成！"
-
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:154
-#: src/fnschool/canteen/workbook.py:962
-msgid ""
-"Do you want to save all updated data to \"{0}\"? or just save it as a copy "
-"to \"{1}\". (YyNn)"
-msgstr ""
-"保存被更新的数据到 “{0}” 吗？或者仅保存为副本到 “{1}” 。 （YyNn：“Y” 或 “y” "
-"为 “是”，其它为“否”）"
-
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:161
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:162
-#: src/fnschool/canteen/workbook.py:969
-msgid ""
-"If you save updated data to \"{0}\", data of food sheets will be saved for "
-"every month."
-msgstr "如果您把已更新的数据保存到 “{0}”，那每个月的食材台账表都会被保存下来。"
-
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:177
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:178
-#: src/fnschool/canteen/workbook.py:979
-msgid ""
-"You can fill in the monthly missing data to food sheets, they will be saved "
-"for next updating."
-msgstr ""
-"您可以把 食材台账表 里面没有更新的月份的数据更新了，这些数据会被保存下来的。"
-
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:192
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:193
-#: src/fnschool/canteen/workbook.py:990
-msgid "Updated data was saved."
-msgstr "被更改的数据已保存。"
-
-#: src/fnschool/canteen/workbook.py:1015
-#, python-format
-msgid "Spreadsheet %s is being tested."
-msgstr "正在检测工作簿 %s 。"
-
-#: src/fnschool/canteen/workbook.py:1030
-msgid "The food purchasing times of preadsheet {0} is {1} ."
-msgstr "工作簿 {0} 的食材购入时间集是 {1} 。"
-
-#: src/fnschool/canteen/workbook.py:1059
-msgid "Workbook '{0}' doesn't exist, workbook '{1}' was copied to '{2}' ."
-msgstr "工作簿 “{0}” 不存在，工作簿 “{1}” 被复制到 “{2}” 。"
-
-#: src/fnschool/canteen/workbook.py:1070
-msgid "Food name index"
-msgstr "食材名索引"
-
-#: src/fnschool/canteen/workbook.py:1071
-msgid "Food count index"
-msgstr "食材数量索引"
-
-#: src/fnschool/canteen/workbook.py:1072
-msgid "Food total price index"
-msgstr "食材总价索引"
-
-#: src/fnschool/canteen/workbook.py:1073
-msgid "Food unit index"
-msgstr "食材单位索引"
-
-#: src/fnschool/canteen/workbook.py:1074
-msgid "Food check date index"
-msgstr "食材清点日期（购入日期）索引"
-
-#: src/fnschool/canteen/workbook.py:1076
-msgid "Food 'negligible' mark index"
-msgstr "食材 “可忽略” 标记索引"
-
-#: src/fnschool/canteen/workbook.py:1079
-msgid "Food 'residue' mark index"
-msgstr "食材 “剩余” 标记索引"
-
-#: src/fnschool/canteen/workbook.py:1080
-msgid "Food purchaser name index"
-msgstr "食材购买方（学校名）索引"
-
-#: src/fnschool/canteen/workbook.py:1143
-#, python-format
-msgid "There is not food of time node %s ,skip workbook designing."
-msgstr "时间节点 %s 没有食材购入或剩余，跳过出库设计。"
-
-#: src/fnschool/canteen/workbook.py:1170
-msgid ""
-"Workbook '{0}' was updated, please design the daily foods consumption and "
-"press ANY key to continue."
-msgstr "工作簿 “{0}” 已更新，请设计每天的食材消耗然后按任意键继续。"
-
-#: src/fnschool/canteen/workbook.py:1180
-#, python-format
-msgid "Workbook %s was read."
-msgstr "已读取 工作簿 “%s” 。"
-
-#: src/fnschool/canteen/workbook.py:1193
-msgid "Read consumption from '{0}' ."
-msgstr "已读取 工作簿 “{0}” 每天的消耗。"
-
-#: src/fnschool/canteen/workbook.py:1199
-msgid ""
-"Unable to find {0} from {1}, You can input it (1 base) directly or give "
-"feedback to the maintainers --> {2} ."
-msgstr ""
-"从 {1} 中未找到 {0} ，您可以直接输入它（以1开始）或这给项目维护人员反馈 —> "
-"{2} 。"
-
-#: src/fnschool/canteen/workbook.py:1227
-msgid ""
-"Please enter the 'purchase list file path' of spreadsheet Changsheng "
-"provided, or enter the directory path and then {app_name} will read all "
-"spreadsheets. (default: '{dpath0}')"
-msgstr ""
-"请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} 会读取所有的"
-"工作簿并获取购入数据。（默认的目录：{dpath0}）"
-
-#: src/fnschool/canteen/workbook.py:1242 src/fnschool/canteen/workbook.py:1454
-#, python-format
-msgid "File or directory '%s' doesn't exist."
-msgstr "文件 或 目录 “%s” 不存在。"
-
-#: src/fnschool/canteen/workbook.py:1246 src/fnschool/canteen/workbook.py:1461
-#, python-format
-msgid "Entered directory: %s"
-msgstr "键入的目录： %s"
-
-#: src/fnschool/canteen/workbook.py:1277
-msgid ""
-"{app_name} desn't pick the index of organization name column, input it (0 "
-"base) or '{wb_fpath}' will be ignored."
-msgstr ""
-"{app_name} 找不到机构名（学校名）列的索引，您可以直接输入索引，否则 "
-"“{wb_fpath}” 会被忽略。"
-
-#: src/fnschool/canteen/workbook.py:1305
-msgid "Organization name read from {0} are \"{1}\","
-msgstr "从 “{0}” 中读取到的 机构名（学校名）是 “{1}”，"
-
-#: src/fnschool/canteen/workbook.py:1307
-msgid "Organization name read from {0} is \"{1}\", "
-msgstr "从 “{0}” 中读取到的 机构名（学校名）是 “{1}”， "
-
-#: src/fnschool/canteen/workbook.py:1309
-msgid "but organization name of {0} is \"{1}\"."
-msgstr "但是 “{0}” 的 机构名（学校名）是 “{1}”。"
-
-#: src/fnschool/canteen/workbook.py:1315
-msgid "'{wb_fpath}' was discarded."
-msgstr "“{wb_fpath}” 已被舍去。"
-
-#: src/fnschool/canteen/workbook.py:1327
-msgid ""
-"It seems you didn't set the 'negligible' mark for workbook '{0}' , update "
-"this workbook and press ANY key to continue. (Add the 'negligible' column "
-"name even though there is no negligible foods)"
-msgstr ""
-"好像您没有 在 工作簿 “{0}” 添加 “非入库” 列，请添加 “非入库” 列，然后按任意键"
-"继续。（如果没有非入库的食材，只需添加列名）"
-
-#: src/fnschool/canteen/workbook.py:1336
-msgid "The column names of 'negligible' mark are following:"
-msgstr "“非入库”食材的列名有以下可供选择（随意选择一个都可以被识别）："
-
-#: src/fnschool/canteen/workbook.py:1347
-#, python-format
-msgid "Spreadsheet '%s' was used."
-msgstr "工作表 “%s” 被使用。"
-
-#: src/fnschool/canteen/workbook.py:1438
-msgid ""
-"Please enter the 'purchase list file path' of spreadsheet Changsheng "
-"provided, or enter the directory path and then {app_name} will read all "
-"spreadsheets. (default: '{seeking_dpath0}')"
-msgstr ""
-"请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} 会读取所有的"
-"工作簿并获取购入数据。（默认的目录：{seeking_dpath0}）"
-
-#: src/fnschool/canteen/workbook.py:1570
-#, python-format
-msgid "Got no purchased foods of time node %s ."
-msgstr "时间节点 %s 没有购入的食材。"
-
-#: src/fnschool/canteen/workbook.py:1583
-msgid ""
-"It seems the residue foods from last time node are going to be consumed. The "
-"new foods of this time node ({0})aren't purchased."
-msgstr "好像时间节点 {0} 没有新购入的食材，消耗将只从剩余的食材中进行。"
-
-#: src/fnschool/canteen/workbook.py:1639
-msgid "There is no residue foods."
-msgstr "没有结余的食材。"
-
-#: src/fnschool/canteen/spreadsheet/consuming.py:52
-#: src/fnschool/canteen/workbook.py:1800
-msgid "Consuming days:"
-msgstr "耗材（出库）日期："
-
-#: src/fnschool/canteen/workbook.py:2009
-msgid ""
-"Sheet '{0}' was updated.\n"
-"Press any key to continue when you have completed the foods allocation."
-msgstr ""
-"工作表 “{0}” 已更新。\n"
-"在您完成每天消耗设计后按任意建以继续。"
-
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:229
-#: src/fnschool/canteen/workbook.py:2016
-msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
-msgstr "好的，我已经更新工作簿 “{0}” 了。（按任意键继续）"
-
 #: src/fnschool/canteen/spreadsheet/consuming.py:307
 #: src/fnschool/canteen/spreadsheet/warehousing.py:158
-#: src/fnschool/canteen/workbook.py:2184 src/fnschool/canteen/workbook.py:2253
 #, python-format
 msgid "Sheet '%s' was formatted."
 msgstr "“%s” 表已被格式化。"
-
-#: src/fnschool/canteen/workbook.py:2578
-#, python-format
-msgid "Directory '%s' has been made."
-msgstr "目录 “%s” 已创建。"
-
-#: src/fnschool/canteen/workbook.py:2583
-msgid "Workbook '{0}' was copied to '{1}'."
-msgstr "工作簿 “{0}” 被复制到 “{1}” 。"
-
-#: src/fnschool/canteen/workbook.py:2587
-#, python-format
-msgid "Workbook '%s' has been used."
-msgstr "使用工作薄 “%s” 。"
-
-#: src/fnschool/canteen/workbook.py:2609
-msgid "Saving workbook. . ."
-msgstr "正在保存......"
-
-#: src/fnschool/canteen/workbook.py:2615 src/fnschool/canteen/workbook.py:2650
-#, python-format
-msgid "Workbook '%s' was saved."
-msgstr "工作簿 “%s” 已保存。"
-
-#: src/fnschool/canteen/workbook.py:2619
-#, python-format
-msgid "Directory %s was created."
-msgstr "目录 “%s” 已创建。"
-
-#: src/fnschool/canteen/workbook.py:2646
-msgid "Copying workbook..."
-msgstr "正在复制工作簿......"
-
-#: src/fnschool/canteen/spreadsheet/base.py:40
-#: src/fnschool/canteen/spreadsheet/purchasing.py:427
-#: src/fnschool/exam/score.py:519
-msgid "Spreadsheet Files"
-msgstr "工作簿文件。"
-
-#: src/fnschool/canteen/spreadsheet/base.py:58
-msgid "Row {0} of {1} is being inserted, please wait a moment."
-msgstr "工作表 “{1}” 的 第{0}行 正在插入新行，请稍作等待。"
-
-#: src/fnschool/canteen/spreadsheet/base.py:105
-msgid "Cells of {0} was unmerged."
-msgstr "工作表 “{0}” 的所有单元格被取消合并。"
-
-#: src/fnschool/canteen/spreadsheet/base.py:147
-msgid "Empty row {0} of sheet \"{1}\" has been deleted."
-msgstr "{1} 表的 空行 （第{0}行）已被删除。"
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:71
 #: src/fnschool/canteen/spreadsheet/spreadsheet.py:72
 msgid "Spreadsheet \"{0}\" is in use."
 msgstr "工作簿 “{0}” 被使用。"
 
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:154
+msgid ""
+"Do you want to save all updated data to \"{0}\"? or just save it as a "
+"copy to \"{1}\". (YyNn)"
+msgstr "保存被更新的数据到 “{0}” 吗？或者仅保存为副本到 “{1}” 。 （YyNn：“Y” 或 “y” 为 “是”，其它为“否”）"
+
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:161
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:162
+msgid ""
+"If you save updated data to \"{0}\", data of food sheets will be saved "
+"for every month."
+msgstr "如果您把已更新的数据保存到 “{0}”，那每个月的食材台账表都会被保存下来。"
+
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:171
 #: src/fnschool/canteen/spreadsheet/spreadsheet.py:172
 msgid "Saving. . ."
 msgstr "正在保存......"
 
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:177
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:178
+msgid ""
+"You can fill in the monthly missing data to food sheets, they will be "
+"saved for next updating."
+msgstr "您可以把 食材台账表 里面没有更新的月份的数据更新了，这些数据会被保存下来的。"
+
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:187
 #: src/fnschool/canteen/spreadsheet/spreadsheet.py:188
 msgid "Updated data has been saved to \"{0}\"."
 msgstr "更新的数据已被保存到 “{0}”。"
+
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:192
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:193
+msgid "Updated data was saved."
+msgstr "被更改的数据已保存。"
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:205
 #: src/fnschool/canteen/spreadsheet/spreadsheet.py:206
@@ -622,6 +358,11 @@ msgstr "汇总："
 msgid "Updating sheets for {0}."
 msgstr "正在为 {0} 更新表单。"
 
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:348
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:360
+msgid "Update completely!"
+msgstr "更新完成！"
+
 #: src/fnschool/canteen/spreadsheet/food.py:140
 msgid "Sheet {0} has been reformatted."
 msgstr "“{0}” 表已被重新格式化。"
@@ -650,11 +391,15 @@ msgstr "为 “{0}” 表更新每月累积数据和每年累积数据。"
 msgid "Update completed."
 msgstr "更新完成！"
 
-#: src/fnschool/canteen/spreadsheet/food.py:614
+#: src/fnschool/canteen/spreadsheet/food.py:601
+msgid "All food sheets have their tab colors reset."
+msgstr "所有食材台账表标签颜色已被重置。"
+
+#: src/fnschool/canteen/spreadsheet/food.py:615
 msgid "Food sheets have their tab colors recolor:"
 msgstr "标签已被重新上色的食材台账表："
 
-#: src/fnschool/canteen/spreadsheet/food.py:618
+#: src/fnschool/canteen/spreadsheet/food.py:619
 msgid "Updated food sheets:"
 msgstr "被更新的食材台账表："
 
@@ -666,7 +411,7 @@ msgstr "“{0}” 表已被重新格式化。"
 msgid "No unit"
 msgstr "无单位"
 
-#: src/fnschool/canteen/spreadsheet/inventory.py:242
+#: src/fnschool/canteen/spreadsheet/inventory.py:244
 msgid "There is no inventories for \"{0}\"."
 msgstr "“{0}” 没有盘存的食材。"
 
@@ -678,37 +423,36 @@ msgstr "上一份账单文件目录路径"
 msgid "current_bill_dpath"
 msgstr "当前账单文件目录路径"
 
-#: src/fnschool/canteen/spreadsheet/merging.py:44
-#: src/fnschool/canteen/spreadsheet/merging.py:52
+#: src/fnschool/canteen/spreadsheet/merging.py:45
+#: src/fnschool/canteen/spreadsheet/merging.py:53
 #: src/fnschool/canteen/spreadsheet/purchasing.py:277
 msgid "Loading data from \"{0}\"."
 msgstr "正在从 “{0}” 中加载数据。"
 
-#: src/fnschool/canteen/spreadsheet/merging.py:72
+#: src/fnschool/canteen/spreadsheet/merging.py:73
 msgid "Select the last bill spreadsheet"
 msgstr "选择上一份账单文件。"
 
-#: src/fnschool/canteen/spreadsheet/merging.py:77
-#: src/fnschool/canteen/spreadsheet/merging.py:105
+#: src/fnschool/canteen/spreadsheet/merging.py:78
+#: src/fnschool/canteen/spreadsheet/merging.py:108
 msgid "there is not file selected. Exit."
 msgstr "没有选择文件。退出。"
 
-#: src/fnschool/canteen/spreadsheet/merging.py:99
+#: src/fnschool/canteen/spreadsheet/merging.py:102
 msgid "Select the current bill spreadsheet"
 msgstr "选择当前账单文件"
 
-#: src/fnschool/canteen/spreadsheet/merging.py:288
+#: src/fnschool/canteen/spreadsheet/merging.py:301
 msgid ""
-"Data from Sheet \"{0}\" of Workbook \"{1}\" was copied to Sheet\"{2}\" of "
-"Workbook \"{3}\"."
-msgstr ""
-"工作簿 “{1}” 的 表 “{0}” 的 数据已被复制到 工作薄 “{3}” 的 表 \"{2}\"。"
+"Data from Sheet \"{0}\" of Workbook \"{1}\" was copied to Sheet\"{2}\" of"
+" Workbook \"{3}\"."
+msgstr "工作簿 “{1}” 的 表 “{0}” 的 数据已被复制到 工作薄 “{3}” 的 表 \"{2}\"。"
 
-#: src/fnschool/canteen/spreadsheet/merging.py:305
+#: src/fnschool/canteen/spreadsheet/merging.py:318
 msgid "Food sheet \"{0}\" has its color recolor."
 msgstr "食材台账表 “{0}” 的标签颜色已被重新上色。"
 
-#: src/fnschool/canteen/spreadsheet/merging.py:318
+#: src/fnschool/canteen/spreadsheet/merging.py:331
 msgid "Merge completed！Saving \"{0}\"."
 msgstr "合并完成。正在保存 “{0}”。"
 
@@ -729,7 +473,7 @@ msgstr "食材出库（{t0}到{t1}）.xlsx"
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr "工作簿 “{0}” 已被复制到 “{1}” 。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:174
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:175
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
@@ -737,49 +481,53 @@ msgstr ""
 "工作簿 “{1}” 的工作表 ‘{0}’ 已更新。\n"
 "在您完成每天消耗设计后按任意建以继续。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:186
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:187
 msgid "New purchased food for date {0} is:"
 msgstr "{0} 新购入的食材："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:188
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:189
 msgid "New purchased foods for date {0} are:"
 msgstr "{0} 新购入的食材："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:210
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:211
 msgid "Negligible foods are not listed."
 msgstr "无需入库的食材未列出。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:213
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:214
 msgid "There is no purchased food for {0}."
 msgstr "{0} 没有新购入的食材。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:219
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:220
 msgid ""
-"There is no need to design for dates without food consumption. (Ok, I know "
-"[press any key to continue])"
+"There is no need to design for dates without food consumption. (Ok, I "
+"know [press any key to continue])"
 msgstr "没有食材消耗的日期不需要设计出库。（好的，知道了的【按任意键继续】）"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:269
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:230
+msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
+msgstr "好的，我已经更新工作簿 “{0}” 了。（按任意键继续）"
+
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:270
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:298
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:299
 msgid "Consuming days of {0} ({1}):"
 msgstr "{0} 的出库日期（{1}）："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:300
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:301
 msgid "Consuming days of {0}:"
 msgstr "{0} 的出库日期："
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:308
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:309
 msgid "{0} days in total."
 msgstr "共 {0} 天。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:310
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:311
 msgid "{0} day in total."
 msgstr "共 {0} 天。"
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:314
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:315
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr "是的，都是对的。（按任意键继续）"
 
@@ -805,8 +553,8 @@ msgstr "未找到 “{0}” 列。退出。"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:335
 msgid ""
-"Column \"{0}\" has been updated, feel free to open new issue if some food "
-"with the wrong class ({1}). "
+"Column \"{0}\" has been updated, feel free to open new issue if some food"
+" with the wrong class ({1}). "
 msgstr "“{0}”列已添加，如果食材的大类名有错误，还请您随时提交反馈（{1}）。"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:342
@@ -817,17 +565,13 @@ msgstr "好的，我想检查更新的数据。（按任意键打开文件）"
 msgid ""
 "I have checked it, all classes of food are right, and I closed the file. "
 "(Press any key to continue)"
-msgstr ""
-"我已经检查了，每个食材的大类都是对的，然后也关闭了被打开的文件。（按任意键继"
-"续）"
+msgstr "我已经检查了，每个食材的大类都是对的，然后也关闭了被打开的文件。（按任意键继续）"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:407
 msgid ""
-"{0} need a purchasing list file, and it's file type should be '.xlsx'. The "
-"column names of it:"
-msgstr ""
-"{0} 需要一个购入食材的列表文件，这个列表文件的类型应为 “.xlsx”。它的列（表"
-"头）为："
+"{0} need a purchasing list file, and it's file type should be '.xlsx'. "
+"The column names of it:"
+msgstr "{0} 需要一个购入食材的列表文件，这个列表文件的类型应为 “.xlsx”。它的列（表头）为："
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:412
 msgid ""
@@ -864,7 +608,7 @@ msgid "Please select the purchasing file"
 msgstr "请选择购入食材的列表文件"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:440
-#: src/fnschool/exam/score.py:536
+#: src/fnschool/exam/score.py:538
 msgid "No file was selected, exit."
 msgstr "未选择文件，退出。"
 
@@ -878,8 +622,8 @@ msgstr "从 “{0}” 中没有读取到剩余的食材。"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:502
 msgid ""
-"{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet "
-"\"{2}\" ......"
+"{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet \"{2}\" "
+"......"
 msgstr "{0} 正在从 工作簿 “{2}” 的 工作表 “{1}” 中读取剩余的食材 ......"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:515
@@ -893,8 +637,7 @@ msgid ""
 msgstr "已经从 工作簿 “{1}” 的 工作表 “{0}” 中一些剩余的食材："
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:528
-msgid ""
-"The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
+msgid "The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
 msgstr "已经从 工作簿 “{1}” 的 工作表 “{0}” 中一个剩余的食材："
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:554
@@ -931,14 +674,14 @@ msgstr "好了，我已经检查每个食材的大类了，它们都是对的。
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:673
 msgid ""
-"The total price of the following food has more than two decimal places, and "
-"{0} cannot process it."
+"The total price of the following food has more than two decimal places, "
+"and {0} cannot process it."
 msgstr "以下食材的总价的小数位数超过两位，{0} 无法处理它。"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:678
 msgid ""
-"The total price of the following foods have more than two decimal places, "
-"and {0} cannot process them."
+"The total price of the following foods have more than two decimal places,"
+" and {0} cannot process them."
 msgstr "以下食材的总价的小数位数超过两位，{0} 无法处理它们。"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:690
@@ -952,13 +695,13 @@ msgstr "退出。"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:716
 msgid ""
-"The unit price of \"{0}\" is an infinite decimal, split \"{0}\"?(Yes: \"Y\","
-"\"y\",\"\". Yes for rest: \"A\",\"a\". No: \"N\",\"n\". No for rest: \"S\","
-"\"s\". Default: Yes for rest, \"A/a\".)"
+"The unit price of \"{0}\" is an infinite decimal, split \"{0}\"?(Yes: "
+"\"Y\",\"y\",\"\". Yes for rest: \"A\",\"a\". No: \"N\",\"n\". No for "
+"rest: \"S\",\"s\". Default: Yes for rest, \"A/a\".)"
 msgstr ""
-"“{0}”的单价是无限小数，分割 “{0}” ？（是：“Y”、“y”、“”。分割接下来的所有此类"
-"食材：“A”,“a”。否：“N”、“n”。不分割接下来的所有此类食材：“S”、“s”。默认：分割"
-"全部单价为无限小数的食材 —> A/a 。）"
+"“{0}”的单价是无限小数，分割 “{0}” "
+"？（是：“Y”、“y”、“”。分割接下来的所有此类食材：“A”,“a”。否：“N”、“n”。不分割接下来的所有此类食材：“S”、“s”。默认：分割全部单价为无限小数的食材"
+" —> A/a 。）"
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:761
 msgid "\"{0}\" was split:"
@@ -966,20 +709,17 @@ msgstr "“{0}” 被分成："
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:796
 msgid ""
-"Normally, {0} only considers non-warehoused foods as seasonings, but {0} has "
-"found that the following food is non-warehoused, but it is not seasonings:"
-msgstr ""
-"通常，{0} 会认为只有 “调味类”食材 才不需要入库，但是 {0} 发现以下的食材被标记"
-"为“非入库”食材，但是它不是“调味类”："
+"Normally, {0} only considers non-warehoused foods as seasonings, but {0} "
+"has found that the following food is non-warehoused, but it is not "
+"seasonings:"
+msgstr "通常，{0} 会认为只有 “调味类”食材 才不需要入库，但是 {0} 发现以下的食材被标记为“非入库”食材，但是它不是“调味类”："
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:802
 msgid ""
-"Normally, {0} only considers non-warehoused foods as seasonings, but {0} has "
-"found that the following foods are non-warehoused, but they are not "
+"Normally, {0} only considers non-warehoused foods as seasonings, but {0} "
+"has found that the following foods are non-warehoused, but they are not "
 "seasonings:"
-msgstr ""
-"通常，{0} 会认为只有 “调味类”食材 才不需要入库，但是 {0} 发现以下的食材被标记"
-"为“非入库”食材，但是它们不是“调味类”："
+msgstr "通常，{0} 会认为只有 “调味类”食材 才不需要入库，但是 {0} 发现以下的食材被标记为“非入库”食材，但是它们不是“调味类”："
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:815
 msgid "You may need to modify its food class, otherwise {0} will go wrong."
@@ -997,13 +737,42 @@ msgstr "您要重新编辑 “{0}” 吗？（是的：“Y”或“y”，默�
 msgid "Ok, I have re-edited and closed it? (Press any key to continue)"
 msgstr "好了，我已经重新编辑然后关闭它了？（按任意键继续）"
 
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:26
+msgid "食堂食品、材料入库汇总报销单"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:34
+msgid "食堂食品、材料未入库汇总报销单"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:40
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:51
+msgid "编制单位："
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:43
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:53
+msgid "单位："
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:82
+msgid "总金额（大写)："
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:87
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:100
+msgid "经办人："
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/purchasingsum.py:95
+msgid "总金额（大写）："
+msgstr ""
+
 #: src/fnschool/canteen/spreadsheet/spreadsheet.py:155
 msgid ""
-"Do you want to save all updated data to \"{0}\"? or just save it as a copy "
-"to \"{1}\". (Yy[N]n)"
-msgstr ""
-"保存被更新的数据到 “{0}” 吗？或者仅保存为副本到 “{1}” 。 （YyNn：“Y” 或 “y” "
-"为 “是”，其它为“否”。默认为“否”）"
+"Do you want to save all updated data to \"{0}\"? or just save it as a "
+"copy to \"{1}\". (Yy[N]n)"
+msgstr "保存被更新的数据到 “{0}” 吗？或者仅保存为副本到 “{1}” 。 （YyNn：“Y” 或 “y” 为 “是”，其它为“否”。默认为“否”）"
 
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:57
 msgid "{0} ({1})"
@@ -1115,8 +884,8 @@ msgstr "请告诉 {0} 你的邮件服务器密码！"
 
 #: src/fnschool/exam/email.py:126
 msgid ""
-"Hey! {0}, do you want to send these scores of students to chaperones? (Yes: "
-"'Y','y')"
+"Hey! {0}, do you want to send these scores of students to chaperones? "
+"(Yes: 'Y','y')"
 msgstr "哈楼～ {0}，您要把这些学生成绩发送给家长吗？（是的：“Y”、“y”）"
 
 #: src/fnschool/exam/email.py:135
@@ -1157,18 +926,16 @@ msgstr "家长邮箱"
 
 #: src/fnschool/exam/email.py:309
 msgid ""
-"Parental emails spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" was "
-"copied to \"{0}\"."
+"Parental emails spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" "
+"was copied to \"{0}\"."
 msgstr "“家长邮箱” 工作簿 “{0}” 不存在，已将工作簿 “{1}” 复制到 “{0}” 。"
 
 #: src/fnschool/exam/email.py:326
 msgid ""
-"The student's name has been filled in spreadsheet \"{0}\". Please fill in "
-"the email addresses according to the comments. (Ok! open the file for me. "
-"[Press any key to open it])"
-msgstr ""
-"学生姓名已填入 “{0}”。请按照备注更新电子邮件地址。（好的，打开文件【按任意键"
-"打开文件】）"
+"The student's name has been filled in spreadsheet \"{0}\". Please fill in"
+" the email addresses according to the comments. (Ok! open the file for "
+"me. [Press any key to open it])"
+msgstr "学生姓名已填入 “{0}”。请按照备注更新电子邮件地址。（好的，打开文件【按任意键打开文件】）"
 
 #: src/fnschool/exam/email.py:338
 msgid "(Ok! I have filled them in? [Press any key to continue])"
@@ -1212,220 +979,216 @@ msgstr "考试纪律"
 msgid "Student Name"
 msgstr "学生姓名"
 
-#: src/fnschool/exam/score.py:113
+#: src/fnschool/exam/score.py:115
 msgid "Generate the scores and scoring rate plots now ? (Yes: \"Y\",\"y\")"
 msgstr "现在生成 历次成绩 和 得分率 统计图吗？（是：“Y”、“y”）"
 
-#: src/fnschool/exam/score.py:118
+#: src/fnschool/exam/score.py:120
 msgid "Generate the scoring rate plots now ? (Yes: \"Y\",\"y\")"
 msgstr "现在生成 得分率 统计图吗？（是：“Y”、“y”）"
 
-#: src/fnschool/exam/score.py:135
+#: src/fnschool/exam/score.py:137
 msgid "scores_of_all_students"
 msgstr "所有同学的历次测试分数"
 
-#: src/fnschool/exam/score.py:138
+#: src/fnschool/exam/score.py:140
 msgid "scores_of_{0}"
 msgstr "{0}的历次测试"
 
-#: src/fnschool/exam/score.py:140
+#: src/fnschool/exam/score.py:142
 msgid "average_scores"
 msgstr "平均分"
 
-#: src/fnschool/exam/score.py:172
+#: src/fnschool/exam/score.py:174
 msgid "Summary of {0}:"
 msgstr "{0} 的汇总："
 
-#: src/fnschool/exam/score.py:176
+#: src/fnschool/exam/score.py:178
 msgid "Scores:"
 msgstr "分数："
 
-#: src/fnschool/exam/score.py:217 src/fnschool/exam/score.py:380
+#: src/fnschool/exam/score.py:219 src/fnschool/exam/score.py:382
 msgid "[{0}] \"{1}\" {2}has been saved."
 msgstr "【{0}】“{1}” {2}已被保存。"
 
-#: src/fnschool/exam/score.py:245
+#: src/fnschool/exam/score.py:247
 msgid "The scores of Student {0}"
 msgstr "{0} 同学的历次测试分数"
 
-#: src/fnschool/exam/score.py:247
+#: src/fnschool/exam/score.py:249
 msgid "The average scores"
 msgstr "平均分"
 
-#: src/fnschool/exam/score.py:255 src/fnschool/exam/score.py:330
+#: src/fnschool/exam/score.py:257 src/fnschool/exam/score.py:332
 msgid "Examination names of {0}"
 msgstr "{0} 历次测试"
 
-#: src/fnschool/exam/score.py:258 src/fnschool/exam/score.py:333
+#: src/fnschool/exam/score.py:260 src/fnschool/exam/score.py:335
 msgid "Examination Points ({0} points in total)"
 msgstr "测试得分（总 {0} 分）"
 
-#: src/fnschool/exam/score.py:260 src/fnschool/exam/score.py:335
+#: src/fnschool/exam/score.py:262 src/fnschool/exam/score.py:337
 msgid "Examination Points ({0} point in total)"
 msgstr "测试得分（总 {0} 分）"
 
-#: src/fnschool/exam/score.py:282
+#: src/fnschool/exam/score.py:284
 msgid "Discipline point: {0}."
 msgstr "考试纪律：{0} 。"
 
-#: src/fnschool/exam/score.py:284
+#: src/fnschool/exam/score.py:286
 msgid "Discipline points: {0}."
 msgstr "考试纪律：{0} 。"
 
-#: src/fnschool/exam/score.py:323
+#: src/fnschool/exam/score.py:325
 msgid "The scores of all students"
 msgstr "所有同学的历次测试分数"
 
-#: src/fnschool/exam/score.py:353
+#: src/fnschool/exam/score.py:355
 msgid "scoring_rate_of_{0}"
 msgstr "{0}的得分率"
 
-#: src/fnschool/exam/score.py:355
+#: src/fnschool/exam/score.py:357
 msgid "average_scoring_rate"
 msgstr "平均得分率"
 
-#: src/fnschool/exam/score.py:415
+#: src/fnschool/exam/score.py:417
 msgid "The scoring rate of Student {0} ({1})"
 msgstr "{0} 同学的得分率（{1}）"
 
-#: src/fnschool/exam/score.py:419
+#: src/fnschool/exam/score.py:421
 msgid "The average scoring rate ({0})"
 msgstr "平均得分率（{0}）"
 
-#: src/fnschool/exam/score.py:432
+#: src/fnschool/exam/score.py:434
 msgid "Question titles of {0} ({1})"
 msgstr "{0} 的题目（{1}）"
 
-#: src/fnschool/exam/score.py:435
+#: src/fnschool/exam/score.py:437
 msgid "{0} point in total, "
 msgstr "总 {0} 分， "
 
-#: src/fnschool/exam/score.py:437
+#: src/fnschool/exam/score.py:439
 msgid "{0} points in total, "
 msgstr "总 {0} 分， "
 
-#: src/fnschool/exam/score.py:440
+#: src/fnschool/exam/score.py:442
 msgid "{0} point got"
 msgstr "得 {0} 分"
 
-#: src/fnschool/exam/score.py:442
+#: src/fnschool/exam/score.py:444
 msgid "{0} points got"
 msgstr "得 {0} 分"
 
-#: src/fnschool/exam/score.py:447
+#: src/fnschool/exam/score.py:449
 msgid "Scoring rate(%)"
 msgstr "得分率（%）"
 
-#: src/fnschool/exam/score.py:474
+#: src/fnschool/exam/score.py:476
 msgid "comment:"
 msgstr "评语："
 
-#: src/fnschool/exam/score.py:525
+#: src/fnschool/exam/score.py:527
 msgid "Please select the scores file"
 msgstr "请选择成绩文件"
 
-#: src/fnschool/exam/score.py:539
+#: src/fnschool/exam/score.py:541
 msgid "Scores file \"{0}\" has been selected."
 msgstr "已选择成绩文件 “{0}” 。"
 
-#: src/fnschool/exam/score.py:569
+#: src/fnschool/exam/score.py:571
 msgid "Would you like to edit \"{0}\" ? (\"Yes\": 'Y' or 'y'. Default: No)"
 msgstr "您要编辑 “{0}” 吗？（是的：“Y”或“y”，默认：否）"
 
-#: src/fnschool/exam/score.py:578
+#: src/fnschool/exam/score.py:580
 msgid "Ok, I have edited and closed it? (Enter any key to continue)"
 msgstr "好了，我已经编辑然后关闭它了？（按任意键继续）"
 
-#: src/fnschool/exam/score.py:763
+#: src/fnschool/exam/score.py:766
 msgid "Failed to get examination start time from \"{0}\"."
 msgstr "从 “{0}” 获取测试开始时间失败。"
 
-#: src/fnschool/exam/score.py:776
+#: src/fnschool/exam/score.py:779
 msgid "Failed to get examination end time from \"{0}\"."
 msgstr "从 “{0}” 获取测试结束时间失败。"
 
-#: src/fnschool/exam/score.py:786
+#: src/fnschool/exam/score.py:789
 msgid "The examination end time is set to \"{0}\"."
 msgstr "测试结束时间被设置为 “{0}”。"
 
-#: src/fnschool/exam/score.py:895
+#: src/fnschool/exam/score.py:898
 msgid "exam_names"
 msgstr "测试名"
 
-#: src/fnschool/exam/score.py:929
+#: src/fnschool/exam/score.py:934
 msgid ""
-"Scores spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" was copied to "
-"\"{0}\"."
+"Scores spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" was copied "
+"to \"{0}\"."
 msgstr "测试分数工作簿 “{0}” 不存在，已将工作簿 “{1}” 复制到 “{0}” 。"
 
-#: src/fnschool/exam/score.py:966
+#: src/fnschool/exam/score.py:971
 msgid "The recent examination scores ({0}) have been added to \"{1}\"."
 msgstr "上一次的测试分数（\"{0}\" 测试）已被添加到 “{0}”。"
 
-#: src/fnschool/exam/score.py:971
+#: src/fnschool/exam/score.py:976
 msgid "There is no recent tests."
 msgstr "近期无测试。"
 
-#: src/fnschool/exam/score.py:976
+#: src/fnschool/exam/score.py:981
 msgid "Spreadsheet \"{0}\" has been saved."
 msgstr "已保存 工作簿 “{0}”。"
 
-#: src/fnschool/exam/score.py:980
+#: src/fnschool/exam/score.py:985
 msgid ""
 "Please update the question titles , student names and scores of \"{0}\" "
-"according to the comments. (Ok, open it for me [Press any key to open file])"
-msgstr ""
-"请按照备注更新 “{0}” 文件的题目标题、学生姓名和分数。（好的，打开文件吧～【按"
-"任意键打开文件】）"
+"according to the comments. (Ok, open it for me [Press any key to open "
+"file])"
+msgstr "请按照备注更新 “{0}” 文件的题目标题、学生姓名和分数。（好的，打开文件吧～【按任意键打开文件】）"
 
-#: src/fnschool/exam/score.py:996
+#: src/fnschool/exam/score.py:1001
 msgid ""
-"Ok, I have updated the question titles, student names and scores. (Press any "
-"key to continue)"
+"Ok, I have updated the question titles, student names and scores. (Press "
+"any key to continue)"
 msgstr "好了，我已经更新试题的标题、学生姓名和学生的分数了。 （按任意键继续）"
 
-#: src/fnschool/exam/score.py:1018
+#: src/fnschool/exam/score.py:1023
 msgid "Is the total score {0} points?"
 msgstr "总分是 {0} 分吗？"
 
-#: src/fnschool/exam/score.py:1020
+#: src/fnschool/exam/score.py:1025
 msgid "Is the total score {0} point?"
 msgstr "总分是 {0} 分吗？"
 
-#: src/fnschool/exam/score.py:1022
+#: src/fnschool/exam/score.py:1027
 msgid " (Yes: \"Y\",\"y\")"
 msgstr " （是的：“Y”、“y”）"
 
-#: src/fnschool/exam/score.py:1056
+#: src/fnschool/exam/score.py:1061
 msgid "The examination name \"{0}\" has been saved to \"{1}\"."
 msgstr "测试名 “{0}” 已被保存到 “{1}”。"
 
-#: src/fnschool/exam/score.py:1060
+#: src/fnschool/exam/score.py:1065
 msgid "The examination name has been saved to \"{0}\"."
 msgstr "测试名已被保存到 “{0}”。"
 
-#: src/fnschool/exam/score.py:1075
+#: src/fnschool/exam/score.py:1080
 msgid "The saved examination names are as follow:"
 msgstr "被保存的一些测试名如下："
 
-#: src/fnschool/exam/score.py:1077
+#: src/fnschool/exam/score.py:1082
 msgid "The saved examination name is as follow:"
 msgstr "仅有一个被保存的测试名，它是："
 
-#: src/fnschool/exam/score.py:1092
+#: src/fnschool/exam/score.py:1097
 msgid ""
-"Select the examination name you entered (index), or enter new examination "
-"name, please! (default: {0})"
-msgstr ""
-"选择以前你输入的测试名（输入序号），或者输入新的测试名。（默认：“{0}”）"
+"Select the examination name you entered (index), or enter new examination"
+" name, please! (default: {0})"
+msgstr "选择以前你输入的测试名（输入序号），或者输入新的测试名。（默认：“{0}”）"
 
-#: src/fnschool/exam/score.py:1134
+#: src/fnschool/exam/score.py:1139
 msgid ""
 "Hello~ tell {0} the examination name, please! (e.g: Class 5(1)/English "
 "Volume 1/Unit 1 Testing)"
-msgstr ""
-"您好～ 请告诉 {0} 您需要录入的测试名。（如：五年级1班/语文下册/第一单元测试"
-"卷）"
+msgstr "您好～ 请告诉 {0} 您需要录入的测试名。（如：五年级1班/语文下册/第一单元测试卷）"
 
 #: src/fnschool/exam/teacher.py:31
 msgid "scores_info"
@@ -1503,13 +1266,14 @@ msgstr "祝您万事如意！"
 #~ msgstr "已设置的月份："
 
 #~ msgid ""
-#~ "The built-in unit conversion logic is incomplete, so you need to change "
-#~ "the units (quantities) in the purchasing list spreadsheets to the basic "
-#~ "consumption unit (quantity).\n"
+#~ "The built-in unit conversion logic "
+#~ "is incomplete, so you need to "
+#~ "change the units (quantities) in the "
+#~ "purchasing list spreadsheets to the "
+#~ "basic consumption unit (quantity).\n"
 #~ "Okay, I got it? (ANY KEY)"
 #~ msgstr ""
-#~ "内置的单位转换逻辑并不完善，所以你需要把购入表单里面的单位和数量手动转换成"
-#~ "最基本的出库单位和数量。\n"
+#~ "内置的单位转换逻辑并不完善，所以你需要把购入表单里面的单位和数量手动转换成最基本的出库单位和数量。\n"
 #~ "好的，我知道了？（按任意键继续）"
 
 #~ msgid "Please add codes to get foods from your suppliers."
@@ -1523,8 +1287,10 @@ msgstr "祝您万事如意！"
 
 #~ msgid ""
 #~ "Sheet '{0}' was updated.\n"
-#~ "Press any key to continue when you have completed the foods allocation. "
-#~ "(There is no need to design for dates without food consumption)"
+#~ "Press any key to continue when you"
+#~ " have completed the foods allocation. "
+#~ "(There is no need to design for"
+#~ " dates without food consumption)"
 #~ msgstr ""
 #~ "工作表 “{0}” 已更新。\n"
 #~ "在你完成每天消耗设计后按任意建以继续。（没有消耗食材的日期不需要设计出库）"
@@ -1591,23 +1357,28 @@ msgstr "祝您万事如意！"
 
 #~ msgid ""
 #~ "Tips for Changsheng files:\n"
-#~ "You need to add the residue of last year or last semester: Open the first "
-#~ "spreadsheet you got from Changsheng, and add the 'residue' column, then "
-#~ "insert the 'residue' foods after the end of entered data, the 'residue' "
-#~ "column names you could set are:\n"
+#~ "You need to add the residue of "
+#~ "last year or last semester: Open "
+#~ "the first spreadsheet you got from "
+#~ "Changsheng, and add the 'residue' "
+#~ "column, then insert the 'residue' foods"
+#~ " after the end of entered data, "
+#~ "the 'residue' column names you could "
+#~ "set are:\n"
 #~ "\t{0}\n"
 #~ "The columns need to be updated are:\n"
 #~ "\t1. Inventory time: The time of residue foods inventorying.\n"
 #~ "\t2. The organization name or school name.\n"
 #~ "\t3. The food name.\n"
-#~ "\t4. The food count, fill in all count related columns if there are many "
-#~ "'food count columns'.\n"
+#~ "\t4. The food count, fill in "
+#~ "all count related columns if there "
+#~ "are many 'food count columns'.\n"
 #~ "\t5. The total price."
 #~ msgstr ""
 #~ "关于 昌盛 提供的文件的小提示：\n"
-#~ "您要把 去年 或 上个学期 的结余添加到昌盛提供的这个学期的第一个工作簿里面："
-#~ "打开工作簿，给工作簿添加“结余”列，然后在已有数据的后行中添加结余的所有食"
-#~ "材，您可以输入以下之一作为列名:\n"
+#~ "您要把 去年 或 上个学期 "
+#~ "的结余添加到昌盛提供的这个学期的第一个工作簿里面：打开工作簿，给工作簿添加“结余”列，然后在已有数据的后行中添加结余的所有食材，您可以输入以下之一作为列名:"
+#~ "\n"
 #~ "\t{0}\n"
 #~ "盘存食材的以下信息需要被添加：\n"
 #~ "\t1、盘存时间：食材的盘存时间。\n"
@@ -1617,12 +1388,12 @@ msgstr "祝您万事如意！"
 #~ "\t5、食材总价。"
 
 #~ msgid ""
-#~ "If new Xuelan milks is purchased. you have to add the purchasing "
-#~ "information of them into the end of the purchasing spreadsheet (e.g: the "
-#~ "spreadsheets Changsheng provided)."
-#~ msgstr ""
-#~ "如果有新购入的雪兰奶，您需要将购入信息添加在购入表单里面（比如添加在“昌"
-#~ "盛”提供的表单）。"
+#~ "If new Xuelan milks is purchased. "
+#~ "you have to add the purchasing "
+#~ "information of them into the end "
+#~ "of the purchasing spreadsheet (e.g: the"
+#~ " spreadsheets Changsheng provided)."
+#~ msgstr "如果有新购入的雪兰奶，您需要将购入信息添加在购入表单里面（比如添加在“昌盛”提供的表单）。"
 
 #~ msgid "Ok! I knew that.(press any key to continue)"
 #~ msgstr "好的，我知道了。（按任意键继续）"
@@ -1664,8 +1435,7 @@ msgstr "祝您万事如意！"
 #~ msgstr "好了，我已经更新了。（按任意键继续）"
 
 #~ msgid "Failed to read remaining foods from Sheet {0} of Spreadsheet {1}."
-#~ msgstr ""
-#~ "从 工作簿 “{1}” 中读取 工作表 “{0}” 失败。（可能为表头的盘存信息格式错误）"
+#~ msgstr "从 工作簿 “{1}” 中读取 工作表 “{0}” 失败。（可能为表头的盘存信息格式错误）"
 
 #~ msgid "Is residue"
 #~ msgstr "是库存食材"
@@ -1699,27 +1469,32 @@ msgstr "祝您万事如意！"
 
 #~ msgid ""
 #~ "A story about the infinite decimal:\n"
-#~ "In the process of handling bills by authors and many bill operators, "
-#~ "infinite decimals and the rounding display of spreadsheet have always "
-#~ "been the biggest trouble. So, We can eliminate it through a simple mean. "
-#~ "Firstly, we take the unit price with significant digits and multiply it "
-#~ "by the quantity to obtain a number less than the total price. Subtract "
-#~ "this number from the total price. Then, we obtain their difference and "
-#~ "allocate this difference to some unit prices. Finally, we eliminated it "
-#~ "in \"consuming\" sheet. \n"
-#~ "Although we have made some efforts, we are still unable to solve some "
-#~ "difficult problems (\"Remainder total prices\" of \"food\" sheets, etc).\n"
+#~ "In the process of handling bills "
+#~ "by authors and many bill operators, "
+#~ "infinite decimals and the rounding "
+#~ "display of spreadsheet have always been"
+#~ " the biggest trouble. So, We can "
+#~ "eliminate it through a simple mean. "
+#~ "Firstly, we take the unit price "
+#~ "with significant digits and multiply it"
+#~ " by the quantity to obtain a "
+#~ "number less than the total price. "
+#~ "Subtract this number from the total "
+#~ "price. Then, we obtain their difference"
+#~ " and allocate this difference to some"
+#~ " unit prices. Finally, we eliminated "
+#~ "it in \"consuming\" sheet. \n"
+#~ "Although we have made some efforts, "
+#~ "we are still unable to solve some"
+#~ " difficult problems (\"Remainder total "
+#~ "prices\" of \"food\" sheets, etc).\n"
 #~ "[Ok! I know that, disable the infinite decimals for me? (Yes:'Y','y') ]"
 #~ msgstr ""
 #~ "关于无限小数和表格四舍五入显示的故事：\n"
-#~ "　　在处理无限小数和表格四舍五入显示的过程中，此软件的作者以及很多账单操作"
-#~ "人员都倍感心力交瘁。我们为此想出了一个可以消除无限小数的方法（理论上）。首"
-#~ "先，我们在含有无限小数的单价上截取有效数（不进行四舍五入），用这个有效数乘"
-#~ "以数量，我们就得到一个比总价稍小的数，然后，我们用总价减去这个数得到差，我"
-#~ "们把这个差拆成多份分配给前几个单价，最后，我们在“出库”和“盘存”上几乎避免了"
-#~ "无限小数的麻烦。\n"
-#~ "　　尽管我们作出再多的努力，依然无法避免一些问题，“食材台账表的剩余量单"
-#~ "价”就是其中一个。\n"
+#~ "　　"
+#~ "在处理无限小数和表格四舍五入显示的过程中，此软件的作者以及很多账单操作人员都倍感心力交瘁。我们为此想出了一个可以消除无限小数的方法（理论上）。首先，我们在含有无限小数的单价上截取有效数（不进行四舍五入），用这个有效数乘以数量，我们就得到一个比总价稍小的数，然后，我们用总价减去这个数得到差，我们把这个差拆成多份分配给前几个单价，最后，我们在“出库”和“盘存”上几乎避免了无限小数的麻烦。"
+#~ "\n"
+#~ "　　尽管我们作出再多的努力，依然无法避免一些问题，“食材台账表的剩余量单价”就是其中一个。\n"
 #~ "【好的，我知道其中的逻辑细节了，我要“消除”无限小数？（是：“Y”、“y”）】"
 
 #~ msgid "disable infinite decimals"
@@ -1750,7 +1525,8 @@ msgstr "祝您万事如意！"
 #~ msgstr "请更新您的个人信息文件。"
 
 #~ msgid ""
-#~ "Profile label for data directory making, it shouldn't contain any space "
+#~ "Profile label for data directory making,"
+#~ " it shouldn't contain any space "
 #~ "character.\n"
 #~ "Supplier names are the supplier's alias."
 #~ msgstr ""
@@ -1810,3 +1586,181 @@ msgstr "祝您万事如意！"
 
 #~ msgid "Table_Unwarehousing Form"
 #~ msgstr "未入库明细表"
+
+#~ msgid "Workbook {0} doesn't exist."
+#~ msgstr "工作簿 {0} 不存在。"
+
+#~ msgid "Spreadsheet {0} was copied to {1} ."
+#~ msgstr "工作簿 “{0}” 被复制到 “{1}” 。"
+
+#~ msgid "Please design the consumptions of spreadsheet '{0}' ."
+#~ msgstr "请给工作簿 “{0}” 设计每天的消耗。"
+
+#~ msgid "Food sheets [{0}] have their tab colors recolor."
+#~ msgstr "这些食材台账表 [ {0} ] 的标签颜色已被重新上色。"
+
+#~ msgid "Food sheets [{0}] have been updated."
+#~ msgstr "食材台账表 {0} 已被更新。"
+
+#~ msgid "Got no check date column index of {0} ."
+#~ msgstr "未找到 {0} 的清点日期列索引。"
+
+#~ msgid "Got no organization name column of {0}"
+#~ msgstr "未找到 {0} 的机构名的列索引。"
+
+#~ msgid "Spreadsheet %s is being tested."
+#~ msgstr "正在检测工作簿 %s 。"
+
+#~ msgid "The food purchasing times of preadsheet {0} is {1} ."
+#~ msgstr "工作簿 {0} 的食材购入时间集是 {1} 。"
+
+#~ msgid "Workbook '{0}' doesn't exist, workbook '{1}' was copied to '{2}' ."
+#~ msgstr "工作簿 “{0}” 不存在，工作簿 “{1}” 被复制到 “{2}” 。"
+
+#~ msgid "Food name index"
+#~ msgstr "食材名索引"
+
+#~ msgid "Food count index"
+#~ msgstr "食材数量索引"
+
+#~ msgid "Food total price index"
+#~ msgstr "食材总价索引"
+
+#~ msgid "Food unit index"
+#~ msgstr "食材单位索引"
+
+#~ msgid "Food check date index"
+#~ msgstr "食材清点日期（购入日期）索引"
+
+#~ msgid "Food 'negligible' mark index"
+#~ msgstr "食材 “可忽略” 标记索引"
+
+#~ msgid "Food 'residue' mark index"
+#~ msgstr "食材 “剩余” 标记索引"
+
+#~ msgid "Food purchaser name index"
+#~ msgstr "食材购买方（学校名）索引"
+
+#~ msgid "There is not food of time node %s ,skip workbook designing."
+#~ msgstr "时间节点 %s 没有食材购入或剩余，跳过出库设计。"
+
+#~ msgid ""
+#~ "Workbook '{0}' was updated, please "
+#~ "design the daily foods consumption and"
+#~ " press ANY key to continue."
+#~ msgstr "工作簿 “{0}” 已更新，请设计每天的食材消耗然后按任意键继续。"
+
+#~ msgid "Workbook %s was read."
+#~ msgstr "已读取 工作簿 “%s” 。"
+
+#~ msgid "Read consumption from '{0}' ."
+#~ msgstr "已读取 工作簿 “{0}” 每天的消耗。"
+
+#~ msgid ""
+#~ "Unable to find {0} from {1}, You"
+#~ " can input it (1 base) directly "
+#~ "or give feedback to the maintainers "
+#~ "--> {2} ."
+#~ msgstr "从 {1} 中未找到 {0} ，您可以直接输入它（以1开始）或这给项目维护人员反馈 —> {2} 。"
+
+#~ msgid ""
+#~ "Please enter the 'purchase list file "
+#~ "path' of spreadsheet Changsheng provided, "
+#~ "or enter the directory path and "
+#~ "then {app_name} will read all "
+#~ "spreadsheets. (default: '{dpath0}')"
+#~ msgstr ""
+#~ "请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} "
+#~ "会读取所有的工作簿并获取购入数据。（默认的目录：{dpath0}）"
+
+#~ msgid "File or directory '%s' doesn't exist."
+#~ msgstr "文件 或 目录 “%s” 不存在。"
+
+#~ msgid "Entered directory: %s"
+#~ msgstr "键入的目录： %s"
+
+#~ msgid ""
+#~ "{app_name} desn't pick the index of "
+#~ "organization name column, input it (0"
+#~ " base) or '{wb_fpath}' will be "
+#~ "ignored."
+#~ msgstr "{app_name} 找不到机构名（学校名）列的索引，您可以直接输入索引，否则 “{wb_fpath}” 会被忽略。"
+
+#~ msgid "Organization name read from {0} are \"{1}\","
+#~ msgstr "从 “{0}” 中读取到的 机构名（学校名）是 “{1}”，"
+
+#~ msgid "Organization name read from {0} is \"{1}\", "
+#~ msgstr "从 “{0}” 中读取到的 机构名（学校名）是 “{1}”， "
+
+#~ msgid "but organization name of {0} is \"{1}\"."
+#~ msgstr "但是 “{0}” 的 机构名（学校名）是 “{1}”。"
+
+#~ msgid "'{wb_fpath}' was discarded."
+#~ msgstr "“{wb_fpath}” 已被舍去。"
+
+#~ msgid ""
+#~ "It seems you didn't set the "
+#~ "'negligible' mark for workbook '{0}' ,"
+#~ " update this workbook and press ANY"
+#~ " key to continue. (Add the "
+#~ "'negligible' column name even though "
+#~ "there is no negligible foods)"
+#~ msgstr "好像您没有 在 工作簿 “{0}” 添加 “非入库” 列，请添加 “非入库” 列，然后按任意键继续。（如果没有非入库的食材，只需添加列名）"
+
+#~ msgid "The column names of 'negligible' mark are following:"
+#~ msgstr "“非入库”食材的列名有以下可供选择（随意选择一个都可以被识别）："
+
+#~ msgid "Spreadsheet '%s' was used."
+#~ msgstr "工作表 “%s” 被使用。"
+
+#~ msgid ""
+#~ "Please enter the 'purchase list file "
+#~ "path' of spreadsheet Changsheng provided, "
+#~ "or enter the directory path and "
+#~ "then {app_name} will read all "
+#~ "spreadsheets. (default: '{seeking_dpath0}')"
+#~ msgstr ""
+#~ "请输入 昌盛 提供的购入单文件的路径，或者输入一个目录，{app_name} "
+#~ "会读取所有的工作簿并获取购入数据。（默认的目录：{seeking_dpath0}）"
+
+#~ msgid "Got no purchased foods of time node %s ."
+#~ msgstr "时间节点 %s 没有购入的食材。"
+
+#~ msgid ""
+#~ "It seems the residue foods from "
+#~ "last time node are going to be "
+#~ "consumed. The new foods of this "
+#~ "time node ({0})aren't purchased."
+#~ msgstr "好像时间节点 {0} 没有新购入的食材，消耗将只从剩余的食材中进行。"
+
+#~ msgid "There is no residue foods."
+#~ msgstr "没有结余的食材。"
+
+#~ msgid ""
+#~ "Sheet '{0}' was updated.\n"
+#~ "Press any key to continue when you have completed the foods allocation."
+#~ msgstr ""
+#~ "工作表 “{0}” 已更新。\n"
+#~ "在您完成每天消耗设计后按任意建以继续。"
+
+#~ msgid "Directory '%s' has been made."
+#~ msgstr "目录 “%s” 已创建。"
+
+#~ msgid "Workbook '{0}' was copied to '{1}'."
+#~ msgstr "工作簿 “{0}” 被复制到 “{1}” 。"
+
+#~ msgid "Workbook '%s' has been used."
+#~ msgstr "使用工作薄 “%s” 。"
+
+#~ msgid "Saving workbook. . ."
+#~ msgstr "正在保存......"
+
+#~ msgid "Workbook '%s' was saved."
+#~ msgstr "工作簿 “%s” 已保存。"
+
+#~ msgid "Directory %s was created."
+#~ msgstr "目录 “%s” 已创建。"
+
+#~ msgid "Copying workbook..."
+#~ msgstr "正在复制工作簿......"
+
