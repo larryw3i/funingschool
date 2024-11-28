@@ -177,14 +177,14 @@ class Food(Base):
                     print_error(
                         _(
                             "cannot find the starting index of form in "
-                            + '"{0}". (row {1})'
+                            + 'Sheet "{0}". (row {1})'
                         ).format(sheet.title, row[0].row)
                     )
                 if not row_index1:
                     print_error(
                         _(
                             "cannot find the ending index of form in "
-                            + '"{0}". (row {1})'
+                            + 'Sheet "{0}". (row {1})'
                         ).form(sheet.title, row[0].row)
                     )
                 if row_index0 and row_index1:

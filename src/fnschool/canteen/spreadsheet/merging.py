@@ -154,7 +154,10 @@ class Merging(Base):
             if rc1_value and "材料名称：（）" in rc1_value:
                 unit = [f.unit_name for f in bfoods if f.name == name]
                 unit = unit[0] if len(unit) > 0 else "斤"
-                sheet.cell(row_index, 1, f"材料名称：{name}（{unit}）")
+                sheet.cell(row_index, 1, "材料名称：{0}（{1}）".format(
+                    name,unit
+                )
+                )
 
         return sheet
 
