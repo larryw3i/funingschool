@@ -19,18 +19,18 @@ def set_exam(args):
 
 
 def parse_exam(subparsers):
-    parser_canteen = subparsers.add_parser(
+    parser_exam =  subparsers.add_parser(
         "exam", help=_("Examination related functions.")
     )
-    parser_canteen.add_argument(
+    parser_exam.add_argument(
         "action",
         choices=["enter", "read"],
         help=_(
             '"enter": Enter the examination scores. '
-            + '"read":Read the examination scores.'
+            + '"read": Read the examination scores.'
         ),
     )
-    parser_canteen.set_defaults(func=set_exam)
+    parser_exam.set_defaults(func=set_exam)
 
 
 # The end.
