@@ -25,10 +25,12 @@ def parse_canteen(subparsers):
     )
     parser_canteen.add_argument(
         "action",
-        choices=["mk_bill", "merge_foodsheets"],
+        choices=["mk_bill", "merge_foodsheets", ],
         help=_(
             'The functions of canteen. "mk_bill": Make bill. '
             + '"merge_foodsheets": Merge food sheets.'
         ),
     )
     parser_canteen.set_defaults(func=set_canteen)
+
+# The end.

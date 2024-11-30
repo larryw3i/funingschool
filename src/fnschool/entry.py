@@ -17,18 +17,11 @@ def get_entries():
     entries = [
         ".".join(
             os.path.splitext(p.relative_to(module_dpath.parent.as_posix()))[0]
-            .replace("\\", "/")
             .split("/")
         )
         for p in module_dpath.glob(f"*/{entry_name}")
     ]
     return entries
-
-
-def show_gui():
-    print_info(_("Just wait."))
-    pass
-
 
 def read_cli():
     parser = argparse.ArgumentParser(
@@ -40,13 +33,17 @@ def read_cli():
     entries = get_entries()
 
     for entry in entries:
+        entry_name = entry
         entry = importlib.import_module(entry)
         names = dir(entry)
         for name in names:
             attr = getattr(entry, name)
             if inspect.isfunction(attr):
                 if name.startswith("parse_"):
+                    print(entry_name,name)
                     attr(subparsers)
+                    break
+                    pass
 
     args = parser.parse_args()
 
