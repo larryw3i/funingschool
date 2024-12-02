@@ -31,6 +31,7 @@ def read_cli():
     )
     subparsers = parser.add_subparsers(help=_("The modules to run."))
     entries = get_entries()
+    added_entries = []
 
     for entry in entries:
         entry_name = entry
@@ -39,11 +40,11 @@ def read_cli():
         for name in names:
             attr = getattr(entry, name)
             if inspect.isfunction(attr):
-                if name.startswith("parse_"):
-                    print(entry_name,name)
+                if name.startswith("parse_") and not name in added_entries:
                     attr(subparsers)
-                    break
+                    added_entries.append(name)
                     pass
+
 
     args = parser.parse_args()
 
