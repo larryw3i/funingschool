@@ -45,6 +45,7 @@ def read_cli():
                     added_entries.append(name)
                     pass
 
+    del added_entries
 
     args = parser.parse_args()
 
@@ -54,6 +55,7 @@ def read_cli():
         parser.print_help()
 
     print_sponsor()
-
+    
+    del parser
 
 # The end.
