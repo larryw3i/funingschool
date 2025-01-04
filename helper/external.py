@@ -30,7 +30,7 @@ activate_fpath = (
 )
 
 if not Path(activate_fpath).exists():
-    sh_value = f"python3 -m venv {venv_dpath} --system-site-packages"
+    sh_value = f"python3 -m venv {venv_dpath}"
     os.system(sh_value)
     print(_('Virtual Environment "{0}" has been made.').format(venv_dpath))
 
