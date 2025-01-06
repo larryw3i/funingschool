@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-11-28 11:28+0800\n"
+"POT-Creation-Date: 2025-01-06 11:24+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -16,29 +16,25 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.14.0\n"
+"Generated-By: Babel 2.16.0\n"
 
 #: src/fnschool/config.py:26
 msgid "Configurations has been read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/entry.py:29
-msgid "Just wait."
-msgstr ""
-
-#: src/fnschool/entry.py:35
+#: src/fnschool/entry.py:28
 msgid "fnschool"
 msgstr ""
 
-#: src/fnschool/entry.py:36
+#: src/fnschool/entry.py:29
 msgid "Command line interface of fnschool."
 msgstr ""
 
-#: src/fnschool/entry.py:37
+#: src/fnschool/entry.py:30
 msgid "Enjoy it."
 msgstr ""
 
-#: src/fnschool/entry.py:39
+#: src/fnschool/entry.py:32
 msgid "The modules to run."
 msgstr ""
 
@@ -136,25 +132,35 @@ msgstr ""
 msgid "config"
 msgstr ""
 
+#: src/fnschool/canteeen/entry.py:19 src/fnschool/canteen/entry.py:24
+msgid "Canteen related functions."
+msgstr ""
+
+#: src/fnschool/canteeen/entry.py:24 src/fnschool/canteen/entry.py:29
+msgid ""
+"The functions of canteen. \"mk_bill\": Make bill. \"merge_foodsheets\": "
+"Merge food sheets."
+msgstr ""
+
 #: src/fnschool/canteen/bill.py:80 src/fnschool/canteen/bill.py:85
 #: src/fnschool/canteen/bill.py:100
 #, python-format
 msgid "%s can't change."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:203
+#: src/fnschool/canteen/bill.py:207
 msgid "Food classes files:"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:214
+#: src/fnschool/canteen/bill.py:218
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:224
+#: src/fnschool/canteen/bill.py:228
 msgid "Preset food classes were read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:238
+#: src/fnschool/canteen/bill.py:242
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr ""
 
@@ -172,19 +178,9 @@ msgstr ""
 msgid "Function is not found."
 msgstr ""
 
-#: src/fnschool/canteen/entry.py:24
-msgid "Canteen related functions."
-msgstr ""
-
-#: src/fnschool/canteen/entry.py:29
-msgid ""
-"The functions of canteen. \"mk_bill\": Make bill. \"merge_foodsheets\": "
-"Merge food sheets."
-msgstr ""
-
 #: src/fnschool/canteen/food.py:47 src/fnschool/canteen/operator.py:67
 #: src/fnschool/canteen/operator.py:72
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:201
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:204
 msgid "({0})"
 msgstr ""
 
@@ -500,59 +496,59 @@ msgstr ""
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:175
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:178
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:187
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:190
 msgid "New purchased food for date {0} is:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:189
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:192
 msgid "New purchased foods for date {0} are:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:211
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:214
 msgid "Negligible foods are not listed."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:214
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:217
 msgid "There is no purchased food for {0}."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:220
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:223
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I "
 "know [press any key to continue])"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:230
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:233
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:270
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:273
 msgid "{year}.{month}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:299
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:302
 msgid "Consuming days of {0} ({1}):"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:301
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:304
 msgid "Consuming days of {0}:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:309
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:312
 msgid "{0} days in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:311
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:314
 msgid "{0} day in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:315
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:318
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
@@ -945,7 +941,7 @@ msgstr ""
 
 #: src/fnschool/exam/entry.py:28
 msgid ""
-"\"enter\": Enter the examination scores. \"read\":Read the examination "
+"\"enter\": Enter the examination scores. \"read\": Read the examination "
 "scores."
 msgstr ""
 

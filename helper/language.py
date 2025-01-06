@@ -35,7 +35,7 @@ app_language_code = get_language_code()
 
 language_code_is_zh_CN = "zh_CN" in app_language_code
 is_zh_CN = language_code_is_zh_CN
-t_domain = "helper"
+t_domain = Path(__file__).parent.name
 
 T = gettext.translation(
     t_domain, locale_dir, fallback=True, languages=[app_language_code]
