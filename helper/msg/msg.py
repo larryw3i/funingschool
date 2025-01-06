@@ -61,6 +61,7 @@ class Msg:
                 + f" -d {locales_dpath}"
                 + f" -D {module_name}"
             )
+
             sh(sh_value)
 
     def add(self, language_code):
