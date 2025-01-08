@@ -16,12 +16,14 @@ entry_name = "entry.py"
 def get_entries():
     entries = [
         ".".join(
-            os.path.splitext(p.relative_to(module_dpath.parent.as_posix()))[0]
-            .split("/")
+            os.path.splitext(p.relative_to(module_dpath.parent.as_posix()))[
+                0
+            ].split("/")
         )
         for p in module_dpath.glob(f"*/{entry_name}")
     ]
     return entries
+
 
 def read_cli():
     parser = argparse.ArgumentParser(
@@ -55,7 +57,8 @@ def read_cli():
         parser.print_help()
 
     print_sponsor()
-    
+
     del parser
+
 
 # The end.

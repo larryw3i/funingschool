@@ -19,7 +19,7 @@ def set_exam(args):
 
 
 def parse_exam(subparsers):
-    parser_exam =  subparsers.add_parser(
+    parser_exam = subparsers.add_parser(
         "exam", help=_("Examination related functions.")
     )
     parser_exam.add_argument(

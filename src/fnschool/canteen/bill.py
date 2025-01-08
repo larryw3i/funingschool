@@ -164,7 +164,6 @@ class Bill:
 
     def make_spreadsheets_g(self):
         pass
-         
 
     def make_spreadsheets(self):
         self.spreadsheet.update()

@@ -150,13 +150,14 @@ class PreConsuming(Base):
                 sheet.cell(row_index, 2, wbfood.get_remainder(mday_m1))
                 sheet.cell(row_index, 4, wbfood.unit_price)
                 if wbfood.meal_type and not last_meal_type == wbfood.meal_type:
-                    new_meal_type_rows.append([wbfood.meal_type,row_index])
+                    new_meal_type_rows.append([wbfood.meal_type, row_index])
                     last_meal_type = wbfood.meal_type
 
             for row_index in range(row_index + 1, sheet.max_row + 1):
                 sheet.cell(row_index, 1, "")
                 sheet.cell(row_index, 2, "")
-                    sheet.cell(row_index, 4, "")
+                sheet.cell(row_index, 4, "")
+                pass
 
             new_meal_type_rows = [
                 [new_meal_type_rows[i][1], new_meal_type_rows[i + 1][1]]
