@@ -302,7 +302,7 @@ class Food(Base):
                     w_unit_price = 0
                 w_total_price = w_count * w_unit_price
                 
-                if sheet.cell(row_index,6).value:
+                if not sheet.cell(row_index,6).value:
                     sheet.cell(row_index, 6, w_total_price)
 
                 c_count = sheet.cell(row_index, 7).value
@@ -317,7 +317,7 @@ class Food(Base):
                     c_unit_price = 0
                 c_total_price = c_count * c_unit_price
 
-                if sheet.cell(row_index, 9).value:
+                if not sheet.cell(row_index, 9).value:
                     sheet.cell(row_index, 9, c_total_price)
 
                 i_count = sheet.cell(row_index, 10).value
@@ -335,7 +335,7 @@ class Food(Base):
                 if i_count == 0:
                     sheet.cell(row_index, 10, "0")
 
-                if sheet.cell(row_index, 12).value:
+                if not sheet.cell(row_index, 12).value:
                     sheet.cell(row_index, 12, i_total_price)
 
 
