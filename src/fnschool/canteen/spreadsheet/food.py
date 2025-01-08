@@ -235,9 +235,6 @@ class Food(Base):
                         w_unit_price_n = 0
                     w_total_price_n = w_count_n * w_unit_price_n
 
-                    if sheet.cell(row_indexp1, 6).value is None:
-                        sheet.cell(row_indexp1, 6, w_total_price_n)
-
                     c_count_n = sheet.cell(row_indexp1, 7).value
                     c_unit_price_n = sheet.cell(row_indexp1, 8).value
                     if str(c_count_n).replace(".", "").isnumeric():
@@ -250,9 +247,6 @@ class Food(Base):
                         c_unit_price_n = 0
                     c_total_price_n = c_count_n * c_unit_price_n
 
-                    if sheet.cell(row_indexp1, 9).value is None:
-                        sheet.cell(row_indexp1, 9, c_total_price_n)
-
                     i_count_n = sheet.cell(row_indexp1, 10).value
                     i_unit_price_n = sheet.cell(row_indexp1, 11).value
                     if str(i_count_n).replace(".", "").isnumeric():
@@ -264,9 +258,6 @@ class Food(Base):
                     else:
                         i_unit_price_n = 0
                     i_total_price_n = i_count_n * i_unit_price_n
-
-                    if sheet.cell(row_indexp1, 12).value is None:
-                        sheet.cell(row_indexp1, 12, i_unit_price_n)
 
                     i_count = sheet.cell(row_index, 10).value
                     i_unit_price = sheet.cell(row_index, 11).value
@@ -291,13 +282,69 @@ class Food(Base):
                         sheet.cell(
                             row_indexp1,
                             12,
-                            i_unit_price * (i_count + w_count_n - c_count_n),
+                            i_unit_price * (i_count + w_count_n - c_count_n)
                         )
 
                         pass
                     pass
                 pass
+
+            for row_index in range(ri0,ri1+1):
+                w_count = sheet.cell(row_index, 4).value
+                w_unit_price = sheet.cell(row_index, 5).value
+                if str(w_count).replace(".", "").isnumeric():
+                    w_count = float(w_count)
+                else:
+                    w_count = 0
+                if str(w_unit_price).replace(".", "").isnumeric():
+                    w_unit_price = float(w_unit_price)
+                else:
+                    w_unit_price = 0
+                w_total_price = w_count * w_unit_price
+                
+                if sheet.cell(row_index,6).value:
+                    sheet.cell(row_index, 6, w_total_price)
+
+                c_count = sheet.cell(row_index, 7).value
+                c_unit_price = sheet.cell(row_index, 8).value
+                if str(c_count).replace(".", "").isnumeric():
+                    c_count = float(c_count)
+                else:
+                    c_count = 0
+                if str(c_unit_price).replace(".", "").isnumeric():
+                    c_unit_price = float(c_unit_price)
+                else:
+                    c_unit_price = 0
+                c_total_price = c_count * c_unit_price
+
+                if sheet.cell(row_index, 9).value:
+                    sheet.cell(row_index, 9, c_total_price)
+
+                i_count = sheet.cell(row_index, 10).value
+                i_unit_price = sheet.cell(row_index, 11).value
+                if str(i_count).replace(".", "").isnumeric():
+                    i_count = float(i_count)
+                else:
+                    i_count = 0
+                if str(i_unit_price).replace(".", "").isnumeric():
+                    i_unit_price = float(i_unit_price)
+                else:
+                    i_unit_price = 0
+                i_total_price = i_count * i_unit_price
+
+                if i_count == 0:
+                    sheet.cell(row_index, 10, "0")
+
+                if sheet.cell(row_index, 12).value:
+                    sheet.cell(row_index, 12, i_total_price)
+
+
+
+
+            pass
+
         print_info(_("Update completed!"))
+
         pass
 
     def update_summation(self, sheet):
