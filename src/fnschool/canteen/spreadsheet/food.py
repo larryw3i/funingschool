@@ -235,6 +235,9 @@ class Food(Base):
                         w_unit_price_n = 0
                     w_total_price_n = w_count_n * w_unit_price_n
 
+                    if sheet.cell(row_indexp1, 6).value is None:
+                        sheet.cell(row_indexp1, 6, w_total_price_n)
+
                     c_count_n = sheet.cell(row_indexp1, 7).value
                     c_unit_price_n = sheet.cell(row_indexp1, 8).value
                     if str(c_count_n).replace(".", "").isnumeric():
@@ -247,6 +250,9 @@ class Food(Base):
                         c_unit_price_n = 0
                     c_total_price_n = c_count_n * c_unit_price_n
 
+                    if sheet.cell(row_indexp1, 9).value is None:
+                        sheet.cell(row_indexp1, 9, c_total_price_n)
+
                     i_count_n = sheet.cell(row_indexp1, 10).value
                     i_unit_price_n = sheet.cell(row_indexp1, 11).value
                     if str(i_count_n).replace(".", "").isnumeric():
@@ -258,6 +264,9 @@ class Food(Base):
                     else:
                         i_unit_price_n = 0
                     i_total_price_n = i_count_n * i_unit_price_n
+
+                    if sheet.cell(row_indexp1, 12).value is None:
+                        sheet.cell(row_indexp1, 12, i_unit_price_n)
 
                     i_count = sheet.cell(row_index, 10).value
                     i_unit_price = sheet.cell(row_index, 11).value
