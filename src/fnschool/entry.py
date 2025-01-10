@@ -16,12 +16,15 @@ entry_name = "entry.py"
 def get_entries():
     entries = [
         ".".join(
-            os.path.splitext(p.relative_to(module_dpath.parent.as_posix()))[
+            os.path.splitext(
+                p.relative_to(module_dpath.parent.as_posix()).as_posix()
+            )[
                 0
             ].split("/")
         )
         for p in module_dpath.glob(f"*/{entry_name}")
     ]
+    print(entries)
     return entries
 
 

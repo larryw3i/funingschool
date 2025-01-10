@@ -147,9 +147,10 @@ class Base:
 
         return bill_year
 
-    def update_food_sheet_year(self, sheet):
+    def update_food_sheet_year(self, sheet, year=None):
         wb = sheet.parent
-        bill_year = self.get_bill_year(wb)
+        bill_year = year or self.get_bill_year(wb)
+        bill_year = str(bill_year)
         csheet = sheet
         for row_index in range(1, csheet.max_row + 1):
             cell0_value = str(csheet.cell(row_index, 1).value).replace(" ", "")
