@@ -2,7 +2,7 @@ import subprocess
 
 from helper import *
 from helper.msg.fnmsg import Msg
-from helper.project.fnproject import Project
+from helper.project.info import Info
 
 
 class Build:

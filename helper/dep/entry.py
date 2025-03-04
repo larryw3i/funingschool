@@ -4,7 +4,7 @@ from helper import *
 
 
 def set_dep(args):
-    from helper.dep.dep import Dep
+    from helper.dep.pkg import Pkg
 
     if args.action in "install":
         dep = Dep()

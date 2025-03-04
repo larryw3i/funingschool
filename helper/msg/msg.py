@@ -1,6 +1,6 @@
 from helper import *
 
-from helper.project.project import Project
+from helper.project.info import Info as ProjectInfo
 
 
 class Msg:
@@ -12,7 +12,7 @@ class Msg:
     @property
     def proj(self):
         if not self._proj:
-            proj = Project()
+            proj = ProjectInfo()
             self._proj = proj
         return self._proj
 

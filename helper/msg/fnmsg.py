@@ -1,6 +1,6 @@
 from helper import *
 
-from helper.project.fnproject import Project
+from helper.project.info import Info
 
 
 class Msg:

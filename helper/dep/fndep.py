@@ -1,6 +1,6 @@
 import tomllib
 from helper import *
-from helper.project.project import Project
+from helper.project.info import Info
 
 
 class Dep:
