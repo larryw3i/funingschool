@@ -24,7 +24,6 @@ def get_entries():
         )
         for p in module_dpath.glob(f"*/{entry_name}")
     ]
-    print(entries)
     return entries
 
 
