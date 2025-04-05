@@ -282,14 +282,14 @@ class Food(Base):
                         sheet.cell(
                             row_indexp1,
                             12,
-                            i_unit_price * (i_count + w_count_n - c_count_n)
+                            i_unit_price * (i_count + w_count_n - c_count_n),
                         )
 
                         pass
                     pass
                 pass
 
-            for row_index in range(ri0,ri1+1):
+            for row_index in range(ri0, ri1 + 1):
                 w_count = sheet.cell(row_index, 4).value
                 w_unit_price = sheet.cell(row_index, 5).value
                 if str(w_count).replace(".", "").isnumeric():
@@ -301,8 +301,8 @@ class Food(Base):
                 else:
                     w_unit_price = 0
                 w_total_price = w_count * w_unit_price
-                
-                if not sheet.cell(row_index,6).value:
+
+                if not sheet.cell(row_index, 6).value:
                     sheet.cell(row_index, 6, w_total_price)
 
                 c_count = sheet.cell(row_index, 7).value
@@ -337,9 +337,6 @@ class Food(Base):
 
                 if not sheet.cell(row_index, 12).value:
                     sheet.cell(row_index, 12, i_total_price)
-
-
-
 
             pass
 

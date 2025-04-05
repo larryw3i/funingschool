@@ -15,6 +15,12 @@ def set_canteen(args):
     elif args.action in "merge_foodsheets":
         bill.merge_foodsheets()
 
+    elif args.action in "gen_daybook":
+        from fnschool.canteen.daybook import DayBook
+
+        daybook = DayBook()
+        daybook.gen()
+
     else:
         print_info(_("Function is not found."))
 
@@ -28,6 +34,7 @@ def parse_canteen(subparsers):
         choices=[
             "mk_bill",
             "merge_foodsheets",
+            "gen_daybook",
         ],
         help=_(
             'The functions of canteen. "mk_bill": Make bill. '
