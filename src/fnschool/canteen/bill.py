@@ -28,7 +28,7 @@ class Bill:
     @property
     def currency(self):
         if not self._currency:
-            self._currency = Currency().CNY if is_zh_CN else Currency().CNY
+            self._currency = Currency().get()
         return self._currency
 
     @property

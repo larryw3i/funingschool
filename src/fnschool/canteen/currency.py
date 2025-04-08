@@ -1,12 +1,24 @@
 import os
 import sys
+from abc import *
 
 from fnschool import *
 
 
-class Currency_CNY(Currency):
+class CurrencyBase:
+    def __init__(self, name=None, unit=None, mark=None):
+        self.name = name
+        self.unit = unit
+        self.mark = mark
+
+    @abstractmethod
+    def locale(self):
+        pass
+
+
+class Currency_CNY(CurrencyBase):
     def __init__(self, name="CNY", unit=_("CNY"), mark="\u00a5"):
-        super.__init__(name, unitm, mark)
+        super().__init__(name, unit, mark)
 
     def locale(self, value):
         format_char = [
@@ -43,10 +55,10 @@ class Currency_CNY(Currency):
             "捌",
             "玖",
         ]
-        nan_error_msg = _("%s is NOT a NUMBER.") % value 
+        nan_error_msg = _("%s is NOT a NUMBER.") % value
 
         if type(value) == str:
-            if not value.replace(".","").isnumeric():
+            if not value.replace(".", "").isnumeric():
                 print_error(nan_error_msg)
 
         real_numbers = []
@@ -90,17 +102,13 @@ class Currency_CNY(Currency):
 
 
 class Currency:
-    def __init__(self, name=None, unit=None, mark=None):
-        self.name = name
-        self.unit = unit
-        self.mark = mark
+    def __init__(self):
+        pass
 
     def get(self):
         return Currency_CNY() if is_zh_CN else Currency_CNY()
 
-    @abstractmethod
-    def locale(self):
-        pass
+    pass
 
 
 # The end.

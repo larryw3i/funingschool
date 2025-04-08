@@ -37,7 +37,8 @@ class Operator(User):
             + "{0} will use it as the form title ("
             + '"purchasing summary" form, '
             + '"consuming summary" form, etc). '
-            + 'e.g: "富宁县那能乡中小学". '
+            + 'e.g: "Primary and secondary schools in '
+            + 'Naneng Township, Funing County". '
             + "If you haven't noticed it, "
             + "you can check the previous bill "
             + "first and then let {0} know."

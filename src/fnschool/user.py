@@ -17,6 +17,7 @@ class User:
         self._profile = {}
         self._config = None
         self.is_male_key = _("is_male")
+        self.use_tk = os.environ.get("use_tk") == "1"
 
     def __str__(self):
         return self.name
@@ -87,139 +88,175 @@ class User:
 
     @property
     def name(self):
+        if not self._name:
+            self._name = (
+                self.get_name_from_tk()
+                if self.use_tk
+                else self.get_name_from_cli()
+            )
+
+            pass
+
+        return self._name
+
+    def get_name_from_tk(self):
+        name = None
+        root = tk.Tk()
+        root.title(self.ask_name_s)
+        root.bind("<Return>", lambda e: root.destroy())
+
+        name_var = tk.StringVar()
+        notername_label = tk.Label(root, text=_("Enter your name:"))
+        notername_entry = tk.Entry(root, textvariable=name_var)
+        submit_button = tk.Button(
+            root,
+            text=_("OK"),
+            command=root.destroy,
+        )
+        notername_label.grid(row=0, column=0)
+        notername_entry.grid(row=0, column=1)
+        submit_button.grid(row=1, column=1, sticky=tk.E)
+        notername_entry.focus_set()
+        root.mainloop()
+
+        name = name_var.get()
+        return name
+        pass
+
+    def get_name_from_cli(self):
         name_writed_s = _('Your name has been saved to "{0}".').format(
             self.name_fpath
         )
 
-        if not self._name:
-            name = None
-            with open(self.name_fpath, "r", encoding="utf-8") as f:
-                name = f.read().replace(" ", "").strip()
+        name = None
+        name1 = None
+        with open(self.name_fpath, "r", encoding="utf-8") as f:
+            name = f.read().replace(" ", "").strip()
+
+        print_info(
+            (
+                _('The saved names have been read from "{0}".')
+                if "\n" in name
+                else (
+                    _('No name was read from "{0}".')
+                    if len(name) < 1
+                    else _('The saved name has been read from "{0}".')
+                )
+            ).format(self.name_fpath)
+        )
+
+        if "\n" in name:
+            names = name.split("\n")
+
+            name0 = None
+            if ">" in name:
+                name0 = name.split(">")[1]
+                if "\n" in name0:
+                    name0 = name0.split("\n")[0]
+            else:
+                name0 = names[0]
 
             print_info(
-                (
-                    _('The saved names have been read from "{0}".')
-                    if "\n" in name
-                    else (
-                        _('No name was read from "{0}".')
-                        if len(name) < 1
-                        else _('The saved name has been read from "{0}".')
-                    )
-                ).format(self.name_fpath)
+                _("The names saved by {0} are as follows:").format(app_name)
             )
 
-            if "\n" in name:
-                names = name.split("\n")
+            names_len = len(names)
+            names_len2 = len(str(names_len))
+            name_s = sqr_slist(
+                [f"({i+1:>{names_len2}}) {n}" for i, n in enumerate(names)]
+            )
+            print_warning(name_s)
 
-                name0 = None
-                if ">" in name:
-                    name0 = name.split(">")[1]
-                    if "\n" in name0:
-                        name0 = name0.split("\n")[0]
-                else:
-                    name0 = names[0]
+            for i in range(0, 3):
+                if i > 2:
+                    print_error(_("Unexpected value was got. Exit."))
+                    exit()
 
                 print_info(
-                    _("The names saved by {0} are as follows:").format(app_name)
-                )
-
-                names_len = len(names)
-                names_len2 = len(str(names_len))
-                name_s = sqr_slist(
-                    [f"({i+1:>{names_len2}}) {n}" for i, n in enumerate(names)]
-                )
-                print_warning(name_s)
-
-                for i in range(0, 3):
-                    if i > 2:
-                        print_error(_("Unexpected value was got. Exit."))
-                        exit()
-
-                    print_info(
-                        _(
-                            "Enter the Number of your name, "
-                            + 'or enter your name. ("Enter" for "{0}")'
-                        ).format(name0)
-                    )
-
-                    n_input = get_input()
-
-                    if n_input.isnumeric():
-                        n_input = int(n_input) - 1
-                        if n_input > names_len or n_input < 0:
-                            continue
-                        name0 = names[n_input]
-                        if name0.startswith(">"):
-                            name0 = name0[1:]
-                        break
-
-                    elif n_input == "":
-                        self._name = name0
-                        break
-                    else:
-                        name0 = n_input
-                        break
-
-                if not self._name:
-                    if name0 in names:
-                        names.remove(name0)
-                    elif (">" + name0) in names:
-                        names.remove((">" + name0))
-
-                    self._name = name0
-                    name0 = ">" + name0
-                    names = [n.replace(">", "") for n in names]
-
-                    with open(self.name_fpath, "w", encoding="utf-8") as f:
-                        f.write("\n".join([name0] + names))
-
-                    print_info(name_writed_s)
-
-            elif len(name) > 0:
-
-                if ">" in name:
-                    name = name[1:]
-
-                print_warning(
                     _(
-                        "Hi~ is {0} your name? or enter your "
-                        + "name, please! (Yes: 'Y','y','')"
-                    ).format(name)
+                        "Enter the Number of your name, "
+                        + 'or enter your name. ("Enter" for "{0}")'
+                    ).format(name0)
                 )
 
-                n_input = input("> ").replace(" ", "")
-                if not n_input in "Yy":
-                    name0 = ">" + n_input
+                n_input = get_input()
 
-                    with open(self.name_fpath, "w", encoding="utf-8") as f:
-                        f.write("\n".join([name0, name]))
+                if n_input.isnumeric():
+                    n_input = int(n_input) - 1
+                    if n_input > names_len or n_input < 0:
+                        continue
+                    name0 = names[n_input]
+                    if name0.startswith(">"):
+                        name0 = name0[1:]
+                    break
 
-                    print_info(name_writed_s)
-                    self._name = n_input
+                elif n_input == "":
+                    name1 = name0
+                    break
                 else:
-                    self._name = name
+                    name0 = n_input
+                    break
 
-            else:
+            if not name1:
+                if name0 in names:
+                    names.remove(name0)
+                elif (">" + name0) in names:
+                    names.remove((">" + name0))
 
-                print_warning(self.ask_name_s)
-                for i in range(0, 3):
-                    n_input = get_input().replace(" ", "")
-                    n_input_len = len(n_input)
-                    if n_input_len > 0:
-                        self._name = n_input
-                        break
-                    elif n_input_len < 1 and i < 3:
-                        print_error(_("Unexpected value was got."))
-                    else:
-                        print_error(_("Unexpected value was got. Exit."))
-                        exit()
+                name1 = name0
+                name0 = ">" + name0
+                names = [n.replace(">", "") for n in names]
 
                 with open(self.name_fpath, "w", encoding="utf-8") as f:
-                    f.write(">" + self._name)
+                    f.write("\n".join([name0] + names))
 
                 print_info(name_writed_s)
 
-        return self._name
+        elif len(name) > 0:
+
+            if ">" in name:
+                name = name[1:]
+
+            print_warning(
+                _(
+                    "Hi~ is {0} your name? or enter your "
+                    + "name, please! (Yes: 'Y','y','')"
+                ).format(name)
+            )
+
+            n_input = input("> ").replace(" ", "")
+            if not n_input in "Yy":
+                name0 = ">" + n_input
+
+                with open(self.name_fpath, "w", encoding="utf-8") as f:
+                    f.write("\n".join([name0, name]))
+
+                print_info(name_writed_s)
+                name1 = n_input
+            else:
+                name1 = name
+
+        else:
+
+            print_warning(self.ask_name_s)
+            for i in range(0, 3):
+                n_input = get_input().replace(" ", "")
+                n_input_len = len(n_input)
+                if n_input_len > 0:
+                    name1 = n_input
+                    break
+                elif n_input_len < 1 and i < 3:
+                    print_error(_("Unexpected value was got."))
+                else:
+                    print_error(_("Unexpected value was got. Exit."))
+                    exit()
+
+            with open(self.name_fpath, "w", encoding="utf-8") as f:
+                f.write(">" + name1)
+
+            print_info(name_writed_s)
+
+        return name1
 
     @property
     def dpath(self):

@@ -1,8 +1,11 @@
 import os
 import sys
+import tkinter as tk
+from tkinter import ttk
 
 from fnschool import *
-from fnschool.operator import *
+from fnschool.canteen.noter import *
+from fnschool.canteen.path import *
 from fnschool.canteen.currency import *
 from fnschool.canteen.forms.cover import Cover as CoverForm
 from fnschool.canteen.forms.purchase import (
@@ -19,11 +22,15 @@ from fnschool.canteen.forms.goods import Goods as GoodsForm
 
 class DayBook:
     def __init__(self):
-        self._operator = None
+        self._noter = None
         self._currency = None
+
+        os.environ["use_tk"] = "1"
+
         pass
 
     def gen(self):
+        print(self.noter.name)
         pass
 
     @property
@@ -34,10 +41,10 @@ class DayBook:
         pass
 
     @property
-    def operator(self):
-        if not self._operator:
-            self._operator = Operator(self)
-        return self._operator
+    def noter(self):
+        if not self._noter:
+            self._noter = Noter(user_daybook_dpath, noter_name_fpath)
+        return self._noter
         pass
 
 
