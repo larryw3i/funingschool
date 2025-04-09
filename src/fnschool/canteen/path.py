@@ -15,7 +15,7 @@ operator_name_fpath = user_canteen_dpath / (_("operator_name") + ".txt")
 documents_dpath = Path.home() / "Documents"
 
 user_daybook_dpath = user_canteen_dpath / _("daybook")
-noter_name_fpath = user_canteen_dpath / (_("noter_name") + ".txt")
+user_daybook_cfg_fpath = user_canteen_dpath / (_("config") + ".toml")
 
 for d in [
     user_canteen_dpath,
@@ -23,7 +23,7 @@ for d in [
     if not d.exists():
         os.makedirs(d, exist_ok=True)
 
-for f in [operator_name_fpath, noter_name_fpath]:
+for f in [operator_name_fpath, user_daybook_cfg_fpath]:
     if not f.exists():
         with open(f, "w", encoding="utf-8") as _f:
             _f.write("")

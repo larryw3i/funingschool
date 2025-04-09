@@ -7,6 +7,14 @@ app_author = "larryw3i"
 app_version = None
 
 
+def use_tk(yes=None):
+    if yes:
+        os.environ["use_tk"] = '1'
+        return yes
+    else:
+        env = os.environ.get("use_tk") == '1'
+        return env
+
 def get_app_version():
 
     global app_version

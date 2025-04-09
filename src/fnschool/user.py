@@ -6,9 +6,9 @@ from fnschool.config import *
 
 
 class User:
-    def __init__(self, parent_dpath=None, name_fpath=None, ask_name_s=None):
-        self.parent_dpath = parent_dpath
-        self.name_fpath = name_fpath
+    def __init__(self,  config_fpath, parent_dpath=None, ask_name_s=None):
+        self.config_fpath = config_fpath
+        self.parent_dpath = parent_dpath or self.config_fpath.parent
         self.ask_name_s = ask_name_s or _("Enter your name, please!")
 
         self._name = None
@@ -17,74 +17,34 @@ class User:
         self._profile = {}
         self._config = None
         self.is_male_key = _("is_male")
-        self.use_tk = os.environ.get("use_tk") == "1"
+        self._saved_names = None
+        self.use_tk = use_tk()
+        self.saved_names_key=_("Saved Name")
 
     def __str__(self):
         return self.name
 
-    def save_profile(self):
-        profile = self.profile
-        with open(self.profile_fpath, "w", encoding="utf-8") as f:
-            f.write("\n".join([f'"{k}"="{v}"' for k, v in profile.items()]))
-        return profile
 
     @property
-    def profile_fpath(self):
-        fpath = self.config_dpath / (_("profile") + ".toml")
-        if not fpath.exists():
-            with open(fpath, "w+", encoding="utf-8") as f:
-                f.write("")
-        return fpath
+    def saved_names(self):
+        if not self._saved_names:
+            names = self.config.get(self.saved_names_key,[""])
+            self._saved_names = names
+        return self._saved_names        
+        pass
 
-    @property
-    def profile(self):
-        if not self._profile:
-            with open(self.profile_fpath, "rb") as f:
-                self._profile = tomllib.load(f)
-        return self._profile
+    def save_name(self, name):
+        if not name in self.saved_names:
+            self._saved_names.insert(0,name)
+            self.config[self.saved_names_key]=self._saved_names
+            self.save_config()
+            pass
 
-    def get_profile(self, key, info=None, allow_blank=False):
-        profile = self.profile
-        if not key in profile.keys() or profile.get(key).strip() == "":
-            print_warning(
-                info or _("Please tell {0} the {1}.").format(app_name, key)
-            )
-            i_value = None
-            for i in range(0, 3):
-                i_value = get_input().replace(" ", "")
-                if len(i_value) > 0:
-                    break
-                if allow_blank:
-                    i_value = ""
-                    break
-                print_error(_("Unexpected value got."))
-                if i >= 2:
-                    exit()
-
-            self.profile[key] = i_value
-            self.save_profile()
+        if not self.use_tk:
             print_info(
-                _(
-                    '"{0}" has been saved to "{1}". '
-                    + "(Ok! I know that. "
-                    + "[Press any key to continue])"
-                ).format(key, self.profile_fpath)
+                _("Name \"%s\" has been saved.")
             )
-            get_input()
-
-        return self.profile[key]
-
-    @property
-    def is_male(self):
-        m = self.get_profile(
-            self.is_male_key,
-            info=_(
-                "Excuse me, could you tell me your gender? "
-                + "('F' for \"Female\", 'M' for \"Male\","
-                + "default: 'F')"
-            ),
-        )
-        return m.lower() == "m"
+        pass
 
     @property
     def name(self):
@@ -99,6 +59,7 @@ class User:
 
         return self._name
 
+
     def get_name_from_tk(self):
         name = None
         root = tk.Tk()
@@ -107,30 +68,39 @@ class User:
 
         name_var = tk.StringVar()
         notername_label = tk.Label(root, text=_("Enter your name:"))
-        notername_entry = tk.Entry(root, textvariable=name_var)
+        notername_combo = ttk.Combobox(
+            root, 
+            textvariable=name_var,
+            values = self.saved_names
+        )
+        notername_combo.set(self.saved_names[0])
         submit_button = tk.Button(
             root,
             text=_("OK"),
-            command=root.destroy,
         )
+        closing_lambda = lambda: [
+            root.destroy()
+        ]
+        submit_button.config(command = closing_lambda)
         notername_label.grid(row=0, column=0)
-        notername_entry.grid(row=0, column=1)
+        notername_combo.grid(row=0, column=1)
         submit_button.grid(row=1, column=1, sticky=tk.E)
-        notername_entry.focus_set()
+        notername_combo.focus_set()
         root.mainloop()
 
         name = name_var.get()
+        self.save_name(name)
         return name
         pass
 
     def get_name_from_cli(self):
         name_writed_s = _('Your name has been saved to "{0}".').format(
-            self.name_fpath
+            self.config_fpath
         )
 
         name = None
         name1 = None
-        with open(self.name_fpath, "r", encoding="utf-8") as f:
+        with open(self.config_fpath, "r", encoding="utf-8") as f:
             name = f.read().replace(" ", "").strip()
 
         print_info(
@@ -142,7 +112,7 @@ class User:
                     if len(name) < 1
                     else _('The saved name has been read from "{0}".')
                 )
-            ).format(self.name_fpath)
+            ).format(self.config_fpath)
         )
 
         if "\n" in name:
@@ -207,7 +177,7 @@ class User:
                 name0 = ">" + name0
                 names = [n.replace(">", "") for n in names]
 
-                with open(self.name_fpath, "w", encoding="utf-8") as f:
+                with open(self.config_fpath, "w", encoding="utf-8") as f:
                     f.write("\n".join([name0] + names))
 
                 print_info(name_writed_s)
@@ -228,7 +198,7 @@ class User:
             if not n_input in "Yy":
                 name0 = ">" + n_input
 
-                with open(self.name_fpath, "w", encoding="utf-8") as f:
+                with open(self.config_fpath, "w", encoding="utf-8") as f:
                     f.write("\n".join([name0, name]))
 
                 print_info(name_writed_s)
@@ -251,7 +221,7 @@ class User:
                     print_error(_("Unexpected value was got. Exit."))
                     exit()
 
-            with open(self.name_fpath, "w", encoding="utf-8") as f:
+            with open(self.config_fpath, "w", encoding="utf-8") as f:
                 f.write(">" + name1)
 
             print_info(name_writed_s)
@@ -265,6 +235,7 @@ class User:
             self._dpath = dpath
             if not self._dpath.exists():
                 os.makedirs(self._dpath, exist_ok=True)
+
         if not self.dpath_showed:
             print_info(
                 _(
@@ -282,18 +253,17 @@ class User:
     @property
     def config(self):
         if not self._config:
-            self._config = Config(
-                (self.config_dpath / (_("app_config") + ".toml"))
-            )
+            with open(self.config_fpath,"r", encoding = "utf-8") as f:            
+                self._config = tomlkit.load(f)
 
         return self._config
 
-    @property
-    def config_dpath(self):
-        dpath = self.dpath / _("config")
-        if not dpath.exists():
-            os.makedirs(dpath, exist_ok=True)
-        return dpath
+    def save_config(self):
+        with open(self.config_fpath,"w", encoding = "utf-8") as f:
+            tomlkit.dump(self.config,f)
+
+
+        pass
 
 
 # The end.

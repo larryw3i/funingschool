@@ -24,8 +24,7 @@ class DayBook:
     def __init__(self):
         self._noter = None
         self._currency = None
-
-        os.environ["use_tk"] = "1"
+        use_tk(yes=True)
 
         pass
 
@@ -43,7 +42,7 @@ class DayBook:
     @property
     def noter(self):
         if not self._noter:
-            self._noter = Noter(user_daybook_dpath, noter_name_fpath)
+            self._noter = Noter( user_daybook_cfg_fpath)
         return self._noter
         pass
 
