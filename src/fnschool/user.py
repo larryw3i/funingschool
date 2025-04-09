@@ -6,7 +6,7 @@ from fnschool.config import *
 
 
 class User:
-    def __init__(self,  config_fpath, parent_dpath=None, ask_name_s=None):
+    def __init__(self, config_fpath, parent_dpath=None, ask_name_s=None):
         self.config_fpath = config_fpath
         self.parent_dpath = parent_dpath or self.config_fpath.parent
         self.ask_name_s = ask_name_s or _("Enter your name, please!")
@@ -19,31 +19,40 @@ class User:
         self.is_male_key = _("is_male")
         self._saved_names = None
         self.use_tk = use_tk()
-        self.saved_names_key=_("Saved Name")
+        self.saved_names_key = _("Saved Name")
 
     def __str__(self):
         return self.name
 
-
     @property
     def saved_names(self):
         if not self._saved_names:
-            names = self.config.get(self.saved_names_key,[""])
+            names = self.config.get(self.saved_names_key, [""])
             self._saved_names = names
-        return self._saved_names        
+        return self._saved_names
         pass
 
     def save_name(self, name):
-        if not name in self.saved_names:
-            self._saved_names.insert(0,name)
-            self.config[self.saved_names_key]=self._saved_names
+        if len(name.strip()) > 0:
+            self._saved_names = [
+                n for n in self._saved_names if len(n.strip()) > 0
+            ]
+
+            if name in self._saved_names:
+                if self._saved_names[0] == name:
+                    return
+                else:
+                    self._saved_names.remove(name)
+                    pass
+
+            self._saved_names.insert(0, name)
+            self.config[self.saved_names_key] = self._saved_names
             self.save_config()
             pass
+        pass
 
         if not self.use_tk:
-            print_info(
-                _("Name \"%s\" has been saved.")
-            )
+            print_info(_('Name "%s" has been saved.'))
         pass
 
     @property
@@ -59,7 +68,6 @@ class User:
 
         return self._name
 
-
     def get_name_from_tk(self):
         name = None
         root = tk.Tk()
@@ -69,19 +77,15 @@ class User:
         name_var = tk.StringVar()
         notername_label = tk.Label(root, text=_("Enter your name:"))
         notername_combo = ttk.Combobox(
-            root, 
-            textvariable=name_var,
-            values = self.saved_names
+            root, textvariable=name_var, values=self.saved_names
         )
         notername_combo.set(self.saved_names[0])
         submit_button = tk.Button(
             root,
             text=_("OK"),
         )
-        closing_lambda = lambda: [
-            root.destroy()
-        ]
-        submit_button.config(command = closing_lambda)
+        closing_lambda = lambda: [root.destroy()]
+        submit_button.config(command=closing_lambda)
         notername_label.grid(row=0, column=0)
         notername_combo.grid(row=0, column=1)
         submit_button.grid(row=1, column=1, sticky=tk.E)
@@ -253,15 +257,14 @@ class User:
     @property
     def config(self):
         if not self._config:
-            with open(self.config_fpath,"r", encoding = "utf-8") as f:            
+            with open(self.config_fpath, "r", encoding="utf-8") as f:
                 self._config = tomlkit.load(f)
 
         return self._config
 
     def save_config(self):
-        with open(self.config_fpath,"w", encoding = "utf-8") as f:
-            tomlkit.dump(self.config,f)
-
+        with open(self.config_fpath, "w", encoding="utf-8") as f:
+            tomlkit.dump(self.config, f)
 
         pass
 

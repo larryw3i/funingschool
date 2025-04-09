@@ -9,11 +9,12 @@ app_version = None
 
 def use_tk(yes=None):
     if yes:
-        os.environ["use_tk"] = '1'
+        os.environ["use_tk"] = "1"
         return yes
     else:
-        env = os.environ.get("use_tk") == '1'
+        env = os.environ.get("use_tk") == "1"
         return env
+
 
 def get_app_version():
 
