@@ -20,6 +20,7 @@ app_dpath = Path(__file__).parent
 data_dpath = app_dpath / "data"
 user_config_dir = Path(dirs.user_config_dir)
 user_data_dir = Path(dirs.user_data_dir)
+app_config_fpath = user_config_dir / "config.toml"
 
 
 for d in [

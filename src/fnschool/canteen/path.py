@@ -17,10 +17,7 @@ documents_dpath = Path.home() / "Documents"
 user_daybook_dpath = user_canteen_dpath / _("daybook")
 user_daybook_cfg_fpath = user_canteen_dpath / (_("config") + ".toml")
 
-for d in [
-    user_canteen_dpath,
-    user_daybook_templates_dpath
-]:
+for d in [user_canteen_dpath, user_daybook_templates_dpath]:
     if not d.exists():
         os.makedirs(d, exist_ok=True)
 

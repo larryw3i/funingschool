@@ -255,14 +255,14 @@ class User:
                 open_path(self._dpath)
             self._dpath_showed = True
         return self._dpath
-    
+
     @property
     def config_fpath(self):
         if not self._config_fpath:
             dpath = self.fpath / self.name
             if not dpath.exists():
                 os.makedirs(dpath, exist_ok=True)
-            fpath = dpath / ( _("config") + ".toml" )
+            fpath = dpath / (_("config") + ".toml")
 
             self._config_fpath = fpath
         return self._config_fpath

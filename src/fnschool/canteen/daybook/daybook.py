@@ -30,7 +30,7 @@ class DayBook:
 
     def gen(self):
         print(self.noter.name)
-        
+
         pass
 
     @property

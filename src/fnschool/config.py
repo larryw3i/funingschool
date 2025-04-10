@@ -5,8 +5,8 @@ from fnschool import *
 
 
 class Config:
-    def __init__(self, path):
-        self._path = path
+    def __init__(self, cfg_path):
+        self._path = cfg_path
         self._data = None
 
     @property
@@ -28,10 +28,40 @@ class Config:
             )
         return self._data
 
-    def save(self, key, value):
+    def save(self):
         data = self.data
-        data[key] = value
         with open(self.path, "w", encoding="utf-8") as f:
             tomlkit.dump(data, f)
+            pass
 
-# The end.            
+        pass
+
+
+class ConfigBase(Config):
+
+    def __init__(self, cfg_path):
+        super().__init__(self, cfg_path)
+        self._app_config = None
+        pass
+
+    @property
+    def app_config(self):
+        if not self._app_config:
+            if not app_config_fpath.exists():
+                with open(app_config_fpath, "w", encoding="utf-8") as f:
+                    f.write("")
+                    pass
+
+                return {}
+
+            app_config = Config(app_config_fpath)
+            self._app_config = app_config
+            pass
+
+        return self._app_config
+        pass
+
+    pass
+
+
+# The end.
