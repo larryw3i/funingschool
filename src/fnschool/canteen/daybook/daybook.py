@@ -30,6 +30,7 @@ class DayBook:
 
     def gen(self):
         print(self.noter.name)
+        
         pass
 
     @property
@@ -42,7 +43,7 @@ class DayBook:
     @property
     def noter(self):
         if not self._noter:
-            self._noter = Noter(user_daybook_cfg_fpath)
+            self._noter = Noter(user_daybook_dpath)
         return self._noter
         pass
 

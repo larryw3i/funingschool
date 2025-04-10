@@ -17,11 +17,10 @@ class Config:
 
         return self._path
 
-    @property
-    def data(self):
+    def get(self):
         if not self._data:
             with open(self.path, "rb") as f:
-                self._data = tomllib.load(f)
+                self._data = tomlkit.load(f)
             print_info(
                 _("Configurations has been " + 'read from "{0}".').format(
                     self.path
@@ -29,20 +28,10 @@ class Config:
             )
         return self._data
 
-    def get(self, key):
-        value = self.data
-        if key in value.keys():
-            return value[key]
-        return None
-
     def save(self, key, value):
         data = self.data
-        if key in data.keys() and data[key] == value:
-            return
         data[key] = value
         with open(self.path, "w", encoding="utf-8") as f:
-            f.write(
-                "\n".join(
-                    [f'"{key}"="{value0}"' for key, value0 in data.items()]
-                )
-            )
+            tomlkit.dump(data, f)
+
+# The end.            

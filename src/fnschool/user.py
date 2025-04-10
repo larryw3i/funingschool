@@ -6,17 +6,17 @@ from fnschool.config import *
 
 
 class User:
-    def __init__(self, config_fpath, parent_dpath=None, ask_name_s=None):
-        self.config_fpath = config_fpath
-        self.parent_dpath = parent_dpath or self.config_fpath.parent
+    def __init__(self, parent_dpath=None, ask_name_s=None):
+        self.parent_dpath = parent_dpath
+        self._config_fpath = None
         self.ask_name_s = ask_name_s or _("Enter your name, please!")
 
         self._name = None
-        self.dpath_showed = False
+        self._dpath_showed = False
         self._dpath = None
         self._profile = {}
         self._config = None
-        self.is_male_key = _("is_male")
+        self.is_male_key = _("Is Male")
         self._saved_names = None
         self.use_tk = use_tk()
         self.saved_names_key = _("Saved Name")
@@ -49,10 +49,12 @@ class User:
             self.config[self.saved_names_key] = self._saved_names
             self.save_config()
             pass
+
         pass
 
         if not self.use_tk:
             print_info(_('Name "%s" has been saved.'))
+
         pass
 
     @property
@@ -240,7 +242,7 @@ class User:
             if not self._dpath.exists():
                 os.makedirs(self._dpath, exist_ok=True)
 
-        if not self.dpath_showed:
+        if not self._dpath_showed:
             print_info(
                 _(
                     "Hey! {0}, all of your files will be"
@@ -251,8 +253,20 @@ class User:
             o_input = get_input().replace(" ", "")
             if len(o_input) > 0 and o_input in "Yy":
                 open_path(self._dpath)
-            self.dpath_showed = True
+            self._dpath_showed = True
         return self._dpath
+    
+    @property
+    def config_fpath(self):
+        if not self._config_fpath:
+            dpath = self.fpath / self.name
+            if not dpath.exists():
+                os.makedirs(dpath, exist_ok=True)
+            fpath = dpath / ( _("config") + ".toml" )
+
+            self._config_fpath = fpath
+        return self._config_fpath
+        pass
 
     @property
     def config(self):
