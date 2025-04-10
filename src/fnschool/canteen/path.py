@@ -5,9 +5,10 @@ import shutil
 from fnschool import *
 from fnschool.external import *
 
+module_dpath = Path(__file__).parent
 
-food_classes_config0_fpath = Path(__file__).parent / "food_classes.toml"
-canteen_data_dpath = Path(__file__).parent / "data"
+food_classes_config0_fpath = module_dpath / "food_classes.toml"
+canteen_data_dpath = module_dpath / "data"
 bill0_fpath = canteen_data_dpath / "bill.xlsx"
 pre_consuming0_fpath = canteen_data_dpath / "consuming.xlsx"
 user_canteen_dpath = user_data_dir / _("canteen")
