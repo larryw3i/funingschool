@@ -6,7 +6,7 @@ from fnschool.config import ConfigBase
 
 
 class User:
-    def __init__(self,  ask_name_s=None):
+    def __init__(self, ask_name_s=None):
         self._parent_dpath = None
         self._cfg_fpath = None
         self.ask_name_s = ask_name_s or _("Enter your name, please!")
@@ -22,9 +22,6 @@ class User:
 
     def __str__(self):
         return self.name
-    
-    @property
-    def  
 
     @property
     def saved_names(self):
@@ -261,7 +258,7 @@ class User:
     @property
     def cfg_fpath(self):
         if not self._cfg_fpath:
-            dpath = self.dpath 
+            dpath = self.dpath
             if not dpath.exists():
                 os.makedirs(dpath, exist_ok=True)
             fpath = dpath / (_("config") + ".toml")

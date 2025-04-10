@@ -1,4 +1,3 @@
-
 import os
 import sys
 import tkinter as tk
@@ -49,7 +48,6 @@ class Note(ModuleBase):
             self._noter = Noter(user_daybook_dpath)
         return self._noter
         pass
-
 
 
 # The end.

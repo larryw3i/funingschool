@@ -33,27 +33,30 @@ class ConfigBase:
         with open(self.path, "w", encoding="utf-8") as f:
             tomlkit.dump(data, f)
             pass
-        print_info(
-            _("Configuration data has been saved!")
-        )
+        print_info(_("Configuration data has been saved!"))
         pass
 
+
 class ClsConfig(ConfigBase):
-    def __init__(self, cfg_fpath = None):
-        cfg_fpath = cfg_fpath or Path(self.__class__).parent
+    def __init__(self, cfg_fpath=None):
+        cfg_fpath = cfg_fpath or (
+            Path(self.__class__).parent / (_("config") + ".toml")
+        )
         cfg_fpath = get_config_dpath(cfg_fpath)
         super().__init__(cfg_fpath)
         pass
 
+
 class UserConfig(ConfigBase):
-    def __init__(self,user):
-            self.user = user
-            cfg_fpath = self.user.cfg_fpath
-            super().__init__(cfg_fpath)
+    def __init__(self, user):
+        self.user = user
+        cfg_fpath = self.user.cfg_fpath
+        super().__init__(cfg_fpath)
+
 
 class AppConfig(ConfigBase):
     def __init__(self, cfg_fpath=None):
-        cfg_fpath = cfg_fpath or app_config_fpath 
+        cfg_fpath = cfg_fpath or app_config_fpath
         super().__init__(self, cfg_fpath)
 
         pass

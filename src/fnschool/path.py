@@ -30,14 +30,16 @@ for d in [
     if not d.exists():
         os.makedirs(d)
 
-def get_config_dpath(self,dpath):
+
+def get_config_dpath(self, dpath):
     if app_dpath.as_posix() in dpath.as_posix():
-        dpath = dpath.as_posix().replace(app_dpath,"")
+        dpath = dpath.as_posix().replace(app_dpath, "")
         dpath = Path(dpath)
 
     dpath = user_data_dir / dpath
     return dpath
     pass
+
 
 def get_file_mtime(path):
     mtime = os.path.getmtime(path)
