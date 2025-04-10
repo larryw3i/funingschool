@@ -2,15 +2,14 @@ import os
 import sys
 
 from fnschool import *
-from fnschool.config import *
+from fnschool.config import ConfigBase
 
 
 class User:
-    def __init__(self, parent_dpath=None, ask_name_s=None):
-        self.parent_dpath = parent_dpath
-        self._config_fpath = None
+    def __init__(self,  ask_name_s=None):
+        self._parent_dpath = None
+        self._cfg_fpath = None
         self.ask_name_s = ask_name_s or _("Enter your name, please!")
-
         self._name = None
         self._dpath_showed = False
         self._dpath = None
@@ -23,6 +22,9 @@ class User:
 
     def __str__(self):
         return self.name
+    
+    @property
+    def  
 
     @property
     def saved_names(self):
@@ -101,12 +103,12 @@ class User:
 
     def get_name_from_cli(self):
         name_writed_s = _('Your name has been saved to "{0}".').format(
-            self.config_fpath
+            self.cfg_fpath
         )
 
         name = None
         name1 = None
-        with open(self.config_fpath, "r", encoding="utf-8") as f:
+        with open(self.cfg_fpath, "r", encoding="utf-8") as f:
             name = f.read().replace(" ", "").strip()
 
         print_info(
@@ -118,7 +120,7 @@ class User:
                     if len(name) < 1
                     else _('The saved name has been read from "{0}".')
                 )
-            ).format(self.config_fpath)
+            ).format(self.cfg_fpath)
         )
 
         if "\n" in name:
@@ -183,7 +185,7 @@ class User:
                 name0 = ">" + name0
                 names = [n.replace(">", "") for n in names]
 
-                with open(self.config_fpath, "w", encoding="utf-8") as f:
+                with open(self.cfg_fpath, "w", encoding="utf-8") as f:
                     f.write("\n".join([name0] + names))
 
                 print_info(name_writed_s)
@@ -204,7 +206,7 @@ class User:
             if not n_input in "Yy":
                 name0 = ">" + n_input
 
-                with open(self.config_fpath, "w", encoding="utf-8") as f:
+                with open(self.cfg_fpath, "w", encoding="utf-8") as f:
                     f.write("\n".join([name0, name]))
 
                 print_info(name_writed_s)
@@ -227,7 +229,7 @@ class User:
                     print_error(_("Unexpected value was got. Exit."))
                     exit()
 
-            with open(self.config_fpath, "w", encoding="utf-8") as f:
+            with open(self.cfg_fpath, "w", encoding="utf-8") as f:
                 f.write(">" + name1)
 
             print_info(name_writed_s)
@@ -237,7 +239,7 @@ class User:
     @property
     def dpath(self):
         if not self._dpath:
-            dpath = self.parent_dpath / self.name
+            dpath = get_config_dpath(Path(self.__class__)).parent / self.name
             self._dpath = dpath
             if not self._dpath.exists():
                 os.makedirs(self._dpath, exist_ok=True)
@@ -257,28 +259,24 @@ class User:
         return self._dpath
 
     @property
-    def config_fpath(self):
-        if not self._config_fpath:
-            dpath = self.fpath / self.name
+    def cfg_fpath(self):
+        if not self._cfg_fpath:
+            dpath = self.dpath 
             if not dpath.exists():
                 os.makedirs(dpath, exist_ok=True)
             fpath = dpath / (_("config") + ".toml")
 
-            self._config_fpath = fpath
-        return self._config_fpath
+            self._cfg_fpath = fpath
+        return self._cfg_fpath
         pass
 
     @property
     def config(self):
         if not self._config:
-            with open(self.config_fpath, "r", encoding="utf-8") as f:
-                self._config = tomlkit.load(f)
+            u_config = UserConfig(self)
+            self._config = u_config
 
         return self._config
-
-    def save_config(self):
-        with open(self.config_fpath, "w", encoding="utf-8") as f:
-            tomlkit.dump(self.config, f)
 
         pass
 

@@ -4,9 +4,9 @@ import sys
 from fnschool import *
 
 
-class Config:
-    def __init__(self, cfg_path):
-        self._path = cfg_path
+class ConfigBase:
+    def __init__(self, cfg_fpath):
+        self._path = cfg_fpath
         self._data = None
 
     @property
@@ -33,32 +33,29 @@ class Config:
         with open(self.path, "w", encoding="utf-8") as f:
             tomlkit.dump(data, f)
             pass
-
+        print_info(
+            _("Configuration data has been saved!")
+        )
         pass
 
-
-class ConfigBase(Config):
-
-    def __init__(self, cfg_path):
-        super().__init__(self, cfg_path)
-        self._app_config = None
+class ClsConfig(ConfigBase):
+    def __init__(self, cfg_fpath = None):
+        cfg_fpath = cfg_fpath or Path(self.__class__).parent
+        cfg_fpath = get_config_dpath(cfg_fpath)
+        super().__init__(cfg_fpath)
         pass
 
-    @property
-    def app_config(self):
-        if not self._app_config:
-            if not app_config_fpath.exists():
-                with open(app_config_fpath, "w", encoding="utf-8") as f:
-                    f.write("")
-                    pass
+class UserConfig(ConfigBase):
+    def __init__(self,user):
+            self.user = user
+            cfg_fpath = self.user.cfg_fpath
+            super().__init__(cfg_fpath)
 
-                return {}
+class AppConfig(ConfigBase):
+    def __init__(self, cfg_fpath=None):
+        cfg_fpath = cfg_fpath or app_config_fpath 
+        super().__init__(self, cfg_fpath)
 
-            app_config = Config(app_config_fpath)
-            self._app_config = app_config
-            pass
-
-        return self._app_config
         pass
 
     pass

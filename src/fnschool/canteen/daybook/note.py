@@ -22,7 +22,7 @@ from fnschool.canteen.forms.good import Good as GoodForm
 from fnschool.canteen.forms.goods import Goods as GoodsForm
 
 
-class DayBook:
+class Note(ModuleBase):
     def __init__(self):
         self._noter = None
         self._currency = None
@@ -49,12 +49,6 @@ class DayBook:
             self._noter = Noter(user_daybook_dpath)
         return self._noter
         pass
-    
-    @property
-    def config(self):
-        if not self._config:
-            self._config = Config()
-        return self._config
 
 
 
