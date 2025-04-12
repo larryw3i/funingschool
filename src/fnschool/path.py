@@ -22,6 +22,7 @@ user_config_dir = Path(dirs.user_config_dir)
 user_data_dir = Path(dirs.user_data_dir)
 app_config_fpath = user_config_dir / "config.toml"
 
+default_share_dpath = user_data_dir
 
 for d in [
     user_config_dir,
@@ -31,12 +32,12 @@ for d in [
         os.makedirs(d)
 
 
-def get_config_dpath(self, dpath):
+def get_share_dpath(self, dpath):
     if app_dpath.as_posix() in dpath.as_posix():
         dpath = dpath.as_posix().replace(app_dpath, "")
         dpath = Path(dpath)
 
-    dpath = user_data_dir / dpath
+    dpath = default_share_dpath / dpath
     return dpath
     pass
 

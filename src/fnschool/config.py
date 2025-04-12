@@ -37,20 +37,16 @@ class ConfigBase:
         pass
 
 
-class ClsConfig(ConfigBase):
+class MojoConfig(ConfigBase):
     def __init__(self, cfg_fpath=None):
-        cfg_fpath = cfg_fpath or (
-            Path(self.__class__).parent / (_("config") + ".toml")
-        )
-        cfg_fpath = get_config_dpath(cfg_fpath)
+        cfg_fpath = cfg_fpath or self._cfg_fpath
         super().__init__(cfg_fpath)
         pass
 
 
 class UserConfig(ConfigBase):
-    def __init__(self, user):
-        self.user = user
-        cfg_fpath = self.user.cfg_fpath
+    def __init__(self, cfg_fpath=None):
+        cfg_fpath = cfg_fpath or self.cfg_fpath
         super().__init__(cfg_fpath)
 
 

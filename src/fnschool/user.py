@@ -5,8 +5,9 @@ from fnschool import *
 from fnschool.config import ConfigBase
 
 
-class User:
+class User(UserConfig):
     def __init__(self, ask_name_s=None):
+        UserConfig().__init__()
         self._parent_dpath = None
         self._cfg_fpath = None
         self.ask_name_s = ask_name_s or _("Enter your name, please!")
@@ -236,7 +237,10 @@ class User:
     @property
     def dpath(self):
         if not self._dpath:
-            dpath = get_config_dpath(Path(self.__class__)).parent / self.name
+            dpath = (
+                get_share_dpath(Path(inspect.getfile(self.__class__))).parent
+                / self.name
+            )
             self._dpath = dpath
             if not self._dpath.exists():
                 os.makedirs(self._dpath, exist_ok=True)
