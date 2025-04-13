@@ -4,10 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 
 from fnschool import *
-from fnschool.canteen.noter import *
-from fnschool.canteen.path import *
 from fnschool.canteen.currency import *
-from fnschool.canteen.daybook.config import Config
 from fnschool.canteen.forms.cover import Cover as CoverForm
 from fnschool.canteen.forms.purchase import (
     Purchase as PurchaseForm,
@@ -21,18 +18,15 @@ from fnschool.canteen.forms.good import Good as GoodForm
 from fnschool.canteen.forms.goods import Goods as GoodsForm
 
 
-class Note(ModuleBase):
+class Note(ClsBase):
     def __init__(self):
-        self._noter = None
-        self._currency = None
-        self._config = None
-        use_tk(yes=True)
-
+        use_tk(True)
+        ClsBase.__init__(self)
         pass
 
     def gen(self):
-        print(self.noter.name)
-
+        print(self.user.name)
+        self.cfg.save() 
         pass
 
     @property
@@ -40,13 +34,6 @@ class Note(ModuleBase):
         if not self._currency:
             self._currency = Currency().get()
         return self._currency
-        pass
-
-    @property
-    def noter(self):
-        if not self._noter:
-            self._noter = Noter(user_daybook_dpath)
-        return self._noter
         pass
 
 

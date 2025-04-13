@@ -4,22 +4,20 @@ from fnschool import *
 
 
 def set_canteen(args):
-    from fnschool.canteen.bill import Bill
 
     print_app()
 
-    bill = Bill()
     if args.action in "mk_bill":
-        bill.make_spreadsheets()
+        pass
 
     elif args.action in "merge_foodsheets":
-        bill.merge_foodsheets()
+        pass
 
     elif args.action in "gen_daybook":
-        from fnschool.canteen.daybook import DayBook
+        from fnschool.canteen.daybook.note import Note
 
-        daybook = DayBook()
-        daybook.gen()
+        note = Note()
+        note.gen()
 
     else:
         print_info(_("Function is not found."))

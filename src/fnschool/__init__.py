@@ -29,6 +29,8 @@ from fnschool.entry import *
 from fnschool.external import *
 from fnschool.user import *
 from fnschool.config import *
+from fnschool.base import *
+from fnschool.user import *
 
 
 __version__ = "20250109.80531.837"

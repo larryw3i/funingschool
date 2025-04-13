@@ -32,11 +32,12 @@ for d in [
         os.makedirs(d)
 
 
-def get_share_dpath(self, dpath):
+def get_share_dpath(dpath):
     if app_dpath.as_posix() in dpath.as_posix():
-        dpath = dpath.as_posix().replace(app_dpath, "")
-        dpath = Path(dpath)
+        dpath = str((dpath).as_posix()).replace("/"+str(app_dpath.as_posix()), "")
 
+        dpath = Path(dpath)
+    
     dpath = default_share_dpath / dpath
     return dpath
     pass

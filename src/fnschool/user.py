@@ -2,20 +2,21 @@ import os
 import sys
 
 from fnschool import *
-from fnschool.config import ConfigBase
+from fnschool.config import *
 
-
-class User(UserConfig):
-    def __init__(self, ask_name_s=None):
-        UserConfig().__init__()
+class User():
+    def __init__(self, mcls,ask_name_s=None):
+        self.mcls = mcls
         self._parent_dpath = None
         self._cfg_fpath = None
+        self._cfg = None
         self.ask_name_s = ask_name_s or _("Enter your name, please!")
         self._name = None
         self._dpath_showed = False
         self._dpath = None
         self._profile = {}
-        self._config = None
+        self._cfg = None
+        self._mojo_cfg = None
         self.is_male_key = _("Is Male")
         self._saved_names = None
         self.use_tk = use_tk()
@@ -23,31 +24,46 @@ class User(UserConfig):
 
     def __str__(self):
         return self.name
+    
+    @property
+    def cfg(self):
+        if not self._cfg:
+            self._cfg = UserConfig(self.cfg_fpath)
+        return self._cfg
+
+    @property
+    def mojo_cfg(self):
+        if not self._mojo_cfg:
+            self._mojo_cfg = self.mcls.cfg.mojo
+        return self._mojo_cfg
 
     @property
     def saved_names(self):
         if not self._saved_names:
-            names = self.config.get(self.saved_names_key, [""])
+            names = self.mojo_cfg.data.get(self.saved_names_key, [""])
             self._saved_names = names
         return self._saved_names
         pass
 
     def save_name(self, name):
         if len(name.strip()) > 0:
-            self._saved_names = [
-                n for n in self._saved_names if len(n.strip()) > 0
-            ]
+            if self._saved_names:
+                self._saved_names = [
+                    n for n in self._saved_names if len(n.strip()) > 0
+                ]
 
-            if name in self._saved_names:
-                if self._saved_names[0] == name:
-                    return
-                else:
-                    self._saved_names.remove(name)
-                    pass
-
+                if name in self._saved_names:
+                    if self._saved_names[0] == name:
+                        return
+                    else:
+                        self._saved_names.remove(name)
+                        pass
+            else:
+                self._saved_names = []
             self._saved_names.insert(0, name)
-            self.config[self.saved_names_key] = self._saved_names
-            self.save_config()
+
+            self.mojo_cfg.data[self.saved_names_key] = self._saved_names
+
             pass
 
         pass
@@ -269,15 +285,6 @@ class User(UserConfig):
 
             self._cfg_fpath = fpath
         return self._cfg_fpath
-        pass
-
-    @property
-    def config(self):
-        if not self._config:
-            u_config = UserConfig(self)
-            self._config = u_config
-
-        return self._config
 
         pass
 
