@@ -34,10 +34,12 @@ for d in [
 
 def get_share_dpath(dpath):
     if app_dpath.as_posix() in dpath.as_posix():
-        dpath = str((dpath).as_posix()).replace("/"+str(app_dpath.as_posix()), "")
+        dpath = str((dpath).as_posix()).replace(
+            "/" + str(app_dpath.as_posix()), ""
+        )
 
         dpath = Path(dpath)
-    
+
     dpath = default_share_dpath / dpath
     return dpath
     pass

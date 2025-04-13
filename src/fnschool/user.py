@@ -4,8 +4,9 @@ import sys
 from fnschool import *
 from fnschool.config import *
 
-class User():
-    def __init__(self, mcls,ask_name_s=None):
+
+class User:
+    def __init__(self, mcls, ask_name_s=None):
         self.mcls = mcls
         self._parent_dpath = None
         self._cfg_fpath = None
@@ -24,7 +25,7 @@ class User():
 
     def __str__(self):
         return self.name
-    
+
     @property
     def cfg(self):
         if not self._cfg:
@@ -81,7 +82,6 @@ class User():
                 else self.get_name_from_cli()
             )
             pass
-            
 
         return self._name
 

@@ -9,7 +9,7 @@ from fnschool.path import *
 from fnschool.config import *
 
 
-class ClsBase():
+class ClsBase:
     def __init__(self):
         self._dpath = None
         self._user = None
@@ -38,9 +38,10 @@ class ClsBase():
         return self._mojo_cfg_fpath
 
     @property
-    def user(self,mojo_cfg=None):
+    def user(self, mojo_cfg=None):
         if not self._user:
-            self._user = User(self) 
+            self._user = User(self)
         return self._user
+
 
 # The end.

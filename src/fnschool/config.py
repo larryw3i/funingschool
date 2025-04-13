@@ -13,13 +13,13 @@ class ConfigBase(ABC):
     def path(self):
 
         if not self._cfg_fpath.exists():
-            os.makedirs(self._cfg_fpath.parent,exist_ok=True)
+            os.makedirs(self._cfg_fpath.parent, exist_ok=True)
             with open(self._cfg_fpath, "w", encoding="utf-8") as f:
                 f.write("")
                 pass
 
         return self._cfg_fpath
-    
+
     @property
     def data(self):
         if not self._data:
@@ -44,16 +44,16 @@ class ConfigBase(ABC):
 
 
 class MojoConfig(ConfigBase):
-    def __init__(self,cfg_fpath):
+    def __init__(self, cfg_fpath):
         self._cfg_fpath = cfg_fpath
         ConfigBase.__init__(self)
         pass
 
 
 class UserConfig(ConfigBase):
-    def __init__(self,cfg_fpath):
+    def __init__(self, cfg_fpath):
         self._cfg_fpath = cfg_fpath
-        ConfigBase.__init__( self)
+        ConfigBase.__init__(self)
 
 
 class AppConfig(ConfigBase):
@@ -65,8 +65,9 @@ class AppConfig(ConfigBase):
 
     pass
 
-class Config():
-    def __init__(self,cls):
+
+class Config:
+    def __init__(self, cls):
         self.cls = cls
         self._app = None
         self._user = None
@@ -90,15 +91,18 @@ class Config():
         if not self._user:
             self._user = UserConfig(self.cls.user.cfg_fpath)
         return self._user
-    
+
     def save(self):
-        for c in [self.app, self.mojo,self.user]:
+        for c in [self.app, self.mojo, self.user]:
             c.save()
-            print_info(_("Configuration file \"{0}\" has been saved!").format(
-                c._cfg_fpath
-            ))
+            print_info(
+                _('Configuration file "{0}" has been saved!').format(
+                    c._cfg_fpath
+                )
+            )
         pass
 
     pass
+
 
 # The end.
