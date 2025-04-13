@@ -92,8 +92,11 @@ class Config():
         return self._user
     
     def save(self):
-        for c in [self.app, self.mojo,self.app]:
+        for c in [self.app, self.mojo,self.user]:
             c.save()
+            print_info(_("Configuration file \"{0}\" has been saved!").format(
+                c._cfg_fpath
+            ))
         pass
 
     pass

@@ -26,6 +26,7 @@ class Note(ClsBase):
 
     def gen(self):
         print(self.user.name)
+        print(self.user.cfg.data)
         self.cfg.save() 
         pass
 

@@ -61,7 +61,6 @@ class User():
             else:
                 self._saved_names = []
             self._saved_names.insert(0, name)
-
             self.mojo_cfg.data[self.saved_names_key] = self._saved_names
 
             pass
@@ -81,8 +80,8 @@ class User():
                 if self.use_tk
                 else self.get_name_from_cli()
             )
-
             pass
+            
 
         return self._name
 
