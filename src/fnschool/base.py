@@ -43,5 +43,10 @@ class ClsBase:
             self._user = User(self)
         return self._user
 
+    @user.setter
+    def user(self, user):
+        self._user = user
+        pass
+
 
 # The end.

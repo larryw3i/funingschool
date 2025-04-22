@@ -10,7 +10,8 @@ dependencies = [
     "openpyxl",
     "appdirs",
     "redmail",
-    "tomlkit"
+    "tomlkit",
+    "pygubu"
 ]
 authors = [
   {name = "larryw3i", email = "larryw3i@163.com"},
