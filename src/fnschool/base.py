@@ -14,7 +14,8 @@ class ClsBase:
         self._dpath = None
         self._user = None
         self._cfg = None
-        self._mojo_cfg_fpath = None
+        self._cls_cfg_fpath = None
+        self._user_cfg_fpath = None
 
     @property
     def cfg(self):
@@ -32,13 +33,20 @@ class ClsBase:
         return self._dpath
 
     @property
-    def mojo_cfg_fpath(self):
-        if not self._mojo_cfg_fpath:
-            self._mojo_cfg_fpath = self.dpath / (_("config") + ".toml")
-        return self._mojo_cfg_fpath
+    def cls_cfg_fpath(self):
+        if not self._cls_cfg_fpath:
+            self._cls_cfg_fpath = self.dpath / (_("config") + ".toml")
+        return self._cls_cfg_fpath
 
     @property
-    def user(self, mojo_cfg=None):
+    def user_cfg_fpath(self):
+        if not self._user_cfg_fpath:
+            self._user_cfg_fpath = self.user.cfg_fpath
+        return self._user_cfg_fpath
+        pass
+
+    @property
+    def user(self, cls_cfg=None):
         if not self._user:
             self._user = User(self)
         return self._user

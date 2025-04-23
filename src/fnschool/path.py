@@ -8,7 +8,7 @@ import subprocess
 from datetime import datetime
 
 from appdirs import AppDirs
-from fnschool.inoutput import *
+from fnschool.i_o import *
 from fnschool.app import *
 
 

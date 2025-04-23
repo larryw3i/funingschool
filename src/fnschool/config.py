@@ -33,6 +33,7 @@ class ConfigBase(ABC):
                 )
             )
         return self._data
+        pass
 
     def save(self):
         data = self.data
@@ -43,7 +44,7 @@ class ConfigBase(ABC):
         pass
 
 
-class MojoConfig(ConfigBase):
+class ClsConfig(ConfigBase):
     def __init__(self, cfg_fpath):
         self._cfg_fpath = cfg_fpath
         ConfigBase.__init__(self)
@@ -71,7 +72,7 @@ class Config:
         self.cls = cls
         self._app = None
         self._user = None
-        self._mojo = None
+        self._cls = None
         self.saved_user_names = None
 
     @property
@@ -81,19 +82,19 @@ class Config:
         return self._app
 
     @property
-    def mojo(self):
-        if not self._mojo:
-            self._mojo = MojoConfig(self.cls.mojo_cfg_fpath)
-        return self._mojo
+    def cls(self):
+        if not self._cls:
+            self._cls = ClsConfig(self.cls.cls_cfg_fpath)
+        return self._cls
 
     @property
     def user(self):
         if not self._user:
-            self._user = UserConfig(self.cls.user.cfg_fpath)
+            self._user = self.cls.user.cfg
         return self._user
 
     def save(self):
-        for c in [self.app, self.mojo, self.user]:
+        for c in [self.app, self.cls, self.user]:
             c.save()
             print_info(
                 _('Configuration file "{0}" has been saved!').format(

@@ -23,7 +23,7 @@ from openpyxl.styles import numbers
 from openpyxl.styles import Font
 from fnschool.app import *
 from fnschool.language import _
-from fnschool.inoutput import *
+from fnschool.i_o import *
 from fnschool.path import *
 from fnschool.entry import *
 from fnschool.external import *

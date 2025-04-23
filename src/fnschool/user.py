@@ -17,7 +17,7 @@ class User:
         self._dpath = None
         self._profile = {}
         self._cfg = None
-        self._mojo_cfg = None
+        self._cls_cfg = None
         self.is_male_key = _("Is Male")
         self._saved_names = None
         self.use_tk = use_tk()
@@ -33,15 +33,15 @@ class User:
         return self._cfg
 
     @property
-    def mojo_cfg(self):
-        if not self._mojo_cfg:
-            self._mojo_cfg = self.cls.cfg.mojo
-        return self._mojo_cfg
+    def cls_cfg(self):
+        if not self._cls_cfg:
+            self._cls_cfg = self.cls.cfg.cls
+        return self._cls_cfg
 
     @property
     def saved_names(self):
         if not self._saved_names:
-            names = self.mojo_cfg.data.get(self.saved_names_key, [""])
+            names = self.cls_cfg.data.get(self.saved_names_key, [""])
             self._saved_names = names
         return self._saved_names
         pass
@@ -62,7 +62,7 @@ class User:
             else:
                 self._saved_names = []
             self._saved_names.insert(0, name)
-            self.mojo_cfg.data[self.saved_names_key] = self._saved_names
+            self.cls_cfg.data[self.saved_names_key] = self._saved_names
 
             pass
 
