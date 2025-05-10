@@ -69,7 +69,8 @@ class AppConfig(ConfigBase):
 
 class Config:
     def __init__(self, cls):
-        self.cls = cls
+        self.__cls = cls
+        self.__cls_cfg_fpath = self.__cls.cls_cfg_fpath
         self._app = None
         self._user = None
         self._cls = None
@@ -84,13 +85,14 @@ class Config:
     @property
     def cls(self):
         if not self._cls:
-            self._cls = ClsConfig(self.cls.cls_cfg_fpath)
+            self._cls = ClsConfig(self.__cls_cfg_fpath)
         return self._cls
 
     @property
     def user(self):
         if not self._user:
-            self._user = self.cls.user.cfg
+            user = self.__cls.user
+            self._user = user.cfg
         return self._user
 
     def save(self):

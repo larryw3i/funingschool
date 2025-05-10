@@ -27,9 +27,12 @@ class ClsBase:
     @property
     def dpath(self):
         if not self._dpath:
-            self._dpath = get_share_dpath(
-                Path(inspect.getfile(self.__class__)).parent
+            dpath = get_share_dpath(
+                Path(inspect.getfile(self.__class__))
             )
+            dpath = dpath.parent / dpath.stem
+            self._dpath = dpath
+
         return self._dpath
 
     @property
