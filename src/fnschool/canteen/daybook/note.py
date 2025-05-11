@@ -31,7 +31,10 @@ class Note(ClsBase):
     def gen(self):
         print(self.user.name)
         print(self.cfg.data)
-        self.cfg.save()
+        print(self.user.cfg.data)
+        print(self.app.cfg.data)
+
+        self.exit()
         pass
 
     @property

@@ -7,15 +7,16 @@ from fnschool.base import *
 from fnschool.user import *
 from fnschool.path import *
 from fnschool.config import *
+from fnschool.app import *
 
 
 class ClsBase(ABC):
-    def __init__(self):
+    def __init__(self,app = None):
+        self.app = app or App()
         self._dpath = None
         self._user = None
         self._cfg_fpath = None
         self._cfg = None
-        self._app_cfg = None
         pass
 
     @property
@@ -50,13 +51,12 @@ class ClsBase(ABC):
     def user(self, user):
         self._user = user
         pass
+    
+    def exit(self):
+        for cfg in [self.cfg,self.app.cfg,self.user.cfg]:
+            cfg.save()
 
-    @property
-    def app_cfg(self):
-        if not self._app_cfg:
-            self._app_cfg = AppConfig(app_config_fpath)
-        return self._app_cfg
+        print_info(_("The application has exited."))
         pass
-
 
 # The end.
