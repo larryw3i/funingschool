@@ -5,7 +5,7 @@ from fnschool import *
 from fnschool.config import *
 
 
-class User:
+class User(ABC):
     def __init__(self, cls, ask_name_s=None):
         self.cls = cls
         self._parent_dpath = None
@@ -21,7 +21,7 @@ class User:
         self.is_male_key = _("Is Male")
         self._saved_names = None
         self.use_tk = use_tk()
-        self.saved_names_key = _("Saved Name")
+        self.saved_names_key = _("Saved User Names")
 
     def __str__(self):
         return self.name
@@ -35,7 +35,7 @@ class User:
     @property
     def cls_cfg(self):
         if not self._cls_cfg:
-            self._cls_cfg = self.cls.cfg.cls
+            self._cls_cfg = self.cls.cfg
         return self._cls_cfg
 
     @property
@@ -92,21 +92,21 @@ class User:
         root.bind("<Return>", lambda e: root.destroy())
 
         name_var = tk.StringVar()
-        notername_label = tk.Label(root, text=_("Enter your name:"))
-        notername_combo = ttk.Combobox(
+        name_label = tk.Label(root, text=_("Enter your name:"))
+        name_combo = ttk.Combobox(
             root, textvariable=name_var, values=self.saved_names
         )
-        notername_combo.set(self.saved_names[0])
+        name_combo.set(self.saved_names[0])
         submit_button = tk.Button(
             root,
             text=_("OK"),
         )
         closing_lambda = lambda: [root.destroy()]
         submit_button.config(command=closing_lambda)
-        notername_label.grid(row=0, column=0)
-        notername_combo.grid(row=0, column=1)
+        name_label.grid(row=0, column=0)
+        name_combo.grid(row=0, column=1)
         submit_button.grid(row=1, column=1, sticky=tk.E)
-        notername_combo.focus_set()
+        name_combo.focus_set()
         root.mainloop()
 
         name = name_var.get()
@@ -115,6 +115,7 @@ class User:
         pass
 
     def get_name_from_cli(self):
+        print_error
         pass
 
     @property
