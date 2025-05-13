@@ -108,19 +108,36 @@ def print_app():
     app_info = "\n" + app_name + version + "\n"
     print(app_info)
 
-class App():
+
+class App:
     def __init__(self):
         from fnschool.path import app_config_fpath
-        self.cfg_fpath = app_config_fpath 
+
+        self.cfg_fpath = app_config_fpath
         self._cfg = None
+        self._ui = None
         pass
-    
+
     @property
-    def cfg(self):  
+    def ui(self):
+        if not self._ui:
+            from fnschool.ui import UI
+
+            self._ui = UI()
+            pass
+        return self._ui
+        pass
+
+    @property
+    def cfg(self):
         from fnschool.config import AppConfig
+
         if not self._cfg:
             self._cfg = AppConfig(self.cfg_fpath)
         return self._cfg
         pass
+
+    pass
+
 
 # The end.

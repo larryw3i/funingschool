@@ -5,20 +5,10 @@ from tkinter import ttk
 
 from fnschool import *
 from fnschool.canteen.currency import *
-from fnschool.canteen.daybook.forms.cover import Cover as CoverForm
-from fnschool.canteen.daybook.forms.purchase import (
-    Purchase as PurchaseForm,
-    NonIgnorableGoodsSum as NonIgnorableGoodsSumForm,
-    NonIgnorableGoods as NonIgnorableGoodsForm,
-    IgnorableGoodsSum as IgnorableGoodsSumForm,
-    IgnorableGoods as IgnorableGoodsForm,
-)
-from fnschool.canteen.daybook.forms.consumption import (
-    Consumption as ConsumptionForm,
-)
-from fnschool.canteen.daybook.forms.good import Good as GoodForm
-from fnschool.canteen.daybook.forms.goods import Goods as GoodsForm
-from fnschool.canteen.daybook.noter import Noter
+from fnschool.canteen.daybook.operate.cover import *
+from fnschool.canteen.daybook.operate.purchase import *
+from fnschool.canteen.daybook.operate.consume import *
+from fnschool.canteen.daybook.noter import *
 
 
 class Note(ClsBase):
@@ -26,13 +16,28 @@ class Note(ClsBase):
         use_tk(True)
         ClsBase.__init__(self)
         self.user = Noter(self)
+        self._purchase = None
+        self._pfoods = None
         pass
 
+    @property
+    def pfoods(self):
+        if not self._pfoods:
+            self._pfoods = self.purchase.pfoods
+            pass
+
+        return self._pfoods
+        pass
+
+    @property
+    def purchase(self):
+        if not self._purchase:
+            self._purchase = Purchase(self)
+        return self._purchase
+
     def gen(self):
-        print(self.user.name)
-        print(self.cfg.data)
-        print(self.user.cfg.data)
-        print(self.app.cfg.data)
+        self.user.name
+        self.pfoods
 
         self.exit()
         pass

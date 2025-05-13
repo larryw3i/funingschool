@@ -11,7 +11,7 @@ from fnschool.app import *
 
 
 class ClsBase(ABC):
-    def __init__(self,app = None):
+    def __init__(self, app=None):
         self.app = app or App()
         self._dpath = None
         self._user = None
@@ -51,12 +51,13 @@ class ClsBase(ABC):
     def user(self, user):
         self._user = user
         pass
-    
+
     def exit(self):
-        for cfg in [self.cfg,self.app.cfg,self.user.cfg]:
+        for cfg in [self.cfg, self.app.cfg, self.user.cfg]:
             cfg.save()
 
         print_info(_("The application has exited."))
         pass
+
 
 # The end.
