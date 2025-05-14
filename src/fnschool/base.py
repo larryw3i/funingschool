@@ -52,7 +52,7 @@ class ClsBase(ABC):
         self._user = user
         pass
 
-    def exit(self):
+    def pre_exit(self):
         for cfg in [self.cfg, self.app.cfg, self.user.cfg]:
             cfg.save()
 

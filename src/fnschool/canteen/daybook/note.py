@@ -13,8 +13,8 @@ from fnschool.canteen.daybook.noter import *
 
 class Note(ClsBase):
     def __init__(self):
-        use_tk(True)
         ClsBase.__init__(self)
+        self.app.use_tk()
         self.user = Noter(self)
         self._purchase = None
         self._pfoods = None
@@ -38,8 +38,8 @@ class Note(ClsBase):
     def gen(self):
         self.user.name
         self.pfoods
-
-        self.exit()
+        
+        self.pre_exit()
         pass
 
     @property

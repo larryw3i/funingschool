@@ -114,8 +114,34 @@ class App:
         from fnschool.path import app_config_fpath
 
         self.cfg_fpath = app_config_fpath
+        self._name = None
+        self._version = None
         self._cfg = None
         self._ui = None
+        self._use_tk = False
+        pass
+
+    @use_tk.setter
+    def use_tk(value = True):
+        self._use_tk = value
+    
+    @property
+    def use_tk(self):
+        return self._use_tk
+        pass
+
+    @property
+    def name(self):
+        if not self._name:
+            self._name = app_name
+        return self._name
+        pass
+    
+    @property
+    def version(self):
+        if not self._version:
+            self._version = get_app_version()
+        return self._version
         pass
 
     @property

@@ -8,6 +8,7 @@ from fnschool.config import *
 class User(ABC):
     def __init__(self, cls, ask_name_s=None):
         self.cls = cls
+        self.app = self.cls.app
         self._parent_dpath = None
         self._cfg_fpath = None
         self._cfg = None
@@ -130,16 +131,22 @@ class User(ABC):
                 os.makedirs(self._dpath, exist_ok=True)
 
         if not self._dpath_showed:
-            print_info(
-                _(
-                    "Hey! {0}, all of your files will be"
-                    + ' saved to "{1}", show it now? '
-                    + "(Yes: 'Y','y')"
-                ).format(self.name, self._dpath)
-            )
-            o_input = get_input().replace(" ", "")
-            if len(o_input) > 0 and o_input in "Yy":
-                open_path(self._dpath)
+            if not self.app.use_tk:    
+                print_info(
+                    _(
+                        "Hey! {0}, all of your files will be"
+                        + ' saved to "{1}", show it now? '
+                        + "(Yes: 'Y','y')"
+                    ).format(self.name, self._dpath)
+                )
+                o_input = get_input().replace(" ", "")
+                if len(o_input) > 0 and o_input in "Yy":
+                    open_path(self._dpath)
+            else:
+                from tkinter import messagebox
+                response = messagebox.askyesno(
+                    _("Open your directory?")
+                )
             self._dpath_showed = True
         return self._dpath
 
