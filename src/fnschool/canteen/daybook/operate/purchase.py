@@ -43,9 +43,9 @@ class Purchase(OprBase):
             "{0} requires a spreadsheet with the "
             + "following table headers "
             + "(not in order):\n"
-            + "  ● Purchase time (required, can be \"in-stock time, "
-            + "record time\")\n"
-            + "  ● Purchaser (required, can be \"buyer\")\n"
+            + '  ● Purchase time (required, can be "in-stock time, '
+            + 'record time")\n'
+            + '  ● Purchaser (required, can be "buyer")\n'
             + "  ● Quantity (required)\n"
             + "  ● Total price (required)\n"
             + "  ● Meal type (optional)\n"
@@ -74,7 +74,7 @@ class Purchase(OprBase):
                 text=_("OK! Select a purchased foods spreadsheet,")
             )
             tip_txt.insert(tk.INSERT, self.select_pfoods_file_str)
-            tip_txt.configure(state='disabled')
+            tip_txt.configure(state="disabled")
             s_btn.grid(column=0, row=1, sticky="E")
             window.mainloop()
 

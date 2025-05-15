@@ -121,13 +121,14 @@ class App:
         self._use_tk = False
         pass
 
-    @use_tk.setter
-    def use_tk(value = True):
-        self._use_tk = value
-    
     @property
     def use_tk(self):
         return self._use_tk
+        pass
+
+    @use_tk.setter
+    def use_tk(self, value=True):
+        self._use_tk = value
         pass
 
     @property
@@ -136,7 +137,7 @@ class App:
             self._name = app_name
         return self._name
         pass
-    
+
     @property
     def version(self):
         if not self._version:

@@ -79,7 +79,7 @@ class User(ABC):
         if not self._name:
             self._name = (
                 self.get_name_from_tk()
-                if self.use_tk
+                if self.app.use_tk
                 else self.get_name_from_cli()
             )
             pass
@@ -131,12 +131,12 @@ class User(ABC):
                 os.makedirs(self._dpath, exist_ok=True)
 
         if not self._dpath_showed:
-            if not self.app.use_tk:    
+            if not self.app.use_tk:
                 print_info(
                     _(
                         "Hey! {0}, all of your files will be"
                         + ' saved to "{1}", show it now? '
-                        + "(Yes: 'Y','y')"
+                        + "(yes: 'y','y')"
                     ).format(self.name, self._dpath)
                 )
                 o_input = get_input().replace(" ", "")
@@ -144,10 +144,20 @@ class User(ABC):
                     open_path(self._dpath)
             else:
                 from tkinter import messagebox
+
                 response = messagebox.askyesno(
-                    _("Open your directory?")
+                    _("Open your directory?"),
+                    _(
+                        "Hey! {0}, all of your files will be"
+                        + ' saved to "{1}", show it now? '
+                    ).format(self.name, self._dpath),
                 )
+                if response:
+                    open_path(self._dpath)
+                    pass
             self._dpath_showed = True
+            pass
+
         return self._dpath
 
     @property

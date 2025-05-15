@@ -14,7 +14,7 @@ from fnschool.canteen.daybook.noter import *
 class Note(ClsBase):
     def __init__(self):
         ClsBase.__init__(self)
-        self.app.use_tk()
+        self.app.use_tk = True
         self.user = Noter(self)
         self._purchase = None
         self._pfoods = None
@@ -38,7 +38,7 @@ class Note(ClsBase):
     def gen(self):
         self.user.name
         self.pfoods
-        
+
         self.pre_exit()
         pass
 
