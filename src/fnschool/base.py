@@ -20,9 +20,14 @@ class ClsBase(ABC):
         pass
 
     @property
+    def use_tk(self):
+        value = self.app.use_tk
+        return value
+
+    @property
     def cfg(self):
         if not self._cfg:
-            self._cfg = ClsConfig(self.cfg_fpath)
+            self._cfg = ClsConfig(self)
         return self._cfg
         pass
 

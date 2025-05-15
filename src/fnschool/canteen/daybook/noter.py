@@ -1,12 +1,12 @@
 import os
 import sys
 
-from fnschool import *
+from fnschool.canteen.daybook import *
 
 
 class Noter(User):
     def __init__(self, cls):
-        super().__init__(cls)
+        User.__init__(self, cls)
         pass
 
 

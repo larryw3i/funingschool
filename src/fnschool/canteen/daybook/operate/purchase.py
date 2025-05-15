@@ -38,22 +38,6 @@ class Purchase(OprBase):
         pass
 
     @property
-    def select_pfoods_file_str(self):
-        return _(
-            "{0} requires a spreadsheet with the "
-            + "following table headers "
-            + "(not in order):\n"
-            + '  ● Purchase time (required, can be "in-stock time, '
-            + 'record time")\n'
-            + '  ● Purchaser (required, can be "buyer")\n'
-            + "  ● Quantity (required)\n"
-            + "  ● Total price (required)\n"
-            + "  ● Meal type (optional)\n"
-            + "  ● Leftover (optional)\n"
-            + "  ● Ignore (optional)"
-        ).format(self.app.name)
-
-    @property
     def pfoods(self):
         if not self._pfoods:
             from tkinter import scrolledtext
@@ -76,7 +60,11 @@ class Purchase(OprBase):
             tip_txt.insert(tk.INSERT, self.select_pfoods_file_str)
             tip_txt.configure(state="disabled")
             s_btn.grid(column=0, row=1, sticky="E")
+            s_btn.focus_set()
             window.mainloop()
+            pass
+
+        return self._pfoods
 
 
 # The end.

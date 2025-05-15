@@ -5,10 +5,8 @@ from tkinter import ttk
 
 from fnschool import *
 from fnschool.canteen.currency import *
-from fnschool.canteen.daybook.operate.cover import *
-from fnschool.canteen.daybook.operate.purchase import *
-from fnschool.canteen.daybook.operate.consume import *
 from fnschool.canteen.daybook.noter import *
+from fnschool.canteen.daybook.workbook import *
 
 
 class Note(ClsBase):
@@ -18,27 +16,18 @@ class Note(ClsBase):
         self.user = Noter(self)
         self._purchase = None
         self._pfoods = None
+        self._spreadsheet = None
+
         pass
 
     @property
-    def pfoods(self):
-        if not self._pfoods:
-            self._pfoods = self.purchase.pfoods
-            pass
-
-        return self._pfoods
-        pass
-
-    @property
-    def purchase(self):
-        if not self._purchase:
-            self._purchase = Purchase(self)
-        return self._purchase
+    def spreadsheet(self):
+        if not self._spreadsheet:
+            self._spreadsheet = SpreadSheet(self)
+        return self._spreadsheet
 
     def gen(self):
-        self.user.name
-        self.pfoods
-
+        print(self.user.use_tk, self.user.name, self.user.department_name)
         self.pre_exit()
         pass
 

@@ -160,7 +160,7 @@ class App:
         from fnschool.config import AppConfig
 
         if not self._cfg:
-            self._cfg = AppConfig(self.cfg_fpath)
+            self._cfg = AppConfig(self)
         return self._cfg
         pass
 
