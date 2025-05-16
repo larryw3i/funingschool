@@ -17,7 +17,14 @@ class SheetBase(FileBase):
     def __init__(self, spreadsheet):
         self.spreadsheet = spreadsheet
         SpreadSheetBase.__init__(self, self.spreadsheet.note)
-        self.wb = self.spreadsheet.wb
+        self._wb = None
+        pass
+
+    @property
+    def wb(self):
+        if not self._wb:
+            self._wb = self.spreadsheet.wb
+        return self._wb
 
     pass
 

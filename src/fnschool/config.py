@@ -58,19 +58,22 @@ class ConfigBase(ABC):
         self.data[key] = value
         pass
 
-    def select(self, key, title=None, tip=None):
+    def select(self, key, title=None, label=None, tooltip=None):
+        from pygubu.widgets import Tooltip
+
         name = None
         root = tk.Tk()
         root.title(title)
         root.bind("<Return>", lambda e: root.destroy())
 
-        title = title or _("Select or entry a value")
-        tip = tip or _("Value:")
+        title = title or _("Select or enter a value")
+        label = label or _("Value:")
+        tooltip = tooltip or _("Select or enter a value")
         key = key
         values = self.get(key) or [""]
 
         value_var = tk.StringVar()
-        value_label = tk.Label(root, text=tip)
+        value_label = tk.Label(root, text=label)
         value_combo = ttk.Combobox(root, textvariable=value_var, values=values)
         value_combo.set(values[0])
         submit_button = tk.Button(
@@ -82,6 +85,7 @@ class ConfigBase(ABC):
         value_label.grid(row=0, column=0)
         value_combo.grid(row=0, column=1)
         submit_button.grid(row=1, column=1, sticky=tk.E)
+        Tooltip(value_combo, tooltip)
         value_combo.focus_set()
         root.mainloop()
 
