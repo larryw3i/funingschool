@@ -6,15 +6,15 @@ from helper.project.info import Info
 class Pkg:
     def __init__(self):
         self.venv_dpath = venv_dpath
-        self._proj = None
+        self._proj_info = None
         pass
 
     @property
     def proj(self):
-        if not self._proj:
+        if not self._proj_info:
 
-            self._proj = Project()
-        return self._proj
+            self._proj_info = Info()
+        return self._proj_info
 
     def install(self):
         sh_value = f"pip install -U {self.proj.deps_s};"

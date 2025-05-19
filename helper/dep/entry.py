@@ -7,8 +7,8 @@ def set_dep(args):
     from helper.dep.pkg import Pkg
 
     if args.action in "install":
-        dep = Dep()
-        dep.install()
+        pkg = Pkg()
+        pkg.install()
         pass
     else:
         print_info(_("Function is not found."))

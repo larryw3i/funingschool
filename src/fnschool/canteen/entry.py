@@ -4,16 +4,20 @@ from fnschool import *
 
 
 def set_canteen(args):
-    from fnschool.canteen.bill import Bill
 
     print_app()
 
-    bill = Bill()
     if args.action in "mk_bill":
-        bill.make_spreadsheets()
+        pass
 
     elif args.action in "merge_foodsheets":
-        bill.merge_foodsheets()
+        pass
+
+    elif args.action in "gen_daybook":
+        from fnschool.canteen.daybook.note import Note
+
+        note = Note()
+        note.gen()
 
     else:
         print_info(_("Function is not found."))
@@ -28,6 +32,7 @@ def parse_canteen(subparsers):
         choices=[
             "mk_bill",
             "merge_foodsheets",
+            "gen_daybook",
         ],
         help=_(
             'The functions of canteen. "mk_bill": Make bill. '

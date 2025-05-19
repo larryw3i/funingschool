@@ -51,7 +51,7 @@ class Info:
 
     @property
     def dev_deps(self):
-        deps = ["black", "pybabel", "twine", "build"]
+        deps = ["black", "babel", "twine", "build"]
         return deps
 
     @property

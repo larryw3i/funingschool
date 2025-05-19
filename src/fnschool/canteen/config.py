@@ -2,9 +2,13 @@ import os
 import sys
 
 from fnschool import *
-from fnschool.canteen.path import *
+from fnschool.config import Config as AppConfig, ConfigBase
 
 
-class CtConfig(Config):
-    def __init__(self, config_fpath):
-        super().__init__(config_fpath)
+class Config(ConfigBase):
+    def __init__(self):
+        super().__init__(self)
+        pass
+
+
+# The end.

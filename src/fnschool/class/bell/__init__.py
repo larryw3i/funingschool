@@ -1,5 +1,5 @@
+import os
+import sys
 from fnschool import *
-import pygubu
-
 
 # The end.

@@ -18,13 +18,10 @@ def get_entries():
         ".".join(
             os.path.splitext(
                 p.relative_to(module_dpath.parent.as_posix()).as_posix()
-            )[
-                0
-            ].split("/")
+            )[0].split("/")
         )
         for p in module_dpath.glob(f"*/{entry_name}")
     ]
-    print(entries)
     return entries
 
 
