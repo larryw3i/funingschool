@@ -32,7 +32,7 @@ class Currency_CNY(CurrencyBase):
             _("CNY_shi"),
             _("CNY_bai"),
             _("CNY_qian"),
-            _("CNY_yi"),
+            _("CNY_yi4"),
             _("CNY_shi"),
             _("CNY_bai"),
             _("CNY_qian"),

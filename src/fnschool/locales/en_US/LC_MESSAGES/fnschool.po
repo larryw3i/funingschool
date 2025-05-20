@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-05-20 20:30+0800\n"
+"POT-Creation-Date: 2025-05-20 21:10+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -195,8 +195,8 @@ msgstr ""
 msgid "CNY_wan"
 msgstr ""
 
-#: src/fnschool/canteen/currency.py:35 src/fnschool/canteen/currency.py:48
-msgid "CNY_yi"
+#: src/fnschool/canteen/currency.py:35
+msgid "CNY_yi4"
 msgstr ""
 
 #: src/fnschool/canteen/currency.py:43
@@ -205,6 +205,10 @@ msgstr ""
 
 #: src/fnschool/canteen/currency.py:47
 msgid "CNY_ling"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:48
+msgid "CNY_yi"
 msgstr ""
 
 #: src/fnschool/canteen/currency.py:49
