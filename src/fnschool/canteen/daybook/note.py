@@ -26,6 +26,10 @@ class Note(ClsBase):
             self._spreadsheet = SpreadSheet(self)
         return self._spreadsheet
 
+    @property
+    def file(self):
+        return self._spreadsheet
+
     def gen(self):
         self.pre_exit()
         pass

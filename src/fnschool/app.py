@@ -157,5 +157,11 @@ class App:
 
     pass
 
+    def open_path(self, value):
+        from fnschool.external import open_path as _open_path
+
+        _open_path(value)
+        pass
+
 
 # The end.
