@@ -7,6 +7,7 @@ from fnschool import *
 from fnschool.canteen.currency import *
 from fnschool.canteen.daybook.noter import *
 from fnschool.canteen.daybook.workbook import *
+from fnschool.canteen.daybook.workbook.spreadsheet import *
 
 
 class Note(ClsBase):
@@ -14,10 +15,19 @@ class Note(ClsBase):
         ClsBase.__init__(self)
         self.app.use_tk = True
         self.user = Noter(self)
-        self._purchase = None
-        self._pfoods = None
+        self._foods = None
         self._spreadsheet = None
 
+        pass
+
+    @property
+    def foods(self):
+        if not self._foods:
+            purchase = self.spreadsheet.purchase
+            self._foods = purchase.foods
+            pass
+
+        return self._foods
         pass
 
     @property
@@ -31,6 +41,7 @@ class Note(ClsBase):
         return self._spreadsheet
 
     def gen(self):
+        self.foods
         self.pre_exit()
         pass
 

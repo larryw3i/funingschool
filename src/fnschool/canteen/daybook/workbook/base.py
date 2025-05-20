@@ -17,7 +17,7 @@ class SheetBase(FileBase):
     def __init__(self, spreadsheet):
         self.spreadsheet = spreadsheet
         self.file = self.spreadsheet
-        SpreadSheetBase.__init__(self, self.spreadsheet.note)
+        FileBase.__init__(self, self.spreadsheet.note)
         self._wb = None
         self._sheet = None
 

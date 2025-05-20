@@ -6,7 +6,7 @@ from fnschool.canteen.daybook.workbook.purchase import *
 
 class SpreadSheet(FileBase):
     def __init__(self, note):
-        SpreadSheetBase.__init__(self, note)
+        FileBase.__init__(self, note)
         self._wb = None
         self._purchase = None
         self._fpath = None
