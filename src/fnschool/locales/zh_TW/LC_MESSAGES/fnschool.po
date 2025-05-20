@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-06 15:16+0800\n"
+"POT-Creation-Date: 2025-05-20 20:30+0800\n"
 "PO-Revision-Date: 2024-03-08 11:00+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_TW\n"
@@ -16,130 +16,117 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
-#: src/fnschool/config.py:26
+#: src/fnschool/base.py:46 src/fnschool/canteen/daybook/path.py:18
+#: src/fnschool/canteen/path.py:19 src/fnschool/user.py:150
+msgid "config"
+msgstr ""
+
+#: src/fnschool/base.py:64
+msgid "The application has exited."
+msgstr ""
+
+#: src/fnschool/config.py:39
+#, python-brace-format
 msgid "Configurations has been read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/entry.py:28
-msgid "fnschool"
+#: src/fnschool/config.py:51
+msgid "Configuration data has been saved!"
 msgstr ""
 
-#: src/fnschool/entry.py:29
-msgid "Command line interface of fnschool."
+#: src/fnschool/config.py:70 src/fnschool/config.py:72
+msgid "Select or enter a value"
+msgstr ""
+
+#: src/fnschool/config.py:71
+msgid "Value:"
+msgstr ""
+
+#: src/fnschool/config.py:82
+msgid "OK"
+msgstr ""
+
+#: src/fnschool/config.py:112
+#, python-format
+msgid "Name \"%s\" has been saved."
 msgstr ""
 
 #: src/fnschool/entry.py:30
-msgid "Enjoy it."
+msgid "fnschool"
+msgstr ""
+
+#: src/fnschool/entry.py:31
+msgid "Command line interface of fnschool."
 msgstr ""
 
 #: src/fnschool/entry.py:32
+msgid "Enjoy it."
+msgstr ""
+
+#: src/fnschool/entry.py:34
 msgid "The modules to run."
 msgstr ""
 
-#: src/fnschool/external.py:55
+#: src/fnschool/external.py:56
+#, python-brace-format
 msgid ""
 "If you feel {0} is great, please sponsor it. Your sponsorship will keep "
 "the project alive."
 msgstr ""
 
 #: src/fnschool/external.py:66
+#, python-brace-format
 msgid "Sponsor URL: {0}"
 msgstr ""
 
-#: src/fnschool/user.py:12
+#: src/fnschool/user.py:16
 msgid "Enter your name, please!"
 msgstr ""
 
-#: src/fnschool/user.py:19
-msgid "is_male"
+#: src/fnschool/user.py:23
+msgid "Is Male"
 msgstr ""
 
-#: src/fnschool/user.py:32
-msgid "profile"
+#: src/fnschool/user.py:25
+msgid "Saved User Names"
 msgstr ""
 
-#: src/fnschool/user.py:49
-msgid "Please tell {0} the {1}."
+#: src/fnschool/user.py:27
+msgid "Department Name"
 msgstr ""
 
-#: src/fnschool/user.py:59
-msgid "Unexpected value got."
+#: src/fnschool/user.py:45
+msgid "Enter your department name:"
 msgstr ""
 
-#: src/fnschool/user.py:66
+#: src/fnschool/user.py:46
+msgid "Department name"
+msgstr ""
+
+#: src/fnschool/user.py:67 src/fnschool/user.py:98
+msgid "The function has not been implemented."
+msgstr ""
+
+#: src/fnschool/user.py:73
+msgid "Enter your name:"
+msgstr ""
+
+#: src/fnschool/user.py:118
+#, python-brace-format
 msgid ""
-"\"{0}\" has been saved to \"{1}\". (Ok! I know that. [Press any key to "
-"continue])"
+"Hey! {0}, all of your files will be saved to \"{1}\", show it now? (yes: "
+"'y','y')"
 msgstr ""
 
-#: src/fnschool/user.py:80
-msgid ""
-"Excuse me, could you tell me your gender? ('F' for \"Female\", 'M' for "
-"\"Male\",default: 'F')"
+#: src/fnschool/user.py:130
+msgid "Open your directory?"
 msgstr ""
 
-#: src/fnschool/user.py:90
-msgid "Your name has been saved to \"{0}\"."
-msgstr ""
-
-#: src/fnschool/user.py:101
-msgid "The saved names have been read from \"{0}\"."
-msgstr ""
-
-#: src/fnschool/user.py:104
-msgid "No name was read from \"{0}\"."
-msgstr ""
-
-#: src/fnschool/user.py:106
-msgid "The saved name has been read from \"{0}\"."
-msgstr ""
-
-#: src/fnschool/user.py:123
-msgid "The names saved by {0} are as follows:"
-msgstr ""
-
-#: src/fnschool/exam/score.py:1122 src/fnschool/exam/score.py:1157
-#: src/fnschool/user.py:135 src/fnschool/user.py:214
-msgid "Unexpected value was got. Exit."
-msgstr ""
-
-#: src/fnschool/user.py:139
-msgid "Enter the Number of your name, or enter your name. (\"Enter\" for \"{0}\")"
-msgstr ""
-
-#: src/fnschool/user.py:184
-msgid "Hi~ is {0} your name? or enter your name, please! (Yes: 'Y','y','')"
-msgstr ""
-
-#: src/fnschool/exam/score.py:1125 src/fnschool/exam/score.py:1155
-#: src/fnschool/user.py:212
-msgid "Unexpected value was got."
-msgstr ""
-
-#: src/fnschool/user.py:233
-msgid ""
-"Hey! {0}, all of your files will be saved to \"{1}\", show it now? (Yes: "
-"'Y','y')"
-msgstr ""
-
-#: src/fnschool/user.py:249
-msgid "app_config"
-msgstr ""
-
-#: src/fnschool/user.py:256
-msgid "config"
-msgstr ""
-
-#: src/fnschool/canteeen/entry.py:19 src/fnschool/canteen/entry.py:24
-msgid "Canteen related functions."
-msgstr ""
-
-#: src/fnschool/canteeen/entry.py:24 src/fnschool/canteen/entry.py:29
-msgid ""
-"The functions of canteen. \"mk_bill\": Make bill. \"merge_foodsheets\": "
-"Merge food sheets."
+#: src/fnschool/user.py:132
+#, python-brace-format
+msgid "Hey! {0}, all of your files will be saved to \"{1}\", show it now? "
 msgstr ""
 
 #: src/fnschool/canteen/bill.py:80 src/fnschool/canteen/bill.py:85
@@ -148,39 +135,138 @@ msgstr ""
 msgid "%s can't change."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:207
+#: src/fnschool/canteen/bill.py:206
 msgid "Food classes files:"
 msgstr ""
 
 #: src/fnschool/canteen/bill.py:218
+#, python-brace-format
 msgid "Your food classes were read from \"{0}\". It will be used first."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:228
+#: src/fnschool/canteen/bill.py:227
+#, python-brace-format
 msgid "Preset food classes were read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:242
+#: src/fnschool/canteen/bill.py:241
 msgid "Ok! I know it. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/consuming.py:46
+#: src/fnschool/canteen/consuming.py:47
+#, python-brace-format
 msgid ""
 "It seems you didn't design the consumptions, please restart {0} and "
 "design the consumptions."
 msgstr ""
 
-#: src/fnschool/canteen/currency.py:15
+#: src/fnschool/canteen/currency.py:20
 msgid "CNY"
 msgstr ""
 
-#: src/fnschool/canteen/entry.py:19 src/fnschool/exam/entry.py:18
+#: src/fnschool/canteen/currency.py:25
+msgid "CNY_fen"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:26
+msgid "CNY_jiao"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:27
+msgid "CNY_yuan"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:28 src/fnschool/canteen/currency.py:32
+#: src/fnschool/canteen/currency.py:36 src/fnschool/canteen/currency.py:40
+msgid "CNY_shi"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:29 src/fnschool/canteen/currency.py:33
+#: src/fnschool/canteen/currency.py:37 src/fnschool/canteen/currency.py:41
+msgid "CNY_bai"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:30 src/fnschool/canteen/currency.py:34
+#: src/fnschool/canteen/currency.py:38 src/fnschool/canteen/currency.py:42
+msgid "CNY_qian"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:31 src/fnschool/canteen/currency.py:39
+msgid "CNY_wan"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:35 src/fnschool/canteen/currency.py:48
+msgid "CNY_yi"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:43
+msgid "CNY_zhao"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:47
+msgid "CNY_ling"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:49
+msgid "CNY_er"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:50
+msgid "CNY_san"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:51
+msgid "CNY_si"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:52
+msgid "CNY_wu"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:53
+msgid "CNY_liu"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:54
+msgid "CNY_qi"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:55
+msgid "CNY_ba"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:56
+msgid "CNY_jiu"
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:58
+#, python-format
+msgid "%s is NOT a NUMBER."
+msgstr ""
+
+#: src/fnschool/canteen/currency.py:98
+msgid "CNY_zheng"
+msgstr ""
+
+#: src/fnschool/canteen/entry.py:23 src/fnschool/class/entry.py:14
+#: src/fnschool/exam/entry.py:18 src/fnschool/games/entry.py:16
 msgid "Function is not found."
 msgstr ""
 
-#: src/fnschool/canteen/food.py:47 src/fnschool/canteen/operator.py:67
-#: src/fnschool/canteen/operator.py:72
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:204
+#: src/fnschool/canteen/entry.py:28
+msgid "Canteen related functions."
+msgstr ""
+
+#: src/fnschool/canteen/entry.py:38
+msgid ""
+"The functions of canteen. \"mk_bill\": Make bill. \"merge_foodsheets\": "
+"Merge food sheets."
+msgstr ""
+
+#: src/fnschool/canteen/food.py:47 src/fnschool/canteen/operator.py:68
+#: src/fnschool/canteen/operator.py:73
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:205
+#, python-brace-format
 msgid "({0})"
 msgstr ""
 
@@ -189,6 +275,7 @@ msgid "Remaining"
 msgstr ""
 
 #: src/fnschool/canteen/food.py:62
+#, python-brace-format
 msgid "The count of \"{0}\" is 0, you need to delete it maybe."
 msgstr ""
 
@@ -200,28 +287,226 @@ msgstr ""
 msgid "food_classes"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:34
+#: src/fnschool/canteen/operator.py:35
+#, python-brace-format
 msgid ""
 "Please tell {0} the alias of your superior department, {0} will use it as"
 " the form title (\"purchasing summary\" form, \"consuming summary\" form,"
-" etc). e.g: \"富宁县那能乡中小学\". If you haven't noticed it, you can check the "
-"previous bill first and then let {0} know."
+" etc). e.g: \"Primary and secondary schools in Naneng Township, Funing "
+"County\". If you haven't noticed it, you can check the previous bill "
+"first and then let {0} know."
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:46
+#: src/fnschool/canteen/operator.py:47
 msgid "superior department"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:52 src/fnschool/canteen/operator.py:64
+#: src/fnschool/canteen/operator.py:53 src/fnschool/canteen/operator.py:65
 msgid "bill"
 msgstr ""
 
-#: src/fnschool/canteen/path.py:13
+#: src/fnschool/canteen/daybook/path.py:13 src/fnschool/canteen/path.py:14
 msgid "canteen"
 msgstr ""
 
-#: src/fnschool/canteen/path.py:14
+#: src/fnschool/canteen/daybook/path.py:14 src/fnschool/canteen/path.py:15
 msgid "operator_name"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/path.py:17 src/fnschool/canteen/path.py:18
+msgid "daybook"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/operate/purchase.py:48
+msgid "Select spreadsheet"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/operate/purchase.py:58
+msgid "OK! Select a purchased foods spreadsheet,"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:25
+msgid "Counting Date"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:26
+msgid "Purchase Date"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:27
+msgid "Check Date"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:28
+msgid "Counting Date 0"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:29
+msgid "Counting Date 1"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:30
+msgid "Counting Date 2"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:31
+msgid "Counting Date 3"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:34
+msgid "Meal Type"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:35
+msgid "Meal Class"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:36
+msgid "Meal Type 0"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:37
+msgid "Meal Type 1"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:38
+msgid "Meal Type 2"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:39
+msgid "Meal Type 3"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:42
+msgid "Name"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:43
+msgid "Food Name"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:44
+msgid "Food Name 0"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:45
+msgid "Food Name 1"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:46
+msgid "Food Name 2"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:47
+msgid "Food Name 3"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:50
+msgid "Quantity"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:51
+msgid "Quantity 0"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:52
+msgid "Quantity 1"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:53
+msgid "Quantity 2"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:54
+msgid "Quantity 3"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:57
+msgid "Total Price"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:58
+msgid "Total Price 0"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:59
+msgid "Total Price 1"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:60
+msgid "Total Price 2"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:61
+msgid "Total Price 3"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:64
+msgid "Residual"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:65
+msgid "Surplus"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:66
+msgid "Remnant"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:67
+msgid "Residual 0"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:68
+msgid "Residual 1"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:71
+msgid "Negligible"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:72
+msgid "Neglected"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:73
+msgid "Non-inbound"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:74
+msgid "Negligible 0"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/base.py:75
+msgid "Negligible 1"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:23
+msgid "Continue"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:24
+msgid "Edit opened Spreadsheet, save it and click \"OK\" to continue."
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:34
+msgid "Saved Workbook Names"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:35
+msgid "Select a spreadsheet"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:36
+msgid "File:"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:37
+msgid "Select a saved file or enter a file name."
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:47
+msgid "Workbooks"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/base.py:41
@@ -230,15 +515,18 @@ msgstr ""
 msgid "Spreadsheet Files"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:66
+#: src/fnschool/canteen/spreadsheet/base.py:67
+#, python-brace-format
 msgid "Row {0} of {1} is being inserted, please wait a moment."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/base.py:113
+#, python-brace-format
 msgid "Cells of {0} was unmerged."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:193
+#: src/fnschool/canteen/spreadsheet/base.py:195
+#, python-brace-format
 msgid "Empty row {0} of sheet \"{1}\" has been deleted."
 msgstr ""
 
@@ -249,7 +537,7 @@ msgstr ""
 #: src/fnschool/canteen/spreadsheet/consuming.py:238
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:73
 #: src/fnschool/canteen/spreadsheet/cover.py:61
-#: src/fnschool/canteen/spreadsheet/food.py:589
+#: src/fnschool/canteen/spreadsheet/food.py:642
 #: src/fnschool/canteen/spreadsheet/inventory.py:372
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:107
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:175
@@ -281,6 +569,7 @@ msgstr ""
 #: src/fnschool/canteen/spreadsheet/consumingsum.py:57
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:46
 #: src/fnschool/canteen/spreadsheet/purchasingsum.py:57
+#, python-brace-format
 msgid "{0}年{1}月{2}日"
 msgstr ""
 
@@ -296,17 +585,20 @@ msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:71
 #: src/fnschool/canteen/spreadsheet/spreadsheet.py:72
+#, python-brace-format
 msgid "Spreadsheet \"{0}\" is in use."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:154
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:155
+#, python-brace-format
 msgid ""
 "Do you want to save all updated data to \"{0}\"? or just save it as a "
 "copy to \"{1}\". (YyNn)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:161
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:162
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:162
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:163
+#, python-brace-format
 msgid ""
 "If you save updated data to \"{0}\", data of food sheets will be saved "
 "for every month."
@@ -317,8 +609,8 @@ msgstr ""
 msgid "Saving. . ."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:177
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:178
+#: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:178
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:179
 msgid ""
 "You can fill in the monthly missing data to food sheets, they will be "
 "saved for next updating."
@@ -326,6 +618,7 @@ msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:187
 #: src/fnschool/canteen/spreadsheet/spreadsheet.py:188
+#, python-brace-format
 msgid "Updated data has been saved to \"{0}\"."
 msgstr ""
 
@@ -378,6 +671,7 @@ msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:326
 #: src/fnschool/canteen/spreadsheet/spreadsheet.py:337
+#, python-brace-format
 msgid "Updating sheets for {0}."
 msgstr ""
 
@@ -387,46 +681,52 @@ msgid "Update completely!"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/food.py:140
+#, python-brace-format
 msgid "Sheet {0} has been reformatted."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/food.py:165
+#, python-brace-format
 msgid "Updating inventories for \"{0}\""
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:178
+#: src/fnschool/canteen/spreadsheet/food.py:179
+#, python-brace-format
 msgid "cannot find the starting index of form in Sheet \"{0}\". (row {1})"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:185
+#: src/fnschool/canteen/spreadsheet/food.py:186
+#, python-brace-format
 msgid "cannot find the ending index of form in Sheet \"{0}\". (row {1})"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:291
+#: src/fnschool/canteen/spreadsheet/food.py:343
 msgid "Update completed!"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:297
+#: src/fnschool/canteen/spreadsheet/food.py:350
+#, python-brace-format
 msgid "Update monthly and annual accumulation for \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:417
+#: src/fnschool/canteen/spreadsheet/food.py:470
 msgid "Update completed."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:601
+#: src/fnschool/canteen/spreadsheet/food.py:654
 msgid "All food sheets have their tab colors reset."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:615
+#: src/fnschool/canteen/spreadsheet/food.py:668
 msgid "Food sheets have their tab colors recolor:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/food.py:619
+#: src/fnschool/canteen/spreadsheet/food.py:672
 msgid "Updated food sheets:"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/inventory.py:99
+#, python-brace-format
 msgid "Sheet \"{0}\" has been reformatted."
 msgstr ""
 
@@ -435,6 +735,7 @@ msgid "No unit"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/inventory.py:244
+#, python-brace-format
 msgid "There is no inventories for \"{0}\"."
 msgstr ""
 
@@ -449,6 +750,7 @@ msgstr ""
 #: src/fnschool/canteen/spreadsheet/merging.py:45
 #: src/fnschool/canteen/spreadsheet/merging.py:53
 #: src/fnschool/canteen/spreadsheet/purchasing.py:277
+#, python-brace-format
 msgid "Loading data from \"{0}\"."
 msgstr ""
 
@@ -466,16 +768,19 @@ msgid "Select the current bill spreadsheet"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/merging.py:299
+#, python-brace-format
 msgid ""
 "Data from Sheet \"{0}\" of Workbook \"{1}\" was copied to Sheet\"{2}\" of"
 " Workbook \"{3}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/merging.py:316
+#: src/fnschool/canteen/spreadsheet/merging.py:315
+#, python-brace-format
 msgid "Food sheet \"{0}\" has its color recolor."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/merging.py:329
+#: src/fnschool/canteen/spreadsheet/merging.py:328
+#, python-brace-format
 msgid "Merge completed！Saving \"{0}\"."
 msgstr ""
 
@@ -485,70 +790,83 @@ msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/preconsuming.py:73
 #: src/fnschool/canteen/spreadsheet/preconsuming.py:76
+#, python-brace-format
 msgid "{year}.{month}.{day}"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/preconsuming.py:83
+#, python-brace-format
 msgid "food_consuming--{t0}--{t1}.xlsx"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/preconsuming.py:95
+#, python-brace-format
 msgid "Spreadsheet \"{0}\" was copied to \"{1}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:178
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:180
+#, python-brace-format
 msgid ""
 "Sheet '{0}' of \"{1}\" was updated.\n"
 "Press any key to continue when you have completed the foods allocation."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:190
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:191
+#, python-brace-format
 msgid "New purchased food for date {0} is:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:192
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:193
+#, python-brace-format
 msgid "New purchased foods for date {0} are:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:214
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:215
 msgid "Negligible foods are not listed."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:217
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:218
+#, python-brace-format
 msgid "There is no purchased food for {0}."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:223
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:225
 msgid ""
 "There is no need to design for dates without food consumption. (Ok, I "
 "know [press any key to continue])"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:233
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:235
+#, python-brace-format
 msgid "Ok! I have updated spreadsheet '{0}'. (Press any key)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:273
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:274
+#, python-brace-format
 msgid "{year}.{month}"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:302
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:303
+#, python-brace-format
 msgid "Consuming days of {0} ({1}):"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:304
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:305
+#, python-brace-format
 msgid "Consuming days of {0}:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:312
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:313
+#, python-brace-format
 msgid "{0} days in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:314
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:315
+#, python-brace-format
 msgid "{0} day in total."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/preconsuming.py:318
+#: src/fnschool/canteen/spreadsheet/preconsuming.py:319
 msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
@@ -557,10 +875,12 @@ msgid "parent_path_of_purchasing_file"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:161
+#, python-brace-format
 msgid "Column \"{0}\" was no found."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:163
+#, python-brace-format
 msgid "Columns \"{0}\" were no found."
 msgstr ""
 
@@ -569,32 +889,35 @@ msgid ","
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:186
+#, python-brace-format
 msgid "Column \"{0}\" was not found. Exit"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:335
+#: src/fnschool/canteen/spreadsheet/purchasing.py:336
+#, python-brace-format
 msgid ""
 "Column \"{0}\" has been updated, feel free to open new issue if some food"
 " with the wrong class ({1}). "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:342
+#: src/fnschool/canteen/spreadsheet/purchasing.py:343
 msgid "Ok, I'd like to check and update it. (Press any key to check the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:350
+#: src/fnschool/canteen/spreadsheet/purchasing.py:351
 msgid ""
 "I have checked it, all classes of food are right, and I closed the file. "
 "(Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:407
+#: src/fnschool/canteen/spreadsheet/purchasing.py:408
+#, python-brace-format
 msgid ""
 "{0} need a purchasing list file, and it's file type should be '.xlsx'. "
 "The column names of it:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:412
+#: src/fnschool/canteen/spreadsheet/purchasing.py:413
 msgid ""
 "\n"
 "\tcolumn   type    example\n"
@@ -623,30 +946,36 @@ msgid "No file was selected, exit."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:444
+#, python-brace-format
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:489
+#, python-brace-format
 msgid "The remaining food wasn't read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:502
+#: src/fnschool/canteen/spreadsheet/purchasing.py:503
+#, python-brace-format
 msgid ""
 "{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet \"{2}\" "
 "......"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:515
+#, python-brace-format
 msgid "There is no saved inventories from \"{0}\""
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:523
+#: src/fnschool/canteen/spreadsheet/purchasing.py:524
+#, python-brace-format
 msgid ""
 "Some remaining foods have been read from sheet \"{0}\" of spreadsheet "
 "\"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:528
+#: src/fnschool/canteen/spreadsheet/purchasing.py:529
+#, python-brace-format
 msgid "The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
 msgstr ""
 
@@ -659,22 +988,26 @@ msgid "Inventory data: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:565
+#, python-brace-format
 msgid "Fill them in \"{0}\"? (YyNn, default: \"No\")"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:567
+#, python-brace-format
 msgid "Fill it in \"{0}\"? (YyNn, default: \"No\")"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:629
+#, python-brace-format
 msgid "The remaining foods have been added to \"{0}\"."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:631
+#, python-brace-format
 msgid "The remaining food has been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:644
+#: src/fnschool/canteen/spreadsheet/purchasing.py:645
 msgid "Please check/modify the updated data. (Press any key to open the file)"
 msgstr ""
 
@@ -682,13 +1015,15 @@ msgstr ""
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:673
+#: src/fnschool/canteen/spreadsheet/purchasing.py:674
+#, python-brace-format
 msgid ""
 "The total price of the following food has more than two decimal places, "
 "and {0} cannot process it."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:678
+#: src/fnschool/canteen/spreadsheet/purchasing.py:679
+#, python-brace-format
 msgid ""
 "The total price of the following foods have more than two decimal places,"
 " and {0} cannot process them."
@@ -696,6 +1031,7 @@ msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:690
 #: src/fnschool/canteen/spreadsheet/purchasing.py:811
+#, python-brace-format
 msgid "{0}({1})"
 msgstr ""
 
@@ -703,7 +1039,8 @@ msgstr ""
 msgid "Exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:716
+#: src/fnschool/canteen/spreadsheet/purchasing.py:717
+#, python-brace-format
 msgid ""
 "The unit price of \"{0}\" is an infinite decimal, split \"{0}\"?(Yes: "
 "\"Y\",\"y\",\"\". Yes for rest: \"A\",\"a\". No: \"N\",\"n\". No for "
@@ -711,36 +1048,42 @@ msgid ""
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:761
+#, python-brace-format
 msgid "\"{0}\" was split:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:796
+#: src/fnschool/canteen/spreadsheet/purchasing.py:797
+#, python-brace-format
 msgid ""
 "Normally, {0} only considers non-warehoused foods as seasonings, but {0} "
 "has found that the following food is non-warehoused, but it is not "
 "seasonings:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:802
+#: src/fnschool/canteen/spreadsheet/purchasing.py:803
+#, python-brace-format
 msgid ""
 "Normally, {0} only considers non-warehoused foods as seasonings, but {0} "
 "has found that the following foods are non-warehoused, but they are not "
 "seasonings:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:815
+#: src/fnschool/canteen/spreadsheet/purchasing.py:816
+#, python-brace-format
 msgid "You may need to modify its food class, otherwise {0} will go wrong."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:820
+#: src/fnschool/canteen/spreadsheet/purchasing.py:821
+#, python-brace-format
 msgid "You may need to modify their food classes, otherwise {0} will go wrong."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:825
+#: src/fnschool/canteen/spreadsheet/purchasing.py:826
+#, python-brace-format
 msgid " Do you want to re-edit \"{0}\"? (Yes: 'Y' or 'y'. Default: No.)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:834
+#: src/fnschool/canteen/spreadsheet/purchasing.py:835
 msgid "Ok, I have re-edited and closed it? (Press any key to continue)"
 msgstr ""
 
@@ -762,18 +1105,29 @@ msgstr ""
 msgid "总金额（大写）："
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:155
+#: src/fnschool/canteen/spreadsheet/spreadsheet.py:156
+#, python-brace-format
 msgid ""
 "Do you want to save all updated data to \"{0}\"? or just save it as a "
 "copy to \"{1}\". (Yy[N]n)"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/unwarehousing.py:57
+#, python-brace-format
 msgid "{0} ({1})"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/unwarehousing.py:67
+#: src/fnschool/canteen/spreadsheet/unwarehousing.py:68
+#, python-brace-format
 msgid "There is no abandoned food. Sheet {0} updating skipped."
+msgstr ""
+
+#: src/fnschool/class/entry.py:19
+msgid "Class related functions."
+msgstr ""
+
+#: src/fnschool/class/entry.py:26
+msgid "The functions of class. \"set_bell\": Configurate bell. "
 msgstr ""
 
 #: src/fnschool/exam/email.py:27
@@ -861,28 +1215,34 @@ msgid "chaperone"
 msgstr ""
 
 #: src/fnschool/exam/email.py:76
+#, python-brace-format
 msgid "Tell {0} your SMTP server host, please!"
 msgstr ""
 
 #: src/fnschool/exam/email.py:84
+#, python-brace-format
 msgid "Tell {0} your SMTP server port, please!"
 msgstr ""
 
 #: src/fnschool/exam/email.py:93
+#, python-brace-format
 msgid "Tell {0} your user name at SMTP server, please!"
 msgstr ""
 
 #: src/fnschool/exam/email.py:103
+#, python-brace-format
 msgid "Tell {0} your password for SMTP server, please!"
 msgstr ""
 
-#: src/fnschool/exam/email.py:126
+#: src/fnschool/exam/email.py:127
+#, python-brace-format
 msgid ""
 "Hey! {0}, do you want to send these scores of students to chaperones? "
 "(Yes: 'Y','y')"
 msgstr ""
 
 #: src/fnschool/exam/email.py:135
+#, python-brace-format
 msgid "The scores of Test \"{0}\""
 msgstr ""
 
@@ -890,27 +1250,33 @@ msgstr ""
 msgid "'s"
 msgstr ""
 
-#: src/fnschool/exam/email.py:183
+#: src/fnschool/exam/email.py:184
+#, python-brace-format
 msgid "There is no emails of chaperones for {0}. Skip."
 msgstr ""
 
 #: src/fnschool/exam/email.py:209
+#, python-brace-format
 msgid "Teacher {0}"
 msgstr ""
 
 #: src/fnschool/exam/email.py:212
+#, python-brace-format
 msgid "Mr. {0}"
 msgstr ""
 
 #: src/fnschool/exam/email.py:214
+#, python-brace-format
 msgid "Ms. {0}"
 msgstr ""
 
-#: src/fnschool/exam/email.py:234
+#: src/fnschool/exam/email.py:235
+#, python-brace-format
 msgid "The \"{0}\" scores of {1} are: "
 msgstr ""
 
-#: src/fnschool/exam/email.py:243
+#: src/fnschool/exam/email.py:244
+#, python-brace-format
 msgid "The scores information of \"{0}\" has been sent to {2}{1}"
 msgstr ""
 
@@ -918,20 +1284,22 @@ msgstr ""
 msgid "parental_emails"
 msgstr ""
 
-#: src/fnschool/exam/email.py:309
+#: src/fnschool/exam/email.py:310
+#, python-brace-format
 msgid ""
 "Parental emails spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" "
 "was copied to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/email.py:326
+#: src/fnschool/exam/email.py:327
+#, python-brace-format
 msgid ""
 "The student's name has been filled in spreadsheet \"{0}\". Please fill in"
 " the email addresses according to the comments. (Ok! open the file for "
 "me. [Press any key to open it])"
 msgstr ""
 
-#: src/fnschool/exam/email.py:338
+#: src/fnschool/exam/email.py:339
 msgid "(Ok! I have filled them in? [Press any key to continue])"
 msgstr ""
 
@@ -939,7 +1307,7 @@ msgstr ""
 msgid "Examination related functions."
 msgstr ""
 
-#: src/fnschool/exam/entry.py:28
+#: src/fnschool/exam/entry.py:29
 msgid ""
 "\"enter\": Enter the examination scores. \"read\": Read the examination "
 "scores."
@@ -973,11 +1341,11 @@ msgstr ""
 msgid "Student Name"
 msgstr ""
 
-#: src/fnschool/exam/score.py:115
+#: src/fnschool/exam/score.py:116
 msgid "Generate the scores and scoring rate plots now ? (Yes: \"Y\",\"y\")"
 msgstr ""
 
-#: src/fnschool/exam/score.py:120
+#: src/fnschool/exam/score.py:121
 msgid "Generate the scoring rate plots now ? (Yes: \"Y\",\"y\")"
 msgstr ""
 
@@ -986,6 +1354,7 @@ msgid "scores_of_all_students"
 msgstr ""
 
 #: src/fnschool/exam/score.py:140
+#, python-brace-format
 msgid "scores_of_{0}"
 msgstr ""
 
@@ -994,6 +1363,7 @@ msgid "average_scores"
 msgstr ""
 
 #: src/fnschool/exam/score.py:174
+#, python-brace-format
 msgid "Summary of {0}:"
 msgstr ""
 
@@ -1002,10 +1372,12 @@ msgid "Scores:"
 msgstr ""
 
 #: src/fnschool/exam/score.py:219 src/fnschool/exam/score.py:382
+#, python-brace-format
 msgid "[{0}] \"{1}\" {2}has been saved."
 msgstr ""
 
 #: src/fnschool/exam/score.py:247
+#, python-brace-format
 msgid "The scores of Student {0}"
 msgstr ""
 
@@ -1014,22 +1386,27 @@ msgid "The average scores"
 msgstr ""
 
 #: src/fnschool/exam/score.py:257 src/fnschool/exam/score.py:332
+#, python-brace-format
 msgid "Examination names of {0}"
 msgstr ""
 
 #: src/fnschool/exam/score.py:260 src/fnschool/exam/score.py:335
+#, python-brace-format
 msgid "Examination Points ({0} points in total)"
 msgstr ""
 
 #: src/fnschool/exam/score.py:262 src/fnschool/exam/score.py:337
+#, python-brace-format
 msgid "Examination Points ({0} point in total)"
 msgstr ""
 
 #: src/fnschool/exam/score.py:284
+#, python-brace-format
 msgid "Discipline point: {0}."
 msgstr ""
 
 #: src/fnschool/exam/score.py:286
+#, python-brace-format
 msgid "Discipline points: {0}."
 msgstr ""
 
@@ -1038,6 +1415,7 @@ msgid "The scores of all students"
 msgstr ""
 
 #: src/fnschool/exam/score.py:355
+#, python-brace-format
 msgid "scoring_rate_of_{0}"
 msgstr ""
 
@@ -1046,30 +1424,37 @@ msgid "average_scoring_rate"
 msgstr ""
 
 #: src/fnschool/exam/score.py:417
+#, python-brace-format
 msgid "The scoring rate of Student {0} ({1})"
 msgstr ""
 
 #: src/fnschool/exam/score.py:421
+#, python-brace-format
 msgid "The average scoring rate ({0})"
 msgstr ""
 
 #: src/fnschool/exam/score.py:434
+#, python-brace-format
 msgid "Question titles of {0} ({1})"
 msgstr ""
 
 #: src/fnschool/exam/score.py:437
+#, python-brace-format
 msgid "{0} point in total, "
 msgstr ""
 
 #: src/fnschool/exam/score.py:439
+#, python-brace-format
 msgid "{0} points in total, "
 msgstr ""
 
 #: src/fnschool/exam/score.py:442
+#, python-brace-format
 msgid "{0} point got"
 msgstr ""
 
 #: src/fnschool/exam/score.py:444
+#, python-brace-format
 msgid "{0} points got"
 msgstr ""
 
@@ -1086,26 +1471,31 @@ msgid "Please select the scores file"
 msgstr ""
 
 #: src/fnschool/exam/score.py:541
+#, python-brace-format
 msgid "Scores file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/exam/score.py:571
+#: src/fnschool/exam/score.py:572
+#, python-brace-format
 msgid "Would you like to edit \"{0}\" ? (\"Yes\": 'Y' or 'y'. Default: No)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:580
+#: src/fnschool/exam/score.py:581
 msgid "Ok, I have edited and closed it? (Enter any key to continue)"
 msgstr ""
 
-#: src/fnschool/exam/score.py:766
+#: src/fnschool/exam/score.py:767
+#, python-brace-format
 msgid "Failed to get examination start time from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:779
+#: src/fnschool/exam/score.py:780
+#, python-brace-format
 msgid "Failed to get examination end time from \"{0}\"."
 msgstr ""
 
 #: src/fnschool/exam/score.py:789
+#, python-brace-format
 msgid "The examination end time is set to \"{0}\"."
 msgstr ""
 
@@ -1113,13 +1503,15 @@ msgstr ""
 msgid "exam_names"
 msgstr ""
 
-#: src/fnschool/exam/score.py:934
+#: src/fnschool/exam/score.py:935
+#, python-brace-format
 msgid ""
 "Scores spreadsheet \"{0}\" doesn't exist, spreadsheet \"{1}\" was copied "
 "to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/exam/score.py:971
+#: src/fnschool/exam/score.py:972
+#, python-brace-format
 msgid "The recent examination scores ({0}) have been added to \"{1}\"."
 msgstr ""
 
@@ -1128,27 +1520,31 @@ msgid "There is no recent tests."
 msgstr ""
 
 #: src/fnschool/exam/score.py:981
+#, python-brace-format
 msgid "Spreadsheet \"{0}\" has been saved."
 msgstr ""
 
-#: src/fnschool/exam/score.py:985
+#: src/fnschool/exam/score.py:986
+#, python-brace-format
 msgid ""
 "Please update the question titles , student names and scores of \"{0}\" "
 "according to the comments. (Ok, open it for me [Press any key to open "
 "file])"
 msgstr ""
 
-#: src/fnschool/exam/score.py:1001
+#: src/fnschool/exam/score.py:1002
 msgid ""
 "Ok, I have updated the question titles, student names and scores. (Press "
 "any key to continue)"
 msgstr ""
 
 #: src/fnschool/exam/score.py:1023
+#, python-brace-format
 msgid "Is the total score {0} points?"
 msgstr ""
 
 #: src/fnschool/exam/score.py:1025
+#, python-brace-format
 msgid "Is the total score {0} point?"
 msgstr ""
 
@@ -1156,11 +1552,13 @@ msgstr ""
 msgid " (Yes: \"Y\",\"y\")"
 msgstr ""
 
-#: src/fnschool/exam/score.py:1061
+#: src/fnschool/exam/score.py:1062
+#, python-brace-format
 msgid "The examination name \"{0}\" has been saved to \"{1}\"."
 msgstr ""
 
 #: src/fnschool/exam/score.py:1065
+#, python-brace-format
 msgid "The examination name has been saved to \"{0}\"."
 msgstr ""
 
@@ -1172,13 +1570,23 @@ msgstr ""
 msgid "The saved examination name is as follow:"
 msgstr ""
 
-#: src/fnschool/exam/score.py:1097
+#: src/fnschool/exam/score.py:1098
+#, python-brace-format
 msgid ""
 "Select the examination name you entered (index), or enter new examination"
 " name, please! (default: {0})"
 msgstr ""
 
-#: src/fnschool/exam/score.py:1139
+#: src/fnschool/exam/score.py:1122 src/fnschool/exam/score.py:1157
+msgid "Unexpected value was got. Exit."
+msgstr ""
+
+#: src/fnschool/exam/score.py:1125 src/fnschool/exam/score.py:1155
+msgid "Unexpected value was got."
+msgstr ""
+
+#: src/fnschool/exam/score.py:1140
+#, python-brace-format
 msgid ""
 "Hello~ tell {0} the examination name, please! (e.g: Class 5(1)/English "
 "Volume 1/Unit 1 Testing)"
@@ -1194,6 +1602,14 @@ msgstr ""
 
 #: src/fnschool/exam/teacher.py:42
 msgid "Kind regards!"
+msgstr ""
+
+#: src/fnschool/games/entry.py:21
+msgid "Game related functions."
+msgstr ""
+
+#: src/fnschool/games/entry.py:28
+msgid "The functions of game. \"start\": Start games module. "
 msgstr ""
 
 #~ msgid "Configuration file '%s' was copied to '%s'."

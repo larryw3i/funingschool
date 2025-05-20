@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-06 15:16+0800\n"
+"POT-Creation-Date: 2025-05-20 20:30+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: helper/entry.py:36
 msgid "Helper of fnschool project"
@@ -35,14 +35,19 @@ msgid "The tools to run."
 msgstr ""
 
 #: helper/external.py:35
+#, python-brace-format
 msgid "Virtual Environment \"{0}\" has been made."
 msgstr ""
 
-#: helper/dep/dep.py:24 helper/dep/fndep.py:24
+#: helper/dep/__init__.py:24 helper/dep/dep.py:24 helper/dep/fndep.py:24
+#: helper/dep/pkg.py:24
+#, python-brace-format
 msgid "Dependency ({0}) has been installed."
 msgstr ""
 
-#: helper/dep/dep.py:26 helper/dep/fndep.py:26
+#: helper/dep/__init__.py:26 helper/dep/dep.py:26 helper/dep/fndep.py:26
+#: helper/dep/pkg.py:26
+#, python-brace-format
 msgid "Dependencies ({0}) have been installed."
 msgstr ""
 
@@ -55,7 +60,7 @@ msgstr ""
 msgid "'dependencies' related functions."
 msgstr ""
 
-#: helper/dep/entry.py:24
+#: helper/dep/entry.py:25
 msgid "\"install\": Install all dependencies in virtual environment."
 msgstr ""
 
@@ -68,6 +73,7 @@ msgid "\"readme\": \"README\" files related functions."
 msgstr ""
 
 #: helper/docs/readme/content.py:32
+#, python-brace-format
 msgid "README file \"{0}\" was updated."
 msgstr ""
 
@@ -99,7 +105,7 @@ msgstr ""
 msgid "Screenshot"
 msgstr ""
 
-#: helper/docs/readme/content.py:87
+#: helper/docs/readme/content.py:88
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132"
 "-f8cd-11ee-8ee6-f37309efa64b.png"
@@ -117,7 +123,7 @@ msgstr ""
 msgid "The simplest and most straightforward `consuming sheets`."
 msgstr ""
 
-#: helper/docs/readme/content.py:103
+#: helper/docs/readme/content.py:104
 msgid "Update sheets (warehousing, consuming, summing, etc) automatically."
 msgstr ""
 
@@ -145,7 +151,7 @@ msgstr ""
 msgid "An easy-to-use \"test score entry form\"."
 msgstr ""
 
-#: helper/docs/readme/content.py:117
+#: helper/docs/readme/content.py:118
 msgid ""
 "Clear test results at a glance, converting table data into Intuitive "
 "images."
@@ -167,7 +173,7 @@ msgstr ""
 msgid "on `Ubuntu`:"
 msgstr ""
 
-#: helper/docs/readme/content.py:138
+#: helper/docs/readme/content.py:139
 msgid ""
 "For `Windows 10` and `Windows 11`, you can install Python3 from "
 "https://www.python.org/getit/ . (`fnschool` requires Python 3.12 or "
@@ -178,7 +184,7 @@ msgstr ""
 msgid "Install fnschool and run it"
 msgstr ""
 
-#: helper/docs/readme/content.py:151
+#: helper/docs/readme/content.py:152
 msgid ""
 "Run the command line application:\n"
 "* `Ubuntu`: `Ctrl+Alt+T`.  \n"
@@ -239,14 +245,14 @@ msgstr ""
 msgid "'gettext' related functions."
 msgstr ""
 
-#: helper/msg/entry.py:35
+#: helper/msg/entry.py:36
 msgid ""
 "\"update\": Update message catalogs.\"compile\": Compile message "
 "catalogs. \"add\": Add locale message catalogs (\"locale\" argument is "
 "required)."
 msgstr ""
 
-#: helper/msg/entry.py:46
+#: helper/msg/entry.py:47
 msgid "The locale language code for adding message catalogs (e.g: en_US)."
 msgstr ""
 
@@ -262,17 +268,19 @@ msgstr ""
 msgid "'build' related functions."
 msgstr ""
 
-#: helper/packing/entry.py:28
+#: helper/packing/entry.py:29
 msgid ""
 "\"now\": Build \"fnschool\" now. \"upload\": Build and upload "
 "\"fnschool\" via \"twine\"."
 msgstr ""
 
-#: helper/project/fnproject.py:30 helper/project/project.py:30
+#: helper/project/fnproject.py:30 helper/project/info.py:30
+#: helper/project/project.py:30
 msgid "Version was updated."
 msgstr ""
 
-#: helper/project/fnproject.py:32 helper/project/project.py:32
+#: helper/project/fnproject.py:32 helper/project/info.py:32
+#: helper/project/project.py:32
 msgid "Versions were updated."
 msgstr ""
 

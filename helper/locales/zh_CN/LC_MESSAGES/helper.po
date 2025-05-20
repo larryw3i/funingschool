@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-01-06 15:16+0800\n"
+"POT-Creation-Date: 2025-05-20 20:30+0800\n"
 "PO-Revision-Date: 2024-10-29 16:18+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language: zh_CN\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.17.0\n"
 
 #: helper/entry.py:36
 msgid "Helper of fnschool project"
@@ -36,14 +36,19 @@ msgid "The tools to run."
 msgstr "要运行的工具。"
 
 #: helper/external.py:35
+#, python-brace-format
 msgid "Virtual Environment \"{0}\" has been made."
 msgstr "虚拟环境 “{0}” 已被创建。"
 
-#: helper/dep/dep.py:24 helper/dep/fndep.py:24
+#: helper/dep/__init__.py:24 helper/dep/dep.py:24 helper/dep/fndep.py:24
+#: helper/dep/pkg.py:24
+#, python-brace-format
 msgid "Dependency ({0}) has been installed."
 msgstr "依赖（{0}）已被安装。"
 
-#: helper/dep/dep.py:26 helper/dep/fndep.py:26
+#: helper/dep/__init__.py:26 helper/dep/dep.py:26 helper/dep/fndep.py:26
+#: helper/dep/pkg.py:26
+#, python-brace-format
 msgid "Dependencies ({0}) have been installed."
 msgstr "依赖（{0}）已被安装。"
 
@@ -56,7 +61,7 @@ msgstr "未找到函数。"
 msgid "'dependencies' related functions."
 msgstr "依赖 相关函数。"
 
-#: helper/dep/entry.py:24
+#: helper/dep/entry.py:25
 msgid "\"install\": Install all dependencies in virtual environment."
 msgstr "“install”：在虚拟环境中安装依赖。"
 
@@ -69,6 +74,7 @@ msgid "\"readme\": \"README\" files related functions."
 msgstr "“readme”：“README”文件的 相关函数。"
 
 #: helper/docs/readme/content.py:32
+#, python-brace-format
 msgid "README file \"{0}\" was updated."
 msgstr "README 文件 “{0}” 已更新。"
 
@@ -100,7 +106,7 @@ msgstr "授权"
 msgid "Screenshot"
 msgstr "截图"
 
-#: helper/docs/readme/content.py:87
+#: helper/docs/readme/content.py:88
 msgid ""
 "https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9432e132"
 "-f8cd-11ee-8ee6-f37309efa64b.png"
@@ -120,7 +126,7 @@ msgstr "自动读取食材表单。"
 msgid "The simplest and most straightforward `consuming sheets`."
 msgstr "更简单更直观食材出库设计。"
 
-#: helper/docs/readme/content.py:103
+#: helper/docs/readme/content.py:104
 msgid "Update sheets (warehousing, consuming, summing, etc) automatically."
 msgstr "自动更新表单（入库、出库、汇总等等）。"
 
@@ -148,7 +154,7 @@ msgstr "测试统计"
 msgid "An easy-to-use \"test score entry form\"."
 msgstr "易用的“测试登记”表单。"
 
-#: helper/docs/readme/content.py:117
+#: helper/docs/readme/content.py:118
 msgid ""
 "Clear test results at a glance, converting table data into Intuitive "
 "images."
@@ -170,7 +176,7 @@ msgstr "安装 Python3"
 msgid "on `Ubuntu`:"
 msgstr "在 `Ubuntu` 上："
 
-#: helper/docs/readme/content.py:138
+#: helper/docs/readme/content.py:139
 msgid ""
 "For `Windows 10` and `Windows 11`, you can install Python3 from "
 "https://www.python.org/getit/ . (`fnschool` requires Python 3.12 or "
@@ -187,7 +193,7 @@ msgstr ""
 msgid "Install fnschool and run it"
 msgstr "安装 和 运行 fnschool "
 
-#: helper/docs/readme/content.py:151
+#: helper/docs/readme/content.py:152
 msgid ""
 "Run the command line application:\n"
 "* `Ubuntu`: `Ctrl+Alt+T`.  \n"
@@ -264,14 +270,14 @@ msgstr "“add” 函数需要一个 “locale” 参数。"
 msgid "'gettext' related functions."
 msgstr "“gettext” 相关函数。"
 
-#: helper/msg/entry.py:35
+#: helper/msg/entry.py:36
 msgid ""
 "\"update\": Update message catalogs.\"compile\": Compile message "
 "catalogs. \"add\": Add locale message catalogs (\"locale\" argument is "
 "required)."
 msgstr "“update”：更新翻译文本目录。“compile”：编译含义文本目录。“add”：增加一个本地翻译文本（需要 “locale” 参数）。"
 
-#: helper/msg/entry.py:46
+#: helper/msg/entry.py:47
 msgid "The locale language code for adding message catalogs (e.g: en_US)."
 msgstr "本地翻译文本的语言码（例如：zh_CN）。"
 
@@ -287,17 +293,19 @@ msgstr "此次多个分发的哈希值为："
 msgid "'build' related functions."
 msgstr "编译 相关函数。"
 
-#: helper/packing/entry.py:28
+#: helper/packing/entry.py:29
 msgid ""
 "\"now\": Build \"fnschool\" now. \"upload\": Build and upload "
 "\"fnschool\" via \"twine\"."
 msgstr "“now”：编译 “fnschool” 项目。“upload”：编译 “fnschool” 并将安装包上传到 twine 。"
 
-#: helper/project/fnproject.py:30 helper/project/project.py:30
+#: helper/project/fnproject.py:30 helper/project/info.py:30
+#: helper/project/project.py:30
 msgid "Version was updated."
 msgstr "版本已更新。"
 
-#: helper/project/fnproject.py:32 helper/project/project.py:32
+#: helper/project/fnproject.py:32 helper/project/info.py:32
+#: helper/project/project.py:32
 msgid "Versions were updated."
 msgstr "版本已更新。"
 

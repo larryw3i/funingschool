@@ -22,38 +22,38 @@ class Currency_CNY(CurrencyBase):
 
     def locale(self, value):
         format_char = [
-            "分",
-            "角",
-            "元",
-            "拾",
-            "佰",
-            "仟",
-            "万",
-            "拾",
-            "佰",
-            "仟",
-            "亿",
-            "拾",
-            "佰",
-            "仟",
-            "万",
-            "拾",
-            "佰",
-            "仟",
-            "兆",
+            _("CNY_fen"),
+            _("CNY_jiao"),
+            _("CNY_yuan"),
+            _("CNY_shi"),
+            _("CNY_bai"),
+            _("CNY_qian"),
+            _("CNY_wan"),
+            _("CNY_shi"),
+            _("CNY_bai"),
+            _("CNY_qian"),
+            _("CNY_yi"),
+            _("CNY_shi"),
+            _("CNY_bai"),
+            _("CNY_qian"),
+            _("CNY_wan"),
+            _("CNY_shi"),
+            _("CNY_bai"),
+            _("CNY_qian"),
+            _("CNY_zhao"),
         ]
 
         format_num = [
-            "零",
-            "壹",
-            "贰",
-            "叁",
-            "肆",
-            "伍",
-            "陆",
-            "柒",
-            "捌",
-            "玖",
+            _("CNY_ling"),
+            _("CNY_yi"),
+            _("CNY_er"),
+            _("CNY_san"),
+            _("CNY_si"),
+            _("CNY_wu"),
+            _("CNY_liu"),
+            _("CNY_qi"),
+            _("CNY_ba"),
+            _("CNY_jiu"),
         ]
         nan_error_msg = _("%s is NOT a NUMBER.") % value
 
@@ -95,7 +95,7 @@ class Currency_CNY(CurrencyBase):
             format_char[0],
             # format_char[1]
         ):
-            CNY_chars.append("整")
+            CNY_chars.append(_("CNY_zheng"))
 
         result = "".join(CNY_chars)
         return result

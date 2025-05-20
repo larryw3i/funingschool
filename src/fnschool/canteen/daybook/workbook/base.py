@@ -20,6 +20,61 @@ class SheetBase(FileBase):
         SpreadSheetBase.__init__(self, self.spreadsheet.note)
         self._wb = None
         self._sheet = None
+
+        self.counting_date__strs = [
+            _("Counting Date"),
+            _("Purchase Date"),
+            _("Check Date"),
+            _("Counting Date 0"),
+            _("Counting Date 1"),
+            _("Counting Date 2"),
+            _("Counting Date 3"),
+        ]
+        self.meal_type__strs = [
+            _("Meal Type"),
+            _("Meal Class"),
+            _("Meal Type 0"),
+            _("Meal Type 1"),
+            _("Meal Type 2"),
+            _("Meal Type 3"),
+        ]
+        self.name_strs = [
+            _("Name"),
+            _("Food Name"),
+            _("Food Name 0"),
+            _("Food Name 1"),
+            _("Food Name 2"),
+            _("Food Name 3"),
+        ]
+        self.quantity_strs = [
+            _("Quantity"),
+            _("Quantity 0"),
+            _("Quantity 1"),
+            _("Quantity 2"),
+            _("Quantity 3"),
+        ]
+        self.total_price_strs = [
+            _("Total Price"),
+            _("Total Price 0"),
+            _("Total Price 1"),
+            _("Total Price 2"),
+            _("Total Price 3"),
+        ]
+        self.residual_strs = [
+            _("Residual"),
+            _("Surplus"),
+            _("Remnant"),
+            _("Residual 0"),
+            _("Residual 1"),
+        ]
+        self.negligible_strs = [
+            _("Negligible"),
+            _("Neglected"),
+            _("Non-inbound"),
+            _("Negligible 0"),
+            _("Negligible 1"),
+        ]
+
         pass
 
     @property
