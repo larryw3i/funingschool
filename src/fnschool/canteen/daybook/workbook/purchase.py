@@ -12,6 +12,25 @@ class Purchase(SheetBase):
 
     @property
     def foods(self):
+        def update_col_label(text, label_var):
+            text_value = text.get("1.0", "end-1c")
+            label_value = label_var.get()
+            text_value_len = len(text_value.split("\n"))
+
+            label_value_split = label_value.rsplit(_("("), 1)
+            label_with_len = False
+            if len(label_value_split) > 1:
+                label_with_len = label_value_split[1].replace(_(")"), "")
+                label_with_len = label_with_len.isnumeric()
+
+            if label_with_len:
+                label_value = label_value_split[0]
+
+            label_value += _("({0})").format(text_value_len)
+            label_var.set(label_value)
+
+            pass
+
         if not self._foods:
             foods = None
             window = tk.Tk()
@@ -33,14 +52,13 @@ class Purchase(SheetBase):
             for i, col_title in enumerate(cols):
                 row = 1
                 col = i + 1
-                svar = tk.StringVar()
-                svar.set(col_title)
-                col_label = tk.Label(window, textvariable=svar)
+                col_label_var = tk.StringVar()
+                col_label_var.set(col_title)
+                col_label = tk.Label(window, textvariable=col_label_var)
                 col_label.grid(
                     row=row,
                     column=col,
                 )
-                fwidth = int(width / (len(cols)))
                 frame = tk.Frame(
                     window,
                 )
@@ -49,6 +67,13 @@ class Purchase(SheetBase):
                 window.grid_columnconfigure(col, weight=1)
 
                 col_text = ScrolledText(frame)
+                col_text.bind(
+                    "<KeyRelease>",
+                    lambda event, kwargs=dict(
+                        text=col_text, label_var=col_label_var
+                    ): (update_col_label(kwargs["text"], kwargs["label_var"])),
+                )
+
                 col_text.grid(row=1, column=1, sticky="WENS")
                 frame.grid_rowconfigure(1, weight=1)
                 frame.grid_columnconfigure(1, weight=1)
