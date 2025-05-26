@@ -22,38 +22,38 @@ class Currency_CNY(CurrencyBase):
 
     def locale(self, value):
         format_char = [
-            _("CNY_fen"),
-            _("CNY_jiao"),
-            _("CNY_yuan"),
-            _("CNY_shi"),
-            _("CNY_bai"),
-            _("CNY_qian"),
-            _("CNY_wan"),
-            _("CNY_shi"),
-            _("CNY_bai"),
-            _("CNY_qian"),
-            _("CNY_yi4"),
-            _("CNY_shi"),
-            _("CNY_bai"),
-            _("CNY_qian"),
-            _("CNY_wan"),
-            _("CNY_shi"),
-            _("CNY_bai"),
-            _("CNY_qian"),
-            _("CNY_zhao"),
+            "\u5206",  # fen1
+            "\u89d2",  # jiao3
+            "\u5143",  # yuan2
+            "\u62fe",  # 10
+            "\u4f70",  # 100
+            "\u4edf",  # 1000
+            "\u4e07",  # wan4
+            "\u62fe",  # 10
+            "\u4f70",  # 100
+            "\u4edf",  # 1000
+            "\u4ebf",  # yi4
+            "\u62fe",  # 10
+            "\u4f70",  # 100
+            "\u4edf",  # 1000
+            "\u4e07",  # wan4
+            "\u62fe",  # 10
+            "\u4f70",  # 100
+            "\u4edf",  # 1000
+            "\u5146",  # zhao4
         ]
 
         format_num = [
-            _("CNY_ling"),
-            _("CNY_yi"),
-            _("CNY_er"),
-            _("CNY_san"),
-            _("CNY_si"),
-            _("CNY_wu"),
-            _("CNY_liu"),
-            _("CNY_qi"),
-            _("CNY_ba"),
-            _("CNY_jiu"),
+            "\u96f6",  # 0
+            "\u58f9",  # 1
+            "\u8d30",  # 2
+            "\u53c1",  # 3
+            "\u8086",  # 4
+            "\u4f0d",  # 5
+            "\u9646",  # 6
+            "\u67d2",  # 7
+            "\u634c",  # 8
+            "\u7396",  # 9
         ]
         nan_error_msg = _("%s is NOT a NUMBER.") % value
 
