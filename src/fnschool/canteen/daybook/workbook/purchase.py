@@ -12,8 +12,9 @@ class Purchase(SheetBase):
 
     @property
     def foods(self):
-        
+
         food_cols = {}
+
         def update_col_label(text, label_var):
             text_value = text.get("1.0", "end-1c")
             label_value = label_var.get()
@@ -33,13 +34,13 @@ class Purchase(SheetBase):
 
             pass
 
-        def window_exit(root,texts):
+        def window_exit(root, texts):
             for col_title in texts.keys():
                 text = texts[col_title]
-                food_cols[col_title] = text.get("1.0","end-1c")
+                food_cols[col_title] = text.get("1.0", "end-1c")
             root.destroy()
             pass
-        
+
         if not self._foods:
             foods = None
             texts = {}
@@ -75,7 +76,7 @@ class Purchase(SheetBase):
                 col_frame.grid(row=row + 1, column=col, sticky="NS")
                 window.grid_rowconfigure(row + 1, weight=1)
                 window.grid_columnconfigure(col, weight=1)
-                
+
                 col_text = ScrolledText(col_frame)
                 col_text.bind(
                     "<KeyRelease>",
@@ -96,10 +97,8 @@ class Purchase(SheetBase):
             select_file_btn.grid(row=row + 2, column=1, sticky="W")
             edit_btn.grid(row=row + 2, column=len(cols), sticky="E")
             window.protocol(
-                "WM_DELETE_WINDOW", 
-                lambda window=window, texts=texts:(
-                    window_exit(window,texts)
-                )
+                "WM_DELETE_WINDOW",
+                lambda window=window, texts=texts: (window_exit(window, texts)),
             )
             window.mainloop()
 
@@ -107,8 +106,6 @@ class Purchase(SheetBase):
                 col_data = food_cols[col_title]
                 print(col_title)
                 print(col_data)
-
-
 
         return self._foods
 
