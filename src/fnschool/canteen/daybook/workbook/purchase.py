@@ -12,6 +12,8 @@ class Purchase(SheetBase):
 
     @property
     def foods(self):
+        
+        food_cols = {}
         def update_col_label(text, label_var):
             text_value = text.get("1.0", "end-1c")
             label_value = label_var.get()
@@ -31,8 +33,16 @@ class Purchase(SheetBase):
 
             pass
 
+        def window_exit(root,texts):
+            for col_title in texts.keys():
+                text = texts[col_title]
+                food_cols[col_title] = text.get("1.0","end-1c")
+            root.destroy()
+            pass
+        
         if not self._foods:
             foods = None
+            texts = {}
             window = tk.Tk()
             width, height = (
                 int(self.app.ui.screen_width / 2),
@@ -59,14 +69,14 @@ class Purchase(SheetBase):
                     row=row,
                     column=col,
                 )
-                frame = tk.Frame(
+                col_frame = tk.Frame(
                     window,
                 )
-                frame.grid(row=row + 1, column=col, sticky="NS")
+                col_frame.grid(row=row + 1, column=col, sticky="NS")
                 window.grid_rowconfigure(row + 1, weight=1)
                 window.grid_columnconfigure(col, weight=1)
-
-                col_text = ScrolledText(frame)
+                
+                col_text = ScrolledText(col_frame)
                 col_text.bind(
                     "<KeyRelease>",
                     lambda event, kwargs=dict(
@@ -75,15 +85,30 @@ class Purchase(SheetBase):
                 )
 
                 col_text.grid(row=1, column=1, sticky="WENS")
-                frame.grid_rowconfigure(1, weight=1)
-                frame.grid_columnconfigure(1, weight=1)
+                col_frame.grid_rowconfigure(1, weight=1)
+                col_frame.grid_columnconfigure(1, weight=1)
+                texts[col_title] = col_text
+                pass
+
             row = 1
             select_file_btn = tk.Button(window, text=_("Select a file"))
             edit_btn = tk.Button(window, text=_("Edit"))
             select_file_btn.grid(row=row + 2, column=1, sticky="W")
             edit_btn.grid(row=row + 2, column=len(cols), sticky="E")
-
+            window.protocol(
+                "WM_DELETE_WINDOW", 
+                lambda window=window, texts=texts:(
+                    window_exit(window,texts)
+                )
+            )
             window.mainloop()
+
+            for col_title in food_cols.keys():
+                col_data = food_cols[col_title]
+                print(col_title)
+                print(col_data)
+
+
 
         return self._foods
 

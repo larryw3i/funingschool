@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-05-20 21:10+0800\n"
+"POT-Creation-Date: 2025-05-27 10:25+0800\n"
 "PO-Revision-Date: 2024-03-07 22:12+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en_US\n"
@@ -164,85 +164,6 @@ msgstr ""
 msgid "CNY"
 msgstr ""
 
-#: src/fnschool/canteen/currency.py:25
-msgid "CNY_fen"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:26
-msgid "CNY_jiao"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:27
-msgid "CNY_yuan"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:28 src/fnschool/canteen/currency.py:32
-#: src/fnschool/canteen/currency.py:36 src/fnschool/canteen/currency.py:40
-msgid "CNY_shi"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:29 src/fnschool/canteen/currency.py:33
-#: src/fnschool/canteen/currency.py:37 src/fnschool/canteen/currency.py:41
-msgid "CNY_bai"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:30 src/fnschool/canteen/currency.py:34
-#: src/fnschool/canteen/currency.py:38 src/fnschool/canteen/currency.py:42
-msgid "CNY_qian"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:31 src/fnschool/canteen/currency.py:39
-msgid "CNY_wan"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:35
-msgid "CNY_yi4"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:43
-msgid "CNY_zhao"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:47
-msgid "CNY_ling"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:48
-msgid "CNY_yi"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:49
-msgid "CNY_er"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:50
-msgid "CNY_san"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:51
-msgid "CNY_si"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:52
-msgid "CNY_wu"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:53
-msgid "CNY_liu"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:54
-msgid "CNY_qi"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:55
-msgid "CNY_ba"
-msgstr ""
-
-#: src/fnschool/canteen/currency.py:56
-msgid "CNY_jiu"
-msgstr ""
-
 #: src/fnschool/canteen/currency.py:58
 #, python-format
 msgid "%s is NOT a NUMBER."
@@ -267,6 +188,7 @@ msgid ""
 "Merge food sheets."
 msgstr ""
 
+#: src/fnschool/canteen/daybook/workbook/purchase.py:30
 #: src/fnschool/canteen/food.py:47 src/fnschool/canteen/operator.py:68
 #: src/fnschool/canteen/operator.py:73
 #: src/fnschool/canteen/spreadsheet/preconsuming.py:205
@@ -483,6 +405,26 @@ msgstr ""
 
 #: src/fnschool/canteen/daybook/workbook/base.py:75
 msgid "Negligible 1"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/purchase.py:21
+msgid "("
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/purchase.py:24
+msgid ")"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/purchase.py:43
+msgid "Paste the purchasing data"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/purchase.py:82
+msgid "Select a file"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/purchase.py:83
+msgid "Edit"
 msgstr ""
 
 #: src/fnschool/canteen/daybook/workbook/spreadsheet.py:23
@@ -3666,5 +3608,62 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Kind regards!"
+#~ msgstr ""
+
+#~ msgid "CNY_fen"
+#~ msgstr ""
+
+#~ msgid "CNY_jiao"
+#~ msgstr ""
+
+#~ msgid "CNY_yuan"
+#~ msgstr ""
+
+#~ msgid "CNY_shi"
+#~ msgstr ""
+
+#~ msgid "CNY_bai"
+#~ msgstr ""
+
+#~ msgid "CNY_qian"
+#~ msgstr ""
+
+#~ msgid "CNY_wan"
+#~ msgstr ""
+
+#~ msgid "CNY_yi4"
+#~ msgstr ""
+
+#~ msgid "CNY_zhao"
+#~ msgstr ""
+
+#~ msgid "CNY_ling"
+#~ msgstr ""
+
+#~ msgid "CNY_yi"
+#~ msgstr ""
+
+#~ msgid "CNY_er"
+#~ msgstr ""
+
+#~ msgid "CNY_san"
+#~ msgstr ""
+
+#~ msgid "CNY_si"
+#~ msgstr ""
+
+#~ msgid "CNY_wu"
+#~ msgstr ""
+
+#~ msgid "CNY_liu"
+#~ msgstr ""
+
+#~ msgid "CNY_qi"
+#~ msgstr ""
+
+#~ msgid "CNY_ba"
+#~ msgstr ""
+
+#~ msgid "CNY_jiu"
 #~ msgstr ""
 
