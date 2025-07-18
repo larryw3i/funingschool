@@ -21,7 +21,7 @@ class SheetBase(FileBase):
         self._wb = None
         self._sheet = None
 
-        self.counting_date__strs = [
+        self.counting_date_col_names = [
             _("Counting Date"),
             _("Purchase Date"),
             _("Check Date"),
@@ -30,7 +30,7 @@ class SheetBase(FileBase):
             _("Counting Date 2"),
             _("Counting Date 3"),
         ]
-        self.meal_type__strs = [
+        self.meal_type_col_names = [
             _("Meal Type"),
             _("Meal Class"),
             _("Meal Type 0"),
@@ -38,7 +38,7 @@ class SheetBase(FileBase):
             _("Meal Type 2"),
             _("Meal Type 3"),
         ]
-        self.name_strs = [
+        self.namecol_names = [
             _("Name"),
             _("Food Name"),
             _("Food Name 0"),
@@ -46,28 +46,28 @@ class SheetBase(FileBase):
             _("Food Name 2"),
             _("Food Name 3"),
         ]
-        self.quantity_strs = [
+        self.quantitycol_names = [
             _("Quantity"),
             _("Quantity 0"),
             _("Quantity 1"),
             _("Quantity 2"),
             _("Quantity 3"),
         ]
-        self.total_price_strs = [
+        self.total_pricecol_names = [
             _("Total Price"),
             _("Total Price 0"),
             _("Total Price 1"),
             _("Total Price 2"),
             _("Total Price 3"),
         ]
-        self.residual_strs = [
+        self.residualcol_names = [
             _("Residual"),
             _("Surplus"),
             _("Remnant"),
             _("Residual 0"),
             _("Residual 1"),
         ]
-        self.negligible_strs = [
+        self.negligiblecol_names = [
             _("Negligible"),
             _("Neglected"),
             _("Non-inbound"),
