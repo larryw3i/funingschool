@@ -38,7 +38,7 @@ class SheetBase(FileBase):
             _("Meal Type 2"),
             _("Meal Type 3"),
         ]
-        self.namecol_names = [
+        self.name_col_names = [
             _("Name"),
             _("Food Name"),
             _("Food Name 0"),
@@ -46,34 +46,41 @@ class SheetBase(FileBase):
             _("Food Name 2"),
             _("Food Name 3"),
         ]
-        self.quantitycol_names = [
+        self.quantity_col_names = [
             _("Quantity"),
             _("Quantity 0"),
             _("Quantity 1"),
             _("Quantity 2"),
             _("Quantity 3"),
         ]
-        self.total_pricecol_names = [
+        self.total_price_col_names = [
             _("Total Price"),
             _("Total Price 0"),
             _("Total Price 1"),
             _("Total Price 2"),
             _("Total Price 3"),
         ]
-        self.residualcol_names = [
+        self.residual_col_names = [
             _("Residual"),
             _("Surplus"),
             _("Remnant"),
             _("Residual 0"),
             _("Residual 1"),
         ]
-        self.negligiblecol_names = [
+        self.negligible_col_names = [
             _("Negligible"),
             _("Neglected"),
             _("Non-inbound"),
             _("Negligible 0"),
             _("Negligible 1"),
         ]
+
+        self.cover_sheet_name = _("Cover sheet")
+        self.purchase_sum_sheet_name = _("Purchase sum sheet")
+        self.consumption_sum_sheet_name = _("Consumption sum sheet")
+        self.purchase_list_sheet_name = _("Purchase list sheet")
+        self.consumption_list_sheet_name = _("Consumption list sheet")
+        self.surplus_sheet_name = _("Surplus sheet")
 
         pass
 

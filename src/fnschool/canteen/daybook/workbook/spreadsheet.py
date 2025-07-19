@@ -14,20 +14,6 @@ class SpreadSheet(FileBase):
 
         pass
 
-    def edit_workbook(self):
-        self.wb.save(self.fpath)
-        self.app.open_path(self.fpath)
-        root = tk.Tk()
-        messagebox.showinfo(
-            root,
-            _("Continue"),
-            _('Edit opened Spreadsheet, save it and click "OK" to continue.'),
-        )
-        root.mainloop()
-        self._wb = None
-
-        pass
-
     @property
     def fpath(self):
         if not self._fpath:
