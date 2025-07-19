@@ -77,8 +77,9 @@ class SheetBase(FileBase):
 
         self.cover_sheet_name = _("Cover sheet")
         self.purchase_sum_sheet_name = _("Purchase sum sheet")
-        self.consumption_sum_sheet_name = _("Consumption sum sheet")
         self.purchase_list_sheet_name = _("Purchase list sheet")
+        self.purchase_original_sheet_name = _("Original purchase sheet")
+        self.consumption_sum_sheet_name = _("Consumption sum sheet")
         self.consumption_list_sheet_name = _("Consumption list sheet")
         self.surplus_sheet_name = _("Surplus sheet")
 
