@@ -1,6 +1,7 @@
 import os
 import sys
 import random
+from tkinter import *
 
 app_name = "fnschool"
 app_author = "larryw3i"
@@ -110,6 +111,7 @@ class App:
         self._cfg = None
         self._ui = None
         self._use_tk = False
+        self.tkroot = Tk()
         pass
 
     @property

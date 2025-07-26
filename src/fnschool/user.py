@@ -30,6 +30,12 @@ class User(ABC):
         return self.name
 
     @property
+    def app_cfg(self):
+        cfg = self.app.cfg
+        return cfg
+        pass
+
+    @property
     def cfg(self):
         if not self._cfg:
             self._cfg = UserConfig(self)

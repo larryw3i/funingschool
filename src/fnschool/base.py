@@ -47,6 +47,17 @@ class ClsBase(ABC):
         return self._cfg_fpath
 
     @property
+    def user_cfg(self):
+        cfg = self.user.cfg
+        return cfg
+        pass
+
+    @property
+    def app_cfg(self):
+        cfg = self.app.cfg
+        return cfg
+
+    @property
     def user(self):
         if not self._user:
             self._user = User(self)

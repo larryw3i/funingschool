@@ -19,6 +19,12 @@ def set_canteen(args):
         note = Note()
         note.gen()
 
+    elif args.action in "ledger":
+        from fnschool.canteen.ledger.daybook import Daybook
+
+        daybook = Daybook()
+        daybook.show()
+
     else:
         print_info(_("Function is not found."))
 
@@ -33,10 +39,12 @@ def parse_canteen(subparsers):
             "mk_bill",
             "merge_foodsheets",
             "gen_daybook",
+            "ledger",
         ],
         help=_(
             'The functions of canteen. "mk_bill": Make bill. '
-            + '"merge_foodsheets": Merge food sheets.'
+            + '"merge_foodsheets": Merge food sheets. '
+            + '"ledger": Manage Ledgers.'
         ),
     )
     parser_canteen.set_defaults(func=set_canteen)
