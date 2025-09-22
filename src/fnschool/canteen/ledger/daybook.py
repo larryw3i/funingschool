@@ -4,7 +4,7 @@ import sys
 from fnschool.canteen.ledger import *
 
 
-class Daybooki(ClsBase):
+class Daybook(ClsBase):
     def __init__(self):
         pass
 
