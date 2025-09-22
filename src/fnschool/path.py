@@ -7,19 +7,19 @@ import platform
 import subprocess
 from datetime import datetime
 
-from appdirs import AppDirs
+from platformdirs import *
 from fnschool.tio import *
 from fnschool.app import *
 
 
 user_name = getpass.getuser()
 
-dirs = AppDirs(app_name, app_author)
+dir_args = (app_name, app_author)
 
 app_dpath = Path(__file__).parent
 data_dpath = app_dpath / "data"
-user_config_dir = Path(dirs.user_config_dir)
-user_data_dir = Path(dirs.user_data_dir)
+user_config_dir = Path(user_config_dir(*dir_args))
+user_data_dir = Path(user_data_dir(*dir_args))
 app_config_fpath = user_config_dir / "config.toml"
 
 default_share_dpath = user_data_dir
