@@ -71,22 +71,36 @@ class User(ABC):
         bottom_frame = tk.Frame(user_window)
         bottom_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=10)
 
+        info_list = self.cls_cfg.get(self._info_key)
+
         def user_window_destroy():
-            self._name = name_var.get()
-            self._org_name = org_var.get()
-            self._department_name = department_var.get()
+            self._name = name_var.get() or ""
+            self._org_name = org_var.get() or ""
+            self._department_name = department_var.get() or ""
+            info_list_cp = [[self._name, self._org_name, self._department_name]]
+            print(info_list_cp)
+            nonlocal info_list
+            if info_list:
+                for i in info_list:
+                    if i[0] and not i[0] == info_list_cp[0][0]:
+                        info_list_cp.append(i)
+
+            info_list = info_list_cp
+            self.cls_cfg.set(self._info_key, info_list)
+            self.cls_cfg.save()
+
             user_window.destroy()
             pass
 
-        info_list = self.cls_cfg.get(self._info_key)
-
         def on_name_var_change(*args):
-            name, org_name, department_name = [
-                i for i in info_list if i[0] == name_var.get()
-            ][0]
+            info_list0 = [i for i in info_list if i[0] == name_var.get()]
+            if not info_list0:
+                return
+            name, org_name, department_name = info_list0[0]
             if name:
                 org_var.set(org_name)
                 department_var.set(department_name)
+            pass
 
         name_var.trace("w", on_name_var_change)
 
@@ -105,18 +119,6 @@ class User(ABC):
             department_var.set(department_name)
 
         user_window.mainloop()
-
-        info_list_cp = [[self._name, self._org_name, self._department_name]]
-        print(info_list_cp)
-
-        if info_list:
-            for i in info_list:
-                if i[0] and not i[0] == info_list_cp[0][0]:
-                    info_list_cp.append(i)
-
-        info_list = info_list_cp
-        self.cls_cfg.set(self._info_key, info_list)
-        self.cls_cfg.save()
 
         pass
 

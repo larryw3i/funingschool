@@ -15,7 +15,7 @@ from openpyxl.worksheet.datavalidation import DataValidation
 class Purchasing(SsBase):
     def __init__(self, bill):
         super().__init__(bill)
-        self.p_path_key = _("parent_path_of_purchasing_file")
+        self.p_path_key = _("Parent Path Of Purchasing File")
         self._path = None
 
         condiment_class_names = ["调味类", "调味品类", "调味"]
