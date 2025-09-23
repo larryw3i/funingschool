@@ -45,7 +45,7 @@ class User(ABC):
 
         name_label = tk.Label(main_frame, text=_("Name:"), anchor="e")
         name_label.grid(row=0, column=0, sticky="e", padx=(0, 5), pady=5)
-
+       
         name_var = tk.StringVar()
         name_combobox = ttk.Combobox(main_frame, textvariable=name_var)
         name_combobox.grid(row=0, column=1, sticky="ew", padx=(0, 0), pady=5)
@@ -73,17 +73,28 @@ class User(ABC):
 
         def user_window_destroy():
             self._name = name_var.get()
-            self._org_name = org_var.get()
+            self._org_name = org_var.get() 
             self._department_name = department_var.get()
             user_window.destroy()
             pass
+
+        info_list = self.cls_cfg.get(self._info_key)
+
+        def on_name_var_change(*args):
+            name, org_name, department_name = [
+                i for i in info_list if i[0]==name_var.get()
+            ][0]
+            if name:
+                org_var.set(org_name)
+                department_var.set(department_name)
+        
+        name_var.trace("w", on_name_var_change)
 
         confirm_button = tk.Button(
             bottom_frame, text=_("OK"), command=user_window_destroy
         )
         confirm_button.pack()
 
-        info_list = self.cls.cfg.get(self._info_key)
         if info_list:
             names = [n[0] for n in info_list]
             name, org_name, department_name = info_list[0]
@@ -100,7 +111,7 @@ class User(ABC):
 
         if info_list:
             for i in info_list:
-                if not i[0] == info_list_cp[0][0]:
+                if i[0] and not i[0] == info_list_cp[0][0]:
                     info_list_cp.append(i)
 
         info_list = info_list_cp
