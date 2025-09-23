@@ -396,7 +396,7 @@ class Purchasing(Base):
 
     @property
     def path(self):
-        p_dpath = self.config.get(self.p_path_key)
+        p_dpath = self.cfg.get(self.p_path_key)
         initialdir = (
             p_dpath
             if (p_dpath and Path(p_dpath).exists())

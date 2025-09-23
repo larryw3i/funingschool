@@ -96,8 +96,8 @@ class Base:
         return self.bill.operator
 
     @property
-    def config(self):
-        return self.operator.config
+    def cfg(self):
+        return self.operator.cfg
 
     def get_bill_sheet(self, name):
         sheet = self.bwb[name]
