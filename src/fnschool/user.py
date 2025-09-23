@@ -93,6 +93,8 @@ class User(ABC):
             pass
 
         def on_name_var_change(*args):
+            if not info_list:
+                return
             info_list0 = [i for i in info_list if i[0] == name_var.get()]
             if not info_list0:
                 return
@@ -117,7 +119,11 @@ class User(ABC):
             name_combobox.current(0)
             org_var.set(org_name)
             department_var.set(department_name)
+        else:
+            username = getpass.getuser()
+            name_var.set(username)
 
+        user_window.protocol("WM_DELETE_WINDOW", user_window_destroy)
         user_window.mainloop()
 
         pass

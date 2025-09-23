@@ -36,7 +36,7 @@ class Gui:
             info_window.transient(root)
 
         info_window.title(title)
-        w,h = int(self.screen_width/4), int(self.screen_height/4)
+        w, h = int(self.screen_width / 4), int(self.screen_height / 4)
         info_window.geometry(f"{w}x{h}")
 
         main_frame = tk.Frame(info_window)
@@ -45,19 +45,19 @@ class Gui:
         border_frame = tk.Frame(main_frame, bg="pink", bd=2, relief=tk.SOLID)
         border_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=(10, 5))
 
-        content_label = tk.Label(
+        content_text = tk.Text(
             border_frame,
-            text=content,
+            wrap=tk.WORD,
             bg="pink",
             fg="black",
             font=("Mono", 10),
-            justify="left",
-            anchor="nw",
-            wraplength=400,
             padx=10,
             pady=10,
+            height=10,
         )
-        content_label.pack(fill=tk.BOTH, expand=True, padx=1, pady=1)
+        content_text.insert("1.0", content)
+        content_text["state"] = "disabled"
+        content_text.pack(fill=tk.BOTH, expand=True, padx=1, pady=1)
 
         bottom_frame = tk.Frame(main_frame)
         bottom_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=(0, 10))
