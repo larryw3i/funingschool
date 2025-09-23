@@ -45,32 +45,32 @@ class User(ABC):
 
         name_label = tk.Label(main_frame, text=_("Name:"), anchor="e")
         name_label.grid(row=0, column=0, sticky="e", padx=(0, 5), pady=5)
-        
+
         name_var = tk.StringVar()
-        name_combobox = ttk.Combobox(main_frame,textvariable = name_var)
+        name_combobox = ttk.Combobox(main_frame, textvariable=name_var)
         name_combobox.grid(row=0, column=1, sticky="ew", padx=(0, 0), pady=5)
-        
+
         org_label = tk.Label(main_frame, text=_("Organization:"), anchor="e")
         org_label.grid(row=1, column=0, sticky="e", padx=(0, 5), pady=5)
 
         org_var = tk.StringVar()
-        org_entry = tk.Entry(main_frame,textvariable = org_var)
+        org_entry = tk.Entry(main_frame, textvariable=org_var)
         org_entry.grid(row=1, column=1, sticky="ew", padx=(0, 0), pady=5)
 
         department_label = tk.Label(
             main_frame, text=_("Department:"), anchor="e"
         )
         department_label.grid(row=2, column=0, sticky="e", padx=(0, 5), pady=5)
-        
+
         department_var = tk.StringVar()
-        department_entry = tk.Entry(main_frame,textvariable=department_var)
+        department_entry = tk.Entry(main_frame, textvariable=department_var)
         department_entry.grid(row=2, column=1, sticky="ew", padx=(0, 0), pady=5)
 
         main_frame.grid_columnconfigure(1, weight=1)
 
         bottom_frame = tk.Frame(user_window)
         bottom_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=10)
-        
+
         def user_window_destroy():
             self._name = name_var.get()
             self._org_name = org_var.get()
@@ -87,7 +87,7 @@ class User(ABC):
         if info_list:
             names = [n[0] for n in info_list]
             name, org_name, department_name = info_list[0]
-            name_combobox['values'] = names
+            name_combobox["values"] = names
             name_var.set(name)
             name_combobox.current(0)
             org_var.set(org_name)
