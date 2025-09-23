@@ -36,8 +36,8 @@ class Gui:
             info_window.transient(root)
 
         info_window.title(title)
-        info_window.geometry("500x350")
-        info_window.minsize(400, 250)
+        w,h = int(self.screen_width/4), int(self.screen_height/4)
+        info_window.geometry(f"{w}x{h}")
 
         main_frame = tk.Frame(info_window)
         main_frame.pack(fill=tk.BOTH, expand=True)
