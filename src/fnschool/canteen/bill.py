@@ -241,9 +241,6 @@ class Bill(ClsBase):
                 else:
                     self._food_classes[fclass] = name_likes
 
-            print_info(_("Ok! I know it. (Press any key to continue)"))
-            get_input()
-
         return self._food_classes
 
     @property

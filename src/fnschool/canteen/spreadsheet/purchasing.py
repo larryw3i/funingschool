@@ -12,7 +12,7 @@ from fnschool.canteen.spreadsheet.base import *
 from openpyxl.worksheet.datavalidation import DataValidation
 
 
-class Purchasing(Base):
+class Purchasing(SsBase):
     def __init__(self, bill):
         super().__init__(bill)
         self.p_path_key = _("parent_path_of_purchasing_file")
@@ -403,7 +403,7 @@ class Purchasing(Base):
             else ((Path.home() / "Downloads").as_posix())
         )
         if not self._path:
-            print_info(
+            self.gui.show_info(
                 _(
                     "{0} need a purchasing list file, "
                     + "and it's file type should be '.xlsx'. "
@@ -411,19 +411,20 @@ class Purchasing(Base):
                 ).format(app_name)
                 + _(
                     ""
-                    + "\n\tcolumn   type    example"
-                    + "\n\t送货日期 Text    2024-03-01"
-                    + "\n\t食材名称 Text    香菜"
-                    + "\n\t餐类     Text    正餐        (Optional)"
-                    + "\n\t数量     Number  20"
-                    + "\n\t计量单位 Text    斤"
-                    + "\n\t总价     Number  20.0"
-                    + "\n\t购买者   Text    "
-                    + "\n\t是不计   Text    y"
-                    + "\n\t是结余   Text    y"
+                    + "\n\t ______________________________________________"
+                    + "\n\t| column       | type  | example   | Note      |"
+                    + "\n\t| Checking Date| Text  | 2024-03-01|           |"
+                    + "\n\t| Food Name    | Text  | Cabbage   |           |"
+                    + "\n\t| Meal Type    | Text  | Breakfast | Optional  |"
+                    + "\n\t| Count        | Number| 20        |           |"
+                    + "\n\t| Unit         | Text  | jin1      |           |"
+                    + "\n\t| Total Price  | Number| 20.0      |           |"
+                    + "\n\t| Is Negligible| Text  | y         |           |"
+                    + "\n\t| Is Inventory | Text  | y         |           |"
+                    + "\n\t ``````````````````````````````````````````````"
                 )
             )
-            print_info(_("Please select a purchasing file."))
+
             filetypes = ((_("Spreadsheet Files"), "*.xlsx"),)
 
             tkroot = tk.Tk()
@@ -446,7 +447,7 @@ class Purchasing(Base):
                 )
             )
             self._path = filename
-        self.config.save(self.p_path_key, Path(self._path).parent.as_posix())
+        self.cfg.set(self.p_path_key, Path(self._path).parent.as_posix())
         return self._path
 
     def update_data_validations(self):

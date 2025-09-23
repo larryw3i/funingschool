@@ -10,7 +10,7 @@ from fnschool import *
 from fnschool.canteen.spreadsheet.base import *
 
 
-class Unwarehousing(Base):
+class Unwarehousing(SsBase):
     def __init__(self, bill):
         super().__init__(bill)
         self.sheet_name = self.s.unwarehousing_name

@@ -4,7 +4,7 @@ import sys
 from abc import ABC
 from fnschool import *
 
-from fnschool.ui import *
+from fnschool.gui import *
 
 
 class ConfigBase(ABC):

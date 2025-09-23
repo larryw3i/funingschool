@@ -8,7 +8,7 @@ from fnschool.canteen.spreadsheet.base import *
 from openpyxl.styles import *
 
 
-class Food(Base):
+class Food(SsBase):
     def __init__(self, bill):
         super().__init__(bill)
         self.sheet_name = self.s.sfood_name

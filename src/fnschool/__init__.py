@@ -32,7 +32,7 @@ from fnschool.user import *
 from fnschool.config import *
 from fnschool.base import *
 from fnschool.user import *
-from fnschool.ui import *
+from fnschool.gui import *
 from tkinter.scrolledtext import *
 
 __version__ = "20250109.80531.837"

@@ -9,7 +9,7 @@ from openpyxl.utils.cell import *
 from fnschool import *
 
 
-class Base:
+class SsBase:
     def __init__(self, bill):
         self.bill = bill
         self.currency = self.bill.currency
@@ -41,6 +41,7 @@ class Base:
         self.filetypes_xlsx = [(_("Spreadsheet Files"), "*.xlsx")]
         self.food_sheet0_name = "材料台账母表"
         self.food_form_title_like = "材料入库、出库台账"
+        self.gui = Gui()
 
     def get_local_total_price(self, total_price):
         return (

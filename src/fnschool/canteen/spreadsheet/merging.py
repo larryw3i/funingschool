@@ -16,11 +16,11 @@ from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.path import *
 
-from fnschool.canteen.spreadsheet.base import Base
+from fnschool.canteen.spreadsheet.base import SsBase
 from fnschool.canteen.spreadsheet.food import Food as FoodSheet
 
 
-class Merging(Base):
+class Merging(SsBase):
     def __init__(self, bill):
         super().__init__(bill)
         self._last_fpath = None
@@ -65,7 +65,7 @@ class Merging(Base):
         if not self._last_fpath:
             root = tk.Tk()
             root.withdraw()
-            conf_initialdir = self.config.get(self.last_fpath_dpath_key)
+            conf_initialdir = self.cfg.get(self.last_fpath_dpath_key)
             conf_initialdir = Path(conf_initialdir) if conf_initialdir else None
             initialdir = conf_initialdir or documents_dpath or Path.home()
             fpath = filedialog.askopenfilename(
@@ -81,9 +81,7 @@ class Merging(Base):
                 fpath = Path(fpath)
 
             if not conf_initialdir == fpath:
-                self.config.save(
-                    self.last_fpath_dpath_key, fpath.parent.as_posix()
-                )
+                self.set(self.last_fpath_dpath_key, fpath.parent.as_posix())
             self._last_fpath = fpath
 
         return self._last_fpath
@@ -94,7 +92,7 @@ class Merging(Base):
         if not self._current_fpath:
             root = tk.Tk()
             root.withdraw()
-            conf_initialdir = self.config.get(self.current_fpath_dpath_key)
+            conf_initialdir = self.cfg.get(self.current_fpath_dpath_key)
             conf_initialdir = Path(conf_initialdir) if conf_initialdir else None
             initialdir = conf_initialdir or documents_dpath or Path.home()
             fpath = filedialog.askopenfilename(
@@ -111,9 +109,7 @@ class Merging(Base):
                 fpath = Path(fpath)
 
             if not conf_initialdir == fpath:
-                self.config.save(
-                    self.current_fpath_dpath_key, fpath.parent.as_posix()
-                )
+                self.set(self.current_fpath_dpath_key, fpath.parent.as_posix())
 
             self._current_fpath = fpath
         return self._current_fpath

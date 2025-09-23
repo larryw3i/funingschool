@@ -8,7 +8,7 @@ from fnschool.canteen.food import Food
 from fnschool.canteen.spreadsheet.base import *
 
 
-class Inventory(Base):
+class Inventory(SsBase):
     def __init__(self, bill):
         super().__init__(bill)
         self.sheet_name = self.s.inventory_name

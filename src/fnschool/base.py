@@ -17,6 +17,7 @@ class ClsBase(ABC):
         self._user = None
         self._cfg_fpath = None
         self._cfg = None
+        self.gui = Gui()
         pass
 
     @property
