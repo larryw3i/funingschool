@@ -8,6 +8,10 @@ def set_canteen(args):
     print_app()
 
     if args.action in "mk_bill":
+        from fnschool.canteen.bill import Bill
+
+        b = Bill()
+        b.make_spreadsheets()
         pass
 
     elif args.action in "merge_foodsheets":

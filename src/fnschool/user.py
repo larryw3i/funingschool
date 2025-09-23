@@ -6,25 +6,112 @@ from fnschool.config import *
 
 
 class User(ABC):
-    def __init__(self, cls, ask_name_str=None):
+    def __init__(self, cls):
         self.cls = cls
         self.app = self.cls.app
-        self.use_tk = self.app.use_tk
         self._parent_dpath = None
         self._cfg_fpath = None
         self._cfg = None
-        self.ask_name_str = ask_name_str or _("Enter your name, please!")
         self._name = None
         self._dpath_showed = False
         self._dpath = None
-        self._profile = {}
         self._cfg = None
         self._cls_cfg = None
-        self.is_male_key = _("Is Male")
         self._saved_names = None
-        self.saved_names_key = _("Saved User Names")
         self._department_name = None
-        self.saved_department_name_key = _("Department Name")
+        self._org_name = None
+        self._info_key = _("User Info")
+        self.get()
+
+    def get(self):
+        user_window = tk.Tk()
+        user_window.title(_("User Information"))
+
+        screen_width = user_window.winfo_screenwidth()
+        screen_height = user_window.winfo_screenheight()
+
+        window_width = int(screen_width / 4)
+        window_height = int(screen_height / 4)
+
+        x_position = (screen_width - window_width) // 2
+        y_position = (screen_height - window_height) // 2
+
+        user_window.geometry(
+            f"{window_width}x{window_height}+{x_position}+{y_position}"
+        )
+
+        main_frame = tk.Frame(user_window)
+        main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+
+        name_label = tk.Label(main_frame, text=_("Name:"), anchor="e")
+        name_label.grid(row=0, column=0, sticky="e", padx=(0, 5), pady=5)
+        
+        name_var = tk.StringVar()
+        name_combobox = ttk.Combobox(main_frame,textvariable = name_var)
+        name_combobox.grid(row=0, column=1, sticky="ew", padx=(0, 0), pady=5)
+        
+        org_label = tk.Label(main_frame, text=_("Organization:"), anchor="e")
+        org_label.grid(row=1, column=0, sticky="e", padx=(0, 5), pady=5)
+
+        org_var = tk.StringVar()
+        org_entry = tk.Entry(main_frame,textvariable = org_var)
+        org_entry.grid(row=1, column=1, sticky="ew", padx=(0, 0), pady=5)
+
+        department_label = tk.Label(
+            main_frame, text=_("Department:"), anchor="e"
+        )
+        department_label.grid(row=2, column=0, sticky="e", padx=(0, 5), pady=5)
+        
+        department_var = tk.StringVar()
+        department_entry = tk.Entry(main_frame,textvariable=department_var)
+        department_entry.grid(row=2, column=1, sticky="ew", padx=(0, 0), pady=5)
+
+        main_frame.grid_columnconfigure(1, weight=1)
+
+        bottom_frame = tk.Frame(user_window)
+        bottom_frame.pack(side=tk.BOTTOM, fill=tk.X, pady=10)
+        
+        def user_window_destroy():
+            self._name = name_var.get()
+            self._org_name = org_var.get()
+            self._department_name = department_var.get()
+            user_window.destroy()
+            pass
+
+        confirm_button = tk.Button(
+            bottom_frame, text=_("OK"), command=user_window_destroy
+        )
+        confirm_button.pack()
+
+        info_list = self.cls.cfg.get(self._info_key)
+        if info_list:
+            names = [n[0] for n in info_list]
+            name, org_name, department_name = info_list[0]
+            name_combobox['values'] = names
+            name_var.set(name)
+            name_combobox.current(0)
+            org_var.set(org_name)
+            department_var.set(department_name)
+
+        user_window.mainloop()
+
+        info_list_cp = [[self._name, self._org_name, self._department_name]]
+        print(info_list_cp)
+
+        if info_list:
+            for i in info_list:
+                if not i[0] == info_list_cp[0][0]:
+                    info_list_cp.append(i)
+
+        info_list = info_list_cp
+        self.cls_cfg.set(self._info_key, info_list)
+        self.cls_cfg.save()
+
+        pass
+
+    @property
+    def org_name(self):
+        return self._org_name
 
     def __str__(self):
         return self.name
@@ -47,63 +134,13 @@ class User(ABC):
             self._cls_cfg = self.cls.cfg
         return self._cls_cfg
 
-    def _get_department_name_from_tk(self):
-        tip = _("Enter your department name:")
-        title = _("Department name")
-        key = self.saved_department_name_key
-        department_name = self.cls_cfg.select(title, tip, key)
-        return department_name
-        pass
-
     @property
     def department_name(self):
-        if not self._department_name:
-            self._department_name = (
-                self._get_department_name_from_tk()
-                if self.use_tk
-                else self._get_department_name_from_cli()
-            )
         return self._department_name
-
-    def _get_department_name_from_cli(self):
-        department_name = None
-        if self.use_tk:
-            pass
-        else:
-            print_error(_("The function has not been implemented."))
-            pass
-        return department_name
-        pass
-
-    def _get_name_from_tk(self):
-        tip = _("Enter your name:")
-        title = self.ask_name_str
-        key = self.saved_names_key
-        name = self.cls_cfg.select(key, title, tip)
-        return name
-        pass
 
     @property
     def name(self):
-        if not self._name:
-            self._name = (
-                self._get_name_from_tk()
-                if self.use_tk
-                else self._get_name_from_cli()
-            )
-            pass
-
         return self._name
-        pass
-
-    def _get_name_from_cli(self):
-        name = None
-        if self.use_tk:
-            pass
-        else:
-            print_error(_("The function has not been implemented."))
-            pass
-        return name
         pass
 
     @property
@@ -118,30 +155,18 @@ class User(ABC):
                 os.makedirs(self._dpath, exist_ok=True)
 
         if not self._dpath_showed:
-            if not self.app.use_tk:
-                print_info(
-                    _(
-                        "Hey! {0}, all of your files will be"
-                        + ' saved to "{1}", show it now? '
-                        + "(yes: 'y','y')"
-                    ).format(self.name, self._dpath)
-                )
-                o_input = get_input().replace(" ", "")
-                if len(o_input) > 0 and o_input in "Yy":
-                    open_path(self._dpath)
-            else:
-                from tkinter import messagebox
+            from tkinter import messagebox
 
-                response = messagebox.askyesno(
-                    _("Open your directory?"),
-                    _(
-                        "Hey! {0}, all of your files will be"
-                        + ' saved to "{1}", show it now? '
-                    ).format(self.name, self._dpath),
-                )
-                if response:
-                    open_path(self._dpath)
-                    pass
+            response = messagebox.askyesno(
+                _("Open your directory?"),
+                _(
+                    "Hey! {0}, all of your files will be"
+                    + ' saved to "{1}", show it now? '
+                ).format(self.name, self._dpath),
+            )
+            if response:
+                open_path(self._dpath)
+                pass
             self._dpath_showed = True
             pass
 

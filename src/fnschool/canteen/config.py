@@ -2,7 +2,7 @@ import os
 import sys
 
 from fnschool import *
-from fnschool.config import Config as AppConfig, ConfigBase
+from fnschool.config import *
 
 
 class Config(ConfigBase):

@@ -10,7 +10,7 @@ from fnschool.canteen.config import *
 
 class Operator(User):
     def __init__(self, bill):
-        super().__init__(user_canteen_dpath, operator_name_fpath)
+        super().__init__(bill)
         self.bill = bill
         self.workbook_ext = ".xlsx"
         pass
@@ -24,28 +24,14 @@ class Operator(User):
 
     @property
     def food_classes_fpath(self):
-        fpath = self.config_dpath / (_("food_classes") + ".toml")
+        fpath = self.dpath / (_("food_classes") + ".toml")
         if not fpath.exists():
             shutil.copy(food_classes_config0_fpath, fpath)
         return fpath
 
     @property
     def superior_department(self):
-        info = _(
-            "Please tell {0} the alias of your "
-            + "superior department, "
-            + "{0} will use it as the form title ("
-            + '"purchasing summary" form, '
-            + '"consuming summary" form, etc). '
-            + 'e.g: "Primary and secondary schools in '
-            + 'Naneng Township, Funing County". '
-            + "If you haven't noticed it, "
-            + "you can check the previous bill "
-            + "first and then let {0} know."
-        ).format(app_name)
-        superior_department0 = self.get_profile(
-            key=_("superior department"), info=info
-        )
+        superior_department = self.department_name
         return superior_department0
 
     @property

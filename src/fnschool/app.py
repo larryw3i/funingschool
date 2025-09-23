@@ -109,19 +109,6 @@ class App:
         self._name = None
         self._version = None
         self._cfg = None
-        self._ui = None
-        self._use_tk = False
-        self.tkroot = Tk()
-        pass
-
-    @property
-    def use_tk(self):
-        return self._use_tk
-        pass
-
-    @use_tk.setter
-    def use_tk(self, value=True):
-        self._use_tk = value
         pass
 
     @property
@@ -136,16 +123,6 @@ class App:
         if not self._version:
             self._version = get_app_version()
         return self._version
-        pass
-
-    @property
-    def ui(self):
-        if not self._ui:
-            from fnschool.ui import UI
-
-            self._ui = UI()
-            pass
-        return self._ui
         pass
 
     @property

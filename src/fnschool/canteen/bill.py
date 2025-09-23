@@ -2,6 +2,7 @@ import os
 import sys
 import calendar
 from fnschool import *
+from fnschool.base import *
 
 from fnschool.canteen.spreadsheet.spreadsheet import *
 from fnschool.canteen.operator import *
@@ -10,8 +11,9 @@ from fnschool.canteen.currency import Currency
 from fnschool.canteen.consuming import Consuming
 
 
-class Bill:
+class Bill(ClsBase):
     def __init__(self):
+        super().__init__()
         self._spreadsheet = None
         self._foods = None
         self._time_nodes = None
@@ -38,39 +40,40 @@ class Bill:
         return self._consuming
 
     def get_CNY_chars(self, value):
+
         format_word = [
-            "分",
-            "角",
-            "元",
-            "拾",
-            "佰",
-            "仟",
-            "万",
-            "拾",
-            "佰",
-            "仟",
-            "亿",
-            "拾",
-            "佰",
-            "仟",
-            "万",
-            "拾",
-            "佰",
-            "仟",
-            "兆",
+            "\u5206",  # fen1
+            "\u89d2",  # jiao3
+            "\u5143",  # yuan2
+            "\u62fe",  # shi2
+            "\u4f70",  # bai3
+            "\u4edf",  # qian1
+            "\u4e07",  # wan4
+            "\u62fe",  # shi2
+            "\u4f70",  # bai3
+            "\u4edf",  # qian1
+            "\u4ebf",  # yi4
+            "\u62fe",  # shi2
+            "\u4f70",  # bai3
+            "\u4edf",  # qian1
+            "\u4e07",  # wan4
+            "\u62fe",  # shi2
+            "\u4f70",  # bai3
+            "\u4edf",  # qian1
+            "\u5146",  # zhao4
         ]
 
         format_num = [
-            "零",
-            "壹",
-            "贰",
-            "叁",
-            "肆",
-            "伍",
-            "陆",
-            "柒",
-            "捌",
-            "玖",
+            "\u96f6",  # ling2
+            "\u58f9",  # yi1
+            "\u8d30",  # er4
+            "\u53c1",  # san1
+            "\u8086",  # si4
+            "\u4f0d",  # wu3
+            "\u9646",  # liu4
+            "\u67d2",  # qi1
+            "\u634c",  # ba1
+            "\u7396",  # jiu3
         ]
         if type(value) == str:
             if "." in value:
