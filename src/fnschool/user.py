@@ -45,7 +45,7 @@ class User(ABC):
 
         name_label = tk.Label(main_frame, text=_("Name:"), anchor="e")
         name_label.grid(row=0, column=0, sticky="e", padx=(0, 5), pady=5)
-       
+
         name_var = tk.StringVar()
         name_combobox = ttk.Combobox(main_frame, textvariable=name_var)
         name_combobox.grid(row=0, column=1, sticky="ew", padx=(0, 0), pady=5)
@@ -73,7 +73,7 @@ class User(ABC):
 
         def user_window_destroy():
             self._name = name_var.get()
-            self._org_name = org_var.get() 
+            self._org_name = org_var.get()
             self._department_name = department_var.get()
             user_window.destroy()
             pass
@@ -82,12 +82,12 @@ class User(ABC):
 
         def on_name_var_change(*args):
             name, org_name, department_name = [
-                i for i in info_list if i[0]==name_var.get()
+                i for i in info_list if i[0] == name_var.get()
             ][0]
             if name:
                 org_var.set(org_name)
                 department_var.set(department_name)
-        
+
         name_var.trace("w", on_name_var_change)
 
         confirm_button = tk.Button(
