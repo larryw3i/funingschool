@@ -123,7 +123,7 @@ class Bill(ClsBase):
             format_word[0],
             # format_word[1]
         ):
-            CNY_chars.append("\u6574") # zheng3.
+            CNY_chars.append("\u6574")  # zheng3.
 
         result = "".join(CNY_chars)
         return result
@@ -153,12 +153,10 @@ class Bill(ClsBase):
             _("Grains"),
             _("Oils"),
             _("Condiments"),
-            _("Fruits")
-
+            _("Fruits"),
         ]
         return fclass_names
 
-    
     @property
     def operator(self):
         if not self._operator:

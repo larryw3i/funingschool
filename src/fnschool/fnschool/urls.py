@@ -21,8 +21,8 @@ from django.conf.urls.i18n import i18n_patterns
 from . import views
 
 urlpatterns = [
-    path('', views.home_view, name='home'),
+    path("", views.home_view, name="home"),
     path("admin/", admin.site.urls),
-    path('i18n/', include('django.conf.urls.i18n')),
+    path("i18n/", include("django.conf.urls.i18n")),
     path("profiles/", include("profiles.urls")),
 ]

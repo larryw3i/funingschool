@@ -15,20 +15,22 @@ class Profile(models.Model):
     )
     phone = models.CharField(
         max_length=15, blank=True, null=True, verbose_name=_("Phone Number")
-    )  
+    )
     affiliation = models.CharField(
         max_length=255, blank=True, null=True, verbose_name=_("Affiliation")
     )
 
     superior_department = models.CharField(
-        max_length=255, blank=True, null=True, 
-        verbose_name=_("Superior department")
+        max_length=255,
+        blank=True,
+        null=True,
+        verbose_name=_("Superior department"),
     )
 
     date_of_birth = models.DateField(
         blank=True, null=True, verbose_name=_("Date of Birth")
     )
-    
+
     address = models.CharField(
         max_length=255, blank=True, null=True, verbose_name=_("Address")
     )

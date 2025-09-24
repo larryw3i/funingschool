@@ -29,12 +29,10 @@ class Purchasing(SsBase):
             self._wb = load_workbook(self.path)
         return self._wb
 
-
     @property
     def food_classes(self):
         food_classes = self.bill.food_classes
         return food_classes
-
 
     @property
     def path(self):
@@ -79,7 +77,7 @@ class Purchasing(SsBase):
 
             tkroot = tk.Tk()
             tkroot.withdraw()
-            tkroot.attributes('-topmost', True)
+            tkroot.attributes("-topmost", True)
 
             filename = filedialog.askopenfilename(
                 parent=tkroot,
@@ -107,5 +105,6 @@ class Purchasing(SsBase):
 
     def update(self):
         pass
+
 
 # The end.

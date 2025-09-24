@@ -1,48 +1,39 @@
-
 {% extends "base.html" %}
 {% load static %}
-
 {% block title %}Home - My Website{% endblock %}
-
 {% block content %}
-<!-- Main Content Section -->
-<div class="container mt-5">
+  <!-- Main Content Section -->
+  <div class="container mt-5">
     <!-- Featured Content Section -->
     <div class="row">
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a href="" class="text-decoration-none">
-                        </a>
-                    </h5>
-                    <p class="card-text"></p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted"></small>
-                    <a href="" class="btn btn-primary btn-sm float-right">
-                        Read More
-                    </a>
-                </div>
-            </div>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="" class="text-decoration-none"></a>
+            </h5>
+            <p class="card-text"></p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted"></small>
+            <a href="" class="btn btn-primary btn-sm float-right">Read More</a>
+          </div>
         </div>
-        <div class="col-12">
-            <div class="alert alert-info text-center">
-                No articles have been posted yet.
-            </div>
+      </div>
+      <div class="col-12">
+        <div class="alert alert-info text-center">
+          No articles have been posted yet.
         </div>
+      </div>
     </div>
-
     <!-- Call to Action Section -->
     {% if user.is_authenticated %}
-    <div class="row mt-5">
+      <div class="row mt-5">
         <div class="col-12 text-center">
-            <h2>Ready to Create Content?</h2>
-            <a href="" class="btn btn-success btn-lg">
-                Create New Post +
-            </a>
+          <h2>Ready to Create Content?</h2>
+          <a href="" class="btn btn-success btn-lg">Create New Post +</a>
         </div>
-    </div>
+      </div>
     {% endif %}
-</div>
+  </div>
 {% endblock %}

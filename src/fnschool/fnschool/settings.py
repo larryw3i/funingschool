@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+
 import os
 
 from pathlib import Path
@@ -41,17 +42,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # site apps.
-    'crispy_forms',
-    'crispy_bootstrap5',  # For Bootstrap 5
-
+    "crispy_forms",
+    "crispy_bootstrap5",  # For Bootstrap 5
     # fnschool apps.
     "profiles",
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -70,7 +69,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, "templates"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -79,12 +78,11 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'django.template.context_processors.i18n',
+                "django.template.context_processors.i18n",
             ],
-            'builtins': [ 
-            'django.templatetags.i18n',  
-
-                        ]
+            "builtins": [
+                "django.templatetags.i18n",
+            ],
         },
     },
 ]
@@ -149,7 +147,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # Optional: for additional static directories
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]  # Optional: for additional static directories
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
