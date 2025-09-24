@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-05-27 10:25+0800\n"
+"POT-Creation-Date: 2025-09-24 08:09+0800\n"
 "PO-Revision-Date: 2024-03-08 01:57+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh_Hant_HK\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: src/fnschool/base.py:46 src/fnschool/canteen/daybook/path.py:18
-#: src/fnschool/canteen/path.py:19 src/fnschool/user.py:150
+#: src/fnschool/base.py:47 src/fnschool/canteen/daybook/path.py:18
+#: src/fnschool/canteen/path.py:19 src/fnschool/user.py:200
 msgid "config"
 msgstr ""
 
-#: src/fnschool/base.py:64
+#: src/fnschool/base.py:76
 msgid "The application has exited."
 msgstr ""
 
@@ -44,7 +44,7 @@ msgstr ""
 msgid "Value:"
 msgstr ""
 
-#: src/fnschool/config.py:82
+#: src/fnschool/config.py:82 src/fnschool/user.py:110
 msgid "OK"
 msgstr ""
 
@@ -81,76 +81,71 @@ msgstr ""
 msgid "Sponsor URL: {0}"
 msgstr ""
 
-#: src/fnschool/user.py:16
-msgid "Enter your name, please!"
+#: src/fnschool/gui.py:33
+msgid "Information"
 msgstr ""
 
 #: src/fnschool/user.py:23
-msgid "Is Male"
+msgid "User Info"
 msgstr ""
 
-#: src/fnschool/user.py:25
-msgid "Saved User Names"
-msgstr ""
-
-#: src/fnschool/user.py:27
-msgid "Department Name"
-msgstr ""
-
-#: src/fnschool/user.py:45
-msgid "Enter your department name:"
+#: src/fnschool/user.py:28
+msgid "User Information"
 msgstr ""
 
 #: src/fnschool/user.py:46
-msgid "Department name"
+msgid "Name:"
 msgstr ""
 
-#: src/fnschool/user.py:67 src/fnschool/user.py:98
-msgid "The function has not been implemented."
+#: src/fnschool/user.py:53
+msgid "Organization:"
 msgstr ""
 
-#: src/fnschool/user.py:73
-msgid "Enter your name:"
+#: src/fnschool/user.py:61
+msgid "Department:"
 msgstr ""
 
-#: src/fnschool/user.py:118
-#, python-brace-format
-msgid ""
-"Hey! {0}, all of your files will be saved to \"{1}\", show it now? (yes: "
-"'y','y')"
-msgstr ""
-
-#: src/fnschool/user.py:130
+#: src/fnschool/user.py:180
 msgid "Open your directory?"
 msgstr ""
 
-#: src/fnschool/user.py:132
+#: src/fnschool/user.py:182
 #, python-brace-format
 msgid "Hey! {0}, all of your files will be saved to \"{1}\", show it now? "
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:80 src/fnschool/canteen/bill.py:85
-#: src/fnschool/canteen/bill.py:100
+#: src/fnschool/canteen/bill.py:83 src/fnschool/canteen/bill.py:88
+#: src/fnschool/canteen/bill.py:103
 #, python-format
 msgid "%s can't change."
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:206
-msgid "Food classes files:"
+#: src/fnschool/canteen/bill.py:150
+msgid "Vegetables"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:218
-#, python-brace-format
-msgid "Your food classes were read from \"{0}\". It will be used first."
+#: src/fnschool/canteen/bill.py:151
+msgid "Meat"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:227
-#, python-brace-format
-msgid "Preset food classes were read from \"{0}\"."
+#: src/fnschool/canteen/bill.py:152
+msgid "Dairy and eggs, Pastries"
 msgstr ""
 
-#: src/fnschool/canteen/bill.py:241
-msgid "Ok! I know it. (Press any key to continue)"
+#: src/fnschool/canteen/bill.py:153
+msgid "Grains"
+msgstr ""
+
+#: src/fnschool/canteen/bill.py:154
+msgid "Oils"
+msgstr ""
+
+#: src/fnschool/canteen/bill.py:155
+msgid "Condiments"
+msgstr ""
+
+#: src/fnschool/canteen/bill.py:156
+msgid "Fruits"
 msgstr ""
 
 #: src/fnschool/canteen/consuming.py:47
@@ -173,24 +168,23 @@ msgstr ""
 msgid "CNY_zheng"
 msgstr ""
 
-#: src/fnschool/canteen/entry.py:23 src/fnschool/class/entry.py:14
+#: src/fnschool/canteen/entry.py:33 src/fnschool/class/entry.py:14
 #: src/fnschool/exam/entry.py:18 src/fnschool/games/entry.py:16
 msgid "Function is not found."
 msgstr ""
 
-#: src/fnschool/canteen/entry.py:28
+#: src/fnschool/canteen/entry.py:38
 msgid "Canteen related functions."
 msgstr ""
 
-#: src/fnschool/canteen/entry.py:38
+#: src/fnschool/canteen/entry.py:49
 msgid ""
 "The functions of canteen. \"mk_bill\": Make bill. \"merge_foodsheets\": "
-"Merge food sheets."
+"Merge food sheets. \"ledger\": Manage Ledgers."
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/purchase.py:30
-#: src/fnschool/canteen/food.py:47 src/fnschool/canteen/operator.py:68
-#: src/fnschool/canteen/operator.py:73
+#: src/fnschool/canteen/food.py:47 src/fnschool/canteen/operator.py:54
+#: src/fnschool/canteen/operator.py:59
 #: src/fnschool/canteen/spreadsheet/preconsuming.py:205
 #, python-brace-format
 msgid "({0})"
@@ -213,21 +207,7 @@ msgstr ""
 msgid "food_classes"
 msgstr ""
 
-#: src/fnschool/canteen/operator.py:35
-#, python-brace-format
-msgid ""
-"Please tell {0} the alias of your superior department, {0} will use it as"
-" the form title (\"purchasing summary\" form, \"consuming summary\" form,"
-" etc). e.g: \"Primary and secondary schools in Naneng Township, Funing "
-"County\". If you haven't noticed it, you can check the previous bill "
-"first and then let {0} know."
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:47
-msgid "superior department"
-msgstr ""
-
-#: src/fnschool/canteen/operator.py:53 src/fnschool/canteen/operator.py:65
+#: src/fnschool/canteen/operator.py:39 src/fnschool/canteen/operator.py:51
 msgid "bill"
 msgstr ""
 
@@ -407,71 +387,81 @@ msgstr ""
 msgid "Negligible 1"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/purchase.py:21
-msgid "("
+#: src/fnschool/canteen/daybook/workbook/base.py:78
+msgid "Cover sheet"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/purchase.py:24
-msgid ")"
+#: src/fnschool/canteen/daybook/workbook/base.py:79
+msgid "Purchase sum sheet"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/purchase.py:43
-msgid "Paste the purchasing data"
+#: src/fnschool/canteen/daybook/workbook/base.py:80
+msgid "Purchase list sheet"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/purchase.py:82
-msgid "Select a file"
+#: src/fnschool/canteen/daybook/workbook/base.py:81
+msgid "Original purchase sheet"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/purchase.py:83
-msgid "Edit"
+#: src/fnschool/canteen/daybook/workbook/base.py:82
+msgid "Consumption sum sheet"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:23
-msgid "Continue"
+#: src/fnschool/canteen/daybook/workbook/base.py:83
+msgid "Consumption list sheet"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:24
-msgid "Edit opened Spreadsheet, save it and click \"OK\" to continue."
+#: src/fnschool/canteen/daybook/workbook/base.py:84
+msgid "Surplus sheet"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:34
-msgid "Saved Workbook Names"
+#: src/fnschool/canteen/daybook/workbook/purchase.py:27
+msgid "Saved Purchase or Daybook Spreadsheet Names"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:35
+#: src/fnschool/canteen/daybook/workbook/purchase.py:28
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:21
 msgid "Select a spreadsheet"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:36
+#: src/fnschool/canteen/daybook/workbook/purchase.py:29
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:22
 msgid "File:"
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:37
+#: src/fnschool/canteen/daybook/workbook/purchase.py:30
+msgid "Select a Purchase SpreadSheet or Daybook Spreadsheet."
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:20
+msgid "Saved Workbook Names"
+msgstr ""
+
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:23
 msgid "Select a saved file or enter a file name."
 msgstr ""
 
-#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:47
+#: src/fnschool/canteen/daybook/workbook/spreadsheet.py:33
 msgid "Workbooks"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/base.py:41
-#: src/fnschool/canteen/spreadsheet/purchasing.py:427
+#: src/fnschool/canteen/spreadsheet/purchasing.py:116
 #: src/fnschool/exam/score.py:521
 msgid "Spreadsheet Files"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:67
+#: src/fnschool/canteen/spreadsheet/base.py:68
 #, python-brace-format
 msgid "Row {0} of {1} is being inserted, please wait a moment."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:113
+#: src/fnschool/canteen/spreadsheet/base.py:114
 #, python-brace-format
 msgid "Cells of {0} was unmerged."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/base.py:195
+#: src/fnschool/canteen/spreadsheet/base.py:196
 #, python-brace-format
 msgid "Empty row {0} of sheet \"{1}\" has been deleted."
 msgstr ""
@@ -530,7 +520,7 @@ msgid "经办人："
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:71
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:72
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:71
 #, python-brace-format
 msgid "Spreadsheet \"{0}\" is in use."
 msgstr ""
@@ -543,7 +533,7 @@ msgid ""
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:162
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:163
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:162
 #, python-brace-format
 msgid ""
 "If you save updated data to \"{0}\", data of food sheets will be saved "
@@ -551,78 +541,78 @@ msgid ""
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:171
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:172
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:171
 msgid "Saving. . ."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:178
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:179
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:178
 msgid ""
 "You can fill in the monthly missing data to food sheets, they will be "
 "saved for next updating."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:187
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:188
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:187
 #, python-brace-format
 msgid "Updated data has been saved to \"{0}\"."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:192
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:193
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:192
 msgid "Updated data was saved."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:205
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:206
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:205
 msgid "Inventory of last month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:214
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:215
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:214
 msgid "Warehousing of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:219
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:253
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:220
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:254
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:219
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:253
 msgid "Total: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:231
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:232
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:231
 msgid "Consuming of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:249
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:250
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:249
 msgid "Inventory of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:260
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:261
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:260
 msgid "Unwarehousing of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:266
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:267
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:266
 msgid "Total purchasing of this month: "
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:305
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:311
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:310
 msgid "Summary:"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:326
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:337
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:336
 #, python-brace-format
 msgid "Updating sheets for {0}."
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/ctspreadsheet.py:348
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:360
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:359
 msgid "Update completely!"
 msgstr ""
 
@@ -695,7 +685,7 @@ msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/merging.py:45
 #: src/fnschool/canteen/spreadsheet/merging.py:53
-#: src/fnschool/canteen/spreadsheet/purchasing.py:277
+#: src/fnschool/canteen/spreadsheet/purchasing.py:23
 #, python-brace-format
 msgid "Loading data from \"{0}\"."
 msgstr ""
@@ -705,27 +695,27 @@ msgid "Select the last bill spreadsheet"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/merging.py:78
-#: src/fnschool/canteen/spreadsheet/merging.py:108
+#: src/fnschool/canteen/spreadsheet/merging.py:106
 msgid "there is not file selected. Exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/merging.py:102
+#: src/fnschool/canteen/spreadsheet/merging.py:100
 msgid "Select the current bill spreadsheet"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/merging.py:299
+#: src/fnschool/canteen/spreadsheet/merging.py:295
 #, python-brace-format
 msgid ""
 "Data from Sheet \"{0}\" of Workbook \"{1}\" was copied to Sheet\"{2}\" of"
 " Workbook \"{3}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/merging.py:315
+#: src/fnschool/canteen/spreadsheet/merging.py:311
 #, python-brace-format
 msgid "Food sheet \"{0}\" has its color recolor."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/merging.py:328
+#: src/fnschool/canteen/spreadsheet/merging.py:324
 #, python-brace-format
 msgid "Merge completed！Saving \"{0}\"."
 msgstr ""
@@ -817,175 +807,144 @@ msgid "Yes, they are all right. (Press any key to continue)"
 msgstr ""
 
 #: src/fnschool/canteen/spreadsheet/purchasing.py:18
-msgid "parent_path_of_purchasing_file"
+msgid "Parent Path Of Purchasing File"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:161
-#, python-brace-format
-msgid "Column \"{0}\" was no found."
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:163
-#, python-brace-format
-msgid "Columns \"{0}\" were no found."
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:164
-msgid ","
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:186
-#, python-brace-format
-msgid "Column \"{0}\" was not found. Exit"
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:336
-#, python-brace-format
-msgid ""
-"Column \"{0}\" has been updated, feel free to open new issue if some food"
-" with the wrong class ({1}). "
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:343
-msgid "Ok, I'd like to check and update it. (Press any key to check the file)"
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:351
-msgid ""
-"I have checked it, all classes of food are right, and I closed the file. "
-"(Press any key to continue)"
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:408
+#: src/fnschool/canteen/spreadsheet/purchasing.py:88
 #, python-brace-format
 msgid ""
 "{0} need a purchasing list file, and it's file type should be '.xlsx'. "
 "The column names of it:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:413
+#: src/fnschool/canteen/spreadsheet/purchasing.py:93
 msgid ""
 "\n"
-"\tcolumn   type    example\n"
-"\t送货日期 Text    2024-03-01\n"
-"\t食材名称 Text    香菜\n"
-"\t餐类     Text    正餐        (Optional)\n"
-"\t数量     Number  20\n"
-"\t计量单位 Text    斤\n"
-"\t总价     Number  20.0\n"
-"\t购买者   Text    \n"
-"\t是不计   Text    y\n"
-"\t是结余   Text    y"
+"\t ______________________________________________\n"
+"\t| column       | type  | example   | Note      |\n"
+"\t|``````````````|```````|```````````|```````````|\n"
+"\t| Checking Date| Text  | 2024-03-01|           |\n"
+"\t|``````````````|```````|```````````|```````````|\n"
+"\t| Food Name    | Text  | Cabbage   |           |\n"
+"\t|``````````````|```````|```````````|```````````|\n"
+"\t| Meal Type    | Text  | Breakfast | Optional  |\n"
+"\t|``````````````|```````|```````````|```````````|\n"
+"\t| Count        | Number| 20        |           |\n"
+"\t|``````````````|```````|```````````|```````````|\n"
+"\t| Unit         | Text  | jin1      |           |\n"
+"\t|``````````````|```````|```````````|```````````|\n"
+"\t| Total Price  | Number| 20.0      |           |\n"
+"\t|``````````````|```````|```````````|```````````|\n"
+"\t| Is Negligible| Text  | y         |           |\n"
+"\t|``````````````|```````|```````````|```````````|\n"
+"\t| Is Inventory | Text  | y         |           |\n"
+"\t ``````````````````````````````````````````````"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:426
-msgid "Please select a purchasing file."
-msgstr ""
-
-#: src/fnschool/canteen/spreadsheet/purchasing.py:434
+#: src/fnschool/canteen/spreadsheet/purchasing.py:124
 msgid "Please select the purchasing file"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:440
+#: src/fnschool/canteen/spreadsheet/purchasing.py:130
 #: src/fnschool/exam/score.py:538
 msgid "No file was selected, exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:444
+#: src/fnschool/canteen/spreadsheet/purchasing.py:134
 #, python-brace-format
 msgid "Purchasing list file \"{0}\" has been selected."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:489
+#: src/fnschool/canteen/spreadsheet/purchasing.py:179
 #, python-brace-format
 msgid "The remaining food wasn't read from \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:503
+#: src/fnschool/canteen/spreadsheet/purchasing.py:193
 #, python-brace-format
 msgid ""
 "{0} is reading remaining foods from Sheet \"{1}\" of Spreadsheet \"{2}\" "
 "......"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:515
+#: src/fnschool/canteen/spreadsheet/purchasing.py:205
 #, python-brace-format
 msgid "There is no saved inventories from \"{0}\""
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:524
+#: src/fnschool/canteen/spreadsheet/purchasing.py:214
 #, python-brace-format
 msgid ""
 "Some remaining foods have been read from sheet \"{0}\" of spreadsheet "
 "\"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:529
+#: src/fnschool/canteen/spreadsheet/purchasing.py:219
 #, python-brace-format
 msgid "The remaining food has been readfrom sheet \"{0}\" of spreadsheet \"{1}\":"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:554
+#: src/fnschool/canteen/spreadsheet/purchasing.py:244
 msgid "Purchaser: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:557
+#: src/fnschool/canteen/spreadsheet/purchasing.py:247
 msgid "Inventory data: "
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:565
+#: src/fnschool/canteen/spreadsheet/purchasing.py:255
 #, python-brace-format
 msgid "Fill them in \"{0}\"? (YyNn, default: \"No\")"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:567
+#: src/fnschool/canteen/spreadsheet/purchasing.py:257
 #, python-brace-format
 msgid "Fill it in \"{0}\"? (YyNn, default: \"No\")"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:629
+#: src/fnschool/canteen/spreadsheet/purchasing.py:319
 #, python-brace-format
 msgid "The remaining foods have been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:631
+#: src/fnschool/canteen/spreadsheet/purchasing.py:321
 #, python-brace-format
 msgid "The remaining food has been added to \"{0}\"."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:645
+#: src/fnschool/canteen/spreadsheet/purchasing.py:335
 msgid "Please check/modify the updated data. (Press any key to open the file)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:653
+#: src/fnschool/canteen/spreadsheet/purchasing.py:343
 msgid "Ok, I checked it, it's ok. (Press any key to continue)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:674
+#: src/fnschool/canteen/spreadsheet/purchasing.py:364
 #, python-brace-format
 msgid ""
 "The total price of the following food has more than two decimal places, "
 "and {0} cannot process it."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:679
+#: src/fnschool/canteen/spreadsheet/purchasing.py:369
 #, python-brace-format
 msgid ""
 "The total price of the following foods have more than two decimal places,"
 " and {0} cannot process them."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:690
-#: src/fnschool/canteen/spreadsheet/purchasing.py:811
+#: src/fnschool/canteen/spreadsheet/purchasing.py:380
+#: src/fnschool/canteen/spreadsheet/purchasing.py:501
 #, python-brace-format
 msgid "{0}({1})"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:703
+#: src/fnschool/canteen/spreadsheet/purchasing.py:393
 msgid "Exit."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:717
+#: src/fnschool/canteen/spreadsheet/purchasing.py:407
 #, python-brace-format
 msgid ""
 "The unit price of \"{0}\" is an infinite decimal, split \"{0}\"?(Yes: "
@@ -993,12 +952,12 @@ msgid ""
 "rest: \"S\",\"s\". Default: Yes for rest, \"A/a\".)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:761
+#: src/fnschool/canteen/spreadsheet/purchasing.py:451
 #, python-brace-format
 msgid "\"{0}\" was split:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:797
+#: src/fnschool/canteen/spreadsheet/purchasing.py:487
 #, python-brace-format
 msgid ""
 "Normally, {0} only considers non-warehoused foods as seasonings, but {0} "
@@ -1006,7 +965,7 @@ msgid ""
 "seasonings:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:803
+#: src/fnschool/canteen/spreadsheet/purchasing.py:493
 #, python-brace-format
 msgid ""
 "Normally, {0} only considers non-warehoused foods as seasonings, but {0} "
@@ -1014,22 +973,22 @@ msgid ""
 "seasonings:"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:816
+#: src/fnschool/canteen/spreadsheet/purchasing.py:506
 #, python-brace-format
 msgid "You may need to modify its food class, otherwise {0} will go wrong."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:821
+#: src/fnschool/canteen/spreadsheet/purchasing.py:511
 #, python-brace-format
 msgid "You may need to modify their food classes, otherwise {0} will go wrong."
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:826
+#: src/fnschool/canteen/spreadsheet/purchasing.py:516
 #, python-brace-format
 msgid " Do you want to re-edit \"{0}\"? (Yes: 'Y' or 'y'. Default: No.)"
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/purchasing.py:835
+#: src/fnschool/canteen/spreadsheet/purchasing.py:525
 msgid "Ok, I have re-edited and closed it? (Press any key to continue)"
 msgstr ""
 
@@ -1051,7 +1010,43 @@ msgstr ""
 msgid "总金额（大写）："
 msgstr ""
 
-#: src/fnschool/canteen/spreadsheet/spreadsheet.py:156
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:50
+msgid "Pre-consuming Sheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:51
+msgid "Purchasing Sheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:52
+msgid "Consuming Sheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:53
+msgid "Inventory Sheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:54
+msgid "Warehousing Sheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:55
+msgid "Unwarehousing Sheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:56
+msgid "Purchasing Sum Sheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:57
+msgid "Consuming Sum Sheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:58
+msgid "Cover Sheet"
+msgstr ""
+
+#: src/fnschool/canteen/spreadsheet/spreadsheet_file.py:155
 #, python-brace-format
 msgid ""
 "Do you want to save all updated data to \"{0}\"? or just save it as a "
@@ -3665,5 +3660,68 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "CNY_jiu"
+#~ msgstr ""
+
+#~ msgid "Is Male"
+#~ msgstr ""
+
+#~ msgid "Saved User Names"
+#~ msgstr ""
+
+#~ msgid "Department Name"
+#~ msgstr ""
+
+#~ msgid "Enter your department name:"
+#~ msgstr ""
+
+#~ msgid "Department name"
+#~ msgstr ""
+
+#~ msgid "The function has not been implemented."
+#~ msgstr ""
+
+#~ msgid "Enter your name:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Hey! {0}, all of your files will"
+#~ " be saved to \"{1}\", show it "
+#~ "now? (yes: 'y','y')"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Please tell {0} the alias of your"
+#~ " superior department, {0} will use it"
+#~ " as the form title (\"purchasing "
+#~ "summary\" form, \"consuming summary\" form,"
+#~ " etc). e.g: \"Primary and secondary "
+#~ "schools in Naneng Township, Funing "
+#~ "County\". If you haven't noticed it, "
+#~ "you can check the previous bill "
+#~ "first and then let {0} know."
+#~ msgstr ""
+
+#~ msgid "("
+#~ msgstr ""
+
+#~ msgid ")"
+#~ msgstr ""
+
+#~ msgid "Paste the purchasing data"
+#~ msgstr ""
+
+#~ msgid "Edit"
+#~ msgstr ""
+
+#~ msgid "Continue"
+#~ msgstr ""
+
+#~ msgid "Edit opened Spreadsheet, save it and click \"OK\" to continue."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Column \"{0}\" has been updated, feel"
+#~ " free to open new issue if some"
+#~ " food with the wrong class ({1}). \n"
 #~ msgstr ""
 

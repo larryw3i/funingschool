@@ -123,7 +123,7 @@ class Bill(ClsBase):
             format_word[0],
             # format_word[1]
         ):
-            CNY_chars.append("整")
+            CNY_chars.append("\u6574") # zheng3.
 
         result = "".join(CNY_chars)
         return result
@@ -137,112 +137,28 @@ class Bill(ClsBase):
     @property
     def foods(self):
         if not self._foods:
-            self._foods = self.spreadsheet.purchasing.read_pfoods()
+            self._foods = self.spreadsheet.purchasing.foods
         return self._foods
-
-    @foods.setter
-    def foods(self, foods):
-        self._foods = foods
-
-    @property
-    def meal_type(self):
-        if not self._meal_type:
-            if len(self.foods) > 0:
-                self._meal_type = self.foods[0].meal_type
-
-        return self._meal_type
-
-    @meal_type.setter
-    def meal_type(self, mtype):
-        self._meal_type = mtype
-
-    @meal_type.deleter
-    def meal_type(self):
-        self._meal_type = None
-
-    @property
-    def purchaser(self):
-        purchaser = self.foods[-1].purchaser
-        return purchaser
-
-    def make_spreadsheets_g(self):
-        pass
 
     def make_spreadsheets(self):
         self.spreadsheet.update()
         pass
 
-    def merge_foodsheets(self):
-        self.spreadsheet.merge()
-        pass
-
-    @property
-    def time_nodes(self):
-        if not self._time_nodes:
-            year = self.get_consuming_year()
-            month = self.get_consuming_month()
-            self._time_nodes = sorted(
-                list(
-                    set(
-                        [f.xdate for f in self.foods]
-                        + [
-                            datetime(
-                                year,
-                                month,
-                                calendar.monthrange(year, month)[1],
-                            )
-                        ]
-                    )
-                )
-            )
-
-        return self._time_nodes
-
-    @property
-    def food_class_names(self):
-        fclass_names = ["蔬菜类"] + list(self.food_classes.keys())
-        return fclass_names
-
     @property
     def food_classes(self):
-        if not self._food_classes:
-            print_info(_("Food classes files:"))
-            for f in [
-                self.operator.food_classes_fpath,
-                food_classes_config0_fpath,
-            ]:
+        fclass_names = [
+            _("Vegetables"),
+            _("Meat"),
+            _("Dairy and eggs, Pastries"),
+            _("Grains"),
+            _("Oils"),
+            _("Condiments"),
+            _("Fruits")
 
-                print("\t", f)
+        ]
+        return fclass_names
 
-            with open(self.operator.food_classes_fpath, "rb") as f:
-                self._food_classes = tomllib.load(f)
-                print_info(
-                    _(
-                        'Your food classes were read from "{0}". '
-                        + "It will be used first."
-                    ).format(self.operator.food_classes_fpath)
-                )
-
-            food_classes0 = None
-            with open(food_classes_config0_fpath, "rb") as f:
-                food_classes0 = tomllib.load(f)
-                print_info(
-                    _('Preset food classes were read from "{0}".').format(
-                        food_classes_config0_fpath
-                    )
-                )
-            for fclass, name_likes in food_classes0.items():
-                if fclass in self._food_classes.keys():
-                    user_name_likes = self._food_classes.get(fclass)
-                    for name_like in name_likes:
-                        if not name_like in user_name_likes:
-                            user_name_likes.append(name_like)
-                    self._food_classes[fclass] = user_name_likes
-                else:
-                    self._food_classes[fclass] = name_likes
-
-        return self._food_classes
-
+    
     @property
     def operator(self):
         if not self._operator:

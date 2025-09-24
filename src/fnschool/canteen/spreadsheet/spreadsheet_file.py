@@ -27,7 +27,7 @@ from fnschool.canteen.spreadsheet.cover import Cover
 from fnschool.canteen.spreadsheet.merging import Merging
 
 
-class SpreadSheet:
+class SpreadsheetFile:
     def __init__(self, bill):
         self.bill = bill
         self.operator = self.bill.operator
@@ -47,16 +47,15 @@ class SpreadSheet:
         self._cover = None
         self.sd = self.bill.significant_digits
 
-        self.preconsuming_name0 = "出库计划表"
-        self.purchasing_name = None
-        self.consuming_name = "出库单"
-        self.inventory_name = "食材盘存表"
-        self.warehousing_name = "入库单"
-        self.unwarehousing_name = "未入库明细表"
-        self.purchasingsum_name = "入库、未入库汇总表"
-        self.consumingsum_name = "出库汇总表"
-        self.sfood_name = "材料台账母表"
-        self.cover_name = "六大类总封面"
+        self.preconsuming_name0 = _("Pre-consuming Sheet")
+        self.purchasing_name = _("Purchasing Sheet")
+        self.consuming_name = _("Consuming Sheet")
+        self.inventory_name = _("Inventory Sheet")
+        self.warehousing_name = _("Warehousing Sheet")
+        self.unwarehousing_name = _("Unwarehousing Sheet")
+        self.purchasingsum_name = _("Purchasing Sum Sheet")
+        self.consumingsum_name = _("Consuming Sum Sheet")
+        self.cover_name = _("Cover Sheet")
 
     @property
     def bill_fpath(self):
