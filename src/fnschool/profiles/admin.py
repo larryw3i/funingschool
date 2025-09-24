@@ -17,5 +17,10 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ["user__username", "phone", "address"]
     list_filter = ["date_of_birth"]
 
+    def user(self, obj):
+        if obj.user:
+            return obj.user.username
+        return "No User"
+
 
 # The end.

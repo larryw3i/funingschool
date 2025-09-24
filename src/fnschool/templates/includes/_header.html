@@ -8,14 +8,14 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="">Articles</a>
+          <a class="nav-link" href=""></a>
         </li>
       </ul>
       <!-- User authentication links -->
       <ul class="navbar-nav navbar-right" style="margin-right: 30px;">
         {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="#">{{ request.user.username }}</a>
+            <a class="nav-link" href="{% url 'profiles:update' %}">{{ request.user.username }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'profiles:log_out' %}">

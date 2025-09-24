@@ -6,7 +6,8 @@ from django.shortcuts import redirect
 
 from django.views.generic import CreateView
 from django.contrib.auth import logout
-from .forms import ProfileForm
+from django.contrib.auth import login, authenticate
+from .forms import ProfileForm, ProfileLoginForm
 
 
 def profile_new(request):
@@ -16,6 +17,7 @@ def profile_new(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.set_password(form.cleaned_data["password"])
+            user.username = form.cleaned_data["username"]
             user.save()
             login(request, user)
             return redirect("home")
@@ -27,13 +29,17 @@ def profile_new(request):
 
 def profile_log_in(request):
     if request.method == "POST":
-        form = ProfileForm(request, data=request.POST)
+        form = ProfileLoginForm(request, data=request.POST)
         if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect("home")
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                next_url = request.GET.get("next", "home")
+                return redirect(next_url)
     else:
-        form = ProfileForm()
+        form = ProfileLoginForm()
     return render(request, "profiles/log_in.html", {"form": form})
 
 
@@ -51,7 +57,7 @@ def profile_edit(request):
             return redirect("home")
     else:
         form = ProfileForm(instance=request.user)
-    return render(request, "profile_edit/edit.html", {"form": form})
+    return render(request, "profiles/edit.html", {"form": form})
 
 
 # The end.
