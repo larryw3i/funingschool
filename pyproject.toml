@@ -3,14 +3,15 @@ name = "fnschool"
 dynamic = ["version"]
 requires-python = ">= 3.9"
 dependencies = [
-    "colorama",
+    "django",
     "pandas",
     "matplotlib",
     "numpy",
     "openpyxl",
     "platformdirs",
     "tomlkit",
-    "pygubu"
+    "django-crispy-forms",
+    "python3-crispy-bootstrap5",
 ]
 authors = [
   {name = "larryw3i", email = "larryw3i@163.com"},

@@ -18,10 +18,10 @@ indent_size = 4
 
 # this must be below the general *.py to overwrite it
 [tools/{perf,power,rcu,testing/kunit}/**.py,]
-indent_style = tab
-indent_size = 8
+indent_style = space
+indent_size = 4
 
-[*.yaml]
+[*.{yaml,js,ts}]
 charset = utf-8
 end_of_line = lf
 insert_final_newline = true
