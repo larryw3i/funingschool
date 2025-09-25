@@ -32,9 +32,6 @@ class Ingredient(models.Model):
         verbose_name=_("Unit Name of Quantity"),
     )
 
-    is_remaining = models.BooleanField(
-        default=True, verbose_name=_("Is Remaining")
-    )
     is_ignorable = models.BooleanField(
         default=False, verbose_name=_("Is Ignorable")
     )

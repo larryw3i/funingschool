@@ -1,0 +1,38 @@
+{% load i18n %}
+{% load crispy_forms_tags %}
+<div class="modal-header">
+  <h5 class="modal-title" id="editModalLabel">编辑项目</h5>
+  button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+</button>
+</div>
+<form id="editForm"
+      method="post"
+      action="{% url 'canteen:edit_ingredient' form.pk %}">
+  <div class="modal-body">
+    {% csrf_token %}
+    {{ form|crispy }}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+      取消
+    </button>
+    <button type="submit" class="btn btn-primary">保存</button>
+  </div>
+</form>
+<script>
+
+$('#editForm').on('submit', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        success: function(response) {
+            $('#editModal').modal('hide');
+        },
+        error: function(xhr) {
+            $('.modal-content').html(xhr.responseText);
+        }
+    });
+});
+</script>

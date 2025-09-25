@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-25 16:21+0000\n"
+"POT-Creation-Date: 2025-09-25 17:22+0000\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -32,31 +32,31 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: canteen/models.py:17 canteen/views.py:19
+#: canteen/models.py:17 canteen/views.py:21
 msgid "Storage Date"
 msgstr ""
 
-#: canteen/models.py:18 canteen/views.py:29
+#: canteen/models.py:18 canteen/views.py:31
 msgid "Ingredient Name"
 msgstr ""
 
-#: canteen/models.py:19 canteen/views.py:31
+#: canteen/models.py:19 canteen/views.py:33
 msgid "Meal Type"
 msgstr ""
 
-#: canteen/models.py:20 canteen/views.py:41
+#: canteen/models.py:20 canteen/views.py:43
 msgid "Category"
 msgstr ""
 
-#: canteen/models.py:22 canteen/views.py:48
+#: canteen/models.py:22 canteen/views.py:50
 msgid "Quantity"
 msgstr ""
 
-#: canteen/models.py:25 canteen/views.py:58
+#: canteen/models.py:25 canteen/views.py:60
 msgid "Total Price"
 msgstr ""
 
-#: canteen/models.py:32 canteen/views.py:62
+#: canteen/models.py:32 canteen/views.py:64
 msgid "Unit Name of Quantity"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgstr ""
 msgid "Is Remaining"
 msgstr ""
 
-#: canteen/models.py:39 canteen/views.py:66
+#: canteen/models.py:39 canteen/views.py:68
 msgid "Is Ignorable"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgstr ""
 msgid "Upload"
 msgstr ""
 
-#: canteen/views.py:21
+#: canteen/views.py:23
 msgid ""
 "Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
 "\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
@@ -121,47 +121,48 @@ msgid ""
 "have to tell the developers. Thank you!"
 msgstr ""
 
-#: canteen/views.py:29
+#: canteen/views.py:31
 msgid "Name of Ingredient"
 msgstr ""
 
-#: canteen/views.py:33
+#: canteen/views.py:35
 msgid ""
 "For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
 "generating a spreadsheet, each meal category corresponds to a spread sheet. "
 "If left blank, only one spreadsheet will be generated."
 msgstr ""
 
-#: canteen/views.py:43
+#: canteen/views.py:45
 msgid ""
 "Usually there are seven categories: vegetables, meat, grains, seasonings, "
 "eggs and milk, oils, and fruits."
 msgstr ""
 
-#: canteen/views.py:50
+#: canteen/views.py:52
 msgid ""
 "When you purchase ingredients, it's best not to have decimals in the "
 "quantity, as this can be a big hassle!"
 msgstr ""
 
-#: canteen/views.py:67
+#: canteen/views.py:69
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr ""
 
-#: canteen/views.py:78
+#: canteen/views.py:80
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:112
+#: canteen/views.py:115
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:132
+#: canteen/views.py:135
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:145
-msgid "Purchased Ingredients WorkBook"
+#: canteen/views.py:150
+#, python-brace-format
+msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
 #: fnschool/settings.py:135

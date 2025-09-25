@@ -1,5 +1,9 @@
 import io
+import pandas as pd
+import numpy as np
 from fnschool import count_chinese_characters
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 from openpyxl.comments import Comment
 from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font
@@ -8,10 +12,15 @@ from pathlib import Path
 from fnschool import _
 from django.http import HttpResponse
 from openpyxl import Workbook
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.encoding import escape_uri_path
+from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 
-from .forms import PurchasedIngredientsWorkBookForm
+from .models import Ingredient
+from .forms import PurchasedIngredientsWorkBookForm, IngredientForm
 
 # Create your views here.
 
@@ -68,26 +77,74 @@ is_ignorable_header = (
 )
 
 
+def edit_ingredient(request, ingredient_id):
+    ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
+
+    if request.method == "POST":
+        form = IngredientForm(request.POST, instance=ingredient)
+        if form.is_valid():
+            form.save()
+            return
+    else:
+        form = IngredientForm(instance=ingredient)
+
+    return render(request, "canteen/edit_ingredient.html", {"form": form})
+
+
+def list_ingredients(request):
+    search_query = request.GET.get("q", "")
+
+    if search_query:
+        ingredients = Ingredient.objects.filter(Q(name__icontains=search_query))
+    else:
+        ingredients = Ingredient.objects.all()
+
+    per_page = request.GET.get("per_page")
+    print(per_page)
+    per_page = int(per_page) if str(per_page).isnumeric() else 10
+    paginator = Paginator(ingredients, per_page)
+    page_number = request.GET.get("page", 1)
+    page_obj = paginator.get_page(page_number)
+    headers = [
+        f.verbose_name
+        for f in Ingredient._meta.fields
+        if f.name not in ["id", "user"]
+    ]
+    context = {
+        "page_obj": page_obj,
+        "search_query": search_query,
+        "headers": headers,
+        "per_page": per_page,
+    }
+    return render(request, "canteen/list_ingredients.html", context)
+
+
 def create_ingredients(request):
     if request.method == "POST":
-        form = UploadExcelForm(request.POST, request.FILES)
+        form = PurchasedIngredientsWorkBookForm(request.POST, request.FILES)
         if form.is_valid():
             workbook_file = request.FILES["workbook_file"]
 
             if not workbook_file.name.endswith(".xlsx"):
                 return HttpResponse(_('Please upload a file in "xlsx" format.'))
 
-            try:
-                df = pd.read_excel(workbook_file)
-                return render(
-                    request,
-                    "canteen/create_ingredients.html",
-                    {"data": df.to_html(classes="table")},
+            df = pd.read_excel(workbook_file)
+
+            for index, row in df.iterrows():
+                Ingredient.objects.create(
+                    user=request.user,
+                    storage_date=row[storage_date_header[0]],
+                    name=row[ingredient_name_header[0]],
+                    meal_type=row[meal_type_header[0]],
+                    category=row[category_header[0]],
+                    quantity=row[quantity_header[0]],
+                    total_price=row[total_price_header[0]],
+                    quantity_unit_name=row[quantity_unit_name_header[0]],
+                    is_ignorable=not row[is_ignorable_header[0]] == np.nan,
                 )
-            except Exception as e:
-                return HttpResponse(
-                    f_("An error occurred while processing the file.")
-                )
+
+            return redirect("canteen:list_ingredients")
+
     else:
         form = PurchasedIngredientsWorkBookForm()
     return render(request, "canteen/create_ingredients.html", {"form": form})
@@ -101,6 +158,7 @@ def get_template_workbook_of_purchased_ingredients(request):
         storage_date_header,
         ingredient_name_header,
         meal_type_header,
+        category_header,
         quantity_header,
         quantity_unit_name_header,
         total_price_header,
@@ -142,7 +200,14 @@ def get_template_workbook_of_purchased_ingredients(request):
             + "vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         ),
     )
-    filename = _("Purchased Ingredients WorkBook") + ".xlsx"
+    today = datetime.now().date()
+    last_month = today + relativedelta(months=-1, day=1)
+    filename = (
+        _("Purchased Ingredients WorkBook ({0})").format(
+            last_month.strftime("%Y%m")
+        )
+        + ".xlsx"
+    )
 
     encoded_filename = escape_uri_path(filename)
     response["Content-Disposition"] = (

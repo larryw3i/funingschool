@@ -4,6 +4,3 @@ main {
   padding-bottom: 120px; 
 }
 
-button[type*="submit"] {
-	min-width: 50%
-}

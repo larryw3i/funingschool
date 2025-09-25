@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+  {% trans "Ingredient List" %}
+{% endblock %}
+{% block content %}
+  <h1>{% trans "Ingredient List" %}</h1>
+  <form method="get"
+        action="{% url 'canteen:list_ingredients' %}"
+        class="d-flex justify-content-between align-items-center">
+    <input type="text"
+           name="q"
+           value="{{ search_query }}"
+           placeholder="{% trans 'Search ingredient ...' %}"
+           class="form-control">
+    <button type="submit" class="btn btn-primary text-nowrap">
+      {% trans "Search" %}
+    </button>
+    {% if search_query %}
+      <a href="{% url 'canteen:list_ingredients' %}" class="text-nowrap">
+        {% trans "Clear" %}
+      </a>
+    {% endif %}
+  </form>
+  <hr>
+  <ul>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          {% for header in headers %}<th scope="col">{{ header }}</th>{% endfor %}
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ingredient in page_obj %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ ingredient.storage_date }}</td>
+            <td>{{ ingredient.name }}</td>
+            <td>{{ ingredient.meal_type }}</td>
+            <td>{{ ingredient.category }}</td>
+            <td>{{ ingredient.quantity }}</td>
+            <td>{{ ingredient.quantity_unit_name }}</td>
+            <td>{{ ingredient.total_price }}</td>
+            <td>
+              {% if ingredient.is_ignorable %}
+                {% trans "Yes" %}
+              {% endif %}
+            </td>
+            <td>
+              <a data-bs-toggle="modal"
+                 data-bs-target="#editModal"
+                 href="{% url "canteen:edit_ingredient" ingredient.id %}">
+                {% trans "Edit" %}
+              </a>
+            </td>
+          </tr>
+        {% empty %}
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="pagination ">
+      <span class="step-links d-flex justify-content-between align-items-center">
+        {% if page_obj.has_previous %}
+          <a href="?page=1&per_page={{ per_page }}{% if search_query %}&q={{ search_query }}{% endif %}"
+             class="pe-2">&lt;&lt;</a>
+          <a href="?page={{ page_obj.previous_page_number }}&per_page={{ per_page }}{% if search_query %}&q={{ search_query }}{% endif %}"
+             class="pe-2">&lt;</a>
+        {% endif %}
+        <span class="current ">
+          {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
+        </span>
+        <form method="get" action="" class="form-inline d-flex">
+          <input type="number"
+                 name="per_page"
+                 id="per_page"
+                 class="form-control"
+                 min="1"
+                 value="{{ per_page }}"
+                 style="width: 80px;
+                        margin: 0 10px">
+          <button type="submit" class="btn btn-primary">&#128640;</button>
+          {% for key, value in request.GET.items %}
+            {% if key != 'per_page' %}
+              <input type="hidden" name="{{ key }}" value="{{ value }}">
+            {% endif %}
+          {% endfor %}
+        </form>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}&per_page={{ per_page }}{% if search_query %}&q={{ search_query }}{% endif %}"
+             class="ps-2">&gt;</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}&per_page={{ per_page }}{% if search_query %}&q={{ search_query }}{% endif %}"
+             class="ps-2">&gt;&gt;</a>
+        {% endif %}
+      </span>
+    </div>
+    <div class="modal fade"
+         id="editModal"
+         tabindex="-1"
+         aria-labelledby="editModalLabel"
+         aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Ajax内容将加载到这里 -->
+        </div>
+      </div>
+    </div>
+    <script>
+$('#editModal').on('hidden.bs.modal', function () {
+    location.reload();
+});
+    </script>
+  {% endblock %}
