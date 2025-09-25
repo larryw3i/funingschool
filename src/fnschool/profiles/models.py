@@ -35,14 +35,16 @@ class Profile(AbstractUser):
     avatar = models.ImageField(
         upload_to="avatars/", blank=True, null=True, verbose_name=_("Avatar")
     )
-    bio = models.TextField(max_length=512, blank=True, verbose_name=_(""))
+    bio = models.TextField(
+        max_length=512, blank=True, verbose_name=_("Biography")
+    )
 
     class Meta:
         verbose_name = _("User Profile")
         verbose_name_plural = _("User Profiles")
 
     def __str__(self):
-        return _("{0}'s Profile").format(self.user.username)
+        return _("{0}'s Profile").format(self.username)
 
 
 # The end.

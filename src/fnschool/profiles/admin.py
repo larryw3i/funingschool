@@ -18,8 +18,8 @@ class ProfileAdmin(admin.ModelAdmin):
     list_filter = ["date_of_birth"]
 
     def user(self, obj):
-        if obj.user:
-            return obj.user.username
+        if obj:
+            return obj.username
         return "No User"
 
 

@@ -1,4 +1,5 @@
 from fnschool import _
+from datetime import date
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
@@ -7,19 +8,35 @@ from .models import Profile
 
 class ProfileLoginForm(AuthenticationForm):
     username = forms.CharField(
-        widget=forms.TextInput(attrs={"placeholder": _("User Name")})
+        label=_("User Name"),
+        widget=forms.TextInput(attrs={"placeholder": _("User Name")}),
     )
     password = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder": _("Password")})
+        label=_("Password"),
+        widget=forms.PasswordInput(attrs={"placeholder": _("Password")}),
     )
 
 
 class ProfileForm(ModelForm):
-    username = forms.CharField(max_length=128)
-    password = forms.CharField(widget=forms.PasswordInput)
-    password_confirm = forms.CharField(widget=forms.PasswordInput)
+    username = forms.CharField(
+        max_length=128,
+        label=_("User Name"),
+        widget=forms.TextInput(attrs={"placeholder": _("User Name")}),
+    )
+    password = forms.CharField(
+        label=_("Password"),
+        widget=forms.PasswordInput(attrs={"placeholder": _("Password")}),
+    )
+    password_confirm = forms.CharField(
+        label=_("Confirm Password"),
+        widget=forms.PasswordInput(
+            attrs={"placeholder": _("Confirm Password")}
+        ),
+    )
 
     class Meta:
+        current_year = date.today().year
+        year_range = list(range(current_year - 100, current_year + 1))
         model = Profile
         fields = [
             "username",
@@ -31,6 +48,12 @@ class ProfileForm(ModelForm):
             "avatar",
             "bio",
         ]
+        widgets = {
+            "date_of_birth": forms.SelectDateWidget(
+                years=year_range,
+                attrs={"style": "width: 33.33%; display: inline-block;"},
+            )
+        }
 
     def clean(self):
         cleaned_data = super().clean()

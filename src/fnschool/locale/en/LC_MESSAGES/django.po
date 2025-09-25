@@ -6,29 +6,175 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-24 10:37+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2025-09-25 02:26+0000\n"
+"PO-Revision-Date: 2025-09-25 10:07+0800\n"
+"Last-Translator: \n"
+"Language-Team: larryw3i@163.com\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: fnschool/settings.py:119
+"X-Generator: Poedit 3.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: fnschool/settings.py:134
 msgid "English"
 msgstr ""
 
-#: fnschool/settings.py:120
+#: fnschool/settings.py:135
 msgid "Spanish"
 msgstr ""
 
-#: fnschool/settings.py:121
+#: fnschool/settings.py:136
 msgid "French"
 msgstr ""
 
-#: fnschool/settings.py:122
+#: fnschool/settings.py:137
 msgid "Simplified Chinese"
+msgstr ""
+
+#: profiles/forms.py:10 profiles/forms.py:20
+msgid "User Name"
+msgstr ""
+
+#: profiles/forms.py:13 profiles/forms.py:23
+msgid "Password"
+msgstr ""
+
+#: profiles/forms.py:26
+msgid "Confirm Password"
+msgstr ""
+
+#: profiles/models.py:15
+msgid "Phone Number"
+msgstr ""
+
+#: profiles/models.py:18
+msgid "Affiliation"
+msgstr ""
+
+#: profiles/models.py:25
+msgid "Superior department"
+msgstr ""
+
+#: profiles/models.py:29
+msgid "Date of Birth"
+msgstr ""
+
+#: profiles/models.py:33
+msgid "Address"
+msgstr ""
+
+#: profiles/models.py:36
+msgid "Avatar"
+msgstr ""
+
+#: profiles/models.py:39
+msgid "Biography"
+msgstr ""
+
+#: profiles/models.py:43
+msgid "User Profile"
+msgstr ""
+
+#: profiles/models.py:44
+msgid "User Profiles"
+msgstr ""
+
+#: profiles/models.py:47
+#, python-brace-format
+msgid "{0}'s Profile"
+msgstr ""
+
+#: profiles/templates/profiles/create.html:4
+msgid "Create"
+msgstr ""
+
+#: profiles/templates/profiles/create.html:7
+msgid "Create new account."
+msgstr ""
+
+#: profiles/templates/profiles/create.html:12
+msgid "Confirm"
+msgstr ""
+
+#: profiles/templates/profiles/create.html:16
+msgid "Already have an account?"
+msgstr ""
+
+#: profiles/templates/profiles/create.html:17
+msgid "Login here"
+msgstr ""
+
+#: profiles/templates/profiles/detail.html:4
+#, python-format
+msgid ""
+"\n"
+"\tHello, %(user_name)s!\n"
+msgstr ""
+
+#: profiles/templates/profiles/edit.html:4
+msgid "Update Profile"
+msgstr ""
+
+#: profiles/templates/profiles/edit.html:7
+msgid "Update Profile."
+msgstr ""
+
+#: profiles/templates/profiles/edit.html:12
+msgid "Update"
+msgstr ""
+
+#: profiles/templates/profiles/log_in.html:4
+#: profiles/templates/profiles/log_in.html:7
+#: profiles/templates/profiles/log_in.html:16
+msgid "Log in"
+msgstr ""
+
+#: profiles/templates/profiles/log_in.html:9
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: profiles/templates/profiles/log_in.html:20
+msgid "Don't have an account?"
+msgstr ""
+
+#: profiles/templates/profiles/log_in.html:21
+msgid "Register here"
+msgstr ""
+
+#: profiles/templates/profiles/log_out.html:3
+#: profiles/templates/profiles/log_out.html:6
+msgid "Logged Out"
+msgstr ""
+
+#: profiles/templates/profiles/log_out.html:7
+msgid "You have been successfully logged out."
+msgstr ""
+
+#: profiles/templates/profiles/log_out.html:9
+msgid "Log in again"
+msgstr ""
+
+#: templates/base.html:9
+msgid "FNSCHOOL"
+msgstr ""
+
+#: templates/includes/_footer.html:7
+msgid "Copyleft &copy; FNSCHOOL"
+msgstr ""
+
+#: templates/includes/_header.html:22
+msgid "Log out"
+msgstr ""
+
+#: templates/includes/_header.html:27
+msgid "Login"
+msgstr ""
+
+#: templates/includes/_header.html:31
+msgid "Sign Up"
 msgstr ""
