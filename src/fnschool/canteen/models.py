@@ -1,3 +1,4 @@
+from fnschool import _
 from django.db import models
 
 # Create your models here.
@@ -13,22 +14,22 @@ class Ingredient(models.Model):
         related_name="ingredients",
         verbose_name=_("User"),
     )
-    name = models.CharField(max_length=100, verbose_name=_("Ingredient Name"))
     storage_date = models.DateField(verbose_name=_("Storage Date"))
+    name = models.CharField(max_length=100, verbose_name=_("Ingredient Name"))
     meal_type = models.CharField(max_length=50, verbose_name=_("Meal Type"))
     category = models.CharField(max_length=50, verbose_name=_("Category"))
     quantity = models.DecimalField(
         max_digits=10, decimal_places=2, verbose_name=_("Quantity")
     )
     total_price = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name=_("Total price")
+        max_digits=10, decimal_places=2, verbose_name=_("Total Price")
     )
 
-    unit_name = models.CharField(
+    quantity_unit_name = models.CharField(
         max_length=20,
         null=True,
         blank=True,
-        verbose_name=_("Unit name of weight"),
+        verbose_name=_("Unit Name of Quantity"),
     )
 
     is_remaining = models.BooleanField(
@@ -65,7 +66,7 @@ class Consumption(models.Model):
         ordering = ["-date_of_using"]
 
     def __str__(self):
-        return _("{0} of {1} was consumed on {1} .").format(
+        return _("{0} of {1} was consumed on {2} .").format(
             str(self.amount_used) + self.ingredient.unit_name,
             self.ingredient.name,
             self.date_of_using,

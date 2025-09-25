@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-25 02:26+0000\n"
-"PO-Revision-Date: 2025-09-25 10:26+0800\n"
+"POT-Creation-Date: 2025-09-25 16:21+0000\n"
+"PO-Revision-Date: 2025-09-26 00:24+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -19,31 +19,183 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.7\n"
 
-#: fnschool/settings.py:134
+#: canteen/forms.py:7
+msgid "Select a Spreadsheet File"
+msgstr "选择一个表格文件"
+
+#: canteen/forms.py:8
+msgid "Office Open XML Spreadsheet only. (*.xlsx)"
+msgstr "仅为 Office Open XML 表格。 (*.xlsx)"
+
+#: canteen/models.py:15
+msgid "User"
+msgstr "用户"
+
+#: canteen/models.py:17 canteen/views.py:19
+msgid "Storage Date"
+msgstr "入库日期"
+
+#: canteen/models.py:18 canteen/views.py:29
+msgid "Ingredient Name"
+msgstr "食材名"
+
+#: canteen/models.py:19 canteen/views.py:31
+msgid "Meal Type"
+msgstr "餐类"
+
+#: canteen/models.py:20 canteen/views.py:41
+msgid "Category"
+msgstr "食材大类"
+
+#: canteen/models.py:22 canteen/views.py:48
+msgid "Quantity"
+msgstr "数量"
+
+#: canteen/models.py:25 canteen/views.py:58
+msgid "Total Price"
+msgstr "总价"
+
+#: canteen/models.py:32 canteen/views.py:62
+msgid "Unit Name of Quantity"
+msgstr "数量单位"
+
+#: canteen/models.py:36
+msgid "Is Remaining"
+msgstr "是剩余的"
+
+#: canteen/models.py:39 canteen/views.py:66
+msgid "Is Ignorable"
+msgstr "是不用入库的"
+
+#: canteen/models.py:44
+msgid "Ingredient List"
+msgstr "食材列表"
+
+#: canteen/models.py:55
+msgid "Ingredient"
+msgstr "食材"
+
+#: canteen/models.py:58
+msgid "Date"
+msgstr "日期"
+
+#: canteen/models.py:64
+msgid "Consumption Record"
+msgstr "消耗记录"
+
+#: canteen/models.py:65
+msgid "Consumption Records"
+msgstr "消耗记录列表"
+
+#: canteen/models.py:69
+#, python-brace-format
+msgid "{0} of {1} was consumed on {2} ."
+msgstr "在 {2} 消耗了 {0} 的 {1} 。"
+
+#: canteen/templates/canteen/create_ingredients.html:4
+msgid "Upload a Spreadsheet of Purchased Ingredients"
+msgstr "上传购入食材的表格"
+
+#: canteen/templates/canteen/create_ingredients.html:7
+msgid "Please upload a spreadsheet of purchased ingredients."
+msgstr "请上传购入食材的表格。"
+
+#: canteen/templates/canteen/create_ingredients.html:9
+msgid "Need a template file?"
+msgstr "需要一份模板文件？"
+
+#: canteen/templates/canteen/create_ingredients.html:11
+msgid "Download it."
+msgstr "下载它。"
+
+#: canteen/templates/canteen/create_ingredients.html:18
+msgid "Upload"
+msgstr "上传"
+
+#: canteen/views.py:21
+msgid ""
+"Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
+"\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
+"compatible with all the formats you like, but if something goes wrong, you "
+"have to tell the developers. Thank you!"
+msgstr ""
+"像这样的格式都能行：“年年年年-月月-日日”、“年年年年/月月/日日”、“年年年年.月"
+"月.日日”、“月月-日日”、“月月日日”，“月月.日日” 。总之，FNSCHOOL 想兼容所有你"
+"喜欢的格式，但是如果出错了，你要告诉开发者，谢谢你！"
+
+#: canteen/views.py:29
+msgid "Name of Ingredient"
+msgstr "食材名称"
+
+#: canteen/views.py:33
+msgid ""
+"For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
+"generating a spreadsheet, each meal category corresponds to a spread sheet. "
+"If left blank, only one spreadsheet will be generated."
+msgstr ""
+"比如早餐、晚餐、正餐、营养餐等，生成 表册 的时候每个餐类对应着一个 表册  。"
+"不填的话只生成一个 表册 。"
+
+#: canteen/views.py:43
+msgid ""
+"Usually there are seven categories: vegetables, meat, grains, seasonings, "
+"eggs and milk, oils, and fruits."
+msgstr ""
+"通常是七大类：蔬菜类、肉类、粮食类、调味类、蛋奶和糕点类、油类、水果类。"
+
+#: canteen/views.py:50
+msgid ""
+"When you purchase ingredients, it's best not to have decimals in the "
+"quantity, as this can be a big hassle!"
+msgstr "当你购买菜品的时候，数量最好不要有小数，因为这是一个大麻烦！"
+
+#: canteen/views.py:67
+msgid "As long as a cell has content, it will be considered as \"yes\"."
+msgstr "只要单元格有内容，就会被当作“是”。"
+
+#: canteen/views.py:78
+msgid "Please upload a file in \"xlsx\" format."
+msgstr "请上传 “xlsx” 格式的文件。"
+
+#: canteen/views.py:112
+msgid "Purchased Ingredients Sheet"
+msgstr "购入食材表"
+
+#: canteen/views.py:132
+msgid "the FNSCHOOL Authors"
+msgstr "FNSCHOOL 的作者们"
+
+#: canteen/views.py:145
+msgid "Purchased Ingredients WorkBook"
+msgstr "购入食材工作表"
+
+#: fnschool/settings.py:135
 msgid "English"
 msgstr "英语"
 
-#: fnschool/settings.py:135
+#: fnschool/settings.py:136
 msgid "Spanish"
 msgstr "西班牙语"
 
-#: fnschool/settings.py:136
+#: fnschool/settings.py:137
 msgid "French"
 msgstr "法语"
 
-#: fnschool/settings.py:137
+#: fnschool/settings.py:138
 msgid "Simplified Chinese"
 msgstr "简体中文"
 
-#: profiles/forms.py:10 profiles/forms.py:20
+#: profiles/forms.py:11 profiles/forms.py:12 profiles/forms.py:23
+#: profiles/forms.py:24
 msgid "User Name"
 msgstr "用户名"
 
-#: profiles/forms.py:13 profiles/forms.py:23
+#: profiles/forms.py:15 profiles/forms.py:16 profiles/forms.py:27
+#: profiles/forms.py:28
 msgid "Password"
 msgstr "密码"
 
-#: profiles/forms.py:26
+#: profiles/forms.py:31 profiles/forms.py:33
 msgid "Confirm Password"
 msgstr "确认密码"
 
@@ -160,7 +312,8 @@ msgstr "你的账号已退出登录。"
 msgid "Log in again"
 msgstr "再次登录"
 
-#: templates/base.html:9
+#: templates/base.html:9 templates/home.html:4
+#: templates/includes/_header.html:5
 msgid "FNSCHOOL"
 msgstr "FNSCHOOL"
 
@@ -168,14 +321,14 @@ msgstr "FNSCHOOL"
 msgid "Copyleft &copy; FNSCHOOL"
 msgstr "版权所无 &copy; FNSCHOOL"
 
-#: templates/includes/_header.html:22
+#: templates/includes/_header.html:19
 msgid "Log out"
 msgstr "退出"
 
-#: templates/includes/_header.html:27
+#: templates/includes/_header.html:24
 msgid "Login"
 msgstr "登录"
 
-#: templates/includes/_header.html:31
+#: templates/includes/_header.html:28
 msgid "Sign Up"
 msgstr "注册"

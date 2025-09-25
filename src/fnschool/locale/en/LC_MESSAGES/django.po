@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-25 02:26+0000\n"
+"POT-Creation-Date: 2025-09-25 16:21+0000\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -20,31 +20,177 @@ msgstr ""
 "X-Generator: Poedit 3.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: fnschool/settings.py:134
-msgid "English"
+#: canteen/forms.py:7
+msgid "Select a Spreadsheet File"
+msgstr ""
+
+#: canteen/forms.py:8
+msgid "Office Open XML Spreadsheet only. (*.xlsx)"
+msgstr ""
+
+#: canteen/models.py:15
+msgid "User"
+msgstr ""
+
+#: canteen/models.py:17 canteen/views.py:19
+msgid "Storage Date"
+msgstr ""
+
+#: canteen/models.py:18 canteen/views.py:29
+msgid "Ingredient Name"
+msgstr ""
+
+#: canteen/models.py:19 canteen/views.py:31
+msgid "Meal Type"
+msgstr ""
+
+#: canteen/models.py:20 canteen/views.py:41
+msgid "Category"
+msgstr ""
+
+#: canteen/models.py:22 canteen/views.py:48
+msgid "Quantity"
+msgstr ""
+
+#: canteen/models.py:25 canteen/views.py:58
+msgid "Total Price"
+msgstr ""
+
+#: canteen/models.py:32 canteen/views.py:62
+msgid "Unit Name of Quantity"
+msgstr ""
+
+#: canteen/models.py:36
+msgid "Is Remaining"
+msgstr ""
+
+#: canteen/models.py:39 canteen/views.py:66
+msgid "Is Ignorable"
+msgstr ""
+
+#: canteen/models.py:44
+msgid "Ingredient List"
+msgstr ""
+
+#: canteen/models.py:55
+msgid "Ingredient"
+msgstr ""
+
+#: canteen/models.py:58
+msgid "Date"
+msgstr ""
+
+#: canteen/models.py:64
+msgid "Consumption Record"
+msgstr ""
+
+#: canteen/models.py:65
+msgid "Consumption Records"
+msgstr ""
+
+#: canteen/models.py:69
+#, python-brace-format
+msgid "{0} of {1} was consumed on {2} ."
+msgstr ""
+
+#: canteen/templates/canteen/create_ingredients.html:4
+msgid "Upload a Spreadsheet of Purchased Ingredients"
+msgstr ""
+
+#: canteen/templates/canteen/create_ingredients.html:7
+msgid "Please upload a spreadsheet of purchased ingredients."
+msgstr ""
+
+#: canteen/templates/canteen/create_ingredients.html:9
+msgid "Need a template file?"
+msgstr ""
+
+#: canteen/templates/canteen/create_ingredients.html:11
+msgid "Download it."
+msgstr ""
+
+#: canteen/templates/canteen/create_ingredients.html:18
+msgid "Upload"
+msgstr ""
+
+#: canteen/views.py:21
+msgid ""
+"Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
+"\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
+"compatible with all the formats you like, but if something goes wrong, you "
+"have to tell the developers. Thank you!"
+msgstr ""
+
+#: canteen/views.py:29
+msgid "Name of Ingredient"
+msgstr ""
+
+#: canteen/views.py:33
+msgid ""
+"For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
+"generating a spreadsheet, each meal category corresponds to a spread sheet. "
+"If left blank, only one spreadsheet will be generated."
+msgstr ""
+
+#: canteen/views.py:43
+msgid ""
+"Usually there are seven categories: vegetables, meat, grains, seasonings, "
+"eggs and milk, oils, and fruits."
+msgstr ""
+
+#: canteen/views.py:50
+msgid ""
+"When you purchase ingredients, it's best not to have decimals in the "
+"quantity, as this can be a big hassle!"
+msgstr ""
+
+#: canteen/views.py:67
+msgid "As long as a cell has content, it will be considered as \"yes\"."
+msgstr ""
+
+#: canteen/views.py:78
+msgid "Please upload a file in \"xlsx\" format."
+msgstr ""
+
+#: canteen/views.py:112
+msgid "Purchased Ingredients Sheet"
+msgstr ""
+
+#: canteen/views.py:132
+msgid "the FNSCHOOL Authors"
+msgstr ""
+
+#: canteen/views.py:145
+msgid "Purchased Ingredients WorkBook"
 msgstr ""
 
 #: fnschool/settings.py:135
-msgid "Spanish"
+msgid "English"
 msgstr ""
 
 #: fnschool/settings.py:136
-msgid "French"
+msgid "Spanish"
 msgstr ""
 
 #: fnschool/settings.py:137
+msgid "French"
+msgstr ""
+
+#: fnschool/settings.py:138
 msgid "Simplified Chinese"
 msgstr ""
 
-#: profiles/forms.py:10 profiles/forms.py:20
+#: profiles/forms.py:11 profiles/forms.py:12 profiles/forms.py:23
+#: profiles/forms.py:24
 msgid "User Name"
 msgstr ""
 
-#: profiles/forms.py:13 profiles/forms.py:23
+#: profiles/forms.py:15 profiles/forms.py:16 profiles/forms.py:27
+#: profiles/forms.py:28
 msgid "Password"
 msgstr ""
 
-#: profiles/forms.py:26
+#: profiles/forms.py:31 profiles/forms.py:33
 msgid "Confirm Password"
 msgstr ""
 
@@ -159,7 +305,8 @@ msgstr ""
 msgid "Log in again"
 msgstr ""
 
-#: templates/base.html:9
+#: templates/base.html:9 templates/home.html:4
+#: templates/includes/_header.html:5
 msgid "FNSCHOOL"
 msgstr ""
 
@@ -167,14 +314,14 @@ msgstr ""
 msgid "Copyleft &copy; FNSCHOOL"
 msgstr ""
 
-#: templates/includes/_header.html:22
+#: templates/includes/_header.html:19
 msgid "Log out"
 msgstr ""
 
-#: templates/includes/_header.html:27
+#: templates/includes/_header.html:24
 msgid "Login"
 msgstr ""
 
-#: templates/includes/_header.html:31
+#: templates/includes/_header.html:28
 msgid "Sign Up"
 msgstr ""
