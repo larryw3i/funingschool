@@ -28,7 +28,7 @@ class IngredientForm(forms.ModelForm):
             "storage_date": forms.SelectDateWidget(
                 years=year_range,
                 attrs={"style": "width: 33.33%; display: inline-block;"},
-            )
+            ),
         }
 
 

@@ -1,3 +1,4 @@
+import re
 from fnschool import _
 from django.db import models
 
@@ -21,15 +22,15 @@ class Ingredient(models.Model):
     quantity = models.DecimalField(
         max_digits=10, decimal_places=2, verbose_name=_("Quantity")
     )
-    total_price = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name=_("Total Price")
-    )
-
     quantity_unit_name = models.CharField(
         max_length=20,
         null=True,
         blank=True,
         verbose_name=_("Unit Name of Quantity"),
+    )
+
+    total_price = models.DecimalField(
+        max_digits=10, decimal_places=2, verbose_name=_("Total Price")
     )
 
     is_ignorable = models.BooleanField(

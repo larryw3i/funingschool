@@ -1,4 +1,6 @@
 import io
+from datetime import datetime, date
+import re
 import pandas as pd
 import numpy as np
 from fnschool import count_chinese_characters
@@ -94,28 +96,105 @@ def edit_ingredient(request, ingredient_id):
     return render(request, "canteen/edit_ingredient.html", {"form": form})
 
 
+date_patterns = [
+    (r"\b\d{4}-\d{2}-\d{2}\b", "%Y-%m-%d"),
+    (r"\b\d{4}/\d{2}/\d{2}\b", "%Y/%m/%d"),
+    (r"\b\d{4}\.\d{2}\.\d{2}\b", "%Y.%m.%d"),
+    (r"\b\d{8}\b", "%Y%m%d"),
+]
+
+
 def list_ingredients(request):
     search_query = request.GET.get("q", "")
+    search_query_cp = search_query
+    fields = [
+        f for f in Ingredient._meta.fields if f.name not in ["id", "user"]
+    ]
 
     if search_query:
-        ingredients = Ingredient.objects.filter(Q(name__icontains=search_query))
+        queries = Q(user=request.user)
+
+        search_query_dates = []
+
+        for pattern, fmt in date_patterns:
+            matches = re.findall(pattern, search_query)
+            for match in matches:
+                try:
+                    date_obj = datetime.strptime(match, fmt).date()
+                    search_query_dates.append(date_obj)
+                    search_query = search_query.replace(match, "")
+
+                except ValueError:
+                    continue
+
+        if len(search_query_dates) > 1:
+            queries &= Q(storage_date__gte=min(search_query_dates))
+            queries &= Q(storage_date__lte=max(search_query_dates))
+        elif len(search_query_dates) == 1:
+            queries &= Q(storage_date=search_query_dates[0])
+
+        unit_names = Ingredient.objects.values("quantity_unit_name").distinct()
+        unit_names = [
+            c.get("quantity_unit_name")
+            for c in unit_names
+            if c.get("quantity_unit_name") in search_query
+        ]
+        for unit_name in unit_names:
+            queries &= Q(quantity_unit_name__icontains=unit_name)
+            search_query = search_query.replace(unit_name, "")
+
+        categories = Ingredient.objects.values("category").distinct()
+        categories = [
+            c.get("category")
+            for c in categories
+            if c.get("category") in search_query
+        ]
+        for category in categories:
+            queries &= Q(category__icontains=category)
+            search_query = search_query.replace(category, "")
+
+        meal_types = Ingredient.objects.values("meal_type").distinct()
+        meal_types = [
+            m.get("meal_type")
+            for m in meal_types
+            if m.get("meal_type") in search_query
+        ]
+        for meal_type in meal_types:
+            queries &= Q(meal_type__icontains=meal_type)
+            search_query = search_query.replace(meal_type, "")
+
+        names = re.split(r"\s+", search_query)
+        name_queries = Q()
+        for name in names:
+            name_queries |= Q(name__icontains=name)
+        queries &= name_queries
+
+        ingredients = Ingredient.objects.filter(queries)
+
     else:
         ingredients = Ingredient.objects.all()
 
+    for f in fields:
+        sort_name = request.GET.get("sort_" + f.name, "")
+        if sort_name and sort_name in "+-":
+            sort_name = (
+                sort_name[1:] if sort_name.startswith("+") else sort_name
+            )
+            sort_name += f.name
+            ingredients = ingredients.order_by(sort_name)
+
     per_page = request.GET.get("per_page")
-    print(per_page)
     per_page = int(per_page) if str(per_page).isnumeric() else 10
     paginator = Paginator(ingredients, per_page)
     page_number = request.GET.get("page", 1)
     page_obj = paginator.get_page(page_number)
     headers = [
-        f.verbose_name
-        for f in Ingredient._meta.fields
-        if f.name not in ["id", "user"]
+        (f.name, request.GET.get("sort_" + f.name, ""), f.verbose_name)
+        for f in fields
     ]
     context = {
         "page_obj": page_obj,
-        "search_query": search_query,
+        "search_query": search_query_cp,
         "headers": headers,
         "per_page": per_page,
     }
