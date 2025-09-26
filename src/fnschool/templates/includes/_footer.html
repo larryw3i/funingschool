@@ -7,8 +7,8 @@
       {% trans "Copyleft &copy; FNSCHOOL" %} {% now "Y" %}
     </p>
   </div>
-  <div class="container">
-    <p class="m-0 text-center text-white">
+  <div class="container ">
+    <p class="m-0 text-start text-white">
       <form action="{% url 'set_language' %}" method="post">
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ redirect_to }}">

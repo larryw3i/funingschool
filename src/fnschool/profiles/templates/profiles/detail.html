@@ -1,9 +1,8 @@
 {% extends 'base/header_content_footer.html' %}
 {% block content %}
   <h1>
-    {% blocktrans with user_name=profile.user.username %}
-	Hello, {{ user_name }}!
-{% endblocktrans %}
+    {% blocktrans with user_name=profile.user.username %} Hello, {{ user_name }}!
+  {% endblocktrans %}
   </h1>
   <p>Phone: {{ profile.phone }}</p>
   <p>Date of Birth: {{ profile.date_of_birth }}</p>
@@ -12,6 +11,6 @@
   <p>Date of Birth: {{ profile.date_of_birth }}</p>
   <p>Address: {{ profile.address }}</p>
   {% if profile.avatar %}
-    <img src="{{ profile.avatar.url }}" alt="Avatar">
+    <img src="{{ profile.avatar.url }}" alt="Avatar" />
   {% endif %}
 {% endblock %}

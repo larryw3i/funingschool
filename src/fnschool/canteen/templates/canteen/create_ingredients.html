@@ -1,8 +1,8 @@
 {% extends "base/header_content_footer.html" %}
 {% load crispy_forms_tags %}
-{% block title %}
-  {% trans "Upload a Spreadsheet of Purchased Ingredients" %}
-{% endblock %}
+{%
+block title %} {% trans "Upload a Spreadsheet of Purchased Ingredients" %} {%
+endblock %}
 {% block content %}
   <h2>{% trans "Please upload a spreadsheet of purchased ingredients." %}</h2>
   <p>
@@ -12,8 +12,7 @@
     </a>
   </p>
   <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form|crispy }}
+    {% csrf_token %} {{ form|crispy }}
     <button type="submit button" class="btn btn-outline-primary">
       {% trans "Upload" %}
     </button>

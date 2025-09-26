@@ -9,7 +9,7 @@
           <a class="nav-link" href=""></a>
         </li>
       </ul>
-      <ul class="navbar-nav navbar-right" style="margin-right: 30px;">
+      <ul class="navbar-nav navbar-right" style="margin-right: 30px">
         {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'profiles:update' %}">{{ request.user.username }}</a>
