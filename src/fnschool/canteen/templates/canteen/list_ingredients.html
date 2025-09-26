@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base/header_content_footer.html" %}
 {% load crispy_forms_tags %}
 {% block title %}
   {% trans "Ingredient List" %}
@@ -49,8 +49,9 @@
               {% endif %}
             </td>
             <td>
-              <a data-bs-toggle="modal"
-                 data-bs-target="#editModal"
+              <a class="edit-btn"
+                 target="_blank"
+                 onclick="openEditWindow(this.href); return false;"
                  href="{% url "canteen:edit_ingredient" ingredient.id %}">
                 {% trans "Edit" %}
               </a>
@@ -95,20 +96,18 @@
         {% endif %}
       </span>
     </div>
-    <div class="modal fade"
-         id="editModal"
-         tabindex="-1"
-         aria-labelledby="editModalLabel"
-         aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <!-- Ajax内容将加载到这里 -->
-        </div>
-      </div>
-    </div>
     <script>
-$('#editModal').on('hidden.bs.modal', function () {
-    location.reload();
-});
+    function openEditWindow(url) {
+        // 打开新窗口，设置尺寸为屏幕的1/4
+        const size_times = 1/4
+        const width = Math.round(screen.width * size_times);
+        const height = Math.round(screen.height * size_times);
+        const left = Math.round((screen.width - width) / 2);
+        const top = Math.round((screen.height - height) / 2);
+
+        const windowFeatures = `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`;
+
+        window.open(url, '_blank', windowFeatures);
+    }
     </script>
   {% endblock %}

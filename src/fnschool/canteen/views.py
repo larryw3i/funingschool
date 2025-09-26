@@ -84,7 +84,10 @@ def edit_ingredient(request, ingredient_id):
         form = IngredientForm(request.POST, instance=ingredient)
         if form.is_valid():
             form.save()
-            return
+            return render(
+                request,
+                "canteen/edit_ingredient_close.html",
+            )
     else:
         form = IngredientForm(instance=ingredient)
 

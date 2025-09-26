@@ -1,3 +1,4 @@
+from datetime import date, datetime
 from fnschool import _
 from django import forms
 
@@ -20,6 +21,15 @@ class IngredientForm(forms.ModelForm):
             for f in Ingredient._meta.fields
             if f.name not in ["id", "user"]
         ]
+
+        current_year = date.today().year
+        year_range = list(range(current_year - 100, current_year + 1))
+        widgets = {
+            "storage_date": forms.SelectDateWidget(
+                years=year_range,
+                attrs={"style": "width: 33.33%; display: inline-block;"},
+            )
+        }
 
 
 # The end.
