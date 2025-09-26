@@ -25,4 +25,21 @@
       </form>
     </p>
   </div>
+  <div id="cookieConsent" class="cookie-container">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <p class="mb-0">
+            {% blocktrans %}
+            We use cookies to ensure that you have the best website experience. By continuing to use this website, you agree to our cookie policy.
+          {% endblocktrans %}
+          </p>
+        </div>
+        <div class="col-md-4 text-md-end">
+          <button id="rejectCookies" class="btn btn-outline-secondary me-2">取消</button>
+          <button id="acceptCookies" class="btn btn-primary">接受全部</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>

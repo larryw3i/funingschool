@@ -7,7 +7,9 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView
 from django.contrib.auth import logout
 from django.contrib.auth import login, authenticate
+from django.urls import reverse_lazy
 from .forms import ProfileForm, ProfileLoginForm
+from fnschool.settings import LOGIN_URL
 
 
 def profile_new(request):
@@ -36,7 +38,7 @@ def profile_log_in(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                next_url = request.GET.get("next", "home")
+                next_url = request.POST.get("next") or reverse_lazy("home")
                 return redirect(next_url)
     else:
         form = ProfileLoginForm()

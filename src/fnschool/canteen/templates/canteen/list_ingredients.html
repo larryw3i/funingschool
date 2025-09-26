@@ -17,9 +17,7 @@
             onclick="submit_q();"
             class="btn btn-primary text-nowrap">{% trans "Search" %}</button>
     {% if search_query %}
-      <a href="{% url 'canteen:list_ingredients' %}" class="text-nowrap">
-        {% trans "Clear" %}
-      </a>
+      <a onclick="clear_q();" class="text-nowrap">{% trans "Clear" %}</a>
     {% endif %}
   </form>
   <hr />
@@ -59,12 +57,16 @@
                 {% trans "Yes" %}
               {% endif %}
             </td>
-            <td>
-              <a class="edit-btn"
+            <td class="">
+              <a class=""
                  target="_blank"
-                 onclick="open_edit_window(this.href); return false;"
-                 href='{% url "canteen:edit_ingredient" ingredient.id %}'>
+                 onclick="open_edit_window('{% url 'canteen:edit_ingredient' ingredient.id %}'); return false;">
                 {% trans "View" %}
+              </a>
+              <a class="text-danger"
+                 target="_blank"
+                 onclick="open_edit_window('{% url 'canteen:delete_ingredient' ingredient.id %}'); return false;">
+                {% trans "Delete" %}
               </a>
             </td>
           </tr>
@@ -101,6 +103,9 @@
       </span>
     </div>
     <script>
+      function clear_q() {
+        update_href({"q":""})
+      }
     const page_size_form = document.querySelector('[name="page_size"]');
 
     page_size_form.addEventListener("submit", function (event) {
@@ -134,15 +139,6 @@
       i_sort = {};
       i_sort[name] = value;
       update_href(i_sort);
-    }
-    function open_edit_window(url) {
-      const size_times = 1 / 4;
-      const width = Math.round(screen.width * size_times);
-      const height = Math.round(screen.height * size_times);
-      const left = Math.round((screen.width - width) / 2);
-      const top = Math.round((screen.height - height) / 2);
-      const windowFeatures = `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`;
-      window.open(url, "_blank", windowFeatures);
     }
     </script>
   {% endblock %}

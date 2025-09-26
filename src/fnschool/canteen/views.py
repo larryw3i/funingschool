@@ -17,6 +17,7 @@ from openpyxl import Workbook
 from django.shortcuts import render, redirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.encoding import escape_uri_path
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
@@ -79,6 +80,22 @@ is_ignorable_header = (
 )
 
 
+@login_required(login_url="/profiles/log_in")
+def delete_ingredient(request, ingredient_id):
+    ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
+
+    if request.method == "POST":
+        if ingredient.user == request.user:
+            ingredient.delete()
+            return render(
+                request,
+                "close.html",
+            )
+
+    form = IngredientForm(instance=ingredient)
+    return render(request, "canteen/delete_ingredient.html", {"form": form})
+
+
 def edit_ingredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
 
@@ -88,7 +105,7 @@ def edit_ingredient(request, ingredient_id):
             form.save()
             return render(
                 request,
-                "canteen/edit_ingredient_close.html",
+                "close.html",
             )
     else:
         form = IngredientForm(instance=ingredient)
@@ -104,6 +121,7 @@ date_patterns = [
 ]
 
 
+@login_required
 def list_ingredients(request):
     search_query = request.GET.get("q", "")
     search_query_cp = search_query
@@ -172,7 +190,7 @@ def list_ingredients(request):
         ingredients = Ingredient.objects.filter(queries)
 
     else:
-        ingredients = Ingredient.objects.all()
+        ingredients = Ingredient.objects.filter(Q(user=request.user))
 
     for f in fields:
         sort_name = request.GET.get("sort_" + f.name, "")

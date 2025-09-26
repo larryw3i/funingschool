@@ -8,3 +8,28 @@ function update_href(query) {
   url.search = params.toString();
   window.location.href = url.href;
 }
+function open_edit_window(url) {
+      const size_times = 1 / 4;
+      const width = Math.round(screen.width * size_times);
+      const height = Math.round(screen.height * size_times);
+      const left = Math.round((screen.width - width) / 2);
+      const top = Math.round((screen.height - height) / 2);
+      const windowFeatures = `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`;
+      window.open(url, "_blank", windowFeatures);
+    }
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (!document.cookie.includes('cookie_enabled=1')) {
+        document.getElementById('cookieConsent').style.display = 'block';
+    }
+
+    document.getElementById('acceptCookies').addEventListener('click', function() {
+        const expiryDate = new Date();
+        expiryDate.setFullYear(expiryDate.getFullYear() + 20);
+        document.cookie = `cookie_enabled=1; expires=${expiryDate.toUTCString()}; path=/`;
+        document.getElementById('cookieConsent').style.display = 'none';
+    });
+    document.getElementById('rejectCookies').addEventListener('click', function() {
+        document.getElementById('cookieConsent').style.display = 'none';
+    });
+});

@@ -1,14 +1,15 @@
 {% extends "base/content.html" %}
 {% load crispy_forms_tags %}
 {% block title %}
-  {% blocktrans with instance_name=form.instance.name%}Edit Ingredient {{
-instance_name }}{% endblocktrans %}
+  {% blocktrans with instance_name=form.instance.name%}
+    Edit Ingredient {{ instance_name }}
+  {% endblocktrans %}
 {% endblock %}
 {% block content %}
   <div class="">
     <h5 class="">
-      {% blocktrans with instance_name=form.instance.name%}Edit Ingredient {{
-    instance_name }} .{% endblocktrans %}
+      {% blocktrans with instance_name=form.instance.name%}
+      Edit Ingredient {{ instance_name }} .{% endblocktrans %}
     </h5>
   </div>
   <form method="post"

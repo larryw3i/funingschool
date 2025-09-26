@@ -6,6 +6,11 @@ app_name = "canteen"
 
 urlpatterns = [
     path(
+        "delete_ingredient/<int:ingredient_id>",
+        views.delete_ingredient,
+        name="delete_ingredient",
+    ),
+    path(
         "edit_ingredient/<int:ingredient_id>",
         views.edit_ingredient,
         name="edit_ingredient",
