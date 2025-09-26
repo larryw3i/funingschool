@@ -39,14 +39,6 @@
   </div>
   <script>
     const elements = document.querySelectorAll('dd');
-    elements.forEach(element => {
-    const text = element.textContent.replace(/\s+/g, '');
-      if (text == "True"){
-        element.textContent="{% trans "Yes" %}"
-      } else if (text == "False"){
-        element.textContent="{% trans "No" %}"
-      }
-
-});
+    localize_bool(elements)
   </script>
 {% endblock %}
