@@ -94,6 +94,7 @@
                  id="per_page"
                  class="form-control"
                  min="1"
+                 onkeydown="if(event.keyCode==13){set_page_size();return false;}"
                  value="{{ per_page }}"
                  style="width: 80px;
                         margin: 0 10px" />
