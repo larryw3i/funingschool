@@ -1,3 +1,24 @@
+
+function get_cookie(name) {
+  const cookies = document.cookie.split(';');
+  for (const cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.trim().split('=');
+    if (cookieName === name) {
+      return decodeURIComponent(cookieValue);
+    }
+  }
+  return null;  
+}
+function set_simple_cookie(key,value){
+        cookie_enabled = get_cookie(key)
+        if (cookie_enabled != '1'){
+          console.log("Cookie is disabled.")
+          return
+        }
+        const expiryDate = new Date();
+        expiryDate.setFullYear(expiryDate.getFullYear() + 20);
+        document.cookie = `${key}=${value}; expires=${expiryDate.toUTCString()}; path=/`;
+}
 function update_href(query) {
   query = new Map(Object.entries(query));
   const url = new URL(window.location.href);

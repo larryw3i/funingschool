@@ -21,6 +21,9 @@
       <a onclick="clear_q();" class="text-nowrap">{% trans "Clear" %}</a>
     {% endif %}
   </form>
+  <div class="d-flex justify-content-end pt-2">
+  <a class="btn btn-outline-primary" href="{% url "canteen:create_ingredients"%}">{% trans "Add"%}</a>
+  </div>
   <hr />
   <ul>
     <table class="table table-bordered table-striped table-hover table-condensed">
@@ -118,6 +121,7 @@
     }
     function set_page_size() {
       const page_size = document.querySelector("#per_page").value;
+      set_simple_cookie("per_page",page_size)
       update_href({ per_page: page_size });
     }
     function submit_q() {

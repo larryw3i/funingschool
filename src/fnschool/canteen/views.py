@@ -201,7 +201,9 @@ def list_ingredients(request):
             sort_name += f.name
             ingredients = ingredients.order_by(sort_name)
 
-    per_page = request.GET.get("per_page")
+    per_page = request.GET.get("per_page", "")
+    if not per_page:
+        per_page = request.COOKIES.get("per_page", "")
     per_page = int(per_page) if str(per_page).isnumeric() else 10
     paginator = Paginator(ingredients, per_page)
     page_number = request.GET.get("page", 1)
