@@ -2,7 +2,7 @@ from datetime import date, datetime
 from fnschool import _
 from django import forms
 
-from .models import Ingredient
+from .models import Ingredient, Consumption
 
 
 class PurchasedIngredientsWorkBookForm(forms.Form):
@@ -30,6 +30,12 @@ class IngredientForm(forms.ModelForm):
                 attrs={"style": "width: 33.33%; display: inline-block;"},
             ),
         }
+
+
+class ConsumptionForm(forms.ModelForm):
+    class Meta:
+        model = Consumption
+        fields = ["amount_used"]
 
 
 # The end.

@@ -11,9 +11,7 @@ function get_cookie(name) {
 }
 function set_simple_cookie(key,value){
         cookie_enabled = get_cookie("cookie_enabled")
-        console.log(cookie_enabled)
         if (cookie_enabled != '1'){
-          console.log("Cookie is disabled.")
           return
         }
         const expiryDate = new Date();

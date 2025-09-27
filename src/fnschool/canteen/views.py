@@ -80,7 +80,46 @@ is_ignorable_header = (
 )
 
 
-@login_required(login_url="/profiles/log_in")
+date_patterns = [
+    (r"\b\d{4}-\d{2}-\d{2}\b", "%Y-%m-%d"),
+    (r"\b\d{4}/\d{2}/\d{2}\b", "%Y/%m/%d"),
+    (r"\b\d{4}\.\d{2}\.\d{2}\b", "%Y.%m.%d"),
+    (r"\b\d{8}\b", "%Y%m%d"),
+]
+
+
+@login_required
+def create_consumptions(request):
+    ingredients_no_remaining = (
+        Ingredient.objects.annotate(
+            total_consumed=Coalesce(Sum("consumptions__amount_used"), 0)
+        )
+        .filter(
+            Q(user=request.user)
+            & Q(is_disabled=False)
+            & Q(quantity__gt=F("total_consumed"))
+        )
+        .order_by("storage_date")
+    )
+    earliest_storage_date_of_remaining = (
+        ingredients_no_remaining.first().storage_date
+    )
+
+    if request.method == "POST":
+        if ingredient.user == request.user:
+            ingredient.delete()
+            return render(
+                request,
+                "close.html",
+            )
+
+    form = IngredientForm(instance=ingredient)
+    return render(request, "canteen/delete_ingredient.html", {"form": form})
+
+    pass
+
+
+@login_required()
 def delete_ingredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
 
@@ -111,14 +150,6 @@ def edit_ingredient(request, ingredient_id):
         form = IngredientForm(instance=ingredient)
 
     return render(request, "canteen/edit_ingredient.html", {"form": form})
-
-
-date_patterns = [
-    (r"\b\d{4}-\d{2}-\d{2}\b", "%Y-%m-%d"),
-    (r"\b\d{4}/\d{2}/\d{2}\b", "%Y/%m/%d"),
-    (r"\b\d{4}\.\d{2}\.\d{2}\b", "%Y.%m.%d"),
-    (r"\b\d{8}\b", "%Y%m%d"),
-]
 
 
 @login_required
@@ -192,6 +223,7 @@ def list_ingredients(request):
     else:
         ingredients = Ingredient.objects.filter(Q(user=request.user))
 
+    sorted = False
     for f in fields:
         sort_name = request.GET.get("sort_" + f.name, "")
         if sort_name and sort_name in "+-":
@@ -200,6 +232,9 @@ def list_ingredients(request):
             )
             sort_name += f.name
             ingredients = ingredients.order_by(sort_name)
+            sorted = True
+    if not sorted:
+        ingredients = ingredients.order_by("name")
 
     per_page = request.GET.get("per_page", "")
     if not per_page:

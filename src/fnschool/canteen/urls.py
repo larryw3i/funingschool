@@ -21,6 +21,11 @@ urlpatterns = [
         name="list_ingredients",
     ),
     path(
+        "create_consumptions",
+        views.create_consumptions,
+        name="create_consumptions",
+    ),
+    path(
         "create_ingredients",
         views.create_ingredients,
         name="create_ingredients",
