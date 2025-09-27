@@ -21,6 +21,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 from .models import Ingredient
 from .forms import PurchasedIngredientsWorkBookForm, IngredientForm
@@ -90,7 +92,7 @@ date_patterns = [
 
 @login_required
 def create_consumptions(request):
-    ingredients_no_remaining = (
+    ingredients = (
         Ingredient.objects.annotate(
             total_consumed=Coalesce(Sum("consumptions__amount_used"), 0)
         )
@@ -101,9 +103,30 @@ def create_consumptions(request):
         )
         .order_by("storage_date")
     )
-    earliest_storage_date_of_remaining = (
-        ingredients_no_remaining.first().storage_date
+    date_start = ingredients.first().storage_date
+
+    today = datetime.now().date()
+    date_end = (today.replace(day=1) + relativedelta(months=2)) - relativedelta(
+        days=1
     )
+    date_range = pd.date_range(start=date_start, end=date_end)
+    form_list = []
+    for ingredient in ingredients:
+        consumptions = ingredient.consumptions
+        consumption_dates = [c.date_of_using for f in consumptions]
+        consumption_forms = []
+        for per_day in date_range:
+            consumption = None
+            if per_day in consumption_dates:
+                consumption = [
+                    c for c in consumptions if c.date_of_using == per_day
+                ][0]
+                consumption_form = ConsumptionForm(instance=consumption)
+            else:
+                consumption = Consumption()
+                consumption.date_of_using = per_day
+            consumption_forms.append(consumption_form)
+        form_list.append([ingredient, consumption_forms])
 
     if request.method == "POST":
         if ingredient.user == request.user:
@@ -113,8 +136,9 @@ def create_consumptions(request):
                 "close.html",
             )
 
-    form = IngredientForm(instance=ingredient)
-    return render(request, "canteen/delete_ingredient.html", {"form": form})
+    return render(
+        request, "canteen/create_consumptions.html", {"form_list": form_list}
+    )
 
     pass
 

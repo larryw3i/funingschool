@@ -27,90 +27,94 @@
     <a class="btn btn-primary" href="{% url "canteen:create_ingredients" %}">{% trans "Add" %}</a>
   </div>
   <hr />
-  <ul>
-    <table class="table table-bordered table-striped table-hover table-condensed">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          {% for name,sort, header in headers %}
-            <th scope="col"
-                data-sort="sort_{{ name }} {{ sort }}"
-                onclick="sort_ingredients(this.dataset.sort);">
-              {{ header }}
-              {% if sort == "+" %}
-                &#8593;
-              {% elif sort == "-" %}
-                &#8595;
-              {% endif %}
-            </th>
-          {% endfor %}
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for ingredient in page_obj %}
-          <tr>
-            <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ ingredient.storage_date }}</td>
-            <td>{{ ingredient.name }}</td>
-            <td>{{ ingredient.meal_type }}</td>
-            <td>{{ ingredient.category }}</td>
-            <td>{{ ingredient.quantity }}</td>
-            <td>{{ ingredient.quantity_unit_name }}</td>
-            <td>{{ ingredient.total_price }}</td>
-            <td>
-              {% if ingredient.is_ignorable %}
-                {% trans "Yes" %}
-              {% endif %}
-            </td>
-            <td class="">
-              <a class=""
-                 target="_blank"
-                 onclick="open_edit_window('{% url 'canteen:edit_ingredient' ingredient.id %}'); return false;">
-                {% trans "Edit" %}
-              </a>
-              |
-              <a class="text-danger"
-                 target="_blank"
-                 onclick="open_edit_window('{% url 'canteen:delete_ingredient' ingredient.id %}'); return false;">
-                {% trans "Delete" %}
-              </a>
-            </td>
-          </tr>
-        {% empty %}
+  <table class="table table-bordered table-striped table-hover table-condensed">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        {% for name,sort, header in headers %}
+          <th scope="col"
+              data-sort="sort_{{ name }} {{ sort }}"
+              onclick="sort_ingredients(this.dataset.sort);">
+            {{ header }}
+            {% if sort == "+" %}
+              &#8593;
+            {% elif sort == "-" %}
+              &#8595;
+            {% endif %}
+          </th>
         {% endfor %}
-      </tbody>
-    </table>
-    <div class="pagination">
-      <span class="step-links d-flex justify-content-between align-items-center">
-        {% if page_obj.has_previous %}
-          <a onclick="set_page(1);" class="pe-2">&lt;&lt;</a>
-          <a onclick="set_page({{ page_obj.previous_page_number }});" class="pe-2">&lt;</a>
-        {% endif %}
-        <span class="current">
-          {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
-        </span>
-        <form method="get" action="" class="form-inline d-flex" name="page_size">
-          <input type="number"
-                 name="per_page"
-                 id="per_page"
-                 class="form-control"
-                 min="1"
-                 onkeydown="if(event.keyCode==13){set_page_size();return false;}"
-                 value="{{ per_page }}"
-                 style="width: 80px;
-                        margin: 0 10px" />
-          <button type="button" onclick="set_page_size();" class="btn btn-primary">
-            &#128640;
-          </button>
-        </form>
-        {% if page_obj.has_next %}
-          <a onclick="set_page({{ page_obj.next_page_number }});" class="ps-2">&gt;</a>
-          <a onclick="set_page({{ page_obj.paginator.num_pages }});" class="ps-2">&gt;&gt;</a>
-        {% endif %}
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ingredient in page_obj %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{ ingredient.storage_date }}</td>
+          <td>{{ ingredient.name }}</td>
+          <td>{{ ingredient.meal_type }}</td>
+          <td>{{ ingredient.category }}</td>
+          <td>{{ ingredient.quantity }}</td>
+          <td>{{ ingredient.quantity_unit_name }}</td>
+          <td>{{ ingredient.total_price }}</td>
+          <td>
+            {% if ingredient.is_ignorable %}
+              {% trans "Yes" %}
+            {% endif %}
+          </td>
+          <td>
+            {% if ingredient.is_disabled %}
+              {% trans "Yes" %}
+            {% endif %}
+          </td>
+          <td class="">
+            <a class=""
+               target="_blank"
+               onclick="open_edit_window('{% url 'canteen:edit_ingredient' ingredient.id %}'); return false;">
+              {% trans "Edit" %}
+            </a>
+            |
+            <a class="text-danger"
+               target="_blank"
+               onclick="open_edit_window('{% url 'canteen:delete_ingredient' ingredient.id %}'); return false;">
+              {% trans "Delete" %}
+            </a>
+          </td>
+        </tr>
+      {% empty %}
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="pagination">
+    <span class="step-links d-flex justify-content-between align-items-center">
+      {% if page_obj.has_previous %}
+        <a onclick="set_page(1);" class="pe-2">&lt;&lt;</a>
+        <a onclick="set_page({{ page_obj.previous_page_number }});" class="pe-2">&lt;</a>
+      {% endif %}
+      <span class="current">
+        {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
       </span>
-    </div>
-    <script>
+      <form method="get" action="" class="form-inline d-flex" name="page_size">
+        <input type="number"
+               name="per_page"
+               id="per_page"
+               class="form-control"
+               min="1"
+               onkeydown="if(event.keyCode==13){set_page_size();return false;}"
+               value="{{ per_page }}"
+               style="width: 80px;
+                      margin: 0 10px" />
+        <button type="button" onclick="set_page_size();" class="btn btn-primary">
+          &#128640;
+        </button>
+      </form>
+      {% if page_obj.has_next %}
+        <a onclick="set_page({{ page_obj.next_page_number }});" class="ps-2">&gt;</a>
+        <a onclick="set_page({{ page_obj.paginator.num_pages }});" class="ps-2">&gt;&gt;</a>
+      {% endif %}
+    </span>
+  </div>
+  <script>
       function clear_q() {
         update_href({"q":""})
       }
@@ -149,6 +153,5 @@
       i_sort[name] = value;
       update_href(i_sort);
     }
-    </script>
-  {% endblock %}
-</ul>
+  </script>
+{% endblock %}

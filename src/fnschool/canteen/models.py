@@ -37,7 +37,7 @@ class Ingredient(models.Model):
         default=False, verbose_name=_("Is Ignorable")
     )
     is_disabled = models.BooleanField(
-        default=False, verbose_name=_("Disable It?")
+        default=False, verbose_name=_("Is Disabled")
     )
 
     class Meta:
