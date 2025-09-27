@@ -37,5 +37,10 @@ class ConsumptionForm(forms.ModelForm):
         model = Consumption
         fields = ["amount_used"]
 
+ConsumptionFormSet = forms.modelformset_factory(
+    Consumption,
+    fields = ['date_of_using'],
+)
+
 
 # The end.

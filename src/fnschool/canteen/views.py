@@ -109,7 +109,7 @@ def create_consumptions(request):
     date_end = (today.replace(day=1) + relativedelta(months=2)) - relativedelta(
         days=1
     )
-    date_range = pd.date_range(start=date_start, end=date_end)
+    date_range = list(pd.date_range(start=date_start, end=date_end))
     form_list = []
     for ingredient in ingredients:
         consumptions = ingredient.consumptions
@@ -127,6 +127,7 @@ def create_consumptions(request):
                 consumption.date_of_using = per_day
             consumption_forms.append(consumption_form)
         form_list.append([ingredient, consumption_forms])
+    headers = date_range
 
     if request.method == "POST":
         if ingredient.user == request.user:
@@ -137,7 +138,8 @@ def create_consumptions(request):
             )
 
     return render(
-        request, "canteen/create_consumptions.html", {"form_list": form_list}
+        request, "canteen/create_consumptions.html",
+        {"form_list": form_list,"headers":headers}
     )
 
     pass
