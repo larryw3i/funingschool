@@ -42,7 +42,7 @@
       const consumptions_table=$(".table-consumptions")
       const header=$("header")
       const footer=$("footer")
-      const height = footer.offset().top-consumptions_table.offset().top - 10
+      const height = Math.round((footer.offset().top-consumptions_table.offset().top )*0.96)
         consumptions_table.parent().height(height)
     }
     $(window).resize(function() {
