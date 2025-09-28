@@ -7,7 +7,7 @@
   <h1>{% trans "Consume Ingredients." %}</h1>
   <hr>
   <div class="table table-responsive table-container">
-    <table class="table table-bordered table-striped table-hover table-condensed scroll-vertical ">
+    <table class="table table-consumptions cotable-bordered table-striped table-hover table-condensed scroll-vertical ">
       <thead>
         <tr>
           <th class="">#</th>
@@ -37,11 +37,26 @@
       </tbody>
     </table>
   </div>
-  <script></script>
+  <script>
+    function set_consumptions_table_size(){
+      const consumptions_table=$(".table-consumptions")
+      const header=$("header")
+      const footer=$("footer")
+      const height = footer.offset().top-consumptions_table.offset().top - 10
+        consumptions_table.parent().height(height)
+    }
+    $(window).resize(function() {
+      set_consumptions_table_size()
+    });
+    $(document).ready(function() {
+      set_consumptions_table_size()
+});
+  </script>
   <style>
+body{
+}
 .table-container {
-  max-height:1000px; 
-  overflow-y: auto; 
+  overflow:auto;
 }
   label[for='id_amount_used']{
     display: none
@@ -49,9 +64,9 @@
   .table thead th {
       position: -webkit-sticky; 
       position: sticky;
-      top: 20; 
+      top: 0; 
       background-color: white; 
-      z-index: 1030; 
+      z-index: 1020; 
       box-shadow: 0 1px 0 #dee2e6; 
   }
 
@@ -60,11 +75,11 @@
       position: sticky;
       left: 0; 
       background-color: white; 
-      z-index: 1030; 
+      z-index: 1020; 
       box-shadow: 1px 0 0 #dee2e6; 
   }
   .table thead tr > :first-child {
-      z-index: 1030; 
+      z-index: 1020; 
       box-shadow: 1px 1px 0 #dee2e6; 
   }
 
