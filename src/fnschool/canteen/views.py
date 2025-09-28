@@ -1,4 +1,9 @@
 import io
+from django.db.models import F
+from django.db.models import ExpressionWrapper, F, DecimalField
+from django.db.models.functions import Coalesce
+from django.db.models import Value
+from django.db.models import Sum
 from datetime import datetime, date
 import re
 import pandas as pd
@@ -24,8 +29,13 @@ from django.db.models import Q
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
-from .models import Ingredient
-from .forms import PurchasedIngredientsWorkBookForm, IngredientForm
+from .models import Ingredient, Consumption
+from .forms import (
+    PurchasedIngredientsWorkBookForm,
+    IngredientForm,
+    ConsumptionForm,
+)
+
 
 # Create your views here.
 
@@ -90,44 +100,69 @@ date_patterns = [
 ]
 
 
-@login_required
-def create_consumptions(request):
+def get_consumption_ingredients(request):
     ingredients = (
         Ingredient.objects.annotate(
-            total_consumed=Coalesce(Sum("consumptions__amount_used"), 0)
+            total_consumed=Coalesce(
+                Sum("consumptions__amount_used"), 0, output_field=DecimalField()
+            )
         )
         .filter(
             Q(user=request.user)
             & Q(is_disabled=False)
+            & Q(is_ignorable=False)
             & Q(quantity__gt=F("total_consumed"))
         )
         .order_by("storage_date")
     )
-    date_start = ingredients.first().storage_date
 
+    return ingredients.all()
+
+
+def get_date_range(ingredients):
+    date_start = ingredients.first().storage_date
     today = datetime.now().date()
     date_end = (today.replace(day=1) + relativedelta(months=2)) - relativedelta(
         days=1
     )
     date_range = list(pd.date_range(start=date_start, end=date_end))
-    form_list = []
-    for ingredient in ingredients:
-        consumptions = ingredient.consumptions
-        consumption_dates = [c.date_of_using for f in consumptions]
-        consumption_forms = []
+    date_range = [d.date() for d in date_range]
+
+    return date_range
+
+
+@login_required
+def create_consumptions(request, ingredient_id=None):
+    ingredients = get_consumption_ingredients(request)
+    date_range = get_date_range(ingredients)
+    if ingredient_id:
+        ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
+        planned_consumptions = []
+        consumptions = ingredient.consumptions.all()
+        consumption_dates = [c.date_of_using for c in consumptions]
         for per_day in date_range:
             consumption = None
             if per_day in consumption_dates:
                 consumption = [
                     c for c in consumptions if c.date_of_using == per_day
                 ][0]
-                consumption_form = ConsumptionForm(instance=consumption)
             else:
                 consumption = Consumption()
+                consumption.ingredient = ingredient
                 consumption.date_of_using = per_day
-            consumption_forms.append(consumption_form)
-        form_list.append([ingredient, consumption_forms])
-    headers = date_range
+
+            if per_day < ingredient.storage_date:
+                consumption.is_disabled = True
+
+            planned_consumptions.append(consumption)
+        form_list = []
+        for c in planned_consumptions:
+            form = ConsumptionForm(instance=c)
+            form.fields["date_of_using"].label = ""
+            form_list.append(form)
+        return render(
+            request, "canteen/create_consumption.html", {"form_list": form_list}
+        )
 
     if request.method == "POST":
         if ingredient.user == request.user:
@@ -137,12 +172,13 @@ def create_consumptions(request):
                 "close.html",
             )
 
+    date_range = [str(d) for d in date_range]
+    print(date_range)
     return render(
-        request, "canteen/create_consumptions.html",
-        {"form_list": form_list,"headers":headers}
+        request,
+        "canteen/create_consumptions.html",
+        {"ingredients": ingredients, "date_range": date_range},
     )
-
-    pass
 
 
 @login_required()

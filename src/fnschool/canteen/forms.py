@@ -27,7 +27,9 @@ class IngredientForm(forms.ModelForm):
         widgets = {
             "storage_date": forms.SelectDateWidget(
                 years=year_range,
-                attrs={"style": "width: 33.33%; display: inline-block;"},
+                attrs={
+                    "style": "width: 33.33%; display: inline-block;",
+                },
             ),
         }
 
@@ -35,11 +37,18 @@ class IngredientForm(forms.ModelForm):
 class ConsumptionForm(forms.ModelForm):
     class Meta:
         model = Consumption
-        fields = ["amount_used"]
+        fields = "__all__"
+        widgets = {
+            "amount_used": forms.NumberInput(attrs={"style": "width: 100px"}),
+            "date_of_using": forms.HiddenInput(),
+            "ingredient": forms.HiddenInput(),
+            "is_disabled": forms.HiddenInput(),
+        }
+
 
 ConsumptionFormSet = forms.modelformset_factory(
     Consumption,
-    fields = ['date_of_using'],
+    fields=["date_of_using"],
 )
 
 

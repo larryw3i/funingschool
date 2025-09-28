@@ -60,6 +60,9 @@ class Consumption(models.Model):
     amount_used = models.DecimalField(
         max_digits=10, decimal_places=2, verbose_name="消耗数量"
     )
+    is_disabled = models.BooleanField(
+        default=False, verbose_name=_("Is Disabled")
+    )
 
     class Meta:
         verbose_name = _("Consumption Record")
@@ -68,7 +71,7 @@ class Consumption(models.Model):
 
     def __str__(self):
         return _("{0} of {1} was consumed on {2} .").format(
-            str(self.amount_used) + self.ingredient.unit_name,
+            str(self.amount_used) + self.ingredient.quantity_unit_name,
             self.ingredient.name,
             self.date_of_using,
         )

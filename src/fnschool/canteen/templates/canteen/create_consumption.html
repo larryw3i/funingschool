@@ -1,0 +1,12 @@
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% for form in form_list %}
+  <td class="">
+    <form onkeydown="if(event.keyCode==13){return false;}"
+          action="{% url 'canteen:create_consumption' form.instance.ingredient.id %}"
+          data-ingredient-id="{{ form.instance.ingredient.id }}">
+      {% csrf_token %}
+      {{ form|crispy }}
+    </form>
+  </td>
+{% endfor %}

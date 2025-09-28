@@ -6,6 +6,16 @@ app_name = "canteen"
 
 urlpatterns = [
     path(
+        "create_consumptions",
+        views.create_consumptions,
+        name="create_consumptions",
+    ),
+    path(
+        "create_consumption/<int:ingredient_id>",
+        views.create_consumptions,
+        name="create_consumption",
+    ),
+    path(
         "delete_ingredient/<int:ingredient_id>",
         views.delete_ingredient,
         name="delete_ingredient",
