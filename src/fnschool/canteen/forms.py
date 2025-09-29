@@ -46,6 +46,7 @@ class ConsumptionForm(forms.ModelForm):
                     "class": "form-control",
                 }
             )
+            self.fields[name].disabled = self.instance.is_disabled
 
     class Meta:
         model = Consumption

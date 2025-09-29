@@ -3,6 +3,7 @@
 {% for form in form_list %}
   <td class="">
     <form onkeydown="if(event.keyCode==13){return false;}"
+          data-is_disabled="{{ form.instance.is_disabled }}"
           action="{% url 'canteen:create_consumption' form.instance.ingredient.id %}"
           data-ingredient-id="{{ form.instance.ingredient.id }}">
       {% csrf_token %}
