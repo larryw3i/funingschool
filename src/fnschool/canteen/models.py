@@ -1,10 +1,12 @@
 import re
-from fnschool import _
-from django.db import models
+
+from django.conf import settings
 
 # Create your models here.
 from django.db import models
-from django.conf import settings
+from django.db.models import Q
+
+from fnschool import _
 
 
 class Ingredient(models.Model):
@@ -39,6 +41,28 @@ class Ingredient(models.Model):
     is_disabled = models.BooleanField(
         default=False, verbose_name=_("Is Disabled")
     )
+
+    @property
+    def unit_price(self):
+        if self.quantity > 0:
+            return self.total_price / self.quantity
+        return 0
+
+    @property
+    def consuming_quantity(self):
+        consumptions = self.consumptions.all()
+        if not consumptions:
+            return 0
+        quantity = sum([c.amount_used for c in consumptions])
+        return quantity
+
+    @property
+    def remaining_quantity(self):
+        consumptions = self.consumptions.all()
+        if not consumptions:
+            return self.quantity
+        quantity = self.quantity - sum([c.amount_used for c in consumptions])
+        return quantity
 
     class Meta:
         verbose_name = "Ingredient"

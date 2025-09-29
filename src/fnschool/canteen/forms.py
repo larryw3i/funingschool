@@ -1,8 +1,10 @@
 from datetime import date, datetime
-from fnschool import _
+
 from django import forms
 
-from .models import Ingredient, Consumption
+from fnschool import _
+
+from .models import Consumption, Ingredient
 
 
 class PurchasedIngredientsWorkBookForm(forms.Form):

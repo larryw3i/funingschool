@@ -4,7 +4,7 @@
   <td class="">
     <form onkeydown="if(event.keyCode==13){return false;}"
           data-is_disabled="{{ form.instance.is_disabled }}"
-          action="{% url 'canteen:create_consumption' form.instance.ingredient.id %}"
+          action="{% url 'canteen:new_consumption' form.instance.id %}"
           data-ingredient-id="{{ form.instance.ingredient.id }}">
       {% csrf_token %}
       {% for field in form %}{{ field }}{% endfor %}

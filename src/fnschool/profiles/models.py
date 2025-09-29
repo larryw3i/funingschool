@@ -1,13 +1,12 @@
+from django.contrib.auth.models import AbstractUser, User
 from django.db import models
-from fnschool import *
-from django.utils.translation import gettext as _
-
-# Create your models here.
-
-from django.contrib.auth.models import User
-from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils.translation import gettext as _
+
+from fnschool import *
+
+# Create your models here.
 
 
 class Profile(AbstractUser):

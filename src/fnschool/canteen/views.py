@@ -1,41 +1,32 @@
 import io
-from django.db.models import F
-from django.db.models import ExpressionWrapper, F, DecimalField
-from django.db.models.functions import Coalesce
-from django.db.models import Value
-from django.db.models import Sum
-from datetime import datetime, date
 import re
-import pandas as pd
-import numpy as np
-from fnschool import count_chinese_characters
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
-from openpyxl.comments import Comment
-from openpyxl.utils import get_column_letter
-from openpyxl.styles import Font
-from openpyxl.styles import Alignment
+from datetime import date, datetime
 from pathlib import Path
-from fnschool import _
-from django.http import HttpResponse
-from openpyxl import Workbook
-from django.shortcuts import render, redirect
-from django.shortcuts import render, get_object_or_404, redirect
-from django.utils.encoding import escape_uri_path
-from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
-from datetime import datetime
+
+import numpy as np
+import pandas as pd
 from dateutil.relativedelta import relativedelta
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.db.models import DecimalField, ExpressionWrapper, F, Q, Sum, Value
+from django.db.models.functions import Coalesce
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.encoding import escape_uri_path
+from django.views.decorators.http import require_POST
+from openpyxl import Workbook
+from openpyxl.comments import Comment
+from openpyxl.styles import Alignment, Font
+from openpyxl.utils import get_column_letter
 
-from .models import Ingredient, Consumption
+from fnschool import _, count_chinese_characters
+
 from .forms import (
-    PurchasedIngredientsWorkBookForm,
-    IngredientForm,
     ConsumptionForm,
+    IngredientForm,
+    PurchasedIngredientsWorkBookForm,
 )
-
+from .models import Consumption, Ingredient
 
 # Create your views here.
 
@@ -132,6 +123,30 @@ def get_date_range(ingredients):
 
 
 @login_required
+@require_POST
+def new_consumption(request, consumption_id):
+    consumption = Consumption.objects.filter(
+        Q(pk=consumption_id)
+        & Q(ingredient__user=request.user)
+        & Q(is_disabled=False)
+    ).first()
+    form = None
+    if consumption:
+        form = ConsumptionForm(request.POST, instance=consumption)
+    else:
+        form = ConsumptionForm(request.POST)
+
+    if form.is_valid():
+        consumption = form.save(commit=False)
+        if consumption.is_disabled:
+            return HttpResponse("Accepted", status=202)
+        consumption.save()
+        return HttpResponse("OK", status=201)
+
+    form = ConsumptionForm(request)
+
+
+@login_required
 def create_consumptions(request, ingredient_id=None):
     ingredients = get_consumption_ingredients(request)
     date_range = get_date_range(ingredients)
@@ -155,22 +170,16 @@ def create_consumptions(request, ingredient_id=None):
                 consumption.is_disabled = True
 
             planned_consumptions.append(consumption)
+
         form_list = []
         for c in planned_consumptions:
             form = ConsumptionForm(instance=c)
             form.fields["date_of_using"].label = ""
             form_list.append(form)
+
         return render(
             request, "canteen/create_consumption.html", {"form_list": form_list}
         )
-
-    if request.method == "POST":
-        if ingredient.user == request.user:
-            ingredient.delete()
-            return render(
-                request,
-                "close.html",
-            )
 
     date_range = [str(d) for d in date_range]
     return render(

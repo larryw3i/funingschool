@@ -1,15 +1,14 @@
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
+from fnschool.settings import LOGIN_URL
+
+from .forms import ProfileForm, ProfileLoginForm
 
 # Create your views here.
-
-from django.views.generic import CreateView
-from django.contrib.auth import logout
-from django.contrib.auth import login, authenticate
-from django.urls import reverse_lazy
-from .forms import ProfileForm, ProfileLoginForm
-from fnschool.settings import LOGIN_URL
 
 
 def profile_new(request):

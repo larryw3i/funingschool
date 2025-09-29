@@ -1,10 +1,16 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
+
 from . import views
 
 app_name = "canteen"
 
 urlpatterns = [
+    path(
+        "new_consumption/<int:consumption_id>",
+        views.new_consumption,
+        name="new_consumption",
+    ),
     path(
         "create_consumptions",
         views.create_consumptions,
