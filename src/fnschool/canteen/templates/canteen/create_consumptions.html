@@ -11,13 +11,19 @@
       <thead>
         <tr>
           <th class="">#</th>
+          <th class="">#</th>
           {% for date_h in date_range %}<th>{{ date_h }}</th>{% endfor %}
         </tr>
       </thead>
       <tbody>
         {% for ingredient in ingredients %}
-          <tr id="ingredient_num_{{ ingredient.id }}">
+          <tr data-ingredient-name="{{ ingredient.name }}"
+              data-ingredient-quantity="{{ ingredient.quantity }}"
+              data-total-price="{{ ingredient.total_price }}"
+              data-ingredient-quantity_unit_name="{{ ingredient.quantity_unit_name }}"
+              id="ingredient_num_{{ ingredient.id }}">
             <td>{{ ingredient.name }}</td>
+            <td name="remaining_{{ ingredient.id }}"></td>
           </tr>
           <script>
             $(function() {
@@ -58,30 +64,35 @@ body{
 .table-container {
   overflow:auto;
 }
-  label[for='id_amount_used']{
-    display: none
-  }
   .table thead th {
       position: -webkit-sticky; 
       position: sticky;
       top: 0; 
-      background-color: white; 
       z-index: 1020; 
-      box-shadow: 0 1px 0 #dee2e6; 
   }
 
-  .table tr > :first-child {
+ .table tr > :nth-child(1) {
       position: -webkit-sticky; 
       position: sticky;
       left: 0; 
-      background-color: white; 
       z-index: 1020; 
-      box-shadow: 1px 0 0 #dee2e6; 
   }
-  .table thead tr > :first-child {
+
+  .table tr > :nth-child(2) {
+      position: -webkit-sticky; 
+      position: sticky;
+      left: 50px; 
       z-index: 1020; 
-      box-shadow: 1px 1px 0 #dee2e6; 
   }
+   .table thead tr > :nth-child(1) {
+      z-index: 1020; 
+  }
+  .table thead tr > :nth-child(2) {
+      z-index: 1020; 
+      left:50px;
+  }
+
+
 
   </style>
 {% endblock %}

@@ -66,4 +66,7 @@ where = ["src"]
 [tool.setuptools.exclude-package-data]
 "*" = ["*.po"]
 
+[tool.djlint]
+profile="django"
+
 # The end.

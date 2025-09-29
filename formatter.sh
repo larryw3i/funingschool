@@ -15,7 +15,13 @@ run_djlint() {
     if [[ ! ${djlint_dir} ]]; then
         pip install djlint
     fi
-    djlint ${src_dir} --reformat --indent 2 --statistics --max-line-length 80
+    djlint ${src_dir} \
+        --reformat \
+        --indent 2 \
+        --statistics \
+        --max-line-length 80 \
+        --profile django
+
 }
 
 run_shfmt() {

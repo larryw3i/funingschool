@@ -173,7 +173,6 @@ def create_consumptions(request, ingredient_id=None):
             )
 
     date_range = [str(d) for d in date_range]
-    print(date_range)
     return render(
         request,
         "canteen/create_consumptions.html",

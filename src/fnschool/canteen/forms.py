@@ -35,6 +35,18 @@ class IngredientForm(forms.ModelForm):
 
 
 class ConsumptionForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name in self.fields:
+            self.fields[name].label = ""
+            self.fields[name].widget.attrs.update(
+                {
+                    "id": f"id_{name}_{self.instance.ingredient.id}",
+                    "class": "form-control",
+                }
+            )
+
     class Meta:
         model = Consumption
         fields = "__all__"
