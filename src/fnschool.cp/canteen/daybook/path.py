@@ -1,10 +1,10 @@
 import os
+import shutil
 import sys
 import tomllib
-import shutil
+
 from fnschool import *
 from fnschool.external import *
-
 
 food_classes_config0_fpath = Path(__file__).parent / "food_classes.toml"
 canteen_data_dpath = Path(__file__).parent / "data"

@@ -1,5 +1,6 @@
 import matplotlib
 import matplotlib.font_manager as fm
+
 from fnschool.language import *
 
 if is_zh_CN:

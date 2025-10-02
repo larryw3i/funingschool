@@ -1,14 +1,14 @@
+import calendar
 import os
 import sys
-import calendar
+
 from fnschool import *
 from fnschool.base import *
-
-from fnschool.canteen.spreadsheet.spreadsheet_file import *
+from fnschool.canteen.consuming import Consuming
+from fnschool.canteen.currency import Currency
 from fnschool.canteen.operator import *
 from fnschool.canteen.path import *
-from fnschool.canteen.currency import Currency
-from fnschool.canteen.consuming import Consuming
+from fnschool.canteen.spreadsheet.spreadsheet_file import *
 
 
 class Bill(ClsBase):

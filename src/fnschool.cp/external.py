@@ -1,10 +1,10 @@
 import os
-import sys
 import subprocess
+import sys
 
 from fnschool.language import *
-from fnschool.tio import *
 from fnschool.path import *
+from fnschool.tio import *
 
 
 def sys_is_linux():

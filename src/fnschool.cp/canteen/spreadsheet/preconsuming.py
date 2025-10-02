@@ -1,9 +1,10 @@
-import os
-import sys
-import random
 import calendar
-from datetime import datetime, timedelta
 import math
+import os
+import random
+import sys
+from datetime import datetime, timedelta
+
 from openpyxl.styles import PatternFill
 
 from fnschool import *

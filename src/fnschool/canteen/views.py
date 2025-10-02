@@ -164,6 +164,7 @@ def create_consumptions(request, ingredient_id=None):
             else:
                 consumption = Consumption()
                 consumption.ingredient = ingredient
+                print(consumption.id)
                 consumption.date_of_using = per_day
 
             if per_day < ingredient.storage_date:
@@ -176,7 +177,7 @@ def create_consumptions(request, ingredient_id=None):
             form = ConsumptionForm(instance=c)
             form.fields["date_of_using"].label = ""
             form_list.append(form)
-
+        
         return render(
             request, "canteen/create_consumption.html", {"form_list": form_list}
         )

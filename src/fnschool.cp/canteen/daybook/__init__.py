@@ -1,6 +1,8 @@
 import os
 import sys
-from fnschool import *
+
 from openpyxl.styles import numbers
+
+from fnschool import *
 
 # The end.

@@ -1,8 +1,8 @@
 import tomllib
+from datetime import UTC
 
 from helper import *
 from helper.project import *
-from datetime import UTC
 
 
 class Info:

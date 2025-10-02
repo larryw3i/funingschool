@@ -1,7 +1,8 @@
 import os
+import shutil
 import sys
 import tomllib
-import shutil
+
 from fnschool import *
 from fnschool.external import *
 

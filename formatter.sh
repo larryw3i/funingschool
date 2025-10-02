@@ -24,9 +24,19 @@ run_djlint() {
 
 }
 
+run_isort() {
+    if [[ ! -x $(which isort) ]]; then
+        echo 'Trying to install "isort"...'
+        sudo apt install isort
+    fi
+    if [[ -x $(which isort) ]]; then
+        isort -l 80 ${project_dir}
+    fi
+}
+
 run_shfmt() {
     if [[ ! -x $(which shfmt) ]]; then
-        echo "Trying to install $(shfmt)..."
+        echo 'Trying to install "shfmt"...'
         sudo apt install shfmt
     fi
     if [[ -x $(which shfmt) ]]; then
@@ -46,6 +56,7 @@ run_black() {
 
 run_djlint
 run_shfmt
+run_isort
 run_black
 
 # The end.

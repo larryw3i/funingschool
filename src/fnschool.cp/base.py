@@ -3,11 +3,11 @@ import sys
 from abc import ABC
 from pathlib import Path
 
-from fnschool.base import *
-from fnschool.user import *
-from fnschool.path import *
-from fnschool.config import *
 from fnschool.app import *
+from fnschool.base import *
+from fnschool.config import *
+from fnschool.path import *
+from fnschool.user import *
 
 
 class ClsBase(ABC):

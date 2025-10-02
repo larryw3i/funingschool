@@ -1,5 +1,6 @@
 import os
 import sys
+
 from fnschool import *
 
 exam_dpath = Path(__file__).parent

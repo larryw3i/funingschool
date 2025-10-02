@@ -1,21 +1,20 @@
+import calendar
 import os
 import random
-import sys
-from pathlib import Path
-import shutil
 import secrets
-import calendar
-import pandas as pd
-from datetime import datetime, timedelta
-import numpy as np
-
+import shutil
+import sys
 import tkinter as tk
+from datetime import datetime, timedelta
+from pathlib import Path
 from tkinter import filedialog, ttk
+
+import numpy as np
+import pandas as pd
 
 from fnschool import *
 from fnschool.canteen.food import *
 from fnschool.canteen.path import *
-
 from fnschool.canteen.spreadsheet.base import SsBase
 from fnschool.canteen.spreadsheet.food import Food as FoodSheet
 

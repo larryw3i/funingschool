@@ -1,11 +1,12 @@
 import os
 import sys
 import time
+
 from fnschool import *
 from fnschool.exam import *
+from fnschool.exam.email import Email as FnEmail
 from fnschool.exam.path import *
 from fnschool.exam.teacher import *
-from fnschool.exam.email import Email as FnEmail
 
 
 class Score:

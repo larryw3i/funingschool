@@ -1,13 +1,12 @@
-import os
-import sys
 import importlib
 import inspect
+import os
+import sys
 
 from fnschool import *
 from fnschool.canteen.entry import *
 from fnschool.exam.entry import *
 from fnschool.external import *
-
 
 module_dpath = Path(__file__).parent
 entry_name = "entry.py"

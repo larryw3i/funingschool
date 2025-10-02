@@ -1,9 +1,8 @@
 import os
 import sys
-
 from abc import ABC
-from fnschool import *
 
+from fnschool import *
 from fnschool.gui import *
 
 

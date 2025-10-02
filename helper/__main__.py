@@ -9,7 +9,6 @@ if not p_dpath in sys.path:
 from helper import *
 from helper.entry import *
 
-
 read_cli()
 
 # The end.

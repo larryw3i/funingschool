@@ -1,8 +1,8 @@
-import os
-import sys
-import platform
 import math
+import os
+import platform
 import random
+import sys
 
 from colorama import Fore, Style
 

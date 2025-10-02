@@ -1,5 +1,6 @@
 import os
 import sys
+
 from fnschool.canteen.food import *
 from fnschool.canteen.spreadsheet.base import *
 

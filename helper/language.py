@@ -1,7 +1,7 @@
-import os
-import sys
 import gettext
 import locale
+import os
+import sys
 from pathlib import Path
 
 locale_dir = (Path(__file__).parent / "locales").as_posix()

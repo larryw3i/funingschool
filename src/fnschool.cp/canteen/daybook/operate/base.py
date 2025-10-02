@@ -1,8 +1,8 @@
 import os
 import sys
+from abc import *
 
 from fnschool import *
-from abc import *
 
 
 class OprBase(ABC):

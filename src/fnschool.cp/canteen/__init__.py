@@ -1,5 +1,5 @@
-from fnschool import *
 import pygubu
 
+from fnschool import *
 
 # The end.

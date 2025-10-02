@@ -1,14 +1,14 @@
-import smtplib
 import email.utils
+import shutil
+import smtplib
 from email import encoders
+from email.mime.base import MIMEBase
+from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.image import MIMEImage
-from email.mime.base import MIMEBase
 
 from redmail import EmailSender
 
-import shutil
 from fnschool import *
 from fnschool.exam import *
 from fnschool.exam.path import *
@@ -109,7 +109,7 @@ class Email:
     @property
     def email(self):
         if not self._email:
-            from smtplib import SMTP_SSL, SMTP, LMTP
+            from smtplib import LMTP, SMTP, SMTP_SSL
 
             email = EmailSender(
                 host=self.host,

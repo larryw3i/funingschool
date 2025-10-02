@@ -1,15 +1,16 @@
 import os
 import sys
-from openpyxl.utils.cell import get_column_letter
+import tkinter as tk
 import tomllib
 from tkinter import filedialog, ttk
-import tkinter as tk
+
+from openpyxl.utils.cell import get_column_letter
+from openpyxl.worksheet.datavalidation import DataValidation
 
 from fnschool import *
-from fnschool.canteen.path import *
 from fnschool.canteen.food import *
+from fnschool.canteen.path import *
 from fnschool.canteen.spreadsheet.base import *
-from openpyxl.worksheet.datavalidation import DataValidation
 
 
 class FoodClass:

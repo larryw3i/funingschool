@@ -1,14 +1,13 @@
-import os
-import sys
 import importlib
 import inspect
+import os
+import sys
 
 from helper import *
-
+from helper.dep.entry import parse_dep
+from helper.docs.entry import parse_docs
 from helper.msg.entry import parse_msg
 from helper.packing.entry import parse_build
-from helper.docs.entry import parse_docs
-from helper.dep.entry import parse_dep
 
 p_dpath = (Path(__file__).parent.parent).as_posix()
 if not p_dpath in sys.path:

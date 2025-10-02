@@ -1,6 +1,6 @@
 import os
-import sys
 import random
+import sys
 from tkinter import *
 
 app_name = "fnschool"

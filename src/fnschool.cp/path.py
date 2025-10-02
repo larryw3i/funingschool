@@ -1,16 +1,16 @@
-import os
-import sys
-from pathlib import Path, PosixPath
-import shutil
 import getpass
+import os
 import platform
+import shutil
 import subprocess
+import sys
 from datetime import datetime
+from pathlib import Path, PosixPath
 
 from platformdirs import *
-from fnschool.tio import *
-from fnschool.app import *
 
+from fnschool.app import *
+from fnschool.tio import *
 
 user_name = getpass.getuser()
 

@@ -1,10 +1,10 @@
 import os
 import sys
-from openpyxl.styles import *
+
 from openpyxl.formatting.rule import *
+from openpyxl.styles import *
 from openpyxl.styles.differential import *
 from openpyxl.utils.cell import *
-
 
 from fnschool import *
 

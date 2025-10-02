@@ -4,20 +4,24 @@ import tkinter as tk
 from tkinter import ttk
 
 from fnschool import *
-from fnschool.canteen.noter import *
-from fnschool.canteen.path import *
 from fnschool.canteen.currency import *
-from fnschool.canteen.forms.cover import Cover as CoverForm
-from fnschool.canteen.forms.purchase import (
-    Purchase as PurchaseForm,
-    NonIgnorableGoodsSum as NonIgnorableGoodsSumForm,
-    NonIgnorableGoods as NonIgnorableGoodsForm,
-    IgnorableGoodsSum as IgnorableGoodsSumForm,
-    IgnorableGoods as IgnorableGoodsForm,
-)
 from fnschool.canteen.forms.consumption import Consumption as ConsumptionForm
+from fnschool.canteen.forms.cover import Cover as CoverForm
 from fnschool.canteen.forms.good import Good as GoodForm
 from fnschool.canteen.forms.goods import Goods as GoodsForm
+from fnschool.canteen.forms.purchase import IgnorableGoods as IgnorableGoodsForm
+from fnschool.canteen.forms.purchase import (
+    IgnorableGoodsSum as IgnorableGoodsSumForm,
+)
+from fnschool.canteen.forms.purchase import (
+    NonIgnorableGoods as NonIgnorableGoodsForm,
+)
+from fnschool.canteen.forms.purchase import (
+    NonIgnorableGoodsSum as NonIgnorableGoodsSumForm,
+)
+from fnschool.canteen.forms.purchase import Purchase as PurchaseForm
+from fnschool.canteen.noter import *
+from fnschool.canteen.path import *
 
 
 class DayBook:

@@ -1,11 +1,12 @@
 import os
-import sys
-import secrets
 import random
+import secrets
+import sys
+
+from openpyxl.styles import *
 
 from fnschool import *
 from fnschool.canteen.spreadsheet.base import *
-from openpyxl.styles import *
 
 
 class Food(SsBase):

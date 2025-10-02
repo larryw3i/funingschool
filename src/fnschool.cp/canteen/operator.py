@@ -1,11 +1,11 @@
 import os
 import sys
-import uuid
 import tomllib
+import uuid
 
 from fnschool import *
-from fnschool.canteen.path import *
 from fnschool.canteen.config import *
+from fnschool.canteen.path import *
 
 
 class Operator(User):

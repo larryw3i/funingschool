@@ -1,6 +1,7 @@
+import calendar
 import os
 import sys
-import calendar
+
 from fnschool import *
 
 
