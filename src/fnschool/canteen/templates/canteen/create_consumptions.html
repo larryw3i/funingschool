@@ -28,20 +28,6 @@
               {{ ingredient.quantity }}-{{ ingredient.consuming_quantity }}={{ ingredient.remaining_quantity }}
             </td>
           </tr>
-          <script>
-            $(function() {
-              $.ajax(
-                {
-                  url:"{% url 'canteen:create_consumption' ingredient.id %}",
-                  method: 'GET',
-                  success: function(data){
-                    $('#ingredient_num_{{ ingredient.id }}').append(data)
-                  }
-                }
-              )
-            });
-
-          </script>
         {% endfor %}
       </tbody>
     </table>
@@ -51,6 +37,69 @@
     {% trans "Submit" %}
   </button>
   <script>
+    var ingredient_ids = [ 
+      {% for ingredient in ingredients %}"{{ingredient.id}}",{% endfor %}
+    ];
+    $(document).ready(function(){
+    $.each(ingredient_ids,function (index, value) {
+              $.ajax(
+                {
+                  url:"/canteen/create_consumption/"+value,
+                  method: 'GET',
+                  success: function(data){
+                    $('#ingredient_num_'+value).append(data)
+                  }
+                }
+              );
+
+    });
+    });
+
+
+    $(document).ready(function() {
+    $('.table-consumptions').on('keydown', 'input[name="amount_used"]', function(e) {
+        if ([9,13,37,38,39,40].includes(e.keyCode)) {
+            e.preventDefault();
+            navigateToNextCell(
+              $(this), 
+              e.keyCode === 9 ? "r" :
+              e.keyCode === 13 ? "d" : 
+              e.keyCode === 37 ? "l" :
+              e.keyCode ===  38 ? "u" :
+              e.keyCode === 39 ? "r" :
+              e.keyCode === 40 ? "d" : "" 
+            );                
+        }
+      if (e.keyCode < 48 || e.keyCode > 57) {
+                e.preventDefault()
+                }
+
+    });
+
+   function navigateToNextCell($currentInput,direction ) {
+      var td = $currentInput.closest("form").closest('td');
+      var columnIndex = td.index();
+
+     var rowIndex = td.closest("tr").index()
+     if (direction == 'l'){
+       columnIndex = columnIndex - 1
+       rowIndex = rowIndex + 1
+     }else if(direction == 'r'){
+       columnIndex = columnIndex + 1
+       rowIndex = rowIndex + 1
+     }else if (direction == "u"){
+       rowIndex = rowIndex 
+     }else if (direction == 'd'){
+       rowIndex = rowIndex + 2
+     }
+      var cell = $('.table-consumptions').find(`tr:eq(${rowIndex}) td:eq(${columnIndex})`);
+     var amount_used_input=cell.find('input[name="amount_used"]')
+     amount_used_input.first().focus()
+
+   }
+
+
+    });
     function submit_consumptions() {
        $('form[name="consumption_form"]').each(function(index) {
           var form = $(this);

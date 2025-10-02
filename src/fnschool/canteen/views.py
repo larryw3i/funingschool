@@ -134,11 +134,18 @@ def new_consumption(request, consumption_id=None):
         ).first()
         if consumption:
             form = ConsumptionForm(request.POST, instance=consumption)
+        else:
+            return HttpResponse("Accepted", status=202)
+
     else:
-        consumption = Consumption()
-        consumption.ingredient = Ingredient.objects.filter(
+        ingredient = Ingredient.objects.filter(
             Q(user=request.user) & Q(pk=request.POST.get("ingredient"))
         ).first()
+        if not ingredient:
+            return HttpResponse("Accepted", status=202)
+
+        consumption = Consumption()
+        consumption.ingredient = ingredient
         form = ConsumptionForm(request.POST, instance=consumption)
 
     if form.is_valid() and not form.instance.is_disabled:
