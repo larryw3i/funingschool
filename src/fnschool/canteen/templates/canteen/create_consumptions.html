@@ -46,7 +46,10 @@
       </tbody>
     </table>
   </div>
-  <button onclick="submit_consumptions();" class="btn btn-submit-consumptions btn-primary">{% trans "Submit" %}</button>
+  <button onclick="submit_consumptions();"
+          class="btn btn-submit-consumptions btn-primary">
+    {% trans "Submit" %}
+  </button>
   <script>
     function submit_consumptions() {
        $('form[name="consumption_form"]').each(function(index) {
