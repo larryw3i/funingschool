@@ -4,9 +4,8 @@ import os
 import sys
 from pathlib import Path
 
-import sys
-PROJECT_PATH=Path(__file__).parent
-FNSCHOOL_PATH=PROJECT_PATH/"src"/"fnschool"
+PROJECT_PATH = Path(__file__).parent
+FNSCHOOL_PATH = PROJECT_PATH / "src" / "fnschool"
 if FNSCHOOL_PATH.as_posix() not in sys.path:
     sys.path.append(FNSCHOOL_PATH.as_posix())
 
@@ -22,9 +21,6 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
-    
-    if not "runserver" in sys.argv:
-        sys.argv.extend(["runserver","8080"])
 
     execute_from_command_line(sys.argv)
 

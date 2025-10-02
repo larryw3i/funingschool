@@ -4,7 +4,7 @@
   {% trans "Consume Ingredients" %}
 {% endblock %}
 {% block content %}
-  <h1>{% trans "Consume Ingredients." %}</h1>
+  <h1>{% trans "Consume Ingredients" %}</h1>
   <hr>
   <div class="table table-responsive table-container">
     <table class="table table-consumptions cotable-bordered table-striped table-hover table-condensed scroll-vertical ">
@@ -46,12 +46,36 @@
       </tbody>
     </table>
   </div>
+  <button onclick="submit_consumptions();" class="btn btn-submit-consumptions btn-primary">{% trans "Submit" %}</button>
   <script>
+    function submit_consumptions() {
+       $('form[name="consumption_form"]').each(function(index) {
+          var form = $(this);
+         if (form.data("is_disabled")=="True"){
+           return true;
+         }
+         if (form.find('input[name="amount_used"]').val().length < 1){
+           return true;
+         }
+    $.ajax({
+        url: form.attr('action'),
+        type: form.attr('method') || 'POST', 
+        data: form.serialize(),
+        success: function(response) {
+            console.log('Form submitted successfully:', response);
+        },
+        error: function(xhr, status, error) {
+            console.error('Form submission failed:', error);
+        }
+    });
+      }); 
+    }
     function set_consumptions_table_size(){
+      const submit_consumptions_btn = $(".btn-submit-consumptions")
       const consumptions_table=$(".table-consumptions")
       const header=$("header")
       const footer=$("footer")
-      const height = Math.round((footer.offset().top-consumptions_table.offset().top )*0.96)
+      const height = Math.round((footer.offset().top - submit_consumptions_btn.height() - consumptions_table.offset().top  )*0.95)
         consumptions_table.parent().height(height)
     }
     $(window).resize(function() {

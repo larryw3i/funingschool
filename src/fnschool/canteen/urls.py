@@ -7,6 +7,11 @@ app_name = "canteen"
 
 urlpatterns = [
     path(
+        "new_consumption",
+        views.new_consumption,
+        name="new_consumption",
+    ),
+    path(
         "new_consumption/<int:consumption_id>",
         views.new_consumption,
         name="new_consumption",

@@ -124,24 +124,29 @@ def get_date_range(ingredients):
 
 @login_required
 @require_POST
-def new_consumption(request, consumption_id):
-    consumption = Consumption.objects.filter(
-        Q(pk=consumption_id)
-        & Q(ingredient__user=request.user)
-        & Q(is_disabled=False)
-    ).first()
+def new_consumption(request, consumption_id=None):
     form = None
-    if consumption:
-        form = ConsumptionForm(request.POST, instance=consumption)
+    if consumption_id:
+        consumption = Consumption.objects.filter(
+            Q(pk=consumption_id)
+            & Q(ingredient__user=request.user)
+            & Q(is_disabled=False)
+        ).first()
+        if consumption:
+            form = ConsumptionForm(request.POST, instance=consumption)
     else:
-        form = ConsumptionForm(request.POST)
+        consumption = Consumption()
+        consumption.ingredient = Ingredient.objects.filter(
+            Q(user=request.user) & Q(pk=request.POST.get("ingredient"))
+        ).first()
+        form = ConsumptionForm(request.POST, instance=consumption)
 
-    if form.is_valid():
+    if form.is_valid() and not form.instance.is_disabled:
         consumption = form.save(commit=False)
-        if consumption.is_disabled:
-            return HttpResponse("Accepted", status=202)
         consumption.save()
         return HttpResponse("OK", status=201)
+    else:
+        return HttpResponse("Accepted", status=202)
 
     form = ConsumptionForm(request)
 
@@ -164,7 +169,6 @@ def create_consumptions(request, ingredient_id=None):
             else:
                 consumption = Consumption()
                 consumption.ingredient = ingredient
-                print(consumption.id)
                 consumption.date_of_using = per_day
 
             if per_day < ingredient.storage_date:
@@ -177,7 +181,7 @@ def create_consumptions(request, ingredient_id=None):
             form = ConsumptionForm(instance=c)
             form.fields["date_of_using"].label = ""
             form_list.append(form)
-        
+
         return render(
             request, "canteen/create_consumption.html", {"form_list": form_list}
         )
