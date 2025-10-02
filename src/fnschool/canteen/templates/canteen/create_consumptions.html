@@ -12,7 +12,9 @@
         <tr>
           <th class="">{% trans "Ingredient Name" %}</th>
           <th class="">{% trans "Remaining Quantity" %}</th>
-          {% for date_h in date_range %}<th>{{ date_h }}</th>{% endfor %}
+          {% for date_h in date_range %}
+            <th class="consumption-date">{{ date_h }}</th>
+          {% endfor %}
         </tr>
       </thead>
       <tbody>
@@ -20,6 +22,7 @@
           <tr data-ingredient_name="{{ ingredient.name }}"
               data-ingredient_quantity="{{ ingredient.quantity }}"
               data-ingredient_total_price="{{ ingredient.total_price }}"
+              data-ingredient_meal_type="{{ ingredient.meal_type }}"
               data-ingredient_quantity_unit_name="{{ ingredient.quantity_unit_name }}"
               data-ingredient_unit_price="{{ ingredient.unit_price }}"
               id="ingredient_num_{{ ingredient.id }}">
@@ -37,6 +40,10 @@
     {% trans "Submit" %}
   </button>
   <script>
+    function is_weekend(date) {
+      const dayOfWeek = date.getDay(); 
+      return dayOfWeek === 0 || dayOfWeek === 6; 
+    }
     var ingredient_ids = [ 
       {% for ingredient in ingredients %}"{{ingredient.id}}",{% endfor %}
     ];
@@ -47,6 +54,13 @@
                   url:"/canteen/create_consumption/"+value,
                   method: 'GET',
                   success: function(data){
+                    data=$(data)
+                    data.each(function(index,element){
+                        if (is_weekend(new Date($(element).data("date_of_using")))){
+                          $(element).find('[name="amount_used"]').addClass("weekend")
+                    }
+
+                    });
                     $('#ingredient_num_'+value).append(data)
                   }
                 }
@@ -70,7 +84,7 @@
               e.keyCode === 40 ? "d" : "" 
             );                
         }
-      if (e.keyCode < 48 || e.keyCode > 57) {
+      if (e.keyCode < 91 && e.keyCode > 64) {
                 e.preventDefault()
                 }
 
@@ -140,6 +154,11 @@
   <style>
 body{
 }
+
+.weekend {
+  background-color:pink;
+}
+
 .table-container {
   overflow:auto;
 }
