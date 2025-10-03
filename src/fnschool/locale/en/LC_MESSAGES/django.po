@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-02 15:39+0000\n"
+"POT-Creation-Date: 2025-10-03 06:15+0000\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -20,113 +20,115 @@ msgstr ""
 "X-Generator: Poedit 3.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: src/fnschool/canteen/forms.py:12
+#: canteen/forms.py:12
 msgid "Select a Spreadsheet File"
 msgstr ""
 
-#: src/fnschool/canteen/forms.py:13
+#: canteen/forms.py:13
 msgid "Office Open XML Spreadsheet only. (*.xlsx)"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:18
+#: canteen/models.py:18
 msgid "User"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:20 src/fnschool/canteen/views.py:34
+#: canteen/models.py:20 canteen/views.py:34
 msgid "Storage Date"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:21
-#: src/fnschool/canteen/templates/canteen/create_consumptions.html:13
-#: src/fnschool/canteen/views.py:44
+#: canteen/models.py:21 canteen/templates/canteen/create_consumptions.html:13
+#: canteen/views.py:44
 msgid "Ingredient Name"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:22 src/fnschool/canteen/views.py:46
+#: canteen/models.py:22 canteen/views.py:46
 msgid "Meal Type"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:23 src/fnschool/canteen/views.py:56
+#: canteen/models.py:23 canteen/views.py:56
 msgid "Category"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:25 src/fnschool/canteen/views.py:63
+#: canteen/models.py:25 canteen/views.py:63
 msgid "Quantity"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:31 src/fnschool/canteen/views.py:77
+#: canteen/models.py:31 canteen/views.py:77
 msgid "Unit Name of Quantity"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:35 src/fnschool/canteen/views.py:73
+#: canteen/models.py:35 canteen/views.py:73
 msgid "Total Price"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:39 src/fnschool/canteen/views.py:81
+#: canteen/models.py:39 canteen/views.py:81
 msgid "Is Ignorable"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:42 src/fnschool/canteen/models.py:88
+#: canteen/models.py:42 canteen/models.py:88
 msgid "Is Disabled"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:69
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:4
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:7
+#: canteen/models.py:69 canteen/templates/canteen/list_ingredients.html:4
+#: canteen/templates/canteen/list_ingredients.html:7
 msgid "Ingredient List"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:80
+#: canteen/models.py:80
 msgid "Ingredient"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:83
+#: canteen/models.py:83
 msgid "Date"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:92
+#: canteen/models.py:92
 msgid "Consumption Record"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:93
+#: canteen/models.py:93
 msgid "Consumption Records"
 msgstr ""
 
-#: src/fnschool/canteen/models.py:97
+#: canteen/models.py:97
 #, python-brace-format
 msgid "{0} of {1} was consumed on {2} ."
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/create_consumptions.html:4
-#: src/fnschool/canteen/templates/canteen/create_consumptions.html:7
+#: canteen/templates/canteen/create_consumptions.html:4
+#: canteen/templates/canteen/create_consumptions.html:7
 msgid "Consume Ingredients"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/create_consumptions.html:14
+#: canteen/templates/canteen/create_consumptions.html:14
 msgid "Remaining Quantity"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/create_ingredients.html:4
+#: canteen/templates/canteen/create_consumptions.html:40
+msgid "Submit"
+msgstr ""
+
+#: canteen/templates/canteen/create_ingredients.html:4
 msgid "Upload a Spreadsheet of Purchased Ingredients"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/create_ingredients.html:7
+#: canteen/templates/canteen/create_ingredients.html:7
 msgid "Please upload a spreadsheet of purchased ingredients."
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/create_ingredients.html:9
+#: canteen/templates/canteen/create_ingredients.html:9
 msgid "Need a template file?"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/create_ingredients.html:11
+#: canteen/templates/canteen/create_ingredients.html:11
 msgid "Download it."
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/create_ingredients.html:17
+#: canteen/templates/canteen/create_ingredients.html:17
 msgid "Upload"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/delete_ingredient.html:4
+#: canteen/templates/canteen/delete_ingredient.html:4
 #, python-format
 msgid ""
 "\n"
@@ -134,7 +136,7 @@ msgid ""
 "  "
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/delete_ingredient.html:10
+#: canteen/templates/canteen/delete_ingredient.html:10
 #, python-format
 msgid ""
 "\n"
@@ -142,7 +144,7 @@ msgid ""
 "      "
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/delete_ingredient.html:25
+#: canteen/templates/canteen/delete_ingredient.html:25
 msgid ""
 "\n"
 "    Are you sure you want to delete this ingredient? This operation is "
@@ -150,17 +152,17 @@ msgid ""
 "    "
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/delete_ingredient.html:34
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:80
+#: canteen/templates/canteen/delete_ingredient.html:34
+#: canteen/templates/canteen/list_ingredients.html:80
 msgid "Delete"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/delete_ingredient.html:36
-#: src/fnschool/canteen/templates/canteen/edit_ingredient.html:21
+#: canteen/templates/canteen/delete_ingredient.html:36
+#: canteen/templates/canteen/edit_ingredient.html:21
 msgid "Cancel"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/edit_ingredient.html:4
+#: canteen/templates/canteen/edit_ingredient.html:4
 #, python-format
 msgid ""
 "\n"
@@ -168,49 +170,48 @@ msgid ""
 "  "
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/edit_ingredient.html:11
+#: canteen/templates/canteen/edit_ingredient.html:11
 #, python-format
 msgid ""
 "\n"
 "      Edit Ingredient %(instance_name)s ."
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/edit_ingredient.html:19
+#: canteen/templates/canteen/edit_ingredient.html:19
 msgid "Save"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:15
+#: canteen/templates/canteen/list_ingredients.html:15
 msgid "Search ingredient ..."
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:19
+#: canteen/templates/canteen/list_ingredients.html:19
 msgid "Search"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:21
+#: canteen/templates/canteen/list_ingredients.html:21
 msgid "Clear"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:26
+#: canteen/templates/canteen/list_ingredients.html:26
 msgid "Consume"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:27
+#: canteen/templates/canteen/list_ingredients.html:27
 msgid "Add"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:62
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:67
-#: src/fnschool/templates/base/_content.html:6
-#: src/fnschool/templates/base/_js.html:6
+#: canteen/templates/canteen/list_ingredients.html:62
+#: canteen/templates/canteen/list_ingredients.html:67
+#: templates/base/_content.html:6 templates/base/_js.html:6
 msgid "Yes"
 msgstr ""
 
-#: src/fnschool/canteen/templates/canteen/list_ingredients.html:74
+#: canteen/templates/canteen/list_ingredients.html:74
 msgid "Edit"
 msgstr ""
 
-#: src/fnschool/canteen/views.py:36
+#: canteen/views.py:36
 msgid ""
 "Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
 "\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
@@ -218,206 +219,204 @@ msgid ""
 "have to tell the developers. Thank you!"
 msgstr ""
 
-#: src/fnschool/canteen/views.py:44
+#: canteen/views.py:44
 msgid "Name of Ingredient"
 msgstr ""
 
-#: src/fnschool/canteen/views.py:48
+#: canteen/views.py:48
 msgid ""
 "For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
 "generating a spreadsheet, each meal category corresponds to a spread sheet. "
 "If left blank, only one spreadsheet will be generated."
 msgstr ""
 
-#: src/fnschool/canteen/views.py:58
+#: canteen/views.py:58
 msgid ""
 "Usually there are seven categories: vegetables, meat, grains, seasonings, "
 "eggs and milk, oils, and fruits."
 msgstr ""
 
-#: src/fnschool/canteen/views.py:65
+#: canteen/views.py:65
 msgid ""
 "When you purchase ingredients, it's best not to have decimals in the "
 "quantity, as this can be a big hassle!"
 msgstr ""
 
-#: src/fnschool/canteen/views.py:82
+#: canteen/views.py:82
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr ""
 
-#: src/fnschool/canteen/views.py:337
+#: canteen/views.py:348
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: src/fnschool/canteen/views.py:378
+#: canteen/views.py:389
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: src/fnschool/canteen/views.py:398
+#: canteen/views.py:409
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: src/fnschool/canteen/views.py:414
+#: canteen/views.py:425
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: src/fnschool/fnschool/settings.py:136
+#: fnschool/settings.py:136
 msgid "English"
 msgstr ""
 
-#: src/fnschool/fnschool/settings.py:137
+#: fnschool/settings.py:137
 msgid "Spanish"
 msgstr ""
 
-#: src/fnschool/fnschool/settings.py:138
+#: fnschool/settings.py:138
 msgid "French"
 msgstr ""
 
-#: src/fnschool/fnschool/settings.py:139
+#: fnschool/settings.py:139
 msgid "Simplified Chinese"
 msgstr ""
 
-#: src/fnschool/profiles/forms.py:14 src/fnschool/profiles/forms.py:15
-#: src/fnschool/profiles/forms.py:26 src/fnschool/profiles/forms.py:27
+#: profiles/forms.py:14 profiles/forms.py:15 profiles/forms.py:26
+#: profiles/forms.py:27
 msgid "User Name"
 msgstr ""
 
-#: src/fnschool/profiles/forms.py:18 src/fnschool/profiles/forms.py:19
-#: src/fnschool/profiles/forms.py:30 src/fnschool/profiles/forms.py:31
+#: profiles/forms.py:18 profiles/forms.py:19 profiles/forms.py:30
+#: profiles/forms.py:31
 msgid "Password"
 msgstr ""
 
-#: src/fnschool/profiles/forms.py:34 src/fnschool/profiles/forms.py:36
+#: profiles/forms.py:34 profiles/forms.py:36
 msgid "Confirm Password"
 msgstr ""
 
-#: src/fnschool/profiles/models.py:14
+#: profiles/models.py:14
 msgid "Phone Number"
 msgstr ""
 
-#: src/fnschool/profiles/models.py:17
+#: profiles/models.py:17
 msgid "Affiliation"
 msgstr ""
 
-#: src/fnschool/profiles/models.py:24
+#: profiles/models.py:24
 msgid "Superior department"
 msgstr ""
 
-#: src/fnschool/profiles/models.py:28
+#: profiles/models.py:28
 msgid "Date of Birth"
 msgstr ""
 
-#: src/fnschool/profiles/models.py:32
+#: profiles/models.py:32
 msgid "Address"
 msgstr ""
 
-#: src/fnschool/profiles/models.py:35
+#: profiles/models.py:35
 msgid "Avatar"
 msgstr ""
 
-#: src/fnschool/profiles/models.py:38
+#: profiles/models.py:38
 msgid "Biography"
 msgstr ""
 
-#: src/fnschool/profiles/models.py:42
+#: profiles/models.py:42
 msgid "User Profile"
 msgstr ""
 
-#: src/fnschool/profiles/models.py:43
+#: profiles/models.py:43
 msgid "User Profiles"
 msgstr ""
 
-#: src/fnschool/profiles/models.py:46
+#: profiles/models.py:46
 #, python-brace-format
 msgid "{0}'s Profile"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/create.html:4
+#: profiles/templates/profiles/create.html:4
 msgid "Create"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/create.html:7
+#: profiles/templates/profiles/create.html:7
 msgid "Create new account."
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/create.html:11
+#: profiles/templates/profiles/create.html:11
 msgid "Confirm"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/create.html:15
+#: profiles/templates/profiles/create.html:15
 msgid "Already have an account?"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/create.html:16
+#: profiles/templates/profiles/create.html:16
 msgid "Login here"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/detail.html:4
+#: profiles/templates/profiles/detail.html:4
 #, python-format
 msgid ""
 " Hello, %(user_name)s!\n"
 "  "
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/edit.html:4
+#: profiles/templates/profiles/edit.html:4
 msgid "Update Profile"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/edit.html:7
+#: profiles/templates/profiles/edit.html:7
 msgid "Update Profile."
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/edit.html:11
+#: profiles/templates/profiles/edit.html:11
 msgid "Update"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/log_in.html:4
-#: src/fnschool/profiles/templates/profiles/log_in.html:7
-#: src/fnschool/profiles/templates/profiles/log_in.html:15
+#: profiles/templates/profiles/log_in.html:4
+#: profiles/templates/profiles/log_in.html:7
+#: profiles/templates/profiles/log_in.html:15
 msgid "Log in"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/log_in.html:9
+#: profiles/templates/profiles/log_in.html:9
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/log_in.html:19
+#: profiles/templates/profiles/log_in.html:19
 msgid "Don't have an account?"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/log_in.html:20
+#: profiles/templates/profiles/log_in.html:20
 msgid "Register here"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/log_out.html:7
+#: profiles/templates/profiles/log_out.html:7
 msgid "Logged Out"
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/log_out.html:8
+#: profiles/templates/profiles/log_out.html:8
 msgid "You have been successfully logged out."
 msgstr ""
 
-#: src/fnschool/profiles/templates/profiles/log_out.html:10
+#: profiles/templates/profiles/log_out.html:10
 msgid "Log in again"
 msgstr ""
 
-#: src/fnschool/templates/base/_content.html:8
-#: src/fnschool/templates/base/_js.html:8
+#: templates/base/_content.html:8 templates/base/_js.html:8
 msgid "No"
 msgstr ""
 
-#: src/fnschool/templates/base/content.html:9
-#: src/fnschool/templates/base/header_content_footer.html:9
-#: src/fnschool/templates/home.html:4
+#: templates/base/content.html:9 templates/base/header_content_footer.html:9
+#: templates/home.html:4
 msgid "FNSCHOOL"
 msgstr ""
 
-#: src/fnschool/templates/includes/_footer.html:6
+#: templates/includes/_footer.html:6
 msgid "Copyleft &copy; FNSCHOOL"
 msgstr ""
 
-#: src/fnschool/templates/includes/_footer.html:32
+#: templates/includes/_footer.html:32
 msgid ""
 "\n"
 "            We use cookies to ensure that you have the best website "
@@ -426,34 +425,34 @@ msgid ""
 "          "
 msgstr ""
 
-#: src/fnschool/templates/includes/_header.html:24
+#: templates/includes/_header.html:24
 msgid "Home"
 msgstr ""
 
-#: src/fnschool/templates/includes/_header.html:27
+#: templates/includes/_header.html:27
 msgid "Canteen"
 msgstr ""
 
-#: src/fnschool/templates/includes/_header.html:30
+#: templates/includes/_header.html:30
 msgid "Bell"
 msgstr ""
 
-#: src/fnschool/templates/includes/_header.html:38
+#: templates/includes/_header.html:38
 msgid "Develop"
 msgstr ""
 
-#: src/fnschool/templates/includes/_header.html:55
+#: templates/includes/_header.html:55
 msgid "About"
 msgstr ""
 
-#: src/fnschool/templates/includes/_header.html:65
+#: templates/includes/_header.html:65
 msgid "Log out"
 msgstr ""
 
-#: src/fnschool/templates/includes/_header.html:70
+#: templates/includes/_header.html:70
 msgid "Login"
 msgstr ""
 
-#: src/fnschool/templates/includes/_header.html:74
+#: templates/includes/_header.html:74
 msgid "Sign Up"
 msgstr ""

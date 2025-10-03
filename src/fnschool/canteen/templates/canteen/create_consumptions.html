@@ -26,7 +26,13 @@
               data-ingredient_quantity_unit_name="{{ ingredient.quantity_unit_name }}"
               data-ingredient_unit_price="{{ ingredient.unit_price }}"
               id="ingredient_num_{{ ingredient.id }}">
-            <td>{{ ingredient.name }}</td>
+            <td class=''>
+              {{ ingredient.name }}
+              {% if ingredient.meal_type %}
+                <br />
+                ({{ ingredient.meal_type }})
+              {% endif %}
+            </td>
             <td name="remaining_{{ ingredient.id }}">
               {{ ingredient.quantity }}-{{ ingredient.consuming_quantity }}={{ ingredient.remaining_quantity }}
             </td>
@@ -47,8 +53,11 @@
     var ingredient_ids = [ 
       {% for ingredient in ingredients %}"{{ingredient.id}}",{% endfor %}
     ];
+    var ingredient_ids_length = ingredient_ids.length
+
     $(document).ready(function(){
     $.each(ingredient_ids,function (index, value) {
+
               $.ajax(
                 {
                   url:"/canteen/create_consumption/"+value,
@@ -62,10 +71,10 @@
 
                     });
                     $('#ingredient_num_'+value).append(data)
+
                   }
                 }
               );
-
     });
     });
 
@@ -115,12 +124,22 @@
 
     });
     function submit_consumptions() {
-       $('form[name="consumption_form"]').each(function(index) {
+      consumption_forms =  $('form[name="consumption_form"]')
+      consumption_forms_length = consumption_forms.length
+      consumption_forms.each(function(index) {
           var form = $(this);
          if (form.data("is_disabled")=="True"){
+           if (index === consumption_forms_length - 1){
+             location.reload(true);
+          }
+
            return true;
          }
          if (form.find('input[name="amount_used"]').val().length < 1){
+           if (index === consumption_forms_length - 1){
+             location.reload(true);
+          }
+
            return true;
          }
     $.ajax({
@@ -128,6 +147,9 @@
         type: form.attr('method') || 'POST', 
         data: form.serialize(),
         success: function(response) {
+          if (index === consumption_forms_length - 1){
+            location.reload(true);
+          }
             console.log('Form submitted successfully:', response);
         },
         error: function(xhr, status, error) {
@@ -169,26 +191,31 @@ body{
       z-index: 1020; 
   }
 
+  .table tr {
+      font-size:15px;
+  }
  .table tr > :nth-child(1) {
       position: -webkit-sticky; 
       position: sticky;
-      left: 0; 
+      left: 0;
       z-index: 1020; 
+      white-space: nowrap;
   }
 
   .table tr > :nth-child(2) {
       position: -webkit-sticky; 
       position: sticky;
-      left: 50px; 
       z-index: 1020; 
+  }
+  .table thead tr {
+      font-size:15px;
   }
    .table thead tr > :nth-child(1) {
       z-index: 1030;
-      font-size:15px;
+      white-space: nowrap;
   }
   .table thead tr > :nth-child(2) {
       z-index: 1030; 
-      left:50px;
   }
 
   </style>
