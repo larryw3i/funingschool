@@ -104,7 +104,7 @@ def get_consumption_ingredients(request):
             & Q(is_ignorable=False)
             & Q(quantity__gt=F("total_consumed"))
         )
-        .order_by("storage_date")
+        .order_by("storage_date", "meal_type")
     )
 
     return ingredients.all()
@@ -133,6 +133,15 @@ def new_consumption(request, consumption_id=None):
             & Q(is_disabled=False)
         ).first()
         if consumption:
+
+            posted_amount_used = request.POST.get("amount_used")
+            if (
+                posted_amount_used.replace(".", "").isnumeric()
+                and float(posted_amount_used) == 0.0
+            ):
+                consumption.delete()
+                return HttpResponse("OK", status=201)
+
             form = ConsumptionForm(request.POST, instance=consumption)
         else:
             return HttpResponse("Accepted", status=202)
@@ -152,10 +161,8 @@ def new_consumption(request, consumption_id=None):
         consumption = form.save(commit=False)
         consumption.save()
         return HttpResponse("OK", status=201)
-    else:
-        return HttpResponse("Accepted", status=202)
 
-    form = ConsumptionForm(request)
+    return HttpResponse("Accepted", status=202)
 
 
 @login_required

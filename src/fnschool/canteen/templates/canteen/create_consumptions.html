@@ -19,7 +19,8 @@
       </thead>
       <tbody>
         {% for ingredient in ingredients %}
-          <tr data-ingredient_name="{{ ingredient.name }}"
+          <tr class="row-consumption"
+              data-ingredient_name="{{ ingredient.name }}"
               data-ingredient_quantity="{{ ingredient.quantity }}"
               data-ingredient_total_price="{{ ingredient.total_price }}"
               data-ingredient_meal_type="{{ ingredient.meal_type }}"
@@ -54,6 +55,23 @@
       {% for ingredient in ingredients %}"{{ingredient.id}}",{% endfor %}
     ];
     var ingredient_ids_length = ingredient_ids.length
+    
+    $(document).ready(function(){
+      var last_meal_type=""
+      var consumption_rows = $(".row-consumption")
+      consumption_rows.each(function(index,element){
+        meal_type = $(element).data("ingredient_meal_type")
+        if (last_meal_type != meal_type){
+          $(element).find("td").css({"color":"red"})
+          last_meal_type = meal_type
+        }
+      });
+    });
+
+    $(document).ready(function(){
+      var td1 = $(".table tr > :nth-child(1):first")
+      $(".table tr > :nth-child(2)").css("left",td1.width())
+    });
 
     $(document).ready(function(){
     $.each(ingredient_ids,function (index, value) {
@@ -68,7 +86,13 @@
                         if (is_weekend(new Date($(element).data("date_of_using")))){
                           $(element).find('[name="amount_used"]').addClass("weekend")
                     }
-
+                    });
+                    data.find('input[name="amount_used"]').blur(function(){
+                      amount_used = $(this).closest("form").data("amount_used")
+                      new_amount_used = $.trim($(this).val())
+                      if(parseFloat(amount_used) > 0.0 && new_amount_used === ""){
+                        $(this).val('0.0')
+                      }
                     });
                     $('#ingredient_num_'+value).append(data)
 
@@ -150,10 +174,8 @@
           if (index === consumption_forms_length - 1){
             location.reload(true);
           }
-            console.log('Form submitted successfully:', response);
         },
         error: function(xhr, status, error) {
-            console.error('Form submission failed:', error);
         }
     });
       }); 

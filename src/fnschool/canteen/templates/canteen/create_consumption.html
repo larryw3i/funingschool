@@ -6,6 +6,7 @@
     <form onkeydown="if(event.keyCode==13){return false;}"
           name="consumption_form"
           data-is_disabled="{{ form.instance.is_disabled }}"
+          data-amount_used="{{ form.instance.amount_used }}"
           {% if form.instance.id %} action="{% url 'canteen:new_consumption' form.instance.id %}" {% else %} action="{% url 'canteen:new_consumption' %}" {% endif %}
           data-ingredient-id="{{ form.instance.ingredient.id }}">
       {% csrf_token %}
