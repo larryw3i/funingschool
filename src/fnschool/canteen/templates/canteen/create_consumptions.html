@@ -27,7 +27,8 @@
               data-ingredient_quantity_unit_name="{{ ingredient.quantity_unit_name }}"
               data-ingredient_unit_price="{{ ingredient.unit_price }}"
               id="ingredient_num_{{ ingredient.id }}">
-            <td class=''>
+            <td title="{% blocktrans with storage_date=ingredient.storage_date %}Storaged on {{ storage_date }} .{% endblocktrans %}"
+                class="">
               {{ ingredient.name }}
               {% if ingredient.meal_type %}
                 <br />
@@ -117,7 +118,7 @@
               e.keyCode === 40 ? "d" : "" 
             );                
         }
-      if (e.keyCode < 91 && e.keyCode > 64) {
+      if ((e.keyCode < 91 && e.keyCode > 64) || e.keyCode == 32) {
                 e.preventDefault()
                 }
 

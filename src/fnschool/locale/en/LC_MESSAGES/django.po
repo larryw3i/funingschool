@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-03 06:15+0000\n"
+"POT-Creation-Date: 2025-10-03 16:38+0000\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -104,7 +104,12 @@ msgstr ""
 msgid "Remaining Quantity"
 msgstr ""
 
-#: canteen/templates/canteen/create_consumptions.html:40
+#: canteen/templates/canteen/create_consumptions.html:31
+#, python-format
+msgid "Storaged on %(storage_date)s ."
+msgstr ""
+
+#: canteen/templates/canteen/create_consumptions.html:49
 msgid "Submit"
 msgstr ""
 
@@ -246,19 +251,19 @@ msgstr ""
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr ""
 
-#: canteen/views.py:348
+#: canteen/views.py:355
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:389
+#: canteen/views.py:396
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:409
+#: canteen/views.py:416
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:425
+#: canteen/views.py:432
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""

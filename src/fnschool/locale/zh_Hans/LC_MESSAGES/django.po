@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-03 06:15+0000\n"
-"PO-Revision-Date: 2025-10-03 14:16+0800\n"
+"POT-Creation-Date: 2025-10-03 16:38+0000\n"
+"PO-Revision-Date: 2025-10-04 00:38+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -103,7 +103,12 @@ msgstr "消耗食材"
 msgid "Remaining Quantity"
 msgstr "余量"
 
-#: canteen/templates/canteen/create_consumptions.html:40
+#: canteen/templates/canteen/create_consumptions.html:31
+#, python-format
+msgid "Storaged on %(storage_date)s ."
+msgstr "于 %(storage_date)s 入库."
+
+#: canteen/templates/canteen/create_consumptions.html:49
 msgid "Submit"
 msgstr "提交"
 
@@ -264,19 +269,19 @@ msgstr "当你购买菜品的时候，数量最好不要有小数，因为这是
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:348
+#: canteen/views.py:355
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:389
+#: canteen/views.py:396
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:409
+#: canteen/views.py:416
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:425
+#: canteen/views.py:432
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
