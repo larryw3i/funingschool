@@ -1,6 +1,8 @@
 import re
+from decimal import Decimal
 
 from django.conf import settings
+from django.core.validators import MinValueValidator
 
 # Create your models here.
 from django.db import models
@@ -102,7 +104,10 @@ class Consumption(models.Model):
 
     date_of_using = models.DateField(verbose_name=_("Date"))
     amount_used = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name="消耗数量"
+        max_digits=10,
+        decimal_places=2,
+        verbose_name="消耗数量",
+        validators=[MinValueValidator(Decimal("0.0"))],
     )
     is_disabled = models.BooleanField(
         default=False, verbose_name=_("Is Disabled")

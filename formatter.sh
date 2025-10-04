@@ -10,6 +10,10 @@ fi
 
 . ${venv_dir}/bin/activate
 
+run_prettier() {
+    npx prettier ${src_dir} --ignore-path ${project_dir}/.prettierignore --write
+}
+
 run_djlint() {
     djlint_dir=$(find ${project_dir}/venv/lib/ -type d -name 'djlint')
     if [[ ! ${djlint_dir} ]]; then
@@ -58,5 +62,6 @@ run_djlint
 run_shfmt
 run_isort
 run_black
+run_prettier
 
 # The end.

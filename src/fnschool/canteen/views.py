@@ -485,7 +485,7 @@ class CategoryDeleteView(LoginRequiredMixin, DeleteView):
 class CategoryUpdateView(LoginRequiredMixin, UpdateView):
     model = Category
     template_name = "canteen/category/update.html"
-    sucess_url = reverse_lazy("canteen:close_window")
+    success_url = reverse_lazy("canteen:close_window")
     form_class = CategoryForm
 
     def get_object(self, queryset=None):
