@@ -9,6 +9,17 @@ from django.db.models import Q
 from fnschool import _
 
 
+class Category(models.Model):
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="Categories",
+        verbose_name=_("Ingredient category"),
+    )
+    name = models.CharField(max_length=100, verbose_name=_("Category name"))
+    created_at = models.DateField(verbose_name=_("Creating Date"))
+
+
 class Ingredient(models.Model):
 
     user = models.ForeignKey(
@@ -18,9 +29,15 @@ class Ingredient(models.Model):
         verbose_name=_("User"),
     )
     storage_date = models.DateField(verbose_name=_("Storage Date"))
-    name = models.CharField(max_length=100, verbose_name=_("Ingredient Name"))
+    name = models.CharField(max_length=100, verbose_name=_("ingredient name"))
     meal_type = models.CharField(max_length=50, verbose_name=_("Meal Type"))
-    category = models.CharField(max_length=50, verbose_name=_("Category"))
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.PROTECT,
+        related_name="ingredients",
+        verbose_name=_("Category"),
+    )
+    # models.CharField(max_length=50, verbose_name=_("Category"))
     quantity = models.DecimalField(
         max_digits=10, decimal_places=2, verbose_name=_("Quantity")
     )

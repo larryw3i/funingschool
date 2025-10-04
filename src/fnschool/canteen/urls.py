@@ -7,6 +7,31 @@ app_name = "canteen"
 
 urlpatterns = [
     path(
+        "close_window",
+        views.close_window,
+        name="close_window",
+    ),
+    path(
+        "update_category",
+        views.CategoryUpdateView.as_view(),
+        name="update_category",
+    ),
+    path(
+        "delete_categories",
+        views.CategoryDeleteView.as_view(),
+        name="delete_categories",
+    ),
+    path(
+        "create_category",
+        views.CategoryCreateView.as_view(),
+        name="create_category",
+    ),
+    path(
+        "list_categories",
+        views.CategoryListView.as_view(),
+        name="list_categories",
+    ),
+    path(
         "new_consumption",
         views.new_consumption,
         name="new_consumption",

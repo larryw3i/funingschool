@@ -70,13 +70,13 @@
           <td class="">
             <a class=""
                target="_blank"
-               onclick="open_edit_window('{% url 'canteen:edit_ingredient' ingredient.id %}'); return false;">
+               onclick="open_small_window('{% url 'canteen:edit_ingredient' ingredient.id %}'); return false;">
               {% trans "Edit" %}
             </a>
             |
             <a class="text-danger"
                target="_blank"
-               onclick="open_edit_window('{% url 'canteen:delete_ingredient' ingredient.id %}'); return false;">
+               onclick="open_small_window('{% url 'canteen:delete_ingredient' ingredient.id %}'); return false;">
               {% trans "Delete" %}
             </a>
           </td>

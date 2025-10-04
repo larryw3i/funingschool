@@ -4,7 +4,7 @@ from django import forms
 
 from fnschool import _
 
-from .models import Consumption, Ingredient
+from .models import Category, Consumption, Ingredient
 
 
 class PurchasedIngredientsWorkBookForm(forms.Form):
@@ -61,10 +61,10 @@ class ConsumptionForm(forms.ModelForm):
         }
 
 
-ConsumptionFormSet = forms.modelformset_factory(
-    Consumption,
-    fields=["date_of_using"],
-)
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ["name"]
 
 
 # The end.

@@ -28,7 +28,7 @@ function update_href(query) {
   url.search = params.toString();
   window.location.href = url.href;
 }
-function open_edit_window(url) {
+function open_small_window(url) {
       const size_times = 1 / 4;
       const width = Math.round(screen.width * size_times);
       const height = Math.round(screen.height * size_times);

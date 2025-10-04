@@ -7,13 +7,22 @@ import numpy as np
 import pandas as pd
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import DecimalField, ExpressionWrapper, F, Q, Sum, Value
 from django.db.models.functions import Coalesce
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from django.utils.encoding import escape_uri_path
 from django.views.decorators.http import require_POST
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font
@@ -26,7 +35,7 @@ from .forms import (
     IngredientForm,
     PurchasedIngredientsWorkBookForm,
 )
-from .models import Consumption, Ingredient
+from .models import Category, Consumption, Ingredient
 
 # Create your views here.
 
@@ -197,13 +206,15 @@ def create_consumptions(request, ingredient_id=None):
             form_list.append(form)
 
         return render(
-            request, "canteen/create_consumption.html", {"form_list": form_list}
+            request,
+            "canteen/consumption/_create.html",
+            {"form_list": form_list},
         )
 
     date_range = [str(d) for d in date_range]
     return render(
         request,
-        "canteen/create_consumptions.html",
+        "canteen/consumption/create.html",
         {"ingredients": ingredients, "date_range": date_range},
     )
 
@@ -217,11 +228,11 @@ def delete_ingredient(request, ingredient_id):
             ingredient.delete()
             return render(
                 request,
-                "close.html",
+                "canteen/close.html",
             )
 
     form = IngredientForm(instance=ingredient)
-    return render(request, "canteen/delete_ingredient.html", {"form": form})
+    return render(request, "canteen/ingredient/delete.html", {"form": form})
 
 
 def edit_ingredient(request, ingredient_id):
@@ -233,12 +244,12 @@ def edit_ingredient(request, ingredient_id):
             form.save()
             return render(
                 request,
-                "close.html",
+                "canteen/close.html",
             )
     else:
         form = IngredientForm(instance=ingredient)
 
-    return render(request, "canteen/edit_ingredient.html", {"form": form})
+    return render(request, "canteen/ingredient/edit.html", {"form": form})
 
 
 @login_required
@@ -342,7 +353,7 @@ def list_ingredients(request):
         "headers": headers,
         "per_page": per_page,
     }
-    return render(request, "canteen/list_ingredients.html", context)
+    return render(request, "canteen/ingredient/list.html", context)
 
 
 def create_ingredients(request):
@@ -373,7 +384,7 @@ def create_ingredients(request):
 
     else:
         form = PurchasedIngredientsWorkBookForm()
-    return render(request, "canteen/create_ingredients.html", {"form": form})
+    return render(request, "canteen/ingredient/create.html", {"form": form})
 
 
 def get_template_workbook_of_purchased_ingredients(request):
@@ -441,6 +452,60 @@ def get_template_workbook_of_purchased_ingredients(request):
     )
 
     return response
+
+
+def close_window(request):
+    return render(request, "canteen:close.html")
+
+
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
+    model = Category
+    template_name = "canteen/category/delete.html"
+    sucess_url = reverse_lazy("canteen:close_window")
+
+    def get_object(self, queryset=None):
+        category = super().get_object(queryset)
+        if category.user != self.request.user:
+            raise Http404()
+        return category
+
+
+class CategoryUpdateView(LoginRequiredMixin, UpdateView):
+    model = Category
+    template_name = "canteen/category/update.html"
+    sucess_url = reverse_lazy("canteen:close_window")
+    form_class = CategoryForm
+
+    def get_object(self, queryset=None):
+        category = super().get_object(queryset)
+        if category.user != self.request.user:
+            raise Http404()
+        return category
+
+    def get_initial(self):
+        return {"user": self.request.user, "created_at": datetime.now().date}
+
+
+class CategoryCreateView(LoginRequiredMixin, CreateView):
+    model = Category
+    template_name = "canteen/category/create.html"
+    sucess_url = reverse_lazy("canteen:close_window")
+    form_class = CategoryForm
+
+    def get_initial(self):
+        return {"user": self.request.user, "created_at": datetime.now().date}
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.created_at = datetime.now().date
+        return super().form_valid(form)
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+    template_name = "canteen/category/list.html"
+    context_object_name = "categories"
+    ordering = ["-created_at"]
 
 
 # The end.
