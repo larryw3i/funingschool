@@ -12,14 +12,14 @@ urlpatterns = [
         name="close_window",
     ),
     path(
-        "update_category",
+        "update_category/<int:pk>",
         views.CategoryUpdateView.as_view(),
         name="update_category",
     ),
     path(
-        "delete_categories",
+        "delete_category/<int:pk>",
         views.CategoryDeleteView.as_view(),
-        name="delete_categories",
+        name="delete_category",
     ),
     path(
         "create_category",

@@ -10,7 +10,7 @@
     <a class="btn btn-primary"
        onclick="open_small_window('{% url 'canteen:create_category' %}'); return false;">{% trans "Add" %}</a>
   </div>
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th>#</th>
@@ -28,7 +28,7 @@
           <td>
             <a class="text-primary"
                target="_blank"
-               onclick="open_small_window('{% url 'canteen:edit_category' category.id %}'); return false; ">{% trans "Edit" %}</a>
+               onclick="open_small_window('{% url 'canteen:update_category' category.id %}'); return false; ">{% trans "Edit" %}</a>
             <a class="text-warning"
                onclick="open_small_window('{% url 'canteen:delete_category' category.id %}'); return false; "
                target="_blank">{% trans "Delete" %}</a>

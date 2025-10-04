@@ -250,7 +250,7 @@ def edit_ingredient(request, ingredient_id):
     else:
         form = IngredientForm(instance=ingredient)
 
-    return render(request, "canteen/ingredient/edit.html", {"form": form})
+    return render(request, "canteen/ingredient/_update.html", {"form": form})
 
 
 @login_required
