@@ -250,7 +250,7 @@ def edit_ingredient(request, ingredient_id):
     else:
         form = IngredientForm(instance=ingredient)
 
-    return render(request, "canteen/ingredient/_update.html", {"form": form})
+    return render(request, "canteen/ingredient/update.html", {"form": form})
 
 
 @login_required
@@ -473,7 +473,8 @@ def close_window(request):
 class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     template_name = "canteen/category/delete.html"
-    sucess_url = reverse_lazy("canteen:close_window")
+    success_url = reverse_lazy("canteen:close_window")
+    context_object_name="category"
 
     def get_object(self, queryset=None):
         category = super().get_object(queryset)
