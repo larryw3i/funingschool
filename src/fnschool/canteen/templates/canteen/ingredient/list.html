@@ -22,6 +22,8 @@
     {% endif %}
   </form>
   <div class="d-flex justify-content-end pt-2">
+    <a class="btn btn-primary mx-1"
+       href="{% url "canteen:list_categories" %}">{% trans "Ingredient Categories" %}</a>
     <a class="btn btn-warning mx-1"
        href="{% url "canteen:create_consumptions" %}">{% trans "Consume" %}</a>
     <a class="btn btn-primary" href="{% url "canteen:create_ingredients" %}">{% trans "Add" %}</a>

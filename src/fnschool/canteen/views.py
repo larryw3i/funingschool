@@ -31,10 +31,10 @@ from openpyxl.utils import get_column_letter
 from fnschool import _, count_chinese_characters
 
 from .forms import (
+    CategoryForm,
     ConsumptionForm,
     IngredientForm,
     PurchasedIngredientsWorkBookForm,
-    CategoryForm, 
 )
 from .models import Category, Consumption, Ingredient
 
@@ -371,14 +371,13 @@ def create_ingredients(request):
             for index, row in df.iterrows():
                 category_name = row[category_header[0]]
                 category = Category.objects.filter(
-                    Q(name=category_name)
-                    & Q(user=request.user)
+                    Q(name=category_name) & Q(user=request.user)
                 ).first()
                 if not category:
                     category = Category.objects.create(
-                        user = request.user,
-                        name = category_name,
-                        created_at=datetime.now().date()
+                        user=request.user,
+                        name=category_name,
+                        created_at=datetime.now().date(),
                     )
                 Ingredient.objects.create(
                     user=request.user,
@@ -467,14 +466,14 @@ def get_template_workbook_of_purchased_ingredients(request):
 
 
 def close_window(request):
-    return render(request, "canteen:close.html")
+    return render(request, "canteen/close.html")
 
 
 class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     template_name = "canteen/category/delete.html"
     success_url = reverse_lazy("canteen:close_window")
-    context_object_name="category"
+    context_object_name = "category"
 
     def get_object(self, queryset=None):
         category = super().get_object(queryset)
@@ -509,6 +508,11 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
         return {"user": self.request.user, "created_at": datetime.now().date}
 
     def form_valid(self, form):
+        category_saved = Category.objects.filter(
+            Q(name=form.instance.name) & Q(user=self.request.user)
+        ).first()
+        if category_saved:
+            return redirect("canteen:close_window")
         form.instance.user = self.request.user
         form.instance.created_at = datetime.now().date
         return super().form_valid(form)
