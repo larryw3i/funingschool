@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # fnschool apps.
     "profiles",
     "canteen",
+    "fnschool_tags",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

@@ -53,3 +53,18 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('cookieConsent').style.display = 'none';
     });
 });
+
+function set_page_size() {
+      const page_size = document.querySelector("#page_size").value;
+      set_simple_cookie("page_size",page_size)
+      update_href({ per_page: page_size });
+    }
+
+document.querySelector('[name="page_size"]').addEventListener("submit", function (event) {
+      event.preventDefault();
+      set_page_size();
+    });
+    function set_page(num) {
+      update_href({ page: num });
+    }
+

@@ -87,53 +87,11 @@
       {% endfor %}
     </tbody>
   </table>
-  <div class="pagination">
-    <span class="step-links d-flex justify-content-between align-items-center">
-      {% if page_obj.has_previous %}
-        <a onclick="set_page(1);" class="pe-2">&lt;&lt;</a>
-        <a onclick="set_page({{ page_obj.previous_page_number }});" class="pe-2">&lt;</a>
-      {% endif %}
-      <span class="current">
-        {{ page_obj.number }}/{{ page_obj.paginator.num_pages }}
-      </span>
-      <form method="get" action="" class="form-inline d-flex" name="page_size">
-        <input type="number"
-               name="per_page"
-               id="per_page"
-               class="form-control"
-               min="1"
-               onkeydown="if(event.keyCode==13){set_page_size();return false;}"
-               value="{{ per_page }}"
-               style="width: 80px;
-                      margin: 0 10px" />
-        <button type="button" onclick="set_page_size();" class="btn btn-primary">
-          &#128640;
-        </button>
-      </form>
-      {% if page_obj.has_next %}
-        <a onclick="set_page({{ page_obj.next_page_number }});" class="ps-2">&gt;</a>
-        <a onclick="set_page({{ page_obj.paginator.num_pages }});" class="ps-2">&gt;&gt;</a>
-      {% endif %}
-    </span>
-  </div>
+  {% include 'includes/_paginator.html' %}
   <script>
       function clear_q() {
         update_href({"q":""})
       }
-    const page_size_form = document.querySelector('[name="page_size"]');
-
-    page_size_form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      set_page_size();
-    });
-    function set_page(num) {
-      update_href({ page: num });
-    }
-    function set_page_size() {
-      const page_size = document.querySelector("#per_page").value;
-      set_simple_cookie("per_page",page_size)
-      update_href({ per_page: page_size });
-    }
     function submit_q() {
       const q_value = document.querySelector('input[name="q"]').value;
       update_href({ q: q_value });

@@ -337,11 +337,11 @@ def list_ingredients(request):
     if not sorted:
         ingredients = ingredients.order_by("name")
 
-    per_page = request.GET.get("per_page", "")
-    if not per_page:
-        per_page = request.COOKIES.get("per_page", "")
-    per_page = int(per_page) if str(per_page).isnumeric() else 10
-    paginator = Paginator(ingredients, per_page)
+    page_size = request.GET.get("page_size", "")
+    if not page_size:
+        page_size = request.COOKIES.get("page_size", "")
+    page_size = int(page_size) if str(page_size).isnumeric() else 10
+    paginator = Paginator(ingredients, page_size)
     page_number = request.GET.get("page", 1)
     page_obj = paginator.get_page(page_number)
     headers = [
@@ -352,7 +352,7 @@ def list_ingredients(request):
         "page_obj": page_obj,
         "search_query": search_query_cp,
         "headers": headers,
-        "per_page": per_page,
+        "page_size": page_size,
     }
     return render(request, "canteen/ingredient/list.html", context)
 
@@ -501,7 +501,7 @@ class CategoryUpdateView(LoginRequiredMixin, UpdateView):
 class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = Category
     template_name = "canteen/category/create.html"
-    sucess_url = reverse_lazy("canteen:close_window")
+    success_url = reverse_lazy("canteen:close_window")
     form_class = CategoryForm
 
     def get_initial(self):
@@ -514,7 +514,7 @@ class CategoryCreateView(LoginRequiredMixin, CreateView):
         if category_saved:
             return redirect("canteen:close_window")
         form.instance.user = self.request.user
-        form.instance.created_at = datetime.now().date
+        form.instance.created_at = datetime.now().date()
         return super().form_valid(form)
 
 
@@ -523,6 +523,17 @@ class CategoryListView(LoginRequiredMixin, ListView):
     template_name = "canteen/category/list.html"
     context_object_name = "categories"
     ordering = ["-created_at"]
+
+    paginate_by = 10
+    paginate_orphans = 2
+
+    def get_paginate_by(self, queryset):
+        page_size = self.request.GET.get("page_size")
+        page_size = (
+            page_size if page_size else self.request.COOKIES.get("page_size")
+        )
+        page_size = page_size if page_size else self.paginate_by
+        return int(page_size)
 
 
 # The end.
