@@ -43,15 +43,17 @@
       </tbody>
     </table>
   </div>
-  <div>
+  <div class="">
     <button onclick="submit_consumptions();"
             class="btn btn-submit-consumptions btn-primary float-start">
       {% trans "Submit" %}
     </button>
-    <button onclick="submit_consumptions();"
+    <button onclick="generate_spreadsheet();"
             class="btn btn-submit-consumptions btn-success float-end">
       {% trans "Generate Spreadsheet" %}
     </button>
+    <select class="month-select form-select float-end mx-2" style="width:118px;">
+    </select>
   </div>
   <script>
     function is_weekend(date) {
@@ -61,6 +63,17 @@
     var ingredient_ids = [ 
       {% for ingredient in ingredients %}"{{ingredient.id}}",{% endfor %}
     ];
+    var monthes = [...new Set(
+      [
+      {% for date_h in date_range %}
+        '{{date_h}}',
+      {% endfor %}
+    ].map(item => item.slice(0,-3)))]
+
+    $(monthes).each(function(index,value){ 
+      $('.month-select').append(`<option>${value}</option>`)
+    });
+
     var ingredient_ids_length = ingredient_ids.length
     
     $(document).ready(function(){
@@ -151,16 +164,25 @@
      amount_used_input.first().focus()
 
    }
-
-
     });
-    function submit_consumptions() {
+
+    function generate_spreadsheet() {
+      submit_consumptions(function (){
+        var month = $(".month-select").val()
+        $.get(`/canteen/generate_spreadsheet/${month}`);
+      });
+       
+    }
+    function submit_consumptions(fn) {
       consumption_forms =  $('form[name="consumption_form"]')
       consumption_forms_length = consumption_forms.length
       consumption_forms.each(function(index) {
           var form = $(this);
          if (form.data("is_disabled")=="True"){
            if (index === consumption_forms_length - 1){
+             if (! fn != undefined){
+               fn()
+             }
              location.reload(true);
           }
 
@@ -168,6 +190,10 @@
          }
          if (form.find('input[name="amount_used"]').val().length < 1){
            if (index === consumption_forms_length - 1){
+             if (! fn != undefined){
+               fn()
+             }
+
              location.reload(true);
           }
 
@@ -179,6 +205,10 @@
         data: form.serialize(),
         success: function(response) {
           if (index === consumption_forms_length - 1){
+            if (! fn != undefined){
+               fn()
+             }
+
             location.reload(true);
           }
         },

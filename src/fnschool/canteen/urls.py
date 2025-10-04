@@ -7,6 +7,11 @@ app_name = "canteen"
 
 urlpatterns = [
     path(
+        "generate_spreadsheet/<str:month>",
+        views.generate_spreadsheet,
+        name="generate_spreadsheet",
+    ),
+    path(
         "close_window",
         views.close_window,
         name="close_window",

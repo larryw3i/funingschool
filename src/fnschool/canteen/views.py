@@ -469,6 +469,11 @@ def close_window(request):
     return render(request, "canteen/close.html")
 
 
+def generate_spreadsheet(request, month):
+
+    return
+
+
 class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     template_name = "canteen/category/delete.html"
