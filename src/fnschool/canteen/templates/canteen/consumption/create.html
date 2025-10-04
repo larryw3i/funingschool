@@ -43,10 +43,16 @@
       </tbody>
     </table>
   </div>
-  <button onclick="submit_consumptions();"
-          class="btn btn-submit-consumptions btn-primary">
-    {% trans "Submit" %}
-  </button>
+  <div>
+    <button onclick="submit_consumptions();"
+            class="btn btn-submit-consumptions btn-primary float-start">
+      {% trans "Submit" %}
+    </button>
+    <button onclick="submit_consumptions();"
+            class="btn btn-submit-consumptions btn-success float-end">
+      {% trans "Generate Spreadsheet" %}
+    </button>
+  </div>
   <script>
     function is_weekend(date) {
       const dayOfWeek = date.getDay(); 
