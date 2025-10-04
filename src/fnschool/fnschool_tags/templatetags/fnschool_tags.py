@@ -17,3 +17,11 @@ def param_replace(context, **kwargs):
             query[key] = value
 
     return urlencode(query)
+
+
+@register.simple_tag
+def multiply(a, b, *args):
+    result = float(a) * float(b)
+    for arg in args:
+        result *= float(arg)
+    return result
