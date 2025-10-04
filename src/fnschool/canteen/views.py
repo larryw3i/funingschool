@@ -486,8 +486,8 @@ def generate_spreadsheet(request, month):
         ),
     )
     filename = (
-        _("Canteen Daybook WorkBook ({month})").format(
-            month=month.replace("-", "")
+        _("Canteen Daybook WorkBook ({month}) of {affiliation}").format(
+            month=month.replace("-", ""), affiliation=request.user.affiliation
         )
         + ".xlsx"
     )

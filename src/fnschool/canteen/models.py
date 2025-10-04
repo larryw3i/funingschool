@@ -20,6 +20,9 @@ class Category(models.Model):
     )
     name = models.CharField(max_length=100, verbose_name=_("Category name"))
     created_at = models.DateField(verbose_name=_("Creating Date"))
+    is_disabled = models.BooleanField(
+        default=False, verbose_name=_("Is Disabled")
+    )
 
     def __str__(self):
         return self.name

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-04 14:22+0000\n"
-"PO-Revision-Date: 2025-10-04 22:22+0800\n"
+"POT-Creation-Date: 2025-10-04 20:37+0000\n"
+"PO-Revision-Date: 2025-10-05 04:37+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -393,6 +393,73 @@ msgstr "FNSCHOOL 的作者们"
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
+#: canteen/views.py:489
+#, python-brace-format
+msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
+msgstr "{affiliation}食堂出入库工作簿（{month}）"
+
+#: canteen/workbook/generate.py:62
+msgid "Sheet Cover"
+msgstr "六大类总封面"
+
+#: canteen/workbook/generate.py:63
+msgid "Sheet Storage"
+msgstr "入库汇总表"
+
+#: canteen/workbook/generate.py:65
+msgid "Sheet Storage List"
+msgstr "入库单"
+
+#: canteen/workbook/generate.py:68
+msgid "Sheet Non-Storage"
+msgstr "未入库汇总表"
+
+#: canteen/workbook/generate.py:71
+msgid "Sheet Non-Storage List"
+msgstr "未入库明细表"
+
+#: canteen/workbook/generate.py:74
+msgid "Sheet Consumption"
+msgstr "出库汇总表"
+
+#: canteen/workbook/generate.py:77
+msgid "Sheet Consumption List"
+msgstr "出库单"
+
+#: canteen/workbook/generate.py:79
+msgid "Sheet Surplus"
+msgstr "食材盘存表"
+
+#: canteen/workbook/generate.py:104
+#, python-brace-format
+msgid ""
+"Table of {affiliation} Canteen Ingredients Procurement Statistics in "
+"{month:0>2} {year}"
+msgstr "{affiliation}{year}年{month:0>2}月份食堂食品采购统计表"
+
+#: canteen/workbook/generate.py:122
+msgid "Ingredient Categories (cover sheet)"
+msgstr "类别"
+
+#: canteen/workbook/generate.py:128
+msgid "Ingredient Total Prices"
+msgstr "合计金额"
+
+#: canteen/workbook/generate.py:134
+msgid "Procurement Note"
+msgstr "备注"
+
+#: canteen/workbook/generate.py:163 canteen/workbook/generate.py:187
+#, python-brace-format
+msgid ""
+"Total price of storaged ingredients is {0}, total price of non-storaged "
+"ingredients is {1}."
+msgstr "入库 {0} 元，未入库 {1} 元。"
+
+#: canteen/workbook/generate.py:181
+msgid "Procurement Summary"
+msgstr "合计"
+
 #: fnschool/settings.py:137
 msgid "English"
 msgstr "英语"
@@ -698,11 +765,6 @@ msgstr "注册"
 #, fuzzy
 #~| msgid "Consumption Record"
 #~ msgid "Consumption sum sheet"
-#~ msgstr "消耗记录"
-
-#, fuzzy
-#~| msgid "Consumption Record"
-#~ msgid "Consumption list sheet"
 #~ msgstr "消耗记录"
 
 #, fuzzy

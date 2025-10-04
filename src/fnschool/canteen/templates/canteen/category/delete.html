@@ -7,18 +7,28 @@
 {% endblock %}
 {% block content %}
   <h5 class="">
-    {% blocktrans with instance_name=category.name%}
+    {% blocktrans with instance_name=category.name %}
         Delete category {{ instance_name }} .
       {% endblocktrans %}
   </h5>
   <p>
     <dl>
-      {% for field in form %}
-        <dt>{{ field.label }}</dt>
-        <dd>
-          {{ field.value }}
-        </dd>
-      {% endfor %}
+      <dt>{% trans 'Category Name' %}</dt>
+      <dd>
+        {{ category.name }}
+      </dd>
+      <dt>{% trans 'Created at' %}</dt>
+      <dd>
+        {{ category.created_at }}
+      </dd>
+      <dt>{% trans 'Is Disabled' %}</dt>
+      <dd>
+        {% if category.is_disabled %}
+          {% trans "Yes" %}
+        {% else %}
+          {% trans "No" %}
+        {% endif %}
+      </dd>
     </dl>
   </p>
   <p class="text-danger">

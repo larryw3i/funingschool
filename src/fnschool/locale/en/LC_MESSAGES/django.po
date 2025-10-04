@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-04 14:22+0000\n"
+"POT-Creation-Date: 2025-10-04 20:37+0000\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -359,6 +359,73 @@ msgstr ""
 #: canteen/views.py:454
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
+msgstr ""
+
+#: canteen/views.py:489
+#, python-brace-format
+msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
+msgstr ""
+
+#: canteen/workbook/generate.py:62
+msgid "Sheet Cover"
+msgstr ""
+
+#: canteen/workbook/generate.py:63
+msgid "Sheet Storage"
+msgstr ""
+
+#: canteen/workbook/generate.py:65
+msgid "Sheet Storage List"
+msgstr ""
+
+#: canteen/workbook/generate.py:68
+msgid "Sheet Non-Storage"
+msgstr ""
+
+#: canteen/workbook/generate.py:71
+msgid "Sheet Non-Storage List"
+msgstr ""
+
+#: canteen/workbook/generate.py:74
+msgid "Sheet Consumption"
+msgstr ""
+
+#: canteen/workbook/generate.py:77
+msgid "Sheet Consumption List"
+msgstr ""
+
+#: canteen/workbook/generate.py:79
+msgid "Sheet Surplus"
+msgstr ""
+
+#: canteen/workbook/generate.py:104
+#, python-brace-format
+msgid ""
+"Table of {affiliation} Canteen Ingredients Procurement Statistics in "
+"{month:0>2} {year}"
+msgstr ""
+
+#: canteen/workbook/generate.py:122
+msgid "Ingredient Categories (cover sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:128
+msgid "Ingredient Total Prices"
+msgstr ""
+
+#: canteen/workbook/generate.py:134
+msgid "Procurement Note"
+msgstr ""
+
+#: canteen/workbook/generate.py:163 canteen/workbook/generate.py:187
+#, python-brace-format
+msgid ""
+"Total price of storaged ingredients is {0}, total price of non-storaged "
+"ingredients is {1}."
+msgstr ""
+
+#: canteen/workbook/generate.py:181
+msgid "Procurement Summary"
 msgstr ""
 
 #: fnschool/settings.py:137
