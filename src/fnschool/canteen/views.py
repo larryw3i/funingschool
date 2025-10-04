@@ -34,6 +34,7 @@ from .forms import (
     ConsumptionForm,
     IngredientForm,
     PurchasedIngredientsWorkBookForm,
+    CategoryForm, 
 )
 from .models import Category, Consumption, Ingredient
 
@@ -368,16 +369,27 @@ def create_ingredients(request):
             df = pd.read_excel(workbook_file)
 
             for index, row in df.iterrows():
+                category_name = row[category_header[0]]
+                category = Category.objects.filter(
+                    Q(name=category_name)
+                    & Q(user=request.user)
+                ).first()
+                if not category:
+                    category = Category.objects.create(
+                        user = request.user,
+                        name = category_name,
+                        created_at=datetime.now().date()
+                    )
                 Ingredient.objects.create(
                     user=request.user,
                     storage_date=row[storage_date_header[0]],
                     name=row[ingredient_name_header[0]],
                     meal_type=row[meal_type_header[0]],
-                    category=row[category_header[0]],
+                    category=category,
                     quantity=row[quantity_header[0]],
                     total_price=row[total_price_header[0]],
                     quantity_unit_name=row[quantity_unit_name_header[0]],
-                    is_ignorable=not row[is_ignorable_header[0]] == np.nan,
+                    is_ignorable=not row[is_ignorable_header[0]] is np.nan,
                 )
 
             return redirect("canteen:list_ingredients")

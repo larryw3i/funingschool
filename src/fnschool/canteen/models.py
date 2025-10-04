@@ -19,6 +19,9 @@ class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name=_("Category name"))
     created_at = models.DateField(verbose_name=_("Creating Date"))
 
+    def __str__(self):
+        return self.name
+
 
 class Ingredient(models.Model):
 
@@ -29,7 +32,7 @@ class Ingredient(models.Model):
         verbose_name=_("User"),
     )
     storage_date = models.DateField(verbose_name=_("Storage Date"))
-    name = models.CharField(max_length=100, verbose_name=_("ingredient name"))
+    name = models.CharField(max_length=100, verbose_name=_("Ingredient Name"))
     meal_type = models.CharField(max_length=50, verbose_name=_("Meal Type"))
     category = models.ForeignKey(
         Category,
