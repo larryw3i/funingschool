@@ -63,15 +63,23 @@
     var ingredient_ids = [ 
       {% for ingredient in ingredients %}"{{ingredient.id}}",{% endfor %}
     ];
-    var monthes = [...new Set(
-      [
-      {% for date_h in date_range %}
-        '{{date_h}}',
-      {% endfor %}
-    ].map(item => item.slice(0,-3)))]
 
-    $(monthes).each(function(index,value){ 
-      $('.month-select').append(`<option>${value}</option>`)
+    $(document).ready(function(){
+      var monthes = [...new Set(
+        [
+        {% for date_h in date_range %}
+          '{{date_h}}',
+        {% endfor %}
+      ].map(item => item.slice(0,-3)))]
+
+      $(monthes).each(function(index,value){ 
+        $('.month-select').append(`<option>${value}</option>`)
+      });
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = now.getMonth() + 1;
+      $('.month-select').val(`${year}-${month}`)
+
     });
 
     var ingredient_ids_length = ingredient_ids.length
@@ -247,7 +255,7 @@ body{
       position: -webkit-sticky; 
       position: sticky;
       top: 0; 
-      z-index: 1020; 
+      z-index: 1010; 
   }
 
   .table tr {
@@ -257,25 +265,29 @@ body{
       position: -webkit-sticky; 
       position: sticky;
       left: 0;
-      z-index: 1020; 
+      z-index: 1010; 
       white-space: nowrap;
   }
 
   .table tr > :nth-child(2) {
       position: -webkit-sticky; 
       position: sticky;
-      z-index: 1020; 
+      z-index: 1010; 
   }
   .table thead tr {
       font-size:15px;
   }
    .table thead tr > :nth-child(1) {
-      z-index: 1030;
+      z-index: 1020;
       white-space: nowrap;
   }
   .table thead tr > :nth-child(2) {
-      z-index: 1030; 
+      z-index: 1020; 
   }
+
+nav li {
+  z-index: 1030;
+}
 
   </style>
 {% endblock %}
