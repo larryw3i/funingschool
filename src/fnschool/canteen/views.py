@@ -470,7 +470,7 @@ def close_window(request):
 
 
 def generate_spreadsheet(request, month):
-    from .workbook.run import Run
+    from .workbook.generate import get_workbook
 
     wb = get_workbook(request, month)
 
@@ -486,8 +486,8 @@ def generate_spreadsheet(request, month):
         ),
     )
     filename = (
-        _("Canteen Consumptions WorkBook ({month})").format(
-            month.replace("-", "")
+        _("Canteen Daybook WorkBook ({month})").format(
+            month=month.replace("-", "")
         )
         + ".xlsx"
     )
@@ -498,8 +498,6 @@ def generate_spreadsheet(request, month):
     )
 
     return response
-
-    return
 
 
 class CategoryDeleteView(LoginRequiredMixin, DeleteView):

@@ -177,19 +177,19 @@
     function generate_spreadsheet() {
       submit_consumptions(function (){
         var month = $(".month-select").val()
-        $.get(`/canteen/generate_spreadsheet/${month}`);
+        window.open(`/canteen/generate_spreadsheet/${month}`, '_blank'); 
       });
        
     }
     function submit_consumptions(fn) {
       consumption_forms =  $('form[name="consumption_form"]')
       consumption_forms_length = consumption_forms.length
-      consumption_forms.each(function(index) {
+      consumption_forms.each( function(index) {
           var form = $(this);
          if (form.data("is_disabled")=="True"){
            if (index === consumption_forms_length - 1){
-             if (! fn != undefined){
-               fn()
+             if ( fn != undefined){
+                 fn()
              }
              location.reload(true);
           }
@@ -198,8 +198,8 @@
          }
          if (form.find('input[name="amount_used"]').val().length < 1){
            if (index === consumption_forms_length - 1){
-             if (! fn != undefined){
-               fn()
+             if ( fn != undefined){
+                fn()
              }
 
              location.reload(true);
@@ -213,8 +213,8 @@
         data: form.serialize(),
         success: function(response) {
           if (index === consumption_forms_length - 1){
-            if (! fn != undefined){
-               fn()
+            if ( fn != undefined){
+                fn()
              }
 
             location.reload(true);
