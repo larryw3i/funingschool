@@ -19,6 +19,7 @@ from django.db.models.functions import Coalesce
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
+from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.views.decorators.http import require_POST
 from django.views.generic import (
@@ -154,21 +155,9 @@ def get_CNY_TEXT(amount):
     return output
 
 
-def get_system_language():
-
-    env_vars = ["LANG", "LC_ALL", "LC_MESSAGES", "LANGUAGE"]
-    for var in env_vars:
-        lang = os.environ.get(var)
-        if lang:
-            if "." in lang:
-                lang = lang.split(".")[0]
-            return lang
-    return None
-
-
 def is_zh_CN():
-    lang = get_system_language()
-    return lang == "zh_CN"
+    lang = translation.get_language()
+    return lang.lower() in ["zh-cn", "zh-hans"]
 
 
 def set_column_width_in_inches(worksheet, column, inches):
@@ -254,7 +243,7 @@ class CanteenWorkBook:
                     ]
                 )
             )
-            if is_zh_CN
+            if self.is_zh_CN
             else False
         )
         self._is_school = is_school
@@ -358,7 +347,7 @@ class CanteenWorkBook:
         summary_row_num = len(categories) + header_row_num + 1
         summary_total_price = sum([i.total_price for i in ingredients])
         summary_total_price_cell = sheet.cell(summary_row_num, 1)
-        total_price_cell.border = self.thin_border
+        summary_total_price_cell.border = self.thin_border
         summary_total_price_cell.value = (
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
@@ -366,7 +355,7 @@ class CanteenWorkBook:
                 total_price_text=get_CNY_TEXT(summary_total_price),
                 total_price=summary_total_price,
             )
-            if is_zh_CN
+            if self.is_zh_CN
             else _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
@@ -531,7 +520,7 @@ class CanteenWorkBook:
                 total_price_text=get_CNY_TEXT(summary_total_price),
                 total_price=summary_total_price,
             )
-            if is_zh_CN
+            if self.is_zh_CN
             else _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
@@ -627,6 +616,7 @@ class CanteenWorkBook:
                 / (ingredient_rows_count - len(empty_categories))
             )
             step = math.floor(len(dated_ingredients) / same_date_count)
+            sub_storage_num = 1
             for index in range(0, len(dated_ingredients), step):
                 split_dated_ingredients = dated_ingredients[
                     index : index + step
@@ -668,12 +658,16 @@ class CanteenWorkBook:
                     split_dated_ingredients, key=lambda i: (i.category.name)
                 )
 
-                storage_date_index = index
+                storage_date_index = sub_storage_num
                 storaged_ingredients.append(
                     [storage_date, storage_date_index, split_dated_ingredients]
                 )
 
-        storage_num = 1
+                sub_storage_num += 1
+
+            print([i[:2] for i in storaged_ingredients])
+
+        storage_num = 0
         for index, (
             storage_date,
             storage_date_index,
@@ -708,14 +702,26 @@ class CanteenWorkBook:
                 _("{day:0>2} {month:0>2} {year}  Quantity Unit Name: CNY")
             ).format(year=self.year, month=self.month, day=storage_date.day)
 
+            if storage_date_index < 2:
+                storage_num += 1
+
             sub_title_num_cell_row_num = title_cell_row_num + 1
             sub_title_num_cell = sheet.cell(sub_title_num_cell_row_num, 7)
             sub_title_num_cell.font = self.font_12
-            sub_title_num_cell.value = (_("Storage No. {storage_num}")).format(
-                storage_num=storage_num
+            sub_title_num_cell.value = _("Storage No. {storage_num}").format(
+                storage_num=(
+                    f"R{self.month:0>2}{storage_num:0>2}"
+                    if self.is_zh_CN
+                    else f"S{self.month:0>2}{storage_num:0>2}"
+                )
+            ) + (
+                _("(Sub Storage No. {sub_storage_num})").format(
+                    sub_storage_num=storage_date_index
+                )
+                if sub_storage_num > 1
+                else ""
             )
-            if storage_date_index < 1:
-                storage_num += 1
+            print(storage_num)
 
             sheet.merge_cells(
                 f"A{sub_title_affiliation_cell_row_num}:B{sub_title_affiliation_cell_row_num}"
@@ -803,7 +809,8 @@ class CanteenWorkBook:
                                 for i in dated_ingredients
                                 if i.category == ingredient.category
                             ]
-                        ),
+                        )
+                        or "",
                     )
                     ingredients_same_category_len = len(
                         [
@@ -822,9 +829,29 @@ class CanteenWorkBook:
 
                 sheet.cell(ingredient_row_num, 2, ingredient.name)
                 sheet.cell(ingredient_row_num, 3, ingredient.quantity_unit_name)
-                sheet.cell(ingredient_row_num, 4, ingredient.quantity)
-                sheet.cell(ingredient_row_num, 5, ingredient.unit_price)
-                sheet.cell(ingredient_row_num, 6, ingredient.total_price)
+                sheet.cell(
+                    ingredient_row_num,
+                    4,
+                    f"{ingredient.quantity:.2f}" if ingredient.quantity else "",
+                )
+                sheet.cell(
+                    ingredient_row_num,
+                    5,
+                    (
+                        f"{ingredient.unit_price:.2f}"
+                        if ingredient.unit_price
+                        else ""
+                    ),
+                )
+                sheet.cell(
+                    ingredient_row_num,
+                    6,
+                    (
+                        f"{ingredient.total_price:.2f}"
+                        if ingredient.total_price
+                        else ""
+                    ),
+                )
                 set_row_height_in_inches(
                     sheet, ingredient_row_num, ingredient_row_height
                 )
@@ -844,9 +871,23 @@ class CanteenWorkBook:
             signature_cell = sheet.cell(signature_row_num, 1)
             signature_cell.value = _(
                 "   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
-            ).format(handler=user)
+            ).format(handler=user.username)
             signature_cell.font = self.font_14
             signature_cell.alignment = self.center_alignment
+            sheet.merge_cells(f"A{signature_row_num}:H{signature_row_num}")
+            set_row_height_in_inches(sheet, signature_row_num, 0.22)
+
+        for col_num, col_width in [
+            [1, 1.13],
+            [2, 1.98],
+            [3, 0.85],
+            [4, 0.85],
+            [5, 0.88],
+            [6, 1.28],
+            [7, 1.19],
+            [8, 0.78],
+        ]:
+            set_column_width_in_inches(sheet, col_num, col_width)
 
     def fill_in_cover_sheet(self):
         sheet = self.cover_sheet
