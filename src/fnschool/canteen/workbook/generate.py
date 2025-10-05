@@ -345,6 +345,7 @@ class CanteenWorkBook:
         summary_row_num = len(categories) + header_row_num + 1
         summary_total_price = sum([i.total_price for i in ingredients])
         summary_total_price_cell = sheet.cell(summary_row_num, 1)
+        total_price_cell.border = self.thin_border
         summary_total_price_cell.value = (
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
@@ -365,18 +366,21 @@ class CanteenWorkBook:
 
         handler_row_num = summary_row_num + 1
         handler_cell = sheet.cell(handler_row_num, 1)
+        handler_cell.border = self.thin_border
         handler_cell.value = _("Handler:")
         sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
         set_row_height_in_inches(sheet, handler_row_num, 0.32)
 
         reviewer_row_num = handler_row_num + 1
         reviewer_cell = sheet.cell(reviewer_row_num, 1)
+        reviewer_cell.border = self.thin_border
         reviewer_cell.value = _("Reviewer:")
         sheet.merge_cells(f"A{reviewer_row_num}:C{reviewer_row_num}")
         set_row_height_in_inches(sheet, reviewer_row_num, 0.32)
 
         supervisor_row_num = reviewer_row_num + 1
         supervisor_cell = sheet.cell(supervisor_row_num, 1)
+        supervisor_cell.border = self.thin_border
         supervisor_cell.value = (
             _("Principal's Signature:")
             if self.is_school
@@ -387,6 +391,7 @@ class CanteenWorkBook:
 
         note_row_num = supervisor_row_num + 1
         note_cell = sheet.cell(note_row_num, 1)
+        note_cell.border = self.thin_border
         note_cell.value = (
             _(
                 "Note: This form is a summary of all monthly food and "
