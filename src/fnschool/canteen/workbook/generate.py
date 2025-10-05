@@ -1,6 +1,8 @@
 import calendar
 import io
+import math
 import os
+import random
 import re
 from datetime import date, datetime
 from decimal import ROUND_HALF_UP, Decimal
@@ -216,6 +218,7 @@ class CanteenWorkBook:
             bottom=Side(style="thin"),
         )
         self.font_16_bold = Font(size=16, bold=True)
+        self.font_20_bold = Font(size=20, bold=True)
         self.font_12 = Font(size=12)
         self.font_12_bold = Font(size=12, bold=True)
 
@@ -584,6 +587,91 @@ class CanteenWorkBook:
         )
         sheet.merge_cells(f"A{note_row_num}:C{note_row_num}")
         set_row_height_in_inches(sheet, note_row_num, 0.27)
+
+    def fill_in_storage_list_sheet(self):
+        sheet = self.storage_list_sheet
+        user = self.user
+        ingredient_rows_count = 21
+        ingredients = Ingredient.objects.filter(
+            Q(user=user)
+            & Q(is_disabled=False)
+            & Q(is_ignorable=False)
+            & Q(storage_date__gte=self.date_start)
+            & Q(storage_date__lte=self.date_end)
+        ).all()
+        categories = Category.objects.filter(
+            Q(user=user) & Q(is_disabled=False)
+        ).all()
+        ingredient_row_height = 0.18
+        ingredient_rows_height = ingredient_rows_count * 0.18
+        storage_dates = list(set([i.storage_date for i in ingredients]))
+
+        storaged_ingredients = []
+        for storage_date in storage_dates:
+            dated_ingredients = [
+                i for i in ingredients if i.storage_date == storage_date
+            ]
+            dated_ingredient_categories = list(
+                set([i.category for i in ingredients])
+            )
+            empty_categories = [
+                c for c in categories if not c in dated_ingredient_categories
+            ]
+            same_date_count = math.ceil(
+                len(dated_ingredients)
+                / (ingredient_rows_count - len(empty_categories))
+            )
+            step = math.floor(len(dated_ingredients) / same_date_count)
+            for index in range(0, len(dated_ingredients), step):
+                split_dated_ingredients = dated_ingredients[
+                    index : index + step
+                ]
+                split_dated_ingredient = split_dated_ingredients[0]
+                split_dated_ingredient_categories = list(
+                    set([i.category for i in split_dated_ingredients])
+                )
+                split_empty_categories = [
+                    c
+                    for c in split_dated_ingredient_categories
+                    if not c in categories
+                ]
+
+                split_dated_ingredients += [
+                    Ingredient(
+                        user=user,
+                        name="",
+                        storage_date=storage_date,
+                        meal_type=new_dated_ingredient.meal_type,
+                        category=c,
+                        quantity=0.0,
+                        quantity_unit_name="",
+                        total_price=0.0,
+                        is_ignorable=False,
+                    )
+                    for c in split_empty_categories
+                    + random.sample(
+                        categories,
+                        k=(
+                            ingredient_rows_count
+                            - len(split_dated_ingredients)
+                            - len(split_empty_categories)
+                        ),
+                    )
+                ]
+
+                storage_date_index = index
+                storaged_ingredients.append(
+                    [storage_date, storage_date_index, split_dated_ingredients]
+                )
+
+        for index, (
+            storage_date,
+            storage_date_index,
+            dated_ingredients,
+        ) in enumerate(storaged_ingredients):
+            row_num = (ingredient_rows_count + 6) * index + 1
+            title_cell = sheet.cell(row_num, 1)
+            title_cell.value = _("Storage List (Storage Sheet)")
 
     def fill_in_cover_sheet(self):
         sheet = self.cover_sheet

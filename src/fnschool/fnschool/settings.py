@@ -47,9 +47,9 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",  # For Bootstrap 5
     # fnschool apps.
+    "fnschool",
     "profiles",
     "canteen",
-    "fnschool_tags",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
