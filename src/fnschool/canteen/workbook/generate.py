@@ -1,5 +1,6 @@
 import calendar
 import io
+import os
 import re
 from datetime import date, datetime
 from decimal import ROUND_HALF_UP, Decimal
@@ -394,7 +395,7 @@ class CanteenWorkBook:
                 + "the school seal by the principal as reimbursement "
                 + "evidence."
             )
-            if is_school
+            if self.is_school
             else _(
                 "Note: This form is a summary of all monthly food and "
                 + "material inventory receipts from the cafeteria. "
@@ -521,7 +522,7 @@ class CanteenWorkBook:
 
     def fill_in(self):
         self.fill_in_cover_sheet()
-        # self.fill_in_storage_sheet()
+        self.fill_in_storage_sheet()
         # self.fill_in_storage_list_sheet()
         # self.fill_in_non_storage_sheet()
         # self.fill_in_non_storage_list_sheet()
