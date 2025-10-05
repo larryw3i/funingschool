@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-05 04:38+0000\n"
-"PO-Revision-Date: 2025-10-05 12:38+0800\n"
+"POT-Creation-Date: 2025-10-05 18:30+0000\n"
+"PO-Revision-Date: 2025-10-06 02:35+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -409,45 +409,45 @@ msgstr "购入食材工作表（{0}）"
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
 msgstr "{affiliation}食堂出入库工作簿（{month}）"
 
-#: canteen/workbook/generate.py:191
+#: canteen/workbook/generate.py:193
 msgid "Sheet Cover"
 msgstr "六大类总封面"
 
-#: canteen/workbook/generate.py:192
+#: canteen/workbook/generate.py:194
 msgid "Sheet Storage"
 msgstr "入库汇总表"
 
-#: canteen/workbook/generate.py:194
+#: canteen/workbook/generate.py:196
 msgid "Sheet Storage List"
 msgstr "入库单"
 
-#: canteen/workbook/generate.py:197
+#: canteen/workbook/generate.py:199
 msgid "Sheet Non-Storage"
 msgstr "未入库汇总表"
 
-#: canteen/workbook/generate.py:200
+#: canteen/workbook/generate.py:202
 msgid "Sheet Non-Storage List"
 msgstr "未入库明细表"
 
-#: canteen/workbook/generate.py:203
+#: canteen/workbook/generate.py:205
 msgid "Sheet Consumption"
 msgstr "出库汇总表"
 
-#: canteen/workbook/generate.py:206
+#: canteen/workbook/generate.py:208
 msgid "Sheet Consumption List"
 msgstr "出库单"
 
-#: canteen/workbook/generate.py:208
+#: canteen/workbook/generate.py:210
 msgid "Sheet Surplus"
 msgstr "食材盘存表"
 
-#: canteen/workbook/generate.py:263
+#: canteen/workbook/generate.py:268
 #, python-brace-format
 msgid ""
 "Table of {superior_department} Canteen Non-Storaged Ingredients Statistics"
 msgstr "{superior_department}食堂食品、材料未入库汇总报销单"
 
-#: canteen/workbook/generate.py:282 canteen/workbook/generate.py:448
+#: canteen/workbook/generate.py:287 canteen/workbook/generate.py:452
 #, python-brace-format
 msgid ""
 "Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}."
@@ -456,42 +456,42 @@ msgstr ""
 "编制单位：{affiliation}        单位：元         {year}年{month:0>2}月"
 "{day:0>2}日"
 
-#: canteen/workbook/generate.py:292 canteen/workbook/generate.py:458
+#: canteen/workbook/generate.py:297 canteen/workbook/generate.py:462
 msgid "Ingredient Categories (storage sheet)"
 msgstr "类别"
 
-#: canteen/workbook/generate.py:296 canteen/workbook/generate.py:462
+#: canteen/workbook/generate.py:301 canteen/workbook/generate.py:466
 msgid "Ingredient Total Prices (storage sheet)"
 msgstr "合  计"
 
-#: canteen/workbook/generate.py:300 canteen/workbook/generate.py:466
-#: canteen/workbook/generate.py:618
+#: canteen/workbook/generate.py:305 canteen/workbook/generate.py:470
+#: canteen/workbook/generate.py:876
 msgid "Procurement Note"
 msgstr "备注"
 
-#: canteen/workbook/generate.py:359 canteen/workbook/generate.py:366
-#: canteen/workbook/generate.py:525 canteen/workbook/generate.py:532
+#: canteen/workbook/generate.py:364 canteen/workbook/generate.py:371
+#: canteen/workbook/generate.py:529 canteen/workbook/generate.py:536
 #, python-brace-format
 msgid "Total Price Text: {total_price_text}        {total_price}"
 msgstr "总金额（大写）：{total_price_text}    ¥{total_price}"
 
-#: canteen/workbook/generate.py:378 canteen/workbook/generate.py:544
+#: canteen/workbook/generate.py:383 canteen/workbook/generate.py:548
 msgid "Handler:"
 msgstr "经办人："
 
-#: canteen/workbook/generate.py:385 canteen/workbook/generate.py:551
+#: canteen/workbook/generate.py:390 canteen/workbook/generate.py:555
 msgid "Reviewer:"
 msgstr "审核人："
 
-#: canteen/workbook/generate.py:393 canteen/workbook/generate.py:559
+#: canteen/workbook/generate.py:398 canteen/workbook/generate.py:563
 msgid "Principal's Signature:"
 msgstr "校长签字："
 
-#: canteen/workbook/generate.py:395 canteen/workbook/generate.py:561
+#: canteen/workbook/generate.py:400 canteen/workbook/generate.py:565
 msgid "Supervisor's Signature:"
 msgstr "主管签字："
 
-#: canteen/workbook/generate.py:405 canteen/workbook/generate.py:571
+#: canteen/workbook/generate.py:410 canteen/workbook/generate.py:575
 msgid ""
 "Note: This form is a summary of all monthly food and material inventory "
 "receipts from the cafeteria. After verification, it will be signed and "
@@ -500,7 +500,7 @@ msgstr ""
 "注：此单为每月食堂食品、材料所有入库单的汇总，审核属实后，校长签字加盖学校公"
 "章作为报销凭据。"
 
-#: canteen/workbook/generate.py:413 canteen/workbook/generate.py:579
+#: canteen/workbook/generate.py:418 canteen/workbook/generate.py:583
 msgid ""
 "Note: This form is a summary of all monthly food and material inventory "
 "receipts from the cafeteria. After verification, it will be signed and "
@@ -510,34 +510,101 @@ msgstr ""
 "注：此单为每月食堂食品、材料所有入库单的汇总，审核属实后，主管签字加盖单位公"
 "章作为报销凭据。"
 
-#: canteen/workbook/generate.py:429
+#: canteen/workbook/generate.py:433
 #, python-brace-format
 msgid "Table of {superior_department} Canteen Storaged Ingredients Statistics"
 msgstr "{superior_department}食堂食品、材料入库汇总报销单"
 
-#: canteen/workbook/generate.py:594
+#: canteen/workbook/generate.py:682
+msgid "Storage List (Storage Sheet)"
+msgstr "入  库  单"
+
+#: canteen/workbook/generate.py:693
+#, python-brace-format
+msgid "Affiliation Name: {affiliation_name}"
+msgstr "单位名称：{affiliation_name}"
+
+#: canteen/workbook/generate.py:695
+#, python-brace-format
+msgid "Principal Name: {affiliation_name}"
+msgstr "学校名称：{affiliation_name}"
+
+#: canteen/workbook/generate.py:704
+#, python-brace-format
+msgid "{day:0>2} {month:0>2} {year}  Quantity Unit Name: CNY"
+msgstr "{year}年{month:0>2}月{day:0>2}日  单位：元"
+
+#: canteen/workbook/generate.py:710
+#, python-brace-format
+msgid "Storage No. {storage_num}"
+msgstr "编号：{storage_num}"
+
+#: canteen/workbook/generate.py:729
+msgid "Category (Storage List Sheet)"
+msgstr "类型"
+
+#: canteen/workbook/generate.py:733
+msgid "Ingredient Name (Storage List Sheet)"
+msgstr "食材名称"
+
+#: canteen/workbook/generate.py:738
+msgid "Quantity Unit Name (Storage List Sheet)"
+msgstr "计量单位"
+
+#: canteen/workbook/generate.py:742
+msgid "Quantity (Storage List Sheet)"
+msgstr "数量"
+
+#: canteen/workbook/generate.py:745
+msgid "Unit Price (Storage List Sheet)"
+msgstr "单价"
+
+#: canteen/workbook/generate.py:749
+msgid "Total Price (Storage List Sheet)"
+msgstr "金额"
+
+#: canteen/workbook/generate.py:754
+msgid "Ingredients Total Price (Storage List Sheet)"
+msgstr "合计"
+
+#: canteen/workbook/generate.py:758
+msgid "Note (Storage List Sheet)"
+msgstr "备注"
+
+#: canteen/workbook/generate.py:832
+msgid "Summary (Storage List Sheet)"
+msgstr "合计"
+
+#: canteen/workbook/generate.py:842
+#, python-brace-format
+msgid ""
+"   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
+msgstr ""
+"   审核人：        经办人：{handler} 　    过称人：        仓管人： 　"
+
+#: canteen/workbook/generate.py:852
 #, python-brace-format
 msgid ""
 "Table of {affiliation} Canteen Ingredients Procurement Statistics in "
 "{month:0>2} {year}"
 msgstr "{affiliation}{year}年{month:0>2}月份食堂食品采购统计表"
 
-#: canteen/workbook/generate.py:612
+#: canteen/workbook/generate.py:870
 msgid "Ingredient Categories (cover sheet)"
 msgstr "类别"
 
-#: canteen/workbook/generate.py:615
+#: canteen/workbook/generate.py:873
 msgid "Ingredient Total Prices"
 msgstr "合计金额"
 
-#: canteen/workbook/generate.py:656 canteen/workbook/generate.py:685
+#: canteen/workbook/generate.py:914 canteen/workbook/generate.py:943
 #, python-brace-format
 msgid ""
 "Total price of storaged ingredients is {0}, total price of non-storaged "
 "ingredients is {1}."
 msgstr "入库 {0} 元，未入库 {1} 元。"
 
-#: canteen/workbook/generate.py:676
+#: canteen/workbook/generate.py:934
 msgid "Procurement Summary"
 msgstr "合计"
 

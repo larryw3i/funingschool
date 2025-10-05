@@ -653,14 +653,16 @@ class CanteenWorkBook:
                         total_price=0.0,
                         is_ignorable=False,
                     )
-                    for c in split_empty_categories
-                    + random.sample(
-                        categories,
-                        k=(
-                            ingredient_rows_count
-                            - len(split_dated_ingredients)
-                            - len(split_empty_categories)
-                        ),
+                    for c in (
+                        split_empty_categories
+                        + random.sample(
+                            categories,
+                            k=(
+                                ingredient_rows_count
+                                - len(split_dated_ingredients)
+                                - len(split_empty_categories)
+                            ),
+                        )
                     )
                 ]
 
@@ -960,7 +962,7 @@ class CanteenWorkBook:
     def fill_in(self):
         self.fill_in_cover_sheet()
         self.fill_in_storage_sheet()
-        # self.fill_in_storage_list_sheet()
+        self.fill_in_storage_list_sheet()
         self.fill_in_non_storage_sheet()
         # self.fill_in_non_storage_list_sheet()
         # self.fill_in_consumption_sheet()

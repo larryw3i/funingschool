@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-05 04:38+0000\n"
+"POT-Creation-Date: 2025-10-05 18:30+0000\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -377,94 +377,94 @@ msgstr ""
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
 msgstr ""
 
-#: canteen/workbook/generate.py:191
+#: canteen/workbook/generate.py:193
 msgid "Sheet Cover"
 msgstr ""
 
-#: canteen/workbook/generate.py:192
+#: canteen/workbook/generate.py:194
 msgid "Sheet Storage"
 msgstr ""
 
-#: canteen/workbook/generate.py:194
+#: canteen/workbook/generate.py:196
 msgid "Sheet Storage List"
 msgstr ""
 
-#: canteen/workbook/generate.py:197
+#: canteen/workbook/generate.py:199
 msgid "Sheet Non-Storage"
 msgstr ""
 
-#: canteen/workbook/generate.py:200
+#: canteen/workbook/generate.py:202
 msgid "Sheet Non-Storage List"
 msgstr ""
 
-#: canteen/workbook/generate.py:203
+#: canteen/workbook/generate.py:205
 msgid "Sheet Consumption"
 msgstr ""
 
-#: canteen/workbook/generate.py:206
+#: canteen/workbook/generate.py:208
 msgid "Sheet Consumption List"
 msgstr ""
 
-#: canteen/workbook/generate.py:208
+#: canteen/workbook/generate.py:210
 msgid "Sheet Surplus"
 msgstr ""
 
-#: canteen/workbook/generate.py:263
+#: canteen/workbook/generate.py:268
 #, python-brace-format
 msgid ""
 "Table of {superior_department} Canteen Non-Storaged Ingredients Statistics"
 msgstr ""
 
-#: canteen/workbook/generate.py:282 canteen/workbook/generate.py:448
+#: canteen/workbook/generate.py:287 canteen/workbook/generate.py:452
 #, python-brace-format
 msgid ""
 "Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}."
 "{day:0>2}"
 msgstr ""
 
-#: canteen/workbook/generate.py:292 canteen/workbook/generate.py:458
+#: canteen/workbook/generate.py:297 canteen/workbook/generate.py:462
 msgid "Ingredient Categories (storage sheet)"
 msgstr ""
 
-#: canteen/workbook/generate.py:296 canteen/workbook/generate.py:462
+#: canteen/workbook/generate.py:301 canteen/workbook/generate.py:466
 msgid "Ingredient Total Prices (storage sheet)"
 msgstr ""
 
-#: canteen/workbook/generate.py:300 canteen/workbook/generate.py:466
-#: canteen/workbook/generate.py:618
+#: canteen/workbook/generate.py:305 canteen/workbook/generate.py:470
+#: canteen/workbook/generate.py:876
 msgid "Procurement Note"
 msgstr ""
 
-#: canteen/workbook/generate.py:359 canteen/workbook/generate.py:366
-#: canteen/workbook/generate.py:525 canteen/workbook/generate.py:532
+#: canteen/workbook/generate.py:364 canteen/workbook/generate.py:371
+#: canteen/workbook/generate.py:529 canteen/workbook/generate.py:536
 #, python-brace-format
 msgid "Total Price Text: {total_price_text}        {total_price}"
 msgstr ""
 
-#: canteen/workbook/generate.py:378 canteen/workbook/generate.py:544
+#: canteen/workbook/generate.py:383 canteen/workbook/generate.py:548
 msgid "Handler:"
 msgstr ""
 
-#: canteen/workbook/generate.py:385 canteen/workbook/generate.py:551
+#: canteen/workbook/generate.py:390 canteen/workbook/generate.py:555
 msgid "Reviewer:"
 msgstr ""
 
-#: canteen/workbook/generate.py:393 canteen/workbook/generate.py:559
+#: canteen/workbook/generate.py:398 canteen/workbook/generate.py:563
 msgid "Principal's Signature:"
 msgstr ""
 
-#: canteen/workbook/generate.py:395 canteen/workbook/generate.py:561
+#: canteen/workbook/generate.py:400 canteen/workbook/generate.py:565
 msgid "Supervisor's Signature:"
 msgstr ""
 
-#: canteen/workbook/generate.py:405 canteen/workbook/generate.py:571
+#: canteen/workbook/generate.py:410 canteen/workbook/generate.py:575
 msgid ""
 "Note: This form is a summary of all monthly food and material inventory "
 "receipts from the cafeteria. After verification, it will be signed and "
 "stamped with the school seal by the principal as reimbursement evidence."
 msgstr ""
 
-#: canteen/workbook/generate.py:413 canteen/workbook/generate.py:579
+#: canteen/workbook/generate.py:418 canteen/workbook/generate.py:583
 msgid ""
 "Note: This form is a summary of all monthly food and material inventory "
 "receipts from the cafeteria. After verification, it will be signed and "
@@ -472,34 +472,100 @@ msgid ""
 "evidence."
 msgstr ""
 
-#: canteen/workbook/generate.py:429
+#: canteen/workbook/generate.py:433
 #, python-brace-format
 msgid "Table of {superior_department} Canteen Storaged Ingredients Statistics"
 msgstr ""
 
-#: canteen/workbook/generate.py:594
+#: canteen/workbook/generate.py:682
+msgid "Storage List (Storage Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:693
+#, python-brace-format
+msgid "Affiliation Name: {affiliation_name}"
+msgstr ""
+
+#: canteen/workbook/generate.py:695
+#, python-brace-format
+msgid "Principal Name: {affiliation_name}"
+msgstr ""
+
+#: canteen/workbook/generate.py:704
+#, python-brace-format
+msgid "{day:0>2} {month:0>2} {year}  Quantity Unit Name: CNY"
+msgstr ""
+
+#: canteen/workbook/generate.py:710
+#, python-brace-format
+msgid "Storage No. {storage_num}"
+msgstr ""
+
+#: canteen/workbook/generate.py:729
+msgid "Category (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:733
+msgid "Ingredient Name (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:738
+msgid "Quantity Unit Name (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:742
+msgid "Quantity (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:745
+msgid "Unit Price (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:749
+msgid "Total Price (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:754
+msgid "Ingredients Total Price (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:758
+msgid "Note (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:832
+msgid "Summary (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:842
+#, python-brace-format
+msgid ""
+"   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
+msgstr ""
+
+#: canteen/workbook/generate.py:852
 #, python-brace-format
 msgid ""
 "Table of {affiliation} Canteen Ingredients Procurement Statistics in "
 "{month:0>2} {year}"
 msgstr ""
 
-#: canteen/workbook/generate.py:612
+#: canteen/workbook/generate.py:870
 msgid "Ingredient Categories (cover sheet)"
 msgstr ""
 
-#: canteen/workbook/generate.py:615
+#: canteen/workbook/generate.py:873
 msgid "Ingredient Total Prices"
 msgstr ""
 
-#: canteen/workbook/generate.py:656 canteen/workbook/generate.py:685
+#: canteen/workbook/generate.py:914 canteen/workbook/generate.py:943
 #, python-brace-format
 msgid ""
 "Total price of storaged ingredients is {0}, total price of non-storaged "
 "ingredients is {1}."
 msgstr ""
 
-#: canteen/workbook/generate.py:676
+#: canteen/workbook/generate.py:934
 msgid "Procurement Summary"
 msgstr ""
 
