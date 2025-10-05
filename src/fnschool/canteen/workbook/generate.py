@@ -219,16 +219,36 @@ class CanteenWorkBook:
         self.font_12_bold = Font(size=12, bold=True)
 
         self.request = request
+        self.user = self.request.user
         self.year = int(month.split("-")[0])
         self.month = int(month.split("-")[1])
         self.date_start = datetime(self.year, self.month, 1).date()
         self.date_end = datetime(
             self.year, self.month, calendar.monthrange(self.year, self.month)[1]
         ).date()
+        self.is_zh_CN = is_zh_CN()
+
+        self.is_school = (
+            (
+                any(
+                    [
+                        name in self.user.affiliation
+                        for name in [
+                            "\u5e7c\u513f\u56ed",
+                            "\u5c0f\u5b66",
+                            "\u4e2d\u5b66",
+                            "\u5927\u5b66",
+                        ]
+                    ]
+                )
+            )
+            if is_zh_CN
+            else False
+        )
 
     def fill_in_storage_sheet(self):
         sheet = self.storage_sheet
-        user = self.request.user
+        user = self.user
         title_cell = sheet.cell(1, 1)
         title_cell.value = _(
             "Table of {superior_department} Canteen Storaged Ingredients Statistics"
@@ -250,7 +270,7 @@ class CanteenWorkBook:
         sub_title_cell.font = self.font_12
         sub_title_cell.alignment = self.center_alignment
         sub_title_cell.value = _(
-            "Affiliation: {affiliation}        Monetary Unit: USD        {year}.{month:0>2}.{day:0>2}"
+            "Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}.{day:0>2}"
         ).format(
             affiliation=user.affiliation,
             year=self.year,
@@ -290,7 +310,7 @@ class CanteenWorkBook:
         for index, category in enumerate(categories):
 
             row_num = header_row_num + 1 + index
-            set_row_height_in_inches(sheet, row_num, 0.44)
+            set_row_height_in_inches(sheet, row_num, 0.32)
 
             category_cell = sheet.cell(row_num, 1)
             category_cell.value = category.name
@@ -322,20 +342,73 @@ class CanteenWorkBook:
         ).all()
 
         summary_row_num = len(categories) + header_row_num + 1
-
         summary_total_price = sum([i.total_price for i in ingredients])
         summary_total_price_cell = sheet.cell(summary_row_num, 1)
-        summary_total_price_cell.value = _(
-            "Total Price Text: {total_price_text}        {total_price} USD"
-        ).format(
-            total_price_text=("" if is_zh_CN() else str(summary_total_price))
+        summary_total_price_cell.value = (
+            _(
+                "Total Price Text: {total_price_text}        {total_price}"
+            ).format(
+                total_price_text=get_CNY_TEXT(summary_total_price),
+                total_price=summary_total_price,
+            )
+            if is_zh_CN
+            else _(
+                "Total Price Text: {total_price_text}        {total_price}"
+            ).format(
+                total_price_text=str(summary_total_price),
+                total_price=summary_total_price,
+            )
         )
+        sheet.merge_cells(f"A{summary_row_num}:C{summary_row_num}")
+        set_row_height_in_inches(sheet, summary_row_num, 0.32)
 
-        set_row_height_in_inches(sheet, summary_row_num, 0.44)
+        handler_row_num = summary_row_num + 1
+        handler_cell = sheet.cell(handler_row_num, 1)
+        handler_cell.value = _("Handler:")
+        sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
+        set_row_height_in_inches(sheet, handler_row_num, 0.32)
+
+        reviewer_row_num = handler_row_num + 1
+        reviewer_cell = sheet.cell(reviewer_row_num, 1)
+        reviewer_cell.value = _("Reviewer:")
+        sheet.merge_cells(f"A{reviewer_row_num}:C{reviewer_row_num}")
+        set_row_height_in_inches(sheet, reviewer_row_num, 0.32)
+
+        supervisor_row_num = reviewer_row_num + 1
+        supervisor_cell = sheet.cell(supervisor_row_num, 1)
+        supervisor_cell.value = (
+            _("Principal's Signature:")
+            if self.is_school
+            else _("Supervisor's Signature:")
+        )
+        sheet.merge_cells(f"A{supervisor_row_num}:C{supervisor_row_num}")
+        set_row_height_in_inches(sheet, supervisor_row_num, 0.32)
+
+        note_row_num = supervisor_row_num + 1
+        note_cell = sheet.cell(note_row_num, 1)
+        note_cell.value = (
+            _(
+                "Note: This form is a summary of all monthly food and "
+                + "material inventory receipts from the cafeteria. After "
+                + "verification, it will be signed and stamped with "
+                + "the school seal by the principal as reimbursement "
+                + "evidence."
+            )
+            if is_school
+            else _(
+                "Note: This form is a summary of all monthly food and "
+                + "material inventory receipts from the cafeteria. "
+                + "After verification, it will be signed and stamped "
+                + "with the affiliation seal by the supervisor as "
+                + "reimbursement evidence."
+            )
+        )
+        sheet.merge_cells(f"A{note_row_num}:C{note_row_num}")
+        set_row_height_in_inches(sheet, note_row_num, 0.27)
 
     def fill_in_cover_sheet(self):
         sheet = self.cover_sheet
-        user = self.request.user
+        user = self.user
         title_cell = sheet.cell(1, 1)
         title_cell.value = _(
             "Table of {affiliation} Canteen Ingredients Procurement Statistics in {month:0>2} {year}"
