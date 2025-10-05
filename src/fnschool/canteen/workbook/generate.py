@@ -43,31 +43,45 @@ from ..models import Category, Consumption, Ingredient
 
 def get_CNY_TEXT(amount):
     units = {
-        "0": "零",
-        "1": "壹",
-        "2": "贰",
-        "3": "叁",
-        "4": "肆",
-        "5": "伍",
-        "6": "陆",
-        "7": "柒",
-        "8": "捌",
-        "9": "玖",
+        "0": "\u96f6",  # ling2
+        "1": "\u58f9",  # yi1
+        "2": "\u8d30",  # er4
+        "3": "\u53c1",  # san1
+        "4": "\u8086",  # si4
+        "5": "\u4f0d",  # wu3
+        "6": "\u9646",  # liu4
+        "7": "\u67d2",  # qi1
+        "8": "\u634c",  # ba1
+        "9": "\u7396",  # jiu3
     }
 
-    # 单位级别映射
-    levels = ["", "拾", "佰", "仟", "万", "亿", "元", "角", "分", "整"]
+    levels = [
+        "",
+        "\u62fe",  # shi2
+        "\u4f70",  # bai3
+        "\u4edf",  # qian1
+        "\u4e07",  # wan4
+        "\u4ebf",  # yi4
+        "\u5143",  # yuan2
+        "\u89d2",  # jiao3
+        "\u5206",  # fen1
+        "\u6574",  # zheng3
+    ]
 
+    is_negative = False
     if amount < 0:
-        return "金额不能为负数"
+        is_negative = True
+        amount = abs(amount)
     if amount == 0:
-        return "零元整"
+        return "\u96f6\u5143\u6574"  # ling2 yuan2 zheng3.
 
     amount = Decimal(str(amount)).quantize(
         Decimal("0.00"), rounding=ROUND_HALF_UP
     )
     amount_str = str(amount)
 
+    integer_part = None
+    decimal_part = None
     if "." in amount_str:
         integer_part, decimal_part = amount_str.split(".")
     else:
@@ -84,20 +98,23 @@ def get_CNY_TEXT(amount):
         integer_part[-4:],
     ]
 
-    group_names = ["万", "亿", "万", "元"]
+    group_names = [
+        "\u4e07",  # wan4
+        "\u4ebf",  # yi4
+        "\u4e07",  # wan4
+        "\u5143",  # yuan2
+    ]
 
     for i, group in enumerate(groups):
-        group = group.lstrip("0")  # 去除前导零
+        group = group.lstrip("0")
         if not group:
             continue
 
         for j, digit in enumerate(group):
             if digit == "0":
-                # 处理连续的零
-                if result and result[-1] != "零":
-                    result.append("零")
+                if result and result[-1] != "\u96f6":  # \\u96f6 is ling2 .
+                    result.append("\u96f6")  # \\u96f6 is ling2 .
             else:
-                # 添加数字和单位
                 result.append(units[digit])
 
                 if len(group) - j - 1 > 0:
@@ -109,24 +126,27 @@ def get_CNY_TEXT(amount):
     if decimal_part != "00":
         if decimal_part[0] != "0":
             result.append(units[decimal_part[0]])
-            result.append("角")
+            result.append("\u89d2")  # \\u89d2 is jiao3 .
 
         if decimal_part[1] != "0":
             result.append(units[decimal_part[1]])
-            result.append("分")
+            result.append("\u5206")  # \\u5206 is fen1 .
     else:
-        result.append("整")
+        result.append("\u6574")  # \\u6574 is zheng3 .
 
     output = "".join(result)
 
-    output = re.sub(r"零+", "零", output)
-    output = re.sub(r"零([万亿])", r"\1", output)
-    output = re.sub(r"零元", "元", output)
-    output = re.sub(r"零角零分", "", output)
-    output = re.sub(r"零分", "", output)
+    output = re.sub("\u96f6+", "\u96f6", output)
+    output = re.sub("\u96f6([\u4e07\u4ebf])", r"\1", output)
+    output = re.sub("\u96f6\u5143", "\u5143", output)
+    output = re.sub("\u96f6\u89d2\u96f6\u5206", "", output)
+    output = re.sub("\u96f6\u5206", "", output)
 
-    if output.startswith("壹拾"):
-        output = output.replace("壹拾", "拾", 1)
+    if output.startswith("\u58f9\u62fe"):
+        output = output.replace("\u58f9\u62fe", "\u62fe", 1)
+
+    if is_negative:
+        output = "\u8d1f" + output
 
     return output
 
