@@ -640,31 +640,33 @@ class CanteenWorkBook:
                     for c in split_dated_ingredient_categories
                     if not c in categories
                 ]
+                split_empty_categories = split_empty_categories + [
+                    random.choice(categories)
+                    for i in range(
+                        ingredient_rows_count
+                        - len(split_dated_ingredients)
+                        - len(split_empty_categories)
+                    )
+                ]
 
                 split_dated_ingredients += [
                     Ingredient(
                         user=user,
                         name="",
                         storage_date=storage_date,
-                        meal_type=new_dated_ingredient.meal_type,
+                        meal_type=split_dated_ingredient.meal_type,
                         category=c,
                         quantity=0.0,
                         quantity_unit_name="",
                         total_price=0.0,
                         is_ignorable=False,
                     )
-                    for c in (
-                        split_empty_categories
-                        + random.sample(
-                            categories,
-                            k=(
-                                ingredient_rows_count
-                                - len(split_dated_ingredients)
-                                - len(split_empty_categories)
-                            ),
-                        )
-                    )
+                    for c in split_empty_categories
                 ]
+
+                split_dated_ingredients = sorted(
+                    split_dated_ingredients, key=lambda i: (i.category.name)
+                )
 
                 storage_date_index = index
                 storaged_ingredients.append(
@@ -680,7 +682,7 @@ class CanteenWorkBook:
             row_num = (ingredient_rows_count + 6) * index + 1
 
             title_cell_row_num = row_num
-            title_cell = sheet.cell(title_cell_row, 1)
+            title_cell = sheet.cell(title_cell_row_num, 1)
             title_cell.value = _("Storage List (Storage Sheet)")
             title_cell.alignment = self.center_alignment
             title_cell.font = self.font_20_bold
@@ -797,7 +799,7 @@ class CanteenWorkBook:
                         7,
                         sum(
                             [
-                                i.total_price
+                                float(i.total_price)
                                 for i in dated_ingredients
                                 if i.category == ingredient.category
                             ]
@@ -828,7 +830,7 @@ class CanteenWorkBook:
                 )
 
             summary_total_price = sum(
-                [i.total_price for i in dated_ingredients]
+                [float(i.total_price) for i in dated_ingredients]
             )
             summary_row_num = header_row_num + len(dated_ingredients) + 1
             sheet.cell(summary_row_num, 1, _("Summary (Storage List Sheet)"))
@@ -842,7 +844,7 @@ class CanteenWorkBook:
             signature_cell = sheet.cell(signature_row_num, 1)
             signature_cell.value = _(
                 "   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
-            ).format(handler=user.name)
+            ).format(handler=user)
             signature_cell.font = self.font_14
             signature_cell.alignment = self.center_alignment
 
