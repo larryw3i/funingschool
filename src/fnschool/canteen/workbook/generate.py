@@ -229,7 +229,13 @@ class CanteenWorkBook:
         ).date()
         self.is_zh_CN = is_zh_CN()
 
-        self.is_school = (
+        self._is_school = None
+
+    @property
+    def is_school(self):
+        if self._is_school:
+            return self._is_school
+        is_school = (
             (
                 any(
                     [
@@ -246,6 +252,173 @@ class CanteenWorkBook:
             if is_zh_CN
             else False
         )
+        self._is_school = is_school
+        return self._is_school
+
+    def fill_in_non_storage_sheet(self):
+        sheet = self.non_storage_sheet
+        user = self.user
+        title_cell = sheet.cell(1, 1)
+        title_cell.value = _(
+            "Table of {superior_department} Canteen Non-Storaged Ingredients Statistics"
+        ).format(
+            superior_department=user.superior_department,
+        )
+        title_cell.font = self.font_16_bold
+        title_cell.alignment = self.center_alignment
+        for col_num, width in [
+            [1, 2.23],
+            [2, 3.14],
+            [3, 3.14],
+        ]:
+            set_column_width_in_inches(sheet, col_num, width)
+        sheet.merge_cells("A1:C1")
+
+        sub_title_cell = sheet.cell(2, 1)
+        sheet.merge_cells("A2:C2")
+        sub_title_cell.font = self.font_12
+        sub_title_cell.alignment = self.center_alignment
+        sub_title_cell.value = _(
+            "Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}.{day:0>2}"
+        ).format(
+            affiliation=user.affiliation,
+            year=self.year,
+            month=self.month,
+            day=self.date_end.day,
+        )
+
+        header_row_num = 3
+        header_category_cell = sheet.cell(header_row_num, 1)
+        header_category_cell.value = _("Ingredient Categories (storage sheet)")
+
+        header_total_price_cell = sheet.cell(header_row_num, 2)
+        header_total_price_cell.value = _(
+            "Ingredient Total Prices (storage sheet)"
+        )
+
+        header_note_cell = sheet.cell(header_row_num, 3)
+        header_note_cell.value = _("Procurement Note")
+
+        for cell in [
+            header_category_cell,
+            header_total_price_cell,
+            header_note_cell,
+        ]:
+            cell.font = self.font_12
+            cell.alignment = self.center_alignment
+            cell.border = self.thin_border
+
+        categories = Category.objects.filter(
+            Q(user=user) & Q(is_disabled=False)
+        ).all()
+
+        set_row_height_in_inches(sheet, 1, 0.38)
+        set_row_height_in_inches(sheet, 2, 0.22)
+        set_row_height_in_inches(sheet, 3, 0.32)
+
+        for index, category in enumerate(categories):
+
+            row_num = header_row_num + 1 + index
+            set_row_height_in_inches(sheet, row_num, 0.32)
+
+            category_cell = sheet.cell(row_num, 1)
+            category_cell.value = category.name
+
+            ingredients = Ingredient.objects.filter(
+                Q(user=user)
+                & Q(category=category)
+                & Q(storage_date__gte=self.date_start)
+                & Q(storage_date__lte=self.date_end)
+                & Q(is_disabled=False)
+                & Q(is_ignorable=True)
+            ).all()
+            total_price_cell = sheet.cell(row_num, 2)
+            total_price_cell.value = sum([i.total_price for i in ingredients])
+
+            note_cell = sheet.cell(row_num, 3)
+
+            for cell in [category_cell, total_price_cell, note_cell]:
+                cell.font = self.font_12
+                cell.alignment = self.center_alignment
+                cell.border = self.thin_border
+
+        ingredients = Ingredient.objects.filter(
+            Q(user=user)
+            & Q(storage_date__gte=self.date_start)
+            & Q(storage_date__lte=self.date_end)
+            & Q(is_disabled=False)
+            & Q(is_ignorable=True)
+        ).all()
+
+        summary_row_num = len(categories) + header_row_num + 1
+        summary_total_price = sum([i.total_price for i in ingredients])
+        summary_total_price_cell = sheet.cell(summary_row_num, 1)
+        total_price_cell.border = self.thin_border
+        summary_total_price_cell.value = (
+            _(
+                "Total Price Text: {total_price_text}        {total_price}"
+            ).format(
+                total_price_text=get_CNY_TEXT(summary_total_price),
+                total_price=summary_total_price,
+            )
+            if is_zh_CN
+            else _(
+                "Total Price Text: {total_price_text}        {total_price}"
+            ).format(
+                total_price_text=str(summary_total_price),
+                total_price=summary_total_price,
+            )
+        )
+        sheet.merge_cells(f"A{summary_row_num}:C{summary_row_num}")
+        set_row_height_in_inches(sheet, summary_row_num, 0.32)
+
+        handler_row_num = summary_row_num + 1
+        handler_cell = sheet.cell(handler_row_num, 1)
+        handler_cell.border = self.thin_border
+        handler_cell.value = _("Handler:")
+        sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
+        set_row_height_in_inches(sheet, handler_row_num, 0.32)
+
+        reviewer_row_num = handler_row_num + 1
+        reviewer_cell = sheet.cell(reviewer_row_num, 1)
+        reviewer_cell.border = self.thin_border
+        reviewer_cell.value = _("Reviewer:")
+        sheet.merge_cells(f"A{reviewer_row_num}:C{reviewer_row_num}")
+        set_row_height_in_inches(sheet, reviewer_row_num, 0.32)
+
+        supervisor_row_num = reviewer_row_num + 1
+        supervisor_cell = sheet.cell(supervisor_row_num, 1)
+        supervisor_cell.border = self.thin_border
+        supervisor_cell.value = (
+            _("Principal's Signature:")
+            if self.is_school
+            else _("Supervisor's Signature:")
+        )
+        sheet.merge_cells(f"A{supervisor_row_num}:C{supervisor_row_num}")
+        set_row_height_in_inches(sheet, supervisor_row_num, 0.32)
+
+        note_row_num = supervisor_row_num + 1
+        note_cell = sheet.cell(note_row_num, 1)
+        note_cell.border = self.thin_border
+        note_cell.value = (
+            _(
+                "Note: This form is a summary of all monthly food and "
+                + "material inventory receipts from the cafeteria. After "
+                + "verification, it will be signed and stamped with "
+                + "the school seal by the principal as reimbursement "
+                + "evidence."
+            )
+            if self.is_school
+            else _(
+                "Note: This form is a summary of all monthly food and "
+                + "material inventory receipts from the cafeteria. "
+                + "After verification, it will be signed and stamped "
+                + "with the affiliation seal by the supervisor as "
+                + "reimbursement evidence."
+            )
+        )
+        sheet.merge_cells(f"A{note_row_num}:C{note_row_num}")
+        set_row_height_in_inches(sheet, note_row_num, 0.27)
 
     def fill_in_storage_sheet(self):
         sheet = self.storage_sheet
@@ -529,7 +702,7 @@ class CanteenWorkBook:
         self.fill_in_cover_sheet()
         self.fill_in_storage_sheet()
         # self.fill_in_storage_list_sheet()
-        # self.fill_in_non_storage_sheet()
+        self.fill_in_non_storage_sheet()
         # self.fill_in_non_storage_list_sheet()
         # self.fill_in_consumption_sheet()
         # self.fill_in_consumption_list_sheet()
