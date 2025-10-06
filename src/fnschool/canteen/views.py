@@ -470,32 +470,18 @@ def close_window(request):
 
 
 def generate_spreadsheet(request, month):
-    from .workbook.generate import get_workbook
+    from .workbook.generate import get_workbook_zip
 
-    wb = get_workbook(request, month)
-
-    buffer = io.BytesIO()
-    wb.save(buffer)
-    buffer.seek(0)
-
-    response = HttpResponse(
-        buffer,
-        content_type=(
-            "application/"
-            + "vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        ),
-    )
+    buffer = get_workbook_zip(request, month)
     filename = (
         _("Canteen Daybook WorkBook ({month}) of {affiliation}").format(
             month=month.replace("-", ""), affiliation=request.user.affiliation
         )
-        + ".xlsx"
+        + ".zip"
     )
-
-    encoded_filename = escape_uri_path(filename)
-    response["Content-Disposition"] = (
-        f'attachment; filename="{encoded_filename}"'
-    )
+    filename = escape_uri_path(filename)
+    response = HttpResponse(buffer, content_type="application/zip")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
 
     return response
 

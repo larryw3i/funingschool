@@ -4,6 +4,7 @@ import math
 import os
 import random
 import re
+import zipfile
 from datetime import date, datetime
 from decimal import ROUND_HALF_UP, Decimal
 from pathlib import Path
@@ -176,7 +177,7 @@ def set_row_height_in_inches(worksheet, row, inches):
 
 
 class CanteenWorkBook:
-    def __init__(self, request, month):
+    def __init__(self, request, month, meal_type):
         self.wb = Workbook()
         self.wb[self.wb.sheetnames[0]].sheet_state = "hidden"
         self.cover_sheet = self.wb.create_sheet(title=_("Sheet Cover"))
@@ -215,6 +216,7 @@ class CanteenWorkBook:
 
         self.request = request
         self.user = self.request.user
+        self.meal_type = meal_type
         self.year = int(month.split("-")[0])
         self.month = int(month.split("-")[1])
         self.date_start = datetime(self.year, self.month, 1).date()
@@ -323,6 +325,7 @@ class CanteenWorkBook:
                 & Q(category=category)
                 & Q(storage_date__gte=self.date_start)
                 & Q(storage_date__lte=self.date_end)
+                & Q(meal_type=self.meal_type)
                 & Q(is_disabled=False)
                 & Q(is_ignorable=True)
             ).all()
@@ -340,6 +343,7 @@ class CanteenWorkBook:
             Q(user=user)
             & Q(storage_date__gte=self.date_start)
             & Q(storage_date__lte=self.date_end)
+            & Q(meal_type=self.meal_type)
             & Q(is_disabled=False)
             & Q(is_ignorable=True)
         ).all()
@@ -488,6 +492,7 @@ class CanteenWorkBook:
                 & Q(category=category)
                 & Q(storage_date__gte=self.date_start)
                 & Q(storage_date__lte=self.date_end)
+                & Q(meal_type=self.meal_type)
                 & Q(is_disabled=False)
                 & Q(is_ignorable=False)
             ).all()
@@ -505,6 +510,7 @@ class CanteenWorkBook:
             Q(user=user)
             & Q(storage_date__gte=self.date_start)
             & Q(storage_date__lte=self.date_end)
+            & Q(meal_type=self.meal_type)
             & Q(is_disabled=False)
             & Q(is_ignorable=False)
         ).all()
@@ -589,6 +595,7 @@ class CanteenWorkBook:
             & Q(is_ignorable=False)
             & Q(storage_date__gte=self.date_start)
             & Q(storage_date__lte=self.date_end)
+            & Q(meal_type=self.meal_type)
         ).all()
         categories = Category.objects.filter(
             Q(user=user) & Q(is_disabled=False)
@@ -705,6 +712,11 @@ class CanteenWorkBook:
             if storage_date_index < 2:
                 storage_num += 1
 
+            next_storage_date = (
+                storaged_ingredients[index + 1][0]
+                if index + 1 < len(storaged_ingredients)
+                else None
+            )
             sub_title_num_cell_row_num = title_cell_row_num + 1
             sub_title_num_cell = sheet.cell(sub_title_num_cell_row_num, 7)
             sub_title_num_cell.font = self.font_12
@@ -718,7 +730,7 @@ class CanteenWorkBook:
                 _("(Sub Storage No. {sub_storage_num})").format(
                     sub_storage_num=storage_date_index
                 )
-                if sub_storage_num > 1
+                if next_storage_date == storage_date
                 else ""
             )
             print(storage_num)
@@ -949,6 +961,7 @@ class CanteenWorkBook:
                 & Q(category=category)
                 & Q(storage_date__gte=self.date_start)
                 & Q(storage_date__lte=self.date_end)
+                & Q(meal_type=self.meal_type)
                 & Q(is_disabled=False)
             ).all()
             total_price_cell = sheet.cell(row_num, 2)
@@ -971,6 +984,7 @@ class CanteenWorkBook:
             Q(user=user)
             & Q(storage_date__gte=self.date_start)
             & Q(storage_date__lte=self.date_end)
+            & Q(meal_type=self.meal_type)
             & Q(is_disabled=False)
         ).all()
 
@@ -1016,6 +1030,36 @@ class CanteenWorkBook:
         return self.wb
 
 
-def get_workbook(request, month):
-    wb = CanteenWorkBook(request, month).fill_in()
-    return wb
+def get_workbook_zip(request, month):
+    meal_types = list(
+        set(
+            Ingredient.objects.filter(
+                Q(user=request.user) & Q(is_disabled=False)
+            ).values_list("meal_type", flat=True)
+        )
+    )
+
+    zip_buffer = io.BytesIO()
+    with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED) as zip_file:
+        for meal_type in meal_types:
+            filename = (
+                _(
+                    "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
+                ).format(
+                    meal_type=meal_type,
+                    month=month.replace("-", ""),
+                    affiliation=request.user.affiliation,
+                )
+                + ".xlsx"
+            )
+            # filename = escape_uri_path(filename)
+
+            wb = CanteenWorkBook(request, month, meal_type).fill_in()
+            excel_buffer = io.BytesIO()
+            wb.save(excel_buffer)
+            excel_buffer.seek(0)
+
+            zip_file.writestr(filename, excel_buffer.getvalue())
+
+    zip_buffer.seek(0)
+    return zip_buffer
