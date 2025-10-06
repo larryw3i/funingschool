@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-06 03:36+0000\n"
-"PO-Revision-Date: 2025-10-06 11:36+0800\n"
+"PO-Revision-Date: 2025-10-06 12:27+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -407,7 +407,7 @@ msgstr "购入食材工作表（{0}）"
 #: canteen/views.py:477
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
-msgstr "{affiliation}食堂出入库工作簿（{month}）"
+msgstr "（{month}）{affiliation}食堂出入库工作簿"
 
 #: canteen/workbook/generate.py:185
 msgid "Sheet Cover"
@@ -585,7 +585,8 @@ msgstr "合计"
 msgid ""
 "   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
 msgstr ""
-"   审核人：        经办人：{handler} 　    过称人：        仓管人： 　"
+"   审核人：            经办人：{handler} 　        过称人：              仓"
+"管人： 　      "
 
 #: canteen/workbook/generate.py:907
 #, python-brace-format
@@ -616,7 +617,7 @@ msgstr "合计"
 #: canteen/workbook/generate.py:1042
 #, python-brace-format
 msgid "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
-msgstr "{affiliation}食堂{meal_type}出入库工作簿（{month}）"
+msgstr "（{month}{meal_type}）{affiliation}食堂出入库工作簿"
 
 #: fnschool/settings.py:137
 msgid "English"

@@ -712,6 +712,11 @@ class CanteenWorkBook:
             if storage_date_index < 2:
                 storage_num += 1
 
+            prev_storage_date = (
+                storaged_ingredients[index - 1][0]
+                if index - 1 < len(storaged_ingredients)
+                else None
+            )
             next_storage_date = (
                 storaged_ingredients[index + 1][0]
                 if index + 1 < len(storaged_ingredients)
@@ -730,7 +735,10 @@ class CanteenWorkBook:
                 _("(Sub Storage No. {sub_storage_num})").format(
                     sub_storage_num=storage_date_index
                 )
-                if next_storage_date == storage_date
+                if (
+                    next_storage_date == storage_date
+                    or prev_storage_date == storage_date
+                )
                 else ""
             )
             print(storage_num)
