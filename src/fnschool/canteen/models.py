@@ -46,8 +46,11 @@ class Ingredient(models.Model):
         verbose_name=_("Category"),
     )
     # models.CharField(max_length=50, verbose_name=_("Category"))
-    quantity = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name=_("Quantity")
+    quantity = models.IntegerField(
+        validators=[
+            MinValueValidator(0),
+        ],
+        verbose_name=_("Quantity"),
     )
     quantity_unit_name = models.CharField(
         max_length=20,

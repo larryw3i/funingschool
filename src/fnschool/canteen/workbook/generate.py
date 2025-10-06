@@ -714,12 +714,12 @@ class CanteenWorkBook:
 
             prev_storage_date = (
                 storaged_ingredients[index - 1][0]
-                if index - 1 < len(storaged_ingredients)
+                if 0 < index - 1 < len(storaged_ingredients)
                 else None
             )
             next_storage_date = (
                 storaged_ingredients[index + 1][0]
-                if index + 1 < len(storaged_ingredients)
+                if 0 < index + 1 < (len(storaged_ingredients) - 1)
                 else None
             )
             sub_title_num_cell_row_num = title_cell_row_num + 1
@@ -736,8 +736,8 @@ class CanteenWorkBook:
                     sub_storage_num=storage_date_index
                 )
                 if (
-                    next_storage_date == storage_date
-                    or prev_storage_date == storage_date
+                    (next_storage_date and next_storage_date == storage_date)
+                    or (prev_storage_date and prev_storage_date == storage_date)
                 )
                 else ""
             )

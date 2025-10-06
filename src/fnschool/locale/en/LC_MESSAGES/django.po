@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-06 17:57+0000\n"
+"POT-Creation-Date: 2025-10-06 18:56+0000\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Creating Date"
 msgstr ""
 
-#: canteen/models.py:24 canteen/models.py:67 canteen/models.py:116
+#: canteen/models.py:24 canteen/models.py:70 canteen/models.py:119
 #: canteen/templates/canteen/category/delete.html:24
 #: canteen/templates/canteen/category/list.html:19
 msgid "Is Disabled"
@@ -67,44 +67,44 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: canteen/models.py:50 canteen/views.py:73
+#: canteen/models.py:53 canteen/views.py:73
 msgid "Quantity"
 msgstr ""
 
-#: canteen/models.py:56 canteen/views.py:87
+#: canteen/models.py:59 canteen/views.py:87
 msgid "Unit Name of Quantity"
 msgstr ""
 
-#: canteen/models.py:60 canteen/views.py:83
+#: canteen/models.py:63 canteen/views.py:83
 msgid "Total Price"
 msgstr ""
 
-#: canteen/models.py:64 canteen/views.py:91
+#: canteen/models.py:67 canteen/views.py:91
 msgid "Is Ignorable"
 msgstr ""
 
-#: canteen/models.py:94 canteen/templates/canteen/ingredient/list.html:4
+#: canteen/models.py:97 canteen/templates/canteen/ingredient/list.html:4
 #: canteen/templates/canteen/ingredient/list.html:7
 msgid "Ingredient List"
 msgstr ""
 
-#: canteen/models.py:105
+#: canteen/models.py:108
 msgid "Ingredient"
 msgstr ""
 
-#: canteen/models.py:108
+#: canteen/models.py:111
 msgid "Date"
 msgstr ""
 
-#: canteen/models.py:120
+#: canteen/models.py:123
 msgid "Consumption Record"
 msgstr ""
 
-#: canteen/models.py:121
+#: canteen/models.py:124
 msgid "Consumption Records"
 msgstr ""
 
-#: canteen/models.py:125
+#: canteen/models.py:128
 #, python-brace-format
 msgid "{0} of {1} was consumed on {2} ."
 msgstr ""
@@ -365,8 +365,8 @@ msgstr ""
 
 #: canteen/views.py:75
 msgid ""
-"When you purchase ingredients, it's best not to have decimals in the "
-"quantity, as this can be a big hassle!"
+"To prevent the number of decimal places in the unit price from becoming too "
+"large, \"quantity\" is only allowed to be an integer."
 msgstr ""
 
 #: canteen/views.py:92

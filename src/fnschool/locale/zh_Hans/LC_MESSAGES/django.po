@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-06 17:57+0000\n"
-"PO-Revision-Date: 2025-10-07 01:58+0800\n"
+"POT-Creation-Date: 2025-10-06 18:56+0000\n"
+"PO-Revision-Date: 2025-10-07 02:59+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -39,7 +39,7 @@ msgstr "食材大类名"
 msgid "Creating Date"
 msgstr "创建日期"
 
-#: canteen/models.py:24 canteen/models.py:67 canteen/models.py:116
+#: canteen/models.py:24 canteen/models.py:70 canteen/models.py:119
 #: canteen/templates/canteen/category/delete.html:24
 #: canteen/templates/canteen/category/list.html:19
 msgid "Is Disabled"
@@ -66,44 +66,44 @@ msgstr "餐类"
 msgid "Category"
 msgstr "食材大类"
 
-#: canteen/models.py:50 canteen/views.py:73
+#: canteen/models.py:53 canteen/views.py:73
 msgid "Quantity"
 msgstr "数量"
 
-#: canteen/models.py:56 canteen/views.py:87
+#: canteen/models.py:59 canteen/views.py:87
 msgid "Unit Name of Quantity"
 msgstr "数量单位"
 
-#: canteen/models.py:60 canteen/views.py:83
+#: canteen/models.py:63 canteen/views.py:83
 msgid "Total Price"
 msgstr "总价"
 
-#: canteen/models.py:64 canteen/views.py:91
+#: canteen/models.py:67 canteen/views.py:91
 msgid "Is Ignorable"
 msgstr "是不用入库的"
 
-#: canteen/models.py:94 canteen/templates/canteen/ingredient/list.html:4
+#: canteen/models.py:97 canteen/templates/canteen/ingredient/list.html:4
 #: canteen/templates/canteen/ingredient/list.html:7
 msgid "Ingredient List"
 msgstr "食材列表"
 
-#: canteen/models.py:105
+#: canteen/models.py:108
 msgid "Ingredient"
 msgstr "食材"
 
-#: canteen/models.py:108
+#: canteen/models.py:111
 msgid "Date"
 msgstr "日期"
 
-#: canteen/models.py:120
+#: canteen/models.py:123
 msgid "Consumption Record"
 msgstr "消耗记录"
 
-#: canteen/models.py:121
+#: canteen/models.py:124
 msgid "Consumption Records"
 msgstr "消耗记录列表"
 
-#: canteen/models.py:125
+#: canteen/models.py:128
 #, python-brace-format
 msgid "{0} of {1} was consumed on {2} ."
 msgstr "在 {2} 消耗了 {0} 的 {1} 。"
@@ -397,9 +397,9 @@ msgstr ""
 
 #: canteen/views.py:75
 msgid ""
-"When you purchase ingredients, it's best not to have decimals in the "
-"quantity, as this can be a big hassle!"
-msgstr "当你购买菜品的时候，数量最好不要有小数，因为这是一个大麻烦！"
+"To prevent the number of decimal places in the unit price from becoming too "
+"large, \"quantity\" is only allowed to be an integer."
+msgstr "为防止单价的小数位数变得很多，“数量”只允许为整数。"
 
 #: canteen/views.py:92
 msgid "As long as a cell has content, it will be considered as \"yes\"."
@@ -611,8 +611,7 @@ msgstr "合计"
 msgid ""
 "   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
 msgstr ""
-"   审核人：            经办人：{handler} 　        过称人：              仓"
-"管人： 　      "
+"   审核人：　　　　经办人：{handler}　　　　过称人：　　　　仓管人：　　　　"
 
 #: canteen/workbook/generate.py:917
 #, python-brace-format
@@ -838,6 +837,11 @@ msgstr "登录"
 #: templates/includes/_header.html:74
 msgid "Sign Up"
 msgstr "注册"
+
+#~ msgid ""
+#~ "When you purchase ingredients, it's best not to have decimals in the "
+#~ "quantity, as this can be a big hassle!"
+#~ msgstr "当你购买菜品的时候，数量最好不要有小数，因为这是一个大麻烦！"
 
 #~ msgid "ingredient name"
 #~ msgstr "食材名"

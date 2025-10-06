@@ -72,9 +72,9 @@ category_header = (
 quantity_header = (
     _("Quantity"),
     _(
-        "When you purchase ingredients, it's best not to have "
-        + "decimals in the quantity, as this can "
-        + "be a big hassle!"
+        "To prevent the number of decimal places in the unit "
+        + 'price from becoming too large, "quantity" is '
+        + "only allowed to be an integer."
     ),
 )
 
