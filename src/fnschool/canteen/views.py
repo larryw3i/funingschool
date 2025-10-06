@@ -379,17 +379,67 @@ def create_ingredients(request):
                         name=category_name,
                         created_at=datetime.now().date(),
                     )
-                Ingredient.objects.create(
-                    user=request.user,
-                    storage_date=row[storage_date_header[0]],
-                    name=row[ingredient_name_header[0]],
-                    meal_type=row[meal_type_header[0]],
-                    category=category,
-                    quantity=row[quantity_header[0]],
-                    total_price=row[total_price_header[0]],
-                    quantity_unit_name=row[quantity_unit_name_header[0]],
-                    is_ignorable=not row[is_ignorable_header[0]] is np.nan,
-                )
+
+                decimal_places = 2
+
+                storage_date = row[storage_date_header[0]]
+                name = row[ingredient_name_header[0]]
+                meal_type = row[meal_type_header[0]]
+                quantity_unit_name = row[quantity_unit_name_header[0]]
+                is_ignorable = not row[is_ignorable_header[0]] is np.nan
+
+                total_price0 = row[total_price_header[0]]
+                quantity0 = row[quantity_header[0]]
+
+                total_price1 = int(float(total_price0 * 10**decimal_places))
+                quantity1 = int(float(quantity0 * 10**decimal_places))
+
+                split_count = total_price1 % quantity1
+                if split_count:
+                    unit_price0 = total_price1 // quantity1
+                    quantity0 = quantity0 - split_count
+                    total_price0 = unit_price0 * quantity0
+
+                    unit_price1 = unit_price0 + 1
+                    total_price1 = unit_price1 * split_count
+                    quantity1 = split_count
+
+                    Ingredient.objects.create(
+                        user=request.user,
+                        storage_date=storage_date,
+                        name=name + _("(1)"),
+                        meal_type=meal_type,
+                        category=category,
+                        quantity=quantity0,
+                        total_price=total_price0,
+                        quantity_unit_name=quantity_unit_name,
+                        is_ignorable=is_ignorable,
+                    )
+
+                    Ingredient.objects.create(
+                        user=request.user,
+                        storage_date=storage_date,
+                        name=name + _("(2)"),
+                        meal_type=meal_type,
+                        category=category,
+                        quantity=quantity1,
+                        total_price=total_price1,
+                        quantity_unit_name=quantity_unit_name,
+                        is_ignorable=is_ignorable,
+                    )
+
+                else:
+                    Ingredient.objects.create(
+                        user=request.user,
+                        storage_date=storage_date,
+                        name=name,
+                        meal_type=meal_type,
+                        category=category,
+                        quantity=quantity0,
+                        total_price=total_price0,
+                        quantity_unit_name=quantity_unit_name,
+                        is_ignorable=is_ignorable,
+                    )
 
             return redirect("canteen:list_ingredients")
 
