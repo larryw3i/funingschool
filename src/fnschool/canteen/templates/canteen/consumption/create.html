@@ -56,6 +56,13 @@
     </select>
   </div>
   <script>
+    function get_previous_month_date(date = new Date()) {
+  const prevMonthDate = new Date(date);
+  prevMonthDate.setDate(1);
+  prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
+  return prevMonthDate;
+}
+
     function is_weekend(date) {
       const dayOfWeek = date.getDay(); 
       return dayOfWeek === 0 || dayOfWeek === 6; 
@@ -76,8 +83,10 @@
         $('.month-select').append(`<option>${value}</option>`)
       });
       var now = new Date();
-      var year = now.getFullYear();
-      var month = now.getMonth() + 1;
+      prev_month = get_previous_month_date(now)
+      var year = prev_month.getFullYear();
+      var month = prev_month.getMonth()+1 ;
+      month = month< 10 ? `0${month}` : `${month}`;
       $('.month-select').val(`${year}-${month}`)
 
     });
