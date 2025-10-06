@@ -380,7 +380,7 @@ def list_ingredients(request):
             ingredients = ingredients.order_by(sort_name)
             sorted = True
     if not sorted:
-        ingredients = ingredients.order_by("name")
+        ingredients = ingredients.order_by("-storage_date", "category")
 
     page_size = request.GET.get("page_size", "")
     if not page_size:

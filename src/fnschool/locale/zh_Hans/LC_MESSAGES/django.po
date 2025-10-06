@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-06 17:57+0000\n"
-"PO-Revision-Date: 2025-10-07 01:42+0800\n"
+"PO-Revision-Date: 2025-10-07 01:58+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -277,16 +277,12 @@ msgid "Upload"
 msgstr "上传"
 
 #: canteen/templates/canteen/ingredient/create_one.html:5
-#, fuzzy
-#| msgid "Ingredient"
 msgid "New Ingredient"
-msgstr "食材"
+msgstr "新食材"
 
 #: canteen/templates/canteen/ingredient/create_one.html:8
-#, fuzzy
-#| msgid "Name of Ingredient"
 msgid "Create new Ingredient"
-msgstr "食材名称"
+msgstr "添加新的食材"
 
 #: canteen/templates/canteen/ingredient/delete.html:4
 #, python-format
@@ -346,7 +342,7 @@ msgstr "通过模板添加"
 
 #: canteen/templates/canteen/ingredient/list.html:32
 msgid "Add one"
-msgstr ""
+msgstr "添加一个"
 
 #: canteen/templates/canteen/ingredient/update.html:4
 #, python-format
@@ -389,8 +385,8 @@ msgid ""
 "generating a spreadsheet, each meal category corresponds to a spread sheet. "
 "If left blank, only one spreadsheet will be generated."
 msgstr ""
-"比如早餐、晚餐、正餐、营养餐等，生成 表册 的时候每个餐类对应着一个 表册  。不"
-"填的话只生成一个 表册 。"
+"比如早餐、晚餐、正餐、营养餐等，生成 表册 的时候每个餐类对应着一个 表册  。"
+"不填的话只生成一个 表册 。"
 
 #: canteen/views.py:68
 msgid ""
@@ -415,11 +411,11 @@ msgstr "请上传 “xlsx” 格式的文件。"
 
 #: canteen/views.py:454
 msgid "(1)"
-msgstr ""
+msgstr "（1）"
 
 #: canteen/views.py:466
 msgid "(2)"
-msgstr ""
+msgstr "（2）"
 
 #: canteen/views.py:512
 msgid "Purchased Ingredients Sheet"
@@ -615,8 +611,8 @@ msgstr "合计"
 msgid ""
 "   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
 msgstr ""
-"   审核人：            经办人：{handler} 　        过称人：              仓管"
-"人： 　      "
+"   审核人：            经办人：{handler} 　        过称人：              仓"
+"管人： 　      "
 
 #: canteen/workbook/generate.py:917
 #, python-brace-format
