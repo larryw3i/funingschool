@@ -26,7 +26,10 @@
        href="{% url "canteen:list_categories" %}">{% trans "Ingredient Categories" %}</a>
     <a class="btn btn-warning mx-1"
        href="{% url "canteen:create_consumptions" %}">{% trans "Consume" %}</a>
-    <a class="btn btn-primary" href="{% url "canteen:create_ingredients" %}">{% trans "Add" %}</a>
+    <a class="btn btn-primary mx-1"
+       onclick="open_small_window('{% url 'canteen:create_ingredients' %}')">{% trans "Add via template" %}</a>
+    <a class="btn btn-primary"
+       onclick="open_small_window('{% url 'canteen:create_ingredient' %}')">{% trans "Add one" %}</a>
   </div>
   <hr />
   <table class="table table-bordered table-striped table-hover table-condensed">

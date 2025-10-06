@@ -485,7 +485,7 @@ def create_ingredients(request):
                         is_ignorable=is_ignorable,
                     )
 
-            return redirect("canteen:list_ingredients")
+            return redirect("canteen:close_window")
 
     else:
         form = PurchasedIngredientsWorkBookForm()
@@ -645,6 +645,23 @@ class CategoryListView(LoginRequiredMixin, ListView):
         )
         page_size = page_size if page_size else self.paginate_by
         return int(page_size)
+
+
+class IngredientCreateView(LoginRequiredMixin, CreateView):
+    model = Ingredient
+    template_name = "canteen/ingredient/create_one.html"
+    success_url = reverse_lazy("canteen:close_window")
+    form_class = IngredientForm
+
+    def get_initial(self):
+        return {
+            "user": self.request.user,
+            "storage_date": datetime.now().date(),
+        }
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 # The end.

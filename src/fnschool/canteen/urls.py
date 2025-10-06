@@ -77,6 +77,11 @@ urlpatterns = [
         name="create_consumptions",
     ),
     path(
+        "create_ingredient",
+        views.IngredientCreateView.as_view(),
+        name="create_ingredient",
+    ),
+    path(
         "create_ingredients",
         views.create_ingredients,
         name="create_ingredients",
