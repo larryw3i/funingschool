@@ -101,6 +101,51 @@ date_patterns = [
 ]
 
 
+def split_price(total_price, quantity, decimal_places=2):
+    decimal_places = decimal_places
+    total_price0 = total_price
+    quantity0 = quantity
+    unit_price0 = total_price0 / quantity0
+
+    unit_price_d = int(total_price0 * 10**decimal_places / quantity0) / (
+        10**decimal_places
+    )
+    total_price1 = int(unit_price_d * quantity0 * 10**decimal_places) / (
+        10**decimal_places
+    )
+
+    total_price_diff = int(
+        total_price0 * 10**decimal_places - total_price1 * 10**decimal_places
+    ) / (10**decimal_places)
+
+    split_quantity = int(total_price_diff * 10**decimal_places)
+
+    unit_price0 = unit_price_d
+    quantity0 = int((quantity0 - split_quantity) * 10**decimal_places) / (
+        10**decimal_places
+    )
+    total_price0 = int((unit_price0 * quantity0) * 10**decimal_places) / (
+        10**decimal_places
+    )
+
+    unit_price1 = unit_price_d + 1 / (10**decimal_places)
+    quantity1 = split_quantity
+    total_price1 = int(unit_price1 * quantity1 * 10**decimal_places) / (
+        10**decimal_places
+    )
+
+    return [
+        [
+            float(f"{total_price0:.{decimal_places}f}"),
+            float(f"{quantity0:.{decimal_places}f}"),
+        ],
+        [
+            float(f"{total_price1:.{decimal_places}f}"),
+            float(f"{quantity1:.{decimal_places}f}"),
+        ],
+    ]
+
+
 def get_consumption_ingredients(request):
     ingredients = (
         Ingredient.objects.annotate(
@@ -380,29 +425,28 @@ def create_ingredients(request):
                         created_at=datetime.now().date(),
                     )
 
-                decimal_places = 2
-
                 storage_date = row[storage_date_header[0]]
                 name = row[ingredient_name_header[0]]
                 meal_type = row[meal_type_header[0]]
                 quantity_unit_name = row[quantity_unit_name_header[0]]
                 is_ignorable = not row[is_ignorable_header[0]] is np.nan
 
+                decimal_places = 2
                 total_price0 = row[total_price_header[0]]
                 quantity0 = row[quantity_header[0]]
 
-                total_price1 = int(float(total_price0 * 10**decimal_places))
-                quantity1 = int(float(quantity0 * 10**decimal_places))
+                total_price_test = int(float(total_price0 * 10**decimal_places))
+                quantity_test = int(float(quantity0 * 10**decimal_places))
 
-                split_count = total_price1 % quantity1
-                if split_count:
-                    unit_price0 = total_price1 // quantity1
-                    quantity0 = quantity0 - split_count
-                    total_price0 = unit_price0 * quantity0
+                if total_price_test % quantity_test:
 
-                    unit_price1 = unit_price0 + 1
-                    total_price1 = unit_price1 * split_count
-                    quantity1 = split_count
+                    [total_price0, quantity0], [total_price1, quantity1] = (
+                        split_price(
+                            total_price0,
+                            quantity0,
+                            decimal_places=decimal_places,
+                        )
+                    )
 
                     Ingredient.objects.create(
                         user=request.user,
