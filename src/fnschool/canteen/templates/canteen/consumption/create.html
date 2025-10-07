@@ -46,6 +46,7 @@
     <tbody>
       {% for ingredient in ingredients %}
         <tr class="row-consumption"
+            data-ingredient_id="{{ ingredient.id }}"
             data-ingredient_name="{{ ingredient.name }}"
             data-ingredient_quantity="{{ ingredient.quantity }}"
             data-ingredient_total_price="{{ ingredient.total_price }}"
@@ -131,6 +132,38 @@
       });
     });
 
+    function amount_used_input_blur(element) {
+      element = $(element)
+      var ingredient_quantity = element.closest('tr').data("ingredient_quantity")
+      ingredient_quantity = parseInt(ingredient_quantity) || 0
+      var amount_used = element.closest("form").data("amount_used")
+      var new_amount_used = $.trim(element.val())
+      new_amount_used = parseInt(new_amount_used) || 0
+      if (new_amount_used<0){
+        element.val('0')
+        new_amount_used = 0
+      }
+      if( amount_used > 0 && new_amount_used === 0){
+        element.val('0')
+        new_amount_used = 0
+      }
+      var $tds = element.parent().parent().siblings("td") 
+      var $amount_used_inputs = $tds.find("form input[name='amount_used']")
+      var total_consumed = 0
+      $amount_used_inputs.each(function(index,amount_used_element){
+        var value = parseInt($(amount_used_element).val()) || 0
+        total_consumed += value
+      });
+      if ((total_consumed+new_amount_used)>ingredient_quantity) {
+        var remaining_quantity = total_consumed<ingredient_quantity? (ingredient_quantity-total_consumed) : 0
+        element.val(remaining_quantity)
+        new_amount_used = remaining_quantity
+      }
+      total_consumed = total_consumed + new_amount_used
+      var ingredient_id=element.closest("tr").data("ingredient_id")
+      $(`td[name='remaining_${ingredient_id}']`).text(`${ingredient_quantity}-${total_consumed}=${ingredient_quantity-total_consumed}`)
+    }
+
     $(document).ready(function(){
       var td1 = $(".table tr > :nth-child(1):first")
       $(".table tr > :nth-child(2)").css("left",td1.width())
@@ -151,11 +184,7 @@
                     }
                     });
                     data.find('input[name="amount_used"]').blur(function(){
-                      amount_used = $(this).closest("form").data("amount_used")
-                      new_amount_used = $.trim($(this).val())
-                      if(parseFloat(amount_used) > 0.0 && new_amount_used === ""){
-                        $(this).val('0.0')
-                      }
+                      amount_used_input_blur(this)
                     });
                     $('#ingredient_num_'+value).append(data)
 
@@ -268,6 +297,7 @@
           query["storage_date_start"] = storage_date_start
           set_simple_cookie("storage_date_start",storage_date_start)
       }else{
+          query["storage_date_start"] = ""
         delete_cookie("storage_date_start" )
       }
 
@@ -275,16 +305,17 @@
          query["storage_date_end"] = storage_date_end
          set_simple_cookie("storage_date_end",storage_date_end)
       }else{
+         query["storage_date_end"] =""
         delete_cookie("storage_date_end")
       }
-      if (storage_date_start || storage_date_end){
-        update_href(query)
-      }else{
-        location.reload()
-      }
+      update_href(query)
     }
 </script>
 <style>
+#storage_date_start, #storage_date_end {
+  text-align:center;
+  font-family: Mono;
+}
 .weekend {
   background-color:pink;
 }
@@ -308,15 +339,19 @@
       left: 0;
       z-index: 1010; 
       white-space: nowrap;
+      text-align:right;
   }
 
   .table tr > :nth-child(2) {
       position: -webkit-sticky; 
       position: sticky;
       z-index: 1010; 
+      font-family: Mono;
+      text-align:right;
   }
   .table thead tr {
       font-size:15px;
+      font-family: Mono;
   }
    .table thead tr > :nth-child(1) {
       z-index: 1020;
