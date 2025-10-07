@@ -10,6 +10,7 @@
     <div class="row justify-content-end">
       <div class="col col-3 col-md-2 col-lg-2">
         <input class="  form-control"
+               onkeydown="if(event.keyCode==13){list_consumptions();}"
                title="{% trans 'The starting date of storage.' %}"
                id="storage_date_start"
                value="{{ request.COOKIES.storage_date_start }}">
@@ -17,6 +18,7 @@
     </div>
     <div class="col col-3 col-md-2 col-lg-2">
       <input class="form-control "
+             onkeydown="if(event.keyCode==13){list_consumptions();}"
              title="{% trans 'The end date of storage.' %}"
              id="storage_date_end"
              value="{{ request.COOKIES.storage_date_end }}">
