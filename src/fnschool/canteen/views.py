@@ -153,7 +153,7 @@ def get_consumption_ingredients(request):
     ingredients = (
         Ingredient.objects.annotate(
             total_consumed=Coalesce(
-                Sum("consumptions__amount_used"), 0, output_field=DecimalField()
+                Sum("consumptions__amount_used"), 0, output_field=IntegerField()
             )
         )
         .filter(
