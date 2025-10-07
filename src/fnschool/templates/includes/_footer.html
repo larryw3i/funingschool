@@ -1,6 +1,5 @@
 {% load i18n %}
 {% load static %}
-<div class="progress-footer"></div>
 <div class="container">
   <p class="m-0 text-center text-white">
     {% trans "Copyleft &copy; FNSCHOOL" %} {% now "Y" %}
@@ -35,9 +34,14 @@
         </p>
       </div>
       <div class="col-md-4 text-md-end">
-        <button id="rejectCookies" class="btn btn-outline-secondary me-2">取消</button>
-        <button id="acceptCookies" class="btn btn-primary">接受全部</button>
+        <button id="rejectCookies" class="btn btn-outline-secondary me-2">
+          {% trans 'Cancel' %}
+        </button>
+        <button id="acceptCookies" class="btn btn-primary">
+          {% trans 'Accept All' %}
+        </button>
       </div>
     </div>
   </div>
 </div>
+<div class="progress-footer"></div>

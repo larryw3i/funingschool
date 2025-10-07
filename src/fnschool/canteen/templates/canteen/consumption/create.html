@@ -175,6 +175,7 @@
     });
 
     $(document).ready(function(){
+    var progress = 0
     $.each(ingredient_ids,function (index, value) {
               $.ajax(
                 {
@@ -182,6 +183,7 @@
                   method: 'GET',
                   success: function(data){
                     data=$(data)
+                    var footer_progressbar = $('.progress-footer')
                     data.each(function(index,element){
                         if (is_weekend(new Date($(element).data("date_of_using")))){
                           $(element).find('[name="amount_used"]').addClass("weekend")
@@ -191,6 +193,13 @@
                       amount_used_input_blur(this)
                     });
                     $('#ingredient_num_'+value).append(data)
+                    if (footer_progressbar) {
+                      progress += 1
+                      footer_progressbar.css('width',`${progress*100/ingredient_ids_length}%`)
+                      if (progress >= ingredient_ids_length) {
+                        footer_progressbar.css('width',"0%")
+                      }
+                    }
 
                   }
                 }
