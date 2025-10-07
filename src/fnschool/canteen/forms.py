@@ -54,7 +54,7 @@ class ConsumptionForm(forms.ModelForm):
         model = Consumption
         fields = "__all__"
         widgets = {
-            "amount_used": forms.NumberInput(attrs={"style": "width: 100px"}),
+            "amount_used": forms.NumberInput(attrs={"style": "width: 80px"}),
             "date_of_using": forms.HiddenInput(),
             "ingredient": forms.HiddenInput(),
             "is_disabled": forms.HiddenInput(),

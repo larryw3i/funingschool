@@ -490,12 +490,16 @@ class CanteenWorkBook:
             ingredients = Ingredient.objects.filter(
                 Q(user=user)
                 & Q(category=category)
-                & Q(storage_date__gte=self.date_start)
-                & Q(storage_date__lte=self.date_end)
+                & Q(
+                    consumptions__date_of_using__range=(
+                        self.date_start,
+                        self.date_end,
+                    )
+                )
                 & Q(meal_type=self.meal_type)
                 & Q(is_disabled=False)
                 & Q(is_ignorable=False)
-            ).all()
+            ).distinct()
             total_price_cell = sheet.cell(row_num, 2)
             total_price_cell.value = sum([i.total_price for i in ingredients])
 

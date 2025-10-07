@@ -40,6 +40,9 @@ from .models import Category, Consumption, Ingredient
 
 # Create your views here.
 
+decimal_places = 2
+float_threshold = 1 / (10**decimal_places) - 1 / (10 ** (decimal_places + 1))
+
 storage_date_header = (
     _("Storage Date"),
     _(
@@ -192,7 +195,7 @@ def new_consumption(request, consumption_id=None):
             posted_amount_used = request.POST.get("amount_used")
             if (
                 posted_amount_used.replace(".", "").isnumeric()
-                and float(posted_amount_used) == 0.0
+                and float(posted_amount_used) < float_threshold
             ):
                 consumption.delete()
                 return HttpResponse("OK", status=201)

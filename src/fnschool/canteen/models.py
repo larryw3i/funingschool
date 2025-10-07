@@ -45,7 +45,6 @@ class Ingredient(models.Model):
         related_name="ingredients",
         verbose_name=_("Category"),
     )
-    # models.CharField(max_length=50, verbose_name=_("Category"))
     quantity = models.IntegerField(
         validators=[
             MinValueValidator(0),
@@ -109,11 +108,9 @@ class Consumption(models.Model):
     )
 
     date_of_using = models.DateField(verbose_name=_("Date"))
-    amount_used = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
+    amount_used = models.IntegerField(
         verbose_name="消耗数量",
-        validators=[MinValueValidator(Decimal("0.0"))],
+        validators=[MinValueValidator(0)],
     )
     is_disabled = models.BooleanField(
         default=False, verbose_name=_("Is Disabled")

@@ -192,47 +192,32 @@
     }
     function submit_consumptions(fn) {
       consumption_forms =  $('form[name="consumption_form"]')
-      consumption_forms_length = consumption_forms.length
+      var requests = [];
       consumption_forms.each( function(index) {
           var form = $(this);
          if (form.data("is_disabled")=="True"){
-           if (index === consumption_forms_length - 1){
-             if ( fn != undefined){
-                 fn()
-             }
-             location.reload(true);
-          }
-
            return true;
          }
          if (form.find('input[name="amount_used"]').val().length < 1){
-           if (index === consumption_forms_length - 1){
-             if ( fn != undefined){
-                fn()
-             }
-
-             location.reload(true);
-          }
-
            return true;
          }
-    $.ajax({
+        requests.push(
+        $.ajax({
         url: form.attr('action'),
         type: form.attr('method') || 'POST', 
         data: form.serialize(),
-        success: function(response) {
-          if (index === consumption_forms_length - 1){
-            if ( fn != undefined){
-                fn()
-             }
-
-            location.reload(true);
-          }
-        },
-        error: function(xhr, status, error) {
-        }
-    });
-      }); 
+    }).catch(function(error) {
+      return erroe;}));
+        });
+      $.when.apply($, requests)
+  .done(function() {
+    if (! fn == undefined){
+      fn()
+    }
+    location.reload();
+  })
+  .fail(function() {
+  });
     }
     function set_consumptions_table_size(){
       const submit_consumptions_btn = $(".btn-submit-consumptions")
