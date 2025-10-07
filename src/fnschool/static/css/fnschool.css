@@ -2,6 +2,12 @@ main {
   padding-top: 60px;
   padding-bottom: 120px;
 }
+.progress-footer {
+  height: 2px;
+  position: absolute;
+  background: green;
+  width: 0%;
+}
 
 [onclick] {
   cursor: pointer;
