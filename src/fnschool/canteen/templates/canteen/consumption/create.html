@@ -56,6 +56,9 @@
             id="ingredient_num_{{ ingredient.id }}">
           <td title="{% blocktrans with storage_date=ingredient.storage_date %}Storaged on {{ storage_date }} .{% endblocktrans %}"
               class="">
+            <div class='ingredient-progress'
+                 style="width:{% widthratio ingredient.remaining_quantity ingredient.quantity 100 %}%">
+            </div>
             {{ ingredient.name }}
             {% if ingredient.meal_type %}
               <br />
@@ -162,6 +165,7 @@
       total_consumed = total_consumed + new_amount_used
       var ingredient_id=element.closest("tr").data("ingredient_id")
       $(`td[name='remaining_${ingredient_id}']`).text(`${ingredient_quantity}-${total_consumed}=${ingredient_quantity-total_consumed}`)
+      element.closest("tr").find('.ingredient-progress').css('width',`${parseInt((ingredient_quantity-total_consumed)*100/ingredient_quantity)}%`)
     }
 
     $(document).ready(function(){
@@ -312,6 +316,12 @@
     }
 </script>
 <style>
+.ingredient-progress {
+  height:2px;
+  background:green;
+  right:9px;
+  position: absolute;
+}
 #storage_date_start, #storage_date_end {
   text-align:center;
   font-family: Mono;
