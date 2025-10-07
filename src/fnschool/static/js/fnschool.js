@@ -8,6 +8,10 @@ function get_cookie(name) {
   }
   return null;
 }
+function delete_cookie(name) {
+  document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+}
+
 function set_simple_cookie(key, value) {
   cookie_enabled = get_cookie("cookie_enabled");
   if (cookie_enabled != "1") {

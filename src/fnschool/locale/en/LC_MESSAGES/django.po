@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 12:02+0000\n"
+"POT-Creation-Date: 2025-10-07 12:21+0000\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -54,7 +54,7 @@ msgstr ""
 msgid "Storage Date"
 msgstr ""
 
-#: canteen/models.py:40 canteen/templates/canteen/consumption/create.html:25
+#: canteen/models.py:40 canteen/templates/canteen/consumption/create.html:34
 #: canteen/views.py:66
 msgid "Ingredient Name"
 msgstr ""
@@ -226,28 +226,36 @@ msgstr ""
 msgid "Consume Ingredients"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:17
-msgid "Refresh"
+#: canteen/templates/canteen/consumption/create.html:14
+msgid "The end date of storage."
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:20
+msgid "The starting date of storage."
 msgstr ""
 
 #: canteen/templates/canteen/consumption/create.html:26
+msgid "Refresh"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:35
 msgid "Remaining Quantity"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:45
+#: canteen/templates/canteen/consumption/create.html:54
 #, python-format
 msgid "Storaged on %(storage_date)s ."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:59
+#: canteen/templates/canteen/consumption/create.html:67
 msgid "No ingredient found."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:68
+#: canteen/templates/canteen/consumption/create.html:75
 msgid "Submit"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:72
+#: canteen/templates/canteen/consumption/create.html:79
 msgid "Generate Spreadsheet"
 msgstr ""
 
@@ -381,32 +389,32 @@ msgstr ""
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr ""
 
-#: canteen/views.py:436
+#: canteen/views.py:434
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:478
+#: canteen/views.py:476
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:490
+#: canteen/views.py:488
 msgid "(2)"
 msgstr ""
 
-#: canteen/views.py:536
+#: canteen/views.py:534
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:556
+#: canteen/views.py:554
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:572
+#: canteen/views.py:570
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:595
+#: canteen/views.py:593
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
 msgstr ""

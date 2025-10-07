@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-07 12:02+0000\n"
-"PO-Revision-Date: 2025-10-07 02:59+0800\n"
+"POT-Creation-Date: 2025-10-07 12:21+0000\n"
+"PO-Revision-Date: 2025-10-07 20:22+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -53,7 +53,7 @@ msgstr "用户"
 msgid "Storage Date"
 msgstr "入库日期"
 
-#: canteen/models.py:40 canteen/templates/canteen/consumption/create.html:25
+#: canteen/models.py:40 canteen/templates/canteen/consumption/create.html:34
 #: canteen/views.py:66
 msgid "Ingredient Name"
 msgstr "食材名"
@@ -239,30 +239,36 @@ msgstr ""
 msgid "Consume Ingredients"
 msgstr "消耗食材"
 
-#: canteen/templates/canteen/consumption/create.html:17
-msgid "Refresh"
-msgstr ""
+#: canteen/templates/canteen/consumption/create.html:14
+msgid "The end date of storage."
+msgstr "入库的结束日期。"
+
+#: canteen/templates/canteen/consumption/create.html:20
+msgid "The starting date of storage."
+msgstr "入库的起始日期。"
 
 #: canteen/templates/canteen/consumption/create.html:26
+msgid "Refresh"
+msgstr "刷新"
+
+#: canteen/templates/canteen/consumption/create.html:35
 msgid "Remaining Quantity"
 msgstr "余量"
 
-#: canteen/templates/canteen/consumption/create.html:45
+#: canteen/templates/canteen/consumption/create.html:54
 #, python-format
 msgid "Storaged on %(storage_date)s ."
 msgstr "于 %(storage_date)s 入库。"
 
-#: canteen/templates/canteen/consumption/create.html:59
-#, fuzzy
-#| msgid "ingredient name"
+#: canteen/templates/canteen/consumption/create.html:67
 msgid "No ingredient found."
-msgstr "食材名"
+msgstr "未发现食材。"
 
-#: canteen/templates/canteen/consumption/create.html:68
+#: canteen/templates/canteen/consumption/create.html:75
 msgid "Submit"
 msgstr "提交"
 
-#: canteen/templates/canteen/consumption/create.html:72
+#: canteen/templates/canteen/consumption/create.html:79
 msgid "Generate Spreadsheet"
 msgstr "生成账单"
 
@@ -395,8 +401,8 @@ msgid ""
 "generating a spreadsheet, each meal category corresponds to a spread sheet. "
 "If left blank, only one spreadsheet will be generated."
 msgstr ""
-"比如早餐、晚餐、正餐、营养餐等，生成 表册 的时候每个餐类对应着一个 表册  。不"
-"填的话只生成一个 表册 。"
+"比如早餐、晚餐、正餐、营养餐等，生成 表册 的时候每个餐类对应着一个 表册  。"
+"不填的话只生成一个 表册 。"
 
 #: canteen/views.py:80
 msgid ""
@@ -415,32 +421,32 @@ msgstr "为防止单价的小数位数变得很多，“数量”只允许为整
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:436
+#: canteen/views.py:434
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:478
+#: canteen/views.py:476
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:490
+#: canteen/views.py:488
 msgid "(2)"
 msgstr "（2）"
 
-#: canteen/views.py:536
+#: canteen/views.py:534
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:556
+#: canteen/views.py:554
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:572
+#: canteen/views.py:570
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:595
+#: canteen/views.py:593
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
 msgstr "（{month}）{affiliation}食堂出入库工作簿"
@@ -557,11 +563,9 @@ msgstr ""
 "章作为报销凭据。"
 
 #: canteen/workbook/generate.py:426
-#, fuzzy, python-brace-format
-#| msgid ""
-#| "Table of {superior_department} Canteen Storaged Ingredients Statistics"
+#, python-brace-format
 msgid "Table of {superior_department} Canteen Consumed Ingredients Statistics"
-msgstr "{superior_department}食堂食品、材料入库汇总报销单"
+msgstr "{superior_department}食堂食品、材料出库汇总报销单"
 
 #: canteen/workbook/generate.py:597
 #, python-brace-format

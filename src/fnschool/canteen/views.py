@@ -150,8 +150,12 @@ def split_price(total_price, quantity, decimal_places=2):
 
 
 def get_consumption_ingredients(request):
-    date_start = request.GET.get("date_start", None)
-    date_end = request.GET.get("date_end", None)
+    date_start = request.GET.get(
+        "storage_date_start", None
+    ) or request.COOKIES.get("storage_date_start", None)
+    date_end = request.GET.get("storage_date_end", None) or request.COOKIES.get(
+        "storage_date_end", None
+    )
     ingredients = Ingredient.objects
     queries = Q()
     queries = (
