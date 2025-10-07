@@ -6,22 +6,22 @@
 {% block content %}
   <h1>{% trans "Consume Ingredients" %}</h1>
   <hr>
-  <div class="">
-    <button class="btn btn-success float-end">{% trans "Refresh" %}</button>
-    <div class="date-picker  float-end mx-2 float-end">
-      <div class="date-selectors float-end inline nowrap">
-        <select id="day2" class="day-select form-select float-end"></select>
-        <select id="month2" class="month-select form-select float-end"></select>
-        <select id="year2" class="year-select form-select float-end"></select>
+  <div class="row justify-content-end ">
+    <div class="date-picker col  mx-2 ">
+      <div class="date-selectors row  inline nowrap">
+        <select id="year2" class=" col year-select form-select "></select>
+        <select id="day2" class="col day-select form-select "></select>
+        <select id="month2" class="col month-select form-select "></select>
       </div>
     </div>
-    <div class="date-picker  float-end mx-2 float-end">
-      <div class="date-selectors float-end inline nowrap">
-        <select id="day1" class="day-select form-select float-end"></select>
-        <select id="month1" class="month-select form-select float-end"></select>
-        <select id="year1" class="year-select form-select float-end"></select>
+    <div class="date-picker col  mx-2 ">
+      <div class="date-selectors row inline nowrap">
+        <select id="year1" class=" col year-select form-select "></select>
+        <select id="month1" class="col month-select form-select "></select>
+        <select id="day1" class="col day-select form-select "></select>
       </div>
     </div>
+    <button class="btn btn-success col ">{% trans "Refresh" %}</button>
   </div>
   <div class="table table-responsive table-container">
     <table class="table table-consumptions cotable-bordered table-striped table-hover table-condensed scroll-vertical ">
