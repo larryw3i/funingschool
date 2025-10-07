@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from dateutil import parser
 from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -157,10 +158,10 @@ def get_consumption_ingredients(request):
         Q(user=request.user) & Q(is_disabled=False) & Q(is_ignorable=False)
     )
     if date_start:
-        date_start = date(date_start)
+        date_start = parser.parse(date_start).date()
         queries &= Q(storage_date__gte=date_start)
     if date_end:
-        date_end = date(date_end)
+        date_end = parser.parse(date_end).date()
         queries &= Q(storage_date__lte=date_end)
 
     if not date_start and not date_end:
@@ -236,6 +237,14 @@ def new_consumption(request, consumption_id=None):
 @login_required
 def create_consumptions(request, ingredient_id=None):
     ingredients = get_consumption_ingredients(request)
+    date_range = None
+    if not ingredients:
+        return render(
+            request,
+            "canteen/consumption/create.html",
+            {"ingredients": ingredients, "date_range": date_range},
+        )
+
     date_range = get_date_range(ingredients)
     if ingredient_id:
         ingredient = get_object_or_404(Ingredient, pk=ingredient_id)

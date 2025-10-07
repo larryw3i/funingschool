@@ -6,73 +6,80 @@
 {% block content %}
   <h1>{% trans "Consume Ingredients" %}</h1>
   <hr>
-  <div class="row justify-content-end ">
-    <div class="date-picker col  mx-2 ">
-      <div class="date-selectors row  inline nowrap">
-        <select id="year2" class=" col year-select form-select "></select>
-        <select id="day2" class="col day-select form-select "></select>
-        <select id="month2" class="col month-select form-select "></select>
-      </div>
+  <div class="container">
+    <div class="row justify-content-end">
+      <div class="col col-3 col-md-2 col-lg-2">
+        <input class="  form-control"
+               id="storage_date_start"
+               value="{{ request.GET.date_start }}">
+      </input>
     </div>
-    <div class="date-picker col  mx-2 ">
-      <div class="date-selectors row inline nowrap">
-        <select id="year1" class=" col year-select form-select "></select>
-        <select id="month1" class="col month-select form-select "></select>
-        <select id="day1" class="col day-select form-select "></select>
-      </div>
-    </div>
-    <button class="btn btn-success col ">{% trans "Refresh" %}</button>
+    <div class="col col-3 col-md-2 col-lg-2">
+      <input class="form-control "
+             id="storage_date_end"
+             value="{{ request.GET.date_end }}">
+    </input>
   </div>
-  <div class="table table-responsive table-container">
-    <table class="table table-consumptions cotable-bordered table-striped table-hover table-condensed scroll-vertical ">
-      <thead>
-        <tr>
+  <button class="btn btn-success col-md-1 col-lg-1 col-2"
+          onclick="list_consumptions();">{% trans "Refresh" %}</button>
+</div>
+</div>
+<div class="table table-responsive table-container">
+  <table class="table table-consumptions cotable-bordered table-striped table-hover table-condensed scroll-vertical ">
+    <thead>
+      <tr>
+        {% if ingredients %}
           <th class="">{% trans "Ingredient Name" %}</th>
           <th class="">{% trans "Remaining Quantity" %}</th>
-          {% for date_h in date_range %}
-            <th class="consumption-date">{{ date_h }}</th>
-          {% endfor %}
-        </tr>
-      </thead>
-      <tbody>
-        {% for ingredient in ingredients %}
-          <tr class="row-consumption"
-              data-ingredient_name="{{ ingredient.name }}"
-              data-ingredient_quantity="{{ ingredient.quantity }}"
-              data-ingredient_total_price="{{ ingredient.total_price }}"
-              data-ingredient_meal_type="{{ ingredient.meal_type }}"
-              data-ingredient_quantity_unit_name="{{ ingredient.quantity_unit_name }}"
-              data-ingredient_unit_price="{{ ingredient.unit_price }}"
-              id="ingredient_num_{{ ingredient.id }}">
-            <td title="{% blocktrans with storage_date=ingredient.storage_date %}Storaged on {{ storage_date }} .{% endblocktrans %}"
-                class="">
-              {{ ingredient.name }}
-              {% if ingredient.meal_type %}
-                <br />
-                ({{ ingredient.meal_type }})
-              {% endif %}
-            </td>
-            <td name="remaining_{{ ingredient.id }}">
-              {{ ingredient.quantity }}-{{ ingredient.consuming_quantity }}={{ ingredient.remaining_quantity }}
-            </td>
-          </tr>
+        {% endif %}
+        {% for date_h in date_range %}
+          <th class="consumption-date">{{ date_h }}</th>
+        {% empty %}
+          <th></th>
         {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  <div class="">
-    <button onclick="submit_consumptions();"
-            class="btn btn-submit-consumptions btn-primary float-start">
-      {% trans "Submit" %}
-    </button>
-    <button onclick="generate_spreadsheet();"
-            class="btn btn-submit-consumptions btn-success float-end">
-      {% trans "Generate Spreadsheet" %}
-    </button>
-    <select class="workbook-month-select form-select float-end mx-2"
-            style="width:118px"></select>
-  </div>
-  <script>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ingredient in ingredients %}
+        <tr class="row-consumption"
+            data-ingredient_name="{{ ingredient.name }}"
+            data-ingredient_quantity="{{ ingredient.quantity }}"
+            data-ingredient_total_price="{{ ingredient.total_price }}"
+            data-ingredient_meal_type="{{ ingredient.meal_type }}"
+            data-ingredient_quantity_unit_name="{{ ingredient.quantity_unit_name }}"
+            data-ingredient_unit_price="{{ ingredient.unit_price }}"
+            id="ingredient_num_{{ ingredient.id }}">
+          <td title="{% blocktrans with storage_date=ingredient.storage_date %}Storaged on {{ storage_date }} .{% endblocktrans %}"
+              class="">
+            {{ ingredient.name }}
+            {% if ingredient.meal_type %}
+              <br />
+              ({{ ingredient.meal_type }})
+            {% endif %}
+          </td>
+          <td name="remaining_{{ ingredient.id }}">
+            {{ ingredient.quantity }}-{{ ingredient.consuming_quantity }}={{ ingredient.remaining_quantity }}
+          </td>
+        </tr>
+      {% empty %}
+        <tr>{% trans "No ingredient found." %}</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="">
+  <button onclick="submit_consumptions();"
+          class="btn btn-submit-consumptions btn-primary float-start">
+    {% trans "Submit" %}
+  </button>
+  <button onclick="generate_spreadsheet();"
+          class="btn btn-submit-consumptions btn-success float-end">
+    {% trans "Generate Spreadsheet" %}
+  </button>
+  <select class="workbook-month-select form-select float-end mx-2"
+          style="width:118px"></select>
+</div>
+<script>
     function get_previous_month_date(date = new Date()) {
   const prevMonthDate = new Date(date);
   prevMonthDate.setDate(1);
@@ -248,112 +255,25 @@
     $(document).ready(function() {
       set_consumptions_table_size()
 });
-
-            document.addEventListener('DOMContentLoaded', function() {
-            const today = new Date();
-            const yesterday = new Date(today);
-            yesterday.setDate(yesterday.getDate() - 1);
-
-            const currentYear = today.getFullYear();
-            const startYear = currentYear - 5;
-            const endYear = currentYear + 5;
-
-            const yearSelects = document.querySelectorAll('.year-select');
-            yearSelects.forEach(select => {
-                for (let year = startYear; year <= endYear; year++) {
-                    const option = document.createElement('option');
-                    option.value = year;
-                    option.textContent = year ;
-                    select.appendChild(option);
-                }
-            });
-
-            const monthSelects = document.querySelectorAll('.month-select');
-            monthSelects.forEach(select => {
-                for (let month = 1; month <= 12; month++) {
-                    const option = document.createElement('option');
-                    option.value = month;
-                    option.textContent = month;
-                    select.appendChild(option);
-                }
-            });
-
-            function updateDays(yearSelect, monthSelect, daySelect) {
-                const year = parseInt(yearSelect.value);
-                const month = parseInt(monthSelect.value);
-
-                const daysInMonth = new Date(year, month, 0).getDate();
-
-                const selectedDay = parseInt(daySelect.value) || 1;
-
-                daySelect.innerHTML = '';
-
-                for (let day = 1; day <= daysInMonth; day++) {
-                    const option = document.createElement('option');
-                    option.value = day;
-                    option.textContent = day ;
-                    daySelect.appendChild(option);
-                }
-
-                daySelect.value = Math.min(selectedDay, daysInMonth);
-            }
-
-            const allYearSelects = document.querySelectorAll('.year-select');
-            const allMonthSelects = document.querySelectorAll('.month-select');
-
-            allYearSelects.forEach(select => {
-                select.addEventListener('change', function() {
-                    const id = this.id.replace('year', '');
-                    updateDays(
-                        document.getElementById('year' + id),
-                        document.getElementById('month' + id),
-                        document.getElementById('day' + id)
-                    );
-                });
-            });
-
-            allMonthSelects.forEach(select => {
-                select.addEventListener('change', function() {
-                    const id = this.id.replace('month', '');
-                    updateDays(
-                        document.getElementById('year' + id),
-                        document.getElementById('month' + id),
-                        document.getElementById('day' + id)
-                    );
-                });
-            });
-
-            document.getElementById('year1').value = yesterday.getFullYear();
-            document.getElementById('month1').value = yesterday.getMonth() + 1;
-            updateDays(
-                document.getElementById('year1'),
-                document.getElementById('month1'),
-                document.getElementById('day1')
-            );
-            document.getElementById('day1').value = yesterday.getDate();
-
-            document.getElementById('year2').value = today.getFullYear();
-            document.getElementById('month2').value = today.getMonth() + 1;
-            updateDays(
-                document.getElementById('year2'),
-                document.getElementById('month2'),
-                document.getElementById('day2')
-            );
-            document.getElementById('day2').value = today.getDate();
-        });
-
-  </script>
-  <style>
-body{
-}
-
-.year-select {
-  width:90px;
-}
-.month-select,.day-select {
-  width:70px
-}
-
+          
+    function list_consumptions(){
+       var date_start = $('#storage_date_start').val()
+      var date_end =  $('#storage_date_end').val()
+      query = {}
+      if (date_start) {
+          query["date_start"] = date_start
+          set_simple_cookie("date_start",date_start)
+      }
+       if (date_end) {
+         query["date_end"] = date_end
+         set_simple_cookie("date_end",date_end)
+      }
+      if (date_start || date_end){
+        update_href(query)
+      }
+    }
+</script>
+<style>
 .weekend {
   background-color:pink;
 }
@@ -399,5 +319,5 @@ nav li {
   z-index: 1030;
 }
 
-  </style>
+</style>
 {% endblock %}
