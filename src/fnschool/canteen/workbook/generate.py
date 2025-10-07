@@ -418,6 +418,173 @@ class CanteenWorkBook:
         sheet.merge_cells(f"A{note_row_num}:C{note_row_num}")
         set_row_height_in_inches(sheet, note_row_num, 0.27)
 
+    def fill_in_consumption_sheet(self):
+        sheet = self.storage_sheet
+        user = self.user
+        title_cell = sheet.cell(1, 1)
+        title_cell.value = _(
+            "Table of {superior_department} Canteen Consumed Ingredients Statistics"
+        ).format(
+            superior_department=user.superior_department,
+        )
+        title_cell.font = self.font_16_bold
+        title_cell.alignment = self.center_alignment
+        for col_num, width in [
+            [1, 2.23],
+            [2, 3.14],
+            [3, 3.14],
+        ]:
+            set_column_width_in_inches(sheet, col_num, width)
+        sheet.merge_cells("A1:C1")
+
+        sub_title_cell = sheet.cell(2, 1)
+        sheet.merge_cells("A2:C2")
+        sub_title_cell.font = self.font_12
+        sub_title_cell.alignment = self.center_alignment
+        sub_title_cell.value = _(
+            "Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}.{day:0>2}"
+        ).format(
+            affiliation=user.affiliation,
+            year=self.year,
+            month=self.month,
+            day=self.date_end.day,
+        )
+
+        header_row_num = 3
+        header_category_cell = sheet.cell(header_row_num, 1)
+        header_category_cell.value = _("Ingredient Categories (storage sheet)")
+
+        header_total_price_cell = sheet.cell(header_row_num, 2)
+        header_total_price_cell.value = _(
+            "Ingredient Total Prices (storage sheet)"
+        )
+
+        header_note_cell = sheet.cell(header_row_num, 3)
+        header_note_cell.value = _("Procurement Note")
+
+        for cell in [
+            header_category_cell,
+            header_total_price_cell,
+            header_note_cell,
+        ]:
+            cell.font = self.font_12
+            cell.alignment = self.center_alignment
+            cell.border = self.thin_border
+
+        categories = Category.objects.filter(
+            Q(user=user) & Q(is_disabled=False)
+        ).all()
+
+        set_row_height_in_inches(sheet, 1, 0.38)
+        set_row_height_in_inches(sheet, 2, 0.22)
+        set_row_height_in_inches(sheet, 3, 0.32)
+
+        for index, category in enumerate(categories):
+
+            row_num = header_row_num + 1 + index
+            set_row_height_in_inches(sheet, row_num, 0.32)
+
+            category_cell = sheet.cell(row_num, 1)
+            category_cell.value = category.name
+
+            ingredients = Ingredient.objects.filter(
+                Q(user=user)
+                & Q(category=category)
+                & Q(storage_date__gte=self.date_start)
+                & Q(storage_date__lte=self.date_end)
+                & Q(meal_type=self.meal_type)
+                & Q(is_disabled=False)
+                & Q(is_ignorable=False)
+            ).all()
+            total_price_cell = sheet.cell(row_num, 2)
+            total_price_cell.value = sum([i.total_price for i in ingredients])
+
+            note_cell = sheet.cell(row_num, 3)
+
+            for cell in [category_cell, total_price_cell, note_cell]:
+                cell.font = self.font_12
+                cell.alignment = self.center_alignment
+                cell.border = self.thin_border
+
+        ingredients = Ingredient.objects.filter(
+            Q(user=user)
+            & Q(storage_date__gte=self.date_start)
+            & Q(storage_date__lte=self.date_end)
+            & Q(meal_type=self.meal_type)
+            & Q(is_disabled=False)
+            & Q(is_ignorable=False)
+        ).all()
+
+        summary_row_num = len(categories) + header_row_num + 1
+        summary_total_price = sum([i.total_price for i in ingredients])
+        summary_total_price_cell = sheet.cell(summary_row_num, 1)
+        total_price_cell.border = self.thin_border
+        summary_total_price_cell.value = (
+            _(
+                "Total Price Text: {total_price_text}        {total_price}"
+            ).format(
+                total_price_text=get_CNY_TEXT(summary_total_price),
+                total_price=summary_total_price,
+            )
+            if self.is_zh_CN
+            else _(
+                "Total Price Text: {total_price_text}        {total_price}"
+            ).format(
+                total_price_text=str(summary_total_price),
+                total_price=summary_total_price,
+            )
+        )
+        sheet.merge_cells(f"A{summary_row_num}:C{summary_row_num}")
+        set_row_height_in_inches(sheet, summary_row_num, 0.32)
+
+        handler_row_num = summary_row_num + 1
+        handler_cell = sheet.cell(handler_row_num, 1)
+        handler_cell.border = self.thin_border
+        handler_cell.value = _("Handler:")
+        sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
+        set_row_height_in_inches(sheet, handler_row_num, 0.32)
+
+        reviewer_row_num = handler_row_num + 1
+        reviewer_cell = sheet.cell(reviewer_row_num, 1)
+        reviewer_cell.border = self.thin_border
+        reviewer_cell.value = _("Reviewer:")
+        sheet.merge_cells(f"A{reviewer_row_num}:C{reviewer_row_num}")
+        set_row_height_in_inches(sheet, reviewer_row_num, 0.32)
+
+        supervisor_row_num = reviewer_row_num + 1
+        supervisor_cell = sheet.cell(supervisor_row_num, 1)
+        supervisor_cell.border = self.thin_border
+        supervisor_cell.value = (
+            _("Principal's Signature:")
+            if self.is_school
+            else _("Supervisor's Signature:")
+        )
+        sheet.merge_cells(f"A{supervisor_row_num}:C{supervisor_row_num}")
+        set_row_height_in_inches(sheet, supervisor_row_num, 0.32)
+
+        note_row_num = supervisor_row_num + 1
+        note_cell = sheet.cell(note_row_num, 1)
+        note_cell.border = self.thin_border
+        note_cell.value = (
+            _(
+                "Note: This form is a summary of all monthly food and "
+                + "material inventory receipts from the cafeteria. After "
+                + "verification, it will be signed and stamped with "
+                + "the school seal by the principal as reimbursement "
+                + "evidence."
+            )
+            if self.is_school
+            else _(
+                "Note: This form is a summary of all monthly food and "
+                + "material inventory receipts from the cafeteria. "
+                + "After verification, it will be signed and stamped "
+                + "with the affiliation seal by the supervisor as "
+                + "reimbursement evidence."
+            )
+        )
+        sheet.merge_cells(f"A{note_row_num}:C{note_row_num}")
+        set_row_height_in_inches(sheet, note_row_num, 0.27)
+
     def fill_in_storage_sheet(self):
         sheet = self.storage_sheet
         user = self.user
@@ -584,6 +751,330 @@ class CanteenWorkBook:
         )
         sheet.merge_cells(f"A{note_row_num}:C{note_row_num}")
         set_row_height_in_inches(sheet, note_row_num, 0.27)
+
+    def fill_in_consumption_list_sheet(self):
+        sheet = self.consumption_list_sheet
+        user = self.user
+        ingredient_rows_count = 21
+        ingredients = Ingredient.objects.filter(
+            Q(user=user)
+            & Q(is_disabled=False)
+            & Q(is_ignorable=False)
+            & Q(storage_date__gte=self.date_start)
+            & Q(storage_date__lte=self.date_end)
+            & Q(meal_type=self.meal_type)
+        ).all()
+        categories = Category.objects.filter(
+            Q(user=user) & Q(is_disabled=False)
+        ).all()
+        ingredient_row_height = 0.18
+        ingredient_rows_height = ingredient_rows_count * 0.18
+        storage_dates = list(set([i.storage_date for i in ingredients]))
+
+        storaged_ingredients = []
+        for storage_date in storage_dates:
+            dated_ingredients = [
+                i for i in ingredients if i.storage_date == storage_date
+            ]
+            dated_ingredients = sorted(
+                dated_ingredients, key=lambda i: (i.category.name, i.name)
+            )
+            dated_ingredient_categories = list(
+                set([i.category for i in ingredients])
+            )
+            empty_categories = [
+                c for c in categories if not c in dated_ingredient_categories
+            ]
+            same_date_count = math.ceil(
+                len(dated_ingredients)
+                / (ingredient_rows_count - len(empty_categories))
+            )
+            step = math.floor(len(dated_ingredients) / same_date_count)
+            sub_storage_num = 1
+            for index in range(0, len(dated_ingredients), step):
+                split_dated_ingredients = dated_ingredients[
+                    index : index + step
+                ]
+                split_dated_ingredient = split_dated_ingredients[0]
+                split_dated_ingredient_categories = list(
+                    set([i.category for i in split_dated_ingredients])
+                )
+                split_empty_categories = [
+                    c
+                    for c in split_dated_ingredient_categories
+                    if not c in categories
+                ]
+                split_empty_categories = split_empty_categories + [
+                    random.choice(categories)
+                    for i in range(
+                        ingredient_rows_count
+                        - len(split_dated_ingredients)
+                        - len(split_empty_categories)
+                    )
+                ]
+
+                split_dated_ingredients += [
+                    Ingredient(
+                        user=user,
+                        name="",
+                        storage_date=storage_date,
+                        meal_type=split_dated_ingredient.meal_type,
+                        category=c,
+                        quantity=0.0,
+                        quantity_unit_name="",
+                        total_price=0.0,
+                        is_ignorable=False,
+                    )
+                    for c in split_empty_categories
+                ]
+
+                split_dated_ingredients = sorted(
+                    split_dated_ingredients, key=lambda i: (i.category.name)
+                )
+
+                storage_date_index = sub_storage_num
+                storaged_ingredients.append(
+                    [storage_date, storage_date_index, split_dated_ingredients]
+                )
+
+                sub_storage_num += 1
+
+            print([i[:2] for i in storaged_ingredients])
+
+        storage_num = 0
+        for index, (
+            storage_date,
+            storage_date_index,
+            dated_ingredients,
+        ) in enumerate(storaged_ingredients):
+            row_num = (ingredient_rows_count + 6) * index + 1
+
+            title_cell_row_num = row_num
+            title_cell = sheet.cell(title_cell_row_num, 1)
+            title_cell.value = _("Storage List (Storage Sheet)")
+            title_cell.alignment = self.center_alignment
+            title_cell.font = self.font_20_bold
+            sheet.merge_cells(f"A{title_cell_row_num}:H{title_cell_row_num}")
+
+            sub_title_affiliation_cell_row_num = title_cell_row_num + 1
+            sub_title_affiliation_cell = sheet.cell(
+                sub_title_affiliation_cell_row_num, 1
+            )
+            sub_title_affiliation_cell.font = self.font_12
+            sub_title_affiliation_cell.value = (
+                _("Affiliation Name: {affiliation_name}")
+                if self.is_school
+                else _("Principal Name: {affiliation_name}")
+            ).format(affiliation_name=user.affiliation)
+
+            sub_title_date_and_unit_cell_row_num = title_cell_row_num + 1
+            sub_title_date_and_unit_cell = sheet.cell(
+                sub_title_date_and_unit_cell_row_num, 4
+            )
+            sub_title_date_and_unit_cell.font = self.font_12
+            sub_title_date_and_unit_cell.value = (
+                _("{day:0>2} {month:0>2} {year}  Quantity Unit Name: CNY")
+            ).format(year=self.year, month=self.month, day=storage_date.day)
+
+            if storage_date_index < 2:
+                storage_num += 1
+
+            prev_storage_date = (
+                storaged_ingredients[index - 1][0]
+                if 0 < index - 1 < len(storaged_ingredients)
+                else None
+            )
+            next_storage_date = (
+                storaged_ingredients[index + 1][0]
+                if 0 < index + 1 < (len(storaged_ingredients) - 1)
+                else None
+            )
+            sub_title_num_cell_row_num = title_cell_row_num + 1
+            sub_title_num_cell = sheet.cell(sub_title_num_cell_row_num, 7)
+            sub_title_num_cell.font = self.font_12
+            sub_title_num_cell.value = _("Storage No. {storage_num}").format(
+                storage_num=(
+                    f"R{self.month:0>2}{storage_num:0>2}"
+                    if self.is_zh_CN
+                    else f"S{self.month:0>2}{storage_num:0>2}"
+                )
+            ) + (
+                _("(Sub Storage No. {sub_storage_num})").format(
+                    sub_storage_num=storage_date_index
+                )
+                if (
+                    (next_storage_date and next_storage_date == storage_date)
+                    or (prev_storage_date and prev_storage_date == storage_date)
+                )
+                else ""
+            )
+            print(storage_num)
+
+            sheet.merge_cells(
+                f"A{sub_title_affiliation_cell_row_num}:B{sub_title_affiliation_cell_row_num}"
+            )
+            sheet.merge_cells(
+                f"D{sub_title_date_and_unit_cell_row_num}:F{sub_title_date_and_unit_cell_row_num}"
+            )
+            sheet.merge_cells(
+                f"G{sub_title_num_cell_row_num}:H{sub_title_num_cell_row_num}"
+            )
+
+            font_12_cells = []
+            header_row_num = title_cell_row_num + 2
+            category_header_cell = sheet.cell(header_row_num, 1)
+            category_header_cell.value = _("Category (Storage List Sheet)")
+
+            ingredient_name_header_cell = sheet.cell(header_row_num, 2)
+            ingredient_name_header_cell.value = _(
+                "Ingredient Name (Storage List Sheet)"
+            )
+
+            quantity_unit_name_header_cell = sheet.cell(header_row_num, 3)
+            quantity_unit_name_header_cell.value = _(
+                "Quantity Unit Name (Storage List Sheet)"
+            )
+
+            quantity_header_cell = sheet.cell(header_row_num, 4)
+            quantity_header_cell.value = _("Quantity (Storage List Sheet)")
+
+            unit_price_header_cell = sheet.cell(header_row_num, 5)
+            unit_price_header_cell.value = _("Unit Price (Storage List Sheet)")
+
+            total_price_header_cell = sheet.cell(header_row_num, 6)
+            total_price_header_cell.value = _(
+                "Total Price (Storage List Sheet)"
+            )
+
+            ingredients_total_price_header_cell = sheet.cell(header_row_num, 7)
+            ingredients_total_price_header_cell.value = _(
+                "Ingredients Total Price (Storage List Sheet)"
+            )
+
+            note_header_cell = sheet.cell(header_row_num, 8)
+            note_header_cell.value = _("Note (Storage List Sheet)")
+
+            font_12_cells += [
+                category_header_cell,
+                ingredient_name_header_cell,
+                quantity_unit_name_header_cell,
+                quantity_header_cell,
+                unit_price_header_cell,
+                total_price_header_cell,
+                ingredients_total_price_header_cell,
+                note_header_cell,
+            ]
+            for cell in font_12_cells:
+                cell.alignment = self.center_alignment
+                cell.font = self.font_12
+                cell.border = self.thin_border
+
+            last_category = None
+
+            first_ingredient_row_num = header_row_num + 1
+            for row_num in range(
+                first_ingredient_row_num,
+                first_ingredient_row_num + len(dated_ingredients) + 1,
+            ):
+                for col_num in range(1, 9):
+                    cell = sheet.cell(row_num, col_num)
+                    cell.font = self.font_12
+                    cell.alignment = self.center_alignment
+                    cell.border = self.thin_border
+
+            for index, ingredient in enumerate(dated_ingredients):
+                ingredient_row_num = header_row_num + 1 + index
+
+                if not ingredient.category == last_category:
+                    sheet.cell(ingredient_row_num, 1, ingredient.category.name)
+                    sheet.cell(
+                        ingredient_row_num,
+                        7,
+                        sum(
+                            [
+                                float(i.total_price)
+                                for i in dated_ingredients
+                                if i.category == ingredient.category
+                            ]
+                        )
+                        or "",
+                    )
+                    ingredients_same_category_len = len(
+                        [
+                            i
+                            for i in dated_ingredients
+                            if i.category == ingredient.category
+                        ]
+                    )
+                    sheet.merge_cells(
+                        f"A{ingredient_row_num}:A{ingredients_same_category_len+ingredient_row_num-1}"
+                    )
+                    sheet.merge_cells(
+                        f"G{ingredient_row_num}:G{ingredients_same_category_len+ingredient_row_num-1}"
+                    )
+                    last_category = ingredient.category
+
+                sheet.cell(ingredient_row_num, 2, ingredient.name)
+                sheet.cell(ingredient_row_num, 3, ingredient.quantity_unit_name)
+                sheet.cell(
+                    ingredient_row_num,
+                    4,
+                    f"{ingredient.quantity:.2f}" if ingredient.quantity else "",
+                )
+                sheet.cell(
+                    ingredient_row_num,
+                    5,
+                    (
+                        f"{ingredient.unit_price:.2f}"
+                        if ingredient.unit_price
+                        else ""
+                    ),
+                )
+                sheet.cell(
+                    ingredient_row_num,
+                    6,
+                    (
+                        f"{ingredient.total_price:.2f}"
+                        if ingredient.total_price
+                        else ""
+                    ),
+                )
+                set_row_height_in_inches(
+                    sheet, ingredient_row_num, ingredient_row_height
+                )
+
+            summary_total_price = sum(
+                [float(i.total_price) for i in dated_ingredients]
+            )
+            summary_row_num = header_row_num + len(dated_ingredients) + 1
+            sheet.cell(summary_row_num, 1, _("Summary (Storage List Sheet)"))
+            sheet.cell(summary_row_num, 6, summary_total_price)
+            sheet.cell(summary_row_num, 7, summary_total_price)
+
+            summary_row_height = ingredient_row_height
+            set_row_height_in_inches(sheet, summary_row_num, summary_row_height)
+
+            signature_row_num = summary_row_num + 1
+            signature_cell = sheet.cell(signature_row_num, 1)
+            signature_cell.value = _(
+                "   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
+            ).format(handler=user.username)
+            signature_cell.font = self.font_14
+            signature_cell.alignment = self.center_alignment
+            sheet.merge_cells(f"A{signature_row_num}:H{signature_row_num}")
+            set_row_height_in_inches(sheet, signature_row_num, 0.22)
+
+        for col_num, col_width in [
+            [1, 1.13],
+            [2, 1.98],
+            [3, 0.85],
+            [4, 0.85],
+            [5, 0.88],
+            [6, 1.28],
+            [7, 1.19],
+            [8, 0.78],
+        ]:
+            set_column_width_in_inches(sheet, col_num, col_width)
 
     def fill_in_storage_list_sheet(self):
         sheet = self.storage_list_sheet
