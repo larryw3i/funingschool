@@ -42,19 +42,21 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("cookieConsent").style.display = "block";
   }
 
-  document
-    .getElementById("acceptCookies")
-    .addEventListener("click", function () {
+  var accept_cookies_element = document.getElementById("acceptCookies");
+  if (accept_cookies_element != undefined) {
+    accept_cookies_element.addEventListener("click", function () {
       const expiryDate = new Date();
       expiryDate.setFullYear(expiryDate.getFullYear() + 20);
       document.cookie = `cookie_enabled=1; expires=${expiryDate.toUTCString()}; path=/`;
       document.getElementById("cookieConsent").style.display = "none";
     });
-  document
-    .getElementById("rejectCookies")
-    .addEventListener("click", function () {
+  }
+  var reject_cookies_element = document.getElementById("rejectCookies");
+  if (reject_cookies_element != undefined) {
+    reject_cookies_element.addEventListener("click", function () {
       document.getElementById("cookieConsent").style.display = "none";
     });
+  }
 });
 
 function set_page_size() {

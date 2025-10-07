@@ -9,7 +9,15 @@ from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import DecimalField, ExpressionWrapper, F, Q, Sum, Value
+from django.db.models import (
+    DecimalField,
+    ExpressionWrapper,
+    F,
+    IntegerField,
+    Q,
+    Sum,
+    Value,
+)
 from django.db.models.functions import Coalesce
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -106,36 +114,27 @@ date_patterns = [
 
 def split_price(total_price, quantity, decimal_places=2):
     decimal_places = decimal_places
+    scale = 10**decimal_places
     total_price0 = total_price
     quantity0 = quantity
     unit_price0 = total_price0 / quantity0
 
-    unit_price_d = int(total_price0 * 10**decimal_places / quantity0) / (
-        10**decimal_places
-    )
-    total_price1 = int(unit_price_d * quantity0 * 10**decimal_places) / (
-        10**decimal_places
+    unit_price_d = int(total_price0 * scale / quantity0) / (scale)
+    total_price1 = int(unit_price_d * quantity0 * scale) / (scale)
+
+    total_price_diff = int(total_price0 * scale - total_price1 * scale) / (
+        scale
     )
 
-    total_price_diff = int(
-        total_price0 * 10**decimal_places - total_price1 * 10**decimal_places
-    ) / (10**decimal_places)
-
-    split_quantity = int(total_price_diff * 10**decimal_places)
+    split_quantity = int(total_price_diff * scale)
 
     unit_price0 = unit_price_d
-    quantity0 = int((quantity0 - split_quantity) * 10**decimal_places) / (
-        10**decimal_places
-    )
-    total_price0 = int((unit_price0 * quantity0) * 10**decimal_places) / (
-        10**decimal_places
-    )
+    quantity0 = int((quantity0 - split_quantity) * scale) / (scale)
+    total_price0 = int((unit_price0 * quantity0) * scale) / (scale)
 
-    unit_price1 = unit_price_d + 1 / (10**decimal_places)
+    unit_price1 = unit_price_d + 1 / (scale)
     quantity1 = split_quantity
-    total_price1 = int(unit_price1 * quantity1 * 10**decimal_places) / (
-        10**decimal_places
-    )
+    total_price1 = int(unit_price1 * quantity1 * scale) / (scale)
 
     return [
         [
@@ -150,19 +149,30 @@ def split_price(total_price, quantity, decimal_places=2):
 
 
 def get_consumption_ingredients(request):
-    ingredients = (
-        Ingredient.objects.annotate(
+    date_start = request.GET.get("date_start", None)
+    date_end = request.GET.get("date_end", None)
+    ingredients = Ingredient.objects
+    queries = Q()
+    queries = (
+        Q(user=request.user) & Q(is_disabled=False) & Q(is_ignorable=False)
+    )
+    if date_start:
+        date_start = date(date_start)
+        queries &= Q(storage_date__gte=date_start)
+    if date_end:
+        date_end = date(date_end)
+        queries &= Q(storage_date__lte=date_end)
+
+    if not date_start and not date_end:
+        queries &= Q(quantity__gt=F("total_consumed"))
+        ingredients = ingredients.annotate(
             total_consumed=Coalesce(
                 Sum("consumptions__amount_used"), 0, output_field=IntegerField()
             )
         )
-        .filter(
-            Q(user=request.user)
-            & Q(is_disabled=False)
-            & Q(is_ignorable=False)
-            & Q(quantity__gt=F("total_consumed"))
-        )
-        .order_by("storage_date", "meal_type")
+
+    ingredients = ingredients.filter(queries).order_by(
+        "storage_date", "meal_type"
     )
 
     return ingredients.all()
