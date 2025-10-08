@@ -93,28 +93,34 @@
   {% include 'includes/_paginator.html' %}
   <script>
       function clear_q() {
-        update_href({"q":""})
+          update_href({
+              "q": ""
+          })
       }
-    function submit_q() {
-      const q_value = document.querySelector('input[name="q"]').value;
-      update_href({ q: q_value });
-    }
-    function sort_ingredients(value) {
-      value = value.trim().split(/\s+/);
-      name = value[0];
-      value = value[1] || "";
-      const url = new URL(window.location.href);
-      const params = new URLSearchParams(url.search);
-      if (value == "-") {
-        value = "";
-      } else if (value == "") {
-        value = "+";
-      } else {
-        value = "-";
+
+      function submit_q() {
+          const q_value = document.querySelector('input[name="q"]').value;
+          update_href({
+              q: q_value
+          });
       }
-      i_sort = {};
-      i_sort[name] = value;
-      update_href(i_sort);
-    }
+
+      function sort_ingredients(value) {
+          value = value.trim().split(/\s+/);
+          name = value[0];
+          value = value[1] || "";
+          const url = new URL(window.location.href);
+          const params = new URLSearchParams(url.search);
+          if (value == "-") {
+              value = "";
+          } else if (value == "") {
+              value = "+";
+          } else {
+              value = "-";
+          }
+          i_sort = {};
+          i_sort[name] = value;
+          update_href(i_sort);
+      }
   </script>
 {% endblock %}

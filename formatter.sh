@@ -24,7 +24,9 @@ run_djlint() {
         --indent 2 \
         --statistics \
         --max-line-length 80 \
-        --profile django
+        --profile django \
+        --format-css \
+        --format-js
 
 }
 
