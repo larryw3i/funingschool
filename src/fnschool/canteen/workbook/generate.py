@@ -23,13 +23,8 @@ from django.urls import reverse_lazy
 from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.views.decorators.http import require_POST
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
@@ -37,12 +32,8 @@ from openpyxl.utils import get_column_letter
 
 from fnschool import _, count_chinese_characters
 
-from ..forms import (
-    CategoryForm,
-    ConsumptionForm,
-    IngredientForm,
-    PurchasedIngredientsWorkBookForm,
-)
+from ..forms import (CategoryForm, ConsumptionForm, IngredientForm,
+                     PurchasedIngredientsWorkBookForm)
 from ..models import Category, Consumption, Ingredient
 
 
@@ -1519,12 +1510,34 @@ class CanteenWorkBook:
 
         set_row_height_in_inches(sheet, summary_row_num, 0.44)
 
+    def fill_in_non_storage_list_sheet():
+        sheet = self.non_storage_list_sheet
+        user = self.user
+        categories =  list(
+            set(
+                Ingredient.objects.filter(
+                    Q(user=request.user) & Q(is_disabled=False)
+                ).values_list("category", flat=True)
+            )
+        )
+
+
+
+        for 
+        title_cell = sheet.cell(1, 1)
+        title_cell.value = _(
+            "Table of Non-storaged Ingredients ({meal_type})"
+        ).format(
+            meal_type=meal_type
+        )
+
+
     def fill_in(self):
         self.fill_in_cover_sheet()
         self.fill_in_storage_sheet()
         self.fill_in_storage_list_sheet()
         self.fill_in_non_storage_sheet()
-        # self.fill_in_non_storage_list_sheet()
+        self.fill_in_non_storage_list_sheet()
         # self.fill_in_consumption_sheet()
         # self.fill_in_consumption_list_sheet()
         # self.fill_in_surplus_sheet()

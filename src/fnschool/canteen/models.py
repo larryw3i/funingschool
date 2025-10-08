@@ -20,7 +20,7 @@ class MealType(models.Model):
     )
     name = models.CharField(max_length=100, verbose_name=_("Me name"))
     abbreviation = models.CharField(
-        max_length=100, verbose_name=_("abbreviation")
+        null=True, blank=True, max_length=100, verbose_name=_("abbreviation")
     )
     created_at = models.DateField(verbose_name=_("Creating Date"))
     is_disabled = models.BooleanField(
@@ -40,7 +40,7 @@ class Category(models.Model):
     )
     name = models.CharField(max_length=100, verbose_name=_("Category name"))
     abbreviation = models.CharField(
-        max_length=100, verbose_name=_("abbreviation")
+        null=True, blank=True, max_length=100, verbose_name=_("abbreviation")
     )
     created_at = models.DateField(verbose_name=_("Creating Date"))
     is_disabled = models.BooleanField(

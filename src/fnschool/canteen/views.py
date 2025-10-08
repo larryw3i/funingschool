@@ -43,9 +43,10 @@ from .forms import (
     CategoryForm,
     ConsumptionForm,
     IngredientForm,
+    MealTypeForm,
     PurchasedIngredientsWorkBookForm,
 )
-from .models import Category, Consumption, Ingredient
+from .models import Category, Consumption, Ingredient, MealType
 
 # Create your views here.
 
@@ -452,6 +453,8 @@ def create_ingredients(request):
 
             for index, row in df.iterrows():
                 category_name = row[category_header[0]]
+                meal_type_name = row[meal_type_header[0]]
+
                 category = Category.objects.filter(
                     Q(name=category_name) & Q(user=request.user)
                 ).first()
@@ -462,9 +465,18 @@ def create_ingredients(request):
                         created_at=datetime.now().date(),
                     )
 
+                meal_type = MealType.objects.filter(
+                    Q(name=meal_type_name) & Q(user=request.user)
+                ).first()
+                if not meal_type:
+                    meal_type = MealType.objects.create(
+                        user=request.user,
+                        name=meal_type_name,
+                        created_at=datetime.now().date(),
+                    )
+
                 storage_date = row[storage_date_header[0]]
                 name = row[ingredient_name_header[0]]
-                meal_type = row[meal_type_header[0]]
                 quantity_unit_name = row[quantity_unit_name_header[0]]
                 is_ignorable = not row[is_ignorable_header[0]] is np.nan
 
@@ -615,6 +627,73 @@ def generate_spreadsheet(request, month):
     response["Content-Disposition"] = f'attachment; filename="{filename}"'
 
     return response
+
+
+class MealTypeDeleteView(LoginRequiredMixin, DeleteView):
+    model = MealType
+    template_name = "canteen/meal_type/delete.html"
+    success_url = reverse_lazy("canteen:close_window")
+    context_object_name = "meal_type"
+
+    def get_object(self, queryset=None):
+        meal_type = super().get_object(queryset)
+        if meal_type.user != self.request.user:
+            raise Http404()
+        return meal_type
+
+
+class MealTypeUpdateView(LoginRequiredMixin, UpdateView):
+    model = MealType
+    template_name = "canteen/meal_type/update.html"
+    success_url = reverse_lazy("canteen:close_window")
+    form_class = MealTypeForm
+
+    def get_object(self, queryset=None):
+        meal_type = super().get_object(queryset)
+        if meal_type.user != self.request.user:
+            raise Http404()
+        return meal_type
+
+    def get_initial(self):
+        return {"user": self.request.user, "created_at": datetime.now().date}
+
+
+class MealTypeCreateView(LoginRequiredMixin, CreateView):
+    model = MealType
+    template_name = "canteen/meal_type/create.html"
+    success_url = reverse_lazy("canteen:close_window")
+    form_class = MealTypeForm
+
+    def get_initial(self):
+        return {"user": self.request.user, "created_at": datetime.now().date}
+
+    def form_valid(self, form):
+        meal_type_saved = MealType.objects.filter(
+            Q(name=form.instance.name) & Q(user=self.request.user)
+        ).first()
+        if meal_type_saved:
+            return redirect("canteen:close_window")
+        form.instance.user = self.request.user
+        form.instance.created_at = datetime.now().date()
+        return super().form_valid(form)
+
+
+class MealTypeListView(LoginRequiredMixin, ListView):
+    model = MealType
+    template_name = "canteen/meal_type/list.html"
+    context_object_name = "meal_types"
+    ordering = ["-created_at"]
+
+    paginate_by = 10
+    paginate_orphans = 2
+
+    def get_paginate_by(self, queryset):
+        page_size = self.request.GET.get("page_size")
+        page_size = (
+            page_size if page_size else self.request.COOKIES.get("page_size")
+        )
+        page_size = page_size if page_size else self.paginate_by
+        return int(page_size)
 
 
 class CategoryDeleteView(LoginRequiredMixin, DeleteView):
