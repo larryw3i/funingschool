@@ -89,6 +89,8 @@
   <select class="workbook-month-select form-select float-end mx-2"
           style="width:118px"></select>
 </div>
+{{ ingredient_ids|json_script:'ingredient_ids' }}
+{{ monthes|json_script:'monthes' }}
 <script>
     function get_previous_month_date(date = new Date()) {
         const prevMonthDate = new Date(date);
@@ -101,28 +103,9 @@
         const dayOfWeek = date.getDay();
         return dayOfWeek === 0 || dayOfWeek === 6;
     }
-    var ingredient_ids = [{
-            %
-            for ingredient in ingredients %
-        }
-        "{{ingredient.id}}", {
-            %
-            endfor %
-        }
-    ];
-
+    var ingredient_ids = JSON.parse($('#ingredient_ids').text())
     $(document).ready(function() {
-        var monthes = [...new Set(
-            [{
-                    %
-                    for date_h in date_range %
-                }
-                '{{date_h}}', {
-                    %
-                    endfor %
-                }
-            ].map(item => item.slice(0, -3)))]
-
+        var monthes = JSON.parse($("#monthes").text())
         $(monthes).each(function(index, value) {
             $('.workbook-month-select').append(`<option>${value}</option>`)
         });

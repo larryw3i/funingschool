@@ -283,15 +283,20 @@ def create_consumptions(request, ingredient_id=None):
             {"form_list": form_list},
         )
 
-    date_range = [d.strftime("%Y-%m-%d") for d in date_range]
+    date_range_cp = date_range
+    date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]
     meal_types = list(set([i.meal_type for i in ingredients]))
+    ingredient_ids = [i.id for i in ingredients]
+    months = list(set([d.strftime("%Y-%m") for d in date_range]))
     return render(
         request,
         "canteen/consumption/create.html",
         {
             "ingredients": ingredients,
-            "date_range": date_range,
+            "date_range": date_range_cp,
             "meal_types": meal_types,
+            "ingredient_ids": ingredient_ids,
+            "months": months,
         },
     )
 
