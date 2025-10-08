@@ -2,11 +2,11 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% block title %}
-  {% trans "New Category" %}
+  {% trans "New Meal Type" %}
 {% endblock %}
 {% block content %}
-  <h1>{% trans "Create new category" %}</h1>
-  <form method="post" action="{% url 'canteen:create_category' %}">
+  <h1>{% trans "Create new meal type" %}</h1>
+  <form method="post" action="{% url 'canteen:create_meal_type' %}">
     {% csrf_token %}
     {{ form|crispy }}
     <div class="py-3 fixed-bottom text-end bg-dark">

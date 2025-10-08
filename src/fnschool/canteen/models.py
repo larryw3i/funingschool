@@ -18,9 +18,9 @@ class MealType(models.Model):
         related_name="meal_types",
         verbose_name=_("Ingredient meal type"),
     )
-    name = models.CharField(max_length=100, verbose_name=_("Me name"))
+    name = models.CharField(max_length=100, verbose_name=_("Meal type name"))
     abbreviation = models.CharField(
-        null=True, blank=True, max_length=100, verbose_name=_("abbreviation")
+        null=True, blank=True, max_length=100, verbose_name=_("Abbreviation")
     )
     created_at = models.DateField(verbose_name=_("Creating Date"))
     is_disabled = models.BooleanField(

@@ -4,7 +4,7 @@ from django import forms
 
 from fnschool import _
 
-from .models import Category, Consumption, Ingredient
+from .models import Category, Consumption, Ingredient, MealType
 
 
 class PurchasedIngredientsWorkBookForm(forms.Form):

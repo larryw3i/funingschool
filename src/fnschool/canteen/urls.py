@@ -17,6 +17,26 @@ urlpatterns = [
         name="close_window",
     ),
     path(
+        "update_meal_type/<int:pk>",
+        views.MealTypeUpdateView.as_view(),
+        name="update_meal_type",
+    ),
+    path(
+        "delete_meal_type/<int:pk>",
+        views.MealTypeDeleteView.as_view(),
+        name="delete_meal_type",
+    ),
+    path(
+        "create_meal_type",
+        views.MealTypeCreateView.as_view(),
+        name="create_meal_type",
+    ),
+    path(
+        "list_meal_types",
+        views.MealTypeListView.as_view(),
+        name="list_meal_types",
+    ),
+    path(
         "update_category/<int:pk>",
         views.CategoryUpdateView.as_view(),
         name="update_category",
