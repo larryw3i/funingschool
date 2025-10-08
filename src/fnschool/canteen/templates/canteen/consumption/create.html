@@ -37,7 +37,9 @@
           <th class="">{% trans "Remaining Quantity" %}</th>
         {% endif %}
         {% for date_h in date_range %}
-          <th class="consumption-date">{{ date_h }}</th>
+          <th data-date_of_using="{{ date_h }}" class="consumption-date">
+            {{ date_h }}
+          </th>
         {% empty %}
           <th></th>
         {% endfor %}
@@ -167,7 +169,34 @@
       var ingredient_id=element.closest("tr").data("ingredient_id")
       $(`td[name='remaining_${ingredient_id}']`).text(`${ingredient_quantity}-${total_consumed}=${ingredient_quantity-total_consumed}`)
       element.closest("tr").find('.ingredient-progress').css('width',`${parseInt((ingredient_quantity-total_consumed)*100/ingredient_quantity)}%`)
+      var date_of_using = element.closest("form").data("date_of_using")
+      update_header(date_of_using)
     }
+
+    function update_header(date_of_using){
+      var consumption_content_dated = date_of_using 
+      $([{% for meal_type in meal_types %} "{{ meal_type }}", {% endfor %}]).each(function (index, meal_type){
+        var total_price_dated = 0.0
+        $(`form[data-date_of_using="${date_of_using}"][data-ingredient_meal_type="${meal_type}"]`).each(function(index, element){
+          element = $(element)
+          var unit_price = parseFloat(element.data("ingredient_unit_price"))
+          var quantity = parseFloat(element.find("input[name='amount_used']").val()) || 0 
+          total_price_dated += (unit_price*quantity)
+        });
+        total_price_dated = total_price_dated.toFixed(2)
+        consumption_content_dated += `<br />${meal_type}:${total_price_dated}`
+      });
+      console.log(consumption_content_dated)
+      $(`th[data-date_of_using="${date_of_using}"]`).html(consumption_content_dated)
+    }
+
+    function update_headers(){    
+      $([{% for date_h in date_range %} "{{ date_h }}", {% endfor %}]).each(function(index,date_h){
+        update_header(date_h)
+      });
+    }
+
+
 
     $(document).ready(function(){
       var td1 = $(".table tr > :nth-child(1):first")
@@ -198,6 +227,7 @@
                       footer_progressbar.css('width',`${progress*100/ingredient_ids_length}%`)
                       if (progress >= ingredient_ids_length) {
                         footer_progressbar.css('width',"0%")
+                        update_headers()
                       }
                     }
 
@@ -364,6 +394,7 @@
       position: sticky;
       top: 0; 
       z-index: 1010; 
+      white-space: nowrap;
   }
 
   .table tr {
