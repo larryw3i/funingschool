@@ -83,12 +83,12 @@
           style="width:118px"></select>
 </div>
 {{ ingredient_ids|json_script:'ingredient_ids' }}
-{{ monthes|json_script:'monthes' }}
+{{ months|json_script:'months' }}
 {{ meal_types|json_script:'meal_types' }}
 {{ date_range|json_script:'date_range' }}
 <script>
   var ingredient_ids = JSON.parse($("#ingredient_ids").text())
-  var monthes = JSON.parse($("#monthes").text())
+  var months = JSON.parse($("#months").text())
   var meal_types = JSON.parse($("#meal_types").text())
   date_range = JSON.parse($("#date_range").text())
 
@@ -105,8 +105,7 @@
   }
   var ingredient_ids = JSON.parse($('#ingredient_ids').text())
   $(document).ready(function() {
-    var monthes = JSON.parse($("#monthes").text())
-    $(monthes).each(function(index, value) {
+    $(months).each(function(index, value) {
       $('.workbook-month-select').append(`<option>${value}</option>`)
     });
     var now = new Date();

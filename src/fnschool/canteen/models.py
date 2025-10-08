@@ -11,6 +11,26 @@ from django.db.models import Q
 from fnschool import _
 
 
+class MealType(models.Model):
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="meal_types",
+        verbose_name=_("Ingredient meal type"),
+    )
+    name = models.CharField(max_length=100, verbose_name=_("Me name"))
+    abbreviation = models.CharField(
+        max_length=100, verbose_name=_("abbreviation")
+    )
+    created_at = models.DateField(verbose_name=_("Creating Date"))
+    is_disabled = models.BooleanField(
+        default=False, verbose_name=_("Is Disabled")
+    )
+
+    def __str__(self):
+        return self.name
+
+
 class Category(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
@@ -19,6 +39,9 @@ class Category(models.Model):
         verbose_name=_("Ingredient category"),
     )
     name = models.CharField(max_length=100, verbose_name=_("Category name"))
+    abbreviation = models.CharField(
+        max_length=100, verbose_name=_("abbreviation")
+    )
     created_at = models.DateField(verbose_name=_("Creating Date"))
     is_disabled = models.BooleanField(
         default=False, verbose_name=_("Is Disabled")

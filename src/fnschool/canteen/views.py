@@ -288,6 +288,7 @@ def create_consumptions(request, ingredient_id=None):
     meal_types = list(set([i.meal_type for i in ingredients]))
     ingredient_ids = [i.id for i in ingredients]
     months = list(set([d.strftime("%Y-%m") for d in date_range]))
+    months = sorted(months, key=lambda d: int(d.split("-")[1]))
     return render(
         request,
         "canteen/consumption/create.html",
