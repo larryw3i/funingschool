@@ -11,7 +11,13 @@ fi
 . ${venv_dir}/bin/activate
 
 run_prettier() {
-    npx prettier ${src_dir} --ignore-path ${project_dir}/.prettierignore --write
+    npx prettier \
+        ${src_dir} \
+        ${project_dir}/.djlintrc.json \
+        ${project_dir}/.prettierrc.json \
+        --config ${project_dir}/.prettierrc.json \
+        --ignore-path ${project_dir}/.prettierignore \
+        --write
 }
 
 run_djlint() {
@@ -19,7 +25,7 @@ run_djlint() {
     if [[ ! ${djlint_dir} ]]; then
         pip install djlint
     fi
-    djlint ${src_dir} --reformat
+    djlint ${src_dir} --reformat --configuration ${project_dir}/.djlintrc.json
 }
 
 run_isort() {
