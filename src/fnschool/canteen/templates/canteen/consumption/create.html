@@ -297,10 +297,15 @@
         consumption_forms_cp = []
         consumption_forms.each(function(index, element) {
             var form = $(element);
+            var amount_used_init = parseInt(form.find("input[name='amount_used']").data("amount_used")) || 0
+            var amount_used_new = parseInt(form.find("input[name='amount_used']").val()) || 0
             if (form.data("is_disabled") == "True") {
                 return true;
             }
             if (form.find('input[name="amount_used"]').val().length < 1) {
+                return true;
+            }
+            if (amount_used_new != 0 && amount_used_new == amount_used_init) {
                 return true;
             }
             consumption_forms_cp.push(form)
