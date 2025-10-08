@@ -5,7 +5,10 @@ venv_dir=${project_dir}/venv
 src_dir=${project_dir}/src
 
 if [[ ! -d ${venv_dir} ]]; then
-    python3 -m venv venv --system-site-packages
+    python3 \
+        -m venv \
+        venv \
+        --system-site-packages
 fi
 
 . ${venv_dir}/bin/activate
@@ -25,7 +28,11 @@ run_djlint() {
     if [[ ! ${djlint_dir} ]]; then
         pip install djlint
     fi
-    djlint ${src_dir} --reformat --configuration ${project_dir}/.djlintrc.json
+    djlint \
+        ${src_dir} \
+        --reformat \
+        --configuration \
+        ${project_dir}/.djlintrc.json
 }
 
 run_isort() {
@@ -34,7 +41,9 @@ run_isort() {
         sudo apt install isort
     fi
     if [[ -x $(which isort) ]]; then
-        isort -l 80 ${project_dir}
+        isort \
+            -l 80 \
+            ${project_dir}
     fi
 }
 
@@ -44,7 +53,11 @@ run_shfmt() {
         sudo apt install shfmt
     fi
     if [[ -x $(which shfmt) ]]; then
-        shfmt -i 4 -l -s -w ${project_dir}
+        shfmt \
+            -i 4 \
+            -l \
+            -s \
+            -w ${project_dir}
     fi
 }
 
@@ -54,7 +67,9 @@ run_black() {
         sudo apt install black
     fi
     if [[ -x $(which black) ]]; then
-        black -l 80 ${project_dir}
+        black \
+            -l 80 \
+            ${project_dir}
     fi
 }
 
