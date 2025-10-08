@@ -91,7 +91,14 @@
 </div>
 {{ ingredient_ids|json_script:'ingredient_ids' }}
 {{ monthes|json_script:'monthes' }}
+{{ meal_types|json_script:'meal_types' }}
+{{ date_range|json_script:'date_range' }}
 <script>
+    var ingredient_ids = JSON.parse($("#ingredient_ids").text())
+    var monthes = JSON.parse($("#monthes").text())
+    var meal_types = JSON.parse($("#meal_types").text())
+    date_range = JSON.parse($("#date_range").text())
+
     function get_previous_month_date(date = new Date()) {
         const prevMonthDate = new Date(date);
         prevMonthDate.setDate(1);
@@ -171,15 +178,7 @@
 
     function update_header(date_of_using) {
         var consumption_content_dated = date_of_using
-        $([{
-                %
-                for meal_type in meal_types %
-            }
-            "{{ meal_type }}", {
-                %
-                endfor %
-            }
-        ]).each(function(index, meal_type) {
+        $(meal_types).each(function(index, meal_type) {
             var total_price_dated = 0.0
             $(`form[data-date_of_using="${date_of_using}"][data-ingredient_meal_type="${meal_type}"]`).each(function(index, element) {
                 element = $(element)
@@ -190,20 +189,12 @@
             total_price_dated = total_price_dated.toFixed(2)
             consumption_content_dated += `<br />${meal_type}:${total_price_dated}`
         });
-        console.log(consumption_content_dated)
         $(`th[data-date_of_using="${date_of_using}"]`).html(consumption_content_dated)
     }
 
     function update_headers() {
-        $([{
-                %
-                for date_h in date_range %
-            }
-            "{{ date_h }}", {
-                %
-                endfor %
-            }
-        ]).each(function(index, date_h) {
+
+        $(date_range).each(function(index, date_h) {
             update_header(date_h)
         });
     }
