@@ -19,8 +19,7 @@ run_djlint() {
     if [[ ! ${djlint_dir} ]]; then
         pip install djlint
     fi
-    djlint ${src_dir} \
-        --reformat
+    djlint ${src_dir} --reformat
 }
 
 run_isort() {
