@@ -106,7 +106,8 @@
             for ingredient in ingredients %
         }
         "{{ingredient.id}}", {
-            % endfor %
+            %
+            endfor %
         }
     ];
 
@@ -117,7 +118,8 @@
                     for date_h in date_range %
                 }
                 '{{date_h}}', {
-                    % endfor %
+                    %
+                    endfor %
                 }
             ].map(item => item.slice(0, -3)))]
 
@@ -191,7 +193,8 @@
                 for meal_type in meal_types %
             }
             "{{ meal_type }}", {
-                % endfor %
+                %
+                endfor %
             }
         ]).each(function(index, meal_type) {
             var total_price_dated = 0.0
@@ -214,7 +217,8 @@
                 for date_h in date_range %
             }
             "{{ date_h }}", {
-                % endfor %
+                %
+                endfor %
             }
         ]).each(function(index, date_h) {
             update_header(date_h)
