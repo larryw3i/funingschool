@@ -1,93 +1,87 @@
 {% extends "base/header_content_footer.html" %}
 {% load crispy_forms_tags %}
 {% block title %}
-  {% trans "Consume Ingredients" %}
+    {% trans "Consume Ingredients" %}
 {% endblock %}
 {% block content %}
-  <h1>{% trans "Consume Ingredients" %}</h1>
-  <hr>
-  <div class="container">
-    <div class="row justify-content-end">
-      <div class="col col-3 col-md-2 col-lg-2">
-        <input class="  form-control"
-               onkeydown="if(event.keyCode==13){list_consumptions();}"
-               title="{% trans 'The starting date of storage.' %}"
-               id="storage_date_start"
-               value="{{ request.COOKIES.storage_date_start }}">
-      </input>
+    <h1>{% trans "Consume Ingredients" %}</h1>
+    <hr>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col col-3 col-md-2 col-lg-2">
+                <input class="  form-control"
+                       onkeydown="if(event.keyCode==13){list_consumptions();}"
+                       title="{% trans 'The starting date of storage.' %}"
+                       id="storage_date_start"
+                       value="{{ request.COOKIES.storage_date_start }}">
+            </input>
+        </div>
+        <div class="col col-3 col-md-2 col-lg-2">
+            <input class="form-control "
+                   onkeydown="if(event.keyCode==13){list_consumptions();}"
+                   title="{% trans 'The end date of storage.' %}"
+                   id="storage_date_end"
+                   value="{{ request.COOKIES.storage_date_end }}">
+        </input>
     </div>
-    <div class="col col-3 col-md-2 col-lg-2">
-      <input class="form-control "
-             onkeydown="if(event.keyCode==13){list_consumptions();}"
-             title="{% trans 'The end date of storage.' %}"
-             id="storage_date_end"
-             value="{{ request.COOKIES.storage_date_end }}">
-    </input>
-  </div>
-  <button class="btn btn-success col-md-1 col-lg-1 col-2"
-          onclick="list_consumptions();">{% trans "Refresh" %}</button>
+    <button class="btn btn-success col-md-1 col-lg-1 col-2"
+            onclick="list_consumptions();">{% trans "Refresh" %}</button>
 </div>
 </div>
 <div class="table table-responsive table-container">
-  <table class="table table-consumptions cotable-bordered table-striped table-hover table-condensed scroll-vertical ">
-    <thead>
-      <tr>
-        {% if ingredients %}
-          <th class="">{% trans "Ingredient Name" %}</th>
-          <th class="">{% trans "Remaining Quantity" %}</th>
-        {% endif %}
-        {% for date_h in date_range %}
-          <th data-date_of_using="{{ date_h }}" class="consumption-date">
-            {{ date_h }}
-          </th>
-        {% empty %}
-          <th></th>
-        {% endfor %}
-      </tr>
-    </thead>
-    <tbody>
-      {% for ingredient in ingredients %}
-        <tr class="row-consumption"
-            data-ingredient_id="{{ ingredient.id }}"
-            data-ingredient_name="{{ ingredient.name }}"
-            data-ingredient_quantity="{{ ingredient.quantity }}"
-            data-ingredient_total_price="{{ ingredient.total_price }}"
-            data-ingredient_meal_type="{{ ingredient.meal_type }}"
-            data-ingredient_quantity_unit_name="{{ ingredient.quantity_unit_name }}"
-            data-ingredient_unit_price="{{ ingredient.unit_price }}"
-            id="ingredient_num_{{ ingredient.id }}">
-          <td title="{% blocktrans with storage_date=ingredient.storage_date %}Storaged on {{ storage_date }} .{% endblocktrans %}"
-              class="">
-            <div class='ingredient-progress'
-                 style="width:{% widthratio ingredient.remaining_quantity ingredient.quantity 100 %}%">
-            </div>
-            {{ ingredient.name }}
-            {% if ingredient.meal_type %}
-              <br />
-              ({{ ingredient.meal_type }})
-            {% endif %}
-          </td>
-          <td name="remaining_{{ ingredient.id }}">
-            {{ ingredient.quantity }}-{{ ingredient.consuming_quantity }}={{ ingredient.remaining_quantity }}
-          </td>
-        </tr>
-      {% empty %}
-        <tr>{% trans "No ingredient found." %}</tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    <table class="table table-consumptions cotable-bordered table-striped table-hover table-condensed scroll-vertical ">
+        <thead>
+            <tr>
+                {% if ingredients %}
+                    <th class="">{% trans "Ingredient Name" %}</th>
+                    <th class="">{% trans "Remaining Quantity" %}</th>
+                {% endif %}
+                {% for date_h in date_range %}
+                    <th data-date_of_using="{{ date_h }}" class="consumption-date">{{ date_h }}</th>
+                {% empty %}
+                    <th></th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for ingredient in ingredients %}
+                <tr class="row-consumption"
+                    data-ingredient_id="{{ ingredient.id }}"
+                    data-ingredient_name="{{ ingredient.name }}"
+                    data-ingredient_quantity="{{ ingredient.quantity }}"
+                    data-ingredient_total_price="{{ ingredient.total_price }}"
+                    data-ingredient_meal_type="{{ ingredient.meal_type }}"
+                    data-ingredient_quantity_unit_name="{{ ingredient.quantity_unit_name }}"
+                    data-ingredient_unit_price="{{ ingredient.unit_price }}"
+                    id="ingredient_num_{{ ingredient.id }}">
+                    <td title="{% blocktrans with storage_date=ingredient.storage_date %}Storaged on {{ storage_date }} .{% endblocktrans %}"
+                        class="">
+                        <div class='ingredient-progress'
+                             style="width:{% widthratio ingredient.remaining_quantity ingredient.quantity 100 %}%">
+                        </div>
+                        {{ ingredient.name }}
+                        {% if ingredient.meal_type %}
+                            <br />
+                            ({{ ingredient.meal_type }})
+                        {% endif %}
+                    </td>
+                    <td name="remaining_{{ ingredient.id }}">
+                        {{ ingredient.quantity }}-{{ ingredient.consuming_quantity }}={{ ingredient.remaining_quantity }}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>{% trans "No ingredient found." %}</tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 <div class="">
-  <button onclick="submit_consumptions();"
-          class="btn btn-submit-consumptions btn-primary float-start">
-    {% trans "Submit" %}
-  </button>
-  <button onclick="generate_spreadsheet();"
-          class="btn btn-submit-consumptions btn-success float-end">
-    {% trans "Generate Spreadsheet" %}
-  </button>
-  <select class="workbook-month-select form-select float-end mx-2"
-          style="width:118px"></select>
+    <button onclick="submit_consumptions();"
+            class="btn btn-submit-consumptions btn-primary float-start">{% trans "Submit" %}</button>
+    <button onclick="generate_spreadsheet();"
+            class="btn btn-submit-consumptions btn-success float-end">{% trans "Generate Spreadsheet" %}</button>
+    <select class="workbook-month-select form-select float-end mx-2"
+            style="width:118px"></select>
 </div>
 {{ ingredient_ids|json_script:'ingredient_ids' }}
 {{ monthes|json_script:'monthes' }}
