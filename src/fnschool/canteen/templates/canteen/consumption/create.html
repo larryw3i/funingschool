@@ -144,6 +144,9 @@
       element.val('0')
       new_amount_used = 0
     }
+    if (new_amount_used === 0 && amount_used == "None") {
+      element.val('')
+    }
     if (amount_used > 0 && new_amount_used === 0) {
       element.val('0')
       new_amount_used = 0
