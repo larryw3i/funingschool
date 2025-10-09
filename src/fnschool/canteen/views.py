@@ -185,7 +185,7 @@ def get_consumption_ingredients(request):
         )
 
     ingredients = ingredients.filter(queries).order_by(
-        "storage_date", "meal_type"
+        "storage_date", "meal_type__name", "category__name"
     )
 
     return ingredients
@@ -422,7 +422,7 @@ def list_ingredients(request):
     else:
         ingredients = Ingredient.objects.filter(Q(user=request.user))
 
-    sorted = False
+    orders = []
     for f in fields:
         sort_name = request.GET.get("sort_" + f.name, "")
         if sort_name and sort_name in "+-":
@@ -430,10 +430,11 @@ def list_ingredients(request):
                 sort_name[1:] if sort_name.startswith("+") else sort_name
             )
             sort_name += f.name
-            ingredients = ingredients.order_by(sort_name)
-            sorted = True
-    if not sorted:
-        ingredients = ingredients.order_by("-storage_date", "category")
+            orders.append(sort_name)
+    if len(orders) < 1:
+        ingredients = ingredients.order_by("storage_date", "category")
+    else:
+        ingredients = ingredients.order_by(*orders)
 
     page_size = request.GET.get("page_size", "")
     if not page_size:
