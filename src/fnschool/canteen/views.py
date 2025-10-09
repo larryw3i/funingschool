@@ -268,15 +268,21 @@ def create_consumptions(request, ingredient_id=None):
     if ingredient_id:
         ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
         planned_consumptions = []
-        consumptions = ingredient.consumptions.all()
-        consumption_dates = [c.date_of_using for c in consumptions]
+        consumptions = ingredient.consumptions.filter(
+            Q(is_disabled=False)
+        ).all()
+        consumption_dates = list(set([c.date_of_using for c in consumptions]))
 
         for per_day in date_range:
             consumption = None
             if per_day in consumption_dates:
-                consumption = [
+                consumptions_per_day = [
                     c for c in consumptions if c.date_of_using == per_day
-                ][0]
+                ]
+                consumption = consumptions_per_day[0]
+                if len(consumptions_per_day) > 1:
+                    for c in consumptions_per_day[1:]:
+                        c.delete()
 
             else:
                 consumption = Consumption()

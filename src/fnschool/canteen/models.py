@@ -109,19 +109,34 @@ class Ingredient(models.Model):
         return 0
 
     @property
-    def consuming_quantity(self):
+    def cleaned_consumptions(self):
         consumptions = self.consumptions.all()
+        for c1 in consumptions:
+            for c2 in consumptions:
+                if c1.date_of_using == c2.date_of_using and c1.id != c2.id:
+                    c1.is_disabled = False
+                    c1.save()
+                    c2.delete()
+        return consumptions
+
+    @property
+    def consuming_quantity(self):
+        consumptions = self.cleaned_consumptions
         if not consumptions:
             return 0
-        quantity = sum([c.amount_used for c in consumptions])
+        quantity = sum(
+            [c.amount_used for c in consumptions if not c.is_disabled]
+        )
         return quantity
 
     @property
     def remaining_quantity(self):
-        consumptions = self.consumptions.all()
+        consumptions = self.cleaned_consumptions
         if not consumptions:
             return self.quantity
-        quantity = self.quantity - sum([c.amount_used for c in consumptions])
+        quantity = self.quantity - sum(
+            [c.amount_used for c in consumptions if not c.is_disabled]
+        )
         return quantity
 
     class Meta:
