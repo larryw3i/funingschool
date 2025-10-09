@@ -185,14 +185,14 @@ def get_consumption_ingredients(request):
         )
 
     ingredients = ingredients.filter(queries).order_by(
-        "storage_date", "meal_type__name", "category__name"
+        "name", "storage_date", "meal_type__name", "category__name"
     )
 
     return ingredients
 
 
 def get_date_range(ingredients):
-    date_start = ingredients.first().storage_date
+    date_start = ingredients.order_by("storage_date").first().storage_date
     today = datetime.now().date()
     date_end = (today.replace(day=1) + relativedelta(months=2)) - relativedelta(
         days=1
@@ -218,7 +218,7 @@ def new_consumption(request, consumption_id=None):
             posted_amount_used = request.POST.get("amount_used")
             if (
                 posted_amount_used.replace(".", "").isnumeric()
-                and float(posted_amount_used) < float_threshold
+                and Decimal(posted_amount_used).is_zero()
             ):
                 consumption.delete()
                 return HttpResponse("OK", status=201)
@@ -270,12 +270,14 @@ def create_consumptions(request, ingredient_id=None):
         planned_consumptions = []
         consumptions = ingredient.consumptions.all()
         consumption_dates = [c.date_of_using for c in consumptions]
+
         for per_day in date_range:
             consumption = None
             if per_day in consumption_dates:
                 consumption = [
                     c for c in consumptions if c.date_of_using == per_day
                 ][0]
+
             else:
                 consumption = Consumption()
                 consumption.ingredient = ingredient
