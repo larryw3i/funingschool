@@ -47,6 +47,7 @@ class ProfileForm(ModelForm):
             "affiliation",
             "superior_department",
             "date_of_birth",
+            "gender",
             "address",
             "avatar",
             "bio",

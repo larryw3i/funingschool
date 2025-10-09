@@ -13,7 +13,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
-from dateutil import parser
+from dateutil import parser as date_parser
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -170,10 +170,10 @@ def get_consumption_ingredients(request):
         Q(user=request.user) & Q(is_disabled=False) & Q(is_ignorable=False)
     )
     if date_start:
-        date_start = parser.parse(date_start).date()
+        date_start = date_parser.parse(date_start).date()
         queries &= Q(storage_date__gte=date_start)
     if date_end:
-        date_end = parser.parse(date_end).date()
+        date_end = date_parser.parse(date_end).date()
         queries &= Q(storage_date__lte=date_end)
 
     if not date_start and not date_end:
@@ -188,7 +188,7 @@ def get_consumption_ingredients(request):
         "storage_date", "meal_type"
     )
 
-    return ingredients.all()
+    return ingredients
 
 
 def get_date_range(ingredients):
@@ -258,6 +258,13 @@ def create_consumptions(request, ingredient_id=None):
         )
 
     date_range = get_date_range(ingredients)
+    date_end = request.GET.get("storage_date_end", None) or request.COOKIES.get(
+        "storage_date_end", None
+    )
+    if date_end:
+        date_end = date_parser.parse(date_end).date()
+        date_range = [d for d in date_range if d <= date_end]
+
     if ingredient_id:
         ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
         planned_consumptions = []
@@ -291,9 +298,10 @@ def create_consumptions(request, ingredient_id=None):
             {"form_list": form_list},
         )
 
+    ingredients = ingredients.all()
     date_range_cp = date_range
     date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]
-    meal_types = list(set([i.meal_type for i in ingredients]))
+    meal_types = list(set([i.meal_type.name for i in ingredients]))
     ingredient_ids = [i.id for i in ingredients]
     months = list(set([d.strftime("%Y-%m") for d in date_range]))
     months = sorted(months, key=lambda d: int(d.split("-")[1]))
@@ -377,27 +385,27 @@ def list_ingredients(request):
         unit_names = [
             c.get("quantity_unit_name")
             for c in unit_names
-            if c.get("quantity_unit_name") in search_query
+            if c.get("quantity_unit_name") in str(search_query)
         ]
         for unit_name in unit_names:
             queries &= Q(quantity_unit_name__icontains=unit_name)
             search_query = search_query.replace(unit_name, "")
 
-        categories = Ingredient.objects.values("category").distinct()
+        categories = Ingredient.objects.values("category__name").distinct()
         categories = [
-            c.get("category")
+            c.get("category__name")
             for c in categories
-            if c.get("category") in search_query
+            if c.get("category__name") in search_query
         ]
         for category in categories:
             queries &= Q(category__icontains=category)
             search_query = search_query.replace(category, "")
 
-        meal_types = Ingredient.objects.values("meal_type").distinct()
+        meal_types = Ingredient.objects.values("meal_type__name").distinct()
         meal_types = [
-            m.get("meal_type")
+            m.get("meal_type__name")
             for m in meal_types
-            if m.get("meal_type") in search_query
+            if m.get("meal_type__name") in search_query
         ]
         for meal_type in meal_types:
             queries &= Q(meal_type__icontains=meal_type)

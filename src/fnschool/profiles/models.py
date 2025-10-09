@@ -9,6 +9,12 @@ from fnschool import *
 # Create your models here.
 
 
+class Gender(models.TextChoices):
+    MALE = "M", _("Male")
+    FEMALE = "F", _("Female")
+    UNKNOWN = "U", "--"
+
+
 class Profile(AbstractUser):
     phone = models.CharField(
         max_length=15, blank=True, null=True, verbose_name=_("Phone Number")
@@ -26,6 +32,12 @@ class Profile(AbstractUser):
 
     date_of_birth = models.DateField(
         blank=True, null=True, verbose_name=_("Date of Birth")
+    )
+    gender = models.CharField(
+        max_length=1,
+        choices=Gender.choices,
+        default=Gender.UNKNOWN,
+        verbose_name=_("Gender"),
     )
 
     address = models.CharField(
