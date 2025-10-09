@@ -68,7 +68,12 @@ class ConsumptionForm(forms.ModelForm):
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = ["name", "abbreviation", "is_disabled"]
+        fields = [
+            "name",
+            "abbreviation",
+            "pin_to_consumptions_top",
+            "is_disabled",
+        ]
 
 
 class MealTypeForm(forms.ModelForm):

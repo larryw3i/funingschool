@@ -299,6 +299,22 @@ def create_consumptions(request, ingredient_id=None):
         )
 
     ingredients = ingredients.all()
+    ingredients_pinned = []
+    ingredients_unpinned = []
+    categories_top = Category.objects.filter(
+        Q(user=request.user)
+        & Q(pin_to_consumptions_top=True)
+        & Q(is_disabled=False)
+    ).all()
+
+    for i in ingredients:
+        if i.category in categories_top:
+            ingredients_pinned.append(i)
+        else:
+            ingredients_unpinned.append(i)
+
+    ingredients = ingredients_pinned + ingredients_unpinned
+
     date_range_cp = date_range
     date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]
     meal_types = list(set([i.meal_type.name for i in ingredients]))

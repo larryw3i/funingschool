@@ -21,6 +21,15 @@
       <dd>
         {{ category.created_at }}
       </dd>
+      <dt>{% trans 'Pin to consumptions top' %}</dt>
+      <dd>
+        {% if category.pin_to_consumptions_top %}
+          {% trans "Yes" %}
+        {% else %}
+          {% trans "No" %}
+        {% endif %}
+      </dd>
+
       <dt>{% trans 'Is Disabled' %}</dt>
       <dd>
         {% if category.is_disabled %}

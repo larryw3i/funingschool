@@ -17,6 +17,7 @@
         <th>{% trans "Category Name" %}</th>
         <th>{% trans "Abbreviation" %}</th>
         <th>{% trans "Created at" %}</th>
+        <th>{% trans "Pin to consumptions top" %}</th>
         <th>{% trans "Is Disabled" %}</th>
         <th>#</th>
       </tr>
@@ -28,6 +29,11 @@
           <td>{{ category.name }}</td>
           <td>{{ category.abbreviation }}</td>
           <td>{{ category.created_at|date:"Y-m-d" }}</td>
+          <td>
+            {% if category.pin_to_consumptions_top %}
+              {% trans "Yes" %}
+            {% endif %}
+          </td>
           <td>
             {% if category.is_disabled %}
               {% trans "Yes" %}

@@ -46,6 +46,9 @@ class Category(models.Model):
     is_disabled = models.BooleanField(
         default=False, verbose_name=_("Is Disabled")
     )
+    pin_to_consumptions_top = models.BooleanField(
+        default=False, verbose_name=_("Pin to Consumptions Top")
+    )
 
     def __str__(self):
         return self.name
