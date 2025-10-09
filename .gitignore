@@ -148,4 +148,7 @@ src/canteen/sett1ngs.py
 # *.cp
 *.cp
 
+# src/fnschool/db.cp
+src/fnschool/db.cp
+
 # The end.

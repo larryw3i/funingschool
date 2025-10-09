@@ -1,12 +1,21 @@
 import io
 import re
 from datetime import date, datetime
+from decimal import (
+    ROUND_DOWN,
+    ROUND_FLOOR,
+    ROUND_HALF_UP,
+    Decimal,
+    getcontext,
+    localcontext,
+)
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 from dateutil import parser
 from dateutil.relativedelta import relativedelta
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -49,9 +58,7 @@ from .forms import (
 from .models import Category, Consumption, Ingredient, MealType
 
 # Create your views here.
-
-decimal_places = 2
-float_threshold = 1 / (10**decimal_places) - 1 / (10 ** (decimal_places + 1))
+decimal_prec = getattr(settings, "DECIMAL_PREC", 2)
 
 storage_date_header = (
     _("Storage Date"),
@@ -114,40 +121,40 @@ date_patterns = [
 ]
 
 
-def split_price(total_price, quantity, decimal_places=2):
-    decimal_places = decimal_places
-    scale = 10**decimal_places
-    total_price0 = total_price
-    quantity0 = quantity
+def get_decimal_places(decimal_number):
+    if not isinstance(decimal_number, Decimal):
+        decimal_number = Decimal(str(decimal_number))
+    tuple_rep = decimal_number.as_tuple()
+    return abs(tuple_rep.exponent) if tuple_rep.exponent < 0 else 0
+
+
+def split_price(total_price, quantity, prec=2):
+    prec = prec
+    prec_decimal = Decimal("0." + ("0" * prec))
+
+    total_price0 = Decimal(str(total_price))
+    quantity0 = Decimal(str(quantity))
     unit_price0 = total_price0 / quantity0
 
-    unit_price_d = int(total_price0 * scale / quantity0) / (scale)
-    total_price1 = int(unit_price_d * quantity0 * scale) / (scale)
+    unit_price_floor = unit_price0.quantize(prec_decimal, rounding=ROUND_FLOOR)
 
-    total_price_diff = int(total_price0 * scale - total_price1 * scale) / (
-        scale
-    )
+    if unit_price_floor == unit_price0:
+        return [[total_price0, quantity0], [None, None]]
 
-    split_quantity = int(total_price_diff * scale)
+    total_price_floor = quantity0 * unit_price_floor
+    total_price_diff = total_price0 - total_price_floor
 
-    unit_price0 = unit_price_d
-    quantity0 = int((quantity0 - split_quantity) * scale) / (scale)
-    total_price0 = int((unit_price0 * quantity0) * scale) / (scale)
+    split_quantity = total_price_diff * Decimal(str(10**prec))
 
-    unit_price1 = unit_price_d + 1 / (scale)
+    unit_price0 = unit_price_floor
+    quantity0 = quantity0 - split_quantity
+    total_price0 = quantity0 * unit_price0
+
+    unit_price1 = unit_price_floor + Decimal(str(1 / (10**prec)))
     quantity1 = split_quantity
-    total_price1 = int(unit_price1 * quantity1 * scale) / (scale)
+    total_price1 = unit_price1 * quantity1
 
-    return [
-        [
-            float(f"{total_price0:.{decimal_places}f}"),
-            float(f"{quantity0:.{decimal_places}f}"),
-        ],
-        [
-            float(f"{total_price1:.{decimal_places}f}"),
-            float(f"{quantity1:.{decimal_places}f}"),
-        ],
-    ]
+    return [[total_price0, quantity0], [total_price1, quantity1]]
 
 
 def get_consumption_ingredients(request):
@@ -480,22 +487,14 @@ def create_ingredients(request):
                 quantity_unit_name = row[quantity_unit_name_header[0]]
                 is_ignorable = not row[is_ignorable_header[0]] is np.nan
 
-                decimal_places = 2
                 total_price0 = row[total_price_header[0]]
                 quantity0 = row[quantity_header[0]]
 
-                total_price_test = int(float(total_price0 * 10**decimal_places))
-                quantity_test = int(float(quantity0 * 10**decimal_places))
+                [total_price0, quantity0], [total_price1, quantity1] = (
+                    split_price(total_price0, quantity0)
+                )
 
-                if total_price_test % quantity_test:
-
-                    [total_price0, quantity0], [total_price1, quantity1] = (
-                        split_price(
-                            total_price0,
-                            quantity0,
-                            decimal_places=decimal_places,
-                        )
-                    )
+                if total_price1:
 
                     Ingredient.objects.create(
                         user=request.user,

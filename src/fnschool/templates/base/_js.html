@@ -1,11 +1,14 @@
 <script>
-  function localize_bool(elements) {
-    elements.forEach(element => {
-      const text = element.textContent.replace(/\s+/g, '');
+  function localize_content(element) {
+    $(element).each(function(index, _element) {
+      var _element = $(_element)
+      const text = _element.text().replace(/\s+/g, '');
       if (text == "True") {
-        element.textContent = "{% trans 'Yes' %}"
+        _element.text("{% trans 'Yes' %}")
       } else if (text == "False") {
-        element.textContent = "{% trans 'No' %}"
+        _element.text("{% trans 'No' %}")
+      } else if (text == "None") {
+        _element.text('{% trans "None" %}')
       }
     });
   }

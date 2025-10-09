@@ -51,4 +51,9 @@
     </tbody>
   </table>
   {% include "includes/_paginator.html" %}
+  <script>
+    $(document).ready(function() {
+      localize_content($("td"))
+    });
+  </script>
 {% endblock %}

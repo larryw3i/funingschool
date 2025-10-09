@@ -28,7 +28,7 @@ class MealType(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.abbreviation or self.name
 
 
 class Category(models.Model):
@@ -61,35 +61,42 @@ class Ingredient(models.Model):
     )
     storage_date = models.DateField(verbose_name=_("Storage Date"))
     name = models.CharField(max_length=100, verbose_name=_("Ingredient Name"))
-    meal_type = models.CharField(max_length=50, verbose_name=_("Meal Type"))
+    meal_type = models.ForeignKey(
+        MealType,
+        on_delete=models.PROTECT,
+        related_name="ingredients",
+        verbose_name=_("Ingredient Meal Type"),
+    )
     category = models.ForeignKey(
         Category,
         on_delete=models.PROTECT,
         related_name="ingredients",
-        verbose_name=_("Category"),
+        verbose_name=_("Ingredient Category"),
     )
     quantity = models.IntegerField(
         validators=[
             MinValueValidator(0),
         ],
-        verbose_name=_("Quantity"),
+        verbose_name=_("Ingredient Quantity"),
     )
     quantity_unit_name = models.CharField(
         max_length=20,
         null=True,
         blank=True,
-        verbose_name=_("Unit Name of Quantity"),
+        verbose_name=_("Unit Name of Ingredient Quantity"),
     )
 
     total_price = models.DecimalField(
-        max_digits=10, decimal_places=2, verbose_name=_("Total Price")
+        max_digits=10,
+        decimal_places=2,
+        verbose_name=_("Ingredient Total Price"),
     )
 
     is_ignorable = models.BooleanField(
-        default=False, verbose_name=_("Is Ignorable")
+        default=False, verbose_name=_("Is Ingredient Ignorable")
     )
     is_disabled = models.BooleanField(
-        default=False, verbose_name=_("Is Disabled")
+        default=False, verbose_name=_("Is Ingredient Disabled")
     )
 
     @property
