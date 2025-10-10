@@ -781,38 +781,25 @@ class CanteenWorkBook:
         sheet = self.consumption_list_sheet
         user = self.user
         consumption_rows_count = 21
-        ingredients = Ingredient.objects.filter(
-            Q(user=user)
-            & Q(is_disabled=False)
-            & Q(is_ignorable=False)
-            & Q(
-                consumptions__date_of_using__range=(
-                    self.date_start,
-                    self.date_end,
-                )
-            )
-            & Q(meal_type=self.meal_type)
-        ).all()
         categories = Category.objects.filter(
             Q(user=user) & Q(is_disabled=False)
         ).all()
+        consumptions = Consumption.objects.filter(
+            Q(is_disabled=False)
+            & Q(date_of_using__gte=date_start)
+            & Q(date_of_using__lte=date_end)
+        ).all
         consumption_row_height = 0.18
         consumption_rows_height = consumption_rows_count * 0.18
 
-        consumption_dates = []
-        for i in ingredients:
-            i_consumptions = i.consumptions.filter(Q(is_disabled=False)).all()
-            i_consumption_dates = [c.date_of_using for c in i_consumptions]
-            for d in i_consumption_dates:
-                if not d in consumption_dates:
-                    consumption_dates.append(d)
+        consumption_dates = list(set([c.date_of_using for c in consumptions]))
         consumption_dates = sorted(consumption_dates)
 
+        formed_consumptions = []
         for consumption_date in consumption_dates:
-            dated_consumptions = Consumption.objects.filter(
-                Q(is_disabled=False) & Q(date_of_using=consumption_date)
-            ).all()
-
+            dated_consumptions = [
+                c for c in c if c.date_of_using == consumption_date
+            ]
             dated_consumptions = sorted(
                 dated_consumptions,
                 key=lambda i: (i.ingredient.category.name, i.ingredient.name),
@@ -871,6 +858,7 @@ class CanteenWorkBook:
                     )
                     for c in split_empty_categories
                 ]
+
                 for fake_ingredient in fake_ingredients:
                     split_dated_consumptions.append(
                         Consumption(
@@ -887,7 +875,7 @@ class CanteenWorkBook:
                 )
 
                 consumption_date_index = sub_consumption_num
-                consumptions.append(
+                formed_consumptions.append(
                     [
                         consumption_date,
                         consumption_date_index,
@@ -895,14 +883,14 @@ class CanteenWorkBook:
                     ]
                 )
 
-                sub_storage_num += 1
+                sub_consumption_num += 1
 
-        storage_num = 0
+        consumption_num = 0
         for index, (
-            storage_date,
-            storage_date_index,
-            dated_ingredients,
-        ) in enumerate(storaged_ingredients):
+            consumption_date,
+            consumption_date_index,
+            dated_consumptions,
+        ) in enumerate(formed_consumptions):
             row_num = (consumption_rows_count + 6) * index + 1
 
             title_cell_row_num = row_num
@@ -930,37 +918,45 @@ class CanteenWorkBook:
             sub_title_date_and_unit_cell.font = self.font_12
             sub_title_date_and_unit_cell.value = (
                 _("{day:0>2} {month:0>2} {year}  Quantity Unit Name: CNY")
-            ).format(year=self.year, month=self.month, day=storage_date.day)
+            ).format(year=self.year, month=self.month, day=consumption_date.day)
 
-            if storage_date_index < 2:
-                storage_num += 1
+            if consumption_date_index < 2:
+                consumption_num += 1
 
-            prev_storage_date = (
-                storaged_ingredients[index - 1][0]
-                if 0 < index - 1 < len(storaged_ingredients)
+            prev_consumption_date = (
+                formed_consumptions[index - 1][0]
+                if 0 < index - 1 < len(formed_consumptions)
                 else None
             )
-            next_storage_date = (
-                storaged_ingredients[index + 1][0]
-                if 0 < index + 1 < (len(storaged_ingredients) - 1)
+            next_consumption_date = (
+                formed_consumptions[index + 1][0]
+                if 0 < index + 1 < (len(formed_consumptions) - 1)
                 else None
             )
             sub_title_num_cell_row_num = title_cell_row_num + 1
             sub_title_num_cell = sheet.cell(sub_title_num_cell_row_num, 7)
             sub_title_num_cell.font = self.font_12
-            sub_title_num_cell.value = _("Storage No. {storage_num}").format(
-                storage_num=(
-                    f"R{self.month:0>2}{storage_num:0>2}"
+            sub_title_num_cell.value = _(
+                "Storage No. {consumption_num}"
+            ).format(
+                consumption_num=(
+                    f"C{self.month:0>2}{consumption_num:0>2}"
                     if self.is_zh_CN
-                    else f"S{self.month:0>2}{storage_num:0>2}"
+                    else f"C{self.month:0>2}{consumption_num:0>2}"
                 )
             ) + (
-                _("(Sub Storage No. {sub_storage_num})").format(
-                    sub_storage_num=storage_date_index
+                _("(Sub Storage No. {sub_consumption_num})").format(
+                    sub_consumption_num=consumption_date_index
                 )
                 if (
-                    (next_storage_date and next_storage_date == storage_date)
-                    or (prev_storage_date and prev_storage_date == storage_date)
+                    (
+                        next_consumption_date
+                        and next_consumption_date == consumption_date
+                    )
+                    or (
+                        prev_consumption_date
+                        and prev_consumption_date == consumption_date
+                    )
                 )
                 else ""
             )
@@ -978,36 +974,38 @@ class CanteenWorkBook:
             font_12_cells = []
             header_row_num = title_cell_row_num + 2
             category_header_cell = sheet.cell(header_row_num, 1)
-            category_header_cell.value = _("Category (Storage List Sheet)")
+            category_header_cell.value = _("Category (Consumption List Sheet)")
 
             ingredient_name_header_cell = sheet.cell(header_row_num, 2)
             ingredient_name_header_cell.value = _(
-                "Ingredient Name (Storage List Sheet)"
+                "Ingredient Name (Consumption List Sheet)"
             )
 
             quantity_unit_name_header_cell = sheet.cell(header_row_num, 3)
             quantity_unit_name_header_cell.value = _(
-                "Quantity Unit Name (Storage List Sheet)"
+                "Quantity Unit Name (Consumption List Sheet)"
             )
 
             quantity_header_cell = sheet.cell(header_row_num, 4)
-            quantity_header_cell.value = _("Quantity (Storage List Sheet)")
+            quantity_header_cell.value = _("Quantity (Consumption List Sheet)")
 
             unit_price_header_cell = sheet.cell(header_row_num, 5)
-            unit_price_header_cell.value = _("Unit Price (Storage List Sheet)")
+            unit_price_header_cell.value = _(
+                "Unit Price (Consumption List Sheet)"
+            )
 
             total_price_header_cell = sheet.cell(header_row_num, 6)
             total_price_header_cell.value = _(
-                "Total Price (Storage List Sheet)"
+                "Total Price (Consumption List Sheet)"
             )
 
             ingredients_total_price_header_cell = sheet.cell(header_row_num, 7)
             ingredients_total_price_header_cell.value = _(
-                "Ingredients Total Price (Storage List Sheet)"
+                "Ingredients Total Price (Consumption List Sheet)"
             )
 
             note_header_cell = sheet.cell(header_row_num, 8)
-            note_header_cell.value = _("Note (Storage List Sheet)")
+            note_header_cell.value = _("Note (Consumption List Sheet)")
 
             font_12_cells += [
                 category_header_cell,
