@@ -786,6 +786,7 @@ class CanteenWorkBook:
         ).all()
         consumptions = Consumption.objects.filter(
             Q(is_disabled=False)
+            & Q(ingredient__meal_type=self.meal_type)
             & Q(date_of_using__gte=self.date_start)
             & Q(date_of_using__lte=self.date_end)
         ).all()
@@ -925,12 +926,12 @@ class CanteenWorkBook:
 
             prev_consumption_date = (
                 formed_consumptions[index - 1][0]
-                if 0 < index - 1 < len(formed_consumptions)
+                if 0 <= index - 1 < len(formed_consumptions)
                 else None
             )
             next_consumption_date = (
                 formed_consumptions[index + 1][0]
-                if 0 < index + 1 < (len(formed_consumptions) - 1)
+                if 0 < index + 1 < (len(formed_consumptions))
                 else None
             )
             sub_title_num_cell_row_num = title_cell_row_num + 1
