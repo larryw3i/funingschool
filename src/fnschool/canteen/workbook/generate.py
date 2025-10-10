@@ -787,6 +787,7 @@ class CanteenWorkBook:
         consumptions = Consumption.objects.filter(
             Q(is_disabled=False)
             & Q(ingredient__meal_type=self.meal_type)
+            & Q(ingredient__user=user)
             & Q(date_of_using__gte=self.date_start)
             & Q(date_of_using__lte=self.date_end)
         ).all()
@@ -1585,13 +1586,246 @@ class CanteenWorkBook:
 
         set_row_height_in_inches(sheet, summary_row_num, 0.44)
 
+    def fill_in_surplus_sheet(self):
+        sheet = self.surplus_sheet
+        user = self.user
+        ingredient_rows_count = 17
+
+        ingredients = Ingredient.objects.filter(
+            Q(user=user)
+            & Q(storage_date__lte=self.date_end)
+            & Q(meal_type=self.meal_type)
+            & Q(is_disabled=False)
+            & Q(is_ignorable=True)
+        ).all()
+        month_days = [
+            self.date_start + timedelta(days=i)
+            for i in range((self.date_end - self.date_start).days)
+        ]
+        month_days = month_days.append(self.date_end)
+
+        sundays = [d for d in month_days if d.weekday() == 6]
+
+        formed_ingredients = []
+        for sunday in sundays:
+            sunday_ingredients = []
+            for ingredient in ingredients:
+                remaining_quantity = ingredient.quantity - sum(
+                    [
+                        c.amount_used
+                        for c in ingredient.consumptions
+                        if c.date_of_using <= sunday
+                    ]
+                )
+                if remaining_quantity > Decimal("0.0"):
+                    sunday_ingredients.append(ingredient)
+            form_count = len(sunday_ingredients) / ingredient_rows_count
+            surplus_ingredients_len = (
+                len(sunday_ingredients) % ingredient_rows_count
+            )
+            fake_ingredients_len = ingredient_rows_count - len(
+                surplus_ingredients_len
+            )
+            s_ingredient0 = sunday_ingredients[0]
+            sunday_ingredients += [
+                Ingredient(
+                    user=user,
+                    storage_date=self.date_start,
+                    name="",
+                    meal_type=self.meal_type,
+                    category=s_ingredient0.category,
+                    quantity=Decimal("0"),
+                    quantity_unit_name="",
+                    total_price=Decimal("0.0"),
+                    is_ignorable=False,
+                    is_disabled=False,
+                )
+                for i in range(fake_ingredients_len)
+            ]
+
+            sunday_ingredients = sorted(
+                sunday_ingredients, key=lambda i: i.category.name
+            )
+            for index in range(
+                0, len(sunday_ingredients), ingredient_rows_count
+            ):
+                split_ingredients = sunday_ingredients[
+                    index : index + ingredient_rows_count
+                ]
+                formed_ingredients.append([sunday, index, split_ingredients])
+
+        for sunday, index, ingredients in enumerate(formed_ingredients):
+
+            title_row_num = (ingredient_rows_count + 8) * index + 1
+            title_cell = sheet.cell(title_row_num, 1)
+            title_cell.value = _("Table of Surplus Ingredients")
+            title_cell.font = self.font_20_bold
+            title_cell.alignment = self.center_alignment
+
+            set_row_height_in_inches(sheet, title_row_num, 0.31)
+            sheet.merge_cells(f"A{title_row_num}:I{title_row_num}")
+
+            sub_title_row_num = title_row_num + 1
+            sub_title_affiliation_cell = sheet.cell(sub_title_row_num, 1)
+            sub_title_affiliation_date_cell.value = (
+                _("Principal Name: {affiliation}                {surplus_date}")
+                if self.is_school
+                else _(
+                    "Affiliation Name: {affiliation}                {surplus_date}"
+                )
+            ).format(affiliation=user.affiliation, surplus_date=sunday)
+
+            sub_title_affiliation_date_cell.font = self.font_12
+            sub_title_affiliation_date_cell.alignment = self.center_alignment
+            sheet.merge_cells(f"A{sub_title_row_num}:I{sub_title_row_num}")
+
+            set_row_height_in_inches(sheet, sub_title_row_num, 0.20)
+
+            header0_row_num = sub_title_row_num + 1
+            header0_ingredient_name_cell = sheet.cell(header0_row_num, 1)
+            cell.value = _("Ingredient Name (Surplus Sheet)")
+
+            header0_quantity_unit_name_cell = sheet.cell(header0_row_num, 2)
+            cell.value = _("Ingredient Quantity Unit Name (Surplus Sheet)")
+
+            header0_recorded_cell = sheet.cell(header0_row_num, 3)
+            cell.value = _("Recorded (Surplus Sheet)")
+
+            header0_actual_cell = sheet.cell(header0_row_num, 5)
+            cell.value = _("Actual (Surplus Sheet)")
+
+            header0_difference_cell = sheet.cell(header0_row_num, 7)
+            cell.value = _("Difference (Surplus Sheet)")
+
+            header0_reason_cell = sheet.cell(header0_row_num, 9)
+            cell.value = _("Reason (Surplus Sheet)")
+
+            for cell in [
+                header0_ingredient_name_cell,
+                header0_quantity_unit_name_cell,
+                header0_recorded_cell,
+                header0_actual_cell,
+                header0_difference_cell,
+                header0_reason_cell,
+            ]:
+                cell.font = self.font_12
+                cell.alignment = self.center_alignment
+                cell.border = self.thin_border
+
+            header1_row_num = header0_row_num + 1
+            cell = sheet.cell(header_row_num, col)
+            cell.value = value
+            cell.font = self.font_16
+            cell.alignment = self.center_alignment
+            cell.border = self.thin_border
+
+            set_row_height_in_inches(sheet, header_row_num, 0.30)
+
+            for i_index, ingredient in enumerate(c_ingredients):
+                ingredient_row_num = header_row_num + 1 + i_index
+
+                storage_date_cell = sheet.cell(ingredient_row_num, 1)
+                storage_date_cell.value = (
+                    _(
+                        "{year}.{month:0>2}.{day:0>2} (Column of Non-storage list sheet)"
+                    ).format(
+                        year=ingredient.storage_date.year,
+                        month=ingredient.storage_date.month,
+                        day=ingredient.storage_date.day,
+                    )
+                    if ingredient.storage_date
+                    else ""
+                )
+                name_cell = sheet.cell(ingredient_row_num, 2)
+                name_cell.value = ingredient.name
+                quantity_unit_name_cell = sheet.cell(ingredient_row_num, 3)
+                quantity_unit_name_cell.value = ingredient.quantity_unit_name
+                quantity_cell = sheet.cell(ingredient_row_num, 4)
+                quantity_cell.value = (
+                    ingredient.quantity if ingredient.quantity else ""
+                )
+                unit_price_cell = sheet.cell(ingredient_row_num, 5)
+                unit_price_cell.value = (
+                    ingredient.unit_price if ingredient.unit_price else ""
+                )
+                total_price_cell = sheet.cell(ingredient_row_num, 6)
+                total_price_cell.value = (
+                    ingredient.total_price if ingredient.total_price else ""
+                )
+                note_cell = sheet.cell(ingredient_row_num, 7)
+                note_cell.value = ""
+
+                for col in range(1, 8):
+                    cell = sheet.cell(ingredient_row_num, col)
+                    cell.font = self.font_12
+                    cell.alignment = self.center_alignment
+                    cell.border = self.thin_border
+
+                set_row_height_in_inches(sheet, ingredient_row_num, 0.30)
+
+            summary_row_num = header_row_num + ingredient_rows_count + 1
+
+            next_category, ___ = (
+                category_ingredients[index + 1]
+                if (index + 1) < len(category_ingredients)
+                else (None, None)
+            )
+            summary_note_cell = sheet.cell(summary_row_num, 2)
+            summary_total_price_cell = sheet.cell(summary_row_num, 6)
+
+            c_total_price = Decimal("0.0")
+            if (not next_category) or (next_category != category):
+                summary_note_cell.value = _("Summary (Non-storage list sheet)")
+                c_ingredients_list = [
+                    _c_ingredients
+                    for _category, _c_ingredients in category_ingredients
+                    if _category == category
+                ]
+                c_total_price = Decimal("0.0")
+                for _c_ingredients in c_ingredients_list:
+                    c_total_price += sum(
+                        [i.total_price for i in _c_ingredients]
+                    )
+                summary_total_price_cell.value = (
+                    f"{c_total_price:.{decimal_prec}f}"
+                )
+
+            else:
+                summary_note_cell.value = _(
+                    "Sub-summary (Non-storage list sheet)"
+                )
+                c_total_price += sum([i.total_price for i in c_ingredients])
+                summary_total_price_cell.value = (
+                    f"{c_total_price:.{decimal_prec}f}"
+                )
+
+            for col in range(1, 8):
+                cell = sheet.cell(summary_row_num, col)
+                cell.font = self.font_14
+                cell.alignment = self.center_alignment
+                cell.border = self.thin_border
+
+            set_row_height_in_inches(sheet, summary_row_num, 0.30)
+
+        for col, width in [
+            [1, 1.17],
+            [2, 1.67],
+            [3, 1.30],
+            [4, 0.86],
+            [5, 0.95],
+            [6, 1.28],
+            [7, 1.04],
+        ]:
+            set_column_width_in_inches(sheet, col, width)
+
     def fill_in_non_storage_list_sheet(self):
         sheet = self.non_storage_list_sheet
         user = self.user
         ingredient_rows_count = 11
 
         ingredients = Ingredient.objects.filter(
-            Q(storage_date__gte=self.date_start)
+            Q(user=user)
+            & Q(storage_date__gte=self.date_start)
             & Q(storage_date__lte=self.date_end)
             & Q(meal_type=self.meal_type)
             & Q(is_disabled=False)
