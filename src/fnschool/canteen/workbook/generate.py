@@ -786,9 +786,9 @@ class CanteenWorkBook:
         ).all()
         consumptions = Consumption.objects.filter(
             Q(is_disabled=False)
-            & Q(date_of_using__gte=date_start)
-            & Q(date_of_using__lte=date_end)
-        ).all
+            & Q(date_of_using__gte=self.date_start)
+            & Q(date_of_using__lte=self.date_end)
+        ).all()
         consumption_row_height = 0.18
         consumption_rows_height = consumption_rows_count * 0.18
 
@@ -798,7 +798,7 @@ class CanteenWorkBook:
         formed_consumptions = []
         for consumption_date in consumption_dates:
             dated_consumptions = [
-                c for c in c if c.date_of_using == consumption_date
+                c for c in consumptions if c.date_of_using == consumption_date
             ]
             dated_consumptions = sorted(
                 dated_consumptions,
@@ -806,7 +806,7 @@ class CanteenWorkBook:
             )
 
             dated_consumption_categories = list(
-                set([c.ingredient.category for c in deted_consumptions])
+                set([c.ingredient.category for c in dated_consumptions])
             )
             empty_categories = [
                 c for c in categories if not c in dated_consumption_categories
@@ -821,7 +821,7 @@ class CanteenWorkBook:
                 split_dated_consumptions = dated_consumptions[
                     index : index + step
                 ]
-                split_dated_consumptions = split_dated_consumptions[0]
+                split_dated_consumption = split_dated_consumptions[0]
                 split_dated_consumption_categories = list(
                     set(
                         [
@@ -839,7 +839,7 @@ class CanteenWorkBook:
                     random.choice(categories)
                     for i in range(
                         consumption_rows_count
-                        - len(split_dated_ingredients)
+                        - len(split_dated_consumptions)
                         - len(split_empty_categories)
                     )
                 ]
@@ -849,7 +849,7 @@ class CanteenWorkBook:
                         user=user,
                         name="",
                         storage_date=self.date_start,
-                        meal_type=split_dated_ingredient.meal_type,
+                        meal_type=split_dated_consumption.ingredient.meal_type,
                         category=c,
                         quantity=0.0,
                         quantity_unit_name="",
@@ -862,7 +862,7 @@ class CanteenWorkBook:
                 for fake_ingredient in fake_ingredients:
                     split_dated_consumptions.append(
                         Consumption(
-                            ingredient=fake_ingredients,
+                            ingredient=fake_ingredient,
                             date_of_using=consumption_date,
                             amount_used=Decimal("0"),
                             is_disabled=False,
@@ -1051,7 +1051,8 @@ class CanteenWorkBook:
                             [
                                 c.ingredient.unit_price * c.amount_used
                                 for c in dated_consumptions
-                                if i.category == ingredient.category
+                                if c.ingredient.category
+                                == consumption.ingredient.category
                             ]
                         )
                         or "",
@@ -1065,12 +1066,12 @@ class CanteenWorkBook:
                         ]
                     )
                     sheet.merge_cells(
-                        f"A{ingredient_row_num}:A{ingredients_same_category_len+ingredient_row_num-1}"
+                        f"A{consumption_row_num}:A{consumptions_same_category_len+consumption_row_num-1}"
                     )
                     sheet.merge_cells(
-                        f"G{ingredient_row_num}:G{ingredients_same_category_len+ingredient_row_num-1}"
+                        f"G{consumption_row_num}:G{consumptions_same_category_len+consumption_row_num-1}"
                     )
-                    last_category = ingredient.category
+                    last_category = consumption.ingredient.category
 
                 sheet.cell(consumption_row_num, 2, consumption.ingredient.name)
                 sheet.cell(
@@ -1122,7 +1123,7 @@ class CanteenWorkBook:
             sheet.cell(summary_row_num, 6, summary_total_price)
             sheet.cell(summary_row_num, 7, summary_total_price)
 
-            summary_row_height = ingredient_row_height
+            summary_row_height = consumption_row_height
             set_row_height_in_inches(sheet, summary_row_num, summary_row_height)
 
             signature_row_num = summary_row_num + 1
@@ -1781,7 +1782,7 @@ class CanteenWorkBook:
         self.fill_in_non_storage_sheet()
         self.fill_in_non_storage_list_sheet()
         self.fill_in_consumption_sheet()
-        # self.fill_in_consumption_list_sheet()
+        self.fill_in_consumption_list_sheet()
         # self.fill_in_surplus_sheet()
         # self.fill_in_food_sheets()
 
