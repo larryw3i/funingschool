@@ -846,8 +846,6 @@ class CanteenWorkBook:
 
                 sub_storage_num += 1
 
-            print([i[:2] for i in storaged_ingredients])
-
         storage_num = 0
         for index, (
             storage_date,
@@ -915,7 +913,6 @@ class CanteenWorkBook:
                 )
                 else ""
             )
-            print(storage_num)
 
             sheet.merge_cells(
                 f"A{sub_title_affiliation_cell_row_num}:B{sub_title_affiliation_cell_row_num}"
@@ -1170,8 +1167,6 @@ class CanteenWorkBook:
 
                 sub_storage_num += 1
 
-            print([i[:2] for i in storaged_ingredients])
-
         storage_num = 0
         for index, (
             storage_date,
@@ -1239,7 +1234,6 @@ class CanteenWorkBook:
                 )
                 else ""
             )
-            print(storage_num)
 
             sheet.merge_cells(
                 f"A{sub_title_affiliation_cell_row_num}:B{sub_title_affiliation_cell_row_num}"
@@ -1573,6 +1567,7 @@ class CanteenWorkBook:
             title_cell.alignment = self.center_alignment
 
             set_row_height_in_inches(sheet, title_row_num, 0.42)
+            sheet.merge_cells(f"A{title_row_num}:G{title_row_num}")
 
             sub_title_row_num = title_row_num + 1
             sub_title_affiliation_cell = sheet.cell(sub_title_row_num, 1)
@@ -1584,12 +1579,15 @@ class CanteenWorkBook:
 
             sub_title_date_cell = sheet.cell(sub_title_row_num, 4)
             sub_title_date_cell.value = _(
-                "{year}.{month:0>2}.{day:0>2}"
+                "{year}.{month:0>2}.{day:0>2} (Non-storage list sheet)"
             ).format(year=self.year, month=self.month, day=self.date_end.day)
 
             for cell in [sub_title_affiliation_cell, sub_title_date_cell]:
                 cell.font = self.font_14
                 cell.alignment = self.center_alignment
+
+            sheet.merge_cells(f"A{sub_title_row_num}:C{sub_title_row_num}")
+            sheet.merge_cells(f"D{sub_title_row_num}:G{sub_title_row_num}")
 
             set_row_height_in_inches(sheet, sub_title_row_num, 0.33)
 
@@ -1632,12 +1630,12 @@ class CanteenWorkBook:
                 quantity_unit_name_cell.value = ingredient.quantity_unit_name
                 quantity_cell = sheet.cell(ingredient_row_num, 4)
                 quantity_cell.value = (
-                    f"{ingredient.quantity:.{decimal_prec}f}"
-                    if ingredient.quantity
-                    else ""
+                    ingredient.quantity if ingredient.quantity else ""
                 )
                 unit_price_cell = sheet.cell(ingredient_row_num, 5)
-                unit_price_cell.value = ingredient.unit_price
+                unit_price_cell.value = (
+                    ingredient.unit_price if ingredient.unit_price else ""
+                )
                 total_price_cell = sheet.cell(ingredient_row_num, 6)
                 total_price_cell = (
                     f"{ingredient.total_price:.{decimal_prec}f}"
@@ -1655,7 +1653,8 @@ class CanteenWorkBook:
 
                 set_row_height_in_inches(sheet, ingredient_row_num, 0.30)
 
-            summary_row_num = sub_title_row_num + ingredient_rows_count + 1
+            summary_row_num = header_row_num + ingredient_rows_count + 1
+
             next_category, __ = (
                 category_ingredients[index + 1]
                 if index + 1 < len(category_ingredients)
@@ -1664,7 +1663,7 @@ class CanteenWorkBook:
             summary_note_cell = sheet.cell(summary_row_num, 2)
             summary_total_price_cell = sheet.cell(summary_row_num, 6)
 
-            c_total_price = 0.0
+            c_total_price = Decimal("0.0")
             if not next_category or next_category != category:
                 summary_note_cell.value = _("Summary (Non-storage list sheet)")
                 c_ingredients_list = [
@@ -1690,7 +1689,8 @@ class CanteenWorkBook:
                     f"{c_total_price:.{decimal_prec}f}"
                 )
 
-            for cell in [summary_note_cell, summary_total_price_cell]:
+            for col in range(1, 8):
+                cell = sheet.cell(summary_row_num, col)
                 cell.font = self.font_14
                 cell.alignment = self.center_alignment
                 cell.border = self.thin_border
