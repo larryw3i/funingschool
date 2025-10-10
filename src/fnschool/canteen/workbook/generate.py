@@ -24,8 +24,13 @@ from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
-                                  UpdateView)
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
@@ -33,8 +38,12 @@ from openpyxl.utils import get_column_letter
 
 from fnschool import count_chinese_characters
 
-from ..forms import (CategoryForm, ConsumptionForm, IngredientForm,
-                     PurchasedIngredientsWorkBookForm)
+from ..forms import (
+    CategoryForm,
+    ConsumptionForm,
+    IngredientForm,
+    PurchasedIngredientsWorkBookForm,
+)
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
 
@@ -446,7 +455,9 @@ class CanteenWorkBook:
 
         header_row_num = 3
         header_category_cell = sheet.cell(header_row_num, 1)
-        header_category_cell.value = _("Ingredient Categories (Consumption Sheet)")
+        header_category_cell.value = _(
+            "Ingredient Categories (Consumption Sheet)"
+        )
 
         header_total_price_cell = sheet.cell(header_row_num, 2)
         header_total_price_cell.value = _(
@@ -495,10 +506,12 @@ class CanteenWorkBook:
                 & Q(is_ignorable=False)
             ).distinct()
             total_price_cell = sheet.cell(row_num, 2)
-            total_price_consumed = Decimal('0.0')
+            total_price_consumed = Decimal("0.0")
             for i in ingredients:
                 consumptions = i.consumptions.filter(is_disabled=False).all()
-                total_price_consumed += sum([c.amount_used*i.unit_price for c in consumptions])
+                total_price_consumed += sum(
+                    [c.amount_used * i.unit_price for c in consumptions]
+                )
             total_price_cell.value = total_price_consumed
 
             note_cell = sheet.cell(row_num, 3)
@@ -511,10 +524,10 @@ class CanteenWorkBook:
         ingredients = Ingredient.objects.filter(
             Q(user=user)
             & Q(
-                    consumptions__date_of_using__range=(
-                        self.date_start,
-                        self.date_end,
-                    )
+                consumptions__date_of_using__range=(
+                    self.date_start,
+                    self.date_end,
+                )
             )
             & Q(meal_type=self.meal_type)
             & Q(category__is_disabled=False)
@@ -526,7 +539,9 @@ class CanteenWorkBook:
         summary_total_price = Decimal("0.0")
         for i in ingredients:
             consumptions = i.consumptions.filter(Q(is_disabled=False)).all()
-            summary_total_price += sum([ c.amount_used*i.unit_price for c in consumptions])
+            summary_total_price += sum(
+                [c.amount_used * i.unit_price for c in consumptions]
+            )
         summary_total_price_cell = sheet.cell(summary_row_num, 1)
         total_price_cell.border = self.thin_border
         summary_total_price_cell.value = (
@@ -771,10 +786,10 @@ class CanteenWorkBook:
             & Q(is_disabled=False)
             & Q(is_ignorable=False)
             & Q(
-                    consumptions__date_of_using__range=(
-                        self.date_start,
-                        self.date_end,
-                    )
+                consumptions__date_of_using__range=(
+                    self.date_start,
+                    self.date_end,
+                )
             )
             & Q(meal_type=self.meal_type)
         ).all()
@@ -795,12 +810,12 @@ class CanteenWorkBook:
 
         for consumption_date in consumption_dates:
             dated_consumptions = Consumption.objects.filter(
-                Q(is_disabled=False)
-                & (date_of_using=consumption_date)
+                Q(is_disabled=False) & Q(date_of_using=consumption_date)
             ).all()
 
             dated_consumptions = sorted(
-                dated_consumptions, key=lambda i: (i.ingredient.category.name, i.ingredient.name)
+                dated_consumptions,
+                key=lambda i: (i.ingredient.category.name, i.ingredient.name),
             )
 
             dated_consumption_categories = list(
@@ -821,7 +836,12 @@ class CanteenWorkBook:
                 ]
                 split_dated_consumptions = split_dated_consumptions[0]
                 split_dated_consumption_categories = list(
-                    set([c.ingredient.category for c in split_dated_consumptions])
+                    set(
+                        [
+                            c.ingredient.category
+                            for c in split_dated_consumptions
+                        ]
+                    )
                 )
                 split_empty_categories = [
                     c
@@ -836,7 +856,6 @@ class CanteenWorkBook:
                         - len(split_empty_categories)
                     )
                 ]
-
 
                 fake_ingredients = [
                     Ingredient(
@@ -855,20 +874,25 @@ class CanteenWorkBook:
                 for fake_ingredient in fake_ingredients:
                     split_dated_consumptions.append(
                         Consumption(
-                            ingredient = fake_ingredients,
+                            ingredient=fake_ingredients,
                             date_of_using=consumption_date,
-                            amount_used=Decimal('0'),
+                            amount_used=Decimal("0"),
                             is_disabled=False,
                         )
                     )
 
                 split_dated_consumptions = sorted(
-                    split_dated_consumptions, key=lambda i: (i.ingredient.category.name)
+                    split_dated_consumptions,
+                    key=lambda i: (i.ingredient.category.name),
                 )
 
                 consumption_date_index = sub_consumption_num
-                storaged_ingredients.append(
-                    [storage_date, storage_date_index, split_dated_ingredients]
+                consumptions.append(
+                    [
+                        consumption_date,
+                        consumption_date_index,
+                        split_dated_consumptions,
+                    ]
                 )
 
                 sub_storage_num += 1
