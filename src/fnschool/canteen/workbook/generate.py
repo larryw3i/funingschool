@@ -848,7 +848,7 @@ class CanteenWorkBook:
                     Ingredient(
                         user=user,
                         name="",
-                        storage_date=storage_date,
+                        storage_date=self.date_start,
                         meal_type=split_dated_ingredient.meal_type,
                         category=c,
                         quantity=0.0,
@@ -1024,10 +1024,10 @@ class CanteenWorkBook:
 
             last_category = None
 
-            first_ingredient_row_num = header_row_num + 1
+            first_consumption_row_num = header_row_num + 1
             for row_num in range(
-                first_ingredient_row_num,
-                first_ingredient_row_num + len(dated_ingredients) + 1,
+                first_consumption_row_num,
+                first_consumption_row_num + len(dated_consumptions) + 1,
             ):
                 for col_num in range(1, 9):
                     cell = sheet.cell(row_num, col_num)
@@ -1035,28 +1035,33 @@ class CanteenWorkBook:
                     cell.alignment = self.center_alignment
                     cell.border = self.thin_border
 
-            for index, ingredient in enumerate(dated_ingredients):
-                ingredient_row_num = header_row_num + 1 + index
+            for index, consumption in enumerate(dated_consumptions):
+                consumption_row_num = header_row_num + 1 + index
 
-                if not ingredient.category == last_category:
-                    sheet.cell(ingredient_row_num, 1, ingredient.category.name)
+                if not consumption.ingredient.category == last_category:
                     sheet.cell(
-                        ingredient_row_num,
+                        consumption_row_num,
+                        1,
+                        consumption.ingredient.category.name,
+                    )
+                    sheet.cell(
+                        consumption_row_num,
                         7,
                         sum(
                             [
-                                float(i.total_price)
-                                for i in dated_ingredients
+                                c.ingredient.unit_price * c.amount_used
+                                for c in dated_consumptions
                                 if i.category == ingredient.category
                             ]
                         )
                         or "",
                     )
-                    ingredients_same_category_len = len(
+                    consumptions_same_category_len = len(
                         [
-                            i
-                            for i in dated_ingredients
-                            if i.category == ingredient.category
+                            c
+                            for c in dated_consumptions
+                            if c.ingredient.category
+                            == consumption.ingredient.category
                         ]
                     )
                     sheet.merge_cells(
@@ -1067,39 +1072,52 @@ class CanteenWorkBook:
                     )
                     last_category = ingredient.category
 
-                sheet.cell(ingredient_row_num, 2, ingredient.name)
-                sheet.cell(ingredient_row_num, 3, ingredient.quantity_unit_name)
+                sheet.cell(consumption_row_num, 2, consumption.ingredient.name)
                 sheet.cell(
-                    ingredient_row_num,
-                    4,
-                    f"{ingredient.quantity:.2f}" if ingredient.quantity else "",
+                    consumption_row_num,
+                    3,
+                    consumption.ingredient.quantity_unit_name,
                 )
                 sheet.cell(
-                    ingredient_row_num,
-                    5,
+                    consumption_row_num,
+                    4,
                     (
-                        f"{ingredient.unit_price:.2f}"
-                        if ingredient.unit_price
+                        consumption.ingredient.quantity
+                        if consumption.ingredient.quantity
                         else ""
                     ),
                 )
                 sheet.cell(
-                    ingredient_row_num,
+                    consumption_row_num,
+                    5,
+                    (
+                        consumption.ingredient.unit_price
+                        if consumption.ingredient.unit_price
+                        else ""
+                    ),
+                )
+                sheet.cell(
+                    consumption_row_num,
                     6,
                     (
-                        f"{ingredient.total_price:.2f}"
-                        if ingredient.total_price
+                        consumption.ingredient.unit_price
+                        * consumption.amount_used
+                        if consumption.ingredient.unit_price
+                        and consumption.amount_used
                         else ""
                     ),
                 )
                 set_row_height_in_inches(
-                    sheet, ingredient_row_num, ingredient_row_height
+                    sheet, consumption_row_num, consumption_row_height
                 )
 
             summary_total_price = sum(
-                [float(i.total_price) for i in dated_ingredients]
+                [
+                    c.ingredient.unit_price * c.amount_used
+                    for c in dated_consumptions
+                ]
             )
-            summary_row_num = header_row_num + len(dated_ingredients) + 1
+            summary_row_num = header_row_num + len(dated_consumptions) + 1
             sheet.cell(summary_row_num, 1, _("Summary (Storage List Sheet)"))
             sheet.cell(summary_row_num, 6, summary_total_price)
             sheet.cell(summary_row_num, 7, summary_total_price)
