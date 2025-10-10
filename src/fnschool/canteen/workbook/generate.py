@@ -23,13 +23,8 @@ from django.urls import reverse_lazy
 from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.views.decorators.http import require_POST
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
@@ -37,13 +32,10 @@ from openpyxl.utils import get_column_letter
 
 from fnschool import _, count_chinese_characters
 
-from ..forms import (
-    CategoryForm,
-    ConsumptionForm,
-    IngredientForm,
-    PurchasedIngredientsWorkBookForm,
-)
+from ..forms import (CategoryForm, ConsumptionForm, IngredientForm,
+                     PurchasedIngredientsWorkBookForm)
 from ..models import Category, Consumption, Ingredient
+from ..views import decimal_prec
 
 
 def get_CNY_TEXT(amount):
@@ -211,6 +203,7 @@ class CanteenWorkBook:
         self.font_12 = Font(size=12)
         self.font_12_bold = Font(size=12, bold=True)
         self.font_14 = Font(size=14)
+        self.font_16 = Font(size=16)
         self.font_16_bold = Font(size=16, bold=True)
         self.font_20_bold = Font(size=20, bold=True)
 
@@ -1522,20 +1515,105 @@ class CanteenWorkBook:
     def fill_in_non_storage_list_sheet():
         sheet = self.non_storage_list_sheet
         user = self.user
-        categories = list(
-            set(
-                Ingredient.objects.filter(
-                    Q(user=request.user) & Q(is_disabled=False)
-                ).values_list("category", flat=True)
-            )
-        )
+        ingredient_rows_count = 11
 
+        ingredients = Ingredient.objects.filter(
+            Q(storage_date__gte=self.date_start)
+            & Q(storage_date__lte=self.date_end)
+            & Q(is_disabled=False)
+            & Q(is_ignorable=True)
+        ).all()
+
+        categories = list(set([i.category for i in ingredients]))
+        
+        category_ingredients = []
         for category in categories:
+            _ingredients = [i for i in ingredients if i.category == category]
+            split_count = math.ceil(len(_ingredients)/ingredient_rows_count)
+            for i in range(0,len(_ingredients),ingredient_rows_count):
+                _split_ingredients = _ingredients[i:i+ingredient_rows_count]
+                category_ingredients.append([category,_split_ingredients])
 
-            title_cell = sheet.cell(1, 1)
+
+
+
+        for index,(category,c_ingredients) in enumerate(category_ingredients):
+            row_num = (ingredient_row_num+5)*index + 1
+            title_row_num = row_num
+            title_cell = sheet.cell(title_row_num, 1)
             title_cell.value = _(
-                "Table of Non-storaged Ingredients ({meal_type})"
-            ).format(meal_type=meal_type)
+                "Table of Non-storaged Ingredients ({category})"
+            ).format(category=category)
+            title_cell.font = self.font_20_bold
+            title_cell.alignment = self.center_alignment
+
+            sub_title_row_num = title_row_num+1
+            sub_title_affiliation_cell = sheet.cell(sub_title_row_num,1)
+            sub_title_affiliation_cell.value = (_("Principal Name: {affiliation}") if self.is_school else _("Affiliation Name: {affiliation}")).format(affiliation = user.affiliation)
+
+            sub_title_date_cell = sheet.cell(sub_title_row_num,4)
+            sub_title_date_cell.value = _("{year}.{month:0>2}.{day:0>2}").format(
+                year = self.year,
+                month = self.month,
+                day = self.date_end.day
+            )
+
+            for cell in [sub_title_affiliation_cell,sub_title_date_cell]:
+                cell.font=self.font_14
+                cell.alignment = self.center_alignment
+            
+            header_row_num = sub_title_row_num+1
+            for col, value in [
+                    [1,_("Procurement Date (Non-storage list sheet)")],
+                    [2,_("Ingredient Name (Non-storage list sheet)")],
+                    [3,_("Unit Name of Quantity (Non-storage list sheet)")],
+                    [4,_("Quantity (Non-storage list sheet)")],
+                    [5,_("Unit Price (Non-storage list sheet)")],
+                    [6,_("Total Price (Non-storage list sheet)")],
+                    [7,_("Note (Non-storage list sheet)")]
+            ]:
+                cell = sheet.cell(header_row_num,col)
+                cell.value = value
+                cell.font = self.font_16
+                cell.alignment = self.center_alignment
+                cell.border = self.thin_border
+
+            for index, ingredient in enumerate(c_ingredients):
+                ingredient_row_num = sub_title_row_num+1+index
+
+                storage_date_cell = sheet.cell(ingredient_row_num,1)
+                storage_date_cell.value = _("{year}.{month:0>2}.{day:0>2} (Column of Non-storage list sheet)")
+                name_cell = sheet.cell(ingredient_row_num,2)
+                name_cell.value = ingredient.name
+                quantity_unit_name_cell = sheet.cell(ingredient_row_num,3)
+                quantity_unit_name_cell.value = ingredient.quantity_unit_name
+                quantity_cell = sheet.cell(ingredient_row_num,4)
+                quantity_cell.value = f"{ingredient.quantity:.{decimal_prec}f}"
+                unit_price_cell = sheet.cell(ingredient_row_num)
+                unit_price_cell.value = ingredient.unit_price
+                total_price_cell = sheet.cell(ingredient_row_num,6)
+                total_price_cell = f"{ingredient.total_price:.{decimal_prec}f}"
+                note_cell = sheet.cell(ingredient_row_num,7)
+                note_cell.value = ""
+
+                for col in range(1,8):
+                    cell = sheet.cell(ingredient_row_num,col)
+                    cell.font = self.font_12
+                    cell.alignment = self.center_alignment
+                    cell.border = self.thin_border
+
+            summary_row_num = sub_title_row_num+ingredient_rows_count+1
+            next_category, __ = category_ingredients[index+1] if index+1<len(category_ingredients) else (None,None)
+            if not next_category or next_category != category:
+                summary_note_cell = sheet.cell(summary_row_num,2)
+                summary_note_cell.value = _("Summary (Non-storage list sheet)")
+                _c_ingredients = [c_ingredients for category,c_ingredients in _category_ingredients if _category == category]
+
+                summary_total_price_cell = sheet.cell(summary_row_num,6)
+                summary_total_price_cell.value = []
+            else:
+
+
 
     def fill_in(self):
         self.fill_in_cover_sheet()
