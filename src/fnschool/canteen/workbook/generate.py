@@ -1612,24 +1612,38 @@ class CanteenWorkBook:
             set_row_height_in_inches(sheet, header_row_num, 0.30)
 
             for index, ingredient in enumerate(c_ingredients):
-                ingredient_row_num = sub_title_row_num + 1 + index
+                ingredient_row_num = header_row_num + 1 + index
 
                 storage_date_cell = sheet.cell(ingredient_row_num, 1)
-                storage_date_cell.value = _(
-                    "{year}.{month:0>2}.{day:0>2} (Column of Non-storage list sheet)"
-                ).format(
-                    year=self.year, month=self.month, day=self.date_end.day
+                storage_date_cell.value = (
+                    _(
+                        "{year}.{month:0>2}.{day:0>2} (Column of Non-storage list sheet)"
+                    ).format(
+                        year=ingredient.storage_date.year,
+                        month=ingredient.storage_date.month,
+                        day=ingredient.storage_date.day,
+                    )
+                    if ingredient.storage_date
+                    else ""
                 )
                 name_cell = sheet.cell(ingredient_row_num, 2)
                 name_cell.value = ingredient.name
                 quantity_unit_name_cell = sheet.cell(ingredient_row_num, 3)
                 quantity_unit_name_cell.value = ingredient.quantity_unit_name
                 quantity_cell = sheet.cell(ingredient_row_num, 4)
-                quantity_cell.value = f"{ingredient.quantity:.{decimal_prec}f}"
+                quantity_cell.value = (
+                    f"{ingredient.quantity:.{decimal_prec}f}"
+                    if ingredient.quantity
+                    else ""
+                )
                 unit_price_cell = sheet.cell(ingredient_row_num, 5)
                 unit_price_cell.value = ingredient.unit_price
                 total_price_cell = sheet.cell(ingredient_row_num, 6)
-                total_price_cell = f"{ingredient.total_price:.{decimal_prec}f}"
+                total_price_cell = (
+                    f"{ingredient.total_price:.{decimal_prec}f}"
+                    if ingredient.total_price
+                    else ""
+                )
                 note_cell = sheet.cell(ingredient_row_num, 7)
                 note_cell.value = ""
 
