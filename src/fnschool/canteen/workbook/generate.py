@@ -1524,6 +1524,7 @@ class CanteenWorkBook:
         ingredients = Ingredient.objects.filter(
             Q(storage_date__gte=self.date_start)
             & Q(storage_date__lte=self.date_end)
+            & Q(meal_type=self.meal_type)
             & Q(is_disabled=False)
             & Q(is_ignorable=True)
         ).all()
@@ -1637,10 +1638,8 @@ class CanteenWorkBook:
                     ingredient.unit_price if ingredient.unit_price else ""
                 )
                 total_price_cell = sheet.cell(ingredient_row_num, 6)
-                total_price_cell = (
-                    f"{ingredient.total_price:.{decimal_prec}f}"
-                    if ingredient.total_price
-                    else ""
+                total_price_cell.value = (
+                    ingredient.total_price if ingredient.total_price else ""
                 )
                 note_cell = sheet.cell(ingredient_row_num, 7)
                 note_cell.value = ""
@@ -1657,7 +1656,7 @@ class CanteenWorkBook:
 
             next_category, __ = (
                 category_ingredients[index + 1]
-                if index + 1 < len(category_ingredients)
+                if (index + 1) < len(category_ingredients)
                 else (None, None)
             )
             summary_note_cell = sheet.cell(summary_row_num, 2)
