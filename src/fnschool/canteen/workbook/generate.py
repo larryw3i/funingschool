@@ -1610,8 +1610,8 @@ class CanteenWorkBook:
 
             set_row_height_in_inches(sheet, header_row_num, 0.30)
 
-            for index, ingredient in enumerate(c_ingredients):
-                ingredient_row_num = header_row_num + 1 + index
+            for i_index, ingredient in enumerate(c_ingredients):
+                ingredient_row_num = header_row_num + 1 + i_index
 
                 storage_date_cell = sheet.cell(ingredient_row_num, 1)
                 storage_date_cell.value = (
@@ -1654,7 +1654,7 @@ class CanteenWorkBook:
 
             summary_row_num = header_row_num + ingredient_rows_count + 1
 
-            next_category, __ = (
+            next_category, ___ = (
                 category_ingredients[index + 1]
                 if (index + 1) < len(category_ingredients)
                 else (None, None)
@@ -1663,7 +1663,7 @@ class CanteenWorkBook:
             summary_total_price_cell = sheet.cell(summary_row_num, 6)
 
             c_total_price = Decimal("0.0")
-            if not next_category or next_category != category:
+            if (not next_category) or (next_category != category):
                 summary_note_cell.value = _("Summary (Non-storage list sheet)")
                 c_ingredients_list = [
                     _c_ingredients
