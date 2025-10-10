@@ -88,8 +88,11 @@
 {{ date_range|json_script:'date_range' }}
 <script>
   var ingredient_ids = JSON.parse($("#ingredient_ids").text())
+  var ingredient_ids_length = ingredient_ids.length
   var months = JSON.parse($("#months").text())
   var meal_types = JSON.parse($("#meal_types").text())
+  var dont_submit = false
+
   date_range = JSON.parse($("#date_range").text())
 
   function get_previous_month_date(date = new Date()) {
@@ -103,7 +106,7 @@
     const dayOfWeek = date.getDay();
     return dayOfWeek === 0 || dayOfWeek === 6;
   }
-  var ingredient_ids = JSON.parse($('#ingredient_ids').text())
+
   $(document).ready(function() {
     $(months).each(function(index, value) {
       $('.workbook-month-select').append(`<option>${value}</option>`)
@@ -117,7 +120,6 @@
 
   });
 
-  var ingredient_ids_length = ingredient_ids.length
 
   $(document).ready(function() {
     var last_meal_type = ""
@@ -202,6 +204,7 @@
   });
 
   $(document).ready(function() {
+    dont_submit = true
     var progress = 0
     $.each(ingredient_ids, function(index, value) {
       $.ajax({
@@ -225,6 +228,7 @@
             if (progress >= ingredient_ids_length) {
               footer_progressbar.css('width', "0%")
               update_headers()
+              dont_submit = false
             }
           }
 
@@ -286,6 +290,12 @@
   }
 
   function submit_consumptions(fn) {
+    if (dont_submit) {
+      return false
+    } else {
+      dont_submit = true
+    }
+
     var consumption_forms = $('form[name="consumption_form"]')
     var requests = [];
     var progress = 0
