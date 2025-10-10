@@ -24,13 +24,8 @@ from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
@@ -38,12 +33,8 @@ from openpyxl.utils import get_column_letter
 
 from fnschool import count_chinese_characters
 
-from ..forms import (
-    CategoryForm,
-    ConsumptionForm,
-    IngredientForm,
-    PurchasedIngredientsWorkBookForm,
-)
+from ..forms import (CategoryForm, ConsumptionForm, IngredientForm,
+                     PurchasedIngredientsWorkBookForm)
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
 
@@ -422,7 +413,7 @@ class CanteenWorkBook:
         set_row_height_in_inches(sheet, note_row_num, 0.27)
 
     def fill_in_consumption_sheet(self):
-        sheet = self.storage_sheet
+        sheet = self.consumption_sheet
         user = self.user
         title_cell = sheet.cell(1, 1)
         title_cell.value = _(
@@ -455,15 +446,15 @@ class CanteenWorkBook:
 
         header_row_num = 3
         header_category_cell = sheet.cell(header_row_num, 1)
-        header_category_cell.value = _("Ingredient Categories (storage sheet)")
+        header_category_cell.value = _("Ingredient Categories (Consumption Sheet)")
 
         header_total_price_cell = sheet.cell(header_row_num, 2)
         header_total_price_cell.value = _(
-            "Ingredient Total Prices (storage sheet)"
+            "Ingredient Total Prices (Consumption Sheet)"
         )
 
         header_note_cell = sheet.cell(header_row_num, 3)
-        header_note_cell.value = _("Procurement Note")
+        header_note_cell.value = _("Procurement Note (Consumption Sheet)")
 
         for cell in [
             header_category_cell,
@@ -504,7 +495,11 @@ class CanteenWorkBook:
                 & Q(is_ignorable=False)
             ).distinct()
             total_price_cell = sheet.cell(row_num, 2)
-            total_price_cell.value = sum([i.total_price for i in ingredients])
+            total_price_consumed = Decimal('0.0')
+            for i in ingredients:
+                consumptions = i.consumptions.filter(is_disabled=False).all()
+                total_price_consumed += sum([c.amount_used*i.unit_price for c in consumptions])
+            total_price_cell.value = total_price_consumed
 
             note_cell = sheet.cell(row_num, 3)
 
@@ -515,15 +510,23 @@ class CanteenWorkBook:
 
         ingredients = Ingredient.objects.filter(
             Q(user=user)
-            & Q(storage_date__gte=self.date_start)
-            & Q(storage_date__lte=self.date_end)
+            & Q(
+                    consumptions__date_of_using__range=(
+                        self.date_start,
+                        self.date_end,
+                    )
+            )
             & Q(meal_type=self.meal_type)
+            & Q(category__is_disabled=False)
             & Q(is_disabled=False)
             & Q(is_ignorable=False)
         ).all()
 
         summary_row_num = len(categories) + header_row_num + 1
-        summary_total_price = sum([i.total_price for i in ingredients])
+        summary_total_price = Decimal("0.0")
+        for i in ingredients:
+            consumptions = i.consumptions.filter(Q(is_disabled=False)).all()
+            summary_total_price += sum([ c.amount_used*i.unit_price for c in consumptions])
         summary_total_price_cell = sheet.cell(summary_row_num, 1)
         total_price_cell.border = self.thin_border
         summary_total_price_cell.value = (
@@ -575,7 +578,7 @@ class CanteenWorkBook:
         note_cell.value = (
             _(
                 "Note: This form is a summary of all monthly food and "
-                + "material inventory receipts from the cafeteria. After "
+                + "material consumption receipts from the cafeteria. After "
                 + "verification, it will be signed and stamped with "
                 + "the school seal by the principal as reimbursement "
                 + "evidence."
@@ -583,7 +586,7 @@ class CanteenWorkBook:
             if self.is_school
             else _(
                 "Note: This form is a summary of all monthly food and "
-                + "material inventory receipts from the cafeteria. "
+                + "material consumption receipts from the cafeteria. "
                 + "After verification, it will be signed and stamped "
                 + "with the affiliation seal by the supervisor as "
                 + "reimbursement evidence."
@@ -762,65 +765,80 @@ class CanteenWorkBook:
     def fill_in_consumption_list_sheet(self):
         sheet = self.consumption_list_sheet
         user = self.user
-        ingredient_rows_count = 21
+        consumption_rows_count = 21
         ingredients = Ingredient.objects.filter(
             Q(user=user)
             & Q(is_disabled=False)
             & Q(is_ignorable=False)
-            & Q(storage_date__gte=self.date_start)
-            & Q(storage_date__lte=self.date_end)
+            & Q(
+                    consumptions__date_of_using__range=(
+                        self.date_start,
+                        self.date_end,
+                    )
+            )
             & Q(meal_type=self.meal_type)
         ).all()
         categories = Category.objects.filter(
             Q(user=user) & Q(is_disabled=False)
         ).all()
-        ingredient_row_height = 0.18
-        ingredient_rows_height = ingredient_rows_count * 0.18
-        storage_dates = list(set([i.storage_date for i in ingredients]))
+        consumption_row_height = 0.18
+        consumption_rows_height = consumption_rows_count * 0.18
 
-        storaged_ingredients = []
-        for storage_date in storage_dates:
-            dated_ingredients = [
-                i for i in ingredients if i.storage_date == storage_date
-            ]
-            dated_ingredients = sorted(
-                dated_ingredients, key=lambda i: (i.category.name, i.name)
+        consumption_dates = []
+        for i in ingredients:
+            i_consumptions = i.consumptions.filter(Q(is_disabled=False)).all()
+            i_consumption_dates = [c.date_of_using for c in i_consumptions]
+            for d in i_consumption_dates:
+                if not d in consumption_dates:
+                    consumption_dates.append(d)
+        consumption_dates = sorted(consumption_dates)
+
+        for consumption_date in consumption_dates:
+            dated_consumptions = Consumption.objects.filter(
+                Q(is_disabled=False)
+                & (date_of_using=consumption_date)
+            ).all()
+
+            dated_consumptions = sorted(
+                dated_consumptions, key=lambda i: (i.ingredient.category.name, i.ingredient.name)
             )
-            dated_ingredient_categories = list(
-                set([i.category for i in ingredients])
+
+            dated_consumption_categories = list(
+                set([c.ingredient.category for c in deted_consumptions])
             )
             empty_categories = [
-                c for c in categories if not c in dated_ingredient_categories
+                c for c in categories if not c in dated_consumption_categories
             ]
             same_date_count = math.ceil(
-                len(dated_ingredients)
-                / (ingredient_rows_count - len(empty_categories))
+                len(dated_consumptions)
+                / (consumption_rows_count - len(empty_categories))
             )
-            step = math.floor(len(dated_ingredients) / same_date_count)
-            sub_storage_num = 1
-            for index in range(0, len(dated_ingredients), step):
-                split_dated_ingredients = dated_ingredients[
+            step = math.floor(len(dated_consumptions) / same_date_count)
+            sub_consumption_num = 1
+            for index in range(0, len(dated_consumptions), step):
+                split_dated_consumptions = dated_consumptions[
                     index : index + step
                 ]
-                split_dated_ingredient = split_dated_ingredients[0]
-                split_dated_ingredient_categories = list(
-                    set([i.category for i in split_dated_ingredients])
+                split_dated_consumptions = split_dated_consumptions[0]
+                split_dated_consumption_categories = list(
+                    set([c.ingredient.category for c in split_dated_consumptions])
                 )
                 split_empty_categories = [
                     c
-                    for c in split_dated_ingredient_categories
+                    for c in split_dated_consumption_categories
                     if not c in categories
                 ]
                 split_empty_categories = split_empty_categories + [
                     random.choice(categories)
                     for i in range(
-                        ingredient_rows_count
+                        consumption_rows_count
                         - len(split_dated_ingredients)
                         - len(split_empty_categories)
                     )
                 ]
 
-                split_dated_ingredients += [
+
+                fake_ingredients = [
                     Ingredient(
                         user=user,
                         name="",
@@ -834,12 +852,21 @@ class CanteenWorkBook:
                     )
                     for c in split_empty_categories
                 ]
+                for fake_ingredient in fake_ingredients:
+                    split_dated_consumptions.append(
+                        Consumption(
+                            ingredient = fake_ingredients,
+                            date_of_using=consumption_date,
+                            amount_used=Decimal('0'),
+                            is_disabled=False,
+                        )
+                    )
 
-                split_dated_ingredients = sorted(
-                    split_dated_ingredients, key=lambda i: (i.category.name)
+                split_dated_consumptions = sorted(
+                    split_dated_consumptions, key=lambda i: (i.ingredient.category.name)
                 )
 
-                storage_date_index = sub_storage_num
+                consumption_date_index = sub_consumption_num
                 storaged_ingredients.append(
                     [storage_date, storage_date_index, split_dated_ingredients]
                 )
@@ -852,7 +879,7 @@ class CanteenWorkBook:
             storage_date_index,
             dated_ingredients,
         ) in enumerate(storaged_ingredients):
-            row_num = (ingredient_rows_count + 6) * index + 1
+            row_num = (consumption_rows_count + 6) * index + 1
 
             title_cell_row_num = row_num
             title_cell = sheet.cell(title_cell_row_num, 1)
@@ -1713,7 +1740,7 @@ class CanteenWorkBook:
         self.fill_in_storage_list_sheet()
         self.fill_in_non_storage_sheet()
         self.fill_in_non_storage_list_sheet()
-        # self.fill_in_consumption_sheet()
+        self.fill_in_consumption_sheet()
         # self.fill_in_consumption_list_sheet()
         # self.fill_in_surplus_sheet()
         # self.fill_in_food_sheets()
