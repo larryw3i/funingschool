@@ -22,6 +22,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import translation
 from django.utils.encoding import escape_uri_path
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 from django.views.generic import (
     CreateView,
@@ -35,7 +36,7 @@ from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
-from fnschool import _, count_chinese_characters
+from fnschool import count_chinese_characters
 
 from ..forms import (
     CategoryForm,
@@ -43,7 +44,7 @@ from ..forms import (
     IngredientForm,
     PurchasedIngredientsWorkBookForm,
 )
-from ..models import Category, Consumption, Ingredient
+from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
 
 
@@ -1521,7 +1522,7 @@ class CanteenWorkBook:
 
         set_row_height_in_inches(sheet, summary_row_num, 0.44)
 
-    def fill_in_non_storage_list_sheet():
+    def fill_in_non_storage_list_sheet(self):
         sheet = self.non_storage_list_sheet
         user = self.user
         ingredient_rows_count = 11
@@ -1541,10 +1542,28 @@ class CanteenWorkBook:
             split_count = math.ceil(len(_ingredients) / ingredient_rows_count)
             for i in range(0, len(_ingredients), ingredient_rows_count):
                 _split_ingredients = _ingredients[i : i + ingredient_rows_count]
+                _split_ingredient0 = _split_ingredients[0]
+                if len(_split_ingredients) < ingredient_rows_count:
+                    _split_ingredients += [
+                        Ingredient(
+                            user=user,
+                            storage_date=None,
+                            name="",
+                            meal_type=_split_ingredient0.meal_type,
+                            category=_split_ingredient0.category,
+                            quantity=Decimal("0"),
+                            quantity_unit_name=None,
+                            total_price=Decimal("0"),
+                            is_ignorable=_split_ingredient0.is_ignorable,
+                        )
+                        for i in range(
+                            ingredient_rows_count - len(_split_ingredients)
+                        )
+                    ]
                 category_ingredients.append([category, _split_ingredients])
 
         for index, (category, c_ingredients) in enumerate(category_ingredients):
-            row_num = (ingredient_row_num + 5) * index + 1
+            row_num = (ingredient_rows_count + 5) * index + 1
             title_row_num = row_num
             title_cell = sheet.cell(title_row_num, 1)
             title_cell.value = _(
@@ -1552,6 +1571,8 @@ class CanteenWorkBook:
             ).format(category=category)
             title_cell.font = self.font_20_bold
             title_cell.alignment = self.center_alignment
+
+            set_row_height_in_inches(sheet, title_row_num, 0.42)
 
             sub_title_row_num = title_row_num + 1
             sub_title_affiliation_cell = sheet.cell(sub_title_row_num, 1)
@@ -1570,6 +1591,8 @@ class CanteenWorkBook:
                 cell.font = self.font_14
                 cell.alignment = self.center_alignment
 
+            set_row_height_in_inches(sheet, sub_title_row_num, 0.33)
+
             header_row_num = sub_title_row_num + 1
             for col, value in [
                 [1, _("Procurement Date (Non-storage list sheet)")],
@@ -1586,12 +1609,16 @@ class CanteenWorkBook:
                 cell.alignment = self.center_alignment
                 cell.border = self.thin_border
 
+            set_row_height_in_inches(sheet, header_row_num, 0.30)
+
             for index, ingredient in enumerate(c_ingredients):
                 ingredient_row_num = sub_title_row_num + 1 + index
 
                 storage_date_cell = sheet.cell(ingredient_row_num, 1)
                 storage_date_cell.value = _(
                     "{year}.{month:0>2}.{day:0>2} (Column of Non-storage list sheet)"
+                ).format(
+                    year=self.year, month=self.month, day=self.date_end.day
                 )
                 name_cell = sheet.cell(ingredient_row_num, 2)
                 name_cell.value = ingredient.name
@@ -1599,7 +1626,7 @@ class CanteenWorkBook:
                 quantity_unit_name_cell.value = ingredient.quantity_unit_name
                 quantity_cell = sheet.cell(ingredient_row_num, 4)
                 quantity_cell.value = f"{ingredient.quantity:.{decimal_prec}f}"
-                unit_price_cell = sheet.cell(ingredient_row_num)
+                unit_price_cell = sheet.cell(ingredient_row_num, 5)
                 unit_price_cell.value = ingredient.unit_price
                 total_price_cell = sheet.cell(ingredient_row_num, 6)
                 total_price_cell = f"{ingredient.total_price:.{decimal_prec}f}"
@@ -1611,6 +1638,8 @@ class CanteenWorkBook:
                     cell.font = self.font_12
                     cell.alignment = self.center_alignment
                     cell.border = self.thin_border
+
+                set_row_height_in_inches(sheet, ingredient_row_num, 0.30)
 
             summary_row_num = sub_title_row_num + ingredient_rows_count + 1
             next_category, __ = (
@@ -1629,24 +1658,31 @@ class CanteenWorkBook:
                     for _category, _c_ingredients in category_ingredients
                     if _category == category
                 ]
-                c_total_price = 0.0
+                c_total_price = Decimal("0.0")
                 for _c_ingredients in c_ingredients_list:
                     c_total_price += sum(
                         [i.total_price for i in _c_ingredients]
                     )
-                summary_total_price_cell = f"{c_total_price:.{decimal_prec}f}"
+                summary_total_price_cell.value = (
+                    f"{c_total_price:.{decimal_prec}f}"
+                )
 
             else:
                 summary_note_cell.value = _(
                     "Sub-summary (Non-storage list sheet)"
                 )
                 c_total_price += sum([i.total_price for i in c_ingredients])
-                summary_total_price_cell = f"{c_total_price:.{decimal_prec}f}"
+                summary_total_price_cell.value = (
+                    f"{c_total_price:.{decimal_prec}f}"
+                )
 
             for cell in [summary_note_cell, summary_total_price_cell]:
                 cell.font = self.font_14
                 cell.alignment = self.center_alignment
                 cell.border = self.thin_border
+
+            set_row_height_in_inches(sheet, summary_row_num, 0.30)
+
         for col, width in [
             [1, 1.17],
             [2, 1.67],
@@ -1673,12 +1709,8 @@ class CanteenWorkBook:
 
 
 def get_workbook_zip(request, month):
-    meal_types = list(
-        set(
-            MealType.objects.filter(
-                Q(user=request.user) & Q(is_disabled=False)
-            ).values_list("name", flat=True)
-        )
+    meal_types = MealType.objects.filter(
+        Q(user=request.user) & Q(is_disabled=False)
     )
 
     zip_buffer = io.BytesIO()
@@ -1688,7 +1720,7 @@ def get_workbook_zip(request, month):
                 _(
                     "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
                 ).format(
-                    meal_type=meal_type,
+                    meal_type=meal_type.abbreviation or meal_type.name,
                     month=month.replace("-", ""),
                     affiliation=request.user.affiliation,
                 )
