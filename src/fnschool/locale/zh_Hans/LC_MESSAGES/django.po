@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-11 02:02+0000\n"
-"PO-Revision-Date: 2025-10-11 10:07+0800\n"
+"POT-Creation-Date: 2025-10-11 02:40+0000\n"
+"PO-Revision-Date: 2025-10-11 10:42+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -900,13 +900,19 @@ msgstr "食 材 盘 存 表"
 
 #: canteen/workbook/generate.py:1675
 #, python-brace-format
-msgid "Principal Name: {affiliation}                {surplus_date}"
-msgstr "学校名称：{affiliation}                {surplus_date}"
+msgid ""
+"Principal Name: {affiliation}                {year}.{month:0>2}.{day:0>2} "
+"(Sub-title of Surplus Sheet)"
+msgstr ""
+"学校名称：{affiliation}                {year}年{month:0>2}月{day:0>2}日"
 
 #: canteen/workbook/generate.py:1678
 #, python-brace-format
-msgid "Affiliation Name: {affiliation}                {surplus_date}"
-msgstr "单位名称：{affiliation}                {surplus_date}"
+msgid ""
+"Affiliation Name: {affiliation}                {year}.{month:0>2}.{day:0>2} "
+"(Sub-title of Surplus Sheet)"
+msgstr ""
+"单位名称：{affiliation}                {year}年{month:0>2}月{day:0>2}日"
 
 #: canteen/workbook/generate.py:1703
 msgid "Ingredient Name (Surplus Sheet)"
@@ -956,19 +962,19 @@ msgstr "数 量"
 msgid "Difference Total Price (Surplus Sheet)"
 msgstr "金 额"
 
-#: canteen/workbook/generate.py:1786
+#: canteen/workbook/generate.py:1796
 msgid "Summary Total Price (Surplus Sheet)"
 msgstr "合计"
 
-#: canteen/workbook/generate.py:1803
+#: canteen/workbook/generate.py:1813
 msgid "Sub0-summary Total Price (Surplus Sheet)"
 msgstr "小 计"
 
-#: canteen/workbook/generate.py:1812
+#: canteen/workbook/generate.py:1822
 msgid "Note: Inventory once a week."
 msgstr "备注：每周盘存一次。"
 
-#: canteen/workbook/generate.py:1819
+#: canteen/workbook/generate.py:1829
 #, python-brace-format
 msgid ""
 "   Reviewer:        Handler:{handler_name}    Weigher:        Warehouseman: "
@@ -977,68 +983,68 @@ msgstr ""
 "   审核人：　　　　经办人：{handler_name}　　　　过称人：　　　　仓管"
 "人：　　　　"
 
-#: canteen/workbook/generate.py:1870
+#: canteen/workbook/generate.py:1894
 #, python-brace-format
 msgid "Table of Non-storaged Ingredients ({category})"
 msgstr "未入库明细表（{category}）"
 
-#: canteen/workbook/generate.py:1881
+#: canteen/workbook/generate.py:1905
 #, python-brace-format
 msgid "Principal Name: {affiliation}"
 msgstr "学校名称：{affiliation}"
 
-#: canteen/workbook/generate.py:1883
+#: canteen/workbook/generate.py:1907
 #, python-brace-format
 msgid "Affiliation Name: {affiliation}"
 msgstr "单位名称：{affiliation}"
 
-#: canteen/workbook/generate.py:1888
+#: canteen/workbook/generate.py:1912
 #, python-brace-format
 msgid "{year}.{month:0>2}.{day:0>2} (Non-storage list sheet)"
 msgstr "{year}年{month:0>2}月{day:0>2}日"
 
-#: canteen/workbook/generate.py:1902
+#: canteen/workbook/generate.py:1926
 msgid "Procurement Date (Non-storage list sheet)"
 msgstr "采购日期"
 
-#: canteen/workbook/generate.py:1903
+#: canteen/workbook/generate.py:1927
 msgid "Ingredient Name (Non-storage list sheet)"
 msgstr "名    称"
 
-#: canteen/workbook/generate.py:1904
+#: canteen/workbook/generate.py:1928
 msgid "Unit Name of Quantity (Non-storage list sheet)"
 msgstr "计量单位"
 
-#: canteen/workbook/generate.py:1905
+#: canteen/workbook/generate.py:1929
 msgid "Quantity (Non-storage list sheet)"
 msgstr "数  量"
 
-#: canteen/workbook/generate.py:1906
+#: canteen/workbook/generate.py:1930
 msgid "Unit Price (Non-storage list sheet)"
 msgstr "单  价"
 
-#: canteen/workbook/generate.py:1907
+#: canteen/workbook/generate.py:1931
 msgid "Total Price (Non-storage list sheet)"
 msgstr "金  额"
 
-#: canteen/workbook/generate.py:1908
+#: canteen/workbook/generate.py:1932
 msgid "Note (Non-storage list sheet)"
 msgstr "备注"
 
-#: canteen/workbook/generate.py:1924
+#: canteen/workbook/generate.py:1948
 #, python-brace-format
 msgid "{year}.{month:0>2}.{day:0>2} (Column of Non-storage list sheet)"
 msgstr "{year}.{month:0>2}.{day:0>2}"
 
-#: canteen/workbook/generate.py:1972
+#: canteen/workbook/generate.py:1996
 msgid "Summary (Non-storage list sheet)"
 msgstr "合计"
 
-#: canteen/workbook/generate.py:1989
+#: canteen/workbook/generate.py:2013
 msgid "Sub-summary (Non-storage list sheet)"
 msgstr "小计"
 
-#: canteen/workbook/generate.py:2039
+#: canteen/workbook/generate.py:2063
 #, python-brace-format
 msgid "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
 msgstr "（{month}{meal_type}）{affiliation}食堂出入库工作簿"
@@ -1256,6 +1262,14 @@ msgstr "登录"
 #: templates/includes/_header.html:71
 msgid "Sign Up"
 msgstr "注册"
+
+#, python-brace-format
+#~ msgid "Principal Name: {affiliation}                {surplus_date}"
+#~ msgstr "学校名称：{affiliation}                {surplus_date}"
+
+#, python-brace-format
+#~ msgid "Affiliation Name: {affiliation}                {surplus_date}"
+#~ msgstr "单位名称：{affiliation}                {surplus_date}"
 
 #~ msgid "Ingredient Meal type"
 #~ msgstr "餐类"

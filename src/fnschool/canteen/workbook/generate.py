@@ -1596,7 +1596,7 @@ class CanteenWorkBook:
             & Q(storage_date__lte=self.date_end)
             & Q(meal_type=self.meal_type)
             & Q(is_disabled=False)
-            & Q(is_ignorable=True)
+            & Q(is_ignorable=False)
         ).all()
         month_days = [
             self.date_start + timedelta(days=i)
@@ -1672,12 +1672,19 @@ class CanteenWorkBook:
             sub_title_row_num = title_row_num + 1
             sub_title_affiliation_date_cell = sheet.cell(sub_title_row_num, 1)
             sub_title_affiliation_date_cell.value = (
-                _("Principal Name: {affiliation}                {surplus_date}")
+                _(
+                    "Principal Name: {affiliation}                {year}.{month:0>2}.{day:0>2} (Sub-title of Surplus Sheet)"
+                )
                 if self.is_school
                 else _(
-                    "Affiliation Name: {affiliation}                {surplus_date}"
+                    "Affiliation Name: {affiliation}                {year}.{month:0>2}.{day:0>2} (Sub-title of Surplus Sheet)"
                 )
-            ).format(affiliation=user.affiliation, surplus_date=sunday)
+            ).format(
+                affiliation=user.affiliation,
+                year=sunday.year,
+                month=sunday.month,
+                day=sunday.day,
+            )
 
             sub_title_affiliation_date_cell.font = self.font_12
             sub_title_affiliation_date_cell.alignment = self.center_alignment
@@ -1685,16 +1692,15 @@ class CanteenWorkBook:
 
             set_row_height_in_inches(sheet, sub_title_row_num, 0.20)
 
-            for row in range(
-                sub_title_row_num,
-                sub_title_row_num + ingredient_rows_count + 5 + 1,
-            ):
+            __style_row_end = sub_title_row_num + ingredient_rows_count + 5 + 1
+            for row in range(sub_title_row_num, __style_row_end):
                 set_row_height_in_inches(sheet, row, 0.20)
                 for col in range(1, 10):
                     cell = sheet.cell(row, col)
                     cell.font = self.font_12
                     cell.alignment = self.center_alignment
-                    cell.border = self.thin_border
+                    if row < (__style_row_end - 1):
+                        cell.border = self.thin_border
 
             header0_row_num = sub_title_row_num + 1
 
@@ -1802,8 +1808,17 @@ class CanteenWorkBook:
                 ]
                 for ingredients in ingredients_list:
                     for ingredient in ingredients:
-                        ingredient_quantity = ingredient.quantity - sum(
-                            [c.amount_used for c in ingredient.consumptions]
+                        ingredient_quantity = ingredient.quantity - (
+                            sum(
+                                [
+                                    c.amount_used
+                                    for c in ingredient.consumptions.filter(
+                                        is_disabled=False
+                                    ).all()
+                                ]
+                            )
+                            if ingredient.id
+                            else Decimal("0.0")
                         )
                         summary_total_price += (
                             ingredient_quantity * ingredient.unit_price
@@ -1827,8 +1842,10 @@ class CanteenWorkBook:
                 1,
                 _(
                     "   Reviewer:        Handler:{handler_name}    Weigher:        Warehouseman: 　     "
-                ),
+                ).format(handler_name=user.username),
             )
+            sheet.merge_cells(f"A{signature_row_num}:I{signature_row_num}")
+
         for col, width in [
             [1, 2.08],
             [2, 0.49],
