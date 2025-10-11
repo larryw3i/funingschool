@@ -1670,7 +1670,7 @@ class CanteenWorkBook:
             sheet.merge_cells(f"A{title_row_num}:I{title_row_num}")
 
             sub_title_row_num = title_row_num + 1
-            sub_title_affiliation_cell = sheet.cell(sub_title_row_num, 1)
+            sub_title_affiliation_date_cell = sheet.cell(sub_title_row_num, 1)
             sub_title_affiliation_date_cell.value = (
                 _("Principal Name: {affiliation}                {surplus_date}")
                 if self.is_school
@@ -1750,8 +1750,18 @@ class CanteenWorkBook:
             summary_total_price = Decimal("0.0")
             for index, ingredient in enumerate(ingredients):
                 ingredient_row_num = header1_row_num + index + 1
-                ingredient_quantity = ingredient.quantity - sum(
-                    [c.amount_used for c in ingredient.consumptions]
+                ingredient_quantity = (
+                    ingredient.quantity
+                    - sum(
+                        [
+                            c.amount_used
+                            for c in ingredient.consumptions.filter(
+                                is_disabled=False
+                            ).all()
+                        ]
+                    )
+                    if ingredient.id
+                    else Decimal("0.0")
                 )
                 ingredient_total_price = (
                     ingredient_quantity * ingredient.unit_price
@@ -1782,7 +1792,7 @@ class CanteenWorkBook:
             )
             summary_1_value = ""
 
-            if next_sunday and not next_sunday == sunday:
+            if not next_sunday or not next_sunday == sunday:
                 summary_1_value = _("Summary Total Price (Surplus Sheet)")
                 summary_total_price = Decimal("0.0")
                 ingredients_list = [
@@ -1819,6 +1829,18 @@ class CanteenWorkBook:
                     "   Reviewer:        Handler:{handler_name}    Weigher:        Warehouseman: 　     "
                 ),
             )
+        for col, width in [
+            [1, 2.08],
+            [2, 0.49],
+            [3, 0.75],
+            [4, 1.14],
+            [5, 0.89],
+            [6, 1.15],
+            [7, 0.74],
+            [8, 0.74],
+            [9, 0.56],
+        ]:
+            set_column_width_in_inches(sheet, col, width)
 
     def fill_in_non_storage_list_sheet(self):
         sheet = self.non_storage_list_sheet
