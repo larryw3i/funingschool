@@ -41,10 +41,7 @@ gui=[]
 cli=[]
 
 [project.scripts]
-fnschool-cli = "fnschool:read_cli"
-
-[project.gui-scripts]
-fnschool-gui = "fnschool:show_gui"
+fnschool-cli = "fnschool:main"
 
 [build-system]
 requires = [
