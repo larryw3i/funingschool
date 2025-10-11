@@ -1621,6 +1621,7 @@ class CanteenWorkBook:
                 )
                 if remaining_quantity > Decimal("0.0"):
                     sunday_ingredients.append(ingredient)
+                    print(ingredient.name, remaining_quantity)
             form_count = len(sunday_ingredients) / ingredient_rows_count
             surplus_ingredients_len = (
                 len(sunday_ingredients) % ingredient_rows_count
@@ -1654,6 +1655,7 @@ class CanteenWorkBook:
                 split_ingredients = sunday_ingredients[
                     index : index + ingredient_rows_count
                 ]
+
                 formed_ingredients.append([sunday, index, split_ingredients])
 
         for index, (sunday, sunday_index, ingredients) in enumerate(
@@ -1764,6 +1766,7 @@ class CanteenWorkBook:
                             for c in ingredient.consumptions.filter(
                                 is_disabled=False
                             ).all()
+                            if c.date_of_using <= sunday
                         ]
                     )
                     if ingredient.id
