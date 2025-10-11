@@ -11,7 +11,7 @@ dependencies = [
     "platformdirs",
     "tomlkit",
     "django-crispy-forms",
-    "python3-crispy-bootstrap5",
+    "crispy-bootstrap5",
 ]
 authors = [
   {name = "larryw3i", email = "larryw3i@163.com"},
