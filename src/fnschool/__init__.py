@@ -44,7 +44,10 @@ def main():
         sys.argv.append("runserver")
         sys.argv.append(str(local_port))
         try:
-            os.startfile(local_url)
+            if is_windows:
+                os.startfile(local_url)
+            else:
+                os.system("open " + local_url)
         except Exception as e:
             print(e)
 
