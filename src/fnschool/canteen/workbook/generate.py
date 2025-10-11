@@ -24,8 +24,13 @@ from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
-                                  UpdateView)
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
@@ -33,8 +38,12 @@ from openpyxl.utils import get_column_letter
 
 from fnschool import count_chinese_characters
 
-from ..forms import (CategoryForm, ConsumptionForm, IngredientForm,
-                     PurchasedIngredientsWorkBookForm)
+from ..forms import (
+    CategoryForm,
+    ConsumptionForm,
+    IngredientForm,
+    PurchasedIngredientsWorkBookForm,
+)
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
 
@@ -1604,7 +1613,9 @@ class CanteenWorkBook:
                 remaining_quantity = ingredient.quantity - sum(
                     [
                         c.amount_used
-                        for c in ingredient.consumptions.filter(Q(is_disabled=False)).all()
+                        for c in ingredient.consumptions.filter(
+                            Q(is_disabled=False)
+                        ).all()
                         if c.date_of_using <= sunday
                     ]
                 )
@@ -1614,7 +1625,9 @@ class CanteenWorkBook:
             surplus_ingredients_len = (
                 len(sunday_ingredients) % ingredient_rows_count
             )
-            fake_ingredients_len = ingredient_rows_count -    surplus_ingredients_len
+            fake_ingredients_len = (
+                ingredient_rows_count - surplus_ingredients_len
+            )
             s_ingredient0 = sunday_ingredients[0]
             sunday_ingredients += [
                 Ingredient(
@@ -1643,7 +1656,9 @@ class CanteenWorkBook:
                 ]
                 formed_ingredients.append([sunday, index, split_ingredients])
 
-        for index,(sunday, sunday_index, ingredients) in enumerate(formed_ingredients):
+        for index, (sunday, sunday_index, ingredients) in enumerate(
+            formed_ingredients
+        ):
 
             title_row_num = (ingredient_rows_count + 8) * index + 1
             title_cell = sheet.cell(title_row_num, 1)
@@ -1754,7 +1769,7 @@ class CanteenWorkBook:
                 sheet.cell(ingredient_row_num, 9, "")
 
             summary_row_num = header1_row_num + ingredient_rows_count + 1
-            
+
             prev_sunday = (
                 formed_ingredients[index - 1][0]
                 if 0 <= index - 1 < len(formed_ingredients)
@@ -1765,14 +1780,30 @@ class CanteenWorkBook:
                 if 0 < index + 1 < (len(formed_ingredients) - 1)
                 else None
             )
-             if ((prev_sunday and not prev_sunday == sunday) or (next_sunday and not next_sunday == sunday)):
-                 pass
+            summary_1_value = ""
 
+            if next_sunday and not next_sunday == sunday:
+                summary_1_value = _("Summary Total Price (Surplus Sheet)")
+                summary_total_price = Decimal("0.0")
+                ingredients_list = [
+                    __ingredients
+                    for __sunday, __sunday_index, __ingredients in formed_ingredients
+                    if __sunday == sunday
+                ]
+                for ingredients in ingredients_list:
+                    for ingredient in ingredients:
+                        ingredient_quantity = ingredient.quantity - sum(
+                            [c.amount_used for c in ingredient.consumptions]
+                        )
+                        summary_total_price += (
+                            ingredient_quantity * ingredient.unit_price
+                        )
 
-            summary_1_value = ( _("Summary Total Price (Surplus Sheet)")) 
-            sheet.cell(
-                summary_row_num, 1, 
-            )
+            else:
+                summary_1_value = _("Sub0-summary Total Price (Surplus Sheet)")
+
+            sheet.cell(summary_row_num, 1, summary_1_value)
+
             sheet.cell(summary_row_num, 4, summary_total_price)
             sheet.cell(summary_row_num, 6, summary_total_price)
 
