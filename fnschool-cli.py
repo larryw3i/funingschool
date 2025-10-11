@@ -1,29 +1,16 @@
-#!/usr/bin/env python3
-"""Django's command-line utility for administrative tasks."""
-import os
+#!/home/larry/Downloads/venv/bin/python3
 import sys
 from pathlib import Path
 
-PROJECT_PATH = Path(__file__).parent
-FNSCHOOL_PATH = PROJECT_PATH / "src" / "fnschool"
-if FNSCHOOL_PATH.as_posix() not in sys.path:
-    sys.path.append(FNSCHOOL_PATH.as_posix())
+from fnschoo1 import main
 
+project_dir = Path(__file__).parent
+fnschoo1_dir = project_dir / "src" / "fnschoo1"
 
-def main():
-    """Run administrative tasks."""
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "fnschool.settings")
-    try:
-        from django.core.management import execute_from_command_line
-    except ImportError as exc:
-        raise ImportError(
-            "Couldn't import Django. Are you sure it's installed and "
-            "available on your PYTHONPATH environment variable? Did you "
-            "forget to activate a virtual environment?"
-        ) from exc
-
-    execute_from_command_line(sys.argv)
-
+if not fnschoo1_dir.as_posix() in sys.path:
+    sys.path.insert(0, fnschoo1_dir.as_posix())
 
 if __name__ == "__main__":
-    main()
+    if sys.argv[0].endswith(".exe"):
+        sys.argv[0] = sys.argv[0][:-4]
+    sys.exit(main())

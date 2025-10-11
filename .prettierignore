@@ -6,3 +6,5 @@
 # Ignore all HTML files:
 **/*.html
 
+# static_collected
+static_collected

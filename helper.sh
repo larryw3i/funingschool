@@ -21,6 +21,9 @@ pack() {
     if [[ ! -f $(which twine) ]]; then
         pip install -U setuptools wheel build twine
     fi
+    new_version=$(date +"%Y%m%d.8%H%M.8%S")
+    sed -i "s/\(__version__ = \"\)[^\"]*\(\"\)/\1$new_version\2/g" ${fnschoo1_dir}/__init__.py
+    echo "New version is ${new_version} ."
     cd ${fnschoo1_dir}
     python manage.py migrate
     python manage.py compilemessages
@@ -34,7 +37,7 @@ pack() {
 pack_upload() {
     cd ${project_dir}
     rm -rf dist/*
-    build
+    pack
     twine upload dist/*
 }
 
@@ -77,7 +80,8 @@ format_code() {
         if [[ -x $(which isort) ]]; then
             isort \
                 -l 80 \
-                ${project_dir}
+                ${fnschoo1_dir} \
+                ${project_dir}/fnschool-cli.py
         fi
     }
 
@@ -103,7 +107,8 @@ format_code() {
         if [[ -x $(which black) ]]; then
             black \
                 -l 80 \
-                ${project_dir}
+                ${fnschoo1_dir} \
+                ${project_dir}/fnschool-cli.py
         fi
     }
 
