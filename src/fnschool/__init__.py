@@ -6,6 +6,7 @@ import random
 import sys
 from pathlib import Path
 
+__version__ = "20251010.80531.837"
 PROJECT_PATH = Path(__file__).parent
 FNSCHOOL_PATH = PROJECT_PATH / "src" / "fnschool"
 if FNSCHOOL_PATH.as_posix() not in sys.path:
