@@ -15,7 +15,7 @@ fi
 . ${venv_dir}/bin/activate
 
 pack() {
-    db="${fnschoo1_dir}/db.sqlite3"
+    db=${fnschoo1_dir}/db.sqlite3
     db_uuid=${fnschoo1_dir}/db.cp/db.$(uuid).sqlite3
     mv ${db} ${db_uuid}
     if [[ ! -f $(which twine) ]]; then
@@ -24,6 +24,7 @@ pack() {
     cd ${fnschoo1_dir}
     python manage.py migrate
     python manage.py compilemessages
+    python manage.py collectstatic
     cd ${project_dir}
     python -m build
     mv ${db_uuid} ${db}
