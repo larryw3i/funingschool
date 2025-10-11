@@ -1,6 +1,7 @@
 [project]
 name = "fnschool"
 dynamic = ["version"]
+license-files = ["LICENSE"]
 requires-python = ">= 3.9"
 dependencies = [
     "django",
@@ -24,7 +25,6 @@ maintainers = [
 ]
 description = "Just some school related scripts, without any ambition."
 readme = "README.md"
-license = {file = "LICENSE"}
 classifiers = [
   "Topic :: Education",
   "Programming Language :: Python :: 3.10",
@@ -41,7 +41,7 @@ gui=[]
 cli=[]
 
 [project.scripts]
-fnschool-cli = "fnschool:main"
+fnschool-cli = "fnschoo1:main"
 
 [build-system]
 requires = [
@@ -52,13 +52,13 @@ requires = [
 line-length = 80
 
 [tool.setuptools.dynamic]
-version = {attr = "fnschool.__version__"}
+version = {attr = "fnschoo1.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-"*" = ["*.mo","*.xlsx","*.toml"]
+"*" = ["*.mo","*.xlsx","*.toml","*.html","*.js", "*.css", "db.sqlite3"]
 
 [tool.setuptools.exclude-package-data]
 "*" = ["*.po"]

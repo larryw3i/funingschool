@@ -3,6 +3,7 @@
 project_dir=$(dirname "$(readlink -f "$0")")
 venv_dir=${project_dir}/venv
 src_dir=${project_dir}/src
+fnschoo1_dir=${src_dir}/fnschoo1
 
 if [[ ! -d ${venv_dir} ]]; then
     python3 \
@@ -12,6 +13,29 @@ if [[ ! -d ${venv_dir} ]]; then
 fi
 
 . ${venv_dir}/bin/activate
+
+pack() {
+    db="${fnschoo1_dir}/db.sqlite3"
+    db_uuid=${fnschoo1_dir}/db.cp/db.$(uuid).sqlite3
+    mv ${db} ${db_uuid}
+    if [[ ! -f $(which twine) ]]; then
+        pip install -U setuptools wheel build twine
+    fi
+    cd ${fnschoo1_dir}
+    python manage.py migrate
+    python manage.py compilemessages
+    cd ${project_dir}
+    python -m build
+    mv ${db_uuid} ${db}
+
+}
+
+pack_upload() {
+    cd ${project_dir}
+    rm -rf dist/*
+    build
+    twine upload dist/*
+}
 
 format_code() {
     run_prettier() {
