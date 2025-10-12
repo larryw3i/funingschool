@@ -24,16 +24,25 @@ from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
-                                  UpdateView)
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 from fnschool import count_chinese_characters
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
-from ..forms import (CategoryForm, ConsumptionForm, IngredientForm,
-                     PurchasedIngredientsWorkBookForm)
+from ..forms import (
+    CategoryForm,
+    ConsumptionForm,
+    IngredientForm,
+    PurchasedIngredientsWorkBookForm,
+)
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
 
@@ -1591,17 +1600,23 @@ class CanteenWorkBook:
 
         consumptions = []
         for ingredient in ingredients:
-            consumptions += [c for c in ingredient.consumptions if not c.is_disabled]
+            consumptions += [
+                c for c in ingredient.consumptions if not c.is_disabled
+            ]
 
         inventory_days = []
-        dates_of_using = sorted(list(set([c.date_of_using for c in consumptions])))
-        for i,date_of_using in enumerate(dates_of_using):
-            if i+1 <  len(dates_of_using):
-                if (date_of_using+timedelta(days=1)) < dates_of_using[i+1]:
+        dates_of_using = sorted(
+            list(set([c.date_of_using for c in consumptions]))
+        )
+        for i, date_of_using in enumerate(dates_of_using):
+            if i + 1 < len(dates_of_using):
+                if (date_of_using + timedelta(days=1)) < dates_of_using[i + 1]:
                     inventory_days.append(date_of_using)
             else:
                 inventory_days.append(date_of_using)
-        inventory_days = inventory_days.insert(0,(self.date_start..replace(day=1) - timedelta(days=1)))
+        inventory_days = inventory_days.insert(
+            0, (self.date_start.replace(day=1) - timedelta(days=1))
+        )
 
         formed_ingredients = []
         for inventory_day in inventory_days:
@@ -1654,11 +1669,15 @@ class CanteenWorkBook:
                     index : index + ingredient_rows_count
                 ]
 
-                formed_ingredients.append([inventory_day, index, split_ingredients])
+                formed_ingredients.append(
+                    [inventory_day, index, split_ingredients]
+                )
 
-        for index, (inventory_day, inventory_day_index, ingredients) in enumerate(
-            formed_ingredients
-        ):
+        for index, (
+            inventory_day,
+            inventory_day_index,
+            ingredients,
+        ) in enumerate(formed_ingredients):
 
             title_row_num = (ingredient_rows_count + 8) * index + 1
             title_cell = sheet.cell(title_row_num, 1)
@@ -1808,7 +1827,10 @@ class CanteenWorkBook:
             )
             summary_1_value = ""
 
-            if not next_inventory_day or not next_inventory_day == inventory_day:
+            if (
+                not next_inventory_day
+                or not next_inventory_day == inventory_day
+            ):
                 summary_1_value = _("Summary Total Price (Surplus Sheet)")
                 summary_total_price = Decimal("0.0")
                 ingredients_list = [
