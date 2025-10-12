@@ -1603,7 +1603,10 @@ class CanteenWorkBook:
         ]
         month_days.append(self.date_end)
 
-        sundays = [d for d in month_days if d.weekday() == 6]
+        min_storage_date = min([i.storage_date for i in ingredients])
+        sundays = [
+            d for d in month_days if d.weekday() == 6 and d >= min_storage_date
+        ]
 
         formed_ingredients = []
         for sunday in sundays:
@@ -1777,7 +1780,16 @@ class CanteenWorkBook:
                 )
                 summary_total_price += ingredient_total_price
 
-                sheet.cell(ingredient_row_num, 1, ingredient.name)
+                ingredient_name_cell = sheet.cell(ingredient_row_num, 1)
+                ingredient_name_cell.value = ingredient.name
+                if ingredient.name:
+                    ingredient_name_cell.comment = Comment(
+                        _("{meal_type} ({category})").format(
+                            meal_type=ingredient.meal_type,
+                            category=ingredient.category,
+                        ),
+                        user.username,
+                    )
                 sheet.cell(ingredient_row_num, 2, ingredient.quantity_unit_name)
                 sheet.cell(ingredient_row_num, 3, ingredient_quantity)
                 sheet.cell(ingredient_row_num, 4, ingredient_total_price)
