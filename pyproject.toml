@@ -58,7 +58,7 @@ version = {attr = "fnschoo1.__version__"}
 where = ["src"]
 
 [tool.setuptools.package-data]
-"*" = ["*.mo","*.xlsx","*.toml","*.html","*.js", "*.css", "db.sqlite3", "*.ico"]
+"*" = ["*.mo","*.xlsx","*.toml","*.html","*.js", "*.css", "*.ico"]
 
 [tool.setuptools.exclude-package-data]
 "*" = ["*.po"]
