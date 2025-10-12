@@ -1601,7 +1601,10 @@ class CanteenWorkBook:
         consumptions = []
         for ingredient in ingredients:
             consumptions += [
-                c for c in ingredient.consumptions if not c.is_disabled
+                c
+                for c in ingredient.consumptions.filter(
+                    Q(is_disabled=False)
+                ).all()
             ]
 
         inventory_days = []
@@ -1614,26 +1617,31 @@ class CanteenWorkBook:
                     inventory_days.append(date_of_using)
             else:
                 inventory_days.append(date_of_using)
-        inventory_days = inventory_days.insert(
+        inventory_days.insert(
             0, (self.date_start.replace(day=1) - timedelta(days=1))
         )
+        print(inventory_days)
 
         formed_ingredients = []
         for inventory_day in inventory_days:
             inventory_day_ingredients = []
             for ingredient in ingredients:
+                if (
+                    ingredient.storage_date > inventory_day
+                    and inventory_day != inventory_days[-1]
+                ):
+                    continue
                 remaining_quantity = ingredient.quantity - sum(
                     [
                         c.amount_used
                         for c in ingredient.consumptions.filter(
                             Q(is_disabled=False)
+                            & Q(date_of_using__lte=inventory_day)
                         ).all()
-                        if c.date_of_using <= inventory_day
                     ]
                 )
                 if remaining_quantity > Decimal("0.0"):
                     inventory_day_ingredients.append(ingredient)
-                    print(ingredient.name, remaining_quantity)
             form_count = len(inventory_day_ingredients) / ingredient_rows_count
             surplus_ingredients_len = (
                 len(inventory_day_ingredients) % ingredient_rows_count
@@ -1646,6 +1654,8 @@ class CanteenWorkBook:
                 inventory_day_ingredients, key=lambda i: i.category.name
             )
 
+            if len(inventory_day_ingredients) < 1:
+                continue
             s_ingredient0 = inventory_day_ingredients[0]
             inventory_day_ingredients += [
                 Ingredient(
@@ -1781,9 +1791,9 @@ class CanteenWorkBook:
                         [
                             c.amount_used
                             for c in ingredient.consumptions.filter(
-                                is_disabled=False
+                                Q(date_of_using__lte=inventory_day)
+                                & Q(is_disabled=False)
                             ).all()
-                            if c.date_of_using <= inventory_day
                         ]
                     )
                     if ingredient.id
@@ -1821,17 +1831,14 @@ class CanteenWorkBook:
                 else None
             )
             next_inventory_day = (
-                storaged_ingredients[index + 1][0]
-                if 0 < index + 1 < (len(formed_ingredients) - 1)
+                formed_ingredients[index + 1][0]
+                if 0 < index + 1 < len(formed_ingredients)
                 else None
             )
-            summary_1_value = ""
+            summary_col1_value = ""
 
-            if (
-                not next_inventory_day
-                or not next_inventory_day == inventory_day
-            ):
-                summary_1_value = _("Summary Total Price (Surplus Sheet)")
+            if not next_inventory_day or next_inventory_day != inventory_day:
+                summary_col1_value = _("Summary Total Price (Surplus Sheet)")
                 summary_total_price = Decimal("0.0")
                 ingredients_list = [
                     __ingredients
@@ -1845,7 +1852,8 @@ class CanteenWorkBook:
                                 [
                                     c.amount_used
                                     for c in ingredient.consumptions.filter(
-                                        is_disabled=False
+                                        Q(is_disabled=False)
+                                        & Q(date_of_using__lte=inventory_day)
                                     ).all()
                                 ]
                             )
@@ -1857,9 +1865,11 @@ class CanteenWorkBook:
                         )
 
             else:
-                summary_1_value = _("Sub0-summary Total Price (Surplus Sheet)")
+                summary_col1_value = _(
+                    "Sub0-summary Total Price (Surplus Sheet)"
+                )
 
-            sheet.cell(summary_row_num, 1, summary_1_value)
+            sheet.cell(summary_row_num, 1, summary_col1_value)
 
             sheet.cell(summary_row_num, 4, summary_total_price)
             sheet.cell(summary_row_num, 6, summary_total_price)
