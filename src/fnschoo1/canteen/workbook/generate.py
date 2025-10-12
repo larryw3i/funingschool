@@ -1603,7 +1603,14 @@ class CanteenWorkBook:
         ]
         month_days.append(self.date_end)
 
-        min_storage_date = min([i.storage_date for i in ingredients])
+        min_storage_date = min(
+            [
+                i.storage_date
+                for i in ingredients
+                if i.storage_date >= self.date_start
+            ]
+        )
+        print("min_storage_date", min_storage_date)
         sundays = [
             d for d in month_days if d.weekday() == 6 and d >= min_storage_date
         ]
