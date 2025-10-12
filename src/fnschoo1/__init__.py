@@ -6,7 +6,7 @@ import random
 import sys
 from pathlib import Path
 
-__version__ = "20251011.82005.807"
+__version__ = "20251012.81520.855"
 
 FNSCHOOL_PATH = Path(__file__).parent
 if FNSCHOOL_PATH.as_posix() not in sys.path:
@@ -37,7 +37,7 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
 
-    if not "runserver" in sys.argv:
+    if len(sys.argv) < 2:
         local_port = str(random.randint(8080, 65530))
         local_url = "http://127.0.0.1:" + local_port
         sys.argv.append("runserver")

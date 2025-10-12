@@ -421,7 +421,7 @@ def list_ingredients(request):
             if c.get("category__name") in search_query
         ]
         for category in categories:
-            queries &= Q(category__icontains=category)
+            queries &= Q(category__name__icontains=category)
             search_query = search_query.replace(category, "")
 
         meal_types = Ingredient.objects.values("meal_type__name").distinct()
@@ -431,7 +431,7 @@ def list_ingredients(request):
             if m.get("meal_type__name") in search_query
         ]
         for meal_type in meal_types:
-            queries &= Q(meal_type__icontains=meal_type)
+            queries &= Q(meal_type__name__icontains=meal_type)
             search_query = search_query.replace(meal_type, "")
 
         names = re.split(r"\s+", search_query)
