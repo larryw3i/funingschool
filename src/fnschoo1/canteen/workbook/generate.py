@@ -1628,6 +1628,11 @@ class CanteenWorkBook:
             fake_ingredients_len = (
                 ingredient_rows_count - surplus_ingredients_len
             )
+
+            sunday_ingredients = sorted(
+                sunday_ingredients, key=lambda i: i.category.name
+            )
+
             s_ingredient0 = sunday_ingredients[0]
             sunday_ingredients += [
                 Ingredient(
@@ -1644,10 +1649,6 @@ class CanteenWorkBook:
                 )
                 for i in range(fake_ingredients_len)
             ]
-
-            sunday_ingredients = sorted(
-                sunday_ingredients, key=lambda i: i.category.name
-            )
             for index in range(
                 0, len(sunday_ingredients), ingredient_rows_count
             ):

@@ -27,7 +27,7 @@ pack() {
     cd ${fnschoo1_dir}
     python manage.py migrate
     python manage.py compilemessages
-    python manage.py collectstatic
+    # python manage.py collectstatic
     cd ${project_dir}
     python -m build
     mv ${db_uuid} ${db}

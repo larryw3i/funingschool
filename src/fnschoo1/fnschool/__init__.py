@@ -1,7 +1,8 @@
 import re
 
-from django.utils.translation import gettext  # as _
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
+
+# from django.utils.translation import gettext_lazy as _
 
 
 def count_chinese_characters(text):
