@@ -24,25 +24,16 @@ from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 from fnschool import count_chinese_characters
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
-from ..forms import (
-    CategoryForm,
-    ConsumptionForm,
-    IngredientForm,
-    PurchasedIngredientsWorkBookForm,
-)
+from ..forms import (CategoryForm, ConsumptionForm, IngredientForm,
+                     PurchasedIngredientsWorkBookForm)
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
 
@@ -1597,29 +1588,24 @@ class CanteenWorkBook:
             & Q(is_disabled=False)
             & Q(is_ignorable=False)
         ).all()
-        month_days = [
-            self.date_start + timedelta(days=i)
-            for i in range((self.date_end - self.date_start).days)
-        ]
-        month_days.append(self.date_end)
 
-        min_storage_date = min(
-            [
-                i.storage_date
-                for i in ingredients
-                if i.storage_date >= self.date_start
-            ]
-        )
-        print("min_storage_date", min_storage_date)
-        sundays = [
-            d
-            for d in month_days
-            if d.weekday() == 6 and d > min_storage_date or d == self.date_end
-        ]
+        consumptions = []
+        for ingredient in ingredients:
+            consumptions += [c for c in ingredient.consumptions if not c.is_disabled]
+
+        inventory_days = []
+        dates_of_using = sorted(list(set([c.date_of_using for c in consumptions])))
+        for i,date_of_using in enumerate(dates_of_using):
+            if i+1 <  len(dates_of_using):
+                if (date_of_using+timedelta(days=1)) < dates_of_using[i+1]:
+                    inventory_days.append(date_of_using)
+            else:
+                inventory_days.append(date_of_using)
+        inventory_days = inventory_days.insert(0,(self.date_start..replace(day=1) - timedelta(days=1)))
 
         formed_ingredients = []
-        for sunday in sundays:
-            sunday_ingredients = []
+        for inventory_day in inventory_days:
+            inventory_day_ingredients = []
             for ingredient in ingredients:
                 remaining_quantity = ingredient.quantity - sum(
                     [
@@ -1627,26 +1613,26 @@ class CanteenWorkBook:
                         for c in ingredient.consumptions.filter(
                             Q(is_disabled=False)
                         ).all()
-                        if c.date_of_using <= sunday
+                        if c.date_of_using <= inventory_day
                     ]
                 )
                 if remaining_quantity > Decimal("0.0"):
-                    sunday_ingredients.append(ingredient)
+                    inventory_day_ingredients.append(ingredient)
                     print(ingredient.name, remaining_quantity)
-            form_count = len(sunday_ingredients) / ingredient_rows_count
+            form_count = len(inventory_day_ingredients) / ingredient_rows_count
             surplus_ingredients_len = (
-                len(sunday_ingredients) % ingredient_rows_count
+                len(inventory_day_ingredients) % ingredient_rows_count
             )
             fake_ingredients_len = (
                 ingredient_rows_count - surplus_ingredients_len
             )
 
-            sunday_ingredients = sorted(
-                sunday_ingredients, key=lambda i: i.category.name
+            inventory_day_ingredients = sorted(
+                inventory_day_ingredients, key=lambda i: i.category.name
             )
 
-            s_ingredient0 = sunday_ingredients[0]
-            sunday_ingredients += [
+            s_ingredient0 = inventory_day_ingredients[0]
+            inventory_day_ingredients += [
                 Ingredient(
                     user=user,
                     storage_date=self.date_start,
@@ -1662,15 +1648,15 @@ class CanteenWorkBook:
                 for i in range(fake_ingredients_len)
             ]
             for index in range(
-                0, len(sunday_ingredients), ingredient_rows_count
+                0, len(inventory_day_ingredients), ingredient_rows_count
             ):
-                split_ingredients = sunday_ingredients[
+                split_ingredients = inventory_day_ingredients[
                     index : index + ingredient_rows_count
                 ]
 
-                formed_ingredients.append([sunday, index, split_ingredients])
+                formed_ingredients.append([inventory_day, index, split_ingredients])
 
-        for index, (sunday, sunday_index, ingredients) in enumerate(
+        for index, (inventory_day, inventory_day_index, ingredients) in enumerate(
             formed_ingredients
         ):
 
@@ -1695,9 +1681,9 @@ class CanteenWorkBook:
                 )
             ).format(
                 affiliation=user.affiliation,
-                year=sunday.year,
-                month=sunday.month,
-                day=sunday.day,
+                year=inventory_day.year,
+                month=inventory_day.month,
+                day=inventory_day.day,
             )
 
             sub_title_affiliation_date_cell.font = self.font_12
@@ -1778,7 +1764,7 @@ class CanteenWorkBook:
                             for c in ingredient.consumptions.filter(
                                 is_disabled=False
                             ).all()
-                            if c.date_of_using <= sunday
+                            if c.date_of_using <= inventory_day
                         ]
                     )
                     if ingredient.id
@@ -1810,25 +1796,25 @@ class CanteenWorkBook:
 
             summary_row_num = header1_row_num + ingredient_rows_count + 1
 
-            prev_sunday = (
+            prev_inventory_day = (
                 formed_ingredients[index - 1][0]
                 if 0 <= index - 1 < len(formed_ingredients)
                 else None
             )
-            next_sunday = (
+            next_inventory_day = (
                 storaged_ingredients[index + 1][0]
                 if 0 < index + 1 < (len(formed_ingredients) - 1)
                 else None
             )
             summary_1_value = ""
 
-            if not next_sunday or not next_sunday == sunday:
+            if not next_inventory_day or not next_inventory_day == inventory_day:
                 summary_1_value = _("Summary Total Price (Surplus Sheet)")
                 summary_total_price = Decimal("0.0")
                 ingredients_list = [
                     __ingredients
-                    for __sunday, __sunday_index, __ingredients in formed_ingredients
-                    if __sunday == sunday
+                    for __inventory_day, __inventory_day_index, __ingredients in formed_ingredients
+                    if __inventory_day == inventory_day
                 ]
                 for ingredients in ingredients_list:
                     for ingredient in ingredients:
