@@ -1819,9 +1819,12 @@ class CanteenWorkBook:
                 ingredient_name_cell.value = ingredient.name
                 if ingredient.name:
                     ingredient_name_cell.comment = Comment(
-                        _("{meal_type} ({category})").format(
+                        _(
+                            "{meal_type} ({category}, Checked/Storaged at {storage_date})"
+                        ).format(
                             meal_type=ingredient.meal_type,
                             category=ingredient.category,
+                            storage_date=ingredient.storage_date,
                         ),
                         user.username,
                     )

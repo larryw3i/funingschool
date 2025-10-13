@@ -8,6 +8,9 @@
   <hr>
   <div class="container">
     <div class="row justify-content-end">
+      <button class="btn btn-success col-md-1 col-lg-1 col-2"
+              onclick="list_consumptions();">{% trans "Refresh" %}</button>
+
       <div class="col col-3 col-md-2 col-lg-2">
         <input class="  form-control"
                onkeydown="if(event.keyCode==13){list_consumptions();}"
