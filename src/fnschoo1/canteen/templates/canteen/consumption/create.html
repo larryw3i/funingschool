@@ -136,6 +136,12 @@
   }
 
   $(document).ready(function() {
+    var td1 = $(".table tr > :nth-child(1):first")
+    $(".table tr > :nth-child(2)").css("left", td1.width() * 1.05)
+  });
+
+
+  $(document).ready(function() {
     $(months).each(function(index, value) {
       $('.workbook-month-select').append(`<option>${value}</option>`)
     });
@@ -224,12 +230,6 @@
     });
   }
 
-
-
-  $(document).ready(function() {
-    var td1 = $(".table tr > :nth-child(1):first")
-    $(".table tr > :nth-child(2)").css("left", td1.width() * 1.05)
-  });
 
   $(document).ready(function() {
     dont_submit = true
