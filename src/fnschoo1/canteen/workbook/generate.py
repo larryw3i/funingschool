@@ -1620,7 +1620,6 @@ class CanteenWorkBook:
         inventory_days.insert(
             0, (self.date_start.replace(day=1) - timedelta(days=1))
         )
-        print(inventory_days)
 
         formed_ingredients = []
         for inventory_day in inventory_days:
@@ -1783,6 +1782,7 @@ class CanteenWorkBook:
             )
 
             summary_total_price = Decimal("0.0")
+            formed_ingredients_index = index
             for index, ingredient in enumerate(ingredients):
                 ingredient_row_num = header1_row_num + index + 1
                 ingredient_quantity = (
@@ -1826,18 +1826,22 @@ class CanteenWorkBook:
             summary_row_num = header1_row_num + ingredient_rows_count + 1
 
             prev_inventory_day = (
-                formed_ingredients[index - 1][0]
-                if 0 <= index - 1 < len(formed_ingredients)
+                formed_ingredients[formed_ingredients_index - 1][0]
+                if 0 <= formed_ingredients_index - 1 < len(formed_ingredients)
                 else None
             )
             next_inventory_day = (
-                formed_ingredients[index + 1][0]
-                if 0 < index + 1 < len(formed_ingredients)
+                formed_ingredients[formed_ingredients_index + 1][0]
+                if 0 < formed_ingredients_index + 1 < len(formed_ingredients)
                 else None
             )
             summary_col1_value = ""
 
-            if not next_inventory_day or next_inventory_day != inventory_day:
+            if next_inventory_day and next_inventory_day == inventory_day:
+                summary_col1_value = _(
+                    "Sub0-summary Total Price (Surplus Sheet)"
+                )
+            else:
                 summary_col1_value = _("Summary Total Price (Surplus Sheet)")
                 summary_total_price = Decimal("0.0")
                 ingredients_list = [
@@ -1863,11 +1867,6 @@ class CanteenWorkBook:
                         summary_total_price += (
                             ingredient_quantity * ingredient.unit_price
                         )
-
-            else:
-                summary_col1_value = _(
-                    "Sub0-summary Total Price (Surplus Sheet)"
-                )
 
             sheet.cell(summary_row_num, 1, summary_col1_value)
 
