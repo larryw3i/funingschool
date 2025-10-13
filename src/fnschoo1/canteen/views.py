@@ -297,6 +297,7 @@ def create_consumptions(request, ingredient_id=None):
             "meal_types": meal_types,
             "ingredient_ids": ingredient_ids,
             "months": months,
+            "storage_date_start": date_start,
         },
     )
 

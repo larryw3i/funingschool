@@ -22,8 +22,8 @@
         <input class="  form-control"
                onkeydown="if(event.keyCode==13){list_consumptions();}"
                title="{% trans 'The starting date of storage.' %}"
-               id="storage_date_start"
-               value="{{ request.COOKIES.storage_date_start }}">
+               id="storage_date_start_input"
+               value="{{ storage_date_start|date:"Y/m/d" }}">
       </input>
     </div>
     <div class="col col-3 col-md-2 col-lg-2">
@@ -96,14 +96,18 @@
 {{ months|json_script:'months' }}
 {{ meal_types|json_script:'meal_types' }}
 {{ date_range|json_script:'date_range' }}
+{{ storage_date_start|json_script:'storage_date_start' }}
 <script>
   var ingredient_ids = JSON.parse($("#ingredient_ids").text())
   var ingredient_ids_length = ingredient_ids.length
   var months = JSON.parse($("#months").text())
   var meal_types = JSON.parse($("#meal_types").text())
+  var date_range = JSON.parse($("#date_range").text())
+
+  var storage_date_start = $('#storage_date_start').text().replace(new RegExp('"', 'g'), "")
+
   var dont_submit = false
 
-  date_range = JSON.parse($("#date_range").text())
 
   function list_consumptions_rapidly() {
     query = {
@@ -154,6 +158,13 @@
 
   });
 
+  $(document).ready(function() {
+    if (get_cookie('storage_date_start') === null) {
+      set_cookies({
+        "storage_date_start": storage_date_start
+      })
+    }
+  });
 
   $(document).ready(function() {
     var last_meal_type = ""
@@ -391,20 +402,20 @@
   });
 
   function list_consumptions() {
-    var storage_date_start = $('#storage_date_start').val()
-    var storage_date_end = $('#storage_date_end').val()
+    var new_storage_date_start = $('#storage_date_start_input').val()
+    var new_storage_date_end = $('#storage_date_end_input').val()
     query = {}
-    if (storage_date_start) {
-      query["storage_date_start"] = storage_date_start
-      set_simple_cookie("storage_date_start", storage_date_start)
+    if (new_storage_date_start) {
+      query["storage_date_start"] = new_storage_date_start
+      set_simple_cookie("storage_date_start", new_storage_date_start)
     } else {
       query["storage_date_start"] = ""
       delete_cookie("storage_date_start")
     }
 
-    if (storage_date_end) {
-      query["storage_date_end"] = storage_date_end
-      set_simple_cookie("storage_date_end", storage_date_end)
+    if (new_storage_date_end) {
+      query["storage_date_end"] = new_storage_date_end
+      set_simple_cookie("storage_date_end", new_storage_date_end)
     } else {
       query["storage_date_end"] = ""
       delete_cookie("storage_date_end")
@@ -420,7 +431,7 @@
     position: absolute;
   }
 
-  #storage_date_start,
+  #storage_date_start_input,
   #storage_date_end {
     text-align: center;
     font-family: Mono;
