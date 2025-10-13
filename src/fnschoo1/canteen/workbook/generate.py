@@ -1611,7 +1611,7 @@ class CanteenWorkBook:
             consumptions += [
                 c
                 for c in ingredient.consumptions.filter(
-                    Q(is_disabled=False)
+                    Q(date_of_using__lte=self.date_end) & Q(is_disabled=False)
                 ).all()
             ]
 
@@ -1625,10 +1625,13 @@ class CanteenWorkBook:
                     inventory_days.append(date_of_using)
             else:
                 inventory_days.append(date_of_using)
+
+        if len(inventory_days) < 1:
+            inventory_days.insert(-1, self.date_end)
+
         inventory_days.insert(
             0, (self.date_start.replace(day=1) - timedelta(days=1))
         )
-
         formed_ingredients = []
         for inventory_day in inventory_days:
             inventory_day_ingredients = []
