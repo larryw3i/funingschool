@@ -8,8 +8,15 @@
   <hr>
   <div class="container">
     <div class="row justify-content-end">
-      <button class="btn btn-success col-md-1 col-lg-1 col-2"
-              onclick="list_consumptions();">{% trans "Refresh" %}</button>
+      <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-2"
+              onclick="list_consumptions_by_week();">{% trans "Consume by Week" %}</button>
+
+      <button class="btn btn-outline-success col-md-1 col-lg-1 col-2"
+              onclick="list_consumptions_rapidly();">{% trans "Rapid Consumption" %}</button>
+
+      <a class="btn btn-success col-md-1 col-lg-1 col-2 mx-2"
+         target="canteen_list_categories"
+         href="{% url "canteen:list_categories" %}">{% trans "Ingredient Categories" %}</a>
 
       <div class="col col-3 col-md-2 col-lg-2">
         <input class="  form-control"
@@ -97,6 +104,24 @@
   var dont_submit = false
 
   date_range = JSON.parse($("#date_range").text())
+
+  function list_consumptions_rapidly() {
+    query = {
+      'by_week': 'false',
+      "rapidly": 'true'
+    }
+    set_cookies(query)
+    update_href(query)
+  }
+
+  function list_consumptions_by_week() {
+    query = {
+      'by_week': 'true',
+      "rapidly": 'false'
+    }
+    set_cookies(query)
+    update_href(query)
+  }
 
   function get_previous_month_date(date = new Date()) {
     const prevMonthDate = new Date(date);

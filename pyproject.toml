@@ -41,7 +41,7 @@ gui=[]
 cli=[]
 
 [project.scripts]
-fnschool-cli = "fnschoo1:main"
+fnschool-cli = "fnschoo1.manage:main"
 
 [build-system]
 requires = [

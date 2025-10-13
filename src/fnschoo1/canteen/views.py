@@ -156,50 +156,149 @@ def split_price(total_price, quantity, prec=2):
     return [[total_price0, quantity0], [total_price1, quantity1]]
 
 
-def get_consumption_ingredients(request):
+@login_required
+def create_consumptions(request, ingredient_id=None):
     date_start = request.GET.get(
         "storage_date_start", None
     ) or request.COOKIES.get("storage_date_start", None)
-    date_end = request.GET.get("storage_date_end", None) or request.COOKIES.get(
-        "storage_date_end", None
-    )
-    ingredients = Ingredient.objects
-    queries = Q()
-    queries = (
-        Q(user=request.user) & Q(is_disabled=False) & Q(is_ignorable=False)
-    )
-    if date_start:
-        date_start = date_parser.parse(date_start).date()
-        queries &= Q(storage_date__gte=date_start)
-    if date_end:
-        date_end = date_parser.parse(date_end).date()
-        queries &= Q(storage_date__lte=date_end)
-
-    if not date_start and not date_end:
-        queries &= Q(quantity__gt=F("total_consumed"))
-        ingredients = ingredients.annotate(
+    if not date_start:
+        ingredients = Ingredient.objects.annotate(
             total_consumed=Coalesce(
                 Sum("consumptions__amount_used"), 0, output_field=IntegerField()
             )
+        ).filter(
+            Q(quantity__gt=F("total_consumed"))
+            & Q(is_disabled=False)
+            & Q(is_ignorable=False)
+            & Q(user=request.user)
         )
+        date_start = ingredients.order_by("storage_date").first().storage_date
 
-    ingredients = ingredients.filter(queries).order_by(
-        "name", "storage_date", "meal_type__name", "category__name"
+    else:
+        date_start = date_parser.parse(date_start).date()
+
+    date_end = request.GET.get("storage_date_end", None) or request.COOKIES.get(
+        "storage_date_end", None
     )
+    if not date_end:
+        today = datetime.now().date()
+        date_end = (
+            today.replace(day=1) + relativedelta(months=2)
+        ) - relativedelta(days=1)
+    else:
+        date_end = date_parser.parse(date_end).date()
 
-    return ingredients
-
-
-def get_date_range(ingredients):
-    date_start = ingredients.order_by("storage_date").first().storage_date
-    today = datetime.now().date()
-    date_end = (today.replace(day=1) + relativedelta(months=2)) - relativedelta(
-        days=1
-    )
     date_range = list(pd.date_range(start=date_start, end=date_end))
     date_range = [d.date() for d in date_range]
 
-    return date_range
+    if ingredient_id:
+        ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
+        planned_consumptions = []
+        consumptions = ingredient.consumptions.filter(
+            Q(is_disabled=False)
+        ).all()
+        consumption_dates = list(set([c.date_of_using for c in consumptions]))
+
+        for per_day in date_range:
+            consumption = None
+            if per_day in consumption_dates:
+                consumptions_per_day = [
+                    c for c in consumptions if c.date_of_using == per_day
+                ]
+                consumption = consumptions_per_day[0]
+                if len(consumptions_per_day) > 1:
+                    for c in consumptions_per_day[1:]:
+                        c.delete()
+
+            else:
+                consumption = Consumption()
+                consumption.ingredient = ingredient
+                consumption.date_of_using = per_day
+
+            if per_day < ingredient.storage_date:
+                consumption.is_disabled = True
+
+            planned_consumptions.append(consumption)
+
+        form_list = []
+        for c in planned_consumptions:
+            form = ConsumptionForm(instance=c)
+            form.fields["date_of_using"].label = ""
+            form_list.append(form)
+
+        return render(
+            request,
+            "canteen/consumption/_create.html",
+            {"form_list": form_list},
+        )
+    by_week = (
+        request.GET.get("by_week", "") or request.COOKIES.get("by_week", "")
+    ) == "true"
+    rapidly = (
+        request.GET.get("rapidly", "") or request.COOKIES.get("rapidly", "")
+    ) == "true" or not by_week
+
+    queries = (
+        Q(storage_date__gte=date_start)
+        & Q(storage_date__lte=date_end)
+        & Q(user=request.user)
+        & Q(is_disabled=False)
+        & Q(is_ignorable=False)
+    )
+    ingredients = Ingredient.objects
+    print("by_week", by_week, "rapidly", rapidly)
+    ingredients = (
+        ingredients.filter(queries).order_by(
+            "name", "storage_date", "meal_type__name", "category__name"
+        )
+        if rapidly
+        else ingredients.filter(queries).order_by(
+            "storage_date", "meal_type__name", "name", "category__name"
+        )
+    )
+
+    ingredients = ingredients.all()
+
+    if not ingredients:
+        return render(
+            request,
+            "canteen/consumption/create.html",
+            {"ingredients": ingredients, "date_range": date_range},
+        )
+
+    ingredients_pinned = []
+    ingredients_unpinned = []
+    categories_top = Category.objects.filter(
+        Q(user=request.user)
+        & Q(pin_to_consumptions_top=True)
+        & Q(is_disabled=False)
+    ).all()
+
+    for i in ingredients:
+        if i.category in categories_top:
+            ingredients_pinned.append(i)
+        else:
+            ingredients_unpinned.append(i)
+
+    ingredients = ingredients_pinned + ingredients_unpinned
+
+    date_range_cp = date_range
+    date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]
+    meal_types = list(set([i.meal_type.name for i in ingredients]))
+    ingredient_ids = [i.id for i in ingredients]
+    months = list(set([d.strftime("%Y-%m") for d in date_range]))
+    months = sorted(months, key=lambda d: int(d.split("-")[1]))
+    return render(
+        request,
+        "canteen/consumption/create.html",
+        {
+            "ingredients": ingredients,
+            "date_range": date_range_cp,
+            "meal_types": meal_types,
+            "ingredient_ids": ingredient_ids,
+            "months": months,
+        },
+    )
 
 
 @login_required
@@ -243,102 +342,6 @@ def new_consumption(request, consumption_id=None):
         return HttpResponse("OK", status=201)
 
     return HttpResponse("Accepted", status=202)
-
-
-@login_required
-def create_consumptions(request, ingredient_id=None):
-    ingredients = get_consumption_ingredients(request)
-    date_range = None
-    if not ingredients:
-        return render(
-            request,
-            "canteen/consumption/create.html",
-            {"ingredients": ingredients, "date_range": date_range},
-        )
-
-    date_range = get_date_range(ingredients)
-    date_end = request.GET.get("storage_date_end", None) or request.COOKIES.get(
-        "storage_date_end", None
-    )
-    if date_end:
-        date_end = date_parser.parse(date_end).date()
-        date_range = [d for d in date_range if d <= date_end]
-
-    if ingredient_id:
-        ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
-        planned_consumptions = []
-        consumptions = ingredient.consumptions.filter(
-            Q(is_disabled=False)
-        ).all()
-        consumption_dates = list(set([c.date_of_using for c in consumptions]))
-
-        for per_day in date_range:
-            consumption = None
-            if per_day in consumption_dates:
-                consumptions_per_day = [
-                    c for c in consumptions if c.date_of_using == per_day
-                ]
-                consumption = consumptions_per_day[0]
-                if len(consumptions_per_day) > 1:
-                    for c in consumptions_per_day[1:]:
-                        c.delete()
-
-            else:
-                consumption = Consumption()
-                consumption.ingredient = ingredient
-                consumption.date_of_using = per_day
-
-            if per_day < ingredient.storage_date:
-                consumption.is_disabled = True
-
-            planned_consumptions.append(consumption)
-
-        form_list = []
-        for c in planned_consumptions:
-            form = ConsumptionForm(instance=c)
-            form.fields["date_of_using"].label = ""
-            form_list.append(form)
-
-        return render(
-            request,
-            "canteen/consumption/_create.html",
-            {"form_list": form_list},
-        )
-
-    ingredients = ingredients.all()
-    ingredients_pinned = []
-    ingredients_unpinned = []
-    categories_top = Category.objects.filter(
-        Q(user=request.user)
-        & Q(pin_to_consumptions_top=True)
-        & Q(is_disabled=False)
-    ).all()
-
-    for i in ingredients:
-        if i.category in categories_top:
-            ingredients_pinned.append(i)
-        else:
-            ingredients_unpinned.append(i)
-
-    ingredients = ingredients_pinned + ingredients_unpinned
-
-    date_range_cp = date_range
-    date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]
-    meal_types = list(set([i.meal_type.name for i in ingredients]))
-    ingredient_ids = [i.id for i in ingredients]
-    months = list(set([d.strftime("%Y-%m") for d in date_range]))
-    months = sorted(months, key=lambda d: int(d.split("-")[1]))
-    return render(
-        request,
-        "canteen/consumption/create.html",
-        {
-            "ingredients": ingredients,
-            "date_range": date_range_cp,
-            "meal_types": meal_types,
-            "ingredient_ids": ingredient_ids,
-            "months": months,
-        },
-    )
 
 
 @login_required()

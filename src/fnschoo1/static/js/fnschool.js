@@ -9,7 +9,16 @@ function get_cookie(name) {
   return null
 }
 function delete_cookie(name) {
-  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/'
+  document.cookie =
+    name +
+    `=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=${window.location.pathname}`
+}
+
+function set_cookies(cookies) {
+  cookies = new Map(Object.entries(cookies))
+  for (var [key, value] of cookies) {
+    set_simple_cookie(key, value)
+  }
 }
 
 function set_simple_cookie(key, value) {
@@ -19,7 +28,7 @@ function set_simple_cookie(key, value) {
   }
   const expiryDate = new Date()
   expiryDate.setFullYear(expiryDate.getFullYear() + 20)
-  document.cookie = `${key}=${value}; expires=${expiryDate.toUTCString()}; path=/`
+  document.cookie = `${key}=${value}; expires=${expiryDate.toUTCString()}; path=${window.location.pathname}`
 }
 function update_href(query) {
   query = new Map(Object.entries(query))
