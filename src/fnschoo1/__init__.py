@@ -6,7 +6,7 @@ import random
 import sys
 from pathlib import Path
 
-__version__ = "20251012.81520.855"
+__version__ = "20251013.80821.836"
 
 FNSCHOOL_PATH = Path(__file__).parent
 if FNSCHOOL_PATH.as_posix() not in sys.path:
@@ -46,7 +46,7 @@ def main():
             if is_windows:
                 os.startfile(local_url)
             else:
-                os.system("open " + local_url)
+                os.system("sleep 5 && open " + local_url)
         except Exception as e:
             print(e)
 

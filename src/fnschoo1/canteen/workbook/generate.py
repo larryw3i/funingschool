@@ -2107,8 +2107,10 @@ class CanteenWorkBook:
 
 
 def get_workbook_zip(request, month):
-    meal_types = MealType.objects.filter(
-        Q(user=request.user) & Q(is_disabled=False)
+    meal_types = MealType.objects.annotate(
+        ingredients_count=Count("ingredients")
+    ).filter(
+        Q(user=request.user) & Q(is_disabled=False) & Q(ingredients_count__gt=0)
     )
 
     zip_buffer = io.BytesIO()
