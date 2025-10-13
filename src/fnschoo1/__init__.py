@@ -46,7 +46,7 @@ def main():
             if is_windows:
                 os.startfile(local_url)
             else:
-                os.system("sleep 5 && open " + local_url)
+                os.system("open " + local_url + "&")
         except Exception as e:
             print(e)
 
