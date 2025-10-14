@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-13 08:05+0000\n"
-"PO-Revision-Date: 2025-10-13 16:07+0800\n"
+"POT-Creation-Date: 2025-10-14 04:47+0000\n"
+"PO-Revision-Date: 2025-10-14 12:47+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -45,9 +45,9 @@ msgstr "简称"
 msgid "Creating Date"
 msgstr "创建日期"
 
-#: canteen/models.py:26 canteen/models.py:46 canteen/models.py:163
+#: canteen/models.py:26 canteen/models.py:46 canteen/models.py:182
 #: canteen/templates/canteen/category/delete.html:33
-#: canteen/templates/canteen/category/list.html:21
+#: canteen/templates/canteen/category/list.html:22
 #: canteen/templates/canteen/meal_type/delete.html:29
 #: canteen/templates/canteen/meal_type/list.html:20
 msgid "Is Disabled"
@@ -65,73 +65,81 @@ msgstr "食材大类名"
 msgid "abbreviation"
 msgstr "简称"
 
-#: canteen/models.py:49
+#: canteen/models.py:54
+msgid "Category Priority"
+msgstr "优先级"
+
+#: canteen/models.py:58
 msgid "Pin to Consumptions Top"
 msgstr "置顶出库"
 
-#: canteen/models.py:62
+#: canteen/models.py:71
 msgid "User"
 msgstr "用户"
 
-#: canteen/models.py:64 canteen/views.py:63
+#: canteen/models.py:73 canteen/views.py:63
 msgid "Storage Date"
 msgstr "入库日期"
 
-#: canteen/models.py:65 canteen/templates/canteen/consumption/create.html:45
+#: canteen/models.py:74 canteen/templates/canteen/consumption/create.html:46
 #: canteen/views.py:73
 msgid "Ingredient Name"
 msgstr "食材名"
 
-#: canteen/models.py:70
+#: canteen/models.py:79
 msgid "Ingredient Meal Type"
 msgstr "餐类"
 
-#: canteen/models.py:76
+#: canteen/models.py:85
 msgid "Ingredient Category"
 msgstr "大类"
 
-#: canteen/models.py:82
+#: canteen/models.py:91
 msgid "Ingredient Quantity"
 msgstr "数量"
 
-#: canteen/models.py:88
+#: canteen/models.py:97
 msgid "Unit Name of Ingredient Quantity"
 msgstr "数量单位"
 
-#: canteen/models.py:94
+#: canteen/models.py:103
 msgid "Ingredient Total Price"
 msgstr "总价"
 
-#: canteen/models.py:98
+#: canteen/models.py:107
 msgid "Is Ingredient Ignorable"
 msgstr "不入库"
 
-#: canteen/models.py:101
+#: canteen/models.py:110
 msgid "Is Ingredient Disabled"
 msgstr "禁用"
 
-#: canteen/models.py:143 canteen/templates/canteen/ingredient/list.html:4
+#: canteen/models.py:162 canteen/templates/canteen/ingredient/list.html:4
 #: canteen/templates/canteen/ingredient/list.html:7
 msgid "Ingredient List"
 msgstr "食材列表"
 
-#: canteen/models.py:154
+#: canteen/models.py:173
 msgid "Ingredient"
 msgstr "食材"
 
-#: canteen/models.py:157
+#: canteen/models.py:176
 msgid "Date"
 msgstr "日期"
 
-#: canteen/models.py:167
+#: canteen/models.py:178
+msgid "Consuming Quantity"
+msgstr "消耗数量"
+
+#: canteen/models.py:186
 msgid "Consumption Record"
 msgstr "消耗记录"
 
-#: canteen/models.py:168
+#: canteen/models.py:187
 msgid "Consumption Records"
 msgstr "消耗记录列表"
 
-#: canteen/models.py:172
+#: canteen/models.py:191
 #, python-brace-format
 msgid "{0} of {1} was consumed on {2} ."
 msgstr "在 {2} 消耗了 {0} 的 {1} 。"
@@ -208,8 +216,8 @@ msgstr "置顶出库"
 
 #: canteen/templates/canteen/category/delete.html:27
 #: canteen/templates/canteen/category/delete.html:36
-#: canteen/templates/canteen/category/list.html:34
-#: canteen/templates/canteen/category/list.html:39
+#: canteen/templates/canteen/category/list.html:35
+#: canteen/templates/canteen/category/list.html:41
 #: canteen/templates/canteen/ingredient/list.html:69
 #: canteen/templates/canteen/ingredient/list.html:74
 #: canteen/templates/canteen/meal_type/delete.html:32
@@ -235,7 +243,7 @@ msgstr ""
 "    "
 
 #: canteen/templates/canteen/category/delete.html:53
-#: canteen/templates/canteen/category/list.html:49
+#: canteen/templates/canteen/category/list.html:51
 #: canteen/templates/canteen/ingredient/delete.html:34
 #: canteen/templates/canteen/ingredient/list.html:87
 #: canteen/templates/canteen/meal_type/delete.html:49
@@ -253,13 +261,17 @@ msgstr "食材大类列表"
 msgid "Add"
 msgstr "添加"
 
-#: canteen/templates/canteen/category/list.html:45
+#: canteen/templates/canteen/category/list.html:21
+msgid "Priority"
+msgstr "优先级"
+
+#: canteen/templates/canteen/category/list.html:47
 #: canteen/templates/canteen/ingredient/list.html:81
 #: canteen/templates/canteen/meal_type/list.html:39
 msgid "Edit"
 msgstr "编辑"
 
-#: canteen/templates/canteen/category/list.html:54
+#: canteen/templates/canteen/category/list.html:56
 msgid "No categories yet."
 msgstr "还没有食材大类。"
 
@@ -296,41 +308,41 @@ msgstr "周消耗"
 msgid "Rapid Consumption"
 msgstr "快消耗"
 
-#: canteen/templates/canteen/consumption/create.html:18
+#: canteen/templates/canteen/consumption/create.html:19
 #: canteen/templates/canteen/ingredient/list.html:28
 msgid "Ingredient Categories"
 msgstr "大类"
 
-#: canteen/templates/canteen/consumption/create.html:23
+#: canteen/templates/canteen/consumption/create.html:24
 msgid "The starting date of storage."
 msgstr "入库的起始日期。"
 
-#: canteen/templates/canteen/consumption/create.html:31
+#: canteen/templates/canteen/consumption/create.html:32
 msgid "The end date of storage."
 msgstr "入库的结束日期。"
 
-#: canteen/templates/canteen/consumption/create.html:37
+#: canteen/templates/canteen/consumption/create.html:38
 msgid "Refresh"
 msgstr "刷新"
 
-#: canteen/templates/canteen/consumption/create.html:46
+#: canteen/templates/canteen/consumption/create.html:47
 msgid "Remaining Quantity"
 msgstr "余量"
 
-#: canteen/templates/canteen/consumption/create.html:66
+#: canteen/templates/canteen/consumption/create.html:67
 #, python-format
 msgid "Storaged on %(storage_date)s ."
 msgstr "于 %(storage_date)s 入库。"
 
-#: canteen/templates/canteen/consumption/create.html:81
+#: canteen/templates/canteen/consumption/create.html:82
 msgid "No ingredient found."
 msgstr "未发现食材。"
 
-#: canteen/templates/canteen/consumption/create.html:88
+#: canteen/templates/canteen/consumption/create.html:89
 msgid "Submit"
 msgstr "提交"
 
-#: canteen/templates/canteen/consumption/create.html:90
+#: canteen/templates/canteen/consumption/create.html:91
 msgid "Generate Spreadsheet"
 msgstr "生成账单"
 
@@ -585,32 +597,32 @@ msgstr "是不用入库的"
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:489
+#: canteen/views.py:493
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:534
+#: canteen/views.py:538
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:546
+#: canteen/views.py:550
 msgid "(2)"
 msgstr "（2）"
 
-#: canteen/views.py:592
+#: canteen/views.py:596
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:612
+#: canteen/views.py:616
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:628
+#: canteen/views.py:632
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:651
+#: canteen/views.py:655
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
 msgstr "（{month}）{affiliation}食堂出入库工作簿"
@@ -1058,7 +1070,7 @@ msgstr "合计"
 msgid "Sub-summary (Non-storage list sheet)"
 msgstr "小计"
 
-#: canteen/workbook/generate.py:2135
+#: canteen/workbook/generate.py:2148
 #, python-brace-format
 msgid "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
 msgstr "（{month}{meal_type}）{affiliation}食堂出入库工作簿"
@@ -1369,11 +1381,6 @@ msgstr "注册"
 #~| msgid "Select a Spreadsheet File"
 #~ msgid "Spreadsheet Files"
 #~ msgstr "选择一个表格文件"
-
-#, fuzzy
-#~| msgid "Consumption Records"
-#~ msgid "Consuming days:"
-#~ msgstr "消耗记录列表"
 
 #, fuzzy, python-brace-format
 #~| msgid "Select a Spreadsheet File"

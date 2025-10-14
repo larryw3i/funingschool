@@ -784,7 +784,6 @@ class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = "canteen/category/list.html"
     context_object_name = "categories"
-    ordering = ["-created_at"]
 
     paginate_by = 10
     paginate_orphans = 2

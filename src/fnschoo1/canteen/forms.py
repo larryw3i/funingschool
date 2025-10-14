@@ -70,9 +70,19 @@ class CategoryForm(forms.ModelForm):
         fields = [
             "name",
             "abbreviation",
+            "priority",
             "pin_to_consumptions_top",
             "is_disabled",
         ]
+        widgets = {
+            "priority": forms.NumberInput(
+                attrs={
+                    "title": _(
+                        "Numbers with smaller values have higher priority."
+                    ),
+                },
+            ),
+        }
 
 
 class MealTypeForm(forms.ModelForm):

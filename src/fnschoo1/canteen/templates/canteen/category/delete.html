@@ -21,6 +21,10 @@
       <dd>
         {{ category.created_at }}
       </dd>
+      <dt>{% trans 'Priority' %}</dt>
+      <dd>
+        {{ category.priority }}
+      </dd>
       <dt>{% trans 'Pin to consumptions top' %}</dt>
       <dd>
         {% if category.pin_to_consumptions_top %}

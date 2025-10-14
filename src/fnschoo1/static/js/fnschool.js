@@ -9,9 +9,7 @@ function get_cookie(name) {
   return null
 }
 function delete_cookie(name) {
-  document.cookie =
-    name +
-    `=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=${window.location.pathname}`
+  document.cookie = name + `=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`
 }
 
 function set_cookies(cookies) {
@@ -28,7 +26,7 @@ function set_simple_cookie(key, value) {
   }
   const expiryDate = new Date()
   expiryDate.setFullYear(expiryDate.getFullYear() + 20)
-  document.cookie = `${key}=${value}; expires=${expiryDate.toUTCString()}; path=${window.location.pathname}`
+  document.cookie = `${key}=${value}; expires=${expiryDate.toUTCString()}; path=/`
 }
 function update_href(query) {
   query = new Map(Object.entries(query))

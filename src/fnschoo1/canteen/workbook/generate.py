@@ -2106,6 +2106,19 @@ class CanteenWorkBook:
         ]:
             set_column_width_in_inches(sheet, col, width)
 
+    def fill_in_food_sheets(self):
+        user = self.request.user
+        date_start = self.date_start
+        date_end = self.date_end
+        meal_type = self.meal_type
+
+        ingredients = Ingredient.objects.filter(
+            Q(is_disabled=False)
+            & Q(is_ignorable=False)
+            & Q(user=user)
+            & Q(meal_type=meal_type)
+        ).all()
+
     def fill_in(self):
         self.fill_in_cover_sheet()
         self.fill_in_storage_sheet()

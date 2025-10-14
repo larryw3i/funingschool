@@ -45,9 +45,21 @@ class Category(models.Model):
     is_disabled = models.BooleanField(
         default=False, verbose_name=_("Is Disabled")
     )
+    priority = models.IntegerField(
+        null=True,
+        blank=True,
+        validators=[
+            MinValueValidator(0),
+        ],
+        verbose_name=_("Category Priority"),
+    )
+
     pin_to_consumptions_top = models.BooleanField(
         default=False, verbose_name=_("Pin to Consumptions Top")
     )
+
+    class Meta:
+        ordering = ["priority"]
 
     def __str__(self):
         return self.name
@@ -110,12 +122,6 @@ class Ingredient(models.Model):
     @property
     def cleaned_consumptions(self):
         consumptions = self.consumptions.all()
-        for c1 in consumptions:
-            for c2 in consumptions:
-                if c1.date_of_using == c2.date_of_using and c1.id != c2.id:
-                    c1.is_disabled = False
-                    c1.save()
-                    c2.delete()
         return consumptions
 
     @property
@@ -127,6 +133,22 @@ class Ingredient(models.Model):
             [c.amount_used for c in consumptions if not c.is_disabled]
         )
         return quantity
+
+    def get_consuming_quantity(self, date_end):
+        consumptions = self.cleaned_consumptions
+        if not consumptions:
+            return 0
+        quantity = sum(
+            [
+                c.amount_used
+                for c in consumptions
+                if not c.is_disabled and c.date_of_using <= date_end
+            ]
+        )
+        return quantity
+
+    def get_remaining_quantity(self, date_end):
+        return self.quantity - self.get_consuming_quantity(date_end)
 
     @property
     def remaining_quantity(self):
@@ -156,7 +178,7 @@ class Consumption(models.Model):
 
     date_of_using = models.DateField(verbose_name=_("Date"))
     amount_used = models.IntegerField(
-        verbose_name="消耗数量",
+        verbose_name=_("Consuming Quantity"),
         validators=[MinValueValidator(0)],
     )
     is_disabled = models.BooleanField(
