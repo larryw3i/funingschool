@@ -6,7 +6,7 @@
     <form onkeydown="if(event.keyCode==13){return false;}"
           name="consumption_form"
           data-is_disabled="{{ form.instance.is_disabled }}"
-          data-amount_used="{{ form.instance.amount_used }}"
+          data-amount_used="{{ form.instance.amount_used|default_if_none:0 }}"
           data-ingredient_unit_price="{{ form.instance.ingredient.unit_price }}"
           data-date_of_using="{{ form.instance.date_of_using|date:"Y-m-d" }}"
           data-ingredient_meal_type="{{ form.instance.ingredient.meal_type }}"

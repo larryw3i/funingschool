@@ -85,8 +85,6 @@
   </table>
 </div>
 <div class="">
-  <button onclick="submit_consumptions();"
-          class="btn btn-submit-consumptions btn-primary float-start">{% trans "Submit" %}</button>
   <button onclick="generate_spreadsheet();"
           class="btn btn-submit-consumptions btn-success float-end">{% trans "Generate Spreadsheet" %}</button>
   <select class="workbook-month-select form-select float-end mx-2"
@@ -180,23 +178,53 @@
     });
   });
 
+  function submit_consumption_form(element) {
+    var element = $(element)
+    var form = $(element.closest("form"));
+    var formData = new FormData(form[0]);
+
+    $.ajax({
+      url: form.attr('action'),
+      method: 'POST',
+      data: formData,
+      processData: false,
+      contentType: false,
+      success(res) {
+        if (res == "OK") {
+          element.css({
+            'border': "5px solid green",
+            "border-radius": "10px"
+          })
+          form.data("amount_used", element.val())
+        }
+      },
+      error(xhr) {
+        element.css({
+          'border': "5px solid red",
+          "border-radius": "10px"
+        })
+      }
+    });
+
+  }
+
   function amount_used_input_blur(element) {
     element = $(element)
     var ingredient_quantity = element.closest('tr').data("ingredient_quantity")
     ingredient_quantity = parseInt(ingredient_quantity) || 0
-    var amount_used = element.closest("form").data("amount_used")
-    var new_amount_used = $.trim(element.val())
+    var $consumption_form = element.closest("form")
+    var amount_used = parseInt($consumption_form.data("amount_used")) || 0
+    var new_amount_used = parseInt($.trim(element.val())) || 0
     new_amount_used = parseInt(new_amount_used) || 0
     if (new_amount_used < 0) {
-      element.val('0')
+      element.val('')
       new_amount_used = 0
     }
-    if (new_amount_used === 0 && amount_used == "None") {
+    if (new_amount_used === 0 && amount_used === 0) {
       element.val('')
     }
     if (amount_used > 0 && new_amount_used === 0) {
       element.val('0')
-      new_amount_used = 0
     }
     var $tds = element.parent().parent().siblings("td")
     var $amount_used_inputs = $tds.find("form input[name='amount_used']")
@@ -207,7 +235,11 @@
     });
     if ((total_consumed + new_amount_used) > ingredient_quantity) {
       var remaining_quantity = total_consumed < ingredient_quantity ? (ingredient_quantity - total_consumed) : 0
-      element.val(remaining_quantity)
+      if (remaining_quantity === 0) {
+        element.val('')
+      } else {
+        element.val(remaining_quantity)
+      }
       new_amount_used = remaining_quantity
     }
     total_consumed = total_consumed + new_amount_used
@@ -215,7 +247,11 @@
     $(`td[name='remaining_${ingredient_id}']`).text(`${ingredient_quantity}-${total_consumed}=${ingredient_quantity-total_consumed}`)
     element.closest("tr").find('.ingredient-progress').css('width', `${parseInt((ingredient_quantity-total_consumed)*100/ingredient_quantity)}%`)
     var date_of_using = element.closest("form").data("date_of_using")
+
     update_header(date_of_using)
+    if (new_amount_used != amount_used) {
+      submit_consumption_form(element, new_amount_used)
+    }
   }
 
   function update_header(date_of_using) {
@@ -321,69 +357,8 @@
   });
 
   function generate_spreadsheet() {
-    submit_consumptions(function() {
-      var month = $(".workbook-month-select").val()
-      window.open(`/canteen/generate_spreadsheet/${month}`, '_blank');
-    });
-
-  }
-
-  function submit_consumptions(fn) {
-    if (dont_submit) {
-      return false
-    } else {
-      dont_submit = true
-    }
-
-    var consumption_forms = $('form[name="consumption_form"]')
-    var requests = [];
-    var progress = 0
-    consumption_forms_cp = []
-    consumption_forms.each(function(index, element) {
-      var form = $(element);
-      var amount_used_init = parseInt(form.data("amount_used")) || 0
-      var amount_used_new = parseInt(form.find("input[name='amount_used']").val()) || 0
-      if (form.data("is_disabled") == "True") {
-        return true;
-      }
-      if (form.find('input[name="amount_used"]').val().length < 1) {
-        return true;
-      }
-      if (amount_used_new == amount_used_init) {
-        return true;
-      }
-      consumption_forms_cp.push(form)
-    });
-
-    consumption_forms = consumption_forms_cp
-    var consumption_forms_length = consumption_forms.length
-    $(consumption_forms).each(function(index, element) {
-      form = $(element)
-      requests.push(
-        $.ajax({
-          url: form.attr('action'),
-          type: form.attr('method') || 'POST',
-          data: form.serialize(),
-          success: function(response) {
-            progress += 1
-            var footer_progressbar = $('.progress-footer')
-            if (footer_progressbar) {
-              var width = `${parseInt(progress*100/consumption_forms_length)}%`
-              $(footer_progressbar).css("width", width)
-            }
-          }
-        }).catch(function(error) {
-          return erroe;
-        }));
-    });
-    $.when.apply($, requests)
-      .done(function() {
-        if (fn != undefined) {
-          fn()
-        }
-        location.reload();
-      })
-      .fail(function() {});
+    var month = $(".workbook-month-select").val()
+    window.open(`/canteen/generate_spreadsheet/${month}`, 'generate_spreadsheet');
   }
 
   function set_consumptions_table_size() {

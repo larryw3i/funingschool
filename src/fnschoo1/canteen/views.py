@@ -306,19 +306,19 @@ def create_consumptions(request, ingredient_id=None):
 @require_POST
 def new_consumption(request, consumption_id=None):
     form = None
+
+    posted_date_of_using = date_parser.parse(request.POST.get("date_of_using"))
+    posted_amount_used = request.POST.get("amount_used")
+
     if consumption_id:
         consumption = Consumption.objects.filter(
             Q(pk=consumption_id)
             & Q(ingredient__user=request.user)
+            & Q(date_of_using=posted_date_of_using)
             & Q(is_disabled=False)
         ).first()
         if consumption:
-
-            posted_amount_used = request.POST.get("amount_used")
-            if (
-                posted_amount_used.replace(".", "").isnumeric()
-                and Decimal(posted_amount_used).is_zero()
-            ):
+            if Decimal(posted_amount_used).is_zero():
                 consumption.delete()
                 return HttpResponse("OK", status=201)
 
@@ -327,13 +327,24 @@ def new_consumption(request, consumption_id=None):
             return HttpResponse("Accepted", status=202)
 
     else:
+        ingredient_id = request.POST.get("ingredient")
         ingredient = Ingredient.objects.filter(
-            Q(user=request.user) & Q(pk=request.POST.get("ingredient"))
+            Q(user=request.user) & Q(pk=ingredient_id)
         ).first()
         if not ingredient:
             return HttpResponse("Accepted", status=202)
 
-        consumption = Consumption()
+        consumption = Consumption.objects.filter(
+            Q(date_of_using=posted_date_of_using)
+            & Q(ingredient__id=ingredient_id)
+        ).first()
+
+        if not consumption:
+            consumption = Consumption()
+        elif Decimal(posted_amount_used).is_zero():
+            consumption.delete()
+            return HttpResponse("OK", status=201)
+
         consumption.ingredient = ingredient
         form = ConsumptionForm(request.POST, instance=consumption)
 

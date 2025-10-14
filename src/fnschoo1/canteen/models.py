@@ -189,6 +189,12 @@ class Consumption(models.Model):
         verbose_name = _("Consumption Record")
         verbose_name_plural = _("Consumption Records")
         ordering = ["-date_of_using"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["ingredient", "date_of_using"],
+                name="unique_ingredient_date_of_using",
+            )
+        ]
 
     def __str__(self):
         return _("{0} of {1} was consumed on {2} .").format(
