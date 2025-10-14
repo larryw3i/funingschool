@@ -880,7 +880,10 @@ class CanteenWorkBook:
 
                 split_dated_consumptions = sorted(
                     split_dated_consumptions,
-                    key=lambda i: (i.ingredient.category.name),
+                    key=lambda c: (
+                        c.ingredient.category.priority,
+                        c.ingredient.category.name,
+                    ),
                 )
 
                 consumption_date_index = sub_consumption_num
@@ -1234,7 +1237,8 @@ class CanteenWorkBook:
                 ]
 
                 split_dated_ingredients = sorted(
-                    split_dated_ingredients, key=lambda i: (i.category.name)
+                    split_dated_ingredients,
+                    key=lambda i: (i.category.priority, i.category.name),
                 )
 
                 storage_date_index = sub_storage_num

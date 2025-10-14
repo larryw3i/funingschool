@@ -157,5 +157,7 @@ src/fnschool/db.cp
 # venv*
 venv*
 
+# *.out.*
+*.out.*
 
 # The end.

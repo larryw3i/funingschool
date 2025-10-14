@@ -39,7 +39,7 @@ def main():
     sys.argv[0] = "manage.py"
 
     if len(sys.argv) < 2:
-        local_port = str(random.randint(8080, 65530))
+        local_port = "8230"
         local_url = "http://127.0.0.1:" + local_port
         sys.argv.append("runserver")
         sys.argv.append(str(local_port))

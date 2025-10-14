@@ -14,6 +14,20 @@ fi
 
 . ${venv_dir}/bin/activate
 
+generate_code_txt() {
+    code_out_path=${project_dir}/code.out.txt
+    echo "" >${code_out_path}
+    files=$(
+        find src \
+            -type d \( -name ".egg-info" -o -name "*.egg-info" \) -prune \
+            -o -type f \( -name "*.py" -o -name "*.po" -o -name "*.js" ! -name "*.min.js" \) -print
+    )
+    for f in ${files[@]}; do
+        echo "文件：${f}" >>${code_out_path}
+        cat ${f} >>${code_out_path}
+    done
+}
+
 pack() {
     if [[ ! -f $(which twine) ]]; then
         pip install -U setuptools wheel build twine
