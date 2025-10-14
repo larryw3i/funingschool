@@ -47,7 +47,13 @@
           <th class="">{% trans "Remaining Quantity" %}</th>
         {% endif %}
         {% for date_h in date_range %}
-          <th data-date_of_using="{{ date_h }}" class="consumption-date">{{ date_h }}</th>
+          <th data-date_of_using="{{ date_h }}" class="consumption-date">
+            {{ date_h }}
+            <br />
+            |
+            <br />
+            |
+          </th>
         {% empty %}
           <th></th>
         {% endfor %}
