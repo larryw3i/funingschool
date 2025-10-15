@@ -1826,7 +1826,14 @@ class CanteenWorkBook:
                         _(
                             "{meal_type} ({category}, Checked/Storaged at {storage_date})"
                         ).format(
-                            meal_type=ingredient.meal_type,
+                            meal_type=(
+                                (
+                                    ingredient.meal_type.abbreviation
+                                    or ingredient.meal_type.name
+                                )
+                                if ingredient.meal_type
+                                else ""
+                            ),
                             category=ingredient.category,
                             storage_date=ingredient.storage_date,
                         ),
@@ -2151,13 +2158,16 @@ def get_workbook_zip(request, month):
                 _(
                     "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
                 ).format(
-                    meal_type=meal_type.abbreviation or meal_type.name,
+                    meal_type=(
+                        (meal_type.abbreviation or meal_type.name)
+                        if meal_type
+                        else ""
+                    ),
                     month=month.replace("-", ""),
                     affiliation=request.user.affiliation,
                 )
                 + ".xlsx"
             )
-            # filename = escape_uri_path(filename)
 
             wb = CanteenWorkBook(request, month, meal_type).fill_in()
             excel_buffer = io.BytesIO()
