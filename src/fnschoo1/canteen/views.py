@@ -246,7 +246,7 @@ def create_consumptions(request, ingredient_id=None):
         & Q(is_ignorable=False)
     )
     ingredients = Ingredient.objects
-    print("by_week", by_week, "rapidly", rapidly)
+
     ingredients = (
         ingredients.filter(queries).order_by(
             "name", "storage_date", "meal_type__name", "category__name"

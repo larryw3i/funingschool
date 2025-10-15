@@ -907,7 +907,9 @@ class CanteenWorkBook:
 
             title_cell_row_num = row_num
             title_cell = sheet.cell(title_cell_row_num, 1)
-            title_cell.value = _("Storage List (Storage Sheet)")
+            title_cell.value = _(
+                "Consumption List Title (Consumption List Sheet)"
+            )
             title_cell.alignment = self.center_alignment
             title_cell.font = self.font_20_bold
             sheet.merge_cells(f"A{title_cell_row_num}:H{title_cell_row_num}")
@@ -1177,7 +1179,7 @@ class CanteenWorkBook:
         ).all()
         ingredient_row_height = 0.18
         ingredient_rows_height = ingredient_rows_count * 0.18
-        storage_dates = list(set([i.storage_date for i in ingredients]))
+        storage_dates = sorted(list(set([i.storage_date for i in ingredients])))
 
         storaged_ingredients = []
         for storage_date in storage_dates:
