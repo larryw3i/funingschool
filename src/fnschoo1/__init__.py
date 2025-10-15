@@ -6,4 +6,4 @@ import random
 import sys
 from pathlib import Path
 
-__version__ = "20251014.81348.830"
+__version__ = "20251015.80844.859"
