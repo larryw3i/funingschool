@@ -23,7 +23,7 @@ generate_code_txt() {
             -o -type f \( -name "*.py" -o -name "*.po" -o -name "*.js" ! -name "*.min.js" \) -print
     )
     for f in ${files[@]}; do
-        echo "文件：${f}" >>${code_out_path}
+        echo "File: ${f}" >>${code_out_path}
         cat ${f} >>${code_out_path}
     done
 }

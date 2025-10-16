@@ -56,7 +56,16 @@
     <tbody>
       {% for ingredient in page_obj %}
         <tr>
-          <th scope="row">{{ forloop.counter }}</th>
+          <th scope="row">
+            <div class="form-check">
+              <input type="checkbox"
+                     class="form-check-input"
+                     id="ingredient_free_nark_{{ ingredient.id }}"
+                     title="{% trans 'It helps you check the ingredients.' %}" />
+              <label class="form-check-label"
+                     for="ingredient_free_nark_{{ ingredient.id }}">{{ forloop.counter }}</label>
+            </div>
+          </th>
           <td>{{ ingredient.storage_date }}</td>
           <td>{{ ingredient.name }}</td>
           <td>{{ ingredient.meal_type }}</td>
