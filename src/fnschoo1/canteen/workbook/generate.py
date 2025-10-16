@@ -2166,7 +2166,12 @@ class CanteenWorkBook:
             & Q(meal_type=meal_type)
         ).all()
         ingredients = [
-            i for i in ingredients if i.get_remaining_quantity(date_start) > 0
+            i
+            for i in ingredients
+            if i.get_remaining_quantity(
+                (date_start + timedelta(days=-1)).date()
+            )
+            > 0
         ]
 
         ingredient_names = list(set([i.name for i in ingredients]))
@@ -2178,7 +2183,11 @@ class CanteenWorkBook:
             year_ingredient0 = year_ingredients[0]
             for month_index in range(12):
                 month = month_index + 1
+
                 ___, month_days = calendar.monthrange(year, month)
+                month_day_1 = date(year, month, 1)
+                month_day_n1 = date(year, month, month_days)
+
                 row_num = (month_days + 8) * month_index
                 title_row_num = row_num + 1
                 title_cell = sheet.cell(title_row_num, 1)
@@ -2319,9 +2328,10 @@ class CanteenWorkBook:
                     else _("Surplus for last year")
                 )
 
-                date_day_1 = date(year, month, 1)
+                date_day_1 = month_day_1
+                _date_day_1 = (date_day_1 + timedelta(days=-1)).date()
+
                 if any([i.storage_date < date_day_1 for i in year_ingredients]):
-                    _date_day_1 = (date_day_1 + timedelta(days=-1)).date()
                     remaining_quantity_last_month = sum(
                         [
                             i.get_remaining_quantity(_date_day_1)
@@ -2354,6 +2364,12 @@ class CanteenWorkBook:
                         f"{unit_price:.{decimal_prec}f}",
                     )
 
+                month_ingredients = [
+                    i
+                    for i in year_ingredients
+                    if i.storage_date.month <= month
+                    and i.get_remaining_quantity(_date_day_1) > 0
+                ]
                 storage_dates = sorted(
                     list(
                         set(
@@ -2374,9 +2390,34 @@ class CanteenWorkBook:
                 consumption_dates = sorted(consumption_dates)
 
                 for day_index in range(month_days):
+                    day = date(year, month, day_index + 1)
                     ingredient_row_num = (
                         month_surplus_header_row_num + 1 + day_index
                     )
+                    storage_quantity = sum(
+                        [
+                            i.quantity
+                            for i in month_ingredients
+                            if i.storage_date == day
+                        ]
+                    )
+                    storage_total_price = sum(
+                        [
+                            i.total_price
+                            for i in month_ingredients
+                            if i.storage_date == day
+                        ]
+                    )
+                    storage_unit_price = Decimal(
+                        str(storage_total_price)
+                    ) / Decimal(str(storage_quantity))
+                    storage_unit_price = (
+                        f"{storage_unit_price:.{decimal_prec}f}"
+                    )
+
+                    sheet.cell(ingredient_row_num, 4, storage_quantity)
+                    sheet.cell(ingredient_row_num, 5, storage_unit_price)
+                    sheet.cell(ingredient_row_num, 6, storage_total_price)
 
     def fill_in(self):
         self.fill_in_cover_sheet()
