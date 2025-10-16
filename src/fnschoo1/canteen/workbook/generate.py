@@ -2181,6 +2181,12 @@ class CanteenWorkBook:
                 i for i in ingredients if i.name == ingredient_name
             ]
             year_ingredient0 = year_ingredients[0]
+
+            year_storage_quantity = Decimal("0")
+            year_storage_total_price = Decimal("0.0")
+            year_consumption_quantity = Decimal("0")
+            year_consumption_total_price = Decimal("0.0")
+
             for month_index in range(12):
                 month = month_index + 1
 
@@ -2321,8 +2327,10 @@ class CanteenWorkBook:
                     total_price_header_cell.border = self.thin_border
 
                 month_surplus_header_row_num = month_header_row_num + 1
-                month_surplus_cell = sheet.cell(month_surplus_header_row_num, 3)
-                month_surplus_cell.value = (
+                month_surplus_header_cell = sheet.cell(
+                    month_surplus_header_row_num, 3
+                )
+                month_surplus_header_cell.value = (
                     _("Surplus for last month")
                     if month > 1
                     else _("Surplus for last year")
@@ -2388,6 +2396,11 @@ class CanteenWorkBook:
                             consumption_dates.append(c.date_of_using)
 
                 consumption_dates = sorted(consumption_dates)
+
+                month_storage_quantity = Decimal("0")
+                month_storage_total_price = Decimal("0.0")
+                month_consumption_quantity = Decimal("0")
+                month_consumption_total_price = Decimal("0.0")
 
                 for day_index in range(month_days):
                     day = date(year, month, day_index + 1)
@@ -2485,6 +2498,67 @@ class CanteenWorkBook:
                         )
 
                     sheet.cell(ingredient_row_num, 13, num_value)
+
+                    month_storage_quantity += storage_quantity
+                    month_storage_total_price += storage_total_price
+                    month_consumption_quantity += consumption_quantity
+                    month_consumption_total_price += consumption_total_price
+
+                    year_storage_quantity += storage_quantity
+                    year_storage_total_price += storage_total_price
+                    year_consumption_quantity += consumption_quantity
+                    year_consumption_total_price += consumption_total_price
+
+                for row_index in range(
+                    month_surplus_header_row_num,
+                    month_surplus_header_row_num + month_days + 2 + 1,
+                ):
+                    for col_index in range(1, 13 + 1):
+                        cell = sheet.cell(row_index, col_index)
+                        cell.font = self.font_12
+                        cell.alignment = self.center_alignment
+                        cell.border = self.thin_border
+
+                month_summary_row_num = year_header_row_num + month_days + 1
+                year_accumulation_row_num = month_summary_row_num + 1
+
+                sheet.cell(month_summary_row_num, 3, _("Monthly Summary"))
+                sheet.cell(month_summary_row_num, 4, month_storage_quantity)
+                sheet.cell(month_summary_row_num, 6, month_storage_total_price)
+                sheet.cell(month_summary_row_num, 7, month_consumption_quantity)
+                sheet.cell(
+                    month_summary_row_num, 9, month_consumption_total_price
+                )
+
+                sheet.cell(year_accumulation_row_num, 3, _("Year Accumulation"))
+                sheet.cell(year_accumulation_row_num, 4, year_storage_quantity)
+                sheet.cell(
+                    year_accumulation_row_num, 6, year_storage_total_price
+                )
+                sheet.cell(
+                    year_accumulation_row_num, 7, year_consumption_quantity
+                )
+                sheet.cell(
+                    year_accumulation_row_num,
+                    9,
+                    year_consumption_total_price,
+                )
+
+                note_row_num = year_accumulation_row_num + 1
+                sheet.cell(
+                    note_row_num,
+                    2,
+                    (
+                        _(
+                            "Note: The 'Principal Canteen Material Storage and Outbound Ledger' is registered on a daily basis based on the storage and outbound receipts."
+                        )
+                        if self.is_school
+                        else _(
+                            "Note: The 'Affiliation Canteen Material Storage and Outbound Ledger' is registered on a daily basis based on the storage and outbound receipts."
+                        )
+                    ),
+                )
+                sheet.merge_cells(f"B{note_row_num}:M{note_row_num}")
 
     def fill_in(self):
         self.fill_in_cover_sheet()
