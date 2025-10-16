@@ -91,9 +91,6 @@
   </table>
 </div>
 <div class="">
-  <button id="body_mp0_trigger"
-          onclick="set_body_to_mp0();"
-          class="btn btn-submit-consumptions btn-success float-end">||</button>
   <button onclick="generate_spreadsheet();"
           class="btn btn-submit-consumptions btn-success float-end">{% trans "Generate Spreadsheet" %}</button>
   <select class="workbook-month-select form-select float-end mx-2"
@@ -114,27 +111,6 @@
   var storage_date_start = $('#storage_date_start').text().replace(new RegExp('"', 'g'), "")
 
   var dont_submit = false
-
-  $(document).ready(function() {
-    var body_mp0_cookie = get_cookie("body_mp0")
-    if (body_mp0_cookie == "" || body_mp0_cookie == null) {
-      $("#body_mp0_trigger").html("&lt;")
-    } else {
-      $("#body_mp0_trigger").html("&gt;")
-    }
-  });
-
-  function set_body_to_mp0() {
-    if ($('body').hasClass("m-0")) {
-      set_simple_cookie("body_mp0", "")
-      $("#body_mp0_trigger").html("&gt;")
-      $('body').removeClass("m-0 p-0");
-    } else {
-      set_simple_cookie("body_mp0", "1")
-      $('#body_mp0_trigger').html("&lt;")
-      $('body').addClass("m-0 p-0");
-    }
-  }
 
   function list_consumptions_rapidly() {
     query = {
