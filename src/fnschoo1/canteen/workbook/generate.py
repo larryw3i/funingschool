@@ -2319,6 +2319,65 @@ class CanteenWorkBook:
                     else _("Surplus for last year")
                 )
 
+                date_day_1 = date(year, month, 1)
+                if any([i.storage_date < date_day_1 for i in year_ingredients]):
+                    _date_day_1 = (date_day_1 + timedelta(days=-1)).date()
+                    remaining_quantity_last_month = sum(
+                        [
+                            i.get_remaining_quantity(_date_day_1)
+                            for i in year_ingredients
+                        ]
+                    )
+                    sheet.cell(
+                        month_surplus_header_row_num,
+                        4,
+                        remaining_quantity_last_month,
+                    )
+
+                    remaining_total_price_last_month = sum(
+                        [
+                            i.unit_price * i.get_remaining_quantity(_date_day_1)
+                            for i in year_ingredients
+                        ]
+                    )
+                    sheet.cell(
+                        month_surplus_header_row_num,
+                        6,
+                        remaining_total_price_last_month,
+                    )
+                    unit_price = Decimal(
+                        str(remaining_total_price_last_month)
+                    ) / Decimal(str(remaining_quantity_last_month))
+                    sheet.cell(
+                        month_surplus_header_row_num,
+                        5,
+                        f"{unit_price:.{decimal_prec}f}",
+                    )
+
+                storage_dates = sorted(
+                    list(
+                        set(
+                            [
+                                i.storage_date
+                                for i in year_ingredients
+                                if i.storage_date.month == month
+                            ]
+                        )
+                    )
+                )
+                consumption_dates = []
+                for i in year_ingredients:
+                    for c in i.consumptions.filter(is_disabled=False).all():
+                        if not c.date_of_using in consumption_dates:
+                            consumption_dates.append(c.date_of_using)
+
+                consumption_dates = sorted(consumption_dates)
+
+                for day_index in range(month_days):
+                    ingredient_row_num = (
+                        month_surplus_header_row_num + 1 + day_index
+                    )
+
     def fill_in(self):
         self.fill_in_cover_sheet()
         self.fill_in_storage_sheet()
