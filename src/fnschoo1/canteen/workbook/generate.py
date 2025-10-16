@@ -512,7 +512,7 @@ class CanteenWorkBook:
                 & Q(category__is_disabled=False)
                 & Q(is_disabled=False)
                 & Q(is_ignorable=False)
-            ).all()
+            ).distinct()
 
             total_price_cell = sheet.cell(row_num, 2)
             total_price_consumed = Decimal("0.0")
@@ -546,7 +546,7 @@ class CanteenWorkBook:
             & Q(category__is_disabled=False)
             & Q(is_disabled=False)
             & Q(is_ignorable=False)
-        ).all()
+        ).distinct()
 
         summary_row_num = len(categories) + header_row_num + 1
         summary_total_price = Decimal("0.0")
@@ -582,7 +582,9 @@ class CanteenWorkBook:
         handler_row_num = summary_row_num + 1
         handler_cell = sheet.cell(handler_row_num, 1)
         handler_cell.border = self.thin_border
-        handler_cell.value = _("Handler:")
+        handler_cell.value = _("Handler:{handler}").format(
+            handler=user.username
+        )
         sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
         set_row_height_in_inches(sheet, handler_row_num, 0.32)
 
