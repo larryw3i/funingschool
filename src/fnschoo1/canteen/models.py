@@ -186,6 +186,7 @@ class Consumption(models.Model):
     )
 
     class Meta:
+
         verbose_name = _("Consumption Record")
         verbose_name_plural = _("Consumption Records")
         ordering = ["-date_of_using"]

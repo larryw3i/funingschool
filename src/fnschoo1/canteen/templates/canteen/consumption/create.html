@@ -49,10 +49,10 @@
         {% for date_h in date_range %}
           <th data-date_of_using="{{ date_h }}" class="consumption-date">
             {{ date_h }}
-            <br />
-            |
-            <br />
-            |
+            {% for meal_type in meal_types %}
+              <br />
+              |
+            {% endfor %}
           </th>
         {% empty %}
           <th></th>
@@ -75,7 +75,7 @@
             <div class='ingredient-progress'
                  style="width:{% widthratio ingredient.remaining_quantity ingredient.quantity 100 %}%"></div>
             {{ ingredient.name }}
-            {% if ingredient.meal_type %}
+            {% if ingredient.meal_type != meal_type_name_0 %}
               <br />
               ({{ ingredient.meal_type }})
             {% endif %}
@@ -91,6 +91,9 @@
   </table>
 </div>
 <div class="">
+  <button id="body_mp0_trigger"
+          onclick="set_body_to_mp0();"
+          class="btn btn-submit-consumptions btn-success float-end">||</button>
   <button onclick="generate_spreadsheet();"
           class="btn btn-submit-consumptions btn-success float-end">{% trans "Generate Spreadsheet" %}</button>
   <select class="workbook-month-select form-select float-end mx-2"
@@ -112,6 +115,26 @@
 
   var dont_submit = false
 
+  $(document).ready(function() {
+    var body_mp0_cookie = get_cookie("body_mp0")
+    if (body_mp0_cookie == "" || body_mp0_cookie == null) {
+      $("#body_mp0_trigger").html("&lt;")
+    } else {
+      $("#body_mp0_trigger").html("&gt;")
+    }
+  });
+
+  function set_body_to_mp0() {
+    if ($('body').hasClass("m-0")) {
+      set_simple_cookie("body_mp0", "")
+      $("#body_mp0_trigger").html("&gt;")
+      $('body').removeClass("m-0 p-0");
+    } else {
+      set_simple_cookie("body_mp0", "1")
+      $('#body_mp0_trigger').html("&lt;")
+      $('body').addClass("m-0 p-0");
+    }
+  }
 
   function list_consumptions_rapidly() {
     query = {

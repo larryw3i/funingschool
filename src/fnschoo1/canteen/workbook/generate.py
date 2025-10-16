@@ -1087,7 +1087,22 @@ class CanteenWorkBook:
                     )
                     last_category = consumption.ingredient.category
 
-                sheet.cell(consumption_row_num, 2, consumption.ingredient.name)
+                ingredient_name_cell = sheet.cell(consumption_row_num, 2)
+                ingredient_name_cell.value = consumption.ingredient.name
+                if consumption.ingredient.name:
+                    ingredient_name_cell.comment = Comment(
+                        _(
+                            "{meal_type}({category}, Storaged/Checked at {storage_date})."
+                        ).format(
+                            meal_type=consumption.ingredient.meal_type,
+                            category=consumption.ingredient.category,
+                            storage_date=consumption.ingredient.storage_date.strftime(
+                                "%Y.%m.%d"
+                            ),
+                        ),
+                        user.username,
+                    )
+
                 sheet.cell(
                     consumption_row_num,
                     3,
@@ -1097,8 +1112,8 @@ class CanteenWorkBook:
                     consumption_row_num,
                     4,
                     (
-                        consumption.ingredient.quantity
-                        if consumption.ingredient.quantity
+                        consumption.amount_used
+                        if consumption.ingredient.name
                         else ""
                     ),
                 )
@@ -1107,7 +1122,7 @@ class CanteenWorkBook:
                     5,
                     (
                         consumption.ingredient.unit_price
-                        if consumption.ingredient.unit_price
+                        if consumption.ingredient.name
                         else ""
                     ),
                 )
@@ -1117,8 +1132,7 @@ class CanteenWorkBook:
                     (
                         consumption.ingredient.unit_price
                         * consumption.amount_used
-                        if consumption.ingredient.unit_price
-                        and consumption.amount_used
+                        if consumption.ingredient.name
                         else ""
                     ),
                 )
@@ -1946,6 +1960,7 @@ class CanteenWorkBook:
         category_ingredients = []
         for category in categories:
             _ingredients = [i for i in ingredients if i.category == category]
+            _ingredients = sorted(_ingredients, key=lambda i: (i.storage_date))
             split_count = math.ceil(len(_ingredients) / ingredient_rows_count)
             for i in range(0, len(_ingredients), ingredient_rows_count):
                 _split_ingredients = _ingredients[i : i + ingredient_rows_count]
@@ -1968,9 +1983,6 @@ class CanteenWorkBook:
                         )
                     ]
 
-                _split_ingredients = sorted(
-                    _split_ingredients, key=lambda i: (i.storage_date)
-                )
                 category_ingredients.append([category, _split_ingredients])
 
         for index, (category, c_ingredients) in enumerate(category_ingredients):
@@ -2151,6 +2163,8 @@ class CanteenWorkBook:
 
 
 def get_workbook_zip(request, month):
+    from ..views import meal_type_name_0
+
     meal_types = MealType.objects.annotate(
         ingredients_count=Count("ingredients")
     ).filter(
@@ -2166,7 +2180,7 @@ def get_workbook_zip(request, month):
                 ).format(
                     meal_type=(
                         (meal_type.abbreviation or meal_type.name)
-                        if meal_type
+                        if not meal_type.name == meal_type_name_0
                         else ""
                     ),
                     month=month.replace("-", ""),

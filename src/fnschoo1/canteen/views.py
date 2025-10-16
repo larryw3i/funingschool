@@ -57,6 +57,9 @@ from .forms import (
 from .models import Category, Consumption, Ingredient, MealType
 
 # Create your views here.
+
+meal_type_name_0 = _("Meal type 0")
+
 decimal_prec = getattr(settings, "DECIMAL_PREC", 2)
 
 storage_date_header = (
@@ -197,6 +200,15 @@ def create_consumptions(request, ingredient_id=None):
         consumptions = ingredient.consumptions.filter(
             Q(is_disabled=False)
         ).all()
+
+        consumptions_len = len(consumptions)
+        for c_index in range(consumptions_len):
+            consumption = consumptions[c_index]
+            for c0_index in range(c_index + 1, consumptions_len):
+                consumption0 = consumptions[c0_index]
+                if consumption.date_of_using == consumption0.date_of_using:
+                    consumption.delete()
+
         consumption_dates = list(set([c.date_of_using for c in consumptions]))
 
         for per_day in date_range:
@@ -206,9 +218,6 @@ def create_consumptions(request, ingredient_id=None):
                     c for c in consumptions if c.date_of_using == per_day
                 ]
                 consumption = consumptions_per_day[0]
-                if len(consumptions_per_day) > 1:
-                    for c in consumptions_per_day[1:]:
-                        c.delete()
 
             else:
                 consumption = Consumption()
@@ -298,6 +307,7 @@ def create_consumptions(request, ingredient_id=None):
             "ingredient_ids": ingredient_ids,
             "months": months,
             "storage_date_start": date_start,
+            "meal_type_name_0": meal_type_name_0,
         },
     )
 
@@ -508,6 +518,11 @@ def create_ingredients(request):
             for index, row in df.iterrows():
                 category_name = row[category_header[0]]
                 meal_type_name = row[meal_type_header[0]]
+                meal_type_name = (
+                    meal_type_name_0
+                    if meal_type_name is np.nan
+                    else meal_type_name
+                )
 
                 category = Category.objects.filter(
                     Q(name=category_name) & Q(user=request.user)
