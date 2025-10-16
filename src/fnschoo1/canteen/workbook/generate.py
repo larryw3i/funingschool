@@ -509,13 +509,19 @@ class CanteenWorkBook:
                     )
                 )
                 & Q(meal_type=self.meal_type)
+                & Q(category__is_disabled=False)
                 & Q(is_disabled=False)
                 & Q(is_ignorable=False)
-            ).distinct()
+            ).all()
+
             total_price_cell = sheet.cell(row_num, 2)
             total_price_consumed = Decimal("0.0")
             for i in ingredients:
-                consumptions = i.consumptions.filter(is_disabled=False).all()
+                consumptions = i.consumptions.filter(
+                    Q(is_disabled=False)
+                    & Q(date_of_using__lte=self.date_end)
+                    & Q(date_of_using__gte=self.date_start)
+                ).all()
                 total_price_consumed += sum(
                     [c.amount_used * i.unit_price for c in consumptions]
                 )
@@ -545,7 +551,11 @@ class CanteenWorkBook:
         summary_row_num = len(categories) + header_row_num + 1
         summary_total_price = Decimal("0.0")
         for i in ingredients:
-            consumptions = i.consumptions.filter(Q(is_disabled=False)).all()
+            consumptions = i.consumptions.filter(
+                Q(is_disabled=False)
+                & Q(date_of_using__lte=self.date_end)
+                & Q(date_of_using__gte=self.date_start)
+            ).all()
             summary_total_price += sum(
                 [c.amount_used * i.unit_price for c in consumptions]
             )
