@@ -210,6 +210,8 @@ class CanteenWorkBook:
         self.center_alignment = Alignment(
             horizontal="center", vertical="center"
         )
+        self.left_alignment = Alignment(horizontal="left", vertical="center")
+
         self.thin_border = Border(
             left=Side(style="thin"),
             right=Side(style="thin"),
@@ -222,6 +224,7 @@ class CanteenWorkBook:
         self.font_14 = Font(size=14)
         self.font_16 = Font(size=16)
         self.font_16_bold = Font(size=16, bold=True)
+        self.font_18_bold = Font(size=18, bold=True)
         self.font_20_bold = Font(size=20, bold=True)
 
         self.request = request
@@ -2149,7 +2152,10 @@ class CanteenWorkBook:
 
     def fill_in_food_sheets(self):
         user = self.request.user
-        date_start = self.date_start
+        wb = self.wb
+        year = datetime.now().year
+        date_start = date(year, 1, 1)
+        date_end = date(year, 12, 31)
         date_end = self.date_end
         meal_type = self.meal_type
 
@@ -2159,6 +2165,96 @@ class CanteenWorkBook:
             & Q(user=user)
             & Q(meal_type=meal_type)
         ).all()
+        ingredients = [
+            i for i in ingredients if i.get_remaining_quantity(date_start) > 0
+        ]
+
+        ingredient_names = list(set([i.name for i in ingredients]))
+        for ingredient_name in ingredient_names:
+            sheet = wb.create_sheet(ingredient_name)
+            year_ingredients = [
+                i for i in ingredients if i.name == ingredient_name
+            ]
+            year_ingredient0 = year_ingredients[0]
+            for month_index in range(12):
+                month = month_index + 1
+                ___, month_days = calendar.monthrange(year, month)
+                row_num = (month_days + 8) * month_index
+                title_row_num = row_num + 1
+                title_cell = sheet.cell(title_row_num, 1)
+                title_cell.value = (
+                    _(
+                        "Ingredients Storage and Consumption Records of Principal Canteen"
+                    )
+                    if self.is_school
+                    else _(
+                        "Ingredients Storage and Consumption Records of Affiliation Canteen"
+                    )
+                )
+                title_cell.font = self.font_18_bold
+                title_cell.alignment = self.center_alignment
+                set_row_height_in_inches(sheet, title_row_num, 0.38)
+                sheet.merge_cells(f"A{title_row_num}:M{title_row_num}")
+
+                ingredient_name_row_num = title_row_num + 1
+                ingredient_name_cell = sheet.cell(ingredient_name_row_num, 1)
+                ingredient_name_cell.value = _(
+                    "Ingredient Name: {ingredient_name} (quantity_unit_name)"
+                ).format(
+                    ingredient_name=ingredient_name,
+                    quantity_unit_name=year_ingredient0.quantity_unit_name,
+                )
+                ingredient_name_cell.alignment = self.left_alignment
+                ingredient_name_cell.font = self.font_14
+                sheet.merge_cells(
+                    f"A{ingredient_name_row_num}:M{ingredient_name_row_num}"
+                )
+                set_row_height_in_inches(sheet, ingredient_name_row_num, 0.22)
+
+                year_header_row_num = ingredient_name_row_num + 1
+                year_header_cell = sheet.cell(year_header_row_num, 1)
+                year_header_cell.value = _("Year {year}").format(year=year)
+                year_header_cell.font = self.font_14
+                year_header_cell.alignment = self.center_alignment
+                year_header_cell.border = self.thin_border
+                sheet.merge_cells(
+                    f"A{year_header_row_num}:B{year_header_row_num}"
+                )
+
+                storage_header_row_num = year_header_row_num
+                storage_header_cell = sheet.cell(storage_header_row_num, 4)
+                storage_header_cell.value = _("Storage (Food Sheet)")
+                storage_header_cell.font = self.font_14
+                storage_header_cell.alignment = self.center_alignment
+                storage_header_cell.border = self.thin_border
+                sheet.merge_cells(
+                    f"D{storage_header_row_num}:F{storage_header_row_num}"
+                )
+
+                consumption_header_row_num = year_header_row_num
+                consumption_header_cell = sheet.cell(
+                    consumption_header_row_num, 7
+                )
+                consumption_header_cell.value = _("Consumption (Food Sheet)")
+                consumption_header_cell.font = self.font_14
+                consumption_header_cell.alignment = self.center_alignment
+                consumption_header_cell.border = self.thin_border
+                sheet.merge_cells(
+                    f"G{consumption_header_row_num}:I{consumption_header_row_num}"
+                )
+
+                surplus_header_row_num = year_header_row_num
+                surplus_header_cell = sheet.cell(surplus_header_row_num, 10)
+                surplus_header_cell.value = _("Surplus (Food Sheet)")
+                surplus_header_cell.font = self.font_14
+                surplus_header_cell.alignment = self.center_alignment
+                surplus_header_cell.border = self.thin_border
+                sheet.merge_cells(
+                    f"J{surplus_header_row_num}:L{surplus_header_row_num}"
+                )
+
+                month_header_row_num = year_header_row_num + 1
+                month_header_cell = sheet.cell(month_header_row_num, 1)
 
     def fill_in(self):
         self.fill_in_cover_sheet()
