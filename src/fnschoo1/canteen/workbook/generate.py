@@ -2253,8 +2253,71 @@ class CanteenWorkBook:
                     f"J{surplus_header_row_num}:L{surplus_header_row_num}"
                 )
 
+                num_header_row_num = year_header_row_num
+                num_header_cell = sheet.cell(num_header_row_num, 13)
+                num_header_cell.value = _(
+                    "Storage/Consumption No. (Food Sheet)"
+                )
+                num_header_cell.font = self.font_14
+                num_header_cell.alignment = self.center_alignment
+                num_header_cell.border = self.thin_border
+                sheet.merge_cells(
+                    f"M{num_header_row_num}:M{num_header_row_num+1}"
+                )
+
                 month_header_row_num = year_header_row_num + 1
                 month_header_cell = sheet.cell(month_header_row_num, 1)
+                month_header_cell.value = _("Month (Food Sheet)")
+                month_header_cell.font = self.font_14
+                month_header_cell.alignment = self.center_alignment
+                month_header_cell.border = self.thin_border
+
+                day_header_row_num = year_header_row_num + 1
+                day_header_cell = sheet.cell(day_header_row_num, 1)
+                day_header_cell.value = _("Day (Food Sheet)")
+                day_header_cell.font = self.font_14
+                day_header_cell.alignment = self.center_alignment
+                day_header_cell.border = self.thin_border
+
+                price_header_row_num = day_header_row_num
+                for col_index in range(4, 13, 3):
+                    quantity_header_col_num = col_index
+                    unit_price_header_col_num = col_index + 1
+                    total_price_header_col_num = col_index + 2
+
+                    quantity_header_cell = sheet.cell(
+                        price_header_row_num, quantity_header_col_num
+                    )
+                    quantity_header_cell.value = _("Quantity (Food Sheet)")
+                    quantity_header_cell.font = self.font_14
+                    quantity_header_cell.alignment = self.center_alignment
+                    quantity_header_cell.border = self.thin_border
+
+                    unit_price_header_cell = sheet.cell(
+                        price_header_row_num, unit_price_header_col_num
+                    )
+                    unit_price_header_cell.value = _("Unit Price (Food Sheet)")
+                    unit_price_header_cell.font = self.font_14
+                    unit_price_header_cell.alignment = self.center_alignment
+                    unit_price_header_cell.border = self.thin_border
+
+                    total_price_header_cell = sheet.cell(
+                        price_header_row_num, total_price_header_col_num
+                    )
+                    total_price_header_cell.value = _(
+                        "Total Price (Food Sheet)"
+                    )
+                    total_price_header_cell.font = self.font_14
+                    total_price_header_cell.alignment = self.center_alignment
+                    total_price_header_cell.border = self.thin_border
+
+                month_surplus_header_row_num = month_header_row_num + 1
+                month_surplus_cell = sheet.cell(month_surplus_header_row_num, 3)
+                month_surplus_cell.value = (
+                    _("Surplus for last month")
+                    if month > 1
+                    else _("Surplus for last year")
+                )
 
     def fill_in(self):
         self.fill_in_cover_sheet()
