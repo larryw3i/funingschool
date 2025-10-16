@@ -9,10 +9,14 @@
   <div class="container">
     <div class="row justify-content-end">
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-2"
-              onclick="list_consumptions_by_week();">{% trans "Consume by Week" %}</button>
+              onclick="list_consumptions_by_week();">
+        {% trans "Consume by Week" %}
+      </button>
 
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2"
-              onclick="list_consumptions_rapidly();">{% trans "Rapid Consumption" %}</button>
+              onclick="list_consumptions_rapidly();">
+        {% trans "Rapid Consumption" %}
+      </button>
 
       <a class="btn btn-success col-md-1 col-lg-1 col-2 mx-2"
          target="canteen_list_categories"
@@ -65,6 +69,9 @@
             data-ingredient_id="{{ ingredient.id }}"
             data-ingredient_name="{{ ingredient.name }}"
             data-ingredient_quantity="{{ ingredient.quantity }}"
+            data-ingredient_quantity_used="{{ ingredient.quantity_used }}"
+            data-ingredient_remaining_quantity="{{ ingredient.remaining_quantity }}"
+            data-ingredient_consuming_quantity="{{ ingredient.consuming_quantity }}"
             data-ingredient_total_price="{{ ingredient.total_price }}"
             data-ingredient_meal_type="{{ ingredient.meal_type }}"
             data-ingredient_quantity_unit_name="{{ ingredient.quantity_unit_name }}"
@@ -73,16 +80,15 @@
           <td title="{% blocktrans with storage_date=ingredient.storage_date %}Storaged on {{ storage_date }} .{% endblocktrans %}"
               class="">
             <div class='ingredient-progress'
-                 style="width:{% widthratio ingredient.remaining_quantity ingredient.quantity 100 %}%"></div>
+                 style="width:{% widthratio ingredient.remaining_quantity ingredient.quantity 100 %}%">
+            </div>
             {{ ingredient.name }}
             {% if ingredient.meal_type != meal_type_name_0 %}
               <br />
               ({{ ingredient.meal_type }})
             {% endif %}
           </td>
-          <td name="remaining_{{ ingredient.id }}">
-            {{ ingredient.quantity }}-{{ ingredient.consuming_quantity }}={{ ingredient.remaining_quantity }}
-          </td>
+          <td name="remaining_{{ ingredient.id }}"></td>
         </tr>
       {% empty %}
         <tr>{% trans "No ingredient found." %}</tr>
@@ -92,7 +98,9 @@
 </div>
 <div class="">
   <button onclick="generate_spreadsheet();"
-          class="btn btn-submit-consumptions btn-success float-end">{% trans "Generate Spreadsheet" %}</button>
+          class="btn btn-submit-consumptions btn-success float-end">
+    {% trans "Generate Spreadsheet" %}
+  </button>
   <select class="workbook-month-select form-select float-end mx-2"
           style="width:118px"></select>
 </div>
@@ -111,6 +119,21 @@
   var storage_date_start = $('#storage_date_start').text().replace(new RegExp('"', 'g'), "")
 
   var dont_submit = false
+
+  $(document).ready(function() {
+    $(ingredient_ids).each(function(index, ingredient_id) {
+      var td = $(`td[name='remaining_${ingredient_id}']`)
+      var tr = $(td.closest("tr"))
+      var ingredient_quantity = parseInt(tr.data("ingredient_quantity")) || 0
+      var ingredient_quantity_used = parseInt(tr.data("ingredient_quantity_used")) || 0
+      var ingredient_consuming_quantity = parseInt(tr.data("ingredient_consuming_quantity")) || 0
+      var ingredient_remaining_quantity = parseInt(tr.data("ingredient_remaining_quantity")) || 0
+      td.text(
+        `${ingredient_quantity-ingredient_quantity_used}-${ingredient_consuming_quantity-ingredient_quantity_used}=${ingredient_remaining_quantity}`
+      )
+    });
+
+  });
 
   function list_consumptions_rapidly() {
     query = {
@@ -215,8 +238,10 @@
 
   function amount_used_input_blur(element) {
     element = $(element)
-    var ingredient_quantity = element.closest('tr').data("ingredient_quantity")
-    ingredient_quantity = parseInt(ingredient_quantity) || 0
+    var ingredient_quantity = parseInt(element.closest('tr').data("ingredient_quantity")) || 0
+    var ingredient_quantity_used = parseInt(element.closest("tr").data("ingredient_quantity_used")) || 0
+    ingredient_quantity = ingredient_quantity - ingredient_quantity_used
+
     var $consumption_form = element.closest("form")
     var amount_used = parseInt($consumption_form.data("amount_used")) || 0
     var new_amount_used = parseInt($.trim(element.val())) || 0

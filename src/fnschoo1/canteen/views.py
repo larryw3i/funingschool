@@ -248,8 +248,7 @@ def create_consumptions(request, ingredient_id=None):
     ) == "true" or not by_week
 
     queries = (
-        Q(storage_date__gte=date_start)
-        & Q(storage_date__lte=date_end)
+        Q(storage_date__lte=date_end)
         & Q(user=request.user)
         & Q(is_disabled=False)
         & Q(is_ignorable=False)
@@ -275,6 +274,13 @@ def create_consumptions(request, ingredient_id=None):
             {"ingredients": ingredients, "date_range": date_range},
         )
 
+    ingredients = [
+        i
+        for i in ingredients
+        if i.get_remaining_quantity(date_end) > 0
+        or i.storage_date >= date_start
+    ]
+
     ingredients_pinned = []
     ingredients_unpinned = []
     categories_top = Category.objects.filter(
@@ -290,6 +296,9 @@ def create_consumptions(request, ingredient_id=None):
             ingredients_unpinned.append(i)
 
     ingredients = ingredients_pinned + ingredients_unpinned
+
+    for ingredient in ingredients:
+        ingredient.quantity_used = ingredient.get_consuming_quantity(date_start)
 
     date_range_cp = date_range
     date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]

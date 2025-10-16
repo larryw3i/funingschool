@@ -47,7 +47,9 @@
           style="display: inline">
       {% csrf_token %}
       <button type="submit" class="btn btn-danger">{% trans 'Delete' %}</button>
-      <button type="button" class="btn btn-primary" onclick="window.close();">{% trans "Cancel" %}</button>
+      <button type="button" class="btn btn-primary" onclick="window.close();">
+        {% trans "Cancel" %}
+      </button>
     </form>
   </div>
   <script>

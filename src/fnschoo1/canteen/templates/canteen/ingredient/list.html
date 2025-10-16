@@ -63,7 +63,9 @@
                      class="form-check-input"
                      id="ingredient_free_nark_{{ ingredient.id }}" />
               <label class="form-check-label"
-                     for="ingredient_free_nark_{{ ingredient.id }}">{{ forloop.counter }}</label>
+                     for="ingredient_free_nark_{{ ingredient.id }}">
+                {{ forloop.counter }}
+              </label>
             </div>
           </th>
           <td>{{ ingredient.storage_date }}</td>

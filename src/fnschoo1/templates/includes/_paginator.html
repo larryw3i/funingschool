@@ -17,7 +17,9 @@
              value="{{ page_obj.paginator.per_page }}"
              style="width: 80px;
                     margin: 0 10px" />
-      <button type="button" onclick="set_page_size();" class="btn btn-primary">&#128640;</button>
+      <button type="button" onclick="set_page_size();" class="btn btn-primary">
+        &#128640;
+      </button>
     </form>
     {% if page_obj.has_next %}
       <a onclick="set_page({{ page_obj.next_page_number }});" class="ps-2">&gt;</a>

@@ -113,6 +113,10 @@ class Ingredient(models.Model):
         default=False, verbose_name=_("Is Ingredient Disabled")
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.quantity_used = Decimal("0")
+
     @property
     def unit_price(self):
         if self.quantity > 0:

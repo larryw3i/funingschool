@@ -1,7 +1,9 @@
 {% load i18n %}
 {% load static %}
 <div class="container">
-  <p class="m-0 text-center text-white">{% trans "Copyleft &copy; FNSCHOOL" %} {% now "Y" %}</p>
+  <p class="m-0 text-center text-white">
+    {% trans "Copyleft &copy; FNSCHOOL" %} {% now "Y" %}
+  </p>
 </div>
 <div class="container ">
   <p class="m-0 text-start text-white">
@@ -13,7 +15,9 @@
         {% get_available_languages as LANGUAGES %}
         {% for code, name in LANGUAGES %}
           <option value="{{ code }}"
-                  {% if code == CURRENT_LANGUAGE %}selected{% endif %}>{{ name }}</option>
+                  {% if code == CURRENT_LANGUAGE %}selected{% endif %}>
+            {{ name }}
+          </option>
         {% endfor %}
       </select>
     </form>
@@ -30,8 +34,12 @@
         </p>
       </div>
       <div class="col-md-4 text-md-end">
-        <button id="rejectCookies" class="btn btn-outline-secondary me-2">{% trans 'Cancel' %}</button>
-        <button id="acceptCookies" class="btn btn-primary">{% trans 'Accept All' %}</button>
+        <button id="rejectCookies" class="btn btn-outline-secondary me-2">
+          {% trans 'Cancel' %}
+        </button>
+        <button id="acceptCookies" class="btn btn-primary">
+          {% trans 'Accept All' %}
+        </button>
       </div>
     </div>
   </div>
