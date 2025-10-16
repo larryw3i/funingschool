@@ -1954,7 +1954,7 @@ class CanteenWorkBook:
                     _split_ingredients += [
                         Ingredient(
                             user=user,
-                            storage_date=None,
+                            storage_date=self.date_end,
                             name="",
                             meal_type=_split_ingredient0.meal_type,
                             category=_split_ingredient0.category,
@@ -1967,6 +1967,10 @@ class CanteenWorkBook:
                             ingredient_rows_count - len(_split_ingredients)
                         )
                     ]
+
+                _split_ingredients = sorted(
+                    _split_ingredients, key=lambda i: (i.storage_date)
+                )
                 category_ingredients.append([category, _split_ingredients])
 
         for index, (category, c_ingredients) in enumerate(category_ingredients):
@@ -2034,7 +2038,7 @@ class CanteenWorkBook:
                         month=ingredient.storage_date.month,
                         day=ingredient.storage_date.day,
                     )
-                    if ingredient.storage_date
+                    if ingredient.storage_date and ingredient.name
                     else ""
                 )
                 name_cell = sheet.cell(ingredient_row_num, 2)

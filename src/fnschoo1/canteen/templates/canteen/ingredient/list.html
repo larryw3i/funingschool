@@ -57,11 +57,11 @@
       {% for ingredient in page_obj %}
         <tr>
           <th scope="row">
-            <div class="form-check">
+            <div class="form-check"
+                 title="{% trans 'It helps you check the ingredients.' %}">
               <input type="checkbox"
                      class="form-check-input"
-                     id="ingredient_free_nark_{{ ingredient.id }}"
-                     title="{% trans 'It helps you check the ingredients.' %}" />
+                     id="ingredient_free_nark_{{ ingredient.id }}" />
               <label class="form-check-label"
                      for="ingredient_free_nark_{{ ingredient.id }}">{{ forloop.counter }}</label>
             </div>
