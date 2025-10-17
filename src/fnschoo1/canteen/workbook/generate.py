@@ -2544,7 +2544,10 @@ class CanteenWorkBook:
 
                 for row_index in range(
                     month_surplus_header_row_num,
-                    month_surplus_header_row_num + month_days + 2 + 1,
+                    month_surplus_header_row_num
+                    + ingredient_rows_count
+                    + 2
+                    + 1,
                 ):
                     for col_index in range(1, 13 + 1):
                         cell = sheet.cell(row_index, col_index)
@@ -2552,7 +2555,9 @@ class CanteenWorkBook:
                         cell.alignment = self.center_alignment
                         cell.border = self.thin_border
 
-                month_summary_row_num = year_header_row_num + month_days + 1
+                month_summary_row_num = (
+                    year_header_row_num + ingredient_rows_count + 1
+                )
                 year_accumulation_row_num = month_summary_row_num + 1
 
                 sheet.cell(month_summary_row_num, 3, _("Monthly Summary"))
@@ -2602,7 +2607,7 @@ class CanteenWorkBook:
         self.fill_in_consumption_sheet()
         self.fill_in_consumption_list_sheet()
         self.fill_in_surplus_sheet()
-        # self.fill_in_food_sheets()
+        self.fill_in_food_sheets()
 
         return self.wb
 
