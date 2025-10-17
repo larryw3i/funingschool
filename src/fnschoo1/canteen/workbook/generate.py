@@ -2167,7 +2167,7 @@ class CanteenWorkBook:
         ingredients = [
             i
             for i in ingredients
-            if date_start <= i.storage <= date_end
+            if date_start <= i.storage_date <= date_end
             or any(
                 [
                     date_start <= c.date_of_using <= date_end
@@ -2177,23 +2177,9 @@ class CanteenWorkBook:
         ]
 
         ingredient_names = list(set([i.name for i in ingredients]))
-        for col_index, col_width in [
-            [1, 0.4],
-            [2, 0.4],
-            [3, 1.86],
-            [4, 0.7],
-            [5, 0.8],
-            [6, 0.95],
-            [7, 0.7],
-            [8, 0.8],
-            [9, 0.97],
-            [10, 0.7],
-            [11, 0.8],
-            [12, 0.8],
-            [13, 1.67],
-        ]:
-            set_column_width_in_inches(sheet, col_index, col_width)
-        for ingredient_name in ingredient_names:
+        for ingredient_name_index, ingredient_name in enumerate(
+            ingredient_names
+        ):
             sheet = wb.create_sheet(ingredient_name)
             named_ingredients = [
                 i for i in ingredients if i.name == ingredient_name
@@ -2206,8 +2192,31 @@ class CanteenWorkBook:
             year_consumption_total_price = Decimal("0.0")
             ingredient_rows_count = 31
 
+            for col_index, col_width in [
+                [1, 0.4],
+                [2, 0.4],
+                [3, 1.86],
+                [4, 0.7],
+                [5, 0.8],
+                [6, 0.95],
+                [7, 0.7],
+                [8, 0.8],
+                [9, 0.97],
+                [10, 0.7],
+                [11, 0.8],
+                [12, 0.8],
+                [13, 1.67],
+            ]:
+                set_column_width_in_inches(sheet, col_index, col_width)
+
             for month_index in range(12):
                 month = month_index + 1
+                print(
+                    ingredient_name_index,
+                    len(ingredient_names),
+                    ingredient_name,
+                    month,
+                )
 
                 ___, month_days = calendar.monthrange(year, month)
                 month_day_1 = date(year, month, 1)
@@ -2361,7 +2370,7 @@ class CanteenWorkBook:
                 )
 
                 date_day_1 = month_day_1
-                _date_day_1 = (date_day_1 + timedelta(days=-1)).date()
+                _date_day_1 = date_day_1 + timedelta(days=-1)
 
                 if any(
                     [i.storage_date < date_day_1 for i in named_ingredients]
@@ -2389,9 +2398,12 @@ class CanteenWorkBook:
                         6,
                         remaining_total_price_last_month,
                     )
-                    unit_price = Decimal(
-                        str(remaining_total_price_last_month)
-                    ) / Decimal(str(remaining_quantity_last_month))
+                    unit_price = (
+                        Decimal(str(remaining_total_price_last_month))
+                        / Decimal(str(remaining_quantity_last_month))
+                        if remaining_quantity_last_month
+                        else Decimal("0.0")
+                    )
                     sheet.cell(
                         month_surplus_header_row_num,
                         5,
@@ -2463,9 +2475,12 @@ class CanteenWorkBook:
                                 if i.storage_date == day
                             ]
                         )
-                        storage_unit_price = Decimal(
-                            str(storage_total_price)
-                        ) / Decimal(str(storage_quantity))
+                        storage_unit_price = (
+                            Decimal(str(storage_total_price))
+                            / Decimal(str(storage_quantity))
+                            if storage_quantity
+                            else Decimal("0.0")
+                        )
                         storage_unit_price = (
                             f"{storage_unit_price:.{decimal_prec}f}"
                         )
@@ -2492,7 +2507,9 @@ class CanteenWorkBook:
                                     )
 
                         consumption_unit_price = (
-                            consumption_total_price / consumption_quantity
+                            (consumption_total_price / consumption_quantity)
+                            if consumption_quantity
+                            else Decimal("0.0")
                         )
                         consumption_unit_price = (
                             f"{consumption_unit_price:.{decimal_prec}f}"
@@ -2520,7 +2537,9 @@ class CanteenWorkBook:
                                 remaining_quantity * i.unit_price
                             )
                         surplus_unit_price = (
-                            surplus_total_price / surplus_unit_price
+                            (surplus_total_price / surplus_quantity)
+                            if surplus_quantity
+                            else Decimal("0.0")
                         )
                         surplus_unit_price = (
                             f"{surplus_unit_price:.{decimal_prec}f}"
