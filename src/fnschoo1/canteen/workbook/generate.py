@@ -2372,27 +2372,43 @@ class CanteenWorkBook:
                         f"{unit_price:.{decimal_prec}f}",
                     )
 
-                month_ingredients = [
-                    i
-                    for i in year_ingredients
-                    if i.storage_date.month <= month
-                    and i.get_remaining_quantity(_date_day_1) > 0
-                ]
+                month_ingredients = []
+                for ingredient in year_ingredients:
+                    consumption_dates = [
+                        c.date_of_using
+                        for c in ingredient.consumptions.filter(
+                            is_disabled=False
+                        ).all()
+                    ]
+                    if (
+                        month_day_1 <= ingredient.storage_date <= month_day_n1
+                        or any(
+                            [
+                                month_day_1 <= date_of_using <= month_day_n1
+                                for date_of_using in consumption_dates
+                            ]
+                        )
+                    ):
+                        month_ingredients.append(ingredient)
+
                 storage_dates = sorted(
                     list(
                         set(
                             [
                                 i.storage_date
-                                for i in year_ingredients
-                                if i.storage_date.month == month
+                                for i in month_ingredients
+                                if month_day_1 <= i.storage_date <= month_day_n1
                             ]
                         )
                     )
                 )
                 consumption_dates = []
-                for i in year_ingredients:
+                for i in month_ingredients:
                     for c in i.consumptions.filter(is_disabled=False).all():
-                        if not c.date_of_using in consumption_dates:
+                        if (
+                            month_day_1 <= c.date_of_using <= month_day_n1
+                            and not c.date_of_using in consumption_dates
+                        ):
                             consumption_dates.append(c.date_of_using)
 
                 consumption_dates = sorted(consumption_dates)
