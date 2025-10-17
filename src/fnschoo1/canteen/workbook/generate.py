@@ -15,8 +15,15 @@ from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import (Count, DecimalField, ExpressionWrapper, F, Q, Sum,
-                              Value)
+from django.db.models import (
+    Count,
+    DecimalField,
+    ExpressionWrapper,
+    F,
+    Q,
+    Sum,
+    Value,
+)
 from django.db.models.functions import Coalesce
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -25,16 +32,25 @@ from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
-                                  UpdateView)
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 from fnschool import count_chinese_characters
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
-from ..forms import (CategoryForm, ConsumptionForm, IngredientForm,
-                     PurchasedIngredientsWorkBookForm)
+from ..forms import (
+    CategoryForm,
+    ConsumptionForm,
+    IngredientForm,
+    PurchasedIngredientsWorkBookForm,
+)
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
 
@@ -2323,7 +2339,9 @@ class CanteenWorkBook:
                 date_day_1 = month_day_1
                 _date_day_1 = (date_day_1 + timedelta(days=-1)).date()
 
-                if any([i.storage_date < date_day_1 for i in named_ingredients]):
+                if any(
+                    [i.storage_date < date_day_1 for i in named_ingredients]
+                ):
                     remaining_quantity_last_month = sum(
                         [
                             i.get_remaining_quantity(_date_day_1)
@@ -2357,22 +2375,43 @@ class CanteenWorkBook:
                     )
 
                 month_ingredients = []
-                storage_dates = list(set([i.storage_date for i in ingredients if month_day_1 <= i.storage_date <= month_day_n1]))
+                storage_dates = list(
+                    set(
+                        [
+                            i.storage_date
+                            for i in ingredients
+                            if month_day_1 <= i.storage_date <= month_day_n1
+                        ]
+                    )
+                )
                 consumption_dates = []
                 for i in ingredients:
-                    consumptions = i.consumptions.filter(is_disabled=False).all()
-                    consumption_dates += [c.date_of_using if month_day_1 <= c.date_of_using <= month_day_n1 ]
-
+                    consumptions = i.consumptions.filter(
+                        is_disabled=False
+                    ).all()
+                    for c in consumptions:
+                        if (
+                            month_day_1 <= c.date_of_using <= month_day_n1
+                            and not c.date_of_using in consumption_dates
+                        ):
+                            consumption_dates.append(c.date_of_using)
 
                 for ingredient in named_ingredients:
-                    consumptions = ingredient.consumptions.filter(is_disabled=False).all()
-                    ingredient_consumption_dates = [c.date_of_using for c in consumptions]
+                    consumptions = ingredient.consumptions.filter(
+                        is_disabled=False
+                    ).all()
+                    ingredient_consumption_dates = [
+                        c.date_of_using for c in consumptions
+                    ]
                     if month_day_1 <= ingredient.storage_date <= month_day_n1:
                         month_ingredients.append(ingredient)
-                    elif any([ month_day_1 <= consumption_date <= month_day_n1   for consumption_date in ingredient_consumption_dates]):
+                    elif any(
+                        [
+                            month_day_1 <= consumption_date <= month_day_n1
+                            for consumption_date in ingredient_consumption_dates
+                        ]
+                    ):
                         month_ingredients.append(ingredient)
-                        
-
 
                 month_storage_quantity = Decimal("0")
                 month_storage_total_price = Decimal("0.0")
