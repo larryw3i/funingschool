@@ -2438,6 +2438,9 @@ class CanteenWorkBook:
                         ):
                             consumption_dates.append(c.date_of_using)
 
+                storage_dates = sorted(storage_dates)
+                consumption_dates = sorted(consumption_dates)
+
                 for ingredient in named_ingredients:
                     consumptions = [
                         c
