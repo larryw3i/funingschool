@@ -370,7 +370,7 @@ class CanteenWorkBook:
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
                 total_price_text=get_CNY_TEXT(summary_total_price),
-                total_price=summary_total_price,
+                total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
             else _(
@@ -569,14 +569,14 @@ class CanteenWorkBook:
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
                 total_price_text=get_CNY_TEXT(summary_total_price),
-                total_price=summary_total_price,
+                total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
             else _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
                 total_price_text=str(summary_total_price),
-                total_price=summary_total_price,
+                total_price=summary_total_price.normalize(),
             )
         )
         sheet.merge_cells(f"A{summary_row_num}:C{summary_row_num}")
@@ -738,7 +738,7 @@ class CanteenWorkBook:
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
                 total_price_text=get_CNY_TEXT(summary_total_price),
-                total_price=summary_total_price,
+                total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
             else _(
@@ -2216,12 +2216,6 @@ class CanteenWorkBook:
 
             for month_index in range(12):
                 month = month_index + 1
-                print(
-                    ingredient_name_index,
-                    len(ingredient_names),
-                    ingredient_name,
-                    month,
-                )
 
                 ___, month_days = calendar.monthrange(year, month)
                 month_day_1 = date(year, month, 1)
@@ -2265,6 +2259,15 @@ class CanteenWorkBook:
                 )
 
                 year_header_row_num = ingredient_name_row_num + 1
+
+                for row_index in range(
+                    year_header_row_num, year_header_row_num + 1 + 1
+                ):
+                    for col_index in range(1, 14):
+                        sheet.cell(row_index, col_index).border = (
+                            self.thin_border
+                        )
+
                 year_header_cell = sheet.cell(year_header_row_num, 1)
                 year_header_cell.value = _("Year {year}").format(year=year)
                 year_header_cell.font = self.font_14
@@ -2326,7 +2329,7 @@ class CanteenWorkBook:
                 month_header_cell.border = self.thin_border
 
                 day_header_row_num = year_header_row_num + 1
-                day_header_cell = sheet.cell(day_header_row_num, 1)
+                day_header_cell = sheet.cell(day_header_row_num, 2)
                 day_header_cell.value = _("Day (Food Sheet)")
                 day_header_cell.font = self.font_14
                 day_header_cell.alignment = self.center_alignment
@@ -2386,22 +2389,11 @@ class CanteenWorkBook:
                             for i in named_ingredients
                         ]
                     )
-                    sheet.cell(
-                        month_surplus_header_row_num,
-                        4,
-                        remaining_quantity_last_month,
-                    )
-
                     remaining_total_price_last_month = sum(
                         [
                             i.unit_price * i.get_remaining_quantity(_date_day_1)
                             for i in named_ingredients
                         ]
-                    )
-                    sheet.cell(
-                        month_surplus_header_row_num,
-                        6,
-                        remaining_total_price_last_month,
                     )
                     unit_price = (
                         Decimal(str(remaining_total_price_last_month))
@@ -2409,10 +2401,19 @@ class CanteenWorkBook:
                         if remaining_quantity_last_month
                         else Decimal("0.0")
                     )
+
                     sheet.cell(
                         month_surplus_header_row_num,
-                        5,
-                        f"{unit_price:.{decimal_prec}f}",
+                        4,
+                        remaining_quantity_last_month,
+                    )
+                    sheet.cell(
+                        month_surplus_header_row_num,
+                        6,
+                        remaining_total_price_last_month,
+                    )
+                    sheet.cell(
+                        month_surplus_header_row_num, 5, unit_price.normalize()
                     )
 
                 month_ingredients = []
@@ -2468,6 +2469,8 @@ class CanteenWorkBook:
                         ingredient_row_num = (
                             month_surplus_header_row_num + 1 + day_index
                         )
+                        sheet.cell(ingredient_row_num, 1, day.month)
+                        sheet.cell(ingredient_row_num, 2, day.day)
                         storage_quantity = sum(
                             [
                                 i.quantity
@@ -2488,9 +2491,7 @@ class CanteenWorkBook:
                             if storage_quantity
                             else Decimal("0.0")
                         )
-                        storage_unit_price = (
-                            f"{storage_unit_price:.{decimal_prec}f}"
-                        )
+                        storage_unit_price = storage_unit_price.normalize()
                         if storage_quantity:
                             sheet.cell(ingredient_row_num, 4, storage_quantity)
                             sheet.cell(
@@ -2608,7 +2609,7 @@ class CanteenWorkBook:
                         cell.border = self.thin_border
 
                 month_summary_row_num = (
-                    year_header_row_num + ingredient_rows_count + 1
+                    year_header_row_num + 2 + ingredient_rows_count + 1
                 )
                 year_accumulation_row_num = month_summary_row_num + 1
 
