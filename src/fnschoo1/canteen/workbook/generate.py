@@ -208,7 +208,7 @@ class CanteenWorkBook:
         )
         self.surplus_sheet = self.wb.create_sheet(title=_("Sheet Surplus"))
         self.center_alignment = Alignment(
-            horizontal="center", vertical="center"
+            horizontal="center", vertical="center", wrap_text=True
         )
         self.left_alignment = Alignment(horizontal="left", vertical="center")
 
@@ -266,6 +266,7 @@ class CanteenWorkBook:
 
     def fill_in_non_storage_sheet(self):
         sheet = self.non_storage_sheet
+        sheet.sheet_properties.tabColor = "e616ff"
         user = self.user
         title_cell = sheet.cell(1, 1)
         title_cell.value = _(
@@ -386,7 +387,9 @@ class CanteenWorkBook:
         handler_row_num = summary_row_num + 1
         handler_cell = sheet.cell(handler_row_num, 1)
         handler_cell.border = self.thin_border
-        handler_cell.value = _("Handler:")
+        handler_cell.value = _("Handler: {handler}").format(
+            handler=user.username
+        )
         sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
         set_row_height_in_inches(sheet, handler_row_num, 0.32)
 
@@ -433,6 +436,7 @@ class CanteenWorkBook:
 
     def fill_in_consumption_sheet(self):
         sheet = self.consumption_sheet
+        sheet.sheet_properties.tabColor = "ff8116"
         user = self.user
         title_cell = sheet.cell(1, 1)
         title_cell.value = _(
@@ -585,7 +589,7 @@ class CanteenWorkBook:
         handler_row_num = summary_row_num + 1
         handler_cell = sheet.cell(handler_row_num, 1)
         handler_cell.border = self.thin_border
-        handler_cell.value = _("Handler:{handler}").format(
+        handler_cell.value = _("Handler: {handler}").format(
             handler=user.username
         )
         sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
@@ -634,6 +638,7 @@ class CanteenWorkBook:
 
     def fill_in_storage_sheet(self):
         sheet = self.storage_sheet
+        sheet.sheet_properties.tabColor = "16d2ff"
         user = self.user
         title_cell = sheet.cell(1, 1)
         title_cell.value = _(
@@ -754,7 +759,9 @@ class CanteenWorkBook:
         handler_row_num = summary_row_num + 1
         handler_cell = sheet.cell(handler_row_num, 1)
         handler_cell.border = self.thin_border
-        handler_cell.value = _("Handler:")
+        handler_cell.value = _("Handler: {handler}").format(
+            handler=user.username
+        )
         sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
         set_row_height_in_inches(sheet, handler_row_num, 0.32)
 
@@ -801,6 +808,7 @@ class CanteenWorkBook:
 
     def fill_in_consumption_list_sheet(self):
         sheet = self.consumption_list_sheet
+        sheet.sheet_properties.tabColor = "ff9e16"
         user = self.user
         consumption_rows_count = 21
         categories = Category.objects.filter(
@@ -1193,6 +1201,7 @@ class CanteenWorkBook:
 
     def fill_in_storage_list_sheet(self):
         sheet = self.storage_list_sheet
+        sheet.sheet_properties.tabColor = "16b1ff"
         user = self.user
         ingredient_rows_count = 21
         ingredients = Ingredient.objects.filter(
@@ -1494,7 +1503,7 @@ class CanteenWorkBook:
             signature_row_num = summary_row_num + 1
             signature_cell = sheet.cell(signature_row_num, 1)
             signature_cell.value = _(
-                "   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
+                "   Reviewer:        Handler: {handler} 　    Weigher:      Warehouseman: 　"
             ).format(handler=user.username)
             signature_cell.font = self.font_14
             signature_cell.alignment = self.center_alignment
@@ -1515,6 +1524,7 @@ class CanteenWorkBook:
 
     def fill_in_cover_sheet(self):
         sheet = self.cover_sheet
+        sheet.sheet_properties.tabColor = "9416ff"
         user = self.user
         title_cell = sheet.cell(1, 1)
         title_cell.value = _(
@@ -1630,6 +1640,7 @@ class CanteenWorkBook:
 
     def fill_in_surplus_sheet(self):
         sheet = self.surplus_sheet
+        sheet.sheet_properties.tabColor = "29ff16"
         user = self.user
         ingredient_rows_count = 17
 
@@ -1938,7 +1949,7 @@ class CanteenWorkBook:
                 signature_row_num,
                 1,
                 _(
-                    "   Reviewer:        Handler:{handler_name}    Weigher:        Warehouseman: 　     "
+                    "   Reviewer:        Handler: {handler_name}    Weigher:        Warehouseman: 　     "
                 ).format(handler_name=user.username),
             )
             sheet.merge_cells(f"A{signature_row_num}:I{signature_row_num}")
@@ -1958,6 +1969,7 @@ class CanteenWorkBook:
 
     def fill_in_non_storage_list_sheet(self):
         sheet = self.non_storage_list_sheet
+        sheet.sheet_properties.tabColor = "ff16ee"
         user = self.user
         ingredient_rows_count = 11
 
@@ -2175,7 +2187,7 @@ class CanteenWorkBook:
             or any(
                 [
                     date_start <= c.date_of_using <= date_end
-                    for c in i.consumptions
+                    for c in i.consumptions.all()
                     if c.is_disabled == False
                 ]
             )
@@ -2186,6 +2198,7 @@ class CanteenWorkBook:
             ingredient_names
         ):
             sheet = wb.create_sheet(ingredient_name)
+            sheet.sheet_properties.tabColor = "1689ff"
             named_ingredients = [
                 i for i in ingredients if i.name == ingredient_name
             ]
