@@ -2186,6 +2186,7 @@ class CanteenWorkBook:
             year_storage_total_price = Decimal("0.0")
             year_consumption_quantity = Decimal("0")
             year_consumption_total_price = Decimal("0.0")
+            ingredient_rows_count = 31
 
             for month_index in range(12):
                 month = month_index + 1
@@ -2194,7 +2195,7 @@ class CanteenWorkBook:
                 month_day_1 = date(year, month, 1)
                 month_day_n1 = date(year, month, month_days)
 
-                row_num = (month_days + 8) * month_index
+                row_num = (ingredient_rows_count + 8) * month_index
                 title_row_num = row_num + 1
                 title_cell = sheet.cell(title_row_num, 1)
                 title_cell.value = (
@@ -2418,112 +2419,128 @@ class CanteenWorkBook:
                 month_consumption_quantity = Decimal("0")
                 month_consumption_total_price = Decimal("0.0")
 
-                for day_index in range(month_days):
-                    day = date(year, month, day_index + 1)
-                    ingredient_row_num = (
-                        month_surplus_header_row_num + 1 + day_index
-                    )
-                    storage_quantity = sum(
-                        [
-                            i.quantity
-                            for i in month_ingredients
-                            if i.storage_date == day
-                        ]
-                    )
-                    storage_total_price = sum(
-                        [
-                            i.total_price
-                            for i in month_ingredients
-                            if i.storage_date == day
-                        ]
-                    )
-                    storage_unit_price = Decimal(
-                        str(storage_total_price)
-                    ) / Decimal(str(storage_quantity))
-                    storage_unit_price = (
-                        f"{storage_unit_price:.{decimal_prec}f}"
-                    )
-                    if storage_quantity:
-                        sheet.cell(ingredient_row_num, 4, storage_quantity)
-                        sheet.cell(ingredient_row_num, 5, storage_unit_price)
-                        sheet.cell(ingredient_row_num, 6, storage_total_price)
+                for day_index in range(ingredient_rows_count):
 
-                    consumption_quantity = Decimal("0")
-                    consumption_total_price = Decimal("0.0")
-
-                    for i in month_ingredients:
-                        for c in i.consumptions.filter(is_disabled=False).all():
-                            if c.date_of_using == day:
-                                consumption_quantity += c.amount_used
-                                consumption_total_price += (
-                                    c.amount_used * i.unit_price
-                                )
-
-                    consumption_unit_price = (
-                        consumption_total_price / consumption_quantity
-                    )
-                    consumption_unit_price = (
-                        f"{consumption_unit_price:.{decimal_prec}f}"
-                    )
-
-                    if consumption_quantity:
-                        sheet.cell(ingredient_row_num, 7, consumption_quantity)
-                        sheet.cell(
-                            ingredient_row_num, 8, consumption_unit_price
+                    if day_index + 1 <= month_days:
+                        day = date(year, month, day_index + 1)
+                        ingredient_row_num = (
+                            month_surplus_header_row_num + 1 + day_index
                         )
-                        sheet.cell(
-                            ingredient_row_num, 9, consumption_total_price
+                        storage_quantity = sum(
+                            [
+                                i.quantity
+                                for i in month_ingredients
+                                if i.storage_date == day
+                            ]
                         )
-
-                    surplus_quantity = Decimal("0")
-                    surplus_total_price = Decimal("0.0")
-                    for i in month_ingredients:
-                        if i.storage_date > day:
-                            continue
-                        remaining_quantity = i.get_remaining_quantity(day)
-                        surplus_quantity += remaining_quantity
-                        surplus_total_price += remaining_quantity * i.unit_price
-                    surplus_unit_price = (
-                        surplus_total_price / surplus_unit_price
-                    )
-                    surplus_unit_price = (
-                        f"{surplus_unit_price:.{decimal_prec}f}"
-                    )
-
-                    if surplus_quantity:
-                        sheet.cell(ingredient_row_num, 10, surplus_quantity)
-                        sheet.cell(ingredient_row_num, 11, surplus_unit_price)
-                        sheet.cell(ingredient_row_num, 12, surplus_total_price)
-
-                    num_value = ""
-                    if storage_quantity:
-                        storage_num = storage_dates.index(day) + 1
-                        num_value += (
-                            (f"R{month:0>2}{storage_num:0>2}")
-                            if self.is_zh_CN
-                            else (f"S{month:0>2}{storage_num:0>2}")
+                        storage_total_price = sum(
+                            [
+                                i.total_price
+                                for i in month_ingredients
+                                if i.storage_date == day
+                            ]
                         )
-                        num_value += _("and (Food Sheet)")
+                        storage_unit_price = Decimal(
+                            str(storage_total_price)
+                        ) / Decimal(str(storage_quantity))
+                        storage_unit_price = (
+                            f"{storage_unit_price:.{decimal_prec}f}"
+                        )
+                        if storage_quantity:
+                            sheet.cell(ingredient_row_num, 4, storage_quantity)
+                            sheet.cell(
+                                ingredient_row_num, 5, storage_unit_price
+                            )
+                            sheet.cell(
+                                ingredient_row_num, 6, storage_total_price
+                            )
 
-                    if consumption_quantity:
-                        consumption_num = consumption_dates.index(day) + 1
-                        num_value += (
-                            (f"C{month:0>2}{consumption_num:0>2}")
-                            if self.is_zh_CN
-                            else (f"C{month:0>2}{consumption_num:0>2}")
+                        consumption_quantity = Decimal("0")
+                        consumption_total_price = Decimal("0.0")
+
+                        for i in month_ingredients:
+                            for c in i.consumptions.filter(
+                                is_disabled=False
+                            ).all():
+                                if c.date_of_using == day:
+                                    consumption_quantity += c.amount_used
+                                    consumption_total_price += (
+                                        c.amount_used * i.unit_price
+                                    )
+
+                        consumption_unit_price = (
+                            consumption_total_price / consumption_quantity
+                        )
+                        consumption_unit_price = (
+                            f"{consumption_unit_price:.{decimal_prec}f}"
                         )
 
-                    sheet.cell(ingredient_row_num, 13, num_value)
+                        if consumption_quantity:
+                            sheet.cell(
+                                ingredient_row_num, 7, consumption_quantity
+                            )
+                            sheet.cell(
+                                ingredient_row_num, 8, consumption_unit_price
+                            )
+                            sheet.cell(
+                                ingredient_row_num, 9, consumption_total_price
+                            )
 
-                    month_storage_quantity += storage_quantity
-                    month_storage_total_price += storage_total_price
-                    month_consumption_quantity += consumption_quantity
-                    month_consumption_total_price += consumption_total_price
+                        surplus_quantity = Decimal("0")
+                        surplus_total_price = Decimal("0.0")
+                        for i in month_ingredients:
+                            if i.storage_date > day:
+                                continue
+                            remaining_quantity = i.get_remaining_quantity(day)
+                            surplus_quantity += remaining_quantity
+                            surplus_total_price += (
+                                remaining_quantity * i.unit_price
+                            )
+                        surplus_unit_price = (
+                            surplus_total_price / surplus_unit_price
+                        )
+                        surplus_unit_price = (
+                            f"{surplus_unit_price:.{decimal_prec}f}"
+                        )
 
-                    year_storage_quantity += storage_quantity
-                    year_storage_total_price += storage_total_price
-                    year_consumption_quantity += consumption_quantity
-                    year_consumption_total_price += consumption_total_price
+                        if surplus_quantity:
+                            sheet.cell(ingredient_row_num, 10, surplus_quantity)
+                            sheet.cell(
+                                ingredient_row_num, 11, surplus_unit_price
+                            )
+                            sheet.cell(
+                                ingredient_row_num, 12, surplus_total_price
+                            )
+
+                        num_value = ""
+                        if storage_quantity:
+                            storage_num = storage_dates.index(day) + 1
+                            num_value += (
+                                (f"R{month:0>2}{storage_num:0>2}")
+                                if self.is_zh_CN
+                                else (f"S{month:0>2}{storage_num:0>2}")
+                            )
+                            num_value += _("and (Food Sheet)")
+
+                        if consumption_quantity:
+                            consumption_num = consumption_dates.index(day) + 1
+                            num_value += (
+                                (f"C{month:0>2}{consumption_num:0>2}")
+                                if self.is_zh_CN
+                                else (f"C{month:0>2}{consumption_num:0>2}")
+                            )
+
+                        sheet.cell(ingredient_row_num, 13, num_value)
+
+                        month_storage_quantity += storage_quantity
+                        month_storage_total_price += storage_total_price
+                        month_consumption_quantity += consumption_quantity
+                        month_consumption_total_price += consumption_total_price
+
+                        year_storage_quantity += storage_quantity
+                        year_storage_total_price += storage_total_price
+                        year_consumption_quantity += consumption_quantity
+                        year_consumption_total_price += consumption_total_price
 
                 for row_index in range(
                     month_surplus_header_row_num,
