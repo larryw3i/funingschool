@@ -103,6 +103,15 @@
   </button>
   <select class="workbook-month-select form-select float-end mx-2"
           style="width:118px"></select>
+  <div class="form-check float-end mx-1 pt-2">
+    <label class="form-check-label" for="include_food_sheets">
+      {% trans 'Ingredient Sheets are also included.' %}
+    </label>
+    <input class="form-check-input"
+           type="checkbox"
+           value=""
+           id="include_food_sheets">
+  </div>
 </div>
 {{ ingredient_ids|json_script:'ingredient_ids' }}
 {{ months|json_script:'months' }}
@@ -115,7 +124,6 @@
   var months = JSON.parse($("#months").text())
   var meal_types = JSON.parse($("#meal_types").text())
   var date_range = JSON.parse($("#date_range").text())
-
   var storage_date_start = $('#storage_date_start').text().replace(new RegExp('"', 'g'), "")
 
   var dont_submit = false
@@ -387,8 +395,13 @@
   });
 
   function generate_spreadsheet() {
+    var include_food_sheets = $("#include_food_sheets").is(':checked')
     var month = $(".workbook-month-select").val()
-    window.open(`/canteen/generate_spreadsheet/${month}`, 'generate_spreadsheet');
+    if (include_food_sheets) {
+      window.open(`/canteen/generate_spreadsheet/${month}?include_food_sheets=true`, 'generate_spreadsheet');
+    } else {
+      window.open(`/canteen/generate_spreadsheet/${month}`, 'generate_spreadsheet');
+    }
   }
 
   function set_consumptions_table_size() {
