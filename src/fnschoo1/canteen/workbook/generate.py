@@ -2156,7 +2156,6 @@ class CanteenWorkBook:
         year = datetime.now().year
         date_start = date(year, 1, 1)
         date_end = date(year, 12, 31)
-        date_end = self.date_end
         meal_type = self.meal_type
 
         ingredients = Ingredient.objects.filter(
@@ -2168,13 +2167,32 @@ class CanteenWorkBook:
         ingredients = [
             i
             for i in ingredients
-            if i.get_remaining_quantity(
-                (date_start + timedelta(days=-1)).date()
+            if date_start <= i.storage <= date_end
+            or any(
+                [
+                    date_start <= c.date_of_using <= date_end
+                    for c in i.consumptions.filter(is_disabled=False).all()
+                ]
             )
-            > 0
         ]
 
         ingredient_names = list(set([i.name for i in ingredients]))
+        for col_index, col_width in [
+            [1, 0.4],
+            [2, 0.4],
+            [3, 1.86],
+            [4, 0.7],
+            [5, 0.8],
+            [6, 0.95],
+            [7, 0.7],
+            [8, 0.8],
+            [9, 0.97],
+            [10, 0.7],
+            [11, 0.8],
+            [12, 0.8],
+            [13, 1.67],
+        ]:
+            set_column_width_in_inches(sheet, col_index, col_width)
         for ingredient_name in ingredient_names:
             sheet = wb.create_sheet(ingredient_name)
             named_ingredients = [
@@ -2213,6 +2231,12 @@ class CanteenWorkBook:
                 sheet.merge_cells(f"A{title_row_num}:M{title_row_num}")
 
                 ingredient_name_row_num = title_row_num + 1
+
+                for row_index in range(
+                    ingredient_name_row_num, ingredient_rows_count + 6 + 1
+                ):
+                    set_row_height_in_inches(sheet, row_index, 0.22)
+
                 ingredient_name_cell = sheet.cell(ingredient_name_row_num, 1)
                 ingredient_name_cell.value = _(
                     "Ingredient Name: {ingredient_name} (quantity_unit_name)"
@@ -2225,7 +2249,6 @@ class CanteenWorkBook:
                 sheet.merge_cells(
                     f"A{ingredient_name_row_num}:M{ingredient_name_row_num}"
                 )
-                set_row_height_in_inches(sheet, ingredient_name_row_num, 0.22)
 
                 year_header_row_num = ingredient_name_row_num + 1
                 year_header_cell = sheet.cell(year_header_row_num, 1)
@@ -2520,9 +2543,10 @@ class CanteenWorkBook:
                                 if self.is_zh_CN
                                 else (f"S{month:0>2}{storage_num:0>2}")
                             )
-                            num_value += _("and (Food Sheet)")
 
                         if consumption_quantity:
+                            if not num_value == "":
+                                num_value += _("and (Food Sheet)")
                             consumption_num = consumption_dates.index(day) + 1
                             num_value += (
                                 (f"C{month:0>2}{consumption_num:0>2}")
