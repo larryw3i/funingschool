@@ -4,6 +4,7 @@ project_dir=$(dirname "$(readlink -f "$0")")
 venv_dir=${project_dir}/venv
 src_dir=${project_dir}/src
 fnschoo1_dir=${src_dir}/fnschoo1
+db_cp_dir=${fnschoo1_dir}/db.cp
 
 if [[ ! -d ${venv_dir} ]]; then
     python3 \
@@ -13,6 +14,22 @@ if [[ ! -d ${venv_dir} ]]; then
 fi
 
 . ${venv_dir}/bin/activate
+
+copy_db() {
+    db_path=${fnschoo1_dir}/db.sqlite3
+    user_name=""
+    if [ -z "$1" ]; then
+        user_name="$(whoami)"
+    else
+        user_name="$1"
+    fi
+    if [ -d "${db_cp_dir}" ]; then
+        mkdir -p ${db_cp_dir}
+    fi
+    db_copy_path=${db_cp_dir}/db.${user_name}.$(date +%Y%m%d%H%M%S).$(uuid).sqlite3
+    cp ${db_path} ${db_copy_path}
+    echo "'${db_path}' has been copied to '${db_copy_path}' ."
+}
 
 generate_code_txt() {
     code_out_path=${project_dir}/code.out.txt

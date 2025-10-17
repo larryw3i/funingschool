@@ -2158,12 +2158,16 @@ class CanteenWorkBook:
         date_end = date(year, 12, 31)
         meal_type = self.meal_type
 
-        ingredients = Ingredient.objects.filter(
-            Q(is_disabled=False)
-            & Q(is_ignorable=False)
-            & Q(user=user)
-            & Q(meal_type=meal_type)
-        ).all()
+        ingredients = (
+            Ingredient.objects.filter(
+                Q(is_disabled=False)
+                & Q(is_ignorable=False)
+                & Q(user=user)
+                & Q(meal_type=meal_type)
+            )
+            .prefetch_related("consumptions")
+            .all()
+        )
         ingredients = [
             i
             for i in ingredients
@@ -2171,7 +2175,8 @@ class CanteenWorkBook:
             or any(
                 [
                     date_start <= c.date_of_using <= date_end
-                    for c in i.consumptions.filter(is_disabled=False).all()
+                    for c in i.consumptions
+                    if c.is_disabled == False
                 ]
             )
         ]
@@ -2248,7 +2253,7 @@ class CanteenWorkBook:
 
                 ingredient_name_cell = sheet.cell(ingredient_name_row_num, 1)
                 ingredient_name_cell.value = _(
-                    "Ingredient Name: {ingredient_name} (quantity_unit_name)"
+                    "Ingredient Name: {ingredient_name} ({quantity_unit_name})"
                 ).format(
                     ingredient_name=ingredient_name,
                     quantity_unit_name=year_ingredient0.quantity_unit_name,
@@ -2422,9 +2427,9 @@ class CanteenWorkBook:
                 )
                 consumption_dates = []
                 for i in ingredients:
-                    consumptions = i.consumptions.filter(
-                        is_disabled=False
-                    ).all()
+                    consumptions = [
+                        c for c in i.consumptions.all() if not c.is_disabled
+                    ]
                     for c in consumptions:
                         if (
                             month_day_1 <= c.date_of_using <= month_day_n1
@@ -2433,9 +2438,11 @@ class CanteenWorkBook:
                             consumption_dates.append(c.date_of_using)
 
                 for ingredient in named_ingredients:
-                    consumptions = ingredient.consumptions.filter(
-                        is_disabled=False
-                    ).all()
+                    consumptions = [
+                        c
+                        for c in ingredient.consumptions.all()
+                        if not c.is_disabled
+                    ]
                     ingredient_consumption_dates = [
                         c.date_of_using for c in consumptions
                     ]
@@ -2497,9 +2504,11 @@ class CanteenWorkBook:
                         consumption_total_price = Decimal("0.0")
 
                         for i in month_ingredients:
-                            for c in i.consumptions.filter(
-                                is_disabled=False
-                            ).all():
+                            for c in [
+                                c
+                                for c in i.consumptions.all()
+                                if not c.is_disabled
+                            ]:
                                 if c.date_of_using == day:
                                     consumption_quantity += c.amount_used
                                     consumption_total_price += (
