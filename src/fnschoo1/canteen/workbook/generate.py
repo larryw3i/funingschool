@@ -2579,6 +2579,10 @@ class CanteenWorkBook:
                             sheet.cell(
                                 ingredient_row_num, 12, surplus_total_price
                             )
+                        elif consumption_quantity:
+                            sheet.cell(ingredient_row_num, 10, "0")
+                            sheet.cell(ingredient_row_num, 11, "")
+                            sheet.cell(ingredient_row_num, 12, "0")
 
                         num_value = ""
                         if storage_quantity:
