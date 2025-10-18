@@ -2680,7 +2680,7 @@ class CanteenWorkBook:
         self.fill_in_consumption_sheet()
         self.fill_in_consumption_list_sheet()
         self.fill_in_surplus_sheet()
-        if self.request.GET.get("include_food_sheets") == "true":
+        if self.request.GET.get("include_food_sheets", "") == "true":
             self.fill_in_food_sheets()
 
         return self.wb
