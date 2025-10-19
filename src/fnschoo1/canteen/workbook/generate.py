@@ -2417,16 +2417,16 @@ class CanteenWorkBook:
 
                     sheet.cell(
                         month_surplus_header_row_num,
-                        4,
+                        10,
                         remaining_quantity_last_month,
                     )
                     sheet.cell(
                         month_surplus_header_row_num,
-                        6,
+                        12,
                         remaining_total_price_last_month,
                     )
                     sheet.cell(
-                        month_surplus_header_row_num, 5, unit_price.normalize()
+                        month_surplus_header_row_num, 11, unit_price.normalize()
                     )
 
                 month_ingredients = []

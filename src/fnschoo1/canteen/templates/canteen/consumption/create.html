@@ -42,7 +42,7 @@
           onclick="list_consumptions();">{% trans "Refresh" %}</button>
 </div>
 </div>
-<div class="table table-responsive table-container">
+<div class="table-responsive table-container">
   <table class="table table-consumptions cotable-bordered table-striped table-hover table-condensed scroll-vertical ">
     <thead>
       <tr>
@@ -97,7 +97,8 @@
   </table>
 </div>
 <div class="">
-  <button onclick="generate_spreadsheet();"
+  <button id="generate_spreadsheet_btn"
+          onclick="generate_spreadsheet();"
           class="btn btn-submit-consumptions btn-success float-end">
     {% trans "Generate Spreadsheet" %}
   </button>
@@ -405,11 +406,11 @@
   }
 
   function set_consumptions_table_size() {
-    const submit_consumptions_btn = $(".btn-submit-consumptions")
+    const generate_spreadsheet_btn = $("#generate_spreadsheet_btn")
     const consumptions_table = $(".table-consumptions")
     const header = $("header")
     const footer = $("footer")
-    const height = Math.round((footer.offset().top - submit_consumptions_btn.height() - consumptions_table.offset().top) * 0.95)
+    const height = Math.round((footer.offset().top - generate_spreadsheet_btn.height() - consumptions_table.offset().top) * 0.95)
     consumptions_table.parent().height(height)
   }
   $(window).resize(function() {

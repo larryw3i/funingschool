@@ -35,79 +35,92 @@
        onclick="open_small_window('{% url 'canteen:create_ingredient' %}')">{% trans "Add one" %}</a>
   </div>
   <hr />
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        {% for name,sort, header in headers %}
-          <th scope="col"
-              data-sort="sort_{{ name }} {{ sort }}"
-              onclick="sort_ingredients(this.dataset.sort);">
-            {{ header }}
-            {% if sort == "+" %}
-              &#8593;
-            {% elif sort == "-" %}
-              &#8595;
-            {% endif %}
-          </th>
-        {% endfor %}
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for ingredient in page_obj %}
-        <tr class="tr-ingredient"
-            data-ingredient_updated_at="{{ ingredient.updated_at|localtime|date:'Y/m/d H:i:s' }}"
-            data-ingredient_storage_date="{{ ingredient.storage_date|localtime|date:'Y/m/d' }}">
-          <th scope="row">
-            <div class="form-check"
-                 title="{% trans 'It helps you check the ingredients.' %}">
-              <input type="checkbox"
-                     class="form-check-input"
-                     id="ingredient_free_nark_{{ ingredient.id }}" />
-              <label class="form-check-label"
-                     for="ingredient_free_nark_{{ ingredient.id }}">
-                {{ forloop.counter }}
-              </label>
-            </div>
-          </th>
-          <td>{{ ingredient.storage_date }}</td>
-          <td>{{ ingredient.name }}</td>
-          <td>{{ ingredient.meal_type }}</td>
-          <td>{{ ingredient.category }}</td>
-          <td>{{ ingredient.quantity }}</td>
-          <td>{{ ingredient.quantity_unit_name }}</td>
-          <td>{{ ingredient.total_price }}</td>
-          <td>
-            {% if ingredient.is_ignorable %}
-              {% trans "Yes" %}
-            {% endif %}
-          </td>
-          <td>
-            {% if ingredient.is_disabled %}
-              {% trans "Yes" %}
-            {% endif %}
-          </td>
-          <td class="">
-            <a class=""
-               target="_blank"
-               onclick="open_small_window('{% url 'canteen:edit_ingredient' ingredient.id %}'); return false;">
-              {% trans "Edit" %}
-            </a>
-            |
-            <a class="text-danger"
-               target="_blank"
-               onclick="open_small_window('{% url 'canteen:delete_ingredient' ingredient.id %}'); return false;">
-              {% trans "Delete" %}
-            </a>
-          </td>
-        </tr>
-      {% empty %}
-      {% endfor %}
-    </tbody>
-  </table>
+  <div class="container">
+    <div class="table-responsive-lg  table-container">
+      <table class="table table-bordered table-ingredient table-striped table-hover table-condensed">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            {% for name,sort, header in headers %}
+              <th scope="col"
+                  data-sort="sort_{{ name }} {{ sort }}"
+                  onclick="sort_ingredients(this.dataset.sort);">
+                {{ header }}
+                {% if sort == "+" %}
+                  &#8593;
+                {% elif sort == "-" %}
+                  &#8595;
+                {% endif %}
+              </th>
+            {% endfor %}
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for ingredient in page_obj %}
+            <tr class="tr-ingredient"
+                data-ingredient_updated_at="{{ ingredient.updated_at|localtime|date:'Y/m/d H:i:s' }}"
+                data-ingredient_storage_date="{{ ingredient.storage_date|localtime|date:'Y/m/d' }}">
+              <th scope="row">
+                <div class="form-check"
+                     title="{% trans 'It helps you check the ingredients.' %}">
+                  <input type="checkbox"
+                         class="form-check-input"
+                         id="ingredient_free_nark_{{ ingredient.id }}" />
+                  <label class="form-check-label"
+                         for="ingredient_free_nark_{{ ingredient.id }}">
+                    {{ forloop.counter }}
+                  </label>
+                </div>
+              </th>
+              <td>{{ ingredient.storage_date }}</td>
+              <td>{{ ingredient.name }}</td>
+              <td>{{ ingredient.meal_type }}</td>
+              <td>{{ ingredient.category }}</td>
+              <td>{{ ingredient.quantity }}</td>
+              <td>{{ ingredient.quantity_unit_name }}</td>
+              <td>{{ ingredient.total_price }}</td>
+              <td>
+                {% if ingredient.is_ignorable %}
+                  {% trans "Yes" %}
+                {% endif %}
+              </td>
+              <td>
+                {% if ingredient.is_disabled %}
+                  {% trans "Yes" %}
+                {% endif %}
+              </td>
+              <td class="">
+                <a class=""
+                   target="_blank"
+                   onclick="open_small_window('{% url 'canteen:edit_ingredient' ingredient.id %}'); return false;">
+                  {% trans "Edit" %}
+                </a>
+                |
+                <a class="text-danger"
+                   target="_blank"
+                   onclick="open_small_window('{% url 'canteen:delete_ingredient' ingredient.id %}'); return false;">
+                  {% trans "Delete" %}
+                </a>
+              </td>
+            </tr>
+          {% empty %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
   {% include 'includes/_paginator.html' %}
   <script>
+    $(document).ready(function() {
+      var ingredient_table = $('.table-ingredient')
+      var pagination = $('.pagination')
+      var footer = $("footer")
+      var height = Math.round((footer.offset().top - pagination.height() - ingredient_table.offset().top) * 0.98)
+      ingredient_table.parent().height(
+        height
+      );
+    });
     $(document).ready(
       function() {
         make_highlight(".tr-ingredient", "ingredient_updated_at")
@@ -144,6 +157,15 @@
       update_href(i_sort);
     }
   </script>
-  <style></style>
+  <style>
+    .table-container {
+      overflow: auto;
+    }
+
+    .table-container thead th {
+      position: sticky;
+      top: 0;
+    }
+  </style>
 
 {% endblock %}

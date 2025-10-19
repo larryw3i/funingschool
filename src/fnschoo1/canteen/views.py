@@ -395,7 +395,31 @@ def edit_ingredient(request, ingredient_id):
     ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
 
     if request.method == "POST":
+
         form = IngredientForm(request.POST, instance=ingredient)
+
+        total_price = form.instance.total_price
+        quantity = form.instance.quantity
+
+        [total_price0, quantity0], [total_price1, quantity1] = split_price(
+            total_price, quantity
+        )
+
+        if total_price1:
+            unit_price_error_msg = _(
+                "The unit pricei ({unit_price}) has more than 3 decimal places and cannot be saved. Please modify it again."
+            ).format(
+                unit_price=(
+                    Decimal(str(total_price)) / Decimal(str(float(quantity)))
+                ).normalize()
+            )
+            form.add_error("total_price", unit_price_error_msg)
+            form.add_error("quantity", unit_price_error_msg)
+            return render(
+                request, "canteen/ingredient/update.html", {"form": form}
+            )
+
+        form.instance.user = request.user
         if form.is_valid():
             form.save()
             return render(
@@ -847,6 +871,30 @@ class IngredientCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        total_price = form.instance.total_price
+        quantity = form.instance.quantity
+
+        [total_price0, quantity0], [total_price1, quantity1] = split_price(
+            total_price, quantity
+        )
+
+        if form.is_valid() and total_price1:
+            Ingredient.objects.create(
+                user=form.instance.user,
+                storage_date=form.instance.storage_date,
+                name=form.instance.name + _("(2)"),
+                meal_type=form.instance.meal_type,
+                category=form.instance.category,
+                quantity=quantity1,
+                total_price=total_price1,
+                quantity_unit_name=form.instance.quantity_unit_name,
+                is_ignorable=form.instance.is_ignorable,
+            )
+            form.instance.name = form.instance.name + _("(1)")
+
+        form.instance.total_price = total_price0
+        form.instance.quantity = quantity0
+
         return super().form_valid(form)
 
 

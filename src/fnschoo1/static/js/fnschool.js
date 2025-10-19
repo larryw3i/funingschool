@@ -5,7 +5,6 @@ function make_highlight(query, time_data) {
     var element = $(element)
     var time_value = element.data(time_data)
     var seconds_diff = Math.floor((new Date() - new Date(time_value)) / 1000)
-    console.log(seconds_diff)
     if (seconds_diff < 46) {
       highlight_elements_toggled.push(element)
       element.toggleClass('fn-highlight')
