@@ -165,4 +165,14 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 LOGIN_URL = reverse_lazy("profiles:log_in")
+
+_settings_path = Path(__file__).parent / "_settings.py"
+if _settings_path.exists():
+    print(
+        ('Custom configuration "{_settings_path}" has been used.').format(
+            _settings_path=_settings_path.as_posix()
+        )
+    )
+    from ._settings import *
+
 # The end.

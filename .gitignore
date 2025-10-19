@@ -160,4 +160,7 @@ venv*
 # *.out.*
 *.out.*
 
+# _settings.py
+_settings.py
+
 # The end.
