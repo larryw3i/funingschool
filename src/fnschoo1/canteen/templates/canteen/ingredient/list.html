@@ -1,4 +1,5 @@
 {% extends "base/header_content_footer.html" %}
+{% load tz %}
 {% load crispy_forms_tags %}
 {% block title %}
   {% trans "Ingredient List" %}
@@ -55,7 +56,9 @@
     </thead>
     <tbody>
       {% for ingredient in page_obj %}
-        <tr>
+        <tr class="tr-ingredient"
+            data-ingredient_updated_at="{{ ingredient.updated_at|localtime|date:'Y/m/d H:i:s' }}"
+            data-ingredient_storage_date="{{ ingredient.storage_date|localtime|date:'Y/m/d' }}">
           <th scope="row">
             <div class="form-check"
                  title="{% trans 'It helps you check the ingredients.' %}">
@@ -105,6 +108,11 @@
   </table>
   {% include 'includes/_paginator.html' %}
   <script>
+    $(document).ready(
+      function() {
+        make_highlight(".tr-ingredient", "ingredient_updated_at")
+      });
+
     function clear_q() {
       update_href({
         "q": ""
@@ -136,4 +144,6 @@
       update_href(i_sort);
     }
   </script>
+  <style></style>
+
 {% endblock %}

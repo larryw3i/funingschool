@@ -1,3 +1,26 @@
+function make_highlight(query, time_data) {
+  var highlight_elements = $(query)
+  var highlight_elements_toggled = []
+  highlight_elements.each(function (index, element) {
+    var element = $(element)
+    var time_value = element.data(time_data)
+    var seconds_diff = Math.floor((new Date() - new Date(time_value)) / 1000)
+    console.log(seconds_diff)
+    if (seconds_diff < 46) {
+      highlight_elements_toggled.push(element)
+      element.toggleClass('fn-highlight')
+      $('html,body').animate({ scrollTop: element.offset().top }, 1)
+    }
+  })
+
+  setTimeout(function () {
+    $(highlight_elements_toggled).each(function (index, element) {
+      element = $(element)
+      element.toggleClass('fn-highlight')
+    })
+  }, 10 * 1000)
+}
+
 function get_cookie(name) {
   const cookies = document.cookie.split(';')
   for (const cookie of cookies) {
@@ -89,3 +112,5 @@ $(document).ready(function () {
 function set_page(num) {
   update_href({ page: num })
 }
+
+// The end.

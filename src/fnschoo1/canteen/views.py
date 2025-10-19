@@ -413,9 +413,10 @@ def list_ingredients(request):
     search_query = request.GET.get("q", "")
     search_query_cp = search_query
     fields = [
-        f for f in Ingredient._meta.fields if f.name not in ["id", "user"]
+        f
+        for f in Ingredient._meta.fields
+        if f.name in IngredientForm._meta.fields
     ]
-
     if search_query:
         queries = Q(user=request.user)
 
