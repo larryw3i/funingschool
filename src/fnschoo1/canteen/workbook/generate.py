@@ -15,15 +15,8 @@ from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import (
-    Count,
-    DecimalField,
-    ExpressionWrapper,
-    F,
-    Q,
-    Sum,
-    Value,
-)
+from django.db.models import (Count, DecimalField, ExpressionWrapper, F, Q, Sum,
+                              Value)
 from django.db.models.functions import Coalesce
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -32,25 +25,16 @@ from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 from fnschool import count_chinese_characters
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
-from ..forms import (
-    CategoryForm,
-    ConsumptionForm,
-    IngredientForm,
-    PurchasedIngredientsWorkBookForm,
-)
+from ..forms import (CategoryForm, ConsumptionForm, IngredientForm,
+                     PurchasedIngredientsWorkBookForm)
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
 
@@ -185,8 +169,16 @@ def set_row_height_in_inches(worksheet, row, inches):
     worksheet.row_dimensions[row].height = points
 
 
-class CanteenWorkBook:
-    def __init__(self, request, month, meal_type):
+class MealTypeWorkbook:
+    def __init__(
+        self,
+        request,
+        year=None,
+        month=None,
+        ingredients=None,
+        meal_type=None,
+        categories=None,
+    ):
         self.wb = Workbook()
         self.wb[self.wb.sheetnames[0]].sheet_state = "hidden"
         self.cover_sheet = self.wb.create_sheet(title=_("Sheet Cover"))
@@ -227,15 +219,23 @@ class CanteenWorkBook:
         self.font_18_bold = Font(size=18, bold=True)
         self.font_20_bold = Font(size=20, bold=True)
 
-        self.request = request
-        self.user = self.request.user
-        self.meal_type = meal_type
-        self.year = int(month.split("-")[0])
-        self.month = int(month.split("-")[1])
-        self.date_start = datetime(self.year, self.month, 1).date()
-        self.date_end = datetime(
+        self.year = year or datetime().now().year
+        self.month = month or datetime().now().month
+
+        self.first_date_of_month = datetime(self.year, self.month, 1).date()
+        self.last_date_of_month = datetime(
             self.year, self.month, calendar.monthrange(self.year, self.month)[1]
         ).date()
+        self.first_date_of_year=datetime(self.year,1,1)
+        self.last_date_of_year=datetime(self.year,12,31)
+
+        self.request = request
+        self.user = self.request.user
+        self.ingredients = ingredients
+        self.ignorable_ingredients = self.ingredients.filter(Q(is_ignorable=True)).all()
+        self.non_ignorable_ingredients = self.ingredients.filter(Q(is_ignorable=False)).all()
+        self.meal_type = meal_type
+        self.categories = categories
         self.is_zh_CN = is_zh_CN()
 
         self._is_school = None
@@ -294,7 +294,7 @@ class CanteenWorkBook:
             affiliation=user.affiliation,
             year=self.year,
             month=self.month,
-            day=self.date_end.day,
+            day=self.last_date_of_month.day,
         )
 
         header_row_num = 3
@@ -318,10 +318,7 @@ class CanteenWorkBook:
             cell.alignment = self.center_alignment
             cell.border = self.thin_border
 
-        categories = Category.objects.filter(
-            Q(user=user) & Q(is_disabled=False)
-        ).all()
-
+        categories = self.categories
         set_row_height_in_inches(sheet, 1, 0.38)
         set_row_height_in_inches(sheet, 2, 0.22)
         set_row_height_in_inches(sheet, 3, 0.32)
@@ -334,14 +331,9 @@ class CanteenWorkBook:
             category_cell = sheet.cell(row_num, 1)
             category_cell.value = category.name
 
-            ingredients = Ingredient.objects.filter(
-                Q(user=user)
-                & Q(category=category)
-                & Q(storage_date__gte=self.date_start)
-                & Q(storage_date__lte=self.date_end)
-                & Q(meal_type=self.meal_type)
-                & Q(is_disabled=False)
-                & Q(is_ignorable=True)
+            ingredients = self.ignorable_ingredients.filter(
+                & Q(storage_date__gte=self.first_date_of_month)
+                & Q(storage_date__lte=self.last_date_of_month)
             ).all()
             total_price_cell = sheet.cell(row_num, 2)
             total_price_cell.value = sum([i.total_price for i in ingredients])
@@ -353,13 +345,9 @@ class CanteenWorkBook:
                 cell.alignment = self.center_alignment
                 cell.border = self.thin_border
 
-        ingredients = Ingredient.objects.filter(
-            Q(user=user)
-            & Q(storage_date__gte=self.date_start)
-            & Q(storage_date__lte=self.date_end)
-            & Q(meal_type=self.meal_type)
-            & Q(is_disabled=False)
-            & Q(is_ignorable=True)
+        ingredients = self.ignorable_ingredients.filter(
+            & Q(storage_date__gte=self.first_date_of_month)
+            & Q(storage_date__lte=self.last_date_of_month)
         ).all()
 
         summary_row_num = len(categories) + header_row_num + 1
@@ -464,7 +452,7 @@ class CanteenWorkBook:
             affiliation=user.affiliation,
             year=self.year,
             month=self.month,
-            day=self.date_end.day,
+            day=self.last_date_of_month.day,
         )
 
         header_row_num = 3
@@ -490,10 +478,7 @@ class CanteenWorkBook:
             cell.alignment = self.center_alignment
             cell.border = self.thin_border
 
-        categories = Category.objects.filter(
-            Q(user=user) & Q(is_disabled=False)
-        ).all()
-
+        categories = self.categories
         set_row_height_in_inches(sheet, 1, 0.38)
         set_row_height_in_inches(sheet, 2, 0.22)
         set_row_height_in_inches(sheet, 3, 0.32)
@@ -506,19 +491,14 @@ class CanteenWorkBook:
             category_cell = sheet.cell(row_num, 1)
             category_cell.value = category.name
 
-            ingredients = Ingredient.objects.filter(
-                Q(user=user)
+            ingredients = self.non_ignorable_ingredients.filter(
                 & Q(category=category)
                 & Q(
                     consumptions__date_of_using__range=(
-                        self.date_start,
-                        self.date_end,
+                        self.first_date_of_month,
+                        self.last_date_of_month,
                     )
                 )
-                & Q(meal_type=self.meal_type)
-                & Q(category__is_disabled=False)
-                & Q(is_disabled=False)
-                & Q(is_ignorable=False)
             ).distinct()
 
             total_price_cell = sheet.cell(row_num, 2)
@@ -526,8 +506,8 @@ class CanteenWorkBook:
             for i in ingredients:
                 consumptions = i.consumptions.filter(
                     Q(is_disabled=False)
-                    & Q(date_of_using__lte=self.date_end)
-                    & Q(date_of_using__gte=self.date_start)
+                    & Q(date_of_using__lte=self.last_date_of_month)
+                    & Q(date_of_using__gte=self.first_date_of_month)
                 ).all()
                 total_price_consumed += sum(
                     [c.amount_used * i.unit_price for c in consumptions]
@@ -541,18 +521,14 @@ class CanteenWorkBook:
                 cell.alignment = self.center_alignment
                 cell.border = self.thin_border
 
-        ingredients = Ingredient.objects.filter(
-            Q(user=user)
-            & Q(
+        ingredients = self.non_ignorable_ingredients.filter(
+            Q(
                 consumptions__date_of_using__range=(
-                    self.date_start,
-                    self.date_end,
+                    self.first_date_of_month,
+                    self.last_date_of_month,
                 )
             )
-            & Q(meal_type=self.meal_type)
             & Q(category__is_disabled=False)
-            & Q(is_disabled=False)
-            & Q(is_ignorable=False)
         ).distinct()
 
         summary_row_num = len(categories) + header_row_num + 1
@@ -560,8 +536,8 @@ class CanteenWorkBook:
         for i in ingredients:
             consumptions = i.consumptions.filter(
                 Q(is_disabled=False)
-                & Q(date_of_using__lte=self.date_end)
-                & Q(date_of_using__gte=self.date_start)
+                & Q(date_of_using__lte=self.last_date_of_month)
+                & Q(date_of_using__gte=self.first_date_of_month)
             ).all()
             summary_total_price += sum(
                 [c.amount_used * i.unit_price for c in consumptions]
@@ -666,7 +642,7 @@ class CanteenWorkBook:
             affiliation=user.affiliation,
             year=self.year,
             month=self.month,
-            day=self.date_end.day,
+            day=self.last_date_of_month.day,
         )
 
         header_row_num = 3
@@ -690,10 +666,7 @@ class CanteenWorkBook:
             cell.alignment = self.center_alignment
             cell.border = self.thin_border
 
-        categories = Category.objects.filter(
-            Q(user=user) & Q(is_disabled=False)
-        ).all()
-
+        categories = self.categories 
         set_row_height_in_inches(sheet, 1, 0.38)
         set_row_height_in_inches(sheet, 2, 0.22)
         set_row_height_in_inches(sheet, 3, 0.32)
@@ -706,15 +679,12 @@ class CanteenWorkBook:
             category_cell = sheet.cell(row_num, 1)
             category_cell.value = category.name
 
-            ingredients = Ingredient.objects.filter(
-                Q(user=user)
+            ingredients = self.non_ignorable_ingredients.filter(
+                Q(storage_date__gte=self.first_date_of_month)
+                & Q(storage_date__lte=self.last_date_of_month)
                 & Q(category=category)
-                & Q(storage_date__gte=self.date_start)
-                & Q(storage_date__lte=self.date_end)
-                & Q(meal_type=self.meal_type)
-                & Q(is_disabled=False)
-                & Q(is_ignorable=False)
             ).all()
+
             total_price_cell = sheet.cell(row_num, 2)
             total_price_cell.value = sum([i.total_price for i in ingredients])
 
@@ -725,13 +695,9 @@ class CanteenWorkBook:
                 cell.alignment = self.center_alignment
                 cell.border = self.thin_border
 
-        ingredients = Ingredient.objects.filter(
-            Q(user=user)
-            & Q(storage_date__gte=self.date_start)
-            & Q(storage_date__lte=self.date_end)
-            & Q(meal_type=self.meal_type)
-            & Q(is_disabled=False)
-            & Q(is_ignorable=False)
+        ingredients = self.non_ignorable_ingredients.filter(
+             Q(storage_date__gte=self.first_date_of_month)
+            & Q(storage_date__lte=self.last_date_of_month)
         ).all()
 
         summary_row_num = len(categories) + header_row_num + 1
@@ -811,16 +777,10 @@ class CanteenWorkBook:
         sheet.sheet_properties.tabColor = "ff9e16"
         user = self.user
         consumption_rows_count = 21
-        categories = Category.objects.filter(
-            Q(user=user) & Q(is_disabled=False)
-        ).all()
-        consumptions = Consumption.objects.filter(
-            Q(is_disabled=False)
-            & Q(ingredient__meal_type=self.meal_type)
-            & Q(ingredient__user=user)
-            & Q(date_of_using__gte=self.date_start)
-            & Q(date_of_using__lte=self.date_end)
-        ).all()
+        categories = self.categories
+        consumptions = []
+        for i in self.non_ignorable_ingredients:
+            consumptions += i.consumptions.filter(Q(is_disabled=False)).all()
         consumption_row_height = 0.18
         consumption_rows_height = consumption_rows_count * 0.18
 
@@ -880,7 +840,7 @@ class CanteenWorkBook:
                     Ingredient(
                         user=user,
                         name="",
-                        storage_date=self.date_start,
+                        storage_date=self.first_date_of_month,
                         meal_type=split_dated_consumption.ingredient.meal_type,
                         category=c,
                         quantity=0.0,
@@ -1204,17 +1164,11 @@ class CanteenWorkBook:
         sheet.sheet_properties.tabColor = "16b1ff"
         user = self.user
         ingredient_rows_count = 21
-        ingredients = Ingredient.objects.filter(
-            Q(user=user)
-            & Q(is_disabled=False)
-            & Q(is_ignorable=False)
-            & Q(storage_date__gte=self.date_start)
-            & Q(storage_date__lte=self.date_end)
-            & Q(meal_type=self.meal_type)
+        ingredients = self.non_ignorable_ingredients.filter(
+            Q(storage_date__gte=self.first_date_of_month)
+            & Q(storage_date__lte=self.last_date_of_month)
         ).all()
-        categories = Category.objects.filter(
-            Q(user=user) & Q(is_disabled=False)
-        ).all()
+        categories = self.categories
         ingredient_row_height = 0.18
         ingredient_rows_height = ingredient_rows_count * 0.18
         storage_dates = sorted(list(set([i.storage_date for i in ingredients])))
@@ -1563,10 +1517,7 @@ class CanteenWorkBook:
             cell.border = self.thin_border
             cell.font = self.font_12_bold
 
-        categories = Category.objects.filter(
-            Q(user=user) & Q(is_disabled=False)
-        ).all()
-
+        categories = self.categories
         set_row_height_in_inches(sheet, 1, 0.60)
         set_row_height_in_inches(sheet, 2, 0.44)
 
@@ -1578,13 +1529,9 @@ class CanteenWorkBook:
             category_cell = sheet.cell(row_num, 1)
             category_cell.value = category.name
 
-            ingredients = Ingredient.objects.filter(
-                Q(user=user)
-                & Q(category=category)
-                & Q(storage_date__gte=self.date_start)
-                & Q(storage_date__lte=self.date_end)
-                & Q(meal_type=self.meal_type)
-                & Q(is_disabled=False)
+            ingredients = self.ingredients.filter(
+                & Q(storage_date__gte=self.first_date_of_month)
+                & Q(storage_date__lte=self.last_date_of_month)
             ).all()
             total_price_cell = sheet.cell(row_num, 2)
             total_price_cell.value = sum([i.total_price for i in ingredients])
@@ -1602,12 +1549,9 @@ class CanteenWorkBook:
                 cell.alignment = self.center_alignment
                 cell.border = self.thin_border
 
-        ingredients = Ingredient.objects.filter(
-            Q(user=user)
-            & Q(storage_date__gte=self.date_start)
-            & Q(storage_date__lte=self.date_end)
-            & Q(meal_type=self.meal_type)
-            & Q(is_disabled=False)
+        ingredients = self.ingredients.filter(
+            & Q(storage_date__gte=self.first_date_of_month)
+            & Q(storage_date__lte=self.last_date_of_month)
         ).all()
 
         summary_row_num = len(categories) + header_row_num + 1
@@ -1644,12 +1588,8 @@ class CanteenWorkBook:
         user = self.user
         ingredient_rows_count = 17
 
-        ingredients = Ingredient.objects.filter(
-            Q(user=user)
-            & Q(storage_date__lte=self.date_end)
-            & Q(meal_type=self.meal_type)
-            & Q(is_disabled=False)
-            & Q(is_ignorable=False)
+        ingredients = self.non_ignorable_ingredients.filter(
+            Q(storage_date__lte=self.last_date_of_month)
         ).all()
 
         consumptions = []
@@ -1657,7 +1597,7 @@ class CanteenWorkBook:
             consumptions += [
                 c
                 for c in ingredient.consumptions.filter(
-                    Q(date_of_using__lte=self.date_end) & Q(is_disabled=False)
+                    Q(date_of_using__lte=self.last_date_of_month) & Q(is_disabled=False)
                 ).all()
             ]
 
@@ -1673,10 +1613,10 @@ class CanteenWorkBook:
                 inventory_days.append(date_of_using)
 
         if len(inventory_days) < 1:
-            inventory_days.insert(-1, self.date_end)
+            inventory_days.insert(-1, self.last_date_of_month)
 
         inventory_days.insert(
-            0, (self.date_start.replace(day=1) - timedelta(days=1))
+            0, (self.first_date_of_month - timedelta(days=1))
         )
         formed_ingredients = []
         for inventory_day in inventory_days:
@@ -1716,7 +1656,7 @@ class CanteenWorkBook:
             inventory_day_ingredients += [
                 Ingredient(
                     user=user,
-                    storage_date=self.date_start,
+                    storage_date=self.first_date_of_month,
                     name="",
                     meal_type=self.meal_type,
                     category=s_ingredient0.category,
@@ -1973,14 +1913,7 @@ class CanteenWorkBook:
         user = self.user
         ingredient_rows_count = 11
 
-        ingredients = Ingredient.objects.filter(
-            Q(user=user)
-            & Q(storage_date__gte=self.date_start)
-            & Q(storage_date__lte=self.date_end)
-            & Q(meal_type=self.meal_type)
-            & Q(is_disabled=False)
-            & Q(is_ignorable=True)
-        ).all()
+        ingredients = self.non_ignorable_ingredients_month
 
         categories = list(set([i.category for i in ingredients]))
 
@@ -1996,7 +1929,7 @@ class CanteenWorkBook:
                     _split_ingredients += [
                         Ingredient(
                             user=user,
-                            storage_date=self.date_end,
+                            storage_date=self.last_date_of_month,
                             name="",
                             meal_type=_split_ingredient0.meal_type,
                             category=_split_ingredient0.category,
@@ -2036,7 +1969,7 @@ class CanteenWorkBook:
             sub_title_date_cell = sheet.cell(sub_title_row_num, 4)
             sub_title_date_cell.value = _(
                 "{year}.{month:0>2}.{day:0>2} (Non-storage list sheet)"
-            ).format(year=self.year, month=self.month, day=self.date_end.day)
+            ).format(year=self.year, month=self.month, day=self.last_date_of_month.day)
 
             for cell in [sub_title_affiliation_cell, sub_title_date_cell]:
                 cell.font = self.font_14
@@ -2170,28 +2103,9 @@ class CanteenWorkBook:
         date_end = date(year, 12, 31)
         meal_type = self.meal_type
 
-        ingredients = (
-            Ingredient.objects.filter(
-                Q(is_disabled=False)
-                & Q(is_ignorable=False)
-                & Q(user=user)
-                & Q(meal_type=meal_type)
-            )
-            .prefetch_related("consumptions")
-            .all()
-        )
-        ingredients = [
-            i
-            for i in ingredients
-            if date_start <= i.storage_date <= date_end
-            or any(
-                [
-                    date_start <= c.date_of_using <= date_end
-                    for c in i.consumptions.all()
-                    if c.is_disabled == False
-                ]
-            )
-        ]
+        ingredients = self.ingredients.filter(
+            Q(is_ignorable=False)
+        ).all()
 
         ingredient_names = list(set([i.name for i in ingredients]))
         for ingredient_name_index, ingredient_name in enumerate(
@@ -2689,10 +2603,56 @@ class CanteenWorkBook:
 def get_workbook_zip(request, month):
     from ..views import meal_type_name_0
 
-    meal_types = MealType.objects.annotate(
-        ingredients_count=Count("ingredients")
-    ).filter(
-        Q(user=request.user) & Q(is_disabled=False) & Q(ingredients_count__gt=0)
+    year, month = [int(v) for v in month.split("-")]
+    first_date_of_year = Date(year, 1, 1)
+    last_date_of_year = Date(year, 12, 31)
+
+    meal_types = (
+        MealType.objects.annotate(ingredients_count=Count("ingredients"))
+        .filter(
+            Q(user=request.user)
+            & Q(is_disabled=False)
+            & Q(ingredients_count__gt=0)
+        )
+        .all()
+    )
+
+    categories = (
+        Category.objects.annotate(ingredients_count=Count("ingredients"))
+        .filter(
+            Q(user=request.user)
+            & Q(is_disabled=False)
+            & Q(ingredients_count__gt=0)
+        )
+        .all()
+    )
+
+    user_ingredients = (
+        Ingredient.objects.annotate(
+            total_consumed=Coalesce(
+                Sum("consumptions__amount_used"), 0, output_field=IntegerField()
+            )
+        )
+        .filter(
+            (
+                Q(
+                    consumptions__date_of_using__range=(
+                        first_date_of_year,
+                        last_date_of_year,
+                    )
+                )
+                | Q(quantity__gt=F("total_consumed"))
+                | (
+                    Q(storage_date__gte=first_date_of_year)
+                    & Q(storage_date__lte=last_date_of_year)
+                )
+            )
+            & Q(is_disabled=False)
+            & Q(user=user)
+        )
+        .select_related("meal_type", "category")
+        .prefetch_related("consumptions")
+        .distinct()
     )
 
     zip_buffer = io.BytesIO()
@@ -2712,8 +2672,17 @@ def get_workbook_zip(request, month):
                 )
                 + ".xlsx"
             )
-
-            wb = CanteenWorkBook(request, month, meal_type).fill_in()
+            __ingredients = [
+                i for i in user_ingredients if i.meal_type == meal_type
+            ]
+            wb = MealTypeWorkbook(
+                request,
+                year=year,
+                month=month,
+                ingredients=__ingredients,
+                meal_type=meal_type,
+                categories=categories,
+            ).fill_in()
             excel_buffer = io.BytesIO()
             wb.save(excel_buffer)
             excel_buffer.seek(0)
