@@ -15,8 +15,16 @@ from dateutil.relativedelta import relativedelta
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import (Count, DecimalField, ExpressionWrapper, F, Q, Sum,
-                              Value)
+from django.db.models import (
+    Count,
+    DecimalField,
+    ExpressionWrapper,
+    F,
+    IntegerField,
+    Q,
+    Sum,
+    Value,
+)
 from django.db.models.functions import Coalesce
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -25,16 +33,25 @@ from django.utils import translation
 from django.utils.encoding import escape_uri_path
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
-from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
-                                  UpdateView)
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 from fnschool import count_chinese_characters
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
-from ..forms import (CategoryForm, ConsumptionForm, IngredientForm,
-                     PurchasedIngredientsWorkBookForm)
+from ..forms import (
+    CategoryForm,
+    ConsumptionForm,
+    IngredientForm,
+    PurchasedIngredientsWorkBookForm,
+)
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
 
@@ -226,14 +243,18 @@ class MealTypeWorkbook:
         self.last_date_of_month = datetime(
             self.year, self.month, calendar.monthrange(self.year, self.month)[1]
         ).date()
-        self.first_date_of_year=datetime(self.year,1,1)
-        self.last_date_of_year=datetime(self.year,12,31)
+        self.first_date_of_year = datetime(self.year, 1, 1)
+        self.last_date_of_year = datetime(self.year, 12, 31)
 
         self.request = request
         self.user = self.request.user
         self.ingredients = ingredients
-        self.ignorable_ingredients = self.ingredients.filter(Q(is_ignorable=True)).all()
-        self.non_ignorable_ingredients = self.ingredients.filter(Q(is_ignorable=False)).all()
+        self.ignorable_ingredients = self.ingredients.filter(
+            Q(is_ignorable=True)
+        ).all()
+        self.non_ignorable_ingredients = self.ingredients.filter(
+            Q(is_ignorable=False)
+        ).all()
         self.meal_type = meal_type
         self.categories = categories
         self.is_zh_CN = is_zh_CN()
@@ -347,7 +368,7 @@ class MealTypeWorkbook:
                 cell.border = self.thin_border
 
         ingredients = self.ignorable_ingredients.filter(
-            & Q(storage_date__gte=self.first_date_of_month)
+            Q(storage_date__gte=self.first_date_of_month)
             & Q(storage_date__lte=self.last_date_of_month)
         ).all()
 
@@ -493,7 +514,7 @@ class MealTypeWorkbook:
             category_cell.value = category.name
 
             ingredients = self.non_ignorable_ingredients.filter(
-                & Q(category=category)
+                Q(category=category)
                 & Q(
                     consumptions__date_of_using__range=(
                         self.first_date_of_month,
@@ -666,7 +687,7 @@ class MealTypeWorkbook:
             cell.alignment = self.center_alignment
             cell.border = self.thin_border
 
-        categories = self.categories 
+        categories = self.categories
         set_row_height_in_inches(sheet, 1, 0.38)
         set_row_height_in_inches(sheet, 2, 0.22)
         set_row_height_in_inches(sheet, 3, 0.32)
@@ -696,7 +717,7 @@ class MealTypeWorkbook:
                 cell.border = self.thin_border
 
         ingredients = self.non_ignorable_ingredients.filter(
-             Q(storage_date__gte=self.first_date_of_month)
+            Q(storage_date__gte=self.first_date_of_month)
             & Q(storage_date__lte=self.last_date_of_month)
         ).all()
 
@@ -1551,7 +1572,7 @@ class MealTypeWorkbook:
                 cell.border = self.thin_border
 
         ingredients = self.ingredients.filter(
-            & Q(storage_date__gte=self.first_date_of_month)
+            Q(storage_date__gte=self.first_date_of_month)
             & Q(storage_date__lte=self.last_date_of_month)
         ).all()
 
@@ -1598,7 +1619,8 @@ class MealTypeWorkbook:
             consumptions += [
                 c
                 for c in ingredient.consumptions.filter(
-                    Q(date_of_using__lte=self.last_date_of_month) & Q(is_disabled=False)
+                    Q(date_of_using__lte=self.last_date_of_month)
+                    & Q(is_disabled=False)
                 ).all()
             ]
 
@@ -1616,9 +1638,7 @@ class MealTypeWorkbook:
         if len(inventory_days) < 1:
             inventory_days.insert(-1, self.last_date_of_month)
 
-        inventory_days.insert(
-            0, (self.first_date_of_month - timedelta(days=1))
-        )
+        inventory_days.insert(0, (self.first_date_of_month - timedelta(days=1)))
         formed_ingredients = []
         for inventory_day in inventory_days:
             inventory_day_ingredients = []
@@ -1973,7 +1993,11 @@ class MealTypeWorkbook:
             sub_title_date_cell = sheet.cell(sub_title_row_num, 4)
             sub_title_date_cell.value = _(
                 "{year}.{month:0>2}.{day:0>2} (Non-storage list sheet)"
-            ).format(year=self.year, month=self.month, day=self.last_date_of_month.day)
+            ).format(
+                year=self.year,
+                month=self.month,
+                day=self.last_date_of_month.day,
+            )
 
             for cell in [sub_title_affiliation_cell, sub_title_date_cell]:
                 cell.font = self.font_14
@@ -2605,8 +2629,8 @@ def get_workbook_zip(request, month):
     from ..views import meal_type_name_0
 
     year, month = [int(v) for v in month.split("-")]
-    first_date_of_year = Date(year, 1, 1)
-    last_date_of_year = Date(year, 12, 31)
+    first_date_of_year = datetime(year, 1, 1).date()
+    last_date_of_year = datetime(year, 12, 31).date()
 
     meal_types = (
         MealType.objects.annotate(ingredients_count=Count("ingredients"))
@@ -2649,7 +2673,7 @@ def get_workbook_zip(request, month):
                     & Q(storage_date__lte=last_date_of_year)
                 )
             )
-            & Q(user=user)
+            & Q(user=request.user)
             & Q(category__is_disabled=False)
             & Q(meal_type__is_disabled=False)
         )
@@ -2670,14 +2694,12 @@ def get_workbook_zip(request, month):
                         if not meal_type.name == meal_type_name_0
                         else ""
                     ),
-                    month=month.replace("-", ""),
+                    month=f"{year}{month:0>2}",
                     affiliation=request.user.affiliation,
                 )
                 + ".xlsx"
             )
-            __ingredients = [
-                i for i in user_ingredients if i.meal_type == meal_type
-            ]
+            __ingredients = user_ingredients.filter(meal_type=meal_type).all()
             wb = MealTypeWorkbook(
                 request,
                 year=year,
@@ -2694,5 +2716,6 @@ def get_workbook_zip(request, month):
 
     zip_buffer.seek(0)
     return zip_buffer
+
 
 # The end.
