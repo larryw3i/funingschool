@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-21 00:27+0800\n"
-"PO-Revision-Date: 2025-10-21 00:27+0800\n"
+"POT-Creation-Date: 2025-10-21 00:54+0800\n"
+"PO-Revision-Date: 2025-10-21 00:55+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -595,26 +595,30 @@ msgstr "数量"
 #: canteen/views.py:97
 msgid ""
 "To prevent the number of decimal places in the unit price from becoming too "
-"large, \"quantity\" is only allowed to be an integer."
-msgstr "为防止单价的小数位数变得很多，“数量”只允许为整数。"
+"large, \"quantity\" is only allowed to be an integer. If your unit price is "
+"a decimal, please use a smaller quantity unit and then expand the quantity "
+"to an integer."
+msgstr ""
+"为防止单价的小数位数变得很多，“数量”只允许为整数。如果你的单价是小数，请你用"
+"更小的数量单位，然后把数量扩大为整数。"
 
-#: canteen/views.py:105
+#: canteen/views.py:108
 msgid "Total Price"
 msgstr "总价"
 
-#: canteen/views.py:109
+#: canteen/views.py:112
 msgid "Unit Name of Quantity"
 msgstr "数量单位"
 
-#: canteen/views.py:113
+#: canteen/views.py:116
 msgid "Is Ignorable"
 msgstr "是不用入库的"
 
-#: canteen/views.py:114
+#: canteen/views.py:117
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:409
+#: canteen/views.py:412
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
@@ -623,32 +627,32 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:548
+#: canteen/views.py:552
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:598 canteen/views.py:893
-msgid "(1)"
-msgstr "（1）"
-
-#: canteen/views.py:610 canteen/views.py:885
+#: canteen/views.py:601 canteen/views.py:876
 msgid "(2)"
 msgstr "（2）"
 
-#: canteen/views.py:656
+#: canteen/views.py:609 canteen/views.py:884
+msgid "(1)"
+msgstr "（1）"
+
+#: canteen/views.py:647
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:676
+#: canteen/views.py:667
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:692
+#: canteen/views.py:683
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:715
+#: canteen/views.py:706
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
 msgstr "（{month}）{affiliation}食堂出入库工作簿"

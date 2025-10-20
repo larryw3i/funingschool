@@ -97,6 +97,9 @@ quantity_header = (
         "To prevent the number of decimal places in the unit "
         + 'price from becoming too large, "quantity" is '
         + "only allowed to be an integer."
+        + " If your unit price is a decimal, please use a "
+        + "smaller quantity unit and then expand the "
+        + "quantity to an integer."
     ),
 )
 
