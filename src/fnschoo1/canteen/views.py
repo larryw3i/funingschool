@@ -579,7 +579,7 @@ def create_ingredients(request):
                         created_at=datetime.now().date(),
                     )
 
-                storage_date = row[storage_date_header[0]]
+                storage_date = date_parser.parse(row[storage_date_header[0]])
                 name = row[ingredient_name_header[0]]
                 quantity_unit_name = row[quantity_unit_name_header[0]]
                 is_ignorable = not row[is_ignorable_header[0]] is np.nan
@@ -662,7 +662,7 @@ def get_template_workbook_of_purchased_ingredients(request):
         ws.column_dimensions[column_letter].width = len(h) + hans_len + 2
         if c:
             h_cell.comment = Comment(c, _("the FNSCHOOL Authors"))
-
+    ws.freeze_panes = "B2"
     buffer = io.BytesIO()
     wb.save(buffer)
     buffer.seek(0)
