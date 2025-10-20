@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-19 19:03+0800\n"
-"PO-Revision-Date: 2025-10-18 04:24+0800\n"
+"PO-Revision-Date: 2025-10-20 22:22+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: zh_CN\n"
@@ -990,7 +990,7 @@ msgstr "账面栏"
 
 #: canteen/workbook/generate.py:1806
 msgid "Actual (Surplus Sheet)"
-msgstr "账面栏"
+msgstr "盘点栏"
 
 #: canteen/workbook/generate.py:1809
 msgid "Difference (Surplus Sheet)"

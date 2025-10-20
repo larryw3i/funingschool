@@ -252,7 +252,7 @@ class MealTypeWorkbook:
         self.ignorable_ingredients = self.ingredients.filter(
             Q(is_ignorable=True)
         ).all()
-        self.non_ignorable_ingredients = self.ingredients.filter(
+        self.storage_ingredients = self.ingredients.filter(
             Q(is_ignorable=False)
         ).all()
         self.meal_type = meal_type
@@ -513,7 +513,7 @@ class MealTypeWorkbook:
             category_cell = sheet.cell(row_num, 1)
             category_cell.value = category.name
 
-            ingredients = self.non_ignorable_ingredients.filter(
+            ingredients = self.storage_ingredients.filter(
                 Q(category=category)
                 & Q(
                     consumptions__date_of_using__range=(
@@ -543,7 +543,7 @@ class MealTypeWorkbook:
                 cell.alignment = self.center_alignment
                 cell.border = self.thin_border
 
-        ingredients = self.non_ignorable_ingredients.filter(
+        ingredients = self.storage_ingredients.filter(
             Q(
                 consumptions__date_of_using__range=(
                     self.first_date_of_month,
@@ -700,7 +700,7 @@ class MealTypeWorkbook:
             category_cell = sheet.cell(row_num, 1)
             category_cell.value = category.name
 
-            ingredients = self.non_ignorable_ingredients.filter(
+            ingredients = self.storage_ingredients.filter(
                 Q(storage_date__gte=self.first_date_of_month)
                 & Q(storage_date__lte=self.last_date_of_month)
                 & Q(category=category)
@@ -716,7 +716,7 @@ class MealTypeWorkbook:
                 cell.alignment = self.center_alignment
                 cell.border = self.thin_border
 
-        ingredients = self.non_ignorable_ingredients.filter(
+        ingredients = self.storage_ingredients.filter(
             Q(storage_date__gte=self.first_date_of_month)
             & Q(storage_date__lte=self.last_date_of_month)
         ).all()
@@ -800,7 +800,7 @@ class MealTypeWorkbook:
         consumption_rows_count = 21
         categories = self.categories
         consumptions = []
-        for i in self.non_ignorable_ingredients:
+        for i in self.storage_ingredients:
             consumptions += i.consumptions.filter(Q(is_disabled=False)).all()
         consumption_row_height = 0.18
         consumption_rows_height = consumption_rows_count * 0.18
@@ -1185,7 +1185,7 @@ class MealTypeWorkbook:
         sheet.sheet_properties.tabColor = "16b1ff"
         user = self.user
         ingredient_rows_count = 21
-        ingredients = self.non_ignorable_ingredients.filter(
+        ingredients = self.storage_ingredients.filter(
             Q(storage_date__gte=self.first_date_of_month)
             & Q(storage_date__lte=self.last_date_of_month)
         ).all()
@@ -1194,7 +1194,7 @@ class MealTypeWorkbook:
         ingredient_rows_height = ingredient_rows_count * 0.18
         storage_dates = sorted(list(set([i.storage_date for i in ingredients])))
 
-        storaged_ingredients = []
+        formed_ingredients = []
         for storage_date in storage_dates:
             dated_ingredients = [
                 i for i in ingredients if i.storage_date == storage_date
@@ -1257,7 +1257,7 @@ class MealTypeWorkbook:
                 )
 
                 storage_date_index = sub_storage_num
-                storaged_ingredients.append(
+                formed_ingredients.append(
                     [storage_date, storage_date_index, split_dated_ingredients]
                 )
 
@@ -1268,7 +1268,7 @@ class MealTypeWorkbook:
             storage_date,
             storage_date_index,
             dated_ingredients,
-        ) in enumerate(storaged_ingredients):
+        ) in enumerate(formed_ingredients):
             row_num = (ingredient_rows_count + 6) * index + 1
 
             title_cell_row_num = row_num
@@ -1302,13 +1302,13 @@ class MealTypeWorkbook:
                 storage_num += 1
 
             prev_storage_date = (
-                storaged_ingredients[index - 1][0]
-                if 0 <= index - 1 < len(storaged_ingredients)
+                formed_ingredients[index - 1][0]
+                if 0 <= index - 1 < len(formed_ingredients)
                 else None
             )
             next_storage_date = (
-                storaged_ingredients[index + 1][0]
-                if 0 < index + 1 < (len(storaged_ingredients) - 1)
+                formed_ingredients[index + 1][0]
+                if 0 < index + 1 < (len(formed_ingredients) - 1)
                 else None
             )
             sub_title_num_cell_row_num = title_cell_row_num + 1
@@ -1610,7 +1610,7 @@ class MealTypeWorkbook:
         user = self.user
         ingredient_rows_count = 17
 
-        ingredients = self.non_ignorable_ingredients.filter(
+        ingredients = self.storage_ingredients.filter(
             Q(storage_date__lte=self.last_date_of_month)
         ).all()
 
@@ -1934,7 +1934,7 @@ class MealTypeWorkbook:
         user = self.user
         ingredient_rows_count = 11
 
-        ingredients = self.non_ignorable_ingredients.filter(
+        ingredients = self.ignorable_ingredients.filter(
             Q(storage_date__gte=self.first_date_of_month)
             & Q(storage_date__lte=self.last_date_of_month)
         ).all()
@@ -2131,7 +2131,7 @@ class MealTypeWorkbook:
         date_end = date(year, 12, 31)
         meal_type = self.meal_type
 
-        ingredients = self.non_ignorable_ingredients
+        ingredients = self.storage_ingredients
         ingredient_names = list(set([i.name for i in ingredients]))
         for ingredient_name_index, ingredient_name in enumerate(
             ingredient_names
@@ -2649,6 +2649,7 @@ def get_workbook_zip(request, month):
             & Q(is_disabled=False)
             & Q(ingredients_count__gt=0)
         )
+        .order_by("priority")
         .all()
     )
 
