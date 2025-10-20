@@ -8,7 +8,17 @@ function make_highlight(query, time_data) {
     if (seconds_diff < 46) {
       highlight_elements_toggled.push(element)
       element.toggleClass('fn-highlight')
-      $('html,body').animate({ scrollTop: element.offset().top }, 1)
+      var table_container = $(element.closest('.table-container'))
+      if (table_container.length) {
+        var container = table_container
+        var thead = $(element.closest('table').find('thead'))
+        var pos =
+          element.offset().top -
+          container.offset().top +
+          container.scrollTop() -
+          thead.height()
+        container.animate({ scrollTop: pos }, 1)
+      }
     }
   })
 

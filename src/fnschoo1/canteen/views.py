@@ -396,25 +396,26 @@ def edit_ingredient(request, ingredient_id):
 
     if request.method == "POST":
 
-        form = IngredientForm(request.POST, instance=ingredient)
-
-        total_price = form.instance.total_price
-        quantity = form.instance.quantity
+        total_price = request.POST.get("total_price")
+        quantity = request.POST.get("quantity")
 
         [total_price0, quantity0], [total_price1, quantity1] = split_price(
             total_price, quantity
         )
 
+        form = IngredientForm(request.POST, instance=ingredient)
         if total_price1:
             unit_price_error_msg = _(
-                "The unit pricei ({unit_price}) has more than 3 decimal places and cannot be saved. Please modify it again."
+                "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places and cannot be saved. Please modify it again."
             ).format(
                 unit_price=(
                     Decimal(str(total_price)) / Decimal(str(float(quantity)))
-                ).normalize()
+                ).normalize(),
+                decimal_prec=decimal_prec,
             )
             form.add_error("total_price", unit_price_error_msg)
             form.add_error("quantity", unit_price_error_msg)
+            form.fields["total_price"].widget.attrs.update({"autofocus": ""})
             return render(
                 request, "canteen/ingredient/update.html", {"form": form}
             )
@@ -591,19 +592,6 @@ def create_ingredients(request):
                 )
 
                 if total_price1:
-
-                    Ingredient.objects.create(
-                        user=request.user,
-                        storage_date=storage_date,
-                        name=name + _("(1)"),
-                        meal_type=meal_type,
-                        category=category,
-                        quantity=quantity0,
-                        total_price=total_price0,
-                        quantity_unit_name=quantity_unit_name,
-                        is_ignorable=is_ignorable,
-                    )
-
                     Ingredient.objects.create(
                         user=request.user,
                         storage_date=storage_date,
@@ -615,19 +603,19 @@ def create_ingredients(request):
                         quantity_unit_name=quantity_unit_name,
                         is_ignorable=is_ignorable,
                     )
+                    name = name + _("(1)")
 
-                else:
-                    Ingredient.objects.create(
-                        user=request.user,
-                        storage_date=storage_date,
-                        name=name,
-                        meal_type=meal_type,
-                        category=category,
-                        quantity=quantity0,
-                        total_price=total_price0,
-                        quantity_unit_name=quantity_unit_name,
-                        is_ignorable=is_ignorable,
-                    )
+                Ingredient.objects.create(
+                    user=request.user,
+                    storage_date=storage_date,
+                    name=name,
+                    meal_type=meal_type,
+                    category=category,
+                    quantity=quantity0,
+                    total_price=total_price0,
+                    quantity_unit_name=quantity_unit_name,
+                    is_ignorable=is_ignorable,
+                )
 
             return redirect("canteen:close_window")
 
