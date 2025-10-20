@@ -332,6 +332,7 @@ class MealTypeWorkbook:
             category_cell.value = category.name
 
             ingredients = self.ignorable_ingredients.filter(
+                Q(category=category)
                 & Q(storage_date__gte=self.first_date_of_month)
                 & Q(storage_date__lte=self.last_date_of_month)
             ).all()
@@ -528,7 +529,6 @@ class MealTypeWorkbook:
                     self.last_date_of_month,
                 )
             )
-            & Q(category__is_disabled=False)
         ).distinct()
 
         summary_row_num = len(categories) + header_row_num + 1
@@ -1530,6 +1530,7 @@ class MealTypeWorkbook:
             category_cell.value = category.name
 
             ingredients = self.ingredients.filter(
+                Q(category=category)
                 & Q(storage_date__gte=self.first_date_of_month)
                 & Q(storage_date__lte=self.last_date_of_month)
             ).all()
@@ -1913,7 +1914,10 @@ class MealTypeWorkbook:
         user = self.user
         ingredient_rows_count = 11
 
-        ingredients = self.non_ignorable_ingredients_month
+        ingredients = self.non_ignorable_ingredients.filter(
+            Q(storage_date__gte=self.first_date_of_month)
+            & Q(storage_date__lte=self.last_date_of_month)
+        ).all()
 
         categories = list(set([i.category for i in ingredients]))
 
@@ -2103,10 +2107,7 @@ class MealTypeWorkbook:
         date_end = date(year, 12, 31)
         meal_type = self.meal_type
 
-        ingredients = self.ingredients.filter(
-            Q(is_ignorable=False)
-        ).all()
-
+        ingredients = self.non_ignorable_ingredients
         ingredient_names = list(set([i.name for i in ingredients]))
         for ingredient_name_index, ingredient_name in enumerate(
             ingredient_names
@@ -2634,7 +2635,8 @@ def get_workbook_zip(request, month):
             )
         )
         .filter(
-            (
+            Q(is_disabled=False)
+            & (
                 Q(
                     consumptions__date_of_using__range=(
                         first_date_of_year,
@@ -2647,8 +2649,9 @@ def get_workbook_zip(request, month):
                     & Q(storage_date__lte=last_date_of_year)
                 )
             )
-            & Q(is_disabled=False)
             & Q(user=user)
+            & Q(category__is_disabled=False)
+            & Q(meal_type__is_disabled=False)
         )
         .select_related("meal_type", "category")
         .prefetch_related("consumptions")
@@ -2691,3 +2694,5 @@ def get_workbook_zip(request, month):
 
     zip_buffer.seek(0)
     return zip_buffer
+
+# The end.
