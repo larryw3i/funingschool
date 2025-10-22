@@ -112,7 +112,7 @@
   </div>
   {% include 'includes/_paginator.html' %}
   <script>
-    $(document).ready(function() {
+    function set_ingredient_table_height() {
       var ingredient_table = $('.table-ingredient')
       var pagination = $('.pagination')
       var footer = $("footer")
@@ -120,7 +120,16 @@
       ingredient_table.parent().height(
         height
       );
+    }
+
+    $(document).ready(function() {
+      set_ingredient_table_height();
     });
+
+    $(window).resize(function() {
+      set_ingredient_table_height();
+    });
+
     $(document).ready(
       function() {
         make_highlight(".tr-ingredient", "ingredient_updated_at")

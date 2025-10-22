@@ -37,7 +37,7 @@ generate_code_txt() {
     files=$(
         find src \
             -type d \( -name ".egg-info" -o -name "*.egg-info" \) -prune \
-            -o -type f \( -name "*.py" -o -name "*.po" -o -name "*.js" ! -name "*.min.js" \) -print
+            -o -type f \( -name "*.py" -o -name "*.po" -o -name "*.html" -o -name "*.js" ! -name "*.min.js" \) -print
     )
     for f in ${files[@]}; do
         echo "File: ${f}" >>${code_out_path}
