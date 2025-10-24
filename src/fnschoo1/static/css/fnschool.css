@@ -3,13 +3,13 @@
 }
 
 .avatar-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 5px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   position: fixed;
 }
 .avatar-nav-link {
-  margin: 0px 12px 0px 0px;
+  margin: 0px 18px 0px 0px;
 }
 main {
   padding-top: 60px;
