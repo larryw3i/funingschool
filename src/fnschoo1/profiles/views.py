@@ -1,8 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
+from fnschool import _, count_chinese_characters
 from fnschool.settings import LOGIN_URL
 
 from .forms import ProfileForm, ProfileLoginForm
@@ -51,9 +53,13 @@ def profile_log_out(request):
 @login_required
 def profile_edit(request):
     if request.method == "POST":
-        form = ProfileForm(request.POST, instance=request.user)
+        form = ProfileForm(request.POST, request.FILES, instance=request.user)
+        print(request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(
+                request, _("Profile has been updated successfully!")
+            )
             return redirect("home")
     else:
         form = ProfileForm(instance=request.user)

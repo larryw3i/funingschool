@@ -36,6 +36,12 @@ class ProfileForm(ModelForm):
         ),
     )
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["avatar"].widget.attrs.update(
+            {"class": "form-control-file"}
+        )
+
     class Meta:
         current_year = date.today().year
         year_range = list(range(current_year - 100, current_year + 1))
