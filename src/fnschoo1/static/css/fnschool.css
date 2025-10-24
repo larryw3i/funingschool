@@ -8,9 +8,14 @@
   border-radius: 50%;
   position: fixed;
 }
-.avatar-nav-link {
-  margin: 0px 18px 0px 0px;
+
+.avatar-img:hover {
+  transform: scale(1.1);
 }
+.avatar-nav-link {
+  width: 32px;
+}
+
 main {
   padding-top: 60px;
   padding-bottom: 120px;

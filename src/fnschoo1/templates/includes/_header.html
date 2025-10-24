@@ -64,27 +64,28 @@
                  title="{{ request.user.username }}">
                 <img src="{{ request.user.avatar.url }}"
                      alt="{{ request.user.username }}"
-                     class="avatar-img" />
-              {% else %}
-                <a class="nav-link "
-                   href="{% url 'profiles:update' %}"
-                   title="{{ request.user.username }}">
-                  {{ request.user.username }}
-                </a>
-              {% endif %}
-            </ul>
-            <ul class="nav-item ">
-              <a class="nav-link" href="{% url 'profiles:log_out' %}">{% trans "Log out" %}</a>
-            </ul>
-          {% else %}
-            <ul class="nav-item">
-              <a class="nav-link" href="{% url 'profiles:log_in' %}">{% trans "Login" %}</a>
-            </ul>
-            <ul class="nav-item">
-              <a class="nav-link" href="{% url 'profiles:create' %}">{% trans "Sign Up" %}</a>
-            </ul>
-          {% endif %}
-        </div>
+                     class="avatar-img">
+              </a>
+            {% else %}
+              <a class="nav-link "
+                 href="{% url 'profiles:update' %}"
+                 title="{{ request.user.username }}">
+                {{ request.user.username }}
+              </a>
+            {% endif %}
+          </ul>
+          <ul class="nav-item ">
+            <a class="nav-link" href="{% url 'profiles:log_out' %}">{% trans "Log out" %}</a>
+          </ul>
+        {% else %}
+          <ul class="nav-item">
+            <a class="nav-link" href="{% url 'profiles:log_in' %}">{% trans "Login" %}</a>
+          </ul>
+          <ul class="nav-item">
+            <a class="nav-link" href="{% url 'profiles:create' %}">{% trans "Sign Up" %}</a>
+          </ul>
+        {% endif %}
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
