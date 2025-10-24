@@ -20,7 +20,7 @@ class IngredientForm(forms.ModelForm):
         fields = [
             f.name
             for f in Ingredient._meta.fields
-            if f.name not in ["id", "user", "updated_at"]
+            if f.name not in ["id", "user", "updated_at", "created_at"]
         ]
 
         current_year = date.today().year
