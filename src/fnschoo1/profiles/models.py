@@ -1,4 +1,10 @@
-from django.contrib.auth.models import AbstractUser, User
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    AbstractUser,
+    BaseUserManager,
+    PermissionsMixin,
+    User,
+)
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -14,7 +20,7 @@ class Gender(models.TextChoices):
     UNKNOWN = "U", "--"
 
 
-class Profile(AbstractUser):
+class Profile(AbstractUser, PermissionsMixin):
     phone = models.CharField(
         max_length=15, blank=True, null=True, verbose_name=_("Phone Number")
     )
@@ -47,6 +53,14 @@ class Profile(AbstractUser):
     )
     bio = models.TextField(
         max_length=512, blank=True, verbose_name=_("Biography")
+    )
+
+    created_at = models.DateTimeField(
+        null=True, auto_now_add=True, verbose_name=_("Time of creating")
+    )
+
+    updated_at = models.DateTimeField(
+        null=True, auto_now=True, verbose_name=_("Time of updating")
     )
 
     class Meta:

@@ -22,8 +22,12 @@ class MealType(models.Model):
         null=True, blank=True, max_length=100, verbose_name=_("Abbreviation")
     )
     created_at = models.DateTimeField(
-        null=True, verbose_name=_("Creating Date")
+        null=True, auto_now_add=True, verbose_name=_("Creating Date")
     )
+    updated_at = models.DateTimeField(
+        null=True, auto_now=True, verbose_name=_("Time of updating")
+    )
+
     is_disabled = models.BooleanField(
         default=False, verbose_name=_("Is Disabled")
     )
@@ -44,8 +48,12 @@ class Category(models.Model):
         null=True, blank=True, max_length=100, verbose_name=_("abbreviation")
     )
     created_at = models.DateTimeField(
-        null=True, verbose_name=_("Creating Date")
+        null=True, auto_now_add=True, verbose_name=_("Creating Date")
     )
+    updated_at = models.DateTimeField(
+        null=True, auto_now=True, verbose_name=_("Time of updating")
+    )
+
     is_disabled = models.BooleanField(
         default=False, verbose_name=_("Is Disabled")
     )
@@ -78,9 +86,15 @@ class Ingredient(models.Model):
         verbose_name=_("User"),
     )
     storage_date = models.DateField(verbose_name=_("Storage Date"))
+
+    created_at = models.DateTimeField(
+        null=True, auto_now_add=True, verbose_name=_("Time of creating")
+    )
+
     updated_at = models.DateTimeField(
         null=True, auto_now=True, verbose_name=_("Time of updating")
     )
+
     name = models.CharField(max_length=100, verbose_name=_("Ingredient Name"))
     meal_type = models.ForeignKey(
         MealType,
