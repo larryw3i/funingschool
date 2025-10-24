@@ -149,7 +149,7 @@ src/canteen/sett1ngs.py
 *.cp
 
 # src/fnschool/db.cp
-src/fnschool/db.cp
+db.cp/
 
 # src/fnschoo1/static_collected/
 **/static_collected
@@ -162,5 +162,8 @@ venv*
 
 # _settings.py
 _settings.py
+
+# media/
+media/
 
 # The end.
