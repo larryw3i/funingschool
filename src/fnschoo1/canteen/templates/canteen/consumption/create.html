@@ -22,6 +22,11 @@
          target="canteen_list_categories"
          href="{% url "canteen:list_categories" %}">{% trans "Ingredient Categories" %}</a>
 
+      <a class="btn btn-primary col-md-1 col-lg-1 col-2 "
+         target="canteen_list_meal_types"
+         href="{% url "canteen:list_meal_types" %}">{% trans "Ingredient Meal Types" %}</a>
+
+
       <div class="col col-3 col-md-2 col-lg-2">
         <input class="  form-control"
                onkeydown="if(event.keyCode==13){list_consumptions();}"
