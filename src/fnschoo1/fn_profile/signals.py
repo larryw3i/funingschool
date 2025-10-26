@@ -6,15 +6,15 @@ from .models import FnUser
 
 
 @receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+def create_user_fn_profile(sender, instance, created, **kwargs):
     if created:
         FnUser.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
+def save_user_fn_profile(sender, instance, **kwargs):
     if hasattr(instance, "fn_profile"):
-        instance.profile.save()
+        instance.fn_profile.save()
 
 
 # The end.

@@ -12,7 +12,7 @@ from .forms import FnUserForm, FnUserLoginForm
 # Create your views here.
 
 
-def profile_new(request):
+def fn_profile_new(request):
     form = None
     if request.method == "POST":
         form = FnUserForm(request.POST)
@@ -26,10 +26,10 @@ def profile_new(request):
     else:
         form = FnUserForm()
 
-    return render(request, "profile/create.html", {"form": form})
+    return render(request, "fn_profile/create.html", {"form": form})
 
 
-def profile_log_in(request):
+def fn_profile_log_in(request):
     if request.method == "POST":
         form = FnUserLoginForm(request, data=request.POST)
         if form.is_valid():
@@ -42,16 +42,16 @@ def profile_log_in(request):
                 return redirect(next_url)
     else:
         form = FnUserLoginForm()
-    return render(request, "profile/log_in.html", {"form": form})
+    return render(request, "fn_profile/log_in.html", {"form": form})
 
 
-def profile_log_out(request):
+def fn_profile_log_out(request):
     logout(request)
     return redirect("home")
 
 
 @login_required
-def profile_edit(request):
+def fn_profile_edit(request):
     if request.method == "POST":
         form = FnUserForm(request.POST, request.FILES, instance=request.user)
         print(request.FILES)
@@ -63,7 +63,7 @@ def profile_edit(request):
             return redirect("home")
     else:
         form = FnUserForm(instance=request.user)
-    return render(request, "profile/edit.html", {"form": form})
+    return render(request, "fn_profile/edit.html", {"form": form})
 
 
 # The end.
