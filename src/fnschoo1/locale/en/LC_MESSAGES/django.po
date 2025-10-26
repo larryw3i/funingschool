@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-21 00:54+0800\n"
+"POT-Creation-Date: 2025-10-24 16:18+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -46,11 +46,16 @@ msgstr ""
 msgid "Abbreviation"
 msgstr ""
 
-#: canteen/models.py:25 canteen/models.py:47
+#: canteen/models.py:28 canteen/models.py:54
 msgid "Creating Date"
 msgstr ""
 
-#: canteen/models.py:28 canteen/models.py:50 canteen/models.py:201
+#: canteen/models.py:31 canteen/models.py:57 canteen/models.py:101
+#: profiles/models.py:63
+msgid "Time of updating"
+msgstr ""
+
+#: canteen/models.py:35 canteen/models.py:61 canteen/models.py:221
 #: canteen/templates/canteen/category/delete.html:37
 #: canteen/templates/canteen/category/list.html:22
 #: canteen/templates/canteen/meal_type/delete.html:29
@@ -58,97 +63,97 @@ msgstr ""
 msgid "Is Disabled"
 msgstr ""
 
-#: canteen/models.py:40
+#: canteen/models.py:47
 msgid "Ingredient category"
 msgstr ""
 
-#: canteen/models.py:42
+#: canteen/models.py:49
 msgid "Category name"
 msgstr ""
 
-#: canteen/models.py:44
+#: canteen/models.py:51
 msgid "abbreviation"
 msgstr ""
 
-#: canteen/models.py:58
+#: canteen/models.py:69
 msgid "Category Priority"
 msgstr ""
 
-#: canteen/models.py:62
+#: canteen/models.py:73
 msgid "Pin to Consumptions Top"
 msgstr ""
 
-#: canteen/models.py:78
+#: canteen/models.py:89
 msgid "User"
 msgstr ""
 
-#: canteen/models.py:80 canteen/views.py:66
+#: canteen/models.py:91 canteen/views.py:66
 msgid "Storage Date"
 msgstr ""
 
-#: canteen/models.py:82
-msgid "Time of updating"
+#: canteen/models.py:97 profiles/models.py:59
+msgid "Time of creating"
 msgstr ""
 
-#: canteen/models.py:84 canteen/templates/canteen/consumption/create.html:50
+#: canteen/models.py:104 canteen/templates/canteen/consumption/create.html:50
 #: canteen/views.py:76
 msgid "Ingredient Name"
 msgstr ""
 
-#: canteen/models.py:89
+#: canteen/models.py:109
 msgid "Ingredient Meal Type"
 msgstr ""
 
-#: canteen/models.py:95
+#: canteen/models.py:115
 msgid "Ingredient Category"
 msgstr ""
 
-#: canteen/models.py:101
+#: canteen/models.py:121
 msgid "Ingredient Quantity"
 msgstr ""
 
-#: canteen/models.py:107
+#: canteen/models.py:127
 msgid "Unit Name of Ingredient Quantity"
 msgstr ""
 
-#: canteen/models.py:113
+#: canteen/models.py:133
 msgid "Ingredient Total Price"
 msgstr ""
 
-#: canteen/models.py:117
+#: canteen/models.py:137
 msgid "Is Ingredient Ignorable"
 msgstr ""
 
-#: canteen/models.py:120
+#: canteen/models.py:140
 msgid "Is Ingredient Disabled"
 msgstr ""
 
-#: canteen/models.py:181 canteen/templates/canteen/ingredient/list.html:5
+#: canteen/models.py:201 canteen/templates/canteen/ingredient/list.html:5
 #: canteen/templates/canteen/ingredient/list.html:8
 msgid "Ingredient List"
 msgstr ""
 
-#: canteen/models.py:192
+#: canteen/models.py:212
 msgid "Ingredient"
 msgstr ""
 
-#: canteen/models.py:195
+#: canteen/models.py:215
 msgid "Date"
 msgstr ""
 
-#: canteen/models.py:197
+#: canteen/models.py:217
 msgid "Consuming Quantity"
 msgstr ""
 
-#: canteen/models.py:206
+#: canteen/models.py:226
 msgid "Consumption Record"
 msgstr ""
 
-#: canteen/models.py:207
+#: canteen/models.py:227
 msgid "Consumption Records"
 msgstr ""
 
-#: canteen/models.py:217
+#: canteen/models.py:237
 #, python-brace-format
 msgid "{0} of {1} was consumed on {2} ."
 msgstr ""
@@ -1172,55 +1177,55 @@ msgstr ""
 msgid "Confirm Password"
 msgstr ""
 
-#: profiles/models.py:12
+#: profiles/models.py:18
 msgid "Male"
 msgstr ""
 
-#: profiles/models.py:13
+#: profiles/models.py:19
 msgid "Female"
 msgstr ""
 
-#: profiles/models.py:19
+#: profiles/models.py:25
 msgid "Phone Number"
 msgstr ""
 
-#: profiles/models.py:22
+#: profiles/models.py:28
 msgid "Affiliation"
 msgstr ""
 
-#: profiles/models.py:29
+#: profiles/models.py:35
 msgid "Superior department"
 msgstr ""
 
-#: profiles/models.py:33
+#: profiles/models.py:39
 msgid "Date of Birth"
 msgstr ""
 
-#: profiles/models.py:39
+#: profiles/models.py:45
 msgid "Gender"
 msgstr ""
 
-#: profiles/models.py:43
+#: profiles/models.py:49
 msgid "Address"
 msgstr ""
 
-#: profiles/models.py:46
+#: profiles/models.py:52
 msgid "Avatar"
 msgstr ""
 
-#: profiles/models.py:49
+#: profiles/models.py:55
 msgid "Biography"
 msgstr ""
 
-#: profiles/models.py:53
+#: profiles/models.py:67
 msgid "User Profile"
 msgstr ""
 
-#: profiles/models.py:54
+#: profiles/models.py:68
 msgid "User Profiles"
 msgstr ""
 
-#: profiles/models.py:57
+#: profiles/models.py:71
 #, python-brace-format
 msgid "{0}'s Profile"
 msgstr ""
@@ -1260,7 +1265,7 @@ msgstr ""
 msgid "Update Profile."
 msgstr ""
 
-#: profiles/templates/profiles/edit.html:11
+#: profiles/templates/profiles/edit.html:13
 msgid "Update"
 msgstr ""
 
@@ -1294,11 +1299,15 @@ msgstr ""
 msgid "Log in again"
 msgstr ""
 
+#: profiles/views.py:61
+msgid "Profile has been updated successfully!"
+msgstr ""
+
 #: templates/base/_js.html:11
 msgid "None"
 msgstr ""
 
-#: templates/base/content.html:10 templates/base/header_content_footer.html:9
+#: templates/base/content.html:10 templates/base/document.html:9
 #: templates/home.html:4
 msgid "FNSCHOOL"
 msgstr ""
@@ -1340,14 +1349,14 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: templates/includes/_header.html:64
+#: templates/includes/_header.html:78
 msgid "Log out"
 msgstr ""
 
-#: templates/includes/_header.html:68
+#: templates/includes/_header.html:82
 msgid "Login"
 msgstr ""
 
-#: templates/includes/_header.html:71
+#: templates/includes/_header.html:85
 msgid "Sign Up"
 msgstr ""

@@ -1,3 +1,6 @@
+$(document).ready(function () {
+  $('.messages').css({ top: $('.nav').height() })
+})
 function make_highlight(query, time_data) {
   var highlight_elements = $(query)
   var highlight_elements_toggled = []

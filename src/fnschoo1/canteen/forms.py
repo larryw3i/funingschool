@@ -55,7 +55,7 @@ class ConsumptionForm(forms.ModelForm):
         widgets = {
             "amount_used": forms.NumberInput(
                 attrs={
-                    "style": "width: 109px; text-align: center; font-family: Mono;"
+                    "style": "width: 95px; text-align: center; font-family: Mono;"
                 }
             ),
             "date_of_using": forms.HiddenInput(),

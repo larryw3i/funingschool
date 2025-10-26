@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",  # For Bootstrap 5
     # fnschool apps.
     "fnschool",
-    "profiles",
+    "profile",
     "canteen",
 ]
 
@@ -106,7 +106,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-AUTH_USER_MODEL = "profiles.Profile"
+AUTH_USER_MODEL = "profile.Profile"
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -164,7 +164,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-LOGIN_URL = reverse_lazy("profiles:log_in")
+LOGIN_URL = reverse_lazy("profile:log_in")
 
 _settings_path = Path(__file__).parent / "_settings.py"
 if _settings_path.exists():
