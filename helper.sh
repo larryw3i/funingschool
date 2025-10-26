@@ -106,7 +106,7 @@ format_code() {
             isort \
                 -l 80 \
                 ${fnschoo1_dir} \
-                ${project_dir}/fnschool-cli.py
+                ${project_dir}/manage.py
         fi
     }
 
@@ -133,7 +133,7 @@ format_code() {
             black \
                 -l 80 \
                 ${fnschoo1_dir} \
-                ${project_dir}/fnschool-cli.py
+                ${project_dir}/manage.py
         fi
     }
 
