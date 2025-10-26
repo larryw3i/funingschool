@@ -5,7 +5,7 @@ from django.db import migrations
 
 def migrate_data_forward(apps, schema_editor):
     profiles_profile_model = apps.get_model("profiles", "Profile")
-    profile_fn_user_model = apps.get_model("profile", "FnUser")
+    profile_fn_user_model = apps.get_model("fn_profile", "FnUser")
 
     for profile in profiles_profile_model.objects.all():
         profile_fn_user_model.objects.create(
@@ -24,14 +24,14 @@ def migrate_data_forward(apps, schema_editor):
 
 
 def migrate_data_backward(apps, schema_editor):
-    profile_fn_user_model = apps.get_model("profile", "FnUser")
+    profile_fn_user_model = apps.get_model("fn_profile", "FnUser")
     profile_fn_user_model.objects.all().delete()
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("profile", "0001_initial"),
+        ("fn_profile", "0001_initial"),
     ]
 
     operations = [

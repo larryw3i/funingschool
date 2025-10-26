@@ -3,10 +3,10 @@ from django.apps import AppConfig
 
 class FnUserConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "profile"
+    name = "fn_profile"
 
     def ready(self):
-        import profile.signals
+        import fn_profile.signals
 
 
 # The end.

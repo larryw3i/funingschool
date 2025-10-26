@@ -1,14 +1,8 @@
 import io
 import re
 from datetime import date, datetime
-from decimal import (
-    ROUND_DOWN,
-    ROUND_FLOOR,
-    ROUND_HALF_UP,
-    Decimal,
-    getcontext,
-    localcontext,
-)
+from decimal import (ROUND_DOWN, ROUND_FLOOR, ROUND_HALF_UP, Decimal,
+                     getcontext, localcontext)
 from pathlib import Path
 
 import numpy as np
@@ -19,41 +13,24 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.db.models import (
-    DecimalField,
-    ExpressionWrapper,
-    F,
-    IntegerField,
-    Q,
-    Sum,
-    Value,
-)
+from django.db.models import (DecimalField, ExpressionWrapper, F, IntegerField,
+                              Q, Sum, Value)
 from django.db.models.functions import Coalesce
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils.encoding import escape_uri_path
 from django.views.decorators.http import require_POST
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    ListView,
-    UpdateView,
-)
+from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
+                                  UpdateView)
 from fnschool import _, count_chinese_characters
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font
 from openpyxl.utils import get_column_letter
 
-from .forms import (
-    CategoryForm,
-    ConsumptionForm,
-    IngredientForm,
-    MealTypeForm,
-    PurchasedIngredientsWorkBookForm,
-)
+from .forms import (CategoryForm, ConsumptionForm, IngredientForm, MealTypeForm,
+                    PurchasedIngredientsWorkBookForm)
 from .models import Category, Consumption, Ingredient, MealType
 
 # Create your views here.

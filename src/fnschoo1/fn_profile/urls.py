@@ -3,7 +3,7 @@ from django.urls import include, path
 
 from . import views
 
-app_name = "profile"
+app_name = "fn_profile"
 
 urlpatterns = [
     path("detail", views.profile_edit, name="detail"),
