@@ -5,10 +5,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ModelForm
 from fnschool import _
 
-from .models import Profile
+from .models import FnUser
 
 
-class ProfileLoginForm(AuthenticationForm):
+class FnUserLoginForm(AuthenticationForm):
     username = forms.CharField(
         label=_("User Name"),
         widget=forms.TextInput(attrs={"placeholder": _("User Name")}),
@@ -19,7 +19,7 @@ class ProfileLoginForm(AuthenticationForm):
     )
 
 
-class ProfileForm(ModelForm):
+class FnUserForm(ModelForm):
     username = forms.CharField(
         max_length=128,
         label=_("User Name"),
@@ -45,7 +45,7 @@ class ProfileForm(ModelForm):
     class Meta:
         current_year = date.today().year
         year_range = list(range(current_year - 100, current_year + 1))
-        model = Profile
+        model = FnUser
         fields = [
             "username",
             "phone",

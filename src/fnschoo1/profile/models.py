@@ -20,7 +20,23 @@ class Gender(models.TextChoices):
     UNKNOWN = "U", "--"
 
 
-class Profile(AbstractUser, PermissionsMixin):
+class FnUser(AbstractUser, PermissionsMixin):
+    groups = models.ManyToManyField(
+        "auth.Group",
+        verbose_name="groups",
+        blank=True,
+        help_text=_("The groups this user belongs to."),
+        related_name="fn_user_groups",
+        related_query_name="fn_user",
+    )
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        verbose_name="user permissions",
+        blank=True,
+        help_text=_("Specific permissions for this user."),
+        related_name="fn_user_permissions",
+        related_query_name="fn_user",
+    )
     phone = models.CharField(
         max_length=15, blank=True, null=True, verbose_name=_("Phone Number")
     )
@@ -64,11 +80,11 @@ class Profile(AbstractUser, PermissionsMixin):
     )
 
     class Meta:
-        verbose_name = _("User Profile")
-        verbose_name_plural = _("User Profiles")
+        verbose_name = _("User FnUser")
+        verbose_name_plural = _("User FnUsers")
 
     def __str__(self):
-        return _("{0}'s Profile").format(self.username)
+        return _("{0}'s FnUser").format(self.username)
 
 
 # The end.

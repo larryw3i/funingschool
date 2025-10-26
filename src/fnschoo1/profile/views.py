@@ -7,7 +7,7 @@ from django.views.generic import CreateView
 from fnschool import _, count_chinese_characters
 from fnschool.settings import LOGIN_URL
 
-from .forms import ProfileForm, ProfileLoginForm
+from .forms import FnUserForm, FnUserLoginForm
 
 # Create your views here.
 
@@ -15,7 +15,7 @@ from .forms import ProfileForm, ProfileLoginForm
 def profile_new(request):
     form = None
     if request.method == "POST":
-        form = ProfileForm(request.POST)
+        form = FnUserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.set_password(form.cleaned_data["password"])
@@ -24,14 +24,14 @@ def profile_new(request):
             login(request, user)
             return redirect("home")
     else:
-        form = ProfileForm()
+        form = FnUserForm()
 
     return render(request, "profile/create.html", {"form": form})
 
 
 def profile_log_in(request):
     if request.method == "POST":
-        form = ProfileLoginForm(request, data=request.POST)
+        form = FnUserLoginForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
@@ -41,7 +41,7 @@ def profile_log_in(request):
                 next_url = request.POST.get("next") or reverse_lazy("home")
                 return redirect(next_url)
     else:
-        form = ProfileLoginForm()
+        form = FnUserLoginForm()
     return render(request, "profile/log_in.html", {"form": form})
 
 
@@ -53,16 +53,16 @@ def profile_log_out(request):
 @login_required
 def profile_edit(request):
     if request.method == "POST":
-        form = ProfileForm(request.POST, request.FILES, instance=request.user)
+        form = FnUserForm(request.POST, request.FILES, instance=request.user)
         print(request.FILES)
         if form.is_valid():
             form.save()
             messages.success(
-                request, _("Profile has been updated successfully!")
+                request, _("FnUser has been updated successfully!")
             )
             return redirect("home")
     else:
-        form = ProfileForm(instance=request.user)
+        form = FnUserForm(instance=request.user)
     return render(request, "profile/edit.html", {"form": form})
 
 
