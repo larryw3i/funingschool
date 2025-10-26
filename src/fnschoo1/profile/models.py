@@ -80,11 +80,11 @@ class FnUser(AbstractUser, PermissionsMixin):
     )
 
     class Meta:
-        verbose_name = _("User FnUser")
-        verbose_name_plural = _("User FnUsers")
+        verbose_name = _("User Information")
+        verbose_name_plural = _("User Information")
 
     def __str__(self):
-        return _("{0}'s FnUser").format(self.username)
+        return _("{0}'s Information").format(self.username)
 
 
 # The end.

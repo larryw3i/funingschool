@@ -21,6 +21,22 @@ class Gender(models.TextChoices):
 
 
 class Profile(AbstractUser, PermissionsMixin):
+    groups = models.ManyToManyField(
+        "auth.Group",
+        verbose_name="groups",
+        blank=True,
+        help_text=_("The groups this user belongs to."),
+        related_name="profile_groups",
+        related_query_name="profile",
+    )
+    user_permissions = models.ManyToManyField(
+        "auth.Permission",
+        verbose_name="user permissions",
+        blank=True,
+        help_text=_("Specific permissions for this user."),
+        related_name="profile_permissions",
+        related_query_name="profile",
+    )
     phone = models.CharField(
         max_length=15, blank=True, null=True, verbose_name=_("Phone Number")
     )
