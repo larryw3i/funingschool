@@ -1,5 +1,12 @@
 $(document).ready(function () {
-  $('.messages').css({ top: $('.nav').height() })
+  var messages_div = $('.messages')
+  if (messages_div.length) {
+    messages_div.css({
+      position: 'absolute',
+      top: $('.navbar').height(),
+      width: '100%',
+    })
+  }
 })
 function make_highlight(query, time_data) {
   var highlight_elements = $(query)
