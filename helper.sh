@@ -144,6 +144,10 @@ format_code() {
     run_prettier
 }
 
-$1 ${@:2}
+if [[ $# -eq 0 ]]; then
+    echo "I'm helper of Project FUNINGSCHOOL."
+else
+    $1 ${@:2}
+fi
 
 # The end.
