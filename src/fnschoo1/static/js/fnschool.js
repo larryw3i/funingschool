@@ -1,13 +1,23 @@
 $(document).ready(function () {
-  var messages_div = $('.messages')
-  if (messages_div.length) {
-    messages_div.css({
+  var messages = $('.messages')
+  if (messages.length) {
+    messages.css({
       position: 'absolute',
       top: $('.navbar').height(),
       width: '100%',
     })
+    setTimeout(function () {
+      messages.hide()
+    }, 25000)
+  }
+  var close_btn = $('.btn-close')
+  if (close_btn.length) {
+    close_btn.on('click', function () {
+      close_btn.closest('.alert').hide()
+    })
   }
 })
+
 function make_highlight(query, time_data) {
   var highlight_elements = $(query)
   var highlight_elements_toggled = []
