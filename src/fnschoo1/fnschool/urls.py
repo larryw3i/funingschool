@@ -25,7 +25,8 @@ from django.views.static import serve
 from . import views
 
 urlpatterns = [
-    path("", views.home_view, name="home"),
+    path("", include("fnhome.urls")),
+    path("home/", include("fnhome.urls")),
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     path("fnprofile/", include("fnprofile.urls")),

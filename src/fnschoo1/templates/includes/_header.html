@@ -2,7 +2,7 @@
 {% load i18n %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'home' %}">
+    <a class="navbar-brand" href="{% url 'fnhome:home' %}">
       <img src="{% static '/images/favicon.ico' %}"
            alt="Logo"
            width="30"
@@ -21,7 +21,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">{% trans "Home" %}</a>
+          <a class="nav-link active"
+             aria-current="page"
+             href="{% url 'fnhome:home' %}">{% trans "Home" %}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'canteen:list_ingredients' %}">{% trans "Canteen" %}</a>
