@@ -1,7 +1,7 @@
 from django.apps import AppConfig
 
 
-class FnUserConfig(AppConfig):
+class FnprofileConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "fnprofile"
 

@@ -7,7 +7,7 @@ from django.views.generic import CreateView
 from fnschool import _, count_chinese_characters
 from fnschool.settings import LOGIN_URL
 
-from .forms import FnUserForm, FnUserLoginForm
+from .forms import FnuserForm, FnuserLoginForm
 
 # Create your views here.
 
@@ -15,7 +15,7 @@ from .forms import FnUserForm, FnUserLoginForm
 def fnprofile_new(request):
     form = None
     if request.method == "POST":
-        form = FnUserForm(request.POST)
+        form = FnuserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.set_password(form.cleaned_data["password"])
@@ -24,14 +24,14 @@ def fnprofile_new(request):
             login(request, user)
             return redirect("home")
     else:
-        form = FnUserForm()
+        form = FnuserForm()
 
     return render(request, "fnprofile/create.html", {"form": form})
 
 
 def fnprofile_log_in(request):
     if request.method == "POST":
-        form = FnUserLoginForm(request, data=request.POST)
+        form = FnuserLoginForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
@@ -41,7 +41,7 @@ def fnprofile_log_in(request):
                 next_url = request.POST.get("next") or reverse_lazy("home")
                 return redirect(next_url)
     else:
-        form = FnUserLoginForm()
+        form = FnuserLoginForm()
     return render(request, "fnprofile/log_in.html", {"form": form})
 
 
@@ -53,16 +53,16 @@ def fnprofile_log_out(request):
 @login_required
 def fnprofile_edit(request):
     if request.method == "POST":
-        form = FnUserForm(request.POST, request.FILES, instance=request.user)
+        form = FnuserForm(request.POST, request.FILES, instance=request.user)
         print(request.FILES)
         if form.is_valid():
             form.save()
             messages.success(
-                request, _("FnUser has been updated successfully!")
+                request, _("Fnuser has been updated successfully!")
             )
             return redirect("home")
     else:
-        form = FnUserForm(instance=request.user)
+        form = FnuserForm(instance=request.user)
     return render(request, "fnprofile/edit.html", {"form": form})
 
 

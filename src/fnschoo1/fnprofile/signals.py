@@ -8,7 +8,7 @@ from .models import Fnuser
 @receiver(post_save, sender=User)
 def create_user_fnprofile(sender, instance, created, **kwargs):
     if created:
-        FnUser.objects.create(user=instance)
+        Fnuser.objects.create(user=instance)
 
 
 @receiver(post_save, sender=User)

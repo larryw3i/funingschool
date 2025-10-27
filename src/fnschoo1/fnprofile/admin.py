@@ -6,7 +6,7 @@ from .models import Fnuser
 
 
 @admin.register(Fnuser)
-class FnUserAdmin(admin.ModelAdmin):
+class FnuserAdmin(admin.ModelAdmin):
     list_display = [
         "user",
         "phone",

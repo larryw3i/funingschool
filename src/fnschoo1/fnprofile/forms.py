@@ -8,7 +8,7 @@ from fnschool import _
 from .models import Fnuser
 
 
-class FnUserLoginForm(AuthenticationForm):
+class FnuserLoginForm(AuthenticationForm):
     username = forms.CharField(
         label=_("User Name"),
         widget=forms.TextInput(attrs={"placeholder": _("User Name")}),
@@ -19,7 +19,7 @@ class FnUserLoginForm(AuthenticationForm):
     )
 
 
-class FnUserForm(ModelForm):
+class FnuserForm(ModelForm):
     username = forms.CharField(
         max_length=128,
         label=_("User Name"),
