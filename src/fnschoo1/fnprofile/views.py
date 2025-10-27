@@ -58,7 +58,7 @@ def fnprofile_edit(request):
         if form.is_valid():
             form.save()
             messages.success(
-                request, _("Fnuser has been updated successfully!")
+                request, _("Your information has been updated successfully!")
             )
             return redirect("home")
     else:

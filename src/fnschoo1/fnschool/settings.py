@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     # fnschool apps.
     "fnschool",
     "fnprofile",
-    "profiles",
+    # "profiles",
     "canteen",
 ]
 
@@ -108,7 +108,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 AUTH_USER_MODEL = "fnprofile.Fnuser"
-## AUTH_USER_MODEL = "profiles.Profile"
+## AUTH_USER_MODEL = "auth.User"
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",

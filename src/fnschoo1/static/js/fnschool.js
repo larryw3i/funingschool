@@ -3,7 +3,7 @@ $(document).ready(function () {
   if (messages.length) {
     messages.css({
       position: 'absolute',
-      top: $('.navbar').height(),
+      top: $('.navbar').height() * 1.45,
       width: '100%',
     })
     setTimeout(function () {

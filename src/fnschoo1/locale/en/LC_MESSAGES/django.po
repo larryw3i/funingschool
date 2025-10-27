@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-24 16:18+0800\n"
+"POT-Creation-Date: 2025-10-27 21:30+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -51,7 +51,7 @@ msgid "Creating Date"
 msgstr ""
 
 #: canteen/models.py:31 canteen/models.py:57 canteen/models.py:101
-#: profiles/models.py:63
+#: fnprofile/models.py:79 profiles/models.py:79
 msgid "Time of updating"
 msgstr ""
 
@@ -91,11 +91,11 @@ msgstr ""
 msgid "Storage Date"
 msgstr ""
 
-#: canteen/models.py:97 profiles/models.py:59
+#: canteen/models.py:97 fnprofile/models.py:75 profiles/models.py:75
 msgid "Time of creating"
 msgstr ""
 
-#: canteen/models.py:104 canteen/templates/canteen/consumption/create.html:50
+#: canteen/models.py:104 canteen/templates/canteen/consumption/create.html:55
 #: canteen/views.py:76
 msgid "Ingredient Name"
 msgstr ""
@@ -314,36 +314,41 @@ msgstr ""
 msgid "Ingredient Categories"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:28
+#: canteen/templates/canteen/consumption/create.html:27
+#: canteen/templates/canteen/ingredient/list.html:27
+msgid "Ingredient Meal Types"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:33
 msgid "The starting date of storage."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:36
+#: canteen/templates/canteen/consumption/create.html:41
 msgid "The end date of storage."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:42
+#: canteen/templates/canteen/consumption/create.html:47
 msgid "Refresh"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:51
+#: canteen/templates/canteen/consumption/create.html:56
 msgid "Remaining Quantity"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:80
+#: canteen/templates/canteen/consumption/create.html:85
 #, python-format
 msgid "Storaged on %(storage_date)s ."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:94
+#: canteen/templates/canteen/consumption/create.html:99
 msgid "No ingredient found."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:103
+#: canteen/templates/canteen/consumption/create.html:108
 msgid "Generate Spreadsheet"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:109
+#: canteen/templates/canteen/consumption/create.html:114
 msgid "Ingredient Sheets are also included."
 msgstr ""
 
@@ -409,10 +414,6 @@ msgstr ""
 
 #: canteen/templates/canteen/ingredient/list.html:22
 msgid "Clear"
-msgstr ""
-
-#: canteen/templates/canteen/ingredient/list.html:27
-msgid "Ingredient Meal Types"
 msgstr ""
 
 #: canteen/templates/canteen/ingredient/list.html:31
@@ -1147,109 +1148,106 @@ msgstr ""
 msgid "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
 msgstr ""
 
-#: fnschool/settings.py:138
-msgid "English"
-msgstr ""
-
-#: fnschool/settings.py:139
-msgid "Spanish"
-msgstr ""
-
-#: fnschool/settings.py:140
-msgid "French"
-msgstr ""
-
-#: fnschool/settings.py:141
-msgid "Simplified Chinese"
-msgstr ""
-
-#: profiles/forms.py:13 profiles/forms.py:14 profiles/forms.py:25
-#: profiles/forms.py:26
+#: fnprofile/forms.py:13 fnprofile/forms.py:14 fnprofile/forms.py:25
+#: fnprofile/forms.py:26 profiles/forms.py:13 profiles/forms.py:14
+#: profiles/forms.py:25 profiles/forms.py:26
 msgid "User Name"
 msgstr ""
 
-#: profiles/forms.py:17 profiles/forms.py:18 profiles/forms.py:29
-#: profiles/forms.py:30
+#: fnprofile/forms.py:17 fnprofile/forms.py:18 fnprofile/forms.py:29
+#: fnprofile/forms.py:30 profiles/forms.py:17 profiles/forms.py:18
+#: profiles/forms.py:29 profiles/forms.py:30
 msgid "Password"
 msgstr ""
 
-#: profiles/forms.py:33 profiles/forms.py:35
+#: fnprofile/forms.py:33 fnprofile/forms.py:35 profiles/forms.py:33
+#: profiles/forms.py:35
 msgid "Confirm Password"
 msgstr ""
 
-#: profiles/models.py:18
+#: fnprofile/models.py:18 profiles/models.py:18
 msgid "Male"
 msgstr ""
 
-#: profiles/models.py:19
+#: fnprofile/models.py:19 profiles/models.py:19
 msgid "Female"
 msgstr ""
 
-#: profiles/models.py:25
+#: fnprofile/models.py:28 profiles/models.py:28
+msgid "The groups this user belongs to."
+msgstr ""
+
+#: fnprofile/models.py:36 profiles/models.py:36
+msgid "Specific permissions for this user."
+msgstr ""
+
+#: fnprofile/models.py:41 profiles/models.py:41
 msgid "Phone Number"
 msgstr ""
 
-#: profiles/models.py:28
+#: fnprofile/models.py:44 profiles/models.py:44
 msgid "Affiliation"
 msgstr ""
 
-#: profiles/models.py:35
+#: fnprofile/models.py:51 profiles/models.py:51
 msgid "Superior department"
 msgstr ""
 
-#: profiles/models.py:39
+#: fnprofile/models.py:55 profiles/models.py:55
 msgid "Date of Birth"
 msgstr ""
 
-#: profiles/models.py:45
+#: fnprofile/models.py:61 profiles/models.py:61
 msgid "Gender"
 msgstr ""
 
-#: profiles/models.py:49
+#: fnprofile/models.py:65 profiles/models.py:65
 msgid "Address"
 msgstr ""
 
-#: profiles/models.py:52
+#: fnprofile/models.py:68 profiles/models.py:68
 msgid "Avatar"
 msgstr ""
 
-#: profiles/models.py:55
+#: fnprofile/models.py:71 profiles/models.py:71
 msgid "Biography"
 msgstr ""
 
-#: profiles/models.py:67
-msgid "User Profile"
+#: fnprofile/models.py:83 fnprofile/models.py:84
+msgid "User Information"
 msgstr ""
 
-#: profiles/models.py:68
-msgid "User Profiles"
-msgstr ""
-
-#: profiles/models.py:71
+#: fnprofile/models.py:87
 #, python-brace-format
-msgid "{0}'s Profile"
+msgid "{0}'s Information"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/create.html:4
 #: profiles/templates/profiles/create.html:4
 msgid "Create"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/create.html:7
 #: profiles/templates/profiles/create.html:7
 msgid "Create new account."
 msgstr ""
 
+#: fnprofile/templates/fnprofile/create.html:11
 #: profiles/templates/profiles/create.html:11
 msgid "Confirm"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/create.html:15
 #: profiles/templates/profiles/create.html:15
 msgid "Already have an account?"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/create.html:16
 #: profiles/templates/profiles/create.html:16
 msgid "Login here"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/detail.html:4
 #: profiles/templates/profiles/detail.html:4
 #, python-format
 msgid ""
@@ -1257,46 +1255,91 @@ msgid ""
 "  "
 msgstr ""
 
+#: fnprofile/templates/fnprofile/edit.html:4
 #: profiles/templates/profiles/edit.html:4
 msgid "Update Profile"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/edit.html:7
 #: profiles/templates/profiles/edit.html:7
 msgid "Update Profile."
 msgstr ""
 
+#: fnprofile/templates/fnprofile/edit.html:13
 #: profiles/templates/profiles/edit.html:13
 msgid "Update"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/log_in.html:4
+#: fnprofile/templates/fnprofile/log_in.html:7
+#: fnprofile/templates/fnprofile/log_in.html:15
 #: profiles/templates/profiles/log_in.html:4
 #: profiles/templates/profiles/log_in.html:7
 #: profiles/templates/profiles/log_in.html:15
 msgid "Log in"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/log_in.html:9
 #: profiles/templates/profiles/log_in.html:9
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 
+#: fnprofile/templates/fnprofile/log_in.html:19
 #: profiles/templates/profiles/log_in.html:19
 msgid "Don't have an account?"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/log_in.html:20
 #: profiles/templates/profiles/log_in.html:20
 msgid "Register here"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/log_out.html:7
 #: profiles/templates/profiles/log_out.html:7
 msgid "Logged Out"
 msgstr ""
 
+#: fnprofile/templates/fnprofile/log_out.html:8
 #: profiles/templates/profiles/log_out.html:8
 msgid "You have been successfully logged out."
 msgstr ""
 
+#: fnprofile/templates/fnprofile/log_out.html:10
 #: profiles/templates/profiles/log_out.html:10
 msgid "Log in again"
+msgstr ""
+
+#: fnprofile/views.py:61
+msgid "Your information has been updated successfully!"
+msgstr ""
+
+#: fnschool/settings.py:140
+msgid "English"
+msgstr ""
+
+#: fnschool/settings.py:141
+msgid "Spanish"
+msgstr ""
+
+#: fnschool/settings.py:142
+msgid "French"
+msgstr ""
+
+#: fnschool/settings.py:143
+msgid "Simplified Chinese"
+msgstr ""
+
+#: profiles/models.py:83
+msgid "User Profile"
+msgstr ""
+
+#: profiles/models.py:84
+msgid "User Profiles"
+msgstr ""
+
+#: profiles/models.py:87
+#, python-brace-format
+msgid "{0}'s Profile"
 msgstr ""
 
 #: profiles/views.py:61
@@ -1359,4 +1402,8 @@ msgstr ""
 
 #: templates/includes/_header.html:85
 msgid "Sign Up"
+msgstr ""
+
+#: templates/includes/_header.html:97
+msgid "Hide messages."
 msgstr ""
