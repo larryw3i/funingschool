@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="FnUser",
+            name="Fnuser",
             fields=[
                 (
                     "id",
@@ -203,8 +203,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "verbose_name": "User FnUser",
-                "verbose_name_plural": "User FnUsers",
+                "verbose_name": "User Information",
+                "verbose_name_plural": "User Information",
             },
             managers=[
                 ("objects", django.contrib.auth.models.UserManager()),

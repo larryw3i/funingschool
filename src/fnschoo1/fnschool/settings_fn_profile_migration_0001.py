@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",  # For Bootstrap 5
     # fnschool apps.
     "fnschool",
-    "fn_profile",
+    "fnprofile",
     "profiles",
     "canteen",
 ]

@@ -20,7 +20,7 @@ class Gender(models.TextChoices):
     UNKNOWN = "U", "--"
 
 
-class FnUser(AbstractUser, PermissionsMixin):
+class Fnuser(AbstractUser, PermissionsMixin):
     groups = models.ManyToManyField(
         "auth.Group",
         verbose_name="groups",

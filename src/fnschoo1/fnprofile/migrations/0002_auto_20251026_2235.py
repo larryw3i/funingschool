@@ -5,10 +5,10 @@ from django.db import migrations
 
 def migrate_data_forward(apps, schema_editor):
     profiles_profile_model = apps.get_model("profiles", "Profile")
-    fn_profile_fn_user_model = apps.get_model("fn_profile", "FnUser")
+    fnprofile_fnuser_model = apps.get_model("fnprofile", "Fnuser")
 
-    for profile in rofiles_profile_model.objects.all():
-        fn_profile_fn_user_model.objects.create(
+    for profile in profiles_profile_model.objects.all():
+        fnprofile_fnuser_model.objects.create(
             phone=profile.phone,
             affiliation=profile.affiliation,
             superior_department=profile.superior_department,
@@ -24,14 +24,14 @@ def migrate_data_forward(apps, schema_editor):
 
 
 def migrate_data_backward(apps, schema_editor):
-    fn_profile_fn_user_model = apps.get_model("fn_profile", "FnUser")
-    fn_profile_fn_user_model.objects.all().delete()
+    fnprofile_fnuser_model = apps.get_model("fnprofile", "Fnuser")
+    fnprofile_fnuser_model.objects.all().delete()
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("fn_profile", "0001_initial"),
+        ("fnprofile", "0001_initial"),
     ]
 
     operations = [

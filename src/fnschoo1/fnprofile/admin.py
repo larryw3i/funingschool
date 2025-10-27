@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .models import FnUser
+from .models import Fnuser
 
 # Register your models here.
 
 
-@admin.register(FnUser)
+@admin.register(Fnuser)
 class FnUserAdmin(admin.ModelAdmin):
     list_display = [
         "user",

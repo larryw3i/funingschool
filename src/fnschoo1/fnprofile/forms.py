@@ -5,7 +5,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ModelForm
 from fnschool import _
 
-from .models import FnUser
+from .models import Fnuser
 
 
 class FnUserLoginForm(AuthenticationForm):
@@ -45,7 +45,7 @@ class FnUserForm(ModelForm):
     class Meta:
         current_year = date.today().year
         year_range = list(range(current_year - 100, current_year + 1))
-        model = FnUser
+        model = Fnuser
         fields = [
             "username",
             "phone",

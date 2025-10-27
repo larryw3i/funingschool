@@ -28,7 +28,7 @@ urlpatterns = [
     path("", views.home_view, name="home"),
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
-    path("profile/", include("fn_profile.urls")),
+    path("profile/", include("fnprofile.urls")),
     path("canteen/", include("canteen.urls")),
 ]
 if settings.DEBUG:
