@@ -95,8 +95,17 @@ function open_small_window(url) {
   const width = Math.round(screen.width * size_times)
   const height = Math.round(screen.height * size_times)
   const left = Math.round((screen.width - width) / 2)
-  const top = Math.round((screen.height - height) / 2)
-  const windowFeatures = `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`
+  const _top = Math.round((screen.height - height) / 2)
+
+  const left0 = Math.round((screen.width - height) / 2)
+  const _top0 = Math.round((screen.height - width) / 2)
+
+  var _width_ = width
+  var _height_ = height
+  var _left_ = left
+  var _top_ = _top
+
+  const windowFeatures = `width=${_width_},height=${_height_},left=${_left_},top=${_top_},resizable=yes,scrollbars=yes`
   window.open(url, '_blank', windowFeatures)
 }
 

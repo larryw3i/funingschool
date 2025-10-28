@@ -22,7 +22,7 @@ def fnprofile_new(request):
             user.username = form.cleaned_data["username"]
             user.save()
             login(request, user)
-            return redirect("home")
+            return redirect("fnhome:home")
     else:
         form = FnuserForm()
 
@@ -38,7 +38,9 @@ def fnprofile_log_in(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                next_url = request.POST.get("next") or reverse_lazy("home")
+                next_url = request.POST.get("next") or reverse_lazy(
+                    "fnhome:home"
+                )
                 return redirect(next_url)
     else:
         form = FnuserLoginForm()
@@ -47,7 +49,7 @@ def fnprofile_log_in(request):
 
 def fnprofile_log_out(request):
     logout(request)
-    return redirect("home")
+    return redirect("fnhome:home")
 
 
 @login_required
@@ -60,7 +62,7 @@ def fnprofile_edit(request):
             messages.success(
                 request, _("Your information has been updated successfully!")
             )
-            return redirect("home")
+            return redirect("fnhome:home")
     else:
         form = FnuserForm(instance=request.user)
     return render(request, "fnprofile/edit.html", {"form": form})

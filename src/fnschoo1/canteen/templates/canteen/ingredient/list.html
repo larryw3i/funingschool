@@ -36,7 +36,7 @@
   </div>
   <hr />
   <div class="container">
-    <div class="table-responsive-lg  table-container">
+    <div class="table-responsive table-responsive-lg  table-container">
       <table class="table table-bordered table-ingredient table-striped table-hover table-condensed">
         <thead>
           <tr>
@@ -65,15 +65,17 @@
                 <div class="form-check"
                      title="{% trans 'It helps you check the ingredients.' %}">
                   <input type="checkbox"
+                         style="cursor: pointer"
                          class="form-check-input"
                          id="ingredient_free_nark_{{ ingredient.id }}" />
                   <label class="form-check-label"
+                         style="cursor: pointer"
                          for="ingredient_free_nark_{{ ingredient.id }}">
                     {{ forloop.counter }}
                   </label>
                 </div>
               </th>
-              <td>{{ ingredient.storage_date }}</td>
+              <td>{{ ingredient.storage_date|date:"Y.m.d" }}</td>
               <td>{{ ingredient.name }}</td>
               <td>{{ ingredient.meal_type }}</td>
               <td>{{ ingredient.category }}</td>
@@ -169,6 +171,7 @@
   <style>
     .table-container {
       overflow: auto;
+
     }
 
     .table-container thead th {
