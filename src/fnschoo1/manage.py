@@ -38,6 +38,16 @@ def main():
     os.chdir(FNSCHOOL_PATH)
     sys.argv[0] = "manage.py"
 
+    if "202511012053_copy_profiles_to_fnprofile" in sys.argv:
+        patche_path = (
+            FNSCHOOL_PATH
+            / "patches"
+            / "202511012053_copy_profiles_to_fnprofile.py"
+        )
+        patche_path = patche_path.as_posix()
+        os.system(f"python3 {patche_path} run")
+        return
+
     if len(sys.argv) < 2:
         local_port = "8230"
         local_url = "http://127.0.0.1:" + local_port

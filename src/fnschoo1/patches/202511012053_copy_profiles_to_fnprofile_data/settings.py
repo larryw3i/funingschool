@@ -17,7 +17,8 @@ from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+print(BASE_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
     # fnschool apps.
     "fnschool",
     "fnprofile",
-    # "profiles",
+    "patches.202511012053_copy_profiles_to_fnprofile_data.profiles",
     "canteen",
     "fnhome",
 ]
@@ -107,8 +108,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-AUTH_USER_MODEL = "fnprofile.Fnuser"
-## AUTH_USER_MODEL = "auth.User"
+## AUTH_USER_MODEL = "fnprofile.Fnuser"
+AUTH_USER_MODEL = "profiles.Profile"
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
