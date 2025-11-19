@@ -82,11 +82,18 @@ function set_simple_cookie(key, value) {
 }
 function update_href(query) {
   query = new Map(Object.entries(query))
-  const url = new URL(window.location.href)
-  const params = new URLSearchParams(url.search)
-  for (const [key, value] of query) {
+  var url = new URL(window.location.href)
+  var params = new URLSearchParams(url.search)
+  for (var [key, value] of query) {
     params.set(key, value)
   }
+
+  for (var [key, value] of params) {
+    if (value === undefined || value === '' || value === null) {
+      params.delete(key)
+    }
+  }
+
   url.search = params.toString()
   window.location.href = url.href
 }

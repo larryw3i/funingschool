@@ -244,12 +244,6 @@ def create_consumptions(request, ingredient_id=None):
             "canteen/consumption/_create.html",
             {"form_list": form_list},
         )
-    by_week = (
-        request.GET.get("by_week", "") or request.COOKIES.get("by_week", "")
-    ) == "true"
-    rapidly = (
-        request.GET.get("rapidly", "") or request.COOKIES.get("rapidly", "")
-    ) == "true" or not by_week
 
     queries = (
         Q(storage_date__lte=date_end)
@@ -259,14 +253,16 @@ def create_consumptions(request, ingredient_id=None):
     )
     ingredients = Ingredient.objects
 
+    sort_values = []
+    for key, value in request.GET.items():
+        if key.startswith("sort_") and value:
+            key = key[5:]
+            value = "" if value == "+" else "-"
+            sort_values.append(value + key)
     ingredients = (
-        ingredients.filter(queries).order_by(
-            "name", "storage_date", "meal_type__name", "category__name"
-        )
-        if rapidly
-        else ingredients.filter(queries).order_by(
-            "storage_date", "meal_type__name", "name", "category__name"
-        )
+        ingredients.filter(queries).order_by(*sort_values)
+        if sort_values
+        else ingredients.filter(queries).order_by("storage_date")
     )
 
     ingredients = ingredients.all()

@@ -155,7 +155,7 @@
 
     function sort_ingredients(value) {
       value = value.trim().split(/\s+/);
-      name = value[0];
+      var name = value[0];
       value = value[1] || "";
       const url = new URL(window.location.href);
       const params = new URLSearchParams(url.search);
@@ -166,7 +166,7 @@
       } else {
         value = "-";
       }
-      i_sort = {};
+      var i_sort = {};
       i_sort[name] = value;
       update_href(i_sort);
     }
