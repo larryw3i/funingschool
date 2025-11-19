@@ -167,10 +167,10 @@ class Ingredient(models.Model):
 
     def get_consuming_quantity(self, date_end):
         if self.storage_date > date_end:
-            return 0
+            return Decimal(0)
         consumptions = self.cleaned_consumptions
         if not consumptions:
-            return 0
+            return Decimal(0)
         quantity = sum(
             [
                 c.amount_used
@@ -182,7 +182,7 @@ class Ingredient(models.Model):
 
     def get_remaining_quantity(self, date_end):
         if self.storage_date > date_end:
-            return 0
+            return Decimal(0)
         return self.quantity - self.get_consuming_quantity(date_end)
 
     @property

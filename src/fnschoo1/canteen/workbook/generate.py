@@ -374,6 +374,7 @@ class MealTypeWorkbook:
 
         summary_row_num = len(categories) + header_row_num + 1
         summary_total_price = sum([i.total_price for i in ingredients])
+        summary_total_price = Decimal(summary_total_price)
         summary_total_price_cell = sheet.cell(summary_row_num, 1)
         summary_total_price_cell.border = self.thin_border
         summary_total_price_cell.value = (
@@ -723,6 +724,7 @@ class MealTypeWorkbook:
 
         summary_row_num = len(categories) + header_row_num + 1
         summary_total_price = sum([i.total_price for i in ingredients])
+        summary_total_price = Decimal(summary_total_price)
         summary_total_price_cell = sheet.cell(summary_row_num, 1)
         total_price_cell.border = self.thin_border
         summary_total_price_cell.value = (

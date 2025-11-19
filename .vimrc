@@ -12,7 +12,6 @@ set ruler
 set cursorline                  " Highlight current line
 set cursorcolumn
 set showmatch                   " Show matching brackets
-set matchtime=2                 " How long to show matching brackets
 set showmode                    " Show current mode
 set showcmd                     " Show commands
 set laststatus=2                " Always show status line
