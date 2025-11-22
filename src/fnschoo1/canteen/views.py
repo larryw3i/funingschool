@@ -265,7 +265,8 @@ def create_consumptions(request, ingredient_id=None):
         else ingredients.filter(queries).order_by("storage_date")
     )
 
-    ingredients = ingredients.all()
+    ingredients = ingredients.prefetch_related("consumptions")
+    ingredients = ingredients.distinct()
 
     if not ingredients:
         return render(
@@ -280,6 +281,12 @@ def create_consumptions(request, ingredient_id=None):
         if (
             i.get_remaining_quantity(date_end) > 0
             or i.storage_date >= date_start
+            or any(
+                [
+                    date_start <= c.date_of_using <= date_end
+                    for c in i.consumptions
+                ]
+            )
         )
     ]
 
@@ -300,7 +307,9 @@ def create_consumptions(request, ingredient_id=None):
     ingredients = ingredients_pinned + ingredients_unpinned
 
     for ingredient in ingredients:
-        ingredient.quantity_used = ingredient.get_consuming_quantity(date_start)
+        ingredient.quantity_used = ingredient.get_consuming_quantity(
+            date_start
+        ) + (ingredient.quantity - ingredient.get_consuming_quantity(date_end))
 
     date_range_cp = date_range
     date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]
