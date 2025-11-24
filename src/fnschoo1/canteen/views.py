@@ -599,6 +599,7 @@ def create_ingredients(request):
                 .only("name", "quantity_unit_name", "category__name")
             )
 
+            new_ingredients = []
             for index, row in df.iterrows():
                 category_name = row[category_header[0]]
                 category_name = (
@@ -673,30 +674,35 @@ def create_ingredients(request):
                 )
 
                 if total_price1:
-                    Ingredient.objects.create(
-                        user=request.user,
-                        storage_date=storage_date,
-                        name=name + _("(2)"),
-                        meal_type=meal_type,
-                        category=category,
-                        quantity=quantity1,
-                        total_price=total_price1,
-                        quantity_unit_name=quantity_unit_name,
-                        is_ignorable=is_ignorable,
+                    new_ingredients.append(
+                        Ingredient(
+                            user=request.user,
+                            storage_date=storage_date,
+                            name=name + _("(2)"),
+                            meal_type=meal_type,
+                            category=category,
+                            quantity=quantity1,
+                            total_price=total_price1,
+                            quantity_unit_name=quantity_unit_name,
+                            is_ignorable=is_ignorable,
+                        )
                     )
                     name = name + _("(1)")
 
-                Ingredient.objects.create(
-                    user=request.user,
-                    storage_date=storage_date,
-                    name=name,
-                    meal_type=meal_type,
-                    category=category,
-                    quantity=quantity0,
-                    total_price=total_price0,
-                    quantity_unit_name=quantity_unit_name,
-                    is_ignorable=is_ignorable,
+                new_ingredients.append(
+                    Ingredient(
+                        user=request.user,
+                        storage_date=storage_date,
+                        name=name,
+                        meal_type=meal_type,
+                        category=category,
+                        quantity=quantity0,
+                        total_price=total_price0,
+                        quantity_unit_name=quantity_unit_name,
+                        is_ignorable=is_ignorable,
+                    )
                 )
+            Ingredient.objects.bulk_create(new_ingredients)
 
             return redirect("canteen:close_window")
 
