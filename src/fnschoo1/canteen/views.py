@@ -554,7 +554,9 @@ def list_ingredients(request):
         for f in fields
     ]
 
-    meal_types = list(set([i.meal_type for i in ingredients]))
+    meal_types = list(
+        set([i.meal_type for i in ingredients if not i.meal_type.is_disabled])
+    )
     total_price_title = ""
     total_price = Decimal("0.0")
     for meal_type in meal_types:
