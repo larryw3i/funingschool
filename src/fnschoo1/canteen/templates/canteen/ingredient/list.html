@@ -130,7 +130,7 @@
 
     $(document).ready(function() {
       var ingredient_table = $(".table-ingredient")
-      ingredient_table.find('th:eq(7)').attr("title", $("#total_price_title").text())
+      ingredient_table.find('th:eq(7)').attr("title", JSON.parse($("#total_price_title").text()))
     });
 
     $(document).ready(function() {

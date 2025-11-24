@@ -145,6 +145,9 @@ LANGUAGES = [
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, "locale"),
 ]
+LANGUAGE_COOKIE_NAME = "django_language"
+LANGUAGE_COOKIE_AGE = 60 * 60 * 24 * 365 * 2
+LANGUAGE_COOKIE_PATH = "/"
 
 USE_TZ = True
 
