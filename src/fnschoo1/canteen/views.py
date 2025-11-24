@@ -546,17 +546,37 @@ def list_ingredients(request):
         page_size = request.COOKIES.get("page_size", "")
     page_size = int(page_size) if str(page_size).isnumeric() else 10
     paginator = Paginator(ingredients, page_size)
+
     page_number = request.GET.get("page", 1)
     page_obj = paginator.get_page(page_number)
     headers = [
         (f.name, request.GET.get("sort_" + f.name, ""), f.verbose_name)
         for f in fields
     ]
+
+    meal_types = list(set([i.meal_type for i in ingredients]))
+    total_price_title = ""
+    total_price = Decimal("0.0")
+    for meal_type in meal_types:
+        sum_total_price = sum(
+            ingredients.filter(Q(meal_type=meal_type)).values_list(
+                "total_price", flat=True
+            )
+        )
+        sum_total_price = Decimal(sum_total_price)
+        total_price += sum_total_price
+        total_price_title += "\n" + _("{meal_type}:{sum_total_price}").format(
+            meal_type=meal_type.name,
+            sum_total_price=sum_total_price.normalize(),
+        )
+    total_price_title = str(total_price.normalize()) + total_price_title
+
     context = {
         "page_obj": page_obj,
         "search_query": search_query_cp,
         "headers": headers,
         "page_size": page_size,
+        "total_price_title": total_price_title,
     }
     return render(request, "canteen/ingredient/list.html", context)
 

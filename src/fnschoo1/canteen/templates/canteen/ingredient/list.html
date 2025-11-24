@@ -116,6 +116,7 @@
     </div>
   </div>
   {% include 'includes/_paginator.html' %}
+  {{ total_price_title|json_script:"total_price_title" }}
   <script>
     function set_ingredient_table_height() {
       var ingredient_table = $('.table-ingredient')
@@ -129,21 +130,8 @@
 
     $(document).ready(function() {
       var ingredient_table = $(".table-ingredient")
-      var max_row = ingredient_table.find('tr').length;
-      var max_col = ingredient_table.find('tr:first').children('td, th').length;
-      var sum_total_price = 0.0
-      for (var r = 1; r <= max_row; r++) {
-        var row = r
-        var cell_col_8 = $("table tr").eq(row).find("td").eq(8);
-        var is_disabled = $(cell_col_8).data("value")
-        if (is_disabled != "True") {
-          var cell_col_6 = ingredient_table.find("tr").eq(row).find("td").eq(6);
-          sum_total_price += (parseFloat($(cell_col_6).text()) || 0.0)
-        }
-      }
-      ingredient_table.find('th:eq(7)').attr("title", sum_total_price.toFixed(2))
+      ingredient_table.find('th:eq(7)').attr("title", $("#total_price_title").text())
     });
-
 
     $(document).ready(function() {
       set_ingredient_table_height();

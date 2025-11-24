@@ -1639,7 +1639,16 @@ class MealTypeWorkbook:
 
         inventory_days = []
         dates_of_using = sorted(
-            list(set([c.date_of_using for c in consumptions]))
+            list(
+                set(
+                    [
+                        c.date_of_using
+                        for c in consumptions
+                        if c.date_of_using.year == self.year
+                        and c.date_of_using.month == self.month
+                    ]
+                )
+            )
         )
         for i, date_of_using in enumerate(dates_of_using):
             if i + 1 < len(dates_of_using):
