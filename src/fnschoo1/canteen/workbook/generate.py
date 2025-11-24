@@ -1680,24 +1680,25 @@ class MealTypeWorkbook:
                         ).all()
                     ]
                 )
-                if remaining_quantity > Decimal("0.0"):
+                if remaining_quantity > 0:
                     inventory_day_ingredients.append(ingredient)
 
-            surplus_ingredients_len = (
-                len(inventory_day_ingredients) % ingredient_rows_count
-            )
-            fake_ingredients_len = (
-                ingredient_rows_count - surplus_ingredients_len
-            )
+            if len(inventory_day_ingredients) < 1:
+                continue
 
             inventory_day_ingredients = sorted(
                 inventory_day_ingredients, key=lambda i: i.category.name
             )
 
-            if len(inventory_day_ingredients) < 1:
-                continue
+            surplus_ingredients_len = (
+                len(inventory_day_ingredients) % ingredient_rows_count
+            )
 
-            if fake_ingredients_len > 0:
+            if surplus_ingredients_len > 0:
+
+                fake_ingredients_len = (
+                    ingredient_rows_count - surplus_ingredients_len
+                )
                 s_ingredient0 = inventory_day_ingredients[0]
                 inventory_day_ingredients += [
                     Ingredient(
