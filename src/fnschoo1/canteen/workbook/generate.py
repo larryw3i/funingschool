@@ -870,30 +870,31 @@ class MealTypeWorkbook:
                     )
                 ]
 
-                fake_ingredients = [
-                    Ingredient(
-                        user=user,
-                        name="",
-                        storage_date=self.first_date_of_month,
-                        meal_type=split_dated_consumption.ingredient.meal_type,
-                        category=c,
-                        quantity=0.0,
-                        quantity_unit_name="",
-                        total_price=0.0,
-                        is_ignorable=False,
-                    )
-                    for c in split_empty_categories
-                ]
-
-                for fake_ingredient in fake_ingredients:
-                    split_dated_consumptions.append(
-                        Consumption(
-                            ingredient=fake_ingredient,
-                            date_of_using=consumption_date,
-                            amount_used=Decimal("0"),
-                            is_disabled=False,
+                if len(split_empty_categories) > 0:
+                    fake_ingredients = [
+                        Ingredient(
+                            user=user,
+                            name="",
+                            storage_date=self.first_date_of_month,
+                            meal_type=split_dated_consumption.ingredient.meal_type,
+                            category=c,
+                            quantity=0.0,
+                            quantity_unit_name="",
+                            total_price=0.0,
+                            is_ignorable=False,
                         )
-                    )
+                        for c in split_empty_categories
+                    ]
+
+                    for fake_ingredient in fake_ingredients:
+                        split_dated_consumptions.append(
+                            Consumption(
+                                ingredient=fake_ingredient,
+                                date_of_using=consumption_date,
+                                amount_used=Decimal("0"),
+                                is_disabled=False,
+                            )
+                        )
 
                 split_dated_consumptions = sorted(
                     split_dated_consumptions,
@@ -1681,7 +1682,7 @@ class MealTypeWorkbook:
                 )
                 if remaining_quantity > Decimal("0.0"):
                     inventory_day_ingredients.append(ingredient)
-            form_count = len(inventory_day_ingredients) / ingredient_rows_count
+
             surplus_ingredients_len = (
                 len(inventory_day_ingredients) % ingredient_rows_count
             )
@@ -1695,22 +1696,25 @@ class MealTypeWorkbook:
 
             if len(inventory_day_ingredients) < 1:
                 continue
-            s_ingredient0 = inventory_day_ingredients[0]
-            inventory_day_ingredients += [
-                Ingredient(
-                    user=user,
-                    storage_date=self.first_date_of_month,
-                    name="",
-                    meal_type=self.meal_type,
-                    category=s_ingredient0.category,
-                    quantity=Decimal("0"),
-                    quantity_unit_name="",
-                    total_price=Decimal("0.0"),
-                    is_ignorable=False,
-                    is_disabled=False,
-                )
-                for i in range(fake_ingredients_len)
-            ]
+
+            if fake_ingredients_len > 0:
+                s_ingredient0 = inventory_day_ingredients[0]
+                inventory_day_ingredients += [
+                    Ingredient(
+                        user=user,
+                        storage_date=self.first_date_of_month,
+                        name="",
+                        meal_type=self.meal_type,
+                        category=s_ingredient0.category,
+                        quantity=Decimal("0"),
+                        quantity_unit_name="",
+                        total_price=Decimal("0.0"),
+                        is_ignorable=False,
+                        is_disabled=False,
+                    )
+                    for i in range(fake_ingredients_len)
+                ]
+
             for index in range(
                 0, len(inventory_day_ingredients), ingredient_rows_count
             ):
