@@ -1,0 +1,15 @@
+{
+  "indent": "2",
+  "max_blank_lines": 2,
+  "max_line_length": "80",
+  "profile": "django",
+  "use_gitignore": true,
+  "format_css": true,
+  "css": {
+    "indent_size": 2
+  },
+  "format_js": true,
+  "js": {
+    "indent_size": 2
+  }
+}

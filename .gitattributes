@@ -1,0 +1,3 @@
+
+# 'diff' ignores all '.po' files.
+*.po -diff

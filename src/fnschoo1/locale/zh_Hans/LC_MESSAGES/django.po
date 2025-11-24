@@ -1,0 +1,1866 @@
+#
+#  <>, YEAR-2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fnschool 0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-20 04:17+0800\n"
+"PO-Revision-Date: 2025-11-20 04:17+0800\n"
+"Last-Translator: \n"
+"Language-Team: larryw3i@163.com\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 49.0\n"
+
+#: canteen/forms.py:11
+msgid "Select a Spreadsheet File"
+msgstr "选择一个表格文件"
+
+#: canteen/forms.py:12
+msgid "Office Open XML Spreadsheet only. (*.xlsx)"
+msgstr "仅为 Office Open XML 表格。 (*.xlsx)"
+
+#: canteen/forms.py:81
+msgid "Numbers with smaller values have higher priority."
+msgstr "数量越小，优先级越高。"
+
+#: canteen/models.py:18
+msgid "Ingredient meal type"
+msgstr "餐类"
+
+#: canteen/models.py:20
+msgid "Meal type name"
+msgstr "餐类名称"
+
+#: canteen/models.py:22 canteen/templates/canteen/category/list.html:18
+#: canteen/templates/canteen/meal_type/delete.html:20
+#: canteen/templates/canteen/meal_type/list.html:18
+msgid "Abbreviation"
+msgstr "简称"
+
+#: canteen/models.py:28 canteen/models.py:54
+msgid "Creating Date"
+msgstr "创建日期"
+
+#: canteen/models.py:31 canteen/models.py:57 canteen/models.py:101
+#: fnprofile/models.py:79
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:63
+msgid "Time of updating"
+msgstr "更新时间"
+
+#: canteen/models.py:35 canteen/models.py:61 canteen/models.py:220
+#: canteen/templates/canteen/category/delete.html:37
+#: canteen/templates/canteen/category/list.html:22
+#: canteen/templates/canteen/meal_type/delete.html:29
+#: canteen/templates/canteen/meal_type/list.html:20
+msgid "Is Disabled"
+msgstr "已禁用"
+
+#: canteen/models.py:47
+msgid "Ingredient category"
+msgstr "大类"
+
+#: canteen/models.py:49
+msgid "Category name"
+msgstr "食材大类名"
+
+#: canteen/models.py:51
+msgid "abbreviation"
+msgstr "简称"
+
+#: canteen/models.py:69
+msgid "Category Priority"
+msgstr "优先级"
+
+#: canteen/models.py:73
+msgid "Pin to Consumptions Top"
+msgstr "置顶出库"
+
+#: canteen/models.py:89
+msgid "User"
+msgstr "用户"
+
+#: canteen/models.py:91 canteen/templates/canteen/consumption/create.html:15
+#: canteen/views.py:67
+msgid "Storage Date"
+msgstr "入库日期"
+
+#: canteen/models.py:97 fnprofile/models.py:75
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:59
+msgid "Time of creating"
+msgstr "创建时间"
+
+#: canteen/models.py:104 canteen/templates/canteen/consumption/create.html:21
+#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:77
+msgid "Ingredient Name"
+msgstr "食材名"
+
+#: canteen/models.py:109
+msgid "Ingredient Meal Type"
+msgstr "餐类"
+
+#: canteen/models.py:115
+msgid "Ingredient Category"
+msgstr "大类"
+
+#: canteen/models.py:121
+msgid "Ingredient Quantity"
+msgstr "数量"
+
+#: canteen/models.py:127
+msgid "Unit Name of Ingredient Quantity"
+msgstr "数量单位"
+
+#: canteen/models.py:133
+msgid "Ingredient Total Price"
+msgstr "总价"
+
+#: canteen/models.py:137
+msgid "Is Ingredient Ignorable"
+msgstr "不入库"
+
+#: canteen/models.py:140
+msgid "Is Ingredient Disabled"
+msgstr "禁用"
+
+#: canteen/models.py:200 canteen/templates/canteen/ingredient/list.html:5
+#: canteen/templates/canteen/ingredient/list.html:8
+msgid "Ingredient List"
+msgstr "食材列表"
+
+#: canteen/models.py:211
+msgid "Ingredient"
+msgstr "食材"
+
+#: canteen/models.py:214
+msgid "Date"
+msgstr "日期"
+
+#: canteen/models.py:216
+msgid "Consuming Quantity"
+msgstr "消耗数量"
+
+#: canteen/models.py:225
+msgid "Consumption Record"
+msgstr "消耗记录"
+
+#: canteen/models.py:226
+msgid "Consumption Records"
+msgstr "消耗记录列表"
+
+#: canteen/models.py:236
+#, python-brace-format
+msgid "{0} of {1} was consumed on {2} ."
+msgstr "在 {2} 消耗了 {0} 的 {1} 。"
+
+#: canteen/templates/canteen/category/create.html:5
+msgid "New Category"
+msgstr "新建食材大类"
+
+#: canteen/templates/canteen/category/create.html:8
+msgid "Create new category"
+msgstr "新建食材大类"
+
+#: canteen/templates/canteen/category/create.html:13
+#: canteen/templates/canteen/category/update.html:19
+#: canteen/templates/canteen/ingredient/create_one.html:13
+#: canteen/templates/canteen/ingredient/update.html:19
+#: canteen/templates/canteen/meal_type/create.html:13
+#: canteen/templates/canteen/meal_type/update.html:19
+msgid "Save"
+msgstr "保存"
+
+#: canteen/templates/canteen/category/create.html:15
+#: canteen/templates/canteen/category/delete.html:59
+#: canteen/templates/canteen/category/update.html:21
+#: canteen/templates/canteen/ingredient/create.html:19
+#: canteen/templates/canteen/ingredient/create_one.html:15
+#: canteen/templates/canteen/ingredient/delete.html:36
+#: canteen/templates/canteen/ingredient/update.html:21
+#: canteen/templates/canteen/meal_type/create.html:15
+#: canteen/templates/canteen/meal_type/delete.html:51
+#: canteen/templates/canteen/meal_type/update.html:21
+#: templates/includes/_footer.html:38
+msgid "Cancel"
+msgstr "取消"
+
+#: canteen/templates/canteen/category/delete.html:4
+#, python-format
+msgid ""
+"\n"
+"    Delete category %(instance_name)s\n"
+"  "
+msgstr ""
+"\n"
+"    删除食材大类（ %(instance_name)s ）\n"
+"  "
+
+#: canteen/templates/canteen/category/delete.html:10
+#, python-format
+msgid ""
+"\n"
+"        Delete category %(instance_name)s .\n"
+"      "
+msgstr ""
+"\n"
+"删除食材大类（ %(instance_name)s ）。\n"
+"    "
+
+#: canteen/templates/canteen/category/delete.html:16
+#: canteen/templates/canteen/category/list.html:17
+msgid "Category Name"
+msgstr "食材大类名"
+
+#: canteen/templates/canteen/category/delete.html:20
+#: canteen/templates/canteen/category/list.html:19
+#: canteen/templates/canteen/meal_type/delete.html:25
+#: canteen/templates/canteen/meal_type/list.html:19
+msgid "Created at"
+msgstr "创建于"
+
+#: canteen/templates/canteen/category/delete.html:24
+#: canteen/templates/canteen/category/list.html:21
+msgid "Priority"
+msgstr "优先级"
+
+#: canteen/templates/canteen/category/delete.html:28
+#: canteen/templates/canteen/category/list.html:20
+msgid "Pin to consumptions top"
+msgstr "置顶出库"
+
+#: canteen/templates/canteen/category/delete.html:31
+#: canteen/templates/canteen/category/delete.html:40
+#: canteen/templates/canteen/category/list.html:35
+#: canteen/templates/canteen/category/list.html:41
+#: canteen/templates/canteen/ingredient/list.html:90
+#: canteen/templates/canteen/ingredient/list.html:95
+#: canteen/templates/canteen/meal_type/delete.html:32
+#: canteen/templates/canteen/meal_type/list.html:33 templates/base/_js.html:7
+msgid "Yes"
+msgstr "是"
+
+#: canteen/templates/canteen/category/delete.html:33
+#: canteen/templates/canteen/category/delete.html:42
+#: canteen/templates/canteen/meal_type/delete.html:34 templates/base/_js.html:9
+msgid "No"
+msgstr "否"
+
+#: canteen/templates/canteen/category/delete.html:48
+msgid ""
+"\n"
+"    Are you sure you want to delete this category? This operation is "
+"irreversible.\n"
+"    "
+msgstr ""
+"\n"
+"    确定要删除这个 食材大类 吗？此操作不可恢复。\n"
+"    "
+
+#: canteen/templates/canteen/category/delete.html:57
+#: canteen/templates/canteen/category/list.html:51
+#: canteen/templates/canteen/ingredient/delete.html:34
+#: canteen/templates/canteen/ingredient/list.html:108
+#: canteen/templates/canteen/meal_type/delete.html:49
+#: canteen/templates/canteen/meal_type/list.html:43
+msgid "Delete"
+msgstr "删除"
+
+#: canteen/templates/canteen/category/list.html:4
+#: canteen/templates/canteen/category/list.html:7
+msgid "Category list"
+msgstr "食材大类列表"
+
+#: canteen/templates/canteen/category/list.html:11
+#: canteen/templates/canteen/meal_type/list.html:11
+msgid "Add"
+msgstr "添加"
+
+#: canteen/templates/canteen/category/list.html:47
+#: canteen/templates/canteen/ingredient/list.html:102
+#: canteen/templates/canteen/meal_type/list.html:39
+msgid "Edit"
+msgstr "编辑"
+
+#: canteen/templates/canteen/category/list.html:56
+msgid "No categories yet."
+msgstr "还没有食材大类。"
+
+#: canteen/templates/canteen/category/update.html:4
+#, python-format
+msgid ""
+"\n"
+"    Edit Category %(instance_name)s\n"
+"  "
+msgstr ""
+"\n"
+"    编辑食材大类 （%(instance_name)s）\n"
+"  "
+
+#: canteen/templates/canteen/category/update.html:11
+#, python-format
+msgid ""
+"\n"
+"      Edit Category %(instance_name)s ."
+msgstr ""
+"\n"
+"编辑食材大类（ %(instance_name)s ）。"
+
+#: canteen/templates/canteen/consumption/create.html:4
+#: canteen/templates/canteen/consumption/create.html:7
+msgid "Consume Ingredients"
+msgstr "消耗食材"
+
+#: canteen/templates/canteen/consumption/create.html:27 canteen/views.py:79
+msgid "Meal Type"
+msgstr "餐类"
+
+#: canteen/templates/canteen/consumption/create.html:33
+msgid "Category Name (canteen__consumption_create)"
+msgstr "大类"
+
+#: canteen/templates/canteen/consumption/create.html:38
+#: canteen/templates/canteen/ingredient/list.html:31
+msgid "Ingredient Categories"
+msgstr "大类"
+
+#: canteen/templates/canteen/consumption/create.html:42
+#: canteen/templates/canteen/ingredient/list.html:28
+msgid "Ingredient Meal Types"
+msgstr "餐类"
+
+#: canteen/templates/canteen/consumption/create.html:47
+msgid "The starting date of storage."
+msgstr "入库的起始日期。"
+
+#: canteen/templates/canteen/consumption/create.html:55
+msgid "The end date of storage."
+msgstr "入库的结束日期。"
+
+#: canteen/templates/canteen/consumption/create.html:61
+msgid "Refresh"
+msgstr "刷新"
+
+#: canteen/templates/canteen/consumption/create.html:70
+msgid "Remaining Quantity"
+msgstr "余量"
+
+#: canteen/templates/canteen/consumption/create.html:99
+#, python-format
+msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
+msgstr "于 %(storage_date)s 入库。（%(meal_type)s，%(category)s）"
+
+#: canteen/templates/canteen/consumption/create.html:108
+#, python-format
+msgid ""
+"\n"
+"                (%(meal_type)s, %(category)s)\n"
+"                "
+msgstr ""
+"\n"
+"                （%(meal_type)s, %(category)s）\n"
+"                "
+
+#: canteen/templates/canteen/consumption/create.html:117
+msgid "No ingredient found."
+msgstr "未发现食材。"
+
+#: canteen/templates/canteen/consumption/create.html:126
+msgid "Generate Spreadsheet"
+msgstr "生成账单"
+
+#: canteen/templates/canteen/consumption/create.html:132
+msgid "Ingredient Sheets are also included."
+msgstr "也包含食材表。"
+
+#: canteen/templates/canteen/ingredient/create.html:4
+msgid "Upload a Spreadsheet of Purchased Ingredients"
+msgstr "上传购入食材的表格"
+
+#: canteen/templates/canteen/ingredient/create.html:7
+msgid "Please upload a spreadsheet of purchased ingredients."
+msgstr "请上传购入食材的表格。"
+
+#: canteen/templates/canteen/ingredient/create.html:9
+msgid "Need a template file?"
+msgstr "需要一份模板文件？"
+
+#: canteen/templates/canteen/ingredient/create.html:10
+msgid "Download it."
+msgstr "下载它。"
+
+#: canteen/templates/canteen/ingredient/create.html:16
+msgid "Upload"
+msgstr "上传"
+
+#: canteen/templates/canteen/ingredient/create_one.html:5
+msgid "New Ingredient"
+msgstr "新食材"
+
+#: canteen/templates/canteen/ingredient/create_one.html:8
+msgid "Create new Ingredient"
+msgstr "添加新的食材"
+
+#: canteen/templates/canteen/ingredient/delete.html:4
+#, python-format
+msgid ""
+"\n"
+"    Delete Ingredient %(instance_name)s\n"
+"  "
+msgstr ""
+"\n"
+"    删除 %(instance_name)s 食材\n"
+"  "
+
+#: canteen/templates/canteen/ingredient/delete.html:10
+#, python-format
+msgid ""
+"\n"
+"        Delete Ingredient %(instance_name)s .\n"
+"      "
+msgstr ""
+"\n"
+"删除 %(instance_name)s 食材。"
+
+#: canteen/templates/canteen/ingredient/delete.html:25
+msgid ""
+"\n"
+"    Are you sure you want to delete this ingredient? This operation is "
+"irreversible.\n"
+"    "
+msgstr ""
+"\n"
+"    确定要删除这个 食材 吗？此操作不可恢复。\n"
+"    "
+
+#: canteen/templates/canteen/ingredient/list.html:16
+msgid "Search ingredient ..."
+msgstr "搜索食材......"
+
+#: canteen/templates/canteen/ingredient/list.html:20
+msgid "Search"
+msgstr "搜索"
+
+#: canteen/templates/canteen/ingredient/list.html:22
+msgid "Clear"
+msgstr "清除"
+
+#: canteen/templates/canteen/ingredient/list.html:34
+msgid "Consume"
+msgstr "消耗"
+
+#: canteen/templates/canteen/ingredient/list.html:36
+msgid "Add via template"
+msgstr "通过模板添加"
+
+#: canteen/templates/canteen/ingredient/list.html:38
+msgid "Add one"
+msgstr "添加一个"
+
+#: canteen/templates/canteen/ingredient/list.html:69
+msgid "It helps you check the ingredients."
+msgstr "自由标记，用于检查食材、核对单据等等。"
+
+#: canteen/templates/canteen/ingredient/update.html:4
+#, python-format
+msgid ""
+"\n"
+"    Edit Ingredient %(instance_name)s\n"
+"  "
+msgstr ""
+"\n"
+"    编辑 %(instance_name)s 食材\n"
+"  "
+
+#: canteen/templates/canteen/ingredient/update.html:11
+#, python-format
+msgid ""
+"\n"
+"      Edit Ingredient %(instance_name)s ."
+msgstr ""
+"\n"
+"编辑 %(instance_name)s 食材。"
+
+#: canteen/templates/canteen/meal_type/create.html:5
+msgid "New Meal Type"
+msgstr "新建餐类"
+
+#: canteen/templates/canteen/meal_type/create.html:8
+msgid "Create new meal type"
+msgstr "新建餐类"
+
+#: canteen/templates/canteen/meal_type/delete.html:4
+#, python-format
+msgid ""
+"\n"
+"    Delete meal type %(instance_name)s\n"
+"  "
+msgstr ""
+"\n"
+"    删除餐类（ %(instance_name)s ）\n"
+"  "
+
+#: canteen/templates/canteen/meal_type/delete.html:10
+#, python-format
+msgid ""
+"\n"
+"        Delete meal_type %(instance_name)s .\n"
+"      "
+msgstr ""
+"\n"
+"删除餐类（ %(instance_name)s ）。\n"
+"    "
+
+#: canteen/templates/canteen/meal_type/delete.html:16
+#: canteen/templates/canteen/meal_type/list.html:17
+msgid "Meal Type Name"
+msgstr "餐类名称"
+
+#: canteen/templates/canteen/meal_type/delete.html:40
+msgid ""
+"\n"
+"    Are you sure you want to delete this meal type? This operation is "
+"irreversible.\n"
+"    "
+msgstr ""
+"\n"
+"    确定要删除这个 餐类 吗？此操作不可恢复。\n"
+"    "
+
+#: canteen/templates/canteen/meal_type/list.html:4
+msgid "Meal Type List"
+msgstr "餐类列表"
+
+#: canteen/templates/canteen/meal_type/list.html:7
+msgid "Meal type list"
+msgstr "餐类列表"
+
+#: canteen/templates/canteen/meal_type/list.html:48
+msgid "No meal types yet."
+msgstr "还没有餐类。"
+
+#: canteen/templates/canteen/meal_type/update.html:4
+#, python-format
+msgid ""
+"\n"
+"    Edit Meal Type %(instance_name)s\n"
+"  "
+msgstr ""
+"\n"
+"    编辑餐类（%(instance_name)s）\n"
+"  "
+
+#: canteen/templates/canteen/meal_type/update.html:11
+#, python-format
+msgid ""
+"\n"
+"      Edit Meal Type %(instance_name)s ."
+msgstr ""
+"\n"
+"编辑餐类（ %(instance_name)s ）。"
+
+#: canteen/views.py:61
+msgid "Meal type 0"
+msgstr "默认类"
+
+#: canteen/views.py:62
+msgid "Category Name 0"
+msgstr "默认类"
+
+#: canteen/views.py:69
+msgid ""
+"Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
+"\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
+"compatible with all the formats you like, but if something goes wrong, you "
+"have to tell the developers. Thank you!"
+msgstr ""
+"像这样的格式都能行：“年年年年-月月-日日”、“年年年年/月月/日日”、“年年年年.月"
+"月.日日”、“月月-日日”、“月月日日”，“月月.日日” 。总之，FNSCHOOL 想兼容所有你"
+"喜欢的格式，但是如果出错了，你要告诉开发者，谢谢你！"
+
+#: canteen/views.py:77
+msgid "Name of Ingredient"
+msgstr "食材名称"
+
+#: canteen/views.py:81
+msgid ""
+"For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
+"generating a spreadsheet, each meal category corresponds to a spread sheet. "
+"If left blank, only one spreadsheet will be generated."
+msgstr ""
+"比如早餐、晚餐、正餐、营养餐等，生成 表册 的时候每个餐类对应着一个 表册  。不"
+"填的话只生成一个 表册 。"
+
+#: canteen/views.py:89
+msgid "Category"
+msgstr "食材大类"
+
+#: canteen/views.py:91
+msgid ""
+"Usually there are seven categories: vegetables, meat, grains, seasonings, "
+"eggs and milk, oils, and fruits."
+msgstr ""
+"通常是七大类：蔬菜类、肉类、粮食类、调味类、蛋奶和糕点类、油类、水果类。"
+
+#: canteen/views.py:96
+msgid "Quantity"
+msgstr "数量"
+
+#: canteen/views.py:98
+msgid ""
+"To prevent the number of decimal places in the unit price from becoming too "
+"large, \"quantity\" is only allowed to be an integer. If your unit price is "
+"a decimal, please use a smaller quantity unit and then expand the quantity "
+"to an integer."
+msgstr ""
+"为防止单价的小数位数变得很多，“数量”只允许为整数。如果你的单价是小数，请你用"
+"更小的数量单位，然后把数量扩大为整数。"
+
+#: canteen/views.py:109
+msgid "Total Price"
+msgstr "总价"
+
+#: canteen/views.py:113
+msgid "Unit Name of Quantity"
+msgstr "数量单位"
+
+#: canteen/views.py:117
+msgid "Is Ignorable"
+msgstr "是不用入库的"
+
+#: canteen/views.py:118
+msgid "As long as a cell has content, it will be considered as \"yes\"."
+msgstr "只要单元格有内容，就会被当作“是”。"
+
+#: canteen/views.py:412
+#, python-brace-format
+msgid ""
+"The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
+"and cannot be saved. Please modify it again."
+msgstr ""
+"单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
+"价和数量。"
+
+#: canteen/views.py:552
+msgid "Please upload a file in \"xlsx\" format."
+msgstr "请上传 “xlsx” 格式的文件。"
+
+#: canteen/views.py:640 canteen/views.py:915
+msgid "(2)"
+msgstr "（2）"
+
+#: canteen/views.py:648 canteen/views.py:923
+msgid "(1)"
+msgstr "（1）"
+
+#: canteen/views.py:686
+msgid "Purchased Ingredients Sheet"
+msgstr "购入食材表"
+
+#: canteen/views.py:706
+msgid "the FNSCHOOL Authors"
+msgstr "FNSCHOOL 的作者们"
+
+#: canteen/views.py:722
+#, python-brace-format
+msgid "Purchased Ingredients WorkBook ({0})"
+msgstr "购入食材工作表（{0}）"
+
+#: canteen/views.py:745
+#, python-brace-format
+msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
+msgstr "（{month}）{affiliation}食堂出入库工作簿"
+
+#: canteen/workbook/generate.py:201
+msgid "Sheet Cover"
+msgstr "六大类总封面"
+
+#: canteen/workbook/generate.py:202
+msgid "Sheet Storage"
+msgstr "入库汇总表"
+
+#: canteen/workbook/generate.py:204
+msgid "Sheet Storage List"
+msgstr "入库单"
+
+#: canteen/workbook/generate.py:207
+msgid "Sheet Non-Storage"
+msgstr "未入库汇总表"
+
+#: canteen/workbook/generate.py:210
+msgid "Sheet Non-Storage List"
+msgstr "未入库明细表"
+
+#: canteen/workbook/generate.py:213
+msgid "Sheet Consumption"
+msgstr "出库汇总表"
+
+#: canteen/workbook/generate.py:216
+msgid "Sheet Consumption List"
+msgstr "出库单"
+
+#: canteen/workbook/generate.py:218
+msgid "Sheet Surplus"
+msgstr "食材盘存表"
+
+#: canteen/workbook/generate.py:294
+#, python-brace-format
+msgid ""
+"Table of {superior_department} Canteen Non-Storaged Ingredients Statistics"
+msgstr "{superior_department}食堂食品、材料未入库汇总报销单"
+
+#: canteen/workbook/generate.py:313 canteen/workbook/generate.py:473
+#: canteen/workbook/generate.py:662
+#, python-brace-format
+msgid ""
+"Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}."
+"{day:0>2}"
+msgstr ""
+"编制单位：{affiliation}        单位：元         {year}年{month:0>2}月"
+"{day:0>2}日"
+
+#: canteen/workbook/generate.py:323 canteen/workbook/generate.py:672
+msgid "Ingredient Categories (storage sheet)"
+msgstr "类别"
+
+#: canteen/workbook/generate.py:327 canteen/workbook/generate.py:676
+msgid "Ingredient Total Prices (storage sheet)"
+msgstr "合  计"
+
+#: canteen/workbook/generate.py:331 canteen/workbook/generate.py:680
+#: canteen/workbook/generate.py:1532
+msgid "Procurement Note"
+msgstr "备注"
+
+#: canteen/workbook/generate.py:382 canteen/workbook/generate.py:389
+#: canteen/workbook/generate.py:571 canteen/workbook/generate.py:578
+#: canteen/workbook/generate.py:732 canteen/workbook/generate.py:739
+#, python-brace-format
+msgid "Total Price Text: {total_price_text}        {total_price}"
+msgstr "总金额（大写）：{total_price_text}    ¥{total_price}"
+
+#: canteen/workbook/generate.py:401 canteen/workbook/generate.py:590
+#: canteen/workbook/generate.py:751
+#, python-brace-format
+msgid "Handler: {handler}"
+msgstr "经办人：{handler}"
+
+#: canteen/workbook/generate.py:410 canteen/workbook/generate.py:599
+#: canteen/workbook/generate.py:760
+msgid "Reviewer:"
+msgstr "审核人："
+
+#: canteen/workbook/generate.py:418 canteen/workbook/generate.py:607
+#: canteen/workbook/generate.py:768
+msgid "Principal's Signature:"
+msgstr "校长签字："
+
+#: canteen/workbook/generate.py:420 canteen/workbook/generate.py:609
+#: canteen/workbook/generate.py:770
+msgid "Supervisor's Signature:"
+msgstr "主管签字："
+
+#: canteen/workbook/generate.py:430 canteen/workbook/generate.py:780
+msgid ""
+"Note: This form is a summary of all monthly food and material inventory "
+"receipts from the cafeteria. After verification, it will be signed and "
+"stamped with the school seal by the principal as reimbursement evidence."
+msgstr ""
+"注：此单为每月食堂食品、材料所有入库单的汇总，审核属实后，校长签字加盖学校公"
+"章作为报销凭据。"
+
+#: canteen/workbook/generate.py:438 canteen/workbook/generate.py:788
+msgid ""
+"Note: This form is a summary of all monthly food and material inventory "
+"receipts from the cafeteria. After verification, it will be signed and "
+"stamped with the affiliation seal by the supervisor as reimbursement "
+"evidence."
+msgstr ""
+"注：此单为每月食堂食品、材料所有入库单的汇总，审核属实后，主管签字加盖单位公"
+"章作为报销凭据。"
+
+#: canteen/workbook/generate.py:454
+#, python-brace-format
+msgid "Table of {superior_department} Canteen Consumed Ingredients Statistics"
+msgstr "{superior_department}食堂食品、材料出库汇总报销单"
+
+#: canteen/workbook/generate.py:484
+msgid "Ingredient Categories (Consumption Sheet)"
+msgstr "类 型"
+
+#: canteen/workbook/generate.py:489
+msgid "Ingredient Total Prices (Consumption Sheet)"
+msgstr "合   计"
+
+#: canteen/workbook/generate.py:493
+msgid "Procurement Note (Consumption Sheet)"
+msgstr "备  注"
+
+#: canteen/workbook/generate.py:619
+msgid ""
+"Note: This form is a summary of all monthly food and material consumption "
+"receipts from the cafeteria. After verification, it will be signed and "
+"stamped with the school seal by the principal as reimbursement evidence."
+msgstr ""
+"注：此单为每月食堂食品、材料所有出库单的汇总，审核属实后，校长签字加盖学校公"
+"章作为报销凭据。"
+
+#: canteen/workbook/generate.py:627
+msgid ""
+"Note: This form is a summary of all monthly food and material consumption "
+"receipts from the cafeteria. After verification, it will be signed and "
+"stamped with the affiliation seal by the supervisor as reimbursement "
+"evidence."
+msgstr ""
+"注：此单为每月食堂食品、材料所有出库单的汇总，审核属实后，主管签字加盖单位公"
+"章作为报销凭据。"
+
+#: canteen/workbook/generate.py:643
+#, python-brace-format
+msgid "Table of {superior_department} Canteen Storaged Ingredients Statistics"
+msgstr "{superior_department}食堂食品、材料入库汇总报销单"
+
+#: canteen/workbook/generate.py:917
+msgid "Consumption List Title (Consumption List Sheet)"
+msgstr "出    库    单"
+
+#: canteen/workbook/generate.py:929 canteen/workbook/generate.py:1289
+#, python-brace-format
+msgid "Affiliation Name: {affiliation_name}"
+msgstr "单位名称：{affiliation_name}"
+
+#: canteen/workbook/generate.py:931 canteen/workbook/generate.py:1291
+#, python-brace-format
+msgid "Principal Name: {affiliation_name}"
+msgstr "学校名称：{affiliation_name}"
+
+#: canteen/workbook/generate.py:940 canteen/workbook/generate.py:1300
+#, python-brace-format
+msgid "{day:0>2} {month:0>2} {year}  Quantity Unit Name: CNY"
+msgstr "{year}年{month:0>2}月{day:0>2}日  单位：元"
+
+#: canteen/workbook/generate.py:960
+#, python-brace-format
+msgid "Storage No. {consumption_num}"
+msgstr "编号：{consumption_num}"
+
+#: canteen/workbook/generate.py:968
+#, python-brace-format
+msgid "(Sub Storage No. {sub_consumption_num})"
+msgstr "（{sub_consumption_num}）"
+
+#: canteen/workbook/generate.py:997
+msgid "Category (Consumption List Sheet)"
+msgstr "类 型"
+
+#: canteen/workbook/generate.py:1001
+msgid "Ingredient Name (Consumption List Sheet)"
+msgstr "食 材 名 称"
+
+#: canteen/workbook/generate.py:1006
+msgid "Quantity Unit Name (Consumption List Sheet)"
+msgstr "计量单位"
+
+#: canteen/workbook/generate.py:1010
+msgid "Quantity (Consumption List Sheet)"
+msgstr "数  量"
+
+#: canteen/workbook/generate.py:1014
+msgid "Unit Price (Consumption List Sheet)"
+msgstr "单 价"
+
+#: canteen/workbook/generate.py:1019
+msgid "Total Price (Consumption List Sheet)"
+msgstr "金 额"
+
+#: canteen/workbook/generate.py:1024
+msgid "Ingredients Total Price (Consumption List Sheet)"
+msgstr "金 额"
+
+#: canteen/workbook/generate.py:1028
+msgid "Note (Consumption List Sheet)"
+msgstr "备 注"
+
+#: canteen/workbook/generate.py:1101
+#, python-brace-format
+msgid "{meal_type}({category}, Storaged/Checked at {storage_date})."
+msgstr "{meal_type}（{category}，于 {storage_date} 入库/清点）"
+
+#: canteen/workbook/generate.py:1156 canteen/workbook/generate.py:1473
+msgid "Summary (Storage List Sheet)"
+msgstr "合计"
+
+#: canteen/workbook/generate.py:1166
+#, python-brace-format
+msgid ""
+"   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
+msgstr ""
+"   审核人：　　　　经办人：{handler}　　　　过称人：　　　　仓管人：　　　　"
+
+#: canteen/workbook/generate.py:1278
+msgid "Storage List (Storage Sheet)"
+msgstr "入  库  单"
+
+#: canteen/workbook/generate.py:1319
+#, python-brace-format
+msgid "Storage No. {storage_num}"
+msgstr "编号：{storage_num}"
+
+#: canteen/workbook/generate.py:1326
+#, python-brace-format
+msgid "(Sub Storage No. {sub_storage_num})"
+msgstr "（{sub_storage_num}）"
+
+#: canteen/workbook/generate.py:1349
+msgid "Category (Storage List Sheet)"
+msgstr "类型"
+
+#: canteen/workbook/generate.py:1353
+msgid "Ingredient Name (Storage List Sheet)"
+msgstr "食材名称"
+
+#: canteen/workbook/generate.py:1358
+msgid "Quantity Unit Name (Storage List Sheet)"
+msgstr "计量单位"
+
+#: canteen/workbook/generate.py:1362
+msgid "Quantity (Storage List Sheet)"
+msgstr "数量"
+
+#: canteen/workbook/generate.py:1365
+msgid "Unit Price (Storage List Sheet)"
+msgstr "单价"
+
+#: canteen/workbook/generate.py:1369
+msgid "Total Price (Storage List Sheet)"
+msgstr "金额"
+
+#: canteen/workbook/generate.py:1374
+msgid "Ingredients Total Price (Storage List Sheet)"
+msgstr "合计"
+
+#: canteen/workbook/generate.py:1378
+msgid "Note (Storage List Sheet)"
+msgstr "备注"
+
+#: canteen/workbook/generate.py:1483
+#, python-brace-format
+msgid ""
+"   Reviewer:        Handler: {handler} 　    Weigher:      Warehouseman: 　"
+msgstr ""
+"   审核人：　　　　经办人：{handler}　　　　过称人：　　　　仓管人：　　　　"
+
+#: canteen/workbook/generate.py:1508
+#, python-brace-format
+msgid ""
+"Table of {affiliation} Canteen Ingredients Procurement Statistics in "
+"{month:0>2} {year}"
+msgstr "{affiliation}{year}年{month:0>2}月份食堂食品采购统计表"
+
+#: canteen/workbook/generate.py:1526
+msgid "Ingredient Categories (cover sheet)"
+msgstr "类别"
+
+#: canteen/workbook/generate.py:1529
+msgid "Ingredient Total Prices"
+msgstr "合计金额"
+
+#: canteen/workbook/generate.py:1565 canteen/workbook/generate.py:1592
+#, python-brace-format
+msgid ""
+"Total price of storaged ingredients is {0}, total price of non-storaged "
+"ingredients is {1}."
+msgstr "入库 {0} 元，未入库 {1} 元。"
+
+#: canteen/workbook/generate.py:1583
+msgid "Procurement Summary"
+msgstr "合计"
+
+#: canteen/workbook/generate.py:1713
+msgid "Table of Surplus Ingredients"
+msgstr "食 材 盘 存 表"
+
+#: canteen/workbook/generate.py:1724
+#, python-brace-format
+msgid ""
+"Principal Name: {affiliation}                {year}.{month:0>2}.{day:0>2} "
+"(Sub-title of Surplus Sheet)"
+msgstr ""
+"学校名称：{affiliation}                {year}年{month:0>2}月{day:0>2}日"
+
+#: canteen/workbook/generate.py:1728
+#, python-brace-format
+msgid ""
+"Affiliation Name: {affiliation}                {year}.{month:0>2}.{day:0>2} "
+"(Sub-title of Surplus Sheet)"
+msgstr ""
+"单位名称：{affiliation}                {year}年{month:0>2}月{day:0>2}日"
+
+#: canteen/workbook/generate.py:1757
+msgid "Ingredient Name (Surplus Sheet)"
+msgstr "食 材 名 称"
+
+#: canteen/workbook/generate.py:1762
+msgid "Ingredient Quantity Unit Name (Surplus Sheet)"
+msgstr "单位"
+
+#: canteen/workbook/generate.py:1766
+msgid "Recorded (Surplus Sheet)"
+msgstr "账面栏"
+
+#: canteen/workbook/generate.py:1769
+msgid "Actual (Surplus Sheet)"
+msgstr "盘点栏"
+
+#: canteen/workbook/generate.py:1772
+msgid "Difference (Surplus Sheet)"
+msgstr "差额栏"
+
+#: canteen/workbook/generate.py:1775
+msgid "Reason (Surplus Sheet)"
+msgstr "差额原因"
+
+#: canteen/workbook/generate.py:1781
+msgid "Recorded Quantity (Surplus Sheet)"
+msgstr "数 量"
+
+#: canteen/workbook/generate.py:1785
+msgid "Recorded Total Price (Surplus Sheet)"
+msgstr "金 额"
+
+#: canteen/workbook/generate.py:1789
+msgid "Actual Quantity (Surplus Sheet)"
+msgstr "数 量"
+
+#: canteen/workbook/generate.py:1793
+msgid "Actual Total Price (Surplus Sheet)"
+msgstr "金 额"
+
+#: canteen/workbook/generate.py:1797
+msgid "Difference Quantity (Surplus Sheet)"
+msgstr "数 量"
+
+#: canteen/workbook/generate.py:1801
+msgid "Difference Total Price (Surplus Sheet)"
+msgstr "金 额"
+
+#: canteen/workbook/generate.py:1832
+#, python-brace-format
+msgid "{meal_type} ({category}, Checked/Storaged at {storage_date})"
+msgstr "{meal_type} ({category}，于 {storage_date} 入库/清点)"
+
+#: canteen/workbook/generate.py:1872
+msgid "Sub0-summary Total Price (Surplus Sheet)"
+msgstr "小 计"
+
+#: canteen/workbook/generate.py:1875
+msgid "Summary Total Price (Surplus Sheet)"
+msgstr "合计"
+
+#: canteen/workbook/generate.py:1908
+msgid "Note: Inventory once a week."
+msgstr "备注：每周盘存一次。"
+
+#: canteen/workbook/generate.py:1915
+#, python-brace-format
+msgid ""
+"   Reviewer:        Handler: {handler_name}    Weigher:        Warehouseman: "
+"　     "
+msgstr ""
+"   审核人：　　　　经办人：{handler_name}　　　　过称人：　　　　仓管"
+"人：　　　　 "
+
+#: canteen/workbook/generate.py:1979
+#, python-brace-format
+msgid "Table of Non-storaged Ingredients ({category})"
+msgstr "未入库明细表（{category}）"
+
+#: canteen/workbook/generate.py:1990
+#, python-brace-format
+msgid "Principal Name: {affiliation}"
+msgstr "学校名称：{affiliation}"
+
+#: canteen/workbook/generate.py:1992
+#, python-brace-format
+msgid "Affiliation Name: {affiliation}"
+msgstr "单位名称：{affiliation}"
+
+#: canteen/workbook/generate.py:1997
+#, python-brace-format
+msgid "{year}.{month:0>2}.{day:0>2} (Non-storage list sheet)"
+msgstr "{year}年{month:0>2}月{day:0>2}日"
+
+#: canteen/workbook/generate.py:2015
+msgid "Procurement Date (Non-storage list sheet)"
+msgstr "采购日期"
+
+#: canteen/workbook/generate.py:2016
+msgid "Ingredient Name (Non-storage list sheet)"
+msgstr "名    称"
+
+#: canteen/workbook/generate.py:2017
+msgid "Unit Name of Quantity (Non-storage list sheet)"
+msgstr "计量单位"
+
+#: canteen/workbook/generate.py:2018
+msgid "Quantity (Non-storage list sheet)"
+msgstr "数  量"
+
+#: canteen/workbook/generate.py:2019
+msgid "Unit Price (Non-storage list sheet)"
+msgstr "单  价"
+
+#: canteen/workbook/generate.py:2020
+msgid "Total Price (Non-storage list sheet)"
+msgstr "金  额"
+
+#: canteen/workbook/generate.py:2021
+msgid "Note (Non-storage list sheet)"
+msgstr "备注"
+
+#: canteen/workbook/generate.py:2037
+#, python-brace-format
+msgid "{year}.{month:0>2}.{day:0>2} (Column of Non-storage list sheet)"
+msgstr "{year}.{month:0>2}.{day:0>2}"
+
+#: canteen/workbook/generate.py:2085
+msgid "Summary (Non-storage list sheet)"
+msgstr "合计"
+
+#: canteen/workbook/generate.py:2102
+msgid "Sub-summary (Non-storage list sheet)"
+msgstr "小计"
+
+#: canteen/workbook/generate.py:2183
+msgid "Ingredients Storage and Consumption Records of Principal Canteen"
+msgstr "学校食堂材料入库、出库台账"
+
+#: canteen/workbook/generate.py:2187
+msgid "Ingredients Storage and Consumption Records of Affiliation Canteen"
+msgstr "单位食堂材料入库、出库台账"
+
+#: canteen/workbook/generate.py:2204
+#, python-brace-format
+msgid "Ingredient Name: {ingredient_name} ({quantity_unit_name})"
+msgstr "材料名称：{ingredient_name}（{quantity_unit_name}）"
+
+#: canteen/workbook/generate.py:2226
+#, python-brace-format
+msgid "Year {year}"
+msgstr "{year} 年"
+
+#: canteen/workbook/generate.py:2236
+msgid "Storage (Food Sheet)"
+msgstr "入  库"
+
+#: canteen/workbook/generate.py:2248
+msgid "Consumption (Food Sheet)"
+msgstr "出库"
+
+#: canteen/workbook/generate.py:2258
+msgid "Surplus (Food Sheet)"
+msgstr "库 存"
+
+#: canteen/workbook/generate.py:2269
+msgid "Storage/Consumption No. (Food Sheet)"
+msgstr "出、入库单编号"
+
+#: canteen/workbook/generate.py:2280
+msgid "Month (Food Sheet)"
+msgstr "月"
+
+#: canteen/workbook/generate.py:2287
+msgid "Day (Food Sheet)"
+msgstr "日"
+
+#: canteen/workbook/generate.py:2301
+msgid "Quantity (Food Sheet)"
+msgstr "数 量"
+
+#: canteen/workbook/generate.py:2309
+msgid "Unit Price (Food Sheet)"
+msgstr "单 价"
+
+#: canteen/workbook/generate.py:2318
+msgid "Total Price (Food Sheet)"
+msgstr "金 额"
+
+#: canteen/workbook/generate.py:2329
+msgid "Surplus for last month"
+msgstr "上月结转"
+
+#: canteen/workbook/generate.py:2331
+msgid "Surplus for last year"
+msgstr "上年结转"
+
+#: canteen/workbook/generate.py:2539
+msgid "and (Food Sheet)"
+msgstr "、"
+
+#: canteen/workbook/generate.py:2577
+msgid "Monthly Summary"
+msgstr "本月合计"
+
+#: canteen/workbook/generate.py:2585
+msgid "Year Accumulation"
+msgstr "本年累积"
+
+#: canteen/workbook/generate.py:2605
+msgid ""
+"Note: The 'Principal Canteen Material Storage and Outbound Ledger' is "
+"registered on a daily basis based on the storage and outbound receipts."
+msgstr ""
+"注：《学校食堂材料入库、出库台账》是以入库单、出库单为依据按日进行登记。"
+
+#: canteen/workbook/generate.py:2609
+msgid ""
+"Note: The 'Affiliation Canteen Material Storage and Outbound Ledger' is "
+"registered on a daily basis based on the storage and outbound receipts."
+msgstr ""
+"注：《单位食堂材料入库、出库台账》是以入库单、出库单为依据按日进行登记。"
+
+#: canteen/workbook/generate.py:2687
+#, python-brace-format
+msgid "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
+msgstr "（{month}{meal_type}）{affiliation}食堂出入库工作簿"
+
+#: fnhome/templates/fnhome/home.html:5
+msgid "FNSCHOOL Home"
+msgstr "FNSCHOOL 主页"
+
+#: fnprofile/forms.py:13 fnprofile/forms.py:14 fnprofile/forms.py:25
+#: fnprofile/forms.py:26
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:13
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:14
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:25
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:26
+msgid "User Name"
+msgstr "用户名"
+
+#: fnprofile/forms.py:17 fnprofile/forms.py:18 fnprofile/forms.py:29
+#: fnprofile/forms.py:30
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:17
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:18
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:29
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:30
+msgid "Password"
+msgstr "密码"
+
+#: fnprofile/forms.py:33 fnprofile/forms.py:35
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:33
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:35
+msgid "Confirm Password"
+msgstr "确认密码"
+
+#: fnprofile/models.py:18
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:18
+msgid "Male"
+msgstr "男"
+
+#: fnprofile/models.py:19
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:19
+msgid "Female"
+msgstr "女"
+
+#: fnprofile/models.py:28
+msgid "The groups this user belongs to."
+msgstr "这个用户所属的组。"
+
+#: fnprofile/models.py:36
+msgid "Specific permissions for this user."
+msgstr "给这个用户指定权限。"
+
+#: fnprofile/models.py:41
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:25
+msgid "Phone Number"
+msgstr "电话号码"
+
+#: fnprofile/models.py:44
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:28
+msgid "Affiliation"
+msgstr "机构"
+
+#: fnprofile/models.py:51
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:35
+msgid "Superior department"
+msgstr "上级机构"
+
+#: fnprofile/models.py:55
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:39
+msgid "Date of Birth"
+msgstr "生日"
+
+#: fnprofile/models.py:61
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:45
+msgid "Gender"
+msgstr "性别"
+
+#: fnprofile/models.py:65
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:49
+msgid "Address"
+msgstr "地址"
+
+#: fnprofile/models.py:68
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:52
+msgid "Avatar"
+msgstr "头像"
+
+#: fnprofile/models.py:71
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:55
+msgid "Biography"
+msgstr "个人简介"
+
+#: fnprofile/models.py:83 fnprofile/models.py:84
+msgid "User Information"
+msgstr "用户信息"
+
+#: fnprofile/models.py:87
+#, python-brace-format
+msgid "{0}'s Information"
+msgstr "{0} 的信息"
+
+#: fnprofile/templates/fnprofile/create.html:4
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:4
+msgid "Create"
+msgstr "新建"
+
+#: fnprofile/templates/fnprofile/create.html:7
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:7
+msgid "Create new account."
+msgstr "创建一个账户。"
+
+#: fnprofile/templates/fnprofile/create.html:11
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:11
+msgid "Confirm"
+msgstr "确认"
+
+#: fnprofile/templates/fnprofile/create.html:15
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:15
+msgid "Already have an account?"
+msgstr "已经有张号了？"
+
+#: fnprofile/templates/fnprofile/create.html:16
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:16
+msgid "Login here"
+msgstr "现在登录"
+
+#: fnprofile/templates/fnprofile/detail.html:4
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/detail.html:4
+#, python-format
+msgid ""
+" Hello, %(user_name)s!\n"
+"  "
+msgstr "你好，%(user_name)s！"
+
+#: fnprofile/templates/fnprofile/edit.html:4
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:4
+msgid "Update Profile"
+msgstr "更新信息"
+
+#: fnprofile/templates/fnprofile/edit.html:7
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:7
+msgid "Update Profile."
+msgstr "更新信息。"
+
+#: fnprofile/templates/fnprofile/edit.html:13
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:13
+msgid "Update"
+msgstr "更新"
+
+#: fnprofile/templates/fnprofile/log_in.html:4
+#: fnprofile/templates/fnprofile/log_in.html:7
+#: fnprofile/templates/fnprofile/log_in.html:15
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:4
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:7
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:15
+msgid "Log in"
+msgstr "登录"
+
+#: fnprofile/templates/fnprofile/log_in.html:9
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:9
+msgid "Your username and password didn't match. Please try again."
+msgstr "你的用户名和密码不匹配，请重试。"
+
+#: fnprofile/templates/fnprofile/log_in.html:19
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:19
+msgid "Don't have an account?"
+msgstr "没有张号？"
+
+#: fnprofile/templates/fnprofile/log_in.html:20
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:20
+msgid "Register here"
+msgstr "现在注册"
+
+#: fnprofile/templates/fnprofile/log_out.html:7
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:7
+msgid "Logged Out"
+msgstr "已退出"
+
+#: fnprofile/templates/fnprofile/log_out.html:8
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:8
+msgid "You have been successfully logged out."
+msgstr "你的账号已退出登录。"
+
+#: fnprofile/templates/fnprofile/log_out.html:10
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:10
+msgid "Log in again"
+msgstr "再次登录"
+
+#: fnprofile/views.py:65
+msgid "Your information has been updated successfully!"
+msgstr "您的信息已更新！"
+
+#: fnschool/settings.py:140
+#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:140
+msgid "English"
+msgstr "英语"
+
+#: fnschool/settings.py:141
+#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:141
+msgid "Spanish"
+msgstr "西班牙语"
+
+#: fnschool/settings.py:142
+#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:142
+msgid "French"
+msgstr "法语"
+
+#: fnschool/settings.py:143
+#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:143
+msgid "Simplified Chinese"
+msgstr "简体中文"
+
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:67
+msgid "User Profile"
+msgstr "用户信息"
+
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:68
+msgid "User Profiles"
+msgstr "用户信息"
+
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:71
+#, python-brace-format
+msgid "{0}'s Profile"
+msgstr "{0} 的信息"
+
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/views.py:63
+msgid "Profile has been updated successfully!"
+msgstr "个人信息已更新！"
+
+#: templates/base/_js.html:11
+msgid "None"
+msgstr "无"
+
+#: templates/base/content.html:10 templates/base/document.html:9
+#: templates/home.html:4
+msgid "FNSCHOOL"
+msgstr "FNSCHOOL"
+
+#: templates/includes/_footer.html:5
+msgid "Copyleft &copy; FNSCHOOL"
+msgstr "版权所无 &copy; FNSCHOOL"
+
+#: templates/includes/_footer.html:31
+msgid ""
+"\n"
+"            We use cookies to ensure that you have the best website "
+"experience. By continuing to use this website, you agree to our cookie "
+"policy.\n"
+"          "
+msgstr ""
+"\n"
+"            我们使用Cookie来确保您获得最佳的网站体验。继续使用本站即表示您同"
+"意我们的Cookie政策。\n"
+"          "
+
+#: templates/includes/_footer.html:41
+msgid "Accept All"
+msgstr "接受全部"
+
+#: templates/includes/_header.html:26
+msgid "Home"
+msgstr "主页"
+
+#: templates/includes/_header.html:29
+msgid "Canteen"
+msgstr "食堂"
+
+#: templates/includes/_header.html:32
+msgid "Bell"
+msgstr "铃声"
+
+#: templates/includes/_header.html:40
+msgid "Develop"
+msgstr "开发"
+
+#: templates/includes/_header.html:57
+msgid "About"
+msgstr "关于"
+
+#: templates/includes/_header.html:80
+msgid "Log out"
+msgstr "退出"
+
+#: templates/includes/_header.html:84
+msgid "Login"
+msgstr "登录"
+
+#: templates/includes/_header.html:87
+msgid "Sign Up"
+msgstr "注册"
+
+#: templates/includes/_header.html:99
+msgid "Hide messages."
+msgstr "隐藏信息。"
+
+#~ msgid "Consume by Week"
+#~ msgstr "周消耗"
+
+#~ msgid "Rapid Consumption"
+#~ msgstr "快消耗"
+
+#~ msgid "Handler:"
+#~ msgstr "经办人："
+
+#~ msgid "Submit"
+#~ msgstr "提交"
+
+#, fuzzy
+#~| msgid "Select a Spreadsheet File"
+#~ msgid "Static Files"
+#~ msgstr "选择一个表格文件"
+
+#, fuzzy
+#~| msgid "Add"
+#~ msgid "and"
+#~ msgstr "添加"
+
+#, fuzzy
+#~| msgid "Abbreviation"
+#~ msgid "Duration"
+#~ msgstr "简称"
+
+#, fuzzy
+#~| msgid "Address"
+#~ msgid "Email address"
+#~ msgstr "地址"
+
+#, fuzzy
+#~| msgid "Address"
+#~ msgid "IPv4 address"
+#~ msgstr "地址"
+
+#, fuzzy
+#~| msgid "Address"
+#~ msgid "IP address"
+#~ msgstr "地址"
+
+#, fuzzy
+#~| msgid "Update Profile."
+#~ msgid "Enter a complete value."
+#~ msgstr "更新信息。"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgid "March"
+#~ msgstr "搜索"
+
+#, fuzzy
+#~| msgid "Phone Number"
+#~ msgid "November"
+#~ msgstr "电话号码"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "abbrev. month"
+#~ msgid "March"
+#~ msgstr "搜索"
+
+#, fuzzy
+#~| msgid "Search"
+#~ msgctxt "alt. month"
+#~ msgid "March"
+#~ msgstr "搜索"
+
+#, fuzzy
+#~| msgid "Phone Number"
+#~ msgctxt "alt. month"
+#~ msgid "November"
+#~ msgstr "电话号码"
+
+#, fuzzy
+#~| msgid "Date of Birth"
+#~ msgid "Date out of range"
+#~ msgstr "生日"
+
+#, fuzzy
+#~| msgid "Remaining Quantity"
+#~ msgid "Remaining"
+#~ msgstr "余量"
+
+#, fuzzy
+#~| msgid "Superior department"
+#~ msgid "superior department"
+#~ msgstr "上级机构"
+
+#, fuzzy
+#~| msgid "Canteen"
+#~ msgid "canteen"
+#~ msgstr "食堂"
+
+#, fuzzy
+#~| msgid "Category name"
+#~ msgid "operator_name"
+#~ msgstr "食材大类名"
+
+#, fuzzy
+#~| msgid "Select a Spreadsheet File"
+#~ msgid "Spreadsheet Files"
+#~ msgstr "选择一个表格文件"
+
+#, fuzzy, python-brace-format
+#~| msgid "Select a Spreadsheet File"
+#~ msgid "Spreadsheet \"{0}\" is in use."
+#~ msgstr "选择一个表格文件"
+
+#, fuzzy
+#~| msgid "Total Price"
+#~ msgid "Total: "
+#~ msgstr "总价"
+
+#, fuzzy
+#~| msgid "Consumption Records"
+#~ msgid "Consuming of this month: "
+#~ msgstr "消耗记录列表"
+
+#, fuzzy
+#~| msgid "Update Profile"
+#~ msgid "Update completely!"
+#~ msgstr "更新信息"
+
+#, fuzzy
+#~| msgid "Update Profile"
+#~ msgid "Update completed!"
+#~ msgstr "更新信息"
+
+#, fuzzy
+#~| msgid "Update Profile."
+#~ msgid "Update completed."
+#~ msgstr "更新信息。"
+
+#, fuzzy
+#~| msgid "Select a Spreadsheet File"
+#~ msgid "Select the last bill spreadsheet"
+#~ msgstr "选择一个表格文件"
+
+#, fuzzy
+#~| msgid "Select a Spreadsheet File"
+#~ msgid "Select the current bill spreadsheet"
+#~ msgstr "选择一个表格文件"
+
+#, fuzzy, python-brace-format
+#~| msgid "Consumption Records"
+#~ msgid "Consuming days of {0} ({1}):"
+#~ msgstr "消耗记录列表"
+
+#, fuzzy, python-brace-format
+#~| msgid "Consumption Records"
+#~ msgid "Consuming days of {0}:"
+#~ msgstr "消耗记录列表"
+
+#, fuzzy
+#~| msgid "Please upload a spreadsheet of purchased ingredients."
+#~ msgid "Please select a purchasing file."
+#~ msgstr "请上传购入食材的表格。"
+
+#, fuzzy
+#~| msgid "Storage Date"
+#~ msgid "Purchaser: "
+#~ msgstr "入库日期"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "smtp_port"
+#~ msgstr "密码"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "smtp_password"
+#~ msgstr "密码"
+
+#, fuzzy
+#~| msgid "Add"
+#~ msgid "dad"
+#~ msgstr "添加"
+
+#, fuzzy
+#~| msgid "Ingredient Name"
+#~ msgid "Student Name"
+#~ msgstr "食材名"
+
+#, fuzzy
+#~| msgid "Female"
+#~ msgid "is_male"
+#~ msgstr "女"
+
+#, fuzzy
+#~| msgid "Update Profile"
+#~ msgid "profile"
+#~ msgstr "更新信息"
+
+#, fuzzy
+#~| msgid "Confirm"
+#~ msgid "app_config"
+#~ msgstr "确认"
+
+#, fuzzy
+#~| msgid "Confirm"
+#~ msgid "config"
+#~ msgstr "确认"
+
+#, python-brace-format
+#~ msgid "Principal Name: {affiliation}                {surplus_date}"
+#~ msgstr "学校名称：{affiliation}                {surplus_date}"
+
+#, python-brace-format
+#~ msgid "Affiliation Name: {affiliation}                {surplus_date}"
+#~ msgstr "单位名称：{affiliation}                {surplus_date}"
+
+#~ msgid "Ingredient Meal type"
+#~ msgstr "餐类"
+
+#~ msgid "Me name"
+#~ msgstr "餐类名称"
+
+#~ msgid "MealType list"
+#~ msgstr "餐类列表"
+
+#~ msgid ""
+#~ "When you purchase ingredients, it's best not to have decimals in the "
+#~ "quantity, as this can be a big hassle!"
+#~ msgstr "当你购买菜品的时候，数量最好不要有小数，因为这是一个大麻烦！"
+
+#~ msgid "Consume Ingredients."
+#~ msgstr "消耗食材。"
+
+#, fuzzy
+#~| msgid "Consume Ingredients"
+#~ msgid "Condiments"
+#~ msgstr "消耗食材"
+
+#, fuzzy
+#~| msgid "Meal Type"
+#~ msgid "Meal Type 1"
+#~ msgstr "餐类"
+
+#, fuzzy
+#~| msgid "Meal Type"
+#~ msgid "Meal Type 2"
+#~ msgstr "餐类"
+
+#, fuzzy
+#~| msgid "Meal Type"
+#~ msgid "Meal Type 3"
+#~ msgstr "餐类"
+
+#~ msgid "Name"
+#~ msgstr "用户名"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Food Name"
+#~ msgstr "用户名"
+
+#, fuzzy
+#~| msgid "Quantity"
+#~ msgid "Quantity 0"
+#~ msgstr "数量"
+
+#, fuzzy
+#~| msgid "Quantity"
+#~ msgid "Quantity 1"
+#~ msgstr "数量"
+
+#, fuzzy
+#~| msgid "Quantity"
+#~ msgid "Quantity 2"
+#~ msgstr "数量"
+
+#, fuzzy
+#~| msgid "Quantity"
+#~ msgid "Quantity 3"
+#~ msgstr "数量"
+
+#, fuzzy
+#~| msgid "Total Price"
+#~ msgid "Total Price 0"
+#~ msgstr "总价"
+
+#, fuzzy
+#~| msgid "Total Price"
+#~ msgid "Total Price 1"
+#~ msgstr "总价"
+
+#, fuzzy
+#~| msgid "Total Price"
+#~ msgid "Total Price 2"
+#~ msgstr "总价"
+
+#, fuzzy
+#~| msgid "Total Price"
+#~ msgid "Total Price 3"
+#~ msgstr "总价"
+
+#, fuzzy
+#~| msgid "Purchased Ingredients Sheet"
+#~ msgid "Purchase sum sheet"
+#~ msgstr "购入食材表"
+
+#, fuzzy
+#~| msgid "Purchased Ingredients Sheet"
+#~ msgid "Purchase list sheet"
+#~ msgstr "购入食材表"
+
+#, fuzzy
+#~| msgid "Select a Spreadsheet File"
+#~ msgid "Select a spreadsheet"
+#~ msgstr "选择一个表格文件"
+
+#, fuzzy
+#~| msgid "Purchased Ingredients Sheet"
+#~ msgid "Purchasing Sheet"
+#~ msgstr "购入食材表"
+
+#, fuzzy
+#~| msgid "Consume Ingredients"
+#~ msgid "Consuming Sheet"
+#~ msgstr "消耗食材"
+
+#, fuzzy
+#~| msgid "Purchased Ingredients Sheet"
+#~ msgid "Purchasing Sum Sheet"
+#~ msgstr "购入食材表"
+
+#, fuzzy
+#~| msgid "Name"
+#~ msgid "Name:"
+#~ msgstr "用户名"
+
+#, fuzzy
+#~| msgid "Superior department"
+#~ msgid "Department:"
+#~ msgstr "上级机构"
+
+#~ msgid "View"
+#~ msgstr "查看"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "  Edit Ingredient %(instance_name)s"
+#~ msgstr ""
+#~ "\n"
+#~ "编辑 %(instance_name)s 食材"

@@ -1,0 +1,1445 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: fnschool 0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-20 04:17+0800\n"
+"PO-Revision-Date: 2025-09-25 10:07+0800\n"
+"Last-Translator: \n"
+"Language-Team: larryw3i@163.com\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: canteen/forms.py:11
+msgid "Select a Spreadsheet File"
+msgstr ""
+
+#: canteen/forms.py:12
+msgid "Office Open XML Spreadsheet only. (*.xlsx)"
+msgstr ""
+
+#: canteen/forms.py:81
+msgid "Numbers with smaller values have higher priority."
+msgstr ""
+
+#: canteen/models.py:18
+msgid "Ingredient meal type"
+msgstr ""
+
+#: canteen/models.py:20
+msgid "Meal type name"
+msgstr ""
+
+#: canteen/models.py:22 canteen/templates/canteen/category/list.html:18
+#: canteen/templates/canteen/meal_type/delete.html:20
+#: canteen/templates/canteen/meal_type/list.html:18
+msgid "Abbreviation"
+msgstr ""
+
+#: canteen/models.py:28 canteen/models.py:54
+msgid "Creating Date"
+msgstr ""
+
+#: canteen/models.py:31 canteen/models.py:57 canteen/models.py:101
+#: fnprofile/models.py:79
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:63
+msgid "Time of updating"
+msgstr ""
+
+#: canteen/models.py:35 canteen/models.py:61 canteen/models.py:220
+#: canteen/templates/canteen/category/delete.html:37
+#: canteen/templates/canteen/category/list.html:22
+#: canteen/templates/canteen/meal_type/delete.html:29
+#: canteen/templates/canteen/meal_type/list.html:20
+msgid "Is Disabled"
+msgstr ""
+
+#: canteen/models.py:47
+msgid "Ingredient category"
+msgstr ""
+
+#: canteen/models.py:49
+msgid "Category name"
+msgstr ""
+
+#: canteen/models.py:51
+msgid "abbreviation"
+msgstr ""
+
+#: canteen/models.py:69
+msgid "Category Priority"
+msgstr ""
+
+#: canteen/models.py:73
+msgid "Pin to Consumptions Top"
+msgstr ""
+
+#: canteen/models.py:89
+msgid "User"
+msgstr ""
+
+#: canteen/models.py:91 canteen/templates/canteen/consumption/create.html:15
+#: canteen/views.py:67
+msgid "Storage Date"
+msgstr ""
+
+#: canteen/models.py:97 fnprofile/models.py:75
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:59
+msgid "Time of creating"
+msgstr ""
+
+#: canteen/models.py:104 canteen/templates/canteen/consumption/create.html:21
+#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:77
+msgid "Ingredient Name"
+msgstr ""
+
+#: canteen/models.py:109
+msgid "Ingredient Meal Type"
+msgstr ""
+
+#: canteen/models.py:115
+msgid "Ingredient Category"
+msgstr ""
+
+#: canteen/models.py:121
+msgid "Ingredient Quantity"
+msgstr ""
+
+#: canteen/models.py:127
+msgid "Unit Name of Ingredient Quantity"
+msgstr ""
+
+#: canteen/models.py:133
+msgid "Ingredient Total Price"
+msgstr ""
+
+#: canteen/models.py:137
+msgid "Is Ingredient Ignorable"
+msgstr ""
+
+#: canteen/models.py:140
+msgid "Is Ingredient Disabled"
+msgstr ""
+
+#: canteen/models.py:200 canteen/templates/canteen/ingredient/list.html:5
+#: canteen/templates/canteen/ingredient/list.html:8
+msgid "Ingredient List"
+msgstr ""
+
+#: canteen/models.py:211
+msgid "Ingredient"
+msgstr ""
+
+#: canteen/models.py:214
+msgid "Date"
+msgstr ""
+
+#: canteen/models.py:216
+msgid "Consuming Quantity"
+msgstr ""
+
+#: canteen/models.py:225
+msgid "Consumption Record"
+msgstr ""
+
+#: canteen/models.py:226
+msgid "Consumption Records"
+msgstr ""
+
+#: canteen/models.py:236
+#, python-brace-format
+msgid "{0} of {1} was consumed on {2} ."
+msgstr ""
+
+#: canteen/templates/canteen/category/create.html:5
+msgid "New Category"
+msgstr ""
+
+#: canteen/templates/canteen/category/create.html:8
+msgid "Create new category"
+msgstr ""
+
+#: canteen/templates/canteen/category/create.html:13
+#: canteen/templates/canteen/category/update.html:19
+#: canteen/templates/canteen/ingredient/create_one.html:13
+#: canteen/templates/canteen/ingredient/update.html:19
+#: canteen/templates/canteen/meal_type/create.html:13
+#: canteen/templates/canteen/meal_type/update.html:19
+msgid "Save"
+msgstr ""
+
+#: canteen/templates/canteen/category/create.html:15
+#: canteen/templates/canteen/category/delete.html:59
+#: canteen/templates/canteen/category/update.html:21
+#: canteen/templates/canteen/ingredient/create.html:19
+#: canteen/templates/canteen/ingredient/create_one.html:15
+#: canteen/templates/canteen/ingredient/delete.html:36
+#: canteen/templates/canteen/ingredient/update.html:21
+#: canteen/templates/canteen/meal_type/create.html:15
+#: canteen/templates/canteen/meal_type/delete.html:51
+#: canteen/templates/canteen/meal_type/update.html:21
+#: templates/includes/_footer.html:38
+msgid "Cancel"
+msgstr ""
+
+#: canteen/templates/canteen/category/delete.html:4
+#, python-format
+msgid ""
+"\n"
+"    Delete category %(instance_name)s\n"
+"  "
+msgstr ""
+
+#: canteen/templates/canteen/category/delete.html:10
+#, python-format
+msgid ""
+"\n"
+"        Delete category %(instance_name)s .\n"
+"      "
+msgstr ""
+
+#: canteen/templates/canteen/category/delete.html:16
+#: canteen/templates/canteen/category/list.html:17
+msgid "Category Name"
+msgstr ""
+
+#: canteen/templates/canteen/category/delete.html:20
+#: canteen/templates/canteen/category/list.html:19
+#: canteen/templates/canteen/meal_type/delete.html:25
+#: canteen/templates/canteen/meal_type/list.html:19
+msgid "Created at"
+msgstr ""
+
+#: canteen/templates/canteen/category/delete.html:24
+#: canteen/templates/canteen/category/list.html:21
+msgid "Priority"
+msgstr ""
+
+#: canteen/templates/canteen/category/delete.html:28
+#: canteen/templates/canteen/category/list.html:20
+msgid "Pin to consumptions top"
+msgstr ""
+
+#: canteen/templates/canteen/category/delete.html:31
+#: canteen/templates/canteen/category/delete.html:40
+#: canteen/templates/canteen/category/list.html:35
+#: canteen/templates/canteen/category/list.html:41
+#: canteen/templates/canteen/ingredient/list.html:90
+#: canteen/templates/canteen/ingredient/list.html:95
+#: canteen/templates/canteen/meal_type/delete.html:32
+#: canteen/templates/canteen/meal_type/list.html:33 templates/base/_js.html:7
+msgid "Yes"
+msgstr ""
+
+#: canteen/templates/canteen/category/delete.html:33
+#: canteen/templates/canteen/category/delete.html:42
+#: canteen/templates/canteen/meal_type/delete.html:34 templates/base/_js.html:9
+msgid "No"
+msgstr ""
+
+#: canteen/templates/canteen/category/delete.html:48
+msgid ""
+"\n"
+"    Are you sure you want to delete this category? This operation is "
+"irreversible.\n"
+"    "
+msgstr ""
+
+#: canteen/templates/canteen/category/delete.html:57
+#: canteen/templates/canteen/category/list.html:51
+#: canteen/templates/canteen/ingredient/delete.html:34
+#: canteen/templates/canteen/ingredient/list.html:108
+#: canteen/templates/canteen/meal_type/delete.html:49
+#: canteen/templates/canteen/meal_type/list.html:43
+msgid "Delete"
+msgstr ""
+
+#: canteen/templates/canteen/category/list.html:4
+#: canteen/templates/canteen/category/list.html:7
+msgid "Category list"
+msgstr ""
+
+#: canteen/templates/canteen/category/list.html:11
+#: canteen/templates/canteen/meal_type/list.html:11
+msgid "Add"
+msgstr ""
+
+#: canteen/templates/canteen/category/list.html:47
+#: canteen/templates/canteen/ingredient/list.html:102
+#: canteen/templates/canteen/meal_type/list.html:39
+msgid "Edit"
+msgstr ""
+
+#: canteen/templates/canteen/category/list.html:56
+msgid "No categories yet."
+msgstr ""
+
+#: canteen/templates/canteen/category/update.html:4
+#, python-format
+msgid ""
+"\n"
+"    Edit Category %(instance_name)s\n"
+"  "
+msgstr ""
+
+#: canteen/templates/canteen/category/update.html:11
+#, python-format
+msgid ""
+"\n"
+"      Edit Category %(instance_name)s ."
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:4
+#: canteen/templates/canteen/consumption/create.html:7
+msgid "Consume Ingredients"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:27 canteen/views.py:79
+msgid "Meal Type"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:33
+msgid "Category Name (canteen__consumption_create)"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:38
+#: canteen/templates/canteen/ingredient/list.html:31
+msgid "Ingredient Categories"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:42
+#: canteen/templates/canteen/ingredient/list.html:28
+msgid "Ingredient Meal Types"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:47
+msgid "The starting date of storage."
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:55
+msgid "The end date of storage."
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:61
+msgid "Refresh"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:70
+msgid "Remaining Quantity"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:99
+#, python-format
+msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:108
+#, python-format
+msgid ""
+"\n"
+"                (%(meal_type)s, %(category)s)\n"
+"                "
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:117
+msgid "No ingredient found."
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:126
+msgid "Generate Spreadsheet"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:132
+msgid "Ingredient Sheets are also included."
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/create.html:4
+msgid "Upload a Spreadsheet of Purchased Ingredients"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/create.html:7
+msgid "Please upload a spreadsheet of purchased ingredients."
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/create.html:9
+msgid "Need a template file?"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/create.html:10
+msgid "Download it."
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/create.html:16
+msgid "Upload"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/create_one.html:5
+msgid "New Ingredient"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/create_one.html:8
+msgid "Create new Ingredient"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/delete.html:4
+#, python-format
+msgid ""
+"\n"
+"    Delete Ingredient %(instance_name)s\n"
+"  "
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/delete.html:10
+#, python-format
+msgid ""
+"\n"
+"        Delete Ingredient %(instance_name)s .\n"
+"      "
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/delete.html:25
+msgid ""
+"\n"
+"    Are you sure you want to delete this ingredient? This operation is "
+"irreversible.\n"
+"    "
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:16
+msgid "Search ingredient ..."
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:20
+msgid "Search"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:22
+msgid "Clear"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:34
+msgid "Consume"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:36
+msgid "Add via template"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:38
+msgid "Add one"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:69
+msgid "It helps you check the ingredients."
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/update.html:4
+#, python-format
+msgid ""
+"\n"
+"    Edit Ingredient %(instance_name)s\n"
+"  "
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/update.html:11
+#, python-format
+msgid ""
+"\n"
+"      Edit Ingredient %(instance_name)s ."
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/create.html:5
+msgid "New Meal Type"
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/create.html:8
+msgid "Create new meal type"
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/delete.html:4
+#, python-format
+msgid ""
+"\n"
+"    Delete meal type %(instance_name)s\n"
+"  "
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/delete.html:10
+#, python-format
+msgid ""
+"\n"
+"        Delete meal_type %(instance_name)s .\n"
+"      "
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/delete.html:16
+#: canteen/templates/canteen/meal_type/list.html:17
+msgid "Meal Type Name"
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/delete.html:40
+msgid ""
+"\n"
+"    Are you sure you want to delete this meal type? This operation is "
+"irreversible.\n"
+"    "
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/list.html:4
+msgid "Meal Type List"
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/list.html:7
+msgid "Meal type list"
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/list.html:48
+msgid "No meal types yet."
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/update.html:4
+#, python-format
+msgid ""
+"\n"
+"    Edit Meal Type %(instance_name)s\n"
+"  "
+msgstr ""
+
+#: canteen/templates/canteen/meal_type/update.html:11
+#, python-format
+msgid ""
+"\n"
+"      Edit Meal Type %(instance_name)s ."
+msgstr ""
+
+#: canteen/views.py:61
+msgid "Meal type 0"
+msgstr ""
+
+#: canteen/views.py:62
+msgid "Category Name 0"
+msgstr ""
+
+#: canteen/views.py:69
+msgid ""
+"Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
+"\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
+"compatible with all the formats you like, but if something goes wrong, you "
+"have to tell the developers. Thank you!"
+msgstr ""
+
+#: canteen/views.py:77
+msgid "Name of Ingredient"
+msgstr ""
+
+#: canteen/views.py:81
+msgid ""
+"For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
+"generating a spreadsheet, each meal category corresponds to a spread sheet. "
+"If left blank, only one spreadsheet will be generated."
+msgstr ""
+
+#: canteen/views.py:89
+msgid "Category"
+msgstr ""
+
+#: canteen/views.py:91
+msgid ""
+"Usually there are seven categories: vegetables, meat, grains, seasonings, "
+"eggs and milk, oils, and fruits."
+msgstr ""
+
+#: canteen/views.py:96
+msgid "Quantity"
+msgstr ""
+
+#: canteen/views.py:98
+msgid ""
+"To prevent the number of decimal places in the unit price from becoming too "
+"large, \"quantity\" is only allowed to be an integer. If your unit price is "
+"a decimal, please use a smaller quantity unit and then expand the quantity "
+"to an integer."
+msgstr ""
+
+#: canteen/views.py:109
+msgid "Total Price"
+msgstr ""
+
+#: canteen/views.py:113
+msgid "Unit Name of Quantity"
+msgstr ""
+
+#: canteen/views.py:117
+msgid "Is Ignorable"
+msgstr ""
+
+#: canteen/views.py:118
+msgid "As long as a cell has content, it will be considered as \"yes\"."
+msgstr ""
+
+#: canteen/views.py:412
+#, python-brace-format
+msgid ""
+"The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
+"and cannot be saved. Please modify it again."
+msgstr ""
+
+#: canteen/views.py:552
+msgid "Please upload a file in \"xlsx\" format."
+msgstr ""
+
+#: canteen/views.py:640 canteen/views.py:915
+msgid "(2)"
+msgstr ""
+
+#: canteen/views.py:648 canteen/views.py:923
+msgid "(1)"
+msgstr ""
+
+#: canteen/views.py:686
+msgid "Purchased Ingredients Sheet"
+msgstr ""
+
+#: canteen/views.py:706
+msgid "the FNSCHOOL Authors"
+msgstr ""
+
+#: canteen/views.py:722
+#, python-brace-format
+msgid "Purchased Ingredients WorkBook ({0})"
+msgstr ""
+
+#: canteen/views.py:745
+#, python-brace-format
+msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
+msgstr ""
+
+#: canteen/workbook/generate.py:201
+msgid "Sheet Cover"
+msgstr ""
+
+#: canteen/workbook/generate.py:202
+msgid "Sheet Storage"
+msgstr ""
+
+#: canteen/workbook/generate.py:204
+msgid "Sheet Storage List"
+msgstr ""
+
+#: canteen/workbook/generate.py:207
+msgid "Sheet Non-Storage"
+msgstr ""
+
+#: canteen/workbook/generate.py:210
+msgid "Sheet Non-Storage List"
+msgstr ""
+
+#: canteen/workbook/generate.py:213
+msgid "Sheet Consumption"
+msgstr ""
+
+#: canteen/workbook/generate.py:216
+msgid "Sheet Consumption List"
+msgstr ""
+
+#: canteen/workbook/generate.py:218
+msgid "Sheet Surplus"
+msgstr ""
+
+#: canteen/workbook/generate.py:294
+#, python-brace-format
+msgid ""
+"Table of {superior_department} Canteen Non-Storaged Ingredients Statistics"
+msgstr ""
+
+#: canteen/workbook/generate.py:313 canteen/workbook/generate.py:473
+#: canteen/workbook/generate.py:662
+#, python-brace-format
+msgid ""
+"Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}."
+"{day:0>2}"
+msgstr ""
+
+#: canteen/workbook/generate.py:323 canteen/workbook/generate.py:672
+msgid "Ingredient Categories (storage sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:327 canteen/workbook/generate.py:676
+msgid "Ingredient Total Prices (storage sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:331 canteen/workbook/generate.py:680
+#: canteen/workbook/generate.py:1532
+msgid "Procurement Note"
+msgstr ""
+
+#: canteen/workbook/generate.py:382 canteen/workbook/generate.py:389
+#: canteen/workbook/generate.py:571 canteen/workbook/generate.py:578
+#: canteen/workbook/generate.py:732 canteen/workbook/generate.py:739
+#, python-brace-format
+msgid "Total Price Text: {total_price_text}        {total_price}"
+msgstr ""
+
+#: canteen/workbook/generate.py:401 canteen/workbook/generate.py:590
+#: canteen/workbook/generate.py:751
+#, python-brace-format
+msgid "Handler: {handler}"
+msgstr ""
+
+#: canteen/workbook/generate.py:410 canteen/workbook/generate.py:599
+#: canteen/workbook/generate.py:760
+msgid "Reviewer:"
+msgstr ""
+
+#: canteen/workbook/generate.py:418 canteen/workbook/generate.py:607
+#: canteen/workbook/generate.py:768
+msgid "Principal's Signature:"
+msgstr ""
+
+#: canteen/workbook/generate.py:420 canteen/workbook/generate.py:609
+#: canteen/workbook/generate.py:770
+msgid "Supervisor's Signature:"
+msgstr ""
+
+#: canteen/workbook/generate.py:430 canteen/workbook/generate.py:780
+msgid ""
+"Note: This form is a summary of all monthly food and material inventory "
+"receipts from the cafeteria. After verification, it will be signed and "
+"stamped with the school seal by the principal as reimbursement evidence."
+msgstr ""
+
+#: canteen/workbook/generate.py:438 canteen/workbook/generate.py:788
+msgid ""
+"Note: This form is a summary of all monthly food and material inventory "
+"receipts from the cafeteria. After verification, it will be signed and "
+"stamped with the affiliation seal by the supervisor as reimbursement "
+"evidence."
+msgstr ""
+
+#: canteen/workbook/generate.py:454
+#, python-brace-format
+msgid "Table of {superior_department} Canteen Consumed Ingredients Statistics"
+msgstr ""
+
+#: canteen/workbook/generate.py:484
+msgid "Ingredient Categories (Consumption Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:489
+msgid "Ingredient Total Prices (Consumption Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:493
+msgid "Procurement Note (Consumption Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:619
+msgid ""
+"Note: This form is a summary of all monthly food and material consumption "
+"receipts from the cafeteria. After verification, it will be signed and "
+"stamped with the school seal by the principal as reimbursement evidence."
+msgstr ""
+
+#: canteen/workbook/generate.py:627
+msgid ""
+"Note: This form is a summary of all monthly food and material consumption "
+"receipts from the cafeteria. After verification, it will be signed and "
+"stamped with the affiliation seal by the supervisor as reimbursement "
+"evidence."
+msgstr ""
+
+#: canteen/workbook/generate.py:643
+#, python-brace-format
+msgid "Table of {superior_department} Canteen Storaged Ingredients Statistics"
+msgstr ""
+
+#: canteen/workbook/generate.py:917
+msgid "Consumption List Title (Consumption List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:929 canteen/workbook/generate.py:1289
+#, python-brace-format
+msgid "Affiliation Name: {affiliation_name}"
+msgstr ""
+
+#: canteen/workbook/generate.py:931 canteen/workbook/generate.py:1291
+#, python-brace-format
+msgid "Principal Name: {affiliation_name}"
+msgstr ""
+
+#: canteen/workbook/generate.py:940 canteen/workbook/generate.py:1300
+#, python-brace-format
+msgid "{day:0>2} {month:0>2} {year}  Quantity Unit Name: CNY"
+msgstr ""
+
+#: canteen/workbook/generate.py:960
+#, python-brace-format
+msgid "Storage No. {consumption_num}"
+msgstr ""
+
+#: canteen/workbook/generate.py:968
+#, python-brace-format
+msgid "(Sub Storage No. {sub_consumption_num})"
+msgstr ""
+
+#: canteen/workbook/generate.py:997
+msgid "Category (Consumption List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1001
+msgid "Ingredient Name (Consumption List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1006
+msgid "Quantity Unit Name (Consumption List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1010
+msgid "Quantity (Consumption List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1014
+msgid "Unit Price (Consumption List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1019
+msgid "Total Price (Consumption List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1024
+msgid "Ingredients Total Price (Consumption List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1028
+msgid "Note (Consumption List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1101
+#, python-brace-format
+msgid "{meal_type}({category}, Storaged/Checked at {storage_date})."
+msgstr ""
+
+#: canteen/workbook/generate.py:1156 canteen/workbook/generate.py:1473
+msgid "Summary (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1166
+#, python-brace-format
+msgid ""
+"   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
+msgstr ""
+
+#: canteen/workbook/generate.py:1278
+msgid "Storage List (Storage Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1319
+#, python-brace-format
+msgid "Storage No. {storage_num}"
+msgstr ""
+
+#: canteen/workbook/generate.py:1326
+#, python-brace-format
+msgid "(Sub Storage No. {sub_storage_num})"
+msgstr ""
+
+#: canteen/workbook/generate.py:1349
+msgid "Category (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1353
+msgid "Ingredient Name (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1358
+msgid "Quantity Unit Name (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1362
+msgid "Quantity (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1365
+msgid "Unit Price (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1369
+msgid "Total Price (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1374
+msgid "Ingredients Total Price (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1378
+msgid "Note (Storage List Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1483
+#, python-brace-format
+msgid ""
+"   Reviewer:        Handler: {handler} 　    Weigher:      Warehouseman: 　"
+msgstr ""
+
+#: canteen/workbook/generate.py:1508
+#, python-brace-format
+msgid ""
+"Table of {affiliation} Canteen Ingredients Procurement Statistics in "
+"{month:0>2} {year}"
+msgstr ""
+
+#: canteen/workbook/generate.py:1526
+msgid "Ingredient Categories (cover sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1529
+msgid "Ingredient Total Prices"
+msgstr ""
+
+#: canteen/workbook/generate.py:1565 canteen/workbook/generate.py:1592
+#, python-brace-format
+msgid ""
+"Total price of storaged ingredients is {0}, total price of non-storaged "
+"ingredients is {1}."
+msgstr ""
+
+#: canteen/workbook/generate.py:1583
+msgid "Procurement Summary"
+msgstr ""
+
+#: canteen/workbook/generate.py:1713
+msgid "Table of Surplus Ingredients"
+msgstr ""
+
+#: canteen/workbook/generate.py:1724
+#, python-brace-format
+msgid ""
+"Principal Name: {affiliation}                {year}.{month:0>2}.{day:0>2} "
+"(Sub-title of Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1728
+#, python-brace-format
+msgid ""
+"Affiliation Name: {affiliation}                {year}.{month:0>2}.{day:0>2} "
+"(Sub-title of Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1757
+msgid "Ingredient Name (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1762
+msgid "Ingredient Quantity Unit Name (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1766
+msgid "Recorded (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1769
+msgid "Actual (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1772
+msgid "Difference (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1775
+msgid "Reason (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1781
+msgid "Recorded Quantity (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1785
+msgid "Recorded Total Price (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1789
+msgid "Actual Quantity (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1793
+msgid "Actual Total Price (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1797
+msgid "Difference Quantity (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1801
+msgid "Difference Total Price (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1832
+#, python-brace-format
+msgid "{meal_type} ({category}, Checked/Storaged at {storage_date})"
+msgstr ""
+
+#: canteen/workbook/generate.py:1872
+msgid "Sub0-summary Total Price (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1875
+msgid "Summary Total Price (Surplus Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:1908
+msgid "Note: Inventory once a week."
+msgstr ""
+
+#: canteen/workbook/generate.py:1915
+#, python-brace-format
+msgid ""
+"   Reviewer:        Handler: {handler_name}    Weigher:        Warehouseman: "
+"　     "
+msgstr ""
+
+#: canteen/workbook/generate.py:1979
+#, python-brace-format
+msgid "Table of Non-storaged Ingredients ({category})"
+msgstr ""
+
+#: canteen/workbook/generate.py:1990
+#, python-brace-format
+msgid "Principal Name: {affiliation}"
+msgstr ""
+
+#: canteen/workbook/generate.py:1992
+#, python-brace-format
+msgid "Affiliation Name: {affiliation}"
+msgstr ""
+
+#: canteen/workbook/generate.py:1997
+#, python-brace-format
+msgid "{year}.{month:0>2}.{day:0>2} (Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2015
+msgid "Procurement Date (Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2016
+msgid "Ingredient Name (Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2017
+msgid "Unit Name of Quantity (Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2018
+msgid "Quantity (Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2019
+msgid "Unit Price (Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2020
+msgid "Total Price (Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2021
+msgid "Note (Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2037
+#, python-brace-format
+msgid "{year}.{month:0>2}.{day:0>2} (Column of Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2085
+msgid "Summary (Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2102
+msgid "Sub-summary (Non-storage list sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2183
+msgid "Ingredients Storage and Consumption Records of Principal Canteen"
+msgstr ""
+
+#: canteen/workbook/generate.py:2187
+msgid "Ingredients Storage and Consumption Records of Affiliation Canteen"
+msgstr ""
+
+#: canteen/workbook/generate.py:2204
+#, python-brace-format
+msgid "Ingredient Name: {ingredient_name} ({quantity_unit_name})"
+msgstr ""
+
+#: canteen/workbook/generate.py:2226
+#, python-brace-format
+msgid "Year {year}"
+msgstr ""
+
+#: canteen/workbook/generate.py:2236
+msgid "Storage (Food Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2248
+msgid "Consumption (Food Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2258
+msgid "Surplus (Food Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2269
+msgid "Storage/Consumption No. (Food Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2280
+msgid "Month (Food Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2287
+msgid "Day (Food Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2301
+msgid "Quantity (Food Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2309
+msgid "Unit Price (Food Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2318
+msgid "Total Price (Food Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2329
+msgid "Surplus for last month"
+msgstr ""
+
+#: canteen/workbook/generate.py:2331
+msgid "Surplus for last year"
+msgstr ""
+
+#: canteen/workbook/generate.py:2539
+msgid "and (Food Sheet)"
+msgstr ""
+
+#: canteen/workbook/generate.py:2577
+msgid "Monthly Summary"
+msgstr ""
+
+#: canteen/workbook/generate.py:2585
+msgid "Year Accumulation"
+msgstr ""
+
+#: canteen/workbook/generate.py:2605
+msgid ""
+"Note: The 'Principal Canteen Material Storage and Outbound Ledger' is "
+"registered on a daily basis based on the storage and outbound receipts."
+msgstr ""
+
+#: canteen/workbook/generate.py:2609
+msgid ""
+"Note: The 'Affiliation Canteen Material Storage and Outbound Ledger' is "
+"registered on a daily basis based on the storage and outbound receipts."
+msgstr ""
+
+#: canteen/workbook/generate.py:2687
+#, python-brace-format
+msgid "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
+msgstr ""
+
+#: fnhome/templates/fnhome/home.html:5
+msgid "FNSCHOOL Home"
+msgstr ""
+
+#: fnprofile/forms.py:13 fnprofile/forms.py:14 fnprofile/forms.py:25
+#: fnprofile/forms.py:26
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:13
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:14
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:25
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:26
+msgid "User Name"
+msgstr ""
+
+#: fnprofile/forms.py:17 fnprofile/forms.py:18 fnprofile/forms.py:29
+#: fnprofile/forms.py:30
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:17
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:18
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:29
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:30
+msgid "Password"
+msgstr ""
+
+#: fnprofile/forms.py:33 fnprofile/forms.py:35
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:33
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:35
+msgid "Confirm Password"
+msgstr ""
+
+#: fnprofile/models.py:18
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:18
+msgid "Male"
+msgstr ""
+
+#: fnprofile/models.py:19
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:19
+msgid "Female"
+msgstr ""
+
+#: fnprofile/models.py:28
+msgid "The groups this user belongs to."
+msgstr ""
+
+#: fnprofile/models.py:36
+msgid "Specific permissions for this user."
+msgstr ""
+
+#: fnprofile/models.py:41
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:25
+msgid "Phone Number"
+msgstr ""
+
+#: fnprofile/models.py:44
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:28
+msgid "Affiliation"
+msgstr ""
+
+#: fnprofile/models.py:51
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:35
+msgid "Superior department"
+msgstr ""
+
+#: fnprofile/models.py:55
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:39
+msgid "Date of Birth"
+msgstr ""
+
+#: fnprofile/models.py:61
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:45
+msgid "Gender"
+msgstr ""
+
+#: fnprofile/models.py:65
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:49
+msgid "Address"
+msgstr ""
+
+#: fnprofile/models.py:68
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:52
+msgid "Avatar"
+msgstr ""
+
+#: fnprofile/models.py:71
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:55
+msgid "Biography"
+msgstr ""
+
+#: fnprofile/models.py:83 fnprofile/models.py:84
+msgid "User Information"
+msgstr ""
+
+#: fnprofile/models.py:87
+#, python-brace-format
+msgid "{0}'s Information"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/create.html:4
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:4
+msgid "Create"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/create.html:7
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:7
+msgid "Create new account."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/create.html:11
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:11
+msgid "Confirm"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/create.html:15
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:15
+msgid "Already have an account?"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/create.html:16
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:16
+msgid "Login here"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/detail.html:4
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/detail.html:4
+#, python-format
+msgid ""
+" Hello, %(user_name)s!\n"
+"  "
+msgstr ""
+
+#: fnprofile/templates/fnprofile/edit.html:4
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:4
+msgid "Update Profile"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/edit.html:7
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:7
+msgid "Update Profile."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/edit.html:13
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:13
+msgid "Update"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/log_in.html:4
+#: fnprofile/templates/fnprofile/log_in.html:7
+#: fnprofile/templates/fnprofile/log_in.html:15
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:4
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:7
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:15
+msgid "Log in"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/log_in.html:9
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:9
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/log_in.html:19
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:19
+msgid "Don't have an account?"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/log_in.html:20
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:20
+msgid "Register here"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/log_out.html:7
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:7
+msgid "Logged Out"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/log_out.html:8
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:8
+msgid "You have been successfully logged out."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/log_out.html:10
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:10
+msgid "Log in again"
+msgstr ""
+
+#: fnprofile/views.py:65
+msgid "Your information has been updated successfully!"
+msgstr ""
+
+#: fnschool/settings.py:140
+#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:140
+msgid "English"
+msgstr ""
+
+#: fnschool/settings.py:141
+#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:141
+msgid "Spanish"
+msgstr ""
+
+#: fnschool/settings.py:142
+#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:142
+msgid "French"
+msgstr ""
+
+#: fnschool/settings.py:143
+#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:143
+msgid "Simplified Chinese"
+msgstr ""
+
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:67
+msgid "User Profile"
+msgstr ""
+
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:68
+msgid "User Profiles"
+msgstr ""
+
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:71
+#, python-brace-format
+msgid "{0}'s Profile"
+msgstr ""
+
+#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/views.py:63
+msgid "Profile has been updated successfully!"
+msgstr ""
+
+#: templates/base/_js.html:11
+msgid "None"
+msgstr ""
+
+#: templates/base/content.html:10 templates/base/document.html:9
+#: templates/home.html:4
+msgid "FNSCHOOL"
+msgstr ""
+
+#: templates/includes/_footer.html:5
+msgid "Copyleft &copy; FNSCHOOL"
+msgstr ""
+
+#: templates/includes/_footer.html:31
+msgid ""
+"\n"
+"            We use cookies to ensure that you have the best website "
+"experience. By continuing to use this website, you agree to our cookie "
+"policy.\n"
+"          "
+msgstr ""
+
+#: templates/includes/_footer.html:41
+msgid "Accept All"
+msgstr ""
+
+#: templates/includes/_header.html:26
+msgid "Home"
+msgstr ""
+
+#: templates/includes/_header.html:29
+msgid "Canteen"
+msgstr ""
+
+#: templates/includes/_header.html:32
+msgid "Bell"
+msgstr ""
+
+#: templates/includes/_header.html:40
+msgid "Develop"
+msgstr ""
+
+#: templates/includes/_header.html:57
+msgid "About"
+msgstr ""
+
+#: templates/includes/_header.html:80
+msgid "Log out"
+msgstr ""
+
+#: templates/includes/_header.html:84
+msgid "Login"
+msgstr ""
+
+#: templates/includes/_header.html:87
+msgid "Sign Up"
+msgstr ""
+
+#: templates/includes/_header.html:99
+msgid "Hide messages."
+msgstr ""

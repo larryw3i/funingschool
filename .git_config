@@ -1,0 +1,16 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@gitee.com:larryw3i/funingschool.git
+	url = git@github.com:larryw3i/funingschool.git
+    url = git@gitcode.com:larryw3i/funingschool.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[gui]
+	wmstate = normal
+	geometry = 1920x913+-61+-23 321 234
