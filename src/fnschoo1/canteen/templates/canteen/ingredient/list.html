@@ -43,7 +43,12 @@
       <table class="table table-bordered table-ingredient table-striped table-hover table-condensed">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">
+              #
+              {% blocktrans with object_list_len=page_obj.object_list|length %}
+              ({{object_list_len}})
+              {% endblocktrans %}
+            </th>
             {% for name,sort, header in headers %}
               <th scope="col"
                   data-sort="sort_{{ name }} {{ sort }}"
