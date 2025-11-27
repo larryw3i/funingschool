@@ -545,8 +545,8 @@ def list_ingredients(request):
     if not page_size:
         page_size = request.COOKIES.get("page_size", "")
     page_size = int(page_size) if str(page_size).isnumeric() else 10
+    ingredients_len = len(ingredients)
     paginator = Paginator(ingredients, page_size)
-
     page_number = request.GET.get("page", 1)
     page_obj = paginator.get_page(page_number)
     headers = [
@@ -579,6 +579,7 @@ def list_ingredients(request):
         "headers": headers,
         "page_size": page_size,
         "total_price_title": total_price_title,
+        "ingredients_len": ingredients_len,
     }
     return render(request, "canteen/ingredient/list.html", context)
 

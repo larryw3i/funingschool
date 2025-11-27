@@ -45,8 +45,8 @@
           <tr>
             <th scope="col">
               #
-              {% blocktrans with object_list_len=page_obj.object_list|length %}
-              ({{object_list_len}})
+              {% blocktrans with ingredients_len=ingredients_len %}
+              ({{ingredients_len}})
               {% endblocktrans %}
             </th>
             {% for name,sort, header in headers %}
