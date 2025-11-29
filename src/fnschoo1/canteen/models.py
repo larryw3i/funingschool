@@ -7,6 +7,7 @@ from django.core.validators import MinValueValidator
 # Create your models here.
 from django.db import models
 from django.db.models import Q
+
 from fnschool import _
 
 

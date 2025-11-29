@@ -1,6 +1,7 @@
 from datetime import date, datetime
 
 from django import forms
+
 from fnschool import _
 
 from .models import Category, Consumption, Ingredient, MealType

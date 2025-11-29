@@ -3,6 +3,7 @@ from datetime import date
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ModelForm
+
 from fnschool import _
 
 from .models import Profile
