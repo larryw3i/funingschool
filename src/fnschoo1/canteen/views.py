@@ -41,12 +41,11 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
+from fnschool import _, count_chinese_characters
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font
 from openpyxl.utils import get_column_letter
-
-from fnschool import _, count_chinese_characters
 
 from .forms import (
     CategoryForm,

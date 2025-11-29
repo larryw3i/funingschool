@@ -6,7 +6,7 @@
 [remote "origin"]
 	url = git@gitee.com:larryw3i/funingschool.git
 	url = git@github.com:larryw3i/funingschool.git
-        url = git@gitcode.com:larryw3i/funingschool.git
+    url = git@gitcode.com:larryw3i/funingschool.git
 	fetch = +refs/heads/*:refs/remotes/origin/*
 [branch "master"]
 	remote = origin
