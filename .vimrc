@@ -42,4 +42,7 @@ set background=dark
 
 colorscheme elflord
 
+set exrc
+set secure
+
 " The end.
