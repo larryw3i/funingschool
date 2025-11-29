@@ -34,8 +34,10 @@ set wrap                        " Wrap lines
 set linebreak                   " Break at word boundaries
 set breakindent
 
+autocmd BufNewFile,BufRead .git/config set filetype=yaml
+
 autocmd FileType html,css,javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType python,yaml setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 syntax enable
 set background=dark
