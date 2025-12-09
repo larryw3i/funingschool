@@ -606,9 +606,7 @@ def create_ingredients(request):
             for index, row in df.iterrows():
                 category_name = row[category_header[0]]
                 category_name = (
-                    category_name_0
-                    if pd.isnull(category_name)
-                    else category_name
+                    None if pd.isnull(category_name) else category_name
                 )
                 meal_type_name = row[meal_type_header[0]]
                 meal_type_name = (
@@ -616,26 +614,42 @@ def create_ingredients(request):
                     if pd.isnull(meal_type_name)
                     else meal_type_name
                 )
-
-                category = Category.objects.filter(
-                    Q(name=category_name) & Q(user=request.user)
-                ).first()
                 name = row[ingredient_name_header[0]]
 
-                if not category or category.name == category_name_0:
+                category = None
+
+                if category_name:
+                    named_category = Category.objects.filter(
+                        Q(name=category_name) & Q(user=request.user)
+                    ).first()
+
+                    if named_category:
+                        category = named_category
+                    else:
+                        new_category = Category.objects.create(
+                            user=request.user,
+                            name=category_name,
+                        )
+                        category = new_category
+                else:
                     saved_categories = [
-                        i.category for i in saved_ingredients if i.name == name
+                        i.category
+                        for i in saved_ingredients
+                        if i.name == name and i.name != category_name_0
                     ]
                     if saved_categories:
                         category = saved_categories[0]
-                    elif category.name == category_name_0:
-                        category = category
                     else:
-                        category = Category.objects.create(
-                            user=request.user,
-                            name=category_name,
-                            created_at=datetime.now().date(),
-                        )
+                        category_0 = Category.objects.filter(
+                            Q(user=request.user) & Q(name=category_name_0)
+                        ).first()
+                        if not category_0:
+                            category_0 = Category.objects.create(
+                                user=request.user,
+                                name=category_name,
+                            )
+
+                        category = category_0
 
                 meal_type = MealType.objects.filter(
                     Q(name=meal_type_name) & Q(user=request.user)
@@ -644,7 +658,6 @@ def create_ingredients(request):
                     meal_type = MealType.objects.create(
                         user=request.user,
                         name=meal_type_name,
-                        created_at=datetime.now().date(),
                     )
 
                 storage_date = row[storage_date_header[0]]
