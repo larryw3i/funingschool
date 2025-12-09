@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-25 08:55+0800\n"
+"POT-Creation-Date: 2025-12-09 16:52+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -443,7 +443,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"              (%(object_list_len)s)\n"
+"              (%(ingredients_len)s)\n"
 "              "
 msgstr ""
 
@@ -607,32 +607,32 @@ msgstr ""
 msgid "{meal_type}:{sum_total_price}"
 msgstr ""
 
-#: canteen/views.py:593
+#: canteen/views.py:594
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:683 canteen/views.py:962
+#: canteen/views.py:687 canteen/views.py:966
 msgid "(2)"
 msgstr ""
 
-#: canteen/views.py:692 canteen/views.py:970
+#: canteen/views.py:696 canteen/views.py:974
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:733
+#: canteen/views.py:737
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:753
+#: canteen/views.py:757
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:769
+#: canteen/views.py:773
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:792
+#: canteen/views.py:796
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
 msgstr ""

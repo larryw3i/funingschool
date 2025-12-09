@@ -621,12 +621,15 @@ def create_ingredients(request):
                     Q(name=category_name) & Q(user=request.user)
                 ).first()
                 name = row[ingredient_name_header[0]]
-                if not category:
+
+                if not category or category.name == category_name_0:
                     saved_categories = [
                         i.category for i in saved_ingredients if i.name == name
                     ]
                     if saved_categories:
                         category = saved_categories[0]
+                    elif category.name == category_name_0:
+                        category = category
                     else:
                         category = Category.objects.create(
                             user=request.user,
