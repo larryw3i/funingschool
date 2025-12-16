@@ -110,9 +110,6 @@ python -m fnschoo1.manage migrate
 # 启动 fnschoo1。
 python -m fnschoo1.manage 
 ```
-
->备注：细心耐心阅读它打印的提示，这是您能使用好它的关键。
-
 <h2 id="credits">
     致谢（声明）
 </h2>
@@ -125,7 +122,6 @@ python -m fnschoo1.manage
         <li><a href="https://openpyxl.readthedocs.io/">openpyxl</a></li>
         <li><a href="https://github.com/tox-dev/platformdirs">platformdirs</a></li>
         <li><a href="https://matplotlib.org/">matplotlib</a></li>
-        <li><a href="https://github.com/Miksus/red-mail">redmail</a></li>
     </ul>
 </p>
 

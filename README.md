@@ -114,7 +114,6 @@ python -m fnschoo1.manage
         <li><a href="https://openpyxl.readthedocs.io/">openpyxl</a></li>
         <li><a href="https://github.com/tox-dev/platformdirs">platformdirs</a></li>
         <li><a href="https://matplotlib.org/">matplotlib</a></li>
-        <li><a href="https://github.com/Miksus/red-mail">redmail</a></li>
     </ul>
 </p>
 
