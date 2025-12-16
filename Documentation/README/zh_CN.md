@@ -90,7 +90,7 @@ sudo apt-get install python3 python3-pip python3-tk
 <p>
 
 运行 命令行 应用：
-* `Ubuntu`：`Ctrl+Alt+T`；  
+* `Debian`：`Ctrl+Alt+T`；  
 * `Windows`：“`Win+R，powershell，回车`”。  
 
 然后执行如下命令：
