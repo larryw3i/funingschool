@@ -1267,7 +1267,7 @@ class MealTypeWorkbook:
 
                 split_dated_ingredients = sorted(
                     split_dated_ingredients,
-                    key=lambda i: (i.category.priority, i.category.name),
+                    key=lambda i: ((i.category.priority or 0), i.category.name),
                 )
 
                 storage_date_index = sub_storage_num
@@ -2653,7 +2653,6 @@ class MealTypeWorkbook:
 
 
 def get_workbook_zip(request, month):
-    from ..views import meal_type_name_0
 
     year, month = [int(v) for v in month.split("-")]
     first_date_of_year = datetime(year, 1, 1).date()
@@ -2711,11 +2710,7 @@ def get_workbook_zip(request, month):
                 _(
                     "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
                 ).format(
-                    meal_type=(
-                        (meal_type.abbreviation or meal_type.name)
-                        if not meal_type.name == meal_type_name_0
-                        else ""
-                    ),
+                    meal_type=meal_type,
                     month=f"{year}{month:0>2}",
                     affiliation=request.user.affiliation,
                 )

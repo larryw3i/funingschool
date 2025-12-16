@@ -93,6 +93,7 @@ format_code() {
         djlint \
             ${src_dir} \
             --reformat \
+            --statistics \
             --configuration \
             ${project_dir}/.djlintrc.json
     }

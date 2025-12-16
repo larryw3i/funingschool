@@ -9,6 +9,9 @@ from django.db import models
 from django.db.models import Q
 from fnschool import _
 
+meal_type_name_0 = _("Meal type 0")
+category_name_0 = _("Category Name 0")
+
 
 class MealType(models.Model):
     user = models.ForeignKey(

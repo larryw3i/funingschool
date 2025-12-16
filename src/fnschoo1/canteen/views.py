@@ -54,12 +54,16 @@ from .forms import (
     MealTypeForm,
     PurchasedIngredientsWorkBookForm,
 )
-from .models import Category, Consumption, Ingredient, MealType
+from .models import (
+    Category,
+    Consumption,
+    Ingredient,
+    MealType,
+    category_name_0,
+    meal_type_name_0,
+)
 
 # Create your views here.
-
-meal_type_name_0 = _("Meal type 0")
-category_name_0 = _("Category Name 0")
 
 decimal_prec = getattr(settings, "DECIMAL_PREC", 2)
 
@@ -338,7 +342,6 @@ def create_consumptions(request, ingredient_id=None):
             "months": months,
             "storage_date_start": date_start.strftime("%Y-%m-%d"),
             "storage_date_end": date_end.strftime("%Y-%m-%d"),
-            "meal_type_name_0": meal_type_name_0,
         },
     )
 
@@ -610,9 +613,7 @@ def create_ingredients(request):
                 )
                 meal_type_name = row[meal_type_header[0]]
                 meal_type_name = (
-                    meal_type_name_0
-                    if pd.isnull(meal_type_name)
-                    else meal_type_name
+                    None if pd.isnull(meal_type_name) else meal_type_name
                 )
                 name = row[ingredient_name_header[0]]
 
@@ -635,29 +636,29 @@ def create_ingredients(request):
                     saved_categories = [
                         i.category
                         for i in saved_ingredients
-                        if i.name == name and i.name != category_name_0
+                        if i.name == name and i.name != ""
                     ]
                     if saved_categories:
                         category = saved_categories[0]
                     else:
                         category_0 = Category.objects.filter(
-                            Q(user=request.user) & Q(name=category_name_0)
+                            Q(user=request.user) & Q(name="")
                         ).first()
                         if not category_0:
                             category_0 = Category.objects.create(
                                 user=request.user,
-                                name=category_name,
+                                name="",
                             )
 
                         category = category_0
 
                 meal_type = MealType.objects.filter(
-                    Q(name=meal_type_name) & Q(user=request.user)
+                    Q(name=meal_type_name or "") & Q(user=request.user)
                 ).first()
                 if not meal_type:
                     meal_type = MealType.objects.create(
                         user=request.user,
-                        name=meal_type_name,
+                        name="",
                     )
 
                 storage_date = row[storage_date_header[0]]

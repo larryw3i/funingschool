@@ -102,13 +102,17 @@
                    style="width:{% widthratio ingredient.remaining_quantity ingredient.quantity 100 %}%">
               </div>
               {{ ingredient.name }}
-              {% if ingredient.meal_type != meal_type_name_0 %}
+              {% if ingredient.meal_type != "" %}
                 <span style="font-size: 80%;">
                   <br />
                   {% blocktrans with meal_type=ingredient.meal_type.name category=ingredient.category.name %}
-                ({{ meal_type }}, {{ category }})
-                {% endblocktrans %}
+                  ({{ meal_type }}, {{ category }})
+                  {% endblocktrans %}
                 </span>
+              {% else %}
+                {% blocktrans with category=ingredient.category.name%}
+                ({{ category }})
+                {% endblocktrans %}
               {% endif %}
             </td>
             <td name="remaining_{{ ingredient.id }}"></td>
