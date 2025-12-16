@@ -108,7 +108,6 @@ python -m fnschoo1.manage
 <p>
     This software uses the following open source packages:
     <ul>
-        <li><a href="https://github.com/tartley/colorama">colorama</a></li>
         <li><a href="https://pandas.pydata.org/">pandas</a></li>
         <li><a href="https://numpy.org/">numpy</a></li>
         <li><a href="https://openpyxl.readthedocs.io/">openpyxl</a></li>

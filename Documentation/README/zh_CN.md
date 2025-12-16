@@ -116,7 +116,6 @@ python -m fnschoo1.manage
 <p>
     此软件使用了如下的开源软件包（项目）：
     <ul>
-        <li><a href="https://github.com/tartley/colorama">colorama</a></li>
         <li><a href="https://pandas.pydata.org/">pandas</a></li>
         <li><a href="https://numpy.org/">numpy</a></li>
         <li><a href="https://openpyxl.readthedocs.io/">openpyxl</a></li>
