@@ -13,7 +13,7 @@
     funingschool
 </p>
 <h4 align="center">
-    不只是一些出入库脚本。
+    不只是一些出入库设计。
 </h4>
 <hr/>
 <p align="center">
@@ -43,7 +43,7 @@
     </a>
 </p>
 
-![截图](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/9432e132-f8cd-11ee-8ee6-f37309efa64b.png)
+![截图](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)
 
 <h2 id="key-features">
     特性
@@ -61,15 +61,6 @@
 * 在工作薄之间合并食材台账。  
 * 易用。
 
-<h3>
-    测试统计
-</h3>
-
-* 易用的“测试登记”表单。
-* 直观展示测试结果，生成直观的图片方便发送给学生家长。
-* 显示测试备注。
-* 有效协助测试相关人员，尤其是老师和学生。
-
 <h2 id="how-to-use">
     如何使用
 </h2>
@@ -79,7 +70,7 @@
 </h3>
 <p>
 
-在 `Ubuntu` 上：
+在 `Debian` 上：
 
 ```bash
 sudo apt-get install python3 python3-pip python3-tk
@@ -114,14 +105,10 @@ pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/si
 
 # 安装 fnschool 。
 pip install -U fnschool
-
-# “食堂”模块的账单生成命令。
-fnschool-cli canteen mk_bill
-# “食堂”模块的合并食材台账命令。
-fnschool-cli canteen merge_foodsheets
-
-# 运行“测试”模块。
-fnschool-cli exam enter
+# 更新数据库。
+python -m fnschoo1.manage migrate
+# 启动 fnschoo1。
+python -m fnschoo1.manage 
 ```
 
 >备注：细心耐心阅读它打印的提示，这是您能使用好它的关键。
@@ -136,7 +123,7 @@ fnschool-cli exam enter
         <li><a href="https://pandas.pydata.org/">pandas</a></li>
         <li><a href="https://numpy.org/">numpy</a></li>
         <li><a href="https://openpyxl.readthedocs.io/">openpyxl</a></li>
-        <li><a href="http://github.com/ActiveState/appdirs">appdirs</a></li>
+        <li><a href="https://github.com/tox-dev/platformdirs">platformdirs</a></li>
         <li><a href="https://matplotlib.org/">matplotlib</a></li>
         <li><a href="https://github.com/Miksus/red-mail">redmail</a></li>
     </ul>

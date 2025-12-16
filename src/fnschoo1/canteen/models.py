@@ -49,7 +49,9 @@ class Category(models.Model):
         related_name="Categories",
         verbose_name=_("Ingredient category"),
     )
-    name = models.CharField(max_length=100, verbose_name=_("Category name"))
+    name = models.CharField(
+        max_length=100, blank=True, verbose_name=_("Category name")
+    )
     abbreviation = models.CharField(
         null=True, blank=True, max_length=100, verbose_name=_("abbreviation")
     )
