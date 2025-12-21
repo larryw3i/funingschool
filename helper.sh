@@ -5,6 +5,7 @@ venv_dir=${project_dir}/venv
 src_dir=${project_dir}/src
 fnschoo1_dir=${src_dir}/fnschoo1
 db_cp_dir=${fnschoo1_dir}/.db_cp
+released_hashes_path=${project_dir}/release/SHA256es
 
 if [[ ! -d ${venv_dir} ]]; then
     python3 \
@@ -60,10 +61,18 @@ pack() {
 }
 
 pack_upload() {
+    pwd_cp=${PWD}
+    released_hashes_cp_path=${released_hashes_path}.cp
     cd ${project_dir}
     rm -rf dist/*
     pack
+    cd dist
+    sha256sum * >${released_hashes_cp_path}
+    cat ${released_hashes_path} >>${released_hashes_cp_path}
+    mv ${released_hashes_cp_path} ${released_hashes_path}
+    cd ${project_dir}
     twine upload dist/*
+    cd ${pwd_cp}
 }
 
 format_code() {

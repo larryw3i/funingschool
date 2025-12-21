@@ -11,7 +11,7 @@
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
               id="sort_storage_date"
               style="font-size: 90%"
-              onclick="list_consumptions('storage_date')">
+              onclick="list_consumptions('storage_date');">
         {% trans "Storage Date" %}
       </button>
 
@@ -483,8 +483,7 @@
       set_consumptions_table_size()
     });
 
-    function list_consumptions(sort_key = "storage_date") {
-      sort_key = "sort_" + sort_key
+    function list_consumptions(sort_key = "") {
       var new_storage_date_start = $('#storage_date_start_input').val()
       var new_storage_date_end = $('#storage_date_end_input').val()
       query = {}
@@ -504,13 +503,16 @@
         delete_cookie("storage_date_end")
       }
 
-      var sort_value = url_params.get(sort_key) || ""
-      if (sort_value == "+") {
-        query[sort_key] = "-"
-      } else if (sort_value == "-") {
-        query[sort_key] = ""
-      } else {
-        query[sort_key] = "+"
+      if (sort_key !== "") {
+        sort_key = "sort_" + sort_key
+        var sort_value = url_params.get(sort_key) || ""
+        if (sort_value == "+") {
+          query[sort_key] = "-"
+        } else if (sort_value == "-") {
+          query[sort_key] = ""
+        } else {
+          query[sort_key] = "+"
+        }
       }
 
       update_href(query)
