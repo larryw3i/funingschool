@@ -77,6 +77,7 @@ pack_upload() {
 
 format_code() {
     run_prettier() {
+        export PATH=${HOME}/.npm-global/bin:$PATH
         if [[ "$(which prettier)" != *"/bin/prettier" ]]; then
             echo "Trying to install prettier ..."
             mkdir -p ${HOME}/.npm-global
@@ -84,7 +85,6 @@ format_code() {
             export PATH=${HOME}/.npm-global/bin:$PATH
             npm i -g prettier
         fi
-        export PATH=${HOME}/.npm-global/bin:$PATH
         prettier \
             ${src_dir} \
             ${project_dir}/.djlintrc.json \
