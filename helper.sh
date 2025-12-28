@@ -7,6 +7,10 @@ fnschoo1_dir=${src_dir}/fnschoo1
 db_cp_dir=${fnschoo1_dir}/.db_cp
 released_hashes_path=${project_dir}/release/SHA256es
 
+pyhelper_name="helper"
+pyhelper_dir=${project_dir}/${pyhelper_name}
+pyhelper_locale_dir=${pyhelper_dir}/locale
+
 if [[ ! -d ${venv_dir} ]]; then
     python3 \
         -m venv \
@@ -152,6 +156,46 @@ format_code() {
     run_isort
     run_black
     run_prettier
+}
+
+xgettext_pyhelper() {
+    pot_file=${pyhelper_locale_dir}/${pyhelper_name}.pot
+    find ${pyhelper_dir} -name "*.py" -print | xgettext --language=Python -o ${pot_file} -f -
+    if [[ ! -f ${pot_file} ]]; then
+        echo "File \"${pot_file}\" not found."
+        exit 1
+    fi
+    for d in $(ls ${pyhelper_locale_dir}); do
+        lang=${d}
+        d=${pyhelper_locale_dir}/${d}
+        if [[ -d ${d} ]]; then
+            lc_msg_dir=${d}/LC_MESSAGES
+            po_file=${lc_msg_dir}/${pyhelper_name}.po
+            if [[ ! -d ${lc_msg_dir} ]]; then
+                mkdir -p ${lc_msg_dir}
+            fi
+
+            if [[ ! -f ${po_file} ]]; then
+                msginit -i ${pot_file} -l ${lang}.UTF-8 -o ${po_file}
+            else
+                msgmerge --update -vv ${po_file} ${pot_file}
+            fi
+
+        fi
+    done
+}
+
+msgfmt_pyhelper() {
+    for d in $(ls ${pyhelper_locale_dir}); do
+        lang=${d}
+        d=${pyhelper_locale_dir}/${d}
+        if [[ -d ${d} ]]; then
+            lc_msg_dir=${pyhelper_locale_dir}/${lang}/LC_MESSAGES
+            po_file=${lc_msg_dir}/${pyhelper_name}.po
+            mo_file=${lc_msg_dir}/${pyhelper_name}.mo
+            msgfmt -vv -o ${mo_file} ${po_file}
+        fi
+    done
 }
 
 if [[ $# -eq 0 ]]; then

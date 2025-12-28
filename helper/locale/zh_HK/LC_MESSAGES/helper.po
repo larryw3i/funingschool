@@ -1,0 +1,33 @@
+# Chinese translations for larryw package.
+# Copyright (C) 2025 THE larryw'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the larryw package.
+# Larry Wei <larryw3i@yeah.net>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: larryw 3i\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-28 23:49+0800\n"
+"PO-Revision-Date: 2025-12-28 23:49+0800\n"
+"Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
+"Language-Team: Chinese (Hong Kong) <(nothing)>\n"
+"Language: zh_HK\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/run.py:9
+msgid "Helper for funingschool project."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/run.py:10
+msgid "commands for documents."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/run.py:12
+msgid "Generate documents."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/run.py:14
+msgid "The specified local language for generating document."
+msgstr ""
