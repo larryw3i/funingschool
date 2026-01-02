@@ -135,20 +135,25 @@ _(" License"),
 _(" GNU LESSER GENERAL PUBLIC LICENSE Version 3"),
 "</a>",
     ]
-    readme = "\n".join(readme)
+    readme = "  \n".join(readme)
 
     file_path = project_readme_dir / (l +".md")
     if not file_path.exists():
         file_path.touch()
+        print(f'"{file_path}"',_("has been created."))
 
     with open(file_path, 'w') as file:
         file.write(readme)
+        print(f'"{file_path}"',_("has been updated."))
 
     if l == "en_US":
         if not project_readme_path.exists():
             project_readme_path.touch()
+            print(f'"{project_readme_path}"',_("has been created."))
         with open(project_readme_path, 'w') as file:
             file.write(readme)
+            print(f'"{project_readme_path}"',_("has been updated."))
+
 
 def write(lang=None):
     langs = [lang] if lang else[p.name for p in locale_dir.iterdir() if p.is_dir()]
