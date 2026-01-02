@@ -15,8 +15,10 @@ def get_subparser(subparsers):
                               help=_('The specified local language for generating document.'))
     return subparser
 
-def start(parser,subparsers):
-    subparser = get_subparser(subparsers)
+def start(assistant):
+
+    subparser = get_subparser(assistant.subparsers)
+    parser = assistant.parser
     args = parser.parse_args()
 
     if not args.command:
@@ -25,6 +27,7 @@ def start(parser,subparsers):
     
     if args.command == 'docs':
         if args.generate:
+
             pass
         else:
             subparser.print_help()

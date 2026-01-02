@@ -1,5 +1,5 @@
 
-from helper.run import get_parser, start
+from helper.run import start
 start()
 
 # The end.
