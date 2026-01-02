@@ -9,9 +9,9 @@ from helper.trans import _
 
 def get_subparser(subparsers):
     subparser = subparsers.add_parser('docs', help=_('Commands for documents.'))
-    subparser.add_argument('-g', '--generate', required=False,
+    subparser.add_argument('-g', '--generate', action='store_true', 
                               help=_('Generate documents.'))
-    subparser.add_argument('-l', '--locale', required=False,
+    subparser.add_argument('-l', '--locale',
                               help=_('The specified local language for generating document.'))
     return subparser
 
@@ -27,7 +27,9 @@ def start(assistant):
     
     if args.command == 'docs':
         if args.generate:
-            
+            from helper.docs.generate import write
+            lang = args.locale
+            write(lang)
             pass
         else:
             subparser.print_help()

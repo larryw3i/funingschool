@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-28 23:46+0800\n"
+"POT-Creation-Date: 2026-01-02 21:40+0800\n"
 "PO-Revision-Date: 2025-12-28 23:46+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: English\n"
@@ -17,18 +17,181 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/run.py:9
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:15
+msgid "python -m helper"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:15
 msgid "Helper for funingschool project."
 msgstr "Helper for funingschool project."
 
-#: /home/larry/Git/larryw3i/funingschool/helper/run.py:10
-msgid "commands for documents."
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:16
+msgid "commands."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/run.py:11
+#, fuzzy
+msgid "Commands for documents."
 msgstr "commands for documents."
 
-#: /home/larry/Git/larryw3i/funingschool/helper/run.py:12
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/run.py:13
 msgid "Generate documents."
 msgstr "Generate documents."
 
-#: /home/larry/Git/larryw3i/funingschool/helper/run.py:14
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/run.py:15
 msgid "The specified local language for generating document."
 msgstr "The specified local language for generating document."
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:34
+msgid "    funingschool"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:37
+msgid "    NO Just some simple scripts for warehousing and consuming."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:46
+msgid "         Key Features"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:50
+msgid "         How To Use"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:54
+msgid "         Credits"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:58
+msgid "         Support"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:62
+msgid "         License"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:65
+msgid ""
+"![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/"
+"Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:67
+msgid "    Key Features"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:70
+msgid "    warehousing and consuming"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:72
+msgid "* Read food spreadsheets automatically."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:73
+msgid "* The simplest and most straightforward `consuming sheets`."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:74
+msgid "* Update sheets (warehousing, consuming, summing, etc) automatically."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:75
+msgid "* Reduce calculation errors."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:76
+msgid "* Effectively eliminate unit prices containing infinite decimals."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:77
+msgid "* Merge food sheets between spreadsheets.  "
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:78
+msgid "* Easy to use."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:80
+msgid "    How To Use"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:83
+msgid "    Install Python3"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:86
+msgid "on `Debian|Ubuntu`:"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:90
+msgid ""
+"For `Windows 10` and `Windows 11`, you can install Python3 from https://"
+"www.python.org/getit/ . (`fnschool` requires Python 3.12 or later)"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:96
+msgid "Run the command line application:"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:99
+msgid "Enter the following commands:"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:102
+msgid "# Install or update \"fnschool\"."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:103
+msgid ""
+"#      You may use the virtual enviroment on Debian|Ubuntu, the commands:"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:104
+msgid ""
+"#      python -m venv --system-site-packages ~/pyvenv; # Create virtual "
+"enviroment."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:105
+msgid "#      . ~/pyvenv/bin/activate; # Use it."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:107
+msgid "# Update database."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:109
+msgid "# Start fnschoo1."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:113
+msgid "Credits"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:116
+msgid " This software uses the following open source packages:"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:126
+msgid " Support"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:129
+msgid " Buy me a `coffee`:"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:131
+msgid ""
+"![Buy me a \"coffee\".](https://raw.githubusercontent.com/larryw3i/"
+"funingschool/master/Documentation/images/9237879a-"
+"f8d5-11ee-8411-23057db0a773.jpeg)"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:133
+msgid " License"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:136
+msgid " GNU LESSER GENERAL PUBLIC LICENSE Version 3"
+msgstr ""
