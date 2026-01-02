@@ -56,7 +56,6 @@
 * 自动更新“入库、出库、汇总、盘存”等表格。
 * 减少计算错误。
 * 避免出现无限小数单价。
-* Merge food sheets between spreadsheets.  
 * 简单易用。
 <h2 id="how-to-use">
     如何使用
@@ -76,6 +75,7 @@ sudo apt-get install python3 python3-pip python-is-python3
 * https://registry.npmmirror.com/binary.html?path=python/  
 * https://mirrors.huaweicloud.com/python/  
 * https://mirror.bjtu.edu.cn/python/  
+
 （`funingschool` 需要 Python 3.12 或 3.12 以上版本）
 </p>
 

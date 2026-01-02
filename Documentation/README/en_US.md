@@ -56,7 +56,6 @@
 * Update sheets (warehousing, consuming, summing, etc) automatically.
 * Reduce calculation errors.
 * Effectively eliminate unit prices containing infinite decimals.
-* Merge food sheets between spreadsheets.  
 * Easy to use.
 <h2 id="how-to-use">
     How To Use
