@@ -84,6 +84,7 @@ Run the command line application:
 * `Debian|Ubuntu`: `Ctrl+Alt+T`.
 * `Windows`: "`Win+R, powershell, Enter`".
 Enter the following commands:
+
 </p>
 
 ```bash

@@ -96,7 +96,7 @@ _('For `Windows 10` and `Windows 11`, you can install Python3 from https://www.p
 '</p>',
 '',
 '<h3>',
-'    Install fnschool and run it',
+_('    Install fnschool and run it'),
 '</h3>',
 '',
 '<p>',
@@ -105,6 +105,7 @@ _('Run the command line application:'),
 '* `Debian|Ubuntu`: `Ctrl+Alt+T`.',
 '* `Windows`: "`Win+R, powershell, Enter`".',
 _("Enter the following commands:"),
+'',
 '</p>',
 '',
 '```bash',
@@ -149,8 +150,6 @@ _(" GNU LESSER GENERAL PUBLIC LICENSE Version 3"),
 "</a>",
     ]
     readme = "\n".join(readme)
-    print(readme)
-    print("="*80)
 
     file_path = project_readme_dir / (l +".md")
     if not file_path.exists():

@@ -89,6 +89,7 @@ sudo apt-get install python3 python3-pip python-is-python3
 * `Debian|Ubuntu`: `Ctrl+Alt+T`.
 * `Windows`: "`Win+R, powershell, Enter`".
 复制粘贴以下命令：
+
 </p>
 
 ```bash
