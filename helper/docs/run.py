@@ -27,7 +27,7 @@ def start(assistant):
     
     if args.command == 'docs':
         if args.generate:
-
+            
             pass
         else:
             subparser.print_help()
