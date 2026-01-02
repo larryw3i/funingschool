@@ -19,9 +19,9 @@ def write_readme(lang,_t):
     _ = _t
     l = lang
     readme = [
-'        <hr/>',
+'<hr/>',
 '<div align="center">',
-'    <pre>',
+'   <pre>',
 r' _____ _   _ ____   ____ _   _  ___   ___  _     ',
 r'|  ___| \ | / ___| / ___| | | |/ _ \ / _ \| |    ',
 r'| |_  |  \| \___ \| |   | |_| | | | | | | | |    ',
@@ -32,6 +32,7 @@ r'|_|   |_| \_|____/ \____|_| |_|\___/ \___/|_____|',
 '<p align="center">',
 _('    funingschool'),
 '</p>',
+'',
 '<h4 align="center">',
 _('    NO Just some simple scripts for warehousing and consuming.'),
 '</h4>',
@@ -40,6 +41,7 @@ _('    NO Just some simple scripts for warehousing and consuming.'),
 '    <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/README/zh_CN.md">\u7b80\u4f53\u4e2d\u6587</a> •',
 '    <a href="https://github.com/larryw3i/funingschool/blob/master/README.md">English</a>',
 '</p>',
+'',
 '<p align="center">',
 '    <a href="#key-features">',
 _('         Key Features'),
@@ -61,6 +63,7 @@ _('         Support'),
 _('         License'),
 '    </a>',
 '</p>',
+'',
 _('![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)'),
 '<h2 id="key-features">',
 _('    Key Features'),
@@ -68,6 +71,7 @@ _('    Key Features'),
 '<h3>',
 _('    warehousing and consuming'),
 '</h3>',
+'',
 _('* Read food spreadsheets automatically.'),
 _('* The simplest and most straightforward `consuming sheets`.'),
 _('* Update sheets (warehousing, consuming, summing, etc) automatically.'),
@@ -81,22 +85,28 @@ _("    How To Use"),
 '<h3>',
 _('    Install Python3'),
 '</h3>',
+'',
 '<p>',
+"",
 _('on `Debian|Ubuntu`:'),
 '```bash',
 'sudo apt-get install python3 python3-pip python-is-python3',
 '```  ',
 _('For `Windows 10` and `Windows 11`, you can install Python3 from https://www.python.org/getit/ . (`fnschool` requires Python 3.12 or later)'),
 '</p>',
+'',
 '<h3>',
 '    Install fnschool and run it',
 '</h3>',
+'',
 '<p>',
+'',
 _('Run the command line application:'),
 '* `Debian|Ubuntu`: `Ctrl+Alt+T`.',
 '* `Windows`: "`Win+R, powershell, Enter`".',
 _("Enter the following commands:"),
 '</p>',
+'',
 '```bash',
 _('# Install or update "fnschool".'),
   _("#      You may use the virtual enviroment on Debian|Ubuntu, the commands:"),
@@ -112,6 +122,7 @@ _('# Start fnschoo1.'),
     _("Credits"),
 '</h2>',
 '<p>',
+"", 
 _(' This software uses the following open source packages:'),
 '   <ul>',
 '       <li><a href="https://pandas.pydata.org/">pandas</a></li>',
@@ -121,12 +132,14 @@ _(' This software uses the following open source packages:'),
 '       <li><a href="https://matplotlib.org/">matplotlib</a></li>',
 '   </ul>',
 '</p>',
+'',
 '<h2 id="support">',
 _(" Support"),
 '</h2>',
 '<h3>',
 _(" Buy me a `coffee`:"),
 '</h3>',
+'',
 _('![Buy me a "coffee".](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)'),
 '<h2 id="license">',
 _(" License"),
@@ -135,14 +148,16 @@ _(" License"),
 _(" GNU LESSER GENERAL PUBLIC LICENSE Version 3"),
 "</a>",
     ]
-    readme = "  \n".join(readme)
+    readme = "\n".join(readme)
+    print(readme)
+    print("="*80)
 
     file_path = project_readme_dir / (l +".md")
     if not file_path.exists():
         file_path.touch()
         print(f'"{file_path}"',_("has been created."))
 
-    with open(file_path, 'w') as file:
+    with open(file_path, 'w', encoding="UTF-8") as file:
         file.write(readme)
         print(f'"{file_path}"',_("has been updated."))
 
@@ -150,7 +165,7 @@ _(" GNU LESSER GENERAL PUBLIC LICENSE Version 3"),
         if not project_readme_path.exists():
             project_readme_path.touch()
             print(f'"{project_readme_path}"',_("has been created."))
-        with open(project_readme_path, 'w') as file:
+        with open(project_readme_path, 'w', encoding="UTF-8") as file:
             file.write(readme)
             print(f'"{project_readme_path}"',_("has been updated."))
 
@@ -169,3 +184,5 @@ def write(lang=None):
             write_readme(l,t.gettext)
 
 _ = __cp
+
+# The end.
