@@ -43,7 +43,7 @@
     </a>
 </p>
 
-![Screenshot](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)
+![截屏](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)
 <h2 id="key-features">
     特性
 </h2>
@@ -126,7 +126,7 @@ python -m fnschoo1.manage
 给我买一杯“咖啡”：
 </h3>
 
-![给我买一杯“咖啡”。](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)
+![给我买一杯“咖啡”。](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/5ec0296a-8a3b-11ef-8e0b-efbca71f7f1a.png)
 <h2 id="license">
 授权
 </h2>
