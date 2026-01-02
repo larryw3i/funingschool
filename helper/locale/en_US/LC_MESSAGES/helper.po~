@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-02 21:15+0800\n"
+"POT-Creation-Date: 2026-01-02 21:40+0800\n"
 "PO-Revision-Date: 2025-12-28 23:46+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: English\n"
@@ -139,55 +139,59 @@ msgid "Enter the following commands:"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:102
-msgid "# install or update \"fnschool\"."
+msgid "# Install or update \"fnschool\"."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:103
 msgid ""
-"#     You may use the virtual enviroment on Debian|Ubuntu, the commands:"
+"#      You may use the virtual enviroment on Debian|Ubuntu, the commands:"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:104
 msgid ""
-"#     python -m venv --system-site-packages ~/pyvenv; . ~/pyvenv/bin/"
-"activate;"
+"#      python -m venv --system-site-packages ~/pyvenv; # Create virtual "
+"enviroment."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:106
-msgid "# update database."
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:105
+msgid "#      . ~/pyvenv/bin/activate; # Use it."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:108
-msgid "# start fnschoo1."
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:107
+msgid "# Update database."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:112
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:109
+msgid "# Start fnschoo1."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:113
 msgid "Credits"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:115
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:116
 msgid " This software uses the following open source packages:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:125
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:126
 msgid " Support"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:128
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:129
 msgid " Buy me a `coffee`:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:130
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:131
 msgid ""
 "![Buy me a \"coffee\".](https://raw.githubusercontent.com/larryw3i/"
 "funingschool/master/Documentation/images/9237879a-"
 "f8d5-11ee-8411-23057db0a773.jpeg)"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:132
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:133
 msgid " License"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:135
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:136
 msgid " GNU LESSER GENERAL PUBLIC LICENSE Version 3"
 msgstr ""

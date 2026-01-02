@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-02 21:40+0800\n"
-"PO-Revision-Date: 2026-01-02 21:41+0800\n"
+"POT-Creation-Date: 2026-01-02 23:17+0800\n"
+"PO-Revision-Date: 2026-01-02 23:18+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -42,7 +42,7 @@ msgstr "生成文档。"
 msgid "The specified local language for generating document."
 msgstr "指定“生成文档”的国家/地区语言。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:34
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:33
 msgid "    funingschool"
 msgstr "    funingschool "
 
@@ -50,27 +50,27 @@ msgstr "    funingschool "
 msgid "    NO Just some simple scripts for warehousing and consuming."
 msgstr "    不只是一些出入库脚本。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:46
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:47
 msgid "         Key Features"
 msgstr "         特性"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:50
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:51
 msgid "         How To Use"
 msgstr "         使用"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:54
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:55
 msgid "         Credits"
 msgstr "         鸣谢"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:58
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:59
 msgid "         Support"
 msgstr "         赞助"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:62
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:63
 msgid "         License"
 msgstr "         授权"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:65
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:67
 msgid ""
 "![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/"
 "Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)"
@@ -78,55 +78,55 @@ msgstr ""
 "![Screenshot](https://gitee.com/larryw3i/funingschool/raw/master/"
 "Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:67
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:69
 msgid "    Key Features"
 msgstr "    特性"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:70
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:72
 msgid "    warehousing and consuming"
 msgstr "    出入库"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:72
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:75
 msgid "* Read food spreadsheets automatically."
 msgstr "* 自动读取入库表格。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:73
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:76
 msgid "* The simplest and most straightforward `consuming sheets`."
 msgstr "* 简单直接的消耗设计。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:74
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:77
 msgid "* Update sheets (warehousing, consuming, summing, etc) automatically."
 msgstr "* 自动更新“入库、出库、汇总、盘存”等表格。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:75
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:78
 msgid "* Reduce calculation errors."
 msgstr "* 减少计算错误。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:76
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:79
 msgid "* Effectively eliminate unit prices containing infinite decimals."
 msgstr "* 避免出现无限小数单价。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:77
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:80
 msgid "* Merge food sheets between spreadsheets.  "
 msgstr "* Merge food sheets between spreadsheets.  "
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:78
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:81
 msgid "* Easy to use."
 msgstr "* 简单易用。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:80
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:83
 msgid "    How To Use"
 msgstr "    如何使用"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:83
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:86
 msgid "    Install Python3"
 msgstr "安装 Python3"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:86
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:91
 msgid "on `Debian|Ubuntu`:"
 msgstr "在 `Debian` 或 `Ubuntu` 上："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:90
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:95
 msgid ""
 "For `Windows 10` and `Windows 11`, you can install Python3 from https://"
 "www.python.org/getit/ . (`fnschool` requires Python 3.12 or later)"
@@ -139,58 +139,62 @@ msgstr ""
 "* https://mirror.bjtu.edu.cn/python/  \n"
 "（`funingschool` 需要 Python 3.12 或 3.12 以上版本）"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:96
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:99
+msgid "    Install fnschool and run it"
+msgstr "    安装 fnschool 并运行它"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:104
 msgid "Run the command line application:"
 msgstr "运行`命令行`（航站楼）应用："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:99
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:108
 msgid "Enter the following commands:"
 msgstr "复制粘贴以下命令："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:102
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:113
 msgid "# Install or update \"fnschool\"."
 msgstr "# 安装 或 更新 `fnschool` 。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:103
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:114
 msgid ""
 "#      You may use the virtual enviroment on Debian|Ubuntu, the commands:"
 msgstr "#     在 `Debian` 或 `Ubuntu` 上，你可能要使用虚拟环境，其命令："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:104
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:115
 msgid ""
 "#      python -m venv --system-site-packages ~/pyvenv; # Create virtual "
 "enviroment."
 msgstr "#     python -m venv --system-site-packages ~/pyvenv; # 初次创建。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:105
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:116
 msgid "#      . ~/pyvenv/bin/activate; # Use it."
 msgstr "#     . ~/pyvenv/bin/activate; # 后续使用。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:107
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:118
 msgid "# Update database."
 msgstr "# 更新数据库。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:109
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:120
 msgid "# Start fnschoo1."
 msgstr "# 启动 `fnschool` 。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:113
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:124
 msgid "Credits"
 msgstr "鸣谢"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:116
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:128
 msgid " This software uses the following open source packages:"
 msgstr "此项目使用了以下的开源项目（包）："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:126
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:139
 msgid " Support"
 msgstr "赞助"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:129
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:142
 msgid " Buy me a `coffee`:"
 msgstr "给我买一杯“咖啡”："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:131
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:145
 msgid ""
 "![Buy me a \"coffee\".](https://raw.githubusercontent.com/larryw3i/"
 "funingschool/master/Documentation/images/9237879a-"
@@ -199,10 +203,20 @@ msgstr ""
 "![给我买一杯“咖啡”。](https://gitee.com/larryw3i/funingschool/raw/master/"
 "Documentation/images/9237879a-f8d5-11ee-8411-23057db0a773.jpeg)"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:133
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:147
 msgid " License"
 msgstr "授权"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:136
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:150
 msgid " GNU LESSER GENERAL PUBLIC LICENSE Version 3"
 msgstr "GNU 宽通用公共许可证 第3版"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:158
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:167
+msgid "has been created."
+msgstr "已被创建。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:162
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:170
+msgid "has been updated."
+msgstr "已被更新。"

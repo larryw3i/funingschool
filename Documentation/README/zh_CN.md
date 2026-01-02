@@ -80,7 +80,7 @@ sudo apt-get install python3 python3-pip python-is-python3
 </p>
 
 <h3>
-    Install fnschool and run it
+    安装 fnschool 并运行它
 </h3>
 
 <p>
@@ -88,6 +88,7 @@ sudo apt-get install python3 python3-pip python-is-python3
 运行`命令行`（航站楼）应用：
 * `Debian|Ubuntu`: `Ctrl+Alt+T`.
 * `Windows`: "`Win+R, powershell, Enter`".
+
 复制粘贴以下命令：
 
 </p>
