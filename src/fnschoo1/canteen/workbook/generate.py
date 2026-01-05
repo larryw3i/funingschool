@@ -899,7 +899,7 @@ class MealTypeWorkbook:
                 split_dated_consumptions = sorted(
                     split_dated_consumptions,
                     key=lambda c: (
-                        c.ingredient.category.priority,
+                        c.ingredient.category.priority or 0,
                         c.ingredient.category.name,
                     ),
                 )
