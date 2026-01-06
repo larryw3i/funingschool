@@ -5,6 +5,7 @@
       data-date_of_using="{{ form.instance.date_of_using|date:'Y-m-d' }}">
     <form onkeydown="if(event.keyCode==13){return false;}"
           name="consumption_form"
+          title="{% trans 'Please enter a number.' %}"
           data-is_disabled="{{ form.instance.is_disabled }}"
           data-amount_used="{{ form.instance.amount_used|default_if_none:0 }}"
           data-ingredient_unit_price="{{ form.instance.ingredient.unit_price }}"

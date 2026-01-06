@@ -141,12 +141,114 @@
              id="include_food_sheets">
     </div>
   </div>
+
+  <style>
+    @keyframes shake-horizontal {
+
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+
+      10%,
+      30%,
+      50%,
+      70%,
+      90% {
+        transform: translateX(-4px);
+      }
+
+      20%,
+      40%,
+      60%,
+      80% {
+        transform: translateX(4px);
+      }
+    }
+
+    .wrong-date {
+      border-width: 5px;
+      border-style: solid;
+      border-color: red;
+      border-radius: 10px;
+      animation: shake-horizontal 0.5s;
+    }
+
+    .ingredient-progress {
+      height: 2px;
+      background: green;
+      right: 9px;
+      position: absolute;
+    }
+
+    .storage-date-input {
+      text-align: center;
+      font-family: Mono;
+    }
+
+    .weekend {
+      background-color: pink;
+    }
+
+    .table-container {
+      overflow: auto;
+    }
+
+    .table thead th {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 1010;
+      white-space: nowrap;
+    }
+
+    .table tr {
+      font-size: 15px;
+    }
+
+    .table tr> :nth-child(1) {
+      position: -webkit-sticky;
+      position: sticky;
+      left: 0;
+      z-index: 1010;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .table tr> :nth-child(2) {
+      position: -webkit-sticky;
+      position: sticky;
+      z-index: 1010;
+      font-family: Mono;
+      text-align: right;
+    }
+
+    .table thead tr {
+      font-size: 15px;
+      font-family: Mono;
+    }
+
+    .table thead tr> :nth-child(1) {
+      z-index: 1020;
+      white-space: nowrap;
+    }
+
+    .table thead tr> :nth-child(2) {
+      z-index: 1020;
+    }
+
+    nav li {
+      z-index: 1030;
+    }
+  </style>
+
   {{ ingredient_ids|json_script:'ingredient_ids' }}
   {{ months|json_script:'months' }}
   {{ meal_types|json_script:'meal_types' }}
   {{ date_range|json_script:'date_range' }}
   {{ storage_date_start|json_script:'storage_date_start' }}
   {{ storage_date_end|json_script:'storage_date_end' }}
+
   <script>
     var url = new URL(window.location.href)
     var url_params = new URLSearchParams(url.search)
@@ -518,103 +620,5 @@
       update_href(query)
     }
   </script>
-  <style>
-    @keyframes shake-horizontal {
 
-      0%,
-      100% {
-        transform: translateX(0);
-      }
-
-      10%,
-      30%,
-      50%,
-      70%,
-      90% {
-        transform: translateX(-4px);
-      }
-
-      20%,
-      40%,
-      60%,
-      80% {
-        transform: translateX(4px);
-      }
-    }
-
-    .wrong-date {
-      border-width: 5px;
-      border-style: solid;
-      border-color: red;
-      border-radius: 10px;
-      animation: shake-horizontal 0.5s;
-    }
-
-    .ingredient-progress {
-      height: 2px;
-      background: green;
-      right: 9px;
-      position: absolute;
-    }
-
-    .storage-date-input {
-      text-align: center;
-      font-family: Mono;
-    }
-
-    .weekend {
-      background-color: pink;
-    }
-
-    .table-container {
-      overflow: auto;
-    }
-
-    .table thead th {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 0;
-      z-index: 1010;
-      white-space: nowrap;
-    }
-
-    .table tr {
-      font-size: 15px;
-    }
-
-    .table tr> :nth-child(1) {
-      position: -webkit-sticky;
-      position: sticky;
-      left: 0;
-      z-index: 1010;
-      white-space: nowrap;
-      text-align: right;
-    }
-
-    .table tr> :nth-child(2) {
-      position: -webkit-sticky;
-      position: sticky;
-      z-index: 1010;
-      font-family: Mono;
-      text-align: right;
-    }
-
-    .table thead tr {
-      font-size: 15px;
-      font-family: Mono;
-    }
-
-    .table thead tr> :nth-child(1) {
-      z-index: 1020;
-      white-space: nowrap;
-    }
-
-    .table thead tr> :nth-child(2) {
-      z-index: 1020;
-    }
-
-    nav li {
-      z-index: 1030;
-    }
-  </style>
 {% endblock %}

@@ -15,6 +15,9 @@ class PurchasedIngredientsWorkBookForm(forms.Form):
 
 
 class IngredientForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     class Meta:
         model = Ingredient
         fields = [
@@ -48,6 +51,10 @@ class ConsumptionForm(forms.ModelForm):
                 }
             )
             self.fields[name].disabled = self.instance.is_disabled
+
+        self.fields["amount_used"].widget.attrs.update(
+            {"title": _("Please enter a number.")}
+        )
 
     class Meta:
         model = Consumption

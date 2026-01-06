@@ -37,6 +37,19 @@
     <a class="btn btn-primary"
        onclick="open_small_window('{% url 'canteen:create_ingredient' %}')">{% trans "Add one" %}</a>
   </div>
+
+  <div class="d-flex justify-content-end pt-2">
+    <div class="form-check">
+      <input class="form-check-input"
+             type="checkbox"
+             value=""
+             id="locate_updated_element_checkbox">
+      <label class="form-check-label" for="locate_updated_element_checkbox">
+        {% trans "Locate the updated element." %}
+      </label>
+    </div>
+  </div>
+
   <hr />
   <div class="container">
     <div class="table-responsive table-responsive-lg  table-container">
@@ -148,7 +161,9 @@
 
     $(document).ready(
       function() {
-        make_highlight(".tr-ingredient", "ingredient_updated_at")
+        if ($("#locate_updated_element_checkbox").is(':checked')) {
+          make_highlight(".tr-ingredient", "ingredient_updated_at")
+        }
       });
 
     function clear_q() {
