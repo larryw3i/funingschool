@@ -169,4 +169,7 @@ _settings.py
 # media/
 media/
 
+# *.po~
+*.po~
+
 # The end.
