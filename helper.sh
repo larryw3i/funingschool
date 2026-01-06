@@ -147,7 +147,8 @@ format_code() {
             black \
                 -l 80 \
                 ${fnschoo1_dir} \
-                ${project_dir}/manage.py
+                ${project_dir}/manage.py \
+                ${pyhelper_dir}
         fi
     }
 

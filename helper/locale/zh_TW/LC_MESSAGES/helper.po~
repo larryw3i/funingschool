@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-02 23:17+0800\n"
+"POT-Creation-Date: 2026-01-02 23:21+0800\n"
 "PO-Revision-Date: 2025-12-28 23:48+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@lists.slat.org>\n"
@@ -104,107 +104,103 @@ msgid "* Effectively eliminate unit prices containing infinite decimals."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:80
-msgid "* Merge food sheets between spreadsheets.  "
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:81
 msgid "* Easy to use."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:83
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:82
 msgid "    How To Use"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:86
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:85
 msgid "    Install Python3"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:91
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:90
 msgid "on `Debian|Ubuntu`:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:95
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:94
 msgid ""
 "For `Windows 10` and `Windows 11`, you can install Python3 from https://"
 "www.python.org/getit/ . (`fnschool` requires Python 3.12 or later)"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:99
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:98
 msgid "    Install fnschool and run it"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:104
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:103
 msgid "Run the command line application:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:108
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:107
 msgid "Enter the following commands:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:113
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:112
 msgid "# Install or update \"fnschool\"."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:114
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:113
 msgid ""
 "#      You may use the virtual enviroment on Debian|Ubuntu, the commands:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:115
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:114
 msgid ""
 "#      python -m venv --system-site-packages ~/pyvenv; # Create virtual "
 "enviroment."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:116
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:115
 msgid "#      . ~/pyvenv/bin/activate; # Use it."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:118
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:117
 msgid "# Update database."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:120
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:119
 msgid "# Start fnschoo1."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:124
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:123
 msgid "Credits"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:128
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:127
 msgid " This software uses the following open source packages:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:139
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:138
 msgid " Support"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:142
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:141
 msgid " Buy me a `coffee`:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:145
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:144
 msgid ""
 "![Buy me a \"coffee\".](https://raw.githubusercontent.com/larryw3i/"
 "funingschool/master/Documentation/images/9237879a-"
 "f8d5-11ee-8411-23057db0a773.jpeg)"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:147
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:146
 msgid " License"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:150
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:149
 msgid " GNU LESSER GENERAL PUBLIC LICENSE Version 3"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:158
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:167
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:157
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:166
 msgid "has been created."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:162
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:170
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:161
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/generate.py:169
 msgid "has been updated."
 msgstr ""
