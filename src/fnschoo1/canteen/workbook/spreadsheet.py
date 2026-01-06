@@ -2153,7 +2153,7 @@ class MealTypeWorkbook:
     def fill_in_food_sheets(self):
         user = self.request.user
         wb = self.wb
-        year = datetime.now().year
+        year = self.year
         date_start = date(year, 1, 1)
         date_end = date(year, 12, 31)
         meal_type = self.meal_type

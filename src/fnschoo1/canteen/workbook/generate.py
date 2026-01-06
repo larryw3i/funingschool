@@ -122,6 +122,9 @@ def get_workbook_zip(request, month):
                 + ".xlsx"
             )
             __ingredients = user_ingredients.filter(meal_type=meal_type).all()
+            if len(__ingredients) < 1:
+                continue
+
             wb = MealTypeWorkbook(
                 request,
                 year=year,
