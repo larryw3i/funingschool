@@ -8,6 +8,7 @@ import argparse
 from helper.trans import _
 
 helper_dir = Path(__file__).parent
+project_dir = helper_dir.parent
 
 
 class Assistant:
@@ -20,6 +21,7 @@ class Assistant:
             dest="command", help=_("commands.")
         )
         self.helper_dir = helper_dir
+        self.project_dir = project_dir
 
     def start(self):
         dirs = [d for d in self.helper_dir.iterdir() if d.is_dir()]

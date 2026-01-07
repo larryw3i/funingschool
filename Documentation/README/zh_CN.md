@@ -86,8 +86,8 @@ sudo apt-get install python3 python3-pip python-is-python3
 <p>
 
 运行`命令行`（航站楼）应用：
-* `Debian|Ubuntu`: `Ctrl+Alt+T`.
-* `Windows`: "`Win+R, powershell, Enter`".
+* `Debian|Ubuntu`：`Ctrl+Alt+T`。
+* `Windows`："`Win+R（同时按）, 输入“powershell”, 按 Enter`"。
 
 复制粘贴以下命令：
 

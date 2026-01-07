@@ -2,20 +2,15 @@ import os
 import sys
 from pathlib import Path
 import gettext
-from helper.trans import _
+from helper.docs import _, project_dir, locale_dir, project_doc_dir, helper_dir
 
-from helper.assistant import helper_dir
-
-project_dir = helper_dir.parent
-locale_dir = helper_dir / "locale"
-project_doc_dir = project_dir / "Documentation"
 project_readme_dir = project_doc_dir / "README"
 project_readme_path = project_dir / "README.md"
 
 __cp = _
 
 
-def write_readme(lang, _t):
+def write(lang, _t):
     _ = _t
     l = lang
     readme = [
@@ -38,7 +33,7 @@ def write_readme(lang, _t):
         "</h4>",
         "<hr/>",
         '<p align="center">',
-        '    <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/README/zh_CN.md">\u7b80\u4f53\u4e2d\u6587</a> •',
+        '    <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/README/zh_CN.md">\u7b80\u4f53\u4e2d\u6587</a> \u2022',
         '    <a href="https://github.com/larryw3i/funingschool/blob/master/README.md">English</a>',
         "</p>",
         "",
@@ -46,19 +41,19 @@ def write_readme(lang, _t):
         '    <a href="#key-features">',
         _("         Key Features"),
         "    </a>",
-        "    •",
+        "    \u2022",
         '    <a href="#how-to-use">',
         _("         How To Use"),
         "    </a>",
-        "    •",
+        "    \u2022",
         '    <a href="#credits">',
         _("         Credits"),
         "    </a>",
-        "    •",
+        "    \u2022",
         '    <a href="#support">',
         _("         Support"),
         "    </a>",
-        "    •",
+        "    \u2022",
         '    <a href="#license">',
         _("         License"),
         "    </a>",
@@ -107,8 +102,8 @@ def write_readme(lang, _t):
         "<p>",
         "",
         _("Run the command line application:"),
-        "* `Debian|Ubuntu`: `Ctrl+Alt+T`.",
-        '* `Windows`: "`Win+R, powershell, Enter`".',
+        _("* `Debian|Ubuntu`: `Ctrl+Alt+T`."),
+        _('* `Windows`: "`Win+R, powershell, Enter`".'),
         "",
         _("Enter the following commands:"),
         "",
@@ -163,6 +158,7 @@ def write_readme(lang, _t):
     ]
     readme = "\n".join(readme)
 
+    _ = __cp
     file_path = project_readme_dir / (l + ".md")
     if not file_path.exists():
         file_path.touch()
@@ -179,24 +175,6 @@ def write_readme(lang, _t):
         with open(project_readme_path, "w", encoding="UTF-8") as file:
             file.write(readme)
             print(_('"{0}" has been updated.').format(project_readme_path))
-
-
-def write(lang=None):
-    langs = (
-        [lang] if lang else [p.name for p in locale_dir.iterdir() if p.is_dir()]
-    )
-
-    localedir = locale_dir
-    localedir = localedir.as_posix()
-
-    for l in langs:
-        mo_file = locale_dir / l / "LC_MESSAGES" / "helper.mo"
-        if mo_file.exists():
-            t = gettext.translation(
-                "helper", localedir, languages=[l], fallback=True
-            )
-
-            write_readme(l, t.gettext)
 
 
 _ = __cp

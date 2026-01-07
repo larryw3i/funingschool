@@ -31,7 +31,7 @@ def start(assistant):
 
     if args.command == "docs":
         if args.generate:
-            from helper.docs.generate import write
+            from helper.docs.write_doc import write
 
             lang = args.locale
             write(lang)
