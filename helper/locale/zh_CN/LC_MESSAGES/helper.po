@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-07 15:54+0800\n"
-"PO-Revision-Date: 2026-01-07 16:05+0800\n"
+"POT-Creation-Date: 2026-01-14 21:48+0800\n"
+"PO-Revision-Date: 2026-01-14 21:49+0800\n"
 "Last-Translator:  <>\n"
 "Language-Team: Abkhazian\n"
 "Language: ab\n"
@@ -16,15 +16,15 @@ msgstr ""
 "X-Generator: Gtranslator 49.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:16
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:17
 msgid "python -m helper"
 msgstr "python -m helper"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:17
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:18
 msgid "Helper for funingschool project."
 msgstr "funingschool 项目的助手。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:20
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:21
 msgid "commands."
 msgstr "命令。"
 
@@ -144,7 +144,7 @@ msgstr "运行`命令行`（航站楼）应用："
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:105
 msgid "* `Debian|Ubuntu`: `Ctrl+Alt+T`."
-msgstr "* `Debian|Ubuntu`：`Ctrl+Alt+T`。"
+msgstr "* `Debian 或 Ubuntu`：`Ctrl+Alt+T`。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:106
 msgid "* `Windows`: \"`Win+R, powershell, Enter`\"."
@@ -168,8 +168,10 @@ msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:115
 msgid ""
-"#      You may use the virtual enviroment on Debian|Ubuntu, the commands:"
-msgstr "#     在 `Debian` 或 `Ubuntu` 上，你可能要使用虚拟环境，其命令："
+"#      You may use the virtual enviroment on Debian|Ubuntu, the commands "
+"(without `#`):"
+msgstr ""
+"#     在 `Debian` 或 `Ubuntu` 上，你可能要使用虚拟环境，其命令（不带`#`号）："
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:118
 msgid ""

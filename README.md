@@ -89,7 +89,7 @@ Enter the following commands:
 
 ```bash
 # Install or update "fnschool".
-#      You may use the virtual enviroment on Debian|Ubuntu, the commands:
+#      You may use the virtual enviroment on Debian|Ubuntu, the commands (without `#`):
 #      python -m venv --system-site-packages ~/pyvenv; # Create virtual enviroment.
 #      . ~/pyvenv/bin/activate; # Use it.
 pip install -U fnschool

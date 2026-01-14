@@ -112,7 +112,7 @@ def write(lang, _t):
         "```bash",
         _('# Install or update "fnschool".'),
         _(
-            "#      You may use the virtual enviroment on Debian|Ubuntu, the commands:"
+            "#      You may use the virtual enviroment on Debian|Ubuntu, the commands (without `#`):"
         ),
         _(
             "#      python -m venv --system-site-packages ~/pyvenv; # Create virtual enviroment."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-07 15:54+0800\n"
+"POT-Creation-Date: 2026-01-14 21:48+0800\n"
 "PO-Revision-Date: 2025-12-28 23:49+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: Chinese (Hong Kong) <(nothing)>\n"
@@ -16,15 +16,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:16
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:17
 msgid "python -m helper"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:17
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:18
 msgid "Helper for funingschool project."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:20
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:21
 msgid "commands."
 msgstr ""
 
@@ -150,7 +150,8 @@ msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:115
 msgid ""
-"#      You may use the virtual enviroment on Debian|Ubuntu, the commands:"
+"#      You may use the virtual enviroment on Debian|Ubuntu, the commands "
+"(without `#`):"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:118
