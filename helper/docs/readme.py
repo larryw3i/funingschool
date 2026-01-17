@@ -110,14 +110,14 @@ def write(lang, _t):
         "</p>",
         "",
         "```bash",
+        _(
+            "# You may use the virtual enviroment on `Debian` or `Ubuntu`, the commands:"
+        ),
+        _(
+            "python -m venv --system-site-packages ~/pyvenv; # Create virtual enviroment."
+        ),
+        _(". ~/pyvenv/bin/activate; # Use it."),
         _('# Install or update "fnschool".'),
-        _(
-            "#      You may use the virtual enviroment on Debian|Ubuntu, the commands (without `#`):"
-        ),
-        _(
-            "#      python -m venv --system-site-packages ~/pyvenv; # Create virtual enviroment."
-        ),
-        _("#      . ~/pyvenv/bin/activate; # Use it."),
         "pip install -U fnschool",
         _("# Update database."),
         "python -m fnschoo1.manage migrate",
@@ -152,7 +152,9 @@ def write(lang, _t):
         '<h2 id="license">',
         _(" License"),
         "</h2>",
-        '<a href="https://github.com/larryw3i/funingschool/blob/master/LICENSE">',
+        '<a href="'
+        + _("https://github.com/larryw3i/funingschool/blob/master/LICENSE")
+        + '">',
         _(" GNU LESSER GENERAL PUBLIC LICENSE Version 3"),
         "</a>",
     ]

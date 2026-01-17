@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-14 21:48+0800\n"
+"POT-Creation-Date: 2026-01-17 16:34+0800\n"
 "PO-Revision-Date: 2025-12-28 23:46+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: English\n"
@@ -146,24 +146,22 @@ msgstr ""
 msgid "Enter the following commands:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:113
-msgid "# Install or update \"fnschool\"."
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:114
+msgid ""
+"# You may use the virtual enviroment on `Debian` or `Ubuntu`, the commands:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:115
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:117
 msgid ""
-"#      You may use the virtual enviroment on Debian|Ubuntu, the commands "
-"(without `#`):"
+"python -m venv --system-site-packages ~/pyvenv; # Create virtual enviroment."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:118
-msgid ""
-"#      python -m venv --system-site-packages ~/pyvenv; # Create virtual "
-"enviroment."
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:119
+msgid ". ~/pyvenv/bin/activate; # Use it."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:120
-msgid "#      . ~/pyvenv/bin/activate; # Use it."
+msgid "# Install or update \"fnschool\"."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:122
@@ -199,6 +197,10 @@ msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:153
 msgid " License"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:155
+msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:156

@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-14 21:48+0800\n"
-"PO-Revision-Date: 2026-01-17 15:50+0800\n"
+"POT-Creation-Date: 2026-01-17 16:34+0800\n"
+"PO-Revision-Date: 2026-01-17 16:36+0800\n"
 "Last-Translator:  <>\n"
 "Language-Team: Abkhazian\n"
 "Language: ab\n"
@@ -154,7 +154,21 @@ msgstr "* `Windows`：\"`Win+R（同时按）, 输入“powershell”, 按 Enter
 msgid "Enter the following commands:"
 msgstr "复制粘贴以下命令："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:113
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:114
+msgid ""
+"# You may use the virtual enviroment on `Debian` or `Ubuntu`, the commands:"
+msgstr "# 在 `Debian` 或 `Ubuntu` 机器上，你可能要使用虚拟环境，其命令："
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:117
+msgid ""
+"python -m venv --system-site-packages ~/pyvenv; # Create virtual enviroment."
+msgstr "python -m venv --system-site-packages ~/pyvenv; # 初次创建。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:119
+msgid ". ~/pyvenv/bin/activate; # Use it."
+msgstr ". ~/pyvenv/bin/activate; # 后续使用。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:120
 msgid "# Install or update \"fnschool\"."
 msgstr ""
 "# 由于网络堵塞，安装 `fnschool` 时会出现访问不到 PyPI 源或网速慢的情形。由"
@@ -165,24 +179,6 @@ msgstr ""
 "mirrors.zju.edu.cn/pypi/web/simple https://mirror.sjtu.edu.cn/pypi/web/"
 "simple\"\n"
 "# 安装 或 更新 `fnschool` 。"
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:115
-msgid ""
-"#      You may use the virtual enviroment on Debian|Ubuntu, the commands "
-"(without `#`):"
-msgstr ""
-"#     在 `Debian` 或 `Ubuntu` 上，你可能要使用虚拟环境，其命令（前后都不带`#`"
-"号）："
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:118
-msgid ""
-"#      python -m venv --system-site-packages ~/pyvenv; # Create virtual "
-"enviroment."
-msgstr "#     python -m venv --system-site-packages ~/pyvenv; # 初次创建。"
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:120
-msgid "#      . ~/pyvenv/bin/activate; # Use it."
-msgstr "#     . ~/pyvenv/bin/activate; # 后续使用。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:122
 msgid "# Update database."
@@ -220,6 +216,10 @@ msgstr ""
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:153
 msgid " License"
 msgstr "授权"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:155
+msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
+msgstr "https://gitee.com/larryw3i/funingschool/blob/master/LICENSE"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:156
 msgid " GNU LESSER GENERAL PUBLIC LICENSE Version 3"

@@ -88,10 +88,10 @@ Enter the following commands:
 </p>
 
 ```bash
+# You may use the virtual enviroment on `Debian` or `Ubuntu`, the commands:
+python -m venv --system-site-packages ~/pyvenv; # Create virtual enviroment.
+. ~/pyvenv/bin/activate; # Use it.
 # Install or update "fnschool".
-#      You may use the virtual enviroment on Debian|Ubuntu, the commands (without `#`):
-#      python -m venv --system-site-packages ~/pyvenv; # Create virtual enviroment.
-#      . ~/pyvenv/bin/activate; # Use it.
 pip install -U fnschool
 # Update database.
 python -m fnschoo1.manage migrate
