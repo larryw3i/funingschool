@@ -97,7 +97,7 @@ sudo apt-get install python3 python3-pip python-is-python3
 # 由于网络堵塞，安装 `fnschool` 时会出现访问不到 PyPI 源或网速慢的情形。由此，建议您设置访问源为镜像源，这样做便于您安装和更新：
 pip config set global.extra-index-url "https://mirrors.pku.edu.cn/pypi/web/simple https://mirror.nju.edu.cn/pypi/web/simple https://mirrors.ustc.edu.cn/pypi/web/simple https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple https://mirrors.zju.edu.cn/pypi/web/simple https://mirror.sjtu.edu.cn/pypi/web/simple"
 # 安装 或 更新 `fnschool` 。
-#     在 `Debian` 或 `Ubuntu` 上，你可能要使用虚拟环境，其命令（不带`#`号）：
+#     在 `Debian` 或 `Ubuntu` 上，你可能要使用虚拟环境，其命令（前后都不带`#`号）：
 #     python -m venv --system-site-packages ~/pyvenv; # 初次创建。
 #     . ~/pyvenv/bin/activate; # 后续使用。
 pip install -U fnschool
