@@ -23,3 +23,7 @@ def write(lang=None):
             from helper.docs.readme import write
 
             write(l, t.gettext)
+
+            from helper.docs.change_log import write
+
+            write(l, t.gettext)

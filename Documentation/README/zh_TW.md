@@ -43,6 +43,10 @@
     </a>
 </p>
 
+<p align="center">
+    [Changelog](https://github.com/larryw3i/funingschool/blob/master/CHANGELOG.md)
+</p>
+
 ![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)
 <h2 id="key-features">
     Key Features

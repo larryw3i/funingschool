@@ -59,6 +59,12 @@ def write(lang, _t):
         "    </a>",
         "</p>",
         "",
+        '<p align="center">',
+        _(
+            "    [Changelog](https://github.com/larryw3i/funingschool/blob/master/CHANGELOG.md)"
+        ),
+        "</p>",
+        "",
         _(
             "![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)"
         ),

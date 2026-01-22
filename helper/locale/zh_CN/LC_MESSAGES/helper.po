@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-17 16:34+0800\n"
-"PO-Revision-Date: 2026-01-17 16:36+0800\n"
+"POT-Creation-Date: 2026-01-22 21:52+0800\n"
+"PO-Revision-Date: 2026-01-22 21:55+0800\n"
 "Last-Translator:  <>\n"
 "Language-Team: Abkhazian\n"
 "Language: ab\n"
@@ -70,57 +70,65 @@ msgstr "         授权"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:63
 msgid ""
+"    [Changelog](https://github.com/larryw3i/funingschool/blob/master/"
+"CHANGELOG.md)"
+msgstr ""
+"    [更新日志](https://gitee.com/larryw3i/funingschool/blob/master/"
+"Documentation/CHANGELOG/zh_CN.md)"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:67
+msgid ""
 "![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/"
 "Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)"
 msgstr ""
 "![截屏](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/"
 "images/44e58998-da32-11f0-b726-700894a38a35.png)"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:66
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:70
 msgid "    Key Features"
 msgstr "    特性"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:69
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:73
 msgid "    warehousing and consuming"
 msgstr "    出入库"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:72
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:76
 msgid "* Read food spreadsheets automatically."
 msgstr "* 自动读取入库表格。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:73
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:77
 msgid "* The simplest and most straightforward `consuming sheets`."
 msgstr "* 简单直接的消耗设计。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:75
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:79
 msgid "* Update sheets (warehousing, consuming, summing, etc) automatically."
 msgstr "* 自动更新“入库、出库、汇总、盘存”等表格。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:77
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:81
 msgid "* Reduce calculation errors."
 msgstr "* 减少计算错误。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:78
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:82
 msgid "* Effectively eliminate unit prices containing infinite decimals."
 msgstr "* 避免出现无限小数单价。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:79
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:83
 msgid "* Easy to use."
 msgstr "* 简单易用。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:81
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:85
 msgid "    How To Use"
 msgstr "    如何使用"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:84
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:88
 msgid "    Install Python3"
 msgstr "安装 Python3"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:89
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:93
 msgid "on `Debian|Ubuntu`:"
 msgstr "在 `Debian` 或 `Ubuntu` 上："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:94
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:98
 msgid ""
 "For `Windows 10` and `Windows 11`, you can install Python3 from https://"
 "www.python.org/getit/ . (`fnschool` requires Python 3.12 or later)"
@@ -134,41 +142,41 @@ msgstr ""
 "\n"
 "（`funingschool` 需要 Python 3.12 或 3.12 以上版本）"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:99
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:103
 msgid "    Install fnschool and run it"
 msgstr "    安装 fnschool 并运行它"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:104
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:108
 msgid "Run the command line application:"
 msgstr "运行`命令行`（航站楼）应用："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:105
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:109
 msgid "* `Debian|Ubuntu`: `Ctrl+Alt+T`."
 msgstr "* `Debian 或 Ubuntu`：`Ctrl+Alt+T`。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:106
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:110
 msgid "* `Windows`: \"`Win+R, powershell, Enter`\"."
 msgstr "* `Windows`：\"`Win+R（同时按）, 输入“powershell”, 按 Enter`\"。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:108
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:112
 msgid "Enter the following commands:"
 msgstr "复制粘贴以下命令："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:114
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:118
 msgid ""
 "# You may use the virtual enviroment on `Debian` or `Ubuntu`, the commands:"
 msgstr "# 在 `Debian` 或 `Ubuntu` 机器上，你可能要使用虚拟环境，其命令："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:117
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:121
 msgid ""
 "python -m venv --system-site-packages ~/pyvenv; # Create virtual enviroment."
 msgstr "python -m venv --system-site-packages ~/pyvenv; # 初次创建。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:119
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:123
 msgid ". ~/pyvenv/bin/activate; # Use it."
 msgstr ". ~/pyvenv/bin/activate; # 后续使用。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:120
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:124
 msgid "# Install or update \"fnschool\"."
 msgstr ""
 "# 由于网络堵塞，安装 `fnschool` 时会出现访问不到 PyPI 源或网速慢的情形。由"
@@ -180,31 +188,31 @@ msgstr ""
 "simple\"\n"
 "# 安装 或 更新 `fnschool` 。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:122
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:126
 msgid "# Update database."
 msgstr "# 更新数据库。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:124
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:128
 msgid "# Start fnschoo1."
 msgstr "# 启动 `fnschool` 。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:128
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:132
 msgid "Credits"
 msgstr "鸣谢"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:132
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:136
 msgid " This software uses the following open source packages:"
 msgstr "此项目使用了以下的开源项目（包）："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:143
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:147
 msgid " Support"
 msgstr "赞助"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:146
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:150
 msgid " Buy me a `coffee`:"
 msgstr "给我买一杯“咖啡”："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:150
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:154
 msgid ""
 "![Buy me a \"coffee\".](https://raw.githubusercontent.com/larryw3i/"
 "funingschool/master/Documentation/images/9237879a-"
@@ -213,29 +221,66 @@ msgstr ""
 "![给我买一杯“咖啡”。](https://gitee.com/larryw3i/funingschool/raw/master/"
 "Documentation/images/5ec0296a-8a3b-11ef-8e0b-efbca71f7f1a.png)"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:153
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:157
 msgid " License"
 msgstr "授权"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:155
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:160
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr "https://gitee.com/larryw3i/funingschool/blob/master/LICENSE"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:156
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:162
 msgid " GNU LESSER GENERAL PUBLIC LICENSE Version 3"
 msgstr "GNU 宽通用公共许可证 第3版"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:165
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:174
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:171
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:180
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:40
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:49
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr "“{0}” 已被创建。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:169
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:177
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:175
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:183
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:44
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:52
 #, python-brace-format
 msgid "\"{0}\" has been updated."
 msgstr "“{0}” 已被更新。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:18
+msgid "# Changelog"
+msgstr "# 更新日志"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:20
+#, python-brace-format
+msgid "## [{0}] - {1}-{2}-{3}"
+msgstr "## [版本 {0}] - {1}年{2}月{3}日"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:22
+msgid "### Added"
+msgstr "### 新增"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:23
+msgid "- **Add CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
+msgstr "- **添加 CHANGELOG.md**： 为 `CHANGELOG.md` 添加多语言特性。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:25
+msgid "### Changed"
+msgstr "### 更改"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:27
+msgid "### Deprecated"
+msgstr "### 即将废弃"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:29
+msgid "### Fixed"
+msgstr "### 修复"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:31
+msgid "### Removed"
+msgstr "### 移除"
 
 #~ msgid "* Merge food sheets between spreadsheets.  "
 #~ msgstr "* Merge food sheets between spreadsheets.  "
