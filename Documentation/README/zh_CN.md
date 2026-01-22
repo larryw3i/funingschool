@@ -44,7 +44,7 @@
 </p>
 
 <p align="center">
-    [更新日志](https://gitee.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/zh_CN.md)
+[Changelog](https://github.com/larryw3i/funingschool/blob/master/CHANGELOG.md)
 </p>
 
 ![截屏](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)

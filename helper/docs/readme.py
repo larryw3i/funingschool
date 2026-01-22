@@ -61,7 +61,7 @@ def write(lang, _t):
         "",
         '<p align="center">',
         _(
-            "    [Changelog](https://github.com/larryw3i/funingschool/blob/master/CHANGELOG.md)"
+            "[Changelog](https://github.com/larryw3i/funingschool/blob/master/CHANGELOG.md)"
         ),
         "</p>",
         "",
