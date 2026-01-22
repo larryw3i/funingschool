@@ -44,7 +44,7 @@
 </p>
 
 <p align="center">
-<a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/zh_CN.md">更新日志</a>
+    <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/zh_CN.md">更新日志    </a>
 </p>
 
 ![截屏](https://gitee.com/larryw3i/funingschool/raw/master/Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)

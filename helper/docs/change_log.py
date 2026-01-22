@@ -15,6 +15,7 @@ def write(lang, _t):
     l = lang
     change_log = [
         "<hr/>",
+        "",
         _("# Changelog"),
         "",
         _("## [{0}] - {1}-{2}-{3}").format("Unreleased", "2026", "01", "22"),
