@@ -60,11 +60,11 @@ def write(lang, _t):
         "</p>",
         "",
         '<p align="center">',
-        '<a href="'
+        '    <a href="'
         + _("https://github.com/larryw3i/funingschool/blob/master/CHANGELOG.md")
         + '">'
         + _("Changelog")
-        + "</a>",
+        + "    </a>",
         "</p>",
         "",
         _(
