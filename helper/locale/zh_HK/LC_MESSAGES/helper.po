@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-22 21:52+0800\n"
+"POT-Creation-Date: 2026-01-22 22:01+0800\n"
 "PO-Revision-Date: 2025-12-28 23:49+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: Chinese (Hong Kong) <(nothing)>\n"
@@ -69,9 +69,11 @@ msgid "         License"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:63
-msgid ""
-"    [Changelog](https://github.com/larryw3i/funingschool/blob/master/"
-"CHANGELOG.md)"
+msgid "https://github.com/larryw3i/funingschool/blob/master/CHANGELOG.md"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:63
+msgid "Changelog"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:67
@@ -213,16 +215,16 @@ msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:171
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:180
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:40
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:49
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:39
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:48
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:175
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:183
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:44
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:52
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:43
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:51
 #, python-brace-format
 msgid "\"{0}\" has been updated."
 msgstr ""
