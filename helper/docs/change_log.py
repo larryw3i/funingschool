@@ -22,10 +22,16 @@ def write(lang, _t):
         "",
         _("### Added"),
         _("- **Add CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."),
+        _(
+            "- Delete Ingredients: Add the function of batch deleting ingredients."
+        ),
         "",
         _("### Changed"),
         "",
         _("### Deprecated"),
+        _(
+            "- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be deprecated after February 2026."
+        ),
         "",
         _("### Fixed"),
         "",

@@ -82,6 +82,11 @@ urlpatterns = [
         name="delete_ingredient",
     ),
     path(
+        "delete_ingredients",
+        views.delete_ingredients,
+        name="delete_ingredients",
+    ),
+    path(
         "edit_ingredient/<int:ingredient_id>",
         views.edit_ingredient,
         name="edit_ingredient",

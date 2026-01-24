@@ -34,8 +34,9 @@
        href="{% url "canteen:create_consumptions" %}">{% trans "Consume" %}</a>
     <a class="btn btn-primary mx-1"
        onclick="open_small_window('{% url 'canteen:create_ingredients' %}')">{% trans "Add via template" %}</a>
-    <a class="btn btn-primary"
+    <a class="btn btn-primary mx-1"
        onclick="open_small_window('{% url 'canteen:create_ingredient' %}')">{% trans "Add one" %}</a>
+    <a class="btn btn-danger" onclick="delete_ingredients()">{% trans "Delete selected Ingredients" %}</a>
   </div>
 
   <div class="d-flex justify-content-end pt-2">
@@ -84,10 +85,12 @@
                 data-ingredient_storage_date="{{ ingredient.storage_date|localtime|date:'Y/m/d' }}">
               <th scope="row">
                 <div class="form-check"
-                     title="{% trans 'It helps you check the ingredients.' %}">
+                     title="{% trans 'It helps you check/delete the ingredients.' %}">
                   <input type="checkbox"
                          style="cursor: pointer"
-                         class="form-check-input"
+                         class="form-check-input ingredient_checkbox"
+                         value="{{ ingredient.id }}"
+                         name="ingredient_checkbox"
                          id="ingredient_free_nark_{{ ingredient.id }}" />
                   <label class="form-check-label"
                          style="cursor: pointer"
@@ -133,6 +136,15 @@
       </table>
     </div>
   </div>
+  <form id="delete_ingredients_form"
+        method="post"
+        action="{% url 'canteen:delete_ingredients' %}">
+    {% csrf_token %}
+    <input type="hidden"
+           name="selected_ingredient_ids"
+           id="selected_ingredient_ids"
+           value="">
+  </form>
   {% include 'includes/_paginator.html' %}
   {{ total_price_title|json_script:"total_price_title" }}
   <script>
@@ -144,6 +156,15 @@
       ingredient_table.parent().height(
         height
       );
+    }
+
+    function delete_ingredients() {
+      var selected_ingredient_ids = [];
+      $('.ingredient_checkbox:checked').each(function(index, element) {
+        selected_ingredient_ids.push($(element).val())
+      });
+      $('#selected_ingredient_ids').val(selected_ingredient_ids.join(' '))
+      $('#delete_ingredients_form').submit()
     }
 
     $(document).ready(function() {

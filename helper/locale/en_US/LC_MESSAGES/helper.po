@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-22 22:08+0800\n"
+"POT-Creation-Date: 2026-01-24 23:48+0800\n"
 "PO-Revision-Date: 2025-12-28 23:46+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: English\n"
@@ -217,49 +217,59 @@ msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:175
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:184
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:39
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:48
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:42
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:51
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:179
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:187
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:43
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:51
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:46
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:54
 #, python-brace-format
 msgid "\"{0}\" has been updated."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:18
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:19
 msgid "# Changelog"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:20
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:21
 #, python-brace-format
 msgid "## [{0}] - {1}-{2}-{3}"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:22
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:23
 msgid "### Added"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:23
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:24
 msgid "- **Add CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:25
-msgid "### Changed"
+msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:27
-msgid "### Deprecated"
+msgid "### Changed"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:29
+msgid "### Deprecated"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:30
+msgid ""
+"- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
+"deprecated after February 2026."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:32
 msgid "### Fixed"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:31
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:34
 msgid "### Removed"
 msgstr ""

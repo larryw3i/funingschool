@@ -16,6 +16,7 @@ import pandas as pd
 from dateutil import parser as date_parser
 from dateutil.relativedelta import relativedelta
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -398,6 +399,47 @@ def new_consumption(request, consumption_id=None):
         return HttpResponse("OK", status=201)
 
     return HttpResponse("Accepted", status=202)
+
+
+@login_required()
+@require_POST
+def delete_ingredients(request):
+    selected_ids = request.POST.get("selected_ingredient_ids", "").strip()
+    not_selected_ids_msg = _("Please select the item(s) you wish to delete.")
+
+    if not selected_ids:
+        messages.info(request, not_selected_ids_msg)
+        return redirect("canteen:list_ingredients")
+
+    id_list = [
+        int(id_str) for id_str in selected_ids.split() if id_str.isdigit()
+    ]
+
+    if not id_list:
+        messages.error(request, not_selected_ids_msg)
+        return redirect("canteen:list_ingredients")
+    deleted_consumption_count, ___ = Consumption.objects.filter(
+        ingredient__id__in=id_list
+    ).delete()
+    deleted_ingredient_count, ___ = Ingredient.objects.filter(
+        id__in=id_list
+    ).delete()
+    messages.success(
+        request,
+        (
+            _("{0} ingredients have been deleted.")
+            if deleted_ingredient_count > 1
+            else _("{0} ingredient has been deleted.")
+        ).format(deleted_ingredient_count)
+        + "\n"
+        + (
+            _("{0} consumptions have been deleted.")
+            if deleted_consumption_count > 1
+            else _("{0} consumption has been deleted.")
+        ).format(deleted_consumption_count),
+    )
+
+    return redirect("canteen:list_ingredients")
 
 
 @login_required()
