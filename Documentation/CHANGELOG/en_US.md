@@ -14,7 +14,7 @@
 
 ### Removed
 
-## [Unreleased] - 2026-01-22
+## [20260127.80117.831] - 2026-01-27
 
 ### Added
 - Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`.
