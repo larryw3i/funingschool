@@ -408,7 +408,7 @@ def delete_ingredients(request):
     not_selected_ids_msg = _("Please select the item(s) you wish to delete.")
 
     if not selected_ids:
-        messages.info(request, not_selected_ids_msg)
+        messages.warning(request, not_selected_ids_msg)
         return redirect("canteen:list_ingredients")
 
     id_list = [
@@ -416,7 +416,7 @@ def delete_ingredients(request):
     ]
 
     if not id_list:
-        messages.error(request, not_selected_ids_msg)
+        messages.warning(request, not_selected_ids_msg)
         return redirect("canteen:list_ingredients")
     deleted_consumption_count, ___ = Consumption.objects.filter(
         ingredient__id__in=id_list
@@ -431,7 +431,7 @@ def delete_ingredients(request):
             if deleted_ingredient_count > 1
             else _("{0} ingredient has been deleted.")
         ).format(deleted_ingredient_count)
-        + "\n"
+        + " "
         + (
             _("{0} consumptions have been deleted.")
             if deleted_consumption_count > 1

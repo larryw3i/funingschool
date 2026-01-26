@@ -4,7 +4,6 @@ $(document).ready(function () {
     messages.css({
       position: 'absolute',
       top: $('.navbar').height() * 1.45,
-      width: '100%',
     })
     setTimeout(function () {
       messages.hide()

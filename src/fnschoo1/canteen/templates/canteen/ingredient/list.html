@@ -36,7 +36,9 @@
        onclick="open_small_window('{% url 'canteen:create_ingredients' %}')">{% trans "Add via template" %}</a>
     <a class="btn btn-primary mx-1"
        onclick="open_small_window('{% url 'canteen:create_ingredient' %}')">{% trans "Add one" %}</a>
-    <a class="btn btn-danger" onclick="delete_ingredients()">{% trans "Delete selected Ingredients" %}</a>
+    <a title='{% trans "Click twice within one minute to delete the selected ingredients. (Note: This is an irreversible operation.)" %}'
+       class="btn btn-danger"
+       onclick="delete_ingredients()">{% trans "Delete selected Ingredients" %}</a>
   </div>
 
   <div class="d-flex justify-content-end pt-2">
@@ -58,10 +60,20 @@
         <thead>
           <tr>
             <th scope="col">
-              #
-              {% blocktrans with ingredients_len=ingredients_len %}
-              ({{ingredients_len}})
-              {% endblocktrans %}
+              <div class="form-check" title="{% trans 'Select all ingredients.' %}">
+                <input type="checkbox"
+                       style="cursor: pointer"
+                       class="form-check-input all_ingredients_checkbox"
+                       name="all_ingredients_checkbox"
+                       id="all_ingredients_checkbox" />
+                <label class="form-check-label"
+                       style="cursor: pointer"
+                       for="all_ingredients_checkbox">
+                  {% blocktrans with ingredients_len=ingredients_len %}
+                    ({{ingredients_len}})
+                  {% endblocktrans %}
+                </label>
+              </div>
             </th>
             {% for name,sort, header in headers %}
               <th scope="col"
@@ -91,10 +103,10 @@
                          class="form-check-input ingredient_checkbox"
                          value="{{ ingredient.id }}"
                          name="ingredient_checkbox"
-                         id="ingredient_free_nark_{{ ingredient.id }}" />
+                         id="ingredient_checkbox_{{ ingredient.id }}" />
                   <label class="form-check-label"
                          style="cursor: pointer"
-                         for="ingredient_free_nark_{{ ingredient.id }}">
+                         for="ingredient_checkbox_{{ ingredient.id }}">
                     {{ forloop.counter }}
                   </label>
                 </div>
@@ -148,6 +160,24 @@
   {% include 'includes/_paginator.html' %}
   {{ total_price_title|json_script:"total_price_title" }}
   <script>
+    var delete_ingredients_timer = null
+
+    $(document).ready(function() {
+      $("#all_ingredients_checkbox").click(function(event) {
+        var ingredient_checkboxes = $('.ingredient_checkbox')
+        var element = $(event.target)
+        if ($(element).is(':checked')) {
+          $(ingredient_checkboxes).each(function(index, __element) {
+            $(__element).prop("checked", true)
+          })
+        } else {
+          $(ingredient_checkboxes).each(function(index, __element) {
+            $(__element).prop("checked", false)
+          })
+        }
+      })
+    })
+
     function set_ingredient_table_height() {
       var ingredient_table = $('.table-ingredient')
       var pagination = $('.pagination')
@@ -159,6 +189,11 @@
     }
 
     function delete_ingredients() {
+      var current_time = Date.now();
+      if (delete_ingredients_timer == null || current_time - delete_ingredients_timer > 60 * 1000) {
+        delete_ingredients_timer = current_time
+        return
+      }
       var selected_ingredient_ids = [];
       $('.ingredient_checkbox:checked').each(function(index, element) {
         selected_ingredient_ids.push($(element).val())

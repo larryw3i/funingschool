@@ -92,12 +92,18 @@
   </div>
 </nav>
 {% if messages %}
-  <div class="messages">
-    {% for message in messages %}
-      <div class="alert alert-{{ message.tags }} p-2 m-0">
-        {{ message }}
-        <span class="btn-close mx-2" title="{% trans "Hide messages." %}"></span>
+  <div class="container">
+    <div class="row">
+      <div class="col col-12 justify-content-center d-flex">
+        <div class="messages">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+              <span class="btn-close" title="{% trans "Hide messages." %}"></span>
+            </div>
+          {% endfor %}
+        </div>
       </div>
-    {% endfor %}
+    </div>
   </div>
 {% endif %}

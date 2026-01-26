@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-24 23:12+0800\n"
-"PO-Revision-Date: 2026-01-24 23:12+0800\n"
+"POT-Creation-Date: 2026-01-26 23:41+0800\n"
+"PO-Revision-Date: 2026-01-26 23:44+0800\n"
 "Last-Translator:  <>\n"
 "Language-Team: Abkhazian\n"
 "Language: ab\n"
@@ -248,8 +248,8 @@ msgstr "置顶出库"
 #: canteen/templates/canteen/category/delete.html:40
 #: canteen/templates/canteen/category/list.html:35
 #: canteen/templates/canteen/category/list.html:41
-#: canteen/templates/canteen/ingredient/list.html:111
-#: canteen/templates/canteen/ingredient/list.html:116
+#: canteen/templates/canteen/ingredient/list.html:113
+#: canteen/templates/canteen/ingredient/list.html:118
 #: canteen/templates/canteen/meal_type/delete.html:32
 #: canteen/templates/canteen/meal_type/list.html:33 templates/base/_js.html:7
 msgid "Yes"
@@ -275,7 +275,7 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:57
 #: canteen/templates/canteen/category/list.html:51
 #: canteen/templates/canteen/ingredient/delete.html:34
-#: canteen/templates/canteen/ingredient/list.html:129
+#: canteen/templates/canteen/ingredient/list.html:131
 #: canteen/templates/canteen/meal_type/delete.html:49
 #: canteen/templates/canteen/meal_type/list.html:43
 msgid "Delete"
@@ -292,7 +292,7 @@ msgid "Add"
 msgstr "添加"
 
 #: canteen/templates/canteen/category/list.html:47
-#: canteen/templates/canteen/ingredient/list.html:123
+#: canteen/templates/canteen/ingredient/list.html:125
 #: canteen/templates/canteen/meal_type/list.html:39
 msgid "Edit"
 msgstr "编辑"
@@ -484,14 +484,20 @@ msgid "Add one"
 msgstr "添加一个"
 
 #: canteen/templates/canteen/ingredient/list.html:39
+msgid ""
+"Click twice within one minute to delete the selected ingredients. (Note: "
+"This is an irreversible operation.)"
+msgstr "60 秒内点两次此按钮才会触发删除操作。（注意：食材被删除后不可恢复。）"
+
+#: canteen/templates/canteen/ingredient/list.html:41
 msgid "Delete selected Ingredients"
 msgstr "删除已选食材"
 
-#: canteen/templates/canteen/ingredient/list.html:49
+#: canteen/templates/canteen/ingredient/list.html:51
 msgid "Locate the updated element."
 msgstr "更新后定位"
 
-#: canteen/templates/canteen/ingredient/list.html:62
+#: canteen/templates/canteen/ingredient/list.html:64
 #, python-format
 msgid ""
 "\n"
@@ -502,7 +508,7 @@ msgstr ""
 "                （%(ingredients_len)s）\n"
 "                 "
 
-#: canteen/templates/canteen/ingredient/list.html:88
+#: canteen/templates/canteen/ingredient/list.html:90
 msgid "It helps you check/delete the ingredients."
 msgstr "自由标记，用于检查和删除食材、核对单据等等。"
 
