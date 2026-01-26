@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-24 23:48+0800\n"
+"POT-Creation-Date: 2026-01-27 01:16+0800\n"
 "PO-Revision-Date: 2025-12-28 23:49+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: Chinese (Hong Kong) <(nothing)>\n"
@@ -40,234 +40,244 @@ msgstr ""
 msgid "The specified local language for generating document."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:28
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:21
+msgid "# Changelog"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:23
+#, python-brace-format
+msgid "## [{0}] - {1}-{2:0>2}-{3:0>2}"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:27
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:39
+msgid "### Added"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:29
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:45
+msgid "### Changed"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:31
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:47
+msgid "### Deprecated"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:33
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:52
+msgid "### Fixed"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:35
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:54
+msgid "### Removed"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:37
+#, python-brace-format
+msgid "## [{0}] - {1}-{2}-{3}"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:40
+msgid "- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:42
+msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:49
+msgid ""
+"- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
+"deprecated after February 2026."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:62
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:71
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:175
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:184
+#, python-brace-format
+msgid "\"{0}\" has been created."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:66
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:74
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:179
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
+#, python-brace-format
+msgid "\"{0}\" has been updated."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:28
 msgid "    funingschool"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:32
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:32
 msgid "    NO Just some simple scripts for warehousing and consuming."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:42
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:42
 msgid "         Key Features"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:46
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:46
 msgid "         How To Use"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:50
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:50
 msgid "         Credits"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:54
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:54
 msgid "         Support"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:58
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:58
 msgid "         License"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:64
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:64
 msgid "https://github.com/larryw3i/funingschool/blob/master/CHANGELOG.md"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:66
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:66
 msgid "Changelog"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:71
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:71
 msgid ""
 "![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/"
 "Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:74
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:74
 msgid "    Key Features"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:77
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:77
 msgid "    warehousing and consuming"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:80
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:80
 msgid "* Read food spreadsheets automatically."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:81
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:81
 msgid "* The simplest and most straightforward `consuming sheets`."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:83
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:83
 msgid "* Update sheets (warehousing, consuming, summing, etc) automatically."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:85
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:85
 msgid "* Reduce calculation errors."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:86
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:86
 msgid "* Effectively eliminate unit prices containing infinite decimals."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:87
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:87
 msgid "* Easy to use."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:89
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:89
 msgid "    How To Use"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:92
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:92
 msgid "    Install Python3"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:97
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:97
 msgid "on `Debian|Ubuntu`:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:102
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:102
 msgid ""
 "For `Windows 10` and `Windows 11`, you can install Python3 from https://"
 "www.python.org/getit/ . (`fnschool` requires Python 3.12 or later)"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:107
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:107
 msgid "    Install fnschool and run it"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:112
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:112
 msgid "Run the command line application:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:113
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:113
 msgid "* `Debian|Ubuntu`: `Ctrl+Alt+T`."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:114
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:114
 msgid "* `Windows`: \"`Win+R, powershell, Enter`\"."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:116
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:116
 msgid "Enter the following commands:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:122
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:122
 msgid ""
 "# You may use the virtual enviroment on `Debian` or `Ubuntu`, the commands:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:125
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:125
 msgid ""
 "python -m venv --system-site-packages ~/pyvenv; # Create virtual enviroment."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:127
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:127
 msgid ". ~/pyvenv/bin/activate; # Use it."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:128
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:128
 msgid "# Install or update \"fnschool\"."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:130
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:130
 msgid "# Update database."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:132
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:132
 msgid "# Start fnschoo1."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:136
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:136
 msgid "Credits"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:140
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:140
 msgid " This software uses the following open source packages:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:151
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:151
 msgid " Support"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:154
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:154
 msgid " Buy me a `coffee`:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:158
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:158
 msgid ""
 "![Buy me a \"coffee\".](https://raw.githubusercontent.com/larryw3i/"
 "funingschool/master/Documentation/images/9237879a-"
 "f8d5-11ee-8411-23057db0a773.jpeg)"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:161
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:161
 msgid " License"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:164
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:164
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:166
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:166
 msgid " GNU LESSER GENERAL PUBLIC LICENSE Version 3"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:175
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:184
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:42
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:51
-#, python-brace-format
-msgid "\"{0}\" has been created."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:179
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/readme.py:187
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:46
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:54
-#, python-brace-format
-msgid "\"{0}\" has been updated."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:19
-msgid "# Changelog"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:21
-#, python-brace-format
-msgid "## [{0}] - {1}-{2}-{3}"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:23
-msgid "### Added"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:24
-msgid "- **Add CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:25
-msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:27
-msgid "### Changed"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:29
-msgid "### Deprecated"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:30
-msgid ""
-"- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
-"deprecated after February 2026."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:32
-msgid "### Fixed"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/change_log.py:34
-msgid "### Removed"
 msgstr ""

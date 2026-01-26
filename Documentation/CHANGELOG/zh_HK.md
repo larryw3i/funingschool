@@ -2,10 +2,22 @@
 
 # Changelog
 
+## [Unreleased] - 2026-01-27
+
+### Added
+
+### Changed
+
+### Deprecated
+
+### Fixed
+
+### Removed
+
 ## [Unreleased] - 2026-01-22
 
 ### Added
-- **Add CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`.
+- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`.
 - Delete Ingredients: Add the function of batch deleting ingredients.
 
 ### Changed

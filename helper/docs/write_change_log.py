@@ -2,6 +2,7 @@ import os
 import sys
 from pathlib import Path
 import gettext
+from datetime import datetime
 from helper.docs import _, project_dir, locale_dir, project_doc_dir, helper_dir
 
 project_change_log_dir = project_doc_dir / "CHANGELOG"
@@ -13,15 +14,32 @@ __cp = _
 def write(lang, _t):
     _ = _t
     l = lang
+    date_now = datetime.now()
     change_log = [
         "<hr/>",
         "",
         _("# Changelog"),
         "",
-        _("## [{0}] - {1}-{2}-{3}").format("Unreleased", "2026", "01", "22"),
+        _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
+            "Unreleased", date_now.year, date_now.month, date_now.day
+        ),
         "",
         _("### Added"),
-        _("- **Add CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."),
+        "",
+        _("### Changed"),
+        "",
+        _("### Deprecated"),
+        "",
+        _("### Fixed"),
+        "",
+        _("### Removed"),
+        "",
+        _("## [{0}] - {1}-{2}-{3}").format(
+            "20260127.80117.831", "2026", "01", "27"
+        ),
+        "",
+        _("### Added"),
+        _("- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."),
         _(
             "- Delete Ingredients: Add the function of batch deleting ingredients."
         ),
