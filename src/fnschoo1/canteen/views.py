@@ -419,10 +419,10 @@ def delete_ingredients(request):
         messages.warning(request, not_selected_ids_msg)
         return redirect("canteen:list_ingredients")
     deleted_consumption_count, ___ = Consumption.objects.filter(
-        ingredient__id__in=id_list
+        Q(ingredient__id__in=id_list) & Q(ingredient__user=request.user)
     ).delete()
     deleted_ingredient_count, ___ = Ingredient.objects.filter(
-        id__in=id_list
+        Q(id__in=id_list) & Q(user=request.user)
     ).delete()
     messages.success(
         request,
@@ -439,7 +439,8 @@ def delete_ingredients(request):
         ).format(deleted_consumption_count),
     )
 
-    return redirect("canteen:list_ingredients")
+    next_url = request.POST.get("next")
+    return redirect(next_url)
 
 
 @login_required()
