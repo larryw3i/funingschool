@@ -158,7 +158,7 @@
            value="">
     <input type="hidden"
            name="next"
-           value='{{ request.GET.next|default:request.get_full_path|urlencode }}'>
+           value='{{ request.GET.next|default:request.get_full_path }}'>
   </form>
   {% include 'includes/_paginator.html' %}
   {{ total_price_title|json_script:"total_price_title" }}
