@@ -98,9 +98,7 @@
               id="ingredient_num_{{ ingredient.id }}">
             <td title="{% blocktrans with storage_date=ingredient.storage_date meal_type=ingredient.meal_type.name category=ingredient.category.name %}Storaged on {{ storage_date }} . ({{ meal_type }}, {{ category }}){% endblocktrans %}"
                 class="">
-              <div class='ingredient-progress'
-                   style="width:{% widthratio ingredient.remaining_quantity ingredient.quantity 100 %}%">
-              </div>
+              <div class='ingredient-progress'></div>
               {{ ingredient.name }}
               {% if ingredient.meal_type != "" %}
                 <span style="font-size: 80%;">
@@ -278,6 +276,22 @@
     }
 
     $(document).ready(function() {
+      $('.row-consumption').each(function(index, element) {
+        element = $(element)
+        var ingredient_consumption_progress = element.find(".ingredient-progress")
+        var ingredient_quantity = parseInt(element.data("ingredient_quantity")) || 0
+        var ingredient_quantity_used = parseInt(element.data("ingredient_quantity_used")) || 0
+        var ingredient_remaining_quantity = parseInt(element.data("ingredient_remaining_quantity")) || 0
+        if ((ingredient_quantity - ingredient_quantity_used) > 0) {
+          var ingredient_consumption_progress_with = ingredient_remaining_quantity * 100 / (ingredient_quantity - ingredient_quantity_used)
+          ingredient_consumption_progress.css({
+            "width": `${ingredient_consumption_progress_with}%`
+          })
+        }
+      })
+    })
+
+    $(document).ready(function() {
       for (var [key, value] of url_params) {
         if (key.startsWith("sort_")) {
           value = value == "+" ? "&uarr;" : (value == "-" ? "&darr;" : "")
@@ -321,7 +335,9 @@
         var ingredient_consuming_quantity = parseInt(tr.data("ingredient_consuming_quantity")) || 0
         var ingredient_remaining_quantity = parseInt(tr.data("ingredient_remaining_quantity")) || 0
         td.text(
-          `${ingredient_quantity-ingredient_quantity_used}-${ingredient_consuming_quantity-ingredient_quantity_used}=${ingredient_remaining_quantity}`
+          `${ingredient_quantity-ingredient_quantity_used}` +
+          `-${ingredient_consuming_quantity-ingredient_quantity_used}` +
+          `=${ingredient_remaining_quantity}`
         )
       });
 
@@ -364,20 +380,6 @@
           "storage_date_start": storage_date_start
         })
       }
-    });
-
-    $(document).ready(function() {
-      var last_meal_type = ""
-      var consumption_rows = $(".row-consumption")
-      consumption_rows.each(function(index, element) {
-        meal_type = $(element).data("ingredient_meal_type")
-        if (last_meal_type != meal_type) {
-          $(element).find("td").css({
-            "color": "red"
-          })
-          last_meal_type = meal_type
-        }
-      });
     });
 
     function submit_consumption_form(element) {
