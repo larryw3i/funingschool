@@ -16,7 +16,7 @@
 ### 弃用
 
 ### 修复
-- Ingredient Consumption: Fixed the error in displaying the ingredient progress bar on the ingredient consumption page.
+- 食材消耗：修复了 `食材消耗` 页面的食材进度条的显示问题。
 
 ### 移除
 
