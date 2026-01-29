@@ -18,6 +18,11 @@ def write(lang, _t):
     change_log = [
         "<hr/>",
         "",
+        '<p align="center">',
+        '    <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/zh_CN.md">\u7b80\u4f53\u4e2d\u6587</a> \u2022',
+        '    <a href="https://github.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/en_US.md">English</a>',
+        "</p>",
+        "",
         _("# Changelog"),
         "",
         _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
