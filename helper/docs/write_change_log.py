@@ -36,6 +36,9 @@ def write(lang, _t):
         _("### Deprecated"),
         "",
         _("### Fixed"),
+        _(
+            "- Ingredient Consumption: Fixed the error in displaying the ingredient progress bar on the ingredient consumption page."
+        ),
         "",
         _("### Removed"),
         "",

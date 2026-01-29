@@ -16,6 +16,7 @@
 ### 弃用
 
 ### 修复
+- Ingredient Consumption: Fixed the error in displaying the ingredient progress bar on the ingredient consumption page.
 
 ### 移除
 

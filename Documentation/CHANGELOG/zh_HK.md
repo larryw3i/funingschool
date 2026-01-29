@@ -16,6 +16,7 @@
 ### Deprecated
 
 ### Fixed
+- Ingredient Consumption: Fixed the error in displaying the ingredient progress bar on the ingredient consumption page.
 
 ### Removed
 

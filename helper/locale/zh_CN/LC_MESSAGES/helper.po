@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-27 01:16+0800\n"
-"PO-Revision-Date: 2026-01-27 01:20+0800\n"
+"POT-Creation-Date: 2026-01-29 17:51+0800\n"
+"PO-Revision-Date: 2026-01-29 17:51+0800\n"
 "Last-Translator:  <>\n"
 "Language-Team: Abkhazian\n"
 "Language: ab\n"
@@ -40,54 +40,60 @@ msgstr "生成文档。"
 msgid "The specified local language for generating document."
 msgstr "指定“生成文档”的国家/地区语言。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:21
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:26
 msgid "# Changelog"
 msgstr "# 更新日志"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:23
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:28
 #, python-brace-format
 msgid "## [{0}] - {1}-{2:0>2}-{3:0>2}"
 msgstr "## [版本 {0}] - {1}年{2:0>2}月{3:0>2}日"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:27
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:39
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:32
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:47
 msgid "### Added"
 msgstr "### 新增"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:29
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:45
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:34
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:53
 msgid "### Changed"
 msgstr "### 更改"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:31
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:47
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:36
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:55
 msgid "### Deprecated"
 msgstr "### 弃用"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:33
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:52
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:38
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:60
 msgid "### Fixed"
 msgstr "### 修复"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:35
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:54
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:39
+msgid ""
+"- Ingredient Consumption: Fixed the error in displaying the ingredient "
+"progress bar on the ingredient consumption page."
+msgstr "- 食材消耗：修复了 `食材消耗` 页面的食材进度条的显示问题。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:41
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:62
 msgid "### Removed"
 msgstr "### 移除"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:37
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:43
 #, python-brace-format
 msgid "## [{0}] - {1}-{2}-{3}"
 msgstr "## [版本 {0}] - {1}年{2}月{3}日"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:40
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:48
 msgid "- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
 msgstr "- 添加 **CHANGELOG.md**： 为 `CHANGELOG.md` 添加多语言特性。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:42
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:50
 msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
 msgstr "- 删除食材： 添加`批量删除`食材的功能。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:49
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:57
 msgid ""
 "- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
 "deprecated after February 2026."
@@ -95,16 +101,16 @@ msgstr ""
 "- “202511012053_copy_profiles_to_fnprofile”补丁：2026 年 02 月后，它将被弃"
 "用。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:62
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:71
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:70
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:79
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:175
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:184
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr "“{0}” 已被创建。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:66
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:74
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:82
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:179
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
 #, python-brace-format
