@@ -8,9 +8,8 @@ from django.contrib.auth.models import (
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from django.utils.translation import gettext as _
-from fnschool import *
 
+from django.utils.translation import gettext_lazy  as _
 # Create your models here.
 
 
@@ -31,7 +30,7 @@ class Fnuser(AbstractUser, PermissionsMixin):
     )
     user_permissions = models.ManyToManyField(
         "auth.Permission",
-        verbose_name="user permissions",
+        verbose_name=_("User Permissions"),
         blank=True,
         help_text=_("Specific permissions for this user."),
         related_name="fn_user_permissions",

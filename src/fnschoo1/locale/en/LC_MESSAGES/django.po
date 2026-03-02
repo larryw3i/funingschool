@@ -1,15 +1,12 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
+#  <>, YEAR-2026.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-26 23:41+0800\n"
-"PO-Revision-Date: 2025-09-25 10:07+0800\n"
+"POT-Creation-Date: 2026-03-02 23:21+0800\n"
+"PO-Revision-Date: 2026-03-02 23:25+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
 "Language: en\n"
@@ -17,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.7\n"
+"X-Generator: Gtranslator 49.0\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: canteen/forms.py:11
@@ -64,7 +61,6 @@ msgstr ""
 
 #: canteen/models.py:34 canteen/models.py:62 canteen/models.py:106
 #: fnprofile/models.py:79
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:63
 msgid "Time of updating"
 msgstr ""
 
@@ -98,7 +94,7 @@ msgstr ""
 
 #: canteen/models.py:94
 msgid "User"
-msgstr ""
+msgstr "用户"
 
 #: canteen/models.py:96 canteen/templates/canteen/consumption/create.html:15
 #: canteen/views.py:72
@@ -106,7 +102,6 @@ msgid "Storage Date"
 msgstr ""
 
 #: canteen/models.py:102 fnprofile/models.py:75
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:59
 msgid "Time of creating"
 msgstr ""
 
@@ -246,8 +241,8 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:40
 #: canteen/templates/canteen/category/list.html:35
 #: canteen/templates/canteen/category/list.html:41
-#: canteen/templates/canteen/ingredient/list.html:113
-#: canteen/templates/canteen/ingredient/list.html:118
+#: canteen/templates/canteen/ingredient/list.html:123
+#: canteen/templates/canteen/ingredient/list.html:128
 #: canteen/templates/canteen/meal_type/delete.html:32
 #: canteen/templates/canteen/meal_type/list.html:33 templates/base/_js.html:7
 msgid "Yes"
@@ -270,7 +265,7 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:57
 #: canteen/templates/canteen/category/list.html:51
 #: canteen/templates/canteen/ingredient/delete.html:34
-#: canteen/templates/canteen/ingredient/list.html:131
+#: canteen/templates/canteen/ingredient/list.html:141
 #: canteen/templates/canteen/meal_type/delete.html:49
 #: canteen/templates/canteen/meal_type/list.html:43
 msgid "Delete"
@@ -287,7 +282,7 @@ msgid "Add"
 msgstr ""
 
 #: canteen/templates/canteen/category/list.html:47
-#: canteen/templates/canteen/ingredient/list.html:125
+#: canteen/templates/canteen/ingredient/list.html:135
 #: canteen/templates/canteen/meal_type/list.html:39
 msgid "Edit"
 msgstr ""
@@ -355,7 +350,7 @@ msgstr ""
 msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:108
+#: canteen/templates/canteen/consumption/create.html:106
 #, python-format
 msgid ""
 "\n"
@@ -363,7 +358,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:113
+#: canteen/templates/canteen/consumption/create.html:111
 #, python-format
 msgid ""
 "\n"
@@ -371,15 +366,15 @@ msgid ""
 "                "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:121
+#: canteen/templates/canteen/consumption/create.html:119
 msgid "No ingredient found."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:130
+#: canteen/templates/canteen/consumption/create.html:128
 msgid "Generate Spreadsheet"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:136
+#: canteen/templates/canteen/consumption/create.html:134
 msgid "Ingredient Sheets are also included."
 msgstr ""
 
@@ -473,15 +468,19 @@ msgstr ""
 msgid "Locate the updated element."
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:64
+#: canteen/templates/canteen/ingredient/list.html:63
+msgid "Select all ingredients."
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:72
 #, python-format
 msgid ""
 "\n"
-"              (%(ingredients_len)s)\n"
-"              "
+"                    (%(ingredients_len)s)\n"
+"                  "
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:90
+#: canteen/templates/canteen/ingredient/list.html:100
 msgid "It helps you check/delete the ingredients."
 msgstr ""
 
@@ -645,44 +644,44 @@ msgstr ""
 msgid "{0} consumption has been deleted."
 msgstr ""
 
-#: canteen/views.py:476
+#: canteen/views.py:477
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
 "and cannot be saved. Please modify it again."
 msgstr ""
 
-#: canteen/views.py:615
+#: canteen/views.py:616
 #, python-brace-format
 msgid "{meal_type}:{sum_total_price}"
 msgstr ""
 
-#: canteen/views.py:639
+#: canteen/views.py:640
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:743 canteen/views.py:1022
+#: canteen/views.py:744 canteen/views.py:1023
 msgid "(2)"
 msgstr ""
 
-#: canteen/views.py:752 canteen/views.py:1030
+#: canteen/views.py:753 canteen/views.py:1031
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:793
+#: canteen/views.py:794
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:813
+#: canteen/views.py:814
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:829
+#: canteen/views.py:830
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:852
+#: canteen/views.py:853
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
 msgstr ""
@@ -1224,126 +1223,100 @@ msgstr ""
 
 #: fnhome/templates/fnhome/home.html:5
 msgid "FNSCHOOL Home"
-msgstr ""
+msgstr "FNSCHOOL Home"
 
 #: fnprofile/forms.py:13 fnprofile/forms.py:14 fnprofile/forms.py:25
 #: fnprofile/forms.py:26
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:13
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:14
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:25
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:26
 msgid "User Name"
-msgstr ""
+msgstr "User Name"
 
 #: fnprofile/forms.py:17 fnprofile/forms.py:18 fnprofile/forms.py:29
 #: fnprofile/forms.py:30
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:17
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:18
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:29
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:30
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: fnprofile/forms.py:33 fnprofile/forms.py:35
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:33
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:35
 msgid "Confirm Password"
-msgstr ""
+msgstr "Confirm Password"
 
 #: fnprofile/models.py:18
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:18
 msgid "Male"
-msgstr ""
+msgstr "Male"
 
 #: fnprofile/models.py:19
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:19
 msgid "Female"
-msgstr ""
+msgstr "Female"
 
 #: fnprofile/models.py:28
 msgid "The groups this user belongs to."
-msgstr ""
+msgstr "The groups this user belongs to."
 
 #: fnprofile/models.py:36
 msgid "Specific permissions for this user."
-msgstr ""
+msgstr "Specific permissions for this user."
 
 #: fnprofile/models.py:41
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:25
 msgid "Phone Number"
-msgstr ""
+msgstr "Phone Number"
 
 #: fnprofile/models.py:44
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:28
 msgid "Affiliation"
-msgstr ""
+msgstr "Affiliation"
 
 #: fnprofile/models.py:51
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:35
 msgid "Superior department"
-msgstr ""
+msgstr "Superior department"
 
 #: fnprofile/models.py:55
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:39
 msgid "Date of Birth"
-msgstr ""
+msgstr "Date of Birth"
 
 #: fnprofile/models.py:61
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:45
 msgid "Gender"
-msgstr ""
+msgstr "Gender"
 
 #: fnprofile/models.py:65
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:49
 msgid "Address"
-msgstr ""
+msgstr "Address"
 
 #: fnprofile/models.py:68
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:52
 msgid "Avatar"
-msgstr ""
+msgstr "Avatar"
 
 #: fnprofile/models.py:71
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:55
 msgid "Biography"
-msgstr ""
+msgstr "Biography"
 
 #: fnprofile/models.py:83 fnprofile/models.py:84
 msgid "User Information"
-msgstr ""
+msgstr "User Information"
 
 #: fnprofile/models.py:87
 #, python-brace-format
 msgid "{0}'s Information"
-msgstr ""
+msgstr "{0}'s Information"
 
 #: fnprofile/templates/fnprofile/create.html:4
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:4
 msgid "Create"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/create.html:7
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:7
 msgid "Create new account."
 msgstr ""
 
 #: fnprofile/templates/fnprofile/create.html:11
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:11
 msgid "Confirm"
-msgstr ""
+msgstr "Confirm"
 
 #: fnprofile/templates/fnprofile/create.html:15
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:15
 msgid "Already have an account?"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/create.html:16
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:16
 msgid "Login here"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/detail.html:4
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/detail.html:4
 #, python-format
 msgid ""
 " Hello, %(user_name)s!\n"
@@ -1351,56 +1324,44 @@ msgid ""
 msgstr ""
 
 #: fnprofile/templates/fnprofile/edit.html:4
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:4
 msgid "Update Profile"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/edit.html:7
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:7
 msgid "Update Profile."
 msgstr ""
 
 #: fnprofile/templates/fnprofile/edit.html:13
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:13
 msgid "Update"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/log_in.html:4
 #: fnprofile/templates/fnprofile/log_in.html:7
 #: fnprofile/templates/fnprofile/log_in.html:15
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:4
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:7
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:15
 msgid "Log in"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/log_in.html:9
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:9
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 
 #: fnprofile/templates/fnprofile/log_in.html:19
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:19
 msgid "Don't have an account?"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/log_in.html:20
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:20
 msgid "Register here"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/log_out.html:7
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:7
 msgid "Logged Out"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/log_out.html:8
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:8
 msgid "You have been successfully logged out."
 msgstr ""
 
 #: fnprofile/templates/fnprofile/log_out.html:10
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:10
 msgid "Log in again"
 msgstr ""
 
@@ -1409,40 +1370,19 @@ msgid "Your information has been updated successfully!"
 msgstr ""
 
 #: fnschool/settings.py:140
-#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:140
 msgid "English"
 msgstr ""
 
 #: fnschool/settings.py:141
-#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:141
 msgid "Spanish"
 msgstr ""
 
 #: fnschool/settings.py:142
-#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:142
 msgid "French"
 msgstr ""
 
 #: fnschool/settings.py:143
-#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:143
 msgid "Simplified Chinese"
-msgstr ""
-
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:67
-msgid "User Profile"
-msgstr ""
-
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:68
-msgid "User Profiles"
-msgstr ""
-
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:71
-#, python-brace-format
-msgid "{0}'s Profile"
-msgstr ""
-
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/views.py:63
-msgid "Profile has been updated successfully!"
 msgstr ""
 
 #: templates/base/_js.html:11
@@ -1503,6 +1443,6 @@ msgstr ""
 msgid "Sign Up"
 msgstr ""
 
-#: templates/includes/_header.html:99
+#: templates/includes/_header.html:102
 msgid "Hide messages."
 msgstr ""

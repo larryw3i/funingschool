@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-26 23:41+0800\n"
-"PO-Revision-Date: 2026-01-26 23:44+0800\n"
+"POT-Creation-Date: 2026-03-02 23:21+0800\n"
+"PO-Revision-Date: 2026-03-02 23:23+0800\n"
 "Last-Translator:  <>\n"
 "Language-Team: Abkhazian\n"
 "Language: ab\n"
@@ -60,7 +60,6 @@ msgstr "创建日期"
 
 #: canteen/models.py:34 canteen/models.py:62 canteen/models.py:106
 #: fnprofile/models.py:79
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:63
 msgid "Time of updating"
 msgstr "更新时间"
 
@@ -102,7 +101,6 @@ msgid "Storage Date"
 msgstr "入库日期"
 
 #: canteen/models.py:102 fnprofile/models.py:75
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:59
 msgid "Time of creating"
 msgstr "创建时间"
 
@@ -248,8 +246,8 @@ msgstr "置顶出库"
 #: canteen/templates/canteen/category/delete.html:40
 #: canteen/templates/canteen/category/list.html:35
 #: canteen/templates/canteen/category/list.html:41
-#: canteen/templates/canteen/ingredient/list.html:113
-#: canteen/templates/canteen/ingredient/list.html:118
+#: canteen/templates/canteen/ingredient/list.html:123
+#: canteen/templates/canteen/ingredient/list.html:128
 #: canteen/templates/canteen/meal_type/delete.html:32
 #: canteen/templates/canteen/meal_type/list.html:33 templates/base/_js.html:7
 msgid "Yes"
@@ -275,7 +273,7 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:57
 #: canteen/templates/canteen/category/list.html:51
 #: canteen/templates/canteen/ingredient/delete.html:34
-#: canteen/templates/canteen/ingredient/list.html:131
+#: canteen/templates/canteen/ingredient/list.html:141
 #: canteen/templates/canteen/meal_type/delete.html:49
 #: canteen/templates/canteen/meal_type/list.html:43
 msgid "Delete"
@@ -292,7 +290,7 @@ msgid "Add"
 msgstr "添加"
 
 #: canteen/templates/canteen/category/list.html:47
-#: canteen/templates/canteen/ingredient/list.html:125
+#: canteen/templates/canteen/ingredient/list.html:135
 #: canteen/templates/canteen/meal_type/list.html:39
 msgid "Edit"
 msgstr "编辑"
@@ -365,7 +363,7 @@ msgstr "余量"
 msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
 msgstr "于 %(storage_date)s 入库。（%(meal_type)s，%(category)s）"
 
-#: canteen/templates/canteen/consumption/create.html:108
+#: canteen/templates/canteen/consumption/create.html:106
 #, python-format
 msgid ""
 "\n"
@@ -376,7 +374,7 @@ msgstr ""
 "                  （%(meal_type)s, %(category)s）\n"
 "                  "
 
-#: canteen/templates/canteen/consumption/create.html:113
+#: canteen/templates/canteen/consumption/create.html:111
 #, python-format
 msgid ""
 "\n"
@@ -387,15 +385,15 @@ msgstr ""
 "                （%(category)s）\n"
 "                "
 
-#: canteen/templates/canteen/consumption/create.html:121
+#: canteen/templates/canteen/consumption/create.html:119
 msgid "No ingredient found."
 msgstr "未发现食材。"
 
-#: canteen/templates/canteen/consumption/create.html:130
+#: canteen/templates/canteen/consumption/create.html:128
 msgid "Generate Spreadsheet"
 msgstr "生成账单"
 
-#: canteen/templates/canteen/consumption/create.html:136
+#: canteen/templates/canteen/consumption/create.html:134
 msgid "Ingredient Sheets are also included."
 msgstr "也包含食材表。"
 
@@ -497,18 +495,22 @@ msgstr "删除已选食材"
 msgid "Locate the updated element."
 msgstr "更新后定位"
 
-#: canteen/templates/canteen/ingredient/list.html:64
+#: canteen/templates/canteen/ingredient/list.html:63
+msgid "Select all ingredients."
+msgstr "选择全部食材"
+
+#: canteen/templates/canteen/ingredient/list.html:72
 #, python-format
 msgid ""
 "\n"
-"              (%(ingredients_len)s)\n"
-"              "
+"                    (%(ingredients_len)s)\n"
+"                  "
 msgstr ""
 "\n"
-"                （%(ingredients_len)s）\n"
-"                 "
+"                    （%(ingredients_len)s）\n"
+"                  "
 
-#: canteen/templates/canteen/ingredient/list.html:90
+#: canteen/templates/canteen/ingredient/list.html:100
 msgid "It helps you check/delete the ingredients."
 msgstr "自由标记，用于检查和删除食材、核对单据等等。"
 
@@ -699,7 +701,7 @@ msgstr "{0} 项食材消耗已被删除。"
 msgid "{0} consumption has been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:476
+#: canteen/views.py:477
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
@@ -708,37 +710,37 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:615
+#: canteen/views.py:616
 #, python-brace-format
 msgid "{meal_type}:{sum_total_price}"
 msgstr "{meal_type}：{sum_total_price}"
 
-#: canteen/views.py:639
+#: canteen/views.py:640
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:743 canteen/views.py:1022
+#: canteen/views.py:744 canteen/views.py:1023
 msgid "(2)"
 msgstr "（2）"
 
-#: canteen/views.py:752 canteen/views.py:1030
+#: canteen/views.py:753 canteen/views.py:1031
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:793
+#: canteen/views.py:794
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:813
+#: canteen/views.py:814
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:829
+#: canteen/views.py:830
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:852
+#: canteen/views.py:853
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
 msgstr "（{month}）{affiliation}食堂出入库工作簿"
@@ -1302,35 +1304,23 @@ msgstr "FNSCHOOL 主页"
 
 #: fnprofile/forms.py:13 fnprofile/forms.py:14 fnprofile/forms.py:25
 #: fnprofile/forms.py:26
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:13
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:14
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:25
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:26
 msgid "User Name"
 msgstr "用户名"
 
 #: fnprofile/forms.py:17 fnprofile/forms.py:18 fnprofile/forms.py:29
 #: fnprofile/forms.py:30
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:17
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:18
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:29
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:30
 msgid "Password"
 msgstr "密码"
 
 #: fnprofile/forms.py:33 fnprofile/forms.py:35
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:33
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/forms.py:35
 msgid "Confirm Password"
 msgstr "确认密码"
 
 #: fnprofile/models.py:18
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:18
 msgid "Male"
 msgstr "男"
 
 #: fnprofile/models.py:19
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:19
 msgid "Female"
 msgstr "女"
 
@@ -1343,42 +1333,34 @@ msgid "Specific permissions for this user."
 msgstr "给这个用户指定权限。"
 
 #: fnprofile/models.py:41
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:25
 msgid "Phone Number"
 msgstr "电话号码"
 
 #: fnprofile/models.py:44
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:28
 msgid "Affiliation"
 msgstr "机构"
 
 #: fnprofile/models.py:51
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:35
 msgid "Superior department"
 msgstr "上级机构"
 
 #: fnprofile/models.py:55
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:39
 msgid "Date of Birth"
 msgstr "生日"
 
 #: fnprofile/models.py:61
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:45
 msgid "Gender"
 msgstr "性别"
 
 #: fnprofile/models.py:65
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:49
 msgid "Address"
 msgstr "地址"
 
 #: fnprofile/models.py:68
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:52
 msgid "Avatar"
 msgstr "头像"
 
 #: fnprofile/models.py:71
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:55
 msgid "Biography"
 msgstr "个人简介"
 
@@ -1392,32 +1374,26 @@ msgid "{0}'s Information"
 msgstr "{0} 的信息"
 
 #: fnprofile/templates/fnprofile/create.html:4
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:4
 msgid "Create"
 msgstr "新建"
 
 #: fnprofile/templates/fnprofile/create.html:7
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:7
 msgid "Create new account."
 msgstr "创建一个账户。"
 
 #: fnprofile/templates/fnprofile/create.html:11
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:11
 msgid "Confirm"
 msgstr "确认"
 
 #: fnprofile/templates/fnprofile/create.html:15
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:15
 msgid "Already have an account?"
 msgstr "已经有张号了？"
 
 #: fnprofile/templates/fnprofile/create.html:16
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/create.html:16
 msgid "Login here"
 msgstr "现在登录"
 
 #: fnprofile/templates/fnprofile/detail.html:4
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/detail.html:4
 #, python-format
 msgid ""
 " Hello, %(user_name)s!\n"
@@ -1425,56 +1401,44 @@ msgid ""
 msgstr "你好，%(user_name)s！"
 
 #: fnprofile/templates/fnprofile/edit.html:4
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:4
 msgid "Update Profile"
 msgstr "更新信息"
 
 #: fnprofile/templates/fnprofile/edit.html:7
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:7
 msgid "Update Profile."
 msgstr "更新信息。"
 
 #: fnprofile/templates/fnprofile/edit.html:13
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/edit.html:13
 msgid "Update"
 msgstr "更新"
 
 #: fnprofile/templates/fnprofile/log_in.html:4
 #: fnprofile/templates/fnprofile/log_in.html:7
 #: fnprofile/templates/fnprofile/log_in.html:15
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:4
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:7
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:15
 msgid "Log in"
 msgstr "登录"
 
 #: fnprofile/templates/fnprofile/log_in.html:9
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:9
 msgid "Your username and password didn't match. Please try again."
 msgstr "你的用户名和密码不匹配，请重试。"
 
 #: fnprofile/templates/fnprofile/log_in.html:19
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:19
 msgid "Don't have an account?"
 msgstr "没有张号？"
 
 #: fnprofile/templates/fnprofile/log_in.html:20
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_in.html:20
 msgid "Register here"
 msgstr "现在注册"
 
 #: fnprofile/templates/fnprofile/log_out.html:7
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:7
 msgid "Logged Out"
 msgstr "已退出"
 
 #: fnprofile/templates/fnprofile/log_out.html:8
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:8
 msgid "You have been successfully logged out."
 msgstr "你的账号已退出登录。"
 
 #: fnprofile/templates/fnprofile/log_out.html:10
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/templates/profiles/log_out.html:10
 msgid "Log in again"
 msgstr "再次登录"
 
@@ -1483,41 +1447,20 @@ msgid "Your information has been updated successfully!"
 msgstr "您的信息已更新！"
 
 #: fnschool/settings.py:140
-#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:140
 msgid "English"
 msgstr "英语"
 
 #: fnschool/settings.py:141
-#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:141
 msgid "Spanish"
 msgstr "西班牙语"
 
 #: fnschool/settings.py:142
-#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:142
 msgid "French"
 msgstr "法语"
 
 #: fnschool/settings.py:143
-#: patches/202511012053_copy_profiles_to_fnprofile_data/settings.py:143
 msgid "Simplified Chinese"
 msgstr "简体中文"
-
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:67
-msgid "User Profile"
-msgstr "用户信息"
-
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:68
-msgid "User Profiles"
-msgstr "用户信息"
-
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/models.py:71
-#, python-brace-format
-msgid "{0}'s Profile"
-msgstr "{0} 的信息"
-
-#: patches/202511012053_copy_profiles_to_fnprofile_data/profiles/views.py:63
-msgid "Profile has been updated successfully!"
-msgstr "个人信息已更新！"
 
 #: templates/base/_js.html:11
 msgid "None"
@@ -1581,9 +1524,22 @@ msgstr "登录"
 msgid "Sign Up"
 msgstr "注册"
 
-#: templates/includes/_header.html:99
+#: templates/includes/_header.html:102
 msgid "Hide messages."
 msgstr "隐藏信息。"
+
+#~ msgid "User Profile"
+#~ msgstr "用户信息"
+
+#~ msgid "User Profiles"
+#~ msgstr "用户信息"
+
+#, python-brace-format
+#~ msgid "{0}'s Profile"
+#~ msgstr "{0} 的信息"
+
+#~ msgid "Profile has been updated successfully!"
+#~ msgstr "个人信息已更新！"
 
 #~ msgid "Consume by Week"
 #~ msgstr "周消耗"
