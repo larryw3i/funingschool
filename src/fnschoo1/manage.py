@@ -26,15 +26,7 @@ sys_executable = sys.executable
 
 
 def run_patches():
-    if "202511012053_copy_profiles_to_fnprofile" in sys.argv:
-        patche_path = (
-            FNSCHOOL_PATH
-            / "patches"
-            / "202511012053_copy_profiles_to_fnprofile.py"
-        )
-        patche_path = patche_path.as_posix()
-        os.system(f"{sys_executable} {patche_path} run")
-        sys.exit()
+    pass
 
 
 def main():
