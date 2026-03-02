@@ -159,7 +159,7 @@ format_code() {
     run_prettier
 }
 
-xgettext_pyhelper() {
+pyhelper_xgettext() {
     pot_file=${pyhelper_locale_dir}/${pyhelper_name}.pot
     find ${pyhelper_dir} -name "*.py" -print | xgettext --language=Python -o ${pot_file} -f -
     if [[ ! -f ${pot_file} ]]; then
@@ -186,7 +186,7 @@ xgettext_pyhelper() {
     done
 }
 
-msgfmt_pyhelper() {
+pyhelper_msgfmt() {
     for d in $(ls ${pyhelper_locale_dir}); do
         lang=${d}
         d=${pyhelper_locale_dir}/${d}

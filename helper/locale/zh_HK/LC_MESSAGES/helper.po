@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-29 17:53+0800\n"
+"POT-Creation-Date: 2026-03-03 00:43+0800\n"
 "PO-Revision-Date: 2025-12-28 23:49+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: Chinese (Hong Kong) <(nothing)>\n"
@@ -15,18 +15,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:17
-msgid "python -m helper"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:18
-msgid "Helper for funingschool project."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:21
-msgid "commands."
-msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/run.py:10
 msgid "Commands for documents."
@@ -38,81 +26,6 @@ msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/run.py:17
 msgid "The specified local language for generating document."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:26
-msgid "# Changelog"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:28
-#, python-brace-format
-msgid "## [{0}] - {1}-{2:0>2}-{3:0>2}"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:32
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:49
-msgid "### Added"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:34
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:55
-msgid "### Changed"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:36
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:57
-msgid "### Deprecated"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:38
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:62
-msgid "### Fixed"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:40
-msgid ""
-"- Ingredient Consumption: Fixed the error in displaying the ingredient "
-"progress bar on the ingredient consumption page."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:43
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:64
-msgid "### Removed"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:45
-#, python-brace-format
-msgid "## [{0}] - {1}-{2}-{3}"
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:50
-msgid "- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:52
-msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:59
-msgid ""
-"- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
-"deprecated after February 2026."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:72
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:81
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:175
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:184
-#, python-brace-format
-msgid "\"{0}\" has been created."
-msgstr ""
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:76
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:84
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:179
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
-#, python-brace-format
-msgid "\"{0}\" has been updated."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:28
@@ -154,7 +67,7 @@ msgstr ""
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:71
 msgid ""
 "![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/"
-"Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)"
+"Documentation/images/99ec9b89-1656-11f1-9cc1-dc364391135b.png)"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:74
@@ -286,4 +199,91 @@ msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:166
 msgid " GNU LESSER GENERAL PUBLIC LICENSE Version 3"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:175
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:184
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:72
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:81
+#, python-brace-format
+msgid "\"{0}\" has been created."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:179
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:76
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:84
+#, python-brace-format
+msgid "\"{0}\" has been updated."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:26
+msgid "# Changelog"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:28
+#, python-brace-format
+msgid "## [{0}] - {1}-{2:0>2}-{3:0>2}"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:32
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:49
+msgid "### Added"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:34
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:55
+msgid "### Changed"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:36
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:57
+msgid "### Deprecated"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:38
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:62
+msgid "### Fixed"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:40
+msgid ""
+"- Ingredient Consumption: Fixed the error in displaying the ingredient "
+"progress bar on the ingredient consumption page."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:43
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:64
+msgid "### Removed"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:45
+#, python-brace-format
+msgid "## [{0}] - {1}-{2}-{3}"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:50
+msgid "- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:52
+msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:59
+msgid ""
+"- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
+"deprecated after February 2026."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:17
+msgid "python -m helper"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:18
+msgid "Helper for funingschool project."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:21
+msgid "commands."
 msgstr ""

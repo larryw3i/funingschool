@@ -68,7 +68,7 @@ def write(lang, _t):
         "</p>",
         "",
         _(
-            "![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/44e58998-da32-11f0-b726-700894a38a35.png)"
+            "![Screenshot](https://raw.githubusercontent.com/larryw3i/funingschool/master/Documentation/images/99ec9b89-1656-11f1-9cc1-dc364391135b.png)"
         ),
         '<h2 id="key-features">',
         _("    Key Features"),
