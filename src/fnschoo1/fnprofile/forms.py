@@ -3,10 +3,12 @@ from datetime import date
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms import ModelForm
+from fnschool import *
 
 from .models import Fnuser
 
-from django.utils.translation import gettext_lazy  as _
+_ = gettext_lazy
+
 
 class FnuserLoginForm(AuthenticationForm):
     username = forms.CharField(
@@ -69,5 +71,7 @@ class FnuserForm(ModelForm):
         if cleaned_data.get("password") != cleaned_data.get("password_confirm"):
             raise forms.ValidationError("Passwords do not match")
 
+
+_ = gettext
 
 # The end.
