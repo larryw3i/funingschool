@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-08 14:27+0800\n"
+"POT-Creation-Date: 2026-04-09 01:08+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -48,26 +48,26 @@ msgstr ""
 msgid "Ingredient meal type"
 msgstr ""
 
-#: canteen/models.py:23
+#: canteen/models.py:24
 msgid "Meal type name"
 msgstr ""
 
-#: canteen/models.py:25 canteen/templates/canteen/category/list.html:18
+#: canteen/models.py:27 canteen/templates/canteen/category/list.html:18
 #: canteen/templates/canteen/meal_type/delete.html:20
 #: canteen/templates/canteen/meal_type/list.html:18
 msgid "Abbreviation"
 msgstr ""
 
-#: canteen/models.py:31 canteen/models.py:59
+#: canteen/models.py:33 canteen/models.py:61
 msgid "Creating Date"
 msgstr ""
 
-#: canteen/models.py:34 canteen/models.py:62 canteen/models.py:106
+#: canteen/models.py:36 canteen/models.py:64 canteen/models.py:108
 #: fnprofile/models.py:79
 msgid "Time of updating"
 msgstr ""
 
-#: canteen/models.py:38 canteen/models.py:66 canteen/models.py:225
+#: canteen/models.py:40 canteen/models.py:68 canteen/models.py:227
 #: canteen/templates/canteen/category/delete.html:37
 #: canteen/templates/canteen/category/list.html:22
 #: canteen/templates/canteen/meal_type/delete.html:29
@@ -75,98 +75,98 @@ msgstr ""
 msgid "Is Disabled"
 msgstr ""
 
-#: canteen/models.py:50
+#: canteen/models.py:52
 msgid "Ingredient category"
 msgstr ""
 
-#: canteen/models.py:53
+#: canteen/models.py:55
 msgid "Category name"
 msgstr ""
 
-#: canteen/models.py:56
+#: canteen/models.py:58
 msgid "abbreviation"
 msgstr ""
 
-#: canteen/models.py:74
+#: canteen/models.py:76
 msgid "Category Priority"
 msgstr ""
 
-#: canteen/models.py:78
+#: canteen/models.py:80
 msgid "Pin to Consumptions Top"
 msgstr ""
 
-#: canteen/models.py:94
+#: canteen/models.py:96
 msgid "User"
 msgstr ""
 
-#: canteen/models.py:96 canteen/templates/canteen/consumption/create.html:15
+#: canteen/models.py:98 canteen/templates/canteen/consumption/create.html:15
 #: canteen/views.py:72
 msgid "Storage Date"
 msgstr ""
 
-#: canteen/models.py:102 fnprofile/models.py:75
+#: canteen/models.py:104 fnprofile/models.py:75
 msgid "Time of creating"
 msgstr ""
 
-#: canteen/models.py:109 canteen/templates/canteen/consumption/create.html:21
+#: canteen/models.py:111 canteen/templates/canteen/consumption/create.html:21
 #: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:82
 msgid "Ingredient Name"
 msgstr ""
 
-#: canteen/models.py:114
+#: canteen/models.py:116
 msgid "Ingredient Meal Type"
 msgstr ""
 
-#: canteen/models.py:120
+#: canteen/models.py:122
 msgid "Ingredient Category"
 msgstr ""
 
-#: canteen/models.py:126
+#: canteen/models.py:128
 msgid "Ingredient Quantity"
 msgstr ""
 
-#: canteen/models.py:132
+#: canteen/models.py:134
 msgid "Unit Name of Ingredient Quantity"
 msgstr ""
 
-#: canteen/models.py:138
+#: canteen/models.py:140
 msgid "Ingredient Total Price"
 msgstr ""
 
-#: canteen/models.py:142
+#: canteen/models.py:144
 msgid "Is Ingredient Ignorable"
 msgstr ""
 
-#: canteen/models.py:145
+#: canteen/models.py:147
 msgid "Is Ingredient Disabled"
 msgstr ""
 
-#: canteen/models.py:205 canteen/templates/canteen/ingredient/list.html:5
+#: canteen/models.py:207 canteen/templates/canteen/ingredient/list.html:5
 #: canteen/templates/canteen/ingredient/list.html:8
 msgid "Ingredient List"
 msgstr ""
 
-#: canteen/models.py:216
+#: canteen/models.py:218
 msgid "Ingredient"
 msgstr ""
 
-#: canteen/models.py:219
+#: canteen/models.py:221
 msgid "Date"
 msgstr ""
 
-#: canteen/models.py:221
+#: canteen/models.py:223
 msgid "Consuming Quantity"
 msgstr ""
 
-#: canteen/models.py:230
+#: canteen/models.py:232
 msgid "Consumption Record"
 msgstr ""
 
-#: canteen/models.py:231
+#: canteen/models.py:233
 msgid "Consumption Records"
 msgstr ""
 
-#: canteen/models.py:241
+#: canteen/models.py:243
 #, python-brace-format
 msgid "{0} of {1} was consumed on {2} ."
 msgstr ""
@@ -353,15 +353,23 @@ msgstr ""
 msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:106
+#: canteen/templates/canteen/consumption/create.html:107
 #, python-format
 msgid ""
 "\n"
-"                  (%(meal_type)s, %(category)s)\n"
-"                  "
+"                    (%(meal_type)s, %(category)s)\n"
+"                    "
 msgstr ""
 
 #: canteen/templates/canteen/consumption/create.html:111
+#, python-format
+msgid ""
+"\n"
+"                      (%(category)s)\n"
+"                    "
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:117
 #, python-format
 msgid ""
 "\n"
@@ -369,15 +377,15 @@ msgid ""
 "                "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:119
+#: canteen/templates/canteen/consumption/create.html:125
 msgid "No ingredient found."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:128
+#: canteen/templates/canteen/consumption/create.html:134
 msgid "Generate Spreadsheet"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:134
+#: canteen/templates/canteen/consumption/create.html:140
 msgid "Ingredient Sheets are also included."
 msgstr ""
 
@@ -654,37 +662,42 @@ msgid ""
 "and cannot be saved. Please modify it again."
 msgstr ""
 
-#: canteen/views.py:616
+#: canteen/views.py:632
 #, python-brace-format
-msgid "{meal_type}:{sum_total_price}"
+msgid "{meal_type}:{meal_type_total_price}"
 msgstr ""
 
-#: canteen/views.py:640
+#: canteen/views.py:641
+#, python-brace-format
+msgid "{year}.{month}"
+msgstr ""
+
+#: canteen/views.py:669
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:744 canteen/views.py:1023
+#: canteen/views.py:780 canteen/views.py:1059
 msgid "(2)"
 msgstr ""
 
-#: canteen/views.py:753 canteen/views.py:1031
+#: canteen/views.py:789 canteen/views.py:1067
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:794
+#: canteen/views.py:830
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:814
+#: canteen/views.py:850
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:830
+#: canteen/views.py:866
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:853
+#: canteen/views.py:889
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
 msgstr ""

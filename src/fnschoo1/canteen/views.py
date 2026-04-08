@@ -29,7 +29,7 @@ from django.db.models import (
     Sum,
     Value,
 )
-from django.db.models.functions import Coalesce
+from django.db.models.functions import Coalesce, TruncMonth
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
@@ -605,18 +605,47 @@ def list_ingredients(request):
     )
     total_price_title = ""
     total_price = Decimal("0.0")
-    for meal_type in meal_types:
-        sum_total_price = sum(
-            ingredients.filter(Q(meal_type=meal_type)).values_list(
-                "total_price", flat=True
+    storage_months = (
+        Ingredient.objects.annotate(month=TruncMonth("storage_date"))
+        .values_list("month", flat=True)
+        .distinct()
+    )
+
+    storage_months = sorted(storage_months, reverse=True)
+
+    for month in storage_months:
+        month_total_price = Decimal("0.0")
+        month_total_price_title = ""
+
+        for meal_type in meal_types:
+            meal_type_total_price = sum(
+                ingredients.filter(
+                    Q(meal_type=meal_type)
+                    & Q(storage_date__year=month.year)
+                    & Q(storage_date__month=month.month)
+                ).values_list("total_price", flat=True)
             )
-        )
-        sum_total_price = Decimal(sum_total_price)
-        total_price += sum_total_price
-        total_price_title += "\n" + _("{meal_type}:{sum_total_price}").format(
-            meal_type=meal_type.name,
-            sum_total_price=sum_total_price.normalize(),
-        )
+            meal_type_total_price = Decimal(meal_type_total_price)
+            month_total_price += meal_type_total_price
+            total_price += meal_type_total_price
+            month_total_price_title += "+" + _(
+                "{meal_type}:{meal_type_total_price}"
+            ).format(
+                meal_type=meal_type.name,
+                meal_type_total_price=meal_type_total_price.normalize(),
+            )
+            pass
+
+        total_price_title += (
+            "\n"
+            + _("{year}.{month}").format(
+                year=month.year, month=f"{month.month:0>2}"
+            )
+            + f":{month_total_price.normalize()}="
+        ) + month_total_price_title[1:]
+        month_total_price_title = None
+        month_total_price=None
+
     total_price_title = str(total_price.normalize()) + total_price_title
 
     context = {

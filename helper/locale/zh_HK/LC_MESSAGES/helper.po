@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-08 20:56+0800\n"
+"POT-Creation-Date: 2026-04-09 01:15+0800\n"
 "PO-Revision-Date: 2025-12-28 23:49+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: Chinese (Hong Kong) <(nothing)>\n"
@@ -16,21 +16,21 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:16
+#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:17
 msgid "Commands for project."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:22
+#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:23
 msgid "Print Python3 dependencies."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:28
+#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:29
 msgid "Install dependencies for this project."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:59
+#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:58
 #, python-brace-format
-msgid "Project Python3 dependencies: {0}"
+msgid "Python3 dependencies of this project: {0}"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:17
@@ -41,7 +41,7 @@ msgstr ""
 msgid "Helper for funingschool project."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:21
+#: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:22
 msgid "commands."
 msgstr ""
 
@@ -220,16 +220,16 @@ msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:175
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:184
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:75
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:84
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:78
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:87
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:179
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:79
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:87
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:82
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:90
 #, python-brace-format
 msgid "\"{0}\" has been updated."
 msgstr ""
@@ -256,56 +256,60 @@ msgid "## [{0}] - {1}-{2:0>2}-{3:0>2}"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:32
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:52
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:55
 msgid "### Added"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:34
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:58
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:61
 msgid "### Changed"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:36
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:60
+msgid "- `Ingredients List` Page: Make total price summary more intuitive."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:39
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:63
 msgid "### Deprecated"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:38
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:65
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:41
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:68
 msgid "### Fixed"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:40
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:43
 msgid ""
 "- Crate New Ingredients: Update the `new_ingredients` function, prevent "
 "adding too many meal types to the database when they are `empty`."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:43
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:46
 msgid ""
 "- Ingredient Consumption: Fixed the error in displaying the ingredient "
 "progress bar on the ingredient consumption page."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:46
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:67
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:49
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:70
 msgid "### Removed"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:48
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:51
 #, python-brace-format
 msgid "## [{0}] - {1}-{2}-{3}"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:53
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:56
 msgid "- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:55
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:58
 msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:62
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:65
 msgid ""
 "- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
 "deprecated after February 2026."

@@ -7,11 +7,12 @@
 
 # Changelog
 
-## [Unreleased] - 2026-04-08
+## [Unreleased] - 2026-04-09
 
 ### Added
 
 ### Changed
+- `Ingredients List` Page: Make total price summary more intuitive.
 
 ### Deprecated
 

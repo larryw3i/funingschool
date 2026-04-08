@@ -32,6 +32,9 @@ def write(lang, _t):
         _("### Added"),
         "",
         _("### Changed"),
+        _(
+            "- `Ingredients List` Page: Make total price summary more intuitive."
+        ),
         "",
         _("### Deprecated"),
         "",
