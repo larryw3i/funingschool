@@ -32,6 +32,20 @@ def write(lang, _t):
         _("### Added"),
         "",
         _("### Changed"),
+        "",
+        _("### Deprecated"),
+        "",
+        _("### Fixed"),
+        "",
+        _("### Removed"),
+        "",
+        _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
+            "20260409.80155.835", date_now.year, date_now.month, date_now.day
+        ),
+        "",
+        _("### Added"),
+        "",
+        _("### Changed"),
         _(
             "- `Ingredients List` Page: Make total price summary more intuitive."
         ),

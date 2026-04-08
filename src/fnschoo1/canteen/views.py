@@ -644,7 +644,7 @@ def list_ingredients(request):
             + f":{month_total_price.normalize()}="
         ) + month_total_price_title[1:]
         month_total_price_title = None
-        month_total_price=None
+        month_total_price = None
 
     total_price_title = str(total_price.normalize()) + total_price_title
 
