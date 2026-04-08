@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-09 02:00+0800\n"
+"POT-Creation-Date: 2026-04-09 07:46+0800\n"
 "PO-Revision-Date: 2025-12-28 23:46+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: English\n"
@@ -185,51 +185,57 @@ msgstr ""
 msgid "# Start fnschoo1."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:136
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:135
+msgid ""
+"> It seems that the loong64 machine cannot install PyPI packages normally "
+"after setting \"pip global.index-url\" to the mirror site link address."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:137
 msgid "Credits"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:140
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:141
 msgid " This software uses the following open source packages:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:151
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:152
 msgid " Support"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:154
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:155
 msgid " Buy me a `coffee`:"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:158
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:159
 msgid ""
 "![Buy me a \"coffee\".](https://raw.githubusercontent.com/larryw3i/"
 "funingschool/master/Documentation/images/9237879a-"
 "f8d5-11ee-8411-23057db0a773.jpeg)"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:161
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:162
 msgid " License"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:164
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:165
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:166
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:167
 msgid " GNU LESSER GENERAL PUBLIC LICENSE Version 3"
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:175
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:184
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:176
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:185
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:92
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:101
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:179
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:180
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:188
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:96
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:104
 #, python-brace-format

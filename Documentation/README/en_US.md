@@ -102,6 +102,7 @@ python -m fnschoo1.manage migrate
 # Start fnschoo1.
 python -m fnschoo1.manage
 ```
+> It seems that the loong64 machine cannot install PyPI packages normally after setting "pip global.index-url" to the mirror site link address.
 <h2 id="credits">
 Credits
 </h2>

@@ -202,6 +202,11 @@ msgfmt_pyhelper() {
     done
 }
 
+gen_doc() {
+  msgfmt_pyhelper
+  python -m helper docs -g
+}
+
 if [[ $# -eq 0 ]]; then
     echo "I'm helper of Project FUNINGSCHOOL."
 else
