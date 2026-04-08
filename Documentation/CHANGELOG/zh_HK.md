@@ -7,7 +7,7 @@
 
 # Changelog
 
-## [Unreleased] - 2026-01-29
+## [Unreleased] - 2026-04-08
 
 ### Added
 
@@ -16,6 +16,7 @@
 ### Deprecated
 
 ### Fixed
+- Crate New Ingredients: Update the `new_ingredients` function, prevent adding too many meal types to the database when they are `empty`.
 - Ingredient Consumption: Fixed the error in displaying the ingredient progress bar on the ingredient consumption page.
 
 ### Removed

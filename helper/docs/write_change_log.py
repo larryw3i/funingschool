@@ -37,6 +37,9 @@ def write(lang, _t):
         "",
         _("### Fixed"),
         _(
+            "- Crate New Ingredients: Update the `new_ingredients` function, prevent adding too many meal types to the database when they are `empty`."
+        ),
+        _(
             "- Ingredient Consumption: Fixed the error in displaying the ingredient progress bar on the ingredient consumption page."
         ),
         "",

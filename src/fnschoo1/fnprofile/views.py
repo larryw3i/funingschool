@@ -56,9 +56,9 @@ def fnprofile_log_out(request):
 
 @login_required
 def fnprofile_edit(request):
+    form = None
     if request.method == "POST":
         form = FnuserForm(request.POST, request.FILES, instance=request.user)
-        print(request.FILES)
         if form.is_valid():
             form.save()
             messages.success(

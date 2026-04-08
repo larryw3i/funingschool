@@ -694,14 +694,21 @@ def create_ingredients(request):
                             )
 
                         category = category_0
+                
+                meal_type = None
+                if meal_type_name:
+                    meal_type = MealType.objects.filter(
+                        Q(name=meal_type_name) & Q(user=request.user)
+                    ).first()
+                else:
+                    meal_type = MealType.objects.filter(
+                        Q(name="") & Q(user=request.user)
+                    ).first()
 
-                meal_type = MealType.objects.filter(
-                    Q(name=meal_type_name or "") & Q(user=request.user)
-                ).first()
                 if not meal_type:
                     meal_type = MealType.objects.create(
                         user=request.user,
-                        name="",
+                        name=meal_type_name if meal_type_name else "",
                     )
 
                 storage_date = row[storage_date_header[0]]
