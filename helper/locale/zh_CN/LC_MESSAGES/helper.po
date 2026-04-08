@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-09 01:15+0800\n"
+"POT-Creation-Date: 2026-04-09 02:00+0800\n"
 "PO-Revision-Date: 2026-04-09 01:17+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -245,16 +245,16 @@ msgstr "GNU 宽通用公共许可证 第3版"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:175
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:184
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:78
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:87
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:92
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:101
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr "“{0}” 已被创建。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:179
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:82
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:90
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:96
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:104
 #, python-brace-format
 msgid "\"{0}\" has been updated."
 msgstr "“{0}” 已被更新。"
@@ -276,35 +276,46 @@ msgid "# Changelog"
 msgstr "# 更新日志"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:28
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:42
 #, python-brace-format
 msgid "## [{0}] - {1}-{2:0>2}-{3:0>2}"
 msgstr "## [版本 {0}] - {1}年{2:0>2}月{3:0>2}日"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:32
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:55
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:46
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:69
 msgid "### Added"
 msgstr "### 新增"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:34
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:61
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:48
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:75
 msgid "### Changed"
 msgstr "### 更改"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:36
-msgid "- `Ingredients List` Page: Make total price summary more intuitive."
-msgstr "- `食材列表`页面：让总价的汇总信息更直观。"
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:39
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:63
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:53
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:77
 msgid "### Deprecated"
 msgstr "### 弃用"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:41
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:68
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:38
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:55
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:82
 msgid "### Fixed"
 msgstr "### 修复"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:43
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:40
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:63
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:84
+msgid "### Removed"
+msgstr "### 移除"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:50
+msgid "- `Ingredients List` Page: Make total price summary more intuitive."
+msgstr "- `食材列表`页面：让总价的汇总信息更直观。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:57
 msgid ""
 "- Crate New Ingredients: Update the `new_ingredients` function, prevent "
 "adding too many meal types to the database when they are `empty`."
@@ -312,31 +323,26 @@ msgstr ""
 "- 新增食材：更新“new_ingredients”函数，防止在餐类为空的情况下向数据库中写入多"
 "个餐类实例。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:46
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:60
 msgid ""
 "- Ingredient Consumption: Fixed the error in displaying the ingredient "
 "progress bar on the ingredient consumption page."
 msgstr "- 食材消耗：修复了 `食材消耗` 页面的食材进度条的显示问题。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:49
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:70
-msgid "### Removed"
-msgstr "### 移除"
-
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:51
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:65
 #, python-brace-format
 msgid "## [{0}] - {1}-{2}-{3}"
 msgstr "## [版本 {0}] - {1}年{2}月{3}日"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:56
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:70
 msgid "- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
 msgstr "- 添加 **CHANGELOG.md**： 为 `CHANGELOG.md` 添加多语言特性。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:58
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:72
 msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
 msgstr "- 删除食材： 添加`批量删除`食材的功能。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:65
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:79
 msgid ""
 "- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
 "deprecated after February 2026."
