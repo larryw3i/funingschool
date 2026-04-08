@@ -103,9 +103,15 @@
               {% if ingredient.meal_type != "" %}
                 <span style="font-size: 80%;">
                   <br />
-                  {% blocktrans with meal_type=ingredient.meal_type.name category=ingredient.category.name %}
-                  ({{ meal_type }}, {{ category }})
-                  {% endblocktrans %}
+                  {% if ingredient.meal_type.name %}
+                    {% blocktrans with meal_type=ingredient.meal_type.name category=ingredient.category.name %}
+                    ({{ meal_type }}, {{ category }})
+                    {% endblocktrans %}
+                  {% else %}
+                    {% blocktrans with category=ingredient.category.name %}
+                      ({{ category }})
+                    {% endblocktrans %}
+                  {% endif %}
                 </span>
               {% else %}
                 {% blocktrans with category=ingredient.category.name%}

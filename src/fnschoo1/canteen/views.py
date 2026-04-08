@@ -694,7 +694,7 @@ def create_ingredients(request):
                             )
 
                         category = category_0
-                
+
                 meal_type = None
                 if meal_type_name:
                     meal_type = MealType.objects.filter(

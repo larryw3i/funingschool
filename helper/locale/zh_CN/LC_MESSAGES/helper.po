@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-08 16:05+0800\n"
-"PO-Revision-Date: 2026-04-08 16:08+0800\n"
+"POT-Creation-Date: 2026-04-08 20:56+0800\n"
+"PO-Revision-Date: 2026-04-08 22:41+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -16,6 +16,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Gtranslator 49.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:16
+msgid "Commands for project."
+msgstr "项目相关命令。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:22
+msgid "Print Python3 dependencies."
+msgstr "打印 Python3 依赖。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:28
+msgid "Install dependencies for this project."
+msgstr "安装该项目的依赖。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:59
+#, python-brace-format
+msgid "Project Python3 dependencies: {0}"
+msgstr "该项目的 Python3 依赖：{0}"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/assistant.py:17
 msgid "python -m helper"
@@ -171,12 +188,14 @@ msgstr ". ~/pyvenv/bin/activate; # 后续使用。"
 msgid "# Install or update \"fnschool\"."
 msgstr ""
 "# 由于网络堵塞，安装 `fnschool` 时会出现访问不到 PyPI 源或网速慢的情形。由"
-"此，建议您设置访问源为镜像源，这样做便于您安装和更新：\n"
-"pip config set global.extra-index-url \"https://mirrors.pku.edu.cn/pypi/web/"
-"simple https://mirror.nju.edu.cn/pypi/web/simple https://mirrors.ustc.edu.cn/"
-"pypi/web/simple https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple https://"
-"mirrors.zju.edu.cn/pypi/web/simple https://mirror.sjtu.edu.cn/pypi/web/"
-"simple\"\n"
+"此，建议您设置访问源为镜像源，这样做便于您安装和更新（任意一个即可）：\n"
+"pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple "
+"# BFSU PyPI 镜像。\n"
+"pip config set global.index-url https://mirrors.pku.edu.cn/pypi/web/simple # "
+"mirrors.pku.edu.cn PyPI 镜像。\n"
+"pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/"
+"web/simple # TUNA PyPI 镜像。\n"
+"## 如需其它 PyPI 镜像请自行参考 https://mirrors.cernet.edu.cn/list/pypi 。\n"
 "# 安装 或 更新 `fnschool` 。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:130

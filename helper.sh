@@ -12,10 +12,12 @@ pyhelper_dir=${project_dir}/${pyhelper_name}
 pyhelper_locale_dir=${pyhelper_dir}/locale
 
 if [[ ! -d ${venv_dir} ]]; then
-    python3 \
+    python \
         -m venv \
-        venv \
-        --system-site-packages
+        --system-site-packages \
+        venv
+    . ${venv_dir}/bin/activate
+    python -m helper project -d -i
 fi
 
 . ${venv_dir}/bin/activate

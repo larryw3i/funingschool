@@ -20,7 +20,9 @@ class MealType(models.Model):
         related_name="meal_types",
         verbose_name=_("Ingredient meal type"),
     )
-    name = models.CharField(max_length=100, verbose_name=_("Meal type name"))
+    name = models.CharField(
+        max_length=100, null=True, blank=True, verbose_name=_("Meal type name")
+    )
     abbreviation = models.CharField(
         null=True, blank=True, max_length=100, verbose_name=_("Abbreviation")
     )
@@ -50,7 +52,7 @@ class Category(models.Model):
         verbose_name=_("Ingredient category"),
     )
     name = models.CharField(
-        max_length=100, blank=True, verbose_name=_("Category name")
+        max_length=100, null=True, blank=True, verbose_name=_("Category name")
     )
     abbreviation = models.CharField(
         null=True, blank=True, max_length=100, verbose_name=_("abbreviation")

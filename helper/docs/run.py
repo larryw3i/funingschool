@@ -2,11 +2,11 @@ import getopt
 import sys
 import argparse
 
-import argparse
 from helper.trans import _
 
 
-def get_subparser(subparsers):
+def get_subparser(assistant):
+    subparsers = assistant.subparsers
     subparser = subparsers.add_parser("docs", help=_("Commands for documents."))
     subparser.add_argument(
         "-g", "--generate", action="store_true", help=_("Generate documents.")
@@ -21,12 +21,10 @@ def get_subparser(subparsers):
 
 def start(assistant):
 
-    subparser = get_subparser(assistant.subparsers)
-    parser = assistant.parser
-    args = parser.parse_args()
+    args = assistant.parser.parse_args()
 
     if not args.command:
-        parser.print_help()
+        assistant.parser.print_help()
         return
 
     if args.command == "docs":
@@ -37,7 +35,7 @@ def start(assistant):
             write(lang)
             pass
         else:
-            subparser.print_help()
+            get_subparser(assistant).print_help()
             pass
 
     pass

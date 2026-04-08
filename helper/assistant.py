@@ -18,7 +18,8 @@ class Assistant:
             description=_("Helper for funingschool project."),
         )
         self.subparsers = self.parser.add_subparsers(
-            dest="command", help=_("commands.")
+            dest="command",
+            help=_("commands."),
         )
         self.helper_dir = helper_dir
         self.project_dir = project_dir
@@ -32,6 +33,14 @@ class Assistant:
                 dirs_cp.append(p)
 
         dirs = dirs_cp
+
+        for p in dirs:
+            module = module = importlib.import_module(f"helper.{p.name}.run")
+            if hasattr(module, "get_subparser"):
+                get_subparser_func = getattr(module, "get_subparser")
+                if callable(get_subparser_func):
+                    get_subparser_func(self)
+
         for p in dirs:
             module = module = importlib.import_module(f"helper.{p.name}.run")
             if hasattr(module, "start"):

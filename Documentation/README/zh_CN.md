@@ -101,8 +101,11 @@ sudo apt-get install python3 python3-pip python-is-python3
 # 在 `Debian` 或 `Ubuntu` 机器上，你可能要使用虚拟环境，其命令：
 python -m venv --system-site-packages ~/pyvenv; # 初次创建。
 . ~/pyvenv/bin/activate; # 后续使用。
-# 由于网络堵塞，安装 `fnschool` 时会出现访问不到 PyPI 源或网速慢的情形。由此，建议您设置访问源为镜像源，这样做便于您安装和更新：
-pip config set global.extra-index-url "https://mirrors.pku.edu.cn/pypi/web/simple https://mirror.nju.edu.cn/pypi/web/simple https://mirrors.ustc.edu.cn/pypi/web/simple https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple https://mirrors.zju.edu.cn/pypi/web/simple https://mirror.sjtu.edu.cn/pypi/web/simple"
+# 由于网络堵塞，安装 `fnschool` 时会出现访问不到 PyPI 源或网速慢的情形。由此，建议您设置访问源为镜像源，这样做便于您安装和更新（任意一个即可）：
+pip config set global.index-url https://mirrors.bfsu.edu.cn/pypi/web/simple # BFSU PyPI 镜像。
+pip config set global.index-url https://mirrors.pku.edu.cn/pypi/web/simple # mirrors.pku.edu.cn PyPI 镜像。
+pip config set global.index-url https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple # TUNA PyPI 镜像。
+## 如需其它 PyPI 镜像请自行参考 https://mirrors.cernet.edu.cn/list/pypi 。
 # 安装 或 更新 `fnschool` 。
 pip install -U fnschool
 # 更新数据库。
