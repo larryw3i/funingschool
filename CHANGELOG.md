@@ -7,9 +7,10 @@
 
 # Changelog
 
-## [Unreleased] - 2026-04-09
+## [Unreleased] - 2026-04-10
 
 ### Added
+- `Ingredient consumptions` Page: Make the input boxes in the table automatically scroll to the visible area when they are obscured by the header and the columns fixed on the left.
 
 ### Changed
 
@@ -19,7 +20,7 @@
 
 ### Removed
 
-## [20260409.80155.835] - 2026-04-09
+## [20260409.80155.835] - 2026-04-10
 
 ### Added
 

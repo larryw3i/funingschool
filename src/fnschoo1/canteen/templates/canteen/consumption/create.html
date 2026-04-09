@@ -61,8 +61,10 @@
               onclick="list_consumptions();">{% trans "Refresh" %}</button>
     </div>
   </div>
-  <div class="table-responsive table-container">
-    <table class="table table-consumptions cotable-bordered table-striped table-hover table-condensed scroll-vertical ">
+  <div class="table-responsive table-container"
+       id="consumptions_table_container">
+    <table class="table table-consumptions cotable-bordered table-striped table-hover table-condensed scroll-vertical "
+           id="consumptions_table">
       <thead>
         <tr>
           {% if ingredients %}
@@ -460,13 +462,13 @@
       element.closest("tr").find('.ingredient-progress').css('width', `${parseInt((ingredient_quantity-total_consumed)*100/ingredient_quantity)}%`)
       var date_of_using = element.closest("form").data("date_of_using")
 
-      update_table_header(date_of_using)
+      update_consumptions_table_header(date_of_using)
       if (new_amount_used != amount_used) {
         submit_consumption_form(element, new_amount_used)
       }
     }
 
-    function update_table_header(date_of_using) {
+    function update_consumptions_table_header(date_of_using) {
       var consumption_content_dated = date_of_using
       $(meal_types).each(function(index, meal_type) {
         var total_price_dated = 0.0
@@ -482,13 +484,27 @@
       $(`th[data-date_of_using="${date_of_using}"]`).html(consumption_content_dated)
     }
 
-    function update_table_headers() {
+    function update_consumptions_table_headers() {
 
       $(date_range).each(function(index, date_h) {
-        update_table_header(date_h)
+        update_consumptions_table_header(date_h)
       });
     }
 
+    function set_consumptions_table_scroll_padding() {
+      var consumptions_table = $("#consumptions_table");
+      var consumptions_table_container = $('#consumptions_table_container');
+      var header_height = consumptions_table.find('thead').outerHeight(true) || 0;
+      var header_fixed_cols__width = $('thead th').eq(0).outerWidth(true) || 0;
+      header_fixed_cols__width += ($('thead th').eq(1).outerWidth(true) || 0);
+
+      header_height = Math.ceil(header_height)
+      header_fixed_cols__width = Math.ceil(header_fixed_cols__width)
+
+      consumptions_table_container.css({
+        "scroll-padding": `${header_height}px 0px 0px ${header_fixed_cols__width}px`
+      });
+    }
 
     $(document).ready(function() {
       dont_submit = true
@@ -514,7 +530,8 @@
               footer_progressbar.css('width', `${progress*100/ingredient_ids_length}%`)
               if (progress >= ingredient_ids_length) {
                 footer_progressbar.css('width', "0%")
-                update_table_headers()
+                update_consumptions_table_headers()
+                set_consumptions_table_scroll_padding()
                 dont_submit = false
               }
             }
@@ -526,26 +543,7 @@
 
 
     $(document).ready(function() {
-      $('.table-consumptions').on('keydown', 'input[name="amount_used"]', function(e) {
-        if ([9, 13, 37, 38, 39, 40].includes(e.keyCode)) {
-          e.preventDefault();
-          navigateToNextCell(
-            $(this),
-            e.keyCode === 9 ? "r" :
-            e.keyCode === 13 ? "d" :
-            e.keyCode === 37 ? "l" :
-            e.keyCode === 38 ? "u" :
-            e.keyCode === 39 ? "r" :
-            e.keyCode === 40 ? "d" : ""
-          );
-        }
-        if ((e.keyCode < 91 && e.keyCode > 64) || e.keyCode == 32) {
-          e.preventDefault()
-        }
-
-      });
-
-      function navigateToNextCell($currentInput, direction) {
+      function navigate_to_next_cell($currentInput, direction) {
         var td = $currentInput.closest("form").closest('td');
         var columnIndex = td.index();
 
@@ -561,11 +559,32 @@
         } else if (direction == 'd') {
           rowIndex = rowIndex + 2
         }
-        var cell = $('.table-consumptions').find(`tr:eq(${rowIndex}) td:eq(${columnIndex})`);
+        var cell = $('#consumptions_table').find(`tr:eq(${rowIndex}) td:eq(${columnIndex})`);
         var amount_used_input = cell.find('input[name="amount_used"]')
         amount_used_input.first().focus()
 
       }
+
+      $('#consumptions_table').on('keydown', 'input[name="amount_used"]', function(e) {
+        if ([9, 13, 37, 38, 39, 40].includes(e.keyCode)) {
+          e.preventDefault();
+          direction = e.keyCode === 9 ? "r" :
+            e.keyCode === 13 ? "d" :
+            e.keyCode === 37 ? "l" :
+            e.keyCode === 38 ? "u" :
+            e.keyCode === 39 ? "r" :
+            e.keyCode === 40 ? "d" : ""
+
+          navigate_to_next_cell(
+            $(this),
+            direction
+          );
+        }
+        if ((e.keyCode < 91 && e.keyCode > 64) || e.keyCode == 32) {
+          e.preventDefault()
+        }
+
+      });
     });
 
     function generate_spreadsheet() {
@@ -580,7 +599,7 @@
 
     function set_consumptions_table_size() {
       const generate_spreadsheet_btn = $("#generate_spreadsheet_btn")
-      const consumptions_table = $(".table-consumptions")
+      const consumptions_table = $("#consumptions_table")
       const header = $("header")
       const footer = $("footer")
       const height = Math.round((footer.offset().top - generate_spreadsheet_btn.height() - consumptions_table.offset().top) * 0.95)

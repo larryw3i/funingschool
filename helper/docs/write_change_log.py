@@ -30,6 +30,9 @@ def write(lang, _t):
         ),
         "",
         _("### Added"),
+        _(
+            "- `Ingredient consumptions` Page: Make the input boxes in the table automatically scroll to the visible area when they are obscured by the header and the columns fixed on the left."
+        ),
         "",
         _("### Changed"),
         "",
