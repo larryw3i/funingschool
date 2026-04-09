@@ -203,8 +203,8 @@ msgfmt_pyhelper() {
 }
 
 gen_doc() {
-  msgfmt_pyhelper
-  python -m helper docs -g
+    msgfmt_pyhelper
+    python -m helper docs -g
 }
 
 if [[ $# -eq 0 ]]; then

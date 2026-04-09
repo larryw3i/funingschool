@@ -113,7 +113,7 @@ python -m fnschoo1.manage migrate
 # 启动 `fnschool` 。
 python -m fnschoo1.manage
 ```
-> 似乎 loong64 机器在设置“pip global.index-url”为镜像站链接地址后无法正常安装 PyPI 包。
+> 似乎 loong64 机器在设置“pip global.index-url”为镜像站的链接地址后无法正常安装 PyPI 包。
 <h2 id="credits">
 鸣谢
 </h2>

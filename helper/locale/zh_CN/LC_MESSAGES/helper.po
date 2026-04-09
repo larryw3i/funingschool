@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-09 07:46+0800\n"
-"PO-Revision-Date: 2026-04-09 07:49+0800\n"
+"POT-Creation-Date: 2026-04-09 22:12+0800\n"
+"PO-Revision-Date: 2026-04-09 22:13+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -206,31 +206,31 @@ msgstr "# 更新数据库。"
 msgid "# Start fnschoo1."
 msgstr "# 启动 `fnschool` 。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:135
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:136
 msgid ""
 "> It seems that the loong64 machine cannot install PyPI packages normally "
-"after setting \"pip global.index-url\" to the mirror site link address."
+"after setting \"pip global.index-url\" to the mirror site URL."
 msgstr ""
-"> 似乎 loong64 机器在设置“pip global.index-url”为镜像站链接地址后无法正常安"
+"> 似乎 loong64 机器在设置“pip global.index-url”为镜像站的链接地址后无法正常安"
 "装 PyPI 包。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:137
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:139
 msgid "Credits"
 msgstr "鸣谢"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:141
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:143
 msgid " This software uses the following open source packages:"
 msgstr "此项目使用了以下的开源项目（包）："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:152
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:154
 msgid " Support"
 msgstr "赞助"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:155
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:157
 msgid " Buy me a `coffee`:"
 msgstr "给我买一杯“咖啡”："
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:159
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:161
 msgid ""
 "![Buy me a \"coffee\".](https://raw.githubusercontent.com/larryw3i/"
 "funingschool/master/Documentation/images/9237879a-"
@@ -239,28 +239,28 @@ msgstr ""
 "![给我买一杯“咖啡”。](https://gitee.com/larryw3i/funingschool/raw/master/"
 "Documentation/images/5ec0296a-8a3b-11ef-8e0b-efbca71f7f1a.png)"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:162
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:164
 msgid " License"
 msgstr "授权"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:165
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:167
 msgid "https://github.com/larryw3i/funingschool/blob/master/LICENSE"
 msgstr "https://gitee.com/larryw3i/funingschool/blob/master/LICENSE"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:167
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:169
 msgid " GNU LESSER GENERAL PUBLIC LICENSE Version 3"
 msgstr "GNU 宽通用公共许可证 第3版"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:176
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:185
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:178
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:92
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:101
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr "“{0}” 已被创建。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:180
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:188
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:182
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:190
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:96
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:104
 #, python-brace-format

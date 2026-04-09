@@ -132,7 +132,9 @@ def write(lang, _t):
         _("# Start fnschoo1."),
         "python -m fnschoo1.manage",
         "```",
-        _('> It seems that the loong64 machine cannot install PyPI packages normally after setting "pip global.index-url" to the mirror site link address.'),
+        _(
+            '> It seems that the loong64 machine cannot install PyPI packages normally after setting "pip global.index-url" to the mirror site URL.'
+        ),
         '<h2 id="credits">',
         _("Credits"),
         "</h2>",
