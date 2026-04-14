@@ -26,15 +26,18 @@ def write(lang, _t):
         _("# Changelog"),
         "",
         _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
-            "Unreleased", date_now.year, date_now.month, date_now.day
+            _("Unreleased"), date_now.year, date_now.month, date_now.day
         ),
         "",
         _("### Added"),
         _(
-            "- `Ingredient consumptions` Page: Make the input boxes in the table automatically scroll to the visible area when they are obscured by the header and the columns fixed on the left."
+            "- `Ingredient consumptions` Page: Make the Entry Fields in the table automatically scroll to the visible area when they are obscured by the header and the columns fixed on the left and one of them is inputted."
         ),
         "",
         _("### Changed"),
+        _(
+            "- Start Up: When starting up on a Linux distro, there may be a situation where the browser is already open but unable to access the specified URL. Therefore, it is advisable to delay opening the browser during startup."
+        ),
         "",
         _("### Deprecated"),
         "",

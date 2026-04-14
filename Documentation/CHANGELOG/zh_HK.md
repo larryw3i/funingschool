@@ -7,12 +7,13 @@
 
 # Changelog
 
-## [Unreleased] - 2026-04-10
+## [Unreleased] - 2026-04-14
 
 ### Added
-- `Ingredient consumptions` Page: Make the input boxes in the table automatically scroll to the visible area when they are obscured by the header and the columns fixed on the left.
+- `Ingredient consumptions` Page: Make the Entry Fields in the table automatically scroll to the visible area when they are obscured by the header and the columns fixed on the left and one of them is inputted.
 
 ### Changed
+- Start Up: When starting up on a Linux distro, there may be a situation where the browser is already open but unable to access the specified URL. Therefore, it is advisable to delay opening the browser during startup.
 
 ### Deprecated
 
@@ -20,7 +21,7 @@
 
 ### Removed
 
-## [20260409.80155.835] - 2026-04-10
+## [20260409.80155.835] - 2026-04-14
 
 ### Added
 
