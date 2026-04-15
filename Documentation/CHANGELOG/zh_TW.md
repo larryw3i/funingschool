@@ -7,13 +7,11 @@
 
 # Changelog
 
-## [Unreleased] - 2026-04-14
+## [Unreleased] - 2026-04-15
 
 ### Added
-- `Ingredient consumptions` Page: Make the Entry Fields in the table automatically scroll to the visible area when they are obscured by the header and the columns fixed on the left and one of them is inputted.
 
 ### Changed
-- Start Up: When starting up on a Linux distro, there may be a situation where the browser is already open but unable to access the specified URL. Therefore, it is advisable to delay opening the browser during startup.
 
 ### Deprecated
 
@@ -21,7 +19,22 @@
 
 ### Removed
 
-## [20260409.80155.835] - 2026-04-14
+## [20260415.80820.815] - 2026-04-15
+
+### Added
+- `Ingredient consumptions` Page: Make the Entry Fields in the table automatically scroll to the visible area when they are obscured by the header or the columns fixed on the left and one of them is inputted.
+
+### Changed
+- Start Up: When starting up on a Linux distro, there may be a situation where the browser is already open but unable to access the specified URL. Therefore, it is advisable to delay opening the browser during startup.
+
+### Deprecated
+
+### Fixed
+- Edit Ingredient: Fixed issue the `Edit Ingredient` page be loaded with error if some `Category Name` is `None`.
+
+### Removed
+
+## [20260409.80155.835] - 2026-04-09
 
 ### Added
 

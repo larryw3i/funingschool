@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-14 16:34+0800\n"
-"PO-Revision-Date: 2026-04-14 16:35+0800\n"
+"POT-Creation-Date: 2026-04-15 08:13+0800\n"
+"PO-Revision-Date: 2026-04-15 08:16+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -253,16 +253,16 @@ msgstr "GNU 宽通用公共许可证 第3版"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:178
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:98
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:107
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:99
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:108
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr "“{0}” 已被创建。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:182
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:190
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:102
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:110
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:103
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:111
 #, python-brace-format
 msgid "\"{0}\" has been updated."
 msgstr "“{0}” 已被更新。"
@@ -284,7 +284,7 @@ msgid "# Changelog"
 msgstr "# 更新日志"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:28
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:48
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:49
 #, python-brace-format
 msgid "## [{0}] - {1}-{2:0>2}-{3:0>2}"
 msgstr "## [版本 {0}] - {1}年{2:0>2}月{3:0>2}日"
@@ -294,8 +294,8 @@ msgid "Unreleased"
 msgstr "未发布"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:32
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:52
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:75
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:53
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:76
 msgid "### Added"
 msgstr "### 新增"
 
@@ -303,14 +303,14 @@ msgstr "### 新增"
 msgid ""
 "- `Ingredient consumptions` Page: Make the Entry Fields in the table "
 "automatically scroll to the visible area when they are obscured by the "
-"header and the columns fixed on the left and one of them is inputted."
+"header or the columns fixed on the left and one of them is inputted."
 msgstr ""
-"- `食材消耗`页面：输入时，让表格中的输入框在被表头和固定在左边的列遮住时自动"
+"- `食材消耗`页面：输入时，让表格中的输入框在被表头或固定在左边的列遮住时自动"
 "滚动到可视区域。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:37
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:54
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:81
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:55
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:82
 msgid "### Changed"
 msgstr "### 更改"
 
@@ -324,28 +324,35 @@ msgstr ""
 "URL`的情况，因此启动的时候适当延迟打开浏览器。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:42
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:59
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:83
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:60
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:84
 msgid "### Deprecated"
 msgstr "### 弃用"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:44
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:61
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:88
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:62
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:89
 msgid "### Fixed"
 msgstr "### 修复"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:46
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:69
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:90
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:45
+msgid ""
+"- Edit Ingredient: Fixed issue the `Edit Ingredient` page be loaded with "
+"error if some `Category Name` is `None`."
+msgstr ""
+"- 编辑食材：修复了有 大类的 大类名 为`空`时`编辑食材`页面无法被加载的问题。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:47
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:70
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:91
 msgid "### Removed"
 msgstr "### 移除"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:56
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:57
 msgid "- `Ingredients List` Page: Make total price summary more intuitive."
 msgstr "- `食材列表`页面：让总价的汇总信息更直观。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:63
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:64
 msgid ""
 "- Crate New Ingredients: Update the `new_ingredients` function, prevent "
 "adding too many meal types to the database when they are `empty`."
@@ -353,26 +360,26 @@ msgstr ""
 "- 新增食材：更新“new_ingredients”函数，防止在餐类为空的情况下向数据库中写入多"
 "个餐类实例。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:66
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:67
 msgid ""
 "- Ingredient Consumption: Fixed the error in displaying the ingredient "
 "progress bar on the ingredient consumption page."
 msgstr "- 食材消耗：修复了 `食材消耗` 页面的食材进度条的显示问题。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:71
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:72
 #, python-brace-format
 msgid "## [{0}] - {1}-{2}-{3}"
 msgstr "## [版本 {0}] - {1}年{2}月{3}日"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:76
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:77
 msgid "- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
 msgstr "- 添加 **CHANGELOG.md**： 为 `CHANGELOG.md` 添加多语言特性。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:78
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:79
 msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
 msgstr "- 删除食材： 添加`批量删除`食材的功能。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:85
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:86
 msgid ""
 "- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
 "deprecated after February 2026."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-09 01:08+0800\n"
+"POT-Creation-Date: 2026-04-15 08:18+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -75,6 +75,10 @@ msgstr ""
 msgid "Is Disabled"
 msgstr ""
 
+#: canteen/models.py:44 canteen/models.py:87 canteen/models.py:210
+msgid "(None)"
+msgstr ""
+
 #: canteen/models.py:52
 msgid "Ingredient category"
 msgstr ""
@@ -109,7 +113,7 @@ msgid "Time of creating"
 msgstr ""
 
 #: canteen/models.py:111 canteen/templates/canteen/consumption/create.html:21
-#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:82
+#: canteen/templates/canteen/consumption/create.html:71 canteen/views.py:82
 msgid "Ingredient Name"
 msgstr ""
 
@@ -344,16 +348,16 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:70
+#: canteen/templates/canteen/consumption/create.html:72
 msgid "Remaining Quantity"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:99
+#: canteen/templates/canteen/consumption/create.html:101
 #, python-format
 msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:107
+#: canteen/templates/canteen/consumption/create.html:109
 #, python-format
 msgid ""
 "\n"
@@ -361,7 +365,7 @@ msgid ""
 "                    "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:111
+#: canteen/templates/canteen/consumption/create.html:113
 #, python-format
 msgid ""
 "\n"
@@ -369,7 +373,7 @@ msgid ""
 "                    "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:117
+#: canteen/templates/canteen/consumption/create.html:119
 #, python-format
 msgid ""
 "\n"
@@ -377,15 +381,15 @@ msgid ""
 "                "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:125
+#: canteen/templates/canteen/consumption/create.html:127
 msgid "No ingredient found."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:134
+#: canteen/templates/canteen/consumption/create.html:136
 msgid "Generate Spreadsheet"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:140
+#: canteen/templates/canteen/consumption/create.html:142
 msgid "Ingredient Sheets are also included."
 msgstr ""
 

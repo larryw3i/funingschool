@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-09 01:08+0800\n"
-"PO-Revision-Date: 2026-04-09 01:11+0800\n"
+"POT-Creation-Date: 2026-04-15 08:18+0800\n"
+"PO-Revision-Date: 2026-04-15 08:19+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -72,6 +72,10 @@ msgstr "更新时间"
 msgid "Is Disabled"
 msgstr "已禁用"
 
+#: canteen/models.py:44 canteen/models.py:87 canteen/models.py:210
+msgid "(None)"
+msgstr "（无）"
+
 #: canteen/models.py:52
 msgid "Ingredient category"
 msgstr "大类"
@@ -106,7 +110,7 @@ msgid "Time of creating"
 msgstr "创建时间"
 
 #: canteen/models.py:111 canteen/templates/canteen/consumption/create.html:21
-#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:82
+#: canteen/templates/canteen/consumption/create.html:71 canteen/views.py:82
 msgid "Ingredient Name"
 msgstr "食材名"
 
@@ -355,16 +359,16 @@ msgstr "入库的结束日期。"
 msgid "Refresh"
 msgstr "刷新"
 
-#: canteen/templates/canteen/consumption/create.html:70
+#: canteen/templates/canteen/consumption/create.html:72
 msgid "Remaining Quantity"
 msgstr "余量"
 
-#: canteen/templates/canteen/consumption/create.html:99
+#: canteen/templates/canteen/consumption/create.html:101
 #, python-format
 msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
 msgstr "于 %(storage_date)s 入库。（%(meal_type)s，%(category)s）"
 
-#: canteen/templates/canteen/consumption/create.html:107
+#: canteen/templates/canteen/consumption/create.html:109
 #, python-format
 msgid ""
 "\n"
@@ -375,7 +379,7 @@ msgstr ""
 "                    (%(meal_type)s， %(category)s)\n"
 "                    "
 
-#: canteen/templates/canteen/consumption/create.html:111
+#: canteen/templates/canteen/consumption/create.html:113
 #, python-format
 msgid ""
 "\n"
@@ -386,7 +390,7 @@ msgstr ""
 "                      （%(category)s）\n"
 "                    "
 
-#: canteen/templates/canteen/consumption/create.html:117
+#: canteen/templates/canteen/consumption/create.html:119
 #, python-format
 msgid ""
 "\n"
@@ -397,15 +401,15 @@ msgstr ""
 "                （%(category)s）\n"
 "                "
 
-#: canteen/templates/canteen/consumption/create.html:125
+#: canteen/templates/canteen/consumption/create.html:127
 msgid "No ingredient found."
 msgstr "未发现食材。"
 
-#: canteen/templates/canteen/consumption/create.html:134
+#: canteen/templates/canteen/consumption/create.html:136
 msgid "Generate Spreadsheet"
 msgstr "生成账单"
 
-#: canteen/templates/canteen/consumption/create.html:140
+#: canteen/templates/canteen/consumption/create.html:142
 msgid "Ingredient Sheets are also included."
 msgstr "也包含食材表。"
 

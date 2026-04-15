@@ -10,6 +10,22 @@ project_change_log_path = project_dir / "CHANGELOG.md"
 
 __cp = _
 
+'''
+        _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
+            _("Unreleased"), date_now.year, date_now.month, date_now.day
+        ),
+        "",
+        _("### Added"),
+        "",
+        _("### Changed"),
+        "",
+        _("### Deprecated"),
+        "",
+        _("### Fixed"),
+        "",
+        _("### Removed"),
+        "",
+'''
 
 def write(lang, _t):
     _ = _t
@@ -30,8 +46,22 @@ def write(lang, _t):
         ),
         "",
         _("### Added"),
+        "",
+        _("### Changed"),
+        "",
+        _("### Deprecated"),
+        "",
+        _("### Fixed"),
+        "",
+        _("### Removed"),
+        "",
+        _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
+            '20260415.80820.815', '2026', '04', '15'
+        ),
+        "",
+        _("### Added"),
         _(
-            "- `Ingredient consumptions` Page: Make the Entry Fields in the table automatically scroll to the visible area when they are obscured by the header and the columns fixed on the left and one of them is inputted."
+            "- `Ingredient consumptions` Page: Make the Entry Fields in the table automatically scroll to the visible area when they are obscured by the header or the columns fixed on the left and one of them is inputted."
         ),
         "",
         _("### Changed"),
@@ -42,11 +72,12 @@ def write(lang, _t):
         _("### Deprecated"),
         "",
         _("### Fixed"),
+        _("- Edit Ingredient: Fixed issue the `Edit Ingredient` page be loaded with error if some `Category Name` is `None`."),
         "",
         _("### Removed"),
         "",
         _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
-            "20260409.80155.835", date_now.year, date_now.month, date_now.day
+            "20260409.80155.835", "2026", "04", "09"
         ),
         "",
         _("### Added"),

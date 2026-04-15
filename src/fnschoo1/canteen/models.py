@@ -41,7 +41,7 @@ class MealType(models.Model):
     )
 
     def __str__(self):
-        return self.abbreviation or self.name
+        return self.abbreviation or self.name or _("(None)")
 
 
 class Category(models.Model):
@@ -84,7 +84,7 @@ class Category(models.Model):
         ordering = ["priority"]
 
     def __str__(self):
-        return self.name
+        return self.abbreviation or self.name or _("(None)")
 
 
 class Ingredient(models.Model):
@@ -207,7 +207,7 @@ class Ingredient(models.Model):
         verbose_name_plural = _("Ingredient List")
 
     def __str__(self):
-        return f"{self.name} ({self.storage_date})"
+        return f"{self.name} ({self.storage_date})" if self.name else _("(None)")
 
 
 class Consumption(models.Model):
