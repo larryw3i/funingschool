@@ -47,6 +47,7 @@ def write(lang, _t):
         ),
         "",
         _("### Added"),
+        _("- Workbook File: Add properties to generated workbook file."),
         "",
         _("### Changed"),
         _("- Generate Wrokbook File: Add `timestamp` to generated file."),

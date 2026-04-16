@@ -133,7 +133,7 @@ def get_workbook_zip(request, month, timestamp):
                 ingredients=__ingredients,
                 meal_type=meal_type,
                 categories=categories,
-            ).fill_in()
+            ).create()
             excel_buffer = io.BytesIO()
             wb.save(excel_buffer)
             excel_buffer.seek(0)

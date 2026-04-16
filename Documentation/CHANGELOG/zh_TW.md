@@ -7,9 +7,10 @@
 
 # Changelog
 
-## [Unreleased] - 2026-04-16
+## [Unreleased] - 2026-04-17
 
 ### Added
+- Workbook File: Add properties to generated workbook file.
 
 ### Changed
 - Generate Wrokbook File: Add `timestamp` to generated file.
