@@ -207,7 +207,9 @@ class Ingredient(models.Model):
         verbose_name_plural = _("Ingredient List")
 
     def __str__(self):
-        return f"{self.name} ({self.storage_date})" if self.name else _("(None)")
+        return (
+            f"{self.name} ({self.storage_date})" if self.name else _("(None)")
+        )
 
 
 class Consumption(models.Model):

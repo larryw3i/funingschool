@@ -10,7 +10,7 @@ project_change_log_path = project_dir / "CHANGELOG.md"
 
 __cp = _
 
-'''
+"""
         _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
             _("Unreleased"), date_now.year, date_now.month, date_now.day
         ),
@@ -25,7 +25,8 @@ __cp = _
         "",
         _("### Removed"),
         "",
-'''
+"""
+
 
 def write(lang, _t):
     _ = _t
@@ -48,6 +49,7 @@ def write(lang, _t):
         _("### Added"),
         "",
         _("### Changed"),
+        _("- Generate Wrokbook File: Add `timestamp` to generated file."),
         "",
         _("### Deprecated"),
         "",
@@ -56,7 +58,7 @@ def write(lang, _t):
         _("### Removed"),
         "",
         _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
-            '20260415.80820.815', '2026', '04', '15'
+            "20260415.80820.815", "2026", "04", "15"
         ),
         "",
         _("### Added"),
@@ -72,7 +74,9 @@ def write(lang, _t):
         _("### Deprecated"),
         "",
         _("### Fixed"),
-        _("- Edit Ingredient: Fixed issue the `Edit Ingredient` page be loaded with error if some `Category Name` is `None`."),
+        _(
+            "- Edit Ingredient: Fixed issue the `Edit Ingredient` page be loaded with error if some `Category Name` is `None`."
+        ),
         "",
         _("### Removed"),
         "",

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-15 08:18+0800\n"
+"POT-Creation-Date: 2026-04-16 09:52+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Time of updating"
 msgstr ""
 
-#: canteen/models.py:40 canteen/models.py:68 canteen/models.py:227
+#: canteen/models.py:40 canteen/models.py:68 canteen/models.py:229
 #: canteen/templates/canteen/category/delete.html:37
 #: canteen/templates/canteen/category/list.html:22
 #: canteen/templates/canteen/meal_type/delete.html:29
@@ -75,7 +75,7 @@ msgstr ""
 msgid "Is Disabled"
 msgstr ""
 
-#: canteen/models.py:44 canteen/models.py:87 canteen/models.py:210
+#: canteen/models.py:44 canteen/models.py:87 canteen/models.py:211
 msgid "(None)"
 msgstr ""
 
@@ -150,27 +150,27 @@ msgstr ""
 msgid "Ingredient List"
 msgstr ""
 
-#: canteen/models.py:218
+#: canteen/models.py:220
 msgid "Ingredient"
 msgstr ""
 
-#: canteen/models.py:221
+#: canteen/models.py:223
 msgid "Date"
 msgstr ""
 
-#: canteen/models.py:223
+#: canteen/models.py:225
 msgid "Consuming Quantity"
 msgstr ""
 
-#: canteen/models.py:232
+#: canteen/models.py:234
 msgid "Consumption Record"
 msgstr ""
 
-#: canteen/models.py:233
+#: canteen/models.py:235
 msgid "Consumption Records"
 msgstr ""
 
-#: canteen/models.py:243
+#: canteen/models.py:245
 #, python-brace-format
 msgid "{0} of {1} was consumed on {2} ."
 msgstr ""
@@ -680,11 +680,11 @@ msgstr ""
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:780 canteen/views.py:1059
+#: canteen/views.py:780 canteen/views.py:1065
 msgid "(2)"
 msgstr ""
 
-#: canteen/views.py:789 canteen/views.py:1067
+#: canteen/views.py:789 canteen/views.py:1073
 msgid "(1)"
 msgstr ""
 
@@ -701,14 +701,15 @@ msgstr ""
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:889
+#: canteen/views.py:892
 #, python-brace-format
-msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
+msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr ""
 
 #: canteen/workbook/generate.py:116
 #, python-brace-format
-msgid "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
+msgid ""
+"Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}({timestamp})"
 msgstr ""
 
 #: canteen/workbook/spreadsheet.py:201

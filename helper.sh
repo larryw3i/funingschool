@@ -202,6 +202,16 @@ msgfmt_pyhelper() {
     done
 }
 
+run_xgettext() {
+    xgettext_pyhelper
+    python manage.py makemessages -a
+}
+
+run_msgfmt() {
+    msgfmt_pyhelper
+    python manage.py compilemessages
+}
+
 gen_doc() {
     msgfmt_pyhelper
     python -m helper docs -g

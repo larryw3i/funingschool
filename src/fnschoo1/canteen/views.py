@@ -884,10 +884,16 @@ def close_window(request):
 def generate_spreadsheet(request, month):
     from .workbook.generate import get_workbook_zip
 
-    buffer = get_workbook_zip(request, month)
+    datetime_now = datetime.now()
+    timestamp = datetime_now.strftime("%Y%m%d%H%M%S")
+    buffer = get_workbook_zip(request, month, timestamp)
     filename = (
-        _("Canteen Daybook WorkBook ({month}) of {affiliation}").format(
-            month=month.replace("-", ""), affiliation=request.user.affiliation
+        _(
+            "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
+        ).format(
+            month=month.replace("-", ""),
+            affiliation=request.user.affiliation,
+            timestamp=timestamp,
         )
         + ".zip"
     )

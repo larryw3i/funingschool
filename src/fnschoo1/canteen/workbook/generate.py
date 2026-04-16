@@ -57,7 +57,7 @@ from ..views import decimal_prec
 from .spreadsheet import MealTypeWorkbook, get_CNY_TEXT
 
 
-def get_workbook_zip(request, month):
+def get_workbook_zip(request, month, timestamp):
 
     year, month = [int(v) for v in month.split("-")]
     first_date_of_year = datetime(year, 1, 1).date()
@@ -113,11 +113,12 @@ def get_workbook_zip(request, month):
         for meal_type in meal_types:
             filename = (
                 _(
-                    "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
+                    "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}({timestamp})"
                 ).format(
                     meal_type=meal_type,
                     month=f"{year}{month:0>2}",
                     affiliation=request.user.affiliation,
+                    timestamp=timestamp,
                 )
                 + ".xlsx"
             )

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-15 08:18+0800\n"
-"PO-Revision-Date: 2026-04-15 08:19+0800\n"
+"POT-Creation-Date: 2026-04-16 09:52+0800\n"
+"PO-Revision-Date: 2026-04-16 09:54+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -64,7 +64,7 @@ msgstr "创建日期"
 msgid "Time of updating"
 msgstr "更新时间"
 
-#: canteen/models.py:40 canteen/models.py:68 canteen/models.py:227
+#: canteen/models.py:40 canteen/models.py:68 canteen/models.py:229
 #: canteen/templates/canteen/category/delete.html:37
 #: canteen/templates/canteen/category/list.html:22
 #: canteen/templates/canteen/meal_type/delete.html:29
@@ -72,7 +72,7 @@ msgstr "更新时间"
 msgid "Is Disabled"
 msgstr "已禁用"
 
-#: canteen/models.py:44 canteen/models.py:87 canteen/models.py:210
+#: canteen/models.py:44 canteen/models.py:87 canteen/models.py:211
 msgid "(None)"
 msgstr "（无）"
 
@@ -147,27 +147,27 @@ msgstr "禁用"
 msgid "Ingredient List"
 msgstr "食材列表"
 
-#: canteen/models.py:218
+#: canteen/models.py:220
 msgid "Ingredient"
 msgstr "食材"
 
-#: canteen/models.py:221
+#: canteen/models.py:223
 msgid "Date"
 msgstr "日期"
 
-#: canteen/models.py:223
+#: canteen/models.py:225
 msgid "Consuming Quantity"
 msgstr "消耗数量"
 
-#: canteen/models.py:232
+#: canteen/models.py:234
 msgid "Consumption Record"
 msgstr "消耗记录"
 
-#: canteen/models.py:233
+#: canteen/models.py:235
 msgid "Consumption Records"
 msgstr "消耗记录列表"
 
-#: canteen/models.py:243
+#: canteen/models.py:245
 #, python-brace-format
 msgid "{0} of {1} was consumed on {2} ."
 msgstr "在 {2} 消耗了 {0} 的 {1} 。"
@@ -740,11 +740,11 @@ msgstr "{year}年{month}月"
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:780 canteen/views.py:1059
+#: canteen/views.py:780 canteen/views.py:1065
 msgid "(2)"
 msgstr "（2）"
 
-#: canteen/views.py:789 canteen/views.py:1067
+#: canteen/views.py:789 canteen/views.py:1073
 msgid "(1)"
 msgstr "（1）"
 
@@ -761,15 +761,16 @@ msgstr "FNSCHOOL 的作者们"
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:889
+#: canteen/views.py:892
 #, python-brace-format
-msgid "Canteen Daybook WorkBook ({month}) of {affiliation}"
-msgstr "（{month}）{affiliation}食堂出入库工作簿"
+msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
+msgstr "（{month}）{affiliation}食堂出入库工作簿（{timestamp}）"
 
 #: canteen/workbook/generate.py:116
 #, python-brace-format
-msgid "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
-msgstr "（{month}{meal_type}）{affiliation}食堂出入库工作簿"
+msgid ""
+"Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}({timestamp})"
+msgstr "（{month}{meal_type}）{affiliation}食堂出入库工作簿（{timestamp}）"
 
 #: canteen/workbook/spreadsheet.py:201
 msgid "Sheet Cover"
