@@ -1,5 +1,6 @@
 <hr/>
 <p align="center">    <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/zh_CN.md">简体中文</a> •    <a href="https://github.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/en_US.md">English</a></p>
+
 # 更新日志
 
 ## [版本 未发布] - 2026年04月19日

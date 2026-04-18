@@ -100,6 +100,7 @@ class Releases:
             + '    <a href="https://github.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/en_US.md">English</a>'
             + "</p>"
             + "\n"
+            + "\n"
             + _("# Changelog")
             + "\n"
             + "\n"
