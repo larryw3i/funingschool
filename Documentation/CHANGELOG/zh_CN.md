@@ -1,20 +1,11 @@
 <hr/>
-
-<p align="center">
-    <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/zh_CN.md">简体中文</a> •
-    <a href="https://github.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/en_US.md">English</a>
-</p>
-
+<p align="center">    <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/zh_CN.md">简体中文</a> •    <a href="https://github.com/larryw3i/funingschool/blob/master/Documentation/CHANGELOG/en_US.md">English</a></p>
 # 更新日志
-
-## [版本 未发布] - 2026年04月17日
-
+## [版本 未发布] - 2026年04月19日
 ### 新增
 - 工作簿文件：为生成的工作簿文件添加一些`属性`。
-
 ### 更改
 - 生成工作簿文件：给生成文件的文件名添加`时间戳`。
-
 ### 弃用
 
 ### 修复
@@ -22,46 +13,38 @@
 ### 移除
 
 ## [版本 20260415.80820.815] - 2026年04月15日
-
 ### 新增
 - `食材消耗`页面：输入时，让表格中的输入框在被表头或固定在左边的列遮住时自动滚动到可视区域。
-
 ### 更改
 - 启动：在`Linux 发行版`上启动的时候会出现浏览器已打开但无法访问`已指定的 URL`的情况，因此启动的时候适当延迟打开浏览器。
-
 ### 弃用
 
 ### 修复
 - 编辑食材：修复了有 大类的 大类名 为`空`时`编辑食材`页面无法被加载的问题。
-
 ### 移除
 
 ## [版本 20260409.80155.835] - 2026年04月09日
-
 ### 新增
 
 ### 更改
 - `食材列表`页面：让总价的汇总信息更直观。
-
 ### 弃用
 
 ### 修复
 - 新增食材：更新“new_ingredients”函数，防止在餐类为空的情况下向数据库中写入多个餐类实例。
 - 食材消耗：修复了 `食材消耗` 页面的食材进度条的显示问题。
-
 ### 移除
 
 ## [版本 20260127.80117.831] - 2026年01月27日
-
 ### 新增
 - 添加 **CHANGELOG.md**： 为 `CHANGELOG.md` 添加多语言特性。
 - 删除食材： 添加`批量删除`食材的功能。
-
 ### 更改
 
 ### 弃用
 - “202511012053_copy_profiles_to_fnprofile”补丁：2026 年 02 月后，它将被弃用。
-
 ### 修复
 
 ### 移除
+
+
