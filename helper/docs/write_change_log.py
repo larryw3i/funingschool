@@ -48,31 +48,21 @@ class Release:
         l = self.lang
         dor = self.date_of_release()
         markdown = (
-            _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
+            "\n".join([_("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
                 self.version or _("Unreleased"), dor.year, dor.month, dor.day
-            )
-            + "\n"
-            + _("### Added")
-            + "\n"
-            + "\n".join([a for a in self.additions])
-            + "\n"
-            + _("### Changed")
-            + "\n"
-            + "\n".join([c for c in self.changes])
-            + "\n"
-            + _("### Deprecated")
-            + "\n"
-            + "\n".join([d for d in self.deprecations])
-            + "\n"
-            + _("### Fixed")
-            + "\n"
-            + "\n".join([f for f in self.fixes])
-            + "\n"
-            + _("### Removed")
-            + "\n"
-            + "\n".join([r for r in self.removals])
-            + "\n"
-        )
+            ),
+             _("### Added"),
+             "\n".join([a for a in self.additions]),
+             _("### Changed"),
+             "\n".join([c for c in self.changes]),
+             _("### Deprecated"),
+             "\n".join([d for d in self.deprecations]),
+             _("### Fixed"),
+             "\n".join([f for f in self.fixes]),
+             _("### Removed"),
+             "\n".join([r for r in self.removals]),
+             ""
+        ]))
         return markdown
 
 
