@@ -102,6 +102,7 @@ class Releases:
             + "\n"
             + _("# Changelog")
             + "\n"
+            + "\n"
             + self.get_release_markdown(
                 additions=[
                     _(
