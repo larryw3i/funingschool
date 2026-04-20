@@ -12,7 +12,8 @@ _t_cp = _
 
 
 class Release:
-    def __init__(self,
+    def __init__(
+        self,
         lang,
         _t,
         version=None,
@@ -47,22 +48,27 @@ class Release:
         _ = self._t
         l = self.lang
         dor = self.date_of_release()
-        markdown = (
-            "\n".join([_("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
-                self.version or _("Unreleased"), dor.year, dor.month, dor.day
-            ),
-             _("### Added"),
-             "\n".join([a for a in self.additions]),
-             _("### Changed"),
-             "\n".join([c for c in self.changes]),
-             _("### Deprecated"),
-             "\n".join([d for d in self.deprecations]),
-             _("### Fixed"),
-             "\n".join([f for f in self.fixes]),
-             _("### Removed"),
-             "\n".join([r for r in self.removals]),
-             ""
-        ]))
+        markdown = "\n".join(
+            [
+                _("## [{0}] - {1}-{2:0>2}-{3:0>2}").format(
+                    self.version or _("Unreleased"),
+                    dor.year,
+                    dor.month,
+                    dor.day,
+                ),
+                _("### Added"),
+                "\n".join([a for a in self.additions]),
+                _("### Changed"),
+                "\n".join([c for c in self.changes]),
+                _("### Deprecated"),
+                "\n".join([d for d in self.deprecations]),
+                _("### Fixed"),
+                "\n".join([f for f in self.fixes]),
+                _("### Removed"),
+                "\n".join([r for r in self.removals]),
+                "",
+            ]
+        )
         return markdown
 
 

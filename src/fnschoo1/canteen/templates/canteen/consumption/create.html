@@ -11,25 +11,25 @@
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
               id="sort_storage_date"
               style="font-size: 90%"
-              onclick="list_consumptions('storage_date');">
+              onclick="sort_consumptions_table('storage_date');">
         {% trans "Storage Date" %}
       </button>
 
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
               id="sort_name"
-              onclick="list_consumptions('name');">
+              onclick="sort_consumptions_table('name');">
         {% trans "Ingredient Name" %}
       </button>
 
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
               id="sort_meal_type__name"
-              onclick="list_consumptions('meal_type__name');">
+              onclick="sort_consumptions_table('meal_type__name');">
         {% trans "Meal Type" %}
       </button>
 
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
               id="sort_category__name"
-              onclick="list_consumptions('category__name');">
+              onclick="sort_consumptions_table('category__name');">
         {% trans "Category Name (canteen__consumption_create)" %}
       </button>
 
@@ -89,6 +89,9 @@
           <tr class="row-consumption"
               data-ingredient_id="{{ ingredient.id }}"
               data-ingredient_name="{{ ingredient.name }}"
+              data-ingredient_meal_type__name='{{ ingredient.meal_type.name|default:"" }}'
+              data-ingredient_category__name='{{ ingredient.category.name|default:"" }}'
+              data-ingredient_storage_date="{{ ingredient.storage_date|date:"Y-m-d" }}"
               data-ingredient_quantity="{{ ingredient.quantity }}"
               data-ingredient_quantity_used="{{ ingredient.quantity_used }}"
               data-ingredient_remaining_quantity="{{ ingredient.remaining_quantity }}"
@@ -616,7 +619,7 @@
     function list_consumptions(sort_key = "") {
       var new_storage_date_start = $('#storage_date_start_input').val()
       var new_storage_date_end = $('#storage_date_end_input').val()
-      query = {}
+      var query = {}
       if (new_storage_date_start) {
         query["storage_date_start"] = new_storage_date_start
         set_simple_cookie("storage_date_start", new_storage_date_start)
@@ -646,6 +649,70 @@
       }
 
       update_href(query)
+    }
+
+    function sort_consumptions_table(sort_key = "") {
+      if (sort_key == "") {
+        return
+      }
+
+      var sort_key_cp = sort_key
+      sort_key = "sort_" + sort_key
+      var sort_btn = $(`#${sort_key}`)
+      var consumptions_table = $("#consumptions_table")
+      var consumptions_table_body = $(consumptions_table).find("tbody")
+      var query = {}
+      var sort_value = url_params.get(sort_key) || ""
+
+      if (sort_value == "+") {
+        query[sort_key] = "-"
+      } else if (sort_value == "-") {
+        query[sort_key] = ""
+      } else {
+        query[sort_key] = "+"
+      }
+      query = new Map(Object.entries(query))
+      sort_value = query.get(sort_key) || ""
+      for (var [key, value] of query) {
+        url_params.set(key, value)
+      }
+
+      for (var [key, value] of url_params) {
+        if (value === undefined || value === '' || value === null) {
+          url_params.delete(key)
+        }
+      }
+      for (var [key, value] of url_params) {
+        url.searchParams.set(key, value);
+      }
+      window.history.replaceState({}, '', url.toString())
+      var consumptions_table_rows = $(consumptions_table_body).find('tr').toArray()
+      consumptions_table_rows.sort(function(a, b) {
+        var sort_data_name = `ingredient_${sort_key_cp}`
+        var value_a = $(a).data(sort_data_name)
+        var value_b = $(b).data(sort_data_name)
+        var comparison = 0;
+        if (sort_key_cp.endsWith("_date")) {
+          comparison = (new Date(value_a).getTime()) - (new Date(value_b).getTime())
+        } else {
+          comparison = value_a.localeCompare(value_b)
+        }
+        comparison = sort_value == "-" ? -comparison : comparison
+        return comparison
+      });
+
+      $(consumptions_table_body).empty()
+      $(consumptions_table_body).append(consumptions_table_rows);
+      var sort_btn_text = $(sort_btn).text()
+      sort_btn_text = sort_btn_text.replace(/\u2191/g, "").replace(/\u2193/g, "")
+      sort_btn_text += (sort_value == "+" ? "\u2191" : (sort_value == "-" ? "\u2193" : ""))
+      $(sort_btn).text(sort_btn_text)
+      $.each($(consumptions_table_rows), function(index, element) {
+        $(element).find('input[name="amount_used"]').blur(function() {
+          amount_used_input_blur(this)
+        });
+      });
+
     }
   </script>
 
