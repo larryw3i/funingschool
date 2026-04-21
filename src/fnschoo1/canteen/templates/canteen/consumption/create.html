@@ -608,33 +608,26 @@
       const height = Math.round((footer.offset().top - generate_spreadsheet_btn.height() - consumptions_table.offset().top) * 0.95)
       consumptions_table.parent().height(height)
     }
-    $(window).resize(function() {
-      set_consumptions_table_size()
-      set_consumptions_table_scroll_padding()
-    });
-    $(document).ready(function() {
-      set_consumptions_table_size()
-    });
 
     function list_consumptions(sort_key = "") {
-      var new_storage_date_start = $('#storage_date_start_input').val()
-      var storage_date_start_original_value = $("#storage_date_start_input").data("original_value")
-      var new_storage_date_end = $('#storage_date_end_input').val()
-      var storage_date_end_original_value = $("#storage_date_end_input").data("original_value")
+      var new_storage_date_start = $('#storage_date_start_input').val() || 0
+      var storage_date_start_original_value = $("#storage_date_start_input").data("original_value") || 0
+      var new_storage_date_end = $('#storage_date_end_input').val() || 0
+      var storage_date_end_original_value = $("#storage_date_end_input").data("original_value") || 0
       var query = {}
       if (new_storage_date_start) {
-        query["storage_date_start"] = new_storage_date_start
-        set_simple_cookie("storage_date_start", new_storage_date_start)
+        if ((new Date(new_storage_date_start)) != (new Date(storage_date_start_original_value))) {
+          set_simple_cookie("storage_date_start", new_storage_date_start)
+        }
       } else {
-        query["storage_date_start"] = ""
         delete_cookie("storage_date_start")
       }
 
       if (new_storage_date_end) {
-        query["storage_date_end"] = new_storage_date_end
-        set_simple_cookie("storage_date_end", new_storage_date_end)
+        if ((new Date(new_storage_date_end)) != (new Date(storage_date_end_original_value))) {
+          set_simple_cookie("storage_date_end", new_storage_date_end)
+        }
       } else {
-        query["storage_date_end"] = ""
         delete_cookie("storage_date_end")
       }
 
@@ -649,8 +642,22 @@
           query[sort_key] = "+"
         }
       }
+      query = new Map(Object.entries(query))
 
-      update_href(query)
+      var url_temp = new URL(window.location.href)
+      var params_temp = new URLSearchParams(url_temp.search)
+      for (var [key, value] of query) {
+        params_temp.set(key, value)
+      }
+
+      var sort_url_params = new URLSearchParams()
+      for (var [key, value] of params_temp) {
+        if (key.startsWith("sort_")) {
+          sort_url_params.append(key, value)
+        }
+      }
+      set_simple_cookie("consumptions_sort_params", sort_url_params.toString())
+      location.reload()
     }
 
     function sort_consumptions_table_rows(sort_key = "") {
@@ -673,7 +680,8 @@
         url.searchParams.set(sort_key, "+")
       }
       sort_value = url.searchParams.get(sort_key) || ""
-      for (var [key, value] of url.searchParams) {
+      var url_params_temp = new URLSearchParams(url.search)
+      for (var [key, value] of url_params_temp) {
         if (value === undefined || value === '' || value === null) {
           url.searchParams.delete(key)
         }
@@ -718,6 +726,15 @@
       url_params = new URLSearchParams(url.search)
 
     }
+
+    $(window).resize(function() {
+      set_consumptions_table_size()
+      set_consumptions_table_scroll_padding()
+    });
+
+    $(document).ready(function() {
+      set_consumptions_table_size()
+    });
   </script>
 
 {% endblock %}

@@ -263,7 +263,18 @@ def create_consumptions(request, ingredient_id=None):
     ingredients = Ingredient.objects
 
     sort_values = []
-    for key, value in request.GET.items():
+
+    consumptions_sort_params = QueryDict()
+
+    if "consumptions_sort_params" in request.COOKIES:
+        consumptions_sort_params = unquote(
+            request.COOKIES["consumptions_sort_params"]
+        )
+        if consumptions_sort_params.startswith("?"):
+            consumptions_sort_params = consumptions_sort_params[1:]
+        consumptions_sort_params = QueryDict(consumptions_sort_params)
+
+    for key, value in consumptions_sort_params.items():
         if key.startswith("sort_") and value:
             key = key[5:]
             value = "" if value == "+" else "-"

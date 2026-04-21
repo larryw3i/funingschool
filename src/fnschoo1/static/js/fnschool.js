@@ -60,7 +60,7 @@ function get_cookie(name) {
   return null
 }
 function delete_cookie(name) {
-  document.cookie = name + `=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`
+  document.cookie = name + `=; max-age=0; path=/`
 }
 
 function set_cookies(cookies) {
