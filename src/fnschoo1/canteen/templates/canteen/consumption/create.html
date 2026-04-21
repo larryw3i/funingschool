@@ -11,25 +11,25 @@
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
               id="sort_storage_date"
               style="font-size: 90%"
-              onclick="sort_consumptions_table('storage_date');">
+              onclick="sort_consumptions_table_rows('storage_date');">
         {% trans "Storage Date" %}
       </button>
 
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
               id="sort_name"
-              onclick="sort_consumptions_table('name');">
+              onclick="sort_consumptions_table_rows('name');">
         {% trans "Ingredient Name" %}
       </button>
 
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
               id="sort_meal_type__name"
-              onclick="sort_consumptions_table('meal_type__name');">
+              onclick="sort_consumptions_table_rows('meal_type__name');">
         {% trans "Meal Type" %}
       </button>
 
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
               id="sort_category__name"
-              onclick="sort_consumptions_table('category__name');">
+              onclick="sort_consumptions_table_rows('category__name');">
         {% trans "Category Name (canteen__consumption_create)" %}
       </button>
 
@@ -618,7 +618,9 @@
 
     function list_consumptions(sort_key = "") {
       var new_storage_date_start = $('#storage_date_start_input').val()
+      var storage_date_start_original_value = $("#storage_date_start_input").data("original_value")
       var new_storage_date_end = $('#storage_date_end_input').val()
+      var storage_date_end_original_value = $("#storage_date_end_input").data("original_value")
       var query = {}
       if (new_storage_date_start) {
         query["storage_date_start"] = new_storage_date_start
@@ -651,7 +653,7 @@
       update_href(query)
     }
 
-    function sort_consumptions_table(sort_key = "") {
+    function sort_consumptions_table_rows(sort_key = "") {
       if (sort_key == "") {
         return
       }
@@ -661,38 +663,39 @@
       var sort_btn = $(`#${sort_key}`)
       var consumptions_table = $("#consumptions_table")
       var consumptions_table_body = $(consumptions_table).find("tbody")
-      var query = {}
-      var sort_value = url_params.get(sort_key) || ""
+      var sort_value = url.searchParams.get(sort_key) || ""
 
       if (sort_value == "+") {
-        query[sort_key] = "-"
+        url.searchParams.set(sort_key, "-")
       } else if (sort_value == "-") {
-        query[sort_key] = ""
+        url.searchParams.set(sort_key, "")
       } else {
-        query[sort_key] = "+"
+        url.searchParams.set(sort_key, "+")
       }
-      query = new Map(Object.entries(query))
-      sort_value = query.get(sort_key) || ""
-      for (var [key, value] of query) {
-        url_params.set(key, value)
-      }
-
-      for (var [key, value] of url_params) {
+      sort_value = url.searchParams.get(sort_key) || ""
+      for (var [key, value] of url.searchParams) {
         if (value === undefined || value === '' || value === null) {
-          url_params.delete(key)
+          url.searchParams.delete(key)
         }
       }
-      for (var [key, value] of url_params) {
-        url.searchParams.set(key, value);
-      }
+
       window.history.replaceState({}, '', url.toString())
+
+      var sort_url_params = new URLSearchParams()
+      for (var [key, value] of url.searchParams) {
+        if (key.startsWith("sort_")) {
+          sort_url_params.append(key, value)
+        }
+      }
+      set_simple_cookie("consumptions_sort_params", sort_url_params.toString())
+
       var consumptions_table_rows = $(consumptions_table_body).find('tr').toArray()
       consumptions_table_rows.sort(function(a, b) {
         var sort_data_name = `ingredient_${sort_key_cp}`
         var value_a = $(a).data(sort_data_name)
         var value_b = $(b).data(sort_data_name)
         var comparison = 0;
-        if (sort_key_cp.endsWith("_date")) {
+        if (sort_key_cp.endsWith("_date") && is_date_value_valid(value_a) && is_date_value_valid(value_b)) {
           comparison = (new Date(value_a).getTime()) - (new Date(value_b).getTime())
         } else {
           comparison = value_a.localeCompare(value_b)
@@ -712,6 +715,7 @@
           amount_used_input_blur(this)
         });
       });
+      url_params = new URLSearchParams(url.search)
 
     }
   </script>

@@ -17,7 +17,7 @@ $(document).ready(function () {
   }
 })
 
-function make_highlight(query, time_data) {
+function make_table_row_highlight(query, time_data) {
   var highlight_elements = $(query)
   var highlight_elements_toggled = []
   highlight_elements.each(function (index, element) {

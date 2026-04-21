@@ -268,6 +268,7 @@ def create_consumptions(request, ingredient_id=None):
             key = key[5:]
             value = "" if value == "+" else "-"
             sort_values.append(value + key)
+
     ingredients = (
         ingredients.filter(queries).order_by(*sort_values)
         if sort_values
