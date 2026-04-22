@@ -3,11 +3,12 @@
 
 # Changelog
 
-## [Unreleased] - 2026-04-19
+## [20260422.82120.845] - 2026-04-22
 ### Added
 - Workbook File: Add properties to generated workbook file.
 ### Changed
 - Generate Wrokbook File: Add `timestamp` to generated file.
+- `Ingredient Consumptions` page: When clicking the sorting condition button, sorting is directly performed in the table without refreshing the page.
 ### Deprecated
 
 ### Fixed

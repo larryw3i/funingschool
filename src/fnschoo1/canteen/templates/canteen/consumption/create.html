@@ -275,7 +275,7 @@
       /^\d{4}\.(0[1-9]|1[0-2])\.(0[1-9]|[12]\d|3[01])$/
     ];
 
-    var dont_submit = false
+    var is_loading = false
 
     function is_date_value_valid(value) {
       var date_value = value
@@ -511,7 +511,7 @@
     }
 
     $(document).ready(function() {
-      dont_submit = true
+      is_loading = true
       var progress = 0
       $.each(ingredient_ids, function(index, value) {
         $.ajax({
@@ -536,7 +536,7 @@
                 footer_progressbar.css('width', "0%")
                 update_consumptions_table_headers()
                 set_consumptions_table_scroll_padding()
-                dont_submit = false
+                is_loading = false
               }
             }
 
@@ -611,6 +611,9 @@
     }
 
     function list_consumptions(sort_key = "") {
+      if (is_loading) {
+        return
+      }
       var new_storage_date_start = $('#storage_date_start_input').val() || 0
       var storage_date_start_original_value = $("#storage_date_start_input").data("original_value") || 0
       var new_storage_date_end = $('#storage_date_end_input').val() || 0
@@ -663,6 +666,9 @@
 
     function sort_consumptions_table_rows(sort_key = "") {
       if (sort_key == "") {
+        return
+      }
+      if (is_loading) {
         return
       }
 

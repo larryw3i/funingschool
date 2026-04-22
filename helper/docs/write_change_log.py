@@ -101,6 +101,7 @@ class Releases:
             + "\n"
             + "\n"
             + self.get_release_markdown(
+                version="20260422.82120.845",
                 additions=[
                     _(
                         "- Workbook File: Add properties to generated workbook file."
@@ -109,7 +110,8 @@ class Releases:
                 changes=[
                     _(
                         "- Generate Wrokbook File: Add `timestamp` to generated file."
-                    )
+                    ),
+                    _("- `Ingredient Consumptions` page: When clicking the sorting condition button, sorting is directly performed in the table without refreshing the page.")
                 ],
             )
             + self.get_release_markdown(
