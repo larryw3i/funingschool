@@ -50,12 +50,10 @@ function make_table_row_highlight(query, time_data) {
 }
 
 function get_cookie(name) {
-  const cookies = document.cookie.split(';')
-  for (const cookie of cookies) {
-    const [cookieName, cookieValue] = cookie.trim().split('=')
-    if (cookieName === name) {
-      return decodeURIComponent(cookieValue)
-    }
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) {
+    return parts.pop().split(';').shift()
   }
   return null
 }
@@ -79,6 +77,16 @@ function set_simple_cookie(key, value) {
   expiryDate.setFullYear(expiryDate.getFullYear() + 20)
   document.cookie = `${key}=${value}; expires=${expiryDate.toUTCString()}; path=/`
 }
+
+function get_search_params_from_cookie(name){
+  var cookie_value = get_cookie(name)
+  if (cookie_value == null) {
+    return null
+  }
+  var search_params = new URLSearchParams(cookie_value)
+  return search_params
+}
+
 function update_href(query) {
   query = new Map(Object.entries(query))
   var url = new URL(window.location.href)

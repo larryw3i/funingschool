@@ -10,6 +10,7 @@ from decimal import (
     localcontext,
 )
 from pathlib import Path
+from urllib.parse import parse_qs, unquote
 
 import numpy as np
 import pandas as pd
@@ -30,7 +31,7 @@ from django.db.models import (
     Value,
 )
 from django.db.models.functions import Coalesce, TruncMonth
-from django.http import HttpResponse
+from django.http import HttpResponse, QueryDict
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils.encoding import escape_uri_path
@@ -42,7 +43,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from fnschool import _, count_chinese_characters
+from fnschool import _, count_chinese_characters, get_search_params_from_cookie
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font
@@ -264,21 +265,15 @@ def create_consumptions(request, ingredient_id=None):
 
     sort_values = []
 
-    consumptions_sort_params = QueryDict()
-
-    if "consumptions_sort_params" in request.COOKIES:
-        consumptions_sort_params = unquote(
-            request.COOKIES["consumptions_sort_params"]
-        )
-        if consumptions_sort_params.startswith("?"):
-            consumptions_sort_params = consumptions_sort_params[1:]
-        consumptions_sort_params = QueryDict(consumptions_sort_params)
-
-    for key, value in consumptions_sort_params.items():
-        if key.startswith("sort_") and value:
-            key = key[5:]
-            value = "" if value == "+" else "-"
-            sort_values.append(value + key)
+    consumptions_sort_params = get_search_params_from_cookie(
+        request, "consumptions_sort_params"
+    )
+    if consumptions_sort_params:
+        for key, value in consumptions_sort_params.items():
+            if key.startswith("sort_") and value:
+                key = key[5:]
+                value = "" if value == "+" else "-"
+                sort_values.append(value + key)
 
     ingredients = (
         ingredients.filter(queries).order_by(*sort_values)

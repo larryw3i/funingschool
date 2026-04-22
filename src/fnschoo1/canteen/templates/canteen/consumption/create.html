@@ -303,7 +303,8 @@
     })
 
     $(document).ready(function() {
-      for (var [key, value] of url_params) {
+      var consumptions_sort_params = get_search_params_from_cookie("consumptions_sort_params")
+      for (var [key, value] of consumptions_sort_params) {
         if (key.startsWith("sort_")) {
           value = value == "+" ? "&uarr;" : (value == "-" ? "&darr;" : "")
           $(`#${key}`).append(value)
