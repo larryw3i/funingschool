@@ -78,7 +78,7 @@ function set_simple_cookie(key, value) {
   document.cookie = `${key}=${value}; expires=${expiryDate.toUTCString()}; path=/`
 }
 
-function get_search_params_from_cookie(name){
+function get_search_params_from_cookie(name) {
   var cookie_value = get_cookie(name)
   if (cookie_value == null) {
     return null
