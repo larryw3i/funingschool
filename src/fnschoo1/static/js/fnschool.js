@@ -69,7 +69,7 @@ function set_cookies(cookies) {
 }
 
 function set_simple_cookie(key, value) {
-  cookie_enabled = get_cookie('cookie_enabled')
+  var cookie_enabled = get_cookie('cookie_enabled')
   if (cookie_enabled != '1') {
     return
   }
@@ -123,26 +123,24 @@ function open_small_window(url) {
   window.open(url, '_blank', windowFeatures)
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  if (!document.cookie.includes('cookie_enabled=1')) {
-    document.getElementById('cookieConsent').style.display = 'block'
+$(document).ready(function () {
+  var cookie_consent_element = $('#cookieConsent')
+  var cookie_acceptance_element = $('#acceptCookies')
+  var cookie_denial_element = $('#rejectCookies')
+  if (document.cookie.indexOf('cookie_enabled=1') === -1) {
+    cookie_consent_element.show()
   }
 
-  var accept_cookies_element = document.getElementById('acceptCookies')
-  if (accept_cookies_element != undefined) {
-    accept_cookies_element.addEventListener('click', function () {
-      const expiryDate = new Date()
-      expiryDate.setFullYear(expiryDate.getFullYear() + 20)
-      document.cookie = `cookie_enabled=1; expires=${expiryDate.toUTCString()}; path=/`
-      document.getElementById('cookieConsent').style.display = 'none'
-    })
-  }
-  var reject_cookies_element = document.getElementById('rejectCookies')
-  if (reject_cookies_element != undefined) {
-    reject_cookies_element.addEventListener('click', function () {
-      document.getElementById('cookieConsent').style.display = 'none'
-    })
-  }
+  cookie_acceptance_element.on('click', function () {
+    const expiry_date = new Date()
+    expiry_date.setFullYear(expiryDate.getFullYear() + 6)
+    document.cookie = `cookie_enabled=1; expires=${expiry_date.toUTCString()}; path=/`
+    cookie_consent_element.hide()
+  })
+
+  cookie_denial_element.on('click', function () {
+    cookie_consent_element.hide()
+  })
 })
 
 function set_page_size() {

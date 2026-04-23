@@ -111,7 +111,9 @@ class Releases:
                     _(
                         "- Generate Wrokbook File: Add `timestamp` to generated file."
                     ),
-                    _("- `Ingredient Consumptions` page: When clicking the sorting condition button, sorting is directly performed in the table without refreshing the page.")
+                    _(
+                        "- `Ingredient Consumptions` page: When clicking the sorting condition button, sorting is directly performed in the table without refreshing the page."
+                    ),
                 ],
             )
             + self.get_release_markdown(

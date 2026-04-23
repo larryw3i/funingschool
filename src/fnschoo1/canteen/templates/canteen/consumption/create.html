@@ -433,7 +433,6 @@
       var $consumption_form = element.closest("form")
       var amount_used = parseInt($consumption_form.data("amount_used")) || 0
       var new_amount_used = parseInt($.trim(element.val())) || 0
-      new_amount_used = parseInt(new_amount_used) || 0
       if (new_amount_used < 0) {
         element.val('')
         new_amount_used = 0
