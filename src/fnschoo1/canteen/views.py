@@ -583,10 +583,11 @@ def list_ingredients(request):
     orders = []
     sort_cookie_name = "list_ingredients_sort"
     params = get_search_params_from_cookie(request, sort_cookie_name)
-    for key, value in params.items():
-        if key.startswith("sort_"):
-            key = key[5:]
-            orders.append(f"-{key}" if value == "-" else key)
+    if params:
+        for key, value in params.items():
+            if key.startswith("sort_"):
+                key = key[5:]
+                orders.append(f"-{key}" if value == "-" else key)
 
     if len(orders) < 1:
         ingredients = ingredients.order_by("storage_date", "category")

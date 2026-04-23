@@ -76,7 +76,9 @@
               </div>
             </th>
             {% for name, verbose_name in headers %}
-              <th scope="col" onclick="sort_ingredients("{{ name }}");">
+              <th class="sort_{{ name }}"
+                  scope="col"
+                  onclick="sort_ingredients('{{ name }}');">
                 {{ verbose_name }}
               </th>
             {% endfor %}
@@ -169,6 +171,7 @@
   {{ total_price_title|json_script:"total_price_title" }}
   <script>
     var delete_ingredients_timer = null
+    var list_ingredients_sort_cookie_name = "list_ingredients_sort"
 
     $(document).ready(function() {
       $("#all_ingredients_checkbox").click(function(event) {
@@ -245,10 +248,14 @@
 
     function sort_ingredients(name) {
       var key = name
-      var cookie_name = "list_ingredients_sort"
+      var cookie_name = list_ingredients_sort_cookie_name
       set_sort_params_from_cookie(cookie_name, key)
       location.reload()
     }
+    $(document).ready(function() {
+      var cookie_name = list_ingredients_sort_cookie_name
+      set_sort_element_arrows(cookie_name)
+    })
   </script>
 
 {% endblock %}

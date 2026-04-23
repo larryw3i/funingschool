@@ -8,26 +8,26 @@
   <hr>
   <div class="container">
     <div class="row justify-content-end">
-      <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
+      <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_storage_date"
               id="sort_storage_date"
               style="font-size: 90%"
               onclick="sort_consumptions_table_rows('storage_date');">
         {% trans "Storage Date" %}
       </button>
 
-      <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
+      <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_name"
               id="sort_name"
               onclick="sort_consumptions_table_rows('name');">
         {% trans "Ingredient Name" %}
       </button>
 
-      <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
+      <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_meal_type__name"
               id="sort_meal_type__name"
               onclick="sort_consumptions_table_rows('meal_type__name');">
         {% trans "Meal Type" %}
       </button>
 
-      <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by"
+      <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_category__name"
               id="sort_category__name"
               onclick="sort_consumptions_table_rows('category__name');">
         {% trans "Category Name (canteen__consumption_create)" %}
@@ -261,6 +261,7 @@
   <script>
     var url = new URL(window.location.href)
     var url_params = new URLSearchParams(url.search)
+    var create_consumptions_sort_cookie_name = "create_consumptions_sort"
 
     var ingredient_ids = JSON.parse($("#ingredient_ids").text())
     var ingredient_ids_length = ingredient_ids.length
@@ -301,16 +302,6 @@
         }
       })
     })
-
-    $(document).ready(function() {
-      var consumptions_sort_params = get_search_params_from_cookie("consumptions_sort_params")
-      for (var [key, value] of consumptions_sort_params) {
-        if (key.startsWith("sort_")) {
-          value = value == "+" ? "&uarr;" : (value == "-" ? "&darr;" : "")
-          $(`#${key}`).append(value)
-        }
-      }
-    });
 
     $(document).ready(function() {
       $(".storage-date-input").blur(function() {
@@ -643,11 +634,12 @@
         return
       }
 
-      var cookie_name = "create_consumptions_sort"
+      var cookie_name = create_consumptions_sort_cookie_name
       var key = sort_key
       var params = set_sort_params_from_cookie(cookie_name, key)
       var sort_value = params.get(sort_key, "")
-
+      var consumptions_table = $("#consumptions_table")
+      var consumptions_table_body = $(consumptions_table).find("tbody")
       var consumptions_table_rows = $(consumptions_table_body).find('tr').toArray()
       consumptions_table_rows.sort(function(a, b) {
         var sort_data_name = `ingredient_${sort_key}`
@@ -665,18 +657,15 @@
 
       $(consumptions_table_body).empty()
       $(consumptions_table_body).append(consumptions_table_rows);
-      var sort_btn_text = $(sort_btn).text()
-      sort_btn_text = sort_btn_text.replace(/\u2191/g, "").replace(/\u2193/g, "")
-      sort_btn_text += (sort_value == "+" ? "\u2191" : (sort_value == "-" ? "\u2193" : ""))
-      $(sort_btn).text(sort_btn_text)
-      $.each($(consumptions_table_rows), function(index, element) {
-        $(element).find('input[name="amount_used"]').blur(function() {
-          amount_used_input_blur(this)
-        });
-      });
+      set_sort_element_arrows(cookie_name)
       url_params = new URLSearchParams(url.search)
 
     }
+
+    $(document).ready(function() {
+      var cookie_name = create_consumptions_sort_cookie_name
+      set_sort_element_arrows(cookie_name)
+    });
 
     $(window).resize(function() {
       set_consumptions_table_size()

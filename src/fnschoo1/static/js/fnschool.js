@@ -57,6 +57,7 @@ function get_cookie(name) {
   }
   return null
 }
+
 function delete_cookie(name) {
   document.cookie = name + `=; max-age=0; path=/`
 }
@@ -89,13 +90,19 @@ function get_search_params_from_cookie(name) {
 
 function set_search_params_from_cookie(name, key, value) {
   var params = get_search_params_from_cookie(name)
+  params = params == null ? new URLSearchParams() : params
   if (value === '' || value === null || value === undefined) {
-    params.delete(key)
+    if (!key.startsWith('sort_')) {
+      params.delete(key)
+    }
   } else {
     if (params.has(key)) {
       params.delete(key)
     }
-    params.append(key, value)
+    params_string = params.toString()
+    value = value.replace(/\+/g, '%2B')
+    params_string = `${key}=${value}&` + params_string
+    params = new URLSearchParams(params_string)
   }
   set_simple_cookie(name, params.toString())
   return params
@@ -105,15 +112,17 @@ function set_sort_params_from_cookie(name, key) {
   var cookie_name = name
   key = 'sort_' + key
   var params = get_search_params_from_cookie(cookie_name)
-  value = params.get(key, '')
-  if (value == '-') {
-    value = ''
-  } else if (value == '') {
-    value = '+'
-  } else {
-    value = '-'
-  }
-  set_search_params_from_cookie(cookie_name, key, value)
+  var value = params == null ? '' : params.get(key, '')
+  value =
+    value == '' || value == null
+      ? '-'
+      : value == '-'
+        ? '+'
+        : value == '+'
+          ? ''
+          : ''
+  params = set_search_params_from_cookie(cookie_name, key, value)
+  return params
 }
 
 function update_href(query) {
@@ -150,6 +159,29 @@ function open_small_window(url) {
 
   const windowFeatures = `width=${_width_},height=${_height_},left=${_left_},top=${_top_},resizable=yes,scrollbars=yes`
   window.open(url, '_blank', windowFeatures)
+}
+
+function set_sort_element_arrows(cookie_name) {
+  var params = get_search_params_from_cookie(cookie_name)
+  if (params == null) {
+    return
+  }
+  var up_char = '\u2191'
+  var down_char = '\u2193'
+
+  for (var [key, value] of params) {
+    if (key.startsWith('sort_')) {
+      var trigger_element = $(`.${key}`).add(`[name='${key}']`).first()
+      if (trigger_element.length > 0) {
+        var element_text = trigger_element.text()
+        element_text = element_text.replace(up_char, '').replace(down_char, '')
+        trigger_element.text(
+          element_text +
+            (value == '+' ? up_char : value == '-' ? down_char : '')
+        )
+      }
+    }
+  }
 }
 
 $(document).ready(function () {
