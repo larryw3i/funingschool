@@ -637,7 +637,7 @@
       var cookie_name = create_consumptions_sort_cookie_name
       var key = sort_key
       var params = set_sort_params_from_cookie(cookie_name, key)
-      var sort_value = params.get(sort_key, "")
+      var sort_value = params.get(`sort_${sort_key}`, "")
       var consumptions_table = $("#consumptions_table")
       var consumptions_table_body = $(consumptions_table).find("tbody")
       var consumptions_table_rows = $(consumptions_table_body).find('tr').toArray()
@@ -656,8 +656,7 @@
       });
 
       $(consumptions_table_body).empty()
-      $(consumptions_table_body).append(consumptions_table_rows);
-      set_sort_element_arrows(cookie_name)
+      $(consumptions_table_body).append(consumptions_table_rows)
       url_params = new URLSearchParams(url.search)
 
     }

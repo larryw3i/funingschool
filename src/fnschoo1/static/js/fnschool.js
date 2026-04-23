@@ -1,3 +1,6 @@
+var up_char = '\u2191'
+var down_char = '\u2193'
+
 $(document).ready(function () {
   var messages = $('.messages')
   if (messages.length) {
@@ -92,17 +95,12 @@ function set_search_params_from_cookie(name, key, value) {
   var params = get_search_params_from_cookie(name)
   params = params == null ? new URLSearchParams() : params
   if (value === '' || value === null || value === undefined) {
-    if (!key.startsWith('sort_')) {
-      params.delete(key)
-    }
+    params.delete(key)
   } else {
     if (params.has(key)) {
       params.delete(key)
     }
-    params_string = params.toString()
-    value = value.replace(/\+/g, '%2B')
-    params_string = `${key}=${value}&` + params_string
-    params = new URLSearchParams(params_string)
+    params.append(key, value)
   }
   set_simple_cookie(name, params.toString())
   return params
@@ -122,6 +120,14 @@ function set_sort_params_from_cookie(name, key) {
           ? ''
           : ''
   params = set_search_params_from_cookie(cookie_name, key, value)
+
+  var trigger_element = $(`.${key}`).add(`[name='${key}']`).first()
+  var element_text = trigger_element.text()
+  element_text = element_text.replace(up_char, '').replace(down_char, '')
+  trigger_element.text(element_text)
+
+  set_sort_element_arrows(cookie_name)
+
   return params
 }
 
@@ -166,8 +172,6 @@ function set_sort_element_arrows(cookie_name) {
   if (params == null) {
     return
   }
-  var up_char = '\u2191'
-  var down_char = '\u2193'
 
   for (var [key, value] of params) {
     if (key.startsWith('sort_')) {

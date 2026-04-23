@@ -592,6 +592,7 @@ def list_ingredients(request):
     if len(orders) < 1:
         ingredients = ingredients.order_by("storage_date", "category")
     else:
+        orders = orders.reverse()
         ingredients = ingredients.order_by(*orders)
 
     page_size = request.GET.get("page_size", "")
