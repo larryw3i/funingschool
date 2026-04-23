@@ -73,9 +73,9 @@ function set_simple_cookie(key, value) {
   if (cookie_enabled != '1') {
     return
   }
-  const expiryDate = new Date()
-  expiryDate.setFullYear(expiryDate.getFullYear() + 20)
-  document.cookie = `${key}=${value}; expires=${expiryDate.toUTCString()}; path=/`
+  const expiry_date = new Date()
+  expiry_date.setFullYear(expiry_date.getFullYear() + 6)
+  document.cookie = `${key}=${value}; expires=${expiry_date.toUTCString()}; path=/`
 }
 
 function get_search_params_from_cookie(name) {
@@ -133,7 +133,7 @@ $(document).ready(function () {
 
   cookie_acceptance_element.on('click', function () {
     const expiry_date = new Date()
-    expiry_date.setFullYear(expiryDate.getFullYear() + 6)
+    expiry_date.setFullYear(expiry_date.getFullYear() + 6)
     document.cookie = `cookie_enabled=1; expires=${expiry_date.toUTCString()}; path=/`
     cookie_consent_element.hide()
   })
