@@ -75,16 +75,9 @@
                 </label>
               </div>
             </th>
-            {% for name,sort, header in headers %}
-              <th scope="col"
-                  data-sort="sort_{{ name }} {{ sort }}"
-                  onclick="sort_ingredients(this.dataset.sort);">
-                {{ header }}
-                {% if sort == "+" %}
-                  &#8593;
-                {% elif sort == "-" %}
-                  &#8595;
-                {% endif %}
+            {% for name, verbose_name in headers %}
+              <th scope="col" onclick="sort_ingredients("{{ name }}");">
+                {{ verbose_name }}
               </th>
             {% endfor %}
             <th scope="col"></th>
@@ -161,6 +154,18 @@
            value='{{ request.GET.next|default:request.get_full_path }}'>
   </form>
   {% include 'includes/_paginator.html' %}
+  <style>
+    .table-container {
+      overflow: auto;
+
+    }
+
+    .table-container thead th {
+      position: sticky;
+      top: 0;
+    }
+  </style>
+
   {{ total_price_title|json_script:"total_price_title" }}
   <script>
     var delete_ingredients_timer = null
@@ -238,34 +243,12 @@
       });
     }
 
-    function sort_ingredients(value) {
-      value = value.trim().split(/\s+/);
-      var name = value[0];
-      value = value[1] || "";
-      const url = new URL(window.location.href);
-      const params = new URLSearchParams(url.search);
-      if (value == "-") {
-        value = "";
-      } else if (value == "") {
-        value = "+";
-      } else {
-        value = "-";
-      }
-      var i_sort = {};
-      i_sort[name] = value;
-      update_href(i_sort);
+    function sort_ingredients(name) {
+      var key = name
+      var cookie_name = "list_ingredients_sort"
+      set_sort_params_from_cookie(cookie_name, key)
+      location.reload()
     }
   </script>
-  <style>
-    .table-container {
-      overflow: auto;
-
-    }
-
-    .table-container thead th {
-      position: sticky;
-      top: 0;
-    }
-  </style>
 
 {% endblock %}

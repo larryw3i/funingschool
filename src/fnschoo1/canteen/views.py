@@ -581,14 +581,13 @@ def list_ingredients(request):
         ingredients = Ingredient.objects.filter(Q(user=request.user))
 
     orders = []
-    for f in fields:
-        sort_name = request.GET.get("sort_" + f.name, "")
-        if sort_name and sort_name in "+-":
-            sort_name = (
-                sort_name[1:] if sort_name.startswith("+") else sort_name
-            )
-            sort_name += f.name
-            orders.append(sort_name)
+    sort_cookie_name = "list_ingredients_sort"
+    params = get_search_params_from_cookie(request, sort_cookie_name)
+    for key, value in params.items():
+        if key.startswith("sort_"):
+            key = key[5:]
+            orders.append(f"-{key}" if value == "-" else key)
+
     if len(orders) < 1:
         ingredients = ingredients.order_by("storage_date", "category")
     else:
@@ -602,10 +601,7 @@ def list_ingredients(request):
     paginator = Paginator(ingredients, page_size)
     page_number = request.GET.get("page", 1)
     page_obj = paginator.get_page(page_number)
-    headers = [
-        (f.name, request.GET.get("sort_" + f.name, ""), f.verbose_name)
-        for f in fields
-    ]
+    headers = [(f.name, f.verbose_name) for f in fields]
 
     meal_types = list(
         set([i.meal_type for i in ingredients if not i.meal_type.is_disabled])

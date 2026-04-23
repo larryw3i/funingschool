@@ -609,7 +609,7 @@
       consumptions_table.parent().height(height)
     }
 
-    function list_consumptions(sort_key = "") {
+    function list_consumptions() {
       if (is_loading) {
         return
       }
@@ -617,7 +617,6 @@
       var storage_date_start_original_value = $("#storage_date_start_input").data("original_value") || 0
       var new_storage_date_end = $('#storage_date_end_input').val() || 0
       var storage_date_end_original_value = $("#storage_date_end_input").data("original_value") || 0
-      var query = {}
       if (new_storage_date_start) {
         if ((new Date(new_storage_date_start)) != (new Date(storage_date_start_original_value))) {
           set_simple_cookie("storage_date_start", new_storage_date_start)
@@ -633,33 +632,6 @@
       } else {
         delete_cookie("storage_date_end")
       }
-
-      if (sort_key !== "") {
-        sort_key = "sort_" + sort_key
-        var sort_value = url_params.get(sort_key) || ""
-        if (sort_value == "+") {
-          query[sort_key] = "-"
-        } else if (sort_value == "-") {
-          query[sort_key] = ""
-        } else {
-          query[sort_key] = "+"
-        }
-      }
-      query = new Map(Object.entries(query))
-
-      var url_temp = new URL(window.location.href)
-      var params_temp = new URLSearchParams(url_temp.search)
-      for (var [key, value] of query) {
-        params_temp.set(key, value)
-      }
-
-      var sort_url_params = new URLSearchParams()
-      for (var [key, value] of params_temp) {
-        if (key.startsWith("sort_")) {
-          sort_url_params.append(key, value)
-        }
-      }
-      set_simple_cookie("consumptions_sort_params", sort_url_params.toString())
       location.reload()
     }
 
@@ -671,45 +643,18 @@
         return
       }
 
-      var sort_key_cp = sort_key
-      sort_key = "sort_" + sort_key
-      var sort_btn = $(`#${sort_key}`)
-      var consumptions_table = $("#consumptions_table")
-      var consumptions_table_body = $(consumptions_table).find("tbody")
-      var sort_value = url.searchParams.get(sort_key) || ""
-
-      if (sort_value == "+") {
-        url.searchParams.set(sort_key, "-")
-      } else if (sort_value == "-") {
-        url.searchParams.set(sort_key, "")
-      } else {
-        url.searchParams.set(sort_key, "+")
-      }
-      sort_value = url.searchParams.get(sort_key) || ""
-      var url_params_temp = new URLSearchParams(url.search)
-      for (var [key, value] of url_params_temp) {
-        if (value === undefined || value === '' || value === null) {
-          url.searchParams.delete(key)
-        }
-      }
-
-      window.history.replaceState({}, '', url.toString())
-
-      var sort_url_params = new URLSearchParams()
-      for (var [key, value] of url.searchParams) {
-        if (key.startsWith("sort_")) {
-          sort_url_params.append(key, value)
-        }
-      }
-      set_simple_cookie("consumptions_sort_params", sort_url_params.toString())
+      var cookie_name = "create_consumptions_sort"
+      var key = sort_key
+      var params = set_sort_params_from_cookie(cookie_name, key)
+      var sort_value = params.get(sort_key, "")
 
       var consumptions_table_rows = $(consumptions_table_body).find('tr').toArray()
       consumptions_table_rows.sort(function(a, b) {
-        var sort_data_name = `ingredient_${sort_key_cp}`
+        var sort_data_name = `ingredient_${sort_key}`
         var value_a = $(a).data(sort_data_name)
         var value_b = $(b).data(sort_data_name)
         var comparison = 0;
-        if (sort_key_cp.endsWith("_date") && is_date_value_valid(value_a) && is_date_value_valid(value_b)) {
+        if (sort_key.endsWith("_date") && is_date_value_valid(value_a) && is_date_value_valid(value_b)) {
           comparison = (new Date(value_a).getTime()) - (new Date(value_b).getTime())
         } else {
           comparison = value_a.localeCompare(value_b)

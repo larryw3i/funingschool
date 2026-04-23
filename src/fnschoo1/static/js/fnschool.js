@@ -87,6 +87,35 @@ function get_search_params_from_cookie(name) {
   return search_params
 }
 
+function set_search_params_from_cookie(name, key, value) {
+  var params = get_search_params_from_cookie(name)
+  if (value === '' || value === null || value === undefined) {
+    params.delete(key)
+  } else {
+    if (params.has(key)) {
+      params.delete(key)
+    }
+    params.append(key, value)
+  }
+  set_simple_cookie(name, params.toString())
+  return params
+}
+
+function set_sort_params_from_cookie(name, key) {
+  var cookie_name = name
+  key = 'sort_' + key
+  var params = get_search_params_from_cookie(cookie_name)
+  value = params.get(key, '')
+  if (value == '-') {
+    value = ''
+  } else if (value == '') {
+    value = '+'
+  } else {
+    value = '-'
+  }
+  set_search_params_from_cookie(cookie_name, key, value)
+}
+
 function update_href(query) {
   query = new Map(Object.entries(query))
   var url = new URL(window.location.href)
