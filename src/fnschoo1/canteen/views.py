@@ -263,21 +263,11 @@ def create_consumptions(request, ingredient_id=None):
     )
     ingredients = Ingredient.objects
 
-    sort_values = []
-
-    consumptions_sort_params = get_search_params_from_cookie(
-        request, "consumptions_sort_params"
-    )
-    if consumptions_sort_params:
-        for key, value in consumptions_sort_params.items():
-            if key.startswith("sort_") and value:
-                key = key[5:]
-                value = "" if value == "+" else "-"
-                sort_values.append(value + key)
+    orders = get_object_orders_from_cookie(request, "consumptions_sort_params")
 
     ingredients = (
-        ingredients.filter(queries).order_by(*sort_values)
-        if sort_values
+        ingredients.filter(queries).order_by(*orders)
+        if orders
         else ingredients.filter(queries).order_by("storage_date")
     )
 
@@ -582,17 +572,11 @@ def list_ingredients(request):
 
     orders = []
     sort_cookie_name = "list_ingredients_sort"
-    params = get_search_params_from_cookie(request, sort_cookie_name)
-    if params:
-        for key, value in params.items():
-            if key.startswith("sort_"):
-                key = key[5:]
-                orders.append(f"-{key}" if value == "-" else key)
+    orders = get_object_orders_from_cookie(request, sort_cookie_name)
 
     if len(orders) < 1:
         ingredients = ingredients.order_by("storage_date", "category")
     else:
-        orders = orders.reverse()
         ingredients = ingredients.order_by(*orders)
 
     page_size = request.GET.get("page_size", "")

@@ -37,6 +37,13 @@ class Fnuser(AbstractUser, PermissionsMixin):
         related_name="fn_user_permissions",
         related_query_name="fn_user",
     )
+
+    email = models.EmailField(
+        null=True, blank=True, verbose_name=_("Email Address")
+    )
+    email_verified = models.BooleanField(default=False)
+    verification_token = models.CharField(max_length=128, null=True, blank=True)
+
     phone = models.CharField(
         max_length=15, blank=True, null=True, verbose_name=_("Phone Number")
     )

@@ -1,0 +1,19 @@
+{% extends "base/document.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+  {% trans "Your account has been activated!" %}
+{% endblock %}
+{% block content %}
+  <h2>{% trans 'Account activation successful!' %}</h2>
+  <p>
+    {% trans 'Your account has been successfully activated! You will be redirected to the Homepage soon!' %}
+  </p>
+  <script>
+    %
+    (document).ready(function() {
+      setTimeout(function() {
+        window.location.href = "{% url 'fnhome' %}";
+      }, 5000);
+    });
+  </script>
+{% endblock %}

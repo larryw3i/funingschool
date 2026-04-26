@@ -164,8 +164,8 @@ venv*
 # *.out.*
 *.out.*
 
-# _settings.py
-_settings.py
+# _*settings.py
+_*settings.py
 
 # media/
 media/

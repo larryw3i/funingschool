@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-22 21:15+0800\n"
+"POT-Creation-Date: 2026-04-26 18:29+0800\n"
 "PO-Revision-Date: 2026-04-17 00:14+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -60,7 +60,7 @@ msgid "Creating Date"
 msgstr "创建日期"
 
 #: canteen/models.py:36 canteen/models.py:64 canteen/models.py:108
-#: fnprofile/models.py:79
+#: fnprofile/models.py:86
 msgid "Time of updating"
 msgstr "更新时间"
 
@@ -105,7 +105,7 @@ msgstr "用户"
 msgid "Storage Date"
 msgstr "入库日期"
 
-#: canteen/models.py:104 fnprofile/models.py:75
+#: canteen/models.py:104 fnprofile/models.py:82
 msgid "Time of creating"
 msgstr "创建时间"
 
@@ -251,8 +251,8 @@ msgstr "置顶出库"
 #: canteen/templates/canteen/category/delete.html:40
 #: canteen/templates/canteen/category/list.html:35
 #: canteen/templates/canteen/category/list.html:41
+#: canteen/templates/canteen/ingredient/list.html:118
 #: canteen/templates/canteen/ingredient/list.html:123
-#: canteen/templates/canteen/ingredient/list.html:128
 #: canteen/templates/canteen/meal_type/delete.html:32
 #: canteen/templates/canteen/meal_type/list.html:33 templates/base/_js.html:7
 msgid "Yes"
@@ -278,7 +278,7 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:57
 #: canteen/templates/canteen/category/list.html:51
 #: canteen/templates/canteen/ingredient/delete.html:34
-#: canteen/templates/canteen/ingredient/list.html:141
+#: canteen/templates/canteen/ingredient/list.html:136
 #: canteen/templates/canteen/meal_type/delete.html:49
 #: canteen/templates/canteen/meal_type/list.html:43
 msgid "Delete"
@@ -295,7 +295,7 @@ msgid "Add"
 msgstr "添加"
 
 #: canteen/templates/canteen/category/list.html:47
-#: canteen/templates/canteen/ingredient/list.html:135
+#: canteen/templates/canteen/ingredient/list.html:130
 #: canteen/templates/canteen/meal_type/list.html:39
 msgid "Edit"
 msgstr "编辑"
@@ -526,7 +526,7 @@ msgstr ""
 "                    （%(ingredients_len)s）\n"
 "                  "
 
-#: canteen/templates/canteen/ingredient/list.html:100
+#: canteen/templates/canteen/ingredient/list.html:95
 msgid "It helps you check/delete the ingredients."
 msgstr "自由标记，用于检查和删除食材、核对单据等等。"
 
@@ -693,31 +693,31 @@ msgstr "是不用入库的"
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:415
+#: canteen/views.py:405
 msgid "Please select the item(s) you wish to delete."
 msgstr "请选择要删除的食材项。"
 
-#: canteen/views.py:437
+#: canteen/views.py:427
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:439
+#: canteen/views.py:429
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:443
+#: canteen/views.py:433
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:445
+#: canteen/views.py:435
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:484
+#: canteen/views.py:474
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
@@ -726,42 +726,42 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:639
+#: canteen/views.py:621
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr "{meal_type}：{meal_type_total_price}"
 
-#: canteen/views.py:648
+#: canteen/views.py:630
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: canteen/views.py:676
+#: canteen/views.py:658
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:787 canteen/views.py:1072
+#: canteen/views.py:769 canteen/views.py:1054
 msgid "(2)"
 msgstr "（2）"
 
-#: canteen/views.py:796 canteen/views.py:1080
+#: canteen/views.py:778 canteen/views.py:1062
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:837
+#: canteen/views.py:819
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:857
+#: canteen/views.py:839
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:873
+#: canteen/views.py:855
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:899
+#: canteen/views.py:881
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr "（{month}）{affiliation}食堂出入库工作簿（{timestamp}）"
@@ -1346,17 +1346,39 @@ msgstr "出入库"
 msgid "FNSCHOOL Home"
 msgstr "FNSCHOOL 主页"
 
-#: fnprofile/forms.py:13 fnprofile/forms.py:14 fnprofile/forms.py:25
 #: fnprofile/forms.py:26
+#, fuzzy
+#| msgid "Address"
+msgid "Email Address (Required)"
+msgstr "地址"
+
+#: fnprofile/forms.py:28
+#, fuzzy
+#| msgid "Address"
+msgid "Email Address (Optional)"
+msgstr "地址"
+
+#: fnprofile/forms.py:30
+#, fuzzy
+#| msgid "Please enter a number."
+msgid "Please enter your email address."
+msgstr "请输入数字。"
+
+#: fnprofile/forms.py:38 fnprofile/forms.py:41
+#, fuzzy
+#| msgid "Please enter a number."
+msgid "Please enter email."
+msgstr "请输入数字。"
+
+#: fnprofile/forms.py:53 fnprofile/forms.py:54
 msgid "User Name"
 msgstr "用户名"
 
-#: fnprofile/forms.py:17 fnprofile/forms.py:18 fnprofile/forms.py:29
-#: fnprofile/forms.py:30
+#: fnprofile/forms.py:57 fnprofile/forms.py:58
 msgid "Password"
 msgstr "密码"
 
-#: fnprofile/forms.py:33 fnprofile/forms.py:35
+#: fnprofile/forms.py:61 fnprofile/forms.py:63
 msgid "Confirm Password"
 msgstr "确认密码"
 
@@ -1376,64 +1398,140 @@ msgstr "这个用户所属的组。"
 msgid "Specific permissions for this user."
 msgstr "给这个用户指定权限。"
 
-#: fnprofile/models.py:41
+#: fnprofile/models.py:42
+#, fuzzy
+#| msgid "Address"
+msgid "Email Address"
+msgstr "地址"
+
+#: fnprofile/models.py:48
 msgid "Phone Number"
 msgstr "电话号码"
 
-#: fnprofile/models.py:44
+#: fnprofile/models.py:51
 msgid "Affiliation"
 msgstr "机构"
 
-#: fnprofile/models.py:51
+#: fnprofile/models.py:58
 msgid "Superior department"
 msgstr "上级机构"
 
-#: fnprofile/models.py:55
+#: fnprofile/models.py:62
 msgid "Date of Birth"
 msgstr "生日"
 
-#: fnprofile/models.py:61
+#: fnprofile/models.py:68
 msgid "Gender"
 msgstr "性别"
 
-#: fnprofile/models.py:65
+#: fnprofile/models.py:72
 msgid "Address"
 msgstr "地址"
 
-#: fnprofile/models.py:68
+#: fnprofile/models.py:75
 msgid "Avatar"
 msgstr "头像"
 
-#: fnprofile/models.py:71
+#: fnprofile/models.py:78
 msgid "Biography"
 msgstr "个人简介"
 
-#: fnprofile/models.py:83 fnprofile/models.py:84
+#: fnprofile/models.py:90 fnprofile/models.py:91
 msgid "User Information"
 msgstr "用户信息"
 
-#: fnprofile/models.py:87
+#: fnprofile/models.py:94
 #, python-brace-format
 msgid "{0}'s Information"
 msgstr "{0} 的信息"
 
+#: fnprofile/templates/fnprofile/activation_invalid.html:4
+msgid "Your account has been activated!"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/activation_invalid.html:7
+msgid "Account activation successful!"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/activation_invalid.html:9
+msgid ""
+"Your account has been successfully activated! You will be redirected to the "
+"Homepage soon!"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/activation_success.html:4
+msgid "Account activation failed!"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/activation_success.html:7
+msgid "The activation link is invalid!"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/activation_success.html:9
+msgid "The activation link has expired or is invalid. Please register again."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/active_email.html:4
+#, fuzzy, python-format
+#| msgid ""
+#| " Hello, %(user_name)s!\n"
+#| "  "
+msgid ""
+"\n"
+"Hello! %(username)s,\n"
+msgstr "你好，%(user_name)s！"
+
+#: fnprofile/templates/fnprofile/active_email.html:7
+msgid "Please click on the link below to activate your account:"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/active_email.html:9
+msgid ""
+"(If you cannot click, please copy the entire link into the browser address "
+"bar and press Enter.)"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/active_email.html:11
+msgid "Thank you for using FNSCHOOL!"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/confirm_email.html:4
+msgid "Verify Your Email"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/confirm_email.html:8
+msgid "Please verify your email!"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/confirm_email.html:10
+msgid ""
+"FNSCHOOL has sent a verification email to the email address you registered. "
+"Please click the link in the email to complete your registration."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/confirm_email.html:13
+msgid "(If you haven"
+msgstr ""
+
 #: fnprofile/templates/fnprofile/create.html:4
-msgid "Create"
-msgstr "新建"
+#, fuzzy
+#| msgid "Create new account."
+msgid "Create an account."
+msgstr "创建一个账户。"
 
 #: fnprofile/templates/fnprofile/create.html:7
 msgid "Create new account."
 msgstr "创建一个账户。"
 
-#: fnprofile/templates/fnprofile/create.html:11
+#: fnprofile/templates/fnprofile/create.html:12
 msgid "Confirm"
 msgstr "确认"
 
-#: fnprofile/templates/fnprofile/create.html:15
+#: fnprofile/templates/fnprofile/create.html:16
 msgid "Already have an account?"
 msgstr "已经有张号了？"
 
-#: fnprofile/templates/fnprofile/create.html:16
+#: fnprofile/templates/fnprofile/create.html:17
 msgid "Login here"
 msgstr "现在登录"
 
@@ -1486,7 +1584,13 @@ msgstr "你的账号已退出登录。"
 msgid "Log in again"
 msgstr "再次登录"
 
-#: fnprofile/views.py:65
+#: fnprofile/views.py:39 fnprofile/views.py:93
+#, fuzzy
+#| msgid "Create new account."
+msgid "Activate your account."
+msgstr "创建一个账户。"
+
+#: fnprofile/views.py:134
 msgid "Your information has been updated successfully!"
 msgstr "您的信息已更新！"
 
@@ -1572,6 +1676,9 @@ msgstr "注册"
 msgid "Hide messages."
 msgstr "隐藏信息。"
 
+#~ msgid "Create"
+#~ msgstr "新建"
+
 #~ msgid "User Profile"
 #~ msgstr "用户信息"
 
@@ -1611,11 +1718,6 @@ msgstr "隐藏信息。"
 #~| msgid "Abbreviation"
 #~ msgid "Duration"
 #~ msgstr "简称"
-
-#, fuzzy
-#~| msgid "Address"
-#~ msgid "Email address"
-#~ msgstr "地址"
 
 #, fuzzy
 #~| msgid "Address"
