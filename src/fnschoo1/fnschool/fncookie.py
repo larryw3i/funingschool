@@ -26,7 +26,7 @@ def get_object_orders_from_cookie(request, name):
             if key.startswith("sort_"):
                 key = key[5:]
                 orders.append(f"-{key}" if value == "-" else key)
-    return orders.reverse()
+    return orders.reverse() or []
 
 
 # The end.

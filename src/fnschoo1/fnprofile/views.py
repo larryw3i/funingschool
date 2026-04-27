@@ -13,13 +13,38 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views.generic import CreateView
 from fnschool import _, count_chinese_characters
+from fnschool.fncookie import get_object_orders_from_cookie
 
 from .fntoken import account_activation_token
 from .forms import FnuserForm, FnuserLoginForm, FnuserSignUpForm
+from .models import Fnuser
 
 # Create your views here.
 
 LOGIN_URL = settings.LOGIN_URL
+
+
+def send_email_verification(request, user):
+    current_site = get_current_site(request)
+    mail_subject = _("Activate your account.")
+    message = render_to_string(
+        "fnprofile/active_email.html",
+        {
+            "user": user,
+            "domain": current_site.domain,
+            "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+            "token": account_activation_token.make_token(user),
+        },
+    )
+    to_email = user.email
+    email = EmailMessage(
+        mail_subject,
+        message,
+        from_email= settings.EMAIL_HOST_USER,
+        to=[to_email],
+    )
+    email.send()
+    pass
 
 
 def fnprofile_new(request):
@@ -35,26 +60,7 @@ def fnprofile_new(request):
             user.save()
 
             if settings.EMAIL_BACKEND:
-                current_site = get_current_site(request)
-                mail_subject = _("Activate your account.")
-                message = render_to_string(
-                    "fnprofile/active_email.html",
-                    {
-                        "user": user,
-                        "domain": current_site.domain,
-                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                        "token": account_activation_token.make_token(user),
-                    },
-                )
-                to_email = form.cleaned_data.get("email")
-                email = EmailMessage(
-                    mail_subject,
-                    message,
-                    settings.EMAIL_HOST_USER,
-                    to=[to_email],
-                )
-                email.send()
-
+                send_email_verification(request, user)
                 return render(request, "fnprofile/confirm_email.html")
             else:
                 login(request, user)
@@ -76,7 +82,7 @@ def activate(request, uidb64, token):
         user = None
 
     if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
+        user.email_verified = True
         user.save()
         login(request, user)
         return render(request, "fnprofile/activation_success.html")
@@ -86,12 +92,13 @@ def activate(request, uidb64, token):
 
 def fnprofile_log_in(request):
     if request.method == "POST":
-        form = FnuserLoginForm(request.POST, request=request)
+        form = FnuserLoginForm(request,data=request.POST)
 
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(request, username=username, password=password)
+            print(user)
             if user is not None:
                 if not user.email_verified:
                     if settings.EMAIL_BACKEND:
@@ -124,7 +131,7 @@ def fnprofile_log_in(request):
                 )
                 return redirect(next_url)
     else:
-        form = FnuserLoginForm()
+        form = FnuserLoginForm(request)
 
     return render(request, "fnprofile/log_in.html", {"form": form})
 

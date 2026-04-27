@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-26 18:29+0800\n"
-"PO-Revision-Date: 2026-04-17 00:14+0800\n"
+"POT-Creation-Date: 2026-04-27 09:03+0800\n"
+"PO-Revision-Date: 2026-04-27 09:05+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 49.0\n"
+"X-Generator: Gtranslator 50.0\n"
 
 #: canteen/forms.py:11
 msgid "Select a Spreadsheet File"
@@ -1346,39 +1346,48 @@ msgstr "出入库"
 msgid "FNSCHOOL Home"
 msgstr "FNSCHOOL 主页"
 
-#: fnprofile/forms.py:26
-#, fuzzy
-#| msgid "Address"
+#: fnprofile/forms.py:33
+msgid "Please enter password."
+msgstr "请输入密码。"
+
+#: fnprofile/forms.py:57
+msgid ""
+"Your email has not been verified. We have sent a verification email to your "
+"email address. Please check your email and complete the verification "
+"process. (If you haven't received the email, please check your spam folder.)"
+msgstr ""
+"你的电子邮件没有被验证，我们已经发送了一封验证邮件到你的电子邮箱，请查看你的"
+"电子邮箱然后完成验证。（如果没有收到邮件，请您检查一下“垃圾邮件”文件夹）"
+
+#: fnprofile/forms.py:72
 msgid "Email Address (Required)"
-msgstr "地址"
+msgstr "电子邮箱地址（必需）"
 
-#: fnprofile/forms.py:28
-#, fuzzy
-#| msgid "Address"
+#: fnprofile/forms.py:74
 msgid "Email Address (Optional)"
-msgstr "地址"
+msgstr "电子邮箱地址（选填）"
 
-#: fnprofile/forms.py:30
-#, fuzzy
-#| msgid "Please enter a number."
+#: fnprofile/forms.py:76
 msgid "Please enter your email address."
-msgstr "请输入数字。"
+msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:38 fnprofile/forms.py:41
-#, fuzzy
-#| msgid "Please enter a number."
+#: fnprofile/forms.py:84
 msgid "Please enter email."
-msgstr "请输入数字。"
+msgstr "请输入电子邮件地址。"
 
-#: fnprofile/forms.py:53 fnprofile/forms.py:54
+#: fnprofile/forms.py:88
+msgid "A user with that email already exists."
+msgstr "该电子邮件地址已被使用。"
+
+#: fnprofile/forms.py:101 fnprofile/forms.py:102
 msgid "User Name"
 msgstr "用户名"
 
-#: fnprofile/forms.py:57 fnprofile/forms.py:58
+#: fnprofile/forms.py:105 fnprofile/forms.py:106
 msgid "Password"
 msgstr "密码"
 
-#: fnprofile/forms.py:61 fnprofile/forms.py:63
+#: fnprofile/forms.py:109 fnprofile/forms.py:111
 msgid "Confirm Password"
 msgstr "确认密码"
 
@@ -1399,10 +1408,8 @@ msgid "Specific permissions for this user."
 msgstr "给这个用户指定权限。"
 
 #: fnprofile/models.py:42
-#, fuzzy
-#| msgid "Address"
 msgid "Email Address"
-msgstr "地址"
+msgstr "电子邮件地址"
 
 #: fnprofile/models.py:48
 msgid "Phone Number"
@@ -1447,77 +1454,76 @@ msgstr "{0} 的信息"
 
 #: fnprofile/templates/fnprofile/activation_invalid.html:4
 msgid "Your account has been activated!"
-msgstr ""
+msgstr "您的账号已被激活！"
 
 #: fnprofile/templates/fnprofile/activation_invalid.html:7
 msgid "Account activation successful!"
-msgstr ""
+msgstr "账号激活成功！"
 
 #: fnprofile/templates/fnprofile/activation_invalid.html:9
 msgid ""
 "Your account has been successfully activated! You will be redirected to the "
 "Homepage soon!"
-msgstr ""
+msgstr "您的账号已被激活！即将跳转主页。"
 
 #: fnprofile/templates/fnprofile/activation_success.html:4
 msgid "Account activation failed!"
-msgstr ""
+msgstr "账号激活失败！"
 
 #: fnprofile/templates/fnprofile/activation_success.html:7
 msgid "The activation link is invalid!"
-msgstr ""
+msgstr "账号激活链接已失效！"
 
 #: fnprofile/templates/fnprofile/activation_success.html:9
 msgid "The activation link has expired or is invalid. Please register again."
-msgstr ""
+msgstr "该账号激活链接已过期或无效。请重新注册或验证。"
 
 #: fnprofile/templates/fnprofile/active_email.html:4
-#, fuzzy, python-format
-#| msgid ""
-#| " Hello, %(user_name)s!\n"
-#| "  "
+#, python-format
 msgid ""
 "\n"
 "Hello! %(username)s,\n"
-msgstr "你好，%(user_name)s！"
+msgstr ""
+"\n"
+"您好！ %(username)s,\n"
 
 #: fnprofile/templates/fnprofile/active_email.html:7
 msgid "Please click on the link below to activate your account:"
-msgstr ""
+msgstr "请您点击以下链接以激活您的账号："
 
 #: fnprofile/templates/fnprofile/active_email.html:9
 msgid ""
 "(If you cannot click, please copy the entire link into the browser address "
 "bar and press Enter.)"
-msgstr ""
+msgstr "（如果无法点击，请复制整个链接到浏览器地址栏再按回车键跳转。）"
 
 #: fnprofile/templates/fnprofile/active_email.html:11
 msgid "Thank you for using FNSCHOOL!"
-msgstr ""
+msgstr "谢谢您使用 FNSCHOOL ！"
 
 #: fnprofile/templates/fnprofile/confirm_email.html:4
 msgid "Verify Your Email"
-msgstr ""
+msgstr "验证您的电子邮件"
 
 #: fnprofile/templates/fnprofile/confirm_email.html:8
 msgid "Please verify your email!"
-msgstr ""
+msgstr "请验证您的电子邮件！"
 
 #: fnprofile/templates/fnprofile/confirm_email.html:10
 msgid ""
 "FNSCHOOL has sent a verification email to the email address you registered. "
 "Please click the link in the email to complete your registration."
 msgstr ""
+"FNSCHOOL 已经发送一封验证电子邮件到您的注册邮箱。请点击邮件内容里的链接以完成"
+"注册验证。"
 
 #: fnprofile/templates/fnprofile/confirm_email.html:13
-msgid "(If you haven"
-msgstr ""
+msgid "(If you haven't received the email, please check your spam folder.)"
+msgstr "（如果您没有收到该邮件，请检查一下您的邮件应用里的“垃圾邮件”文件夹。）"
 
 #: fnprofile/templates/fnprofile/create.html:4
-#, fuzzy
-#| msgid "Create new account."
 msgid "Create an account."
-msgstr "创建一个账户。"
+msgstr "创建一个账号。"
 
 #: fnprofile/templates/fnprofile/create.html:7
 msgid "Create new account."
@@ -1584,13 +1590,11 @@ msgstr "你的账号已退出登录。"
 msgid "Log in again"
 msgstr "再次登录"
 
-#: fnprofile/views.py:39 fnprofile/views.py:93
-#, fuzzy
-#| msgid "Create new account."
+#: fnprofile/views.py:27 fnprofile/views.py:103
 msgid "Activate your account."
-msgstr "创建一个账户。"
+msgstr "激活您的账户。"
 
-#: fnprofile/views.py:134
+#: fnprofile/views.py:149
 msgid "Your information has been updated successfully!"
 msgstr "您的信息已更新！"
 

@@ -11,6 +11,6 @@ urlpatterns = [
     path("create", views.fnprofile_new, name="create"),
     path("log_in", views.fnprofile_log_in, name="log_in"),
     path("update", views.fnprofile_edit, name="update"),
-    path("activate/<uidb64>/<token>/", views.activate, name="activate"),
+    path("activate/<uidb64>/<token>", views.activate, name="activate"),
 ]
 # The end.

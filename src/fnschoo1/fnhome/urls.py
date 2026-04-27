@@ -6,7 +6,7 @@ from . import views
 app_name = "fnhome"
 
 urlpatterns = [
-    path("#", views.home, name="home"),
+    path("home", views.home, name="home"),
     path("", views.home, name="home"),
 ]
 

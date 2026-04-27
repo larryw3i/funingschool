@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-26 18:29+0800\n"
+"POT-Creation-Date: 2026-04-27 09:03+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -1266,31 +1266,46 @@ msgstr ""
 msgid "FNSCHOOL Home"
 msgstr ""
 
-#: fnprofile/forms.py:26
+#: fnprofile/forms.py:33
+msgid "Please enter password."
+msgstr ""
+
+#: fnprofile/forms.py:57
+msgid ""
+"Your email has not been verified. We have sent a verification email to your "
+"email address. Please check your email and complete the verification "
+"process. (If you haven't received the email, please check your spam folder.)"
+msgstr ""
+
+#: fnprofile/forms.py:72
 msgid "Email Address (Required)"
 msgstr ""
 
-#: fnprofile/forms.py:28
+#: fnprofile/forms.py:74
 msgid "Email Address (Optional)"
 msgstr ""
 
-#: fnprofile/forms.py:30
+#: fnprofile/forms.py:76
 msgid "Please enter your email address."
 msgstr ""
 
-#: fnprofile/forms.py:38 fnprofile/forms.py:41
+#: fnprofile/forms.py:84
 msgid "Please enter email."
 msgstr ""
 
-#: fnprofile/forms.py:53 fnprofile/forms.py:54
+#: fnprofile/forms.py:88
+msgid "A user with that email already exists."
+msgstr ""
+
+#: fnprofile/forms.py:101 fnprofile/forms.py:102
 msgid "User Name"
 msgstr ""
 
-#: fnprofile/forms.py:57 fnprofile/forms.py:58
+#: fnprofile/forms.py:105 fnprofile/forms.py:106
 msgid "Password"
 msgstr ""
 
-#: fnprofile/forms.py:61 fnprofile/forms.py:63
+#: fnprofile/forms.py:109 fnprofile/forms.py:111
 msgid "Confirm Password"
 msgstr ""
 
@@ -1417,7 +1432,7 @@ msgid ""
 msgstr ""
 
 #: fnprofile/templates/fnprofile/confirm_email.html:13
-msgid "(If you haven"
+msgid "(If you haven't received the email, please check your spam folder.)"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/create.html:4
@@ -1489,11 +1504,11 @@ msgstr ""
 msgid "Log in again"
 msgstr ""
 
-#: fnprofile/views.py:39 fnprofile/views.py:93
+#: fnprofile/views.py:27 fnprofile/views.py:103
 msgid "Activate your account."
 msgstr ""
 
-#: fnprofile/views.py:134
+#: fnprofile/views.py:149
 msgid "Your information has been updated successfully!"
 msgstr ""
 

@@ -1,11 +1,18 @@
 {% extends "base/document.html" %}
 {% load crispy_forms_tags %}
 {% block title %}
-  {% trans "Account activation failed!" %}
+  {% trans "Your account has been activated!" %}
 {% endblock %}
 {% block content %}
-  <h2>{% trans 'The activation link is invalid!' %}</h2>
+  <h2>{% trans 'Account activation successful!' %}</h2>
   <p>
-    {% trans 'The activation link has expired or is invalid. Please register again.' %}
+    {% trans 'Your account has been successfully activated! You will be redirected to the Homepage soon!' %}
   </p>
+  <script>
+    $(document).ready(function() {
+      setTimeout(function() {
+        window.location.href = "{% url 'fnhome:home' %}";
+      }, 5000);
+    });
+  </script>
 {% endblock %}

@@ -23,53 +23,22 @@ from .fntoken import account_activation_token
 from .models import Fnuser
 
 
-class FnuserLoginForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request", None)
-        super().__init__(*args, **kwargs)
-        self.fields["password"].widget = forms.PasswordInput(
-            attrs={
-                "class": "form-control",
-                "placeholder": _("Please enter password."),
-            }
-        )
-
-    class Meta:
-        model = Fnuser
-        fields = ["username", "password"]
+class FnuserLoginForm(AuthenticationForm):
+    def __init__(self,request,*args, **kwargs):
+        self.request = request
+        super().__init__(request, *args, **kwargs)
 
     def clean(self):
-        cleaned_data = super().clean()
-        username = cleaned_data.get("username")
-        password = cleaned_data.get("password")
+        username = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
         if username and password:
             user = Fnuser.objects.get(username=username)
             if user and user.check_password(password):
                 if settings.EMAIL_BACKEND:
                     if not user.email_verified:
-                        current_site = get_current_site(self.request)
-                        mail_subject = _("Activate your account.")
-                        message = render_to_string(
-                            "fnprofile/active_email.html",
-                            {
-                                "user": user,
-                                "domain": current_site.domain,
-                                "uid": urlsafe_base64_encode(
-                                    force_bytes(user.pk)
-                                ),
-                                "token": account_activation_token.make_token(
-                                    user
-                                ),
-                            },
-                        )
-                        to_email = user.email
-                        email = EmailMessage(
-                            mail_subject,
-                            message,
-                            from_email=settings.EMAIL_HOST_USER,
-                            to=[to_email],
-                        )
-                        email.send()
+                        from .views import send_email_verification
+
+                        send_email_verification(self.request, user)
 
                         self.add_error(
                             "username",
@@ -77,8 +46,9 @@ class FnuserLoginForm(ModelForm):
                                 "Your email has not been verified. We have sent a verification email to your email address. Please check your email and complete the verification process. (If you haven't received the email, please check your spam folder.)"
                             ),
                         )
-
-        return cleaned_data
+        
+        self.leaned_data = super().clean()
+        return self.cleaned_data
 
 
 class FnuserSignUpForm(UserCreationForm):
