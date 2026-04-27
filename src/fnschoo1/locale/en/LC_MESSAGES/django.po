@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-27 09:03+0800\n"
+"POT-Creation-Date: 2026-04-27 14:57+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -104,7 +104,7 @@ msgid "User"
 msgstr ""
 
 #: canteen/models.py:98 canteen/templates/canteen/consumption/create.html:15
-#: canteen/views.py:73
+#: canteen/views.py:74
 msgid "Storage Date"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgid "Time of creating"
 msgstr ""
 
 #: canteen/models.py:111 canteen/templates/canteen/consumption/create.html:21
-#: canteen/templates/canteen/consumption/create.html:71 canteen/views.py:83
+#: canteen/templates/canteen/consumption/create.html:71 canteen/views.py:84
 msgid "Ingredient Name"
 msgstr ""
 
@@ -318,7 +318,7 @@ msgstr ""
 msgid "Consume Ingredients"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:27 canteen/views.py:85
+#: canteen/templates/canteen/consumption/create.html:27 canteen/views.py:86
 msgid "Meal Type"
 msgstr ""
 
@@ -578,7 +578,7 @@ msgid ""
 "      Edit Meal Type %(instance_name)s ."
 msgstr ""
 
-#: canteen/views.py:75
+#: canteen/views.py:76
 msgid ""
 "Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
 "\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
@@ -586,32 +586,32 @@ msgid ""
 "have to tell the developers. Thank you!"
 msgstr ""
 
-#: canteen/views.py:83
+#: canteen/views.py:84
 msgid "Name of Ingredient"
 msgstr ""
 
-#: canteen/views.py:87
+#: canteen/views.py:88
 msgid ""
 "For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
 "generating a spreadsheet, each meal category corresponds to a spread sheet. "
 "If left blank, only one spreadsheet will be generated."
 msgstr ""
 
-#: canteen/views.py:95
+#: canteen/views.py:96
 msgid "Category"
 msgstr ""
 
-#: canteen/views.py:97
+#: canteen/views.py:98
 msgid ""
 "Usually there are seven categories: vegetables, meat, grains, seasonings, "
 "eggs and milk, oils, and fruits."
 msgstr ""
 
-#: canteen/views.py:102
+#: canteen/views.py:103
 msgid "Quantity"
 msgstr ""
 
-#: canteen/views.py:104
+#: canteen/views.py:105
 msgid ""
 "To prevent the number of decimal places in the unit price from becoming too "
 "large, \"quantity\" is only allowed to be an integer. If your unit price is "
@@ -619,89 +619,89 @@ msgid ""
 "to an integer."
 msgstr ""
 
-#: canteen/views.py:115
+#: canteen/views.py:116
 msgid "Total Price"
 msgstr ""
 
-#: canteen/views.py:119
+#: canteen/views.py:120
 msgid "Unit Name of Quantity"
 msgstr ""
 
-#: canteen/views.py:123
+#: canteen/views.py:124
 msgid "Is Ignorable"
 msgstr ""
 
-#: canteen/views.py:124
+#: canteen/views.py:125
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr ""
 
-#: canteen/views.py:405
+#: canteen/views.py:406
 msgid "Please select the item(s) you wish to delete."
 msgstr ""
 
-#: canteen/views.py:427
+#: canteen/views.py:428
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr ""
 
-#: canteen/views.py:429
+#: canteen/views.py:430
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr ""
 
-#: canteen/views.py:433
+#: canteen/views.py:434
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr ""
 
-#: canteen/views.py:435
+#: canteen/views.py:436
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr ""
 
-#: canteen/views.py:474
+#: canteen/views.py:475
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
 "and cannot be saved. Please modify it again."
 msgstr ""
 
-#: canteen/views.py:621
+#: canteen/views.py:622
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr ""
 
-#: canteen/views.py:630
+#: canteen/views.py:631
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr ""
 
-#: canteen/views.py:658
+#: canteen/views.py:659
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:769 canteen/views.py:1054
+#: canteen/views.py:770 canteen/views.py:1055
 msgid "(2)"
 msgstr ""
 
-#: canteen/views.py:778 canteen/views.py:1062
+#: canteen/views.py:779 canteen/views.py:1063
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:819
+#: canteen/views.py:820
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:839
+#: canteen/views.py:840
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:855
+#: canteen/views.py:856
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:881
+#: canteen/views.py:882
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr ""
@@ -1266,46 +1266,42 @@ msgstr ""
 msgid "FNSCHOOL Home"
 msgstr ""
 
-#: fnprofile/forms.py:33
-msgid "Please enter password."
-msgstr ""
-
-#: fnprofile/forms.py:57
+#: fnprofile/forms.py:46
 msgid ""
 "Your email has not been verified. We have sent a verification email to your "
 "email address. Please check your email and complete the verification "
 "process. (If you haven't received the email, please check your spam folder.)"
 msgstr ""
 
-#: fnprofile/forms.py:72
+#: fnprofile/forms.py:62
 msgid "Email Address (Required)"
 msgstr ""
 
-#: fnprofile/forms.py:74
+#: fnprofile/forms.py:64
 msgid "Email Address (Optional)"
 msgstr ""
 
-#: fnprofile/forms.py:76
+#: fnprofile/forms.py:66
 msgid "Please enter your email address."
 msgstr ""
 
-#: fnprofile/forms.py:84
+#: fnprofile/forms.py:74
 msgid "Please enter email."
 msgstr ""
 
-#: fnprofile/forms.py:88
+#: fnprofile/forms.py:78
 msgid "A user with that email already exists."
 msgstr ""
 
-#: fnprofile/forms.py:101 fnprofile/forms.py:102
+#: fnprofile/forms.py:91 fnprofile/forms.py:92
 msgid "User Name"
 msgstr ""
 
-#: fnprofile/forms.py:105 fnprofile/forms.py:106
+#: fnprofile/forms.py:95 fnprofile/forms.py:96
 msgid "Password"
 msgstr ""
 
-#: fnprofile/forms.py:109 fnprofile/forms.py:111
+#: fnprofile/forms.py:99 fnprofile/forms.py:101
 msgid "Confirm Password"
 msgstr ""
 
@@ -1371,29 +1367,29 @@ msgid "{0}'s Information"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/activation_invalid.html:4
-msgid "Your account has been activated!"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/activation_invalid.html:7
-msgid "Account activation successful!"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/activation_invalid.html:9
-msgid ""
-"Your account has been successfully activated! You will be redirected to the "
-"Homepage soon!"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/activation_success.html:4
 msgid "Account activation failed!"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/activation_success.html:7
+#: fnprofile/templates/fnprofile/activation_invalid.html:7
 msgid "The activation link is invalid!"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/activation_success.html:9
+#: fnprofile/templates/fnprofile/activation_invalid.html:9
 msgid "The activation link has expired or is invalid. Please register again."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/activation_success.html:4
+msgid "Your account has been activated!"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/activation_success.html:7
+msgid "Account activation successful!"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/activation_success.html:9
+msgid ""
+"Your account has been successfully activated! You will be redirected to the "
+"Homepage soon!"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/active_email.html:4
@@ -1476,7 +1472,7 @@ msgstr ""
 
 #: fnprofile/templates/fnprofile/log_in.html:4
 #: fnprofile/templates/fnprofile/log_in.html:7
-#: fnprofile/templates/fnprofile/log_in.html:15
+#: fnprofile/templates/fnprofile/log_in.html:20
 msgid "Log in"
 msgstr ""
 
@@ -1484,11 +1480,15 @@ msgstr ""
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
 
-#: fnprofile/templates/fnprofile/log_in.html:19
+#: fnprofile/templates/fnprofile/log_in.html:16
+msgid "If you haven't verified your email, please log in here to verify it."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/log_in.html:24
 msgid "Don't have an account?"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/log_in.html:20
+#: fnprofile/templates/fnprofile/log_in.html:25
 msgid "Register here"
 msgstr ""
 
@@ -1504,11 +1504,11 @@ msgstr ""
 msgid "Log in again"
 msgstr ""
 
-#: fnprofile/views.py:27 fnprofile/views.py:103
+#: fnprofile/views.py:29 fnprofile/views.py:106
 msgid "Activate your account."
 msgstr ""
 
-#: fnprofile/views.py:149
+#: fnprofile/views.py:152
 msgid "Your information has been updated successfully!"
 msgstr ""
 

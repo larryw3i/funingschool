@@ -11,6 +11,11 @@
   <form method="post" action="{% url 'fnprofile:log_in' %}">
     {% csrf_token %} {{ form|crispy }}
     <input type="hidden" name="next" value="{{ request.GET.next }}" />
+    <p>
+      {% if EMAIL_BACKEND %}
+        {% trans "If you haven't verified your email, please log in here to verify it." %}
+      {% endif %}
+    </p>
     <button type="submit button" class="btn btn-outline-primary">
       {% trans "Log in" %}
     </button>

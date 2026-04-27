@@ -1,5 +1,6 @@
 import io
 import re
+import uuid
 from datetime import date, datetime, timedelta
 from decimal import (
     ROUND_DOWN,
@@ -44,11 +45,11 @@ from django.views.generic import (
     UpdateView,
 )
 from fnschool import _, count_chinese_characters, get_search_params_from_cookie
+from fnschool.fncookie import get_object_orders_from_cookie
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font
 from openpyxl.utils import get_column_letter
-from fnschool.fncookie import get_object_orders_from_cookie
 
 from .forms import (
     CategoryForm,

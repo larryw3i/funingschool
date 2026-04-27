@@ -24,7 +24,7 @@ from .models import Fnuser
 
 
 class FnuserLoginForm(AuthenticationForm):
-    def __init__(self,request,*args, **kwargs):
+    def __init__(self, request, *args, **kwargs):
         self.request = request
         super().__init__(request, *args, **kwargs)
 
@@ -46,7 +46,7 @@ class FnuserLoginForm(AuthenticationForm):
                                 "Your email has not been verified. We have sent a verification email to your email address. Please check your email and complete the verification process. (If you haven't received the email, please check your spam folder.)"
                             ),
                         )
-        
+
         self.leaned_data = super().clean()
         return self.cleaned_data
 

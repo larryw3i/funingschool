@@ -40,7 +40,7 @@ def send_email_verification(request, user):
     email = EmailMessage(
         mail_subject,
         message,
-        from_email= settings.EMAIL_HOST_USER,
+        from_email=settings.EMAIL_HOST_USER,
         to=[to_email],
     )
     email.send()
@@ -92,7 +92,7 @@ def activate(request, uidb64, token):
 
 def fnprofile_log_in(request):
     if request.method == "POST":
-        form = FnuserLoginForm(request,data=request.POST)
+        form = FnuserLoginForm(request, data=request.POST)
 
         if form.is_valid():
             username = form.cleaned_data.get("username")
@@ -133,7 +133,11 @@ def fnprofile_log_in(request):
     else:
         form = FnuserLoginForm(request)
 
-    return render(request, "fnprofile/log_in.html", {"form": form})
+    return render(
+        request,
+        "fnprofile/log_in.html",
+        {"form": form, "EMAIL_BACKEND": settings.EMAIL_BACKEND},
+    )
 
 
 def fnprofile_log_out(request):
