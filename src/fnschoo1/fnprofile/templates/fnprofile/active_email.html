@@ -1,12 +1,8 @@
 {% load i18n %}
 {% autoescape off %}
-
-  {% blocktrans with username=user.username %}
-Hello! {{ username }},
-{% endblocktrans %}
+  {% blocktrans with username=user.username %}Hello! {{ username }},{% endblocktrans %}
   {% trans 'Please click on the link below to activate your account:' %}
   http://{{ domain }}{% url 'fnprofile:activate' uidb64=uid token=token %}
   {% trans '(If you cannot click, please copy the entire link into the browser address bar and press Enter.)' %}
-
   {% trans 'Thank you for using FNSCHOOL!' %}
 {% endautoescape %}

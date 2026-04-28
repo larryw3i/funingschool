@@ -1,0 +1,219 @@
+{% extends "base/document.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Edit Email - {{ email.email }} - {{ site_name }}{% endblock %}
+
+{% block content %}
+  <div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'email_list' %}">My Emails</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{% url 'email_detail' email.id %}">{{ email.email|truncatechars:20 }}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+      </ol>
+    </nav>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+              <i class="fas fa-edit me-2"></i>Edit Email Settings
+            </h4>
+            <span class="badge bg-{{ email.status_color }} rounded-pill">
+              {{ email.status_display }}
+            </span>
+          </div>
+
+          <div class="card-body">
+            <!-- Email Preview -->
+            <div class="alert alert-light mb-4">
+              <h6 class="alert-heading">Editing:</h6>
+              <p class="mb-0 fs-5">
+                <code>{{ email.email }}</code>
+              </p>
+            </div>
+
+            {% if messages %}
+              <div class="alert-container mb-4">
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                       role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <form method="post"
+                  action="{% url 'email_edit' email.id %}"
+                  id="edit-email-form">
+              {% csrf_token %}
+
+              <!-- Primary Email Toggle -->
+              <div class="mb-4">
+                <div class="form-check form-switch">
+                  {{ form.is_primary }}
+                  <label class="form-check-label" for="{{ form.is_primary.id_for_label }}">
+                    <strong>{{ form.is_primary.label }}</strong>
+                  </label>
+                  {% if form.is_primary.help_text %}
+                    <div class="form-text">{{ form.is_primary.help_text }}</div>
+                  {% endif %}
+                </div>
+
+                {% if form.is_primary.errors %}
+                  <div class="invalid-feedback d-block">
+                    {% for error in form.is_primary.errors %}{{ error }}{% endfor %}
+                  </div>
+                {% endif %}
+
+                <!-- Requirements -->
+                <div class="alert alert-warning mt-2">
+                  <h6 class="alert-heading">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Requirements
+                  </h6>
+                  <ul class="mb-0 small">
+                    <li>Email must be verified</li>
+                    <li>Email must be active</li>
+                    <li>You can only have one primary email</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Status Information -->
+              <div class="mb-4">
+                <h6 class="text-muted mb-2">Current Status</h6>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="d-flex align-items-center mb-2">
+                      <span class="badge bg-{{ email.is_verified|yesno:'success,danger' }} rounded-pill me-2">
+                        {{ email.is_verified|yesno:'Verified,Unverified' }}
+                      </span>
+                      {% if not email.is_verified %}
+                        <a href="{% url 'email_detail' email.id %}" class="small">Verify Now</a>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <span class="badge bg-{{ email.is_active|yesno:'success,warning' }} rounded-pill">
+                      {{ email.is_active|yesno:'Active,Inactive' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                <a href="{% url 'email_detail' email.id %}"
+                   class="btn btn-outline-secondary">
+                  <i class="fas fa-times me-2"></i>Cancel
+                </a>
+                <button type="submit" class="btn btn-primary" id="save-btn">
+                  <i class="fas fa-save me-2"></i>Save Changes
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="card border-danger shadow-sm mt-4">
+          <div class="card-header bg-danger text-white">
+            <h5 class="mb-0">
+              <i class="fas fa-exclamation-triangle me-2"></i>Danger Zone
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col">
+                <h6>Delete this email</h6>
+                <p class="text-muted mb-0 small">
+                  Once deleted, this email cannot be recovered. You'll need to add it again.
+                </p>
+              </div>
+              <div class="col-auto">
+                {% if not email.is_primary %}
+                  <form method="post"
+                        action="{% url 'email_delete' email.id %}"
+                        class="d-inline"
+                        id="delete-form">
+                    {% csrf_token %}
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete()">
+                      <i class="fas fa-trash me-2"></i>Delete Email
+                    </button>
+                  </form>
+                {% else %}
+                  <button class="btn btn-danger" disabled title="Cannot delete primary email">
+                    <i class="fas fa-trash me-2"></i>Delete Email
+                  </button>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    $(document).ready(function() {
+      // Form submission
+      $('#edit-email-form').on('submit', function(e) {
+        const saveBtn = $('#save-btn');
+        const originalHtml = saveBtn.html();
+
+        // Show loading
+        saveBtn.prop('disabled', true).html(
+          '<i class="fas fa-spinner fa-spin me-2"></i>Saving...'
+        );
+      });
+
+      // Toggle switch styling
+      $('.form-check-input').on('change', function() {
+        if ($(this).is(':checked')) {
+          $(this).parent().addClass('checked');
+        } else {
+          $(this).parent().removeClass('checked');
+        }
+      });
+    });
+
+    // Delete confirmation
+    function confirmDelete() {
+      const email = "{{ email.email }}";
+
+      if (confirm('Are you sure you want to delete ' + email + '?\n\nThis action cannot be undone.')) {
+        // Show loading
+        const deleteBtn = $('#delete-form button');
+        const originalHtml = deleteBtn.html();
+        deleteBtn.prop('disabled', true).html(
+          '<i class="fas fa-spinner fa-spin me-2"></i>Deleting...'
+        );
+
+        // Submit form
+        $('#delete-form').submit();
+      }
+    }
+  </script>
+
+  <style>
+    .form-switch .form-check-input:checked {
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+    }
+
+    .form-switch .form-check-input:focus {
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+  </style>
+{% endblock %}

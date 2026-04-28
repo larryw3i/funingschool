@@ -1,0 +1,537 @@
+{% extends "base/document.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+  Email Details - {{ email.email }} - {{ site_name }}
+{% endblock %}
+
+{% block content %}
+  <div class="container py-4">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'email_list' %}">My Emails</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          {{ email.email|truncatechars:30 }}
+        </li>
+      </ol>
+    </nav>
+
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+              <i class="fas fa-envelope me-2"></i>Email Details
+            </h4>
+            <span class="badge bg-{{ email.status_color }} rounded-pill">
+              {{ email.status_display }}
+            </span>
+          </div>
+
+          <div class="card-body">
+            <!-- Email Information -->
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <h6 class="text-muted mb-2">Email Address</h6>
+                <p class="fs-5">
+                  <code>{{ email.email }}</code>
+                  {% if email.is_primary %}
+                    <span class="badge bg-success ms-2">Primary</span>
+                  {% endif %}
+                </p>
+              </div>
+              <div class="col-md-6">
+                <h6 class="text-muted mb-2">User</h6>
+                <p>{{ email.user.username }}</p>
+              </div>
+            </div>
+
+            <!-- Status Information -->
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <h6 class="text-muted mb-2">Verification Status</h6>
+                <div class="d-flex align-items-center">
+                  {% if email.is_verified %}
+                    <i class="fas fa-check-circle text-success fs-4 me-2"></i>
+                    <div>
+                      <p class="mb-0">Verified</p>
+                      <small class="text-muted">{{ email.verified_at|date:"F j, Y, g:i a" }}</small>
+                    </div>
+                  {% else %}
+                    <i class="fas fa-clock text-warning fs-4 me-2"></i>
+                    <div>
+                      <p class="mb-0">Not Verified</p>
+                      {% if email.verification_sent_at %}
+                        <small class="text-muted">
+                          Last sent: {{ email.verification_sent_at|date:"F j, Y, g:i a" }}
+                        </small>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h6 class="text-muted mb-2">Account Status</h6>
+                <div class="d-flex align-items-center">
+                  {% if email.is_active %}
+                    <i class="fas fa-check-circle text-success fs-4 me-2"></i>
+                    <div>
+                      <p class="mb-0">Active</p>
+                      <small class="text-muted">Receiving notifications</small>
+                    </div>
+                  {% else %}
+                    <i class="fas fa-ban text-danger fs-4 me-2"></i>
+                    <div>
+                      <p class="mb-0">Disabled</p>
+                      <small class="text-muted">Not receiving notifications</small>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <!-- Timestamps -->
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <h6 class="text-muted mb-2">Added</h6>
+                <p>{{ email.created_at|date:"F j, Y, g:i a" }}</p>
+              </div>
+              <div class="col-md-6">
+                <h6 class="text-muted mb-2">Last Updated</h6>
+                <p>{{ email.updated_at|date:"F j, Y, g:i a" }}</p>
+              </div>
+            </div>
+
+            <!-- Email ID -->
+            <div class="mb-4">
+              <h6 class="text-muted mb-2">Email ID</h6>
+              <code class="bg-light p-2 rounded d-inline-block">{{ email.id }}</code>
+            </div>
+
+            <!-- Actions -->
+            <div class="border-top pt-4">
+              <h5 class="mb-3">Actions</h5>
+              <div class="d-flex flex-wrap gap-2">
+                <!-- Set Primary Button -->
+                {% if not email.is_primary and email.is_verified %}
+                  <form method="post"
+                        action="{% url 'email_set_primary' email.id %}"
+                        class="set-primary-form"
+                        data-email="{{ email.email }}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success">
+                      <i class="fas fa-star me-2"></i>Set as Primary
+                    </button>
+                  </form>
+                {% endif %}
+
+                <!-- Toggle Status Button -->
+                <form method="post"
+                      action="{% url 'email_toggle_status' email.id %}"
+                      class="toggle-status-form"
+                      data-email="{{ email.email }}"
+                      data-current-status="{{ email.is_active|yesno:'active,inactive' }}">
+                  {% csrf_token %}
+                  <button type="submit"
+                          class="btn btn-{{ email.is_active|yesno:'warning,success' }}">
+                    <i class="fas fa-{{ email.is_active|yesno:'ban,check' }} me-2"></i>
+                    {{ email.is_active|yesno:'Disable,Enable' }}
+                  </button>
+                </form>
+
+                <!-- Resend Verification Button -->
+                {% if not email.is_verified %}
+                  <form method="post"
+                        action="{% url 'email_resend_verification' email.id %}"
+                        class="resend-form"
+                        data-email="{{ email.email }}">
+                    {% csrf_token %}
+                    <button type="submit"
+                            class="btn btn-warning {% if not can_resend %}disabled{% endif %}"
+                            {% if not can_resend %}title="Wait {{ next_resend }} seconds"{% endif %}>
+                      <i class="fas fa-paper-plane me-2"></i>Resend Verification
+                    </button>
+                  </form>
+                {% endif %}
+
+                <!-- Delete Button -->
+                {% if not email.is_primary %}
+                  <form method="post"
+                        action="{% url 'email_delete' email.id %}"
+                        class="delete-form"
+                        data-email="{{ email.email }}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                      <i class="fas fa-trash me-2"></i>Delete
+                    </button>
+                  </form>
+                {% endif %}
+
+                <!-- Edit Button -->
+                <a href="{% url 'email_edit' email.id %}"
+                   class="btn btn-outline-primary">
+                  <i class="fas fa-edit me-2"></i>Edit
+                </a>
+
+                <!-- Back Button -->
+                <a href="{% url 'email_list' %}" class="btn btn-outline-secondary">
+                  <i class="fas fa-arrow-left me-2"></i>Back to List
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Manual Verification Form -->
+        {% if not email.is_verified %}
+          <div class="card shadow-sm">
+            <div class="card-header bg-white">
+              <h5 class="mb-0">
+                <i class="fas fa-key me-2"></i>Manual Verification
+              </h5>
+            </div>
+            <div class="card-body">
+              <p class="text-muted mb-3">
+                Enter the verification code from the email you received.
+              </p>
+              <form method="post"
+                    action="{% url 'email_verify_form' email.id %}"
+                    id="manual-verify-form">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="{{ verification_form.token.id_for_label }}" class="form-label">
+                    Verification Code
+                  </label>
+                  <div class="input-group">
+                    {{ verification_form.token }}
+                    <button type="submit" class="btn btn-primary" id="verify-btn">
+                      <i class="fas fa-check me-2"></i>Verify
+                    </button>
+                  </div>
+                  {% if verification_form.token.errors %}
+                    <div class="invalid-feedback d-block">
+                      {% for error in verification_form.token.errors %}{{ error }}{% endfor %}
+                    </div>
+                  {% endif %}
+                </div>
+              </form>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <!-- Quick Stats -->
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">
+              <i class="fas fa-chart-pie me-2"></i>Quick Stats
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="mb-3">
+              <small class="text-muted">Days Since Added</small>
+              <h4 class="mb-0">{{ email.created_at|timesince }}</h4>
+            </div>
+            {% if email.verified_at %}
+              <div class="mb-3">
+                <small class="text-muted">Days Since Verified</small>
+                <h4 class="mb-0">{{ email.verified_at|timesince }}</h4>
+              </div>
+            {% endif %}
+            {% if email.verification_sent_at %}
+              <div>
+                <small class="text-muted">Last Verification Sent</small>
+                <h6 class="mb-0">{{ email.verification_sent_at|timesince }} ago</h6>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Resend Countdown -->
+        {% if not email.is_verified %}
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white">
+              <h5 class="mb-0">
+                <i class="fas fa-clock me-2"></i>Resend Timer
+              </h5>
+            </div>
+            <div class="card-body text-center">
+              {% if can_resend %}
+                <div class="mb-3">
+                  <i class="fas fa-check-circle text-success fs-1 mb-3"></i>
+                  <p class="mb-0">Ready to resend verification email</p>
+                </div>
+              {% else %}
+                <div class="mb-3">
+                  <i class="fas fa-clock text-warning fs-1 mb-3"></i>
+                  <p class="mb-0">Wait before resending</p>
+                </div>
+                <div class="countdown-timer">
+                  <h2 id="countdown-timer" class="text-warning">
+                    00:{{ next_resend|stringformat:"02d" }}
+                  </h2>
+                  <small class="text-muted">seconds remaining</small>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Help Card -->
+        <div class="card shadow-sm">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">
+              <i class="fas fa-question-circle me-2"></i>Help
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="accordion" id="helpAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#help1">
+                    What is a primary email?
+                  </button>
+                </h2>
+                <div id="help1"
+                     class="accordion-collapse collapse show"
+                     data-bs-parent="#helpAccordion">
+                  <div class="accordion-body">
+                    The primary email is used for important notifications and password resets.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#help2">Why verify my email?</button>
+                </h2>
+                <div id="help2"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#helpAccordion">
+                  <div class="accordion-body">
+                    Verification ensures you own the email address and can receive important notifications.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    $(document).ready(function() {
+      // Initialize tooltips
+      $('[data-bs-toggle="tooltip"]').tooltip();
+
+      // Set Primary Email
+      $('.set-primary-form').on('submit', function(e) {
+        e.preventDefault();
+        const form = $(this);
+        const email = form.data('email');
+
+        if (confirm('Set ' + email + ' as your primary email?')) {
+          $.ajax({
+            url: form.attr('action'),
+            method: 'POST',
+            data: form.serialize(),
+            success: function() {
+              showToast('success', 'Success', 'Primary email updated');
+              setTimeout(function() {
+                window.location.reload();
+              }, 1500);
+            },
+            error: function() {
+              showToast('error', 'Error', 'Failed to set primary email');
+            }
+          });
+        }
+      });
+
+      // Toggle Status
+      $('.toggle-status-form').on('submit', function(e) {
+        e.preventDefault();
+        const form = $(this);
+        const email = form.data('email');
+        const currentStatus = form.data('current-status');
+        const action = currentStatus === 'active' ? 'disable' : 'enable';
+
+        if (confirm(action.charAt(0).toUpperCase() + action.slice(1) + ' ' + email + '?')) {
+          $.ajax({
+            url: form.attr('action'),
+            method: 'POST',
+            data: form.serialize(),
+            success: function() {
+              showToast('success', 'Success', 'Email ' + action + 'd');
+              setTimeout(function() {
+                window.location.reload();
+              }, 1500);
+            },
+            error: function() {
+              showToast('error', 'Error', 'Failed to ' + action + ' email');
+            }
+          });
+        }
+      });
+
+      // Resend Verification
+      $('.resend-form').on('submit', function(e) {
+        e.preventDefault();
+        const form = $(this);
+        const email = form.data('email');
+
+        if (confirm('Resend verification email to ' + email + '?')) {
+          $.ajax({
+            url: form.attr('action'),
+            method: 'POST',
+            data: form.serialize(),
+            success: function() {
+              showToast('success', 'Success', 'Verification email resent');
+              setTimeout(function() {
+                window.location.reload();
+              }, 1500);
+            },
+            error: function() {
+              showToast('error', 'Error', 'Failed to resend verification');
+            }
+          });
+        }
+      });
+
+      // Delete Email
+      $('.delete-form').on('submit', function(e) {
+        e.preventDefault();
+        const form = $(this);
+        const email = form.data('email');
+
+        if (confirm('Delete ' + email + '? This action cannot be undone.')) {
+          $.ajax({
+            url: form.attr('action'),
+            method: 'POST',
+            data: form.serialize(),
+            success: function() {
+              showToast('success', 'Success', 'Email deleted');
+              setTimeout(function() {
+                window.location.href = "{% url 'email_list' %}";
+              }, 1500);
+            },
+            error: function() {
+              showToast('error', 'Error', 'Failed to delete email');
+            }
+          });
+        }
+      });
+
+      // Manual Verification Form
+      $('#manual-verify-form').on('submit', function(e) {
+        e.preventDefault();
+        const form = $(this);
+        const submitBtn = $('#verify-btn');
+        const originalHtml = submitBtn.html();
+
+        // Show loading
+        submitBtn.prop('disabled', true).html(
+          '<i class="fas fa-spinner fa-spin me-2"></i>Verifying...'
+        );
+
+        $.ajax({
+          url: form.attr('action'),
+          method: 'POST',
+          data: form.serialize(),
+          success: function() {
+            showToast('success', 'Success', 'Email verified!');
+            setTimeout(function() {
+              window.location.reload();
+            }, 1500);
+          },
+          error: function(xhr) {
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+              // Show errors
+              showToast('error', 'Error', xhr.responseJSON.errors.token || 'Invalid code');
+            } else {
+              showToast('error', 'Error', 'Verification failed');
+            }
+            submitBtn.prop('disabled', false).html(originalHtml);
+          }
+        });
+      });
+
+      // Countdown Timer
+      {
+        %
+        if not can_resend and not email.is_verified %
+      }
+      let countdown = {
+        {
+          next_resend
+        }
+      };
+      const countdownElement = $('#countdown-timer');
+
+      const timer = setInterval(function() {
+        if (countdown <= 0) {
+          clearInterval(timer);
+          window.location.reload();
+        } else {
+          countdown--;
+          const minutes = Math.floor(countdown / 60);
+          const seconds = countdown % 60;
+          countdownElement.text(
+            (minutes < 10 ? '0' + minutes : minutes) + ':' +
+            (seconds < 10 ? '0' + seconds : seconds)
+          );
+        }
+      }, 1000);
+      {
+        %
+        endif %
+      }
+
+      // Toast notification function
+      function showToast(type, title, message) {
+        const toastId = 'toast-' + Date.now();
+        const toastHtml = `
+            <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong>${title}:</strong> ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        `;
+
+        $('#toast-container').append(toastHtml);
+        const toastElement = document.getElementById(toastId);
+        const toast = new bootstrap.Toast(toastElement, {
+          autohide: true,
+          delay: 3000
+        });
+        toast.show();
+
+        toastElement.addEventListener('hidden.bs.toast', function() {
+          $(this).remove();
+        });
+      }
+    });
+  </script>
+
+  <!-- Toast Container -->
+  <div id="toast-container"
+       class="position-fixed bottom-0 end-0 p-3"
+       style="z-index: 11"></div>
+{% endblock %}

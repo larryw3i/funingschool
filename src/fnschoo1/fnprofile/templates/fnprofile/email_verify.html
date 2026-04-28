@@ -1,0 +1,306 @@
+{% extends "base/document.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Verify Email - {{ email.email }} - {{ site_name }}
+{% endblock %}
+
+{% block content %}
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-header bg-white text-center">
+            <h3 class="mb-0">
+              <i class="fas fa-shield-alt me-2"></i>Verify Email Address
+            </h3>
+          </div>
+
+          <div class="card-body">
+            <!-- Email Info -->
+            <div class="text-center mb-4">
+              <div class="mb-3">
+                <i class="fas fa-envelope fa-3x text-primary"></i>
+              </div>
+              <h4 class="mb-2">{{ email.email }}</h4>
+              <p class="text-muted">Please verify this email address</p>
+            </div>
+
+            {% if messages %}
+              <div class="alert-container mb-4">
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                       role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <!-- Instructions -->
+            <div class="alert alert-info mb-4">
+              <h6 class="alert-heading">
+                <i class="fas fa-info-circle me-2"></i>How to verify
+              </h6>
+              <ul class="mb-0">
+                <li>Check your email for a verification message</li>
+                <li>Click the verification link in the email</li>
+                <li>Or enter the verification code below</li>
+              </ul>
+            </div>
+
+            <!-- Verification Form -->
+            <div class="card bg-light mb-4">
+              <div class="card-body">
+                <h5 class="card-title mb-3">
+                  <i class="fas fa-key me-2"></i>Enter Verification Code
+                </h5>
+
+                <form method="post"
+                      action="{% url 'email_verify_form' email.id %}"
+                      id="verify-form">
+                  {% csrf_token %}
+
+                  <div class="mb-3">
+                    <label for="{{ form.token.id_for_label }}" class="form-label">
+                      Verification Code
+                    </label>
+                    <div class="input-group input-group-lg">
+                      <span class="input-group-text">
+                        <i class="fas fa-lock"></i>
+                      </span>
+                      {{ form.token }}
+                    </div>
+
+                    {% if form.token.errors %}
+                      <div class="invalid-feedback d-block">
+                        {% for error in form.token.errors %}{{ error }}{% endfor %}
+                      </div>
+                    {% endif %}
+
+                    <div class="form-text">
+                      Enter the 6-digit code from your verification email
+                    </div>
+                  </div>
+
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg" id="verify-btn">
+                      <i class="fas fa-check-circle me-2"></i>Verify Email
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Resend Section -->
+            <div class="text-center">
+              <p class="text-muted mb-2">Didn't receive the email?</p>
+              {% if can_resend %}
+                <form method="post"
+                      action="{% url 'email_resend_verification' email.id %}"
+                      class="d-inline"
+                      id="resend-form">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-outline-primary" id="resend-btn">
+                    <i class="fas fa-paper-plane me-2"></i>Resend Verification Email
+                  </button>
+                </form>
+              {% else %}
+                <button class="btn btn-outline-secondary" disabled id="resend-btn">
+                  <i class="fas fa-clock me-2"></i>
+                  Wait <span id="countdown">{{ next_resend }}</span> seconds
+                </button>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="card-footer bg-white text-center">
+            <a href="{% url 'email_detail' email.id %}"
+               class="btn btn-outline-secondary">
+              <i class="fas fa-arrow-left me-2"></i>Back to Email Details
+            </a>
+          </div>
+        </div>
+
+        <!-- Help Tips -->
+        <div class="card shadow-sm mt-4">
+          <div class="card-header bg-white">
+            <h5 class="mb-0">
+              <i class="fas fa-question-circle me-2"></i>Troubleshooting
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h6>
+                  <i class="fas fa-search me-2"></i>Check Spam Folder
+                </h6>
+                <p class="small text-muted">
+                  Sometimes verification emails end up in spam/junk folders.
+                </p>
+              </div>
+              <div class="col-md-6">
+                <h6>
+                  <i class="fas fa-clock me-2"></i>Wait a Few Minutes
+                </h6>
+                <p class="small text-muted">Email delivery can take 1-5 minutes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    $(document).ready(function() {
+      // Auto focus verification code input
+      $('#{{ form.token.id_for_label }}').focus();
+
+      // Verification form submission
+      $('#verify-form').on('submit', function(e) {
+        e.preventDefault();
+
+        const form = $(this);
+        const verifyBtn = $('#verify-btn');
+        const originalHtml = verifyBtn.html();
+
+        // Show loading
+        verifyBtn.prop('disabled', true).html(
+          '<i class="fas fa-spinner fa-spin me-2"></i>Verifying...'
+        );
+
+        $.ajax({
+          url: form.attr('action'),
+          method: 'POST',
+          data: form.serialize(),
+          success: function(response) {
+            if (response.success) {
+              showToast('success', 'Success', 'Email verified successfully!');
+              setTimeout(function() {
+                window.location.href = "{% url 'email_detail' email.id %}";
+              }, 1500);
+            } else {
+              showToast('error', 'Error', response.message || 'Verification failed');
+              verifyBtn.prop('disabled', false).html(originalHtml);
+            }
+          },
+          error: function(xhr) {
+            if (xhr.responseJSON && xhr.responseJSON.errors) {
+              showToast('error', 'Error', xhr.responseJSON.errors.token || 'Invalid code');
+            } else {
+              showToast('error', 'Error', 'Verification failed');
+            }
+            verifyBtn.prop('disabled', false).html(originalHtml);
+          }
+        });
+      });
+
+      // Resend verification
+      $('#resend-form').on('submit', function(e) {
+        e.preventDefault();
+
+        const form = $(this);
+        const resendBtn = $('#resend-btn');
+        const originalHtml = resendBtn.html();
+
+        if (confirm('Resend verification email to {{ email.email }}?')) {
+          // Show loading
+          resendBtn.prop('disabled', true).html(
+            '<i class="fas fa-spinner fa-spin me-2"></i>Sending...'
+          );
+
+          $.ajax({
+            url: form.attr('action'),
+            method: 'POST',
+            data: form.serialize(),
+            success: function() {
+              showToast('success', 'Success', 'Verification email resent');
+
+              // Update UI
+              resendBtn.prop('disabled', true)
+                .removeClass('btn-outline-primary')
+                .addClass('btn-outline-secondary')
+                .html('<i class="fas fa-clock me-2"></i>Wait 60 seconds');
+
+              // Start countdown
+              startCountdown(60);
+            },
+            error: function() {
+              showToast('error', 'Error', 'Failed to resend verification');
+              resendBtn.prop('disabled', false).html(originalHtml);
+            }
+          });
+        }
+      });
+
+      // Countdown for resend
+      {
+        %
+        if not can_resend %
+      }
+      startCountdown({
+        {
+          next_resend
+        }
+      });
+      {
+        %
+        endif %
+      }
+
+      function startCountdown(seconds) {
+        const countdownElement = $('#countdown');
+        const resendBtn = $('#resend-btn');
+
+        const timer = setInterval(function() {
+          if (seconds <= 0) {
+            clearInterval(timer);
+            resendBtn.prop('disabled', false)
+              .removeClass('btn-outline-secondary')
+              .addClass('btn-outline-primary')
+              .html('<i class="fas fa-paper-plane me-2"></i>Resend Verification Email');
+          } else {
+            seconds--;
+            countdownElement.text(seconds);
+          }
+        }, 1000);
+      }
+
+      // Toast notification
+      function showToast(type, title, message) {
+        const toastId = 'toast-' + Date.now();
+        const toastHtml = `
+            <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0" role="alert">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        <strong>${title}:</strong> ${message}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            </div>
+        `;
+
+        $('#toast-container').append(toastHtml);
+        const toastElement = document.getElementById(toastId);
+        const toast = new bootstrap.Toast(toastElement, {
+          autohide: true,
+          delay: 3000
+        });
+        toast.show();
+
+        toastElement.addEventListener('hidden.bs.toast', function() {
+          $(this).remove();
+        });
+      }
+    });
+  </script>
+
+  <!-- Toast Container -->
+  <div id="toast-container"
+       class="position-fixed bottom-0 end-0 p-3"
+       style="z-index: 11"></div>
+{% endblock %}

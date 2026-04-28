@@ -1,0 +1,218 @@
+{% extends "base/document.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Add Email - {{ site_name }}{% endblock %}
+
+{% block content %}
+  <div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <!-- Back Button -->
+        <div class="mb-4">
+          <a href="{% url 'email_list' %}" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Email List
+          </a>
+        </div>
+
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+              <i class="fas fa-plus-circle me-2"></i>Add New Email
+            </h4>
+          </div>
+
+          <div class="card-body">
+            {% if messages %}
+              <div class="alert-container mb-4">
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                       role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <form method="post"
+                  action="{% url 'email_add' %}"
+                  id="add-email-form"
+                  novalidate>
+              {% csrf_token %}
+
+              <!-- Email Input -->
+              <div class="mb-4">
+                <label for="{{ form.email.id_for_label }}" class="form-label fw-semibold">
+                  <i class="fas fa-envelope me-1"></i>Email Address
+                  <span class="text-danger">*</span>
+                </label>
+
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="fas fa-at"></i>
+                  </span>
+                  {{ form.email }}
+                  <button type="button"
+                          class="btn btn-outline-secondary"
+                          onclick="checkEmailAvailability()"
+                          id="checkEmailBtn">
+                    <i class="fas fa-check"></i> Check
+                  </button>
+                </div>
+
+                <div class="d-flex justify-content-between mt-1">
+                  <div>
+                    {% if form.email.errors %}
+                      <div class="invalid-feedback d-block">
+                        {% for error in form.email.errors %}{{ error }}{% endfor %}
+                      </div>
+                    {% endif %}
+                    <div class="form-text">{{ form.email.help_text }}</div>
+                  </div>
+                  <div id="email-status" class="small"></div>
+                </div>
+              </div>
+
+              <!-- Info Box -->
+              <div class="alert alert-info">
+                <h6 class="alert-heading">
+                  <i class="fas fa-info-circle me-2"></i>What happens next?
+                </h6>
+                <ul class="mb-0">
+                  <li>Verification email will be sent to this address</li>
+                  <li>You need to verify within 7 days</li>
+                  <li>Verified emails can be set as primary</li>
+                  <li>You can have up to 5 email addresses</li>
+                </ul>
+              </div>
+
+              <!-- Current Count -->
+              <div class="mb-4">
+                <p class="text-muted mb-0">
+                  <i class="fas fa-envelope-open me-2"></i>
+                  You currently have {{ current_count }} of 5 email addresses
+                </p>
+                <div class="progress mt-2" style="height: 8px;">
+                  <div class="progress-bar"
+                       style="width: {{ progress_percent }}%"
+                       role="progressbar"
+                       aria-valuenow="{{ current_count }}"
+                       aria-valuemin="0"
+                       aria-valuemax="5"></div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'email_list' %}" class="btn btn-outline-secondary">
+                  <i class="fas fa-times me-2"></i>Cancel
+                </a>
+                <button type="submit" class="btn btn-primary" id="submit-btn">
+                  <i class="fas fa-plus me-2"></i>Add Email
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card shadow-sm mt-4">
+          <div class="card-body text-center">
+            <p class="mb-2">Need to add multiple emails?</p>
+            <a href="{% url 'email_bulk_add' %}" class="btn btn-outline-primary">
+              <i class="fas fa-plus-circle me-2"></i>Bulk Add Emails
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    $(document).ready(function() {
+      // Auto focus email input
+      $('#{{ form.email.id_for_label }}').focus();
+
+      // Real-time email checking
+      let emailTimeout;
+      $('#{{ form.email.id_for_label }}').on('input', function() {
+        clearTimeout(emailTimeout);
+        emailTimeout = setTimeout(checkEmailAvailability, 500);
+      });
+
+      // Form submission
+      $('#add-email-form').on('submit', function(e) {
+        const submitBtn = $('#submit-btn');
+        const originalHtml = submitBtn.html();
+
+        // Show loading
+        submitBtn.prop('disabled', true).html(
+          '<i class="fas fa-spinner fa-spin me-2"></i>Adding...'
+        );
+      });
+    });
+
+    // Check email availability
+    function checkEmailAvailability() {
+      const emailInput = $('#{{ form.email.id_for_label }}');
+      const email = emailInput.val().trim();
+      const statusElement = $('#email-status');
+      const checkBtn = $('#checkEmailBtn');
+
+      if (!email) {
+        updateStatus(statusElement, '', '');
+        return;
+      }
+
+      // Disable check button
+      if (checkBtn) {
+        checkBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i>');
+      }
+
+      // Check via AJAX
+      $.ajax({
+        url: "{% url 'check_email_availability' %}",
+        method: 'GET',
+        data: {
+          email: email
+        },
+        success: function(data) {
+          if (data.available) {
+            updateStatus(statusElement, data.message, 'success');
+            markFieldValid(emailInput.attr('id'));
+          } else {
+            updateStatus(statusElement, data.message, 'danger');
+            markFieldInvalid(emailInput.attr('id'));
+          }
+        },
+        error: function() {
+          updateStatus(statusElement, 'Check failed', 'warning');
+        },
+        complete: function() {
+          if (checkBtn) {
+            checkBtn.prop('disabled', false).html('<i class="fas fa-check"></i> Check');
+          }
+        }
+      });
+    }
+
+    // Utility functions
+    function updateStatus(element, message, type) {
+      if (!element) return;
+      element.text(message);
+      element.removeClass('text-success text-danger text-warning')
+        .addClass('text-' + type);
+    }
+
+    function markFieldValid(fieldId) {
+      $('#' + fieldId).removeClass('is-invalid').addClass('is-valid');
+    }
+
+    function markFieldInvalid(fieldId) {
+      $('#' + fieldId).removeClass('is-valid').addClass('is-invalid');
+    }
+  </script>
+{% endblock %}

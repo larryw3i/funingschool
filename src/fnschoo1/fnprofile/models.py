@@ -10,9 +10,11 @@ from django.contrib.auth.models import (
     PermissionsMixin,
     User,
 )
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 from django.utils.translation import gettext as _
 from fnschool import *
 
@@ -44,6 +46,18 @@ class Fnuser(AbstractUser, PermissionsMixin):
         help_text=_("Specific permissions for this user."),
         related_name="fn_user_permissions",
         related_query_name="fn_user",
+    )
+
+    email = models.EmailField(
+        _("email address"),
+        blank=True,
+        null=True,
+        unique=True,
+        max_length=256,
+        help_text=_("Primary email address."),
+        error_messages={
+            "unique": _("This email is already registered."),
+        },
     )
 
     phone = models.CharField(
@@ -107,62 +121,34 @@ class Fnuser(AbstractUser, PermissionsMixin):
         return _("{0}'s Information").format(self.username)
 
     def save(self, *args, **kwargs):
-        if not self.username:
-            raise ValidationError(
-                _(
-                    "The username may not be empty. Please enter a valid username."
-                )
-            )
-
         super().save(*args, **kwargs)
 
-    def get_email(self):
+    def get_primary_email_instance(self):
         try:
-            primary_email = self.emails.get(
-                is_primary=True, is_active=True, is_verified=True
-            )
-            return primary_email.email
-        except FnEmail.DoesNotExist:
-            verified_email = self.emails.filter(
-                is_verified=True, is_active=True
-            ).first()
-            if verified_email:
-                return verified_email.email
+            return self.emails.get(is_primary=True, is_active=True)
+        except Fnemail.DoesNotExist:
             return None
 
     def get_primary_email(self):
-        try:
-            return self.emails.get(is_primary=True, is_active=True)
-        except FnEmail.DoesNotExist:
-            return None
+        primary_email = self.get_primary_email_instance()
+        if primary_email:
+            return primary_email.email
+        return self.email
 
     def has_verified_email(self):
         return self.emails.filter(is_verified=True, is_active=True).exists()
 
-    def get_verified_emails(self):
-        return self.emails.filter(is_verified=True, is_active=True)
-
-    def get_all_emails(self):
-        return self.emails.filter(is_active=True)
-
-    def email_exists(self, email):
-        return self.emails.filter(email=email, is_active=True).exists()
-
-    def can_add_email(self):
-        max_emails = max_email_count
-        return self.emails.filter(is_active=True).count() < max_emails
-
-    @property
-    def email_count(self):
-        return self.emails.filter(is_active=True).count()
-
-    @property
-    def verified_email_count(self):
-        return self.emails.filter(is_verified=True, is_active=True).count()
+    def update_email_from_primary(self):
+        primary_email = self.get_primary_email_instance()
+        if primary_email and primary_email.is_verified:
+            if self.email != primary_email.email:
+                self.email = primary_email.email
+                self.save(update_fields=["email"])
+                return True
+        return False
 
 
-class FnEmail(models.Model):
-
+class Fnemail(models.Model):
     user = models.ForeignKey(
         Fnuser,
         on_delete=models.CASCADE,
@@ -171,56 +157,59 @@ class FnEmail(models.Model):
         db_index=True,
     )
 
+    # Email address
     email = models.EmailField(
-        _("Email Address"),
-        max_length=256,
+        _("Email address"),
+        max_length=255,
         db_index=True,
-        help_text=_("Please enter a valid email address."),
+        help_text=_("Please enter a valid email address"),
     )
 
-    # 验证相关
+    # Verification related
     is_verified = models.BooleanField(
-        _("Is Verified"),
+        _("Is verified"),
         default=False,
-        help_text=_("Has the email been verified."),
+        help_text=_("Whether the email has been verified"),
     )
 
     verification_token = models.CharField(
-        _("Verification Token"),
+        _("Verification token"),
         max_length=100,
         blank=True,
         null=True,
-        help_text=_("Token used for email verification."),
+        help_text=_("Token for email verification"),
     )
 
     verification_sent_at = models.DateTimeField(
-        _("Last verification email sent time"),
+        _("Verification email sent at"),
         blank=True,
         null=True,
-        help_text=_("The last time a verification email was sent."),
+        help_text=_("When the verification email was last sent"),
     )
 
     verified_at = models.DateTimeField(
         _("Verified at"),
         blank=True,
         null=True,
-        help_text=_("The time when email verification was passed."),
+        help_text=_("When the email was verified"),
     )
 
+    # Status related
     is_active = models.BooleanField(
-        _("Is Active"),
+        _("Is active"),
         default=True,
-        help_text=_("Is this email address active?"),
+        help_text=_("Whether this email address is active"),
     )
 
     is_primary = models.BooleanField(
-        _("Is Primary"),
+        _("Is primary"),
         default=False,
-        help_text=_("Is it used as the primary email?"),
+        help_text=_("Whether this is the primary email address"),
     )
 
+    # Timestamps
     created_at = models.DateTimeField(
-        _("Added at"),
+        _("Created at"),
         auto_now_add=True,
         db_index=True,
     )
@@ -235,18 +224,21 @@ class FnEmail(models.Model):
         verbose_name_plural = _("User Emails")
         ordering = ["-is_primary", "-is_verified", "-created_at"]
 
+        # Constraints
         constraints = [
+            # User and email should be unique together
             models.UniqueConstraint(
                 fields=["user", "email"],
                 name="unique_user_email",
                 violation_error_message=_("You have already added this email."),
             ),
+            # Only one primary email per user
             models.UniqueConstraint(
                 fields=["user"],
                 condition=models.Q(is_primary=True, is_active=True),
                 name="unique_user_primary_email",
                 violation_error_message=_(
-                    "There can only be one primary email."
+                    "You can only have one primary email."
                 ),
             ),
         ]
@@ -261,68 +253,100 @@ class FnEmail(models.Model):
         return f"{self.user.username}: {self.email}"
 
     def clean(self):
+        """Model validation"""
         super().clean()
+
+        # Normalize email
         self.email = self.email.lower().strip()
+
+        # Validate email format
         if not re.match(
             r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", self.email
         ):
-            raise ValidationError(
-                {"email": _("The email format is incorrect.")}
-            )
+            raise ValidationError({"email": _("Invalid email format.")})
 
+        # Check if email is used by other users
         if self.is_active:
             existing = (
-                FnEmail.objects.filter(email=self.email, is_active=True)
+                Fnemail.objects.filter(email=self.email, is_active=True)
                 .exclude(user=self.user)
                 .first()
             )
 
             if existing:
                 raise ValidationError(
-                    {"email": _("This email has been used by another user.")}
+                    {"email": _("This email is already used by another user.")}
                 )
 
+        # Validate primary email
+
         if self.is_primary and (not self.is_verified or not self.is_active):
-            raise ValidationError(
-                {
-                    "is_primary": _(
-                        "Only verified and enabled email addresses can be set as primary email addresses."
-                    )
-                }
-            )
+            if (
+                Fnemail.objects.filter(user=self.user)
+                .exclude(pk=self.pk)
+                .exists()
+            ):
+
+                raise ValidationError(
+                    {
+                        "is_primary": _(
+                            "Only verified and active emails can be set as primary."
+                        )
+                    }
+                )
 
     def save(self, *args, **kwargs):
+        """Override save to sync with Fnuser.email"""
         self.full_clean()
 
+        # If setting as primary, unset other primary emails
         if self.is_primary and self.pk:
-            FnEmail.objects.filter(user=self.user, is_primary=True).exclude(
+            Fnemail.objects.filter(user=self.user, is_primary=True).exclude(
                 pk=self.pk
             ).update(is_primary=False)
 
-        super().save(*args, **kwargs)
+        # Save the Fnemail instance
 
+        # If this is primary and verified, sync to Fnuser.email
+        if self.is_primary and self.is_verified and self.is_active:
+            self.sync_to_user_email()
+
+        # If this is the first email, set as primary
         if (
-            not FnEmail.objects.filter(user=self.user)
+            not Fnemail.objects.filter(user=self.user)
             .exclude(pk=self.pk)
             .exists()
         ):
             self.is_primary = True
-            self.save(update_fields=["is_primary"])
+        super().save(*args, **kwargs)
+
+    def sync_to_user_email(self):
+        """
+        Synchronize this email to the user's email field
+        Only if this is the primary verified email
+        """
+        if self.is_primary and self.is_verified and self.is_active:
+            if self.user.email != self.email:
+                self.user.email = self.email
+                self.user.save(update_fields=["email"])
+                return True
+        return False
 
     def generate_verification_token(self):
+        """Generate verification token"""
         self.verification_token = uuid.uuid4().hex
         self.verification_sent_at = timezone.now()
         self.save(update_fields=["verification_token", "verification_sent_at"])
         return self.verification_token
 
     def verify(self, token):
+        """Verify email with token"""
         if not self.verification_token or self.verification_token != token:
             return False
 
+        # Check token expiration (7 days)
         if self.verification_sent_at:
-            expiry_time = self.verification_sent_at + timezone.timedelta(
-                days=(resend_verification_email_time_interval + 1 * 60)
-            )
+            expiry_time = self.verification_sent_at + timezone.timedelta(days=7)
             if timezone.now() > expiry_time:
                 return False
 
@@ -333,80 +357,68 @@ class FnEmail(models.Model):
             update_fields=["is_verified", "verified_at", "verification_token"]
         )
 
-        if not FnEmail.objects.filter(
-            user=self.user, is_primary=True, is_active=True
+        # If this is user's first verified email, set as primary
+        if not Fnemail.objects.filter(
+            user=self.user, is_primary=True, is_verified=True
         ).exists():
             self.is_primary = True
             self.save(update_fields=["is_primary"])
 
+        # Sync to user.email
+        self.sync_to_user_email()
+
         return True
 
     def can_resend_verification(self):
+        """Check if can resend verification email"""
         if not self.verification_sent_at:
             return True
 
+        # Wait at least 60 seconds
         time_since_last = (
             timezone.now() - self.verification_sent_at
         ).total_seconds()
-        return time_since_last >= resend_verification_email_time_interval
-
-    def disable(self):
-        if self.is_primary:
-            raise ValidationError(_("The primary email cannot be disabled."))
-
-        self.is_active = False
-        self.save(update_fields=["is_active"])
-
-    def enable(self):
-        self.is_active = True
-        self.save(update_fields=["is_active"])
+        return time_since_last >= 60
 
     def set_as_primary(self):
+        """Set this email as primary"""
         if not self.is_verified:
             raise ValidationError(
-                _(
-                    "The email has not been verified, and cannot be set as the primary email."
-                )
+                _("Email must be verified before setting as primary.")
             )
 
         if not self.is_active:
-            raise ValidationError(
-                _(
-                    "The email has been disabled and cannot be set as the primary email."
-                )
-            )
+            raise ValidationError(_("Email must be active to set as primary."))
 
-        FnEmail.objects.filter(user=self.user, is_primary=True).update(
+        # Unset other primary emails
+        Fnemail.objects.filter(user=self.user, is_primary=True).update(
             is_primary=False
         )
 
+        # Set this as primary
         self.is_primary = True
         self.save(update_fields=["is_primary"])
 
-    def resend_verification(self):
-        if not self.can_resend_verification():
-            raise ValidationError(
-                _(
-                    "Please wait for {time_interval} seconds and then resend"
-                ).format(time_interval=resend_verification_email_time_interval)
-            )
+        # Sync to user.email
+        self.sync_to_user_email()
 
-        self.generate_verification_token()
         return True
 
     @property
     def status_display(self):
+        """Display status text"""
         if not self.is_active:
             return _("Disabled")
         elif not self.is_verified:
-            return _("verified")
+            return _("Unverified")
         elif self.is_primary:
             return _("Primary")
         else:
-            return _("Enabled")
+            return _("Verified")
 
     @property
     def status_color(self):
+        """Status badge color"""
         if not self.is_active:
             return "secondary"
         elif not self.is_verified:
@@ -415,10 +427,6 @@ class FnEmail(models.Model):
             return "success"
         else:
             return "info"
-
-    @property
-    def age_days(self):
-        return (timezone.now() - self.created_at).days
 
 
 # The end.
