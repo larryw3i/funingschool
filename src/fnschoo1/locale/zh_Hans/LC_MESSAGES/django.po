@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-27 14:57+0800\n"
-"PO-Revision-Date: 2026-04-27 14:58+0800\n"
+"POT-Creation-Date: 2026-05-02 02:49+0800\n"
+"PO-Revision-Date: 2026-05-02 03:16+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -60,7 +60,7 @@ msgid "Creating Date"
 msgstr "创建日期"
 
 #: canteen/models.py:36 canteen/models.py:64 canteen/models.py:108
-#: fnprofile/models.py:86
+#: fnprofile/models.py:106
 msgid "Time of updating"
 msgstr "更新时间"
 
@@ -96,21 +96,21 @@ msgstr "优先级"
 msgid "Pin to Consumptions Top"
 msgstr "置顶出库"
 
-#: canteen/models.py:96
+#: canteen/models.py:96 fnprofile/models.py:156
 msgid "User"
 msgstr "用户"
 
 #: canteen/models.py:98 canteen/templates/canteen/consumption/create.html:15
-#: canteen/views.py:74
+#: canteen/views.py:75
 msgid "Storage Date"
 msgstr "入库日期"
 
-#: canteen/models.py:104 fnprofile/models.py:82
+#: canteen/models.py:104 fnprofile/models.py:102
 msgid "Time of creating"
 msgstr "创建时间"
 
 #: canteen/models.py:111 canteen/templates/canteen/consumption/create.html:21
-#: canteen/templates/canteen/consumption/create.html:71 canteen/views.py:84
+#: canteen/templates/canteen/consumption/create.html:71 canteen/views.py:85
 msgid "Ingredient Name"
 msgstr "食材名"
 
@@ -233,7 +233,7 @@ msgstr "食材大类名"
 #: canteen/templates/canteen/category/delete.html:20
 #: canteen/templates/canteen/category/list.html:19
 #: canteen/templates/canteen/meal_type/delete.html:25
-#: canteen/templates/canteen/meal_type/list.html:19
+#: canteen/templates/canteen/meal_type/list.html:19 fnprofile/models.py:212
 msgid "Created at"
 msgstr "创建于"
 
@@ -329,7 +329,7 @@ msgstr ""
 msgid "Consume Ingredients"
 msgstr "消耗食材"
 
-#: canteen/templates/canteen/consumption/create.html:27 canteen/views.py:86
+#: canteen/templates/canteen/consumption/create.html:27 canteen/views.py:87
 msgid "Meal Type"
 msgstr "餐类"
 
@@ -628,7 +628,7 @@ msgstr ""
 "\n"
 "编辑餐类（ %(instance_name)s ）。"
 
-#: canteen/views.py:76
+#: canteen/views.py:77
 msgid ""
 "Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
 "\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
@@ -639,11 +639,11 @@ msgstr ""
 "月.日日”、“月月-日日”、“月月日日”，“月月.日日” 。总之，FNSCHOOL 想兼容所有你"
 "喜欢的格式，但是如果出错了，你要告诉开发者，谢谢你！"
 
-#: canteen/views.py:84
+#: canteen/views.py:85
 msgid "Name of Ingredient"
 msgstr "食材名称"
 
-#: canteen/views.py:88
+#: canteen/views.py:89
 msgid ""
 "For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
 "generating a spreadsheet, each meal category corresponds to a spread sheet. "
@@ -652,22 +652,22 @@ msgstr ""
 "比如早餐、晚餐、正餐、营养餐等，生成 表册 的时候每个餐类对应着一个 表册  。不"
 "填的话只生成一个 表册 。"
 
-#: canteen/views.py:96
+#: canteen/views.py:97
 msgid "Category"
 msgstr "食材大类"
 
-#: canteen/views.py:98
+#: canteen/views.py:99
 msgid ""
 "Usually there are seven categories: vegetables, meat, grains, seasonings, "
 "eggs and milk, oils, and fruits."
 msgstr ""
 "通常是七大类：蔬菜类、肉类、粮食类、调味类、蛋奶和糕点类、油类、水果类。"
 
-#: canteen/views.py:103
+#: canteen/views.py:104
 msgid "Quantity"
 msgstr "数量"
 
-#: canteen/views.py:105
+#: canteen/views.py:106
 msgid ""
 "To prevent the number of decimal places in the unit price from becoming too "
 "large, \"quantity\" is only allowed to be an integer. If your unit price is "
@@ -677,47 +677,47 @@ msgstr ""
 "为防止单价的小数位数变得很多，“数量”只允许为整数。如果你的单价是小数，请你用"
 "更小的数量单位，然后把数量扩大为整数。"
 
-#: canteen/views.py:116
+#: canteen/views.py:117
 msgid "Total Price"
 msgstr "总价"
 
-#: canteen/views.py:120
+#: canteen/views.py:121
 msgid "Unit Name of Quantity"
 msgstr "数量单位"
 
-#: canteen/views.py:124
+#: canteen/views.py:125
 msgid "Is Ignorable"
 msgstr "是不用入库的"
 
-#: canteen/views.py:125
+#: canteen/views.py:126
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:406
+#: canteen/views.py:407
 msgid "Please select the item(s) you wish to delete."
 msgstr "请选择要删除的食材项。"
 
-#: canteen/views.py:428
+#: canteen/views.py:429
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:430
+#: canteen/views.py:431
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:434
+#: canteen/views.py:435
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:436
+#: canteen/views.py:437
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:475
+#: canteen/views.py:476
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
@@ -726,42 +726,42 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:622
+#: canteen/views.py:623
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr "{meal_type}：{meal_type_total_price}"
 
-#: canteen/views.py:631
+#: canteen/views.py:632
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: canteen/views.py:659
+#: canteen/views.py:660
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:770 canteen/views.py:1055
+#: canteen/views.py:771 canteen/views.py:1056
 msgid "(2)"
 msgstr "（2）"
 
-#: canteen/views.py:779 canteen/views.py:1063
+#: canteen/views.py:780 canteen/views.py:1064
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:820
+#: canteen/views.py:821
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:840
+#: canteen/views.py:841
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:856
+#: canteen/views.py:857
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:882
+#: canteen/views.py:883
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr "（{month}）{affiliation}食堂出入库工作簿（{timestamp}）"
@@ -1346,107 +1346,311 @@ msgstr "出入库"
 msgid "FNSCHOOL Home"
 msgstr "FNSCHOOL 主页"
 
-#: fnprofile/forms.py:46
+#: fnprofile/forms.py:51
+#, python-brace-format
 msgid ""
-"Your email has not been verified. We have sent a verification email to your "
-"email address. Please check your email and complete the verification "
+"Your email ({0}) has not been verified. We have sent a verification email to "
+"your email address. Please check your email and complete the verification "
 "process. (If you haven't received the email, please check your spam folder.)"
 msgstr ""
-"你的电子邮件没有被验证，我们已经发送了一封验证邮件到你的电子邮箱，请查看你的"
-"电子邮箱然后完成验证。（如果没有收到邮件，请您检查一下“垃圾邮件”文件夹）"
+"你的电子邮件（{0}）没有被验证，我们已经发送了一封验证邮件到你的电子邮箱，请查"
+"看你的电子邮箱然后完成验证。（如果没有收到邮件，请您检查一下“垃圾邮件”文件"
+"夹）"
 
 #: fnprofile/forms.py:62
+msgid "Email"
+msgstr "电子邮件"
+
+#: fnprofile/forms.py:71
+msgid "We'll send a verification email to this address."
+msgstr "我们会发送一封验证邮件到这个邮箱地址。"
+
+#: fnprofile/forms.py:76
+msgid "I agree to the Terms of Service"
+msgstr "我同意《服务协议》"
+
+#: fnprofile/forms.py:84
+msgid "You must agree to the Terms of Service."
+msgstr "你需要同意该服务协议。"
+
+#: fnprofile/forms.py:95
 msgid "Email Address (Required)"
 msgstr "电子邮箱地址（必需）"
 
-#: fnprofile/forms.py:64
+#: fnprofile/forms.py:97
 msgid "Email Address (Optional)"
 msgstr "电子邮箱地址（选填）"
 
-#: fnprofile/forms.py:66
+#: fnprofile/forms.py:99
 msgid "Please enter your email address."
 msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:74
+#: fnprofile/forms.py:102
+msgid "Required. 256 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "必填，最多 256 个字符，可包含字母、数字、“@”、“.”、“+”、“-”、“_”。"
+
+#: fnprofile/forms.py:119
 msgid "Please enter email."
 msgstr "请输入电子邮件地址。"
 
-#: fnprofile/forms.py:78
+#: fnprofile/forms.py:123
 msgid "A user with that email already exists."
 msgstr "该电子邮件地址已被使用。"
 
-#: fnprofile/forms.py:91 fnprofile/forms.py:92
+#: fnprofile/forms.py:137
+msgid "Please enter a username."
+msgstr "请输入用户名。"
+
+#: fnprofile/forms.py:143
+msgid "Username can only contain letters, digits and @/./+/-/_ characters."
+msgstr "用户名只能包含字母、数字、“@”、“.”、“+”、“-”、“_”。"
+
+#: fnprofile/forms.py:148
+msgid "Username must be at least 3 characters."
+msgstr "用户名至少需要三个字符。"
+
+#: fnprofile/forms.py:151
+msgid "Username cannot exceed 256 characters."
+msgstr "用户名不要超过 256 个字符。"
+
+#: fnprofile/forms.py:155
+msgid "This username is already taken."
+msgstr "用户名已存在。"
+
+#: fnprofile/forms.py:164 fnprofile/forms.py:303
+msgid "Please enter an email address."
+msgstr "请输入您的电子邮箱地址。"
+
+#: fnprofile/forms.py:170 fnprofile/forms.py:309
+msgid "Please enter a valid email address."
+msgstr "请输入有效的电子邮箱地址。"
+
+#: fnprofile/forms.py:176 fnprofile/models.py:59
+msgid "This email is already registered."
+msgstr ""
+"该电子邮箱地址已用于注册账号（如果是您的邮箱地址没有被验证可在登录页面验"
+"证）。"
+
+#: fnprofile/forms.py:192
+msgid "Username should not be part of your email address."
+msgstr "用户名不能是您的邮箱地址的一部分。"
+
+#: fnprofile/forms.py:223 fnprofile/forms.py:224
 msgid "User Name"
 msgstr "用户名"
 
-#: fnprofile/forms.py:95 fnprofile/forms.py:96
+#: fnprofile/forms.py:227 fnprofile/forms.py:228
 msgid "Password"
 msgstr "密码"
 
-#: fnprofile/forms.py:99 fnprofile/forms.py:101
+#: fnprofile/forms.py:231 fnprofile/forms.py:233
 msgid "Confirm Password"
 msgstr "确认密码"
 
-#: fnprofile/models.py:18
-msgid "Male"
-msgstr "男"
-
-#: fnprofile/models.py:19
-msgid "Female"
-msgstr "女"
-
-#: fnprofile/models.py:28
-msgid "The groups this user belongs to."
-msgstr "这个用户所属的组。"
-
-#: fnprofile/models.py:36
-msgid "Specific permissions for this user."
-msgstr "给这个用户指定权限。"
-
-#: fnprofile/models.py:42
+#: fnprofile/forms.py:287
 msgid "Email Address"
 msgstr "电子邮件地址"
 
-#: fnprofile/models.py:48
+#: fnprofile/forms.py:290
+msgid "Add a new email address to your account"
+msgstr "添加一个新的邮箱地址到您的账号。"
+
+#: fnprofile/forms.py:318 fnprofile/models.py:233
+msgid "You have already added this email."
+msgstr "您已经添加了该邮箱地址。"
+
+#: fnprofile/forms.py:327 fnprofile/models.py:278
+msgid "This email is already used by another user."
+msgstr "该邮箱地址已被其它用户注册。"
+
+#: fnprofile/forms.py:347
+msgid "Set as primary email"
+msgstr "设置为主邮箱地址"
+
+#: fnprofile/forms.py:350
+msgid "Primary email will be used for notifications"
+msgstr "主邮箱地址将用于消息通知。"
+
+#: fnprofile/forms.py:360 fnprofile/forms.py:375
+msgid "Email must be verified first"
+msgstr "邮箱地址必须要被验证。"
+
+#: fnprofile/forms.py:366 fnprofile/forms.py:378
+msgid "Email is disabled"
+msgstr "邮箱地址已禁用。"
+
+#: fnprofile/forms.py:387
+msgid "Verification Code"
+msgstr "验证码"
+
+#: fnprofile/models.py:27
+msgid "Male"
+msgstr "男"
+
+#: fnprofile/models.py:28
+msgid "Female"
+msgstr "女"
+
+#: fnprofile/models.py:37
+msgid "The groups this user belongs to."
+msgstr "这个用户所属的组。"
+
+#: fnprofile/models.py:46
+msgid "Specific permissions for this user."
+msgstr "给这个用户指定权限。"
+
+#: fnprofile/models.py:52
+msgid "email address"
+msgstr "电子邮件地址"
+
+#: fnprofile/models.py:57
+msgid "Primary email address."
+msgstr "主邮箱地址。"
+
+#: fnprofile/models.py:68
 msgid "Phone Number"
 msgstr "电话号码"
 
-#: fnprofile/models.py:51
+#: fnprofile/models.py:71
 msgid "Affiliation"
 msgstr "机构"
 
-#: fnprofile/models.py:58
+#: fnprofile/models.py:78
 msgid "Superior department"
 msgstr "上级机构"
 
-#: fnprofile/models.py:62
+#: fnprofile/models.py:82
 msgid "Date of Birth"
 msgstr "生日"
 
-#: fnprofile/models.py:68
+#: fnprofile/models.py:88
 msgid "Gender"
 msgstr "性别"
 
-#: fnprofile/models.py:72
+#: fnprofile/models.py:92
 msgid "Address"
 msgstr "地址"
 
-#: fnprofile/models.py:75
+#: fnprofile/models.py:95
 msgid "Avatar"
 msgstr "头像"
 
-#: fnprofile/models.py:78
+#: fnprofile/models.py:98
 msgid "Biography"
 msgstr "个人简介"
 
-#: fnprofile/models.py:90 fnprofile/models.py:91
+#: fnprofile/models.py:117 fnprofile/models.py:118
 msgid "User Information"
 msgstr "用户信息"
 
-#: fnprofile/models.py:94
+#: fnprofile/models.py:121
 #, python-brace-format
 msgid "{0}'s Information"
 msgstr "{0} 的信息"
+
+#: fnprofile/models.py:162
+msgid "Email address"
+msgstr "电子邮件地址"
+
+#: fnprofile/models.py:165
+msgid "Please enter a valid email address"
+msgstr "请输入有效的电子邮箱地址"
+
+#: fnprofile/models.py:170
+msgid "Is verified"
+msgstr "已被验证"
+
+#: fnprofile/models.py:172
+msgid "Whether the email has been verified"
+msgstr "邮箱地址是否已被验证"
+
+#: fnprofile/models.py:176
+msgid "Verification token"
+msgstr "验证令牌"
+
+#: fnprofile/models.py:180
+msgid "Token for email verification"
+msgstr "电子邮件的验证令牌"
+
+#: fnprofile/models.py:184
+msgid "Verification email sent at"
+msgstr "验证邮件发送时间"
+
+#: fnprofile/models.py:187
+msgid "When the verification email was last sent"
+msgstr "上次发送验证邮件的时间。"
+
+#: fnprofile/models.py:191
+msgid "Verified at"
+msgstr "验证于"
+
+#: fnprofile/models.py:194
+msgid "When the email was verified"
+msgstr "该电子邮箱被验证的时间"
+
+#: fnprofile/models.py:199
+msgid "Is active"
+msgstr "已激活"
+
+#: fnprofile/models.py:201
+msgid "Whether this email address is active"
+msgstr "是否电子邮件地址已激活"
+
+#: fnprofile/models.py:205
+msgid "Is primary"
+msgstr "是主邮件地址"
+
+#: fnprofile/models.py:207
+msgid "Whether this is the primary email address"
+msgstr "是否该邮件地址是主邮件地址"
+
+#: fnprofile/models.py:218
+msgid "Updated at"
+msgstr "更新于"
+
+#: fnprofile/models.py:223
+msgid "User Email"
+msgstr "用户电子邮件"
+
+#: fnprofile/models.py:224
+msgid "User Emails"
+msgstr "用户电子邮件"
+
+#: fnprofile/models.py:241
+msgid "You can only have one primary email."
+msgstr "您只能设置一个电子邮件。"
+
+#: fnprofile/models.py:266
+msgid "Invalid email format."
+msgstr "无效的邮件格式。"
+
+#: fnprofile/models.py:293
+msgid "Only verified and active emails can be set as primary."
+msgstr "仅被验证且激活的邮件才能被设为主电子邮件。"
+
+#: fnprofile/models.py:387
+msgid "Email must be verified before setting as primary."
+msgstr "在设置为主电子邮件前该电子邮件地址应被确认。"
+
+#: fnprofile/models.py:391
+msgid "Email must be active to set as primary."
+msgstr "被激活的电子邮件地址才能设为主邮件地址。"
+
+#: fnprofile/models.py:411
+msgid "Disabled"
+msgstr "已禁用"
+
+#: fnprofile/models.py:413
+msgid "Unverified"
+msgstr "未被验证"
+
+#: fnprofile/models.py:415
+msgid "Primary"
+msgstr "主邮件"
+
+#: fnprofile/models.py:417
+msgid "Verified"
+msgstr "已验证"
 
 #: fnprofile/templates/fnprofile/activation_invalid.html:4
 msgid "Account activation failed!"
@@ -1474,26 +1678,22 @@ msgid ""
 "Homepage soon!"
 msgstr "您的账号已被激活！即将跳转主页。"
 
-#: fnprofile/templates/fnprofile/active_email.html:4
+#: fnprofile/templates/fnprofile/active_email.html:3
 #, python-format
-msgid ""
-"\n"
-"Hello! %(username)s,\n"
-msgstr ""
-"\n"
-"您好！ %(username)s,\n"
+msgid "Hello! %(username)s,"
+msgstr "您好！ %(username)s，"
 
-#: fnprofile/templates/fnprofile/active_email.html:7
+#: fnprofile/templates/fnprofile/active_email.html:4
 msgid "Please click on the link below to activate your account:"
 msgstr "请您点击以下链接以激活您的账号："
 
-#: fnprofile/templates/fnprofile/active_email.html:9
+#: fnprofile/templates/fnprofile/active_email.html:6
 msgid ""
 "(If you cannot click, please copy the entire link into the browser address "
 "bar and press Enter.)"
 msgstr "（如果无法点击，请复制整个链接到浏览器地址栏再按回车键跳转。）"
 
-#: fnprofile/templates/fnprofile/active_email.html:11
+#: fnprofile/templates/fnprofile/active_email.html:7
 msgid "Thank you for using FNSCHOOL!"
 msgstr "谢谢您使用 FNSCHOOL ！"
 
@@ -1590,13 +1790,153 @@ msgstr "你的账号已退出登录。"
 msgid "Log in again"
 msgstr "再次登录"
 
-#: fnprofile/views.py:29 fnprofile/views.py:106
+#: fnprofile/views.py:36 fnprofile/views.py:138
 msgid "Activate your account."
 msgstr "激活您的账户。"
 
-#: fnprofile/views.py:152
+#: fnprofile/views.py:63
+msgid "You are already logged in."
+msgstr "您已登录。"
+
+#: fnprofile/views.py:84
+msgid "Registration successful! Verification email sent to {}."
+msgstr "注册成功！验证邮件已发送至 {} 。"
+
+#: fnprofile/views.py:94
+msgid "Registration successful, but verification email failed to send."
+msgstr "注册成功，但验证邮件发送失败。"
+
+#: fnprofile/views.py:163
+msgid "Welcome back, {}!"
+msgstr "欢迎回来，{}！"
+
+#: fnprofile/views.py:181
+msgid "You have been logged out"
+msgstr "你的账号已退出登录。"
+
+#: fnprofile/views.py:194
 msgid "Your information has been updated successfully!"
 msgstr "您的信息已更新！"
+
+#: fnprofile/views.py:228
+msgid "My Emails"
+msgstr "我的电子邮件地址。"
+
+#: fnprofile/views.py:262
+msgid "Email added successfully! Verification email sent."
+msgstr "邮件地址添加成功！验证邮件已发送。"
+
+#: fnprofile/views.py:272
+msgid "Email added, but verification email failed to send."
+msgstr "邮件地址已被添加，但是验证邮件发送失败。"
+
+#: fnprofile/views.py:281
+msgid "Failed to add email. Please try again."
+msgstr "无法添加！请重试。"
+
+#: fnprofile/views.py:293
+msgid "Add Email"
+msgstr "添加电子邮件地址"
+
+#: fnprofile/views.py:335
+msgid "Successfully added {} email(s). Verification emails sent."
+msgstr "成功添加 {} 个电子邮件地址。验证邮件皆已发送。"
+
+#: fnprofile/views.py:342
+msgid "Failed to add {} email(s)."
+msgstr "无法添加 {} 个电子邮件地址。"
+
+#: fnprofile/views.py:356
+msgid "Bulk Add Emails"
+msgstr "批量添加邮件地址"
+
+#: fnprofile/views.py:388
+msgid "Email Details"
+msgstr "电子邮件详细"
+
+#: fnprofile/views.py:410 fnprofile/views.py:578
+msgid "Email set as primary"
+msgstr "设电子邮件地址为主邮件地址"
+
+#: fnprofile/views.py:412
+msgid "Email settings updated"
+msgstr "邮件设置已更新"
+
+#: fnprofile/views.py:418
+msgid "Failed to update email"
+msgstr "无法更新邮件地址"
+
+#: fnprofile/views.py:430
+msgid "Edit Email"
+msgstr "编辑邮件地址"
+
+#: fnprofile/views.py:446
+msgid "Email is already verified"
+msgstr "邮件地址已被验证"
+
+#: fnprofile/views.py:452 fnprofile/views.py:469
+msgid "Email verified successfully!"
+msgstr "邮件地址验证成功！"
+
+#: fnprofile/views.py:457
+msgid "Invalid or expired verification link"
+msgstr "无效或过期的验证链接"
+
+#: fnprofile/views.py:474
+msgid "Invalid verification code"
+msgstr "无效的验证码！"
+
+#: fnprofile/views.py:488
+msgid "Verify Email"
+msgstr "验证电子邮件"
+
+#: fnprofile/views.py:507
+msgid "Please wait 60 seconds before resending"
+msgstr "请等待 60 秒后再发送"
+
+#: fnprofile/views.py:513
+msgid "Verification email resent"
+msgstr "重新发送验证邮件"
+
+#: fnprofile/views.py:518
+msgid "Failed to send verification email"
+msgstr "无法发送验证邮件"
+
+#: fnprofile/views.py:522
+msgid "Failed to resend verification email"
+msgstr "无法重新发送验证邮件"
+
+#: fnprofile/views.py:542
+msgid "Cannot disable primary email"
+msgstr "不能禁用主邮件地址"
+
+#: fnprofile/views.py:546
+msgid "Email disabled"
+msgstr "电子邮件地址已禁用"
+
+#: fnprofile/views.py:553
+msgid "Email enabled"
+msgstr "电子邮件地址已启用"
+
+#: fnprofile/views.py:560
+msgid "Failed to update email status"
+msgstr "无法更新电子邮件地址状态"
+
+#: fnprofile/views.py:587
+msgid "Failed to set primary email"
+msgstr "无法设为主邮件地址"
+
+#: fnprofile/views.py:606
+msgid "Cannot delete primary email"
+msgstr "无法删除主邮件地址"
+
+#: fnprofile/views.py:613
+msgid "Email deleted"
+msgstr "电子邮件地址已删除"
+
+#: fnprofile/views.py:620
+msgid "Failed to delete email"
+msgstr "无法删除电子邮件地址"
 
 #: fnschool/settings.py:140
 msgid "English"
@@ -1686,18 +2026,9 @@ msgstr "隐藏信息。"
 #~ msgid "Create"
 #~ msgstr "新建"
 
-#~ msgid "User Profile"
-#~ msgstr "用户信息"
-
-#~ msgid "User Profiles"
-#~ msgstr "用户信息"
-
 #, python-brace-format
 #~ msgid "{0}'s Profile"
 #~ msgstr "{0} 的信息"
-
-#~ msgid "Profile has been updated successfully!"
-#~ msgstr "个人信息已更新！"
 
 #~ msgid "Consume by Week"
 #~ msgstr "周消耗"
