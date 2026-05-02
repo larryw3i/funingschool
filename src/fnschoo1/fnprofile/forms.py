@@ -36,8 +36,8 @@ class FnuserLoginForm(AuthenticationForm):
         username = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
         if username and password:
-            user = Fnuser.objects.get(username=username)
-            fn_email = Fnemail.objects.get(email=user.email)
+            user = Fnuser.objects.filter(username=username).first()
+            fn_email = Fnemail.objects.first(email=user.email).first()
             if user and user.check_password(password):
                 if settings.EMAIL_BACKEND:
                     if not fn_email.is_verified:

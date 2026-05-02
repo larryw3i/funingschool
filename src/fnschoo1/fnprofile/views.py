@@ -115,7 +115,7 @@ def activate(request, uidb64, token):
         user = None
 
     fn_email = Fnemail.objects.get(email=user.email)
-    if user is not None and fn_email.Verify(token):
+    if user is not None and fn_email.verify(token):
         login(request, user)
         return render(request, "fnprofile/activation_success.html")
     else:
@@ -130,9 +130,13 @@ def fnprofile_log_in(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(request, username=username, password=password)
-            print(user)
             if user is not None:
-                if not user.email_verified:
+                if not Fnemail.objects.filter(
+                    user=user, is_primary=True, is_verified=True
+                ).exists():
+                    fn_email = Fnemail.objects.filter(
+                        user=user, is_primary=True
+                    ).first()
                     if settings.EMAIL_BACKEND:
                         current_site = get_current_site(request)
                         mail_subject = _("Activate your account.")
@@ -144,9 +148,7 @@ def fnprofile_log_in(request):
                                 "uid": urlsafe_base64_encode(
                                     force_bytes(user.pk)
                                 ),
-                                "token": account_activation_token.make_token(
-                                    user
-                                ),
+                                "token": fn_email.generate_verification_token(),
                             },
                         )
                         to_email = form.cleaned_data.get("email")
