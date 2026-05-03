@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-02 23:10+0800\n"
+"POT-Creation-Date: 2026-05-03 16:14+0800\n"
 "PO-Revision-Date: 2026-05-02 03:16+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -60,7 +60,7 @@ msgid "Creating Date"
 msgstr "创建日期"
 
 #: canteen/models.py:36 canteen/models.py:64 canteen/models.py:108
-#: fnprofile/models.py:105
+#: fnprofile/models.py:127
 msgid "Time of updating"
 msgstr "更新时间"
 
@@ -96,7 +96,7 @@ msgstr "优先级"
 msgid "Pin to Consumptions Top"
 msgstr "置顶出库"
 
-#: canteen/models.py:96 fnprofile/models.py:128
+#: canteen/models.py:96 fnprofile/models.py:152
 msgid "User"
 msgstr "用户"
 
@@ -105,7 +105,7 @@ msgstr "用户"
 msgid "Storage Date"
 msgstr "入库日期"
 
-#: canteen/models.py:104 fnprofile/models.py:101
+#: canteen/models.py:104 fnprofile/models.py:123
 msgid "Time of creating"
 msgstr "创建时间"
 
@@ -233,7 +233,7 @@ msgstr "食材大类名"
 #: canteen/templates/canteen/category/delete.html:20
 #: canteen/templates/canteen/category/list.html:19
 #: canteen/templates/canteen/meal_type/delete.html:25
-#: canteen/templates/canteen/meal_type/list.html:19 fnprofile/models.py:180
+#: canteen/templates/canteen/meal_type/list.html:19 fnprofile/models.py:204
 msgid "Created at"
 msgstr "创建于"
 
@@ -1346,305 +1346,302 @@ msgstr "出入库"
 msgid "FNSCHOOL Home"
 msgstr "FNSCHOOL 主页"
 
-#: fnprofile/forms.py:51
-#, python-brace-format
-msgid ""
-"Your email ({0}) has not been verified. We have sent a verification email to "
-"your email address. Please check your email and complete the verification "
-"process. (If you haven't received the email, please check your spam folder.)"
-msgstr ""
-"你的电子邮件（{0}）没有被验证，我们已经发送了一封验证邮件到你的电子邮箱，请查"
-"看你的电子邮箱然后完成验证。（如果没有收到邮件，请您检查一下“垃圾邮件”文件"
-"夹）"
-
-#: fnprofile/forms.py:62
+#: fnprofile/forms.py:44
 msgid "Email"
 msgstr "电子邮件"
 
-#: fnprofile/forms.py:71
+#: fnprofile/forms.py:53
 msgid "We'll send a verification email to this address."
 msgstr "我们会发送一封验证邮件到这个邮箱地址。"
 
-#: fnprofile/forms.py:76
+#: fnprofile/forms.py:58
 msgid "I agree to the Terms of Service"
 msgstr "我同意《服务协议》"
 
-#: fnprofile/forms.py:84
+#: fnprofile/forms.py:66
 msgid "You must agree to the Terms of Service."
 msgstr "你需要同意该服务协议。"
 
-#: fnprofile/forms.py:95
+#: fnprofile/forms.py:77
 msgid "Email Address (Required)"
 msgstr "电子邮箱地址（必需）"
 
-#: fnprofile/forms.py:97
+#: fnprofile/forms.py:79
 msgid "Email Address (Optional)"
 msgstr "电子邮箱地址（选填）"
 
-#: fnprofile/forms.py:99
+#: fnprofile/forms.py:81
 msgid "Please enter your email address."
 msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:102
+#: fnprofile/forms.py:84
 msgid "Required. 256 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "必填，最多 256 个字符，可包含字母、数字、“@”、“.”、“+”、“-”、“_”。"
 
-#: fnprofile/forms.py:119
+#: fnprofile/forms.py:101
 msgid "Please enter email."
 msgstr "请输入电子邮件地址。"
 
-#: fnprofile/forms.py:123
+#: fnprofile/forms.py:105
 msgid "A user with that email already exists."
 msgstr "该电子邮件地址已被使用。"
 
-#: fnprofile/forms.py:137
+#: fnprofile/forms.py:119
 msgid "Please enter a username."
 msgstr "请输入用户名。"
 
-#: fnprofile/forms.py:143
+#: fnprofile/forms.py:124
 msgid "Username can only contain letters, digits and @/./+/-/_ characters."
 msgstr "用户名只能包含字母、数字、“@”、“.”、“+”、“-”、“_”。"
 
-#: fnprofile/forms.py:148
+#: fnprofile/forms.py:129
 msgid "Username must be at least 3 characters."
 msgstr "用户名至少需要三个字符。"
 
-#: fnprofile/forms.py:151
+#: fnprofile/forms.py:132
 msgid "Username cannot exceed 256 characters."
 msgstr "用户名不要超过 256 个字符。"
 
-#: fnprofile/forms.py:155
+#: fnprofile/forms.py:135
 msgid "This username is already taken."
 msgstr "用户名已存在。"
 
-#: fnprofile/forms.py:164 fnprofile/forms.py:303
+#: fnprofile/forms.py:142 fnprofile/forms.py:262
 msgid "Please enter an email address."
 msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:170 fnprofile/forms.py:309
+#: fnprofile/forms.py:147 fnprofile/forms.py:267
 msgid "Please enter a valid email address."
 msgstr "请输入有效的电子邮箱地址。"
 
-#: fnprofile/forms.py:176 fnprofile/models.py:58
+#: fnprofile/forms.py:151 fnprofile/models.py:80
 msgid "This email is already registered."
 msgstr ""
 "该电子邮箱地址已用于注册账号（如果是您的邮箱地址没有被验证可在登录页面验"
 "证）。"
 
-#: fnprofile/forms.py:192
+#: fnprofile/forms.py:163
 msgid "Username should not be part of your email address."
 msgstr "用户名不能是您的邮箱地址的一部分。"
 
-#: fnprofile/forms.py:223 fnprofile/forms.py:224
+#: fnprofile/forms.py:185 fnprofile/forms.py:186
 msgid "User Name"
 msgstr "用户名"
 
-#: fnprofile/forms.py:227 fnprofile/forms.py:228
+#: fnprofile/forms.py:189 fnprofile/forms.py:190
 msgid "Password"
 msgstr "密码"
 
-#: fnprofile/forms.py:231 fnprofile/forms.py:233
+#: fnprofile/forms.py:193 fnprofile/forms.py:195
 msgid "Confirm Password"
 msgstr "确认密码"
 
-#: fnprofile/forms.py:287
+#: fnprofile/forms.py:247
 msgid "Email Address"
 msgstr "电子邮件地址"
 
-#: fnprofile/forms.py:290
+#: fnprofile/forms.py:250
 msgid "Add a new email address to your account"
 msgstr "添加一个新的邮箱地址到您的账号。"
 
-#: fnprofile/forms.py:318 fnprofile/models.py:199
+#: fnprofile/forms.py:274 fnprofile/models.py:223
 msgid "You have already added this email."
 msgstr "您已经添加了该邮箱地址。"
 
-#: fnprofile/forms.py:327
+#: fnprofile/forms.py:283
 msgid "This email is already used by another user."
 msgstr "该邮箱地址已被其它用户注册。"
 
-#: fnprofile/forms.py:347
+#: fnprofile/forms.py:302
 msgid "Set as primary email"
 msgstr "设置为主邮箱地址"
 
-#: fnprofile/forms.py:350
+#: fnprofile/forms.py:305
 msgid "Primary email will be used for notifications"
 msgstr "主邮箱地址将用于消息通知。"
 
-#: fnprofile/forms.py:360 fnprofile/forms.py:375
+#: fnprofile/forms.py:313 fnprofile/forms.py:326
 msgid "Email must be verified first"
 msgstr "邮箱地址必须要被验证。"
 
-#: fnprofile/forms.py:366 fnprofile/forms.py:378
+#: fnprofile/forms.py:318 fnprofile/forms.py:329
 msgid "Email is disabled"
 msgstr "邮箱地址已禁用。"
 
-#: fnprofile/forms.py:387
+#: fnprofile/forms.py:336
 msgid "Verification Code"
 msgstr "验证码"
 
-#: fnprofile/models.py:26
+#: fnprofile/models.py:48
 msgid "Male"
 msgstr "男"
 
-#: fnprofile/models.py:27
+#: fnprofile/models.py:49
 msgid "Female"
 msgstr "女"
 
-#: fnprofile/models.py:36
+#: fnprofile/models.py:58
 msgid "The groups this user belongs to."
 msgstr "这个用户所属的组。"
 
-#: fnprofile/models.py:45
+#: fnprofile/models.py:67
 msgid "Specific permissions for this user."
 msgstr "给这个用户指定权限。"
 
-#: fnprofile/models.py:51
+#: fnprofile/models.py:73
 msgid "email address"
 msgstr "电子邮件地址"
 
-#: fnprofile/models.py:56
+#: fnprofile/models.py:78
 msgid "Primary email address."
 msgstr "主邮箱地址。"
 
-#: fnprofile/models.py:67
+#: fnprofile/models.py:89
 msgid "Phone Number"
 msgstr "电话号码"
 
-#: fnprofile/models.py:70
+#: fnprofile/models.py:92
 msgid "Affiliation"
 msgstr "机构"
 
-#: fnprofile/models.py:77
+#: fnprofile/models.py:99
 msgid "Superior department"
 msgstr "上级机构"
 
-#: fnprofile/models.py:81
+#: fnprofile/models.py:103
 msgid "Date of Birth"
 msgstr "生日"
 
-#: fnprofile/models.py:87
+#: fnprofile/models.py:109
 msgid "Gender"
 msgstr "性别"
 
-#: fnprofile/models.py:91
+#: fnprofile/models.py:113
 msgid "Address"
 msgstr "地址"
 
-#: fnprofile/models.py:94
+#: fnprofile/models.py:116
 msgid "Avatar"
 msgstr "头像"
 
-#: fnprofile/models.py:97
+#: fnprofile/models.py:119
 msgid "Biography"
 msgstr "个人简介"
 
-#: fnprofile/models.py:116 fnprofile/models.py:117
+#: fnprofile/models.py:131 fnprofile/models.py:132
 msgid "User Information"
 msgstr "用户信息"
 
-#: fnprofile/models.py:120
+#: fnprofile/models.py:135
 #, python-brace-format
 msgid "{0}'s Information"
 msgstr "{0} 的信息"
 
-#: fnprofile/models.py:133
+#: fnprofile/models.py:157
 msgid "Email address"
 msgstr "电子邮件地址"
 
-#: fnprofile/models.py:136
+#: fnprofile/models.py:160
 msgid "Please enter a valid email address"
 msgstr "请输入有效的电子邮箱地址"
 
-#: fnprofile/models.py:140
+#: fnprofile/models.py:164
 msgid "Is verified"
 msgstr "已被验证"
 
-#: fnprofile/models.py:142
+#: fnprofile/models.py:166
 msgid "Whether the email has been verified"
 msgstr "邮箱地址是否已被验证"
 
-#: fnprofile/models.py:146
+#: fnprofile/models.py:170
 msgid "Verification token"
 msgstr "验证令牌"
 
-#: fnprofile/models.py:150
+#: fnprofile/models.py:174
 msgid "Token for email verification"
 msgstr "电子邮件的验证令牌"
 
-#: fnprofile/models.py:154
+#: fnprofile/models.py:178
 msgid "Verification email sent at"
 msgstr "验证邮件发送时间"
 
-#: fnprofile/models.py:157
+#: fnprofile/models.py:181
 msgid "When the verification email was last sent"
 msgstr "上次发送验证邮件的时间。"
 
-#: fnprofile/models.py:161
+#: fnprofile/models.py:185
 msgid "Verified at"
 msgstr "验证于"
 
-#: fnprofile/models.py:164
+#: fnprofile/models.py:188
 msgid "When the email was verified"
 msgstr "该电子邮箱被验证的时间"
 
-#: fnprofile/models.py:168
+#: fnprofile/models.py:192
 msgid "Is active"
 msgstr "已激活"
 
-#: fnprofile/models.py:170
+#: fnprofile/models.py:194
 msgid "Whether this email address is active"
 msgstr "是否电子邮件地址已激活"
 
-#: fnprofile/models.py:174
+#: fnprofile/models.py:198
 msgid "Is primary"
 msgstr "是主邮件地址"
 
-#: fnprofile/models.py:176
+#: fnprofile/models.py:200
 msgid "Whether this is the primary email address"
 msgstr "是否该邮件地址是主邮件地址"
 
-#: fnprofile/models.py:186
+#: fnprofile/models.py:210
 msgid "Updated at"
 msgstr "更新于"
 
-#: fnprofile/models.py:191
+#: fnprofile/models.py:215
 msgid "User Email"
 msgstr "用户电子邮件"
 
-#: fnprofile/models.py:192
+#: fnprofile/models.py:216
 msgid "User Emails"
 msgstr "用户电子邮件"
 
-#: fnprofile/models.py:206
+#: fnprofile/models.py:230
 msgid "You can only have one primary email."
 msgstr "您只能设置一个电子邮件。"
 
-#: fnprofile/models.py:226
+#: fnprofile/models.py:248 fnprofile/views.py:122
+msgid "Activate your account."
+msgstr "激活您的账户。"
+
+#: fnprofile/models.py:267
+msgid "An error occurred when sending the email!"
+msgstr ""
+
+#: fnprofile/models.py:275
 msgid "Invalid email format."
 msgstr "无效的邮件格式。"
 
-#: fnprofile/models.py:280
+#: fnprofile/models.py:334
 msgid "Email must be verified before setting as primary."
 msgstr "在设置为主电子邮件前该电子邮件地址应被确认。"
 
-#: fnprofile/models.py:284
+#: fnprofile/models.py:341
 msgid "Email must be active to set as primary."
 msgstr "被激活的电子邮件地址才能设为主邮件地址。"
 
-#: fnprofile/models.py:297
+#: fnprofile/models.py:355
 msgid "Disabled"
 msgstr "已禁用"
 
-#: fnprofile/models.py:299
+#: fnprofile/models.py:357
 msgid "Unverified"
 msgstr "未被验证"
 
-#: fnprofile/models.py:301
+#: fnprofile/models.py:359
 msgid "Primary"
 msgstr "主邮件"
 
-#: fnprofile/models.py:303
+#: fnprofile/models.py:361
 msgid "Verified"
 msgstr "已验证"
 
@@ -1786,151 +1783,99 @@ msgstr "你的账号已退出登录。"
 msgid "Log in again"
 msgstr "再次登录"
 
-#: fnprofile/views.py:36 fnprofile/views.py:138
-msgid "Activate your account."
-msgstr "激活您的账户。"
-
-#: fnprofile/views.py:63
+#: fnprofile/views.py:30
 msgid "You are already logged in."
 msgstr "您已登录。"
 
-#: fnprofile/views.py:84
+#: fnprofile/views.py:51
 msgid "Registration successful! Verification email sent to {}."
 msgstr "注册成功！验证邮件已发送至 {} 。"
 
-#: fnprofile/views.py:94
+#: fnprofile/views.py:61
 msgid "Registration successful, but verification email failed to send."
 msgstr "注册成功，但验证邮件发送失败。"
 
-#: fnprofile/views.py:161
+#: fnprofile/views.py:145
 msgid "Welcome back, {}!"
 msgstr "欢迎回来，{}！"
 
-#: fnprofile/views.py:179
+#: fnprofile/views.py:163
 msgid "You have been logged out"
 msgstr "你的账号已退出登录。"
 
-#: fnprofile/views.py:192
+#: fnprofile/views.py:176
 msgid "Your information has been updated successfully!"
 msgstr "您的信息已更新！"
 
-#: fnprofile/views.py:226
+#: fnprofile/views.py:207
 msgid "My Emails"
 msgstr "我的电子邮件地址。"
 
-#: fnprofile/views.py:260
+#: fnprofile/views.py:235
 msgid "Email added successfully! Verification email sent."
 msgstr "邮件地址添加成功！验证邮件已发送。"
 
-#: fnprofile/views.py:270
+#: fnprofile/views.py:245
 msgid "Email added, but verification email failed to send."
 msgstr "邮件地址已被添加，但是验证邮件发送失败。"
 
-#: fnprofile/views.py:279
+#: fnprofile/views.py:254
 msgid "Failed to add email. Please try again."
 msgstr "无法添加！请重试。"
 
-#: fnprofile/views.py:291
+#: fnprofile/views.py:265
 msgid "Add Email"
 msgstr "添加电子邮件地址"
 
-#: fnprofile/views.py:333
-msgid "Successfully added {} email(s). Verification emails sent."
-msgstr "成功添加 {} 个电子邮件地址。验证邮件皆已发送。"
-
-#: fnprofile/views.py:340
-msgid "Failed to add {} email(s)."
-msgstr "无法添加 {} 个电子邮件地址。"
-
-#: fnprofile/views.py:354
-msgid "Bulk Add Emails"
-msgstr "批量添加邮件地址"
-
-#: fnprofile/views.py:386
+#: fnprofile/views.py:289
 msgid "Email Details"
 msgstr "电子邮件详细"
 
-#: fnprofile/views.py:408 fnprofile/views.py:576
+#: fnprofile/views.py:307
 msgid "Email set as primary"
 msgstr "设电子邮件地址为主邮件地址"
 
-#: fnprofile/views.py:410
+#: fnprofile/views.py:309
 msgid "Email settings updated"
 msgstr "邮件设置已更新"
 
-#: fnprofile/views.py:416
+#: fnprofile/views.py:315
 msgid "Failed to update email"
 msgstr "无法更新邮件地址"
 
-#: fnprofile/views.py:428
+#: fnprofile/views.py:326
 msgid "Edit Email"
 msgstr "编辑邮件地址"
 
-#: fnprofile/views.py:444
+#: fnprofile/views.py:336
 msgid "Email is already verified"
 msgstr "邮件地址已被验证"
 
-#: fnprofile/views.py:450 fnprofile/views.py:467
+#: fnprofile/views.py:340 fnprofile/views.py:353
 msgid "Email verified successfully!"
 msgstr "邮件地址验证成功！"
 
-#: fnprofile/views.py:455
+#: fnprofile/views.py:342
 msgid "Invalid or expired verification link"
 msgstr "无效或过期的验证链接"
 
-#: fnprofile/views.py:472
+#: fnprofile/views.py:358
 msgid "Invalid verification code"
 msgstr "无效的验证码！"
 
-#: fnprofile/views.py:486
+#: fnprofile/views.py:371
 msgid "Verify Email"
 msgstr "验证电子邮件"
 
-#: fnprofile/views.py:505
-msgid "Please wait 60 seconds before resending"
-msgstr "请等待 60 秒后再发送"
-
-#: fnprofile/views.py:511
-msgid "Verification email resent"
-msgstr "重新发送验证邮件"
-
-#: fnprofile/views.py:516
-msgid "Failed to send verification email"
-msgstr "无法发送验证邮件"
-
-#: fnprofile/views.py:520
-msgid "Failed to resend verification email"
-msgstr "无法重新发送验证邮件"
-
-#: fnprofile/views.py:540
-msgid "Cannot disable primary email"
-msgstr "不能禁用主邮件地址"
-
-#: fnprofile/views.py:544
-msgid "Email disabled"
-msgstr "电子邮件地址已禁用"
-
-#: fnprofile/views.py:551
-msgid "Email enabled"
-msgstr "电子邮件地址已启用"
-
-#: fnprofile/views.py:558
-msgid "Failed to update email status"
-msgstr "无法更新电子邮件地址状态"
-
-#: fnprofile/views.py:585
-msgid "Failed to set primary email"
-msgstr "无法设为主邮件地址"
-
-#: fnprofile/views.py:604
+#: fnprofile/views.py:384
 msgid "Cannot delete primary email"
 msgstr "无法删除主邮件地址"
 
-#: fnprofile/views.py:611
+#: fnprofile/views.py:390
 msgid "Email deleted"
 msgstr "电子邮件地址已删除"
 
-#: fnprofile/views.py:618
+#: fnprofile/views.py:397
 msgid "Failed to delete email"
 msgstr "无法删除电子邮件地址"
 
@@ -2015,6 +1960,53 @@ msgstr "注册"
 #: templates/includes/_header.html:102
 msgid "Hide messages."
 msgstr "隐藏信息。"
+
+#, python-brace-format
+#~ msgid ""
+#~ "Your email ({0}) has not been verified. We have sent a verification email "
+#~ "to your email address. Please check your email and complete the "
+#~ "verification process. (If you haven't received the email, please check "
+#~ "your spam folder.)"
+#~ msgstr ""
+#~ "你的电子邮件（{0}）没有被验证，我们已经发送了一封验证邮件到你的电子邮箱，"
+#~ "请查看你的电子邮箱然后完成验证。（如果没有收到邮件，请您检查一下“垃圾邮件”"
+#~ "文件夹）"
+
+#~ msgid "Successfully added {} email(s). Verification emails sent."
+#~ msgstr "成功添加 {} 个电子邮件地址。验证邮件皆已发送。"
+
+#~ msgid "Failed to add {} email(s)."
+#~ msgstr "无法添加 {} 个电子邮件地址。"
+
+#~ msgid "Bulk Add Emails"
+#~ msgstr "批量添加邮件地址"
+
+#~ msgid "Please wait 60 seconds before resending"
+#~ msgstr "请等待 60 秒后再发送"
+
+#~ msgid "Verification email resent"
+#~ msgstr "重新发送验证邮件"
+
+#~ msgid "Failed to send verification email"
+#~ msgstr "无法发送验证邮件"
+
+#~ msgid "Failed to resend verification email"
+#~ msgstr "无法重新发送验证邮件"
+
+#~ msgid "Cannot disable primary email"
+#~ msgstr "不能禁用主邮件地址"
+
+#~ msgid "Email disabled"
+#~ msgstr "电子邮件地址已禁用"
+
+#~ msgid "Email enabled"
+#~ msgstr "电子邮件地址已启用"
+
+#~ msgid "Failed to update email status"
+#~ msgstr "无法更新电子邮件地址状态"
+
+#~ msgid "Failed to set primary email"
+#~ msgstr "无法设为主邮件地址"
 
 #~ msgid "Only verified and active emails can be set as primary."
 #~ msgstr "仅被验证且激活的邮件才能被设为主电子邮件。"

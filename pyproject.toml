@@ -22,7 +22,8 @@ authors = [
 ]
 maintainers = [
   {name = "larryw3i", email = "larryw3i@163.com"},
-  {name = "Larry Wei", email = "larryw3i@126.com"}
+  {name = "Larry Wei", email = "larryw3i@126.com"},
+  {name = "Larry W3i", email = "larryw3i@yeah.net"},
 ]
 description = "Just some school related scripts, without any ambition."
 readme = "README.md"

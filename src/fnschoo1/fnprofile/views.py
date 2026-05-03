@@ -22,40 +22,7 @@ from .fntoken import account_activation_token
 from .forms import FnuserForm, FnuserLoginForm, FnuserSignUpForm
 from .models import Fnemail, Fnuser
 
-# Create your views here.
-
 LOGIN_URL = settings.LOGIN_URL
-
-
-def send_verification_email(request, user, fn_email=None):
-    try:
-        fn_email_cp = fn_email
-        fn_email = fn_email or Fnemail.objects.get(email=user.email)
-        token = fn_email.generate_verification_token()
-        current_site = get_current_site(request)
-        mail_subject = _("Activate your account.")
-        message = render_to_string(
-            "fnprofile/active_email.html",
-            {
-                "user": user,
-                "domain": current_site.domain,
-                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                "token": token,
-            },
-        )
-        to_email = fn_email.email
-        email = EmailMessage(
-            mail_subject,
-            message,
-            from_email=settings.EMAIL_HOST_USER,
-            to=[to_email],
-        )
-        email.send()
-        return True
-    except Exception as e:
-        print(e)
-        return False
-    pass
 
 
 def fnprofile_new(request):
@@ -127,6 +94,17 @@ def fnprofile_log_in(request):
         form = FnuserLoginForm(request, data=request.POST)
 
         if form.is_valid():
+            username = self.cleaned_data.get("username")
+            password = self.cleaned_data.get("password")
+            if username and password:
+                user = Fnuser.objects.filter(username=username).first()
+                if not user:
+                    return None
+                if user and user.check_password(password):
+                    if settings.EMAIL_BACKEND:
+                        if not user.has_verified_email():
+                            return redirect("fnprofile:email_verify")
+
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             user = authenticate(request, username=username, password=password)
@@ -206,17 +184,14 @@ def email_list(request):
     """
     List all user emails
     """
-    # Get all user emails
     emails = Fnemail.objects.filter(user=request.user).order_by(
         "-is_primary", "-is_verified", "-created_at"
     )
 
-    # Statistics
     total_count = emails.count()
     verified_count = emails.filter(is_verified=True).count()
     primary_email = emails.filter(is_primary=True, is_active=True).first()
 
-    # Forms
     add_form = FnemailAddForm(user=request.user, request=request)
     bulk_add_form = FnemailBulkAddForm(user=request.user)
 
@@ -235,20 +210,15 @@ def email_list(request):
 
 @login_required
 def email_add(request):
-    """
-    Add a new email address
-    """
     if request.method == "POST":
         form = FnemailAddForm(request.POST, user=request.user, request=request)
 
         if form.is_valid():
             try:
                 with transaction.atomic():
-                    # Create email
                     email = form.save(commit=False)
                     email.user = request.user
 
-                    # If first email, set as primary
                     if not Fnemail.objects.filter(
                         user=request.user, is_active=True
                     ).exists():
@@ -256,7 +226,6 @@ def email_add(request):
 
                     email.save()
 
-                    # Send verification email
                     if send_verification_email(request, request.user):
                         messages.success(
                             request,
@@ -283,7 +252,6 @@ def email_add(request):
                     request, _("Failed to add email. Please try again.")
                 )
         else:
-            # Show errors
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f"{field}: {error}")
@@ -299,80 +267,10 @@ def email_add(request):
 
 
 @login_required
-def email_bulk_add(request):
-    """
-    Bulk add email addresses
-    """
-    if request.method == "POST":
-        form = FnemailBulkAddForm(request.POST, user=request.user)
-
-        if form.is_valid():
-            emails = form.cleaned_data["emails"]
-            added_count = 0
-            failed_count = 0
-
-            with transaction.atomic():
-                for email_address in emails:
-                    try:
-                        # Create email
-                        email = Fnemail.objects.create(
-                            user=request.user,
-                            email=email_address,
-                        )
-
-                        # Send verification email
-                        send_verification_email(request, request.user, email)
-                        added_count += 1
-
-                    except Exception as e:
-                        logger.error(
-                            f"Failed to add email {email_address}: {e}"
-                        )
-                        failed_count += 1
-
-            if added_count > 0:
-                messages.success(
-                    request,
-                    _(
-                        "Successfully added {} email(s). Verification emails sent."
-                    ).format(added_count),
-                )
-
-            if failed_count > 0:
-                messages.warning(
-                    request,
-                    _("Failed to add {} email(s).").format(failed_count),
-                )
-
-            return redirect("email_list")
-        else:
-            # Show errors
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
-    else:
-        form = FnemailBulkAddForm(user=request.user)
-
-    context = {
-        "form": form,
-        "title": _("Bulk Add Emails"),
-    }
-
-    return render(request, "fnprofile/email_bulk_add.html", context)
-
-
-@login_required
 def email_detail(request, email_id):
-    """
-    Email detail view
-    """
-    # Get email, ensure it belongs to current user
     email = get_object_or_404(Fnemail, id=email_id, user=request.user)
-
-    # Verification form
     verification_form = FnemailVerificationForm()
 
-    # Check if can resend verification
     can_resend = email.can_resend_verification()
     if email.verification_sent_at:
         seconds_since = (
@@ -395,10 +293,6 @@ def email_detail(request, email_id):
 
 @login_required
 def email_edit(request, email_id):
-    """
-    Edit email settings (mainly set as primary)
-    """
-    # Get email, ensure it belongs to current user
     email = get_object_or_404(Fnemail, id=email_id, user=request.user)
 
     if request.method == "POST":
@@ -419,7 +313,6 @@ def email_edit(request, email_id):
                 logger.error(f"Failed to update email: {e}")
                 messages.error(request, _("Failed to update email"))
         else:
-            # Show errors
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f"{field}: {error}")
@@ -435,180 +328,46 @@ def email_edit(request, email_id):
     return render(request, "fnprofile/email_edit.html", context)
 
 
-@login_required
-def email_verify(request, email_id, token=None):
-    """
-    Verify email address
-    """
-    # Get email, ensure it belongs to current user
-    email = get_object_or_404(Fnemail, id=email_id, user=request.user)
+def email_verify(request, email_id=None, token=None):
+    if not email_id:
+        return
 
-    # If already verified, redirect
-    if email.is_verified:
-        messages.info(request, _("Email is already verified"))
-        return redirect("email_detail", email_id=email_id)
-
-    # Handle URL token (from email link)
     if token:
-        if email.verify(token):
+        email = get_object_or_404(Fnemail, id=email_id, user=request.user)
+        if email.is_verified:
+            messages.info(request, _("Email is already verified"))
+            return redirect("fnprofile:email_detail", email_id=email_id)
+
+        elif email.verify(token):
             messages.success(request, _("Email verified successfully!"))
-            logger.info(
-                f"User {request.user.username} verified email: {email.email}"
-            )
         else:
             messages.error(request, _("Invalid or expired verification link"))
 
-        return redirect("email_detail", email_id=email_id)
-
-    # Handle form submission (manual token entry)
-    if request.method == "POST":
-        form = FnemailVerificationForm(request.POST)
-
-        if form.is_valid():
-            token = form.cleaned_data["token"]
-
-            if email.verify(token):
-                messages.success(request, _("Email verified successfully!"))
-                logger.info(
-                    f"User {request.user.username} verified email: {email.email}"
-                )
-            else:
-                messages.error(request, _("Invalid verification code"))
-
-            return redirect("email_detail", email_id=email_id)
-        else:
-            # Show errors
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
+        context = {
+            "form": form,
+            "email": email,
+            "title": _("Verify Email"),
+        }
     else:
-        form = FnemailVerificationForm()
+        fn_email = get_object_or_404(pk=email_id)
+        username = fn_email.user.username
+        username = username[0] + "*" * 5 + username[-1]
+        form = FnemailEditForm(fn_email)
 
-    context = {
-        "form": form,
-        "email": email,
-        "title": _("Verify Email"),
-    }
-
-    return render(request, "fnprofile/email_verify.html", context)
-
-
-@login_required
-def email_resend_verification(request, email_id):
-    """
-    Resend verification email
-    """
-    if request.method != "POST":
-        return redirect("email_detail", email_id=email_id)
-
-    # Get email, ensure it belongs to current user
-    email = get_object_or_404(Fnemail, id=email_id, user=request.user)
-
-    # Check if can resend
-    if not email.can_resend_verification():
-        messages.error(request, _("Please wait 60 seconds before resending"))
-        return redirect("email_detail", email_id=email_id)
-
-    try:
-        # Resend verification
-        if send_verification_email(request, request.user, email):
-            messages.success(request, _("Verification email resent"))
-            logger.info(
-                f"User {request.user.username} resent verification to: {email.email}"
-            )
-        else:
-            messages.error(request, _("Failed to send verification email"))
-
-    except Exception as e:
-        logger.error(f"Failed to resend verification: {e}")
-        messages.error(request, _("Failed to resend verification email"))
-
-    return redirect("email_detail", email_id=email_id)
-
-
-@login_required
-def email_toggle_status(request, email_id):
-    """
-    Toggle email active status
-    """
-    if request.method != "POST":
-        return redirect("email_list")
-
-    # Get email, ensure it belongs to current user
-    email = get_object_or_404(Fnemail, id=email_id, user=request.user)
-
-    try:
-        if email.is_active:
-            # Can't disable primary email
-            if email.is_primary:
-                messages.error(request, _("Cannot disable primary email"))
-            else:
-                email.is_active = False
-                email.save(update_fields=["is_active"])
-                messages.success(request, _("Email disabled"))
-                logger.info(
-                    f"User {request.user.username} disabled email: {email.email}"
-                )
-        else:
-            email.is_active = True
-            email.save(update_fields=["is_active"])
-            messages.success(request, _("Email enabled"))
-            logger.info(
-                f"User {request.user.username} enabled email: {email.email}"
-            )
-
-    except Exception as e:
-        logger.error(f"Failed to toggle email status: {e}")
-        messages.error(request, _("Failed to update email status"))
-
-    return redirect("email_list")
-
-
-@login_required
-def email_set_primary(request, email_id):
-    """
-    Set email as primary
-    """
-    if request.method != "POST":
-        return redirect("email_list")
-
-    # Get email, ensure it belongs to current user
-    email = get_object_or_404(Fnemail, id=email_id, user=request.user)
-
-    try:
-        email.set_as_primary()
-        messages.success(request, _("Email set as primary"))
-        logger.info(
-            f"User {request.user.username} set primary email: {email.email}"
-        )
-
-    except ValidationError as e:
-        messages.error(request, str(e))
-    except Exception as e:
-        logger.error(f"Failed to set primary email: {e}")
-        messages.error(request, _("Failed to set primary email"))
-
-    return redirect("email_list")
+    return render(request, "fnprofile/email_edit.html", context)
 
 
 @login_required
 def email_delete(request, email_id):
-    """
-    Delete email address
-    """
     if request.method != "POST":
         return redirect("email_list")
-
-    # Get email, ensure it belongs to current user
     email = get_object_or_404(Fnemail, id=email_id, user=request.user)
 
     try:
-        # Can't delete primary email
         if email.is_primary:
             messages.error(request, _("Cannot delete primary email"))
             return redirect("email_list")
 
-        # Delete email
         email_email = email.email
         email.delete()
 
@@ -625,9 +384,6 @@ def email_delete(request, email_id):
 
 
 def get_client_ip(request):
-    """
-    Get client IP address
-    """
     x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
     if x_forwarded_for:
         return x_forwarded_for.split(",")[0]

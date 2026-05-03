@@ -3,6 +3,10 @@ import sys
 import uuid
 from pathlib import Path
 
+from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import (
     AbstractBaseUser,
     AbstractUser,
@@ -10,16 +14,29 @@ from django.contrib.auth.models import (
     PermissionsMixin,
     User,
 )
+from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
-from django.db import models
+from django.core.mail import EmailMessage
+from django.db import models, transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy
 from django.utils import timezone
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext as _
+from django.views.generic import CreateView
 from fnschool import *
+from fnschool import _, count_chinese_characters
+from fnschool.fncookie import get_object_orders_from_cookie
 
 resend_verification_email_time_interval = 5 * 60
 max_email_count = 8
+max_username_length = 256
+max_email_length = max_username_length
 
 
 class Gender(models.TextChoices):
@@ -105,19 +122,19 @@ class Fnuser(AbstractUser, PermissionsMixin):
         null=True, auto_now=True, verbose_name=_("Time of updating")
     )
 
-    def get_primary_email(self):
-        primary_email = self.emails.get(is_primary=True, is_active=True)
-        return primary_email.email
-
-    def has_verified_email(self):
-        return self.emails.filter(is_verified=True, is_active=True).exists()
-
     class Meta:
         verbose_name = _("User Information")
         verbose_name_plural = _("User Information")
 
     def __str__(self):
         return _("{0}'s Information").format(self.username)
+
+    def get_primary_email(self):
+        primary_email = self.emails.get(is_primary=True, is_active=True)
+        return primary_email.email
+
+    def has_verified_email(self):
+        return self.emails.filter(is_verified=True, is_active=True).exists()
 
 
 class Fnemail(models.Model):
@@ -131,7 +148,7 @@ class Fnemail(models.Model):
 
     email = models.EmailField(
         _("Email address"),
-        max_length=255,
+        max_length=max_email_length,
         db_index=True,
         help_text=_("Please enter a valid email address"),
     )
@@ -217,6 +234,33 @@ class Fnemail(models.Model):
     def __str__(self):
         return f"{self.user.username}: {self.email}"
 
+    def send_verification_email(self, request):
+        try:
+            token = self.generate_verification_token()
+            current_site = get_current_site(request)
+            mail_subject = _("Activate your account.")
+            message = render_to_string(
+                "fnprofile/active_email.html",
+                {
+                    "user": user,
+                    "domain": current_site.domain,
+                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                    "token": token,
+                },
+            )
+            to_email = fn_email.email
+            email = EmailMessage(
+                mail_subject,
+                message,
+                from_email=settings.EMAIL_HOST_USER,
+                to=[to_email],
+            )
+            email.send()
+        except Exception as e:
+            raise ValidationError(
+                {"email": _("An error occurred when sending the email!")}
+            )
+
     def clean(self):
         super().clean()
         self.email = self.email.lower().strip()
@@ -226,9 +270,15 @@ class Fnemail(models.Model):
             raise ValidationError({"email": _("Invalid email format.")})
 
     def generate_verification_token(self):
-        self.verification_token = uuid.uuid4().hexi + uuid.uuid4().hex
+        self.verification_token = (
+            uuid.uuid4().hex
+            + uuid.uuid4().hex
+            + uuid.uuid4().hex
+            + uuid.uuid4().hex
+        )
         self.verification_sent_at = timezone.now()
         self.save(update_fields=["verification_token", "verification_sent_at"])
+
         return self.verification_token
 
     def sync_to_user_email(self):
