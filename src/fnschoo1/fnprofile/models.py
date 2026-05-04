@@ -238,31 +238,29 @@ class Fnemail(models.Model):
         return f"{self.user.username}: {self.email}"
 
     def send_verification_email(self, request):
-        try:
-            token = self.generate_verification_token()
-            current_site = get_current_site(request)
-            mail_subject = _("Activate your account.")
-            message = render_to_string(
-                "fnprofile/active_email.html",
-                {
-                    "user": user,
-                    "domain": current_site.domain,
-                    "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                    "token": token,
-                },
-            )
-            to_email = fn_email.email
-            email = EmailMessage(
-                mail_subject,
-                message,
-                from_email=settings.EMAIL_HOST_USER,
-                to=[to_email],
-            )
-            email.send()
-        except Exception as e:
-            raise ValidationError(
-                {"email": _("An error occurred when sending the email!")}
-            )
+        if not self.can_resend_verification_email:
+            return False
+        token = self.generate_verification_token()
+        current_site = get_current_site(request)
+        mail_subject = _("Activate your account.")
+        message = render_to_string(
+            "fnprofile/active_email.html",
+            {
+                "user": user,
+                "domain": current_site.domain,
+                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "token": token,
+            },
+        )
+        to_email = fn_email.email
+        email = EmailMessage(
+            mail_subject,
+            message,
+            from_email=settings.EMAIL_HOST_USER,
+            to=[to_email],
+        )
+        email.send()
+        return True
 
     def clean(self):
         super().clean()
@@ -320,7 +318,7 @@ class Fnemail(models.Model):
 
         return True
 
-    def can_resend_verification(self):
+    def can_resend_verification_email(self):
         if not self.verification_sent_at:
             return True
 

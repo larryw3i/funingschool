@@ -58,7 +58,7 @@ def new_fnprofile(request):
                                 "Registration successful, but verification email failed to send."
                             ),
                         )
-                    return render(request, "fnprofile/confirm_email.html")
+                    return render(request, "fnprofile/edit_email.html")
                 else:
                     login(request, user)
                     return redirect("fnhome:home")
@@ -116,7 +116,7 @@ def fnprofile_log_in(request):
 
     return render(
         request,
-        "fnprofile/log_in.html",
+        "fnprofile/fnprofile_log_in.html",
         {"form": form, "EMAIL_BACKEND": settings.EMAIL_BACKEND},
     )
 
@@ -141,11 +141,11 @@ def edit_fnprofile(request):
             return redirect("fnhome:home")
     else:
         form = FnuserForm(instance=request.user)
-    return render(request, "fnprofile/edit.html", {"form": form})
+    return render(request, "fnprofile/edit_fnprofile.html", {"form": form})
 
 
 @login_required
-def list_email(request):
+def list_emails(request):
     emails = Fnemail.objects.filter(user=request.user).order_by(
         "-is_primary", "-is_verified", "-created_at"
     )
@@ -167,7 +167,7 @@ def list_email(request):
         "title": _("My Emails"),
     }
 
-    return render(request, "fnprofile/list_email.html", context)
+    return render(request, "fnprofile/list_emails.html", context)
 
 
 @login_required
@@ -257,20 +257,30 @@ def edit_email(request, email_id):
     email = Fnemail.objects.filter(pk=email_id).first()
     if not email:
         return
+
     user = email.user
     if not user:
         return
+
     if request.method == "POST":
         form = FnemailEditForm(request.POST, instance=email)
 
         if form.is_valid():
-            try:
-                form.save()
 
+            is_verified = form.cleaned_data.get("is_verified")
+            if not is_verified:
+                if form.instance.send_verification_email():
+                    messages.success(request, _("Email set as primary"))
+                else:
+                    from .models import resend_verification_email_time_interval
+                    form.add_error({"is_verified":_("The verification email failed to be sent. Please wait for {time_interval} seconds and try again!").format(time_interval=resend_verification_email_time_interval)})
+            else:
                 if form.cleaned_data.get("is_primary"):
                     messages.success(request, _("Email set as primary"))
                 else:
                     messages.success(request, _("Email settings updated"))
+                
+                form.save()
 
                 return redirect(
                     reverse(
@@ -278,9 +288,6 @@ def edit_email(request, email_id):
                     )
                 )
 
-            except Exception as e:
-                logger.error(f"Failed to update email: {e}")
-                messages.error(request, _("Failed to update email"))
         else:
             for field, errors in form.errors.items():
                 for error in errors:

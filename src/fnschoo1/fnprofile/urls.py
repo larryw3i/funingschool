@@ -6,7 +6,7 @@ from . import views
 app_name = "fnprofile"
 
 urlpatterns = [
-    path("view_profile", views.fnprofile_edit, name="view_profile"),
+    path("view_profile", views.edit_fnprofile, name="view_profile"),
     path("log_out", views.fnprofile_log_out, name="log_out"),
     path("new_profile", views.new_fnprofile, name="new_profile"),
     path("log_in", views.fnprofile_log_in, name="log_in"),
