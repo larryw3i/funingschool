@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
   <h2>{% trans "Create new account." %}</h2>
-  <form method="post" action="{% url 'fnprofile:create' %}">
+  <form method="post" action="{% url 'fnprofile:new_profile' %}">
     {% csrf_token %}
     {{ form|crispy }}
     <button type="submit button" class="btn btn-outline-primary">

@@ -14,11 +14,10 @@ urlpatterns = [
     path("emails", views.list_emails, name="list_emails"),
     path("new_email", views.new_email, name="new_email"),
     path("view_email/<uuid:email_id>", views.view_email, name="view_email"),
-    path("edit_email/<uuid:email_id>", views.edit_email, name="edit_email"),
     path(
-        "verify_email/<uuid:email_id>/<str:token>",
-        views.verify_email,
-        name="verify_email",
+        "edit_email/<uuid:email_id>",
+        views.edit_email,
+        name="edit_email",
     ),
     path(
         "delete_email/<uuid:email_id>", views.delete_email, name="delete_email"

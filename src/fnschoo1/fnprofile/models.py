@@ -134,6 +134,8 @@ class Fnuser(AbstractUser, PermissionsMixin):
         return primary_email.email
 
     def has_verified_email(self):
+        if not self.emails.exists():
+            return False
         return self.emails.filter(is_verified=True, is_active=True).exists()
 
     def get_first_email(self):
@@ -141,6 +143,12 @@ class Fnuser(AbstractUser, PermissionsMixin):
 
 
 class Fnemail(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+        verbose_name=_("ID"),
+    )
     user = models.ForeignKey(
         Fnuser,
         on_delete=models.CASCADE,
@@ -207,6 +215,14 @@ class Fnemail(models.Model):
         auto_now=True,
     )
 
+    @property
+    def pk(self):
+        return self.id
+
+    @pk.setter
+    def pk(self, value):
+        self.id = value
+
     class Meta:
         verbose_name = _("User Email")
         verbose_name_plural = _("User Emails")
@@ -244,15 +260,16 @@ class Fnemail(models.Model):
         current_site = get_current_site(request)
         mail_subject = _("Activate your account.")
         message = render_to_string(
-            "fnprofile/active_email.html",
+            "fnprofile/fnemail/active.html",
             {
-                "user": user,
+                "user": self.user,
+                "http": "https" if request.is_secure() else "http",
                 "domain": current_site.domain,
-                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                "email_id": self.pk,
                 "token": token,
             },
-        )
-        to_email = fn_email.email
+        ).strip()
+        to_email = self.email
         email = EmailMessage(
             mail_subject,
             message,

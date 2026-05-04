@@ -32,10 +32,9 @@ class FnuserLoginForm(AuthenticationForm):
         self.request = request
         super().__init__(request, *args, **kwargs)
 
-    def clean(self):
-
-        self.leaned_data = super().clean()
-        return self.cleaned_data
+    class Meta:
+        model = Fnuser
+        fields = ["username", "password"]
 
 
 class FnuserSignUpForm(UserCreationForm):
@@ -112,7 +111,7 @@ class FnuserSignUpForm(UserCreationForm):
         fields = ("username", "email", "password1", "password2")
 
     def clean_username(self):
-        from .model import max_email_length, max_username_length
+        from .models import max_email_length, max_username_length
 
         username = self.cleaned_data.get("username")
         if not username:
@@ -172,8 +171,7 @@ class FnuserSignUpForm(UserCreationForm):
         if commit:
             user.save()
             fn_email = Fnemail.objects.create(
-                user=user,
-                email=user.email,
+                user=user, email=user.email, is_primary=True
             )
 
         return user
@@ -238,7 +236,7 @@ class FnemailAddForm(forms.ModelForm):
             "email": forms.EmailInput(
                 attrs={
                     "class": "form-control",
-                    "placeholder": "new.email@example.com",
+                    "placeholder": _("name@example.domain"),
                     "autocomplete": "email",
                 }
             ),
@@ -273,20 +271,24 @@ class FnemailAddForm(forms.ModelForm):
         ):
             raise ValidationError(_("You have already added this email."))
 
-        # Check if email is used by other users
-        if Fnemail.objects.filter(email=email, is_active=True).exists():
-            other_user = (
-                Fnemail.objects.filter(email=email, is_active=True).first().user
+        other_user = Fnemail.objects.filter(email=email, is_active=True).first()
+
+        if other_user and other_user != self.user:
+            raise ValidationError(
+                _("This email is already used by another user.")
             )
-            if other_user != self.user:
-                raise ValidationError(
-                    _("This email is already used by another user.")
-                )
 
         return email
 
 
 class FnemailEditForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if not self.instance.is_verified:
+            for field in self.fields:
+                self.fields[field].widget.attrs["readonly"] = "readonly"
 
     class Meta:
         model = Fnemail

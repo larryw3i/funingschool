@@ -1,4 +1,3 @@
-<!-- templates/base.html -->
 <!DOCTYPE html>
 {% load i18n static %}
 {% load crispy_forms_tags %}
@@ -26,5 +25,6 @@
     <main class="container" data-bs-scroll="true" data-bs-backdrop="false">
       {% block content %}{% endblock %}
     </main>
+    {% block extra_js %}{% endblock %}
   </body>
 </html>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 16:14+0800\n"
+"POT-Creation-Date: 2026-05-05 03:31+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -63,7 +63,7 @@ msgid "Creating Date"
 msgstr ""
 
 #: canteen/models.py:36 canteen/models.py:64 canteen/models.py:108
-#: fnprofile/models.py:127
+#: fnprofile/models.py:122
 msgid "Time of updating"
 msgstr ""
 
@@ -99,7 +99,7 @@ msgstr ""
 msgid "Pin to Consumptions Top"
 msgstr ""
 
-#: canteen/models.py:96 fnprofile/models.py:152
+#: canteen/models.py:96 fnprofile/models.py:156
 msgid "User"
 msgstr ""
 
@@ -108,7 +108,7 @@ msgstr ""
 msgid "Storage Date"
 msgstr ""
 
-#: canteen/models.py:104 fnprofile/models.py:123
+#: canteen/models.py:104 fnprofile/models.py:118
 msgid "Time of creating"
 msgstr ""
 
@@ -180,6 +180,7 @@ msgid "New Category"
 msgstr ""
 
 #: canteen/templates/canteen/category/create.html:8
+#: fnprofile/templates/fnprofile/fnemail/new.html:8
 msgid "Create new category"
 msgstr ""
 
@@ -189,6 +190,7 @@ msgstr ""
 #: canteen/templates/canteen/ingredient/update.html:19
 #: canteen/templates/canteen/meal_type/create.html:13
 #: canteen/templates/canteen/meal_type/update.html:19
+#: fnprofile/templates/fnprofile/fnemail/new.html:13
 msgid "Save"
 msgstr ""
 
@@ -202,6 +204,7 @@ msgstr ""
 #: canteen/templates/canteen/meal_type/create.html:15
 #: canteen/templates/canteen/meal_type/delete.html:51
 #: canteen/templates/canteen/meal_type/update.html:21
+#: fnprofile/templates/fnprofile/fnemail/new.html:15
 #: templates/includes/_footer.html:38
 msgid "Cancel"
 msgstr ""
@@ -230,7 +233,7 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:20
 #: canteen/templates/canteen/category/list.html:19
 #: canteen/templates/canteen/meal_type/delete.html:25
-#: canteen/templates/canteen/meal_type/list.html:19 fnprofile/models.py:204
+#: canteen/templates/canteen/meal_type/list.html:19 fnprofile/models.py:208
 msgid "Created at"
 msgstr ""
 
@@ -1266,79 +1269,79 @@ msgstr ""
 msgid "FNSCHOOL Home"
 msgstr ""
 
-#: fnprofile/forms.py:44
+#: fnprofile/forms.py:43
 msgid "Email"
 msgstr ""
 
-#: fnprofile/forms.py:53
+#: fnprofile/forms.py:52
 msgid "We'll send a verification email to this address."
 msgstr ""
 
-#: fnprofile/forms.py:58
+#: fnprofile/forms.py:57
 msgid "I agree to the Terms of Service"
 msgstr ""
 
-#: fnprofile/forms.py:66
+#: fnprofile/forms.py:65
 msgid "You must agree to the Terms of Service."
 msgstr ""
 
-#: fnprofile/forms.py:77
+#: fnprofile/forms.py:76
 msgid "Email Address (Required)"
 msgstr ""
 
-#: fnprofile/forms.py:79
+#: fnprofile/forms.py:78
 msgid "Email Address (Optional)"
 msgstr ""
 
-#: fnprofile/forms.py:81
+#: fnprofile/forms.py:80
 msgid "Please enter your email address."
 msgstr ""
 
-#: fnprofile/forms.py:84
+#: fnprofile/forms.py:83
 msgid "Required. 256 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 
-#: fnprofile/forms.py:101
+#: fnprofile/forms.py:100
 msgid "Please enter email."
 msgstr ""
 
-#: fnprofile/forms.py:105
+#: fnprofile/forms.py:104
 msgid "A user with that email already exists."
 msgstr ""
 
-#: fnprofile/forms.py:119
+#: fnprofile/forms.py:118
 msgid "Please enter a username."
 msgstr ""
 
-#: fnprofile/forms.py:124
+#: fnprofile/forms.py:123
 msgid "Username can only contain letters, digits and @/./+/-/_ characters."
 msgstr ""
 
-#: fnprofile/forms.py:129
+#: fnprofile/forms.py:128
 msgid "Username must be at least 3 characters."
 msgstr ""
 
-#: fnprofile/forms.py:132
+#: fnprofile/forms.py:131
 msgid "Username cannot exceed 256 characters."
 msgstr ""
 
-#: fnprofile/forms.py:135
+#: fnprofile/forms.py:134
 msgid "This username is already taken."
 msgstr ""
 
-#: fnprofile/forms.py:142 fnprofile/forms.py:262
+#: fnprofile/forms.py:141 fnprofile/forms.py:262
 msgid "Please enter an email address."
 msgstr ""
 
-#: fnprofile/forms.py:147 fnprofile/forms.py:267
+#: fnprofile/forms.py:146 fnprofile/forms.py:267
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: fnprofile/forms.py:151 fnprofile/models.py:80
+#: fnprofile/forms.py:150 fnprofile/models.py:75
 msgid "This email is already registered."
 msgstr ""
 
-#: fnprofile/forms.py:163
+#: fnprofile/forms.py:162
 msgid "Username should not be part of your email address."
 msgstr ""
 
@@ -1354,6 +1357,10 @@ msgstr ""
 msgid "Confirm Password"
 msgstr ""
 
+#: fnprofile/forms.py:241
+msgid "name@example.domain"
+msgstr ""
+
 #: fnprofile/forms.py:247
 msgid "Email Address"
 msgstr ""
@@ -1362,389 +1369,383 @@ msgstr ""
 msgid "Add a new email address to your account"
 msgstr ""
 
-#: fnprofile/forms.py:274 fnprofile/models.py:223
+#: fnprofile/forms.py:274 fnprofile/models.py:235
 msgid "You have already added this email."
 msgstr ""
 
-#: fnprofile/forms.py:283
+#: fnprofile/forms.py:280
 msgid "This email is already used by another user."
 msgstr ""
 
-#: fnprofile/forms.py:302
+#: fnprofile/forms.py:306
 msgid "Set as primary email"
 msgstr ""
 
-#: fnprofile/forms.py:305
-msgid "Primary email will be used for notifications"
+#: fnprofile/forms.py:309
+msgid "Primary email will be used for notifications."
 msgstr ""
 
-#: fnprofile/forms.py:313 fnprofile/forms.py:326
-msgid "Email must be verified first"
-msgstr ""
-
-#: fnprofile/forms.py:318 fnprofile/forms.py:329
-msgid "Email is disabled"
-msgstr ""
-
-#: fnprofile/forms.py:336
-msgid "Verification Code"
-msgstr ""
-
-#: fnprofile/models.py:48
+#: fnprofile/models.py:43
 msgid "Male"
 msgstr ""
 
-#: fnprofile/models.py:49
+#: fnprofile/models.py:44
 msgid "Female"
 msgstr ""
 
-#: fnprofile/models.py:58
+#: fnprofile/models.py:53
 msgid "The groups this user belongs to."
 msgstr ""
 
-#: fnprofile/models.py:67
+#: fnprofile/models.py:62
 msgid "Specific permissions for this user."
 msgstr ""
 
-#: fnprofile/models.py:73
+#: fnprofile/models.py:68
 msgid "email address"
 msgstr ""
 
-#: fnprofile/models.py:78
+#: fnprofile/models.py:73
 msgid "Primary email address."
 msgstr ""
 
-#: fnprofile/models.py:89
+#: fnprofile/models.py:84
 msgid "Phone Number"
 msgstr ""
 
-#: fnprofile/models.py:92
+#: fnprofile/models.py:87
 msgid "Affiliation"
 msgstr ""
 
-#: fnprofile/models.py:99
+#: fnprofile/models.py:94
 msgid "Superior department"
 msgstr ""
 
-#: fnprofile/models.py:103
+#: fnprofile/models.py:98
 msgid "Date of Birth"
 msgstr ""
 
-#: fnprofile/models.py:109
+#: fnprofile/models.py:104
 msgid "Gender"
 msgstr ""
 
-#: fnprofile/models.py:113
+#: fnprofile/models.py:108
 msgid "Address"
 msgstr ""
 
-#: fnprofile/models.py:116
+#: fnprofile/models.py:111
 msgid "Avatar"
 msgstr ""
 
-#: fnprofile/models.py:119
+#: fnprofile/models.py:114
 msgid "Biography"
 msgstr ""
 
-#: fnprofile/models.py:131 fnprofile/models.py:132
+#: fnprofile/models.py:126 fnprofile/models.py:127
 msgid "User Information"
 msgstr ""
 
-#: fnprofile/models.py:135
+#: fnprofile/models.py:130
 #, python-brace-format
 msgid "{0}'s Information"
 msgstr ""
 
-#: fnprofile/models.py:157
+#: fnprofile/models.py:150
+msgid "ID"
+msgstr ""
+
+#: fnprofile/models.py:161
 msgid "Email address"
 msgstr ""
 
-#: fnprofile/models.py:160
+#: fnprofile/models.py:164
 msgid "Please enter a valid email address"
 msgstr ""
 
-#: fnprofile/models.py:164
+#: fnprofile/models.py:168
 msgid "Is verified"
 msgstr ""
 
-#: fnprofile/models.py:166
+#: fnprofile/models.py:170
 msgid "Whether the email has been verified"
 msgstr ""
 
-#: fnprofile/models.py:170
+#: fnprofile/models.py:174
 msgid "Verification token"
 msgstr ""
 
-#: fnprofile/models.py:174
+#: fnprofile/models.py:178
 msgid "Token for email verification"
 msgstr ""
 
-#: fnprofile/models.py:178
+#: fnprofile/models.py:182
 msgid "Verification email sent at"
 msgstr ""
 
-#: fnprofile/models.py:181
+#: fnprofile/models.py:185
 msgid "When the verification email was last sent"
 msgstr ""
 
-#: fnprofile/models.py:185
+#: fnprofile/models.py:189
 msgid "Verified at"
 msgstr ""
 
-#: fnprofile/models.py:188
+#: fnprofile/models.py:192
 msgid "When the email was verified"
 msgstr ""
 
-#: fnprofile/models.py:192
+#: fnprofile/models.py:196
 msgid "Is active"
 msgstr ""
 
-#: fnprofile/models.py:194
+#: fnprofile/models.py:198
 msgid "Whether this email address is active"
 msgstr ""
 
-#: fnprofile/models.py:198
+#: fnprofile/models.py:202
 msgid "Is primary"
 msgstr ""
 
-#: fnprofile/models.py:200
+#: fnprofile/models.py:204
 msgid "Whether this is the primary email address"
 msgstr ""
 
-#: fnprofile/models.py:210
+#: fnprofile/models.py:214
 msgid "Updated at"
 msgstr ""
 
-#: fnprofile/models.py:215
+#: fnprofile/models.py:227
 msgid "User Email"
 msgstr ""
 
-#: fnprofile/models.py:216
+#: fnprofile/models.py:228
 msgid "User Emails"
 msgstr ""
 
-#: fnprofile/models.py:230
+#: fnprofile/models.py:242
 msgid "You can only have one primary email."
 msgstr ""
 
-#: fnprofile/models.py:248 fnprofile/views.py:122
+#: fnprofile/models.py:261
 msgid "Activate your account."
 msgstr ""
 
-#: fnprofile/models.py:267
-msgid "An error occurred when sending the email!"
-msgstr ""
-
-#: fnprofile/models.py:275
+#: fnprofile/models.py:288
 msgid "Invalid email format."
 msgstr ""
 
-#: fnprofile/models.py:334
+#: fnprofile/models.py:352
 msgid "Email must be verified before setting as primary."
 msgstr ""
 
-#: fnprofile/models.py:341
+#: fnprofile/models.py:359
 msgid "Email must be active to set as primary."
 msgstr ""
 
-#: fnprofile/models.py:355
+#: fnprofile/models.py:373
 msgid "Disabled"
 msgstr ""
 
-#: fnprofile/models.py:357
+#: fnprofile/models.py:375
 msgid "Unverified"
 msgstr ""
 
-#: fnprofile/models.py:359
+#: fnprofile/models.py:377
 msgid "Primary"
 msgstr ""
 
-#: fnprofile/models.py:361
+#: fnprofile/models.py:379
 msgid "Verified"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/activation_invalid.html:4
-msgid "Account activation failed!"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/activation_invalid.html:7
-msgid "The activation link is invalid!"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/activation_invalid.html:9
-msgid "The activation link has expired or is invalid. Please register again."
-msgstr ""
-
-#: fnprofile/templates/fnprofile/activation_success.html:4
-msgid "Your account has been activated!"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/activation_success.html:7
-msgid "Account activation successful!"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/activation_success.html:9
-msgid ""
-"Your account has been successfully activated! You will be redirected to the "
-"Homepage soon!"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/active_email.html:3
+#: fnprofile/templates/fnprofile/fnemail/active.html:3
 #, python-format
 msgid "Hello! %(username)s,"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/active_email.html:4
+#: fnprofile/templates/fnprofile/fnemail/active.html:4
 msgid "Please click on the link below to activate your account:"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/active_email.html:6
+#: fnprofile/templates/fnprofile/fnemail/active.html:6
 msgid ""
 "(If you cannot click, please copy the entire link into the browser address "
 "bar and press Enter.)"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/active_email.html:7
+#: fnprofile/templates/fnprofile/fnemail/active.html:8
 msgid "Thank you for using FNSCHOOL!"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/confirm_email.html:4
-msgid "Verify Your Email"
+#: fnprofile/templates/fnprofile/fnemail/edit.html:6
+#: fnprofile/templates/fnprofile/fnemail/edit.html:15
+msgid "Edit Email"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/confirm_email.html:8
-msgid "Please verify your email!"
+#: fnprofile/templates/fnprofile/fnemail/edit.html:8
+#: fnprofile/templates/fnprofile/fnemail/edit.html:17
+msgid "Verify Email"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/confirm_email.html:10
+#: fnprofile/templates/fnprofile/fnemail/edit.html:25
+#, python-format
 msgid ""
-"FNSCHOOL has sent a verification email to the email address you registered. "
-"Please click the link in the email to complete your registration."
+"\n"
+"        User Name: %(username)s\n"
+"      "
 msgstr ""
 
-#: fnprofile/templates/fnprofile/confirm_email.html:13
-msgid "(If you haven't received the email, please check your spam folder.)"
+#: fnprofile/templates/fnprofile/fnemail/edit.html:32
+#: fnprofile/templates/fnprofile/profile/edit.html:13
+msgid "Update"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/create.html:4
+#: fnprofile/templates/fnprofile/fnemail/edit.html:34
+msgid "Verify"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/fnemail/new.html:5 fnprofile/views.py:226
+msgid "Add Email"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/edit.html:4
+msgid "Update Profile"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/edit.html:7
+msgid "Update Profile."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/log_in.html:4
+#: fnprofile/templates/fnprofile/profile/log_in.html:7
+#: fnprofile/templates/fnprofile/profile/log_in.html:20
+msgid "Log in"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/log_in.html:9
+msgid "Your username and password didn't match. Please try again."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/log_in.html:16
+msgid "If you haven't verified your email, please log in here to verify it."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/log_in.html:24
+msgid "Don't have an account?"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/log_in.html:25
+msgid "Register here"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/log_out.html:7
+msgid "Logged Out"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/log_out.html:8
+msgid "You have been successfully logged out."
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/log_out.html:10
+msgid "Log in again"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/new.html:4
 msgid "Create an account."
 msgstr ""
 
-#: fnprofile/templates/fnprofile/create.html:7
+#: fnprofile/templates/fnprofile/profile/new.html:7
 msgid "Create new account."
 msgstr ""
 
-#: fnprofile/templates/fnprofile/create.html:12
+#: fnprofile/templates/fnprofile/profile/new.html:12
 msgid "Confirm"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/create.html:16
+#: fnprofile/templates/fnprofile/profile/new.html:16
 msgid "Already have an account?"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/create.html:17
+#: fnprofile/templates/fnprofile/profile/new.html:17
 msgid "Login here"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/detail.html:4
+#: fnprofile/templates/fnprofile/profile/view.html:4
 #, python-format
 msgid ""
 " Hello, %(user_name)s!\n"
 "  "
 msgstr ""
 
-#: fnprofile/templates/fnprofile/edit.html:4
-msgid "Update Profile"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/edit.html:7
-msgid "Update Profile."
-msgstr ""
-
-#: fnprofile/templates/fnprofile/edit.html:13
-msgid "Update"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/log_in.html:4
-#: fnprofile/templates/fnprofile/log_in.html:7
-#: fnprofile/templates/fnprofile/log_in.html:20
-msgid "Log in"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/log_in.html:9
-msgid "Your username and password didn't match. Please try again."
-msgstr ""
-
-#: fnprofile/templates/fnprofile/log_in.html:16
-msgid "If you haven't verified your email, please log in here to verify it."
-msgstr ""
-
-#: fnprofile/templates/fnprofile/log_in.html:24
-msgid "Don't have an account?"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/log_in.html:25
-msgid "Register here"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/log_out.html:7
-msgid "Logged Out"
-msgstr ""
-
-#: fnprofile/templates/fnprofile/log_out.html:8
-msgid "You have been successfully logged out."
-msgstr ""
-
-#: fnprofile/templates/fnprofile/log_out.html:10
-msgid "Log in again"
-msgstr ""
-
 #: fnprofile/views.py:30
 msgid "You are already logged in."
 msgstr ""
 
-#: fnprofile/views.py:51
-msgid "Registration successful! Verification email sent to {}."
+#: fnprofile/views.py:50
+#, python-brace-format
+msgid "Registration successful! Verification email sent to {email} ."
 msgstr ""
 
-#: fnprofile/views.py:61
+#: fnprofile/views.py:57
 msgid "Registration successful, but verification email failed to send."
 msgstr ""
 
-#: fnprofile/views.py:145
-msgid "Welcome back, {}!"
+#: fnprofile/views.py:80
+msgid "The account does not exist or the password is incorrect!"
 msgstr ""
 
-#: fnprofile/views.py:163
+#: fnprofile/views.py:105
+#, python-brace-format
+msgid "Welcome back, {username} !"
+msgstr ""
+
+#: fnprofile/views.py:127
 msgid "You have been logged out"
 msgstr ""
 
-#: fnprofile/views.py:176
+#: fnprofile/views.py:140
 msgid "Your information has been updated successfully!"
 msgstr ""
 
-#: fnprofile/views.py:207
+#: fnprofile/views.py:168
 msgid "My Emails"
 msgstr ""
 
-#: fnprofile/views.py:235
+#: fnprofile/views.py:196
 msgid "Email added successfully! Verification email sent."
 msgstr ""
 
-#: fnprofile/views.py:245
+#: fnprofile/views.py:206
 msgid "Email added, but verification email failed to send."
 msgstr ""
 
-#: fnprofile/views.py:254
+#: fnprofile/views.py:215
 msgid "Failed to add email. Please try again."
 msgstr ""
 
-#: fnprofile/views.py:265
-msgid "Add Email"
+#: fnprofile/views.py:251
+msgid "Email Details"
 msgstr ""
 
-#: fnprofile/views.py:289
-msgid "Email Details"
+#: fnprofile/views.py:269
+msgid "Email verified successfully!"
+msgstr ""
+
+#: fnprofile/views.py:280
+msgid ""
+"A verification email has been sent to your email address. Please follow the "
+"instructions in the email to complete the verification process."
+msgstr ""
+
+#: fnprofile/views.py:294
+#, python-brace-format
+msgid ""
+"The verification email failed to be sent. Please wait for {time_interval} "
+"seconds and try again!"
+msgstr ""
+
+#: fnprofile/views.py:302
+msgid "Please log in to change your information."
 msgstr ""
 
 #: fnprofile/views.py:307
@@ -1755,43 +1756,15 @@ msgstr ""
 msgid "Email settings updated"
 msgstr ""
 
-#: fnprofile/views.py:315
-msgid "Failed to update email"
-msgstr ""
-
-#: fnprofile/views.py:326
-msgid "Edit Email"
-msgstr ""
-
-#: fnprofile/views.py:336
-msgid "Email is already verified"
-msgstr ""
-
-#: fnprofile/views.py:340 fnprofile/views.py:353
-msgid "Email verified successfully!"
-msgstr ""
-
-#: fnprofile/views.py:342
-msgid "Invalid or expired verification link"
-msgstr ""
-
-#: fnprofile/views.py:358
-msgid "Invalid verification code"
-msgstr ""
-
-#: fnprofile/views.py:371
-msgid "Verify Email"
-msgstr ""
-
-#: fnprofile/views.py:384
+#: fnprofile/views.py:338
 msgid "Cannot delete primary email"
 msgstr ""
 
-#: fnprofile/views.py:390
+#: fnprofile/views.py:344
 msgid "Email deleted"
 msgstr ""
 
-#: fnprofile/views.py:397
+#: fnprofile/views.py:351
 msgid "Failed to delete email"
 msgstr ""
 
@@ -1815,7 +1788,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: templates/base/content.html:10 templates/base/document.html:9
+#: templates/base/content.html:9 templates/base/document.html:9
 #: templates/home.html:4
 msgid "FNSCHOOL"
 msgstr ""
