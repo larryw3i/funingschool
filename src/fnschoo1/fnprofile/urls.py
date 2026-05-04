@@ -6,43 +6,22 @@ from . import views
 app_name = "fnprofile"
 
 urlpatterns = [
-    path("detail", views.fnprofile_edit, name="detail"),
+    path("view_profile", views.fnprofile_edit, name="view_profile"),
     path("log_out", views.fnprofile_log_out, name="log_out"),
-    path("create", views.fnprofile_new, name="create"),
+    path("new_profile", views.new_fnprofile, name="new_profile"),
     path("log_in", views.fnprofile_log_in, name="log_in"),
-    path("update", views.fnprofile_edit, name="update"),
-    path("activate/<uidb64>/<token>", views.activate, name="activate"),
-    path("emails", views.email_list, name="email_list"),
-    path("emails/add", views.email_add, name="email_add"),
-    path("emails/<uuid:email_id>", views.email_detail, name="email_detail"),
-    path("emails/<uuid:email_id>/edit", views.email_edit, name="email_edit"),
+    path("edit_profile", views.edit_fnprofile, name="edit_profile"),
+    path("emails", views.list_emails, name="list_emails"),
+    path("new_email", views.new_email, name="new_email"),
+    path("view_email/<uuid:email_id>", views.view_email, name="view_email"),
+    path("edit_email/<uuid:email_id>", views.edit_email, name="edit_email"),
     path(
-        "emails/<uuid:email_id>/verify/<str:token>",
-        views.email_verify,
-        name="email_verify",
+        "verify_email/<uuid:email_id>/<str:token>",
+        views.verify_email,
+        name="verify_email",
     ),
     path(
-        "emails/<uuid:email_id>/verify",
-        views.email_verify,
-        name="email_verify_form",
-    ),
-    path(
-        "emails/<uuid:email_id>/resend",
-        views.email_resend_verification,
-        name="email_resend_verification",
-    ),
-    path(
-        "emails/<uuid:email_id>/toggle",
-        views.email_toggle_status,
-        name="email_toggle_status",
-    ),
-    path(
-        "emails/<uuid:email_id>/set-primary",
-        views.email_set_primary,
-        name="email_set_primary",
-    ),
-    path(
-        "emails/<uuid:email_id>/delete", views.email_delete, name="email_delete"
+        "delete_email/<uuid:email_id>", views.delete_email, name="delete_email"
     ),
 ]
 # The end.

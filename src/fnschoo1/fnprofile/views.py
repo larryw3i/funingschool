@@ -25,7 +25,7 @@ from .models import Fnemail, Fnuser
 LOGIN_URL = settings.LOGIN_URL
 
 
-def fnprofile_new(request):
+def new_fnprofile(request):
     if request.user.is_authenticated:
         messages.info(request, _("You are already logged in."))
         return redirect("fnhome:home")
@@ -48,11 +48,8 @@ def fnprofile_new(request):
                         messages.success(
                             request,
                             _(
-                                "Registration successful! Verification email sent to {}."
-                            ).format(user.email),
-                        )
-                        logger.info(
-                            f"New user registered: {user.username}, email: {user.email}"
+                                "Registration successful! Verification email sent to {email} ."
+                            ).format(email=user.email),
                         )
                     else:
                         messages.warning(
@@ -68,25 +65,7 @@ def fnprofile_new(request):
     else:
         form = FnuserSignUpForm()
 
-    return render(request, "fnprofile/create.html", {"form": form})
-
-
-def activate(request, uidb64, token):
-    uid = None
-    user = None
-
-    try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
-        user = Fnuser.objects.get(pk=uid)
-    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-
-    fn_email = Fnemail.objects.get(email=user.email)
-    if user is not None and fn_email.verify(token):
-        login(request, user)
-        return render(request, "fnprofile/activation_success.html")
-    else:
-        return render(request, "fnprofile/activation_invalid.html")
+    return render(request, "fnprofile/new_profile.html", {"form": form})
 
 
 def fnprofile_log_in(request):
@@ -98,54 +77,40 @@ def fnprofile_log_in(request):
             password = self.cleaned_data.get("password")
             if username and password:
                 user = Fnuser.objects.filter(username=username).first()
+                password_is_incorrect_str = _(
+                    "The account does not exist or the password is incorrect!"
+                )
                 if not user:
-                    return None
-                if user and user.check_password(password):
-                    if settings.EMAIL_BACKEND:
-                        if not user.has_verified_email():
-                            return redirect("fnprofile:email_verify")
-
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                if not Fnemail.objects.filter(
-                    user=user, is_primary=True, is_verified=True
-                ).exists():
-                    fn_email = Fnemail.objects.filter(
-                        user=user, is_primary=True
-                    ).first()
-                    if settings.EMAIL_BACKEND:
-                        current_site = get_current_site(request)
-                        mail_subject = _("Activate your account.")
-                        message = render_to_string(
-                            "fnprofile/active_email.html",
-                            {
-                                "user": user,
-                                "domain": current_site.domain,
-                                "uid": urlsafe_base64_encode(
-                                    force_bytes(user.pk)
+                    messages.warning(request, password_is_incorrect_str)
+                    form.add_error("username", password_is_incorrect_str)
+                else:
+                    password_checked = user.check_password(password)
+                    if not password_checked:
+                        messages.warning(request, password_is_incorrect_str)
+                        form.add_error("username", password_is_incorrect_str)
+                    else:
+                        if (
+                            settings.EMAIL_BACKEND
+                            and not user.has_verified_email()
+                        ):
+                            return redirect(
+                                reverse(
+                                    "fnprofile:edit_email",
+                                    kwargs={"email_id": user.get_first_email()},
+                                )
+                            )
+                        else:
+                            login(request, user)
+                            messages.success(
+                                request,
+                                _("Welcome back, {username} !").format(
+                                    username=user.username
                                 ),
-                                "token": fn_email.generate_verification_token(),
-                            },
-                        )
-                        to_email = form.cleaned_data.get("email")
-                        email = EmailMessage(
-                            mail_subject, message, to=[to_email]
-                        )
-                        email.send()
-                        send_verification_email(request, user)
-
-                        return render(request, "fnprofile/confirm_email.html")
-
-                login(request, user)
-                messages.success(
-                    request, _("Welcome back, {}!").format(user.username)
-                )
-                next_url = request.POST.get("next") or reverse_lazy(
-                    "fnhome:home"
-                )
-                return redirect(next_url)
+                            )
+                            next_url = request.POST.get("next") or reverse_lazy(
+                                "fnhome:home"
+                            )
+                            return redirect(next_url)
     else:
         form = FnuserLoginForm(request)
 
@@ -164,7 +129,7 @@ def fnprofile_log_out(request):
 
 
 @login_required
-def fnprofile_edit(request):
+def edit_fnprofile(request):
     form = None
     if request.method == "POST":
         form = FnuserForm(request.POST, request.FILES, instance=request.user)
@@ -180,10 +145,7 @@ def fnprofile_edit(request):
 
 
 @login_required
-def email_list(request):
-    """
-    List all user emails
-    """
+def list_email(request):
     emails = Fnemail.objects.filter(user=request.user).order_by(
         "-is_primary", "-is_verified", "-created_at"
     )
@@ -205,11 +167,11 @@ def email_list(request):
         "title": _("My Emails"),
     }
 
-    return render(request, "fnprofile/email_list.html", context)
+    return render(request, "fnprofile/list_email.html", context)
 
 
 @login_required
-def email_add(request):
+def new_email(request):
     if request.method == "POST":
         form = FnemailAddForm(request.POST, user=request.user, request=request)
 
@@ -263,11 +225,11 @@ def email_add(request):
         "title": _("Add Email"),
     }
 
-    return render(request, "fnprofile/email_add.html", context)
+    return render(request, "fnprofile/new_email.html", context)
 
 
 @login_required
-def email_detail(request, email_id):
+def view_email(request, email_id):
     email = get_object_or_404(Fnemail, id=email_id, user=request.user)
     verification_form = FnemailVerificationForm()
 
@@ -288,13 +250,16 @@ def email_detail(request, email_id):
         "title": _("Email Details"),
     }
 
-    return render(request, "fnprofile/email_detail.html", context)
+    return render(request, "fnprofile/view_email.html", context)
 
 
-@login_required
-def email_edit(request, email_id):
-    email = get_object_or_404(Fnemail, id=email_id, user=request.user)
-
+def edit_email(request, email_id):
+    email = Fnemail.objects.filter(pk=email_id).first()
+    if not email:
+        return
+    user = email.user
+    if not user:
+        return
     if request.method == "POST":
         form = FnemailEditForm(request.POST, instance=email)
 
@@ -307,7 +272,11 @@ def email_edit(request, email_id):
                 else:
                     messages.success(request, _("Email settings updated"))
 
-                return redirect("email_detail", email_id=email_id)
+                return redirect(
+                    reverse(
+                        "fnprofile:email_detail", kwargs={"email_id": email_id}
+                    )
+                )
 
             except Exception as e:
                 logger.error(f"Failed to update email: {e}")
@@ -322,43 +291,13 @@ def email_edit(request, email_id):
     context = {
         "form": form,
         "email": email,
-        "title": _("Edit Email"),
     }
 
-    return render(request, "fnprofile/email_edit.html", context)
-
-
-def email_verify(request, email_id=None, token=None):
-    if not email_id:
-        return
-
-    if token:
-        email = get_object_or_404(Fnemail, id=email_id, user=request.user)
-        if email.is_verified:
-            messages.info(request, _("Email is already verified"))
-            return redirect("fnprofile:email_detail", email_id=email_id)
-
-        elif email.verify(token):
-            messages.success(request, _("Email verified successfully!"))
-        else:
-            messages.error(request, _("Invalid or expired verification link"))
-
-        context = {
-            "form": form,
-            "email": email,
-            "title": _("Verify Email"),
-        }
-    else:
-        fn_email = get_object_or_404(pk=email_id)
-        username = fn_email.user.username
-        username = username[0] + "*" * 5 + username[-1]
-        form = FnemailEditForm(fn_email)
-
-    return render(request, "fnprofile/email_edit.html", context)
+    return render(request, "fnprofile/edit_email.html", context)
 
 
 @login_required
-def email_delete(request, email_id):
+def delete_email(request, email_id):
     if request.method != "POST":
         return redirect("email_list")
     email = get_object_or_404(Fnemail, id=email_id, user=request.user)
@@ -380,7 +319,7 @@ def email_delete(request, email_id):
         logger.error(f"Failed to delete email: {e}")
         messages.error(request, _("Failed to delete email"))
 
-    return redirect("email_list")
+    return redirect(reverse("fnprofile:list_emails"))
 
 
 def get_client_ip(request):

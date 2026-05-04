@@ -136,6 +136,9 @@ class Fnuser(AbstractUser, PermissionsMixin):
     def has_verified_email(self):
         return self.emails.filter(is_verified=True, is_active=True).exists()
 
+    def get_first_email(self):
+        return self.emails.first()
+
 
 class Fnemail(models.Model):
     user = models.ForeignKey(

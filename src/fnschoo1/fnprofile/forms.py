@@ -290,7 +290,7 @@ class FnemailEditForm(forms.ModelForm):
 
     class Meta:
         model = Fnemail
-        fields = ["is_primary"]
+        fields = ["email", "is_verified", "is_active", "is_primary"]
         widgets = {
             "is_primary": forms.CheckboxInput(
                 attrs={
@@ -302,20 +302,8 @@ class FnemailEditForm(forms.ModelForm):
             "is_primary": _("Set as primary email"),
         }
         help_texts = {
-            "is_primary": _("Primary email will be used for notifications"),
+            "is_primary": _("Primary email will be used for notifications."),
         }
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if not self.instance.is_verified:
-            self.fields["is_primary"].disabled = True
-            self.fields["is_primary"].help_text = _(
-                "Email must be verified first"
-            )
-
-        if not self.instance.is_active:
-            self.fields["is_primary"].disabled = True
-            self.fields["is_primary"].help_text = _("Email is disabled")
 
 
 # The end.
