@@ -44,8 +44,6 @@ def new_fnprofile(request):
                 user = form.save()
                 user.set_password(form.cleaned_data["password1"])
                 user.username = form.cleaned_data["username"]
-                if settings.EMAIL_BACKEND:
-                    user.is_active = False
                 user.save()
                 fn_email = Fnemail.objects.filter(
                     user=user, is_primary=True
@@ -282,8 +280,7 @@ def edit_email(request, email_id):
     if request.method == "POST":
         form = FnemailEditForm(request.POST, instance=email)
         if form.is_valid():
-            is_verified = form.cleaned_data.get("is_verified")
-            if settings.EMAIL_BACKEND and not is_verified:
+            if settings.EMAIL_BACKEND and not email.is_verified:
                 if form.instance.send_verification_email(request):
                     verification_sent_str = _(
                         "A verification email has been sent to your email address. Please follow the instructions in the email to complete the verification process."
@@ -318,11 +315,7 @@ def edit_email(request, email_id):
                     messages.success(request, _("Email set as primary"))
                 else:
                     messages.success(request, _("Email settings updated"))
-                return redirect(
-                    reverse(
-                        "fnprofile:email_detail", kwargs={"email_id": email_id}
-                    )
-                )
+                return redirect("fnprofile:list_emails")
     else:
         form = FnemailEditForm(instance=email)
 

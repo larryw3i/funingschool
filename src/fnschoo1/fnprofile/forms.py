@@ -24,17 +24,83 @@ from django.views.generic import CreateView
 from fnschool import _, count_chinese_characters
 
 from .fntoken import account_activation_token
-from .models import Fnemail, Fnuser, max_email_count
+from .models import Fnemail, Fnuser, max_email_count, max_username_length
+
+min_username_length = 3
 
 
 class FnuserLoginForm(AuthenticationForm):
+    username = forms.CharField(
+        label=_("User Name or Email Address"),
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": _("Please enter user name or email address."),
+                "autocomplete": "username",
+                "autofocus": True,
+            }
+        ),
+        max_length=max_username_length,
+        error_messages={
+            "required": _("Please enter user name or email address."),
+            "max_length": _("The content you entered is too long."),
+        },
+    )
+
+    password = forms.CharField(
+        label=_("password"),
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": _("Please enter password"),
+                "autocomplete": "current-password",
+            }
+        ),
+        strip=False,
+        error_messages={"required": _("Please enter password.")},
+    )
+
+    remember_me = forms.BooleanField(
+        label=_("Remeber me?"),
+        required=False,
+        widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
+    )
+
     def __init__(self, request, *args, **kwargs):
         self.request = request
         super().__init__(request, *args, **kwargs)
 
-    class Meta:
-        model = Fnuser
-        fields = ["username", "password"]
+    def clean_username(self):
+        username = self.cleaned_data.get("username", "").strip()
+
+        if not username:
+            raise ValidationError(
+                _("Please enter your user name or email address.")
+            )
+
+        if len(username) < min_username_length:
+            raise ValidationError(
+                _(
+                    "The username must be at least {min_length} characters long."
+                ).format(min_length=min_username_length)
+            )
+
+        if len(username) > max_username_length:
+            raise ValidationError(
+                _(
+                    "The username can be up to {max_length} characters only."
+                ).format(max_length=max_username_length)
+            )
+
+        return username
+
+    def clean_password(self):
+        password = self.cleaned_data.get("password", "")
+
+        if not password:
+            raise ValidationError(_("Please enter the password."))
+
+        return password
 
 
 class FnuserSignUpForm(UserCreationForm):
@@ -124,11 +190,19 @@ class FnuserSignUpForm(UserCreationForm):
                 )
             )
 
-        if len(username) < 3:
-            raise ValidationError(_("Username must be at least 3 characters."))
+        if len(username) < min_username_length:
+            raise ValidationError(
+                _("Username must be at least {min_length} characters.").format(
+                    min_length=min_username_length
+                )
+            )
 
         if len(username) > max_username_length:
-            raise ValidationError(_("Username cannot exceed 256 characters."))
+            raise ValidationError(
+                _("Username cannot exceed {max_length} characters.").format(
+                    max_length=max_username_length
+                )
+            )
 
         if Fnuser.objects.filter(username=username).exists():
             raise ValidationError(_("This username is already taken."))
