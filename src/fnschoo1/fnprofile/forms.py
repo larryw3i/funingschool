@@ -361,8 +361,10 @@ class FnemailEditForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         if not self.instance.is_verified:
-            for field in self.fields:
-                self.fields[field].widget.attrs["readonly"] = "readonly"
+            self.fields["email"].widget.attrs["readonly"] = "readonly"
+            self.fields["is_verified"].widget.attrs["onclick"] = "return false;"
+            self.fields["is_active"].widget.attrs["onclick"] = "return false;"
+            self.fields["is_primary"].widget.attrs["onclick"] = "return false;"
 
     class Meta:
         model = Fnemail

@@ -263,6 +263,7 @@ def view_email(request, email_id):
 
 def edit_email(request, email_id):
     email = Fnemail.objects.filter(pk=email_id).first()
+    email_is_verified = email.is_verified
     if not email:
         return
 
@@ -280,7 +281,7 @@ def edit_email(request, email_id):
     if request.method == "POST":
         form = FnemailEditForm(request.POST, instance=email)
         if form.is_valid():
-            if settings.EMAIL_BACKEND and not email.is_verified:
+            if settings.EMAIL_BACKEND and not email_is_verified:
                 if form.instance.send_verification_email(request):
                     verification_sent_str = _(
                         "A verification email has been sent to your email address. Please follow the instructions in the email to complete the verification process."
