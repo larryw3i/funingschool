@@ -1,0 +1,10 @@
+{% load i18n %}
+{% autoescape off %}
+  {% blocktrans with username=user.username %}Hello! {{ username }},{% endblocktrans %}
+  {% trans 'Please click on the link below to activate your account:' %}
+  {{ scheme }}://{{ domain }}{% url 'fnprofile:edit_email' email_id=email_id %}?token={{ token }}
+  {% trans '(If you cannot click, please copy the entire link into the browser address bar and press Enter.)' %}
+  {% trans 'If you have not registered an account on FNSCHOOL, please disregard this email.' %}
+
+  {% trans 'Thank you for using FNSCHOOL!' %}
+{% endautoescape %}

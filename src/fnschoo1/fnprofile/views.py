@@ -76,8 +76,8 @@ def new_fnprofile(request):
 
 
 def fnprofile_log_in(request):
-    context = {"add_email_field": False}
     form = None
+    context = {}
     if request.method == "POST":
         form = FnuserLoginForm(request, data=request.POST)
         if form.is_valid():
@@ -119,7 +119,11 @@ def fnprofile_log_in(request):
                                         "fnprofile:edit_email", email.id
                                     )
 
-                                context["add_email_field"] = True
+                                email_field = form.fields["email"]
+                                email_field.widget.attrs["style"] = (
+                                    "display: block;"
+                                )
+
                             else:
 
                                 return redirect(
@@ -139,9 +143,12 @@ def fnprofile_log_in(request):
                             return redirect(next_url)
     else:
         form = FnuserLoginForm(request)
+        email_field = form.fields["email"]
+        email_field.widget.attrs["style"] = "display: none;"
+        email_field.label = ""
+        email_field.help_text = ""
 
     context["form"] = form
-    context["EMAIL_BACKEND"] = settings.EMAIL_BACKEND
     return render(
         request,
         "fnprofile/profile/log_in.html",
@@ -182,17 +189,11 @@ def list_emails(request):
     verified_count = emails.filter(is_verified=True).count()
     primary_email = emails.filter(is_primary=True, is_active=True).first()
 
-    add_form = FnemailAddForm(user=request.user, request=request)
-    bulk_add_form = FnemailBulkAddForm(user=request.user)
-
     context = {
         "emails": emails,
         "total_count": total_count,
         "verified_count": verified_count,
         "primary_email": primary_email,
-        "add_form": add_form,
-        "bulk_add_form": bulk_add_form,
-        "title": _("My Emails"),
     }
 
     return render(request, "fnprofile/fnemail/list.html", context)
@@ -275,16 +276,39 @@ def edit_email(request, email_id):
     if not email:
         return
 
-    user = email.user
-    if not user:
-        return
+    user = None
 
-    token = request.GET.get("token", None)
-    if settings.EMAIL_BACKEND and token:
-        if not email.is_verified and email.verify(token):
-            messages.success(request, _("Email verified successfully!"))
-            login(request, user)
-            return redirect("fnhome:home")
+    if settings.EMAIL_BACKEND:
+        user = (
+            email.user
+            if not email.is_verified and not request.user.is_authenticated
+            else None
+        )
+        if not user:
+            return HttpResponse(_("An error has occurred."), status=404)
+
+        token = request.GET.get("token", None)
+        if token and not email_is_verified:
+            if not email.verification_token.endswith(token):
+                return None
+            if email.verification_token.startswith("__"):
+                email.verification_token = email.verification_token[2:]
+                email.save(update_fields=["verification_token"])
+                return render(
+                    request,
+                    "fnprofile/fnemail/active.html",
+                    {
+                        "full_path": request.get_full_path(),
+                        "username": user.username,
+                        "email": email.email,
+                    },
+                )
+            elif email.verify(token):
+                messages.success(request, _("Email verified successfully!"))
+                login(request, user)
+                return redirect("fnhome:home")
+            else:
+                return None
 
     if request.method == "POST":
         form = FnemailEditForm(request.POST, instance=email)

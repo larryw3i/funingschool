@@ -53,7 +53,7 @@ class FnuserLoginForm(AuthenticationForm):
         widget=forms.EmailInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "example@domain.com",
+                "placeholder": _("example@domain.com"),
                 "autocomplete": "email",
             }
         ),

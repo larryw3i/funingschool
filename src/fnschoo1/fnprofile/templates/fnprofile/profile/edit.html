@@ -4,7 +4,8 @@
   {% trans "Update Profile" %}
 {% endblock %}
 {% block content %}
-  <h2>{% trans "Update Profile." %}</h2>
+  <h2>{% trans "Update Profile" %}</h2>
+  {% include 'fnprofile/includes/_fnprofile_navigation.html' %}
   <form method="post"
         action="{% url 'fnprofile:edit_profile' %}"
         enctype="multipart/form-data">

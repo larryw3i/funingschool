@@ -25,19 +25,5 @@
     <a href="{% url 'fnprofile:new_profile' %}">{% trans "Register here" %}</a>
   </p>
 {% endblock %}
-{% block extra_js %}
-  {% if add_email_field %}
-    <script>
-      $(document).ready(function() {
-        $("#div_id_email").show()
-      })
-    </script>
-  {% else %}
-    <script>
-      $(document).ready(function() {
-        $("#div_id_email").hide()
-      })
-    </script>
-  {% endif %}
-{% endblock %}
+{% block extra_js %}{% endblock %}
 <!-- The end. -->

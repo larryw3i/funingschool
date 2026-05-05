@@ -1,9 +1,20 @@
-{% load i18n %}
-{% autoescape off %}
-  {% blocktrans with username=user.username %}Hello! {{ username }},{% endblocktrans %}
-  {% trans 'Please click on the link below to activate your account:' %}
-  {{ http }}://{{ domain }}{% url 'fnprofile:edit_email' email_id=email_id %}?token={{ token }}
-  {% trans '(If you cannot click, please copy the entire link into the browser address bar and press Enter.)' %}
+{% extends "base/document.html" %}
+{% load crispy_forms_tags %}
 
-  {% trans 'Thank you for using FNSCHOOL!' %}
-{% endautoescape %}
+{% block title %}
+  {% if email.is_verified %}
+    {% trans 'Edit Email' %}
+  {% else %}
+    {% trans 'Verify Email' %}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <h2>{% trans 'Active Account' %}</h2>
+  <h3>
+    {% blocktrans with username=username email=email%}Do you want to activate this account ({{ username }} {{ email }})?{% endblocktrans %} <a class='btn btn-info' href='{{ full_path }}'>{% trans 'Active it' %}</a>
+  </h3>
+{% endblock %}
+{% block extra_js %}{% endblock %}
+
+<!-- The end. -->

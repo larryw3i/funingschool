@@ -45,6 +45,10 @@ class Gender(models.TextChoices):
     UNKNOWN = "U", "--"
 
 
+yes_str = _("Yes")
+no_str = _("No")
+
+
 class Fnuser(AbstractUser, PermissionsMixin):
     groups = models.ManyToManyField(
         "auth.Group",
@@ -223,6 +227,18 @@ class Fnemail(models.Model):
     def pk(self, value):
         self.id = value
 
+    @property
+    def is_verified_t(self):
+        return yes_str if self.is_verified else no_str
+
+    @property
+    def is_active_t(self):
+        return yes_str if self.is_active else no_str
+
+    @property
+    def is_primary_t(self):
+        return yes_str if self.is_primary else no_str
+
     class Meta:
         verbose_name = _("User Email")
         verbose_name_plural = _("User Emails")
@@ -265,6 +281,19 @@ class Fnemail(models.Model):
         ).total_seconds()
         return time_since_last >= resend_verification_email_time_interval
 
+    def generate_verification_token(self):
+        self.verification_token = (
+            "__"
+            + uuid.uuid4().hex
+            + uuid.uuid4().hex
+            + uuid.uuid4().hex
+            + uuid.uuid4().hex
+        )
+        self.verification_sent_at = timezone.now()
+        self.save(update_fields=["verification_token", "verification_sent_at"])
+
+        return self.verification_token[2:]
+
     def send_verification_email(self, request):
         if not self.can_resend_verification_email():
             return False
@@ -272,10 +301,10 @@ class Fnemail(models.Model):
         current_site = get_current_site(request)
         mail_subject = _("Activate your account.")
         message = render_to_string(
-            "fnprofile/fnemail/active.html",
+            "fnprofile/fnemail/verification_email.html",
             {
                 "user": self.user,
-                "http": "https" if request.is_secure() else "http",
+                "scheme": request.scheme,
                 "domain": current_site.domain,
                 "email_id": self.pk,
                 "token": token,
@@ -298,18 +327,6 @@ class Fnemail(models.Model):
             r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", self.email
         ):
             raise ValidationError({"email": _("Invalid email format.")})
-
-    def generate_verification_token(self):
-        self.verification_token = (
-            uuid.uuid4().hex
-            + uuid.uuid4().hex
-            + uuid.uuid4().hex
-            + uuid.uuid4().hex
-        )
-        self.verification_sent_at = timezone.now()
-        self.save(update_fields=["verification_token", "verification_sent_at"])
-
-        return self.verification_token
 
     def sync_to_user_email(self):
         if self.is_primary and self.is_verified and self.is_active:
