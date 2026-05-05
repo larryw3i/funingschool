@@ -47,6 +47,20 @@ class FnuserLoginForm(AuthenticationForm):
         },
     )
 
+    email = forms.EmailField(
+        label=_("Email"),
+        required=False,
+        widget=forms.EmailInput(
+            attrs={
+                "class": "form-control",
+                "placeholder": "example@domain.com",
+                "autocomplete": "email",
+            }
+        ),
+        max_length=max_username_length,
+        help_text=_("We'll send a verification email to this address."),
+    )
+
     password = forms.CharField(
         label=_("password"),
         widget=forms.PasswordInput(
@@ -102,6 +116,21 @@ class FnuserLoginForm(AuthenticationForm):
 
         return password
 
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        email = email.lower().strip()
+
+        try:
+            if email:
+                validate_email(email)
+        except ValidationError:
+            raise ValidationError(_("Please enter a valid email address."))
+
+        if Fnemail.objects.filter(email=email, is_active=True).exists():
+            raise ValidationError(_("This email is already registered."))
+
+        return email
+
 
 class FnuserSignUpForm(UserCreationForm):
 
@@ -114,13 +143,12 @@ class FnuserSignUpForm(UserCreationForm):
                 "autocomplete": "email",
             }
         ),
-        max_length=255,
+        max_length=max_username_length,
         help_text=_("We'll send a verification email to this address."),
     )
 
-    # Terms agreement
     agree_terms = forms.BooleanField(
-        label=_("I agree to the Terms of Service"),
+        label=_("I agree to the Terms of Service."),
         widget=forms.CheckboxInput(
             attrs={
                 "class": "form-check-input",

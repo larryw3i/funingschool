@@ -76,7 +76,8 @@ def new_fnprofile(request):
 
 
 def fnprofile_log_in(request):
-    context = {}
+    context = {"add_email_field": False}
+    form = None
     if request.method == "POST":
         form = FnuserLoginForm(request, data=request.POST)
         if form.is_valid():
@@ -104,13 +105,23 @@ def fnprofile_log_in(request):
                             settings.EMAIL_BACKEND
                             and not user.has_verified_email()
                         ):
+                            email = user.get_first_email()
+                            form_email = form.cleaned_data.get("email", None)
+
                             if not email:
-                                return redirect(
-                                    reverse("fnprofile:new_email")
-                                    + "?"
-                                    + urlencode({"user_id": user.pk})
-                                )
+                                if form_email:
+                                    email = Fnemail.objects.create(
+                                        user=user,
+                                        email=form_email,
+                                        is_primary=True,
+                                    )
+                                    return redirect(
+                                        "fnprofile:edit_email", email.id
+                                    )
+
+                                context["add_email_field"] = True
                             else:
+
                                 return redirect(
                                     "fnprofile:edit_email", email.id
                                 )
@@ -188,24 +199,17 @@ def list_emails(request):
 
 
 def new_email(request):
-    user_id = request.GET.get("user_id", None)
-    if not (request.user.is_authenticated or user_id):
-        return
-    user = (
-        request.user
-        if request.user.is_authenticated
-        else Fnuser.objects.filter(pk=user_id).first()
-    )
+    user = request.user
     if request.method == "POST":
         form = FnemailAddForm(request.POST, user=user, request=request)
         if form.is_valid():
             try:
                 with transaction.atomic():
                     email = form.save(commit=False)
-                    email.user = request.user
+                    email.user = user
 
                     if not Fnemail.objects.filter(
-                        user=request.user, is_active=True
+                        user=user, is_active=True
                     ).exists():
                         email.is_primary = True
 
@@ -231,7 +235,7 @@ def new_email(request):
                     "email", _("Failed to add email. Please try again.")
                 )
     else:
-        form = FnemailAddForm(user=request.user, request=request)
+        form = FnemailAddForm(user=user, request=request)
 
     context = {
         "form": form,
