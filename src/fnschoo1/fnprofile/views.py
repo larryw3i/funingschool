@@ -1,3 +1,5 @@
+from urllib.parse import urlencode
+
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -10,7 +12,7 @@ from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -81,7 +83,11 @@ def fnprofile_log_in(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
             if username and password:
-                user = Fnuser.objects.filter(username=username).first()
+                user = (
+                    Fnuser.objects.filter(email=username).first()
+                    if "@" in username
+                    else Fnuser.objects.filter(username=username).first()
+                )
                 password_is_incorrect_str = _(
                     "The account does not exist or the password is incorrect!"
                 )
@@ -98,9 +104,12 @@ def fnprofile_log_in(request):
                             settings.EMAIL_BACKEND
                             and not user.has_verified_email()
                         ):
-                            email = user.get_first_email()
                             if not email:
-                                return redirect("fnprofile:new_email")
+                                return redirect(
+                                    reverse("fnprofile:new_email")
+                                    + "?"
+                                    + urlencode({"user_id": user.pk})
+                                )
                             else:
                                 return redirect(
                                     "fnprofile:edit_email", email.id
@@ -178,11 +187,17 @@ def list_emails(request):
     return render(request, "fnprofile/fnemail/list.html", context)
 
 
-@login_required
 def new_email(request):
+    user_id = request.GET.get("user_id", None)
+    if not (request.user.is_authenticated or user_id):
+        return
+    user = (
+        request.user
+        if request.user.is_authenticated
+        else Fnuser.objects.filter(pk=user_id).first()
+    )
     if request.method == "POST":
-        form = FnemailAddForm(request.POST, user=request.user, request=request)
-
+        form = FnemailAddForm(request.POST, user=user, request=request)
         if form.is_valid():
             try:
                 with transaction.atomic():
@@ -196,41 +211,30 @@ def new_email(request):
 
                     email.save()
 
-                    if send_verification_email(request, request.user):
-                        messages.success(
-                            request,
+                    if email.send_verification_email(request):
+                        form.add_error(
+                            "email",
                             _(
                                 "Email added successfully! Verification email sent."
                             ),
                         )
-                        logger.info(
-                            f"User {request.user.username} added email: {email.email}"
-                        )
                     else:
-                        messages.warning(
-                            request,
+                        form.add_error(
+                            "email",
                             _(
                                 "Email added, but verification email failed to send."
                             ),
                         )
 
-                    return redirect("email_list")
-
             except Exception as e:
-                logger.error(f"Failed to add email: {e}", exc_info=True)
-                messages.error(
-                    request, _("Failed to add email. Please try again.")
+                form.add_error(
+                    "email", _("Failed to add email. Please try again.")
                 )
-        else:
-            for field, errors in form.errors.items():
-                for error in errors:
-                    messages.error(request, f"{field}: {error}")
     else:
         form = FnemailAddForm(user=request.user, request=request)
 
     context = {
         "form": form,
-        "title": _("Add Email"),
     }
 
     return render(request, "fnprofile/fnemail/new.html", context)

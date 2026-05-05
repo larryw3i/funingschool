@@ -230,9 +230,12 @@ class Fnemail(models.Model):
 
         constraints = [
             models.UniqueConstraint(
-                fields=["user", "email"],
-                name="unique_user_email",
-                violation_error_message=_("You have already added this email."),
+                fields=["email"],
+                condition=models.Q(is_verified=True),
+                name="unique_verified_email",
+                violation_error_message=_(
+                    "This email has been used by other user."
+                ),
             ),
             models.UniqueConstraint(
                 fields=["user"],
