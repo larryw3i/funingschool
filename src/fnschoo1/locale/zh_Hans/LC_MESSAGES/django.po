@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-05 03:31+0800\n"
-"PO-Revision-Date: 2026-05-05 03:33+0800\n"
+"POT-Creation-Date: 2026-05-05 10:59+0800\n"
+"PO-Revision-Date: 2026-05-05 11:03+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -1349,121 +1349,169 @@ msgstr "出入库"
 msgid "FNSCHOOL Home"
 msgstr "FNSCHOOL 主页"
 
-#: fnprofile/forms.py:43
+#: fnprofile/forms.py:34
+msgid "User Name or Email Address"
+msgstr "用户名或电子邮件地址"
+
+#: fnprofile/forms.py:38 fnprofile/forms.py:45
+msgid "Please enter user name or email address."
+msgstr "请输入您的用户名或电子邮箱地址。"
+
+#: fnprofile/forms.py:46
+msgid "The content you entered is too long."
+msgstr "输入内容过多。"
+
+#: fnprofile/forms.py:51
+msgid "password"
+msgstr "密码"
+
+#: fnprofile/forms.py:55
+msgid "Please enter password"
+msgstr "请输入密码"
+
+#: fnprofile/forms.py:60
+msgid "Please enter password."
+msgstr "请输入密码。"
+
+#: fnprofile/forms.py:64
+msgid "Remeber me?"
+msgstr "记住我？"
+
+#: fnprofile/forms.py:78
+msgid "Please enter your user name or email address."
+msgstr "请输入您的用户名或电子邮箱地址。"
+
+#: fnprofile/forms.py:84
+#, python-brace-format
+msgid "The username must be at least {min_length} characters long."
+msgstr "用户名至少需要 {min_length} 个字符。"
+
+#: fnprofile/forms.py:91
+#, python-brace-format
+msgid "The username can be up to {max_length} characters only."
+msgstr "用户名至多只能有 {max_length} 个字符。"
+
+#: fnprofile/forms.py:101
+msgid "Please enter the password."
+msgstr "请输入密码。"
+
+#: fnprofile/forms.py:109
 msgid "Email"
 msgstr "电子邮件"
 
-#: fnprofile/forms.py:52
+#: fnprofile/forms.py:118
 msgid "We'll send a verification email to this address."
 msgstr "我们会发送一封验证邮件到这个邮箱地址。"
 
-#: fnprofile/forms.py:57
+#: fnprofile/forms.py:123
 msgid "I agree to the Terms of Service"
 msgstr "我同意《服务协议》"
 
-#: fnprofile/forms.py:65
+#: fnprofile/forms.py:131
 msgid "You must agree to the Terms of Service."
 msgstr "你需要同意该服务协议。"
 
-#: fnprofile/forms.py:76
+#: fnprofile/forms.py:142
 msgid "Email Address (Required)"
 msgstr "电子邮箱地址（必需）"
 
-#: fnprofile/forms.py:78
+#: fnprofile/forms.py:144
 msgid "Email Address (Optional)"
 msgstr "电子邮箱地址（选填）"
 
-#: fnprofile/forms.py:80
+#: fnprofile/forms.py:146
 msgid "Please enter your email address."
 msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:83
+#: fnprofile/forms.py:149
 msgid "Required. 256 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "必填，最多 256 个字符，可包含字母、数字、“@”、“.”、“+”、“-”、“_”。"
 
-#: fnprofile/forms.py:100
+#: fnprofile/forms.py:166
 msgid "Please enter email."
 msgstr "请输入电子邮件地址。"
 
-#: fnprofile/forms.py:104
+#: fnprofile/forms.py:170
 msgid "A user with that email already exists."
 msgstr "该电子邮件地址已被使用。"
 
-#: fnprofile/forms.py:118
+#: fnprofile/forms.py:184
 msgid "Please enter a username."
 msgstr "请输入用户名。"
 
-#: fnprofile/forms.py:123
+#: fnprofile/forms.py:189
 msgid "Username can only contain letters, digits and @/./+/-/_ characters."
 msgstr "用户名只能包含字母、数字、“@”、“.”、“+”、“-”、“_”。"
 
-#: fnprofile/forms.py:128
-msgid "Username must be at least 3 characters."
-msgstr "用户名至少需要三个字符。"
+#: fnprofile/forms.py:195
+#, python-brace-format
+msgid "Username must be at least {min_length} characters."
+msgstr "用户名至少需要 {min_length} 个字符。"
 
-#: fnprofile/forms.py:131
-msgid "Username cannot exceed 256 characters."
-msgstr "用户名不要超过 256 个字符。"
+#: fnprofile/forms.py:202
+#, python-brace-format
+msgid "Username cannot exceed {max_length} characters."
+msgstr "用户名不要超过 {max_length} 个字符。"
 
-#: fnprofile/forms.py:134
+#: fnprofile/forms.py:208
 msgid "This username is already taken."
 msgstr "用户名已存在。"
 
-#: fnprofile/forms.py:141 fnprofile/forms.py:262
+#: fnprofile/forms.py:215 fnprofile/forms.py:334
 msgid "Please enter an email address."
 msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:146 fnprofile/forms.py:267
+#: fnprofile/forms.py:220 fnprofile/forms.py:339
 msgid "Please enter a valid email address."
 msgstr "请输入有效的电子邮箱地址。"
 
-#: fnprofile/forms.py:150 fnprofile/models.py:75
+#: fnprofile/forms.py:224 fnprofile/models.py:75
 msgid "This email is already registered."
 msgstr ""
 "该电子邮箱地址已用于注册账号（如果是您的邮箱地址没有被验证可在登录页面验"
 "证）。"
 
-#: fnprofile/forms.py:162
+#: fnprofile/forms.py:236
 msgid "Username should not be part of your email address."
 msgstr "用户名不能是您的邮箱地址的一部分。"
 
-#: fnprofile/forms.py:185 fnprofile/forms.py:186
+#: fnprofile/forms.py:257 fnprofile/forms.py:258
 msgid "User Name"
 msgstr "用户名"
 
-#: fnprofile/forms.py:189 fnprofile/forms.py:190
+#: fnprofile/forms.py:261 fnprofile/forms.py:262
 msgid "Password"
 msgstr "密码"
 
-#: fnprofile/forms.py:193 fnprofile/forms.py:195
+#: fnprofile/forms.py:265 fnprofile/forms.py:267
 msgid "Confirm Password"
 msgstr "确认密码"
 
-#: fnprofile/forms.py:241
+#: fnprofile/forms.py:313
 msgid "name@example.domain"
 msgstr "账号名@样例.域名"
 
-#: fnprofile/forms.py:247
+#: fnprofile/forms.py:319
 msgid "Email Address"
 msgstr "电子邮件地址"
 
-#: fnprofile/forms.py:250
+#: fnprofile/forms.py:322
 msgid "Add a new email address to your account"
 msgstr "添加一个新的邮箱地址到您的账号。"
 
-#: fnprofile/forms.py:274 fnprofile/models.py:235
+#: fnprofile/forms.py:346 fnprofile/models.py:235
 msgid "You have already added this email."
 msgstr "您已经添加了该邮箱地址。"
 
-#: fnprofile/forms.py:280
+#: fnprofile/forms.py:352
 msgid "This email is already used by another user."
 msgstr "该邮箱地址已被其它用户注册。"
 
-#: fnprofile/forms.py:306
+#: fnprofile/forms.py:380
 msgid "Set as primary email"
 msgstr "设置为主邮箱地址"
 
-#: fnprofile/forms.py:309
+#: fnprofile/forms.py:383
 msgid "Primary email will be used for notifications."
 msgstr "主邮箱地址将用于消息通知。"
 
@@ -1689,7 +1737,7 @@ msgstr "更新"
 msgid "Verify"
 msgstr "验证"
 
-#: fnprofile/templates/fnprofile/fnemail/new.html:5 fnprofile/views.py:226
+#: fnprofile/templates/fnprofile/fnemail/new.html:5 fnprofile/views.py:233
 msgid "Add Email"
 msgstr "添加电子邮件地址"
 
@@ -1762,94 +1810,98 @@ msgid ""
 "  "
 msgstr "你好，%(user_name)s！"
 
-#: fnprofile/views.py:30
+#: fnprofile/views.py:36
 msgid "You are already logged in."
 msgstr "您已登录。"
 
-#: fnprofile/views.py:50
+#: fnprofile/views.py:56
 #, python-brace-format
 msgid "Registration successful! Verification email sent to {email} ."
 msgstr "注册成功！验证邮件已发送至 {email} 。"
 
-#: fnprofile/views.py:57
+#: fnprofile/views.py:63
 msgid "Registration successful, but verification email failed to send."
 msgstr "注册成功，但验证邮件发送失败。"
 
-#: fnprofile/views.py:80
+#: fnprofile/views.py:86
 msgid "The account does not exist or the password is incorrect!"
 msgstr "账号不存在或密码错误！"
 
-#: fnprofile/views.py:105
+#: fnprofile/views.py:112
 #, python-brace-format
 msgid "Welcome back, {username} !"
 msgstr "欢迎回来，{username}！"
 
-#: fnprofile/views.py:127
+#: fnprofile/views.py:134
 msgid "You have been logged out"
 msgstr "你的账号已退出登录。"
 
-#: fnprofile/views.py:140
+#: fnprofile/views.py:147
 msgid "Your information has been updated successfully!"
 msgstr "您的信息已更新！"
 
-#: fnprofile/views.py:168
+#: fnprofile/views.py:175
 msgid "My Emails"
 msgstr "我的电子邮件地址。"
 
-#: fnprofile/views.py:196
+#: fnprofile/views.py:203
 msgid "Email added successfully! Verification email sent."
 msgstr "邮件地址添加成功！验证邮件已发送。"
 
-#: fnprofile/views.py:206
+#: fnprofile/views.py:213
 msgid "Email added, but verification email failed to send."
 msgstr "邮件地址已被添加，但是验证邮件发送失败。"
 
-#: fnprofile/views.py:215
+#: fnprofile/views.py:222
 msgid "Failed to add email. Please try again."
 msgstr "无法添加！请重试。"
 
-#: fnprofile/views.py:251
+#: fnprofile/views.py:258
 msgid "Email Details"
 msgstr "电子邮件详细"
 
-#: fnprofile/views.py:269
+#: fnprofile/views.py:277
 msgid "Email verified successfully!"
 msgstr "邮件地址验证成功！"
 
-#: fnprofile/views.py:280
+#: fnprofile/views.py:287
 msgid ""
 "A verification email has been sent to your email address. Please follow the "
 "instructions in the email to complete the verification process."
 msgstr "已向您的电子邮件地址发送一封验证邮件，请按照邮件内的要求完成账号验证。"
 
-#: fnprofile/views.py:294
+#: fnprofile/views.py:301
 #, python-brace-format
 msgid ""
 "The verification email failed to be sent. Please wait for {time_interval} "
 "seconds and try again!"
 msgstr "无法发送验证邮件，请稍等 {time_interval} 秒 后重试！"
 
-#: fnprofile/views.py:302
+#: fnprofile/views.py:310
 msgid "Please log in to change your information."
 msgstr "请登录以更改您的信息。"
 
-#: fnprofile/views.py:307
+#: fnprofile/views.py:315
+msgid "An error occurred while saving the form!"
+msgstr "保存表单时出现错误！"
+
+#: fnprofile/views.py:320
 msgid "Email set as primary"
 msgstr "设电子邮件地址为主邮件地址"
 
-#: fnprofile/views.py:309
+#: fnprofile/views.py:322
 msgid "Email settings updated"
 msgstr "邮件设置已更新"
 
-#: fnprofile/views.py:338
+#: fnprofile/views.py:347
 msgid "Cannot delete primary email"
 msgstr "无法删除主邮件地址"
 
-#: fnprofile/views.py:344
+#: fnprofile/views.py:353
 msgid "Email deleted"
 msgstr "电子邮件地址已删除"
 
-#: fnprofile/views.py:351
+#: fnprofile/views.py:360
 msgid "Failed to delete email"
 msgstr "无法删除电子邮件地址"
 
@@ -1899,39 +1951,43 @@ msgstr ""
 msgid "Accept All"
 msgstr "接受全部"
 
-#: templates/includes/_header.html:26
+#: templates/includes/_header.html:5
+msgid "The road is long, but if you walk, you will arrive."
+msgstr "路虽远，行则将至。"
+
+#: templates/includes/_header.html:28
 msgid "Home"
 msgstr "主页"
 
-#: templates/includes/_header.html:29
+#: templates/includes/_header.html:31
 msgid "Canteen"
 msgstr "食堂"
 
-#: templates/includes/_header.html:32
+#: templates/includes/_header.html:34
 msgid "Bell"
 msgstr "铃声"
 
-#: templates/includes/_header.html:40
+#: templates/includes/_header.html:42
 msgid "Develop"
 msgstr "开发"
 
-#: templates/includes/_header.html:57
+#: templates/includes/_header.html:59
 msgid "About"
 msgstr "关于"
 
-#: templates/includes/_header.html:80
+#: templates/includes/_header.html:82
 msgid "Log out"
 msgstr "退出"
 
-#: templates/includes/_header.html:84
+#: templates/includes/_header.html:86
 msgid "Login"
 msgstr "登录"
 
-#: templates/includes/_header.html:87
+#: templates/includes/_header.html:89
 msgid "Sign Up"
 msgstr "注册"
 
-#: templates/includes/_header.html:102
+#: templates/includes/_header.html:104
 msgid "Hide messages."
 msgstr "隐藏信息。"
 
@@ -2036,9 +2092,6 @@ msgstr "隐藏信息。"
 
 #~ msgid "Only verified and active emails can be set as primary."
 #~ msgstr "仅被验证且激活的邮件才能被设为主电子邮件。"
-
-#~ msgid "Please enter password."
-#~ msgstr "请输入密码。"
 
 #~ msgid "Create"
 #~ msgstr "新建"

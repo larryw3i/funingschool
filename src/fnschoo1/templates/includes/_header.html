@@ -2,7 +2,9 @@
 {% load i18n %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'fnhome:home' %}">
+    <a title="{% trans 'The road is long, but if you walk, you will arrive.' %}"
+       class="navbar-brand"
+       href="{% url 'fnhome:home' %}">
       <img src="{% static '/images/favicon.ico' %}"
            alt="Logo"
            width="30"

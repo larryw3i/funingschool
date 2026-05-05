@@ -310,13 +310,17 @@ def edit_email(request, email_id):
                         _("Please log in to change your information.")
                     )
                     return redirect("fnprofile:log_in")
-
-                form.save()
-                if form.cleaned_data.get("is_primary"):
-                    messages.success(request, _("Email set as primary"))
+                if not user == request.user:
+                    form.add_error(
+                        _("An error occurred while saving the form!")
+                    )
                 else:
-                    messages.success(request, _("Email settings updated"))
-                return redirect("fnprofile:list_emails")
+                    form.save()
+                    if form.cleaned_data.get("is_primary"):
+                        messages.success(request, _("Email set as primary"))
+                    else:
+                        messages.success(request, _("Email settings updated"))
+                    return redirect("fnprofile:list_emails")
     else:
         form = FnemailEditForm(instance=email)
 

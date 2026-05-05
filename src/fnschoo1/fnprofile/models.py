@@ -253,8 +253,17 @@ class Fnemail(models.Model):
     def __str__(self):
         return f"{self.user.username}: {self.email}"
 
+    def can_resend_verification_email(self):
+        if not self.verification_sent_at:
+            return True
+
+        time_since_last = (
+            timezone.now() - self.verification_sent_at
+        ).total_seconds()
+        return time_since_last >= resend_verification_email_time_interval
+
     def send_verification_email(self, request):
-        if not self.can_resend_verification_email:
+        if not self.can_resend_verification_email():
             return False
         token = self.generate_verification_token()
         current_site = get_current_site(request)
@@ -334,15 +343,6 @@ class Fnemail(models.Model):
         self.sync_to_user_email()
 
         return True
-
-    def can_resend_verification_email(self):
-        if not self.verification_sent_at:
-            return True
-
-        time_since_last = (
-            timezone.now() - self.verification_sent_at
-        ).total_seconds()
-        return time_since_last >= resend_verification_email_time_interval
 
     def set_as_primary(self):
         if not self.is_verified:
