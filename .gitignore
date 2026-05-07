@@ -173,4 +173,12 @@ media/
 # *.po~
 *.po~
 
+# NPM
+**/package-lock.json
+**/node_modules/
+!**/node_modules/**/*.min.js
+!**/node_modules/**/*.min.js.map
+!**/node_modules/**/*.min.css
+!**/node_modules/**/*.min.css.map
+
 # The end.

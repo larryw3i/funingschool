@@ -11,6 +11,8 @@ pyhelper_name="helper"
 pyhelper_dir=${project_dir}/${pyhelper_name}
 pyhelper_locale_dir=${pyhelper_dir}/locale
 
+fnschool_static_dir=${fnschoo1_dir}/static
+
 if [[ ! -d ${venv_dir} ]]; then
     python \
         -m venv \
@@ -53,6 +55,14 @@ generate_code_txt() {
 }
 
 pack() {
+    if [[ ! -f $(which npm)]]; then
+        echo "Try to instll `npm` and `nodeks`."
+        sudo apt install npm nodejs
+    fi
+    PWD_CP=${PWD}
+    cd ${fnschool_static_dir}
+    npm install
+    cd ${PWD_CP}
     if [[ ! -f $(which twine) ]]; then
         pip install -U setuptools wheel build twine
     fi
