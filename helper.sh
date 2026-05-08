@@ -12,6 +12,7 @@ pyhelper_dir=${project_dir}/${pyhelper_name}
 pyhelper_locale_dir=${pyhelper_dir}/locale
 
 fnschool_static_dir=${fnschoo1_dir}/static
+fnschool_static_node_modules_dir=${fnschool_static_dir}/node_modules
 
 if [[ ! -d ${venv_dir} ]]; then
     python \
@@ -54,15 +55,28 @@ generate_code_txt() {
     done
 }
 
-pack() {
-    if [[ ! -f $(which npm)]]; then
+cp_node_modules() {
+    if [[ ! -f $(which npm) ]]; then
         echo "Try to instll `npm` and `nodeks`."
         sudo apt install npm nodejs
     fi
     PWD_CP=${PWD}
     cd ${fnschool_static_dir}
-    npm install
+    if [[ ! -d "node_modules" ]]; then
+        npm install
+    fi
+    module_files=$(find ${fnschool_static_node_modules_dir} -name "*.min.js" -o -name "*.min.js.map" -o -name "*.min.css" -o -name "*.min.css.map")
+    cd ${fnschool_static__node_modules_dir}
+    for m_file in ${module_files[@]}; do
+        _m_file=${m_file/node_modules/_node_modules_}
+        _m_file=${_m_file/dist/_dist_}
+        mkdir -p $(dirname ${_m_file})
+        cp -vv ${m_file}  ${_m_file}
+    done
     cd ${PWD_CP}
+}
+
+pack() {
     if [[ ! -f $(which twine) ]]; then
         pip install -U setuptools wheel build twine
     fi
