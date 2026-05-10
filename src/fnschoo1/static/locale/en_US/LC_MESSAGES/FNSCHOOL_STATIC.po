@@ -1,0 +1,66 @@
+# English translations for FNSCHOOL_STATIC package.
+# Copyright (C) 2026 THE FNSCHOOL_STATIC'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the FNSCHOOL_STATIC package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: FNSCHOOL_STATIC 1.0.0\n"
+"Report-Msgid-Bugs-To: larryw3i@yeah.net\n"
+"POT-Creation-Date: 2026-05-10 21:31+0800\n"
+"PO-Revision-Date: 2026-05-10 16:52+0800\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:33
+#, fuzzy
+msgid ""
+"An error occurred during compression, \"%(filePath)s\": %(result_error)s"
+msgstr "An error occurred during compression, \"{filePath}\": {result_error}"
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:39
+#, fuzzy
+msgid "\"%(minPath)s\" has been generated."
+msgstr "\"{minPath}\" has been generated."
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:42
+#, fuzzy
+msgid "An error occurred during generating, \"%(minPath)s\": %(error_message)s"
+msgstr "An error occurred during generating, \"{minPath}\": {error_message}"
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:71
+#, fuzzy
+msgid "%(jsFiles_length)s JS Files found."
+msgstr "{jsFiles_length} JS Files found."
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:72
+msgid "One JS File found."
+msgstr "One JS File found."
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:81
+msgid "Start monitoring changes to .js files..."
+msgstr "Start monitoring changes to .js files..."
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:92
+#, fuzzy
+msgid "New file: %(filePath)s ."
+msgstr "New file: {filePath}"
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:96
+#, fuzzy
+msgid "File changed: %(filePath)s ."
+msgstr "File changed: {filePath}"
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:107
+#, fuzzy
+msgid "File removed: %(minPath)s ."
+msgstr "File removed: {minPath}"
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:118
+msgid "Exit."
+msgstr "Exit."

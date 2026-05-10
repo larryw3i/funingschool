@@ -1,49 +1,42 @@
 const fs = require('fs')
 const path = require('path')
-const { package_info, locales_dir, source_dir } = require(path.dirname(
-  __dirname
-), '_package.js')
-const gettextParser = require('gettext-parser')
+const { package_info, locale_dir, source_dir } = require(
+  path.join(path.dirname(path.dirname(__dirname)), '_package.js')
+)
 const { exec } = require('child_process')
 
-function compilePoToMo(locale) {
-  const poPath = path.join(
-    package_dir,
-    'locales',
-    locale,
-    'LC_MESSAGES',
-    `${package_info.name}.po`
-  )
+const entries = fs.readdirSync(locale_dir, { withFileTypes: true });
+const package_langs = entries
+    .filter(d => d.isDirectory())
+    .map(d => d.name);
 
-  const moPath = path.join(
-    package_dir,
-    'locales',
-    locale,
-    'LC_MESSAGES',
-    `${package_dir.name}.mo`
-  )
+package_langs.forEach((lang) => {
+  const po_path = path.join(
+        locale_dir,
+        lang,
+        'LC_MESSAGES',
+        `${package_info.name}.po`
+      )
+  if (fs.existsSync(po_path)) {
+    const mo_path = path.join(
+          locale_dir,
+          lang,
+          'LC_MESSAGES',
+          `${package_info.name}.mo`
+        )
 
-  if (!fs.existsSync(poPath)) {
-    console.warn(`PO file not found: ${poPath}`)
-    return
+    const command = `\
+      msgfmt -vv -o ${mo_path} ${po_path}
+    `
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error generating "${mo_path}" from "${po_path}"`)
+        return
+      }
+      console.log(`Generating ${mo_path} from "${po_path}" .`)
+    })
+
   }
-
-  const poContent = fs.readFileSync(poPath, 'utf8')
-  const po = gettextParser.po.parse(poContent)
-
-  const mo = gettextParser.mo.compile(po)
-
-  fs.writeFileSync(moPath, mo)
-
-  console.log(`Compiled: ${locale} -> ${moPath}`)
-}
-
-const locales = fs
-  .readdirSync(locales_dir)
-  .filter((item) =>
-    fs.statSync(path.join(package_dir, 'locales', item)).isDirectory()
-  )
-
-locales.forEach(compilePoToMo)
+});
 
 // The end.
