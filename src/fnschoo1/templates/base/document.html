@@ -10,10 +10,11 @@
       {% endblock %}
     </title>
     <link rel="icon"
-          href="{% static 'images/favicon.ico' %}"
+          href="{% static 'public/favicon.ico' %}"
           type="image/x-icon" />
-    <link href="{% static '_node_modules_/bootstrap/_dist_/css/bootstrap.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'src/fnschoo1/static/src/assets/css/main.css' %}" rel="stylesheet" />
+    <link href="{% static '_node_modules_/bootstrap/_dist_/css/bootstrap.min.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'src/assets/css/main.css' %}" rel="stylesheet" />
 
     <script src="{% static '_node_modules_/bootstrap/_dist_/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static '_node_modules_/jquery/_dist_/jquery.min.js' %}"></script>
@@ -35,3 +36,5 @@
     {% block extra_js %}{% endblock %}
   </body>
 </html>
+
+{# The end. #}

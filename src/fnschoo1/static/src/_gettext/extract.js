@@ -5,15 +5,17 @@ var { package_info, locale_dir, source_dir } = require(
 )
 var { exec } = require('child_process')
 
-var maintainer_email="larryw3i@yeah.net"
-var langs = ["en_US", "zh_CN"]
-var po_file_paths=langs.map(lang => `${locale_dir}/${lang}/LC_MESSAGES/${package_info.name}.po`);
+var maintainer_email = 'larryw3i@yeah.net'
+var langs = ['en_US', 'zh_CN']
+var po_file_paths = langs.map(
+  (lang) => `${locale_dir}/${lang}/LC_MESSAGES/${package_info.name}.po`
+)
 var pot_file_path = path.join(locale_dir, `${package_info.name}.pot`)
 
 for (var po_file_path of po_file_paths) {
-  po_file_path=path.parse(po_file_path)
+  po_file_path = path.parse(po_file_path)
   if (!fs.existsSync(po_file_path.dir)) {
-    fs.mkdirSync(po_file_path.dir,{recursive:true})
+    fs.mkdirSync(po_file_path.dir, { recursive: true })
   }
 }
 
@@ -70,12 +72,12 @@ function extractStrings() {
     console.log('Strings extracted to:', pot_file_path)
   })
   for (var po_file_path of po_file_paths) {
-    po_file_path=path.parse(po_file_path)
-    var lang_split= po_file_path.dir.split(path.sep)
-    var lang=lang_split[lang_split.length-2]
+    po_file_path = path.parse(po_file_path)
+    var lang_split = po_file_path.dir.split(path.sep)
+    var lang = lang_split[lang_split.length - 2]
     var command = ''
     po_file_path = path.format(po_file_path)
-    if (! fs.existsSync(po_file_path)){
+    if (!fs.existsSync(po_file_path)) {
       command = `\
         msginit \
           --no-translator \
@@ -90,15 +92,14 @@ function extractStrings() {
         ${pot_file_path} \
       `
     }
-    exec(command,(error,stdout,stderr)=>{
-     if (error) {
+    exec(command, (error, stdout, stderr) => {
+      if (error) {
         console.error(`Error updating ${pot_file_path}:`, error)
         return
       }
       console.log(`Updated "${pot_file_path}" from "${pot_file_path}"`)
-      });
+    })
   }
-
 }
 
 extractStrings()

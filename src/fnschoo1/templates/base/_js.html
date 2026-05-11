@@ -1,6 +1,6 @@
 <script>
-  function localize_content(element) {
-    $(element).each(function(index, _element) {
+  function localize_content(elements) {
+    $(elements).each(function(index, _element) {
       var _element = $(_element)
       const text = _element.text().replace(/\s+/g, '');
       if (text == "True") {
