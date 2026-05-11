@@ -1,9 +1,7 @@
-var fs = require('fs')
-var path = require('path')
-var { package_info, locale_dir, source_dir } = require(
-  path.join(path.dirname(path.dirname(__dirname)), '_package.js')
-)
-var { exec } = require('child_process')
+import * as fs from 'fs'
+import * as path from 'path'
+import { package_info, locale_dir, source_dir } from '#root/_package.js'
+import { exec } from 'child_process'
 
 var maintainer_email = 'larryw3i@yeah.net'
 var langs = ['en_US', 'zh_CN']

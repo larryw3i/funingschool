@@ -1,8 +1,6 @@
-const fs = require('fs')
-const path = require('path')
-const { _ } = require(path.join(__dirname, '_gettext', 'gettext'))
-const { package_info, locales_dir, source_dir } = require(
-  path.join(path.dirname(__dirname), '_package')
-)
+import * as fs from 'fs'
+import * as path from 'path'
+import { _ } from '#src/_gettext/gettext.js'
+import { package_info, locale_dir, source_dir } from '#root/_package.js'
 
 // The end.

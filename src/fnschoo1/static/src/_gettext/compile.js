@@ -1,9 +1,7 @@
-const fs = require('fs')
-const path = require('path')
-const { package_info, locale_dir, source_dir } = require(
-  path.join(path.dirname(path.dirname(__dirname)), '_package.js')
-)
-const { exec } = require('child_process')
+import * as fs from 'fs'
+import * as path from 'path'
+import { exec } from 'child_process'
+import { package_info, locale_dir, source_dir } from '#root/_package.js'
 
 const entries = fs.readdirSync(locale_dir, { withFileTypes: true })
 const package_langs = entries.filter((d) => d.isDirectory()).map((d) => d.name)

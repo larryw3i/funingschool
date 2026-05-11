@@ -69,17 +69,17 @@ cp_node_modules() {
         find ${fnschool_static_node_modules_dir} \
             -type f \
             \( \
-                -path "*/@popperjs/*" \
-                -o -path "*/bootstrap/*" \
-                -o -path "*/jquery/*" \
+            -path "*/@popperjs/*" \
+            -o -path "*/bootstrap/*" \
+            -o -path "*/jquery/*" \
             \) \
             \( \
-                -name "*.min.js" \
-                -o -name "*.min.js.map" \
-                -o -name "*.min.css" \
-                -o -name "*.min.css.map" \
-                -o -name "LICENSE*" \
-                -o -name "AUTHORS*" \
+            -name "*.min.js" \
+            -o -name "*.min.js.map" \
+            -o -name "*.min.css" \
+            -o -name "*.min.css.map" \
+            -o -name "*LICENSE*" \
+            -o -name "*AUTHORS*" \
             \)
     )
     cd ${fnschool_static__node_modules_dir}

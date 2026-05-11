@@ -1,11 +1,10 @@
-const fs = require('fs')
-const path = require('path')
-const { package_info, locale_dir, source_dir } = require(
-  path.join(path.dirname(path.dirname(__dirname)), '_package')
-)
-const Gettext = require('node-gettext')
-const { mo } = require('gettext-parser')
-const { sprintf } = require('sprintf-js')
+import * as fs from 'fs'
+import * as path from 'path'
+import { package_info, locale_dir, source_dir } from '#root/_package.js'
+
+import Gettext from 'node-gettext'
+import { mo } from 'gettext-parser'
+import * as sprintf from 'sprintf-js'
 
 const gettext = new Gettext()
 
@@ -31,7 +30,6 @@ package_langs.forEach((lang) => {
     `${package_info.name}.mo`
   )
   if (fs.existsSync(mo_path)) {
-    console.log(lang, mo_path)
     const mo_data = fs.readFileSync(mo_path)
 
     gettext.addTranslations(lang, package_info.name, mo.parse(mo_data))
@@ -47,8 +45,6 @@ function _(...args) {
   return sprintf(translatedString, ...args.slice(1))
 }
 
-module.exports = {
-  _,
-}
+export { _ }
 
 // The end.

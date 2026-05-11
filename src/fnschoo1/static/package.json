@@ -10,10 +10,14 @@
     "i18n:build": "npm run i18n:extract && npm run i18n:compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "imports": {
+    "#root/*": "./*",
+    "#src/*": "./src/*"
+  },
   "keywords": [],
   "author": "larryw3i",
   "license": "LGPL v3",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "bootstrap": "^5.3.8",
     "jquery": "^4.0.0"
