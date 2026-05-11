@@ -1,8 +1,9 @@
 {% load i18n %}
 {% autoescape off %}
-  {% blocktrans with username=user.username %}Hello! {{ username }},{% endblocktrans %}
-  {% blocktrans with verification_url=verification_url %}Please click on the link below to activate your email:{{ verification_url }}{% endblocktrans %}
-  {% trans '(If you cannot click, please copy the entire link into the browser address bar and press Enter.)' %}
-  {% trans 'If you have not registered an account on FNSCHOOL, please disregard this email.' %}
-  {% trans 'Thank you for using FNSCHOOL!' %}
+  {% blocktrans with verification_url=verification_url username=user.username %}Hello! {{ username }},
+    Please click on the link below to activate your email:
+    {{ verification_url }}
+    (If you cannot click, please copy the entire link into the browser address bar and press Enter.)
+    If you have not registered an account on FNSCHOOL, please disregard this email.
+    Thank you for using FNSCHOOL!{% endblocktrans %}
 {% endautoescape %}

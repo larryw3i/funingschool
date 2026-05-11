@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-12 01:56+0800\n"
-"PO-Revision-Date: 2026-05-12 01:58+0800\n"
+"POT-Creation-Date: 2026-05-12 02:28+0800\n"
+"PO-Revision-Date: 2026-05-12 02:28+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -1772,36 +1772,23 @@ msgstr "添加电子邮件地址"
 
 #: fnprofile/templates/fnprofile/fnemail/verification_email.html:3
 #, python-format
-msgid "Hello! %(username)s,"
-msgstr "您好！ %(username)s，"
-
-#: fnprofile/templates/fnprofile/fnemail/verification_email.html:4
-#, python-format
 msgid ""
-"\n"
+"Hello! %(username)s,\n"
 "    Please click on the link below to activate your email:\n"
 "    %(verification_url)s\n"
-"  "
+"    (If you cannot click, please copy the entire link into the browser "
+"address bar and press Enter.)\n"
+"    If you have not registered an account on FNSCHOOL, please disregard this "
+"email.\n"
+"    Thank you for using FNSCHOOL!"
 msgstr ""
-"\n"
-"　　请您点击以下链接以激活您的账号：\n"
-"　　%(verification_url)s"
-
-#: fnprofile/templates/fnprofile/fnemail/verification_email.html:8
-msgid ""
-"(If you cannot click, please copy the entire link into the browser address "
-"bar and press Enter.)"
-msgstr "　　（如果无法点击，请复制整个链接到浏览器地址栏再按回车键跳转。）"
-
-#: fnprofile/templates/fnprofile/fnemail/verification_email.html:9
-msgid ""
-"If you have not registered an account on FNSCHOOL, please disregard this "
-"email."
-msgstr "　　如果您未曾在 FNSCHOOL 进行账号注册，请忽略此邮件。"
-
-#: fnprofile/templates/fnprofile/fnemail/verification_email.html:11
-msgid "Thank you for using FNSCHOOL!"
-msgstr "　　谢谢您使用 FNSCHOOL ！"
+"您好！%(username)s，\n"
+"　　请点击以下链接以验证您的电子邮件：\n"
+"　　%(verification_url)s\n"
+"　　（如果上面的链接点击后无法跳转，可以尝试复制它然后把它粘贴到浏览器地址"
+"栏，回车后跳转至验证界面）\n"
+"　　如果您未曾在 FNSCHOOL 进行邮件注册，请忽略此验证邮件。\n"
+"　　谢谢您使用 FNSCHOOL ！"
 
 #: fnprofile/templates/fnprofile/includes/_fnprofile_navigation.html:4
 msgid "Basic Information"
@@ -2057,6 +2044,34 @@ msgstr "注册"
 #: templates/includes/_header.html:104
 msgid "Hide messages."
 msgstr "隐藏信息。"
+
+#, python-format
+#~ msgid "Hello! %(username)s,"
+#~ msgstr "您好！ %(username)s，"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "    Please click on the link below to activate your email:\n"
+#~ "    %(verification_url)s\n"
+#~ "  "
+#~ msgstr ""
+#~ "\n"
+#~ "　　请您点击以下链接以激活您的账号：\n"
+#~ "　　%(verification_url)s"
+
+#~ msgid ""
+#~ "(If you cannot click, please copy the entire link into the browser "
+#~ "address bar and press Enter.)"
+#~ msgstr "　　（如果无法点击，请复制整个链接到浏览器地址栏再按回车键跳转。）"
+
+#~ msgid ""
+#~ "If you have not registered an account on FNSCHOOL, please disregard this "
+#~ "email."
+#~ msgstr "　　如果您未曾在 FNSCHOOL 进行账号注册，请忽略此邮件。"
+
+#~ msgid "Thank you for using FNSCHOOL!"
+#~ msgstr "　　谢谢您使用 FNSCHOOL ！"
 
 #~ msgid "Update Profile."
 #~ msgstr "更新信息。"

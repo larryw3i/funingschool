@@ -315,7 +315,7 @@ class Fnemail(models.Model):
                     + token
                 ),
             },
-        ).strip()
+        )
         to_email = self.email
         email = EmailMessage(
             mail_subject,
