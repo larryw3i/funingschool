@@ -71,7 +71,7 @@ generate_code_txt() {
 
 cp_node_modules() {
     if [[ ! -f $(which npm) ]]; then
-        echo "Try to instll $(npm) and $(nodeks)."
+        echo "Try to instll npm and nodejs ."
         sudo apt install npm nodejs
     fi
     PWD_CP=${PWD}
@@ -107,13 +107,18 @@ cp_node_modules() {
 }
 
 pack() {
+    new_version=""
+    if [ $# -eq 0 ]; then
+        new_version="$(date +"%Y%m%d.8%H%M.8%S")" 
+    else
+        new_version="${1}"
+    fi
     fnschool_static_node_modules_dir_cp=${project_dir}/node_modules.cp
     cp_node_modules
     mv -vv ${fnschool_static_node_modules_dir} ${fnschool_static_node_modules_dir_cp}
     if [[ ! -f $(which twine) ]]; then
         pip install -U setuptools wheel build twine
     fi
-    new_version=$(date +"%Y%m%d.8%H%M.8%S")
     sed -i "s/\(__version__ = \"\)[^\"]*\(\"\)/\1$new_version\2/g" ${fnschoo1_dir}/__init__.py
     echo "New version is ${new_version} ."
     cd ${fnschoo1_dir}
@@ -130,7 +135,8 @@ pack_upload() {
     released_hashes_cp_path=${released_hashes_path}.cp
     cd ${project_dir}
     rm -rf dist/*
-    pack
+    new_version="$(date +"%Y%m%d.8%H%M.8%S")" 
+    pack "${new_version}"
     cd dist
     sha256sum * >${released_hashes_cp_path}
     cat ${released_hashes_path} >>${released_hashes_cp_path}
@@ -138,6 +144,7 @@ pack_upload() {
     cd ${project_dir}
     twine upload dist/*
     cd ${pwd_cp}
+    echo "Updated new version is \"${new_version}\" ."
 }
 
 format_code() {
