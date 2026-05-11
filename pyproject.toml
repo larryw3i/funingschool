@@ -38,20 +38,14 @@ Repository = "https://github.com/larryw3i/funingschool.git"
 Issues = "https://github.com/larryw3i/funingschool/issues"
 Changelog = "https://github.com/larryw3i/funingschool/CHANGELOG.md"
 
-[project.optional-dependencies]
-gui=[]
-cli=[]
-
 [project.scripts]
 fnschool-cli = "fnschoo1.manage:main"
 
 [build-system]
 requires = [
     "setuptools",
+    "wheel"
 ]
-
-[tool.black]
-line-length = 80
 
 [tool.setuptools.dynamic]
 version = {attr = "fnschoo1.__version__"}
@@ -60,10 +54,12 @@ version = {attr = "fnschoo1.__version__"}
 where = ["src"]
 
 [tool.setuptools.package-data]
-"*" = ["*.mo","*.toml","*.html","*.min.js", "*.min.js.map", "*.min.css", "*.min.css.map",  "*.ico"]
+"*" = ["*.mo","*.toml","*.html", "*.js", "*.min.js.map", "*.css", "*.min.css.map", "*.ico"]
 
 [tool.setuptools.exclude-package-data]
-"*" = ["*.po"]
+"*" = [
+    "*.po",
+]
 
 [tool.djlint]
 profile="django"

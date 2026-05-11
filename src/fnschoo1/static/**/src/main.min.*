@@ -1,0 +1,2 @@
+import*as fs from"fs";import*as path from"path";import{_}from"#src/_gettext/gettext.js";import{package_info,locale_dir,source_dir}from"#root/_package.js";
+//# sourceMappingURL=main.min.*.map

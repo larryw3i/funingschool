@@ -46,8 +46,22 @@ generate_code_txt() {
     echo "" >${code_out_path}
     files=$(
         find src \
-            -type d \( -name ".egg-info" -o -name "*.egg-info" \) -prune \
-            -o -type f \( -name "*.py" -o -name "*.po" -o -name "*.html" -o -name "*.js" ! -name "*.min.js" \) -print
+            -type d \
+            \( \
+                -name ".egg-info" \
+                -o -name "*.egg-info" \
+            \) \
+            -prune \
+            -o \
+            -type f \
+            \( \
+                -name "*.py" \
+                -o -name "*.po" \
+                -o -name "*.html" \
+                -o -name "*.js" \
+                ! -name "*.min.js" \
+            \) \
+            -print
     )
     for f in ${files[@]}; do
         echo "File: ${f}" >>${code_out_path}
@@ -82,7 +96,7 @@ cp_node_modules() {
             -o -name "*AUTHORS*" \
             \)
     )
-    cd ${fnschool_static__node_modules_dir}
+    cd ${fnschool_static_node_modules_dir}
     for m_file in ${module_files[@]}; do
         _m_file=${m_file/node_modules/_node_modules_}
         _m_file=${_m_file/dist/_dist_}
@@ -93,7 +107,9 @@ cp_node_modules() {
 }
 
 pack() {
+    fnschool_static_node_modules_dir_cp=${project_dir}/node_modules.cp
     cp_node_modules
+    mv -vv ${fnschool_static_node_modules_dir} ${fnschool_static_node_modules_dir_cp}
     if [[ ! -f $(which twine) ]]; then
         pip install -U setuptools wheel build twine
     fi
@@ -105,6 +121,8 @@ pack() {
     python manage.py compilemessages
     cd ${project_dir}
     python -m build
+    mv -vv ${fnschool_static_node_modules_dir_cp} ${fnschool_static_node_modules_dir}
+    echo "Generated new version is \"${new_version}\" ."
 }
 
 pack_upload() {
