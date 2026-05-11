@@ -8,8 +8,15 @@
 {% block content %}
   <h2>{% trans 'My Emails' %}</h2>
   {% include 'fnprofile/includes/_fnprofile_navigation.html' %}
-  <div class="table-container">
-    {% if EMAIL_BACKEND and emails %}
+  <div class="d-flex justify-content-end">
+    <div class="btn-group" role="group">
+      <button type="button"
+              onclick="open_small_window('{% url 'fnprofile:new_email' %}');"
+              class="btn btn-primary">{% trans 'Add Email' %}</button>
+    </div>
+  </div>
+  {% if EMAIL_BACKEND and emails %}
+    <div class="table-container">
       <div class="table-responsive">
         <table class="table table-hover">
           <thead class="table-light">
@@ -36,7 +43,7 @@
           </tbody>
         </table>
       </div>
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
 {% endblock %}
-{% block extra_js %}{% endblock %}
+{% block extra_js %}<script></script>{% endblock %}

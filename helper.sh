@@ -48,18 +48,18 @@ generate_code_txt() {
         find src \
             -type d \
             \( \
-                -name ".egg-info" \
-                -o -name "*.egg-info" \
+            -name ".egg-info" \
+            -o -name "*.egg-info" \
             \) \
             -prune \
             -o \
             -type f \
             \( \
-                -name "*.py" \
-                -o -name "*.po" \
-                -o -name "*.html" \
-                -o -name "*.js" \
-                ! -name "*.min.js" \
+            -name "*.py" \
+            -o -name "*.po" \
+            -o -name "*.html" \
+            -o -name "*.js" \
+            ! -name "*.min.js" \
             \) \
             -print
     )
@@ -109,7 +109,7 @@ cp_node_modules() {
 pack() {
     new_version=""
     if [ $# -eq 0 ]; then
-        new_version="$(date +"%Y%m%d.8%H%M.8%S")" 
+        new_version="$(date +"%Y%m%d.8%H%M.8%S")"
     else
         new_version="${1}"
     fi
@@ -135,7 +135,7 @@ pack_upload() {
     released_hashes_cp_path=${released_hashes_path}.cp
     cd ${project_dir}
     rm -rf dist/*
-    new_version="$(date +"%Y%m%d.8%H%M.8%S")" 
+    new_version="$(date +"%Y%m%d.8%H%M.8%S")"
     pack "${new_version}"
     cd dist
     sha256sum * >${released_hashes_cp_path}

@@ -23,7 +23,7 @@ from django.dispatch import receiver
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils import timezone
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
@@ -304,10 +304,16 @@ class Fnemail(models.Model):
             "fnprofile/fnemail/verification_email.html",
             {
                 "user": self.user,
-                "scheme": request.scheme,
-                "domain": current_site.domain,
-                "email_id": self.pk,
-                "token": token,
+                "verification_url": (
+                    request.scheme
+                    + "://"
+                    + current_site.domain
+                    + reverse(
+                        "fnprofile:edit_email", kwargs={"email_id": self.pk}
+                    )
+                    + "?token="
+                    + token
+                ),
             },
         ).strip()
         to_email = self.email
@@ -353,6 +359,10 @@ class Fnemail(models.Model):
         self.save(
             update_fields=["is_verified", "verified_at", "verification_token"]
         )
+
+        Fnemail.objects.filter(
+            Q(is_verified=False) & ~Q(user=self.user)
+        ).delete()
 
         if not Fnemail.objects.filter(
             user=self.user, is_primary=True, is_verified=True

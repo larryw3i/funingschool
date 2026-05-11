@@ -347,20 +347,18 @@ class FnemailAddForm(forms.ModelForm):
             "email": _("Email Address"),
         }
         help_texts = {
-            "email": _("Add a new email address to your account"),
+            "email": _("Add a new email address to your account."),
         }
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop("user", None)
         self.request = kwargs.pop("request", None)
+        self.user = self.request.user
         super().__init__(*args, **kwargs)
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
-
         if not email:
             raise ValidationError(_("Please enter an email address."))
-
         try:
             validate_email(email)
         except ValidationError:
@@ -373,8 +371,9 @@ class FnemailAddForm(forms.ModelForm):
         ):
             raise ValidationError(_("You have already added this email."))
 
-        other_user = Fnemail.objects.filter(email=email, is_active=True).first()
-
+        other_user = Fnemail.objects.filter(
+            email=email, is_verified=True
+        ).first()
         if other_user and other_user != self.user:
             raise ValidationError(
                 _("This email is already used by another user.")

@@ -199,44 +199,46 @@ def list_emails(request):
     return render(request, "fnprofile/fnemail/list.html", context)
 
 
+@login_required
 def new_email(request):
     user = request.user
     if request.method == "POST":
-        form = FnemailAddForm(request.POST, user=user, request=request)
+        form = FnemailAddForm(request.POST, request=request)
         if form.is_valid():
             try:
                 with transaction.atomic():
+
                     email = form.save(commit=False)
                     email.user = user
-
-                    if not Fnemail.objects.filter(
-                        user=user, is_active=True
-                    ).exists():
-                        email.is_primary = True
-
                     email.save()
 
                     if email.send_verification_email(request):
-                        form.add_error(
-                            "email",
+                        messages.info(
+                            request,
                             _(
                                 "Email added successfully! Verification email sent."
                             ),
                         )
+                        return render(
+                            request,
+                            "close.html",
+                        )
+
                     else:
-                        form.add_error(
-                            "email",
+                        messages.error(
+                            request,
                             _(
                                 "Email added, but verification email failed to send."
                             ),
                         )
 
             except Exception as e:
+                print(e)
                 form.add_error(
                     "email", _("Failed to add email. Please try again.")
                 )
     else:
-        form = FnemailAddForm(user=user, request=request)
+        form = FnemailAddForm(request=request)
 
     context = {
         "form": form,
