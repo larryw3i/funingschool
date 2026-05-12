@@ -134,13 +134,13 @@ class Fnuser(AbstractUser, PermissionsMixin):
         return _("{0}'s Information").format(self.username)
 
     def get_primary_email(self):
-        primary_email = self.emails.get(is_primary=True, is_active=True)
+        primary_email = self.emails.get(is_primary=True, is_disabled=True)
         return primary_email.email
 
     def has_verified_email(self):
         if not self.emails.exists():
             return False
-        return self.emails.filter(is_verified=True, is_active=True).exists()
+        return self.emails.filter(is_verified=True, is_disabled=True).exists()
 
     def get_first_email(self):
         return self.emails.first()
@@ -196,10 +196,10 @@ class Fnemail(models.Model):
         help_text=_("When the email was verified"),
     )
 
-    is_active = models.BooleanField(
-        _("Is active"),
-        default=True,
-        help_text=_("Whether this email address is active"),
+    is_disabled = models.BooleanField(
+        _("is disabled"),
+        default=False,
+        help_text=_("Whether this email address is disabled"),
     )
 
     is_primary = models.BooleanField(
@@ -232,8 +232,8 @@ class Fnemail(models.Model):
         return yes_str if self.is_verified else no_str
 
     @property
-    def is_active_t(self):
-        return yes_str if self.is_active else no_str
+    def is_disabled_t(self):
+        return yes_str if self.is_disabled else no_str
 
     @property
     def is_primary_t(self):
@@ -255,7 +255,7 @@ class Fnemail(models.Model):
             ),
             models.UniqueConstraint(
                 fields=["user"],
-                condition=models.Q(is_primary=True, is_active=True),
+                condition=models.Q(is_primary=True, is_disabled=False),
                 name="unique_user_primary_email",
                 violation_error_message=_(
                     "You can only have one primary email."
@@ -264,7 +264,7 @@ class Fnemail(models.Model):
         ]
 
         indexes = [
-            models.Index(fields=["user", "is_primary", "is_active"]),
+            models.Index(fields=["user", "is_primary", "is_disabled"]),
             models.Index(fields=["email", "is_verified"]),
             models.Index(fields=["created_at"]),
         ]
@@ -335,7 +335,7 @@ class Fnemail(models.Model):
             raise ValidationError({"email": _("Invalid email format.")})
 
     def sync_to_user_email(self):
-        if self.is_primary and self.is_verified and self.is_active:
+        if self.is_primary and self.is_verified and not self.is_disabled:
             if self.user.email != self.email:
                 self.user.email = self.email
                 self.user.save(update_fields=["email"])
@@ -384,7 +384,7 @@ class Fnemail(models.Model):
                 }
             )
 
-        if not self.is_active:
+        if self.is_disabled:
             raise ValidationError(
                 {"email": _("Email must be active to set as primary.")}
             )
@@ -399,7 +399,7 @@ class Fnemail(models.Model):
 
     @property
     def status_display(self):
-        if not self.is_active:
+        if self.is_disabled:
             return _("Disabled")
         elif not self.is_verified:
             return _("Unverified")
@@ -410,7 +410,7 @@ class Fnemail(models.Model):
 
     @property
     def status_color(self):
-        if not self.is_active:
+        if self.is_disabled:
             return "secondary"
         elif not self.is_verified:
             return "warning"

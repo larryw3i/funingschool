@@ -1,0 +1,46 @@
+{% extends "base/content.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  {% if email.is_verified %}
+    {% trans 'Edit Email' %}
+  {% else %}
+    {% trans 'Verify Email' %}
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <h2>
+    {% if email.is_verified %}
+      {% trans 'Edit Email' %}
+    {% else %}
+      {% trans 'Verify Email' %}
+    {% endif %}
+  </h2>
+  <form method="post"
+        action="{% url 'fnprofile:edit_email' email_id=email.id %}?is_document=0"
+        enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>
+      {% blocktrans with username=username %}
+        User Name: {{ username }}
+      {% endblocktrans %}
+    </h3>
+    {{ form|crispy }}
+    <div class="py-3 fixed-bottom text-end bg-dark">
+      <button type="submit button" class="btn btn-outline-primary">
+        {% if email.is_verified %}
+          {% trans "Update" %}
+        {% else %}
+          {% trans 'Verify' %}
+        {% endif %}
+      </button>
+      <button type="button" class="btn btn-danger" onclick="window.close();">
+        {% trans "Cancel" %}
+      </button>
+    </form>
+  {% endblock %}
+  {% block extra_js %}{% endblock %}
+
+  <!-- The end. -->

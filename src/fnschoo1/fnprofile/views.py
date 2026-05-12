@@ -28,7 +28,7 @@ from .forms import (
     FnuserLoginForm,
     FnuserSignUpForm,
 )
-from .models import Fnemail, Fnuser
+from .models import Fnemail, Fnuser, resend_verification_email_time_interval
 
 LOGIN_URL = settings.LOGIN_URL
 
@@ -187,7 +187,7 @@ def list_emails(request):
 
     total_count = emails.count()
     verified_count = emails.filter(is_verified=True).count()
-    primary_email = emails.filter(is_primary=True, is_active=True).first()
+    primary_email = emails.filter(is_primary=True, is_disabled=False).first()
 
     context = {
         "emails": emails,
@@ -278,85 +278,109 @@ def edit_email(request, email_id):
     if not email:
         return
 
-    user = None
+    email_user = email.user
 
+    verification_sent_str = _(
+        "A verification email has been sent to your email address. Please follow the instructions in the email to complete the verification process."
+    )
+
+    verification_sent_unsuccessfully_str = _(
+        "The verification email failed to be sent. Please wait for {time_interval} seconds and try again!"
+    ).format(time_interval=resend_verification_email_time_interval)
+
+    form = None
+    return_document = request.GET.get("is_document", "1") == "1"
+    context = {}
     if settings.EMAIL_BACKEND:
-        user = (
-            email.user
-            if not email.is_verified and not request.user.is_authenticated
-            else None
-        )
-        if not user:
-            return HttpResponse(_("An error has occurred."), status=404)
+        if not email_user:
+            messages.error(request, _("An unknown error has occurred!"))
+            return redirect("fnprofile:list_emails")
+        if not email_is_verified:
+            if not request.user.is_authenticated and request.messages == "GET":
+                token = request.GET.get("token", None)
+                if token:
+                    if not email.verification_token.endswith(token):
+                        return None
+                    if email.verification_token.startswith("__"):
+                        email.verification_token = email.verification_token[2:]
+                        email.save(update_fields=["verification_token"])
+                        return render(
+                            request,
+                            "fnprofile/fnemail/verify.html",
+                            {
+                                "full_path": request.get_full_path(),
+                                "username": user.username,
+                                "email": email.email,
+                            },
+                        )
+                    elif email.verify(token):
+                        messages.success(
+                            request, _("Email verified successfully!")
+                        )
+                        login(request, user)
+                        return redirect(
+                            request.GET.get("next", reverse("fnhome:home"))
+                        )
+                    else:
+                        messages.error(
+                            request, _("An unknown error has occurred!")
+                        )
+                        return redirect(request.path)
 
-        token = request.GET.get("token", None)
-        if token and not email_is_verified:
-            if not email.verification_token.endswith(token):
-                return None
-            if email.verification_token.startswith("__"):
-                email.verification_token = email.verification_token[2:]
-                email.save(update_fields=["verification_token"])
-                return render(
-                    request,
-                    "fnprofile/fnemail/active.html",
-                    {
-                        "full_path": request.get_full_path(),
-                        "username": user.username,
-                        "email": email.email,
-                    },
+            if request.method == "POST":
+                form = FnemailEditForm(request.POST, instance=email)
+                if form.is_valid():
+                    if email.send_verification_email(request):
+                        form.add_error("email", verification_sent_str)
+                    else:
+                        form.add_error(
+                            "is_verified", verification_sent_unsuccessfully_str
+                        )
+
+            if request.user.is_authenticated:
+                if not request.user == email_user:
+                    messages.error(request, _("An unknown error has occurred!"))
+                    return redirect(request.path)
+
+                resend_verification_email = request.GET.get(
+                    "resend_verification_email", "0"
                 )
-            elif email.verify(token):
-                messages.success(request, _("Email verified successfully!"))
-                login(request, user)
-                return redirect("fnhome:home")
-            else:
-                return None
+                if resend_verification_email == "1":
+                    if email.send_verification_email(request):
+                        messages.info(request, verification_sent_str)
+                    else:
+                        messages.warning(
+                            request, verification_sent_unsuccessfully_str
+                        )
+                    return redirect("fnprofile:list_emails")
 
-    if request.method == "POST":
-        form = FnemailEditForm(request.POST, instance=email)
-        if form.is_valid():
-            if settings.EMAIL_BACKEND and not email_is_verified:
-                if form.instance.send_verification_email(request):
-                    verification_sent_str = _(
-                        "A verification email has been sent to your email address. Please follow the instructions in the email to complete the verification process."
-                    )
-                    messages.success(
-                        request,
-                        verification_sent_str,
-                    )
-                    form.add_error("email", verification_sent_str)
-
-                else:
-                    from .models import resend_verification_email_time_interval
-
-                    form.add_error(
-                        "is_verified",
-                        _(
-                            "The verification email failed to be sent. Please wait for {time_interval} seconds and try again!"
-                        ).format(
-                            time_interval=resend_verification_email_time_interval
-                        ),
-                    )
-
-            else:
-                if not user.is_authenticated:
+    if not form:
+        if request.method == "POST":
+            form = FnemailEditForm(request.POST, instance=email)
+            if form.is_valid():
+                if not request.user.is_authenticated:
                     messages.info(
                         _("Please log in to change your information.")
                     )
                     return redirect("fnprofile:log_in")
-                if not user == request.user:
+                if not email_user == request.user:
                     form.add_error(
                         _("An error occurred while saving the form!")
                     )
                 else:
                     form.save()
-                    if form.cleaned_data.get("is_primary"):
+                    if not email.is_primary and form.cleaned_data.get(
+                        "is_primary"
+                    ):
                         messages.success(request, _("Email set as primary"))
                     else:
                         messages.success(request, _("Email settings updated"))
+                    print(request.GET)
+                    if not return_document:
+                        return render(request, "close.html")
                     return redirect("fnprofile:list_emails")
-    else:
-        form = FnemailEditForm(instance=email)
+        else:
+            form = FnemailEditForm(instance=email)
 
     username = form.instance.user.username
     username = (
@@ -365,9 +389,12 @@ def edit_email(request, email_id):
         else username
     )
 
-    context = {"form": form, "email": email, "username": username}
-
-    return render(request, "fnprofile/fnemail/edit.html", context)
+    context.update({"form": form, "email": email, "username": username})
+    if return_document:
+        return render(
+            request, "fnprofile/fnemail/edit__document__.html", context
+        )
+    return render(request, "fnprofile/fnemail/edit__content__.html", context)
 
 
 @login_required

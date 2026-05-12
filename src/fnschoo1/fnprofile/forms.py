@@ -126,7 +126,7 @@ class FnuserLoginForm(AuthenticationForm):
         except ValidationError:
             raise ValidationError(_("Please enter a valid email address."))
 
-        if Fnemail.objects.filter(email=email, is_active=True).exists():
+        if Fnemail.objects.filter(email=email, is_disabled=False).exists():
             raise ValidationError(_("This email is already registered."))
 
         return email
@@ -248,7 +248,7 @@ class FnuserSignUpForm(UserCreationForm):
             raise ValidationError(_("Please enter a valid email address."))
 
         email = email.lower().strip()
-        if Fnemail.objects.filter(email=email, is_active=True).exists():
+        if Fnemail.objects.filter(email=email, is_disabled=False).exists():
             raise ValidationError(_("This email is already registered."))
 
         return email
@@ -390,12 +390,12 @@ class FnemailEditForm(forms.ModelForm):
         if not self.instance.is_verified:
             self.fields["email"].widget.attrs["readonly"] = "readonly"
             self.fields["is_verified"].widget.attrs["onclick"] = "return false;"
-            self.fields["is_active"].widget.attrs["onclick"] = "return false;"
+            self.fields["is_disabled"].widget.attrs["onclick"] = "return false;"
             self.fields["is_primary"].widget.attrs["onclick"] = "return false;"
 
     class Meta:
         model = Fnemail
-        fields = ["email", "is_verified", "is_active", "is_primary"]
+        fields = ["email", "is_verified", "is_disabled", "is_primary"]
         widgets = {
             "is_primary": forms.CheckboxInput(
                 attrs={

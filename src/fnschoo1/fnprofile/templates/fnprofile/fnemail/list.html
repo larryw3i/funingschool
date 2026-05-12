@@ -24,7 +24,7 @@
               <th>{% trans 'Email Address' %}</th>
               <th>{% trans 'Is Verified' %}</th>
               <th>{% trans 'Verified at' %}</th>
-              <th>{% trans 'Is Active' %}</th>
+              <th>{% trans 'Is Disabled' %}</th>
               <th>{% trans 'Is Primary' %}</th>
               <th></th>
             </tr>
@@ -33,11 +33,20 @@
             {% for email in emails %}
               <tr>
                 <td>{{ email.email }}</td>
-                <td>{{ email.is_verified_t }}</td>
+                <td>
+                  {{ email.is_verified_t }}
+                  {% if not email.is_verified %}
+                    <a href="{% url 'fnprofile:edit_email' email_id=email.id %}?resend_verification_email=1&is_document=0">{% trans 'Verify' %}</a>
+                  {% endif %}
+                </td>
                 <td>{{ email.verified_at }}</td>
-                <td>{{ email.is_active_t }}</td>
+                <td>{{ email.is_disabled_t }}</td>
                 <td>{{ email.is_primary_t }}</td>
-                <td>{% trans 'Edit' %}|{% trans 'Delete' %}</td>
+                <td>
+                  <a onclick="open_small_window('{% url 'fnprofile:edit_email' email_id=email.id %}?is_document=0');">{% trans 'View' %}</a>
+                  |
+                  <a href="">{% trans 'Delete' %}</a>
+                </td>
               </tr>
             {% endfor %}
           </tbody>
