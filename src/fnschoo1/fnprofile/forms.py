@@ -396,7 +396,8 @@ class FnemailEditForm(forms.ModelForm):
         if self.instance.is_primary:
             self.fields["is_disabled"].widget.attrs["onclick"] = "return false;"
         if (
-            len(self.request.user.get_enabled_emails()) == 1
+            self.request.user.is_authenticated
+            and len(self.request.user.get_enabled_emails()) == 1
             and self.instance.is_primary == True
         ):
             self.fields["is_primary"].widget.attrs["onclick"] = "return false;"

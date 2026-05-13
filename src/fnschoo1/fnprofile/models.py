@@ -18,6 +18,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
 from django.db import models, transaction
+from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.http import HttpResponse

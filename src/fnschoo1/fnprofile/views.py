@@ -9,6 +9,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
 from django.db import transaction
+from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
@@ -296,63 +297,55 @@ def edit_email(request, email_id):
     if settings.EMAIL_BACKEND:
         if not email_user:
             messages.error(request, _("An unknown error has occurred!"))
-            return redirect("fnprofile:list_emails")
-        if not email_is_verified:
-            if not request.user.is_authenticated and request.messages == "GET":
-                token = request.GET.get("token", None)
-                if token:
-                    if not email.verification_token.endswith(token):
-                        return None
-                    if email.verification_token.startswith("__"):
-                        email.verification_token = email.verification_token[2:]
-                        email.save(update_fields=["verification_token"])
-                        return render(
-                            request,
-                            "fnprofile/fnemail/verify.html",
-                            {
-                                "full_path": request.get_full_path(),
-                                "username": user.username,
-                                "email": email.email,
-                            },
-                        )
-                    elif email.verify(token):
-                        messages.success(
-                            request, _("Email verified successfully!")
-                        )
-                        login(request, user)
-                        return redirect(
-                            request.GET.get("next", reverse("fnhome:home"))
-                        )
-                    else:
-                        messages.error(
-                            request, _("an unknown error has occurred!")
-                        )
-                        return redirect(request.path)
+            return HttpResponse("Not found", status=404)
+        elif email_is_verified:
+            pass
+        elif request.method == "GET":
+            token = request.GET.get("token", None)
+            if token:
+                if not email.verification_token.endswith(token):
+                    messages.error(
+                        request,
+                        _("The token has expired or is no longer valid!"),
+                    )
+                    pass
+                elif email.verification_token.startswith("__"):
+                    email.verification_token = email.verification_token[2:]
+                    email.save(update_fields=["verification_token"])
+                    return render(
+                        request,
+                        "fnprofile/fnemail/verify.html",
+                        {
+                            "full_path": request.get_full_path(),
+                            "username": email_user.username,
+                            "email": email_address,
+                        },
+                    )
+                elif email.verify(token):
+                    messages.success(request, _("Email verified successfully!"))
+                    if not request.user.is_authenticated:
+                        login(request, email_user)
+                    return redirect(
+                        request.GET.get("next", reverse("fnhome:home"))
+                    )
+                else:
+                    messages.error(
+                        request,
+                        _("Token verification failed! Please try again later!"),
+                    )
+                return redirect(request.path)
 
-            if request.method == "POST":
-                form = FnemailEditForm(request.POST, instance=email)
-                if form.is_valid():
-                    if not form.cleaned_data["email"] == email_address:
-                        form.add_error(
-                            "email", _("an unknown error has occurred!")
-                        )
-                    else:
-                        if email.send_verification_email(request):
-                            form.add_error("email", verification_sent_str)
-                        else:
-                            form.add_error(
-                                "is_verified",
-                                verification_sent_unsuccessfully_str,
-                            )
-
-            if request.user.is_authenticated:
+            elif request.user.is_authenticated:
                 if not request.user == email_user:
-                    messages.error(request, _("An unknown error has occurred!"))
+                    messages.error(
+                        request,
+                        _("Please check if your email address is correct!"),
+                    )
                     return redirect(request.path)
-
                 resend_verification_email = request.GET.get(
                     "resend_verification_email", "0"
                 )
+                print("resend_verification_email", resend_verification_email)
                 if resend_verification_email == "1":
                     if email.send_verification_email(request):
                         messages.info(request, verification_sent_str)
@@ -361,46 +354,71 @@ def edit_email(request, email_id):
                             request, verification_sent_unsuccessfully_str
                         )
                     return redirect("fnprofile:list_emails")
+                else:
+                    pass
+            else:
+                pass
+
+        elif request.method == "POST":
+            form = FnemailEditForm(
+                request.POST, instance=email, request=request
+            )
+            if not form.is_valid():
+                pass
+            elif not form.cleaned_data["email"] == email_address:
+                form.add_error("email", _("An unknown error has occurred!"))
+            elif email.send_verification_email(request):
+                form.add_error("email", verification_sent_str)
+            else:
+                form.add_error(
+                    "is_verified",
+                    verification_sent_unsuccessfully_str,
+                )
+        else:
+            pass
 
     if not form:
         if request.method == "POST":
             form = FnemailEditForm(
                 request.POST, request=request, instance=email
             )
-            if form.is_valid():
-                if not request.user.is_authenticated:
-                    messages.info(
-                        _("Please log in to change your information.")
-                    )
-                    return redirect("fnprofile:log_in")
-                if not email_user == request.user:
-                    form.add_error(
-                        _("An error occurred while saving the form!")
-                    )
-                elif not form.cleaned_data["email"] == email_address:
-                    form.add_error("email", _("an unknown error has occurred!"))
-                elif (
-                    form.cleaned_data["is_primary"] == False
-                    and len(request.user.get_enabled_emails()) == 1
-                ):
-                    form.add_error(
-                        "is_primary",
-                        _(
-                            "You only have one primary email, so you cannot cancel this option."
-                        ),
-                    )
+            if not form.is_valid():
+                pass
 
+            if not request.user.is_authenticated:
+                messages.info(_("Please log in to change your information."))
+                return redirect("fnprofile:log_in")
+            elif not email_user == request.user:
+                form.add_error(_("An error occurred while saving the form!"))
+            elif not form.cleaned_data["email"] == email_address:
+                form.add_error("email", _("an unknown error has occurred!"))
+            elif (
+                form.cleaned_data["is_primary"] == False
+                and len(request.user.get_enabled_emails()) == 1
+            ):
+                form.add_error(
+                    "is_primary",
+                    _(
+                        "You only have one primary email, so you cannot cancel this option."
+                    ),
+                )
+
+            else:
+                if form.cleaned_data["is_primary"]:
+                    for _email in request.user.emails.all():
+                        _email.is_primary = False
+                        _email.save(update_fields=["is_primary"])
+                email = form.save(commit=False)
+                email.is_disabled = False
+                email.save(update_fields=["is_disabled", "is_primary"])
+                if not email.is_primary and form.cleaned_data.get("is_primary"):
+                    messages.success(request, _("Email set as primary"))
                 else:
-                    form.save()
-                    if not email.is_primary and form.cleaned_data.get(
-                        "is_primary"
-                    ):
-                        messages.success(request, _("Email set as primary"))
-                    else:
-                        messages.success(request, _("Email settings updated"))
-                    if not include_document:
-                        return render(request, "close.html")
-                    return redirect("fnprofile:list_emails")
+                    messages.success(request, _("Email settings updated"))
+
+                if not include_document:
+                    return render(request, "close.html")
+                return redirect("fnprofile:list_emails")
         else:
             form = FnemailEditForm(instance=email, request=request)
 
@@ -410,8 +428,8 @@ def edit_email(request, email_id):
         if not request.user.is_authenticated
         else username
     )
-
     context.update({"form": form, "email": email, "username": username})
+
     if include_document:
         return render(
             request, "fnprofile/fnemail/edit__document__.html", context
@@ -427,6 +445,7 @@ def delete_email(request, email_id):
         try:
             if email.is_primary:
                 messages.error(request, _("Cannot delete primary email"))
+                pass
             else:
                 email_address = email.email
                 email.delete()
@@ -436,10 +455,11 @@ def delete_email(request, email_id):
                         email_address=email_address
                     ),
                 )
+                pass
 
         except Exception as e:
             messages.error(request, _("Failed to delete email."))
-        return render("close.html")
+        return render(request, "close.html")
 
     else:
         email.is_primary = email.is_primary_t

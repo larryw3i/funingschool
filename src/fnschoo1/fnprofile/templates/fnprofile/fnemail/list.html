@@ -37,7 +37,7 @@
                   {{ email.is_verified_t }}
                   {% if not email.is_verified %}
                     <a title="{% trans 'Click to send a verification email to your email address.' %}"
-                       href="{% url 'fnprofile:edit_email' email_id=email.id %}?resend_verification_email=1&include_document=0">{% trans 'Verify' %}</a>
+                       href="{% url 'fnprofile:edit_email' email_id=email.id %}?resend_verification_email=1">{% trans 'Verify' %}</a>
                   {% endif %}
                 </td>
                 <td>{{ email.verified_at }}</td>
