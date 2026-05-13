@@ -954,7 +954,7 @@ class MealTypeListView(LoginRequiredMixin, ListView):
     paginate_orphans = 2
 
     def get_queryset(self):
-        return MealType.objects.filter(user=self.request.user) 
+        return MealType.objects.filter(user=self.request.user)
 
     def get_paginate_by(self, queryset):
         page_size = self.request.GET.get("page_size")
