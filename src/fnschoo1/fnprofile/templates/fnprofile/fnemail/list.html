@@ -36,16 +36,21 @@
                 <td>
                   {{ email.is_verified_t }}
                   {% if not email.is_verified %}
-                    <a href="{% url 'fnprofile:edit_email' email_id=email.id %}?resend_verification_email=1&is_document=0">{% trans 'Verify' %}</a>
+                    <a title="{% trans 'Click to send a verification email to your email address.' %}"
+                       href="{% url 'fnprofile:edit_email' email_id=email.id %}?resend_verification_email=1&include_document=0">{% trans 'Verify' %}</a>
                   {% endif %}
                 </td>
                 <td>{{ email.verified_at }}</td>
                 <td>{{ email.is_disabled_t }}</td>
                 <td>{{ email.is_primary_t }}</td>
                 <td>
-                  <a onclick="open_small_window('{% url 'fnprofile:edit_email' email_id=email.id %}?is_document=0');">{% trans 'View' %}</a>
-                  |
-                  <a href="">{% trans 'Delete' %}</a>
+                  <a class="link-primary"
+                     onclick="open_small_window('{% url 'fnprofile:edit_email' email_id=email.id %}?include_document=0');">{% trans 'View' %}</a>
+                  {% if not email.is_primary %}
+                    |
+                    <a class="link-danger"
+                       onclick="open_small_window('{% url 'fnprofile:delete_email' email_id=email.id %}')">{% trans 'Delete' %}</a>
+                  {% endif %}
                 </td>
               </tr>
             {% endfor %}

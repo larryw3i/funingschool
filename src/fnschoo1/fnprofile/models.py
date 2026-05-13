@@ -134,16 +134,24 @@ class Fnuser(AbstractUser, PermissionsMixin):
         return _("{0}'s Information").format(self.username)
 
     def get_primary_email(self):
-        primary_email = self.emails.get(is_primary=True, is_disabled=True)
+        primary_email = self.emails.get(is_primary=True, is_disabled=False)
         return primary_email.email
 
     def has_verified_email(self):
         if not self.emails.exists():
             return False
-        return self.emails.filter(is_verified=True, is_disabled=True).exists()
+        return self.emails.filter(is_verified=True, is_disabled=False).exists()
 
     def get_first_email(self):
         return self.emails.first()
+
+    def get_enabled_emails(self):
+        emails = self.emails.filter(is_verified=True, is_disabled=False).all()
+        return emails
+
+    def get_verified_emails(self):
+        emails = self.emails.filter(is_verified=True).all()
+        return emails
 
 
 class Fnemail(models.Model):

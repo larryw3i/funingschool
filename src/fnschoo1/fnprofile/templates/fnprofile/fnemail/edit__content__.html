@@ -19,7 +19,7 @@
     {% endif %}
   </h2>
   <form method="post"
-        action="{% url 'fnprofile:edit_email' email_id=email.id %}?is_document=0"
+        action="{% url 'fnprofile:edit_email' email_id=email.id %}?include_document=0"
         enctype="multipart/form-data">
     {% csrf_token %}
     <h3>

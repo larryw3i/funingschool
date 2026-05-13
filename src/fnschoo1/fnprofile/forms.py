@@ -385,12 +385,20 @@ class FnemailAddForm(forms.ModelForm):
 class FnemailEditForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
         super().__init__(*args, **kwargs)
 
+        self.fields["email"].widget.attrs["readonly"] = "readonly"
+        self.fields["is_verified"].widget.attrs["onclick"] = "return false;"
         if not self.instance.is_verified:
-            self.fields["email"].widget.attrs["readonly"] = "readonly"
-            self.fields["is_verified"].widget.attrs["onclick"] = "return false;"
             self.fields["is_disabled"].widget.attrs["onclick"] = "return false;"
+            self.fields["is_primary"].widget.attrs["onclick"] = "return false;"
+        if self.instance.is_primary:
+            self.fields["is_disabled"].widget.attrs["onclick"] = "return false;"
+        if (
+            len(self.request.user.get_enabled_emails()) == 1
+            and self.instance.is_primary == True
+        ):
             self.fields["is_primary"].widget.attrs["onclick"] = "return false;"
 
     class Meta:
@@ -409,6 +417,17 @@ class FnemailEditForm(forms.ModelForm):
         help_texts = {
             "is_primary": _("Primary email will be used for notifications."),
         }
+
+
+class FnemailDeleteForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["email"].widget.attrs["readonly"] = "readonly"
+
+    class Meta:
+        model = Fnemail
+        fields = ["email", "is_verified", "is_disabled", "is_primary"]
 
 
 # The end.
