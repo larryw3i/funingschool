@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 00:10+0800\n"
-"PO-Revision-Date: 2026-05-14 00:16+0800\n"
+"POT-Creation-Date: 2026-05-14 23:38+0800\n"
+"PO-Revision-Date: 2026-05-14 23:40+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: canteen/forms.py:11
 msgid "Select a Spreadsheet File"
-msgstr "选择一个表格文件"
+msgstr "选择一个表格文件 "
 
 #: canteen/forms.py:12
 msgid "Office Open XML Spreadsheet only. (*.xlsx)"
@@ -111,7 +111,7 @@ msgid "Time of creating"
 msgstr "创建时间"
 
 #: canteen/models.py:111 canteen/templates/canteen/consumption/create.html:21
-#: canteen/templates/canteen/consumption/create.html:71 canteen/views.py:85
+#: canteen/templates/canteen/consumption/create.html:72 canteen/views.py:85
 msgid "Ingredient Name"
 msgstr "食材名"
 
@@ -368,59 +368,63 @@ msgstr "入库的结束日期。"
 msgid "Refresh"
 msgstr "刷新"
 
-#: canteen/templates/canteen/consumption/create.html:72
-msgid "Remaining Quantity"
-msgstr "余量"
-
-#: canteen/templates/canteen/consumption/create.html:104
-#, python-format
-msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
-msgstr "于 %(storage_date)s 入库。（%(meal_type)s，%(category)s）"
-
-#: canteen/templates/canteen/consumption/create.html:112
+#: canteen/templates/canteen/consumption/create.html:73
 #, python-format
 msgid ""
 "\n"
-"                    (%(meal_type)s, %(category)s)\n"
-"                    "
+"                (%(ingredients_len)s)\n"
+"              "
 msgstr ""
 "\n"
-"                    (%(meal_type)s， %(category)s)\n"
-"                    "
+"                （%(ingredients_len)s）\n"
+"              "
+
+#: canteen/templates/canteen/consumption/create.html:77
+msgid "Remaining Quantity"
+msgstr "余量"
+
+#: canteen/templates/canteen/consumption/create.html:109
+#, python-format
+msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
+msgstr "于 %(storage_date)s 入库。（%(meal_type)s，%(category)s）"
 
 #: canteen/templates/canteen/consumption/create.html:116
 #, python-format
 msgid ""
 "\n"
-"                      (%(category)s)\n"
-"                    "
+"                  (%(category)s,%(meal_type)s,%(storage_date)s)\n"
+"                  "
 msgstr ""
 "\n"
-"                      （%(category)s）\n"
-"                    "
+"                    （%(category)s,%(meal_type)s,%(storage_date)s）\n"
+"                  "
 
-#: canteen/templates/canteen/consumption/create.html:122
+#: canteen/templates/canteen/consumption/create.html:123
 #, python-format
 msgid ""
 "\n"
-"                (%(category)s)\n"
-"                "
+"                  (%(category)s,%(storage_date)s)\n"
+"                  "
 msgstr ""
 "\n"
-"                （%(category)s）\n"
-"                "
+"                    （%(category)s,%(storage_date)s）\n"
+"                  "
 
-#: canteen/templates/canteen/consumption/create.html:130
+#: canteen/templates/canteen/consumption/create.html:132
 msgid "No ingredient found."
 msgstr "未发现食材。"
 
-#: canteen/templates/canteen/consumption/create.html:139
+#: canteen/templates/canteen/consumption/create.html:141
 msgid "Generate Spreadsheet"
 msgstr "生成账单"
 
-#: canteen/templates/canteen/consumption/create.html:145
+#: canteen/templates/canteen/consumption/create.html:147
 msgid "Ingredient Sheets are also included."
 msgstr "也包含食材表。"
+
+#: canteen/templates/canteen/consumption/create.html:474
+msgid ":"
+msgstr "："
 
 #: canteen/templates/canteen/ingredient/create.html:4
 msgid "Upload a Spreadsheet of Purchased Ingredients"
@@ -702,31 +706,31 @@ msgstr "是不用入库的"
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:407
+#: canteen/views.py:413
 msgid "Please select the item(s) you wish to delete."
 msgstr "请选择要删除的食材项。"
 
-#: canteen/views.py:429
+#: canteen/views.py:435
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:431
+#: canteen/views.py:437
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:435
+#: canteen/views.py:441
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:437
+#: canteen/views.py:443
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:476
+#: canteen/views.py:482
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
@@ -735,42 +739,42 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:623
+#: canteen/views.py:628
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr "{meal_type}：{meal_type_total_price}"
 
-#: canteen/views.py:632
+#: canteen/views.py:637
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: canteen/views.py:660
+#: canteen/views.py:665
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:771 canteen/views.py:1056
+#: canteen/views.py:776 canteen/views.py:1067
 msgid "(2)"
 msgstr "（2）"
 
-#: canteen/views.py:780 canteen/views.py:1064
+#: canteen/views.py:785 canteen/views.py:1075
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:821
+#: canteen/views.py:826
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:841
+#: canteen/views.py:846
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:857
+#: canteen/views.py:862
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:883
+#: canteen/views.py:888
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr "（{month}）{affiliation}食堂出入库工作簿（{timestamp}）"
@@ -2084,41 +2088,71 @@ msgstr "接受全部"
 msgid "The road is long, but if you walk, you will arrive."
 msgstr "路虽远，行则将至。"
 
-#: templates/includes/_header.html:28
+#: templates/includes/_header.html:29
 msgid "Home"
 msgstr "主页"
 
-#: templates/includes/_header.html:31
+#: templates/includes/_header.html:34
 msgid "Canteen"
 msgstr "食堂"
 
-#: templates/includes/_header.html:34
+#: templates/includes/_header.html:37
 msgid "Bell"
 msgstr "铃声"
 
-#: templates/includes/_header.html:42
+#: templates/includes/_header.html:45
 msgid "Develop"
 msgstr "开发"
 
-#: templates/includes/_header.html:59
+#: templates/includes/_header.html:62
 msgid "About"
 msgstr "关于"
 
-#: templates/includes/_header.html:82
+#: templates/includes/_header.html:85
 msgid "Log out"
 msgstr "退出"
 
-#: templates/includes/_header.html:86
+#: templates/includes/_header.html:89
 msgid "Login"
 msgstr "登录"
 
-#: templates/includes/_header.html:89
+#: templates/includes/_header.html:92
 msgid "Sign Up"
 msgstr "注册"
 
-#: templates/includes/_header.html:104
+#: templates/includes/_header.html:107
 msgid "Hide messages."
 msgstr "隐藏信息。"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    (%(category)s)\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    （%(category)s）\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                    (%(meal_type)s, %(category)s)\n"
+#~ "                    "
+#~ msgstr ""
+#~ "\n"
+#~ "                    (%(meal_type)s， %(category)s)\n"
+#~ "                    "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                (%(category)s)\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "                （%(category)s）\n"
+#~ "                "
 
 #~ msgid "Is active"
 #~ msgstr "已激活"

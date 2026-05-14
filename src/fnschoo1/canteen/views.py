@@ -32,7 +32,7 @@ from django.db.models import (
     Value,
 )
 from django.db.models.functions import Coalesce, TruncMonth
-from django.http import HttpResponse, QueryDict
+from django.http import HttpResponse, JsonResponse, QueryDict
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils.encoding import escape_uri_path
@@ -265,7 +265,8 @@ def create_consumptions(request, ingredient_id=None):
     )
     ingredients = Ingredient.objects
 
-    orders = get_object_orders_from_cookie(request, "consumptions_sort_params")
+    orders = get_object_orders_from_cookie(request, "create_consumptions_sort")
+    print(orders)
 
     ingredients = (
         ingredients.filter(queries).order_by(*orders)
@@ -313,6 +314,11 @@ def create_consumptions(request, ingredient_id=None):
             ingredients_unpinned.append(i)
 
     ingredients = ingredients_pinned + ingredients_unpinned
+
+    if request.GET.get("get_ordered_ids", "0") == "1":
+        ordered_ids = [i.pk for i in ingredients]
+        return JsonResponse({"ordered_ids": ordered_ids})
+        pass
 
     for ingredient in ingredients:
         ingredient.quantity_used = ingredient.get_consuming_quantity(

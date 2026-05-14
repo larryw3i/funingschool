@@ -24,11 +24,14 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active"
+             target="fnhome__home"
              aria-current="page"
              href="{% url 'fnhome:home' %}">{% trans "Home" %}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'canteen:list_ingredients' %}">{% trans "Canteen" %}</a>
+          <a class="nav-link"
+             target="Canteen__list_ingredients"
+             href="{% url 'canteen:list_ingredients' %}">{% trans "Canteen" %}</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">{% trans "Bell" %}</a>

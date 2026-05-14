@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 00:10+0800\n"
+"POT-Creation-Date: 2026-05-14 23:38+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -114,7 +114,7 @@ msgid "Time of creating"
 msgstr ""
 
 #: canteen/models.py:111 canteen/templates/canteen/consumption/create.html:21
-#: canteen/templates/canteen/consumption/create.html:71 canteen/views.py:85
+#: canteen/templates/canteen/consumption/create.html:72 canteen/views.py:85
 msgid "Ingredient Name"
 msgstr ""
 
@@ -357,49 +357,53 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:72
-msgid "Remaining Quantity"
-msgstr ""
-
-#: canteen/templates/canteen/consumption/create.html:104
-#, python-format
-msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
-msgstr ""
-
-#: canteen/templates/canteen/consumption/create.html:112
+#: canteen/templates/canteen/consumption/create.html:73
 #, python-format
 msgid ""
 "\n"
-"                    (%(meal_type)s, %(category)s)\n"
-"                    "
+"                (%(ingredients_len)s)\n"
+"              "
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:77
+msgid "Remaining Quantity"
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:109
+#, python-format
+msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
 msgstr ""
 
 #: canteen/templates/canteen/consumption/create.html:116
 #, python-format
 msgid ""
 "\n"
-"                      (%(category)s)\n"
-"                    "
+"                  (%(category)s,%(meal_type)s,%(storage_date)s)\n"
+"                  "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:122
+#: canteen/templates/canteen/consumption/create.html:123
 #, python-format
 msgid ""
 "\n"
-"                (%(category)s)\n"
-"                "
+"                  (%(category)s,%(storage_date)s)\n"
+"                  "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:130
+#: canteen/templates/canteen/consumption/create.html:132
 msgid "No ingredient found."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:139
+#: canteen/templates/canteen/consumption/create.html:141
 msgid "Generate Spreadsheet"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:145
+#: canteen/templates/canteen/consumption/create.html:147
 msgid "Ingredient Sheets are also included."
+msgstr ""
+
+#: canteen/templates/canteen/consumption/create.html:474
+msgid ":"
 msgstr ""
 
 #: canteen/templates/canteen/ingredient/create.html:4
@@ -644,73 +648,73 @@ msgstr ""
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr ""
 
-#: canteen/views.py:407
+#: canteen/views.py:413
 msgid "Please select the item(s) you wish to delete."
-msgstr ""
-
-#: canteen/views.py:429
-#, python-brace-format
-msgid "{0} ingredients have been deleted."
-msgstr ""
-
-#: canteen/views.py:431
-#, python-brace-format
-msgid "{0} ingredient has been deleted."
 msgstr ""
 
 #: canteen/views.py:435
 #, python-brace-format
-msgid "{0} consumptions have been deleted."
+msgid "{0} ingredients have been deleted."
 msgstr ""
 
 #: canteen/views.py:437
 #, python-brace-format
+msgid "{0} ingredient has been deleted."
+msgstr ""
+
+#: canteen/views.py:441
+#, python-brace-format
+msgid "{0} consumptions have been deleted."
+msgstr ""
+
+#: canteen/views.py:443
+#, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr ""
 
-#: canteen/views.py:476
+#: canteen/views.py:482
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
 "and cannot be saved. Please modify it again."
 msgstr ""
 
-#: canteen/views.py:623
+#: canteen/views.py:628
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr ""
 
-#: canteen/views.py:632
+#: canteen/views.py:637
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr ""
 
-#: canteen/views.py:660
+#: canteen/views.py:665
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:771 canteen/views.py:1056
+#: canteen/views.py:776 canteen/views.py:1067
 msgid "(2)"
 msgstr ""
 
-#: canteen/views.py:780 canteen/views.py:1064
+#: canteen/views.py:785 canteen/views.py:1075
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:821
+#: canteen/views.py:826
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:841
+#: canteen/views.py:846
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:857
+#: canteen/views.py:862
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:883
+#: canteen/views.py:888
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr ""
@@ -1976,38 +1980,38 @@ msgstr ""
 msgid "The road is long, but if you walk, you will arrive."
 msgstr ""
 
-#: templates/includes/_header.html:28
+#: templates/includes/_header.html:29
 msgid "Home"
 msgstr ""
 
-#: templates/includes/_header.html:31
+#: templates/includes/_header.html:34
 msgid "Canteen"
 msgstr ""
 
-#: templates/includes/_header.html:34
+#: templates/includes/_header.html:37
 msgid "Bell"
 msgstr ""
 
-#: templates/includes/_header.html:42
+#: templates/includes/_header.html:45
 msgid "Develop"
 msgstr ""
 
-#: templates/includes/_header.html:59
+#: templates/includes/_header.html:62
 msgid "About"
 msgstr ""
 
-#: templates/includes/_header.html:82
+#: templates/includes/_header.html:85
 msgid "Log out"
 msgstr ""
 
-#: templates/includes/_header.html:86
+#: templates/includes/_header.html:89
 msgid "Login"
 msgstr ""
 
-#: templates/includes/_header.html:89
+#: templates/includes/_header.html:92
 msgid "Sign Up"
 msgstr ""
 
-#: templates/includes/_header.html:104
+#: templates/includes/_header.html:107
 msgid "Hide messages."
 msgstr ""
