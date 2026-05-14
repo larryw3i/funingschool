@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-14 23:38+0800\n"
+"POT-Creation-Date: 2026-05-15 00:24+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -648,73 +648,73 @@ msgstr ""
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr ""
 
-#: canteen/views.py:413
+#: canteen/views.py:412
 msgid "Please select the item(s) you wish to delete."
 msgstr ""
 
-#: canteen/views.py:435
+#: canteen/views.py:434
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr ""
 
-#: canteen/views.py:437
+#: canteen/views.py:436
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr ""
 
-#: canteen/views.py:441
+#: canteen/views.py:440
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr ""
 
-#: canteen/views.py:443
+#: canteen/views.py:442
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr ""
 
-#: canteen/views.py:482
+#: canteen/views.py:481
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
 "and cannot be saved. Please modify it again."
 msgstr ""
 
-#: canteen/views.py:628
+#: canteen/views.py:627
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr ""
 
-#: canteen/views.py:637
+#: canteen/views.py:636
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr ""
 
-#: canteen/views.py:665
+#: canteen/views.py:664
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:776 canteen/views.py:1067
+#: canteen/views.py:775 canteen/views.py:1066
 msgid "(2)"
 msgstr ""
 
-#: canteen/views.py:785 canteen/views.py:1075
+#: canteen/views.py:784 canteen/views.py:1074
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:826
+#: canteen/views.py:825
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:846
+#: canteen/views.py:845
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:862
+#: canteen/views.py:861
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:888
+#: canteen/views.py:887
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr ""
@@ -1576,51 +1576,51 @@ msgstr ""
 msgid "Updated at"
 msgstr ""
 
-#: fnprofile/models.py:252
-msgid "User Email"
-msgstr ""
-
-#: fnprofile/models.py:253
-msgid "User Emails"
-msgstr ""
-
-#: fnprofile/models.py:262
-msgid "This email has been used by other user."
-msgstr ""
-
-#: fnprofile/models.py:270
-msgid "You can only have one primary email."
-msgstr ""
-
-#: fnprofile/models.py:311
-msgid "Activate your account."
-msgstr ""
-
-#: fnprofile/models.py:344
-msgid "Invalid email format."
-msgstr ""
-
-#: fnprofile/models.py:391
-msgid "Email must be verified before setting as primary."
-msgstr ""
-
-#: fnprofile/models.py:398
-msgid "Email must be active to set as primary."
-msgstr ""
-
-#: fnprofile/models.py:412
-msgid "Disabled"
-msgstr ""
-
-#: fnprofile/models.py:414
+#: fnprofile/models.py:241 fnprofile/models.py:418
 msgid "Unverified"
 msgstr ""
 
+#: fnprofile/models.py:256
+msgid "User Email"
+msgstr ""
+
+#: fnprofile/models.py:257
+msgid "User Emails"
+msgstr ""
+
+#: fnprofile/models.py:266
+msgid "This email has been used by other user."
+msgstr ""
+
+#: fnprofile/models.py:274
+msgid "You can only have one primary email."
+msgstr ""
+
+#: fnprofile/models.py:315
+msgid "Activate your account."
+msgstr ""
+
+#: fnprofile/models.py:348
+msgid "Invalid email format."
+msgstr ""
+
+#: fnprofile/models.py:395
+msgid "Email must be verified before setting as primary."
+msgstr ""
+
+#: fnprofile/models.py:402
+msgid "Email must be active to set as primary."
+msgstr ""
+
 #: fnprofile/models.py:416
+msgid "Disabled"
+msgstr ""
+
+#: fnprofile/models.py:420
 msgid "Primary"
 msgstr ""
 
-#: fnprofile/models.py:418
+#: fnprofile/models.py:422
 msgid "Verified"
 msgstr ""
 
@@ -1652,7 +1652,6 @@ msgstr ""
 #: fnprofile/templates/fnprofile/fnemail/edit__content__.html:16
 #: fnprofile/templates/fnprofile/fnemail/edit__document__.html:7
 #: fnprofile/templates/fnprofile/fnemail/edit__document__.html:16
-#: fnprofile/templates/fnprofile/fnemail/verify.html:6
 msgid "Edit Email"
 msgstr ""
 
@@ -1660,7 +1659,7 @@ msgstr ""
 #: fnprofile/templates/fnprofile/fnemail/edit__content__.html:18
 #: fnprofile/templates/fnprofile/fnemail/edit__document__.html:9
 #: fnprofile/templates/fnprofile/fnemail/edit__document__.html:18
-#: fnprofile/templates/fnprofile/fnemail/verify.html:8
+#: fnprofile/templates/fnprofile/fnemail/verify.html:5
 msgid "Verify Email"
 msgstr ""
 
@@ -1715,7 +1714,7 @@ msgstr ""
 msgid "Add your email address"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/fnemail/verification_email.html:3
+#: fnprofile/templates/fnprofile/fnemail/verification_email.html:4
 #, python-format
 msgid ""
 "Hello! %(username)s,\n"
@@ -1728,19 +1727,19 @@ msgid ""
 "    Thank you for using FNSCHOOL!"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/fnemail/verify.html:13
-msgid "Active Account"
+#: fnprofile/templates/fnprofile/fnemail/verify.html:9
+msgid "Active Email"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/fnemail/verify.html:15
+#: fnprofile/templates/fnprofile/fnemail/verify.html:11
 #, python-format
 msgid ""
 "\n"
-"      Do you want to activate this account (%(username)s %(email)s)?\n"
+"      Do you want to activate this email (%(username)s %(email)s)?\n"
 "    "
 msgstr ""
 
-#: fnprofile/templates/fnprofile/fnemail/verify.html:18
+#: fnprofile/templates/fnprofile/fnemail/verify.html:14
 msgid "Active it"
 msgstr ""
 
@@ -1848,89 +1847,89 @@ msgstr ""
 msgid "Your information has been updated successfully!"
 msgstr ""
 
-#: fnprofile/views.py:221
+#: fnprofile/views.py:223
 msgid "Email added successfully! Verification email sent."
 msgstr ""
 
-#: fnprofile/views.py:233
+#: fnprofile/views.py:235
 msgid "Email added, but verification email failed to send."
 msgstr ""
 
-#: fnprofile/views.py:240
+#: fnprofile/views.py:242
 msgid "Failed to add email. Please try again."
 msgstr ""
 
-#: fnprofile/views.py:271
+#: fnprofile/views.py:273
 msgid "Email Details"
 msgstr ""
 
-#: fnprofile/views.py:287
+#: fnprofile/views.py:289
 msgid ""
 "A verification email has been sent to your email address. Please follow the "
 "instructions in the email to complete the verification process."
 msgstr ""
 
-#: fnprofile/views.py:291
+#: fnprofile/views.py:293
 #, python-brace-format
 msgid ""
 "The verification email failed to be sent. Please wait for {time_interval} "
 "seconds and try again!"
 msgstr ""
 
-#: fnprofile/views.py:299 fnprofile/views.py:369
+#: fnprofile/views.py:301 fnprofile/views.py:373
 msgid "An unknown error has occurred!"
 msgstr ""
 
-#: fnprofile/views.py:309
+#: fnprofile/views.py:311
 msgid "The token has expired or is no longer valid!"
 msgstr ""
 
-#: fnprofile/views.py:325
+#: fnprofile/views.py:327
 msgid "Email verified successfully!"
 msgstr ""
 
-#: fnprofile/views.py:334
+#: fnprofile/views.py:338
 msgid "Token verification failed! Please try again later!"
 msgstr ""
 
-#: fnprofile/views.py:342
+#: fnprofile/views.py:346
 msgid "Please check if your email address is correct!"
 msgstr ""
 
-#: fnprofile/views.py:389
+#: fnprofile/views.py:393
 msgid "Please log in to change your information."
 msgstr ""
 
-#: fnprofile/views.py:392
+#: fnprofile/views.py:396
 msgid "An error occurred while saving the form!"
 msgstr ""
 
-#: fnprofile/views.py:394
+#: fnprofile/views.py:398
 msgid "an unknown error has occurred!"
 msgstr ""
 
-#: fnprofile/views.py:402
+#: fnprofile/views.py:406
 msgid "You only have one primary email, so you cannot cancel this option."
 msgstr ""
 
-#: fnprofile/views.py:415
+#: fnprofile/views.py:419
 msgid "Email set as primary"
 msgstr ""
 
-#: fnprofile/views.py:417
+#: fnprofile/views.py:421
 msgid "Email settings updated"
 msgstr ""
 
-#: fnprofile/views.py:447
+#: fnprofile/views.py:451
 msgid "Cannot delete primary email"
 msgstr ""
 
-#: fnprofile/views.py:454
+#: fnprofile/views.py:458
 #, python-brace-format
 msgid "Email ({email_address}) deleted"
 msgstr ""
 
-#: fnprofile/views.py:461
+#: fnprofile/views.py:465
 msgid "Failed to delete email."
 msgstr ""
 

@@ -2,18 +2,14 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  {% if email.is_verified %}
-    {% trans 'Edit Email' %}
-  {% else %}
-    {% trans 'Verify Email' %}
-  {% endif %}
+  {% trans 'Verify Email' %}
 {% endblock %}
 
 {% block content %}
-  <h2>{% trans 'Active Account' %}</h2>
+  <h2>{% trans 'Active Email' %}</h2>
   <h3>
     {% blocktrans with username=username email=email%}
-      Do you want to activate this account ({{ username }} {{ email }})?
+      Do you want to activate this email ({{ username }} {{ email }})?
     {% endblocktrans %}
     <a class='btn btn-info' href='{{ full_path }}'>{% trans 'Active it' %}</a>
   </h3>

@@ -191,6 +191,8 @@ def list_emails(request):
     verified_count = emails.filter(is_verified=True).count()
     primary_email = emails.filter(is_primary=True, is_disabled=False).first()
 
+    for email in emails:
+        email.verified_at = email.verified_at_t
     context = {
         "emails": emails,
         "total_count": total_count,
@@ -326,7 +328,9 @@ def edit_email(request, email_id):
                     if not request.user.is_authenticated:
                         login(request, email_user)
                     return redirect(
-                        request.GET.get("next", reverse("fnhome:home"))
+                        request.GET.get(
+                            "next", reverse("fnprofile:list_emails")
+                        )
                     )
                 else:
                     messages.error(
@@ -408,8 +412,8 @@ def edit_email(request, email_id):
                     for _email in request.user.emails.all():
                         _email.is_primary = False
                         _email.save(update_fields=["is_primary"])
+                    form.instance.is_disabled = False
                 email = form.save(commit=False)
-                email.is_disabled = False
                 email.save(update_fields=["is_disabled", "is_primary"])
                 if not email.is_primary and form.cleaned_data.get("is_primary"):
                     messages.success(request, _("Email set as primary"))

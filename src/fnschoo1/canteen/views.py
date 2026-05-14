@@ -266,7 +266,6 @@ def create_consumptions(request, ingredient_id=None):
     ingredients = Ingredient.objects
 
     orders = get_object_orders_from_cookie(request, "create_consumptions_sort")
-    print(orders)
 
     ingredients = (
         ingredients.filter(queries).order_by(*orders)

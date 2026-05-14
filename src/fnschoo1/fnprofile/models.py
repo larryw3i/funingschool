@@ -237,6 +237,10 @@ class Fnemail(models.Model):
         self.id = value
 
     @property
+    def verified_at_t(self):
+        return self.verified_at if self.verified_at else _("Unverified")
+
+    @property
     def is_verified_t(self):
         return yes_str if self.is_verified else no_str
 
