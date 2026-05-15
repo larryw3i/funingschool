@@ -1,10 +1,10 @@
 <div class="btn-group flex-wrap border rounded" role="group">
   <a type="button"
-     class="btn btn-primary"
+     class="btn btn-primary btn-sm"
      href="{% url 'fnprofile:edit_profile' %}">{% trans 'Basic Information' %}</a>
   {% if EMAIL_BACKEND %}
     <a type="button"
-       class="btn btn-primary"
+       class="btn btn-primary btn-sm"
        href="{% url 'fnprofile:list_emails' %}">{% trans 'Edit Emails' %}</a>
   {% endif %}
 </div>

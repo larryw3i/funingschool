@@ -25,15 +25,6 @@
   </form>
   <div class="d-flex justify-content-end pt-2">
     <a class="btn btn-primary mx-1"
-       target="canteen__list_meal_types"
-       href='{% url "canteen:list_meal_types" %}'>{% trans "Ingredient Meal Types" %}</a>
-    <a class="btn btn-primary mx-1"
-       target="canteen__list_categories"
-       href='{% url "canteen:list_categories" %}'>{% trans "Ingredient Categories" %}</a>
-    <a class="btn btn-warning mx-1"
-       target="canteen__create_consumptions"
-       href='{% url "canteen:create_consumptions" %}'>{% trans "Consume" %}</a>
-    <a class="btn btn-primary mx-1"
        onclick="open_small_window('{% url 'canteen:create_ingredients' %}')">{% trans "Add via template" %}</a>
     <a class="btn btn-primary mx-1"
        onclick="open_small_window('{% url 'canteen:create_ingredient' %}')">{% trans "Add one" %}</a>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-15 00:24+0800\n"
+"POT-Creation-Date: 2026-05-15 16:58+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -63,7 +63,7 @@ msgid "Creating Date"
 msgstr ""
 
 #: canteen/models.py:36 canteen/models.py:64 canteen/models.py:108
-#: fnprofile/models.py:127
+#: canteen/models.py:240 fnprofile/models.py:127
 msgid "Time of updating"
 msgstr ""
 
@@ -109,12 +109,12 @@ msgstr ""
 msgid "Storage Date"
 msgstr ""
 
-#: canteen/models.py:104 fnprofile/models.py:123
+#: canteen/models.py:104 canteen/models.py:236 fnprofile/models.py:123
 msgid "Time of creating"
 msgstr ""
 
 #: canteen/models.py:111 canteen/templates/canteen/consumption/create.html:21
-#: canteen/templates/canteen/consumption/create.html:72 canteen/views.py:85
+#: canteen/templates/canteen/consumption/create.html:64 canteen/views.py:85
 msgid "Ingredient Name"
 msgstr ""
 
@@ -163,15 +163,15 @@ msgstr ""
 msgid "Consuming Quantity"
 msgstr ""
 
-#: canteen/models.py:234
+#: canteen/models.py:245
 msgid "Consumption Record"
 msgstr ""
 
-#: canteen/models.py:235
+#: canteen/models.py:246
 msgid "Consumption Records"
 msgstr ""
 
-#: canteen/models.py:245
+#: canteen/models.py:256
 #, python-brace-format
 msgid "{0} of {1} was consumed on {2} ."
 msgstr ""
@@ -253,8 +253,8 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:40
 #: canteen/templates/canteen/category/list.html:35
 #: canteen/templates/canteen/category/list.html:41
-#: canteen/templates/canteen/ingredient/list.html:118
-#: canteen/templates/canteen/ingredient/list.html:123
+#: canteen/templates/canteen/ingredient/list.html:110
+#: canteen/templates/canteen/ingredient/list.html:115
 #: canteen/templates/canteen/meal_type/delete.html:32
 #: canteen/templates/canteen/meal_type/list.html:33 fnprofile/models.py:49
 #: templates/base/_js.html:7
@@ -279,7 +279,7 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:57
 #: canteen/templates/canteen/category/list.html:51
 #: canteen/templates/canteen/ingredient/delete.html:34
-#: canteen/templates/canteen/ingredient/list.html:136
+#: canteen/templates/canteen/ingredient/list.html:128
 #: canteen/templates/canteen/meal_type/delete.html:49
 #: canteen/templates/canteen/meal_type/list.html:43
 #: fnprofile/templates/fnprofile/fnemail/delete.html:34
@@ -298,7 +298,7 @@ msgid "Add"
 msgstr ""
 
 #: canteen/templates/canteen/category/list.html:47
-#: canteen/templates/canteen/ingredient/list.html:130
+#: canteen/templates/canteen/ingredient/list.html:122
 #: canteen/templates/canteen/meal_type/list.html:39
 msgid "Edit"
 msgstr ""
@@ -335,29 +335,19 @@ msgstr ""
 msgid "Category Name (canteen__consumption_create)"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:38
-#: canteen/templates/canteen/ingredient/list.html:31
-msgid "Ingredient Categories"
-msgstr ""
-
-#: canteen/templates/canteen/consumption/create.html:42
-#: canteen/templates/canteen/ingredient/list.html:28
-msgid "Ingredient Meal Types"
-msgstr ""
-
-#: canteen/templates/canteen/consumption/create.html:47
+#: canteen/templates/canteen/consumption/create.html:39
 msgid "The starting date of storage."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:55
+#: canteen/templates/canteen/consumption/create.html:47
 msgid "The end date of storage."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:61
+#: canteen/templates/canteen/consumption/create.html:53
 msgid "Refresh"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:73
+#: canteen/templates/canteen/consumption/create.html:65
 #, python-format
 msgid ""
 "\n"
@@ -365,16 +355,16 @@ msgid ""
 "              "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:77
+#: canteen/templates/canteen/consumption/create.html:69
 msgid "Remaining Quantity"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:109
+#: canteen/templates/canteen/consumption/create.html:101
 #, python-format
 msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:116
+#: canteen/templates/canteen/consumption/create.html:108
 #, python-format
 msgid ""
 "\n"
@@ -382,7 +372,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:123
+#: canteen/templates/canteen/consumption/create.html:115
 #, python-format
 msgid ""
 "\n"
@@ -390,20 +380,36 @@ msgid ""
 "                  "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:132
+#: canteen/templates/canteen/consumption/create.html:124
 msgid "No ingredient found."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:141
+#: canteen/templates/canteen/consumption/create.html:133
 msgid "Generate Spreadsheet"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:147
+#: canteen/templates/canteen/consumption/create.html:139
 msgid "Ingredient Sheets are also included."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:474
+#: canteen/templates/canteen/consumption/create.html:466
 msgid ":"
+msgstr ""
+
+#: canteen/templates/canteen/includes/_canteen_navigation.html:5
+msgid "Ingredients"
+msgstr ""
+
+#: canteen/templates/canteen/includes/_canteen_navigation.html:9
+msgid "Categories"
+msgstr ""
+
+#: canteen/templates/canteen/includes/_canteen_navigation.html:13
+msgid "Meal Types"
+msgstr ""
+
+#: canteen/templates/canteen/includes/_canteen_navigation.html:17
+msgid "Consumptions"
 msgstr ""
 
 #: canteen/templates/canteen/ingredient/create.html:4
@@ -458,49 +464,45 @@ msgid ""
 "    "
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:16
+#: canteen/templates/canteen/ingredient/list.html:17
 msgid "Search ingredient ..."
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:20
+#: canteen/templates/canteen/ingredient/list.html:21
 msgid "Search"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:22
+#: canteen/templates/canteen/ingredient/list.html:23
 msgid "Clear"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:34
-msgid "Consume"
-msgstr ""
-
-#: canteen/templates/canteen/ingredient/list.html:36
+#: canteen/templates/canteen/ingredient/list.html:28
 msgid "Add via template"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:38
+#: canteen/templates/canteen/ingredient/list.html:30
 msgid "Add one"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:39
+#: canteen/templates/canteen/ingredient/list.html:31
 msgid ""
 "Click twice within one minute to delete the selected ingredients. (Note: "
 "This is an irreversible operation.)"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:41
+#: canteen/templates/canteen/ingredient/list.html:33
 msgid "Delete selected Ingredients"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:51
+#: canteen/templates/canteen/ingredient/list.html:43
 msgid "Locate the updated element."
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:63
+#: canteen/templates/canteen/ingredient/list.html:55
 msgid "Select all ingredients."
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:72
+#: canteen/templates/canteen/ingredient/list.html:64
 #, python-format
 msgid ""
 "\n"
@@ -508,7 +510,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:95
+#: canteen/templates/canteen/ingredient/list.html:87
 msgid "It helps you check/delete the ingredients."
 msgstr ""
 

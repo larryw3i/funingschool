@@ -1,15 +1,18 @@
 <div class="btn-group flex-wrap border rounded" role="group">
   <a type="button"
-     class="btn btn-primary"
+     class="btn btn-primary btn-sm"
      target="canteen__list_ingredients"
      href="{% url 'canteen:list_ingredients' %}">{% trans 'Ingredients' %}</a>
   <a type="button"
-     class="btn btn-primary"
+     class="btn btn-primary btn-sm"
      target="canteen__list_categories"
      href="{% url 'canteen:list_categories' %}">{% trans 'Categories' %}</a>
   <a type="button"
-     class="btn btn-primary"
+     class="btn btn-primary btn-sm"
+     target="canteen__list_meal_types"
+     href="{% url 'canteen:list_meal_types' %}">{% trans 'Meal Types' %}</a>
+  <a type="button"
+     class="btn btn-primary btn-sm"
      target="canteen__create_consumptions"
      href="{% url 'canteen:create_consumptions' %}">{% trans 'Consumptions' %}</a>
-
 </div>
