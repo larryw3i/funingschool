@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
   <h1>{% trans "Meal type list" %}</h1>
-  <hr />
+  {% include 'canteen/includes/_canteen_navigation.html' %}
   <div class="d-flex justify-content-end pt-2">
     <a class="btn btn-primary"
        onclick="open_small_window('{% url 'canteen:create_meal_type' %}'); return false;">{% trans "Add" %}</a>

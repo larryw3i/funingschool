@@ -113,10 +113,10 @@ function set_sort_params_from_cookie(name, key) {
   var value = params == null ? '' : params.get(key, '')
   value =
     value == '' || value == null
-      ? '-'
-      : value == '-'
-        ? '+'
-        : value == '+'
+      ? '+'
+      : value == '+'
+        ? '-'
+        : value == '-'
           ? ''
           : ''
   params = set_search_params_from_cookie(cookie_name, key, value)

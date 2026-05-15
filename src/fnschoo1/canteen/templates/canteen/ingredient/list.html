@@ -6,6 +6,7 @@
 {% endblock %}
 {% block content %}
   <h1>{% trans "Ingredient List" %}</h1>
+  {% include 'canteen/includes/_canteen_navigation.html' %}
   <form method="get"
         action="{% url 'canteen:list_ingredients' %}"
         class="d-flex justify-content-between align-items-center">

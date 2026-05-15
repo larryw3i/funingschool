@@ -229,6 +229,17 @@ class Consumption(models.Model):
         default=False, verbose_name=_("Is Disabled")
     )
 
+    created_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        auto_now_add=True,
+        verbose_name=_("Time of creating"),
+    )
+
+    updated_at = models.DateTimeField(
+        null=True, blank=True, auto_now=True, verbose_name=_("Time of updating")
+    )
+
     class Meta:
 
         verbose_name = _("Consumption Record")
