@@ -633,10 +633,13 @@ def list_ingredients(request):
 
         total_price_title += (
             "\n"
-            + _("{year}.{month}").format(
-                year=month.year, month=f"{month.month:0>2}"
+            + _("{month}:{total_price}").format(
+                month=_("{year}.{month}").format(
+                    year=month.year, month=f"{month.month:0>2}"
+                ),
+                total_price=month_total_price.normalize(),
             )
-            + f":{month_total_price.normalize()}="
+            + "="
         ) + month_total_price_title[1:]
         month_total_price_title = None
         month_total_price = None

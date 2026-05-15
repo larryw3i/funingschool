@@ -119,12 +119,20 @@ class Fnuser(AbstractUser, PermissionsMixin):
         max_length=512, blank=True, verbose_name=_("Biography")
     )
 
+    logout_token = models.CharField(
+        _("Logout token"),
+        max_length=256,
+        blank=True,
+        null=True,
+        help_text=_("Token of logout."),
+    )
+
     created_at = models.DateTimeField(
-        null=True, auto_now_add=True, verbose_name=_("Time of creating")
+        null=True, auto_now_add=True, verbose_name=_("Time of creating.")
     )
 
     updated_at = models.DateTimeField(
-        null=True, auto_now=True, verbose_name=_("Time of updating")
+        null=True, auto_now=True, verbose_name=_("Time of updating.")
     )
 
     class Meta:
@@ -153,6 +161,54 @@ class Fnuser(AbstractUser, PermissionsMixin):
     def get_verified_emails(self):
         emails = self.emails.filter(is_verified=True).all()
         return emails
+
+    def generate_logout_token(self):
+        self.logout_token = (
+            uuid.uuid4().hex
+            + uuid.uuid4().hex
+            + uuid.uuid4().hex
+            + uuid.uuid4().hex
+        )
+        self.save(update_fields=["logout_token"])
+
+        return self.logout_token
+
+    def send_login_notification_email(self, request):
+        token = self.generate_logout_token()
+        current_site = get_current_site(request)
+        print(request.META)
+        login_ip = (
+            request.META.get("REMOTE_ADDR", None)
+            or request.META.get("HTTP_X_FORWARDED_FOR", None)
+            or _("Unknown")
+        )
+        HTTP_USER_AGENT = request.META.get("HTTP_USER_AGENT", _("Unknown"))
+        mail_subject = _("You have logged in to FNSCHOOL .")
+        message = render_to_string(
+            "fnprofile/fnemail/login_notification_email.html",
+            {
+                "user": self,
+                "HTTP_USER_AGENT": HTTP_USER_AGENT,
+                "login_ip": login_ip,
+                "logout_url": (
+                    request.scheme
+                    + "://"
+                    + current_site.domain
+                    + reverse("fnprofile:log_out")
+                    + "?token="
+                    + token
+                ),
+            },
+        )
+        to_emails = [e.email for e in self.get_enabled_emails()]
+        email = EmailMessage(
+            mail_subject,
+            message,
+            from_email=settings.EMAIL_HOST_USER,
+            to=to_emails,
+        )
+        email.send()
+        return True
 
 
 class Fnemail(models.Model):

@@ -1,11 +1,13 @@
 {% spaceless %}
   {% load i18n %}
   {% autoescape off %}
-    {% blocktrans with verification_url=verification_url username=user.username %}Hello! {{ username }},
+    {% blocktrans with verification_url=verification_url username=user.username %}
+    Hello! {{ username }},
     Please click on the link below to activate your email:
     {{ verification_url }}
-    (If you cannot click, please copy the entire link into the browser address bar and press Enter.)
+    (If the link does not redirect after clicking, please copy the entire link into the browser address bar and press Enter.)
     If you have not registered an account on FNSCHOOL, please disregard this email.
-    Thank you for using FNSCHOOL!{% endblocktrans %}
+    Thank you for using FNSCHOOL!
+    {% endblocktrans %}
   {% endautoescape %}
 {% endspaceless %}

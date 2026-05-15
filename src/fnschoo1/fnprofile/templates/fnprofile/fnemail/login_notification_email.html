@@ -1,0 +1,15 @@
+{% spaceless %}
+  {% load i18n %}
+  {% autoescape off %}
+    {% blocktrans with logout_url=logout_url username=user.username HTTP_USER_AGENT=HTTP_USER_AGENT login_ip=login_ip%}
+    Hello! {{ username }},
+    You have logged in to FNSCHOOL:
+    -- Login IP: {{ login_ip }}
+    -- Browser: {{ HTTP_USER_AGENT }}
+    If you are not logged in to FNSCHOOL, simply click on the link below to log out:
+    {{ logout_url }}
+    (If the link does not redirect after clicking, please copy the entire link into the browser address bar and press Enter.)
+    Thank you for using FNSCHOOL!
+    {% endblocktrans %}
+  {% endautoescape %}
+{% endspaceless %}

@@ -7,9 +7,10 @@
   <h1>{% trans "Consume Ingredients" %}</h1>
   {% include 'canteen/includes/_canteen_navigation.html' %}
   <div class="container">
-    <div class="row justify-content-end">
+    <div class="row justify-content-end border border-1 border-primary rounded">
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_storage_date"
               id="sort_storage_date"
+              title="{% trans 'Sort by storage date.' %}"
               style="font-size: 90%"
               onclick="sort_consumptions_table_rows('storage_date');">
         {% trans "Storage Date" %}
@@ -17,18 +18,21 @@
 
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_name"
               id="sort_name"
+              title='{% trans 'Sort by name.' %}'
               onclick="sort_consumptions_table_rows('name');">
         {% trans "Ingredient Name" %}
       </button>
 
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_meal_type__name"
               id="sort_meal_type__name"
+              title="{% trans 'Sort by meal type.' %}"
               onclick="sort_consumptions_table_rows('meal_type__name');">
         {% trans "Meal Type" %}
       </button>
 
       <button class="btn btn-outline-success col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_category__name"
               id="sort_category__name"
+              title="{% trans 'Sort by category.' %}"
               onclick="sort_consumptions_table_rows('category__name');">
         {% trans "Category Name (canteen__consumption_create)" %}
       </button>
@@ -50,6 +54,7 @@
                value="{{ storage_date_end }}">
       </div>
       <button class="btn btn-success col-md-1 col-lg-1 col-2"
+              title="{% trans 'Refresh this page.' %}"
               onclick="list_consumptions();">{% trans "Refresh" %}</button>
     </div>
   </div>

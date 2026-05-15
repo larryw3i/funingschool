@@ -2,9 +2,12 @@ from urllib.parse import urlencode
 
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
@@ -33,6 +36,13 @@ from .forms import (
 from .models import Fnemail, Fnuser, resend_verification_email_time_interval
 
 LOGIN_URL = settings.LOGIN_URL
+
+
+def login(request, user):
+    user_login = auth_login(request, user)
+    if settings.EMAIL_BACKEND:
+        user.send_login_notification_email(request)
+    return user_login
 
 
 def new_fnprofile(request):
@@ -159,6 +169,21 @@ def fnprofile_log_in(request):
 
 
 def fnprofile_log_out(request):
+    logout_token = request.GET.get("token", None)
+    if logout_token:
+        user = get_object_or_404(Fnuser, logout_token=logout_token)
+        user_sessions = []
+        for session in Session.objects.filter(expire_date__gte=timezone.now()):
+            session_data = session.get_decoded()
+            if session_data.get("_auth_user_id") == str(user.id):
+                user_sessions.append(session)
+        for session in user_sessions:
+            session.delete()
+        messages.info(request, _("You account has been loged out."))
+        user.logout_token = None
+        user.save(update_fields=["logout_token"])
+        return redirect("fnhome:home")
+
     if request.user.is_authenticated:
         messages.info(request, _("You have been logged out"))
     logout(request)

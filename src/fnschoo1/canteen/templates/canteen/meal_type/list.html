@@ -13,7 +13,11 @@
   <table class="table table-bordered table-striped table-hover table-condensed">
     <thead>
       <tr>
-        <th>#</th>
+        <th>
+          {% blocktrans with meal_types_len=meal_types|length %}
+            ({{ meal_types_len }})
+          {% endblocktrans %}
+        </th>
         <th>{% trans "Meal Type Name" %}</th>
         <th>{% trans "Abbreviation" %}</th>
         <th>{% trans "Created at" %}</th>

@@ -13,7 +13,11 @@
   <table class="table table-bordered table-striped table-hover table-condensed">
     <thead>
       <tr>
-        <th>#</th>
+        <th>
+          {% blocktrans with categories_len=categories|length %}
+            ({{ categories_len }})
+          {% endblocktrans%}
+        </th>
         <th>{% trans "Category Name" %}</th>
         <th>{% trans "Abbreviation" %}</th>
         <th>{% trans "Created at" %}</th>
