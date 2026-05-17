@@ -2,6 +2,8 @@ from urllib.parse import urlencode
 
 from django.conf import settings
 from django.contrib import messages
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
@@ -32,6 +34,7 @@ from .forms import (
     FnuserForm,
     FnuserLoginForm,
     FnuserSignUpForm,
+    FnuserPasswordResetForm
 )
 from .models import Fnemail, Fnuser, resend_verification_email_time_interval
 
@@ -104,55 +107,52 @@ def fnprofile_log_in(request):
                 password_is_incorrect_str = _(
                     "The account does not exist or the password is incorrect!"
                 )
+                password_checked = user.check_password(password) if user else False
                 if not user:
                     messages.warning(request, password_is_incorrect_str)
                     form.add_error("username", password_is_incorrect_str)
+                elif not password_checked:
+                    messages.warning(request, password_is_incorrect_str)
+                    form.add_error("username", password_is_incorrect_str)
+                elif (
+                    settings.EMAIL_BACKEND
+                    and not user.has_verified_email()
+                ):
+                    email = user.get_first_email()
+                    form_email = form.cleaned_data.get("email", None)
+                    
+                    if email:
+                        return redirect(
+                            "fnprofile:edit_email", email.id
+                        )
+
+
+                    if form_email:
+                        email = Fnemail.objects.create(
+                            user=user,
+                            email=form_email,
+                            is_primary=True,
+                        )
+                        return redirect(
+                            "fnprofile:edit_email", email.id
+                        )
+
+                    email_field = form.fields["email"]
+                    email_field.widget.attrs["style"] = (
+                        "display: block;"
+                    )
                 else:
-                    password_checked = user.check_password(password)
-                    if not password_checked:
-                        messages.warning(request, password_is_incorrect_str)
-                        form.add_error("username", password_is_incorrect_str)
-                    else:
-                        if (
-                            settings.EMAIL_BACKEND
-                            and not user.has_verified_email()
-                        ):
-                            email = user.get_first_email()
-                            form_email = form.cleaned_data.get("email", None)
-
-                            if not email:
-                                if form_email:
-                                    email = Fnemail.objects.create(
-                                        user=user,
-                                        email=form_email,
-                                        is_primary=True,
-                                    )
-                                    return redirect(
-                                        "fnprofile:edit_email", email.id
-                                    )
-
-                                email_field = form.fields["email"]
-                                email_field.widget.attrs["style"] = (
-                                    "display: block;"
-                                )
-
-                            else:
-
-                                return redirect(
-                                    "fnprofile:edit_email", email.id
-                                )
-                        else:
-                            login(request, user)
-                            messages.success(
-                                request,
-                                _("Welcome back, {username} !").format(
-                                    username=user.username
-                                ),
-                            )
-                            next_url = request.POST.get("next") or reverse_lazy(
-                                "fnhome:home"
-                            )
-                            return redirect(next_url)
+                    login(request, user)
+                    messages.success(
+                        request,
+                        _("Welcome back, {username} !").format(
+                            username=user.username
+                        ),
+                    )
+                    next_url = request.POST.get("next") or reverse_lazy(
+                        "fnhome:home"
+                    )
+                    return redirect(next_url)
     else:
         form = FnuserLoginForm(request)
         email_field = form.fields["email"]
@@ -169,9 +169,13 @@ def fnprofile_log_in(request):
 
 
 def fnprofile_log_out(request):
-    logout_token = request.GET.get("token", None)
+    logout_token = request.GET.get("logout_token", None)
     if logout_token:
-        user = get_object_or_404(Fnuser, logout_token=logout_token)
+        user_id_r = request.GET.get("user_id", None)
+        if not user_id_r:
+            return HttpResponse("Not Found", status=404)
+        user_id=force_str(urlsafe_base64_decode(user_id_r))
+        user = get_object_or_404(Fnuser, pk=user_id)
         user_sessions = []
         for session in Session.objects.filter(expire_date__gte=timezone.now()):
             session_data = session.get_decoded()
@@ -190,9 +194,44 @@ def fnprofile_log_out(request):
     return redirect("fnhome:home")
 
 
-@login_required
 def edit_fnprofile(request):
     form = None
+    reset_password_token=request.GET.get("reset_password_token", None)
+    if reset_password_token:
+        user_id_r = request.GET.get("user_id", None)
+        user_id=force_str(urlsafe_base64_decode(user_id_r))
+        if not user_pk:
+            return HttpResponse("Not Found", status=404)
+        user=get_object_or_404(Fnuser, pk=user_id)
+        if request.method == "POST":
+            form=FnuserSetPasswordForm(user,request.POST)
+            if form.is_valid():
+                if not user.verify_reset_password_token(reset_password_token,user.reset_password_token):
+                    return HttpResponse("Not Found", status=404)
+                form.save()
+                messages.success(request,_("Your password has been reset."))
+                login(request,user)
+                return redirect("fnhome:home")
+        reset_password_token=user.generate_reset_password_token()
+        current_site = get_current_site(request)
+        verification_url= (
+                    request.scheme
+                    + "://"
+                    + current_site.domain
+                    + reverse(
+                        "fnprofile:edit_fnprofile"
+                    )
+                    + "?user_id="
+                    + user_id_r
+                    + "&token="
+                    + reset_password_token
+                )
+
+        form = FnuserSetPasswordForm(user)
+        return render(request,"fnprofile/profile/reset_password.html",{'form':form,'user':user,"reset_password_token":reset_password_token})
+    
+    if not request.user.is_authenticated:
+        return HttpResponse("Not Found", status=404)
     if request.method == "POST":
         form = FnuserForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
@@ -302,12 +341,14 @@ def view_email(request, email_id):
 
 
 def edit_email(request, email_id):
+    email_id_r = email_id
+    email_id=force_str(urlsafe_base64_decode(email_id_r))
     email = Fnemail.objects.filter(pk=email_id).first()
+    if not email:
+        return HttpResponse("Not Found", status=404)
+
     email_address = email.email
     email_is_verified = email.is_verified
-    if not email:
-        return
-
     email_user = email.user
 
     verification_sent_str = _(
@@ -330,20 +371,17 @@ def edit_email(request, email_id):
         elif request.method == "GET":
             token = request.GET.get("token", None)
             if token:
-                if not email.verification_token.endswith(token):
-                    messages.error(
-                        request,
-                        _("The token has expired or is no longer valid!"),
-                    )
-                    pass
-                elif email.verification_token.startswith("__"):
+                if email.verification_token_startswith_underline():
                     email.verification_token = email.verification_token[2:]
-                    email.save(update_fields=["verification_token"])
+                    if not email.verify(token):
+                        return HttpResponse("Not Found", status=404)
+                    verification_token=email.generate_verification_token(with_underline=False)
+                    full_path=request.get_full_path().split("?")[0] +"?verification_token="+verification_token
                     return render(
                         request,
                         "fnprofile/fnemail/verify.html",
                         {
-                            "full_path": request.get_full_path(),
+                            "full_path": full_path,
                             "username": email_user.username,
                             "email": email_address,
                         },

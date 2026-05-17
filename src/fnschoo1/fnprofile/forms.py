@@ -3,6 +3,8 @@ from datetime import date
 
 from django import forms
 from django.conf import settings
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -329,6 +331,9 @@ class FnuserForm(ModelForm):
         if cleaned_data.get("password") != cleaned_data.get("password_confirm"):
             raise forms.ValidationError("Passwords do not match")
 
+class FnuserSetPasswordForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
 class FnemailAddForm(forms.ModelForm):
     class Meta:
