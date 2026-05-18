@@ -83,6 +83,7 @@ class Fnuser(AbstractUser, PermissionsMixin):
         _("email address"),
         blank=True,
         null=True,
+        unique=True,
         max_length=256,
         help_text=_("Primary email address."),
         error_messages={
@@ -302,7 +303,10 @@ class Fnuser(AbstractUser, PermissionsMixin):
         self.reset_password_token = None
         self.save(update_fields=["reset_password_token"])
         return True
-
+    
+    def clean(self):
+        if self.email == "":
+            self.email = None 
 
 class Fnemail(models.Model):
     id = models.UUIDField(
