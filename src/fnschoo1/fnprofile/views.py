@@ -1,3 +1,4 @@
+import logging
 from urllib.parse import urlencode
 
 from django.conf import settings
@@ -36,6 +37,7 @@ from .forms import (
 )
 from .models import Fnemail, Fnuser, resend_verification_email_time_interval
 
+logger = logging.getLogger(__name__)
 LOGIN_URL = settings.LOGIN_URL
 
 
@@ -115,10 +117,11 @@ def fnprofile_log_in(request):
 
                 elif settings.AS_SITE and not user.has_verified_email():
                     email = user.get_first_email()
-                    form_email = form.cleaned_data.get("email", None)
+                    form_email = form.cleaned_data.get("email", "") or None
 
                     if email:
-                        return redirect("fnprofile:edit_email", email.id)
+                        email_id = email.id
+                        return redirect("fnprofile:edit_email", email_id)
 
                     if form_email:
                         email = Fnemail.objects.create(
@@ -126,7 +129,8 @@ def fnprofile_log_in(request):
                             email=form_email,
                             is_primary=True,
                         )
-                        return redirect("fnprofile:edit_email", email.id)
+                        email_id = email.id
+                        return redirect("fnprofile:edit_email", email_id)
 
                     context.update({"show_email_field": True})
                     form.add_error(
@@ -380,8 +384,6 @@ def view_email(request, email_id):
 
 
 def edit_email(request, email_id):
-    email_id_r = email_id
-    email_id = force_str(urlsafe_base64_decode(email_id_r))
     email = Fnemail.objects.filter(pk=email_id).first()
     if not email:
         return HttpResponse("Not Found", status=404)
@@ -408,10 +410,9 @@ def edit_email(request, email_id):
         elif email_is_verified:
             pass
         elif request.method == "GET":
-            token = request.GET.get("token", None)
+            token = request.GET.get("verification_token", None)
             if token:
                 if email.verification_token_startswith_underline():
-                    email.verification_token = email.verification_token[2:]
                     if not email.verify(token):
                         return HttpResponse("Not Found", status=404)
                     verification_token = email.generate_verification_token(
@@ -431,6 +432,7 @@ def edit_email(request, email_id):
                             "email": email_address,
                         },
                     )
+
                 elif email.verify(token):
                     messages.success(request, _("Email verified successfully!"))
                     if not request.user.is_authenticated:
@@ -457,7 +459,6 @@ def edit_email(request, email_id):
                 resend_verification_email = request.GET.get(
                     "resend_verification_email", "0"
                 )
-                print("resend_verification_email", resend_verification_email)
                 if resend_verification_email == "1":
                     if email.send_verification_email(request):
                         messages.info(request, verification_sent_str)
@@ -498,7 +499,9 @@ def edit_email(request, email_id):
                 pass
 
             if not request.user.is_authenticated:
-                messages.info(_("Please log in to change your information."))
+                messages.info(
+                    request, _("Please log in to change your information.")
+                )
                 return redirect("fnprofile:log_in")
             elif not email_user == request.user:
                 form.add_error(_("An error occurred while saving the form!"))

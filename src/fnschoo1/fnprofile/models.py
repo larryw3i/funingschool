@@ -303,10 +303,11 @@ class Fnuser(AbstractUser, PermissionsMixin):
         self.reset_password_token = None
         self.save(update_fields=["reset_password_token"])
         return True
-    
+
     def clean(self):
         if self.email == "":
-            self.email = None 
+            self.email = None
+
 
 class Fnemail(models.Model):
     id = models.UUIDField(
@@ -464,13 +465,13 @@ class Fnemail(models.Model):
             return False
         token = self.generate_verification_token()
         current_site = get_current_site(request)
-        email_id = urlsafe_base64_encode(force_bytes(self.pk))
+        email_id = self.pk
         verification_url = (
             request.scheme
             + "://"
             + current_site.domain
             + reverse("fnprofile:edit_email", kwargs={"email_id": email_id})
-            + "?token="
+            + "?verification_token="
             + token
         )
         mail_subject = _("Activate your account.")
@@ -508,19 +509,27 @@ class Fnemail(models.Model):
         return False
 
     def verify(self, token):
-        if not self.verification_token or check_password(
-            token, self.verification_token
-        ):
-            return False
-
         if self.verification_sent_at:
             expiry_time = self.verification_sent_at + timezone.timedelta(
                 seconds=resend_verification_email_time_interval
             )
             if timezone.now() > expiry_time:
                 return False
+        verification_token_startswith_underline = (
+            self.verification_token_startswith_underline()
+        )
+        verification_token = (
+            self.verification_token[2:]
+            if verification_token_startswith_underline
+            else self.verification_token
+        )
+        if not self.verification_token or not check_password(
+            token, verification_token
+        ):
+            return False
 
-        self.is_verified = True
+        if not verification_token_startswith_underline:
+            self.is_verified = True
         self.verified_at = timezone.now()
         self.verification_token = None
         self.save(

@@ -190,20 +190,23 @@ class FnuserSignUpForm(UserCreationForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        email = cleaned_data.get("email")
+        email = cleaned_data.get("email", "") or None
 
-        if settings.AS_SITE:
-            if not email:
-                self.add_error("email", _("Please enter email."))
-        else:
-            if not email:
-                pass
-            elif Fnuser.objects.filter(email=email).exists():
-                self.add_error(
-                    "email", _("A user with that email already exists.")
+        if settings.AS_SITE and not email:
+            raise self.add_error("email", _("Please enter email."))
+        elif email:
+            try:
+                validate_email(email)
+            except ValidationError:
+                raise self.add_error(
+                    "email", _("Please enter a valid email address.")
                 )
-            else:
-                pass
+        elif not email:
+            pass
+        elif Fnemail.objects.filter(email=email, is_verified=True).exists():
+            self.add_error("email", _("A user with that email already exists."))
+        else:
+            pass
 
         return cleaned_data
 
