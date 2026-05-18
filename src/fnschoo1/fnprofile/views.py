@@ -127,7 +127,8 @@ def fnprofile_log_in(request):
                             is_primary=True,
                         )
                         return redirect("fnprofile:edit_email", email.id)
-                    form.show_email_field()
+                    context.update({"show_email_field":True})
+                    form.add_error("email",_("Please enter an email address to verify your account!"))
 
                 else:
                     login(request, user)
@@ -143,7 +144,6 @@ def fnprofile_log_in(request):
                     return redirect(next_url)
     else:
         form = FnuserLoginForm(request)
-        form.hide_email_field()
 
     context.update({"form": form})
     return render(

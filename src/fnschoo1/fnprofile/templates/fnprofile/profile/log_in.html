@@ -8,7 +8,7 @@
   {% if form.errors %}
     <p>{% trans "Your username and password didn't match. Please try again." %}</p>
   {% endif %}
-  <form method="post" action="{% url 'fnprofile:log_in' %}">
+  <form method="post" action="{% url 'fnprofile:log_in' %}" style="display: none;">
     {% csrf_token %} {{ form|crispy }}
     <input type="hidden" name="next" value="{{ request.GET.next }}" />
     <p>
@@ -25,5 +25,35 @@
     <a href="{% url 'fnprofile:new_profile' %}">{% trans "Register here" %}</a>
   </p>
 {% endblock %}
-{% block extra_js %}{% endblock %}
+{% block extra_js %}
+  {% if show_email_field %}
+    <script>
+      $(document).ready(function () {
+        var email_div=$("#div_id_email")
+        var email_input=$("#id_email")
+        var email_label=email_div.find("label")
+        var email_help_text=$("#id_email_helptext")
+        email_label.css({"display":"block"})
+        email_input.css({"display":"block"})
+        email_help_text.css({"display":"block"})
+        email_label.text('{% trans "Email Address" %}')
+        email_help_text.text("{% trans 'We\'ll send a verification email to this address.' %}")
+        email_div.closest("form").css({"display":"block"})
+      });
+    </script>
+  {% else %}
+  <script>
+      $(document).ready(function () {
+        var email_div=$("#div_id_email")
+        var email_input=$("#id_email")
+        var email_label=email_div.find("label")
+        var email_help_text=$("#id_email_helptext")
+        email_label.css({"display":"none"})
+        email_input.css({"display":"none"})
+        email_help_text.css({"display":"none"})
+        email_div.closest("form").css({"display":"block"})
+      });
+    </script>
+  {% endif %}
+{% endblock %}
 <!-- The end. -->
