@@ -127,6 +127,7 @@ def fnprofile_log_in(request):
                             is_primary=True,
                         )
                         return redirect("fnprofile:edit_email", email.id)
+
                     context.update({"show_email_field": True})
                     form.add_error(
                         "email",

@@ -88,12 +88,6 @@ class FnuserLoginForm(AuthenticationForm):
     def __init__(self, request, *args, **kwargs):
         self.request = request
         super().__init__(request, *args, **kwargs)
-        """
-        email_field = self.fields["email"]
-        email_field.widget.attrs["style"] = "display: none;"
-        email_field.help_text = ""
-        email_field.label = ""
-        """
 
     def clean_username(self):
         username = self.cleaned_data.get("username", "").strip()

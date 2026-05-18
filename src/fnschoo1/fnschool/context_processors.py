@@ -2,7 +2,10 @@ from django.conf import settings as SETTINGS
 
 
 def settings(request):
-    return {"EMAIL_HOST": SETTINGS.EMAIL_HOST}
+    return {
+            "AS_SITE": SETTINGS.AS_SITE,
+            "AS_LOCAL": SETTINGS.AS_LOCAL,
+    }
 
 
 # The end.
