@@ -2,8 +2,6 @@ from urllib.parse import urlencode
 
 from django.conf import settings
 from django.contrib import messages
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
@@ -33,8 +31,8 @@ from .forms import (
     FnemailEditForm,
     FnuserForm,
     FnuserLoginForm,
+    FnuserSetPasswordForm,
     FnuserSignUpForm,
-    FnuserPasswordResetForm
 )
 from .models import Fnemail, Fnuser, resend_verification_email_time_interval
 
@@ -43,7 +41,7 @@ LOGIN_URL = settings.LOGIN_URL
 
 def login(request, user):
     user_login = auth_login(request, user)
-    if settings.EMAIL_BACKEND:
+    if settings.AS_SITE:
         user.send_login_notification_email(request)
     return user_login
 
@@ -65,7 +63,7 @@ def new_fnprofile(request):
                 fn_email = Fnemail.objects.filter(
                     user=user, is_primary=True
                 ).first()
-                if settings.EMAIL_BACKEND:
+                if settings.AS_SITE:
                     if fn_email.send_verification_email(request):
                         messages.success(
                             request,
@@ -85,7 +83,7 @@ def new_fnprofile(request):
                     login(request, user)
                     return redirect("fnhome:home")
     else:
-        form = FnuserSignUpForm()
+        form = FnuserSignUpForm(request=request)
 
     return render(request, "fnprofile/profile/new.html", {"form": form})
 
@@ -93,6 +91,7 @@ def new_fnprofile(request):
 def fnprofile_log_in(request):
     form = None
     context = {}
+
     if request.method == "POST":
         form = FnuserLoginForm(request, data=request.POST)
         if form.is_valid():
@@ -107,25 +106,19 @@ def fnprofile_log_in(request):
                 password_is_incorrect_str = _(
                     "The account does not exist or the password is incorrect!"
                 )
-                password_checked = user.check_password(password) if user else False
-                if not user:
+                password_checked = (
+                    user.check_password(password) if user else False
+                )
+                if not user or not password_checked:
                     messages.warning(request, password_is_incorrect_str)
                     form.add_error("username", password_is_incorrect_str)
-                elif not password_checked:
-                    messages.warning(request, password_is_incorrect_str)
-                    form.add_error("username", password_is_incorrect_str)
-                elif (
-                    settings.EMAIL_BACKEND
-                    and not user.has_verified_email()
-                ):
+
+                elif settings.AS_SITE and not user.has_verified_email():
                     email = user.get_first_email()
                     form_email = form.cleaned_data.get("email", None)
-                    
-                    if email:
-                        return redirect(
-                            "fnprofile:edit_email", email.id
-                        )
 
+                    if email:
+                        return redirect("fnprofile:edit_email", email.id)
 
                     if form_email:
                         email = Fnemail.objects.create(
@@ -133,14 +126,9 @@ def fnprofile_log_in(request):
                             email=form_email,
                             is_primary=True,
                         )
-                        return redirect(
-                            "fnprofile:edit_email", email.id
-                        )
+                        return redirect("fnprofile:edit_email", email.id)
+                    form.show_email_field()
 
-                    email_field = form.fields["email"]
-                    email_field.widget.attrs["style"] = (
-                        "display: block;"
-                    )
                 else:
                     login(request, user)
                     messages.success(
@@ -155,12 +143,9 @@ def fnprofile_log_in(request):
                     return redirect(next_url)
     else:
         form = FnuserLoginForm(request)
-        email_field = form.fields["email"]
-        email_field.widget.attrs["style"] = "display: none;"
-        email_field.label = ""
-        email_field.help_text = ""
+        form.hide_email_field()
 
-    context["form"] = form
+    context.update({"form": form})
     return render(
         request,
         "fnprofile/profile/log_in.html",
@@ -174,7 +159,7 @@ def fnprofile_log_out(request):
         user_id_r = request.GET.get("user_id", None)
         if not user_id_r:
             return HttpResponse("Not Found", status=404)
-        user_id=force_str(urlsafe_base64_decode(user_id_r))
+        user_id = force_str(urlsafe_base64_decode(user_id_r))
         user = get_object_or_404(Fnuser, pk=user_id)
         user_sessions = []
         for session in Session.objects.filter(expire_date__gte=timezone.now()):
@@ -196,50 +181,98 @@ def fnprofile_log_out(request):
 
 def edit_fnprofile(request):
     form = None
-    reset_password_token=request.GET.get("reset_password_token", None)
+    reset_password = request.GET.get("reset_password", None)
+    if reset_password and request.user.is_authenticated:
+        user = request.user
+        if not user.send_reset_password_email(request):
+            return HttpResponse("Not Found", status=404)
+        messages.info(
+            request,
+            _(
+                "A password reset email has been sent to your email address. Please reset your password according to the instructions in the email."
+            ),
+        )
+
+        return redirect(
+            request.GET.get("next", None) or "fnprofile:edit_profile"
+        )
+
+    reset_password_token = request.GET.get("reset_password_token", None)
     if reset_password_token:
         user_id_r = request.GET.get("user_id", None)
-        user_id=force_str(urlsafe_base64_decode(user_id_r))
-        if not user_pk:
+        user_id = force_str(urlsafe_base64_decode(user_id_r))
+        print(user_id)
+        if not user_id:
             return HttpResponse("Not Found", status=404)
-        user=get_object_or_404(Fnuser, pk=user_id)
+        user = get_object_or_404(Fnuser, pk=user_id)
         if request.method == "POST":
-            form=FnuserSetPasswordForm(user,request.POST)
+            form = FnuserSetPasswordForm(user, request.POST)
             if form.is_valid():
-                if not user.verify_reset_password_token(reset_password_token,user.reset_password_token):
+                if not user.verify_reset_password_token(reset_password_token):
                     return HttpResponse("Not Found", status=404)
-                form.save()
-                messages.success(request,_("Your password has been reset."))
-                login(request,user)
+
+                password = form.cleaned_data["new_password1"]
+                user.reset_password_token = None
+                user.set_password(password)
+                user.save()
+                messages.success(request, _("Your password has been reset."))
+                login(request, user)
                 return redirect("fnhome:home")
-        reset_password_token=user.generate_reset_password_token()
+
+        if not user.verify_reset_password_token(reset_password_token):
+            return HttpResponse("Not Found", status=404)
+        reset_password_token = user.generate_reset_password_token()
         current_site = get_current_site(request)
-        verification_url= (
-                    request.scheme
-                    + "://"
-                    + current_site.domain
-                    + reverse(
-                        "fnprofile:edit_fnprofile"
-                    )
-                    + "?user_id="
-                    + user_id_r
-                    + "&token="
-                    + reset_password_token
-                )
+        reset_password_url = (
+            request.scheme
+            + "://"
+            + current_site.domain
+            + reverse("fnprofile:edit_profile")
+            + "?user_id="
+            + user_id_r
+            + "&reset_password_token="
+            + reset_password_token
+        )
 
         form = FnuserSetPasswordForm(user)
-        return render(request,"fnprofile/profile/reset_password.html",{'form':form,'user':user,"reset_password_token":reset_password_token})
-    
+        return render(
+            request,
+            "fnprofile/profile/set_password.html",
+            {
+                "form": form,
+                "user": user,
+                "reset_password_url": reset_password_url,
+            },
+        )
+
     if not request.user.is_authenticated:
         return HttpResponse("Not Found", status=404)
+
     if request.method == "POST":
         form = FnuserForm(request.POST, request.FILES, instance=request.user)
+
         if form.is_valid():
-            form.save()
+            password = None
+            if settings.AS_SITE:
+                password = cleaned_data["password"]
+                password_confirm = cleaned_data["password_confirm"]
+                if (
+                    password_confirm
+                    and password_confirm
+                    and password != password_confirm
+                ):
+                    form.add_error(
+                        "password_confirm", _("Passwords do not match.")
+                    )
+
+            user = form.save(commit=False)
+            if settings.AS_SITE and password:
+                user.set_password(password)
+            user.save()
             messages.success(
                 request, _("Your information has been updated successfully!")
             )
-            return redirect("fnhome:home")
+            return redirect("fnprofile:edit_profile")
     else:
         form = FnuserForm(instance=request.user)
     return render(request, "fnprofile/profile/edit.html", {"form": form})
@@ -342,7 +375,7 @@ def view_email(request, email_id):
 
 def edit_email(request, email_id):
     email_id_r = email_id
-    email_id=force_str(urlsafe_base64_decode(email_id_r))
+    email_id = force_str(urlsafe_base64_decode(email_id_r))
     email = Fnemail.objects.filter(pk=email_id).first()
     if not email:
         return HttpResponse("Not Found", status=404)
@@ -362,7 +395,7 @@ def edit_email(request, email_id):
     form = None
     include_document = request.GET.get("include_document", "1") == "1"
     context = {}
-    if settings.EMAIL_BACKEND:
+    if settings.AS_SITE:
         if not email_user:
             messages.error(request, _("An unknown error has occurred!"))
             return HttpResponse("Not found", status=404)
@@ -375,8 +408,14 @@ def edit_email(request, email_id):
                     email.verification_token = email.verification_token[2:]
                     if not email.verify(token):
                         return HttpResponse("Not Found", status=404)
-                    verification_token=email.generate_verification_token(with_underline=False)
-                    full_path=request.get_full_path().split("?")[0] +"?verification_token="+verification_token
+                    verification_token = email.generate_verification_token(
+                        with_underline=False
+                    )
+                    full_path = (
+                        request.get_full_path().split("?")[0]
+                        + "?verification_token="
+                        + verification_token
+                    )
                     return render(
                         request,
                         "fnprofile/fnemail/verify.html",

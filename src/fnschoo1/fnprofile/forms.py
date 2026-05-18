@@ -3,12 +3,14 @@ from datetime import date
 
 from django import forms
 from django.conf import settings
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import (
+    AuthenticationForm,
+    SetPasswordForm,
+    UserCreationForm,
+)
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
@@ -32,6 +34,7 @@ min_username_length = 3
 
 
 class FnuserLoginForm(AuthenticationForm):
+
     username = forms.CharField(
         label=_("User Name or Email Address"),
         widget=forms.TextInput(
@@ -50,7 +53,7 @@ class FnuserLoginForm(AuthenticationForm):
     )
 
     email = forms.EmailField(
-        label=_("Email"),
+        label=_("Email Address"),
         required=False,
         widget=forms.EmailInput(
             attrs={
@@ -86,9 +89,22 @@ class FnuserLoginForm(AuthenticationForm):
         self.request = request
         super().__init__(request, *args, **kwargs)
 
+    def show_email_field(self):
+        email_field = self.fields["email"]
+        email_field.widget.attrs["style"] = "display: block;"
+        email_field.help_text = _(
+            "we'll send a verification email to this address."
+        )
+        email_field.label = _("email address")
+
+    def hide_email_field(self):
+        email_field = self.fields["email"]
+        email_field.widget.attrs["style"] = "display: none;"
+        email_field.help_text = ""
+        email_field.label = ""
+
     def clean_username(self):
         username = self.cleaned_data.get("username", "").strip()
-
         if not username:
             raise ValidationError(
                 _("Please enter your user name or email address.")
@@ -107,31 +123,28 @@ class FnuserLoginForm(AuthenticationForm):
                     "The username can be up to {max_length} characters only."
                 ).format(max_length=max_username_length)
             )
-
         return username
 
     def clean_password(self):
         password = self.cleaned_data.get("password", "")
-
         if not password:
             raise ValidationError(_("Please enter the password."))
-
         return password
 
     def clean_email(self):
         email = self.cleaned_data.get("email")
         email = email.lower().strip()
-
         try:
             if email:
                 validate_email(email)
         except ValidationError:
             raise ValidationError(_("Please enter a valid email address."))
 
-        if Fnemail.objects.filter(email=email, is_disabled=False).exists():
-            raise ValidationError(_("This email is already registered."))
-
         return email
+
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data
 
 
 class FnuserSignUpForm(UserCreationForm):
@@ -146,6 +159,7 @@ class FnuserSignUpForm(UserCreationForm):
             }
         ),
         max_length=max_username_length,
+        required=settings.AS_SITE,
         help_text=_("We'll send a verification email to this address."),
     )
 
@@ -163,21 +177,22 @@ class FnuserSignUpForm(UserCreationForm):
     )
 
     def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop("request", None)
+        self.request = kwargs.pop("request")
         super().__init__(*args, **kwargs)
 
+        self.request = kwargs.pop("request", None)
         email_field = self.fields.get("email")
         if email_field:
             email_field.label = (
                 _("Email Address (Required)")
-                if settings.EMAIL_BACKEND
+                if settings.AS_SITE
                 else _("Email Address (Optional)")
             )
             email_field.help_text = _("Please enter your email address.")
 
         self.fields["username"].help_text = _(
-            "Required. 256 characters or fewer. Letters, digits and @/./+/-/_ only."
-        )
+            "Required. {max_username_length} characters or fewer. Letters, digits and @/./+/-/_ only."
+        ).format(max_username_length=max_username_length)
 
         self.field_order = [
             "username",
@@ -191,14 +206,18 @@ class FnuserSignUpForm(UserCreationForm):
         cleaned_data = super().clean()
         email = cleaned_data.get("email")
 
-        if settings.EMAIL_BACKEND:
+        if settings.AS_SITE:
             if not email:
                 self.add_error("email", _("Please enter email."))
         else:
-            if Fnuser.objects.filter(email=email).exists():
+            if not email:
+                pass
+            elif Fnuser.objects.filter(email=email).exists():
                 self.add_error(
                     "email", _("A user with that email already exists.")
                 )
+            else:
+                pass
 
         return cleaned_data
 
@@ -242,6 +261,8 @@ class FnuserSignUpForm(UserCreationForm):
         email = self.cleaned_data.get("email")
 
         if not email:
+            if settings.AS_LOCAL:
+                return email
             raise ValidationError(_("Please enter an email address."))
 
         try:
@@ -270,36 +291,46 @@ class FnuserSignUpForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.email = self.cleaned_data["email"]
+        email_address = self.cleaned_data["email"]
+        if email_address:
+            user.email = self.cleaned_data["email"]
 
         if commit:
             user.save()
-            fn_email = Fnemail.objects.create(
-                user=user, email=user.email, is_primary=True
-            )
+            if email_address:
+                fn_email = Fnemail.objects.create(
+                    user=user, email=user.email, is_primary=True
+                )
 
         return user
 
 
 class FnuserForm(ModelForm):
-    username = forms.CharField(
-        max_length=128,
-        label=_("User Name"),
-        widget=forms.TextInput(attrs={"placeholder": _("User Name")}),
-    )
-    password = forms.CharField(
-        label=_("Password"),
-        widget=forms.PasswordInput(attrs={"placeholder": _("Password")}),
-    )
-    password_confirm = forms.CharField(
-        label=_("Confirm Password"),
-        widget=forms.PasswordInput(
-            attrs={"placeholder": _("Confirm Password")}
-        ),
-    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["username"] = forms.CharField(
+            max_length=128,
+            label=_("User Name"),
+            widget=forms.TextInput(attrs={"placeholder": _("User Name")}),
+        )
+
+        if not settings.AS_SITE:
+            self.fields["password"] = forms.CharField(
+                label=_("Password"),
+                widget=forms.PasswordInput(
+                    attrs={"placeholder": _("Password")}
+                ),
+                required=False,
+            )
+            self.fields["password_confirm"] = forms.CharField(
+                label=_("Confirm Password"),
+                required=False,
+                widget=forms.PasswordInput(
+                    attrs={"placeholder": _("Confirm Password")}
+                ),
+            )
+
         self.fields["avatar"].widget.attrs.update(
             {"class": "form-control-file"}
         )
@@ -328,12 +359,13 @@ class FnuserForm(ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        if cleaned_data.get("password") != cleaned_data.get("password_confirm"):
-            raise forms.ValidationError("Passwords do not match")
+        return cleaned_data
 
-class FnuserSetPasswordForm(PasswordResetForm):
+
+class FnuserSetPasswordForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
 
 class FnemailAddForm(forms.ModelForm):
     class Meta:

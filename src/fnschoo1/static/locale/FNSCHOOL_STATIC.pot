@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the FNSCHOOL_STATIC package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: FNSCHOOL_STATIC 1.0.0\n"
+"Report-Msgid-Bugs-To: larryw3i@yeah.net\n"
+"POT-Creation-Date: 2026-05-10 21:31+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:33
+msgid ""
+"An error occurred during compression, \"%(filePath)s\": %(result_error)s"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:39
+msgid "\"%(minPath)s\" has been generated."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:42
+msgid "An error occurred during generating, \"%(minPath)s\": %(error_message)s"
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:71
+msgid "%(jsFiles_length)s JS Files found."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:72
+msgid "One JS File found."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:81
+msgid "Start monitoring changes to .js files..."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:92
+msgid "New file: %(filePath)s ."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:96
+msgid "File changed: %(filePath)s ."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:107
+msgid "File removed: %(minPath)s ."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/src/fnschoo1/static/src/main.js:118
+msgid "Exit."
+msgstr ""

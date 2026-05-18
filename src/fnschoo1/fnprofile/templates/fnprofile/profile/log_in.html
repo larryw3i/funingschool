@@ -12,7 +12,7 @@
     {% csrf_token %} {{ form|crispy }}
     <input type="hidden" name="next" value="{{ request.GET.next }}" />
     <p>
-      {% if EMAIL_BACKEND %}
+      {% if AS_SITE %}
         {% trans "If you haven't verified your email, please log in here to verify it." %}
       {% endif %}
     </p>

@@ -1,10 +1,17 @@
 <div class="btn-group flex-wrap border rounded" role="group">
   <a type="button"
      class="btn btn-primary btn-sm"
+     target="fnprofile__edit_profile"
      href="{% url 'fnprofile:edit_profile' %}">{% trans 'Basic Information' %}</a>
-  {% if EMAIL_BACKEND %}
+  {% if AS_SITE %}
     <a type="button"
        class="btn btn-primary btn-sm"
+       target="fnprofile__edit_profile"
        href="{% url 'fnprofile:list_emails' %}">{% trans 'Edit Emails' %}</a>
+    <a type="button"
+       class="btn btn-primary btn-sm"
+       target="fnprofile__edit_profile"
+       href="{% url 'fnprofile:edit_profile' %}?reset_password=1&next={{ request.path }}">{% trans 'Reset Password' %} &#128231;</a>
+
   {% endif %}
 </div>

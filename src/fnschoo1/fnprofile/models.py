@@ -3,13 +3,11 @@ import sys
 import uuid
 from pathlib import Path
 
-from django.contrib.auth.hashers import make_password, check_password
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password, make_password
 from django.contrib.auth.models import (
     AbstractBaseUser,
     AbstractUser,
@@ -52,13 +50,15 @@ class Gender(models.TextChoices):
 yes_str = _("Yes")
 no_str = _("No")
 
+
 def get_uuid_hex():
     return (
-            uuid.uuid4().hex
-            + uuid.uuid4().hex
-            + uuid.uuid4().hex
-            + uuid.uuid4().hex
-        )
+        uuid.uuid4().hex
+        + uuid.uuid4().hex
+        + uuid.uuid4().hex
+        + uuid.uuid4().hex
+    )
+
 
 class Fnuser(AbstractUser, PermissionsMixin):
     groups = models.ManyToManyField(
@@ -83,7 +83,6 @@ class Fnuser(AbstractUser, PermissionsMixin):
         _("email address"),
         blank=True,
         null=True,
-        unique=True,
         max_length=256,
         help_text=_("Primary email address."),
         error_messages={
@@ -182,39 +181,39 @@ class Fnuser(AbstractUser, PermissionsMixin):
 
     def generate_logout_token(self):
         logout_token = get_uuid_hex()
-        self.logout_token=make_password(logout_token)
+        self.logout_token = make_password(logout_token)
         self.save(update_fields=["logout_token"])
 
         return self.logout_token
 
-
     def generate_logout_token(self):
         logout_token = get_uuid_hex()
-        self.logout_token=make_password(logout_token)
+        self.logout_token = make_password(logout_token)
         self.save(update_fields=["logout_token"])
 
         return logout_token
 
     def send_login_notification_email(self, request):
         logout_token = self.generate_logout_token()
-        current_site = get_current_site(request)        
+        reset_password_token = self.generate_reset_password_token()
+        current_site = get_current_site(request)
         user_id = urlsafe_base64_encode(force_bytes(self.pk))
-        logout_url=(
+        logout_url = (
             request.scheme
             + "://"
             + current_site.domain
             + reverse("fnprofile:log_out")
             + "?user_id="
-            +  user_id
+            + user_id
             + "&logout_token="
             + logout_token
         )
 
-        reset_password_url=(
+        reset_password_url = (
             request.scheme
             + "://"
             + current_site.domain
-            + reverse("fnprofile:edit_fnprofile")
+            + reverse("fnprofile:edit_profile")
             + "?user_id="
             + user_id
             + "&reset_password_token="
@@ -234,7 +233,7 @@ class Fnuser(AbstractUser, PermissionsMixin):
                 "HTTP_USER_AGENT": HTTP_USER_AGENT,
                 "login_ip": login_ip,
                 "logout_url": logout_url,
-                "reset_password_token": reset_password_url
+                "reset_password_url": reset_password_url,
             },
         )
         to_emails = [e.email for e in self.get_enabled_emails()]
@@ -247,38 +246,37 @@ class Fnuser(AbstractUser, PermissionsMixin):
         email.send()
         return True
 
-    def verify_logout_token(self,logout_token=None):
+    def verify_logout_token(self, logout_token=None):
         if not logout_token:
             return False
-        if not check_password(logout_token,self.logout_token):
+        if not check_password(logout_token, self.logout_token):
             return False
-        self.logout_token=None
-        self.save(update_fields=['logout_token'])
+        self.logout_token = None
+        self.save(update_fields=["logout_token"])
         return True
-
 
     def generate_reset_password_token(self):
         reset_password_token = get_uuid_hex()
-        self.reset_password_token=make_password(reset_password_token)
+        self.reset_password_token = make_password(reset_password_token)
         self.save(update_fields=["reset_password_token"])
 
         return reset_password_token
 
     def send_reset_password_email(self, request):
-        token = self.generate_logout_token()
+        reset_password_token = self.generate_reset_password_token()
         current_site = get_current_site(request)
-        user_id=urlsafe_base64_encode(force_bytes(self.pk))
-        reset_password_url=(
-                    request.scheme
-                    + "://"
-                    + current_site.domain
-                    + reverse("fnprofile:edit_fnprofile")
-                    + "?user_id="
-                    + user_id
-                    + "token="
-                    + token
-                )
-        mail_subject = _("Reset your Baidu login password.")
+        user_id = urlsafe_base64_encode(force_bytes(self.pk))
+        reset_password_url = (
+            request.scheme
+            + "://"
+            + current_site.domain
+            + reverse("fnprofile:edit_profile")
+            + "?user_id="
+            + user_id
+            + "&reset_password_token="
+            + reset_password_token
+        )
+        mail_subject = _("Reset your FNSCHOOL login password.")
         message = render_to_string(
             "fnprofile/fnemail/reset_password_email.html",
             {
@@ -296,13 +294,13 @@ class Fnuser(AbstractUser, PermissionsMixin):
         email.send()
         return True
 
-    def verify_reset_password_token(self,reset_password_token=None):
+    def verify_reset_password_token(self, reset_password_token=None):
         if not reset_password_token:
             return False
-        if not check_password(reset_password_token,self.reset_password_token):
+        if not check_password(reset_password_token, self.reset_password_token):
             return False
-        self.reset_password_token=None
-        self.save(update_fields=['reset_password_token'])
+        self.reset_password_token = None
+        self.save(update_fields=["reset_password_token"])
         return True
 
 
@@ -444,9 +442,11 @@ class Fnemail(models.Model):
         ).total_seconds()
         return time_since_last >= resend_verification_email_time_interval
 
-    def generate_verification_token(self,with_underline=True):
+    def generate_verification_token(self, with_underline=True):
         verification_token = get_uuid_hex()
-        self.verification_token = ("__" if with_underline else "" )+make_password(verification_token)
+        self.verification_token = (
+            "__" if with_underline else ""
+        ) + make_password(verification_token)
         self.verification_sent_at = timezone.now()
         self.save(update_fields=["verification_token", "verification_sent_at"])
 
@@ -460,23 +460,21 @@ class Fnemail(models.Model):
             return False
         token = self.generate_verification_token()
         current_site = get_current_site(request)
-        email_id=urlsafe_base64_encode(force_bytes(self.pk))
-        verification_url= (
-                    request.scheme
-                    + "://"
-                    + current_site.domain
-                    + reverse(
-                        "fnprofile:edit_email", kwargs={"email_id": email_id}
-                    )
-                    + "?token="
-                    + token
-                )
+        email_id = urlsafe_base64_encode(force_bytes(self.pk))
+        verification_url = (
+            request.scheme
+            + "://"
+            + current_site.domain
+            + reverse("fnprofile:edit_email", kwargs={"email_id": email_id})
+            + "?token="
+            + token
+        )
         mail_subject = _("Activate your account.")
         message = render_to_string(
             "fnprofile/fnemail/verification_email.html",
             {
                 "user": self.user,
-                "verification_url": verification_url ,
+                "verification_url": verification_url,
             },
         )
         to_email = self.email
@@ -506,7 +504,9 @@ class Fnemail(models.Model):
         return False
 
     def verify(self, token):
-        if not self.verification_token or check_password(token,self.verification_token):
+        if not self.verification_token or check_password(
+            token, self.verification_token
+        ):
             return False
 
         if self.verification_sent_at:
