@@ -190,9 +190,7 @@ class Ingredient(models.Model):
         consumptions = self.cleaned_consumptions
         if not consumptions:
             return 0
-        quantity = sum(
-            [c.amount_used for c in consumptions if not c.is_disabled]
-        )
+        quantity = sum([c.amount_used for c in consumptions])
         return quantity
 
     def get_consuming_quantity(self, final_time):
@@ -205,7 +203,7 @@ class Ingredient(models.Model):
             [
                 c.amount_used
                 for c in consumptions
-                if not c.is_disabled and c.date_of_using <= final_time
+                if c.date_of_using <= final_time
             ]
         )
         return quantity
@@ -220,9 +218,7 @@ class Ingredient(models.Model):
         consumptions = self.cleaned_consumptions
         if not consumptions:
             return self.quantity
-        quantity = self.quantity - sum(
-            [c.amount_used for c in consumptions if not c.is_disabled]
-        )
+        quantity = self.quantity - sum([c.amount_used for c in consumptions])
         return quantity
 
     class Meta:
@@ -255,9 +251,6 @@ class Consumption(models.Model):
     amount_used = models.IntegerField(
         verbose_name=_("Consuming Quantity"),
         validators=[MinValueValidator(0)],
-    )
-    is_disabled = models.BooleanField(
-        default=False, verbose_name=_("Is Disabled")
     )
 
     created_at = models.DateTimeField(

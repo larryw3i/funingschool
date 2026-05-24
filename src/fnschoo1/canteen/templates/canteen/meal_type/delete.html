@@ -19,7 +19,7 @@
       </dd>
       <dt>{% trans 'Abbreviation' %}</dt>
       <dd>
-        {{ meal_type.abbreviation }}
+        {{ meal_type.abbreviation_t }}
       </dd>
 
       <dt>{% trans 'Created at' %}</dt>
@@ -28,11 +28,7 @@
       </dd>
       <dt>{% trans 'Is Disabled' %}</dt>
       <dd>
-        {% if meal_type.is_disabled %}
-          {% trans "Yes" %}
-        {% else %}
-          {% trans "No" %}
-        {% endif %}
+        {{ meal_type.is_disabled_t }}
       </dd>
     </dl>
   </p>
@@ -52,7 +48,5 @@
       </button>
     </form>
   </div>
-  <script>
-    localize_content($("dd"))
-  </script>
+  <script></script>
 {% endblock %}

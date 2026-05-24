@@ -50,7 +50,6 @@ class ConsumptionForm(forms.ModelForm):
                     "class": "form-control",
                 }
             )
-            self.fields[name].disabled = self.instance.is_disabled
 
         self.fields["amount_used"].widget.attrs.update(
             {"title": _("Please enter a number.")}
@@ -67,7 +66,6 @@ class ConsumptionForm(forms.ModelForm):
             ),
             "date_of_using": forms.HiddenInput(),
             "ingredient": forms.HiddenInput(),
-            "is_disabled": forms.HiddenInput(),
         }
 
 

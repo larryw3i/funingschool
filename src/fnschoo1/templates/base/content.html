@@ -9,6 +9,15 @@
         {% trans "FNSCHOOL" %}
       {% endblock %}
     </title>
+    <script>
+      function apply_system_theme() {
+        var is_dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-bs-theme', is_dark ? 'dark' : 'light');
+      }
+      apply_system_theme();
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', apply_system_theme);
+    </script>
+
     <link rel="icon"
           href="{% static 'public/favicon.ico' %}"
           type="image/x-icon" />

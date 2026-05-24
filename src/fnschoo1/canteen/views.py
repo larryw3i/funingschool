@@ -208,11 +208,11 @@ def create_consumptions(request, ingredient_id=None):
     date_range = [d.date() for d in date_range]
 
     if ingredient_id:
-        ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
+        ingredient = get_object_or_404(
+            Ingredient, pk=ingredient_id, user=request.user
+        )
         planned_consumptions = []
-        consumptions = ingredient.consumptions.filter(
-            Q(is_disabled=False)
-        ).all()
+        consumptions = ingredient.consumptions.all()
 
         consumptions_len = len(consumptions)
         for c_index in range(consumptions_len):

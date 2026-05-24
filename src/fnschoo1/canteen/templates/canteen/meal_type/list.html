@@ -30,7 +30,7 @@
         <tr>
           <td>{{ forloop.counter }}</td>
           <td>{{ meal_type.name }}</td>
-          <td>{{ meal_type.abbreviation }}</td>
+          <td>{{ meal_type.abbreviation_t }}</td>
           <td>{{ meal_type.created_at|date:"Y-m-d" }}</td>
           <td>
             {% if meal_type.is_disabled %}
@@ -55,9 +55,5 @@
     </tbody>
   </table>
   {% include "includes/_paginator.html" %}
-  <script>
-    $(document).ready(function() {
-      localize_content($("td"))
-    });
-  </script>
+  <script></script>
 {% endblock %}
