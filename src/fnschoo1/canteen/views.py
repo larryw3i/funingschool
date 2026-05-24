@@ -70,6 +70,7 @@ from .models import (
 # Create your views here.
 
 decimal_prec = getattr(settings, "DECIMAL_PREC", 2)
+split_ingredient_labels = [_("(1)"), _("2")]
 
 storage_date_header = (
     _("Storage Date"),
@@ -449,7 +450,9 @@ def delete_ingredients(request):
 
 @login_required()
 def delete_ingredient(request, ingredient_id):
-    ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
+    ingredient = get_object_or_404(
+        Ingredient, pk=ingredient_id, user=request.user
+    )
 
     if request.method == "POST":
         if ingredient.user == request.user:
@@ -464,7 +467,11 @@ def delete_ingredient(request, ingredient_id):
 
 
 def edit_ingredient(request, ingredient_id):
-    ingredient = get_object_or_404(Ingredient, pk=ingredient_id)
+    ingredient = get_object_or_404(
+        Ingredient, pk=ingredient_id, user=request.user
+    )
+    ingredient_name = ingredient.name
+    ingredient_category = ingredient.category
 
     if request.method == "POST":
 
@@ -492,8 +499,22 @@ def edit_ingredient(request, ingredient_id):
                 request, "canteen/ingredient/update.html", {"form": form}
             )
 
-        form.instance.user = request.user
         if form.is_valid():
+            form_category = form.cleaned_data["category"] or None
+            if not ingredient_category and form_category:
+                form_name = form.cleaned_data["name"]
+                print(
+                    form_category,
+                    ingredient_name,
+                    ingredient_category,
+                    form_name,
+                )
+                Ingredient.objects.filter(
+                    name=ingredient_name,
+                    category=None,
+                    user=request.user,
+                    is_disabled=False,
+                ).update(name=form_name, category=form_category)
             form.save()
             return render(
                 request,
@@ -507,6 +528,7 @@ def edit_ingredient(request, ingredient_id):
 
 @login_required
 def list_ingredients(request):
+    search_params_cookie_name = "list_ingredients"
     search_query = request.GET.get("q", "")
     search_query_cp = search_query
     fields = [
@@ -514,8 +536,10 @@ def list_ingredients(request):
         for f in Ingredient._meta.fields
         if f.name in IngredientForm._meta.fields
     ]
+    context = {}
+
+    queries = Q(user=request.user)
     if search_query:
-        queries = Q(user=request.user)
 
         search_query_dates = []
 
@@ -575,7 +599,21 @@ def list_ingredients(request):
         ingredients = Ingredient.objects.filter(queries)
 
     else:
-        ingredients = Ingredient.objects.filter(Q(user=request.user))
+
+        search_params = get_search_params_from_cookie(
+            request, search_params_cookie_name
+        )
+        if search_params and "category" in search_params:
+            search_param_category = search_params["category"]
+            search_param_category = (
+                int(search_param_category)
+                if search_param_category.isnumeric()
+                else search_param_category
+            )
+            queries &= Q(category__id=search_param_category)
+            context.update({"selected_category": search_param_category})
+
+        ingredients = Ingredient.objects.filter(queries)
 
     orders = []
     sort_cookie_name = "list_ingredients_sort"
@@ -645,15 +683,21 @@ def list_ingredients(request):
         month_total_price = None
 
     total_price_title = str(total_price.normalize()) + total_price_title
+    categories = Category.objects.filter(
+        user=request.user, is_disabled=False
+    ).all()
 
-    context = {
-        "page_obj": page_obj,
-        "search_query": search_query_cp,
-        "headers": headers,
-        "page_size": page_size,
-        "total_price_title": total_price_title,
-        "ingredients_len": ingredients_len,
-    }
+    context.update(
+        {
+            "page_obj": page_obj,
+            "search_query": search_query_cp,
+            "headers": headers,
+            "page_size": page_size,
+            "total_price_title": total_price_title,
+            "ingredients_len": ingredients_len,
+            "categories": categories,
+        }
+    )
     return render(request, "canteen/ingredient/list.html", context)
 
 
@@ -775,7 +819,7 @@ def create_ingredients(request):
                         Ingredient(
                             user=request.user,
                             storage_date=storage_date,
-                            name=name + _("(2)"),
+                            name=name + split_ingredient_labels[0],
                             meal_type=meal_type,
                             category=category,
                             quantity=quantity1,
@@ -784,7 +828,7 @@ def create_ingredients(request):
                             is_ignorable=is_ignorable,
                         )
                     )
-                    name = name + _("(1)")
+                    name = name + split_ingredient_labels[1]
 
                 new_ingredients.append(
                     Ingredient(

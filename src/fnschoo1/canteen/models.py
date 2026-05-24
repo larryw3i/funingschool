@@ -12,6 +12,9 @@ from fnschool import _
 meal_type_name_0 = _("Meal type 0")
 category_name_0 = _("Category Name 0")
 
+yes_str = _("Yes")
+no_str = _("No")
+
 
 class MealType(models.Model):
     user = models.ForeignKey(
@@ -42,6 +45,14 @@ class MealType(models.Model):
 
     def __str__(self):
         return self.abbreviation or self.name or _("(None)")
+
+    @property
+    def is_disabled_t(self):
+        return yes_str if self.is_disabled else no_str
+
+    @property
+    def abbreviation_t(self):
+        return self.abbreviation or _("None")
 
 
 class Category(models.Model):
@@ -86,6 +97,14 @@ class Category(models.Model):
     def __str__(self):
         return self.abbreviation or self.name or _("(None)")
 
+    @property
+    def ingredients_count(self):
+        return self.ingredients.filter(is_disabled=False).count()
+
+    @property
+    def abbreviation_t(self):
+        return self.abbreviation or _("None")
+
 
 class Ingredient(models.Model):
 
@@ -112,12 +131,16 @@ class Ingredient(models.Model):
     meal_type = models.ForeignKey(
         MealType,
         on_delete=models.PROTECT,
+        null=True,
+        blank=True,
         related_name="ingredients",
         verbose_name=_("Ingredient Meal Type"),
     )
     category = models.ForeignKey(
         Category,
         on_delete=models.PROTECT,
+        null=True,
+        blank=True,
         related_name="ingredients",
         verbose_name=_("Ingredient Category"),
     )
@@ -210,6 +233,14 @@ class Ingredient(models.Model):
         return (
             f"{self.name} ({self.storage_date})" if self.name else _("(None)")
         )
+
+    @property
+    def is_ignorable_t(self):
+        return yes_str if self.is_ignorable else no_str
+
+    @property
+    def is_disabled_t(self):
+        return yes_str if self.is_disabled else no_str
 
 
 class Consumption(models.Model):

@@ -7,22 +7,43 @@
 {% block content %}
   <h1>{% trans "Ingredient List" %}</h1>
   {% include 'canteen/includes/_canteen_navigation.html' %}
-  <form method="get"
-        action="{% url 'canteen:list_ingredients' %}"
-        class="d-flex justify-content-between align-items-center">
-    <input type="text"
-           name="q"
-           onkeydown="if(event.keyCode==13){submit_q();return false;}"
-           value="{{ search_query }}"
-           placeholder="{% trans 'Search ingredient ...' %}"
-           class="form-control" />
-    <button type="button"
-            onclick="submit_q();"
-            class="btn btn-primary text-nowrap">{% trans "Search" %}</button>
-    {% if search_query %}
-      <a onclick="clear_q();" class="text-nowrap">{% trans "Clear" %}</a>
-    {% endif %}
-  </form>
+  <div class="container">
+    <div class="row">
+      <div class="col col-2">
+        <select class="form-select categories-select">
+          <option value="" {% if not selected_category %}selected{% endif %}>
+            {% trans 'All Categories' %}
+          </option>
+          {% for category in categories %}
+            <option value="{{ category.pk }}"
+                    {% if category.id == selected_category %}selected{% endif %}>
+              {{ category.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col">
+        <form method="get"
+              action="{% url 'canteen:list_ingredients' %}"
+              class="d-flex justify-content-between align-items-center">
+          <input type="text"
+                 name="q"
+                 onkeydown="if(event.keyCode==13){submit_q();return false;}"
+                 value="{{ search_query }}"
+                 placeholder="{% trans 'Search ingredient ...' %}"
+                 class="form-control" />
+          <button type="button"
+                  onclick="submit_q();"
+                  class="btn btn-primary text-nowrap">
+            {% trans "Search" %}
+          </button>
+          {% if search_query %}
+            <a onclick="clear_q();" class="text-nowrap">{% trans "Clear" %}</a>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
   <div class="d-flex justify-content-end pt-2">
     <a class="btn btn-primary mx-1"
        onclick="open_small_window('{% url 'canteen:create_ingredients' %}')">{% trans "Add via template" %}</a>
@@ -164,6 +185,7 @@
   <script>
     var delete_ingredients_timer = null
     var list_ingredients_sort_cookie_name = "list_ingredients_sort"
+    var search_params_cookie_name = "list_ingredients"
 
     $(document).ready(function() {
       $("#all_ingredients_checkbox").click(function(event) {
@@ -248,6 +270,14 @@
       var cookie_name = list_ingredients_sort_cookie_name
       set_sort_element_arrows(cookie_name)
     })
+
+    $(document).ready(function() {
+      $('.categories-select').change(function() {
+        var selected_value = $(this).val()
+        set_search_params_from_cookie(search_params_cookie_name, "category", selected_value)
+        location.reload()
+      });
+    });
   </script>
 
 {% endblock %}

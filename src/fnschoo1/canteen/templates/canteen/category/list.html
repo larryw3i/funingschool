@@ -20,6 +20,7 @@
         </th>
         <th>{% trans "Category Name" %}</th>
         <th>{% trans "Abbreviation" %}</th>
+        <th>{% trans "Ingredient Count" %}</th>
         <th>{% trans "Created at" %}</th>
         <th>{% trans "Pin to consumptions top" %}</th>
         <th>{% trans "Priority" %}</th>
@@ -33,6 +34,9 @@
           <td>{{ forloop.counter }}</td>
           <td>{{ category.name }}</td>
           <td>{{ category.abbreviation }}</td>
+          <td class="ingredients-td" data-category_id="{{ category.id }}">
+            {{ category.ingredients_count }}
+          </td>
           <td>{{ category.created_at|date:"Y-m-d" }}</td>
           <td>
             {% if category.pin_to_consumptions_top %}
@@ -63,7 +67,14 @@
     </tbody>
   </table>
   <script>
-    localize_content($("td"))
+    var list_ingredients_search_params_cookie_name = "list_ingredients"
+    $(document).ready(function() {
+      $('.ingredients-td').on('click', function() {
+        var category_id = $(this).data("category_id")
+        set_search_params_from_cookie(list_ingredients_search_params_cookie_name, "category", category_id)
+        window.open("{% url 'canteen:list_ingredients' %}", "canteen__list_ingredients")
+      });
+    });
   </script>
   {% include "includes/_paginator.html" %}
 {% endblock %}
