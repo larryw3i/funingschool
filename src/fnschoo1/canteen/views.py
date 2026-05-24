@@ -174,6 +174,7 @@ def split_price(total_price, quantity, prec=2):
 
 @login_required
 def create_consumptions(request, ingredient_id=None):
+    context = {}
     date_start = request.GET.get(
         "storage_date_start", None
     ) or request.COOKIES.get("storage_date_start", None)
@@ -252,18 +253,31 @@ def create_consumptions(request, ingredient_id=None):
             form.fields["date_of_using"].label = ""
             form_list.append(form)
 
+        context.update({"form_list": form_list})
         return render(
             request,
             "canteen/consumption/_create.html",
-            {"form_list": form_list},
+            context,
         )
 
+    search_params_cookie_name = "create_consumptions_search"
+    search_params = get_search_params_from_cookie(
+        request, search_params_cookie_name
+    )
     queries = (
         Q(storage_date__lte=date_end)
         & Q(user=request.user)
         & Q(is_disabled=False)
         & Q(is_ignorable=False)
     )
+    if search_params and "category" in search_params:
+        category_id = search_params["category"]
+        category_id = (
+            int(category_id) if category_id.isnumeric() else category_id
+        )
+        context.update({"selected_category": category_id})
+        queries &= Q(category__id=category_id)
+
     ingredients = Ingredient.objects
 
     orders = get_object_orders_from_cookie(request, "create_consumptions_sort")
@@ -278,10 +292,11 @@ def create_consumptions(request, ingredient_id=None):
     ingredients = ingredients.distinct()
 
     if not ingredients:
+        context.update({"ingredients": ingredients, "date_range": date_range})
         return render(
             request,
             "canteen/consumption/create.html",
-            {"ingredients": ingredients, "date_range": date_range},
+            context,
         )
 
     ingredients = [
@@ -299,22 +314,6 @@ def create_consumptions(request, ingredient_id=None):
         )
     ]
 
-    ingredients_pinned = []
-    ingredients_unpinned = []
-    categories_top = Category.objects.filter(
-        Q(user=request.user)
-        & Q(pin_to_consumptions_top=True)
-        & Q(is_disabled=False)
-    ).all()
-
-    for i in ingredients:
-        if i.category in categories_top:
-            ingredients_pinned.append(i)
-        else:
-            ingredients_unpinned.append(i)
-
-    ingredients = ingredients_pinned + ingredients_unpinned
-
     if request.GET.get("get_ordered_ids", "0") == "1":
         ordered_ids = [i.pk for i in ingredients]
         return JsonResponse({"ordered_ids": ordered_ids})
@@ -326,7 +325,7 @@ def create_consumptions(request, ingredient_id=None):
         ) + sum(
             [
                 c.amount_used
-                for c in i.consumptions.all()
+                for c in ingredient.consumptions.all()
                 if c.date_of_using > date_end
             ]
         )
@@ -337,9 +336,10 @@ def create_consumptions(request, ingredient_id=None):
     ingredient_ids = [i.id for i in ingredients]
     months = list(set([d.strftime("%Y-%m") for d in date_range]))
     months = sorted(months, key=lambda d: int(d.split("-")[1]))
-    return render(
-        request,
-        "canteen/consumption/create.html",
+    categories = Category.objects.filter(
+        user=request.user, is_disabled=False
+    ).all()
+    context.update(
         {
             "ingredients": ingredients,
             "date_range": date_range_cp,
@@ -348,7 +348,14 @@ def create_consumptions(request, ingredient_id=None):
             "months": months,
             "storage_date_start": date_start.strftime("%Y-%m-%d"),
             "storage_date_end": date_end.strftime("%Y-%m-%d"),
-        },
+            "categories": categories,
+        }
+    )
+
+    return render(
+        request,
+        "canteen/consumption/create.html",
+        context,
     )
 
 
