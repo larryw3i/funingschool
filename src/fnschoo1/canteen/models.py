@@ -54,6 +54,10 @@ class MealType(models.Model):
     def abbreviation_t(self):
         return self.abbreviation or _("None")
 
+    @property
+    def ingredients_count(self):
+        return self.ingredients.filter(is_disabled=False).count()
+
 
 class Category(models.Model):
     user = models.ForeignKey(

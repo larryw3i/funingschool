@@ -70,7 +70,7 @@ from .models import (
 # Create your views here.
 
 decimal_prec = getattr(settings, "DECIMAL_PREC", 2)
-split_ingredient_labels = [_("(1)"), _("2")]
+split_ingredient_labels = [_("(1)"), _("(2)")]
 
 storage_date_header = (
     _("Storage Date"),
@@ -523,14 +523,16 @@ def edit_ingredient(request, ingredient_id):
             form_category = form.cleaned_data["category"] or None
             if not ingredient_category and form_category:
                 form_name = form.cleaned_data["name"]
-                print(
-                    form_category,
+                ingredient_name = ingredient_name.replace(
+                    split_ingredient_labels[0], ""
+                ).replace(split_ingredient_labels[1], "")
+                ingredient_names = [
                     ingredient_name,
-                    ingredient_category,
-                    form_name,
-                )
+                    ingredient_name + split_ingredient_labels[0],
+                    ingredient_name + split_ingredient_labels[1],
+                ]
                 Ingredient.objects.filter(
-                    name=ingredient_name,
+                    name__in=ingredient_names,
                     category=None,
                     user=request.user,
                     is_disabled=False,

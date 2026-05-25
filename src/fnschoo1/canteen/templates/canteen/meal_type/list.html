@@ -20,6 +20,7 @@
         </th>
         <th>{% trans "Meal Type Name" %}</th>
         <th>{% trans "Abbreviation" %}</th>
+        <th>{% trans "Ingredients Count" %}</th>
         <th>{% trans "Created at" %}</th>
         <th>{% trans "Is Disabled" %}</th>
         <th>#</th>
@@ -31,6 +32,10 @@
           <td>{{ forloop.counter }}</td>
           <td>{{ meal_type.name }}</td>
           <td>{{ meal_type.abbreviation_t }}</td>
+          <td class="ingredients-td btn btn-link"
+              data-meal_type_id="{{ meal_type.id }}">
+            {{ meal_type.ingredients_count }}
+          </td>
           <td>{{ meal_type.created_at|date:"Y-m-d" }}</td>
           <td>
             {% if meal_type.is_disabled %}
@@ -54,6 +59,17 @@
       {% endfor %}
     </tbody>
   </table>
+  <script>
+    var list_ingredients_search_params_cookie_name = "list_ingredients"
+    $(document).ready(function() {
+      $('.ingredients-td').on('click', function() {
+        var meal_type_id = $(this).data("meal_type_id")
+        set_search_params_from_cookie(list_ingredients_search_params_cookie_name, "meal_type", meal_type_id)
+        window.open("{% url 'canteen:list_ingredients' %}", "canteen__list_ingredients")
+      });
+    });
+  </script>
+
   {% include "includes/_paginator.html" %}
   <script></script>
 {% endblock %}
