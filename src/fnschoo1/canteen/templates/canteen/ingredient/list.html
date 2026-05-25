@@ -136,8 +136,12 @@
               </th>
               <td>{{ ingredient.storage_date|date:"Y.m.d" }}</td>
               <td>{{ ingredient.name }}</td>
-              <td>{{ ingredient.meal_type }}</td>
-              <td>{{ ingredient.category }}</td>
+              <td class="{% if not ingredient.meal_type %}text-danger{% endif %}">
+                {{ ingredient.meal_type_t }}
+              </td>
+              <td class="{% if not ingredient.category %}text-danger{% endif %}">
+                {{ ingredient.category_t }}
+              </td>
               <td>{{ ingredient.quantity }}</td>
               <td>{{ ingredient.quantity_unit_name }}</td>
               <td>{{ ingredient.total_price }}</td>

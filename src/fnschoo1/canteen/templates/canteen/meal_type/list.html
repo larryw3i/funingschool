@@ -32,9 +32,10 @@
           <td>{{ forloop.counter }}</td>
           <td>{{ meal_type.name }}</td>
           <td>{{ meal_type.abbreviation_t }}</td>
-          <td class="ingredients-td btn btn-link"
+          <td class="ingredients-td"
+              style="cursor: pointer"
               data-meal_type_id="{{ meal_type.id }}">
-            {{ meal_type.ingredients_count }}
+            <span class="link-success">{{ meal_type.ingredients_count }}</span>
           </td>
           <td>{{ meal_type.created_at|date:"Y-m-d" }}</td>
           <td>

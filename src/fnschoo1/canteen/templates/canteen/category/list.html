@@ -34,9 +34,10 @@
           <td>{{ forloop.counter }}</td>
           <td>{{ category.name }}</td>
           <td>{{ category.abbreviation_t }}</td>
-          <td class="ingredients-td btn btn-link"
+          <td class="ingredients-td"
+              style="cursor: pointer"
               data-category_id="{{ category.id }}">
-            {{ category.ingredients_count }}
+            <span class="link-success">{{ category.ingredients_count }}</span>
           </td>
           <td>{{ category.created_at|date:"Y-m-d" }}</td>
           <td>

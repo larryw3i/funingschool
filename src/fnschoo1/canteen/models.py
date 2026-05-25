@@ -242,6 +242,22 @@ class Ingredient(models.Model):
     def is_disabled_t(self):
         return yes_str if self.is_disabled else no_str
 
+    @property
+    def category_t(self):
+        return (
+            (self.category.abbreviation or self.category.name)
+            if self.category
+            else _("(None)")
+        )
+
+    @property
+    def meal_type_t(self):
+        return (
+            (self.meal_type.abbreviation or self.meal_type.name)
+            if self.meal_type
+            else _("(None)")
+        )
+
 
 class Consumption(models.Model):
     ingredient = models.ForeignKey(

@@ -664,7 +664,13 @@ def list_ingredients(request):
     headers = [(f.name, f.verbose_name) for f in fields]
 
     meal_types = list(
-        set([i.meal_type for i in ingredients if not i.meal_type.is_disabled])
+        set(
+            [
+                i.meal_type
+                for i in ingredients
+                if i.meal_type and not i.meal_type.is_disabled
+            ]
+        )
     )
     total_price_title = ""
     total_price = Decimal("0.0")
