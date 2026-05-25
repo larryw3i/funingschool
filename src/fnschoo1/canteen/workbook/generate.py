@@ -68,11 +68,11 @@ def get_workbook_zip(request, month, timestamp):
     ).all()
 
     categories = (
-        Category.objects.annotate(ingredients_count=Count("ingredients"))
+        Category.objects.annotate(_ingredients_count=Count("ingredients"))
         .filter(
             Q(user=request.user)
             & Q(is_disabled=False)
-            & Q(ingredients_count__gt=0)
+            & Q(_ingredients_count__gt=0)
         )
         .order_by("priority")
         .all()

@@ -101,6 +101,12 @@ class Releases:
             + "\n"
             + "\n"
             + self.get_release_markdown(
+                version="20260525.81512.855",
+                additions = [
+                    _("- ")
+                ]
+            )
+            + self.get_release_markdown(
                 version="20260422.82120.845",
                 additions=[
                     _(

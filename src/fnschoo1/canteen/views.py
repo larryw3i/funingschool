@@ -486,6 +486,7 @@ def delete_ingredient(request, ingredient_id):
     return render(request, "canteen/ingredient/delete.html", {"form": form})
 
 
+@login_required
 def edit_ingredient(request, ingredient_id):
     ingredient = get_object_or_404(
         Ingredient, pk=ingredient_id, user=request.user
@@ -519,7 +520,7 @@ def edit_ingredient(request, ingredient_id):
                 request, "canteen/ingredient/update.html", {"form": form}
             )
 
-        if form.is_valid():
+        elif form.is_valid():
             form_category = form.cleaned_data["category"] or None
             if not ingredient_category and form_category:
                 form_name = form.cleaned_data["name"]
@@ -542,8 +543,16 @@ def edit_ingredient(request, ingredient_id):
                 request,
                 "canteen/close.html",
             )
+        else:
+            pass
     else:
         form = IngredientForm(instance=ingredient)
+        form.fields["meal_type"].queryset = MealType.objects.filter(
+            ingredients__user=request.user, is_disabled=False
+        ).distinct()
+        form.fields["category"].queryset = Category.objects.filter(
+            ingredients__user=request.user, is_disabled=False
+        ).distinct()
 
     return render(request, "canteen/ingredient/update.html", {"form": form})
 
