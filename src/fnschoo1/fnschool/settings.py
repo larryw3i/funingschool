@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import sys
 from pathlib import Path
-from platformdirs import PlatformDirs
 
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
+from platformdirs import PlatformDirs
 
 dirs = PlatformDirs("fnschool", "larryw3i")
 user_config_dir = Path(dirs.user_config_dir)
@@ -178,13 +178,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 LOGIN_URL = reverse_lazy("fnprofile:log_in")
 
-AS_LOCAL=True
-AS_SITE=not AS_LOCAL
+AS_LOCAL = True
+AS_SITE = not AS_LOCAL
 
 _settings_path = user_config_dir / "_settings.py"
-print('Your custom settings can be written in "{0}" (you need to create the file yourself), and FNSCHOOL will prioritize using your custom settings.'.format(_settings_path))
+print(
+    'Your custom settings can be written in "{0}" (you need to create the file yourself), and FNSCHOOL will prioritize using your custom settings.'.format(
+        _settings_path
+    )
+)
 if not _settings_path.parent.exists():
-    os.makedirs(_settings_path.parent.as_posix(),exist_ok=True)
+    os.makedirs(_settings_path.parent.as_posix(), exist_ok=True)
 
 if _settings_path.exists():
     sys.path.append(_settings_path.parent.as_posix())

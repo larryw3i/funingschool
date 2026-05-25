@@ -102,12 +102,20 @@ class Releases:
             + "\n"
             + self.get_release_markdown(
                 version="20260525.82149.841",
-                additions = [
-                    _('- Optional "Site" feature: The "Site" feature can be enabled, it includes registered email verification, login notifications, password reset, etc.'),
-                    _('- Ingredient filtering: More convenient conditions for filtering ingredients are provided on the "list_ingredients" and "create_consumptions" pages.'),
-                    _('- Edit ingredients: Ingredients with empty "categories" and those with the same "ingredient name" will be automatically updated.'),
-                    _("- Theme: Automatically enable theme according to system theme.")
-                ]
+                additions=[
+                    _(
+                        '- Optional "Site" feature: The "Site" feature can be enabled, it includes registered email verification, login notifications, password reset, etc.'
+                    ),
+                    _(
+                        '- Ingredient filtering: More convenient conditions for filtering ingredients are provided on the "list_ingredients" and "create_consumptions" pages.'
+                    ),
+                    _(
+                        '- Edit ingredients: Ingredients with empty "categories" and those with the same "ingredient name" will be automatically updated.'
+                    ),
+                    _(
+                        "- Theme: Automatically enable theme according to system theme."
+                    ),
+                ],
             )
             + self.get_release_markdown(
                 version="20260422.82120.845",
