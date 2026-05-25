@@ -8,8 +8,24 @@
   {% include 'canteen/includes/_canteen_navigation.html' %}
   <div class="container">
     <div class="row justify-content-end border border-1 border-primary rounded">
+      {% if meal_types %}
+        <div class="col col-auto">
+          <select class="form-select meal_types-select">
+            <option value="" {% if not selected_meal_type %}selected{% endif %}>
+              {% trans 'All Meal Types' %}
+            </option>
+            {% for meal_type in meal_types %}
+              <option value="{{ meal_type.pk }}"
+                      {% if meal_type.id == selected_meal_type %}selected{% endif %}>
+                {{ meal_type.name }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      {% endif %}
+
       {% if categories %}
-        <div class="col">
+        <div class="col col-auto">
           <select class="form-select categories-select w-100">
             <option value="" {% if not selected_category %}selected{% endif %}>
               {% trans 'All Categories' %}
@@ -24,7 +40,7 @@
         </div>
       {% endif %}
 
-      <button class="btn btn-outline-success col col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_storage_date"
+      <button class="btn btn-outline-success col col-auto mx-1 btn-order-by sort_storage_date"
               id="sort_storage_date"
               title="{% trans 'Sort by storage date.' %}"
               style="font-size: 90%"
@@ -32,28 +48,28 @@
         {% trans "Storage Date" %}
       </button>
 
-      <button class="btn btn-outline-success col col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_name"
+      <button class="btn btn-outline-success col col-auto mx-1 btn-order-by sort_name"
               id="sort_name"
               title='{% trans 'Sort by name.' %}'
               onclick="sort_consumptions_table_rows('name');">
         {% trans "Ingredient Name" %}
       </button>
 
-      <button class="btn btn-outline-success col col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_meal_type__name"
+      <button class="btn btn-outline-success col col-auto mx-1 btn-order-by sort_meal_type__name"
               id="sort_meal_type__name"
               title="{% trans 'Sort by meal type.' %}"
               onclick="sort_consumptions_table_rows('meal_type__name');">
         {% trans "Meal Type" %}
       </button>
 
-      <button class="btn btn-outline-success col col-md-1 col-lg-1 col-2 mx-1 btn-order-by sort_category__name"
+      <button class="btn btn-outline-success col col-auto mx-1 btn-order-by sort_category__name"
               id="sort_category__name"
               title="{% trans 'Sort by category.' %}"
               onclick="sort_consumptions_table_rows('category__name');">
         {% trans "Category Name (canteen__consumption_create)" %}
       </button>
 
-      <div class="col col-3 col-md-2 col-lg-2">
+      <div class="col col-auto">
         <input class="form-control storage-date-input"
                onkeydown="if(event.keyCode==13){list_consumptions();}"
                title="{% trans 'The starting date of storage.' %}"
@@ -61,7 +77,7 @@
                data-original_value="{{ storage_date_start }}"
                value="{{ storage_date_start }}">
       </div>
-      <div class="col col-3 col-md-2 col-lg-2">
+      <div class="col col-auto">
         <input class="form-control storage-date-input"
                onkeydown="if(event.keyCode==13){list_consumptions();}"
                title="{% trans 'The end date of storage.' %}"
@@ -69,7 +85,7 @@
                data-original_value="{{ storage_date_end }}"
                value="{{ storage_date_end }}">
       </div>
-      <button class="btn btn-success col-md-1 col-lg-1 col-2"
+      <button class="btn btn-success col col-auto"
               title="{% trans 'Refresh this page.' %}"
               onclick="list_consumptions();">{% trans "Refresh" %}</button>
     </div>
@@ -265,7 +281,7 @@
 
   {{ ingredient_ids|json_script:'ingredient_ids' }}
   {{ months|json_script:'months' }}
-  {{ meal_types|json_script:'meal_types' }}
+  {{ meal_type_names|json_script:'meal_type_names' }}
   {{ date_range|json_script:'date_range' }}
   {{ storage_date_start|json_script:'storage_date_start' }}
   {{ storage_date_end|json_script:'storage_date_end' }}
@@ -278,7 +294,7 @@
     var ingredient_ids = JSON.parse($("#ingredient_ids").text())
     var ingredient_ids_length = ingredient_ids.length
     var months = JSON.parse($("#months").text())
-    var meal_types = JSON.parse($("#meal_types").text())
+    var meal_types = JSON.parse($("#meal_type_names").text())
     var date_range = JSON.parse($("#date_range").text())
     var storage_date_start = $('#storage_date_start').text().replace(new RegExp('"', 'g'), "")
     var date_patterns = [
@@ -696,6 +712,12 @@
       set_consumptions_table_size()
     });
     $(document).ready(function() {
+      $('.meal_types-select').change(function() {
+        var selected_value = $(this).val()
+        set_search_params_from_cookie(search_params_cookie_name, "meal_type", selected_value)
+        location.reload()
+      });
+
       $('.categories-select').change(function() {
         var selected_value = $(this).val()
         set_search_params_from_cookie(search_params_cookie_name, "category", selected_value)

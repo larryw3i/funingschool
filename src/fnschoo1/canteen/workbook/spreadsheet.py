@@ -528,8 +528,7 @@ class MealTypeWorkbook:
             total_price_consumed = Decimal("0.0")
             for i in ingredients:
                 consumptions = i.consumptions.filter(
-                    Q(is_disabled=False)
-                    & Q(date_of_using__lte=self.last_date_of_month)
+                    Q(date_of_using__lte=self.last_date_of_month)
                     & Q(date_of_using__gte=self.first_date_of_month)
                 ).all()
                 total_price_consumed += sum(
@@ -557,8 +556,7 @@ class MealTypeWorkbook:
         summary_total_price = Decimal("0.0")
         for i in ingredients:
             consumptions = i.consumptions.filter(
-                Q(is_disabled=False)
-                & Q(date_of_using__lte=self.last_date_of_month)
+                Q(date_of_using__lte=self.last_date_of_month)
                 & Q(date_of_using__gte=self.first_date_of_month)
             ).all()
             summary_total_price += sum(
@@ -805,7 +803,7 @@ class MealTypeWorkbook:
         categories = self.categories
         consumptions = []
         for i in self.storage_ingredients:
-            consumptions += i.consumptions.filter(Q(is_disabled=False)).all()
+            consumptions += i.consumptions.all()
         consumption_row_height = 0.18
         consumption_rows_height = consumption_rows_count * 0.18
 
@@ -892,7 +890,6 @@ class MealTypeWorkbook:
                                 ingredient=fake_ingredient,
                                 date_of_using=consumption_date,
                                 amount_used=Decimal("0"),
-                                is_disabled=False,
                             )
                         )
 
@@ -1634,7 +1631,6 @@ class MealTypeWorkbook:
                 c
                 for c in ingredient.consumptions.filter(
                     Q(date_of_using__lte=self.last_date_of_month)
-                    & Q(is_disabled=False)
                 ).all()
             ]
 
@@ -1675,8 +1671,7 @@ class MealTypeWorkbook:
                     [
                         c.amount_used
                         for c in ingredient.consumptions.filter(
-                            Q(is_disabled=False)
-                            & Q(date_of_using__lte=inventory_day)
+                            Q(date_of_using__lte=inventory_day)
                         ).all()
                     ]
                 )
@@ -1837,7 +1832,6 @@ class MealTypeWorkbook:
                             c.amount_used
                             for c in ingredient.consumptions.filter(
                                 Q(date_of_using__lte=inventory_day)
-                                & Q(is_disabled=False)
                             ).all()
                         ]
                     )
@@ -1911,8 +1905,7 @@ class MealTypeWorkbook:
                                 [
                                     c.amount_used
                                     for c in ingredient.consumptions.filter(
-                                        Q(is_disabled=False)
-                                        & Q(date_of_using__lte=inventory_day)
+                                        Q(date_of_using__lte=inventory_day)
                                     ).all()
                                 ]
                             )
@@ -2407,9 +2400,7 @@ class MealTypeWorkbook:
                 )
                 consumption_dates = []
                 for i in ingredients:
-                    consumptions = [
-                        c for c in i.consumptions.all() if not c.is_disabled
-                    ]
+                    consumptions = [c for c in i.consumptions.all()]
                     for c in consumptions:
                         if (
                             month_day_1 <= c.date_of_using <= month_day_n1
@@ -2421,11 +2412,7 @@ class MealTypeWorkbook:
                 consumption_dates = sorted(consumption_dates)
 
                 for ingredient in named_ingredients:
-                    consumptions = [
-                        c
-                        for c in ingredient.consumptions.all()
-                        if not c.is_disabled
-                    ]
+                    consumptions = [c for c in ingredient.consumptions.all()]
                     ingredient_consumption_dates = [
                         c.date_of_using for c in consumptions
                     ]
@@ -2487,11 +2474,7 @@ class MealTypeWorkbook:
                         consumption_total_price = Decimal("0.0")
 
                         for i in month_ingredients:
-                            for c in [
-                                c
-                                for c in i.consumptions.all()
-                                if not c.is_disabled
-                            ]:
+                            for c in [c for c in i.consumptions.all()]:
                                 if c.date_of_using == day:
                                     consumption_quantity += c.amount_used
                                     consumption_total_price += (

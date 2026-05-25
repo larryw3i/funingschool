@@ -9,7 +9,21 @@
   {% include 'canteen/includes/_canteen_navigation.html' %}
   <div class="container">
     <div class="row">
-      <div class="col col-2">
+      <div class="col col-auto">
+        <select class="form-select meal_types-select">
+          <option value="" {% if not selected_meal_type %}selected{% endif %}>
+            {% trans 'All Meal Types' %}
+          </option>
+          {% for meal_type in meal_types %}
+            <option value="{{ meal_type.pk }}"
+                    {% if meal_type.id == selected_meal_type %}selected{% endif %}>
+              {{ meal_type.name }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col col-auto">
         <select class="form-select categories-select">
           <option value="" {% if not selected_category %}selected{% endif %}>
             {% trans 'All Categories' %}
@@ -22,6 +36,7 @@
           {% endfor %}
         </select>
       </div>
+
       <div class="col">
         <form method="get"
               action="{% url 'canteen:list_ingredients' %}"
@@ -272,6 +287,12 @@
     })
 
     $(document).ready(function() {
+      $('.meal_types-select').change(function() {
+        var selected_value = $(this).val()
+        set_search_params_from_cookie(search_params_cookie_name, "meal_type", selected_value)
+        location.reload()
+      });
+
       $('.categories-select').change(function() {
         var selected_value = $(this).val()
         set_search_params_from_cookie(search_params_cookie_name, "category", selected_value)

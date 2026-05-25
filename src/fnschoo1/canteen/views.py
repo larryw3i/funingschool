@@ -212,7 +212,8 @@ def create_consumptions(request, ingredient_id=None):
         ingredient = get_object_or_404(
             Ingredient, pk=ingredient_id, user=request.user
         )
-        planned_consumptions = []
+
+        form_list = []
         consumptions = ingredient.consumptions.all()
 
         consumptions_len = len(consumptions)
@@ -242,15 +243,12 @@ def create_consumptions(request, ingredient_id=None):
                 consumption.ingredient = ingredient
                 consumption.date_of_using = per_day
 
-            if per_day < ingredient.storage_date:
-                consumption.is_disabled = True
-
-            planned_consumptions.append(consumption)
-
-        form_list = []
-        for c in planned_consumptions:
-            form = ConsumptionForm(instance=c)
+            form = ConsumptionForm(instance=consumption)
             form.fields["date_of_using"].label = ""
+
+            if per_day < ingredient.storage_date:
+                form.is_disabled = True
+
             form_list.append(form)
 
         context.update({"form_list": form_list})
@@ -278,21 +276,50 @@ def create_consumptions(request, ingredient_id=None):
         context.update({"selected_category": category_id})
         queries &= Q(category__id=category_id)
 
+    if search_params and "meal_type" in search_params:
+        meal_type_id = search_params["meal_type"]
+        meal_type_id = (
+            int(meal_type_id) if meal_type_id.isnumeric() else meal_type_id
+        )
+        context.update({"selected_meal_type": meal_type_id})
+        queries &= Q(meal_type__id=meal_type_id)
+
+    date_range_cp = date_range
+    date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]
+    months = list(set([d.strftime("%Y-%m") for d in date_range]))
+    months = sorted(months, key=lambda d: int(d.split("-")[1]))
+    categories = Category.objects.filter(
+        user=request.user, is_disabled=False
+    ).all()
+    meal_types = MealType.objects.filter(
+        user=request.user, is_disabled=False
+    ).all()
+
+    context.update(
+        {
+            "date_range": date_range_cp,
+            "meal_types": meal_types,
+            "months": months,
+            "storage_date_start": date_start.strftime("%Y-%m-%d"),
+            "storage_date_end": date_end.strftime("%Y-%m-%d"),
+            "categories": categories,
+            "meal_types": meal_types,
+            "meal_type_names": [m.name for m in meal_types],
+        }
+    )
+
     ingredients = Ingredient.objects
-
     orders = get_object_orders_from_cookie(request, "create_consumptions_sort")
-
     ingredients = (
         ingredients.filter(queries).order_by(*orders)
         if orders
         else ingredients.filter(queries).order_by("storage_date")
     )
-
     ingredients = ingredients.prefetch_related("consumptions")
     ingredients = ingredients.distinct()
 
     if not ingredients:
-        context.update({"ingredients": ingredients, "date_range": date_range})
+        context.update({"ingredients": ingredients, "ingredient_ids": []})
         return render(
             request,
             "canteen/consumption/create.html",
@@ -329,26 +356,11 @@ def create_consumptions(request, ingredient_id=None):
                 if c.date_of_using > date_end
             ]
         )
-
-    date_range_cp = date_range
-    date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]
-    meal_types = list(set([i.meal_type.name for i in ingredients]))
     ingredient_ids = [i.id for i in ingredients]
-    months = list(set([d.strftime("%Y-%m") for d in date_range]))
-    months = sorted(months, key=lambda d: int(d.split("-")[1]))
-    categories = Category.objects.filter(
-        user=request.user, is_disabled=False
-    ).all()
     context.update(
         {
             "ingredients": ingredients,
-            "date_range": date_range_cp,
-            "meal_types": meal_types,
             "ingredient_ids": ingredient_ids,
-            "months": months,
-            "storage_date_start": date_start.strftime("%Y-%m-%d"),
-            "storage_date_end": date_end.strftime("%Y-%m-%d"),
-            "categories": categories,
         }
     )
 
@@ -372,7 +384,6 @@ def new_consumption(request, consumption_id=None):
             Q(pk=consumption_id)
             & Q(ingredient__user=request.user)
             & Q(date_of_using=posted_date_of_using)
-            & Q(is_disabled=False)
         ).first()
         if consumption:
             if Decimal(posted_amount_used).is_zero():
@@ -401,11 +412,13 @@ def new_consumption(request, consumption_id=None):
         elif Decimal(posted_amount_used).is_zero():
             consumption.delete()
             return HttpResponse("OK", status=201)
+        else:
+            pass
 
         consumption.ingredient = ingredient
         form = ConsumptionForm(request.POST, instance=consumption)
 
-    if form.is_valid() and not form.instance.is_disabled:
+    if form.is_valid():
         consumption = form.save(commit=False)
         consumption.save()
         return HttpResponse("OK", status=201)
@@ -620,6 +633,14 @@ def list_ingredients(request):
             queries &= Q(category__id=search_param_category)
             context.update({"selected_category": search_param_category})
 
+        if search_params and "meal_type" in search_params:
+            meal_type_id = search_params["meal_type"]
+            meal_type_id = (
+                int(meal_type_id) if meal_type_id.isnumeric() else meal_type_id
+            )
+            context.update({"selected_meal_type": meal_type_id})
+            queries &= Q(meal_type__id=meal_type_id)
+
         ingredients = Ingredient.objects.filter(queries)
 
     orders = []
@@ -693,6 +714,9 @@ def list_ingredients(request):
     categories = Category.objects.filter(
         user=request.user, is_disabled=False
     ).all()
+    meal_types = MealType.objects.filter(
+        user=request.user, is_disabled=False
+    ).all()
 
     context.update(
         {
@@ -703,6 +727,7 @@ def list_ingredients(request):
             "total_price_title": total_price_title,
             "ingredients_len": ingredients_len,
             "categories": categories,
+            "meal_types": meal_types,
         }
     )
     return render(request, "canteen/ingredient/list.html", context)

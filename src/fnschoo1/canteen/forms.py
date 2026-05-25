@@ -42,6 +42,8 @@ class ConsumptionForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self._is_disabled = False
         for name in self.fields:
             self.fields[name].label = ""
             self.fields[name].widget.attrs.update(
@@ -67,6 +69,23 @@ class ConsumptionForm(forms.ModelForm):
             "date_of_using": forms.HiddenInput(),
             "ingredient": forms.HiddenInput(),
         }
+
+    @property
+    def is_disabled(self):
+        return self._is_disabled
+        pass
+
+    @is_disabled.setter
+    def is_disabled(self, value):
+        self._is_disabled = value
+        if self._is_disabled:
+            self.fields["amount_used"].disabled = True
+            self.fields["amount_used"].widget.attrs.update(
+                {
+                    "readonly": "readonly",
+                }
+            )
+        pass
 
 
 class CategoryForm(forms.ModelForm):
