@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-25 12:52+0800\n"
+"POT-Creation-Date: 2026-05-25 21:57+0800\n"
 "PO-Revision-Date: 2026-05-25 12:52+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -703,11 +703,11 @@ msgstr ""
 "\n"
 "编辑餐类（ %(instance_name)s ）。"
 
-#: canteen/views.py:73 canteen/views.py:1161
+#: canteen/views.py:73 canteen/views.py:1170
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:73 canteen/views.py:1153
+#: canteen/views.py:73 canteen/views.py:1162
 msgid "(2)"
 msgstr "（2）"
 
@@ -800,7 +800,7 @@ msgstr "{0} 项食材消耗已被删除。"
 msgid "{0} consumption has been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:508
+#: canteen/views.py:509
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
@@ -809,39 +809,39 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:701
+#: canteen/views.py:710
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr "{meal_type}：{meal_type_total_price}"
 
-#: canteen/views.py:710
+#: canteen/views.py:719
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr "{month}：{total_price}"
 
-#: canteen/views.py:711
+#: canteen/views.py:720
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: canteen/views.py:751
+#: canteen/views.py:760
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:912
+#: canteen/views.py:921
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:932
+#: canteen/views.py:941
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:948
+#: canteen/views.py:957
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:974
+#: canteen/views.py:983
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr "（{month}）{affiliation}食堂出入库工作簿（{timestamp}）"
@@ -2238,19 +2238,19 @@ msgstr "邮箱地址 （{email_address}） 已被删除"
 msgid "Failed to delete email."
 msgstr "无法删除电子邮件地址"
 
-#: fnschool/settings.py:142
+#: fnschool/settings.py:147
 msgid "English"
 msgstr "英语"
 
-#: fnschool/settings.py:143
+#: fnschool/settings.py:148
 msgid "Spanish"
 msgstr "西班牙语"
 
-#: fnschool/settings.py:144
+#: fnschool/settings.py:149
 msgid "French"
 msgstr "法语"
 
-#: fnschool/settings.py:145
+#: fnschool/settings.py:150
 msgid "Simplified Chinese"
 msgstr "简体中文"
 

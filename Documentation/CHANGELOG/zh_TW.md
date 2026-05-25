@@ -3,6 +3,20 @@
 
 # Changelog
 
+## [20260525.82149.841] - 2026-05-25
+### Added
+- Optional "Site" feature: The "Site" feature can be enabled, it includes registered email verification, login notifications, password reset, etc.
+- Ingredient filtering: More convenient conditions for filtering ingredients are provided on the "list_ingredients" and "create_consumptions" pages.
+- Edit ingredients: Ingredients with empty "categories" and those with the same "ingredient name" will be automatically updated.
+- Theme: Automatically enable theme according to system theme.
+### Changed
+
+### Deprecated
+
+### Fixed
+
+### Removed
+
 ## [20260422.82120.845] - 2026-04-22
 ### Added
 - Workbook File: Add properties to generated workbook file.

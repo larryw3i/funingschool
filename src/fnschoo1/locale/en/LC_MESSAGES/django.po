@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-25 12:52+0800\n"
+"POT-Creation-Date: 2026-05-25 21:57+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -647,11 +647,11 @@ msgid ""
 "      Edit Meal Type %(instance_name)s ."
 msgstr ""
 
-#: canteen/views.py:73 canteen/views.py:1161
+#: canteen/views.py:73 canteen/views.py:1170
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:73 canteen/views.py:1153
+#: canteen/views.py:73 canteen/views.py:1162
 msgid "(2)"
 msgstr ""
 
@@ -736,46 +736,46 @@ msgstr ""
 msgid "{0} consumption has been deleted."
 msgstr ""
 
-#: canteen/views.py:508
+#: canteen/views.py:509
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
 "and cannot be saved. Please modify it again."
 msgstr ""
 
-#: canteen/views.py:701
+#: canteen/views.py:710
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr ""
 
-#: canteen/views.py:710
+#: canteen/views.py:719
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr ""
 
-#: canteen/views.py:711
+#: canteen/views.py:720
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr ""
 
-#: canteen/views.py:751
+#: canteen/views.py:760
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:912
+#: canteen/views.py:921
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:932
+#: canteen/views.py:941
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:948
+#: canteen/views.py:957
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:974
+#: canteen/views.py:983
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr ""
@@ -2103,19 +2103,19 @@ msgstr ""
 msgid "Failed to delete email."
 msgstr ""
 
-#: fnschool/settings.py:142
+#: fnschool/settings.py:147
 msgid "English"
 msgstr ""
 
-#: fnschool/settings.py:143
+#: fnschool/settings.py:148
 msgid "Spanish"
 msgstr ""
 
-#: fnschool/settings.py:144
+#: fnschool/settings.py:149
 msgid "French"
 msgstr ""
 
-#: fnschool/settings.py:145
+#: fnschool/settings.py:150
 msgid "Simplified Chinese"
 msgstr ""
 

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-27 08:49+0800\n"
-"PO-Revision-Date: 2026-04-22 21:19+0800\n"
+"POT-Creation-Date: 2026-05-25 22:03+0800\n"
+"PO-Revision-Date: 2026-05-25 22:03+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Gtranslator 49.0\n"
+"X-Generator: Gtranslator 50.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/project/run.py:17
@@ -253,16 +253,16 @@ msgstr "GNU 宽通用公共许可证 第3版"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:178
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:183
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:193
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:192
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:202
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr "“{0}” 已被创建。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:182
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:190
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:187
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:198
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:196
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:207
 #, python-brace-format
 msgid "\"{0}\" has been updated."
 msgstr "“{0}” 已被更新。"
@@ -312,15 +312,42 @@ msgstr "### 移除"
 msgid "# Changelog"
 msgstr "# 更新日志"
 
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:106
+msgid ""
+"- Optional \"Site\" feature: The \"Site\" feature can be enabled, it "
+"includes registered email verification, login notifications, password reset, "
+"etc."
+msgstr ""
+"- 可选“站点”功能：可启用“站点”功能，该功能包括注册邮箱验证、登录通知、密码重"
+"置等。"
+
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:107
+msgid ""
+"- Ingredient filtering: More convenient conditions for filtering ingredients "
+"are provided on the \"list_ingredients\" and \"create_consumptions\" pages."
+msgstr ""
+"- 筛选食材：在“list_ingredients”和“create_consumptions”页面提供了更加便利的食"
+"材筛选条件。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:108
+msgid ""
+"- Edit ingredients: Ingredients with empty \"categories\" and those with the "
+"same \"ingredient name\" will be automatically updated."
+msgstr "- 编辑食材：空“大类”的食材、相同“食材名”的食材会自动更新。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:109
+msgid "- Theme: Automatically enable theme according to system theme."
+msgstr "- 主题：按照系统主题自动启用页面主题。"
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:116
 msgid "- Workbook File: Add properties to generated workbook file."
 msgstr "- 工作簿文件：为生成的工作簿文件添加一些`属性`。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:112
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:121
 msgid "- Generate Wrokbook File: Add `timestamp` to generated file."
 msgstr "- 生成工作簿文件：给生成文件的文件名添加`时间戳`。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:115
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:124
 msgid ""
 "- `Ingredient Consumptions` page: When clicking the sorting condition "
 "button, sorting is directly performed in the table without refreshing the "
@@ -328,7 +355,7 @@ msgid ""
 msgstr ""
 "- `食材消耗`页面：点击排序条件按钮时直接在表格里进行排序，不再刷新页面。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:123
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:132
 msgid ""
 "- `Ingredient consumptions` Page: Make the Entry Fields in the table "
 "automatically scroll to the visible area when they are obscured by the "
@@ -337,7 +364,7 @@ msgstr ""
 "- `食材消耗`页面：输入时，让表格中的输入框在被表头或固定在左边的列遮住时自动"
 "滚动到可视区域。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:128
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:137
 msgid ""
 "- Start Up: When starting up on a Linux distro, there may be a situation "
 "where the browser is already open but unable to access the specified URL. "
@@ -346,18 +373,18 @@ msgstr ""
 "- 启动：在`Linux 发行版`上启动的时候会出现浏览器已打开但无法访问`已指定的 "
 "URL`的情况，因此启动的时候适当延迟打开浏览器。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:133
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:142
 msgid ""
 "- Edit Ingredient: Fixed issue the `Edit Ingredient` page be loaded with "
 "error if some `Category Name` is `None`."
 msgstr ""
 "- 编辑食材：修复了有 大类的 大类名 为`空`时`编辑食材`页面无法被加载的问题。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:141
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:150
 msgid "- `Ingredients List` Page: Make total price summary more intuitive."
 msgstr "- `食材列表`页面：让总价的汇总信息更直观。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:146
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:155
 msgid ""
 "- Crate New Ingredients: Update the `new_ingredients` function, prevent "
 "adding too many meal types to the database when they are `empty`."
@@ -365,21 +392,21 @@ msgstr ""
 "- 新增食材：更新“new_ingredients”函数，防止在餐类为空的情况下向数据库中写入多"
 "个餐类实例。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:149
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:158
 msgid ""
 "- Ingredient Consumption: Fixed the error in displaying the ingredient "
 "progress bar on the ingredient consumption page."
 msgstr "- 食材消耗：修复了 `食材消耗` 页面的食材进度条的显示问题。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:157
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:166
 msgid "- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
 msgstr "- 添加 **CHANGELOG.md**： 为 `CHANGELOG.md` 添加多语言特性。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:160
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:169
 msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
 msgstr "- 删除食材： 添加`批量删除`食材的功能。"
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:165
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:174
 msgid ""
 "- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
 "deprecated after February 2026."
