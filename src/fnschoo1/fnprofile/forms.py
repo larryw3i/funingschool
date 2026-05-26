@@ -21,6 +21,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
@@ -82,6 +83,7 @@ class FnuserLoginForm(AuthenticationForm):
     remember_me = forms.BooleanField(
         label=_("Remeber me?"),
         required=False,
+        initial=True,
         widget=forms.CheckboxInput(attrs={"class": "form-check-input"}),
     )
 
@@ -150,7 +152,7 @@ class FnuserSignUpForm(UserCreationForm):
     )
 
     agree_terms = forms.BooleanField(
-        label=_("I agree to the Terms of Service."),
+        label=_("I agree to the Terms of Service above."),
         widget=forms.CheckboxInput(
             attrs={
                 "class": "form-check-input",
@@ -158,7 +160,7 @@ class FnuserSignUpForm(UserCreationForm):
         ),
         required=True,
         error_messages={
-            "required": _("You must agree to the Terms of Service.")
+            "required": _("You must agree to the Terms of Service above.")
         },
     )
 
@@ -201,8 +203,6 @@ class FnuserSignUpForm(UserCreationForm):
                 raise self.add_error(
                     "email", _("Please enter a valid email address.")
                 )
-        elif not email:
-            pass
         elif Fnemail.objects.filter(email=email, is_verified=True).exists():
             self.add_error("email", _("A user with that email already exists."))
         else:

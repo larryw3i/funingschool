@@ -99,6 +99,7 @@ def fnprofile_log_in(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
+            remember_me = form.cleaned_data.get("remember_me")
             if username and password:
                 user = (
                     Fnuser.objects.filter(email=username).first()
@@ -142,6 +143,8 @@ def fnprofile_log_in(request):
 
                 else:
                     login(request, user)
+                    if not remember_me:
+                        request.session.set_expiry(0)
                     messages.success(
                         request,
                         _("Welcome back, {username} !").format(

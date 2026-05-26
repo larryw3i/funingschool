@@ -1,0 +1,76 @@
+{% extends "base/document.html" %}
+{% load tz %}
+{% load crispy_forms_tags %}
+{% block title %}
+  {% trans "Terms of Service." %}
+{% endblock %}
+
+{% block content %}
+  <h1>{% trans 'Service Agreement' %}</h1>
+  <p>
+  <strong>{% trans 'Project:' %}</strong> funingschool<br>
+  <strong>{% trans 'License:' %}</strong> GNU Lesser General Public License v3 (LGPL v3)<br>
+  <strong>{% trans 'Source Code:' %}</strong>
+  <a href="{% trans 'https://gitee.com/larryw3i/funingschool' %}" target="_blank">
+    {% trans 'https://gitee.com/larryw3i/funingschool' %}
+  </a>
+  </p>
+  <hr>
+  <h2>{% trans 'Overview' %}</h2>
+  <p>
+    {% blocktrans %}
+      This project is released as free software. Any individual or organization may use, modify, and redistribute this software, provided they comply with the LGPL v3 license.
+    {% endblocktrans %}
+  </p>
+  <h2>{% trans 'License Rights' %}</h2>
+
+  <ul>
+    <li>{% trans 'Free for personal, commercial, or internal use.' %}</li>
+    <li>{% trans 'Free to modify the source code.' %}</li>
+    <li>{% trans 'Free to redistribute original or modified versions.' %}</li>
+    <li>{% trans 'May be linked with proprietary software without open-sourcing your application.' %}</li>
+  </ul>
+  <h2>{% trans 'No Warranty' %}</h2>
+  <p>
+    {% blocktrans %}
+      The software is provided "as is", without warranty of any kind, express or implied, including but not limited to merchantability, fitness for a particular purpose, or non-infringement.
+    {% endblocktrans %}
+  </p>
+  <h2>{% trans 'Obligations for Modified Versions' %}</h2>
+  <p>
+    {% blocktrans %}
+      If you distribute a modified version:
+    {% endblocktrans %}
+  </p>
+
+  <ul>
+    <li>{% trans 'You must release it under LGPL v3 or later;' %}</li>
+    <li>{% trans 'You must provide corresponding complete source code;' %}</li>
+    <li>{% trans 'You must retain all original copyright and license notices.' %}</li>
+  </ul>
+  <h2>{% trans 'Limitation of Liability' %}</h2>
+  <p>
+    {% blocktrans %}
+      In no event shall the authors or contributors be liable for any damages arising from the use or inability to use this software, including but not limited to data loss, business interruption, or lost profits.
+    {% endblocktrans %}
+  </p>
+  <h2>{% trans 'Access to Source Code' %}</h2>
+  <p>
+    {% blocktrans %}
+      The complete source code is always publicly available at:
+    {% endblocktrans %}
+  </p>
+  <p>
+  <a href="%{ trans 'https://gitee.com/larryw3i/funingschool' %}" target="_blank">
+    {% trans 'https://gitee.com/larryw3i/funingschool' %}
+  </a>
+  </p>
+  <hr>
+  <p style="font-size: 14px; color: #666;">
+    {% blocktrans %}
+      By using this software, you acknowledge that you have read and agreed to this agreement.
+    {% endblocktrans %}
+  </p>
+{% endblock %}
+{% block extra_js %}
+{% endblock %}

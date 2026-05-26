@@ -17,3 +17,12 @@
     <a href="{% url 'fnprofile:log_in' %}">{% trans "Login here" %}</a>
   </p>
 {% endblock %}
+{% block extra_js %}
+  <script>
+    $(document).ready(function () {
+      $("#div_id_agree_terms").before(
+        '<a href="{% url 'home:service_terms' %}" target="service_terms">Terms of Service</a>'
+      );
+    });
+  </script>
+{% endblock %}

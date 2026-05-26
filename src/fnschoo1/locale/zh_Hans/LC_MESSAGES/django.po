@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-25 21:57+0800\n"
+"POT-Creation-Date: 2026-05-26 07:44+0800\n"
 "PO-Revision-Date: 2026-05-25 12:52+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -1426,95 +1426,231 @@ msgstr "出入库"
 msgid "FNSCHOOL Home"
 msgstr "FNSCHOOL 主页"
 
-#: fnprofile/forms.py:39
+#: fnhome/templates/fnhome/service_terms.html:5
+#, fuzzy
+#| msgid "I agree to the Terms of Service."
+msgid "Terms of Service."
+msgstr "我同意《服务协议》。"
+
+#: fnhome/templates/fnhome/service_terms.html:9
+msgid "Service Agreement"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:11
+msgid "Project:"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:12
+msgid "License:"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:13
+msgid "Source Code:"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:14
+#: fnhome/templates/fnhome/service_terms.html:15
+msgid "https://gitee.com/larryw3i/funingschool"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:19
+msgid "Overview"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:21
+msgid ""
+"\n"
+"      This project is released as free software. Any individual or "
+"organization may use, modify, and redistribute this software, provided they "
+"comply with the LGPL v3 license.\n"
+"    "
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:25
+msgid "License Rights"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:28
+msgid "Free for personal, commercial, or internal use."
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:29
+msgid "Free to modify the source code."
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:30
+msgid "Free to redistribute original or modified versions."
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:31
+msgid ""
+"May be linked with proprietary software without open-sourcing your "
+"application."
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:33
+msgid "No Warranty"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:35
+msgid ""
+"\n"
+"      The software is provided \"as is\", without warranty of any kind, "
+"express or implied, including but not limited to merchantability, fitness "
+"for a particular purpose, or non-infringement.\n"
+"    "
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:39
+msgid "Obligations for Modified Versions"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:41
+msgid ""
+"\n"
+"      If you distribute a modified version:\n"
+"    "
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:47
+msgid "You must release it under LGPL v3 or later;"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:48
+msgid "You must provide corresponding complete source code;"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:49
+msgid "You must retain all original copyright and license notices."
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:51
+msgid "Limitation of Liability"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:53
+msgid ""
+"\n"
+"      In no event shall the authors or contributors be liable for any "
+"damages arising from the use or inability to use this software, including "
+"but not limited to data loss, business interruption, or lost profits.\n"
+"    "
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:57
+msgid "Access to Source Code"
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:59
+msgid ""
+"\n"
+"      The complete source code is always publicly available at:\n"
+"    "
+msgstr ""
+
+#: fnhome/templates/fnhome/service_terms.html:70
+msgid ""
+"\n"
+"      By using this software, you acknowledge that you have read and agreed "
+"to this agreement.\n"
+"    "
+msgstr ""
+
+#: fnprofile/forms.py:40
 msgid "User Name or Email Address"
 msgstr "用户名或电子邮件地址"
 
-#: fnprofile/forms.py:43 fnprofile/forms.py:50
+#: fnprofile/forms.py:44 fnprofile/forms.py:51
 msgid "Please enter user name or email address."
 msgstr "请输入您的用户名或电子邮箱地址。"
 
-#: fnprofile/forms.py:51
+#: fnprofile/forms.py:52
 msgid "The content you entered is too long."
 msgstr "输入内容过多。"
 
-#: fnprofile/forms.py:56 fnprofile/forms.py:373
+#: fnprofile/forms.py:57 fnprofile/forms.py:373
 #: fnprofile/templates/fnprofile/fnemail/list.html:24
 msgid "Email Address"
 msgstr "电子邮件地址"
 
-#: fnprofile/forms.py:61
+#: fnprofile/forms.py:62
 msgid "example@domain.com"
 msgstr "账号名@样例.后缀"
 
-#: fnprofile/forms.py:66 fnprofile/forms.py:149
+#: fnprofile/forms.py:67 fnprofile/forms.py:151
 msgid "We'll send a verification email to this address."
 msgstr "我们会发送一封验证邮件到这个邮箱地址。"
 
-#: fnprofile/forms.py:70
+#: fnprofile/forms.py:71
 msgid "password"
 msgstr "密码"
 
-#: fnprofile/forms.py:74
+#: fnprofile/forms.py:75
 msgid "Please enter password"
 msgstr "请输入密码"
 
-#: fnprofile/forms.py:79
+#: fnprofile/forms.py:80
 msgid "Please enter password."
 msgstr "请输入密码。"
 
-#: fnprofile/forms.py:83
+#: fnprofile/forms.py:84
 msgid "Remeber me?"
 msgstr "记住我？"
 
-#: fnprofile/forms.py:96
+#: fnprofile/forms.py:98
 msgid "Please enter your user name or email address."
 msgstr "请输入您的用户名或电子邮箱地址。"
 
-#: fnprofile/forms.py:102
+#: fnprofile/forms.py:104
 #, python-brace-format
 msgid "The username must be at least {min_length} characters long."
 msgstr "用户名至少需要 {min_length} 个字符。"
 
-#: fnprofile/forms.py:109
+#: fnprofile/forms.py:111
 #, python-brace-format
 msgid "The username can be up to {max_length} characters only."
 msgstr "用户名至多只能有 {max_length} 个字符。"
 
-#: fnprofile/forms.py:117
+#: fnprofile/forms.py:119
 msgid "Please enter the password."
 msgstr "请输入密码。"
 
-#: fnprofile/forms.py:127 fnprofile/forms.py:202 fnprofile/forms.py:260
+#: fnprofile/forms.py:129 fnprofile/forms.py:204 fnprofile/forms.py:260
 #: fnprofile/forms.py:391
 msgid "Please enter a valid email address."
 msgstr "请输入有效的电子邮箱地址。"
 
-#: fnprofile/forms.py:139
+#: fnprofile/forms.py:141
 msgid "Email"
 msgstr "电子邮件"
 
-#: fnprofile/forms.py:153
-msgid "I agree to the Terms of Service."
-msgstr "我同意《服务协议》。"
-
-#: fnprofile/forms.py:161
-msgid "You must agree to the Terms of Service."
+#: fnprofile/forms.py:155
+#, fuzzy
+#| msgid "You must agree to the Terms of Service."
+msgid ""
+"I agree to the <a herf='home/service_terms' target='service_terms'>Terms of "
+"Service.</a>"
 msgstr "你需要同意该服务协议。"
 
-#: fnprofile/forms.py:173
+#: fnprofile/forms.py:163
+#, fuzzy
+#| msgid "I agree to the Terms of Service."
+msgid "You must agree to the Terms of Service."
+msgstr "我同意《服务协议》。"
+
+#: fnprofile/forms.py:175
 msgid "Email Address (Required)"
 msgstr "电子邮箱地址（必需）"
 
-#: fnprofile/forms.py:175
+#: fnprofile/forms.py:177
 msgid "Email Address (Optional)"
 msgstr "电子邮箱地址（选填）"
 
-#: fnprofile/forms.py:177
+#: fnprofile/forms.py:179
 msgid "Please enter your email address."
 msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:180
+#: fnprofile/forms.py:182
 #, python-brace-format
 msgid ""
 "Required. {max_username_length} characters or fewer. Letters, digits and @/./"
@@ -1523,7 +1659,7 @@ msgstr ""
 "必填，最多 {max_username_length} 个字符，可包含字母、数"
 "字、“@”、“.”、“+”、“-”、“_” 。"
 
-#: fnprofile/forms.py:196
+#: fnprofile/forms.py:198
 msgid "Please enter email."
 msgstr "请输入电子邮件地址。"
 
@@ -2116,125 +2252,125 @@ msgstr "注册成功！验证邮件已发送至 {email} 。"
 msgid "Registration successful, but verification email failed to send."
 msgstr "注册成功，但验证邮件发送失败。"
 
-#: fnprofile/views.py:109
+#: fnprofile/views.py:110
 msgid "The account does not exist or the password is incorrect!"
 msgstr "账号不存在或密码错误！"
 
-#: fnprofile/views.py:139
+#: fnprofile/views.py:140
 msgid "Please enter an email address to verify your account!"
 msgstr "请输入一个您的电子邮件地址以验证您的账号。"
 
-#: fnprofile/views.py:147
+#: fnprofile/views.py:150
 #, python-brace-format
 msgid "Welcome back, {username} !"
 msgstr "欢迎回来，{username}！"
 
-#: fnprofile/views.py:181
+#: fnprofile/views.py:184
 msgid "You account has been loged out."
 msgstr "你的账号已退出登录。"
 
-#: fnprofile/views.py:187
+#: fnprofile/views.py:190
 msgid "You have been logged out"
 msgstr "你的账号已退出登录。"
 
-#: fnprofile/views.py:202
+#: fnprofile/views.py:205
 msgid ""
 "A password reset email has been sent to your email address. Please reset "
 "your password according to the instructions in the email."
 msgstr ""
 "已经发送一封重置密码的邮件到您的电子邮箱地址，请按照邮件中的内容重置密码。"
 
-#: fnprofile/views.py:228
+#: fnprofile/views.py:231
 msgid "Your password has been reset."
 msgstr "您的密码已被重置。"
 
-#: fnprofile/views.py:275
+#: fnprofile/views.py:278
 msgid "Passwords do not match."
 msgstr "两次密码不匹配。"
 
-#: fnprofile/views.py:283
+#: fnprofile/views.py:286
 msgid "Your information has been updated successfully!"
 msgstr "您的信息已更新！"
 
-#: fnprofile/views.py:330
+#: fnprofile/views.py:333
 msgid "Email added successfully! Verification email sent."
 msgstr "邮件地址添加成功！验证邮件已发送。"
 
-#: fnprofile/views.py:342
+#: fnprofile/views.py:345
 msgid "Email added, but verification email failed to send."
 msgstr "邮件地址已被添加，但是验证邮件发送失败。"
 
-#: fnprofile/views.py:349
+#: fnprofile/views.py:352
 msgid "Failed to add email. Please try again."
 msgstr "无法添加！请重试。"
 
-#: fnprofile/views.py:380
+#: fnprofile/views.py:383
 msgid "Email Details"
 msgstr "电子邮件详细"
 
-#: fnprofile/views.py:396
+#: fnprofile/views.py:399
 msgid ""
 "A verification email has been sent to your email address. Please follow the "
 "instructions in the email to complete the verification process."
 msgstr "已向您的电子邮件地址发送一封验证邮件，请按照邮件内的要求完成账号验证。"
 
-#: fnprofile/views.py:400
+#: fnprofile/views.py:403
 #, python-brace-format
 msgid ""
 "The verification email failed to be sent. Please wait for {time_interval} "
 "seconds and try again!"
 msgstr "无法发送验证邮件，请稍等 {time_interval} 秒 后重试！"
 
-#: fnprofile/views.py:408 fnprofile/views.py:482
+#: fnprofile/views.py:411 fnprofile/views.py:485
 msgid "An unknown error has occurred!"
 msgstr "发生了一个错误！"
 
-#: fnprofile/views.py:437
+#: fnprofile/views.py:440
 msgid "Email verified successfully!"
 msgstr "邮件地址验证成功！"
 
-#: fnprofile/views.py:448
+#: fnprofile/views.py:451
 msgid "Token verification failed! Please try again later!"
 msgstr "令牌验证失败！请稍后再试！"
 
-#: fnprofile/views.py:456
+#: fnprofile/views.py:459
 msgid "Please check if your email address is correct!"
 msgstr "请检查您的邮箱地址是否正确！"
 
-#: fnprofile/views.py:503
+#: fnprofile/views.py:506
 msgid "Please log in to change your information."
 msgstr "请登录以更改您的信息。"
 
-#: fnprofile/views.py:507
+#: fnprofile/views.py:510
 msgid "An error occurred while saving the form!"
 msgstr "保存表单时出现错误！"
 
-#: fnprofile/views.py:509
+#: fnprofile/views.py:512
 msgid "an unknown error has occurred!"
 msgstr "发生了一个未知错误！"
 
-#: fnprofile/views.py:517
+#: fnprofile/views.py:520
 msgid "You only have one primary email, so you cannot cancel this option."
 msgstr "您不能取消该项，因为您只有一个主邮箱地址。"
 
-#: fnprofile/views.py:530
+#: fnprofile/views.py:533
 msgid "Email set as primary"
 msgstr "设电子邮件地址为主邮件地址"
 
-#: fnprofile/views.py:532
+#: fnprofile/views.py:535
 msgid "Email settings updated"
 msgstr "邮件设置已更新"
 
-#: fnprofile/views.py:562
+#: fnprofile/views.py:565
 msgid "Cannot delete primary email"
 msgstr "无法删除主邮件地址"
 
-#: fnprofile/views.py:569
+#: fnprofile/views.py:572
 #, python-brace-format
 msgid "Email ({email_address}) deleted"
 msgstr "邮箱地址 （{email_address}） 已被删除"
 
-#: fnprofile/views.py:576
+#: fnprofile/views.py:579
 msgid "Failed to delete email."
 msgstr "无法删除电子邮件地址"
 
