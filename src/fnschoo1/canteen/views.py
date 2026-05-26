@@ -273,16 +273,21 @@ def create_consumptions(request, ingredient_id=None):
         category_id = (
             int(category_id) if category_id.isnumeric() else category_id
         )
-        context.update({"selected_category": category_id})
         queries &= Q(category__id=category_id)
+        context.update({"selected_category": category_id})
+    else:
+        context.update({"selected_category": None})
+
 
     if search_params and "meal_type" in search_params:
         meal_type_id = search_params["meal_type"]
         meal_type_id = (
             int(meal_type_id) if meal_type_id.isnumeric() else meal_type_id
         )
-        context.update({"selected_meal_type": meal_type_id})
         queries &= Q(meal_type__id=meal_type_id)
+        context.update({"selected_meal_type": meal_type_id})
+    else:
+        context.update({"selected_meal_type": None})
 
     date_range_cp = date_range
     date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]
@@ -634,6 +639,7 @@ def list_ingredients(request):
         search_params = get_search_params_from_cookie(
             request, search_params_cookie_name
         )
+
         if search_params and "category" in search_params:
             search_param_category = search_params["category"]
             search_param_category = (
@@ -643,14 +649,19 @@ def list_ingredients(request):
             )
             queries &= Q(category__id=search_param_category)
             context.update({"selected_category": search_param_category})
+        else:
+            context.update({"selected_category": None})
 
         if search_params and "meal_type" in search_params:
             meal_type_id = search_params["meal_type"]
             meal_type_id = (
                 int(meal_type_id) if meal_type_id.isnumeric() else meal_type_id
             )
-            context.update({"selected_meal_type": meal_type_id})
             queries &= Q(meal_type__id=meal_type_id)
+            context.update({"selected_meal_type": meal_type_id})
+        else:
+            context.update({"selected_meal_type": None})
+
 
         ingredients = Ingredient.objects.filter(queries)
 
