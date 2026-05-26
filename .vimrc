@@ -45,6 +45,18 @@ set background=dark
 
 colorscheme elflord
 
+function! s:update_tags()
+    if !executable('ctags')
+        return
+    endif
+    if empty(findfile('manage.py', '.;')) && empty(finddir('.git', '.;'))
+        return
+    endif
+    silent! execute '!ctags -R --languages=Python --fields=+iaS+KS ${PWD}/src'
+endfunction
+
+autocmd BufWritePost *.py call s:update_tags()
+
 set exrc
 set secure
 
