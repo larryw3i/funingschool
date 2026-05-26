@@ -714,13 +714,13 @@
     $(document).ready(function() {
       $('.meal_types-select').change(function() {
         var selected_value = $(this).val()
-        set_search_params_from_cookie(search_params_cookie_name, "meal_type", selected_value)
+        set_search_params_from_cookie(window.location.pathname, "meal_type", selected_value)
         location.reload()
       });
 
       $('.categories-select').change(function() {
         var selected_value = $(this).val()
-        set_search_params_from_cookie(search_params_cookie_name, "category", selected_value)
+        set_search_params_from_cookie(window.location.pathname, "category", selected_value)
         location.reload()
       });
     });

@@ -65,7 +65,7 @@
     $(document).ready(function() {
       $('.ingredients-td').on('click', function() {
         var meal_type_id = $(this).data("meal_type_id")
-        set_search_params_from_cookie(list_ingredients_search_params_cookie_name, "meal_type", meal_type_id)
+        set_search_params_from_cookie("canteen/list_ingredients", "meal_type", meal_type_id)
         window.open("{% url 'canteen:list_ingredients' %}", "canteen__list_ingredients")
       });
     });

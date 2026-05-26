@@ -73,7 +73,7 @@
     $(document).ready(function() {
       $('.ingredients-td').on('click', function() {
         var category_id = $(this).data("category_id")
-        set_search_params_from_cookie(list_ingredients_search_params_cookie_name, "category", category_id)
+        set_search_params_from_cookie("canteen/list_ingredients", "category", category_id)
         window.open("{% url 'canteen:list_ingredients' %}", "canteen__list_ingredients")
       });
     });

@@ -174,6 +174,7 @@ def split_price(total_price, quantity, prec=2):
 
 @login_required
 def create_consumptions(request, ingredient_id=None):
+    search_params = get_search_params_from_cookie(request)
     context = {}
     date_start = request.GET.get(
         "storage_date_start", None
@@ -258,10 +259,6 @@ def create_consumptions(request, ingredient_id=None):
             context,
         )
 
-    search_params_cookie_name = "create_consumptions_search"
-    search_params = get_search_params_from_cookie(
-        request, search_params_cookie_name
-    )
     queries = (
         Q(storage_date__lte=date_end)
         & Q(user=request.user)
@@ -564,7 +561,7 @@ def edit_ingredient(request, ingredient_id):
 
 @login_required
 def list_ingredients(request):
-    search_params_cookie_name = "list_ingredients"
+    search_params=get_search_params_from_cookie(request)
     search_query = request.GET.get("q", "")
     search_query_cp = search_query
     fields = [
@@ -636,10 +633,6 @@ def list_ingredients(request):
 
     else:
 
-        search_params = get_search_params_from_cookie(
-            request, search_params_cookie_name
-        )
-
         if search_params and "category" in search_params:
             search_param_category = search_params["category"]
             search_param_category = (
@@ -673,13 +666,10 @@ def list_ingredients(request):
     else:
         ingredients = ingredients.order_by(*orders)
 
-    page_size = request.GET.get("page_size", "")
-    if not page_size:
-        page_size = request.COOKIES.get("page_size", "")
-    page_size = int(page_size) if str(page_size).isnumeric() else 10
+    page_size = int(search_params.get("page_size",10))
     ingredients_len = len(ingredients)
     paginator = Paginator(ingredients, page_size)
-    page_number = request.GET.get("page", 1)
+    page_number = int(search_params.get("page",1))
     page_obj = paginator.get_page(page_number)
     headers = [(f.name, f.verbose_name) for f in fields]
 
@@ -1064,16 +1054,19 @@ class MealTypeListView(LoginRequiredMixin, ListView):
     paginate_by = 10
     paginate_orphans = 2
 
+    def paginate_queryset(self,queryset,page_size):
+        search_params = get_search_params_from_cookie(self.request)
+        page = int(search_params.get("page",1))
+        self.kwargs[self.page_kwarg]=page
+        return super().paginate_queryset(queryset,page_size)
+
     def get_queryset(self):
         return MealType.objects.filter(user=self.request.user)
 
     def get_paginate_by(self, queryset):
-        page_size = self.request.GET.get("page_size")
-        page_size = (
-            page_size if page_size else self.request.COOKIES.get("page_size")
-        )
-        page_size = page_size if page_size else self.paginate_by
-        return int(page_size)
+        search_params = get_search_params_from_cookie(self.request)
+        page_size = int(search_params.get("page_size",self.paginate_by))
+        return page_size
 
 
 class CategoryDeleteView(LoginRequiredMixin, DeleteView):
@@ -1133,16 +1126,22 @@ class CategoryListView(LoginRequiredMixin, ListView):
     paginate_by = 10
     paginate_orphans = 2
 
+    def paginate_queryset(self,queryset,page_size):
+        search_params = get_search_params_from_cookie(self.request)
+        page = int(search_params.get("page",1))
+        self.kwargs[self.page_kwarg]=page
+        return super().paginate_queryset(queryset,page_size)
+
+
     def get_queryset(self):
         return Category.objects.filter(user=self.request.user)
+    
 
     def get_paginate_by(self, queryset):
-        page_size = self.request.GET.get("page_size")
-        page_size = (
-            page_size if page_size else self.request.COOKIES.get("page_size")
-        )
-        page_size = page_size if page_size else self.paginate_by
-        return int(page_size)
+        search_params = get_search_params_from_cookie(self.request)
+        page_size = int(search_params.get("page_size",self.paginate_by))
+        self.paginate_by=page_size
+        return self.paginate_by
 
 
 class IngredientCreateView(LoginRequiredMixin, CreateView):

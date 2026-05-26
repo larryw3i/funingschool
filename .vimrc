@@ -52,7 +52,7 @@ function! s:update_tags()
     if empty(findfile('manage.py', '.;')) && empty(finddir('.git', '.;'))
         return
     endif
-    silent! execute '!ctags -R --languages=Python --fields=+iaS+KS ${PWD}/src'
+    call job_start(['ctags', '-R', '--languages=Python', '--fields=+iaS+KS', expand('${PWD}/src')])
 endfunction
 
 autocmd BufWritePost *.py call s:update_tags()

@@ -53,8 +53,8 @@ function make_table_row_highlight(query, time_data) {
 }
 
 function get_cookie(name) {
-  const value = `; ${document.cookie}`
-  const parts = value.split(`; ${name}=`)
+  var value = `; ${document.cookie}`
+  var parts = value.split(`; ${name}=`)
   if (parts.length === 2) {
     return parts.pop().split(';').shift()
   }
@@ -77,7 +77,7 @@ function set_simple_cookie(key, value) {
   if (cookie_enabled != '1') {
     return
   }
-  const expiry_date = new Date()
+  var expiry_date = new Date()
   expiry_date.setFullYear(expiry_date.getFullYear() + 6)
   document.cookie = `${key}=${value}; expires=${expiry_date.toUTCString()}; path=/`
 }
@@ -92,6 +92,7 @@ function get_search_params_from_cookie(name) {
 }
 
 function set_search_params_from_cookie(name, key, value) {
+  name = name.replace(/^\/+|\/+$/g, '');
   var params = get_search_params_from_cookie(name)
   params = params == null ? new URLSearchParams() : params
   if (value === '' || value === null || value === undefined) {
@@ -149,21 +150,21 @@ function update_href(query) {
   window.location.href = url.href
 }
 function open_small_window(url) {
-  const size_times = 1 / 4
-  const width = Math.round(screen.width * size_times)
-  const height = Math.round(screen.height * size_times)
-  const left = Math.round((screen.width - width) / 2)
-  const _top = Math.round((screen.height - height) / 2)
+  var size_times = 1 / 4
+  var width = Math.round(screen.width * size_times)
+  var height = Math.round(screen.height * size_times)
+  var left = Math.round((screen.width - width) / 2)
+  var _top = Math.round((screen.height - height) / 2)
 
-  const left0 = Math.round((screen.width - height) / 2)
-  const _top0 = Math.round((screen.height - width) / 2)
+  var left0 = Math.round((screen.width - height) / 2)
+  var _top0 = Math.round((screen.height - width) / 2)
 
   var _width_ = width
   var _height_ = Math.round(height * 1.2)
   var _left_ = left
   var _top_ = _top
 
-  const windowFeatures = `width=${_width_},height=${_height_},left=${_left_},top=${_top_},resizable=yes,scrollbars=yes`
+  var windowFeatures = `width=${_width_},height=${_height_},left=${_left_},top=${_top_},resizable=yes,scrollbars=yes`
   window.open(url, '_blank', windowFeatures)
 }
 
@@ -197,7 +198,7 @@ $(document).ready(function () {
   }
 
   cookie_acceptance_element.on('click', function () {
-    const expiry_date = new Date()
+    var expiry_date = new Date()
     expiry_date.setFullYear(expiry_date.getFullYear() + 6)
     document.cookie = `cookie_enabled=1; expires=${expiry_date.toUTCString()}; path=/`
     cookie_consent_element.hide()
@@ -209,9 +210,11 @@ $(document).ready(function () {
 })
 
 function set_page_size() {
-  const page_size = document.querySelector('#page_size').value
-  set_simple_cookie('page_size', page_size)
-  update_href({ per_page: page_size })
+  var page_size_element = $('#page_size')
+  var page_size = page_size_element.val()
+
+  set_search_params_from_cookie(window.location.pathname,"page_size",page_size)
+  location.reload()
 }
 
 $(document).ready(function () {
@@ -225,7 +228,8 @@ $(document).ready(function () {
 })
 
 function set_page(num) {
-  update_href({ page: num })
+  set_search_params_from_cookie(window.location.pathname,"page",num)
+  location.reload()
 }
 
 // The end.
