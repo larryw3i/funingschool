@@ -21,7 +21,7 @@
   <script>
     $(document).ready(function () {
       $("#div_id_agree_terms").before(
-        '<a href="{% url 'home:service_terms' %}" target="service_terms">Terms of Service</a>'
+        '<a href="{% url "home:service_terms" %}" target="service_terms">{% trans "Terms of Service" %}</a>'
       );
     });
   </script>

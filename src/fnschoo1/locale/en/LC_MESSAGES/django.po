@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-26 07:44+0800\n"
+"POT-Creation-Date: 2026-05-26 13:15+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -1356,12 +1356,17 @@ msgstr ""
 msgid "License:"
 msgstr ""
 
+#: fnhome/templates/fnhome/service_terms.html:12
+msgid "GNU Lesser General Public License v3 (LGPL v3)"
+msgstr ""
+
 #: fnhome/templates/fnhome/service_terms.html:13
 msgid "Source Code:"
 msgstr ""
 
 #: fnhome/templates/fnhome/service_terms.html:14
 #: fnhome/templates/fnhome/service_terms.html:15
+#: fnhome/templates/fnhome/service_terms.html:65
 msgid "https://gitee.com/larryw3i/funingschool"
 msgstr ""
 
@@ -1537,13 +1542,11 @@ msgid "Email"
 msgstr ""
 
 #: fnprofile/forms.py:155
-msgid ""
-"I agree to the <a herf='home/service_terms' target='service_terms'>Terms of "
-"Service.</a>"
+msgid "I agree to the Terms of Service above."
 msgstr ""
 
 #: fnprofile/forms.py:163
-msgid "You must agree to the Terms of Service."
+msgid "You must agree to the Terms of Service above."
 msgstr ""
 
 #: fnprofile/forms.py:175
@@ -2078,6 +2081,10 @@ msgstr ""
 
 #: fnprofile/templates/fnprofile/profile/new.html:17
 msgid "Login here"
+msgstr ""
+
+#: fnprofile/templates/fnprofile/profile/new.html:24
+msgid "Terms of Service"
 msgstr ""
 
 #: fnprofile/templates/fnprofile/profile/set_password.html:4

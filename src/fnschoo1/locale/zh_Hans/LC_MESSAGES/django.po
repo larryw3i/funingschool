@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-26 07:44+0800\n"
-"PO-Revision-Date: 2026-05-25 12:52+0800\n"
+"POT-Creation-Date: 2026-05-26 13:15+0800\n"
+"PO-Revision-Date: 2026-05-26 13:18+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -1427,35 +1427,38 @@ msgid "FNSCHOOL Home"
 msgstr "FNSCHOOL 主页"
 
 #: fnhome/templates/fnhome/service_terms.html:5
-#, fuzzy
-#| msgid "I agree to the Terms of Service."
 msgid "Terms of Service."
-msgstr "我同意《服务协议》。"
+msgstr "《服务协议》"
 
 #: fnhome/templates/fnhome/service_terms.html:9
 msgid "Service Agreement"
-msgstr ""
+msgstr "服务协议"
 
 #: fnhome/templates/fnhome/service_terms.html:11
 msgid "Project:"
-msgstr ""
+msgstr "项目名称："
 
 #: fnhome/templates/fnhome/service_terms.html:12
 msgid "License:"
-msgstr ""
+msgstr "开源协议："
+
+#: fnhome/templates/fnhome/service_terms.html:12
+msgid "GNU Lesser General Public License v3 (LGPL v3)"
+msgstr "GNU 宽通用公共许可证第 3 版 （LGPL v3）"
 
 #: fnhome/templates/fnhome/service_terms.html:13
 msgid "Source Code:"
-msgstr ""
+msgstr "源码地址："
 
 #: fnhome/templates/fnhome/service_terms.html:14
 #: fnhome/templates/fnhome/service_terms.html:15
+#: fnhome/templates/fnhome/service_terms.html:65
 msgid "https://gitee.com/larryw3i/funingschool"
-msgstr ""
+msgstr "https://gitee.com/larryw3i/funingschool"
 
 #: fnhome/templates/fnhome/service_terms.html:19
 msgid "Overview"
-msgstr ""
+msgstr "概述"
 
 #: fnhome/templates/fnhome/service_terms.html:21
 msgid ""
@@ -1465,32 +1468,36 @@ msgid ""
 "comply with the LGPL v3 license.\n"
 "    "
 msgstr ""
+"\n"
+"      本项目以自由软件形式发布，任何个人或组织均可使用、修改和分发本软件，前"
+"提是严格遵守 LGPL v3 许可证。\n"
+"    "
 
 #: fnhome/templates/fnhome/service_terms.html:25
 msgid "License Rights"
-msgstr ""
+msgstr "许可权利"
 
 #: fnhome/templates/fnhome/service_terms.html:28
 msgid "Free for personal, commercial, or internal use."
-msgstr ""
+msgstr "可自由用于个人、商业或内部系统。"
 
 #: fnhome/templates/fnhome/service_terms.html:29
 msgid "Free to modify the source code."
-msgstr ""
+msgstr "可自由修改源码以满足自身需求。"
 
 #: fnhome/templates/fnhome/service_terms.html:30
 msgid "Free to redistribute original or modified versions."
-msgstr ""
+msgstr "可自由分发原始或修改版本。"
 
 #: fnhome/templates/fnhome/service_terms.html:31
 msgid ""
 "May be linked with proprietary software without open-sourcing your "
 "application."
-msgstr ""
+msgstr "可与专有软件组合使用，无需整体开源。"
 
 #: fnhome/templates/fnhome/service_terms.html:33
 msgid "No Warranty"
-msgstr ""
+msgstr "无担保声明"
 
 #: fnhome/templates/fnhome/service_terms.html:35
 msgid ""
@@ -1500,10 +1507,14 @@ msgid ""
 "for a particular purpose, or non-infringement.\n"
 "    "
 msgstr ""
+"\n"
+"      本软件按“原样”提供，不作任何明示或暗示担保，包括但不限于适销性、特定用"
+"途适用性或不侵权的保证。\n"
+"    "
 
 #: fnhome/templates/fnhome/service_terms.html:39
 msgid "Obligations for Modified Versions"
-msgstr ""
+msgstr "修改与发布义务"
 
 #: fnhome/templates/fnhome/service_terms.html:41
 msgid ""
@@ -1511,22 +1522,25 @@ msgid ""
 "      If you distribute a modified version:\n"
 "    "
 msgstr ""
+"\n"
+"      若分发修改后的软件，必须：\n"
+"    "
 
 #: fnhome/templates/fnhome/service_terms.html:47
 msgid "You must release it under LGPL v3 or later;"
-msgstr ""
+msgstr "继续使用 LGPL v3 或更高版本发布；"
 
 #: fnhome/templates/fnhome/service_terms.html:48
 msgid "You must provide corresponding complete source code;"
-msgstr ""
+msgstr "提供完整对应的源码；"
 
 #: fnhome/templates/fnhome/service_terms.html:49
 msgid "You must retain all original copyright and license notices."
-msgstr ""
+msgstr "保留原有版权与许可证声明。"
 
 #: fnhome/templates/fnhome/service_terms.html:51
 msgid "Limitation of Liability"
-msgstr ""
+msgstr "责任限制"
 
 #: fnhome/templates/fnhome/service_terms.html:53
 msgid ""
@@ -1536,10 +1550,14 @@ msgid ""
 "but not limited to data loss, business interruption, or lost profits.\n"
 "    "
 msgstr ""
+"\n"
+"      在任何情况下，作者或贡献者均不对因使用或无法使用本软件造成的任何损害负"
+"责，包括但不限于数据丢失、业务中断或利润损失。\n"
+"    "
 
 #: fnhome/templates/fnhome/service_terms.html:57
 msgid "Access to Source Code"
-msgstr ""
+msgstr "源码获取"
 
 #: fnhome/templates/fnhome/service_terms.html:59
 msgid ""
@@ -1547,6 +1565,9 @@ msgid ""
 "      The complete source code is always publicly available at:\n"
 "    "
 msgstr ""
+"\n"
+"      本项目的完整源码始终公开，地址如下：\n"
+"    "
 
 #: fnhome/templates/fnhome/service_terms.html:70
 msgid ""
@@ -1555,6 +1576,9 @@ msgid ""
 "to this agreement.\n"
 "    "
 msgstr ""
+"\n"
+"      使用本软件即表示您已阅读并同意本协议。\n"
+"    "
 
 #: fnprofile/forms.py:40
 msgid "User Name or Email Address"
@@ -1625,18 +1649,12 @@ msgid "Email"
 msgstr "电子邮件"
 
 #: fnprofile/forms.py:155
-#, fuzzy
-#| msgid "You must agree to the Terms of Service."
-msgid ""
-"I agree to the <a herf='home/service_terms' target='service_terms'>Terms of "
-"Service.</a>"
-msgstr "你需要同意该服务协议。"
+msgid "I agree to the Terms of Service above."
+msgstr "我同意以上《服务协议》。"
 
 #: fnprofile/forms.py:163
-#, fuzzy
-#| msgid "I agree to the Terms of Service."
-msgid "You must agree to the Terms of Service."
-msgstr "我同意《服务协议》。"
+msgid "You must agree to the Terms of Service above."
+msgstr "您需同意以上《服务协议》以使用本软件。"
 
 #: fnprofile/forms.py:175
 msgid "Email Address (Required)"
@@ -2220,6 +2238,10 @@ msgstr "已经有张号了？"
 msgid "Login here"
 msgstr "现在登录"
 
+#: fnprofile/templates/fnprofile/profile/new.html:24
+msgid "Terms of Service"
+msgstr "《服务协议》"
+
 #: fnprofile/templates/fnprofile/profile/set_password.html:4
 msgid "Set New Password"
 msgstr "设置新的密码"
@@ -2455,6 +2477,13 @@ msgstr "注册"
 #: templates/includes/_header.html:109
 msgid "Hide messages."
 msgstr "隐藏信息。"
+
+#, fuzzy
+#~| msgid "You must agree to the Terms of Service."
+#~ msgid ""
+#~ "I agree to the <a herf='home/service_terms' target='service_terms'>Terms "
+#~ "of Service.</a>"
+#~ msgstr "你需要同意该服务协议。"
 
 #~ msgid "The token has expired or is no longer valid!"
 #~ msgstr "令牌已过期或无效！"
