@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-27 13:48+0800\n"
+"POT-Creation-Date: 2026-05-27 21:34+0800\n"
 "PO-Revision-Date: 2025-09-25 10:07+0800\n"
 "Last-Translator: \n"
 "Language-Team: larryw3i@163.com\n"
@@ -645,11 +645,11 @@ msgid ""
 "      Edit Meal Type %(instance_name)s ."
 msgstr ""
 
-#: canteen/views.py:73 canteen/views.py:1188
+#: canteen/views.py:73 canteen/views.py:1203
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:73 canteen/views.py:1180
+#: canteen/views.py:73 canteen/views.py:1195
 msgid "(2)"
 msgstr ""
 
@@ -741,39 +741,39 @@ msgid ""
 "and cannot be saved. Please modify it again."
 msgstr ""
 
-#: canteen/views.py:707
+#: canteen/views.py:722
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr ""
 
-#: canteen/views.py:716
+#: canteen/views.py:731
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr ""
 
-#: canteen/views.py:717
+#: canteen/views.py:732
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr ""
 
-#: canteen/views.py:757
+#: canteen/views.py:772
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:918
+#: canteen/views.py:933
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:938
+#: canteen/views.py:953
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:954
+#: canteen/views.py:969
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:980
+#: canteen/views.py:995
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr ""

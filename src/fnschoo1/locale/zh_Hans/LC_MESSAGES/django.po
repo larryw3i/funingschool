@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-27 13:48+0800\n"
+"POT-Creation-Date: 2026-05-27 21:34+0800\n"
 "PO-Revision-Date: 2026-05-26 13:32+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -701,11 +701,11 @@ msgstr ""
 "\n"
 "编辑餐类（ %(instance_name)s ）。"
 
-#: canteen/views.py:73 canteen/views.py:1188
+#: canteen/views.py:73 canteen/views.py:1203
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:73 canteen/views.py:1180
+#: canteen/views.py:73 canteen/views.py:1195
 msgid "(2)"
 msgstr "（2）"
 
@@ -807,39 +807,39 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:707
+#: canteen/views.py:722
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr "{meal_type}：{meal_type_total_price}"
 
-#: canteen/views.py:716
+#: canteen/views.py:731
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr "{month}：{total_price}"
 
-#: canteen/views.py:717
+#: canteen/views.py:732
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: canteen/views.py:757
+#: canteen/views.py:772
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:918
+#: canteen/views.py:933
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:938
+#: canteen/views.py:953
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:954
+#: canteen/views.py:969
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:980
+#: canteen/views.py:995
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr "（{month}）{affiliation}食堂出入库工作簿（{timestamp}）"

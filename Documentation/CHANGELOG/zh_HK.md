@@ -5,6 +5,7 @@
 
 ## [Unreleased] - 2026-05-27
 ### Added
+- Search for ingredients: The input box allows for searching by quantity and total price.
 - Service Agreement: Add the "Service Agreement" page.
 - Sorting: Add sorting functions for "Category" and "Meal Type".
 ### Changed

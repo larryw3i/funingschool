@@ -102,6 +102,9 @@ class Releases:
             + "\n"
             + self.get_release_markdown(
                 additions=[
+                    _(
+                        "- Search for ingredients: The input box allows for searching by quantity and total price."
+                    ),
                     _('- Service Agreement: Add the "Service Agreement" page.'),
                     _(
                         '- Sorting: Add sorting functions for "Category" and "Meal Type".'

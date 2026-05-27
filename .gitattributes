@@ -1,3 +1,6 @@
 
 # 'diff' ignores all '.po' files.
 *.po -diff
+*.pot -diff
+*.mo -diff
+

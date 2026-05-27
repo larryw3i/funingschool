@@ -561,8 +561,8 @@ def edit_ingredient(request, ingredient_id):
 @login_required
 def list_ingredients(request):
     search_params = get_search_params_from_cookie(request)
-    search_query = request.GET.get("q", "")
-    search_query_cp = search_query
+    search_query = search_params.get("q", None)
+    search_query_cp = search_query or ""
     fields = [
         f
         for f in Ingredient._meta.fields
@@ -570,12 +570,10 @@ def list_ingredients(request):
     ]
     context = {}
 
-    ingredients=Ingredient.objects
+    ingredients = Ingredient.objects
     queries = Q(user=request.user)
     if search_query:
-
         search_query_dates = []
-
         for pattern, fmt in date_patterns:
             matches = re.findall(pattern, search_query)
             for match in matches:
@@ -583,7 +581,6 @@ def list_ingredients(request):
                     date_obj = datetime.strptime(match, fmt).date()
                     search_query_dates.append(date_obj)
                     search_query = search_query.replace(match, "")
-
                 except ValueError:
                     continue
 
@@ -622,6 +619,22 @@ def list_ingredients(request):
         for meal_type in meal_types:
             queries &= Q(meal_type__name__icontains=meal_type)
             search_query = search_query.replace(meal_type, "")
+
+        nums = re.findall(r"\d+(?:\.\d+)?", search_query)
+        nums_cp = nums
+        nums = [Decimal(n) for n in nums]
+        if not nums:
+            pass
+        elif len(nums) > 1:
+            num_range = [min(nums), max(nums)]
+            queries &= Q(quantity__range=num_range) | Q(
+                total_price__range=num_range
+            )
+        else:
+            num = nums[0]
+            queries &= Q(quantity=num) | Q(total_price=num)
+        for n in nums_cp:
+            search_query = search_query.replace(n, "")
 
         names = re.split(r"\s+", search_query)
         name_queries = Q()
