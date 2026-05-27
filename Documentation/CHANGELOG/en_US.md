@@ -3,6 +3,18 @@
 
 # Changelog
 
+## [Unreleased] - 2026-05-27
+### Added
+- Service Agreement: Add the "Service Agreement" page.
+- Sorting: Add sorting functions for "Category" and "Meal Type".
+### Changed
+
+### Deprecated
+
+### Fixed
+
+### Removed
+
 ## [20260525.82149.841] - 2026-05-25
 ### Added
 - Optional "Site" feature: The "Site" feature can be enabled, it includes registered email verification, login notifications, password reset, etc.

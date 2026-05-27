@@ -19,7 +19,7 @@
 {% endblock %}
 {% block extra_js %}
   <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
       $("#div_id_agree_terms").before(
         '<a href="{% url "home:service_terms" %}" target="fnhome/service_terms">{% trans "Terms of Service" %}</a>'
       );

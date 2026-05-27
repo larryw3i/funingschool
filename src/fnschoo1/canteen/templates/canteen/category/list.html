@@ -18,12 +18,22 @@
             ({{ categories_len }})
           {% endblocktrans%}
         </th>
-        <th class='sort_name' onclick="sort_categories('name');">{% trans "Category Name" %}</th>
-        <th class='sort_abbreviation' onclick="sort_categories('abbreviation');">{% trans "Abbreviation" %}</th>
+        <th class='sort_name' onclick="sort_categories('name');">
+          {% trans "Category Name" %}
+        </th>
+        <th class='sort_abbreviation' onclick="sort_categories('abbreviation');">
+          {% trans "Abbreviation" %}
+        </th>
         <th class="">{% trans "Ingredients Count" %}</th>
-        <th class='sort_created_at' onclick="sort_categories('created_at');">{% trans "Created at" %}</th>
-        <th class='sort_priority' onclick="sort_categories('priority');">{% trans "Priority" %}</th>
-        <th class='sort_is_disabled' onclick="sort_categories('is_disabled');">{% trans "Is Disabled" %}</th>
+        <th class='sort_created_at' onclick="sort_categories('created_at');">
+          {% trans "Created at" %}
+        </th>
+        <th class='sort_priority' onclick="sort_categories('priority');">
+          {% trans "Priority" %}
+        </th>
+        <th class='sort_is_disabled' onclick="sort_categories('is_disabled');">
+          {% trans "Is Disabled" %}
+        </th>
         <th>#</th>
       </tr>
     </thead>

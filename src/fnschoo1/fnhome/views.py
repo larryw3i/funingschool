@@ -49,7 +49,9 @@ from django.views.generic import (
 def home(request):
     return render(request, "fnhome/home.html")
 
+
 def service_terms(request):
     return render(request, "fnhome/service_terms.html")
+
 
 # The end.

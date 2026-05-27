@@ -275,7 +275,6 @@ def create_consumptions(request, ingredient_id=None):
     else:
         context.update({"selected_category": None})
 
-
     if search_params and "meal_type" in search_params:
         meal_type_id = search_params["meal_type"]
         meal_type_id = (
@@ -561,7 +560,7 @@ def edit_ingredient(request, ingredient_id):
 
 @login_required
 def list_ingredients(request):
-    search_params=get_search_params_from_cookie(request)
+    search_params = get_search_params_from_cookie(request)
     search_query = request.GET.get("q", "")
     search_query_cp = search_query
     fields = [
@@ -655,19 +654,18 @@ def list_ingredients(request):
         else:
             context.update({"selected_meal_type": None})
 
-
         ingredients = Ingredient.objects.filter(queries)
 
-    orders = get_object_orders_from_cookie(request,model=Ingredient)
+    orders = get_object_orders_from_cookie(request, model=Ingredient)
     if len(orders) < 1:
         ingredients = ingredients.order_by("storage_date", "category")
     else:
         ingredients = ingredients.order_by(*orders)
 
-    page_size = int(search_params.get("page_size",10))
+    page_size = int(search_params.get("page_size", 10))
     ingredients_len = len(ingredients)
     paginator = Paginator(ingredients, page_size)
-    page_number = int(search_params.get("page",1))
+    page_number = int(search_params.get("page", 1))
     page_obj = paginator.get_page(page_number)
     headers = [(f.name, f.verbose_name) for f in fields]
 
@@ -1054,14 +1052,14 @@ class MealTypeListView(LoginRequiredMixin, ListView):
 
     def get_ordering(self):
         request = self.request
-        self.ordering = get_object_orders_from_cookie(request,model=self.model)
+        self.ordering = get_object_orders_from_cookie(request, model=self.model)
         return self.ordering
 
-    def paginate_queryset(self,queryset,page_size):
+    def paginate_queryset(self, queryset, page_size):
         search_params = get_search_params_from_cookie(self.request)
-        page = int(search_params.get("page",1))
-        self.kwargs[self.page_kwarg]=page
-        return super().paginate_queryset(queryset,page_size)
+        page = int(search_params.get("page", 1))
+        self.kwargs[self.page_kwarg] = page
+        return super().paginate_queryset(queryset, page_size)
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -1070,7 +1068,7 @@ class MealTypeListView(LoginRequiredMixin, ListView):
 
     def get_paginate_by(self, queryset):
         search_params = get_search_params_from_cookie(self.request)
-        page_size = int(search_params.get("page_size",self.paginate_by))
+        page_size = int(search_params.get("page_size", self.paginate_by))
         return page_size
 
 
@@ -1133,14 +1131,14 @@ class CategoryListView(LoginRequiredMixin, ListView):
 
     def get_ordering(self):
         request = self.request
-        self.ordering = get_object_orders_from_cookie(request,model=self.model)
+        self.ordering = get_object_orders_from_cookie(request, model=self.model)
         return self.ordering
 
-    def paginate_queryset(self,queryset,page_size):
+    def paginate_queryset(self, queryset, page_size):
         search_params = get_search_params_from_cookie(self.request)
-        page = int(search_params.get("page",1))
-        self.kwargs[self.page_kwarg]=page
-        return super().paginate_queryset(queryset,page_size)
+        page = int(search_params.get("page", 1))
+        self.kwargs[self.page_kwarg] = page
+        return super().paginate_queryset(queryset, page_size)
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -1149,8 +1147,8 @@ class CategoryListView(LoginRequiredMixin, ListView):
 
     def get_paginate_by(self, queryset):
         search_params = get_search_params_from_cookie(self.request)
-        page_size = int(search_params.get("page_size",self.paginate_by))
-        self.paginate_by=page_size
+        page_size = int(search_params.get("page_size", self.paginate_by))
+        self.paginate_by = page_size
         return self.paginate_by
 
 

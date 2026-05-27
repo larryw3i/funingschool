@@ -8,12 +8,15 @@
 {% block content %}
   <h1>{% trans 'Service Agreement' %}</h1>
   <p>
-  <strong>{% trans 'Project:' %}</strong> funingschool<br>
-  <strong>{% trans 'License:' %}</strong> {% trans 'GNU Lesser General Public License v3 (LGPL v3)' %}<br>
-  <strong>{% trans 'Source Code:' %}</strong>
-  <a href="{% trans 'https://gitee.com/larryw3i/funingschool' %}" target="{{ request.path }}/source_code">
-    {% trans 'https://gitee.com/larryw3i/funingschool' %}
-  </a>
+    <strong>{% trans 'Project:' %}</strong> funingschool
+    <br>
+    <strong>{% trans 'License:' %}</strong> {% trans 'GNU Lesser General Public License v3 (LGPL v3)' %}
+    <br>
+    <strong>{% trans 'Source Code:' %}</strong>
+    <a href="{% trans 'https://gitee.com/larryw3i/funingschool' %}"
+       target="{{ request.path }}/source_code">
+      {% trans 'https://gitee.com/larryw3i/funingschool' %}
+    </a>
   </p>
   <hr>
   <h2>{% trans 'Overview' %}</h2>
@@ -28,7 +31,9 @@
     <li>{% trans 'Free for personal, commercial, or internal use.' %}</li>
     <li>{% trans 'Free to modify the source code.' %}</li>
     <li>{% trans 'Free to redistribute original or modified versions.' %}</li>
-    <li>{% trans 'May be linked with proprietary software without open-sourcing your application.' %}</li>
+    <li>
+      {% trans 'May be linked with proprietary software without open-sourcing your application.' %}
+    </li>
   </ul>
   <h2>{% trans 'No Warranty' %}</h2>
   <p>
@@ -46,7 +51,9 @@
   <ul>
     <li>{% trans 'You must release it under LGPL v3 or later;' %}</li>
     <li>{% trans 'You must provide corresponding complete source code;' %}</li>
-    <li>{% trans 'You must retain all original copyright and license notices.' %}</li>
+    <li>
+      {% trans 'You must retain all original copyright and license notices.' %}
+    </li>
   </ul>
   <h2>{% trans 'Limitation of Liability' %}</h2>
   <p>
@@ -61,9 +68,10 @@
     {% endblocktrans %}
   </p>
   <p>
-  <a href="{% trans 'https://gitee.com/larryw3i/funingschool' %}" target="{{ request.path }}/source_code">
-    {% trans 'https://gitee.com/larryw3i/funingschool' %}
-  </a>
+    <a href="{% trans 'https://gitee.com/larryw3i/funingschool' %}"
+       target="{{ request.path }}/source_code">
+      {% trans 'https://gitee.com/larryw3i/funingschool' %}
+    </a>
   </p>
   <hr>
   <p style="font-size: 14px; color: #666;">

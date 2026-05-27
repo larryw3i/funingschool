@@ -18,11 +18,19 @@
             ({{ meal_types_len }})
           {% endblocktrans %}
         </th>
-        <th class='sort_name' onclick="sort_meal_types('name');">{% trans "Meal Type Name" %}</th>
-        <th class='sort_abbreviation' onclick="sort_meal_types('abbreviation');">{% trans "Abbreviation" %}</th>
+        <th class='sort_name' onclick="sort_meal_types('name');">
+          {% trans "Meal Type Name" %}
+        </th>
+        <th class='sort_abbreviation' onclick="sort_meal_types('abbreviation');">
+          {% trans "Abbreviation" %}
+        </th>
         <th>{% trans "Ingredients Count" %}</th>
-        <th class='sort_created_at' onclick="sort_meal_types('created_at');">{% trans "Created at" %}</th>
-        <th class='sort_is_disabled' onclick="sort_meal_types('is_disabled');">{% trans "Is Disabled" %}</th>
+        <th class='sort_created_at' onclick="sort_meal_types('created_at');">
+          {% trans "Created at" %}
+        </th>
+        <th class='sort_is_disabled' onclick="sort_meal_types('is_disabled');">
+          {% trans "Is Disabled" %}
+        </th>
         <th>#</th>
       </tr>
     </thead>
@@ -82,5 +90,5 @@
       var cookie_name = window.location.pathname
       set_sort_element_arrows(cookie_name)
     })
-</script>
+  </script>
 {% endblock %}

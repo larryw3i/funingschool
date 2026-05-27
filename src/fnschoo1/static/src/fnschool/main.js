@@ -83,7 +83,7 @@ function set_simple_cookie(key, value) {
 }
 
 function get_search_params_from_cookie(name) {
-  name = name.replace(/^\/+|\/+$/g, '');
+  name = name.replace(/^\/+|\/+$/g, '')
   var cookie_value = get_cookie(name)
   if (cookie_value == null) {
     return null
@@ -93,7 +93,7 @@ function get_search_params_from_cookie(name) {
 }
 
 function set_search_params_from_cookie(name, key, value) {
-  name = name.replace(/^\/+|\/+$/g, '');
+  name = name.replace(/^\/+|\/+$/g, '')
   var params = get_search_params_from_cookie(name)
   params = params == null ? new URLSearchParams() : params
   if (value === '' || value === null || value === undefined) {
@@ -169,7 +169,7 @@ function open_small_window(url) {
 }
 
 function set_sort_element_arrows(name) {
-  var cookie_name=name
+  var cookie_name = name
   var params = get_search_params_from_cookie(cookie_name)
   if (params == null) {
     return
@@ -213,7 +213,11 @@ function set_page_size() {
   var page_size_element = $('#page_size')
   var page_size = page_size_element.val()
 
-  set_search_params_from_cookie(window.location.pathname,"page_size",page_size)
+  set_search_params_from_cookie(
+    window.location.pathname,
+    'page_size',
+    page_size
+  )
   location.reload()
 }
 
@@ -228,7 +232,7 @@ $(document).ready(function () {
 })
 
 function set_page(num) {
-  set_search_params_from_cookie(window.location.pathname,"page",num)
+  set_search_params_from_cookie(window.location.pathname, 'page', num)
   location.reload()
 }
 

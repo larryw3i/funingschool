@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-26 13:15+0800\n"
+"POT-Creation-Date: 2026-05-27 13:48+0800\n"
 "PO-Revision-Date: 2026-05-26 13:32+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -43,11 +43,10 @@ msgstr "默认类"
 
 #: canteen/models.py:15 canteen/templates/canteen/category/delete.html:31
 #: canteen/templates/canteen/category/delete.html:40
-#: canteen/templates/canteen/category/list.html:45
-#: canteen/templates/canteen/category/list.html:51
+#: canteen/templates/canteen/category/list.html:55
 #: canteen/templates/canteen/ingredient/list.html:150
 #: canteen/templates/canteen/ingredient/list.html:155
-#: canteen/templates/canteen/meal_type/list.html:43 fnprofile/models.py:50
+#: canteen/templates/canteen/meal_type/list.html:51 fnprofile/models.py:50
 #: templates/base/_js.html:7
 msgid "Yes"
 msgstr "是"
@@ -66,9 +65,9 @@ msgstr "餐类"
 msgid "Meal type name"
 msgstr "餐类名称"
 
-#: canteen/models.py:30 canteen/templates/canteen/category/list.html:22
+#: canteen/models.py:30 canteen/templates/canteen/category/list.html:25
 #: canteen/templates/canteen/meal_type/delete.html:20
-#: canteen/templates/canteen/meal_type/list.html:22
+#: canteen/templates/canteen/meal_type/list.html:25
 msgid "Abbreviation"
 msgstr "简称"
 
@@ -83,9 +82,9 @@ msgstr "更新时间"
 
 #: canteen/models.py:43 canteen/models.py:83
 #: canteen/templates/canteen/category/delete.html:37
-#: canteen/templates/canteen/category/list.html:27
+#: canteen/templates/canteen/category/list.html:35
 #: canteen/templates/canteen/meal_type/delete.html:29
-#: canteen/templates/canteen/meal_type/list.html:25
+#: canteen/templates/canteen/meal_type/list.html:32
 #: fnprofile/templates/fnprofile/fnemail/list.html:27
 msgid "Is Disabled"
 msgstr "已禁用"
@@ -253,24 +252,23 @@ msgstr ""
 "    "
 
 #: canteen/templates/canteen/category/delete.html:16
-#: canteen/templates/canteen/category/list.html:21
+#: canteen/templates/canteen/category/list.html:22
 msgid "Category Name"
 msgstr "食材大类名"
 
 #: canteen/templates/canteen/category/delete.html:20
-#: canteen/templates/canteen/category/list.html:24
+#: canteen/templates/canteen/category/list.html:29
 #: canteen/templates/canteen/meal_type/delete.html:25
-#: canteen/templates/canteen/meal_type/list.html:24 fnprofile/models.py:375
+#: canteen/templates/canteen/meal_type/list.html:29 fnprofile/models.py:375
 msgid "Created at"
 msgstr "创建于"
 
 #: canteen/templates/canteen/category/delete.html:24
-#: canteen/templates/canteen/category/list.html:26
+#: canteen/templates/canteen/category/list.html:32
 msgid "Priority"
 msgstr "优先级"
 
 #: canteen/templates/canteen/category/delete.html:28
-#: canteen/templates/canteen/category/list.html:25
 msgid "Pin to consumptions top"
 msgstr "置顶出库"
 
@@ -286,11 +284,11 @@ msgstr ""
 "    "
 
 #: canteen/templates/canteen/category/delete.html:57
-#: canteen/templates/canteen/category/list.html:61
+#: canteen/templates/canteen/category/list.html:65
 #: canteen/templates/canteen/ingredient/delete.html:34
 #: canteen/templates/canteen/ingredient/list.html:168
 #: canteen/templates/canteen/meal_type/delete.html:45
-#: canteen/templates/canteen/meal_type/list.html:53
+#: canteen/templates/canteen/meal_type/list.html:61
 #: fnprofile/templates/fnprofile/fnemail/delete.html:34
 #: fnprofile/templates/fnprofile/fnemail/list.html:52
 msgid "Delete"
@@ -317,18 +315,18 @@ msgstr ""
 "            （%(categories_len)s）\n"
 "          "
 
-#: canteen/templates/canteen/category/list.html:23
-#: canteen/templates/canteen/meal_type/list.html:23
+#: canteen/templates/canteen/category/list.html:27
+#: canteen/templates/canteen/meal_type/list.html:27
 msgid "Ingredients Count"
 msgstr "食材数量"
 
-#: canteen/templates/canteen/category/list.html:57
+#: canteen/templates/canteen/category/list.html:61
 #: canteen/templates/canteen/ingredient/list.html:162
-#: canteen/templates/canteen/meal_type/list.html:49
+#: canteen/templates/canteen/meal_type/list.html:57
 msgid "Edit"
 msgstr "编辑"
 
-#: canteen/templates/canteen/category/list.html:66
+#: canteen/templates/canteen/category/list.html:70
 msgid "No categories yet."
 msgstr "还没有食材大类。"
 
@@ -461,7 +459,7 @@ msgstr "生成账单"
 msgid "Ingredient Sheets are also included."
 msgstr "也包含食材表。"
 
-#: canteen/templates/canteen/consumption/create.html:504
+#: canteen/templates/canteen/consumption/create.html:502
 msgid ":"
 msgstr "："
 
@@ -645,7 +643,7 @@ msgstr ""
 "    "
 
 #: canteen/templates/canteen/meal_type/delete.html:16
-#: canteen/templates/canteen/meal_type/list.html:21
+#: canteen/templates/canteen/meal_type/list.html:22
 msgid "Meal Type Name"
 msgstr "餐类名称"
 
@@ -679,7 +677,7 @@ msgstr ""
 "            （%(meal_types_len)s）\n"
 "          "
 
-#: canteen/templates/canteen/meal_type/list.html:58
+#: canteen/templates/canteen/meal_type/list.html:66
 msgid "No meal types yet."
 msgstr "还没有餐类。"
 
@@ -703,11 +701,11 @@ msgstr ""
 "\n"
 "编辑餐类（ %(instance_name)s ）。"
 
-#: canteen/views.py:73 canteen/views.py:1170
+#: canteen/views.py:73 canteen/views.py:1188
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:73 canteen/views.py:1162
+#: canteen/views.py:73 canteen/views.py:1180
 msgid "(2)"
 msgstr "（2）"
 
@@ -776,31 +774,31 @@ msgstr "是不用入库的"
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:433
+#: canteen/views.py:434
 msgid "Please select the item(s) you wish to delete."
 msgstr "请选择要删除的食材项。"
 
-#: canteen/views.py:455
+#: canteen/views.py:456
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:457
+#: canteen/views.py:458
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:461
+#: canteen/views.py:462
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:463
+#: canteen/views.py:464
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:509
+#: canteen/views.py:510
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
@@ -809,39 +807,39 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:710
+#: canteen/views.py:707
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr "{meal_type}：{meal_type_total_price}"
 
-#: canteen/views.py:719
+#: canteen/views.py:716
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr "{month}：{total_price}"
 
-#: canteen/views.py:720
+#: canteen/views.py:717
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: canteen/views.py:760
+#: canteen/views.py:757
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:921
+#: canteen/views.py:918
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:941
+#: canteen/views.py:938
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:957
+#: canteen/views.py:954
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:983
+#: canteen/views.py:980
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr "（{month}）{affiliation}食堂出入库工作簿（{timestamp}）"
@@ -1438,29 +1436,30 @@ msgstr "服务协议"
 msgid "Project:"
 msgstr "项目名称："
 
-#: fnhome/templates/fnhome/service_terms.html:12
+#: fnhome/templates/fnhome/service_terms.html:13
 msgid "License:"
 msgstr "开源协议："
 
-#: fnhome/templates/fnhome/service_terms.html:12
+#: fnhome/templates/fnhome/service_terms.html:13
 msgid "GNU Lesser General Public License v3 (LGPL v3)"
 msgstr "GNU 宽通用公共许可证第 3 版 （LGPL v3）"
 
-#: fnhome/templates/fnhome/service_terms.html:13
+#: fnhome/templates/fnhome/service_terms.html:15
 msgid "Source Code:"
 msgstr "源码地址："
 
-#: fnhome/templates/fnhome/service_terms.html:14
-#: fnhome/templates/fnhome/service_terms.html:15
-#: fnhome/templates/fnhome/service_terms.html:65
+#: fnhome/templates/fnhome/service_terms.html:16
+#: fnhome/templates/fnhome/service_terms.html:18
+#: fnhome/templates/fnhome/service_terms.html:71
+#: fnhome/templates/fnhome/service_terms.html:73
 msgid "https://gitee.com/larryw3i/funingschool"
 msgstr "https://gitee.com/larryw3i/funingschool"
 
-#: fnhome/templates/fnhome/service_terms.html:19
+#: fnhome/templates/fnhome/service_terms.html:22
 msgid "Overview"
 msgstr "概述"
 
-#: fnhome/templates/fnhome/service_terms.html:21
+#: fnhome/templates/fnhome/service_terms.html:24
 msgid ""
 "\n"
 "      This project is released as free software. Any individual or "
@@ -1473,33 +1472,33 @@ msgstr ""
 "提是严格遵守 LGPL v3 许可证。\n"
 "    "
 
-#: fnhome/templates/fnhome/service_terms.html:25
+#: fnhome/templates/fnhome/service_terms.html:28
 msgid "License Rights"
 msgstr "许可权利"
 
-#: fnhome/templates/fnhome/service_terms.html:28
+#: fnhome/templates/fnhome/service_terms.html:31
 msgid "Free for personal, commercial, or internal use."
 msgstr "可自由用于个人、商业或内部系统。"
 
-#: fnhome/templates/fnhome/service_terms.html:29
+#: fnhome/templates/fnhome/service_terms.html:32
 msgid "Free to modify the source code."
 msgstr "可自由修改源码以满足自身需求。"
 
-#: fnhome/templates/fnhome/service_terms.html:30
+#: fnhome/templates/fnhome/service_terms.html:33
 msgid "Free to redistribute original or modified versions."
 msgstr "可自由分发原始或修改版本。"
 
-#: fnhome/templates/fnhome/service_terms.html:31
+#: fnhome/templates/fnhome/service_terms.html:35
 msgid ""
 "May be linked with proprietary software without open-sourcing your "
 "application."
 msgstr "可与专有软件组合使用，无需整体开源。"
 
-#: fnhome/templates/fnhome/service_terms.html:33
+#: fnhome/templates/fnhome/service_terms.html:38
 msgid "No Warranty"
 msgstr "无担保声明"
 
-#: fnhome/templates/fnhome/service_terms.html:35
+#: fnhome/templates/fnhome/service_terms.html:40
 msgid ""
 "\n"
 "      The software is provided \"as is\", without warranty of any kind, "
@@ -1512,11 +1511,11 @@ msgstr ""
 "途适用性或不侵权的保证。\n"
 "    "
 
-#: fnhome/templates/fnhome/service_terms.html:39
+#: fnhome/templates/fnhome/service_terms.html:44
 msgid "Obligations for Modified Versions"
 msgstr "修改与发布义务"
 
-#: fnhome/templates/fnhome/service_terms.html:41
+#: fnhome/templates/fnhome/service_terms.html:46
 msgid ""
 "\n"
 "      If you distribute a modified version:\n"
@@ -1526,23 +1525,23 @@ msgstr ""
 "      若分发修改后的本软件副本，必须：\n"
 "    "
 
-#: fnhome/templates/fnhome/service_terms.html:47
+#: fnhome/templates/fnhome/service_terms.html:52
 msgid "You must release it under LGPL v3 or later;"
 msgstr "继续使用 LGPL v3 或更高版本发布；"
 
-#: fnhome/templates/fnhome/service_terms.html:48
+#: fnhome/templates/fnhome/service_terms.html:53
 msgid "You must provide corresponding complete source code;"
 msgstr "提供完整对应的源码；"
 
-#: fnhome/templates/fnhome/service_terms.html:49
+#: fnhome/templates/fnhome/service_terms.html:55
 msgid "You must retain all original copyright and license notices."
 msgstr "保留原有版权与许可证声明。"
 
-#: fnhome/templates/fnhome/service_terms.html:51
+#: fnhome/templates/fnhome/service_terms.html:58
 msgid "Limitation of Liability"
 msgstr "责任限制"
 
-#: fnhome/templates/fnhome/service_terms.html:53
+#: fnhome/templates/fnhome/service_terms.html:60
 msgid ""
 "\n"
 "      In no event shall the authors or contributors be liable for any "
@@ -1555,11 +1554,11 @@ msgstr ""
 "责，包括但不限于数据丢失、业务中断或利润损失。\n"
 "    "
 
-#: fnhome/templates/fnhome/service_terms.html:57
+#: fnhome/templates/fnhome/service_terms.html:64
 msgid "Access to Source Code"
 msgstr "源码获取"
 
-#: fnhome/templates/fnhome/service_terms.html:59
+#: fnhome/templates/fnhome/service_terms.html:66
 msgid ""
 "\n"
 "      The complete source code is always publicly available at:\n"
@@ -1569,7 +1568,7 @@ msgstr ""
 "      本项目的完整源码始终公开，地址如下：\n"
 "    "
 
-#: fnhome/templates/fnhome/service_terms.html:70
+#: fnhome/templates/fnhome/service_terms.html:78
 msgid ""
 "\n"
 "      By using this software, you acknowledge that you have read and agreed "
@@ -1580,95 +1579,95 @@ msgstr ""
 "      使用本软件即表示您已阅读并同意本协议。\n"
 "    "
 
-#: fnprofile/forms.py:40
+#: fnprofile/forms.py:39
 msgid "User Name or Email Address"
 msgstr "用户名或电子邮件地址"
 
-#: fnprofile/forms.py:44 fnprofile/forms.py:51
+#: fnprofile/forms.py:43 fnprofile/forms.py:50
 msgid "Please enter user name or email address."
 msgstr "请输入您的用户名或电子邮箱地址。"
 
-#: fnprofile/forms.py:52
+#: fnprofile/forms.py:51
 msgid "The content you entered is too long."
 msgstr "输入内容过多。"
 
-#: fnprofile/forms.py:57 fnprofile/forms.py:373
+#: fnprofile/forms.py:56 fnprofile/forms.py:372
 #: fnprofile/templates/fnprofile/fnemail/list.html:24
 msgid "Email Address"
 msgstr "电子邮件地址"
 
-#: fnprofile/forms.py:62
+#: fnprofile/forms.py:61
 msgid "example@domain.com"
 msgstr "账号名@样例.后缀"
 
-#: fnprofile/forms.py:67 fnprofile/forms.py:151
+#: fnprofile/forms.py:66 fnprofile/forms.py:150
 msgid "We'll send a verification email to this address."
 msgstr "我们会发送一封验证邮件到这个邮箱地址。"
 
-#: fnprofile/forms.py:71
+#: fnprofile/forms.py:70
 msgid "password"
 msgstr "密码"
 
-#: fnprofile/forms.py:75
+#: fnprofile/forms.py:74
 msgid "Please enter password"
 msgstr "请输入密码"
 
-#: fnprofile/forms.py:80
+#: fnprofile/forms.py:79
 msgid "Please enter password."
 msgstr "请输入密码。"
 
-#: fnprofile/forms.py:84
+#: fnprofile/forms.py:83
 msgid "Remeber me?"
 msgstr "记住我？"
 
-#: fnprofile/forms.py:98
+#: fnprofile/forms.py:97
 msgid "Please enter your user name or email address."
 msgstr "请输入您的用户名或电子邮箱地址。"
 
-#: fnprofile/forms.py:104
+#: fnprofile/forms.py:103
 #, python-brace-format
 msgid "The username must be at least {min_length} characters long."
 msgstr "用户名至少需要 {min_length} 个字符。"
 
-#: fnprofile/forms.py:111
+#: fnprofile/forms.py:110
 #, python-brace-format
 msgid "The username can be up to {max_length} characters only."
 msgstr "用户名至多只能有 {max_length} 个字符。"
 
-#: fnprofile/forms.py:119
+#: fnprofile/forms.py:118
 msgid "Please enter the password."
 msgstr "请输入密码。"
 
-#: fnprofile/forms.py:129 fnprofile/forms.py:204 fnprofile/forms.py:260
-#: fnprofile/forms.py:391
+#: fnprofile/forms.py:128 fnprofile/forms.py:203 fnprofile/forms.py:259
+#: fnprofile/forms.py:390
 msgid "Please enter a valid email address."
 msgstr "请输入有效的电子邮箱地址。"
 
-#: fnprofile/forms.py:141
+#: fnprofile/forms.py:140
 msgid "Email"
 msgstr "电子邮件"
 
-#: fnprofile/forms.py:155
+#: fnprofile/forms.py:154
 msgid "I agree to the Terms of Service above."
 msgstr "我同意以上《服务协议》。"
 
-#: fnprofile/forms.py:163
+#: fnprofile/forms.py:162
 msgid "You must agree to the Terms of Service above."
 msgstr "您需同意以上《服务协议》以使用本软件。"
 
-#: fnprofile/forms.py:175
+#: fnprofile/forms.py:174
 msgid "Email Address (Required)"
 msgstr "电子邮箱地址（必需）"
 
-#: fnprofile/forms.py:177
+#: fnprofile/forms.py:176
 msgid "Email Address (Optional)"
 msgstr "电子邮箱地址（选填）"
 
-#: fnprofile/forms.py:179
+#: fnprofile/forms.py:178
 msgid "Please enter your email address."
 msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:182
+#: fnprofile/forms.py:181
 #, python-brace-format
 msgid ""
 "Required. {max_username_length} characters or fewer. Letters, digits and @/./"
@@ -1677,83 +1676,83 @@ msgstr ""
 "必填，最多 {max_username_length} 个字符，可包含字母、数"
 "字、“@”、“.”、“+”、“-”、“_” 。"
 
-#: fnprofile/forms.py:198
+#: fnprofile/forms.py:197
 msgid "Please enter email."
 msgstr "请输入电子邮件地址。"
 
-#: fnprofile/forms.py:207
+#: fnprofile/forms.py:206
 msgid "A user with that email already exists."
 msgstr "该电子邮件地址已被使用。"
 
-#: fnprofile/forms.py:222
+#: fnprofile/forms.py:221
 msgid "Please enter a username."
 msgstr "请输入用户名。"
 
-#: fnprofile/forms.py:227
+#: fnprofile/forms.py:226
 msgid "Username can only contain letters, digits and @/./+/-/_ characters."
 msgstr "用户名只能包含字母、数字、“@”、“.”、“+”、“-”、“_”。"
 
-#: fnprofile/forms.py:233
+#: fnprofile/forms.py:232
 #, python-brace-format
 msgid "Username must be at least {min_length} characters."
 msgstr "用户名至少需要 {min_length} 个字符。"
 
-#: fnprofile/forms.py:240
+#: fnprofile/forms.py:239
 #, python-brace-format
 msgid "Username cannot exceed {max_length} characters."
 msgstr "用户名不要超过 {max_length} 个字符。"
 
-#: fnprofile/forms.py:246
+#: fnprofile/forms.py:245
 msgid "This username is already taken."
 msgstr "用户名已存在。"
 
-#: fnprofile/forms.py:255 fnprofile/forms.py:387
+#: fnprofile/forms.py:254 fnprofile/forms.py:386
 msgid "Please enter an email address."
 msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:264 fnprofile/models.py:90
+#: fnprofile/forms.py:263 fnprofile/models.py:90
 msgid "This email is already registered."
 msgstr ""
 "该电子邮箱地址已用于注册账号（如果是您的邮箱地址没有被验证可在登录页面验"
 "证）。"
 
-#: fnprofile/forms.py:276
+#: fnprofile/forms.py:275
 msgid "Username should not be part of your email address."
 msgstr "用户名不能是您的邮箱地址的一部分。"
 
-#: fnprofile/forms.py:303 fnprofile/forms.py:304
+#: fnprofile/forms.py:302 fnprofile/forms.py:303
 msgid "User Name"
 msgstr "用户名"
 
-#: fnprofile/forms.py:309 fnprofile/forms.py:311
+#: fnprofile/forms.py:308 fnprofile/forms.py:310
 msgid "Password"
 msgstr "密码"
 
-#: fnprofile/forms.py:316 fnprofile/forms.py:319
+#: fnprofile/forms.py:315 fnprofile/forms.py:318
 msgid "Confirm Password"
 msgstr "确认密码"
 
-#: fnprofile/forms.py:367
+#: fnprofile/forms.py:366
 msgid "name@example.domain"
 msgstr "账号名@样例.域名"
 
-#: fnprofile/forms.py:376
+#: fnprofile/forms.py:375
 msgid "Add a new email address to your account."
 msgstr "添加一个新的邮箱地址到您的账号。"
 
-#: fnprofile/forms.py:398
+#: fnprofile/forms.py:397
 msgid "You have already added this email."
 msgstr "您已经添加了该邮箱地址。"
 
-#: fnprofile/forms.py:405
+#: fnprofile/forms.py:404
 msgid "This email is already used by another user."
 msgstr "该邮箱地址已被其它用户注册。"
 
-#: fnprofile/forms.py:442
+#: fnprofile/forms.py:441
 msgid "Set as primary email"
 msgstr "设置为主邮箱地址"
 
-#: fnprofile/forms.py:445
+#: fnprofile/forms.py:444
 msgid "Primary email will be used for notifications."
 msgstr "主邮箱地址将用于消息通知。"
 
