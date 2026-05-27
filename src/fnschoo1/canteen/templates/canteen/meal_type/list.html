@@ -45,12 +45,12 @@
           </td>
           <td>
             <a class="text-primary"
-               target="_blank"
+               target="canteen/update_meal_type"
                onclick="open_small_window('{% url 'canteen:update_meal_type' meal_type.id %}'); return false; ">{% trans "Edit" %}</a>
             |
             <a class="text-danger"
                onclick="open_small_window('{% url 'canteen:delete_meal_type' meal_type.id %}'); return false; "
-               target="_blank">{% trans "Delete" %}</a>
+               target="canteen/delete_meal_type">{% trans "Delete" %}</a>
           </td>
         </tr>
       {% empty %}
@@ -61,7 +61,6 @@
     </tbody>
   </table>
   <script>
-    var list_ingredients_search_params_cookie_name = "list_ingredients"
     $(document).ready(function() {
       $('.ingredients-td').on('click', function() {
         var meal_type_id = $(this).data("meal_type_id")

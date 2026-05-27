@@ -659,8 +659,7 @@ def list_ingredients(request):
         ingredients = Ingredient.objects.filter(queries)
 
     orders = []
-    sort_cookie_name = "list_ingredients_sort"
-    orders = get_object_orders_from_cookie(request, sort_cookie_name)
+    orders = get_object_orders_from_cookie(request)
     if len(orders) < 1:
         ingredients = ingredients.order_by("storage_date", "category")
     else:

@@ -83,6 +83,7 @@ function set_simple_cookie(key, value) {
 }
 
 function get_search_params_from_cookie(name) {
+  name = name.replace(/^\/+|\/+$/g, '');
   var cookie_value = get_cookie(name)
   if (cookie_value == null) {
     return null
@@ -168,7 +169,7 @@ function open_small_window(url) {
   window.open(url, '_blank', windowFeatures)
 }
 
-function set_sort_element_arrows(cookie_name) {
+function set_sort_element_arrows(name) {
   var params = get_search_params_from_cookie(cookie_name)
   if (params == null) {
     return

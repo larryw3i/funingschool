@@ -157,13 +157,13 @@
               </td>
               <td class="">
                 <a class=""
-                   target="_blank"
+                   target="canteen/edit_ingredient"
                    onclick="open_small_window('{% url 'canteen:edit_ingredient' ingredient.id %}'); return false;">
                   {% trans "Edit" %}
                 </a>
                 |
                 <a class="text-danger"
-                   target="_blank"
+                   target="canteen/delete_ingredient"
                    onclick="open_small_window('{% url 'canteen:delete_ingredient' ingredient.id %}'); return false;">
                   {% trans "Delete" %}
                 </a>
@@ -203,8 +203,6 @@
   {{ total_price_title|json_script:"total_price_title" }}
   <script>
     var delete_ingredients_timer = null
-    var list_ingredients_sort_cookie_name = "list_ingredients_sort"
-    var search_params_cookie_name = "list_ingredients"
 
     $(document).ready(function() {
       $("#all_ingredients_checkbox").click(function(event) {
@@ -281,12 +279,11 @@
 
     function sort_ingredients(name) {
       var key = name
-      var cookie_name = list_ingredients_sort_cookie_name
-      set_sort_params_from_cookie(cookie_name, key)
+      set_sort_params_from_cookie(window.location.pathname, key)
       location.reload()
     }
     $(document).ready(function() {
-      var cookie_name = list_ingredients_sort_cookie_name
+      var cookie_name = window.location.pathname
       set_sort_element_arrows(cookie_name)
     })
 

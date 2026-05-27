@@ -288,8 +288,6 @@
 
   <script>
     var url = new URL(window.location.href)
-    var create_consumptions_sort_cookie_name = "create_consumptions_sort"
-    var search_params_cookie_name = "create_consumptions_search"
 
     var ingredient_ids = JSON.parse($("#ingredient_ids").text())
     var ingredient_ids_length = ingredient_ids.length
@@ -662,7 +660,7 @@
         return
       }
 
-      var cookie_name = create_consumptions_sort_cookie_name
+      var cookie_name = window.location.pathname
       var key = sort_key
       var consumptions_table = $("#consumptions_table")
       var consumptions_table_body = $(consumptions_table).find("tbody")
@@ -699,7 +697,7 @@
     }
 
     $(document).ready(function() {
-      var cookie_name = create_consumptions_sort_cookie_name
+      var cookie_name = window.location.pathname
       set_sort_element_arrows(cookie_name)
     });
 
