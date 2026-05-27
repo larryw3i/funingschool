@@ -570,6 +570,7 @@ def list_ingredients(request):
     ]
     context = {}
 
+    ingredients=Ingredient.objects
     queries = Q(user=request.user)
     if search_query:
 
@@ -628,7 +629,7 @@ def list_ingredients(request):
             name_queries |= Q(name__icontains=name)
         queries &= name_queries
 
-        ingredients = Ingredient.objects.filter(queries)
+        ingredients = ingredients.filter(queries)
 
     else:
 
@@ -654,13 +655,14 @@ def list_ingredients(request):
         else:
             context.update({"selected_meal_type": None})
 
-        ingredients = Ingredient.objects.filter(queries)
+        ingredients = ingredients.filter(queries)
 
-    orders = get_object_orders_from_cookie(request, model=Ingredient)
-    if len(orders) < 1:
-        ingredients = ingredients.order_by("storage_date", "category")
-    else:
-        ingredients = ingredients.order_by(*orders)
+    if ingredients.count():
+        orders = get_object_orders_from_cookie(request, model=Ingredient)
+        if len(orders) < 1:
+            ingredients = ingredients.order_by("storage_date", "category")
+        else:
+            ingredients = ingredients.order_by(*orders)
 
     page_size = int(search_params.get("page_size", 10))
     ingredients_len = len(ingredients)
