@@ -101,9 +101,11 @@ class Releases:
             + "\n"
             + "\n"
             + self.get_release_markdown(
-                additions = [
+                additions=[
                     _('- Service Agreement: Add the "Service Agreement" page.'),
-                    _('- Sorting: Add sorting functions for "Category" and "Meal Type".'),
+                    _(
+                        '- Sorting: Add sorting functions for "Category" and "Meal Type".'
+                    ),
                 ],
             )
             + self.get_release_markdown(
