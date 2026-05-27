@@ -311,7 +311,7 @@ def create_consumptions(request, ingredient_id=None):
     )
 
     ingredients = Ingredient.objects
-    orders = get_object_orders_from_cookie(request, "create_consumptions_sort")
+    orders = get_object_orders_from_cookie(request, model=Ingredient)
     ingredients = (
         ingredients.filter(queries).order_by(*orders)
         if orders
@@ -658,8 +658,7 @@ def list_ingredients(request):
 
         ingredients = Ingredient.objects.filter(queries)
 
-    orders = []
-    orders = get_object_orders_from_cookie(request)
+    orders = get_object_orders_from_cookie(request,model=Ingredient)
     if len(orders) < 1:
         ingredients = ingredients.order_by("storage_date", "category")
     else:
@@ -1053,6 +1052,11 @@ class MealTypeListView(LoginRequiredMixin, ListView):
     paginate_by = 10
     paginate_orphans = 2
 
+    def get_ordering(self):
+        request = self.request
+        self.ordering = get_object_orders_from_cookie(request,model=self.model)
+        return self.ordering
+
     def paginate_queryset(self,queryset,page_size):
         search_params = get_search_params_from_cookie(self.request)
         page = int(search_params.get("page",1))
@@ -1060,7 +1064,9 @@ class MealTypeListView(LoginRequiredMixin, ListView):
         return super().paginate_queryset(queryset,page_size)
 
     def get_queryset(self):
-        return MealType.objects.filter(user=self.request.user)
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
 
     def get_paginate_by(self, queryset):
         search_params = get_search_params_from_cookie(self.request)
@@ -1125,16 +1131,21 @@ class CategoryListView(LoginRequiredMixin, ListView):
     paginate_by = 10
     paginate_orphans = 2
 
+    def get_ordering(self):
+        request = self.request
+        self.ordering = get_object_orders_from_cookie(request,model=self.model)
+        return self.ordering
+
     def paginate_queryset(self,queryset,page_size):
         search_params = get_search_params_from_cookie(self.request)
         page = int(search_params.get("page",1))
         self.kwargs[self.page_kwarg]=page
         return super().paginate_queryset(queryset,page_size)
 
-
     def get_queryset(self):
-        return Category.objects.filter(user=self.request.user)
-    
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
 
     def get_paginate_by(self, queryset):
         search_params = get_search_params_from_cookie(self.request)

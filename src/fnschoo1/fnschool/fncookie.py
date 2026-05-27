@@ -22,15 +22,18 @@ def get_search_params_from_cookie(request, name=None):
     return QueryDict()
 
 
-def get_object_orders_from_cookie(request, name=None):
+def get_object_orders_from_cookie(request, name=None, model=None):
     name = name or request.path
     orders = []
     params = get_search_params_from_cookie(request, name)
+    field_names = [f.name for f in model._meta.fields] if model else None
+
     if params:
         for key, value in params.items():
             if key.startswith("sort_"):
                 key = key[5:]
-                orders.append(f"-{key}" if value == "-" else key)
+                if field_names and key in field_names:
+                    orders.append(f"-{key}" if value == "-" else key)
     orders.reverse()
     return orders or []
 

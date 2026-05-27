@@ -18,13 +18,12 @@
             ({{ categories_len }})
           {% endblocktrans%}
         </th>
-        <th>{% trans "Category Name" %}</th>
-        <th>{% trans "Abbreviation" %}</th>
-        <th>{% trans "Ingredients Count" %}</th>
-        <th>{% trans "Created at" %}</th>
-        <th>{% trans "Pin to consumptions top" %}</th>
-        <th>{% trans "Priority" %}</th>
-        <th>{% trans "Is Disabled" %}</th>
+        <th class='sort_name' onclick="sort_categories('name');">{% trans "Category Name" %}</th>
+        <th class='sort_abbreviation' onclick="sort_categories('abbreviation');">{% trans "Abbreviation" %}</th>
+        <th class="">{% trans "Ingredients Count" %}</th>
+        <th class='sort_created_at' onclick="sort_categories('created_at');">{% trans "Created at" %}</th>
+        <th class='sort_priority' onclick="sort_categories('priority');">{% trans "Priority" %}</th>
+        <th class='sort_is_disabled' onclick="sort_categories('is_disabled');">{% trans "Is Disabled" %}</th>
         <th>#</th>
       </tr>
     </thead>
@@ -40,11 +39,6 @@
             <span class="link-success">{{ category.ingredients_count }}</span>
           </td>
           <td>{{ category.created_at|date:"Y-m-d" }}</td>
-          <td>
-            {% if category.pin_to_consumptions_top %}
-              {% trans "Yes" %}
-            {% endif %}
-          </td>
           <td>{{ category.priority|default_if_none:'0' }}</td>
           <td>
             {% if category.is_disabled %}
@@ -76,6 +70,17 @@
         window.open("{% url 'canteen:list_ingredients' %}", "canteen__list_ingredients")
       });
     });
+
+    function sort_categories(name) {
+      var key = name
+      set_sort_params_from_cookie(window.location.pathname, key)
+      location.reload()
+    }
+
+    $(document).ready(function() {
+      var cookie_name = window.location.pathname
+      set_sort_element_arrows(cookie_name)
+    })
   </script>
   {% include "includes/_paginator.html" %}
 {% endblock %}

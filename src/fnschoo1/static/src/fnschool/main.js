@@ -127,7 +127,6 @@ function set_sort_params_from_cookie(name, key) {
   var element_text = trigger_element.text()
   element_text = element_text.replace(up_char, '').replace(down_char, '')
   trigger_element.text(element_text)
-
   set_sort_element_arrows(cookie_name)
 
   return params
@@ -170,11 +169,11 @@ function open_small_window(url) {
 }
 
 function set_sort_element_arrows(name) {
+  var cookie_name=name
   var params = get_search_params_from_cookie(cookie_name)
   if (params == null) {
     return
   }
-
   for (var [key, value] of params) {
     if (key.startsWith('sort_')) {
       var trigger_element = $(`.${key}`).add(`[name='${key}']`).first()
