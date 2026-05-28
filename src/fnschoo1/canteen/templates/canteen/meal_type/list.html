@@ -10,64 +10,66 @@
     <a class="btn btn-primary"
        onclick="open_small_window('{% url 'canteen:create_meal_type' %}'); return false;">{% trans "Add" %}</a>
   </div>
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <thead>
-      <tr>
-        <th>
-          {% blocktrans with meal_types_len=meal_types|length %}
-            ({{ meal_types_len }})
-          {% endblocktrans %}
-        </th>
-        <th class='sort_name' onclick="sort_meal_types('name');">
-          {% trans "Meal Type Name" %}
-        </th>
-        <th class='sort_abbreviation' onclick="sort_meal_types('abbreviation');">
-          {% trans "Abbreviation" %}
-        </th>
-        <th>{% trans "Ingredients Count" %}</th>
-        <th class='sort_created_at' onclick="sort_meal_types('created_at');">
-          {% trans "Created at" %}
-        </th>
-        <th class='sort_is_disabled' onclick="sort_meal_types('is_disabled');">
-          {% trans "Is Disabled" %}
-        </th>
-        <th>#</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for meal_type in meal_types %}
+  <div class="table-container table-container-objects">
+    <table class="table table-bordered table-striped table-hover table-condensed table-objects">
+      <thead>
         <tr>
-          <td>{{ forloop.counter }}</td>
-          <td>{{ meal_type.name }}</td>
-          <td>{{ meal_type.abbreviation_t }}</td>
-          <td class="ingredients-td"
-              style="cursor: pointer"
-              data-meal_type_id="{{ meal_type.id }}">
-            <span class="link-success">{{ meal_type.ingredients_count }}</span>
-          </td>
-          <td>{{ meal_type.created_at|date:"Y-m-d" }}</td>
-          <td>
-            {% if meal_type.is_disabled %}
-              {% trans "Yes" %}
-            {% endif %}
-          </td>
-          <td>
-            <a class="text-primary"
-               target="canteen/update_meal_type"
-               onclick="open_small_window('{% url 'canteen:update_meal_type' meal_type.id %}'); return false; ">{% trans "Edit" %}</a>
-            |
-            <a class="text-danger"
-               onclick="open_small_window('{% url 'canteen:delete_meal_type' meal_type.id %}'); return false; "
-               target="canteen/delete_meal_type">{% trans "Delete" %}</a>
-          </td>
+          <th>
+            {% blocktrans with meal_types_len=meal_types|length %}
+              ({{ meal_types_len }})
+            {% endblocktrans %}
+          </th>
+          <th class='sort_name' onclick="sort_meal_types('name');">
+            {% trans "Meal Type Name" %}
+          </th>
+          <th class='sort_abbreviation' onclick="sort_meal_types('abbreviation');">
+            {% trans "Abbreviation" %}
+          </th>
+          <th>{% trans "Ingredients Count" %}</th>
+          <th class='sort_created_at' onclick="sort_meal_types('created_at');">
+            {% trans "Created at" %}
+          </th>
+          <th class='sort_is_disabled' onclick="sort_meal_types('is_disabled');">
+            {% trans "Is Disabled" %}
+          </th>
+          <th>#</th>
         </tr>
-      {% empty %}
-        <tr>
-          <td colspan="2">{% trans "No meal types yet." %}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {% for meal_type in meal_types %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ meal_type.name }}</td>
+            <td>{{ meal_type.abbreviation_t }}</td>
+            <td class="ingredients-td"
+                style="cursor: pointer"
+                data-meal_type_id="{{ meal_type.id }}">
+              <span class="link-success">{{ meal_type.ingredients_count }}</span>
+            </td>
+            <td>{{ meal_type.created_at|date:"Y-m-d" }}</td>
+            <td>
+              {% if meal_type.is_disabled %}
+                {% trans "Yes" %}
+              {% endif %}
+            </td>
+            <td>
+              <a class="text-primary"
+                 target="canteen/update_meal_type"
+                 onclick="open_small_window('{% url 'canteen:update_meal_type' meal_type.id %}'); return false; ">{% trans "Edit" %}</a>
+              |
+              <a class="text-danger"
+                 onclick="open_small_window('{% url 'canteen:delete_meal_type' meal_type.id %}'); return false; "
+                 target="canteen/delete_meal_type">{% trans "Delete" %}</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="2">{% trans "No meal types yet." %}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
   <script>
     $(document).ready(function() {
       $('.ingredients-td').on('click', function() {

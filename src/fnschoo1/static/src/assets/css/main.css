@@ -1,7 +1,45 @@
+.table-container-objects {
+  overflow: auto;
+}
+.table-objects {
+  white-space: nowrap;
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  min-width: 100px;
+}
+.table-objects th:last-child,
+.table-objects td:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+}
+
+.table-objects thead th:last-child {
+  top: 0;
+  z-index: 3;
+}
+.table-objects th:last-child::after,
+.table-ingredient td:last-child::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #dee2e6;
+}
+.table-objects thead th {
+  position: sticky;
+  right: 0;
+  top: 0;
+  z-index: 3;
+}
+
 .btn-group.flex-wrap {
   gap: 5px;
 }
-.fn-highlight > td {
+.row-highlight > td {
   color: #00adff;
 }
 

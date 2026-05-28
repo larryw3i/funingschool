@@ -29,7 +29,7 @@ function make_table_row_highlight(query, time_data) {
     var seconds_diff = Math.floor((new Date() - new Date(time_value)) / 1000)
     if (seconds_diff < 46) {
       highlight_elements_toggled.push(element)
-      element.toggleClass('fn-highlight')
+      element.toggleClass('row-highlight')
       var table_container = $(element.closest('.table-container'))
       if (table_container.length) {
         var container = table_container
@@ -47,7 +47,7 @@ function make_table_row_highlight(query, time_data) {
   setTimeout(function () {
     $(highlight_elements_toggled).each(function (index, element) {
       element = $(element)
-      element.toggleClass('fn-highlight')
+      element.toggleClass('row-highlight')
     })
   }, 10 * 1000)
 }

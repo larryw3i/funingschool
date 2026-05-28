@@ -10,68 +10,70 @@
     <a class="btn btn-primary"
        onclick="open_small_window('{% url 'canteen:create_category' %}'); return false;">{% trans "Add" %}</a>
   </div>
-  <table class="table table-bordered table-striped table-hover table-condensed">
-    <thead>
-      <tr>
-        <th>
-          {% blocktrans with categories_len=categories|length %}
-            ({{ categories_len }})
-          {% endblocktrans%}
-        </th>
-        <th class='sort_name' onclick="sort_categories('name');">
-          {% trans "Category Name" %}
-        </th>
-        <th class='sort_abbreviation' onclick="sort_categories('abbreviation');">
-          {% trans "Abbreviation" %}
-        </th>
-        <th class="">{% trans "Ingredients Count" %}</th>
-        <th class='sort_created_at' onclick="sort_categories('created_at');">
-          {% trans "Created at" %}
-        </th>
-        <th class='sort_priority' onclick="sort_categories('priority');">
-          {% trans "Priority" %}
-        </th>
-        <th class='sort_is_disabled' onclick="sort_categories('is_disabled');">
-          {% trans "Is Disabled" %}
-        </th>
-        <th>#</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for category in categories %}
+  <div class="table-container table-container-objects">
+    <table class="table table-bordered table-striped table-hover table-condensed table-objects">
+      <thead>
         <tr>
-          <td>{{ forloop.counter }}</td>
-          <td>{{ category.name }}</td>
-          <td>{{ category.abbreviation_t }}</td>
-          <td class="ingredients-td"
-              style="cursor: pointer"
-              data-category_id="{{ category.id }}">
-            <span class="link-success">{{ category.ingredients_count }}</span>
-          </td>
-          <td>{{ category.created_at|date:"Y-m-d" }}</td>
-          <td>{{ category.priority|default_if_none:'0' }}</td>
-          <td>
-            {% if category.is_disabled %}
-              {% trans "Yes" %}
-            {% endif %}
-          </td>
-          <td>
-            <a class="text-primary"
-               target="canteen/update_category/{{ category.id }}"
-               onclick="open_small_window('{% url 'canteen:update_category' category.id %}'); return false; ">{% trans "Edit" %}</a>
-            |
-            <a class="text-danger"
-               onclick="open_small_window('{% url 'canteen:delete_category' category.id %}'); return false; "
-               target="canteen/delete_category/{{ category.id }}">{% trans "Delete" %}</a>
-          </td>
+          <th>
+            {% blocktrans with categories_len=categories|length %}
+              ({{ categories_len }})
+            {% endblocktrans%}
+          </th>
+          <th class='sort_name' onclick="sort_categories('name');">
+            {% trans "Category Name" %}
+          </th>
+          <th class='sort_abbreviation' onclick="sort_categories('abbreviation');">
+            {% trans "Abbreviation" %}
+          </th>
+          <th class="">{% trans "Ingredients Count" %}</th>
+          <th class='sort_created_at' onclick="sort_categories('created_at');">
+            {% trans "Created at" %}
+          </th>
+          <th class='sort_priority' onclick="sort_categories('priority');">
+            {% trans "Priority" %}
+          </th>
+          <th class='sort_is_disabled' onclick="sort_categories('is_disabled');">
+            {% trans "Is Disabled" %}
+          </th>
+          <th>#</th>
         </tr>
-      {% empty %}
-        <tr>
-          <td colspan="2">{% trans "No categories yet." %}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {% for category in categories %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ category.name }}</td>
+            <td>{{ category.abbreviation_t }}</td>
+            <td class="ingredients-td"
+                style="cursor: pointer"
+                data-category_id="{{ category.id }}">
+              <span class="link-success">{{ category.ingredients_count }}</span>
+            </td>
+            <td>{{ category.created_at|date:"Y-m-d" }}</td>
+            <td>{{ category.priority|default_if_none:'0' }}</td>
+            <td>
+              {% if category.is_disabled %}
+                {% trans "Yes" %}
+              {% endif %}
+            </td>
+            <td>
+              <a class="text-primary"
+                 target="canteen/update_category/{{ category.id }}"
+                 onclick="open_small_window('{% url 'canteen:update_category' category.id %}'); return false; ">{% trans "Edit" %}</a>
+              |
+              <a class="text-danger"
+                 onclick="open_small_window('{% url 'canteen:delete_category' category.id %}'); return false; "
+                 target="canteen/delete_category/{{ category.id }}">{% trans "Delete" %}</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="2">{% trans "No categories yet." %}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
   <script>
     $(document).ready(function() {
       $('.ingredients-td').on('click', function() {
