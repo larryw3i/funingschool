@@ -22,8 +22,11 @@ from django.utils import timezone
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views.generic import CreateView
-from fnschool import _, count_chinese_characters
-from fnschool.fncookie import get_object_orders_from_cookie
+from fnschool import _
+from fnschool.views import (
+    get_object_orders_from_cookie,
+    get_search_params_from_cookie,
+)
 
 from .fntoken import account_activation_token
 from .forms import (

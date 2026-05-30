@@ -52,9 +52,8 @@ function! s:update_tags()
     if empty(findfile('manage.py', '.;')) && empty(finddir('.git', '.;'))
         return
     endif
-    call job_start(['ctags', '-R', '--languages=Python', '--fields=+iaS+KS', expand('${PWD}/src')])
+    call job_start(['ctags', '-R', '--languages=Python,JavaScript', '--tag-relative=yes', '--fields=+iaS+KS', 'src'])
 endfunction
-
 autocmd BufWritePost *.py call s:update_tags()
 
 set exrc

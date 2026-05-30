@@ -32,8 +32,8 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext as _
 from django.views.generic import CreateView
 from fnschool import *
-from fnschool import _, count_chinese_characters
-from fnschool.fncookie import get_object_orders_from_cookie
+from fnschool import _
+from fnschool.views import get_object_orders_from_cookie
 
 resend_verification_email_time_interval = 5 * 60
 max_email_count = 8

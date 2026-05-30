@@ -1,0 +1,1043 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+home	src/fnschoo1/fnhome/views.py	/^def home(request):$/;"	function	access:public
+service_terms	src/fnschoo1/fnhome/views.py	/^def service_terms(request):$/;"	function	access:public
+FnhomeConfig	src/fnschoo1/fnhome/apps.py	/^class FnhomeConfig(AppConfig):$/;"	class	inherits:AppConfig
+default_auto_field	src/fnschoo1/fnhome/apps.py	/^    default_auto_field = "django.db.models.BigAutoField"$/;"	variable	class:FnhomeConfig
+name	src/fnschoo1/fnhome/apps.py	/^    name = "fnhome"$/;"	variable	class:FnhomeConfig
+app_name	src/fnschoo1/fnhome/urls.py	/^app_name = "fnhome"$/;"	variable
+urlpatterns	src/fnschoo1/fnhome/urls.py	/^urlpatterns = [$/;"	variable
+Migration	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0019_category_updated_at_ingredient_created_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^    operations = [$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="consumption",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            options={$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="ingredient",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            options={$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                blank=True,$/;"	variable	class:Migration
+max_length	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                max_length=100,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                null=True,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="abbreviation",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="Creating Date"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="Categories",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient category",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="date_of_using",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="Date"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="ingredient",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="consumptions",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.ingredient",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="category",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.category",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient Category",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_ignorable",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="meal_type",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.mealtype",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient Meal Type",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="quantity",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient Quantity",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="quantity_unit_name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                blank=True,$/;"	variable	class:Migration
+max_length	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                max_length=20,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                null=True,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Unit Name of Ingredient Quantity",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="storage_date",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="Storage Date"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="total_price",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DecimalField($/;"	variable	class:Migration
+decimal_places	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                decimal_places=2,$/;"	variable	class:Migration
+max_digits	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                max_digits=10,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient Total Price",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="User",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                blank=True,$/;"	variable	class:Migration
+max_length	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                max_length=100,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                null=True,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Abbreviation",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="Creating Date"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="meal_types",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0010_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient meal type",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^            name="amount_used",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^                verbose_name="消耗数量",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^            name="quantity",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0007_alter_consumption_amount_used_and_more.py	/^                verbose_name="数量",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^            name="category",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                blank=True,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                null=True,$/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                to="canteen.category",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                verbose_name="大类",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^            name="meal_type",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                blank=True,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                null=True,$/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                to="canteen.mealtype",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0028_alter_ingredient_category_alter_ingredient_meal_type.py	/^                verbose_name="餐类",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^    operations = [$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="consumption",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            options={$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="ingredient",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            options={$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="创建日期"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="已禁用"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField(max_length=100, verbose_name="食材大类名"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="pin_to_consumptions_top",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="置顶出库"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="Categories",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="大类",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="date_of_using",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="日期"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="ingredient",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="consumptions",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.ingredient",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="食材",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="已禁用"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="category",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.category",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="大类",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="禁用"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_ignorable",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="不入库"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="meal_type",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.mealtype",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="餐类",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField(max_length=100, verbose_name="食材名"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="quantity",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="数量",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="quantity_unit_name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="storage_date",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField($/;"	variable	class:Migration
+preserve_default	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            preserve_default=False,$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="total_price",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DecimalField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="用户",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="创建日期"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="已禁用"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField(max_length=100, verbose_name="餐类名称"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="meal_types",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0013_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="餐类",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^            field=models.DateTimeField(null=True, verbose_name="创建日期"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0017_ingredient_updated_at_alter_category_created_at_and_more.py	/^            field=models.DateTimeField(null=True, verbose_name="创建日期"),$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^    operations = [$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="consumption",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            options={$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="ingredient",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            options={$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                blank=True,$/;"	variable	class:Migration
+max_length	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                max_length=100,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                null=True,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="abbreviation",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="pin_to_consumptions_top",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="priority",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                blank=True,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                null=True,$/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Category Priority",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="Categories",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient category",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="amount_used",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Consuming Quantity",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="date_of_using",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="Date"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="ingredient",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="consumptions",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.ingredient",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="category",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.category",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient Category",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_ignorable",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="meal_type",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.mealtype",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient Meal Type",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="quantity",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient Quantity",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="quantity_unit_name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                blank=True,$/;"	variable	class:Migration
+max_length	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                max_length=20,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                null=True,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Unit Name of Ingredient Quantity",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="storage_date",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="Storage Date"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="total_price",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DecimalField($/;"	variable	class:Migration
+decimal_places	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                decimal_places=2,$/;"	variable	class:Migration
+max_digits	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                max_digits=10,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient Total Price",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                blank=True,$/;"	variable	class:Migration
+max_length	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                max_length=100,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                null=True,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Abbreviation",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="meal_types",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0023_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="Ingredient meal type",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^    operations = [$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="consumption",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            options={$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="ingredient",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            options={$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="已禁用"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField(max_length=100, verbose_name="食材大类名"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="pin_to_consumptions_top",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="置顶出库"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="priority",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                blank=True,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                null=True,$/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="优先级",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="Categories",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="大类",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="amount_used",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="消耗数量",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="date_of_using",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="日期"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="ingredient",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="consumptions",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.ingredient",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="食材",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="已禁用"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="category",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.category",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="大类",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="禁用"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_ignorable",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="不入库"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="meal_type",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to="canteen.mealtype",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="餐类",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField(max_length=100, verbose_name="食材名"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="quantity",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="数量",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="quantity_unit_name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="storage_date",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateField(verbose_name="入库日期"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="total_price",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DecimalField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="已禁用"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.CharField(max_length=100, verbose_name="餐类名称"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                related_name="meal_types",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0024_alter_consumption_options_alter_ingredient_options_and_more.py	/^                verbose_name="餐类",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0014_category_priority.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0014_category_priority.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0014_category_priority.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0014_category_priority.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0014_category_priority.py	/^            name="priority",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0014_category_priority.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0014_category_priority.py	/^                blank=True,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0014_category_priority.py	/^                null=True,$/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0014_category_priority.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0014_category_priority.py	/^                verbose_name="Category Priority",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            name="meal_type",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^                to="canteen.mealtype",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^                verbose_name="Meal type",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            field=models.CharField(max_length=100, verbose_name="餐类名称"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^                related_name="meal_types",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0009_alter_category_abbreviation_and_more.py	/^                verbose_name="食材餐类",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^    operations = [$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^            name="category",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^            options={"ordering": ["priority"]},$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^            name="priority",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^            field=models.IntegerField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^                blank=True,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^                null=True,$/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^                validators=[django.core.validators.MinValueValidator(0)],$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0015_alter_category_options_alter_category_priority.py	/^                verbose_name="优先级",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0022_alter_category_updated_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0025_alter_category_name.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0025_alter_category_name.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0025_alter_category_name.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0025_alter_category_name.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0025_alter_category_name.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0025_alter_category_name.py	/^            field=models.CharField($/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^            name="abbreviation",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^            field=models.CharField($/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                blank=True,$/;"	variable	class:Migration
+max_length	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                max_length=100,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                null=True,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                verbose_name="abbreviation",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^            name="MealType",$/;"	variable	class:Migration
+fields	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^            fields=[$/;"	variable	class:Migration
+auto_created	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        auto_created=True,$/;"	variable	class:Migration
+primary_key	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        primary_key=True,$/;"	variable	class:Migration
+serialize	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        serialize=False,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        verbose_name="ID",$/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        blank=True,$/;"	variable	class:Migration
+max_length	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        max_length=100,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        null=True,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        verbose_name="abbreviation",$/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        related_name="meal_types",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0008_category_abbreviation_mealtype.py	/^                        verbose_name="Ingredient meal type",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            field=models.DateField(verbose_name="创建日期"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            field=models.CharField(max_length=100, verbose_name="食材大类名"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^                related_name="Categories",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^                verbose_name="食材大类",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0005_alter_category_created_at_alter_category_name_and_more.py	/^            field=models.CharField(max_length=100, verbose_name="食材名"),$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0020_alter_ingredient_created_at.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0020_alter_ingredient_created_at.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0020_alter_ingredient_created_at.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0020_alter_ingredient_created_at.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0020_alter_ingredient_created_at.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0020_alter_ingredient_created_at.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0029_remove_consumption_is_disabled.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0029_remove_consumption_is_disabled.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0029_remove_consumption_is_disabled.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0029_remove_consumption_is_disabled.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0029_remove_consumption_is_disabled.py	/^            name="is_disabled",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0018_alter_ingredient_updated_at.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0018_alter_ingredient_updated_at.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0018_alter_ingredient_updated_at.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0018_alter_ingredient_updated_at.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0018_alter_ingredient_updated_at.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0018_alter_ingredient_updated_at.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^            field=models.CharField($/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^            name="Category",$/;"	variable	class:Migration
+fields	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^            fields=[$/;"	variable	class:Migration
+auto_created	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                        auto_created=True,$/;"	variable	class:Migration
+primary_key	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                        primary_key=True,$/;"	variable	class:Migration
+serialize	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                        serialize=False,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                        verbose_name="ID",$/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                        on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                        related_name="Categories",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                        to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                        verbose_name="Ingredient category",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^            name="category",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                on_delete=django.db.models.deletion.PROTECT,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                to="canteen.category",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0004_alter_ingredient_name_category_and_more.py	/^                verbose_name="食材大类",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0003_consumption_is_disabled_alter_ingredient_is_disabled.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0003_consumption_is_disabled_alter_ingredient_is_disabled.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0003_consumption_is_disabled_alter_ingredient_is_disabled.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0003_consumption_is_disabled_alter_ingredient_is_disabled.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0003_consumption_is_disabled_alter_ingredient_is_disabled.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0003_consumption_is_disabled_alter_ingredient_is_disabled.py	/^            field=models.BooleanField(default=False, verbose_name="已禁用"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0003_consumption_is_disabled_alter_ingredient_is_disabled.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0003_consumption_is_disabled_alter_ingredient_is_disabled.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0003_consumption_is_disabled_alter_ingredient_is_disabled.py	/^            field=models.BooleanField(default=False, verbose_name="已禁用"),$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0002_ingredient_is_disabled.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0002_ingredient_is_disabled.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0002_ingredient_is_disabled.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0002_ingredient_is_disabled.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0002_ingredient_is_disabled.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0002_ingredient_is_disabled.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0012_alter_ingredient_storage_date.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0012_alter_ingredient_storage_date.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0012_alter_ingredient_storage_date.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0012_alter_ingredient_storage_date.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0012_alter_ingredient_storage_date.py	/^            name="storage_date",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0012_alter_ingredient_storage_date.py	/^            field=models.DateField(null=True, verbose_name="Storage Date"),$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0016_consumption_unique_ingredient_date_of_using.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0016_consumption_unique_ingredient_date_of_using.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0016_consumption_unique_ingredient_date_of_using.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0016_consumption_unique_ingredient_date_of_using.py	/^            model_name="consumption",$/;"	variable	class:Migration
+constraint	src/fnschoo1/canteen/migrations/0016_consumption_unique_ingredient_date_of_using.py	/^            constraint=models.UniqueConstraint($/;"	variable	class:Migration
+fields	src/fnschoo1/canteen/migrations/0016_consumption_unique_ingredient_date_of_using.py	/^                fields=("ingredient", "date_of_using"),$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0016_consumption_unique_ingredient_date_of_using.py	/^                name="unique_ingredient_date_of_using",$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+initial	src/fnschoo1/canteen/migrations/0001_initial.py	/^    initial = True$/;"	variable	class:Migration
+dependencies	src/fnschoo1/canteen/migrations/0001_initial.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0001_initial.py	/^    operations = [$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0001_initial.py	/^            name="Ingredient",$/;"	variable	class:Migration
+fields	src/fnschoo1/canteen/migrations/0001_initial.py	/^            fields=[$/;"	variable	class:Migration
+auto_created	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        auto_created=True,$/;"	variable	class:Migration
+primary_key	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        primary_key=True,$/;"	variable	class:Migration
+serialize	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        serialize=False,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        verbose_name="ID",$/;"	variable	class:Migration
+blank	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        blank=True,$/;"	variable	class:Migration
+max_length	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        max_length=20,$/;"	variable	class:Migration
+null	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        null=True,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        verbose_name="数量单位",$/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        related_name="ingredients",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        verbose_name="用户",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0001_initial.py	/^            options={$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0001_initial.py	/^            name="Consumption",$/;"	variable	class:Migration
+fields	src/fnschoo1/canteen/migrations/0001_initial.py	/^            fields=[$/;"	variable	class:Migration
+auto_created	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        auto_created=True,$/;"	variable	class:Migration
+primary_key	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        primary_key=True,$/;"	variable	class:Migration
+serialize	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        serialize=False,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        verbose_name="ID",$/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        related_name="consumptions",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        to="canteen.ingredient",$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0001_initial.py	/^                        verbose_name="食材",$/;"	variable	class:Migration
+options	src/fnschoo1/canteen/migrations/0001_initial.py	/^            options={$/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            model_name="ingredient",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0021_alter_category_updated_at_and_more.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0011_category_pin_to_consumptions_top.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0011_category_pin_to_consumptions_top.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0011_category_pin_to_consumptions_top.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0011_category_pin_to_consumptions_top.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0011_category_pin_to_consumptions_top.py	/^            name="pin_to_consumptions_top",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0011_category_pin_to_consumptions_top.py	/^            field=models.BooleanField($/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0026_alter_category_name_alter_mealtype_name.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0026_alter_category_name_alter_mealtype_name.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0026_alter_category_name_alter_mealtype_name.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0026_alter_category_name_alter_mealtype_name.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0026_alter_category_name_alter_mealtype_name.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0026_alter_category_name_alter_mealtype_name.py	/^            field=models.CharField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0026_alter_category_name_alter_mealtype_name.py	/^            model_name="mealtype",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0026_alter_category_name_alter_mealtype_name.py	/^            name="name",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0026_alter_category_name_alter_mealtype_name.py	/^            field=models.CharField($/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0027_consumption_created_at_consumption_updated_at.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0027_consumption_created_at_consumption_updated_at.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0027_consumption_created_at_consumption_updated_at.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0027_consumption_created_at_consumption_updated_at.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0027_consumption_created_at_consumption_updated_at.py	/^            name="created_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0027_consumption_created_at_consumption_updated_at.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0027_consumption_created_at_consumption_updated_at.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0027_consumption_created_at_consumption_updated_at.py	/^            name="updated_at",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0027_consumption_created_at_consumption_updated_at.py	/^            field=models.DateTimeField($/;"	variable	class:Migration
+Migration	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^class Migration(migrations.Migration):$/;"	class	inherits:migrations.Migration
+dependencies	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^    dependencies = [$/;"	variable	class:Migration
+operations	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^    operations = [$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^            name="is_disabled",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^            field=models.BooleanField(default=False, verbose_name="已禁用"),$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^            model_name="category",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^            name="user",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^            field=models.ForeignKey($/;"	variable	class:Migration
+on_delete	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^                on_delete=django.db.models.deletion.CASCADE,$/;"	variable	class:Migration
+related_name	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^                related_name="Categories",$/;"	variable	class:Migration
+to	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^                to=settings.AUTH_USER_MODEL,$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^                verbose_name="大类",$/;"	variable	class:Migration
+model_name	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^            model_name="consumption",$/;"	variable	class:Migration
+name	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^            name="amount_used",$/;"	variable	class:Migration
+field	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^            field=models.DecimalField($/;"	variable	class:Migration
+decimal_places	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^                decimal_places=2,$/;"	variable	class:Migration
+max_digits	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^                max_digits=10,$/;"	variable	class:Migration
+validators	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^                validators=[$/;"	variable	class:Migration
+verbose_name	src/fnschoo1/canteen/migrations/0006_category_is_disabled_alter_category_user_and_more.py	/^                verbose_name="消耗数量",$/;"	variable	class:Migration
+local	src/fnschoo1/canteen/views.py	/^local = get_local()$/;"	variable
+decimal_prec	src/fnschoo1/canteen/views.py	/^decimal_prec = getattr(settings, "DECIMAL_PREC", 2)$/;"	variable
+split_ingredient_labels	src/fnschoo1/canteen/views.py	/^split_ingredient_labels = [_("(1)"), _("(2)")]$/;"	variable
+storage_date_header	src/fnschoo1/canteen/views.py	/^storage_date_header = ($/;"	variable
+ingredient_name_header	src/fnschoo1/canteen/views.py	/^ingredient_name_header = (_("Ingredient Name"), _("Name of Ingredient"))$/;"	variable
+meal_type_header	src/fnschoo1/canteen/views.py	/^meal_type_header = ($/;"	variable
+category_header	src/fnschoo1/canteen/views.py	/^category_header = ($/;"	variable
+quantity_header	src/fnschoo1/canteen/views.py	/^quantity_header = ($/;"	variable
+total_price_header	src/fnschoo1/canteen/views.py	/^total_price_header = ($/;"	variable
+quantity_unit_name_header	src/fnschoo1/canteen/views.py	/^quantity_unit_name_header = ($/;"	variable
+is_ignorable_header	src/fnschoo1/canteen/views.py	/^is_ignorable_header = ($/;"	variable
+date_patterns	src/fnschoo1/canteen/views.py	/^date_patterns = [$/;"	variable
+get_decimal_places	src/fnschoo1/canteen/views.py	/^def get_decimal_places(decimal_number):$/;"	function	access:public
+split_price	src/fnschoo1/canteen/views.py	/^def split_price(total_price, quantity, prec=2):$/;"	function	access:public
+create_consumptions	src/fnschoo1/canteen/views.py	/^def create_consumptions(request, ingredient_id=None):$/;"	function	access:public
+new_consumption	src/fnschoo1/canteen/views.py	/^def new_consumption(request, consumption_id=None):$/;"	function	access:public
+delete_ingredients	src/fnschoo1/canteen/views.py	/^def delete_ingredients(request):$/;"	function	access:public
+delete_ingredient	src/fnschoo1/canteen/views.py	/^def delete_ingredient(request, ingredient_id):$/;"	function	access:public
+edit_ingredient	src/fnschoo1/canteen/views.py	/^def edit_ingredient(request, ingredient_id):$/;"	function	access:public
+list_ingredients	src/fnschoo1/canteen/views.py	/^def list_ingredients(request):$/;"	function	access:public
+create_ingredients	src/fnschoo1/canteen/views.py	/^def create_ingredients(request):$/;"	function	access:public
+get_template_workbook_of_purchased_ingredients	src/fnschoo1/canteen/views.py	/^def get_template_workbook_of_purchased_ingredients(request):$/;"	function	access:public
+close_window	src/fnschoo1/canteen/views.py	/^def close_window(request):$/;"	function	access:public
+generate_spreadsheet	src/fnschoo1/canteen/views.py	/^def generate_spreadsheet(request, month):$/;"	function	access:public
+MealTypeDeleteView	src/fnschoo1/canteen/views.py	/^class MealTypeDeleteView(LoginRequiredMixin, DeleteView):$/;"	class	inherits:LoginRequiredMixin, DeleteView
+model	src/fnschoo1/canteen/views.py	/^    model = MealType$/;"	variable	class:MealTypeDeleteView
+template_name	src/fnschoo1/canteen/views.py	/^    template_name = "canteen\/meal_type\/delete.html"$/;"	variable	class:MealTypeDeleteView
+success_url	src/fnschoo1/canteen/views.py	/^    success_url = reverse_lazy("canteen:close_window")$/;"	variable	class:MealTypeDeleteView
+context_object_name	src/fnschoo1/canteen/views.py	/^    context_object_name = "meal_type"$/;"	variable	class:MealTypeDeleteView
+get_object	src/fnschoo1/canteen/views.py	/^    def get_object(self, queryset=None):$/;"	member	class:MealTypeDeleteView	access:public
+MealTypeUpdateView	src/fnschoo1/canteen/views.py	/^class MealTypeUpdateView(LoginRequiredMixin, UpdateView):$/;"	class	inherits:LoginRequiredMixin, UpdateView
+model	src/fnschoo1/canteen/views.py	/^    model = MealType$/;"	variable	class:MealTypeUpdateView
+template_name	src/fnschoo1/canteen/views.py	/^    template_name = "canteen\/meal_type\/update.html"$/;"	variable	class:MealTypeUpdateView
+success_url	src/fnschoo1/canteen/views.py	/^    success_url = reverse_lazy("canteen:close_window")$/;"	variable	class:MealTypeUpdateView
+form_class	src/fnschoo1/canteen/views.py	/^    form_class = MealTypeForm$/;"	variable	class:MealTypeUpdateView
+get_object	src/fnschoo1/canteen/views.py	/^    def get_object(self, queryset=None):$/;"	member	class:MealTypeUpdateView	access:public
+get_initial	src/fnschoo1/canteen/views.py	/^    def get_initial(self):$/;"	member	class:MealTypeUpdateView	access:public
+MealTypeCreateView	src/fnschoo1/canteen/views.py	/^class MealTypeCreateView(LoginRequiredMixin, CreateView):$/;"	class	inherits:LoginRequiredMixin, CreateView
+model	src/fnschoo1/canteen/views.py	/^    model = MealType$/;"	variable	class:MealTypeCreateView
+template_name	src/fnschoo1/canteen/views.py	/^    template_name = "canteen\/meal_type\/create.html"$/;"	variable	class:MealTypeCreateView
+success_url	src/fnschoo1/canteen/views.py	/^    success_url = reverse_lazy("canteen:close_window")$/;"	variable	class:MealTypeCreateView
+form_class	src/fnschoo1/canteen/views.py	/^    form_class = MealTypeForm$/;"	variable	class:MealTypeCreateView
+get_initial	src/fnschoo1/canteen/views.py	/^    def get_initial(self):$/;"	member	class:MealTypeCreateView	access:public
+form_valid	src/fnschoo1/canteen/views.py	/^    def form_valid(self, form):$/;"	member	class:MealTypeCreateView	access:public
+MealTypeListView	src/fnschoo1/canteen/views.py	/^class MealTypeListView(LoginRequiredMixin, ListView):$/;"	class	inherits:LoginRequiredMixin, ListView
+model	src/fnschoo1/canteen/views.py	/^    model = MealType$/;"	variable	class:MealTypeListView
+template_name	src/fnschoo1/canteen/views.py	/^    template_name = "canteen\/meal_type\/list.html"$/;"	variable	class:MealTypeListView
+context_object_name	src/fnschoo1/canteen/views.py	/^    context_object_name = "meal_types"$/;"	variable	class:MealTypeListView
+ordering	src/fnschoo1/canteen/views.py	/^    ordering = ["-created_at"]$/;"	variable	class:MealTypeListView
+paginate_by	src/fnschoo1/canteen/views.py	/^    paginate_by = 10$/;"	variable	class:MealTypeListView
+paginate_orphans	src/fnschoo1/canteen/views.py	/^    paginate_orphans = 2$/;"	variable	class:MealTypeListView
+get_ordering	src/fnschoo1/canteen/views.py	/^    def get_ordering(self):$/;"	member	class:MealTypeListView	access:public
+paginate_queryset	src/fnschoo1/canteen/views.py	/^    def paginate_queryset(self, queryset, page_size):$/;"	member	class:MealTypeListView	access:public
+get_queryset	src/fnschoo1/canteen/views.py	/^    def get_queryset(self):$/;"	member	class:MealTypeListView	access:public
+get_paginate_by	src/fnschoo1/canteen/views.py	/^    def get_paginate_by(self, queryset):$/;"	member	class:MealTypeListView	access:public
+CategoryDeleteView	src/fnschoo1/canteen/views.py	/^class CategoryDeleteView(LoginRequiredMixin, DeleteView):$/;"	class	inherits:LoginRequiredMixin, DeleteView
+model	src/fnschoo1/canteen/views.py	/^    model = Category$/;"	variable	class:CategoryDeleteView
+template_name	src/fnschoo1/canteen/views.py	/^    template_name = "canteen\/category\/delete.html"$/;"	variable	class:CategoryDeleteView
+success_url	src/fnschoo1/canteen/views.py	/^    success_url = reverse_lazy("canteen:close_window")$/;"	variable	class:CategoryDeleteView
+context_object_name	src/fnschoo1/canteen/views.py	/^    context_object_name = "category"$/;"	variable	class:CategoryDeleteView
+get_object	src/fnschoo1/canteen/views.py	/^    def get_object(self, queryset=None):$/;"	member	class:CategoryDeleteView	access:public
+CategoryUpdateView	src/fnschoo1/canteen/views.py	/^class CategoryUpdateView(LoginRequiredMixin, UpdateView):$/;"	class	inherits:LoginRequiredMixin, UpdateView
+model	src/fnschoo1/canteen/views.py	/^    model = Category$/;"	variable	class:CategoryUpdateView
+template_name	src/fnschoo1/canteen/views.py	/^    template_name = "canteen\/category\/update.html"$/;"	variable	class:CategoryUpdateView
+success_url	src/fnschoo1/canteen/views.py	/^    success_url = reverse_lazy("canteen:close_window")$/;"	variable	class:CategoryUpdateView
+form_class	src/fnschoo1/canteen/views.py	/^    form_class = CategoryForm$/;"	variable	class:CategoryUpdateView
+get_object	src/fnschoo1/canteen/views.py	/^    def get_object(self, queryset=None):$/;"	member	class:CategoryUpdateView	access:public
+get_initial	src/fnschoo1/canteen/views.py	/^    def get_initial(self):$/;"	member	class:CategoryUpdateView	access:public
+CategoryCreateView	src/fnschoo1/canteen/views.py	/^class CategoryCreateView(LoginRequiredMixin, CreateView):$/;"	class	inherits:LoginRequiredMixin, CreateView
+model	src/fnschoo1/canteen/views.py	/^    model = Category$/;"	variable	class:CategoryCreateView
+template_name	src/fnschoo1/canteen/views.py	/^    template_name = "canteen\/category\/create.html"$/;"	variable	class:CategoryCreateView
+success_url	src/fnschoo1/canteen/views.py	/^    success_url = reverse_lazy("canteen:close_window")$/;"	variable	class:CategoryCreateView
+form_class	src/fnschoo1/canteen/views.py	/^    form_class = CategoryForm$/;"	variable	class:CategoryCreateView
+get_initial	src/fnschoo1/canteen/views.py	/^    def get_initial(self):$/;"	member	class:CategoryCreateView	access:public
+form_valid	src/fnschoo1/canteen/views.py	/^    def form_valid(self, form):$/;"	member	class:CategoryCreateView	access:public
+CategoryListView	src/fnschoo1/canteen/views.py	/^class CategoryListView(LoginRequiredMixin, ListView):$/;"	class	inherits:LoginRequiredMixin, ListView
+model	src/fnschoo1/canteen/views.py	/^    model = Category$/;"	variable	class:CategoryListView
+template_name	src/fnschoo1/canteen/views.py	/^    template_name = "canteen\/category\/list.html"$/;"	variable	class:CategoryListView
+context_object_name	src/fnschoo1/canteen/views.py	/^    context_object_name = "categories"$/;"	variable	class:CategoryListView
+paginate_by	src/fnschoo1/canteen/views.py	/^    paginate_by = 10$/;"	variable	class:CategoryListView
+paginate_orphans	src/fnschoo1/canteen/views.py	/^    paginate_orphans = 2$/;"	variable	class:CategoryListView
+get_ordering	src/fnschoo1/canteen/views.py	/^    def get_ordering(self):$/;"	member	class:CategoryListView	access:public
+paginate_queryset	src/fnschoo1/canteen/views.py	/^    def paginate_queryset(self, queryset, page_size):$/;"	member	class:CategoryListView	access:public
+get_queryset	src/fnschoo1/canteen/views.py	/^    def get_queryset(self):$/;"	member	class:CategoryListView	access:public
+get_paginate_by	src/fnschoo1/canteen/views.py	/^    def get_paginate_by(self, queryset):$/;"	member	class:CategoryListView	access:public
+IngredientCreateView	src/fnschoo1/canteen/views.py	/^class IngredientCreateView(LoginRequiredMixin, CreateView):$/;"	class	inherits:LoginRequiredMixin, CreateView
+model	src/fnschoo1/canteen/views.py	/^    model = Ingredient$/;"	variable	class:IngredientCreateView
+template_name	src/fnschoo1/canteen/views.py	/^    template_name = "canteen\/ingredient\/create_one.html"$/;"	variable	class:IngredientCreateView
+success_url	src/fnschoo1/canteen/views.py	/^    success_url = reverse_lazy("canteen:close_window")$/;"	variable	class:IngredientCreateView
+form_class	src/fnschoo1/canteen/views.py	/^    form_class = IngredientForm$/;"	variable	class:IngredientCreateView
+get_initial	src/fnschoo1/canteen/views.py	/^    def get_initial(self):$/;"	member	class:IngredientCreateView	access:public
+form_valid	src/fnschoo1/canteen/views.py	/^    def form_valid(self, form):$/;"	member	class:IngredientCreateView	access:public
+CanteenConfig	src/fnschoo1/canteen/apps.py	/^class CanteenConfig(AppConfig):$/;"	class	inherits:AppConfig
+default_auto_field	src/fnschoo1/canteen/apps.py	/^    default_auto_field = "django.db.models.BigAutoField"$/;"	variable	class:CanteenConfig
+name	src/fnschoo1/canteen/apps.py	/^    name = "canteen"$/;"	variable	class:CanteenConfig
+meal_type_name_0	src/fnschoo1/canteen/models.py	/^meal_type_name_0 = _("Meal type 0")$/;"	variable
+category_name_0	src/fnschoo1/canteen/models.py	/^category_name_0 = _("Category Name 0")$/;"	variable
+yes_str	src/fnschoo1/canteen/models.py	/^yes_str = _("Yes")$/;"	variable
+no_str	src/fnschoo1/canteen/models.py	/^no_str = _("No")$/;"	variable
+MealType	src/fnschoo1/canteen/models.py	/^class MealType(models.Model):$/;"	class	inherits:models.Model
+user	src/fnschoo1/canteen/models.py	/^    user = models.ForeignKey($/;"	variable	class:MealType
+to	src/fnschoo1/canteen/models.py	/^        to=settings.AUTH_USER_MODEL,$/;"	variable	class:MealType
+on_delete	src/fnschoo1/canteen/models.py	/^        on_delete=models.CASCADE,$/;"	variable	class:MealType
+related_name	src/fnschoo1/canteen/models.py	/^        related_name="meal_types",$/;"	variable	class:MealType
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Ingredient meal type"),$/;"	variable	class:MealType
+name	src/fnschoo1/canteen/models.py	/^    name = models.CharField($/;"	variable	class:MealType
+abbreviation	src/fnschoo1/canteen/models.py	/^    abbreviation = models.CharField($/;"	variable	class:MealType
+created_at	src/fnschoo1/canteen/models.py	/^    created_at = models.DateTimeField($/;"	variable	class:MealType
+null	src/fnschoo1/canteen/models.py	/^        null=True,$/;"	variable	class:MealType
+blank	src/fnschoo1/canteen/models.py	/^        blank=True,$/;"	variable	class:MealType
+auto_now_add	src/fnschoo1/canteen/models.py	/^        auto_now_add=True,$/;"	variable	class:MealType
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Creating Date"),$/;"	variable	class:MealType
+updated_at	src/fnschoo1/canteen/models.py	/^    updated_at = models.DateTimeField($/;"	variable	class:MealType
+is_disabled	src/fnschoo1/canteen/models.py	/^    is_disabled = models.BooleanField($/;"	variable	class:MealType
+__str__	src/fnschoo1/canteen/models.py	/^    def __str__(self):$/;"	member	class:MealType	file:	access:private
+is_disabled_t	src/fnschoo1/canteen/models.py	/^    def is_disabled_t(self):$/;"	member	class:MealType	access:public
+abbreviation_t	src/fnschoo1/canteen/models.py	/^    def abbreviation_t(self):$/;"	member	class:MealType	access:public
+ingredients_count	src/fnschoo1/canteen/models.py	/^    def ingredients_count(self):$/;"	member	class:MealType	access:public
+Category	src/fnschoo1/canteen/models.py	/^class Category(models.Model):$/;"	class	inherits:models.Model
+user	src/fnschoo1/canteen/models.py	/^    user = models.ForeignKey($/;"	variable	class:Category
+to	src/fnschoo1/canteen/models.py	/^        to=settings.AUTH_USER_MODEL,$/;"	variable	class:Category
+on_delete	src/fnschoo1/canteen/models.py	/^        on_delete=models.CASCADE,$/;"	variable	class:Category
+related_name	src/fnschoo1/canteen/models.py	/^        related_name="Categories",$/;"	variable	class:Category
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Ingredient category"),$/;"	variable	class:Category
+name	src/fnschoo1/canteen/models.py	/^    name = models.CharField($/;"	variable	class:Category
+abbreviation	src/fnschoo1/canteen/models.py	/^    abbreviation = models.CharField($/;"	variable	class:Category
+created_at	src/fnschoo1/canteen/models.py	/^    created_at = models.DateTimeField($/;"	variable	class:Category
+updated_at	src/fnschoo1/canteen/models.py	/^    updated_at = models.DateTimeField($/;"	variable	class:Category
+is_disabled	src/fnschoo1/canteen/models.py	/^    is_disabled = models.BooleanField($/;"	variable	class:Category
+priority	src/fnschoo1/canteen/models.py	/^    priority = models.IntegerField($/;"	variable	class:Category
+null	src/fnschoo1/canteen/models.py	/^        null=True,$/;"	variable	class:Category
+blank	src/fnschoo1/canteen/models.py	/^        blank=True,$/;"	variable	class:Category
+validators	src/fnschoo1/canteen/models.py	/^        validators=[$/;"	variable	class:Category
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Category Priority"),$/;"	variable	class:Category
+pin_to_consumptions_top	src/fnschoo1/canteen/models.py	/^    pin_to_consumptions_top = models.BooleanField($/;"	variable	class:Category
+Meta	src/fnschoo1/canteen/models.py	/^    class Meta:$/;"	class	class:Category	inherits:
+ordering	src/fnschoo1/canteen/models.py	/^        ordering = ["priority"]$/;"	variable	class:Category.Meta
+__str__	src/fnschoo1/canteen/models.py	/^    def __str__(self):$/;"	member	class:Category	file:	access:private
+ingredients_count	src/fnschoo1/canteen/models.py	/^    def ingredients_count(self):$/;"	member	class:Category	access:public
+abbreviation_t	src/fnschoo1/canteen/models.py	/^    def abbreviation_t(self):$/;"	member	class:Category	access:public
+Ingredient	src/fnschoo1/canteen/models.py	/^class Ingredient(models.Model):$/;"	class	inherits:models.Model
+user	src/fnschoo1/canteen/models.py	/^    user = models.ForeignKey($/;"	variable	class:Ingredient
+to	src/fnschoo1/canteen/models.py	/^        to=settings.AUTH_USER_MODEL,$/;"	variable	class:Ingredient
+on_delete	src/fnschoo1/canteen/models.py	/^        on_delete=models.CASCADE,$/;"	variable	class:Ingredient
+related_name	src/fnschoo1/canteen/models.py	/^        related_name="ingredients",$/;"	variable	class:Ingredient
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("User"),$/;"	variable	class:Ingredient
+storage_date	src/fnschoo1/canteen/models.py	/^    storage_date = models.DateField(verbose_name=_("Storage Date"))$/;"	variable	class:Ingredient
+created_at	src/fnschoo1/canteen/models.py	/^    created_at = models.DateTimeField($/;"	variable	class:Ingredient
+null	src/fnschoo1/canteen/models.py	/^        null=True,$/;"	variable	class:Ingredient
+blank	src/fnschoo1/canteen/models.py	/^        blank=True,$/;"	variable	class:Ingredient
+auto_now_add	src/fnschoo1/canteen/models.py	/^        auto_now_add=True,$/;"	variable	class:Ingredient
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Time of creating"),$/;"	variable	class:Ingredient
+updated_at	src/fnschoo1/canteen/models.py	/^    updated_at = models.DateTimeField($/;"	variable	class:Ingredient
+name	src/fnschoo1/canteen/models.py	/^    name = models.CharField(max_length=100, verbose_name=_("Ingredient Name"))$/;"	variable	class:Ingredient
+meal_type	src/fnschoo1/canteen/models.py	/^    meal_type = models.ForeignKey($/;"	variable	class:Ingredient
+on_delete	src/fnschoo1/canteen/models.py	/^        on_delete=models.PROTECT,$/;"	variable	class:Ingredient
+null	src/fnschoo1/canteen/models.py	/^        null=True,$/;"	variable	class:Ingredient
+blank	src/fnschoo1/canteen/models.py	/^        blank=True,$/;"	variable	class:Ingredient
+related_name	src/fnschoo1/canteen/models.py	/^        related_name="ingredients",$/;"	variable	class:Ingredient
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Ingredient Meal Type"),$/;"	variable	class:Ingredient
+category	src/fnschoo1/canteen/models.py	/^    category = models.ForeignKey($/;"	variable	class:Ingredient
+on_delete	src/fnschoo1/canteen/models.py	/^        on_delete=models.PROTECT,$/;"	variable	class:Ingredient
+null	src/fnschoo1/canteen/models.py	/^        null=True,$/;"	variable	class:Ingredient
+blank	src/fnschoo1/canteen/models.py	/^        blank=True,$/;"	variable	class:Ingredient
+related_name	src/fnschoo1/canteen/models.py	/^        related_name="ingredients",$/;"	variable	class:Ingredient
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Ingredient Category"),$/;"	variable	class:Ingredient
+quantity	src/fnschoo1/canteen/models.py	/^    quantity = models.IntegerField($/;"	variable	class:Ingredient
+validators	src/fnschoo1/canteen/models.py	/^        validators=[$/;"	variable	class:Ingredient
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Ingredient Quantity"),$/;"	variable	class:Ingredient
+quantity_unit_name	src/fnschoo1/canteen/models.py	/^    quantity_unit_name = models.CharField($/;"	variable	class:Ingredient
+max_length	src/fnschoo1/canteen/models.py	/^        max_length=20,$/;"	variable	class:Ingredient
+null	src/fnschoo1/canteen/models.py	/^        null=True,$/;"	variable	class:Ingredient
+blank	src/fnschoo1/canteen/models.py	/^        blank=True,$/;"	variable	class:Ingredient
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Unit Name of Ingredient Quantity"),$/;"	variable	class:Ingredient
+total_price	src/fnschoo1/canteen/models.py	/^    total_price = models.DecimalField($/;"	variable	class:Ingredient
+max_digits	src/fnschoo1/canteen/models.py	/^        max_digits=10,$/;"	variable	class:Ingredient
+decimal_places	src/fnschoo1/canteen/models.py	/^        decimal_places=2,$/;"	variable	class:Ingredient
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Ingredient Total Price"),$/;"	variable	class:Ingredient
+is_ignorable	src/fnschoo1/canteen/models.py	/^    is_ignorable = models.BooleanField($/;"	variable	class:Ingredient
+is_disabled	src/fnschoo1/canteen/models.py	/^    is_disabled = models.BooleanField($/;"	variable	class:Ingredient
+__init__	src/fnschoo1/canteen/models.py	/^    def __init__(self, *args, **kwargs):$/;"	member	class:Ingredient	access:public
+unit_price	src/fnschoo1/canteen/models.py	/^    def unit_price(self):$/;"	member	class:Ingredient	access:public
+cleaned_consumptions	src/fnschoo1/canteen/models.py	/^    def cleaned_consumptions(self):$/;"	member	class:Ingredient	access:public
+consuming_quantity	src/fnschoo1/canteen/models.py	/^    def consuming_quantity(self):$/;"	member	class:Ingredient	access:public
+get_consuming_quantity	src/fnschoo1/canteen/models.py	/^    def get_consuming_quantity(self, final_time):$/;"	member	class:Ingredient	access:public
+get_remaining_quantity	src/fnschoo1/canteen/models.py	/^    def get_remaining_quantity(self, final_time):$/;"	member	class:Ingredient	access:public
+remaining_quantity	src/fnschoo1/canteen/models.py	/^    def remaining_quantity(self):$/;"	member	class:Ingredient	access:public
+Meta	src/fnschoo1/canteen/models.py	/^    class Meta:$/;"	class	class:Ingredient	inherits:
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name = "Ingredient"$/;"	variable	class:Ingredient.Meta
+verbose_name_plural	src/fnschoo1/canteen/models.py	/^        verbose_name_plural = _("Ingredient List")$/;"	variable	class:Ingredient.Meta
+__str__	src/fnschoo1/canteen/models.py	/^    def __str__(self):$/;"	member	class:Ingredient	file:	access:private
+is_ignorable_t	src/fnschoo1/canteen/models.py	/^    def is_ignorable_t(self):$/;"	member	class:Ingredient	access:public
+is_disabled_t	src/fnschoo1/canteen/models.py	/^    def is_disabled_t(self):$/;"	member	class:Ingredient	access:public
+category_t	src/fnschoo1/canteen/models.py	/^    def category_t(self):$/;"	member	class:Ingredient	access:public
+meal_type_t	src/fnschoo1/canteen/models.py	/^    def meal_type_t(self):$/;"	member	class:Ingredient	access:public
+Consumption	src/fnschoo1/canteen/models.py	/^class Consumption(models.Model):$/;"	class	inherits:models.Model
+ingredient	src/fnschoo1/canteen/models.py	/^    ingredient = models.ForeignKey($/;"	variable	class:Consumption
+on_delete	src/fnschoo1/canteen/models.py	/^        on_delete=models.CASCADE,$/;"	variable	class:Consumption
+related_name	src/fnschoo1/canteen/models.py	/^        related_name="consumptions",$/;"	variable	class:Consumption
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Ingredient"),$/;"	variable	class:Consumption
+date_of_using	src/fnschoo1/canteen/models.py	/^    date_of_using = models.DateField(verbose_name=_("Date"))$/;"	variable	class:Consumption
+amount_used	src/fnschoo1/canteen/models.py	/^    amount_used = models.IntegerField($/;"	variable	class:Consumption
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Consuming Quantity"),$/;"	variable	class:Consumption
+validators	src/fnschoo1/canteen/models.py	/^        validators=[MinValueValidator(0)],$/;"	variable	class:Consumption
+created_at	src/fnschoo1/canteen/models.py	/^    created_at = models.DateTimeField($/;"	variable	class:Consumption
+null	src/fnschoo1/canteen/models.py	/^        null=True,$/;"	variable	class:Consumption
+blank	src/fnschoo1/canteen/models.py	/^        blank=True,$/;"	variable	class:Consumption
+auto_now_add	src/fnschoo1/canteen/models.py	/^        auto_now_add=True,$/;"	variable	class:Consumption
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name=_("Time of creating"),$/;"	variable	class:Consumption
+updated_at	src/fnschoo1/canteen/models.py	/^    updated_at = models.DateTimeField($/;"	variable	class:Consumption
+Meta	src/fnschoo1/canteen/models.py	/^    class Meta:$/;"	class	class:Consumption	inherits:
+verbose_name	src/fnschoo1/canteen/models.py	/^        verbose_name = _("Consumption Record")$/;"	variable	class:Consumption.Meta
+verbose_name_plural	src/fnschoo1/canteen/models.py	/^        verbose_name_plural = _("Consumption Records")$/;"	variable	class:Consumption.Meta
+ordering	src/fnschoo1/canteen/models.py	/^        ordering = ["-date_of_using"]$/;"	variable	class:Consumption.Meta
+constraints	src/fnschoo1/canteen/models.py	/^        constraints = [$/;"	variable

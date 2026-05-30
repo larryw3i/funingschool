@@ -44,8 +44,12 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from fnschool import _, count_chinese_characters, get_search_params_from_cookie
-from fnschool.fncookie import get_object_orders_from_cookie
+from fnschool import _
+from fnschool.local import get_local
+from fnschool.views import (
+    get_object_orders_from_cookie,
+    get_search_params_from_cookie,
+)
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font
@@ -69,6 +73,7 @@ from .models import (
 
 # Create your views here.
 
+local = get_local()
 decimal_prec = getattr(settings, "DECIMAL_PREC", 2)
 split_ingredient_labels = [_("(1)"), _("(2)")]
 
@@ -946,7 +951,7 @@ def get_template_workbook_of_purchased_ingredients(request):
 
         h_cell.value = h
         column_letter = get_column_letter(i + 1)
-        hans_len = count_chinese_characters(h)
+        hans_len = local.get_char_count(h)
         hans_len = (hans_len + 2) if hans_len else hans_len
         ws.column_dimensions[column_letter].width = len(h) + hans_len + 2
         if c:

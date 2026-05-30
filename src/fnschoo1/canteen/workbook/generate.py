@@ -40,7 +40,6 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from fnschool import count_chinese_characters
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
@@ -54,7 +53,7 @@ from ..forms import (
 )
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
-from .spreadsheet import MealTypeWorkbook, get_CNY_TEXT
+from .spreadsheet import MealTypeWorkbook
 
 
 def get_workbook_zip(request, month, timestamp):

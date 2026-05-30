@@ -40,7 +40,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from fnschool import count_chinese_characters
+from fnschool.local import get_local, is_zh_CN
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
@@ -55,120 +55,7 @@ from ..forms import (
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
 
-
-def get_CNY_TEXT(amount):
-    units = {
-        "0": "\u96f6",  # ling2
-        "1": "\u58f9",  # yi1
-        "2": "\u8d30",  # er4
-        "3": "\u53c1",  # san1
-        "4": "\u8086",  # si4
-        "5": "\u4f0d",  # wu3
-        "6": "\u9646",  # liu4
-        "7": "\u67d2",  # qi1
-        "8": "\u634c",  # ba1
-        "9": "\u7396",  # jiu3
-    }
-
-    levels = [
-        "",
-        "\u62fe",  # shi2
-        "\u4f70",  # bai3
-        "\u4edf",  # qian1
-        "\u4e07",  # wan4
-        "\u4ebf",  # yi4
-        "\u5143",  # yuan2
-        "\u89d2",  # jiao3
-        "\u5206",  # fen1
-        "\u6574",  # zheng3
-    ]
-
-    is_negative = False
-    if amount < 0:
-        is_negative = True
-        amount = abs(amount)
-    if amount == 0:
-        return "\u96f6\u5143\u6574"  # ling2 yuan2 zheng3.
-
-    amount = Decimal(str(amount)).quantize(
-        Decimal("0.00"), rounding=ROUND_HALF_UP
-    )
-    amount_str = str(amount)
-
-    integer_part = None
-    decimal_part = None
-    if "." in amount_str:
-        integer_part, decimal_part = amount_str.split(".")
-    else:
-        integer_part = amount_str
-        decimal_part = "00"
-
-    result = []
-    integer_part = integer_part.zfill(16)
-
-    groups = [
-        integer_part[-16:-12],
-        integer_part[-12:-8],
-        integer_part[-8:-4],
-        integer_part[-4:],
-    ]
-
-    group_names = [
-        "\u4e07",  # wan4
-        "\u4ebf",  # yi4
-        "\u4e07",  # wan4
-        "\u5143",  # yuan2
-    ]
-
-    for i, group in enumerate(groups):
-        group = group.lstrip("0")
-        if not group:
-            continue
-
-        for j, digit in enumerate(group):
-            if digit == "0":
-                if result and result[-1] != "\u96f6":  # \\u96f6 is ling2 .
-                    result.append("\u96f6")  # \\u96f6 is ling2 .
-            else:
-                result.append(units[digit])
-
-                if len(group) - j - 1 > 0:
-                    result.append(levels[len(group) - j - 1])
-
-        if group_names[i]:
-            result.append(group_names[i])
-
-    if decimal_part != "00":
-        if decimal_part[0] != "0":
-            result.append(units[decimal_part[0]])
-            result.append("\u89d2")  # \\u89d2 is jiao3 .
-
-        if decimal_part[1] != "0":
-            result.append(units[decimal_part[1]])
-            result.append("\u5206")  # \\u5206 is fen1 .
-    else:
-        result.append("\u6574")  # \\u6574 is zheng3 .
-
-    output = "".join(result)
-
-    output = re.sub("\u96f6+", "\u96f6", output)
-    output = re.sub("\u96f6([\u4e07\u4ebf])", r"\1", output)
-    output = re.sub("\u96f6\u5143", "\u5143", output)
-    output = re.sub("\u96f6\u89d2\u96f6\u5206", "", output)
-    output = re.sub("\u96f6\u5206", "", output)
-
-    if output.startswith("\u58f9\u62fe"):
-        output = output.replace("\u58f9\u62fe", "\u62fe", 1)
-
-    if is_negative:
-        output = "\u8d1f" + output
-
-    return output
-
-
-def is_zh_CN():
-    lang = translation.get_language()
-    return lang.lower() in ["zh-cn", "zh-hans"]
+local = get_local()
 
 
 def set_column_width_in_inches(worksheet, column, inches):
@@ -257,7 +144,9 @@ class MealTypeWorkbook:
         ).all()
         self.meal_type = meal_type
         self.categories = categories
-        self.is_zh_CN = is_zh_CN()
+
+        global is_zh_CN
+        self.is_zh_CN = is_zh_CN
 
         self._is_school = None
 
@@ -381,7 +270,7 @@ class MealTypeWorkbook:
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
-                total_price_text=get_CNY_TEXT(summary_total_price),
+                total_price_text=local.get_numeral(summary_total_price),
                 total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
@@ -568,7 +457,7 @@ class MealTypeWorkbook:
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
-                total_price_text=get_CNY_TEXT(summary_total_price),
+                total_price_text=local.get_numeral(summary_total_price),
                 total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
@@ -730,7 +619,7 @@ class MealTypeWorkbook:
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
-                total_price_text=get_CNY_TEXT(summary_total_price),
+                total_price_text=local.get_numeral(summary_total_price),
                 total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
