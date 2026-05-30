@@ -52,9 +52,10 @@ function! s:update_tags()
     if empty(findfile('manage.py', '.;')) && empty(finddir('.git', '.;'))
         return
     endif
-    call job_start(['ctags', '-R', '--languages=Python,JavaScript', '--tag-relative=yes', '--fields=+iaS+KS', 'src'])
+    call job_start(['ctags', '-R', '--languages=Python,JavaScript', "--exclude=*.min.js", "--exclude=*.min.css", "--exclude=node_modules", "--exclude=__pycache__", "--tag-relative=yes", "--fields=+iaS+KS", "src"])
 endfunction
 autocmd BufWritePost *.py call s:update_tags()
+autocmd BufWritePost *.js call s:update_tags()
 
 set exrc
 set secure
