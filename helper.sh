@@ -157,6 +157,7 @@ format_code() {
             export PATH=${HOME}/.npm-global/bin:$PATH
             npm i -g prettier
         fi
+        echo "Starting prettier ..."
         prettier \
             ${src_dir} \
             ${project_dir}/.djlintrc.json \
@@ -171,6 +172,7 @@ format_code() {
         if [[ ! ${djlint_dir} ]]; then
             pip install djlint
         fi
+        echo "Starting djlint ..."
         djlint \
             ${src_dir} \
             --reformat \
@@ -185,6 +187,7 @@ format_code() {
             sudo apt install isort
         fi
         if [[ -x $(which isort) ]]; then
+            echo "Starting isort ..."
             isort \
                 -l 80 \
                 ${fnschoo1_dir} \
@@ -198,6 +201,7 @@ format_code() {
             sudo apt install shfmt
         fi
         if [[ -x $(which shfmt) ]]; then
+            echo "Starting shfmt ..."
             shfmt \
                 -i 4 \
                 -l \
@@ -212,6 +216,7 @@ format_code() {
             sudo apt install black
         fi
         if [[ -x $(which black) ]]; then
+            echo "Starting black ..."
             black \
                 -l 80 \
                 --fast \
