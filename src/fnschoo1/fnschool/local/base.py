@@ -2,7 +2,7 @@ class FnLocal:
     def __init__(self, local=None):
         pass
 
-    def get_numeral(self, num):
+    def get_monetary_amount(self, num):
         return num
         pass
 

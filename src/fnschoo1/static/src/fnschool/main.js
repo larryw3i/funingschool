@@ -92,7 +92,7 @@ function get_search_params_from_cookie(name) {
   return search_params
 }
 
-function set_search_params_from_cookie(name, key, value) {
+function set_search_params_to_cookie(name, key, value) {
   name = name.replace(/^\/+|\/+$/g, '')
   var params = get_search_params_from_cookie(name)
   params = params == null ? new URLSearchParams() : params
@@ -108,7 +108,7 @@ function set_search_params_from_cookie(name, key, value) {
   return params
 }
 
-function set_sort_params_from_cookie(name, key) {
+function set_sort_params_to_cookie(name, key) {
   var cookie_name = name
   key = 'sort_' + key
   var params = get_search_params_from_cookie(cookie_name)
@@ -121,7 +121,7 @@ function set_sort_params_from_cookie(name, key) {
         : value == '-'
           ? ''
           : ''
-  params = set_search_params_from_cookie(cookie_name, key, value)
+  params = set_search_params_to_cookie(cookie_name, key, value)
 
   var trigger_element = $(`.${key}`).add(`[name='${key}']`).first()
   var element_text = trigger_element.text()
@@ -213,11 +213,7 @@ function set_page_size() {
   var page_size_element = $('#page_size')
   var page_size = page_size_element.val()
 
-  set_search_params_from_cookie(
-    window.location.pathname,
-    'page_size',
-    page_size
-  )
+  set_search_params_to_cookie(window.location.pathname, 'page_size', page_size)
   location.reload()
 }
 
@@ -232,7 +228,7 @@ $(document).ready(function () {
 })
 
 function set_page(num) {
-  set_search_params_from_cookie(window.location.pathname, 'page', num)
+  set_search_params_to_cookie(window.location.pathname, 'page', num)
   location.reload()
 }
 

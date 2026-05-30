@@ -664,7 +664,7 @@
       var key = sort_key
       var consumptions_table = $("#consumptions_table")
       var consumptions_table_body = $(consumptions_table).find("tbody")
-      var params = set_sort_params_from_cookie(cookie_name, key)
+      var params = set_sort_params_to_cookie(cookie_name, key)
       is_loading = true
       $.get('{% url "canteen:create_consumptions" %}?get_ordered_ids=1', function(response) {
         var ordered_ids = response.ordered_ids
@@ -712,13 +712,13 @@
     $(document).ready(function() {
       $('.meal_types-select').change(function() {
         var selected_value = $(this).val()
-        set_search_params_from_cookie(window.location.pathname, "meal_type", selected_value)
+        set_search_params_to_cookie(window.location.pathname, "meal_type", selected_value)
         location.reload()
       });
 
       $('.categories-select').change(function() {
         var selected_value = $(this).val()
-        set_search_params_from_cookie(window.location.pathname, "category", selected_value)
+        set_search_params_to_cookie(window.location.pathname, "category", selected_value)
         location.reload()
       });
     });

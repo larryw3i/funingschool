@@ -25,7 +25,7 @@ class FnZhHansLocal(FnLocal):
         chinese_chars = pattern.findall(text)
         return len(chinese_chars)
 
-    def get_numeral(self, num):
+    def get_monetary_amount(self, num):
         units = {
             "0": "\u96f6",  # ling2
             "1": "\u58f9",  # yi1

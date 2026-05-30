@@ -304,13 +304,13 @@
 
     function submit_q() {
       var q_value = $('.query-input').val();
-      set_search_params_from_cookie(window.location.pathname, "q", q_value)
+      set_search_params_to_cookie(window.location.pathname, "q", q_value)
       location.reload()
     }
 
     function sort_ingredients(name) {
       var key = name
-      set_sort_params_from_cookie(window.location.pathname, key)
+      set_sort_params_to_cookie(window.location.pathname, key)
       location.reload()
     }
     $(document).ready(function() {
@@ -321,13 +321,13 @@
     $(document).ready(function() {
       $('.meal_types-select').change(function() {
         var selected_value = $(this).val()
-        set_search_params_from_cookie(window.location.pathname, "meal_type", selected_value)
+        set_search_params_to_cookie(window.location.pathname, "meal_type", selected_value)
         location.reload()
       });
 
       $('.categories-select').change(function() {
         var selected_value = $(this).val()
-        set_search_params_from_cookie(window.location.pathname, "category", selected_value)
+        set_search_params_to_cookie(window.location.pathname, "category", selected_value)
         location.reload()
       });
     });

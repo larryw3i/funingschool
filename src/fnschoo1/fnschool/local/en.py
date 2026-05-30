@@ -23,7 +23,7 @@ class FnEnLocal(FnLocal):
     def get_char_count(text):
         return len(text)
 
-    def get_numeral(self, num):
+    def get_monetary_amount(self, num):
         return num
 
 

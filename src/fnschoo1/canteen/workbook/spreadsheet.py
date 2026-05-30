@@ -270,7 +270,7 @@ class MealTypeWorkbook:
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
-                total_price_text=local.get_numeral(summary_total_price),
+                total_price_text=local.get_monetary_amount(summary_total_price),
                 total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
@@ -457,7 +457,7 @@ class MealTypeWorkbook:
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
-                total_price_text=local.get_numeral(summary_total_price),
+                total_price_text=local.get_monetary_amount(summary_total_price),
                 total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
@@ -619,7 +619,7 @@ class MealTypeWorkbook:
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
-                total_price_text=local.get_numeral(summary_total_price),
+                total_price_text=local.get_monetary_amount(summary_total_price),
                 total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
