@@ -20,6 +20,9 @@
               {{ meal_type.name }}
             </option>
           {% endfor %}
+          <option value="None" {% if selected_meal_type == 'None' %}selected{% endif %}>
+            {% trans '(None)' %}
+          </option>
         </select>
       </div>
 
@@ -34,6 +37,9 @@
               {{ category.name }}
             </option>
           {% endfor %}
+          <option value="None" {% if selected_category == 'None' %}selected{% endif %}>
+            {% trans '(None)' %}
+          </option>
         </select>
       </div>
 

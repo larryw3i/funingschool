@@ -24,5 +24,40 @@
         '<a href="{% url "home:service_terms" %}" target="fnhome/service_terms">{% trans "Terms of Service" %}</a>'
       );
     });
+
+    function check_generate_password_check_input() {
+      var generate_password_check_input = $("#id_generate_password")
+      var password1_element = $("#id_password1")
+      var password2_element = $("#id_password2")
+      var generated_password = password1_element.data("generated_password")
+      password_elements = [password1_element, password2_element]
+      for (var password_element of password_elements) {
+        if (generate_password_check_input.is(':checked')) {
+          password_element.val(generated_password)
+          password_element.attr('type', 'text');
+          password_element.prop('readonly', true)
+        } else {
+          password_element.val("")
+          password_element.attr('type', 'password');
+          password_element.prop('readonly', false)
+        }
+      }
+    }
+
+    $(document).ready(function() {
+      check_generate_password_check_input()
+    });
+
+    $(document).ready(function() {
+      $('#id_password1_helptext ul').append(
+        `<li class='text-danger fw-bold'>
+        {% trans 'Remember your password! If you forget it, your account will only be deleted after expiration, and FNSCHOOL will not reset your password for you!' %}
+        </li>`
+      );
+    })
+
+    $(document).on('click', '#id_generate_password', function() {
+      check_generate_password_check_input()
+    });
   </script>
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-27 21:35+0800\n"
+"POT-Creation-Date: 2026-05-31 20:52+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,16 +227,16 @@ msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:178
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:187
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:211
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:221
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:214
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:224
 #, python-brace-format
 msgid "\"{0}\" has been created."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:182
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:190
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:215
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:226
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:218
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:229
 #, python-brace-format
 msgid "\"{0}\" has been updated."
 msgstr ""
@@ -300,89 +300,93 @@ msgstr ""
 msgid "- Sorting: Add sorting functions for \"Category\" and \"Meal Type\"."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:118
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:113
+msgid "- Registration: Add the feature of automatically generating passwords."
+msgstr ""
+
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:121
 msgid ""
 "- Optional \"Site\" feature: The \"Site\" feature can be enabled, it "
 "includes registered email verification, login notifications, password reset, "
 "etc."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:121
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:124
 msgid ""
 "- Ingredient filtering: More convenient conditions for filtering ingredients "
 "are provided on the \"list_ingredients\" and \"create_consumptions\" pages."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:124
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:127
 msgid ""
 "- Edit ingredients: Ingredients with empty \"categories\" and those with the "
 "same \"ingredient name\" will be automatically updated."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:127
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:130
 msgid "- Theme: Automatically enable theme according to system theme."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:135
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:138
 msgid "- Workbook File: Add properties to generated workbook file."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:140
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:143
 msgid "- Generate Wrokbook File: Add `timestamp` to generated file."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:143
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:146
 msgid ""
 "- `Ingredient Consumptions` page: When clicking the sorting condition "
 "button, sorting is directly performed in the table without refreshing the "
 "page."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:151
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:154
 msgid ""
 "- `Ingredient consumptions` Page: Make the Entry Fields in the table "
 "automatically scroll to the visible area when they are obscured by the "
 "header or the columns fixed on the left and one of them is inputted."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:156
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:159
 msgid ""
 "- Start Up: When starting up on a Linux distro, there may be a situation "
 "where the browser is already open but unable to access the specified URL. "
 "Therefore, it is advisable to delay opening the browser during startup."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:161
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:164
 msgid ""
 "- Edit Ingredient: Fixed issue the `Edit Ingredient` page be loaded with "
 "error if some `Category Name` is `None`."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:169
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:172
 msgid "- `Ingredients List` Page: Make total price summary more intuitive."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:174
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:177
 msgid ""
 "- Crate New Ingredients: Update the `new_ingredients` function, prevent "
 "adding too many meal types to the database when they are `empty`."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:177
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:180
 msgid ""
 "- Ingredient Consumption: Fixed the error in displaying the ingredient "
 "progress bar on the ingredient consumption page."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:185
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:188
 msgid "- Add **CHANGELOG.md**: Add i18n feature for `CHANGELOG.md`."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:188
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:191
 msgid "- Delete Ingredients: Add the function of batch deleting ingredients."
 msgstr ""
 
-#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:193
+#: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:196
 msgid ""
 "- Patch `202511012053_copy_profiles_to_fnprofile`: This patch will be "
 "deprecated after February 2026."

@@ -270,22 +270,33 @@ def create_consumptions(request, ingredient_id=None):
         & Q(is_disabled=False)
         & Q(is_ignorable=False)
     )
+
     if search_params and "category" in search_params:
         category_id = search_params["category"]
-        category_id = (
-            int(category_id) if category_id.isnumeric() else category_id
-        )
-        queries &= Q(category__id=category_id)
+        if category_id == "None":
+            queries &= Q(category=None)
+            pass
+        else:
+            category_id = (
+                int(category_id) if category_id.isnumeric() else category_id
+            )
+            queries &= Q(category__id=category_id)
+            pass
         context.update({"selected_category": category_id})
     else:
         context.update({"selected_category": None})
 
     if search_params and "meal_type" in search_params:
         meal_type_id = search_params["meal_type"]
-        meal_type_id = (
-            int(meal_type_id) if meal_type_id.isnumeric() else meal_type_id
-        )
-        queries &= Q(meal_type__id=meal_type_id)
+        if meal_type_id == "None":
+            queries &= Q(meal_type=None)
+            pass
+        else:
+            meal_type_id = (
+                int(meal_type_id) if meal_type_id.isnumeric() else meal_type_id
+            )
+            queries &= Q(meal_type__id=meal_type_id)
+            pass
         context.update({"selected_meal_type": meal_type_id})
     else:
         context.update({"selected_meal_type": None})
@@ -647,33 +658,37 @@ def list_ingredients(request):
             name_queries |= Q(name__icontains=name)
         queries &= name_queries
 
-        ingredients = ingredients.filter(queries)
-
-    else:
-
-        if search_params and "category" in search_params:
-            search_param_category = search_params["category"]
-            search_param_category = (
-                int(search_param_category)
-                if search_param_category.isnumeric()
-                else search_param_category
-            )
-            queries &= Q(category__id=search_param_category)
-            context.update({"selected_category": search_param_category})
+    if search_params and "category" in search_params:
+        category_id = search_params["category"]
+        if category_id == "None":
+            queries &= Q(category=None)
+            pass
         else:
-            context.update({"selected_category": None})
+            category_id = (
+                int(category_id) if category_id.isnumeric() else category_id
+            )
+            queries &= Q(category__id=category_id)
+            pass
+        context.update({"selected_category": category_id})
+    else:
+        context.update({"selected_category": None})
 
-        if search_params and "meal_type" in search_params:
-            meal_type_id = search_params["meal_type"]
+    if search_params and "meal_type" in search_params:
+        meal_type_id = search_params["meal_type"]
+        if meal_type_id == "None":
+            queries &= Q(meal_type=None)
+            pass
+        else:
             meal_type_id = (
                 int(meal_type_id) if meal_type_id.isnumeric() else meal_type_id
             )
             queries &= Q(meal_type__id=meal_type_id)
-            context.update({"selected_meal_type": meal_type_id})
-        else:
-            context.update({"selected_meal_type": None})
+            pass
+        context.update({"selected_meal_type": meal_type_id})
+    else:
+        context.update({"selected_meal_type": None})
 
-        ingredients = ingredients.filter(queries)
+    ingredients = ingredients.filter(queries)
 
     if ingredients.count():
         orders = get_object_orders_from_cookie(request, model=Ingredient)

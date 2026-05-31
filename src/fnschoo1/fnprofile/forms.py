@@ -11,6 +11,7 @@ from django.contrib.auth.forms import (
     SetPasswordForm,
     UserCreationForm,
 )
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
@@ -162,6 +163,16 @@ class FnuserSignUpForm(UserCreationForm):
         },
     )
 
+    generate_password = forms.BooleanField(
+        label=_("Automatically generate a password for me."),
+        initial=True,
+        widget=forms.CheckboxInput(
+            attrs={
+                "class": "form-check-input",
+            }
+        ),
+    )
+
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request")
         super().__init__(*args, **kwargs)
@@ -180,13 +191,13 @@ class FnuserSignUpForm(UserCreationForm):
             "Required. {max_username_length} characters or fewer. Letters, digits and @/./+/-/_ only."
         ).format(max_username_length=max_username_length)
 
-        self.field_order = [
-            "username",
-            "email",
-            "password1",
-            "password2",
-            "agree_terms",
-        ]
+        generated_password = make_password(None)
+        password_field = self.fields.get("password1")
+        if not password_field:
+            return
+        password_field.widget.attrs.update(
+            {"data-generated_password": generated_password}
+        )
 
     def clean(self):
         cleaned_data = super().clean()
@@ -210,7 +221,14 @@ class FnuserSignUpForm(UserCreationForm):
 
     class Meta:
         model = Fnuser
-        fields = ("username", "email", "password1", "password2")
+        fields = (
+            "username",
+            "email",
+            "generate_password",
+            "password1",
+            "password2",
+            "agree_terms",
+        )
 
     def clean_username(self):
         from .models import max_email_length, max_username_length

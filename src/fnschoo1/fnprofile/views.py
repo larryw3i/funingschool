@@ -254,8 +254,6 @@ def edit_fnprofile(request):
                 request, _("Your password has been reset automatically.")
             )
             user.send_generate_password_notification_email(
-
-
                 request, generated_password
             )
             login(request, user)

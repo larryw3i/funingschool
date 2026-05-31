@@ -109,6 +109,9 @@ class Releases:
                     _(
                         '- Sorting: Add sorting functions for "Category" and "Meal Type".'
                     ),
+                    _(
+                        "- Registration: Add the feature of automatically generating passwords."
+                    ),
                 ],
             )
             + self.get_release_markdown(
