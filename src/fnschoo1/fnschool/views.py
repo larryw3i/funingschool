@@ -30,7 +30,7 @@ def get_object_orders_from_cookie(request, name=None, model=None):
         for key, value in params.items():
             if key.startswith("sort_"):
                 key = key[5:]
-                if field_names and key in field_names:
+                if not field_names or key in field_names:
                     orders.append(f"-{key}" if value == "-" else key)
     orders.reverse()
     return orders or []

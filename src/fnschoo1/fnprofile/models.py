@@ -1,6 +1,7 @@
 import os
 import sys
 import uuid
+from datetime import timedelta
 from pathlib import Path
 
 from django.conf import settings
@@ -35,7 +36,11 @@ from fnschool import *
 from fnschool import _
 from fnschool.views import get_object_orders_from_cookie
 
-resend_verification_email_time_interval = 5 * 60
+default_timedelta = timedelta(minutes=5)
+resend_verification_email_timedelta = 1 * default_timedelta
+temp_id_timedelta = 6 * default_timedelta
+
+temp_id_timedelta = timedelta(minutes=30)
 max_email_count = 8
 max_username_length = 256
 max_email_length = max_username_length
@@ -61,6 +66,19 @@ def get_uuid_hex():
 
 
 class Fnuser(AbstractUser, PermissionsMixin):
+
+    _temp_id = models.UUIDField(
+        default=uuid.uuid4,
+        editable=False,
+        verbose_name=_("Fake ID"),
+    )
+
+    _temp_id_updated_at = models.DateTimeField(
+        null=True,
+        auto_now=True,
+        verbose_name=_("Time of updating temporary ID."),
+    )
+
     groups = models.ManyToManyField(
         "auth.Group",
         verbose_name="groups",
@@ -160,6 +178,26 @@ class Fnuser(AbstractUser, PermissionsMixin):
     def __str__(self):
         return _("{0}'s Information").format(self.username)
 
+    def get_temp_id(self):
+        if (
+            not self.temp_id_updated_at
+            or (_temp_id_updated_at + temp_id_timedelta) > timezone.now()
+        ):
+            self._temp_id = uuid.uuid4()
+            self._temp_id_updated_at = timezone.now()
+            self.save(update_fields=["_temp_id", "_temp_id_updated_at"])
+        return self._temp_id
+
+    def verify_temp_id(self, temp_id):
+        if (
+            not self._temp_id_updated_at
+            or (_temp_id_updated_at + temp_id_timedelta) < timezone.now()
+        ):
+            return False
+        if not self._temp_id == temp_id:
+            return False
+        return True
+
     def get_primary_email(self):
         primary_email = self.emails.get(is_primary=True, is_disabled=False)
         return primary_email.email
@@ -179,13 +217,6 @@ class Fnuser(AbstractUser, PermissionsMixin):
     def get_verified_emails(self):
         emails = self.emails.filter(is_verified=True).all()
         return emails
-
-    def generate_logout_token(self):
-        logout_token = get_uuid_hex()
-        self.logout_token = make_password(logout_token)
-        self.save(update_fields=["logout_token"])
-
-        return self.logout_token
 
     def generate_logout_token(self):
         logout_token = get_uuid_hex()
@@ -220,6 +251,8 @@ class Fnuser(AbstractUser, PermissionsMixin):
             + "&reset_password_token="
             + reset_password_token
         )
+        generate_password_url = reset_password_url + "&generate=1"
+
         login_ip = (
             request.META.get("REMOTE_ADDR", None)
             or request.META.get("HTTP_X_FORWARDED_FOR", None)
@@ -235,6 +268,7 @@ class Fnuser(AbstractUser, PermissionsMixin):
                 "login_ip": login_ip,
                 "logout_url": logout_url,
                 "reset_password_url": reset_password_url,
+                "generate_password_url": generate_password_url,
             },
         )
         to_emails = [e.email for e in self.get_enabled_emails()]
@@ -283,6 +317,27 @@ class Fnuser(AbstractUser, PermissionsMixin):
             {
                 "user": self,
                 "reset_password_url": reset_password_url,
+            },
+        )
+        to_emails = [e.email for e in self.get_enabled_emails()]
+        email = EmailMessage(
+            mail_subject,
+            message,
+            from_email=settings.EMAIL_HOST_USER,
+            to=to_emails,
+        )
+        email.send()
+        return True
+
+    def send_generated_password_notification_email(
+        self, request, generated_password
+    ):
+        mail_subject = _("Your password has been regenerated.")
+        message = render_to_string(
+            "fnprofile/fnemail/generated_password_notification_email.html",
+            {
+                "user": self,
+                "generated_password": generated_password,
             },
         )
         to_emails = [e.email for e in self.get_enabled_emails()]
@@ -345,7 +400,7 @@ class Fnemail(models.Model):
         help_text=_("Token for email verification"),
     )
 
-    verification_sent_at = models.DateTimeField(
+    verification_token_updated_at = models.DateTimeField(
         _("Verification email sent at"),
         blank=True,
         null=True,
@@ -440,20 +495,25 @@ class Fnemail(models.Model):
         return f"{self.user.username}: {self.email}"
 
     def can_resend_verification_email(self):
-        if not self.verification_sent_at:
+        if not self.verification_token_updated_at:
             return True
         time_since_last = (
-            timezone.now() - self.verification_sent_at
+            timezone.now() - self.verification_token_updated_at
         ).total_seconds()
-        return time_since_last >= resend_verification_email_time_interval
+        return time_since_last >= resend_verification_email_timedelta
 
     def generate_verification_token(self, with_underline=True):
         verification_token = get_uuid_hex()
         self.verification_token = (
             "__" if with_underline else ""
         ) + make_password(verification_token)
-        self.verification_sent_at = timezone.now()
-        self.save(update_fields=["verification_token", "verification_sent_at"])
+        self.verification_token_updated_at = timezone.now()
+        self.save(
+            update_fields=[
+                "verification_token",
+                "verification_token_updated_at",
+            ]
+        )
 
         return verification_token
 
@@ -509,9 +569,12 @@ class Fnemail(models.Model):
         return False
 
     def verify(self, token):
-        if self.verification_sent_at:
-            expiry_time = self.verification_sent_at + timezone.timedelta(
-                seconds=resend_verification_email_time_interval
+        if self.verification_token_updated_at:
+            expiry_time = (
+                self.verification_token_updated_at
+                + timezone.timedelta(
+                    seconds=resend_verification_email_timedelta
+                )
             )
             if timezone.now() > expiry_time:
                 return False

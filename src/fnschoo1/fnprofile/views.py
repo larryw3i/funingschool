@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 from django.contrib.sites.shortcuts import get_current_site
@@ -38,7 +39,7 @@ from .forms import (
     FnuserSetPasswordForm,
     FnuserSignUpForm,
 )
-from .models import Fnemail, Fnuser, resend_verification_email_time_interval
+from .models import Fnemail, Fnuser, resend_verification_email_timedelta
 
 logger = logging.getLogger(__name__)
 LOGIN_URL = settings.LOGIN_URL
@@ -169,6 +170,17 @@ def fnprofile_log_in(request):
     )
 
 
+def delete_sessions(user):
+    user_sessions = []
+    for session in Session.objects.filter(expire_date__gte=timezone.now()):
+        session_data = session.get_decoded()
+        if session_data.get("_auth_user_id") == str(user.id):
+            user_sessions.append(session)
+    for session in user_sessions:
+        session.delete()
+    pass
+
+
 def fnprofile_log_out(request):
     logout_token = request.GET.get("logout_token", None)
     if logout_token:
@@ -177,13 +189,7 @@ def fnprofile_log_out(request):
             return HttpResponse("Not Found", status=404)
         user_id = force_str(urlsafe_base64_decode(user_id_r))
         user = get_object_or_404(Fnuser, pk=user_id)
-        user_sessions = []
-        for session in Session.objects.filter(expire_date__gte=timezone.now()):
-            session_data = session.get_decoded()
-            if session_data.get("_auth_user_id") == str(user.id):
-                user_sessions.append(session)
-        for session in user_sessions:
-            session.delete()
+        delete_sessions(user)
         messages.info(request, _("You account has been loged out."))
         user.logout_token = None
         user.save(update_fields=["logout_token"])
@@ -237,6 +243,21 @@ def edit_fnprofile(request):
 
         if not user.verify_reset_password_token(reset_password_token):
             return HttpResponse("Not Found", status=404)
+        delete_sessions(user)
+        generate_password = request.GET.get("generate", "0") == "1"
+        if generate_password:
+            generated_password = make_password(None)
+            user.reset_password_token = None
+            user.set_password(generated_password)
+            user.save()
+            messages.success(
+                request, _("Your password has been reset automatically.")
+            )
+            user.send_generated_password_notification_email(request)
+            login(request, user)
+            return redirect("fnhome:home")
+            pass
+
         reset_password_token = user.generate_reset_password_token()
         current_site = get_current_site(request)
         reset_password_url = (
@@ -370,9 +391,9 @@ def view_email(request, email_id):
     verification_form = FnemailVerificationForm()
 
     can_resend = email.can_resend_verification()
-    if email.verification_sent_at:
+    if email.verification_token_updated_at:
         seconds_since = (
-            timezone.now() - email.verification_sent_at
+            timezone.now() - email.verification_token_updated_at
         ).total_seconds()
         next_resend = max(0, 60 - int(seconds_since))
     else:
@@ -404,7 +425,7 @@ def edit_email(request, email_id):
 
     verification_sent_unsuccessfully_str = _(
         "The verification email failed to be sent. Please wait for {time_interval} seconds and try again!"
-    ).format(time_interval=resend_verification_email_time_interval)
+    ).format(time_interval=resend_verification_email_timedelta)
 
     form = None
     include_document = request.GET.get("include_document", "1") == "1"
