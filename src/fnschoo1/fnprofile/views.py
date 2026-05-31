@@ -253,7 +253,7 @@ def edit_fnprofile(request):
             messages.success(
                 request, _("Your password has been reset automatically.")
             )
-            user.send_generated_password_notification_email(request)
+            user.send_generate_password_notification_email(request,generated_password)
             login(request, user)
             return redirect("fnhome:home")
             pass

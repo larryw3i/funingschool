@@ -57,6 +57,11 @@ endfunction
 autocmd BufWritePost *.py call s:update_tags()
 autocmd BufWritePost *.js call s:update_tags()
 
+set wildignore+=*.pyc,*.pyo,*.sqlite*
+set wildignore+=*__pycache__*/**
+set wildignore+=*.egg-info*/**
+set wildignore+=*node_modules*/**
+
 set exrc
 set secure
 

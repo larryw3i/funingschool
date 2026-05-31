@@ -67,18 +67,6 @@ def get_uuid_hex():
 
 class Fnuser(AbstractUser, PermissionsMixin):
 
-    _temp_id = models.UUIDField(
-        default=uuid.uuid4,
-        editable=False,
-        verbose_name=_("Fake ID"),
-    )
-
-    _temp_id_updated_at = models.DateTimeField(
-        null=True,
-        auto_now=True,
-        verbose_name=_("Time of updating temporary ID."),
-    )
-
     groups = models.ManyToManyField(
         "auth.Group",
         verbose_name="groups",
@@ -177,26 +165,6 @@ class Fnuser(AbstractUser, PermissionsMixin):
 
     def __str__(self):
         return _("{0}'s Information").format(self.username)
-
-    def get_temp_id(self):
-        if (
-            not self.temp_id_updated_at
-            or (_temp_id_updated_at + temp_id_timedelta) > timezone.now()
-        ):
-            self._temp_id = uuid.uuid4()
-            self._temp_id_updated_at = timezone.now()
-            self.save(update_fields=["_temp_id", "_temp_id_updated_at"])
-        return self._temp_id
-
-    def verify_temp_id(self, temp_id):
-        if (
-            not self._temp_id_updated_at
-            or (_temp_id_updated_at + temp_id_timedelta) < timezone.now()
-        ):
-            return False
-        if not self._temp_id == temp_id:
-            return False
-        return True
 
     def get_primary_email(self):
         primary_email = self.emails.get(is_primary=True, is_disabled=False)
@@ -329,7 +297,7 @@ class Fnuser(AbstractUser, PermissionsMixin):
         email.send()
         return True
 
-    def send_generated_password_notification_email(
+    def send_generate_password_notification_email(
         self, request, generated_password
     ):
         mail_subject = _("Your password has been regenerated.")

@@ -177,4 +177,7 @@ media/
 *package-lock.json
 node_modules/
 
+# tags
+tags
+
 # The end.
