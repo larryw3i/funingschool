@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 21:07+0800\n"
+"POT-Creation-Date: 2026-06-01 13:08+0800\n"
 "PO-Revision-Date: 2026-05-31 21:08+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -44,8 +44,8 @@ msgstr "默认类"
 #: canteen/models.py:15 canteen/templates/canteen/category/delete.html:31
 #: canteen/templates/canteen/category/delete.html:40
 #: canteen/templates/canteen/category/list.html:56
-#: canteen/templates/canteen/ingredient/list.html:150
-#: canteen/templates/canteen/ingredient/list.html:155
+#: canteen/templates/canteen/ingredient/list.html:156
+#: canteen/templates/canteen/ingredient/list.html:161
 #: canteen/templates/canteen/meal_type/list.html:52 fnprofile/models.py:55
 #: templates/base/_js.html:7
 msgid "Yes"
@@ -91,6 +91,10 @@ msgstr "已禁用"
 
 #: canteen/models.py:47 canteen/models.py:102 canteen/models.py:234
 #: canteen/models.py:250 canteen/models.py:258
+#: canteen/templates/canteen/consumption/create.html:24
+#: canteen/templates/canteen/consumption/create.html:43
+#: canteen/templates/canteen/ingredient/list.html:24
+#: canteen/templates/canteen/ingredient/list.html:41
 msgid "(None)"
 msgstr "（无）"
 
@@ -122,7 +126,7 @@ msgstr "置顶出库"
 msgid "User"
 msgstr "用户"
 
-#: canteen/models.py:121 canteen/templates/canteen/consumption/create.html:48
+#: canteen/models.py:121 canteen/templates/canteen/consumption/create.html:55
 #: canteen/views.py:81
 msgid "Storage Date"
 msgstr "入库日期"
@@ -131,8 +135,8 @@ msgstr "入库日期"
 msgid "Time of creating"
 msgstr "创建时间"
 
-#: canteen/models.py:134 canteen/templates/canteen/consumption/create.html:55
-#: canteen/templates/canteen/consumption/create.html:101 canteen/views.py:91
+#: canteen/models.py:134 canteen/templates/canteen/consumption/create.html:62
+#: canteen/templates/canteen/consumption/create.html:108 canteen/views.py:91
 msgid "Ingredient Name"
 msgstr "食材名"
 
@@ -286,7 +290,7 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:57
 #: canteen/templates/canteen/category/list.html:66
 #: canteen/templates/canteen/ingredient/delete.html:34
-#: canteen/templates/canteen/ingredient/list.html:168
+#: canteen/templates/canteen/ingredient/list.html:174
 #: canteen/templates/canteen/meal_type/delete.html:45
 #: canteen/templates/canteen/meal_type/list.html:62
 #: fnprofile/templates/fnprofile/fnemail/delete.html:34
@@ -321,7 +325,7 @@ msgid "Ingredients Count"
 msgstr "食材数量"
 
 #: canteen/templates/canteen/category/list.html:62
-#: canteen/templates/canteen/ingredient/list.html:162
+#: canteen/templates/canteen/ingredient/list.html:168
 #: canteen/templates/canteen/meal_type/list.html:58
 msgid "Edit"
 msgstr "编辑"
@@ -360,52 +364,52 @@ msgstr "食材出库"
 msgid "All Meal Types"
 msgstr "所有餐类"
 
-#: canteen/templates/canteen/consumption/create.html:31
-#: canteen/templates/canteen/ingredient/list.html:29
+#: canteen/templates/canteen/consumption/create.html:34
+#: canteen/templates/canteen/ingredient/list.html:32
 msgid "All Categories"
 msgstr "所有大类"
 
-#: canteen/templates/canteen/consumption/create.html:45
+#: canteen/templates/canteen/consumption/create.html:52
 msgid "Sort by storage date."
 msgstr "按入库日期排序。"
 
-#: canteen/templates/canteen/consumption/create.html:53
+#: canteen/templates/canteen/consumption/create.html:60
 msgid "Sort by name."
 msgstr "按食材名称排序。"
 
-#: canteen/templates/canteen/consumption/create.html:60
+#: canteen/templates/canteen/consumption/create.html:67
 msgid "Sort by meal type."
 msgstr "按餐类排序。"
 
-#: canteen/templates/canteen/consumption/create.html:62 canteen/views.py:93
+#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:93
 msgid "Meal Type"
 msgstr "餐类"
 
-#: canteen/templates/canteen/consumption/create.html:67
+#: canteen/templates/canteen/consumption/create.html:74
 msgid "Sort by category."
 msgstr "按食材大类排序。"
 
-#: canteen/templates/canteen/consumption/create.html:69
+#: canteen/templates/canteen/consumption/create.html:76
 msgid "Category Name (canteen__consumption_create)"
 msgstr "大类"
 
-#: canteen/templates/canteen/consumption/create.html:75
+#: canteen/templates/canteen/consumption/create.html:82
 msgid "The starting date of storage."
 msgstr "入库的起始日期。"
 
-#: canteen/templates/canteen/consumption/create.html:83
+#: canteen/templates/canteen/consumption/create.html:90
 msgid "The end date of storage."
 msgstr "入库的结束日期。"
 
-#: canteen/templates/canteen/consumption/create.html:89
+#: canteen/templates/canteen/consumption/create.html:96
 msgid "Refresh this page."
 msgstr "刷新页面。"
 
-#: canteen/templates/canteen/consumption/create.html:90
+#: canteen/templates/canteen/consumption/create.html:97
 msgid "Refresh"
 msgstr "刷新"
 
-#: canteen/templates/canteen/consumption/create.html:102
+#: canteen/templates/canteen/consumption/create.html:109
 #, python-format
 msgid ""
 "\n"
@@ -416,16 +420,16 @@ msgstr ""
 "                （%(ingredients_len)s）\n"
 "              "
 
-#: canteen/templates/canteen/consumption/create.html:106
+#: canteen/templates/canteen/consumption/create.html:113
 msgid "Remaining Quantity"
 msgstr "余量"
 
-#: canteen/templates/canteen/consumption/create.html:138
+#: canteen/templates/canteen/consumption/create.html:145
 #, python-format
 msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
 msgstr "于 %(storage_date)s 入库。（%(meal_type)s，%(category)s）"
 
-#: canteen/templates/canteen/consumption/create.html:145
+#: canteen/templates/canteen/consumption/create.html:152
 #, python-format
 msgid ""
 "\n"
@@ -436,7 +440,7 @@ msgstr ""
 "                    （%(category)s,%(meal_type)s,%(storage_date)s）\n"
 "                  "
 
-#: canteen/templates/canteen/consumption/create.html:152
+#: canteen/templates/canteen/consumption/create.html:159
 #, python-format
 msgid ""
 "\n"
@@ -447,19 +451,19 @@ msgstr ""
 "                    （%(category)s,%(storage_date)s）\n"
 "                  "
 
-#: canteen/templates/canteen/consumption/create.html:161
+#: canteen/templates/canteen/consumption/create.html:168
 msgid "No ingredient found."
 msgstr "未发现食材。"
 
-#: canteen/templates/canteen/consumption/create.html:170
+#: canteen/templates/canteen/consumption/create.html:177
 msgid "Generate Spreadsheet"
 msgstr "生成账单"
 
-#: canteen/templates/canteen/consumption/create.html:176
+#: canteen/templates/canteen/consumption/create.html:183
 msgid "Ingredient Sheets are also included."
 msgstr "也包含食材表。"
 
-#: canteen/templates/canteen/consumption/create.html:502
+#: canteen/templates/canteen/consumption/create.html:509
 msgid ":"
 msgstr "："
 
@@ -539,45 +543,45 @@ msgstr ""
 "    确定要删除这个 食材 吗？此操作不可恢复。\n"
 "    "
 
-#: canteen/templates/canteen/ingredient/list.html:48
+#: canteen/templates/canteen/ingredient/list.html:54
 msgid "Search ingredient ..."
 msgstr "搜索食材......"
 
-#: canteen/templates/canteen/ingredient/list.html:53
+#: canteen/templates/canteen/ingredient/list.html:59
 msgid "Search"
 msgstr "搜索"
 
-#: canteen/templates/canteen/ingredient/list.html:56
+#: canteen/templates/canteen/ingredient/list.html:62
 msgid "Clear"
 msgstr "清除"
 
-#: canteen/templates/canteen/ingredient/list.html:64
+#: canteen/templates/canteen/ingredient/list.html:70
 msgid "Add via template"
 msgstr "通过模板添加"
 
-#: canteen/templates/canteen/ingredient/list.html:66
+#: canteen/templates/canteen/ingredient/list.html:72
 msgid "Add one"
 msgstr "添加一个"
 
-#: canteen/templates/canteen/ingredient/list.html:67
+#: canteen/templates/canteen/ingredient/list.html:73
 msgid ""
 "Click twice within one minute to delete the selected ingredients. (Note: "
 "This is an irreversible operation.)"
 msgstr "60 秒内点两次此按钮才会触发删除操作。（注意：食材被删除后不可恢复。）"
 
-#: canteen/templates/canteen/ingredient/list.html:69
+#: canteen/templates/canteen/ingredient/list.html:75
 msgid "Delete selected Ingredients"
 msgstr "删除已选食材"
 
-#: canteen/templates/canteen/ingredient/list.html:79
+#: canteen/templates/canteen/ingredient/list.html:85
 msgid "Locate the updated element."
 msgstr "更新后定位"
 
-#: canteen/templates/canteen/ingredient/list.html:91
+#: canteen/templates/canteen/ingredient/list.html:97
 msgid "Select all ingredients."
 msgstr "选择全部食材。"
 
-#: canteen/templates/canteen/ingredient/list.html:100
+#: canteen/templates/canteen/ingredient/list.html:106
 #, python-format
 msgid ""
 "\n"
@@ -588,7 +592,7 @@ msgstr ""
 "                    （%(ingredients_len)s）\n"
 "                  "
 
-#: canteen/templates/canteen/ingredient/list.html:123
+#: canteen/templates/canteen/ingredient/list.html:129
 msgid "It helps you check/delete the ingredients."
 msgstr "自由标记，用于检查和删除食材、核对单据等等。"
 
@@ -701,11 +705,11 @@ msgstr ""
 "\n"
 "编辑餐类（ %(instance_name)s ）。"
 
-#: canteen/views.py:78 canteen/views.py:1208
+#: canteen/views.py:78 canteen/views.py:1223
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:78 canteen/views.py:1200
+#: canteen/views.py:78 canteen/views.py:1215
 msgid "(2)"
 msgstr "（2）"
 
@@ -774,31 +778,31 @@ msgstr "是不用入库的"
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:439
+#: canteen/views.py:450
 msgid "Please select the item(s) you wish to delete."
 msgstr "请选择要删除的食材项。"
 
-#: canteen/views.py:461
+#: canteen/views.py:472
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:463
+#: canteen/views.py:474
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:467
+#: canteen/views.py:478
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:469
+#: canteen/views.py:480
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:515
+#: canteen/views.py:526
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
@@ -807,39 +811,39 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:727
+#: canteen/views.py:742
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr "{meal_type}：{meal_type_total_price}"
 
-#: canteen/views.py:736
+#: canteen/views.py:751
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr "{month}：{total_price}"
 
-#: canteen/views.py:737
+#: canteen/views.py:752
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: canteen/views.py:777
+#: canteen/views.py:792
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:938
+#: canteen/views.py:953
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:958
+#: canteen/views.py:973
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:974
+#: canteen/views.py:989
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:1000
+#: canteen/views.py:1015
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr "（{month}）{affiliation}食堂出入库工作簿（{timestamp}）"
@@ -1591,7 +1595,7 @@ msgstr "请输入您的用户名或电子邮箱地址。"
 msgid "The content you entered is too long."
 msgstr "输入内容过多。"
 
-#: fnprofile/forms.py:56 fnprofile/forms.py:382
+#: fnprofile/forms.py:56 fnprofile/forms.py:389
 #: fnprofile/templates/fnprofile/fnemail/list.html:24
 msgid "Email Address"
 msgstr "电子邮件地址"
@@ -1638,8 +1642,8 @@ msgstr "用户名至多只能有 {max_length} 个字符。"
 msgid "Please enter the password."
 msgstr "请输入密码。"
 
-#: fnprofile/forms.py:128 fnprofile/forms.py:213 fnprofile/forms.py:269
-#: fnprofile/forms.py:400
+#: fnprofile/forms.py:128 fnprofile/forms.py:213 fnprofile/forms.py:276
+#: fnprofile/forms.py:407
 msgid "Please enter a valid email address."
 msgstr "请输入有效的电子邮箱地址。"
 
@@ -1688,75 +1692,75 @@ msgstr "请输入电子邮件地址。"
 msgid "A user with that email already exists."
 msgstr "该电子邮件地址已被使用。"
 
-#: fnprofile/forms.py:231
+#: fnprofile/forms.py:238
 msgid "Please enter a username."
 msgstr "请输入用户名。"
 
-#: fnprofile/forms.py:236
+#: fnprofile/forms.py:243
 msgid "Username can only contain letters, digits and @/./+/-/_ characters."
 msgstr "用户名只能包含字母、数字、“@”、“.”、“+”、“-”、“_”。"
 
-#: fnprofile/forms.py:242
+#: fnprofile/forms.py:249
 #, python-brace-format
 msgid "Username must be at least {min_length} characters."
 msgstr "用户名至少需要 {min_length} 个字符。"
 
-#: fnprofile/forms.py:249
+#: fnprofile/forms.py:256
 #, python-brace-format
 msgid "Username cannot exceed {max_length} characters."
 msgstr "用户名不要超过 {max_length} 个字符。"
 
-#: fnprofile/forms.py:255
+#: fnprofile/forms.py:262
 msgid "This username is already taken."
 msgstr "用户名已存在。"
 
-#: fnprofile/forms.py:264 fnprofile/forms.py:396
+#: fnprofile/forms.py:271 fnprofile/forms.py:403
 msgid "Please enter an email address."
 msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:273 fnprofile/models.py:96
+#: fnprofile/forms.py:280 fnprofile/models.py:96
 msgid "This email is already registered."
 msgstr ""
 "该电子邮箱地址已用于注册账号（如果是您的邮箱地址没有被验证可在登录页面验"
 "证）。"
 
-#: fnprofile/forms.py:285
+#: fnprofile/forms.py:292
 msgid "Username should not be part of your email address."
 msgstr "用户名不能是您的邮箱地址的一部分。"
 
-#: fnprofile/forms.py:312 fnprofile/forms.py:313
+#: fnprofile/forms.py:319 fnprofile/forms.py:320
 msgid "User Name"
 msgstr "用户名"
 
-#: fnprofile/forms.py:318 fnprofile/forms.py:320
+#: fnprofile/forms.py:325 fnprofile/forms.py:327
 msgid "Password"
 msgstr "密码"
 
-#: fnprofile/forms.py:325 fnprofile/forms.py:328
+#: fnprofile/forms.py:332 fnprofile/forms.py:335
 msgid "Confirm Password"
 msgstr "确认密码"
 
-#: fnprofile/forms.py:376
+#: fnprofile/forms.py:383
 msgid "name@example.domain"
 msgstr "账号名@样例.域名"
 
-#: fnprofile/forms.py:385
+#: fnprofile/forms.py:392
 msgid "Add a new email address to your account."
 msgstr "添加一个新的邮箱地址到您的账号。"
 
-#: fnprofile/forms.py:407
+#: fnprofile/forms.py:414
 msgid "You have already added this email."
 msgstr "您已经添加了该邮箱地址。"
 
-#: fnprofile/forms.py:414
+#: fnprofile/forms.py:421
 msgid "This email is already used by another user."
 msgstr "该邮箱地址已被其它用户注册。"
 
-#: fnprofile/forms.py:451
+#: fnprofile/forms.py:458
 msgid "Set as primary email"
 msgstr "设置为主邮箱地址"
 
-#: fnprofile/forms.py:454
+#: fnprofile/forms.py:461
 msgid "Primary email will be used for notifications."
 msgstr "主邮箱地址将用于消息通知。"
 
@@ -2277,7 +2281,7 @@ msgstr "现在登录"
 msgid "Terms of Service"
 msgstr "《服务协议》"
 
-#: fnprofile/templates/fnprofile/profile/new.html:53
+#: fnprofile/templates/fnprofile/profile/new.html:54
 msgid ""
 "Remember your password! If you forget it, your account will only be deleted "
 "after expiration, and FNSCHOOL will not reset your password for you!"
@@ -2353,93 +2357,93 @@ msgstr "您的密码已被重置。"
 msgid "Your password has been reset automatically."
 msgstr "您的密码已被自动重置。"
 
-#: fnprofile/views.py:306
+#: fnprofile/views.py:304
 msgid "Passwords do not match."
 msgstr "两次密码不匹配。"
 
-#: fnprofile/views.py:314
+#: fnprofile/views.py:312
 msgid "Your information has been updated successfully!"
 msgstr "您的信息已更新！"
 
-#: fnprofile/views.py:361
+#: fnprofile/views.py:359
 msgid "Email added successfully! Verification email sent."
 msgstr "邮件地址添加成功！验证邮件已发送。"
 
-#: fnprofile/views.py:373
+#: fnprofile/views.py:371
 msgid "Email added, but verification email failed to send."
 msgstr "邮件地址已被添加，但是验证邮件发送失败。"
 
-#: fnprofile/views.py:380
+#: fnprofile/views.py:378
 msgid "Failed to add email. Please try again."
 msgstr "无法添加！请重试。"
 
-#: fnprofile/views.py:411
+#: fnprofile/views.py:409
 msgid "Email Details"
 msgstr "电子邮件详细"
 
-#: fnprofile/views.py:427
+#: fnprofile/views.py:425
 msgid ""
 "A verification email has been sent to your email address. Please follow the "
 "instructions in the email to complete the verification process."
 msgstr "已向您的电子邮件地址发送一封验证邮件，请按照邮件内的要求完成账号验证。"
 
-#: fnprofile/views.py:431
+#: fnprofile/views.py:429
 #, python-brace-format
 msgid ""
 "The verification email failed to be sent. Please wait for {time_interval} "
 "seconds and try again!"
 msgstr "无法发送验证邮件，请稍等 {time_interval} 秒 后重试！"
 
-#: fnprofile/views.py:439 fnprofile/views.py:513
+#: fnprofile/views.py:437 fnprofile/views.py:511
 msgid "An unknown error has occurred!"
 msgstr "发生了一个错误！"
 
-#: fnprofile/views.py:468
+#: fnprofile/views.py:466
 msgid "Email verified successfully!"
 msgstr "邮件地址验证成功！"
 
-#: fnprofile/views.py:479
+#: fnprofile/views.py:477
 msgid "Token verification failed! Please try again later!"
 msgstr "令牌验证失败！请稍后再试！"
 
-#: fnprofile/views.py:487
+#: fnprofile/views.py:485
 msgid "Please check if your email address is correct!"
 msgstr "请检查您的邮箱地址是否正确！"
 
-#: fnprofile/views.py:534
+#: fnprofile/views.py:532
 msgid "Please log in to change your information."
 msgstr "请登录以更改您的信息。"
 
-#: fnprofile/views.py:538
+#: fnprofile/views.py:536
 msgid "An error occurred while saving the form!"
 msgstr "保存表单时出现错误！"
 
-#: fnprofile/views.py:540
+#: fnprofile/views.py:538
 msgid "an unknown error has occurred!"
 msgstr "发生了一个未知错误！"
 
-#: fnprofile/views.py:548
+#: fnprofile/views.py:546
 msgid "You only have one primary email, so you cannot cancel this option."
 msgstr "您不能取消该项，因为您只有一个主邮箱地址。"
 
-#: fnprofile/views.py:561
+#: fnprofile/views.py:559
 msgid "Email set as primary"
 msgstr "设电子邮件地址为主邮件地址"
 
-#: fnprofile/views.py:563
+#: fnprofile/views.py:561
 msgid "Email settings updated"
 msgstr "邮件设置已更新"
 
-#: fnprofile/views.py:593
+#: fnprofile/views.py:591
 msgid "Cannot delete primary email"
 msgstr "无法删除主邮件地址"
 
-#: fnprofile/views.py:600
+#: fnprofile/views.py:598
 #, python-brace-format
 msgid "Email ({email_address}) deleted"
 msgstr "邮箱地址 （{email_address}） 已被删除"
 
-#: fnprofile/views.py:607
+#: fnprofile/views.py:605
 msgid "Failed to delete email."
 msgstr "无法删除电子邮件地址"
 

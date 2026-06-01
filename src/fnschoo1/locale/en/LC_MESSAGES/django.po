@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-31 21:07+0800\n"
+"POT-Creation-Date: 2026-06-01 13:08+0800\n"
 "PO-Revision-Date: 2026-05-31 20:53+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -47,8 +47,8 @@ msgstr ""
 #: canteen/models.py:15 canteen/templates/canteen/category/delete.html:31
 #: canteen/templates/canteen/category/delete.html:40
 #: canteen/templates/canteen/category/list.html:56
-#: canteen/templates/canteen/ingredient/list.html:150
-#: canteen/templates/canteen/ingredient/list.html:155
+#: canteen/templates/canteen/ingredient/list.html:156
+#: canteen/templates/canteen/ingredient/list.html:161
 #: canteen/templates/canteen/meal_type/list.html:52 fnprofile/models.py:55
 #: templates/base/_js.html:7
 msgid "Yes"
@@ -94,6 +94,10 @@ msgstr ""
 
 #: canteen/models.py:47 canteen/models.py:102 canteen/models.py:234
 #: canteen/models.py:250 canteen/models.py:258
+#: canteen/templates/canteen/consumption/create.html:24
+#: canteen/templates/canteen/consumption/create.html:43
+#: canteen/templates/canteen/ingredient/list.html:24
+#: canteen/templates/canteen/ingredient/list.html:41
 msgid "(None)"
 msgstr ""
 
@@ -125,7 +129,7 @@ msgstr ""
 msgid "User"
 msgstr ""
 
-#: canteen/models.py:121 canteen/templates/canteen/consumption/create.html:48
+#: canteen/models.py:121 canteen/templates/canteen/consumption/create.html:55
 #: canteen/views.py:81
 msgid "Storage Date"
 msgstr ""
@@ -134,8 +138,8 @@ msgstr ""
 msgid "Time of creating"
 msgstr ""
 
-#: canteen/models.py:134 canteen/templates/canteen/consumption/create.html:55
-#: canteen/templates/canteen/consumption/create.html:101 canteen/views.py:91
+#: canteen/models.py:134 canteen/templates/canteen/consumption/create.html:62
+#: canteen/templates/canteen/consumption/create.html:108 canteen/views.py:91
 msgid "Ingredient Name"
 msgstr ""
 
@@ -280,7 +284,7 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:57
 #: canteen/templates/canteen/category/list.html:66
 #: canteen/templates/canteen/ingredient/delete.html:34
-#: canteen/templates/canteen/ingredient/list.html:168
+#: canteen/templates/canteen/ingredient/list.html:174
 #: canteen/templates/canteen/meal_type/delete.html:45
 #: canteen/templates/canteen/meal_type/list.html:62
 #: fnprofile/templates/fnprofile/fnemail/delete.html:34
@@ -312,7 +316,7 @@ msgid "Ingredients Count"
 msgstr ""
 
 #: canteen/templates/canteen/category/list.html:62
-#: canteen/templates/canteen/ingredient/list.html:162
+#: canteen/templates/canteen/ingredient/list.html:168
 #: canteen/templates/canteen/meal_type/list.html:58
 msgid "Edit"
 msgstr ""
@@ -346,52 +350,52 @@ msgstr ""
 msgid "All Meal Types"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:31
-#: canteen/templates/canteen/ingredient/list.html:29
+#: canteen/templates/canteen/consumption/create.html:34
+#: canteen/templates/canteen/ingredient/list.html:32
 msgid "All Categories"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:45
+#: canteen/templates/canteen/consumption/create.html:52
 msgid "Sort by storage date."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:53
+#: canteen/templates/canteen/consumption/create.html:60
 msgid "Sort by name."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:60
+#: canteen/templates/canteen/consumption/create.html:67
 msgid "Sort by meal type."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:62 canteen/views.py:93
+#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:93
 msgid "Meal Type"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:67
+#: canteen/templates/canteen/consumption/create.html:74
 msgid "Sort by category."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:69
+#: canteen/templates/canteen/consumption/create.html:76
 msgid "Category Name (canteen__consumption_create)"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:75
+#: canteen/templates/canteen/consumption/create.html:82
 msgid "The starting date of storage."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:83
+#: canteen/templates/canteen/consumption/create.html:90
 msgid "The end date of storage."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:89
+#: canteen/templates/canteen/consumption/create.html:96
 msgid "Refresh this page."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:90
+#: canteen/templates/canteen/consumption/create.html:97
 msgid "Refresh"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:102
+#: canteen/templates/canteen/consumption/create.html:109
 #, python-format
 msgid ""
 "\n"
@@ -399,16 +403,16 @@ msgid ""
 "              "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:106
+#: canteen/templates/canteen/consumption/create.html:113
 msgid "Remaining Quantity"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:138
+#: canteen/templates/canteen/consumption/create.html:145
 #, python-format
 msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:145
+#: canteen/templates/canteen/consumption/create.html:152
 #, python-format
 msgid ""
 "\n"
@@ -416,7 +420,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:152
+#: canteen/templates/canteen/consumption/create.html:159
 #, python-format
 msgid ""
 "\n"
@@ -424,19 +428,19 @@ msgid ""
 "                  "
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:161
+#: canteen/templates/canteen/consumption/create.html:168
 msgid "No ingredient found."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:170
+#: canteen/templates/canteen/consumption/create.html:177
 msgid "Generate Spreadsheet"
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:176
+#: canteen/templates/canteen/consumption/create.html:183
 msgid "Ingredient Sheets are also included."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:502
+#: canteen/templates/canteen/consumption/create.html:509
 msgid ":"
 msgstr ""
 
@@ -508,45 +512,45 @@ msgid ""
 "    "
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:48
+#: canteen/templates/canteen/ingredient/list.html:54
 msgid "Search ingredient ..."
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:53
+#: canteen/templates/canteen/ingredient/list.html:59
 msgid "Search"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:56
+#: canteen/templates/canteen/ingredient/list.html:62
 msgid "Clear"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:64
+#: canteen/templates/canteen/ingredient/list.html:70
 msgid "Add via template"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:66
+#: canteen/templates/canteen/ingredient/list.html:72
 msgid "Add one"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:67
+#: canteen/templates/canteen/ingredient/list.html:73
 msgid ""
 "Click twice within one minute to delete the selected ingredients. (Note: "
 "This is an irreversible operation.)"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:69
+#: canteen/templates/canteen/ingredient/list.html:75
 msgid "Delete selected Ingredients"
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:79
+#: canteen/templates/canteen/ingredient/list.html:85
 msgid "Locate the updated element."
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:91
+#: canteen/templates/canteen/ingredient/list.html:97
 msgid "Select all ingredients."
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:100
+#: canteen/templates/canteen/ingredient/list.html:106
 #, python-format
 msgid ""
 "\n"
@@ -554,7 +558,7 @@ msgid ""
 "                  "
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:123
+#: canteen/templates/canteen/ingredient/list.html:129
 msgid "It helps you check/delete the ingredients."
 msgstr ""
 
@@ -645,11 +649,11 @@ msgid ""
 "      Edit Meal Type %(instance_name)s ."
 msgstr ""
 
-#: canteen/views.py:78 canteen/views.py:1208
+#: canteen/views.py:78 canteen/views.py:1223
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:78 canteen/views.py:1200
+#: canteen/views.py:78 canteen/views.py:1215
 msgid "(2)"
 msgstr ""
 
@@ -710,70 +714,70 @@ msgstr ""
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr ""
 
-#: canteen/views.py:439
+#: canteen/views.py:450
 msgid "Please select the item(s) you wish to delete."
 msgstr ""
 
-#: canteen/views.py:461
+#: canteen/views.py:472
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr ""
 
-#: canteen/views.py:463
+#: canteen/views.py:474
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr ""
 
-#: canteen/views.py:467
+#: canteen/views.py:478
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr ""
 
-#: canteen/views.py:469
+#: canteen/views.py:480
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr ""
 
-#: canteen/views.py:515
+#: canteen/views.py:526
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
 "and cannot be saved. Please modify it again."
 msgstr ""
 
-#: canteen/views.py:727
+#: canteen/views.py:742
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr ""
 
-#: canteen/views.py:736
+#: canteen/views.py:751
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr ""
 
-#: canteen/views.py:737
+#: canteen/views.py:752
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr ""
 
-#: canteen/views.py:777
+#: canteen/views.py:792
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:938
+#: canteen/views.py:953
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:958
+#: canteen/views.py:973
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:974
+#: canteen/views.py:989
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:1000
+#: canteen/views.py:1015
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr ""
@@ -1484,7 +1488,7 @@ msgstr ""
 msgid "The content you entered is too long."
 msgstr ""
 
-#: fnprofile/forms.py:56 fnprofile/forms.py:382
+#: fnprofile/forms.py:56 fnprofile/forms.py:389
 #: fnprofile/templates/fnprofile/fnemail/list.html:24
 msgid "Email Address"
 msgstr ""
@@ -1531,8 +1535,8 @@ msgstr ""
 msgid "Please enter the password."
 msgstr ""
 
-#: fnprofile/forms.py:128 fnprofile/forms.py:213 fnprofile/forms.py:269
-#: fnprofile/forms.py:400
+#: fnprofile/forms.py:128 fnprofile/forms.py:213 fnprofile/forms.py:276
+#: fnprofile/forms.py:407
 msgid "Please enter a valid email address."
 msgstr ""
 
@@ -1579,73 +1583,73 @@ msgstr ""
 msgid "A user with that email already exists."
 msgstr ""
 
-#: fnprofile/forms.py:231
+#: fnprofile/forms.py:238
 msgid "Please enter a username."
 msgstr ""
 
-#: fnprofile/forms.py:236
+#: fnprofile/forms.py:243
 msgid "Username can only contain letters, digits and @/./+/-/_ characters."
-msgstr ""
-
-#: fnprofile/forms.py:242
-#, python-brace-format
-msgid "Username must be at least {min_length} characters."
 msgstr ""
 
 #: fnprofile/forms.py:249
 #, python-brace-format
+msgid "Username must be at least {min_length} characters."
+msgstr ""
+
+#: fnprofile/forms.py:256
+#, python-brace-format
 msgid "Username cannot exceed {max_length} characters."
 msgstr ""
 
-#: fnprofile/forms.py:255
+#: fnprofile/forms.py:262
 msgid "This username is already taken."
 msgstr ""
 
-#: fnprofile/forms.py:264 fnprofile/forms.py:396
+#: fnprofile/forms.py:271 fnprofile/forms.py:403
 msgid "Please enter an email address."
 msgstr ""
 
-#: fnprofile/forms.py:273 fnprofile/models.py:96
+#: fnprofile/forms.py:280 fnprofile/models.py:96
 msgid "This email is already registered."
 msgstr ""
 
-#: fnprofile/forms.py:285
+#: fnprofile/forms.py:292
 msgid "Username should not be part of your email address."
 msgstr ""
 
-#: fnprofile/forms.py:312 fnprofile/forms.py:313
+#: fnprofile/forms.py:319 fnprofile/forms.py:320
 msgid "User Name"
 msgstr ""
 
-#: fnprofile/forms.py:318 fnprofile/forms.py:320
+#: fnprofile/forms.py:325 fnprofile/forms.py:327
 msgid "Password"
 msgstr ""
 
-#: fnprofile/forms.py:325 fnprofile/forms.py:328
+#: fnprofile/forms.py:332 fnprofile/forms.py:335
 msgid "Confirm Password"
 msgstr ""
 
-#: fnprofile/forms.py:376
+#: fnprofile/forms.py:383
 msgid "name@example.domain"
 msgstr ""
 
-#: fnprofile/forms.py:385
+#: fnprofile/forms.py:392
 msgid "Add a new email address to your account."
 msgstr ""
 
-#: fnprofile/forms.py:407
+#: fnprofile/forms.py:414
 msgid "You have already added this email."
 msgstr ""
 
-#: fnprofile/forms.py:414
+#: fnprofile/forms.py:421
 msgid "This email is already used by another user."
 msgstr ""
 
-#: fnprofile/forms.py:451
+#: fnprofile/forms.py:458
 msgid "Set as primary email"
 msgstr ""
 
-#: fnprofile/forms.py:454
+#: fnprofile/forms.py:461
 msgid "Primary email will be used for notifications."
 msgstr ""
 
@@ -2111,7 +2115,7 @@ msgstr ""
 msgid "Terms of Service"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/profile/new.html:53
+#: fnprofile/templates/fnprofile/profile/new.html:54
 msgid ""
 "Remember your password! If you forget it, your account will only be deleted "
 "after expiration, and FNSCHOOL will not reset your password for you!"
@@ -2184,93 +2188,93 @@ msgstr ""
 msgid "Your password has been reset automatically."
 msgstr ""
 
-#: fnprofile/views.py:306
+#: fnprofile/views.py:304
 msgid "Passwords do not match."
 msgstr ""
 
-#: fnprofile/views.py:314
+#: fnprofile/views.py:312
 msgid "Your information has been updated successfully!"
 msgstr ""
 
-#: fnprofile/views.py:361
+#: fnprofile/views.py:359
 msgid "Email added successfully! Verification email sent."
 msgstr ""
 
-#: fnprofile/views.py:373
+#: fnprofile/views.py:371
 msgid "Email added, but verification email failed to send."
 msgstr ""
 
-#: fnprofile/views.py:380
+#: fnprofile/views.py:378
 msgid "Failed to add email. Please try again."
 msgstr ""
 
-#: fnprofile/views.py:411
+#: fnprofile/views.py:409
 msgid "Email Details"
 msgstr ""
 
-#: fnprofile/views.py:427
+#: fnprofile/views.py:425
 msgid ""
 "A verification email has been sent to your email address. Please follow the "
 "instructions in the email to complete the verification process."
 msgstr ""
 
-#: fnprofile/views.py:431
+#: fnprofile/views.py:429
 #, python-brace-format
 msgid ""
 "The verification email failed to be sent. Please wait for {time_interval} "
 "seconds and try again!"
 msgstr ""
 
-#: fnprofile/views.py:439 fnprofile/views.py:513
+#: fnprofile/views.py:437 fnprofile/views.py:511
 msgid "An unknown error has occurred!"
 msgstr ""
 
-#: fnprofile/views.py:468
+#: fnprofile/views.py:466
 msgid "Email verified successfully!"
 msgstr ""
 
-#: fnprofile/views.py:479
+#: fnprofile/views.py:477
 msgid "Token verification failed! Please try again later!"
 msgstr ""
 
-#: fnprofile/views.py:487
+#: fnprofile/views.py:485
 msgid "Please check if your email address is correct!"
 msgstr ""
 
-#: fnprofile/views.py:534
+#: fnprofile/views.py:532
 msgid "Please log in to change your information."
 msgstr ""
 
-#: fnprofile/views.py:538
+#: fnprofile/views.py:536
 msgid "An error occurred while saving the form!"
 msgstr ""
 
-#: fnprofile/views.py:540
+#: fnprofile/views.py:538
 msgid "an unknown error has occurred!"
 msgstr ""
 
-#: fnprofile/views.py:548
+#: fnprofile/views.py:546
 msgid "You only have one primary email, so you cannot cancel this option."
 msgstr ""
 
-#: fnprofile/views.py:561
+#: fnprofile/views.py:559
 msgid "Email set as primary"
 msgstr ""
 
-#: fnprofile/views.py:563
+#: fnprofile/views.py:561
 msgid "Email settings updated"
 msgstr ""
 
-#: fnprofile/views.py:593
+#: fnprofile/views.py:591
 msgid "Cannot delete primary email"
 msgstr ""
 
-#: fnprofile/views.py:600
+#: fnprofile/views.py:598
 #, python-brace-format
 msgid "Email ({email_address}) deleted"
 msgstr ""
 
-#: fnprofile/views.py:607
+#: fnprofile/views.py:605
 msgid "Failed to delete email."
 msgstr ""
 

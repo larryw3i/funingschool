@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-31 20:52+0800\n"
-"PO-Revision-Date: 2026-05-27 21:35+0800\n"
+"PO-Revision-Date: 2026-06-01 13:09+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -328,7 +328,7 @@ msgstr "- 排序：增加“大类”和“餐类”排序功能。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:113
 msgid "- Registration: Add the feature of automatically generating passwords."
-msgstr ""
+msgstr "- 注册：添加“自动生成密码”功能。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:121
 msgid ""
