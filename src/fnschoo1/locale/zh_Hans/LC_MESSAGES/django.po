@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-01 13:08+0800\n"
-"PO-Revision-Date: 2026-05-31 21:08+0800\n"
+"POT-Creation-Date: 2026-06-01 13:35+0800\n"
+"PO-Revision-Date: 2026-06-01 13:35+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -429,41 +429,27 @@ msgstr "余量"
 msgid "Storaged on %(storage_date)s . (%(meal_type)s, %(category)s)"
 msgstr "于 %(storage_date)s 入库。（%(meal_type)s，%(category)s）"
 
-#: canteen/templates/canteen/consumption/create.html:152
-#, python-format
-msgid ""
-"\n"
-"                  (%(category)s,%(meal_type)s,%(storage_date)s)\n"
-"                  "
-msgstr ""
-"\n"
-"                    （%(category)s,%(meal_type)s,%(storage_date)s）\n"
-"                  "
+#: canteen/templates/canteen/consumption/create.html:155
+msgid "None Category"
+msgstr "无大类"
 
-#: canteen/templates/canteen/consumption/create.html:159
-#, python-format
-msgid ""
-"\n"
-"                  (%(category)s,%(storage_date)s)\n"
-"                  "
-msgstr ""
-"\n"
-"                    （%(category)s,%(storage_date)s）\n"
-"                  "
+#: canteen/templates/canteen/consumption/create.html:161
+msgid "None Meal Type"
+msgstr "无餐类"
 
-#: canteen/templates/canteen/consumption/create.html:168
+#: canteen/templates/canteen/consumption/create.html:171
 msgid "No ingredient found."
 msgstr "未发现食材。"
 
-#: canteen/templates/canteen/consumption/create.html:177
+#: canteen/templates/canteen/consumption/create.html:180
 msgid "Generate Spreadsheet"
 msgstr "生成账单"
 
-#: canteen/templates/canteen/consumption/create.html:183
+#: canteen/templates/canteen/consumption/create.html:186
 msgid "Ingredient Sheets are also included."
 msgstr "也包含食材表。"
 
-#: canteen/templates/canteen/consumption/create.html:509
+#: canteen/templates/canteen/consumption/create.html:512
 msgid ":"
 msgstr "："
 
@@ -2528,6 +2514,26 @@ msgstr "注册"
 #: templates/includes/_header.html:109
 msgid "Hide messages."
 msgstr "隐藏信息。"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                  (%(category)s,%(meal_type)s,%(storage_date)s)\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    （%(category)s,%(meal_type)s,%(storage_date)s）\n"
+#~ "                  "
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                  (%(category)s,%(storage_date)s)\n"
+#~ "                  "
+#~ msgstr ""
+#~ "\n"
+#~ "                    （%(category)s,%(storage_date)s）\n"
+#~ "                  "
 
 #, fuzzy
 #~| msgid "You must agree to the Terms of Service."

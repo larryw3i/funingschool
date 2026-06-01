@@ -146,21 +146,24 @@
                 class="">
               <div class='ingredient-progress'></div>
               {{ ingredient.name }}
-              {% if ingredient.meal_type.name %}
-                <br />
-                <span class='badge px-1 py-1 bg-success rounded-pill'>
-                  {% blocktrans with meal_type=ingredient.meal_type.name category=ingredient.category.name storage_date=ingredient.storage_date|date:"Ymd" %}
-                  ({{ category }},{{ meal_type }},{{ storage_date }})
-                  {% endblocktrans %}
-                </span>
-              {% else %}
-                <br />
-                <span class='badge px-1 py-1 bg-success rounded-pill'>
-                  {% blocktrans with category=ingredient.category.name storage_date=ingredient.storage_date|date:"Ymd" %}
-                  ({{ category }},{{ storage_date }})
-                  {% endblocktrans %}
-                </span>
-              {% endif %}
+              <br />
+              <span class='badge px-1 py-1 bg-success rounded-pill'>
+                (
+                {% if ingredient.category %}
+                  {{ ingredient.category.name }}
+                {% else %}
+                  {% trans 'None Category' %}
+                {% endif %}
+                ,
+                {% if ingredient.meal_type %}
+                  {{ ingredient.meal_type.name }}
+                {% else %}
+                  {% trans 'None Meal Type' %}
+                {% endif %}
+                ,
+                {{ ingredient.storage_date|date:"Ymd" }}
+                )
+              </span>
             </td>
             <td name="remaining_{{ ingredient.id }}"></td>
           </tr>

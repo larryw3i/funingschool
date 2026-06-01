@@ -3,7 +3,7 @@
 
 # Changelog
 
-## [Unreleased] - 2026-06-01
+## [20260601.81344.845] - 2026-06-01
 ### Added
 - Search for ingredients: The input box allows for searching by quantity and total price.
 - Service Agreement: Add the "Service Agreement" page.

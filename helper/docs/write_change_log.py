@@ -101,6 +101,7 @@ class Releases:
             + "\n"
             + "\n"
             + self.get_release_markdown(
+                version="20260601.81344.845",
                 additions=[
                     _(
                         "- Search for ingredients: The input box allows for searching by quantity and total price."
