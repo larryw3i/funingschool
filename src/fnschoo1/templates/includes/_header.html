@@ -39,11 +39,33 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"
              href="#"
-             id="navbarDropdown"
+             id="education_nav_dropdown"
+             role="button"
+             data-bs-toggle="dropdown"
+             aria-expanded="false">{% trans "Education" %}</a>
+          <ul class="dropdown-menu" aria-labelledby="education_nav_dropdown">
+            <li>
+              <a class="dropdown-item" href="#">{% trans 'Subject Tools' %}</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#"></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item" href="#"></a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+             href="#"
+             id="develop_nav_dropdown"
              role="button"
              data-bs-toggle="dropdown"
              aria-expanded="false">{% trans "Develop" %}</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul class="dropdown-menu" aria-labelledby="develop_nav_dropdown">
             <li>
               <a class="dropdown-item" href="#"></a>
             </li>
