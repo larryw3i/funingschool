@@ -26,6 +26,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
+from fnschool.local import is_zh_CN
 
 from .fntoken import account_activation_token
 from .models import Fnemail, Fnuser, max_email_count, max_username_length
@@ -346,6 +347,11 @@ class FnuserForm(ModelForm):
         model = Fnuser
         fields = [
             "username",
+            *(
+                ("last_name", "first_name")
+                if is_zh_CN
+                else ("first_name", "last_name")
+            ),
             "phone",
             "affiliation",
             "superior_department",

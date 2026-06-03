@@ -16,6 +16,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
     User,
 )
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage
@@ -44,16 +45,16 @@ temp_id_timedelta = timedelta(minutes=30)
 max_email_count = 8
 max_username_length = 256
 max_email_length = max_username_length
+username_validator = UnicodeUsernameValidator()
+
+yes_str = _("Yes")
+no_str = _("No")
 
 
 class Gender(models.TextChoices):
     MALE = "M", _("Male")
     FEMALE = "F", _("Female")
     UNKNOWN = "U", "--"
-
-
-yes_str = _("Yes")
-no_str = _("No")
 
 
 def get_uuid_hex():
@@ -85,6 +86,18 @@ class Fnuser(AbstractUser, PermissionsMixin):
         related_query_name="fn_user",
     )
 
+    username = models.CharField(
+        _("username"),
+        max_length=max_username_length,
+        unique=True,
+        help_text=_(
+            "Required. {0} characters or fewer. Letters, digits and @/./+/-/_ only."
+        ).format(max_username_length),
+        validators=[username_validator],
+        error_messages={
+            "unique": _("A user with that username already exists."),
+        },
+    )
     email = models.EmailField(
         _("email address"),
         blank=True,

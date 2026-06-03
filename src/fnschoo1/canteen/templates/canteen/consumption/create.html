@@ -191,7 +191,9 @@
              id="include_food_sheets">
     </div>
   </div>
+{% endblock %}
 
+{% block extra_css %}
   <style>
     @keyframes shake-horizontal {
 
@@ -288,7 +290,9 @@
       z-index: 1030;
     }
   </style>
+{% endblock %}
 
+{% block extra_js %}
   {{ ingredient_ids|json_script:'ingredient_ids' }}
   {{ months|json_script:'months' }}
   {{ meal_type_names|json_script:'meal_type_names' }}
@@ -733,5 +737,4 @@
       });
     });
   </script>
-
 {% endblock %}

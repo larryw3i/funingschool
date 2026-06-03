@@ -22,7 +22,10 @@ lang_module_name = (
     lang_module_name if lang_module_name in lang_module_names else "en"
 )
 
-is_zh_CN = lambda: (lang.lower() in ["zh-cn", "zh-hans"])
+is_zh_CN = lang.lower() in ["zh-cn", "zh-hans"]
+is_zh_Hans = lang.lower() in ["zh-cn", "zh-hans"]
+print(is_zh_Hans, is_zh_CN)
+
 
 def get_local():
     lang_module = import_module(f"fnschool.local.{lang_module_name}")

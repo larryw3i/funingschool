@@ -8,10 +8,25 @@
   {% include 'fnprofile/includes/_fnprofile_navigation.html' %}
   <form method="post"
         action="{% url 'fnprofile:edit_profile' %}"
+        class="form-profile-edit"
+        style="display: none"
         enctype="multipart/form-data">
     {% csrf_token %} {{ form|crispy }}
     <button type="submit button" class="btn btn-outline-primary">
       {% trans "Update" %}
     </button>
   </form>
+{% endblock %}
+
+{% block extra_js %}
+  <script>
+    $(document).ready(function() {
+      $('#div_id_last_name, #div_id_first_name')
+        .wrapAll('<div class="row"></div>')
+        .wrap('<div class="col-md-6"></div>');
+    });
+    $(document).ready(function() {
+      $('.form-profile-edit').css('display', 'block');
+    });
+  </script>
 {% endblock %}
