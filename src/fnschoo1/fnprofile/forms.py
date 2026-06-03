@@ -31,7 +31,7 @@ from fnschool.local import get_local
 from .fntoken import account_activation_token
 from .models import Fnemail, Fnuser, max_email_count, max_username_length
 
-min_username_length = 3
+min_username_length = 2
 
 
 class FnuserLoginForm(AuthenticationForm):
