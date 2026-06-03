@@ -35,6 +35,7 @@ from django.utils.translation import gettext as _
 from django.views.generic import CreateView
 from fnschool import *
 from fnschool import _
+from fnschool.local import get_local
 from fnschool.views import get_object_orders_from_cookie
 
 default_timedelta = timedelta(minutes=5)
@@ -178,6 +179,19 @@ class Fnuser(AbstractUser, PermissionsMixin):
 
     def __str__(self):
         return _("{0}'s Information").format(self.username)
+
+    def get_full_name(self, request=None):
+        full_name = None
+        if request:
+            local = get_local(request=request)
+            full_name = (
+                "{0}{1}".format(self.last_name, self.first_name)
+                if local.is_zh_CN
+                else "{0} {1}".format(self.first_name, self.last_name)
+            )
+        else:
+            full_name = "{0} {1}".format(self.first_name, self.last_name)
+        return full_name.strip()
 
     def get_primary_email(self):
         primary_email = self.emails.get(is_primary=True, is_disabled=False)

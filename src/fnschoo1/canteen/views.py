@@ -73,7 +73,6 @@ from .models import (
 
 # Create your views here.
 
-local = get_local()
 decimal_prec = getattr(settings, "DECIMAL_PREC", 2)
 split_ingredient_labels = [_("(1)"), _("(2)")]
 
@@ -937,6 +936,7 @@ def get_template_workbook_of_purchased_ingredients(request):
     global storage_date_header, ingredient_name_header, meal_type_header
     global quantity_header, quantity_unit_name_header, total_price_header
     global is_ignorable_header
+    local = get_local(request=request)
     headers = [
         storage_date_header,
         ingredient_name_header,

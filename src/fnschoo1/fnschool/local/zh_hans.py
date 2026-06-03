@@ -20,7 +20,7 @@ class FnZhHansLocal(FnLocal):
         super().__init__(*args, **kwargs)
         pass
 
-    def get_char_count(text):
+    def get_char_count(self, text):
         pattern = re.compile(r"[\u4e00-\u9fa5]")
         chinese_chars = pattern.findall(text)
         return len(chinese_chars)
@@ -135,9 +135,9 @@ class FnZhHansLocal(FnLocal):
         return output
 
 
-def get_local():
-    zh_hans_local = FnZhHansLocal()
-    return zh_hans_local
+def get_local(*args, **kwargs):
+    local = FnZhHansLocal(*args, **kwargs)
+    return local
 
 
 # The end.

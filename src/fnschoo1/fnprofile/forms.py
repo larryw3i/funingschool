@@ -26,7 +26,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import CreateView
-from fnschool.local import is_zh_CN
+from fnschool.local import get_local
 
 from .fntoken import account_activation_token
 from .models import Fnemail, Fnuser, max_email_count, max_username_length
@@ -311,9 +311,11 @@ class FnuserSignUpForm(UserCreationForm):
         return user
 
 
-class FnuserForm(ModelForm):
+class FnuserEditForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        self.local = get_local(request=self.request)
         super().__init__(*args, **kwargs)
         self.fields["username"] = forms.CharField(
             max_length=128,
@@ -341,15 +343,11 @@ class FnuserForm(ModelForm):
             {"class": "form-control-file"}
         )
 
-    class Meta:
-        current_year = date.today().year
-        year_range = list(range(current_year - 100, current_year + 1))
-        model = Fnuser
-        fields = [
+        ordered_field_names = [
             "username",
             *(
                 ("last_name", "first_name")
-                if is_zh_CN
+                if self.local.is_zh_CN
                 else ("first_name", "last_name")
             ),
             "phone",
@@ -361,6 +359,18 @@ class FnuserForm(ModelForm):
             "avatar",
             "bio",
         ]
+        if settings.AS_LOCAL:
+            ordered_field_names += ["password", "password_confirm"]
+
+        self.fields = {
+            name: self.fields.get(name) for name in ordered_field_names
+        }
+
+    class Meta:
+        current_year = date.today().year
+        year_range = list(range(current_year - 100, current_year + 1))
+        model = Fnuser
+        fields = "__all__"
         widgets = {
             "date_of_birth": forms.SelectDateWidget(
                 years=year_range,

@@ -40,7 +40,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from fnschool.local import get_local, is_zh_CN
+from fnschool.local import get_local
 from openpyxl import Workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
@@ -54,8 +54,6 @@ from ..forms import (
 )
 from ..models import Category, Consumption, Ingredient, MealType
 from ..views import decimal_prec
-
-local = get_local()
 
 
 def set_column_width_in_inches(worksheet, column, inches):
@@ -135,6 +133,7 @@ class MealTypeWorkbook:
 
         self.request = request
         self.user = self.request.user
+        self.user_full_name = self.user.get_full_name(self.request)
         self.ingredients = ingredients
         self.ignorable_ingredients = self.ingredients.filter(
             Q(is_ignorable=True)
@@ -145,8 +144,8 @@ class MealTypeWorkbook:
         self.meal_type = meal_type
         self.categories = categories
 
-        global is_zh_CN
-        self.is_zh_CN = is_zh_CN
+        self.local = get_local(request=self.request)
+        self.is_zh_CN = self.local.is_zh_CN
 
         self._is_school = None
 
@@ -270,7 +269,9 @@ class MealTypeWorkbook:
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
-                total_price_text=local.get_monetary_amount(summary_total_price),
+                total_price_text=self.local.get_monetary_amount(
+                    summary_total_price
+                ),
                 total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
@@ -288,7 +289,7 @@ class MealTypeWorkbook:
         handler_cell = sheet.cell(handler_row_num, 1)
         handler_cell.border = self.thin_border
         handler_cell.value = _("Handler: {handler}").format(
-            handler=user.username
+            handler=self.user_full_name
         )
         sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
         set_row_height_in_inches(sheet, handler_row_num, 0.32)
@@ -457,7 +458,9 @@ class MealTypeWorkbook:
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
-                total_price_text=local.get_monetary_amount(summary_total_price),
+                total_price_text=self.local.get_monetary_amount(
+                    summary_total_price
+                ),
                 total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
@@ -476,7 +479,7 @@ class MealTypeWorkbook:
         handler_cell = sheet.cell(handler_row_num, 1)
         handler_cell.border = self.thin_border
         handler_cell.value = _("Handler: {handler}").format(
-            handler=user.username
+            handler=self.user_full_name
         )
         sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
         set_row_height_in_inches(sheet, handler_row_num, 0.32)
@@ -619,7 +622,9 @@ class MealTypeWorkbook:
             _(
                 "Total Price Text: {total_price_text}        {total_price}"
             ).format(
-                total_price_text=local.get_monetary_amount(summary_total_price),
+                total_price_text=self.local.get_monetary_amount(
+                    summary_total_price
+                ),
                 total_price=summary_total_price.normalize(),
             )
             if self.is_zh_CN
@@ -638,7 +643,7 @@ class MealTypeWorkbook:
         handler_cell = sheet.cell(handler_row_num, 1)
         handler_cell.border = self.thin_border
         handler_cell.value = _("Handler: {handler}").format(
-            handler=user.username
+            handler=self.user_full_name
         )
         sheet.merge_cells(f"A{handler_row_num}:C{handler_row_num}")
         set_row_height_in_inches(sheet, handler_row_num, 0.32)
@@ -1004,7 +1009,7 @@ class MealTypeWorkbook:
                                 "%Y.%m.%d"
                             ),
                         ),
-                        user.username,
+                        self.user_full_name,
                     )
 
                 sheet.cell(
@@ -1062,7 +1067,7 @@ class MealTypeWorkbook:
             signature_cell = sheet.cell(signature_row_num, 1)
             signature_cell.value = _(
                 "   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
-            ).format(handler=user.username)
+            ).format(handler=self.user_full_name)
             signature_cell.font = self.font_14
             signature_cell.alignment = self.center_alignment
             sheet.merge_cells(f"A{signature_row_num}:H{signature_row_num}")
@@ -1379,7 +1384,7 @@ class MealTypeWorkbook:
             signature_cell = sheet.cell(signature_row_num, 1)
             signature_cell.value = _(
                 "   Reviewer:        Handler: {handler} 　    Weigher:      Warehouseman: 　"
-            ).format(handler=user.username)
+            ).format(handler=self.user_full_name)
             signature_cell.font = self.font_14
             signature_cell.alignment = self.center_alignment
             sheet.merge_cells(f"A{signature_row_num}:H{signature_row_num}")
@@ -1750,7 +1755,7 @@ class MealTypeWorkbook:
                             category=ingredient.category,
                             storage_date=ingredient.storage_date,
                         ),
-                        user.username,
+                        self.user_full_name,
                     )
                 sheet.cell(ingredient_row_num, 2, ingredient.quantity_unit_name)
                 sheet.cell(ingredient_row_num, 3, ingredient_quantity or "")
@@ -1820,7 +1825,7 @@ class MealTypeWorkbook:
                 1,
                 _(
                     "   Reviewer:        Handler: {handler_name}    Weigher:        Warehouseman: 　     "
-                ).format(handler_name=user.username),
+                ).format(handler_name=self.user_full_name),
             )
             sheet.merge_cells(f"A{signature_row_num}:I{signature_row_num}")
 
@@ -2536,7 +2541,7 @@ class MealTypeWorkbook:
             affiliation=self.request.user.affiliation,
         )
         props.subject = _("Daybook Workbook")
-        props.creator = self.request.user.username
+        props.creator = self.user_full_name
         props.description = props_description
         props.keywords = _("Daybook")
         props.created = datetime.now()

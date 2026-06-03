@@ -91,18 +91,16 @@
               <a class="nav-link avatar-nav-link"
                  href="{% url 'fnprofile:edit_profile' %}"
                  target="fnprofile/edit_profile"
-                 title="{{ request.user.username }}">
+                 title="{{ USER_FULL_NAME }}">
                 <img src="{{ request.user.avatar.url }}"
-                     alt="{{ request.user.username }}"
+                     alt="{{ USER_FULL_NAME }}"
                      class="avatar-img">
               </a>
             {% else %}
               <a class="nav-link "
                  href="{% url 'fnprofile:edit_profile' %}"
                  target="fnprofile/edit_profile"
-                 title="{{ request.user.username }}">
-                {{ request.user.username }}
-              </a>
+                 title="{{ USER_FULL_NAME }}">{{ USER_FULL_NAME }}</a>
             {% endif %}
           </ul>
           <ul class="nav-item ">

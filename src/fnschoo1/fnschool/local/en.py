@@ -20,16 +20,16 @@ class FnEnLocal(FnLocal):
         super().__init__(*args, **kwargs)
         pass
 
-    def get_char_count(text):
+    def get_char_count(self, text):
         return len(text)
 
     def get_monetary_amount(self, num):
         return num
 
 
-def get_local():
-    en_local = FnEnLocal()
-    return en_local
+def get_local(*args, **kwargs):
+    local = FnEnLocal(*args, **kwargs)
+    return local
 
 
 # The end.

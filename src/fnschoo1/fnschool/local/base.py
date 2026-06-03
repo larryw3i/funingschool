@@ -4,7 +4,11 @@ from pathlib import Path
 
 
 class FnLocal:
-    def __init__(self, local=None):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.get("request", None)
+        self.lang_code = self.request.COOKIES.get("django_language")
+        self.is_zh_CN = self.lang_code.lower() in ["zh-cn", "zh-hans"]
+        self.is_zh_Hans = self.lang_code.lower() in ["zh-cn", "zh-hans"]
         pass
 
     def get_monetary_amount(self, num):

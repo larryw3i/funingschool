@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout
+from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
@@ -34,7 +34,7 @@ from .forms import (
     FnemailAddForm,
     FnemailDeleteForm,
     FnemailEditForm,
-    FnuserForm,
+    FnuserEditForm,
     FnuserLoginForm,
     FnuserSetPasswordForm,
     FnuserSignUpForm,
@@ -288,32 +288,42 @@ def edit_fnprofile(request):
         return HttpResponse("Not Found", status=404)
 
     if request.method == "POST":
-        form = FnuserForm(request.POST, request.FILES, instance=request.user)
+        form = FnuserEditForm(
+            request.POST, request.FILES, instance=request.user, request=request
+        )
 
         if form.is_valid():
+            user = None
             password = None
-            if settings.AS_SITE:
-                password = cleaned_data["password"]
-                password_confirm = cleaned_data["password_confirm"]
+            if settings.AS_LOCAL:
+                password = form.cleaned_data["password"]
+                password_confirm = form.cleaned_data["password_confirm"]
                 if (
-                    password_confirm
-                    and password_confirm
-                    and password != password_confirm
+                    not password
+                    or not password_confirm
+                    or not password == password_confirm
                 ):
                     form.add_error(
                         "password_confirm", _("Passwords do not match.")
                     )
-
-            user = form.save(commit=False)
-            if settings.AS_SITE and password:
-                user.set_password(password)
+                    return render(
+                        request, "fnprofile/profile/edit.html", {"form": form}
+                    )
+                else:
+                    user = form.save(commit=False)
+                    if password:
+                        user.set_password(password)
+            else:
+                user = form.save(commit=False)
             user.save()
+            update_session_auth_hash(request, user)
             messages.success(
-                request, _("Your information has been updated successfully!")
+                request,
+                _("Your information has been updated successfully!"),
             )
             return redirect("fnprofile:edit_profile")
     else:
-        form = FnuserForm(instance=request.user)
+        form = FnuserEditForm(instance=request.user, request=request)
     return render(request, "fnprofile/profile/edit.html", {"form": form})
 
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-03 16:03+0800\n"
+"POT-Creation-Date: 2026-06-03 17:03+0800\n"
 "PO-Revision-Date: 2026-06-03 16:04+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -2042,7 +2042,7 @@ msgstr ""
 
 #: fnprofile/templates/fnprofile/fnemail/edit__content__.html:34
 #: fnprofile/templates/fnprofile/fnemail/edit__document__.html:33
-#: fnprofile/templates/fnprofile/profile/edit.html:14
+#: fnprofile/templates/fnprofile/profile/edit.html:16
 msgid "Update"
 msgstr "更新"
 
