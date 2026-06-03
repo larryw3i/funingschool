@@ -79,8 +79,9 @@ cp_node_modules() {
     if [[ ! -d "node_modules" ]]; then
         npm install
     fi
+    cd ${fnschool_static_node_modules_dir}
     module_files=$(
-        find ${fnschool_static_node_modules_dir} \
+        find ${PWD} \
             -type f \
             \( \
             -path "*/@popperjs/*" \
@@ -96,10 +97,10 @@ cp_node_modules() {
             -o -name "*AUTHORS*" \
             \)
     )
-    cd ${fnschool_static_node_modules_dir}
+    echo "module_files --> ${module_files[@]}"
     for m_file in ${module_files[@]}; do
-        _m_file=${m_file/node_modules/_node_modules_}
-        _m_file=${_m_file/dist/_dist_}
+        _m_file=${m_file/\/node_modules\//\/_node_modules_\/}
+        _m_file=${_m_file/\/dist\//\/_dist_\/}
         mkdir -p $(dirname ${_m_file})
         cp -vv ${m_file} ${_m_file}
     done
@@ -126,6 +127,7 @@ pack() {
     python manage.py compilemessages
     cd ${project_dir}
     python -m build
+    rm -rfvv "${fnschool_static_node_modules_dir/%\/node_modules/\/_node_modules_}"
     mv -vv ${fnschool_static_node_modules_dir_cp} ${fnschool_static_node_modules_dir}
     echo "Generated new version is \"${new_version}\" ."
 }
