@@ -76,8 +76,12 @@ cp_node_modules() {
     fi
     PWD_CP=${PWD}
     cd ${fnschool_static_dir}
-    if [[ ! -d "node_modules" ]]; then
+    if [[ ! -d ${fnschool_static_node_modules_dir} ]]; then
         npm install
+    fi
+    _fnschool_static_node_modules_dir=${fnschool_static_node_modules_dir/%\/node_modules/\/_node_modules_}
+    if [[ -d ${_fnschool_static_node_modules_dir} ]]; then
+        rm -rfvv ${_fnschool_static_node_modules_dir}
     fi
     cd ${fnschool_static_node_modules_dir}
     module_files=$(
@@ -97,7 +101,6 @@ cp_node_modules() {
             -o -name "*AUTHORS*" \
             \)
     )
-    echo "module_files --> ${module_files[@]}"
     for m_file in ${module_files[@]}; do
         _m_file=${m_file/\/node_modules\//\/_node_modules_\/}
         _m_file=${_m_file/\/dist\//\/_dist_\/}
@@ -127,7 +130,6 @@ pack() {
     python manage.py compilemessages
     cd ${project_dir}
     python -m build
-    rm -rfvv "${fnschool_static_node_modules_dir/%\/node_modules/\/_node_modules_}"
     mv -vv ${fnschool_static_node_modules_dir_cp} ${fnschool_static_node_modules_dir}
     echo "Generated new version is \"${new_version}\" ."
 }

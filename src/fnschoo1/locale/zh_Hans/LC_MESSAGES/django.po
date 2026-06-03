@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-03 17:03+0800\n"
-"PO-Revision-Date: 2026-06-03 16:04+0800\n"
+"POT-Creation-Date: 2026-06-04 03:46+0800\n"
+"PO-Revision-Date: 2026-06-04 03:47+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -46,13 +46,13 @@ msgstr "默认类"
 #: canteen/templates/canteen/category/list.html:56
 #: canteen/templates/canteen/ingredient/list.html:156
 #: canteen/templates/canteen/ingredient/list.html:161
-#: canteen/templates/canteen/meal_type/list.html:52 fnprofile/models.py:50
+#: canteen/templates/canteen/meal_type/list.html:52 fnprofile/models.py:51
 #: templates/base/_js.html:7
 msgid "Yes"
 msgstr "是"
 
 #: canteen/models.py:16 canteen/templates/canteen/category/delete.html:33
-#: canteen/templates/canteen/category/delete.html:42 fnprofile/models.py:51
+#: canteen/templates/canteen/category/delete.html:42 fnprofile/models.py:52
 #: templates/base/_js.html:9
 msgid "No"
 msgstr "否"
@@ -122,12 +122,12 @@ msgstr "优先级"
 msgid "Pin to Consumptions Top"
 msgstr "置顶出库"
 
-#: canteen/models.py:119 fnprofile/models.py:359
+#: canteen/models.py:119 fnprofile/models.py:376
 msgid "User"
 msgstr "用户"
 
 #: canteen/models.py:121 canteen/templates/canteen/consumption/create.html:55
-#: canteen/views.py:81
+#: canteen/views.py:80
 msgid "Storage Date"
 msgstr "入库日期"
 
@@ -136,7 +136,7 @@ msgid "Time of creating"
 msgstr "创建时间"
 
 #: canteen/models.py:134 canteen/templates/canteen/consumption/create.html:62
-#: canteen/templates/canteen/consumption/create.html:108 canteen/views.py:91
+#: canteen/templates/canteen/consumption/create.html:108 canteen/views.py:90
 msgid "Ingredient Name"
 msgstr "食材名"
 
@@ -263,7 +263,7 @@ msgstr "食材大类名"
 #: canteen/templates/canteen/category/delete.html:20
 #: canteen/templates/canteen/category/list.html:30
 #: canteen/templates/canteen/meal_type/delete.html:25
-#: canteen/templates/canteen/meal_type/list.html:30 fnprofile/models.py:411
+#: canteen/templates/canteen/meal_type/list.html:30 fnprofile/models.py:428
 msgid "Created at"
 msgstr "创建于"
 
@@ -381,7 +381,7 @@ msgstr "按食材名称排序。"
 msgid "Sort by meal type."
 msgstr "按餐类排序。"
 
-#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:93
+#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:92
 msgid "Meal Type"
 msgstr "餐类"
 
@@ -691,15 +691,15 @@ msgstr ""
 "\n"
 "编辑餐类（ %(instance_name)s ）。"
 
-#: canteen/views.py:78 canteen/views.py:1223
+#: canteen/views.py:77 canteen/views.py:1223
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:78 canteen/views.py:1215
+#: canteen/views.py:77 canteen/views.py:1215
 msgid "(2)"
 msgstr "（2）"
 
-#: canteen/views.py:83
+#: canteen/views.py:82
 msgid ""
 "Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
 "\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
@@ -710,11 +710,11 @@ msgstr ""
 "月.日日”、“月月-日日”、“月月日日”，“月月.日日” 。总之，FNSCHOOL 想兼容所有你"
 "喜欢的格式，但是如果出错了，你要告诉开发者，谢谢你！"
 
-#: canteen/views.py:91
+#: canteen/views.py:90
 msgid "Name of Ingredient"
 msgstr "食材名称"
 
-#: canteen/views.py:95
+#: canteen/views.py:94
 msgid ""
 "For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
 "generating a spreadsheet, each meal category corresponds to a spread sheet. "
@@ -723,22 +723,22 @@ msgstr ""
 "比如早餐、晚餐、正餐、营养餐等，生成 表册 的时候每个餐类对应着一个 表册  。不"
 "填的话只生成一个 表册 。"
 
-#: canteen/views.py:103
+#: canteen/views.py:102
 msgid "Category"
 msgstr "食材大类"
 
-#: canteen/views.py:105
+#: canteen/views.py:104
 msgid ""
 "Usually there are seven categories: vegetables, meat, grains, seasonings, "
 "eggs and milk, oils, and fruits."
 msgstr ""
 "通常是七大类：蔬菜类、肉类、粮食类、调味类、蛋奶和糕点类、油类、水果类。"
 
-#: canteen/views.py:110
+#: canteen/views.py:109
 msgid "Quantity"
 msgstr "数量"
 
-#: canteen/views.py:112
+#: canteen/views.py:111
 msgid ""
 "To prevent the number of decimal places in the unit price from becoming too "
 "large, \"quantity\" is only allowed to be an integer. If your unit price is "
@@ -748,47 +748,47 @@ msgstr ""
 "为防止单价的小数位数变得很多，“数量”只允许为整数。如果你的单价是小数，请你用"
 "更小的数量单位，然后把数量扩大为整数。"
 
-#: canteen/views.py:123
+#: canteen/views.py:122
 msgid "Total Price"
 msgstr "总价"
 
-#: canteen/views.py:127
+#: canteen/views.py:126
 msgid "Unit Name of Quantity"
 msgstr "数量单位"
 
-#: canteen/views.py:131
+#: canteen/views.py:130
 msgid "Is Ignorable"
 msgstr "是不用入库的"
 
-#: canteen/views.py:132
+#: canteen/views.py:131
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:450
+#: canteen/views.py:449
 msgid "Please select the item(s) you wish to delete."
 msgstr "请选择要删除的食材项。"
 
-#: canteen/views.py:472
+#: canteen/views.py:471
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:474
+#: canteen/views.py:473
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:478
+#: canteen/views.py:477
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:480
+#: canteen/views.py:479
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:526
+#: canteen/views.py:525
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
@@ -797,22 +797,22 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:742
+#: canteen/views.py:741
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr "{meal_type}：{meal_type_total_price}"
 
-#: canteen/views.py:751
+#: canteen/views.py:750
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr "{month}：{total_price}"
 
-#: canteen/views.py:752
+#: canteen/views.py:751
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: canteen/views.py:792
+#: canteen/views.py:791
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
@@ -840,46 +840,46 @@ msgid ""
 "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}({timestamp})"
 msgstr "（{month}{meal_type}）{affiliation}食堂出入库工作簿（{timestamp}）"
 
-#: canteen/workbook/spreadsheet.py:88
+#: canteen/workbook/spreadsheet.py:86
 msgid "Sheet Cover"
 msgstr "六大类总封面"
 
-#: canteen/workbook/spreadsheet.py:89
+#: canteen/workbook/spreadsheet.py:87
 msgid "Sheet Storage"
 msgstr "入库汇总表"
 
-#: canteen/workbook/spreadsheet.py:91
+#: canteen/workbook/spreadsheet.py:89
 msgid "Sheet Storage List"
 msgstr "入库单"
 
-#: canteen/workbook/spreadsheet.py:94
+#: canteen/workbook/spreadsheet.py:92
 msgid "Sheet Non-Storage"
 msgstr "未入库汇总表"
 
-#: canteen/workbook/spreadsheet.py:97
+#: canteen/workbook/spreadsheet.py:95
 msgid "Sheet Non-Storage List"
 msgstr "未入库明细表"
 
-#: canteen/workbook/spreadsheet.py:100
+#: canteen/workbook/spreadsheet.py:98
 msgid "Sheet Consumption"
 msgstr "出库汇总表"
 
-#: canteen/workbook/spreadsheet.py:103
+#: canteen/workbook/spreadsheet.py:101
 msgid "Sheet Consumption List"
 msgstr "出库单"
 
-#: canteen/workbook/spreadsheet.py:105
+#: canteen/workbook/spreadsheet.py:103
 msgid "Sheet Surplus"
 msgstr "食材盘存表"
 
-#: canteen/workbook/spreadsheet.py:183
+#: canteen/workbook/spreadsheet.py:182
 #, python-brace-format
 msgid ""
 "Table of {superior_department} Canteen Non-Storaged Ingredients Statistics"
 msgstr "{superior_department}食堂食品、材料未入库汇总报销单"
 
-#: canteen/workbook/spreadsheet.py:202 canteen/workbook/spreadsheet.py:362
-#: canteen/workbook/spreadsheet.py:550
+#: canteen/workbook/spreadsheet.py:201 canteen/workbook/spreadsheet.py:363
+#: canteen/workbook/spreadsheet.py:553
 #, python-brace-format
 msgid ""
 "Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}."
@@ -888,48 +888,48 @@ msgstr ""
 "编制单位：{affiliation}        单位：元         {year}年{month:0>2}月"
 "{day:0>2}日"
 
-#: canteen/workbook/spreadsheet.py:212 canteen/workbook/spreadsheet.py:560
+#: canteen/workbook/spreadsheet.py:211 canteen/workbook/spreadsheet.py:563
 msgid "Ingredient Categories (storage sheet)"
 msgstr "类别"
 
-#: canteen/workbook/spreadsheet.py:216 canteen/workbook/spreadsheet.py:564
+#: canteen/workbook/spreadsheet.py:215 canteen/workbook/spreadsheet.py:567
 msgid "Ingredient Total Prices (storage sheet)"
 msgstr "合  计"
 
-#: canteen/workbook/spreadsheet.py:220 canteen/workbook/spreadsheet.py:568
-#: canteen/workbook/spreadsheet.py:1430
+#: canteen/workbook/spreadsheet.py:219 canteen/workbook/spreadsheet.py:571
+#: canteen/workbook/spreadsheet.py:1435
 msgid "Procurement Note"
 msgstr "备注"
 
-#: canteen/workbook/spreadsheet.py:271 canteen/workbook/spreadsheet.py:278
-#: canteen/workbook/spreadsheet.py:458 canteen/workbook/spreadsheet.py:465
-#: canteen/workbook/spreadsheet.py:620 canteen/workbook/spreadsheet.py:627
+#: canteen/workbook/spreadsheet.py:270 canteen/workbook/spreadsheet.py:279
+#: canteen/workbook/spreadsheet.py:459 canteen/workbook/spreadsheet.py:468
+#: canteen/workbook/spreadsheet.py:623 canteen/workbook/spreadsheet.py:632
 #, python-brace-format
 msgid "Total Price Text: {total_price_text}        {total_price}"
 msgstr "总金额（大写）：{total_price_text}    ¥{total_price}"
 
-#: canteen/workbook/spreadsheet.py:290 canteen/workbook/spreadsheet.py:478
-#: canteen/workbook/spreadsheet.py:640
+#: canteen/workbook/spreadsheet.py:291 canteen/workbook/spreadsheet.py:481
+#: canteen/workbook/spreadsheet.py:645
 #, python-brace-format
 msgid "Handler: {handler}"
 msgstr "经办人：{handler}"
 
-#: canteen/workbook/spreadsheet.py:299 canteen/workbook/spreadsheet.py:487
-#: canteen/workbook/spreadsheet.py:649
+#: canteen/workbook/spreadsheet.py:300 canteen/workbook/spreadsheet.py:490
+#: canteen/workbook/spreadsheet.py:654
 msgid "Reviewer:"
 msgstr "审核人："
 
-#: canteen/workbook/spreadsheet.py:307 canteen/workbook/spreadsheet.py:495
-#: canteen/workbook/spreadsheet.py:657
+#: canteen/workbook/spreadsheet.py:308 canteen/workbook/spreadsheet.py:498
+#: canteen/workbook/spreadsheet.py:662
 msgid "Principal's Signature:"
 msgstr "校长签字："
 
-#: canteen/workbook/spreadsheet.py:309 canteen/workbook/spreadsheet.py:497
-#: canteen/workbook/spreadsheet.py:659
+#: canteen/workbook/spreadsheet.py:310 canteen/workbook/spreadsheet.py:500
+#: canteen/workbook/spreadsheet.py:664
 msgid "Supervisor's Signature:"
 msgstr "主管签字："
 
-#: canteen/workbook/spreadsheet.py:319 canteen/workbook/spreadsheet.py:669
+#: canteen/workbook/spreadsheet.py:320 canteen/workbook/spreadsheet.py:674
 msgid ""
 "Note: This form is a summary of all monthly food and material inventory "
 "receipts from the cafeteria. After verification, it will be signed and "
@@ -938,7 +938,7 @@ msgstr ""
 "注：此单为每月食堂食品、材料所有入库单的汇总，审核属实后，校长签字加盖学校公"
 "章作为报销凭据。"
 
-#: canteen/workbook/spreadsheet.py:327 canteen/workbook/spreadsheet.py:677
+#: canteen/workbook/spreadsheet.py:328 canteen/workbook/spreadsheet.py:682
 msgid ""
 "Note: This form is a summary of all monthly food and material inventory "
 "receipts from the cafeteria. After verification, it will be signed and "
@@ -948,24 +948,24 @@ msgstr ""
 "注：此单为每月食堂食品、材料所有入库单的汇总，审核属实后，主管签字加盖单位公"
 "章作为报销凭据。"
 
-#: canteen/workbook/spreadsheet.py:343
+#: canteen/workbook/spreadsheet.py:344
 #, python-brace-format
 msgid "Table of {superior_department} Canteen Consumed Ingredients Statistics"
 msgstr "{superior_department}食堂食品、材料出库汇总报销单"
 
-#: canteen/workbook/spreadsheet.py:373
+#: canteen/workbook/spreadsheet.py:374
 msgid "Ingredient Categories (Consumption Sheet)"
 msgstr "类 型"
 
-#: canteen/workbook/spreadsheet.py:378
+#: canteen/workbook/spreadsheet.py:379
 msgid "Ingredient Total Prices (Consumption Sheet)"
 msgstr "合   计"
 
-#: canteen/workbook/spreadsheet.py:382
+#: canteen/workbook/spreadsheet.py:383
 msgid "Procurement Note (Consumption Sheet)"
 msgstr "备  注"
 
-#: canteen/workbook/spreadsheet.py:507
+#: canteen/workbook/spreadsheet.py:510
 msgid ""
 "Note: This form is a summary of all monthly food and material consumption "
 "receipts from the cafeteria. After verification, it will be signed and "
@@ -974,7 +974,7 @@ msgstr ""
 "注：此单为每月食堂食品、材料所有出库单的汇总，审核属实后，校长签字加盖学校公"
 "章作为报销凭据。"
 
-#: canteen/workbook/spreadsheet.py:515
+#: canteen/workbook/spreadsheet.py:518
 msgid ""
 "Note: This form is a summary of all monthly food and material consumption "
 "receipts from the cafeteria. After verification, it will be signed and "
@@ -984,172 +984,172 @@ msgstr ""
 "注：此单为每月食堂食品、材料所有出库单的汇总，审核属实后，主管签字加盖单位公"
 "章作为报销凭据。"
 
-#: canteen/workbook/spreadsheet.py:531
+#: canteen/workbook/spreadsheet.py:534
 #, python-brace-format
 msgid "Table of {superior_department} Canteen Storaged Ingredients Statistics"
 msgstr "{superior_department}食堂食品、材料入库汇总报销单"
 
-#: canteen/workbook/spreadsheet.py:815
+#: canteen/workbook/spreadsheet.py:820
 msgid "Consumption List Title (Consumption List Sheet)"
 msgstr "出    库    单"
 
-#: canteen/workbook/spreadsheet.py:827 canteen/workbook/spreadsheet.py:1187
+#: canteen/workbook/spreadsheet.py:832 canteen/workbook/spreadsheet.py:1192
 #, python-brace-format
 msgid "Affiliation Name: {affiliation_name}"
 msgstr "单位名称：{affiliation_name}"
 
-#: canteen/workbook/spreadsheet.py:829 canteen/workbook/spreadsheet.py:1189
+#: canteen/workbook/spreadsheet.py:834 canteen/workbook/spreadsheet.py:1194
 #, python-brace-format
 msgid "Principal Name: {affiliation_name}"
 msgstr "学校名称：{affiliation_name}"
 
-#: canteen/workbook/spreadsheet.py:838 canteen/workbook/spreadsheet.py:1198
+#: canteen/workbook/spreadsheet.py:843 canteen/workbook/spreadsheet.py:1203
 #, python-brace-format
 msgid "{day:0>2} {month:0>2} {year}  Quantity Unit Name: CNY"
 msgstr "{year}年{month:0>2}月{day:0>2}日  单位：元"
 
-#: canteen/workbook/spreadsheet.py:858
+#: canteen/workbook/spreadsheet.py:863
 #, python-brace-format
 msgid "Storage No. {consumption_num}"
 msgstr "编号：{consumption_num}"
 
-#: canteen/workbook/spreadsheet.py:866
+#: canteen/workbook/spreadsheet.py:871
 #, python-brace-format
 msgid "(Sub Storage No. {sub_consumption_num})"
 msgstr "（{sub_consumption_num}）"
 
-#: canteen/workbook/spreadsheet.py:895
+#: canteen/workbook/spreadsheet.py:900
 msgid "Category (Consumption List Sheet)"
 msgstr "类 型"
 
-#: canteen/workbook/spreadsheet.py:899
+#: canteen/workbook/spreadsheet.py:904
 msgid "Ingredient Name (Consumption List Sheet)"
 msgstr "食 材 名 称"
 
-#: canteen/workbook/spreadsheet.py:904
+#: canteen/workbook/spreadsheet.py:909
 msgid "Quantity Unit Name (Consumption List Sheet)"
 msgstr "计量单位"
 
-#: canteen/workbook/spreadsheet.py:908
+#: canteen/workbook/spreadsheet.py:913
 msgid "Quantity (Consumption List Sheet)"
 msgstr "数  量"
 
-#: canteen/workbook/spreadsheet.py:912
+#: canteen/workbook/spreadsheet.py:917
 msgid "Unit Price (Consumption List Sheet)"
 msgstr "单 价"
 
-#: canteen/workbook/spreadsheet.py:917
+#: canteen/workbook/spreadsheet.py:922
 msgid "Total Price (Consumption List Sheet)"
 msgstr "金 额"
 
-#: canteen/workbook/spreadsheet.py:922
+#: canteen/workbook/spreadsheet.py:927
 msgid "Ingredients Total Price (Consumption List Sheet)"
 msgstr "金 额"
 
-#: canteen/workbook/spreadsheet.py:926
+#: canteen/workbook/spreadsheet.py:931
 msgid "Note (Consumption List Sheet)"
 msgstr "备 注"
 
-#: canteen/workbook/spreadsheet.py:999
+#: canteen/workbook/spreadsheet.py:1004
 #, python-brace-format
 msgid "{meal_type}({category}, Storaged/Checked at {storage_date})."
 msgstr "{meal_type}（{category}，于 {storage_date} 入库/清点）"
 
-#: canteen/workbook/spreadsheet.py:1054 canteen/workbook/spreadsheet.py:1371
+#: canteen/workbook/spreadsheet.py:1059 canteen/workbook/spreadsheet.py:1376
 msgid "Summary (Storage List Sheet)"
 msgstr "合计"
 
-#: canteen/workbook/spreadsheet.py:1064
+#: canteen/workbook/spreadsheet.py:1069
 #, python-brace-format
 msgid ""
 "   Reviewer:        Handler:{handler} 　    Weigher:      Warehouseman: 　"
 msgstr ""
 "   审核人：　　　　经办人：{handler}　　　　过称人：　　　　仓管人：　　　　"
 
-#: canteen/workbook/spreadsheet.py:1176
+#: canteen/workbook/spreadsheet.py:1181
 msgid "Storage List (Storage Sheet)"
 msgstr "入  库  单"
 
-#: canteen/workbook/spreadsheet.py:1217
+#: canteen/workbook/spreadsheet.py:1222
 #, python-brace-format
 msgid "Storage No. {storage_num}"
 msgstr "编号：{storage_num}"
 
-#: canteen/workbook/spreadsheet.py:1224
+#: canteen/workbook/spreadsheet.py:1229
 #, python-brace-format
 msgid "(Sub Storage No. {sub_storage_num})"
 msgstr "（{sub_storage_num}）"
 
-#: canteen/workbook/spreadsheet.py:1247
+#: canteen/workbook/spreadsheet.py:1252
 msgid "Category (Storage List Sheet)"
 msgstr "类型"
 
-#: canteen/workbook/spreadsheet.py:1251
+#: canteen/workbook/spreadsheet.py:1256
 msgid "Ingredient Name (Storage List Sheet)"
 msgstr "食材名称"
 
-#: canteen/workbook/spreadsheet.py:1256
+#: canteen/workbook/spreadsheet.py:1261
 msgid "Quantity Unit Name (Storage List Sheet)"
 msgstr "计量单位"
 
-#: canteen/workbook/spreadsheet.py:1260
+#: canteen/workbook/spreadsheet.py:1265
 msgid "Quantity (Storage List Sheet)"
 msgstr "数量"
 
-#: canteen/workbook/spreadsheet.py:1263
+#: canteen/workbook/spreadsheet.py:1268
 msgid "Unit Price (Storage List Sheet)"
 msgstr "单价"
 
-#: canteen/workbook/spreadsheet.py:1267
+#: canteen/workbook/spreadsheet.py:1272
 msgid "Total Price (Storage List Sheet)"
 msgstr "金额"
 
-#: canteen/workbook/spreadsheet.py:1272
+#: canteen/workbook/spreadsheet.py:1277
 msgid "Ingredients Total Price (Storage List Sheet)"
 msgstr "合计"
 
-#: canteen/workbook/spreadsheet.py:1276
+#: canteen/workbook/spreadsheet.py:1281
 msgid "Note (Storage List Sheet)"
 msgstr "备注"
 
-#: canteen/workbook/spreadsheet.py:1381
+#: canteen/workbook/spreadsheet.py:1386
 #, python-brace-format
 msgid ""
 "   Reviewer:        Handler: {handler} 　    Weigher:      Warehouseman: 　"
 msgstr ""
 "   审核人：　　　　经办人：{handler}　　　　过称人：　　　　仓管人：　　　　"
 
-#: canteen/workbook/spreadsheet.py:1406
+#: canteen/workbook/spreadsheet.py:1411
 #, python-brace-format
 msgid ""
 "Table of {affiliation} Canteen Ingredients Procurement Statistics in "
 "{month:0>2} {year}"
 msgstr "{affiliation}{year}年{month:0>2}月份食堂食品采购统计表"
 
-#: canteen/workbook/spreadsheet.py:1424
+#: canteen/workbook/spreadsheet.py:1429
 msgid "Ingredient Categories (cover sheet)"
 msgstr "类别"
 
-#: canteen/workbook/spreadsheet.py:1427
+#: canteen/workbook/spreadsheet.py:1432
 msgid "Ingredient Total Prices"
 msgstr "合计金额"
 
-#: canteen/workbook/spreadsheet.py:1463 canteen/workbook/spreadsheet.py:1490
+#: canteen/workbook/spreadsheet.py:1468 canteen/workbook/spreadsheet.py:1495
 #, python-brace-format
 msgid ""
 "Total price of storaged ingredients is {0}, total price of non-storaged "
 "ingredients is {1}."
 msgstr "入库 {0} 元，未入库 {1} 元。"
 
-#: canteen/workbook/spreadsheet.py:1481
+#: canteen/workbook/spreadsheet.py:1486
 msgid "Procurement Summary"
 msgstr "合计"
 
-#: canteen/workbook/spreadsheet.py:1622
+#: canteen/workbook/spreadsheet.py:1627
 msgid "Table of Surplus Ingredients"
 msgstr "食 材 盘 存 表"
 
-#: canteen/workbook/spreadsheet.py:1633
+#: canteen/workbook/spreadsheet.py:1638
 #, python-brace-format
 msgid ""
 "Principal Name: {affiliation}                {year}.{month:0>2}.{day:0>2} "
@@ -1157,7 +1157,7 @@ msgid ""
 msgstr ""
 "学校名称：{affiliation}                {year}年{month:0>2}月{day:0>2}日"
 
-#: canteen/workbook/spreadsheet.py:1637
+#: canteen/workbook/spreadsheet.py:1642
 #, python-brace-format
 msgid ""
 "Affiliation Name: {affiliation}                {year}.{month:0>2}.{day:0>2} "
@@ -1165,72 +1165,72 @@ msgid ""
 msgstr ""
 "单位名称：{affiliation}                {year}年{month:0>2}月{day:0>2}日"
 
-#: canteen/workbook/spreadsheet.py:1666
+#: canteen/workbook/spreadsheet.py:1671
 msgid "Ingredient Name (Surplus Sheet)"
 msgstr "食 材 名 称"
 
-#: canteen/workbook/spreadsheet.py:1671
+#: canteen/workbook/spreadsheet.py:1676
 msgid "Ingredient Quantity Unit Name (Surplus Sheet)"
 msgstr "单位"
 
-#: canteen/workbook/spreadsheet.py:1675
+#: canteen/workbook/spreadsheet.py:1680
 msgid "Recorded (Surplus Sheet)"
 msgstr "账面栏"
 
-#: canteen/workbook/spreadsheet.py:1678
+#: canteen/workbook/spreadsheet.py:1683
 msgid "Actual (Surplus Sheet)"
 msgstr "盘点栏"
 
-#: canteen/workbook/spreadsheet.py:1681
+#: canteen/workbook/spreadsheet.py:1686
 msgid "Difference (Surplus Sheet)"
 msgstr "差额栏"
 
-#: canteen/workbook/spreadsheet.py:1684
+#: canteen/workbook/spreadsheet.py:1689
 msgid "Reason (Surplus Sheet)"
 msgstr "差额原因"
 
-#: canteen/workbook/spreadsheet.py:1690
+#: canteen/workbook/spreadsheet.py:1695
 msgid "Recorded Quantity (Surplus Sheet)"
 msgstr "数 量"
 
-#: canteen/workbook/spreadsheet.py:1694
+#: canteen/workbook/spreadsheet.py:1699
 msgid "Recorded Total Price (Surplus Sheet)"
 msgstr "金 额"
 
-#: canteen/workbook/spreadsheet.py:1698
+#: canteen/workbook/spreadsheet.py:1703
 msgid "Actual Quantity (Surplus Sheet)"
 msgstr "数 量"
 
-#: canteen/workbook/spreadsheet.py:1702
+#: canteen/workbook/spreadsheet.py:1707
 msgid "Actual Total Price (Surplus Sheet)"
 msgstr "金 额"
 
-#: canteen/workbook/spreadsheet.py:1706
+#: canteen/workbook/spreadsheet.py:1711
 msgid "Difference Quantity (Surplus Sheet)"
 msgstr "数 量"
 
-#: canteen/workbook/spreadsheet.py:1710
+#: canteen/workbook/spreadsheet.py:1715
 msgid "Difference Total Price (Surplus Sheet)"
 msgstr "金 额"
 
-#: canteen/workbook/spreadsheet.py:1740
+#: canteen/workbook/spreadsheet.py:1745
 #, python-brace-format
 msgid "{meal_type} ({category}, Checked/Storaged at {storage_date})"
 msgstr "{meal_type} ({category}，于 {storage_date} 入库/清点)"
 
-#: canteen/workbook/spreadsheet.py:1780
+#: canteen/workbook/spreadsheet.py:1785
 msgid "Sub0-summary Total Price (Surplus Sheet)"
 msgstr "小 计"
 
-#: canteen/workbook/spreadsheet.py:1783
+#: canteen/workbook/spreadsheet.py:1788
 msgid "Summary Total Price (Surplus Sheet)"
 msgstr "合计"
 
-#: canteen/workbook/spreadsheet.py:1815
+#: canteen/workbook/spreadsheet.py:1820
 msgid "Note: Inventory once a week."
 msgstr "备注：每周盘存一次。"
 
-#: canteen/workbook/spreadsheet.py:1822
+#: canteen/workbook/spreadsheet.py:1827
 #, python-brace-format
 msgid ""
 "   Reviewer:        Handler: {handler_name}    Weigher:        Warehouseman: "
@@ -1239,156 +1239,156 @@ msgstr ""
 "   审核人：　　　　经办人：{handler_name}　　　　过称人：　　　　仓管"
 "人：　　　　 "
 
-#: canteen/workbook/spreadsheet.py:1886
+#: canteen/workbook/spreadsheet.py:1891
 #, python-brace-format
 msgid "Table of Non-storaged Ingredients ({category})"
 msgstr "未入库明细表（{category}）"
 
-#: canteen/workbook/spreadsheet.py:1897
+#: canteen/workbook/spreadsheet.py:1902
 #, python-brace-format
 msgid "Principal Name: {affiliation}"
 msgstr "学校名称：{affiliation}"
 
-#: canteen/workbook/spreadsheet.py:1899
+#: canteen/workbook/spreadsheet.py:1904
 #, python-brace-format
 msgid "Affiliation Name: {affiliation}"
 msgstr "单位名称：{affiliation}"
 
-#: canteen/workbook/spreadsheet.py:1904
+#: canteen/workbook/spreadsheet.py:1909
 #, python-brace-format
 msgid "{year}.{month:0>2}.{day:0>2} (Non-storage list sheet)"
 msgstr "{year}年{month:0>2}月{day:0>2}日"
 
-#: canteen/workbook/spreadsheet.py:1922
+#: canteen/workbook/spreadsheet.py:1927
 msgid "Procurement Date (Non-storage list sheet)"
 msgstr "采购日期"
 
-#: canteen/workbook/spreadsheet.py:1923
+#: canteen/workbook/spreadsheet.py:1928
 msgid "Ingredient Name (Non-storage list sheet)"
 msgstr "名    称"
 
-#: canteen/workbook/spreadsheet.py:1924
+#: canteen/workbook/spreadsheet.py:1929
 msgid "Unit Name of Quantity (Non-storage list sheet)"
 msgstr "计量单位"
 
-#: canteen/workbook/spreadsheet.py:1925
+#: canteen/workbook/spreadsheet.py:1930
 msgid "Quantity (Non-storage list sheet)"
 msgstr "数  量"
 
-#: canteen/workbook/spreadsheet.py:1926
+#: canteen/workbook/spreadsheet.py:1931
 msgid "Unit Price (Non-storage list sheet)"
 msgstr "单  价"
 
-#: canteen/workbook/spreadsheet.py:1927
+#: canteen/workbook/spreadsheet.py:1932
 msgid "Total Price (Non-storage list sheet)"
 msgstr "金  额"
 
-#: canteen/workbook/spreadsheet.py:1928
+#: canteen/workbook/spreadsheet.py:1933
 msgid "Note (Non-storage list sheet)"
 msgstr "备注"
 
-#: canteen/workbook/spreadsheet.py:1944
+#: canteen/workbook/spreadsheet.py:1949
 #, python-brace-format
 msgid "{year}.{month:0>2}.{day:0>2} (Column of Non-storage list sheet)"
 msgstr "{year}.{month:0>2}.{day:0>2}"
 
-#: canteen/workbook/spreadsheet.py:1992
+#: canteen/workbook/spreadsheet.py:1997
 msgid "Summary (Non-storage list sheet)"
 msgstr "合计"
 
-#: canteen/workbook/spreadsheet.py:2009
+#: canteen/workbook/spreadsheet.py:2014
 msgid "Sub-summary (Non-storage list sheet)"
 msgstr "小计"
 
-#: canteen/workbook/spreadsheet.py:2090
+#: canteen/workbook/spreadsheet.py:2095
 msgid "Ingredients Storage and Consumption Records of Principal Canteen"
 msgstr "学校食堂材料入库、出库台账"
 
-#: canteen/workbook/spreadsheet.py:2094
+#: canteen/workbook/spreadsheet.py:2099
 msgid "Ingredients Storage and Consumption Records of Affiliation Canteen"
 msgstr "单位食堂材料入库、出库台账"
 
-#: canteen/workbook/spreadsheet.py:2111
+#: canteen/workbook/spreadsheet.py:2116
 #, python-brace-format
 msgid "Ingredient Name: {ingredient_name} ({quantity_unit_name})"
 msgstr "材料名称：{ingredient_name}（{quantity_unit_name}）"
 
-#: canteen/workbook/spreadsheet.py:2133
+#: canteen/workbook/spreadsheet.py:2138
 #, python-brace-format
 msgid "Year {year}"
 msgstr "{year} 年"
 
-#: canteen/workbook/spreadsheet.py:2143
+#: canteen/workbook/spreadsheet.py:2148
 msgid "Storage (Food Sheet)"
 msgstr "入  库"
 
-#: canteen/workbook/spreadsheet.py:2155
+#: canteen/workbook/spreadsheet.py:2160
 msgid "Consumption (Food Sheet)"
 msgstr "出库"
 
-#: canteen/workbook/spreadsheet.py:2165
+#: canteen/workbook/spreadsheet.py:2170
 msgid "Surplus (Food Sheet)"
 msgstr "库 存"
 
-#: canteen/workbook/spreadsheet.py:2176
+#: canteen/workbook/spreadsheet.py:2181
 msgid "Storage/Consumption No. (Food Sheet)"
 msgstr "出、入库单编号"
 
-#: canteen/workbook/spreadsheet.py:2187
+#: canteen/workbook/spreadsheet.py:2192
 msgid "Month (Food Sheet)"
 msgstr "月"
 
-#: canteen/workbook/spreadsheet.py:2194
+#: canteen/workbook/spreadsheet.py:2199
 msgid "Day (Food Sheet)"
 msgstr "日"
 
-#: canteen/workbook/spreadsheet.py:2208
+#: canteen/workbook/spreadsheet.py:2213
 msgid "Quantity (Food Sheet)"
 msgstr "数 量"
 
-#: canteen/workbook/spreadsheet.py:2216
+#: canteen/workbook/spreadsheet.py:2221
 msgid "Unit Price (Food Sheet)"
 msgstr "单 价"
 
-#: canteen/workbook/spreadsheet.py:2225
+#: canteen/workbook/spreadsheet.py:2230
 msgid "Total Price (Food Sheet)"
 msgstr "金 额"
 
-#: canteen/workbook/spreadsheet.py:2236
+#: canteen/workbook/spreadsheet.py:2241
 msgid "Surplus for last month"
 msgstr "上月结转"
 
-#: canteen/workbook/spreadsheet.py:2238
+#: canteen/workbook/spreadsheet.py:2243
 msgid "Surplus for last year"
 msgstr "上年结转"
 
-#: canteen/workbook/spreadsheet.py:2436
+#: canteen/workbook/spreadsheet.py:2441
 msgid "and (Food Sheet)"
 msgstr "、"
 
-#: canteen/workbook/spreadsheet.py:2474
+#: canteen/workbook/spreadsheet.py:2479
 msgid "Monthly Summary"
 msgstr "本月合计"
 
-#: canteen/workbook/spreadsheet.py:2482
+#: canteen/workbook/spreadsheet.py:2487
 msgid "Year Accumulation"
 msgstr "本年累积"
 
-#: canteen/workbook/spreadsheet.py:2502
+#: canteen/workbook/spreadsheet.py:2507
 msgid ""
 "Note: The 'Principal Canteen Material Storage and Outbound Ledger' is "
 "registered on a daily basis based on the storage and outbound receipts."
 msgstr ""
 "注：《学校食堂材料入库、出库台账》是以入库单、出库单为依据按日进行登记。"
 
-#: canteen/workbook/spreadsheet.py:2506
+#: canteen/workbook/spreadsheet.py:2511
 msgid ""
 "Note: The 'Affiliation Canteen Material Storage and Outbound Ledger' is "
 "registered on a daily basis based on the storage and outbound receipts."
 msgstr ""
 "注：《单位食堂材料入库、出库台账》是以入库单、出库单为依据按日进行登记。"
 
-#: canteen/workbook/spreadsheet.py:2528
+#: canteen/workbook/spreadsheet.py:2533
 msgid ""
 "This file is generated by the FNSCHOOL based on the user-provided data. For "
 "more information about the FNSCHOOL, please visit https://github.com/"
@@ -1397,16 +1397,16 @@ msgstr ""
 "此文件由 FNSCHOOL 依据用户提供的数据生成，要查阅 FNSCHOOL 的更多信息请浏览 "
 "https://gitee.com/larryw3i/funingschool 。"
 
-#: canteen/workbook/spreadsheet.py:2532
+#: canteen/workbook/spreadsheet.py:2537
 #, python-brace-format
 msgid "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}"
 msgstr "（{month}{meal_type}）{affiliation}食堂出入库工作簿"
 
-#: canteen/workbook/spreadsheet.py:2538
+#: canteen/workbook/spreadsheet.py:2543
 msgid "Daybook Workbook"
 msgstr "出入库工作簿"
 
-#: canteen/workbook/spreadsheet.py:2541
+#: canteen/workbook/spreadsheet.py:2546
 msgid "Daybook"
 msgstr "出入库"
 
@@ -1581,7 +1581,7 @@ msgstr "请输入您的用户名或电子邮箱地址。"
 msgid "The content you entered is too long."
 msgstr "输入内容过多。"
 
-#: fnprofile/forms.py:57 fnprofile/forms.py:395
+#: fnprofile/forms.py:57 fnprofile/forms.py:405
 #: fnprofile/templates/fnprofile/fnemail/list.html:24
 msgid "Email Address"
 msgstr "电子邮件地址"
@@ -1629,7 +1629,7 @@ msgid "Please enter the password."
 msgstr "请输入密码。"
 
 #: fnprofile/forms.py:129 fnprofile/forms.py:214 fnprofile/forms.py:277
-#: fnprofile/forms.py:413
+#: fnprofile/forms.py:423
 msgid "Please enter a valid email address."
 msgstr "请输入有效的电子邮箱地址。"
 
@@ -1700,11 +1700,11 @@ msgstr "用户名不要超过 {max_length} 个字符。"
 msgid "This username is already taken."
 msgstr "用户名已存在。"
 
-#: fnprofile/forms.py:272 fnprofile/forms.py:409
+#: fnprofile/forms.py:272 fnprofile/forms.py:419
 msgid "Please enter an email address."
 msgstr "请输入您的电子邮箱地址。"
 
-#: fnprofile/forms.py:281 fnprofile/models.py:109
+#: fnprofile/forms.py:281 fnprofile/models.py:110
 msgid "This email is already registered."
 msgstr ""
 "该电子邮箱地址已用于注册账号（如果是您的邮箱地址没有被验证可在登录页面验"
@@ -1714,269 +1714,269 @@ msgstr ""
 msgid "Username should not be part of your email address."
 msgstr "用户名不能是您的邮箱地址的一部分。"
 
-#: fnprofile/forms.py:320 fnprofile/forms.py:321
+#: fnprofile/forms.py:322 fnprofile/forms.py:323
 msgid "User Name"
 msgstr "用户名"
 
-#: fnprofile/forms.py:326 fnprofile/forms.py:328
+#: fnprofile/forms.py:328 fnprofile/forms.py:330
 msgid "Password"
 msgstr "密码"
 
-#: fnprofile/forms.py:333 fnprofile/forms.py:336
+#: fnprofile/forms.py:335 fnprofile/forms.py:338
 msgid "Confirm Password"
 msgstr "确认密码"
 
-#: fnprofile/forms.py:389
+#: fnprofile/forms.py:399
 msgid "name@example.domain"
 msgstr "账号名@样例.域名"
 
-#: fnprofile/forms.py:398
+#: fnprofile/forms.py:408
 msgid "Add a new email address to your account."
 msgstr "添加一个新的邮箱地址到您的账号。"
 
-#: fnprofile/forms.py:420
+#: fnprofile/forms.py:430
 msgid "You have already added this email."
 msgstr "您已经添加了该邮箱地址。"
 
-#: fnprofile/forms.py:427
+#: fnprofile/forms.py:437
 msgid "This email is already used by another user."
 msgstr "该邮箱地址已被其它用户注册。"
 
-#: fnprofile/forms.py:464
+#: fnprofile/forms.py:474
 msgid "Set as primary email"
 msgstr "设置为主邮箱地址"
 
-#: fnprofile/forms.py:467
+#: fnprofile/forms.py:477
 msgid "Primary email will be used for notifications."
 msgstr "主邮箱地址将用于消息通知。"
 
-#: fnprofile/models.py:55
+#: fnprofile/models.py:56
 msgid "Male"
 msgstr "男"
 
-#: fnprofile/models.py:56
+#: fnprofile/models.py:57
 msgid "Female"
 msgstr "女"
 
-#: fnprofile/models.py:75
+#: fnprofile/models.py:76
 msgid "The groups this user belongs to."
 msgstr "这个用户所属的组。"
 
-#: fnprofile/models.py:84
+#: fnprofile/models.py:85
 msgid "Specific permissions for this user."
 msgstr "给这个用户指定权限。"
 
-#: fnprofile/models.py:90
+#: fnprofile/models.py:91
 msgid "username"
 msgstr "用户名"
 
-#: fnprofile/models.py:94
+#: fnprofile/models.py:95
 #, python-brace-format
 msgid "Required. {0} characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr "必填，最多 {0} 个字符，可包含字母、数字、“@”、“.”、“+”、“-”、“_” 。"
 
-#: fnprofile/models.py:98
+#: fnprofile/models.py:99
 msgid "A user with that username already exists."
 msgstr "该用户名已存在。"
 
-#: fnprofile/models.py:102
+#: fnprofile/models.py:103
 msgid "email address"
 msgstr "电子邮件地址"
 
-#: fnprofile/models.py:107
+#: fnprofile/models.py:108
 msgid "Primary email address."
 msgstr "主邮箱地址。"
 
-#: fnprofile/models.py:118
+#: fnprofile/models.py:119
 msgid "Phone Number"
 msgstr "电话号码"
 
-#: fnprofile/models.py:121
+#: fnprofile/models.py:122
 msgid "Affiliation"
 msgstr "机构"
 
-#: fnprofile/models.py:128
+#: fnprofile/models.py:129
 msgid "Superior department"
 msgstr "上级机构"
 
-#: fnprofile/models.py:132
+#: fnprofile/models.py:133
 msgid "Date of Birth"
 msgstr "生日"
 
-#: fnprofile/models.py:138
+#: fnprofile/models.py:139
 msgid "Gender"
 msgstr "性别"
 
-#: fnprofile/models.py:142
+#: fnprofile/models.py:143
 msgid "Address"
 msgstr "地址"
 
-#: fnprofile/models.py:145
+#: fnprofile/models.py:146
 msgid "Avatar"
 msgstr "头像"
 
-#: fnprofile/models.py:148
+#: fnprofile/models.py:149
 msgid "Biography"
 msgstr "个人简介"
 
-#: fnprofile/models.py:152
+#: fnprofile/models.py:153
 msgid "Logout token"
 msgstr "退出登录令牌"
 
-#: fnprofile/models.py:156
+#: fnprofile/models.py:157
 msgid "Token of logout."
 msgstr "退出登录的令牌。"
 
-#: fnprofile/models.py:160
+#: fnprofile/models.py:161
 msgid "Reset password token"
 msgstr "重置密码令牌"
 
-#: fnprofile/models.py:164
+#: fnprofile/models.py:165
 msgid "Token of resetting password."
 msgstr "重置密码的令牌。"
 
-#: fnprofile/models.py:168
+#: fnprofile/models.py:169
 msgid "Time of creating."
 msgstr "创建时间。"
 
-#: fnprofile/models.py:172
+#: fnprofile/models.py:173
 msgid "Time of updating."
 msgstr "更新时间。"
 
-#: fnprofile/models.py:176 fnprofile/models.py:177
+#: fnprofile/models.py:177 fnprofile/models.py:178
 msgid "User Information"
 msgstr "用户信息"
 
-#: fnprofile/models.py:180
+#: fnprofile/models.py:181
 #, python-brace-format
 msgid "{0}'s Information"
 msgstr "{0} 的信息"
 
-#: fnprofile/models.py:240 fnprofile/models.py:242
+#: fnprofile/models.py:257 fnprofile/models.py:259
 msgid "Unknown"
 msgstr "未知"
 
-#: fnprofile/models.py:243
+#: fnprofile/models.py:260
 msgid "You have logged in to FNSCHOOL ."
 msgstr "您已经登录 FNSCHOOL 。"
 
-#: fnprofile/models.py:295
+#: fnprofile/models.py:312
 msgid "Reset your FNSCHOOL login password."
 msgstr "重置您的 FNSCHOOL 登录密码。"
 
-#: fnprofile/models.py:316
+#: fnprofile/models.py:333
 msgid "Your password has been regenerated."
 msgstr "您的密码已被重新生成。"
 
-#: fnprofile/models.py:353
+#: fnprofile/models.py:370
 msgid "ID"
 msgstr "ID"
 
-#: fnprofile/models.py:364
+#: fnprofile/models.py:381
 msgid "Email address"
 msgstr "电子邮件地址"
 
-#: fnprofile/models.py:367
+#: fnprofile/models.py:384
 msgid "Please enter a valid email address"
 msgstr "请输入有效的电子邮箱地址"
 
-#: fnprofile/models.py:371
+#: fnprofile/models.py:388
 msgid "Is verified"
 msgstr "已被验证"
 
-#: fnprofile/models.py:373
+#: fnprofile/models.py:390
 msgid "Whether the email has been verified"
 msgstr "邮箱地址是否已被验证"
 
-#: fnprofile/models.py:377
+#: fnprofile/models.py:394
 msgid "Verification token"
 msgstr "验证令牌"
 
-#: fnprofile/models.py:381
+#: fnprofile/models.py:398
 msgid "Token for email verification"
 msgstr "电子邮件的验证令牌"
 
-#: fnprofile/models.py:385
+#: fnprofile/models.py:402
 msgid "Verification email sent at"
 msgstr "验证邮件发送时间"
 
-#: fnprofile/models.py:388
+#: fnprofile/models.py:405
 msgid "When the verification email was last sent"
 msgstr "上次发送验证邮件的时间。"
 
-#: fnprofile/models.py:392 fnprofile/templates/fnprofile/fnemail/list.html:26
+#: fnprofile/models.py:409 fnprofile/templates/fnprofile/fnemail/list.html:26
 msgid "Verified at"
 msgstr "验证于"
 
-#: fnprofile/models.py:395
+#: fnprofile/models.py:412
 msgid "When the email was verified"
 msgstr "该电子邮箱被验证的时间"
 
-#: fnprofile/models.py:399
+#: fnprofile/models.py:416
 msgid "is disabled"
 msgstr "已禁用"
 
-#: fnprofile/models.py:401
+#: fnprofile/models.py:418
 msgid "Whether this email address is disabled"
 msgstr "是否该电子邮件地址已禁用"
 
-#: fnprofile/models.py:405
+#: fnprofile/models.py:422
 msgid "Is primary"
 msgstr "是主邮件地址"
 
-#: fnprofile/models.py:407
+#: fnprofile/models.py:424
 msgid "Whether this is the primary email address"
 msgstr "是否该邮件地址是主邮件地址"
 
-#: fnprofile/models.py:417
+#: fnprofile/models.py:434
 msgid "Updated at"
 msgstr "更新于"
 
-#: fnprofile/models.py:431 fnprofile/models.py:625
+#: fnprofile/models.py:448 fnprofile/models.py:642
 msgid "Unverified"
 msgstr "未被验证"
 
-#: fnprofile/models.py:446
+#: fnprofile/models.py:463
 msgid "User Email"
 msgstr "用户电子邮件"
 
-#: fnprofile/models.py:447
+#: fnprofile/models.py:464
 msgid "User Emails"
 msgstr "用户电子邮件"
 
-#: fnprofile/models.py:456
+#: fnprofile/models.py:473
 msgid "This email has been used by other user."
 msgstr "该邮箱地址已被其它用户注册。"
 
-#: fnprofile/models.py:464
+#: fnprofile/models.py:481
 msgid "You can only have one primary email."
 msgstr "您只能设置一个电子邮件。"
 
-#: fnprofile/models.py:518
+#: fnprofile/models.py:535
 msgid "Activate your account."
 msgstr "激活您的账户。"
 
-#: fnprofile/models.py:542
+#: fnprofile/models.py:559
 msgid "Invalid email format."
 msgstr "无效的邮件格式。"
 
-#: fnprofile/models.py:602
+#: fnprofile/models.py:619
 msgid "Email must be verified before setting as primary."
 msgstr "在设置为主电子邮件前该电子邮件地址应被确认。"
 
-#: fnprofile/models.py:609
+#: fnprofile/models.py:626
 msgid "Email must be active to set as primary."
 msgstr "被激活的电子邮件地址才能设为主邮件地址。"
 
-#: fnprofile/models.py:623
+#: fnprofile/models.py:640
 msgid "Disabled"
 msgstr "已禁用"
 
-#: fnprofile/models.py:627
+#: fnprofile/models.py:644
 msgid "Primary"
 msgstr "主邮件"
 
-#: fnprofile/models.py:629
+#: fnprofile/models.py:646
 msgid "Verified"
 msgstr "已验证"
 
@@ -2042,7 +2042,7 @@ msgstr ""
 
 #: fnprofile/templates/fnprofile/fnemail/edit__content__.html:34
 #: fnprofile/templates/fnprofile/fnemail/edit__document__.html:33
-#: fnprofile/templates/fnprofile/profile/edit.html:16
+#: fnprofile/templates/fnprofile/profile/edit.html:17
 msgid "Update"
 msgstr "更新"
 
@@ -2330,8 +2330,8 @@ msgstr "请输入一个您的电子邮件地址以验证您的账号。"
 
 #: fnprofile/views.py:154
 #, python-brace-format
-msgid "Welcome back, {username} !"
-msgstr "欢迎回来，{username}！"
+msgid "Welcome back, {full_name} !"
+msgstr "欢迎回来，{full_name}！"
 
 #: fnprofile/views.py:193
 msgid "You account has been loged out."
@@ -2356,93 +2356,93 @@ msgstr "您的密码已被重置。"
 msgid "Your password has been reset automatically."
 msgstr "您的密码已被自动重置。"
 
-#: fnprofile/views.py:304
+#: fnprofile/views.py:307
 msgid "Passwords do not match."
 msgstr "两次密码不匹配。"
 
-#: fnprofile/views.py:312
+#: fnprofile/views.py:322
 msgid "Your information has been updated successfully!"
 msgstr "您的信息已更新！"
 
-#: fnprofile/views.py:359
+#: fnprofile/views.py:369
 msgid "Email added successfully! Verification email sent."
 msgstr "邮件地址添加成功！验证邮件已发送。"
 
-#: fnprofile/views.py:371
+#: fnprofile/views.py:381
 msgid "Email added, but verification email failed to send."
 msgstr "邮件地址已被添加，但是验证邮件发送失败。"
 
-#: fnprofile/views.py:378
+#: fnprofile/views.py:388
 msgid "Failed to add email. Please try again."
 msgstr "无法添加！请重试。"
 
-#: fnprofile/views.py:409
+#: fnprofile/views.py:419
 msgid "Email Details"
 msgstr "电子邮件详细"
 
-#: fnprofile/views.py:425
+#: fnprofile/views.py:435
 msgid ""
 "A verification email has been sent to your email address. Please follow the "
 "instructions in the email to complete the verification process."
 msgstr "已向您的电子邮件地址发送一封验证邮件，请按照邮件内的要求完成账号验证。"
 
-#: fnprofile/views.py:429
+#: fnprofile/views.py:439
 #, python-brace-format
 msgid ""
 "The verification email failed to be sent. Please wait for {time_interval} "
 "seconds and try again!"
 msgstr "无法发送验证邮件，请稍等 {time_interval} 秒 后重试！"
 
-#: fnprofile/views.py:437 fnprofile/views.py:511
+#: fnprofile/views.py:447 fnprofile/views.py:521
 msgid "An unknown error has occurred!"
 msgstr "发生了一个错误！"
 
-#: fnprofile/views.py:466
+#: fnprofile/views.py:476
 msgid "Email verified successfully!"
 msgstr "邮件地址验证成功！"
 
-#: fnprofile/views.py:477
+#: fnprofile/views.py:487
 msgid "Token verification failed! Please try again later!"
 msgstr "令牌验证失败！请稍后再试！"
 
-#: fnprofile/views.py:485
+#: fnprofile/views.py:495
 msgid "Please check if your email address is correct!"
 msgstr "请检查您的邮箱地址是否正确！"
 
-#: fnprofile/views.py:532
+#: fnprofile/views.py:542
 msgid "Please log in to change your information."
 msgstr "请登录以更改您的信息。"
 
-#: fnprofile/views.py:536
+#: fnprofile/views.py:546
 msgid "An error occurred while saving the form!"
 msgstr "保存表单时出现错误！"
 
-#: fnprofile/views.py:538
+#: fnprofile/views.py:548
 msgid "an unknown error has occurred!"
 msgstr "发生了一个未知错误！"
 
-#: fnprofile/views.py:546
+#: fnprofile/views.py:556
 msgid "You only have one primary email, so you cannot cancel this option."
 msgstr "您不能取消该项，因为您只有一个主邮箱地址。"
 
-#: fnprofile/views.py:559
+#: fnprofile/views.py:569
 msgid "Email set as primary"
 msgstr "设电子邮件地址为主邮件地址"
 
-#: fnprofile/views.py:561
+#: fnprofile/views.py:571
 msgid "Email settings updated"
 msgstr "邮件设置已更新"
 
-#: fnprofile/views.py:591
+#: fnprofile/views.py:601
 msgid "Cannot delete primary email"
 msgstr "无法删除主邮件地址"
 
-#: fnprofile/views.py:598
+#: fnprofile/views.py:608
 #, python-brace-format
 msgid "Email ({email_address}) deleted"
 msgstr "邮箱地址 （{email_address}） 已被删除"
 
-#: fnprofile/views.py:605
+#: fnprofile/views.py:615
 msgid "Failed to delete email."
 msgstr "无法删除电子邮件地址"
 
@@ -2520,19 +2520,19 @@ msgstr "开发"
 msgid "About"
 msgstr "关于"
 
-#: templates/includes/_header.html:109
+#: templates/includes/_header.html:107
 msgid "Log out"
 msgstr "退出"
 
-#: templates/includes/_header.html:113
+#: templates/includes/_header.html:111
 msgid "Login"
 msgstr "登录"
 
-#: templates/includes/_header.html:116
+#: templates/includes/_header.html:114
 msgid "Sign Up"
 msgstr "注册"
 
-#: templates/includes/_header.html:131
+#: templates/includes/_header.html:129
 msgid "Hide messages."
 msgstr "隐藏信息。"
 

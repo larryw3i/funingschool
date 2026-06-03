@@ -182,6 +182,9 @@ class Fnuser(AbstractUser, PermissionsMixin):
 
     def get_full_name(self, request=None):
         full_name = None
+        if not self.first_name and not self.last_name:
+            full_name = self.username
+            return full_name
         if request:
             local = get_local(request=request)
             full_name = (

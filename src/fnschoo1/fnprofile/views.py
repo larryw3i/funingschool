@@ -151,8 +151,8 @@ def fnprofile_log_in(request):
                         request.session.set_expiry(0)
                     messages.success(
                         request,
-                        _("Welcome back, {username} !").format(
-                            username=user.username
+                        _("Welcome back, {full_name} !").format(
+                            full_name=user.get_full_name(request)
                         ),
                     )
                     next_url = request.POST.get("next") or reverse_lazy(
