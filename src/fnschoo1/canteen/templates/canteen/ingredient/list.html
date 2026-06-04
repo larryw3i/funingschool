@@ -109,13 +109,49 @@
                 </label>
               </div>
             </th>
-            {% for name, verbose_name in headers %}
-              <th class="sort_{{ name }}"
-                  scope="col"
-                  onclick="sort_ingredients('{{ name }}');">
-                {{ verbose_name }}
-              </th>
-            {% endfor %}
+            <th class="sort_storage_date"
+                scope="col"
+                onclick="sort_ingredients('storage_date');">
+              {% trans 'Ingredient Storage Data' %}
+            </th>
+            <th class="sort_name" scope="col" onclick="sort_ingredients('name');">
+              {% trans 'Ingredient Name' %}
+            </th>
+            <th class="sort_meal_type__name"
+                scope="col"
+                onclick="sort_ingredients('meal_type__name');">
+              {% trans 'Ingredient Meal Type Name' %}
+            </th>
+            <th class="sort_category__name"
+                scope="col"
+                onclick="sort_ingredients('category__name');">
+              {% trans 'Ingredient Category Name' %}
+            </th>
+            <th class="sort_quantity"
+                scope="col"
+                onclick="sort_ingredients('quantity');">
+              {% trans 'Ingredient Quantity' %}
+            </th>
+            <th class="sort_quantity_unit_name"
+                scope="col"
+                onclick="sort_ingredients('quantity_unit_name');">
+              {% trans 'Ingredient Quantity Unit Name' %}
+            </th>
+            <th class="sort_total_price"
+                scope="col"
+                onclick="sort_ingredients('total_price');">
+              {% trans 'Ingredient Total Price' %}
+            </th>
+            <th class="sort_is_ignorable"
+                scope="col"
+                onclick="sort_ingredients('is_ignorable');">
+              {% trans 'Is Ingredient Ignorable' %}
+            </th>
+            <th class="sort_is_disabled"
+                scope="col"
+                onclick="sort_ingredients('is_disabled');">
+              {% trans 'Is Ingredient Disabled' %}
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>

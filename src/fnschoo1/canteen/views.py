@@ -266,8 +266,8 @@ def create_consumptions(request, ingredient_id=None):
         & Q(is_ignorable=False)
     )
 
-    if search_params and "category" in search_params:
-        category_id = search_params["category"]
+    if search_params and "category__id" in search_params:
+        category_id = search_params["category__id"]
         if category_id == "None":
             queries &= Q(category=None)
             pass
@@ -281,8 +281,8 @@ def create_consumptions(request, ingredient_id=None):
     else:
         context.update({"selected_category": None})
 
-    if search_params and "meal_type" in search_params:
-        meal_type_id = search_params["meal_type"]
+    if search_params and "meal_type__id" in search_params:
+        meal_type_id = search_params["meal_type__id"]
         if meal_type_id == "None":
             queries &= Q(meal_type=None)
             pass
@@ -697,7 +697,6 @@ def list_ingredients(request):
     paginator = Paginator(ingredients, page_size)
     page_number = int(search_params.get("page", 1))
     page_obj = paginator.get_page(page_number)
-    headers = [(f.name, f.verbose_name) for f in fields]
 
     meal_types = list(
         set(
@@ -766,7 +765,6 @@ def list_ingredients(request):
         {
             "page_obj": page_obj,
             "search_query": search_query_cp,
-            "headers": headers,
             "page_size": page_size,
             "total_price_title": total_price_title,
             "ingredients_len": ingredients_len,

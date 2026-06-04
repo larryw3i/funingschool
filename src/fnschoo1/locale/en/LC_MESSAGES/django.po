@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-04 03:46+0800\n"
+"POT-Creation-Date: 2026-06-04 21:36+0800\n"
 "PO-Revision-Date: 2026-05-31 20:53+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -47,8 +47,8 @@ msgstr ""
 #: canteen/models.py:15 canteen/templates/canteen/category/delete.html:31
 #: canteen/templates/canteen/category/delete.html:40
 #: canteen/templates/canteen/category/list.html:56
-#: canteen/templates/canteen/ingredient/list.html:156
-#: canteen/templates/canteen/ingredient/list.html:161
+#: canteen/templates/canteen/ingredient/list.html:192
+#: canteen/templates/canteen/ingredient/list.html:197
 #: canteen/templates/canteen/meal_type/list.html:52 fnprofile/models.py:51
 #: templates/base/_js.html:7
 msgid "Yes"
@@ -139,7 +139,8 @@ msgid "Time of creating"
 msgstr ""
 
 #: canteen/models.py:134 canteen/templates/canteen/consumption/create.html:62
-#: canteen/templates/canteen/consumption/create.html:108 canteen/views.py:90
+#: canteen/templates/canteen/consumption/create.html:108
+#: canteen/templates/canteen/ingredient/list.html:118 canteen/views.py:90
 msgid "Ingredient Name"
 msgstr ""
 
@@ -151,7 +152,7 @@ msgstr ""
 msgid "Ingredient Category"
 msgstr ""
 
-#: canteen/models.py:155
+#: canteen/models.py:155 canteen/templates/canteen/ingredient/list.html:133
 msgid "Ingredient Quantity"
 msgstr ""
 
@@ -159,15 +160,15 @@ msgstr ""
 msgid "Unit Name of Ingredient Quantity"
 msgstr ""
 
-#: canteen/models.py:167
+#: canteen/models.py:167 canteen/templates/canteen/ingredient/list.html:143
 msgid "Ingredient Total Price"
 msgstr ""
 
-#: canteen/models.py:171
+#: canteen/models.py:171 canteen/templates/canteen/ingredient/list.html:148
 msgid "Is Ingredient Ignorable"
 msgstr ""
 
-#: canteen/models.py:174
+#: canteen/models.py:174 canteen/templates/canteen/ingredient/list.html:153
 msgid "Is Ingredient Disabled"
 msgstr ""
 
@@ -284,7 +285,7 @@ msgstr ""
 #: canteen/templates/canteen/category/delete.html:57
 #: canteen/templates/canteen/category/list.html:66
 #: canteen/templates/canteen/ingredient/delete.html:34
-#: canteen/templates/canteen/ingredient/list.html:174
+#: canteen/templates/canteen/ingredient/list.html:210
 #: canteen/templates/canteen/meal_type/delete.html:45
 #: canteen/templates/canteen/meal_type/list.html:62
 #: fnprofile/templates/fnprofile/fnemail/delete.html:34
@@ -316,7 +317,7 @@ msgid "Ingredients Count"
 msgstr ""
 
 #: canteen/templates/canteen/category/list.html:62
-#: canteen/templates/canteen/ingredient/list.html:168
+#: canteen/templates/canteen/ingredient/list.html:204
 #: canteen/templates/canteen/meal_type/list.html:58
 msgid "Edit"
 msgstr ""
@@ -550,7 +551,23 @@ msgid ""
 "                  "
 msgstr ""
 
-#: canteen/templates/canteen/ingredient/list.html:129
+#: canteen/templates/canteen/ingredient/list.html:115
+msgid "Ingredient Storage Data"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:123
+msgid "Ingredient Meal Type Name"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:128
+msgid "Ingredient Category Name"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:138
+msgid "Ingredient Quantity Unit Name"
+msgstr ""
+
+#: canteen/templates/canteen/ingredient/list.html:165
 msgid "It helps you check/delete the ingredients."
 msgstr ""
 
@@ -641,11 +658,11 @@ msgid ""
 "      Edit Meal Type %(instance_name)s ."
 msgstr ""
 
-#: canteen/views.py:77 canteen/views.py:1223
+#: canteen/views.py:77 canteen/views.py:1217
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:77 canteen/views.py:1215
+#: canteen/views.py:77 canteen/views.py:1209
 msgid "(2)"
 msgstr ""
 
@@ -706,70 +723,70 @@ msgstr ""
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr ""
 
-#: canteen/views.py:449
+#: canteen/views.py:445
 msgid "Please select the item(s) you wish to delete."
 msgstr ""
 
-#: canteen/views.py:471
+#: canteen/views.py:467
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr ""
 
-#: canteen/views.py:473
+#: canteen/views.py:469
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr ""
 
-#: canteen/views.py:477
+#: canteen/views.py:473
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr ""
 
-#: canteen/views.py:479
+#: canteen/views.py:475
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr ""
 
-#: canteen/views.py:525
+#: canteen/views.py:521
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
 "and cannot be saved. Please modify it again."
 msgstr ""
 
-#: canteen/views.py:741
+#: canteen/views.py:736
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr ""
 
-#: canteen/views.py:750
+#: canteen/views.py:745
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr ""
 
-#: canteen/views.py:751
+#: canteen/views.py:746
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr ""
 
-#: canteen/views.py:791
+#: canteen/views.py:785
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:953
+#: canteen/views.py:947
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:973
+#: canteen/views.py:967
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:989
+#: canteen/views.py:983
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:1015
+#: canteen/views.py:1009
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr ""
@@ -1939,7 +1956,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"      Hello! %(user.username)s,\n"
+"      Hello! %(USER_FULL_NAME)s,\n"
 "      Your password has been regenerated:\n"
 "\n"
 "      %(generated_password)s\n"
@@ -1978,7 +1995,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"      Hello! %(username)s,\n"
+"      Hello! %(USER_FULL_NAME)s,\n"
 "      You have logged in to FNSCHOOL:\n"
 "      -- Login IP: %(login_ip)s\n"
 "      -- Browser: %(HTTP_USER_AGENT)s\n"
@@ -2005,7 +2022,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"      Hello! %(username)s,\n"
+"      Hello! %(USER_FULL_NAME)s,\n"
 "      You can reset your password by clicking on the following link:\n"
 "      %(reset_password_url)s\n"
 "      (If the link does not redirect after clicking, please copy the entire "
@@ -2018,7 +2035,7 @@ msgstr ""
 #, python-format
 msgid ""
 "\n"
-"    Hello! %(username)s,\n"
+"    Hello! %(USER_FULL_NAME)s,\n"
 "    Please click on the link below to activate your email:\n"
 "    %(verification_url)s\n"
 "    (If the link does not redirect after clicking, please copy the entire "
@@ -2141,7 +2158,8 @@ msgstr ""
 #: fnprofile/templates/fnprofile/profile/view.html:4
 #, python-format
 msgid ""
-" Hello, %(user_name)s!\n"
+"\n"
+"    Hello, %(USER_FULL_NAME)s!\n"
 "  "
 msgstr ""
 

@@ -10,7 +10,7 @@
     <div class="row justify-content-end border border-1 border-primary rounded">
       {% if meal_types %}
         <div class="col col-auto">
-          <select class="form-select meal_types-select">
+          <select class="form-select meal_types-select" data-key='meal_type__id'>
             <option value="" {% if not selected_meal_type %}selected{% endif %}>
               {% trans 'All Meal Types' %}
             </option>
@@ -29,7 +29,7 @@
 
       {% if categories %}
         <div class="col col-auto">
-          <select class="form-select categories-select w-100">
+          <select class="form-select categories-select w-100" data-key='category__id'>
             <option value="" {% if not selected_category %}selected{% endif %}>
               {% trans 'All Categories' %}
             </option>
@@ -723,16 +723,14 @@
     $(document).ready(function() {
       set_consumptions_table_size()
     });
-    $(document).ready(function() {
-      $('.meal_types-select').change(function() {
-        var selected_value = $(this).val()
-        set_search_params_to_cookie(window.location.pathname, "meal_type", selected_value)
-        location.reload()
-      });
 
-      $('.categories-select').change(function() {
+    $(document).ready(function() {
+      $('.meal_types-select, .categories-select').change(function() {
+        var cookie_key = $(this).data("key")
         var selected_value = $(this).val()
-        set_search_params_to_cookie(window.location.pathname, "category", selected_value)
+        selected_value = selected_value === "" ? null : selected_value
+        console.log(cookie_key, selected_value)
+        set_search_params_to_cookie(window.location.pathname, cookie_key, selected_value)
         location.reload()
       });
     });

@@ -2,6 +2,7 @@ from urllib.parse import unquote
 
 from django.http import HttpResponse, QueryDict
 from django.shortcuts import get_object_or_404, redirect, render
+from fnschool._models import get_model_field_names
 
 
 def get_search_params_from_cookie(request, name=None):
@@ -24,7 +25,7 @@ def get_object_orders_from_cookie(request, name=None, model=None):
     name = name or request.path
     orders = []
     params = get_search_params_from_cookie(request, name)
-    field_names = [f.name for f in model._meta.fields] if model else None
+    field_names = get_model_field_names(model) if model else None
 
     if params:
         for key, value in params.items():
