@@ -39,24 +39,11 @@ autocmd BufNewFile,BufRead .git/config,.git_config set filetype=yaml
 autocmd FileType html,css,javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType python,yaml setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType sh,bash,zsh setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType html setlocal tags=
 
 syntax enable
 set background=dark
 
 colorscheme elflord
-
-function! s:update_tags()
-    if !executable('ctags')
-        return
-    endif
-    if empty(findfile('manage.py', '.;')) && empty(finddir('.git', '.;'))
-        return
-    endif
-    call job_start(['ctags', '-R', '--languages=Python,JavaScript', "--exclude=*.min.js", "--exclude=*.min.css", "--exclude=node_modules", "--exclude=__pycache__", "--tag-relative=yes", "--fields=+iaS+KS", "src"])
-endfunction
-autocmd BufWritePost *.py call s:update_tags()
-autocmd BufWritePost *.js call s:update_tags()
 
 set wildignore+=*.pyc,*.pyo,*.sqlite*
 set wildignore+=*__pycache__*/**
