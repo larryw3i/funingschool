@@ -1,8 +1,8 @@
 {% spaceless %}
   {% load i18n %}
   {% autoescape off %}
-    {% blocktrans with logout_url=logout_url username=user.username HTTP_USER_AGENT=HTTP_USER_AGENT login_ip=login_ip reset_password_url=reset_password_url %}
-      Hello! {{ username }},
+    {% blocktrans with logout_url=logout_url USER_FULL_NAME=USER_FULL_NAME HTTP_USER_AGENT=HTTP_USER_AGENT login_ip=login_ip reset_password_url=reset_password_url %}
+      Hello! {{ USER_FULL_NAME }},
       You have logged in to FNSCHOOL:
       -- Login IP: {{ login_ip }}
       -- Browser: {{ HTTP_USER_AGENT }}

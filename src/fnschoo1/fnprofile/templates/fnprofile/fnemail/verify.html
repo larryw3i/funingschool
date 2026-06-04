@@ -8,8 +8,8 @@
 {% block content %}
   <h2>{% trans 'Active Email' %}</h2>
   <h3>
-    {% blocktrans with username=username email=email%}
-      Do you want to activate this email ({{ username }} {{ email }})?
+    {% blocktrans with USER_FULL_NAME=USER_FULL_NAME email=email%}
+      Do you want to activate this email ({{ USER_FULL_NAME }} {{ email }})?
     {% endblocktrans %}
     <a class='btn btn-info' href='{{ full_path }}'>{% trans 'Active it' %}</a>
   </h3>
