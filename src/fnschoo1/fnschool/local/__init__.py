@@ -10,13 +10,14 @@ from decimal import ROUND_HALF_UP, Decimal
 from importlib import import_module
 from pathlib import Path
 
+from django.conf import settings
 from django.utils import translation
 from django.utils.translation import gettext as _
-from django.conf import settings
+
 
 def get_local(*args, **kwargs):
     request = kwargs.get("request")
-    lang = request.COOKIES.get("django_language",settings.LANGUAGE_CODE)
+    lang = request.COOKIES.get("django_language", settings.LANGUAGE_CODE)
     lang_module_name = lang.replace("-", "_").replace(".", "_").lower()
     lang_module_names = [
         p.stem for p in (Path(__file__).parent).glob("*.py") if p.is_file()

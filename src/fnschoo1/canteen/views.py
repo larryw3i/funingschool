@@ -180,9 +180,7 @@ def split_price(total_price, quantity, prec=2):
 def create_consumptions(request, ingredient_id=None):
     search_params = get_search_params_from_cookie(request)
     context = {}
-    date_start = request.GET.get(
-        "storage_date_start", None
-    ) or request.COOKIES.get("storage_date_start", None)
+    date_start = search_params.get("storage_date_start", None)
     if not date_start:
         ingredients = Ingredient.objects.annotate(
             total_consumed=Coalesce(
@@ -199,9 +197,7 @@ def create_consumptions(request, ingredient_id=None):
     else:
         date_start = date_parser.parse(date_start).date()
 
-    date_end = request.GET.get("storage_date_end", None) or request.COOKIES.get(
-        "storage_date_end", None
-    )
+    date_end = search_params.get("storage_date_end", None)
     if not date_end:
         today = datetime.now().date()
         date_end = (
