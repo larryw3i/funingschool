@@ -44,7 +44,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from fnschool import _
+from fnschool import _, fndate
 from fnschool.local import get_local
 from fnschool.views import (
     get_object_orders_from_cookie,
@@ -178,7 +178,9 @@ def split_price(total_price, quantity, prec=2):
 
 @login_required
 def create_consumptions(request, ingredient_id=None):
-    search_params = get_search_params_from_cookie(request)
+    search_params = get_search_params_from_cookie(
+        request, name="canteen/create_consumptions"
+    )
     context = {}
     date_start = search_params.get("storage_date_start", None)
     if not date_start:
@@ -195,7 +197,7 @@ def create_consumptions(request, ingredient_id=None):
         date_start = ingredients.order_by("storage_date").first().storage_date
         pass
     else:
-        date_start = date_parser.parse(date_start).date()
+        date_start = fndate.parse_date(date_start)
         pass
 
     date_end = search_params.get("storage_date_end", None)
@@ -204,9 +206,12 @@ def create_consumptions(request, ingredient_id=None):
         date_end = (
             today.replace(day=1) + relativedelta(months=2)
         ) - relativedelta(days=1)
+        pass
     else:
-        date_end = date_parser.parse(date_end).date()
-
+        date_end = fndate.parse_date(date_end)
+        if date_end <= date_start:
+            date_end = date_start + timedelta(days=1)
+        pass
     date_range = list(pd.date_range(start=date_start, end=date_end))
     date_range = [d.date() for d in date_range]
 
@@ -289,7 +294,6 @@ def create_consumptions(request, ingredient_id=None):
     else:
         context.update({"selected_meal_type": None})
 
-    date_range_cp = date_range
     date_range_cp = [d.strftime("%Y-%m-%d") for d in date_range]
     months = list(set([d.strftime("%Y-%m") for d in date_range]))
     months = sorted(months, key=lambda d: int(d.split("-")[1]))
@@ -378,57 +382,58 @@ def create_consumptions(request, ingredient_id=None):
 
 @login_required
 @require_POST
-def new_consumption(request, consumption_id=None):
+def new_consumption(request):
     form = None
 
     posted_date_of_using = date_parser.parse(request.POST.get("date_of_using"))
     posted_amount_used = request.POST.get("amount_used")
+    ingredient_id = request.POST.get("ingredient")
+    ingredient = Ingredient.objects.filter(
+        Q(user=request.user) & Q(pk=ingredient_id)
+    ).first()
+    is_new_consumption = False
 
-    if consumption_id:
-        consumption = Consumption.objects.filter(
-            Q(pk=consumption_id)
-            & Q(ingredient__user=request.user)
-            & Q(date_of_using=posted_date_of_using)
-        ).first()
+    if not ingredient:
+        return HttpResponse("No Ingredient.", status=202)
+
+    consumption = Consumption.objects.filter(
+        Q(date_of_using=posted_date_of_using) & Q(ingredient__id=ingredient_id)
+    ).first()
+
+    if Decimal(posted_amount_used).is_zero():
         if consumption:
-            if Decimal(posted_amount_used).is_zero():
-                consumption.delete()
-                return HttpResponse("OK", status=201)
-
-            form = ConsumptionForm(request.POST, instance=consumption)
-        else:
-            return HttpResponse("Accepted", status=202)
-
-    else:
-        ingredient_id = request.POST.get("ingredient")
-        ingredient = Ingredient.objects.filter(
-            Q(user=request.user) & Q(pk=ingredient_id)
-        ).first()
-        if not ingredient:
-            return HttpResponse("Accepted", status=202)
-
-        consumption = Consumption.objects.filter(
-            Q(date_of_using=posted_date_of_using)
-            & Q(ingredient__id=ingredient_id)
-        ).first()
-
-        if not consumption:
-            consumption = Consumption()
-        elif Decimal(posted_amount_used).is_zero():
+            consumption_id = consumption.id
             consumption.delete()
-            return HttpResponse("OK", status=201)
+            return HttpResponse(
+                "Consumption {0} has been Deleted".format(consumption_id),
+                status=201,
+            )
+            pass
         else:
+            return HttpResponse("No Consumption.", status=202)
             pass
 
+    if not consumption:
+        consumption = Consumption()
         consumption.ingredient = ingredient
-        form = ConsumptionForm(request.POST, instance=consumption)
+        is_new_consumption = True
+        pass
+
+    form = ConsumptionForm(request.POST, instance=consumption)
 
     if form.is_valid():
         consumption = form.save(commit=False)
         consumption.save()
-        return HttpResponse("OK", status=201)
+        return HttpResponse(
+            (
+                "New Consumption {0} has been created.".format(consumption.id)
+                if is_new_consumption
+                else "Consumption {0} has been updated.".format(consumption.id)
+            ),
+            status=201,
+        )
 
-    return HttpResponse("Accepted", status=202)
+    return HttpResponse("Form is not valid.", status=202)
 
 
 @login_required()

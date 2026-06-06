@@ -88,7 +88,13 @@ class ConsumptionForm(forms.ModelForm):
             )
 
         self.fields["amount_used"].widget.attrs.update(
-            {"title": _("Please enter a number.")}
+            {
+                "title": _("Please enter a number."),
+                "type": "number",
+                "min": "0",
+                "step": "1",
+                "class": "form-control input-consumption-amount_used",
+            }
         )
 
     class Meta:

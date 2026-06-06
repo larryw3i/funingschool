@@ -5,12 +5,14 @@
       data-date_of_using="{{ form.instance.date_of_using|date:'Y-m-d' }}">
     <form onkeydown="if(event.keyCode==13){return false;}"
           name="consumption_form"
+          class='form-consumption'
           title="{% trans 'Please enter a number.' %}"
           data-amount_used="{{ form.instance.amount_used|default_if_none:0 }}"
+          autocomplete="off"
           data-ingredient_unit_price="{{ form.instance.ingredient.unit_price }}"
           data-date_of_using="{{ form.instance.date_of_using|date:"Y-m-d" }}"
           data-ingredient_meal_type="{{ form.instance.ingredient.meal_type }}"
-          {% if form.instance.id %} action="{% url 'canteen:new_consumption' form.instance.id %}" {% else %} action="{% url 'canteen:new_consumption' %}" {% endif %}
+          action="{% url 'canteen:new_consumption' %}"
           data-ingredient-id="{{ form.instance.ingredient.id }}">
       {% csrf_token %}
       {% for field in form %}{{ field }}{% endfor %}

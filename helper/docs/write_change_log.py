@@ -101,6 +101,20 @@ class Releases:
             + "\n"
             + "\n"
             + self.get_release_markdown(
+                version="20260607.80137.820",
+                fixes=[
+                    _(
+                        "- `Canteen/Consumption` page: Set the minimum consumption quantity to 0, and ensure it cannot be negative."
+                    ),
+                    _(
+                        "- `Canteen/Consumptions` page: Fixed the issue where updating the consumption quantity failed after deleting the existing consumption quantity."
+                    ),
+                    _(
+                        "- `Canteen/Consumptions` page: Fixed the issue of mismatch between the header and columns of the Consumptions Table."
+                    ),
+                ]
+            )
+            + self.get_release_markdown(
                 version="20260601.81344.845",
                 additions=[
                     _(

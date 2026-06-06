@@ -223,7 +223,6 @@ def edit_fnprofile(request):
     if reset_password_token:
         user_id_r = request.GET.get("user_id", None)
         user_id = force_str(urlsafe_base64_decode(user_id_r))
-        print(user_id)
         if not user_id:
             return HttpResponse("Not Found", status=404)
         user = get_object_or_404(Fnuser, pk=user_id)

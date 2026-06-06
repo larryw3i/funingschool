@@ -81,6 +81,7 @@
                onkeydown="if(event.keyCode==13){list_consumptions();}"
                title="{% trans 'The starting date of storage.' %}"
                id="storage_date_start_input"
+               autocomplete="off"
                data-original_value="{{ storage_date_start }}"
                value="{{ storage_date_start }}">
       </div>
@@ -89,6 +90,7 @@
                onkeydown="if(event.keyCode==13){list_consumptions();}"
                title="{% trans 'The end date of storage.' %}"
                id="storage_date_end_input"
+               autocomplete="off"
                data-original_value="{{ storage_date_end }}"
                value="{{ storage_date_end }}">
       </div>
@@ -165,7 +167,7 @@
                 )
               </span>
             </td>
-            <td name="remaining_{{ ingredient.id }}"></td>
+            <td class="td-remaining_{{ ingredient.id }}"></td>
           </tr>
         {% empty %}
           <tr>{% trans "No ingredient found." %}</tr>
@@ -309,6 +311,7 @@
     var meal_types = JSON.parse($("#meal_type_names").text())
     var date_range = JSON.parse($("#date_range").text())
     var storage_date_start = $('#storage_date_start').text().replace(new RegExp('"', 'g'), "")
+    var storage_date_end = $('#storage_date_end').text().replace(new RegExp('"', 'g'), "")
     var date_patterns = [
       /^\d{4}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/,
       /^\d{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/,
@@ -371,7 +374,7 @@
 
     $(document).ready(function() {
       $(ingredient_ids).each(function(index, ingredient_id) {
-        var td = $(`td[name='remaining_${ingredient_id}']`)
+        var td = $(`td.td-remaining_${ingredient_id}`)
         var tr = $(td.closest("tr"))
         var ingredient_quantity = parseInt(tr.data("ingredient_quantity")) || 0
         var ingredient_quantity_used = parseInt(tr.data("ingredient_quantity_used")) || 0
@@ -399,8 +402,8 @@
     }
 
     $(document).ready(function() {
-      var td1 = $(".table tr > :nth-child(1):first")
-      $(".table tr > :nth-child(2)").css("left", td1.width() * 1.05)
+      var td1 = $(".table-consumptions tr > :nth-child(1):first")
+      $(".table-consumptions tr > :nth-child(2)").css("left", td1.width() + 2)
     });
 
 
@@ -418,34 +421,44 @@
     });
 
     $(document).ready(function() {
-      if (get_cookie('storage_date_start') === null) {
-        set_cookies({
-          "storage_date_start": storage_date_start
-        })
+      var search_params = get_search_params_from_cookie(window.location.pathname)
+      var saved_storage_date_start = search_params.get("storage_date_start") || null
+      var saved_storage_date_end = search_params.get("storage_date_end") || null
+      if (saved_storage_date_start == null || saved_storage_date_start != storage_date_start) {
+        set_search_params_to_cookie(window.location.pathname, "storage_date_end", storage_date_start)
+      }
+      if (saved_storage_date_end == null || saved_storage_date_end != storage_date_end) {
+        set_search_params_to_cookie(window.location.pathname, "storage_date_end", storage_date_end)
       }
     });
 
     function submit_consumption_form(element) {
       var element = $(element)
       var form = $(element.closest("form"));
-      var formData = new FormData(form[0]);
+      var form_data = new FormData(form[0]);
 
       $.ajax({
         url: form.attr('action'),
         method: 'POST',
-        data: formData,
+        data: form_data,
         processData: false,
         contentType: false,
-        success(res) {
-          if (res == "OK") {
+        success: function(data, textStatus, xhr) {
+          if (xhr.status == 201) {
             element.css({
               'border': "5px solid green",
               "border-radius": "10px"
             })
             form.data("amount_used", element.val())
           }
+          if (xhr.status == "202") {
+            element.css({
+              'border': "5px solid yellow",
+              "border-radius": "10px"
+            })
+          }
         },
-        error(xhr) {
+        error: function(xhr, textStatus, errorThrown) {
           element.css({
             'border': "5px solid red",
             "border-radius": "10px"
@@ -475,7 +488,7 @@
         element.val('0')
       }
       var $tds = element.parent().parent().siblings("td")
-      var $amount_used_inputs = $tds.find("form input[name='amount_used']")
+      var $amount_used_inputs = $tds.find("form .input-consumption-amount_used")
       var total_consumed = 0
       $amount_used_inputs.each(function(index, amount_used_element) {
         var value = parseInt($(amount_used_element).val()) || 0
@@ -492,7 +505,7 @@
       }
       total_consumed = total_consumed + new_amount_used
       var ingredient_id = element.closest("tr").data("ingredient_id")
-      $(`td[name='remaining_${ingredient_id}']`).text(`${ingredient_quantity}-${total_consumed}=${ingredient_quantity-total_consumed}`)
+      $(`.td-remaining_${ingredient_id}`).text(`${ingredient_quantity}-${total_consumed}=${ingredient_quantity-total_consumed}`)
       element.closest("tr").find('.ingredient-progress').css('width', `${parseInt((ingredient_quantity-total_consumed)*100/ingredient_quantity)}%`)
       var date_of_using = element.closest("form").data("date_of_using")
 
@@ -509,7 +522,7 @@
         $(`form[data-date_of_using="${date_of_using}"][data-ingredient_meal_type="${meal_type}"]`).each(function(index, element) {
           element = $(element)
           var unit_price = parseFloat(element.data("ingredient_unit_price"))
-          var quantity = parseFloat(element.find("input[name='amount_used']").val()) || 0
+          var quantity = parseFloat(element.find(".input-consumption-amount_used").val()) || 0
           total_price_dated += (unit_price * quantity)
         });
         total_price_dated = total_price_dated.toFixed(2)
@@ -552,10 +565,10 @@
             var footer_progressbar = $('.progress-footer')
             data.each(function(index, element) {
               if (is_weekend(new Date($(element).data("date_of_using")))) {
-                $(element).find('[name="amount_used"]').addClass("weekend")
+                $(element).find('.input-consumption-amount_used').addClass("weekend")
               }
             });
-            data.find('input[name="amount_used"]').blur(function() {
+            data.find('.input-consumption-amount_used').blur(function() {
               amount_used_input_blur(this)
             });
             $('#ingredient_num_' + value).append(data)
@@ -594,12 +607,12 @@
           rowIndex = rowIndex + 2
         }
         var cell = $('#consumptions_table').find(`tr:eq(${rowIndex}) td:eq(${columnIndex})`);
-        var amount_used_input = cell.find('input[name="amount_used"]')
+        var amount_used_input = cell.find('.input-consumption-amount_used')
         amount_used_input.first().focus()
 
       }
 
-      $('#consumptions_table').on('keydown', 'input[name="amount_used"]', function(e) {
+      $('#consumptions_table').on('keydown', '.input-consumption-amount_used', function(e) {
         if ([9, 13, 37, 38, 39, 40].includes(e.keyCode)) {
           e.preventDefault();
           direction = e.keyCode === 9 ? "r" :
@@ -636,7 +649,7 @@
       const consumptions_table = $("#consumptions_table")
       const header = $("header")
       const footer = $("footer")
-      const height = Math.round((footer.offset().top - generate_spreadsheet_btn.height() - consumptions_table.offset().top) * 0.95)
+      const height = Math.round((footer.offset().top - generate_spreadsheet_btn.height() - consumptions_table.offset().top) - 22)
       consumptions_table.parent().height(height)
     }
 
@@ -644,10 +657,12 @@
       if (is_loading) {
         return
       }
-      var new_storage_date_start = $('#storage_date_start_input').val() || 0
-      var storage_date_start_original_value = $("#storage_date_start_input").data("original_value") || 0
-      var new_storage_date_end = $('#storage_date_end_input').val() || 0
-      var storage_date_end_original_value = $("#storage_date_end_input").data("original_value") || 0
+      var storage_date_start_input = $("#storage_date_start_input")
+      var storage_date_end_input = $("#storage_date_end_input")
+      var new_storage_date_start = storage_date_start_input.val() || null
+      var storage_date_start_original_value = storage_date_start_input.data("original_value") || 0
+      var new_storage_date_end = storage_date_end_input.val() || null
+      var storage_date_end_original_value = storage_date_end_input.data("original_value") || 0
       if (new_storage_date_start) {
         if ((new Date(new_storage_date_start)) != (new Date(storage_date_start_original_value))) {
           set_search_params_to_cookie(window.location.pathname, "storage_date_start", new_storage_date_start)
@@ -701,7 +716,7 @@
             $(consumptions_table_body).append(ordered_row)
           }
         })
-        $("td").find('input[name="amount_used"]').blur(function(input_element) {
+        $("td").find('.input-consumption-amount_used').blur(function(input_element) {
           input_element = $(input_element)
           amount_used_input_blur(input_element)
         });
