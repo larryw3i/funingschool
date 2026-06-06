@@ -193,9 +193,10 @@ def create_consumptions(request, ingredient_id=None):
             & Q(user=request.user)
         )
         date_start = ingredients.order_by("storage_date").first().storage_date
-
+        pass
     else:
         date_start = date_parser.parse(date_start).date()
+        pass
 
     date_end = search_params.get("storage_date_end", None)
     if not date_end:
@@ -216,14 +217,6 @@ def create_consumptions(request, ingredient_id=None):
 
         form_list = []
         consumptions = ingredient.consumptions.all()
-
-        consumptions_len = len(consumptions)
-        for c_index in range(consumptions_len):
-            consumption = consumptions[c_index]
-            for c0_index in range(c_index + 1, consumptions_len):
-                consumption0 = consumptions[c0_index]
-                if consumption.date_of_using == consumption0.date_of_using:
-                    consumption.delete()
 
         for c in consumptions:
             if c.date_of_using < ingredient.storage_date:

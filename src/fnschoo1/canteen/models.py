@@ -118,7 +118,9 @@ class Ingredient(models.Model):
         related_name="ingredients",
         verbose_name=_("User"),
     )
-    storage_date = models.DateField(verbose_name=_("Storage Date"))
+    storage_date = models.DateField(
+        verbose_name=_("Storage Date"), null=False, blank=False
+    )
 
     created_at = models.DateTimeField(
         null=True,
@@ -152,6 +154,7 @@ class Ingredient(models.Model):
         validators=[
             MinValueValidator(0),
         ],
+        default=0,
         verbose_name=_("Ingredient Quantity"),
     )
     quantity_unit_name = models.CharField(

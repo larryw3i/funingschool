@@ -1,6 +1,7 @@
 from datetime import date, datetime
 
 from django import forms
+from django.db.models import CheckConstraint, Q, Sum
 from fnschool import _
 
 from .models import Category, Consumption, Ingredient, MealType
@@ -36,6 +37,39 @@ class IngredientForm(forms.ModelForm):
                 },
             ),
         }
+
+    def clean_storage_date(self):
+        storage_date = self.cleaned_data.get("storage_date", None)
+        ingredient = self.instance
+        if not ingredient.consumptions.exists():
+            return storage_date
+        ingredient.consumptions.filter(date_of_using__lt=storage_date).delete()
+        return storage_date
+
+    def clean_quantity(self):
+        quantity = self.cleaned_data.get("quantity")
+        ingredient = self.instance
+        if not ingredient.consumptions.exists():
+            return quantity
+            pass
+        total_amount_used = (
+            ingredient.consumptions.aggregate(
+                total_amount_used=Sum("amount_used")
+            )["total_amount_used"]
+            or 0
+        )
+        if total_amount_used < quantity:
+            return quantity
+            pass
+        deleted_amount_used_sum = 0
+        for c in ingredient.consumptions.order_by("-date_of_using").all():
+            deleted_amount_used_sum += c.amount_used
+            c.delete()
+            if total_amount_used - deleted_amount_used_sum <= quantity:
+                break
+                pass
+            pass
+        return quantity
 
 
 class ConsumptionForm(forms.ModelForm):
