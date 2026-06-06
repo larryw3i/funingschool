@@ -112,7 +112,7 @@ class Releases:
                     _(
                         "- `Canteen/Consumptions` page: Fixed the issue of mismatch between the header and columns of the Consumptions Table."
                     ),
-                ]
+                ],
             )
             + self.get_release_markdown(
                 version="20260601.81344.845",

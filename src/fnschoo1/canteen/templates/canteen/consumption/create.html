@@ -132,8 +132,8 @@
           <tr class="row-consumption"
               data-ingredient_id="{{ ingredient.id }}"
               data-ingredient_name="{{ ingredient.name }}"
-              data-ingredient_meal_type__name='{{ ingredient.meal_type.name|default:"" }}'
-              data-ingredient_category__name='{{ ingredient.category.name|default:"" }}'
+              data-ingredient_meal_type_name='{{ ingredient.meal_type.name|default:"" }}'
+              data-ingredient_category_name='{{ ingredient.category.name|default:"" }}'
               data-ingredient_storage_date="{{ ingredient.storage_date|date:"Y-m-d" }}"
               data-ingredient_quantity="{{ ingredient.quantity }}"
               data-ingredient_quantity_used="{{ ingredient.quantity_used }}"
@@ -308,7 +308,7 @@
     var ingredient_ids = JSON.parse($("#ingredient_ids").text())
     var ingredient_ids_length = ingredient_ids.length
     var months = JSON.parse($("#months").text())
-    var meal_types = JSON.parse($("#meal_type_names").text())
+    var meal_type_names = JSON.parse($("#meal_type_names").text())
     var date_range = JSON.parse($("#date_range").text())
     var storage_date_start = $('#storage_date_start').text().replace(new RegExp('"', 'g'), "")
     var storage_date_end = $('#storage_date_end').text().replace(new RegExp('"', 'g'), "")
@@ -468,71 +468,71 @@
 
     }
 
-    function amount_used_input_blur(element) {
-      element = $(element)
-      var ingredient_quantity = parseInt(element.closest('tr').data("ingredient_quantity")) || 0
-      var ingredient_quantity_used = parseInt(element.closest("tr").data("ingredient_quantity_used")) || 0
+    function amount_used_input_blur(amount_used_input) {
+      amount_used_input = $(amount_used_input)
+      var consumption_tr = $(amount_used_input.closest('tr'))
+      var ingredient_quantity = parseInt(consumption_tr.data("ingredient_quantity")) || 0
+      var ingredient_quantity_used = parseInt(consumption_tr.data("ingredient_quantity_used")) || 0
       ingredient_quantity = ingredient_quantity - ingredient_quantity_used
 
-      var $consumption_form = element.closest("form")
-      var amount_used = parseInt($consumption_form.data("amount_used")) || 0
-      var new_amount_used = parseInt((element.val() || '0').toString().trim())
+      var consumption_form = $(amount_used_input.closest("form"))
+      var amount_used = parseInt(consumption_form.data("amount_used")) || 0
+      var new_amount_used = parseInt((amount_used_input.val() || '0').toString().trim())
       if (new_amount_used < 0) {
-        element.val('')
+        amount_used_input.val('')
         new_amount_used = 0
       }
       if (new_amount_used === 0 && amount_used === 0) {
-        element.val('')
+        amount_used_input.val('')
       }
       if (amount_used > 0 && new_amount_used === 0) {
-        element.val('0')
+        amount_used_input.val('0')
       }
-      var $tds = element.parent().parent().siblings("td")
-      var $amount_used_inputs = $tds.find("form .input-consumption-amount_used")
+      var tds = $(amount_used_input.parent().parent().siblings("td"))
+      var amount_used_inputs = $(tds.find(".form-consumption .input-consumption-amount_used"))
       var total_consumed = 0
-      $amount_used_inputs.each(function(index, amount_used_element) {
-        var value = parseInt($(amount_used_element).val()) || 0
+      amount_used_inputs.each(function(index, td_used_amount_used_input) {
+        var value = parseInt($(td_used_amount_used_input).val()) || 0
         total_consumed += value
       });
       if ((total_consumed + new_amount_used) > ingredient_quantity) {
         var remaining_quantity = total_consumed < ingredient_quantity ? (ingredient_quantity - total_consumed) : 0
         if (remaining_quantity === 0) {
-          element.val('')
+          amount_used_input.val('')
         } else {
-          element.val(remaining_quantity)
+          amount_used_input.val(remaining_quantity)
         }
         new_amount_used = remaining_quantity
       }
       total_consumed = total_consumed + new_amount_used
-      var ingredient_id = element.closest("tr").data("ingredient_id")
+      var ingredient_id = consumption_tr.data("ingredient_id")
       $(`.td-remaining_${ingredient_id}`).text(`${ingredient_quantity}-${total_consumed}=${ingredient_quantity-total_consumed}`)
-      element.closest("tr").find('.ingredient-progress').css('width', `${parseInt((ingredient_quantity-total_consumed)*100/ingredient_quantity)}%`)
-      var date_of_using = element.closest("form").data("date_of_using")
+      consumption_tr.find('.ingredient-progress').css('width', `${parseInt((ingredient_quantity-total_consumed)*100/ingredient_quantity)}%`)
+      var date_of_using = consumption_form.data("date_of_using")
 
       update_consumptions_table_header(date_of_using)
       if (new_amount_used != amount_used) {
-        submit_consumption_form(element, new_amount_used)
+        submit_consumption_form(amount_used_input, new_amount_used)
       }
     }
 
     function update_consumptions_table_header(date_of_using) {
       var consumption_content_dated = `<span class="badge px-1 py-1 bg-primary rounded-pill">${date_of_using}</span>`
-      $(meal_types).each(function(index, meal_type) {
+      $(meal_type_names).each(function(index, meal_type_name) {
         var total_price_dated = 0.0
-        $(`form[data-date_of_using="${date_of_using}"][data-ingredient_meal_type="${meal_type}"]`).each(function(index, element) {
-          element = $(element)
-          var unit_price = parseFloat(element.data("ingredient_unit_price"))
-          var quantity = parseFloat(element.find(".input-consumption-amount_used").val()) || 0
+        $('.table-consumptions').find(`.form-consumption-date_of_using-${date_of_using}.form-consumption-ingredient_meal_type_name-${meal_type_name}`).each(function(index, consumption_form) {
+          consumption_form = $(consumption_form)
+          var unit_price = parseFloat(consumption_form.data("ingredient_unit_price"))
+          var quantity = parseFloat(consumption_form.find(".input-consumption-amount_used").val()) || 0
           total_price_dated += (unit_price * quantity)
         });
         total_price_dated = total_price_dated.toFixed(2)
-        consumption_content_dated += `<br /><span class="badge px-1 py-1 bg-success rounded-pill">${meal_type}{% trans ':' %}${total_price_dated}</span>`
+        consumption_content_dated += `<br /><span class="badge px-1 py-1 bg-success rounded-pill">${meal_type_name}{% trans ':' %}${total_price_dated}</span>`
       });
       $(`th[data-date_of_using="${date_of_using}"]`).html(consumption_content_dated)
     }
 
     function update_consumptions_table_headers() {
-
       $(date_range).each(function(index, date_h) {
         update_consumptions_table_header(date_h)
       });
@@ -701,22 +701,19 @@
           return
         }
         var consumptions_table_rows = {}
-        $(consumptions_table_body).find("tr").each(function(trindex, tr_element) {
-          console.log(tr_element)
+        consumptions_table_body.find("tr").each(function(trindex, tr_element) {
           var row = $(tr_element);
           var ingredient_id = row.data('ingredient_id')
-          console.log(row)
           consumptions_table_rows[ingredient_id] = row
         });
         $(consumptions_table_body).empty()
         $(ordered_ids).each(function(id_index, ordered_id) {
           var ordered_row = consumptions_table_rows[ordered_id]
-          console.log(ordered_row)
           if (ordered_row) {
             $(consumptions_table_body).append(ordered_row)
           }
         })
-        $("td").find('.input-consumption-amount_used').blur(function(input_element) {
+        consumptions_table_body.find('.input-consumption-amount_used').blur(function(input_element) {
           input_element = $(input_element)
           amount_used_input_blur(input_element)
         });

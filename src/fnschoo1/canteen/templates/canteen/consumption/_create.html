@@ -1,17 +1,18 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 {% for form in form_list %}
-  <td class="date-{{ form.instance.date_of_using|date:'Y-m-d' }}"
+  <td class="td-consumption-date_of_using-{{ form.instance.date_of_using|date:'Y-m-d' }} td-ingredient_id-{{ form.instance.ingredient.id }}"
       data-date_of_using="{{ form.instance.date_of_using|date:'Y-m-d' }}">
     <form onkeydown="if(event.keyCode==13){return false;}"
           name="consumption_form"
-          class='form-consumption'
+          class='form-consumption form-consumption-date_of_using-{{ form.instance.date_of_using|date:"Y-m-d" }} form-consumption-ingredient_id-{{ form.instance.ingredient.id }} form-consumption-ingredient_meal_type_name-{{ form.instance.ingredient.meal_type.name }}'
           title="{% trans 'Please enter a number.' %}"
           data-amount_used="{{ form.instance.amount_used|default_if_none:0 }}"
           autocomplete="off"
           data-ingredient_unit_price="{{ form.instance.ingredient.unit_price }}"
           data-date_of_using="{{ form.instance.date_of_using|date:"Y-m-d" }}"
-          data-ingredient_meal_type="{{ form.instance.ingredient.meal_type }}"
+          data-ingredient_meal_type_id="{{ form.instance.ingredient.meal_type.id }}"
+          data-ingredient_meal_type_name="{{ form.instance.ingredient.meal_type.name }}"
           action="{% url 'canteen:new_consumption' %}"
           data-ingredient-id="{{ form.instance.ingredient.id }}">
       {% csrf_token %}
