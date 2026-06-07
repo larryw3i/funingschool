@@ -47,6 +47,10 @@ from django.views.generic import (
 
 
 def home(request):
+    if not request.user.is_authenticated:
+        return redirect("fnprofile:log_in")
+    else:
+        return redirect("canteen:list_ingredients")
     return render(request, "fnhome/home.html")
 
 
