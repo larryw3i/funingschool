@@ -101,8 +101,11 @@ class Releases:
             + "\n"
             + "\n"
             + self.get_release_markdown(
-                version="20260607.80137.820",
+                version="20260607.80837.824",
                 fixes=[
+                    _(
+                        "- `Canteen/Consumption` page: The issue of being unable to update consumption quantity after sorting has been fixed."
+                    ),
                     _(
                         "- `Canteen/Consumption` page: Set the minimum consumption quantity to 0, and ensure it cannot be negative."
                     ),

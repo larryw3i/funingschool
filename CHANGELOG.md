@@ -3,7 +3,7 @@
 
 # Changelog
 
-## [20260607.80137.820] - 2026-06-07
+## [20260607.80837.824] - 2026-06-07
 ### Added
 
 ### Changed
@@ -11,6 +11,7 @@
 ### Deprecated
 
 ### Fixed
+- `Canteen/Consumption` page: The issue of being unable to update consumption quantity after sorting has been fixed.
 - `Canteen/Consumption` page: Set the minimum consumption quantity to 0, and ensure it cannot be negative.
 - `Canteen/Consumptions` page: Fixed the issue where updating the consumption quantity failed after deleting the existing consumption quantity.
 - `Canteen/Consumptions` page: Fixed the issue of mismatch between the header and columns of the Consumptions Table.

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-07 01:25+0800\n"
+"POT-Creation-Date: 2026-06-07 08:38+0800\n"
 "PO-Revision-Date: 2026-06-04 21:35+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -450,7 +450,7 @@ msgstr "生成账单"
 msgid "Ingredient Sheets are also included."
 msgstr "也包含食材表。"
 
-#: canteen/templates/canteen/consumption/create.html:529
+#: canteen/templates/canteen/consumption/create.html:532
 msgid ":"
 msgstr "："
 
@@ -2369,101 +2369,101 @@ msgid ""
 msgstr ""
 "已经发送一封重置密码的邮件到您的电子邮箱地址，请按照邮件中的内容重置密码。"
 
-#: fnprofile/views.py:240
+#: fnprofile/views.py:239
 msgid "Your password has been reset."
 msgstr "您的密码已被重置。"
 
-#: fnprofile/views.py:254
+#: fnprofile/views.py:253
 msgid "Your password has been reset automatically."
 msgstr "您的密码已被自动重置。"
 
-#: fnprofile/views.py:307
+#: fnprofile/views.py:306
 msgid "Passwords do not match."
 msgstr "两次密码不匹配。"
 
-#: fnprofile/views.py:322
+#: fnprofile/views.py:321
 msgid "Your information has been updated successfully!"
 msgstr "您的信息已更新！"
 
-#: fnprofile/views.py:369
+#: fnprofile/views.py:368
 msgid "Email added successfully! Verification email sent."
 msgstr "邮件地址添加成功！验证邮件已发送。"
 
-#: fnprofile/views.py:381
+#: fnprofile/views.py:380
 msgid "Email added, but verification email failed to send."
 msgstr "邮件地址已被添加，但是验证邮件发送失败。"
 
-#: fnprofile/views.py:388
+#: fnprofile/views.py:387
 msgid "Failed to add email. Please try again."
 msgstr "无法添加！请重试。"
 
-#: fnprofile/views.py:419
+#: fnprofile/views.py:418
 msgid "Email Details"
 msgstr "电子邮件详细"
 
-#: fnprofile/views.py:435
+#: fnprofile/views.py:434
 msgid ""
 "A verification email has been sent to your email address. Please follow the "
 "instructions in the email to complete the verification process."
 msgstr "已向您的电子邮件地址发送一封验证邮件，请按照邮件内的要求完成账号验证。"
 
-#: fnprofile/views.py:439
+#: fnprofile/views.py:438
 #, python-brace-format
 msgid ""
 "The verification email failed to be sent. Please wait for {time_interval} "
 "seconds and try again!"
 msgstr "无法发送验证邮件，请稍等 {time_interval} 秒 后重试！"
 
-#: fnprofile/views.py:447 fnprofile/views.py:521
+#: fnprofile/views.py:446 fnprofile/views.py:520
 msgid "An unknown error has occurred!"
 msgstr "发生了一个错误！"
 
-#: fnprofile/views.py:476
+#: fnprofile/views.py:475
 msgid "Email verified successfully!"
 msgstr "邮件地址验证成功！"
 
-#: fnprofile/views.py:487
+#: fnprofile/views.py:486
 msgid "Token verification failed! Please try again later!"
 msgstr "令牌验证失败！请稍后再试！"
 
-#: fnprofile/views.py:495
+#: fnprofile/views.py:494
 msgid "Please check if your email address is correct!"
 msgstr "请检查您的邮箱地址是否正确！"
 
-#: fnprofile/views.py:542
+#: fnprofile/views.py:541
 msgid "Please log in to change your information."
 msgstr "请登录以更改您的信息。"
 
-#: fnprofile/views.py:546
+#: fnprofile/views.py:545
 msgid "An error occurred while saving the form!"
 msgstr "保存表单时出现错误！"
 
-#: fnprofile/views.py:548
+#: fnprofile/views.py:547
 msgid "an unknown error has occurred!"
 msgstr "发生了一个未知错误！"
 
-#: fnprofile/views.py:556
+#: fnprofile/views.py:555
 msgid "You only have one primary email, so you cannot cancel this option."
 msgstr "您不能取消该项，因为您只有一个主邮箱地址。"
 
-#: fnprofile/views.py:569
+#: fnprofile/views.py:568
 msgid "Email set as primary"
 msgstr "设电子邮件地址为主邮件地址"
 
-#: fnprofile/views.py:571
+#: fnprofile/views.py:570
 msgid "Email settings updated"
 msgstr "邮件设置已更新"
 
-#: fnprofile/views.py:601
+#: fnprofile/views.py:600
 msgid "Cannot delete primary email"
 msgstr "无法删除主邮件地址"
 
-#: fnprofile/views.py:608
+#: fnprofile/views.py:607
 #, python-brace-format
 msgid "Email ({email_address}) deleted"
 msgstr "邮箱地址 （{email_address}） 已被删除"
 
-#: fnprofile/views.py:615
+#: fnprofile/views.py:614
 msgid "Failed to delete email."
 msgstr "无法删除电子邮件地址"
 

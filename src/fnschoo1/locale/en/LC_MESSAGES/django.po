@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-07 01:25+0800\n"
+"POT-Creation-Date: 2026-06-07 08:38+0800\n"
 "PO-Revision-Date: 2026-05-31 20:53+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -433,7 +433,7 @@ msgstr ""
 msgid "Ingredient Sheets are also included."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:529
+#: canteen/templates/canteen/consumption/create.html:532
 msgid ":"
 msgstr ""
 
@@ -2203,101 +2203,101 @@ msgid ""
 "your password according to the instructions in the email."
 msgstr ""
 
-#: fnprofile/views.py:240
+#: fnprofile/views.py:239
 msgid "Your password has been reset."
 msgstr ""
 
-#: fnprofile/views.py:254
+#: fnprofile/views.py:253
 msgid "Your password has been reset automatically."
 msgstr ""
 
-#: fnprofile/views.py:307
+#: fnprofile/views.py:306
 msgid "Passwords do not match."
 msgstr ""
 
-#: fnprofile/views.py:322
+#: fnprofile/views.py:321
 msgid "Your information has been updated successfully!"
 msgstr ""
 
-#: fnprofile/views.py:369
+#: fnprofile/views.py:368
 msgid "Email added successfully! Verification email sent."
 msgstr ""
 
-#: fnprofile/views.py:381
+#: fnprofile/views.py:380
 msgid "Email added, but verification email failed to send."
 msgstr ""
 
-#: fnprofile/views.py:388
+#: fnprofile/views.py:387
 msgid "Failed to add email. Please try again."
 msgstr ""
 
-#: fnprofile/views.py:419
+#: fnprofile/views.py:418
 msgid "Email Details"
 msgstr ""
 
-#: fnprofile/views.py:435
+#: fnprofile/views.py:434
 msgid ""
 "A verification email has been sent to your email address. Please follow the "
 "instructions in the email to complete the verification process."
 msgstr ""
 
-#: fnprofile/views.py:439
+#: fnprofile/views.py:438
 #, python-brace-format
 msgid ""
 "The verification email failed to be sent. Please wait for {time_interval} "
 "seconds and try again!"
 msgstr ""
 
-#: fnprofile/views.py:447 fnprofile/views.py:521
+#: fnprofile/views.py:446 fnprofile/views.py:520
 msgid "An unknown error has occurred!"
 msgstr ""
 
-#: fnprofile/views.py:476
+#: fnprofile/views.py:475
 msgid "Email verified successfully!"
 msgstr ""
 
-#: fnprofile/views.py:487
+#: fnprofile/views.py:486
 msgid "Token verification failed! Please try again later!"
 msgstr ""
 
-#: fnprofile/views.py:495
+#: fnprofile/views.py:494
 msgid "Please check if your email address is correct!"
 msgstr ""
 
-#: fnprofile/views.py:542
+#: fnprofile/views.py:541
 msgid "Please log in to change your information."
 msgstr ""
 
-#: fnprofile/views.py:546
+#: fnprofile/views.py:545
 msgid "An error occurred while saving the form!"
 msgstr ""
 
-#: fnprofile/views.py:548
+#: fnprofile/views.py:547
 msgid "an unknown error has occurred!"
 msgstr ""
 
-#: fnprofile/views.py:556
+#: fnprofile/views.py:555
 msgid "You only have one primary email, so you cannot cancel this option."
 msgstr ""
 
-#: fnprofile/views.py:569
+#: fnprofile/views.py:568
 msgid "Email set as primary"
 msgstr ""
 
-#: fnprofile/views.py:571
+#: fnprofile/views.py:570
 msgid "Email settings updated"
 msgstr ""
 
-#: fnprofile/views.py:601
+#: fnprofile/views.py:600
 msgid "Cannot delete primary email"
 msgstr ""
 
-#: fnprofile/views.py:608
+#: fnprofile/views.py:607
 #, python-brace-format
 msgid "Email ({email_address}) deleted"
 msgstr ""
 
-#: fnprofile/views.py:615
+#: fnprofile/views.py:614
 msgid "Failed to delete email."
 msgstr ""
 

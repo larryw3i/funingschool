@@ -83,6 +83,9 @@ cp_node_modules() {
     if [[ -d ${_fnschool_static_node_modules_dir} ]]; then
         rm -rfvv ${_fnschool_static_node_modules_dir}
     fi
+    if [[ -d ${fnschool_static_node_modules_dir}/node_modules ]]; then
+        rm -rfvv ${fnschool_static_node_modules_dir}/node_modules
+    fi
     cd ${fnschool_static_node_modules_dir}
     module_files=$(
         find ${PWD} \
