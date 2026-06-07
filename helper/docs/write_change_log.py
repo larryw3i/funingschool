@@ -107,7 +107,7 @@ class Releases:
                         "- `Canteen/Consumption` page: The issue of being unable to update consumption quantity after sorting has been fixed."
                     ),
                     _(
-                        "- `Canteen/Consumption` page: Set the minimum consumption quantity to 0, and ensure it cannot be negative."
+                        "- `Canteen/Consumption` page: Set the minimum consumption quantity to `0`, and ensure it cannot be negative."
                     ),
                     _(
                         "- `Canteen/Consumptions` page: Fixed the issue where updating the consumption quantity failed after deleting the existing consumption quantity."

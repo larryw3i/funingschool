@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-07 08:38+0800\n"
-"PO-Revision-Date: 2026-06-07 08:39+0800\n"
+"POT-Creation-Date: 2026-06-07 12:31+0800\n"
+"PO-Revision-Date: 2026-06-07 12:31+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -320,9 +320,9 @@ msgstr "- `食堂/出库` 页面：修复了排序后无法更新消耗数量的
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:110
 msgid ""
-"- `Canteen/Consumption` page: Set the minimum consumption quantity to 0, and "
-"ensure it cannot be negative."
-msgstr "- `食堂/出库` 页面：让最小消耗数量为0 ，而且不能为负数。"
+"- `Canteen/Consumption` page: Set the minimum consumption quantity to `0`, "
+"and ensure it cannot be negative."
+msgstr "- `食堂/出库` 页面：让最小消耗数量为 `0` ，而且不能为负数。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:113
 msgid ""

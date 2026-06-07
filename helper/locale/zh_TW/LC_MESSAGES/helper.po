@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-07 08:38+0800\n"
+"POT-Creation-Date: 2026-06-07 12:31+0800\n"
 "PO-Revision-Date: 2025-12-28 23:48+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@lists.slat.org>\n"
@@ -294,8 +294,8 @@ msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:110
 msgid ""
-"- `Canteen/Consumption` page: Set the minimum consumption quantity to 0, and "
-"ensure it cannot be negative."
+"- `Canteen/Consumption` page: Set the minimum consumption quantity to `0`, "
+"and ensure it cannot be negative."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_change_log.py:113
