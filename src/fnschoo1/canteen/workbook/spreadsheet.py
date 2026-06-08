@@ -41,10 +41,11 @@ from django.views.generic import (
     UpdateView,
 )
 from fnschool.local import get_local
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
+from openpyxl.worksheet.page import PageMargins
 
 from ..forms import (
     CategoryForm,
@@ -2548,9 +2549,49 @@ class MealTypeWorkbook:
         props.modified = datetime.now()
         pass
 
+    def set_page(self):
+        for ws in [
+            self.cover_sheet,
+            self.storage_sheet,
+            self.storage_list_sheet,
+            self.non_storage_sheet,
+            self.non_storage_list_sheet,
+            self.consumption_sheet,
+            self.consumption_list_sheet,
+            self.surplus_sheet,
+        ]:
+
+            ps = ws.page_setup
+            ps.orientation = ws.ORIENTATION_PORTRAIT
+            ps.paperSize = ws.PAPERSIZE_A4 if self.is_zh_CN else ws.PAPERSIZE_A4
+            ws.sheet_properties.pageSetUpPr.fitToPage = True
+            ps.fitToWidth = 1
+            ps.fitToHeight = 0
+
+            po = ws.print_options
+            po.gridLines = True
+            po.gridLinesSet = True
+            po.horizontalCentered = True
+
+            ws.page_margins = (
+                PageMargins(
+                    left=0.22,
+                    right=0.22,
+                    top=0.75,
+                    bottom=0.75,
+                    header=0,
+                    footer=0,
+                )
+                if self.is_zh_CN
+                else PageMargins()
+            )
+            pass
+        pass
+
     def create(self):
         self.set_properties()
         self.fill_in()
+        self.set_page()
         return self.wb
 
 
