@@ -2560,7 +2560,6 @@ class MealTypeWorkbook:
             self.consumption_list_sheet,
             self.surplus_sheet,
         ]:
-
             ps = ws.page_setup
             ps.orientation = ws.ORIENTATION_PORTRAIT
             ps.paperSize = ws.PAPERSIZE_A4 if self.is_zh_CN else ws.PAPERSIZE_A4
