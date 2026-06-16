@@ -532,7 +532,10 @@ def edit_ingredient(request, ingredient_id):
 
         elif form.is_valid():
             form_category = form.cleaned_data["category"] or None
-            if not ingredient_category and form_category:
+            if (
+                not ingredient_category
+                or ingredient_category.name in [None, ""]
+            ) and form_category:
                 form_name = form.cleaned_data["name"]
                 ingredient_name = ingredient_name.replace(
                     split_ingredient_labels[0], ""
@@ -543,11 +546,15 @@ def edit_ingredient(request, ingredient_id):
                     ingredient_name + split_ingredient_labels[1],
                 ]
                 Ingredient.objects.filter(
-                    name__in=ingredient_names,
-                    category=None,
-                    user=request.user,
-                    is_disabled=False,
-                ).update(name=form_name, category=form_category)
+                    Q(name__in=ingredient_names)
+                    & (
+                        Q(category=None)
+                        | Q(category__name=None)
+                        | Q(category__name="")
+                    )
+                    & Q(user=request.user)
+                    & Q(is_disabled=False)
+                ).update(category=form_category)
             form.save()
             return render(
                 request,
@@ -558,10 +565,10 @@ def edit_ingredient(request, ingredient_id):
     else:
         form = IngredientForm(instance=ingredient)
         form.fields["meal_type"].queryset = MealType.objects.filter(
-            ingredients__user=request.user, is_disabled=False
+            user=request.user, is_disabled=False
         ).distinct()
         form.fields["category"].queryset = Category.objects.filter(
-            ingredients__user=request.user, is_disabled=False
+            user=request.user, is_disabled=False
         ).distinct()
 
     return render(request, "canteen/ingredient/update.html", {"form": form})

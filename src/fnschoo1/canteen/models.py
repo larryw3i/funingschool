@@ -118,6 +118,7 @@ class Ingredient(models.Model):
         related_name="ingredients",
         verbose_name=_("User"),
     )
+
     storage_date = models.DateField(
         verbose_name=_("Storage Date"), null=False, blank=False
     )

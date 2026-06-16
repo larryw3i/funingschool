@@ -19,11 +19,11 @@ if [[ ! -d ${venv_dir} ]]; then
         -m venv \
         --system-site-packages \
         venv
-    . ${venv_dir}/bin/activate
+    source ${venv_dir}/bin/activate
     python -m helper project -d -i
 fi
 
-. ${venv_dir}/bin/activate
+source ${venv_dir}/bin/activate
 
 copy_db() {
     db_path=${fnschoo1_dir}/db.sqlite3
