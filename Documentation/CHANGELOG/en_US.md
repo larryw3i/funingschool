@@ -3,7 +3,7 @@
 
 # Changelog
 
-## [Unreleased] - 2026-06-16
+## [20260617.82119.813] - 2026-06-17
 ### Added
 
 ### Changed
@@ -14,7 +14,7 @@
 - `Canteen/Edit Ingredients` Page: Fixed the issue where the category without ingredients (no-ingredient category) was not displayed when editing ingredients.
 - `Canteen/Edit Ingredients` Page: Fixed the issue where the category was not automatically updated when editing an ingredient with an empty category name. If there are other ingredients with the same name and their category names are empty characters, they will also be automatically updated based on the ingredient name.
 ### Removed
-
+- `Canteen/Edit Category` Page: Remove the "pin_to_consumptions_top" field of the Ingredient Category.
 ## [20260607.80837.824] - 2026-06-07
 ### Added
 
