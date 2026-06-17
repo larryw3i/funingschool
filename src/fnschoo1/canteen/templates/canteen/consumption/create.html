@@ -403,7 +403,7 @@
 
     $(document).ready(function() {
       var td1 = $(".table-consumptions tr > :nth-child(1):first")
-      $(".table-consumptions tr > :nth-child(2)").css("left", td1.width() + 2)
+      $(".table-consumptions tr > :nth-child(2)").css("left", td1.outerWidth(true))
     });
 
 

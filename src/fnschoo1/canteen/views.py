@@ -835,31 +835,29 @@ def create_ingredients(request):
                         category = saved_categories[0]
                     else:
                         category_0 = Category.objects.filter(
-                            Q(user=request.user) & Q(name="")
+                            Q(user=request.user) & Q(name__in=["", None])
                         ).first()
                         if not category_0:
-                            category_0 = Category.objects.create(
-                                user=request.user,
-                                name="",
-                            )
-
-                        category = category_0
+                            category = None
+                        else:
+                            category = category_0
 
                 meal_type = None
                 if meal_type_name:
                     meal_type = MealType.objects.filter(
                         Q(name=meal_type_name) & Q(user=request.user)
                     ).first()
+                    if not meal_type:
+                        meal_type = MealType.objects.create(
+                            user=request.user, name=meal_type_name
+                        )
+
                 else:
                     meal_type = MealType.objects.filter(
                         Q(name="") & Q(user=request.user)
                     ).first()
-
-                if not meal_type:
-                    meal_type = MealType.objects.create(
-                        user=request.user,
-                        name=meal_type_name if meal_type_name else "",
-                    )
+                    if not meal_type:
+                        meal_type = None
 
                 storage_date = row[storage_date_header[0]]
                 storage_date = date_parser.parse(str(storage_date))
