@@ -91,10 +91,6 @@ class Category(models.Model):
         verbose_name=_("Category Priority"),
     )
 
-    pin_to_consumptions_top = models.BooleanField(
-        default=False, verbose_name=_("Pin to Consumptions Top")
-    )
-
     class Meta:
         ordering = ["priority"]
 

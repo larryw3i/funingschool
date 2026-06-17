@@ -135,7 +135,6 @@ class CategoryForm(forms.ModelForm):
             "name",
             "abbreviation",
             "priority",
-            "pin_to_consumptions_top",
             "is_disabled",
         ]
         widgets = {
