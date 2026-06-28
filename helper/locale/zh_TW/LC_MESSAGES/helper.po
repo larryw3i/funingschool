@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 21:20+0800\n"
+"POT-Creation-Date: 2026-06-28 16:32+0800\n"
 "PO-Revision-Date: 2025-12-28 23:48+0800\n"
 "Last-Translator: Larry Wei <larryw3i@yeah.net>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@lists.slat.org>\n"
@@ -51,7 +51,7 @@ msgid "    funingschool"
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:32
-msgid "    NO Just some simple scripts for warehousing and consuming."
+msgid "    NOT Just some simple scripts for warehousing and consuming."
 msgstr ""
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:42

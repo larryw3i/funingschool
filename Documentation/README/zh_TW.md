@@ -13,7 +13,7 @@
 </p>
 
 <h4 align="center">
-    NO Just some simple scripts for warehousing and consuming.
+    NOT Just some simple scripts for warehousing and consuming.
 </h4>
 <hr/>
 <p align="center">

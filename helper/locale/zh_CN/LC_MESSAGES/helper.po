@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: larryw 3i\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 21:20+0800\n"
-"PO-Revision-Date: 2026-06-17 21:21+0800\n"
+"POT-Creation-Date: 2026-06-28 16:32+0800\n"
+"PO-Revision-Date: 2026-06-28 16:33+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
 "Language: zh_Hans_CN\n"
@@ -51,7 +51,7 @@ msgid "    funingschool"
 msgstr "    funingschool "
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:32
-msgid "    NO Just some simple scripts for warehousing and consuming."
+msgid "    NOT Just some simple scripts for warehousing and consuming."
 msgstr "    不只是一些出入库脚本。"
 
 #: /home/larry/Git/larryw3i/funingschool/helper/docs/write_readme.py:42

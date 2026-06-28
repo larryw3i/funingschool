@@ -29,7 +29,7 @@ def write(lang, _t):
         "</p>",
         "",
         '<h4 align="center">',
-        _("    NO Just some simple scripts for warehousing and consuming."),
+        _("    NOT Just some simple scripts for warehousing and consuming."),
         "</h4>",
         "<hr/>",
         '<p align="center">',
