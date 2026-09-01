@@ -588,8 +588,8 @@ def list_ingredients(request):
 
     ingredients = Ingredient.objects
     queries = Q(user=request.user)
+    search_query_dates = []
     if search_query:
-        search_query_dates = []
         for pattern, fmt in date_patterns:
             matches = re.findall(pattern, search_query)
             for match in matches:
@@ -606,7 +606,11 @@ def list_ingredients(request):
         elif len(search_query_dates) == 1:
             queries &= Q(storage_date=search_query_dates[0])
 
-        unit_names = Ingredient.objects.values("quantity_unit_name").distinct()
+        unit_names = (
+            Ingredient.objects.filter(user=request.user)
+            .values("quantity_unit_name")
+            .distinct()
+        )
         unit_names = [
             c.get("quantity_unit_name")
             for c in unit_names
@@ -616,7 +620,11 @@ def list_ingredients(request):
             queries &= Q(quantity_unit_name__icontains=unit_name)
             search_query = search_query.replace(unit_name, "")
 
-        categories = Ingredient.objects.values("category__name").distinct()
+        categories = (
+            Ingredient.objects.filter(user=request.user)
+            .values("category__name")
+            .distinct()
+        )
         categories = [
             c.get("category__name")
             for c in categories
@@ -626,7 +634,11 @@ def list_ingredients(request):
             queries &= Q(category__name__icontains=category)
             search_query = search_query.replace(category, "")
 
-        meal_types = Ingredient.objects.values("meal_type__name").distinct()
+        meal_types = (
+            Ingredient.objects.filter(user=request.user)
+            .values("meal_type__name")
+            .distinct()
+        )
         meal_types = [
             m.get("meal_type__name")
             for m in meal_types
