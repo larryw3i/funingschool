@@ -23,8 +23,8 @@ def get_subparser(assistant):
         help=_("Print Python3 dependencies."),
     )
     subparser.add_argument(
-        "-i",
-        "--install",
+        "-I",
+        "--install_dependencies",
         action="store_true",
         help=_("Install dependencies for this project."),
     )
@@ -60,7 +60,7 @@ def start(assistant):
                 )
             )
             pass
-        elif dependencies and args.install:
+        elif dependencies and args.install_dependencies:
             os.system("python -m pip install " + dependencies_str)
             pass
         else:
