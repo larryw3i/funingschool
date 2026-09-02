@@ -40,30 +40,31 @@ def start(assistant):
         return
 
     if args.command == "project":
+        dependencies = []
+        pyproject_toml = None
+        with open(pyproject_toml_path, "rb") as f:
+            pyproject_toml = tomllib.load(f)
+
+        if (
+            "project" in pyproject_toml
+            and "dependencies" in pyproject_toml["project"]
+        ):
+            for dep in pyproject_toml["project"]["dependencies"]:
+                dependencies.append(dep)
+        dependencies_str = " ".join([f'"{d}"' for d in dependencies])
+
         if args.dependencies:
-            pyproject_toml = None
-            with open(pyproject_toml_path, "rb") as f:
-                pyproject_toml = tomllib.load(f)
-
-            dependencies = []
-            if (
-                "project" in pyproject_toml
-                and "dependencies" in pyproject_toml["project"]
-            ):
-                for dep in pyproject_toml["project"]["dependencies"]:
-                    dependencies.append(dep)
-
-            dependencies_str = " ".join([f'"{d}"' for d in dependencies])
             print(
                 _("Python3 dependencies of this project: {0}").format(
                     dependencies_str
                 )
             )
-            if dependencies and args.install:
-                os.system("python -m pip install " + dependencies_str)
+            pass
+        elif dependencies and args.install:
+            os.system("python -m pip install " + dependencies_str)
             pass
         else:
-            get_subparser(assistant).print_help()
+            assistant.parser.parse_args(["project", "--help"])
             pass
 
     pass

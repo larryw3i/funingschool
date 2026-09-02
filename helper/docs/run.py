@@ -35,7 +35,7 @@ def start(assistant):
             write(lang)
             pass
         else:
-            get_subparser(assistant).print_help()
+            assistant.parser.parse_args(["docs", "--help"])
             pass
 
     pass

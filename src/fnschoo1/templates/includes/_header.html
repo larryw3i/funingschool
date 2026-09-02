@@ -84,7 +84,7 @@
           <a class="nav-link" href="#">{% trans "About" %}</a>
         </li>
       </ul>
-      <div class="d-flex ">
+      <div class="d-flex">
         {% if request.user.is_authenticated %}
           <ul class="nav-item">
             {% if request.user.avatar %}
@@ -97,13 +97,13 @@
                      class="avatar-img">
               </a>
             {% else %}
-              <a class="nav-link "
+              <a class="nav-link"
                  href="{% url 'fnprofile:edit_profile' %}"
                  target="fnprofile/edit_profile"
                  title="{{ USER_FULL_NAME }}">{{ USER_FULL_NAME }}</a>
             {% endif %}
           </ul>
-          <ul class="nav-item ">
+          <ul class="nav-item">
             <a class="nav-link" href="{% url 'fnprofile:log_out' %}">{% trans "Log out" %}</a>
           </ul>
         {% else %}
