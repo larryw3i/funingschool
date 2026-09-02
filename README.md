@@ -17,6 +17,9 @@
 </h4>
 <hr/>
 <p align="center">
+    [![Code style: djLint](https://img.shields.io/badge/html%20style-djLint-blue.svg)](https://github.com/djlint/djlint)
+</p>
+<p align="center">
     <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/README/zh_CN.md">简体中文</a> •
     <a href="https://github.com/larryw3i/funingschool/blob/master/Documentation/README/en_US.md">English</a>
 </p>

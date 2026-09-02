@@ -41,76 +41,52 @@ copy_db() {
     echo "'${db_path}' has been copied to '${db_copy_path}' ."
 }
 
-generate_code_txt() {
-    code_out_path=${project_dir}/code.out.txt
-    echo "" >${code_out_path}
-    files=$(
-        find src \
-            -type d \
-            \( \
-            -name ".egg-info" \
-            -o -name "*.egg-info" \
-            \) \
-            -prune \
-            -o \
-            -type f \
-            \( \
-            -name "*.py" \
-            -o -name "*.po" \
-            -o -name "*.html" \
-            -o -name "*.js" \
-            ! -name "*.min.js" \
-            \) \
-            -print
-    )
-    for f in ${files[@]}; do
-        echo "File: ${f}" >>${code_out_path}
-        cat ${f} >>${code_out_path}
-    done
-}
+cp_node_js() {
 
-cp_node_modules() {
     if [[ ! -f $(which npm) ]]; then
-        echo "Try to instll npm and nodejs ."
-        sudo apt install npm nodejs
+        echo "Try to instll essential node-* packages ."
+        sudo apt install npm nodejs node-jquery node-popper2 node-bootstrap
     fi
-    PWD_CP=${PWD}
-    cd ${fnschool_static_dir}
-    if [[ ! -d ${fnschool_static_node_modules_dir} ]]; then
-        npm install
+    fnschool_nodejs_dir="${fnschool_static_dir}/node_modules"
+    nodejs_dir="/usr/share/javascript"
+    pwd_cp=${PWD}
+    cd ${nodejs_dir}
+
+    if [[ ! -d ${fnschool_nodejs_dir} ]]; then
+        mkdir -p ${fnschool_nodejs_dir}
     fi
-    _fnschool_static_node_modules_dir=${fnschool_static_node_modules_dir/%\/node_modules/\/_node_modules_}
-    if [[ -d ${_fnschool_static_node_modules_dir} ]]; then
-        rm -rfvv ${_fnschool_static_node_modules_dir}
-    fi
-    if [[ -d ${fnschool_static_node_modules_dir}/node_modules ]]; then
-        rm -rfvv ${fnschool_static_node_modules_dir}/node_modules
-    fi
-    cd ${fnschool_static_node_modules_dir}
-    module_files=$(
-        find ${PWD} \
-            -type f \
-            \( \
-            -path "*/@popperjs/*" \
-            -o -path "*/bootstrap/*" \
-            -o -path "*/jquery/*" \
-            \) \
-            \( \
-            -name "*.min.js" \
-            -o -name "*.min.js.map" \
-            -o -name "*.min.css" \
-            -o -name "*.min.css.map" \
-            -o -name "*LICENSE*" \
-            -o -name "*AUTHORS*" \
-            \)
-    )
-    for m_file in ${module_files[@]}; do
-        _m_file=${m_file/\/node_modules\//\/_node_modules_\/}
-        _m_file=${_m_file/\/dist\//\/_dist_\/}
-        mkdir -p $(dirname ${_m_file})
-        cp -vv ${m_file} ${_m_file}
+    for js_p in bootstrap5 popperjs2 jquery; do
+        js_files=($(
+            find ${js_p} \
+                \( \
+                -name '*.min.js' \
+                -o -name '*.min.js.map' \
+                -o -name '*.min.css' \
+                -o -name '*.min.css.map' \
+                \) \
+                \( \
+                -type f \
+                -o -type l \
+                \)
+        ))
+        for js_file in ${js_files[@]}; do
+            js_file_cp=${js_file}
+            js_dir="${fnschool_nodejs_dir}/$(dirname ${js_file_cp})"
+            js_file_t="${fnschool_nodejs_dir}/${js_file_cp}"
+            js_file="${nodejs_dir}/${js_file_cp}"
+            if [[ ! -d ${js_dir} ]]; then
+                mkdir -p ${js_dir}
+            fi
+
+            if [[ -L ${js_file} ]]; then
+                cp -Lvv ${js_file} ${js_file_t}
+            else
+                cp -vv ${js_file} ${js_file_t}
+            fi
+
+        done
     done
-    cd ${PWD_CP}
+    cd ${pwd_cp}
 }
 
 pack() {
@@ -120,9 +96,7 @@ pack() {
     else
         new_version="${1}"
     fi
-    fnschool_static_node_modules_dir_cp=${project_dir}/node_modules.cp
-    cp_node_modules
-    mv -vv ${fnschool_static_node_modules_dir} ${fnschool_static_node_modules_dir_cp}
+    cp_node_js
     if [[ ! -f $(which twine) ]]; then
         pip install -U setuptools wheel build twine
     fi
@@ -133,7 +107,6 @@ pack() {
     python manage.py compilemessages
     cd ${project_dir}
     python -m build
-    mv -vv ${fnschool_static_node_modules_dir_cp} ${fnschool_static_node_modules_dir}
     echo "Generated new version is \"${new_version}\" ."
 }
 
