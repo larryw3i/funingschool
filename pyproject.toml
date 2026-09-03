@@ -54,7 +54,7 @@ version = {attr = "fnschoo1.__version__"}
 where = ["src"]
 
 [tool.setuptools.package-data]
-"*" = ["*.mo","*.toml","*.html", "*.js", "*.min.js.map", "*.css", "*.min.css.map", "*.ico"]
+"*" = ["*.mo","*.toml","*.html", "*.js", "*.min.js.map", "*.css", "*.min.css.map", "*.min.map", "*.ico"]
 
 [tool.setuptools.exclude-package-data]
 "*" = [

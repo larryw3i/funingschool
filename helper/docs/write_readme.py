@@ -33,7 +33,7 @@ def write(lang, _t):
         "</h4>",
         "<hr/>",
         '<p align="center">',
-        "    [![Code style: djLint](https://img.shields.io/badge/html%20style-djLint-blue.svg)](https://github.com/djlint/djlint)",
+        "[![Code style: djLint](https://img.shields.io/badge/html%20style-djLint-blue.svg)](https://github.com/djlint/djlint)",
         "</p>",
         '<p align="center">',
         '    <a href="https://gitee.com/larryw3i/funingschool/blob/master/Documentation/README/zh_CN.md">\u7b80\u4f53\u4e2d\u6587</a> \u2022',

@@ -63,6 +63,7 @@ cp_node_js() {
                 -o -name '*.min.js.map' \
                 -o -name '*.min.css' \
                 -o -name '*.min.css.map' \
+                -o -name '*.min.map' \
                 \) \
                 \( \
                 -type f \
@@ -108,6 +109,7 @@ pack() {
     cd ${project_dir}
     python -m build
     echo "Generated new version is \"${new_version}\" ."
+    echo "Packaging completed."
 }
 
 pack_upload() {
