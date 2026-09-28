@@ -41,14 +41,22 @@ class IngredientForm(forms.ModelForm):
     def clean_storage_date(self):
         storage_date = self.cleaned_data.get("storage_date", None)
         ingredient = self.instance
+
+        if ingredient.pk is None:
+            return storage_date
         if not ingredient.consumptions.exists():
             return storage_date
+
         ingredient.consumptions.filter(date_of_using__lt=storage_date).delete()
         return storage_date
 
     def clean_quantity(self):
         quantity = self.cleaned_data.get("quantity")
         ingredient = self.instance
+
+        if ingredient.pk is None:
+            return quantity
+
         if not ingredient.consumptions.exists():
             return quantity
             pass
