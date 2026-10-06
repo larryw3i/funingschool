@@ -869,7 +869,10 @@ def create_ingredients(request):
                         Q(name="") & Q(user=request.user)
                     ).first()
                     if not meal_type:
-                        meal_type = None
+                        meal_type_name = _("Default Meal Type")
+                        meal_type = MealType.objects.create(
+                            user=request.user, name=meal_type_name
+                        )
 
                 storage_date = row[storage_date_header[0]]
                 storage_date = date_parser.parse(str(storage_date))
