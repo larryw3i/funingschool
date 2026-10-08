@@ -76,6 +76,9 @@ from .models import (
 decimal_prec = getattr(settings, "DECIMAL_PREC", 2)
 split_ingredient_labels = [_("(1)"), _("(2)")]
 
+default_meal_type_name = _("Default Meal Type")
+default_category_name = _("Default Category")
+
 storage_date_header = (
     _("Storage Date"),
     _(
@@ -625,11 +628,15 @@ def list_ingredients(request):
             .values("category__name")
             .distinct()
         )
-        categories = [
-            c.get("category__name")
-            for c in categories
-            if c.get("category__name") in search_query
-        ]
+
+        categories_new = []
+        for c in categories:
+            category__name = c.get("category__name")
+            if category__name and category__name in search_query:
+                categories_new.append(category__name)
+
+        categories = categories_new
+
         for category in categories:
             queries &= Q(category__name__icontains=category)
             search_query = search_query.replace(category, "")
@@ -855,24 +862,15 @@ def create_ingredients(request):
                             category = category_0
 
                 meal_type = None
-                if meal_type_name:
-                    meal_type = MealType.objects.filter(
-                        Q(name=meal_type_name) & Q(user=request.user)
-                    ).first()
-                    if not meal_type:
-                        meal_type = MealType.objects.create(
-                            user=request.user, name=meal_type_name
-                        )
-
-                else:
-                    meal_type = MealType.objects.filter(
-                        Q(name="") & Q(user=request.user)
-                    ).first()
-                    if not meal_type:
-                        meal_type_name = _("Default Meal Type")
-                        meal_type = MealType.objects.create(
-                            user=request.user, name=meal_type_name
-                        )
+                if not meal_type_name:
+                    meal_type_name = default_meal_type_name
+                meal_type = MealType.objects.filter(
+                    Q(name=meal_type_name) & Q(user=request.user)
+                ).first()
+                if not meal_type:
+                    meal_type = MealType.objects.create(
+                        user=request.user, name=meal_type_name
+                    )
 
                 storage_date = row[storage_date_header[0]]
                 storage_date = date_parser.parse(str(storage_date))

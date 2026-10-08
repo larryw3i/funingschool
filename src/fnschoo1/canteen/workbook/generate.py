@@ -52,7 +52,7 @@ from ..forms import (
     PurchasedIngredientsWorkBookForm,
 )
 from ..models import Category, Consumption, Ingredient, MealType
-from ..views import decimal_prec
+from ..views import decimal_prec, default_meal_type_name
 from .spreadsheet import MealTypeWorkbook
 
 
@@ -112,6 +112,14 @@ def get_workbook_zip(request, month, timestamp):
         for meal_type in meal_types:
             filename = (
                 _(
+                    "Canteen Daybook WorkBook ({month}) of {affiliation}({timestamp})"
+                ).format(
+                    month=f"{year}{month:0>2}",
+                    affiliation=request.user.affiliation,
+                    timestamp=timestamp,
+                )
+                if meal_type.name == default_meal_type_name
+                else _(
                     "Canteen {meal_type} Daybook WorkBook ({month}) of {affiliation}({timestamp})"
                 ).format(
                     meal_type=meal_type,
@@ -119,8 +127,7 @@ def get_workbook_zip(request, month, timestamp):
                     affiliation=request.user.affiliation,
                     timestamp=timestamp,
                 )
-                + ".xlsx"
-            )
+            ) + ".xlsx"
             __ingredients = user_ingredients.filter(meal_type=meal_type).all()
             if len(__ingredients) < 1:
                 continue

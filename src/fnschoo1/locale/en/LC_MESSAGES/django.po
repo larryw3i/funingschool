@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 21:20+0800\n"
+"POT-Creation-Date: 2026-10-08 08:27+0800\n"
 "PO-Revision-Date: 2026-05-31 20:53+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
@@ -28,11 +28,11 @@ msgstr ""
 msgid "Office Open XML Spreadsheet only. (*.xlsx)"
 msgstr ""
 
-#: canteen/forms.py:92 canteen/templates/canteen/consumption/_create.html:9
+#: canteen/forms.py:100 canteen/templates/canteen/consumption/_create.html:9
 msgid "Please enter a number."
 msgstr ""
 
-#: canteen/forms.py:144
+#: canteen/forms.py:152
 msgid "Numbers with smaller values have higher priority."
 msgstr ""
 
@@ -124,7 +124,7 @@ msgid "User"
 msgstr ""
 
 #: canteen/models.py:119 canteen/templates/canteen/consumption/create.html:55
-#: canteen/views.py:80
+#: canteen/views.py:83
 msgid "Storage Date"
 msgstr ""
 
@@ -134,7 +134,7 @@ msgstr ""
 
 #: canteen/models.py:133 canteen/templates/canteen/consumption/create.html:62
 #: canteen/templates/canteen/consumption/create.html:110
-#: canteen/templates/canteen/ingredient/list.html:118 canteen/views.py:90
+#: canteen/templates/canteen/ingredient/list.html:118 canteen/views.py:93
 msgid "Ingredient Name"
 msgstr ""
 
@@ -358,7 +358,7 @@ msgstr ""
 msgid "Sort by meal type."
 msgstr ""
 
-#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:92
+#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:95
 msgid "Meal Type"
 msgstr ""
 
@@ -648,15 +648,23 @@ msgid ""
 "      Edit Meal Type %(instance_name)s ."
 msgstr ""
 
-#: canteen/views.py:77 canteen/views.py:1220
+#: canteen/views.py:77 canteen/views.py:1233
 msgid "(1)"
 msgstr ""
 
-#: canteen/views.py:77 canteen/views.py:1212
+#: canteen/views.py:77 canteen/views.py:1225
 msgid "(2)"
 msgstr ""
 
-#: canteen/views.py:82
+#: canteen/views.py:79
+msgid "Default Meal Type"
+msgstr ""
+
+#: canteen/views.py:80
+msgid "Default Category"
+msgstr ""
+
+#: canteen/views.py:85
 msgid ""
 "Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
 "\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
@@ -664,32 +672,32 @@ msgid ""
 "have to tell the developers. Thank you!"
 msgstr ""
 
-#: canteen/views.py:90
+#: canteen/views.py:93
 msgid "Name of Ingredient"
 msgstr ""
 
-#: canteen/views.py:94
+#: canteen/views.py:97
 msgid ""
 "For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
 "generating a spreadsheet, each meal category corresponds to a spread sheet. "
 "If left blank, only one spreadsheet will be generated."
 msgstr ""
 
-#: canteen/views.py:102
+#: canteen/views.py:105
 msgid "Category"
 msgstr ""
 
-#: canteen/views.py:104
+#: canteen/views.py:107
 msgid ""
 "Usually there are seven categories: vegetables, meat, grains, seasonings, "
 "eggs and milk, oils, and fruits."
 msgstr ""
 
-#: canteen/views.py:109
+#: canteen/views.py:112
 msgid "Quantity"
 msgstr ""
 
-#: canteen/views.py:111
+#: canteen/views.py:114
 msgid ""
 "To prevent the number of decimal places in the unit price from becoming too "
 "large, \"quantity\" is only allowed to be an integer. If your unit price is "
@@ -697,86 +705,86 @@ msgid ""
 "to an integer."
 msgstr ""
 
-#: canteen/views.py:122
+#: canteen/views.py:125
 msgid "Total Price"
 msgstr ""
 
-#: canteen/views.py:126
+#: canteen/views.py:129
 msgid "Unit Name of Quantity"
 msgstr ""
 
-#: canteen/views.py:130
+#: canteen/views.py:133
 msgid "Is Ignorable"
 msgstr ""
 
-#: canteen/views.py:131
+#: canteen/views.py:134
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr ""
 
-#: canteen/views.py:443
+#: canteen/views.py:446
 msgid "Please select the item(s) you wish to delete."
 msgstr ""
 
-#: canteen/views.py:465
+#: canteen/views.py:468
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr ""
 
-#: canteen/views.py:467
+#: canteen/views.py:470
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr ""
 
-#: canteen/views.py:471
+#: canteen/views.py:474
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr ""
 
-#: canteen/views.py:473
+#: canteen/views.py:476
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr ""
 
-#: canteen/views.py:519
+#: canteen/views.py:522
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
 "and cannot be saved. Please modify it again."
 msgstr ""
 
-#: canteen/views.py:741
+#: canteen/views.py:760
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr ""
 
-#: canteen/views.py:750
+#: canteen/views.py:769
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr ""
 
-#: canteen/views.py:751
+#: canteen/views.py:770
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr ""
 
-#: canteen/views.py:790
+#: canteen/views.py:809
 msgid "Please upload a file in \"xlsx\" format."
 msgstr ""
 
-#: canteen/views.py:950
+#: canteen/views.py:963
 msgid "Purchased Ingredients Sheet"
 msgstr ""
 
-#: canteen/views.py:970
+#: canteen/views.py:983
 msgid "the FNSCHOOL Authors"
 msgstr ""
 
-#: canteen/views.py:986
+#: canteen/views.py:999
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr ""
 
-#: canteen/views.py:1012
+#: canteen/views.py:1025
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr ""
@@ -2091,15 +2099,16 @@ msgstr ""
 msgid "Register here"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/profile/log_out.html:7
+#: fnprofile/templates/fnprofile/profile/log_out.html:3
+#: fnprofile/templates/fnprofile/profile/log_out.html:6
 msgid "Logged Out"
 msgstr ""
 
-#: fnprofile/templates/fnprofile/profile/log_out.html:8
+#: fnprofile/templates/fnprofile/profile/log_out.html:7
 msgid "You have been successfully logged out."
 msgstr ""
 
-#: fnprofile/templates/fnprofile/profile/log_out.html:10
+#: fnprofile/templates/fnprofile/profile/log_out.html:9
 msgid "Log in again"
 msgstr ""
 

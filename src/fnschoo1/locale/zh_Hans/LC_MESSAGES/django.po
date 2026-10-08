@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fnschool 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-17 21:20+0800\n"
-"PO-Revision-Date: 2026-06-04 21:35+0800\n"
+"POT-Creation-Date: 2026-10-08 08:27+0800\n"
+"PO-Revision-Date: 2026-10-08 08:17+0800\n"
 "Last-Translator: larryw3i <larryw3i@163.com>\n"
 "Language-Team: zh_Hans_CN <larryw3i@163.com>\n"
-"Language: zh_Hans_CN\n"
+"Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 50.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #: canteen/forms.py:12
 msgid "Select a Spreadsheet File"
@@ -25,11 +25,11 @@ msgstr "选择一个表格文件"
 msgid "Office Open XML Spreadsheet only. (*.xlsx)"
 msgstr "仅为 Office Open XML 表格。 (*.xlsx)"
 
-#: canteen/forms.py:92 canteen/templates/canteen/consumption/_create.html:9
+#: canteen/forms.py:100 canteen/templates/canteen/consumption/_create.html:9
 msgid "Please enter a number."
 msgstr "请输入数字。"
 
-#: canteen/forms.py:144
+#: canteen/forms.py:152
 msgid "Numbers with smaller values have higher priority."
 msgstr "数量越小，优先级越高。"
 
@@ -121,7 +121,7 @@ msgid "User"
 msgstr "用户"
 
 #: canteen/models.py:119 canteen/templates/canteen/consumption/create.html:55
-#: canteen/views.py:80
+#: canteen/views.py:83
 msgid "Storage Date"
 msgstr "入库日期"
 
@@ -131,7 +131,7 @@ msgstr "创建时间"
 
 #: canteen/models.py:133 canteen/templates/canteen/consumption/create.html:62
 #: canteen/templates/canteen/consumption/create.html:110
-#: canteen/templates/canteen/ingredient/list.html:118 canteen/views.py:90
+#: canteen/templates/canteen/ingredient/list.html:118 canteen/views.py:93
 msgid "Ingredient Name"
 msgstr "食材名"
 
@@ -372,7 +372,7 @@ msgstr "按食材名称排序。"
 msgid "Sort by meal type."
 msgstr "按餐类排序。"
 
-#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:92
+#: canteen/templates/canteen/consumption/create.html:69 canteen/views.py:95
 msgid "Meal Type"
 msgstr "餐类"
 
@@ -698,15 +698,23 @@ msgstr ""
 "\n"
 "编辑餐类（ %(instance_name)s ）。"
 
-#: canteen/views.py:77 canteen/views.py:1220
+#: canteen/views.py:77 canteen/views.py:1233
 msgid "(1)"
 msgstr "（1）"
 
-#: canteen/views.py:77 canteen/views.py:1212
+#: canteen/views.py:77 canteen/views.py:1225
 msgid "(2)"
 msgstr "（2）"
 
-#: canteen/views.py:82
+#: canteen/views.py:79
+msgid "Default Meal Type"
+msgstr "默认餐类"
+
+#: canteen/views.py:80
+msgid "Default Category"
+msgstr "默认大类"
+
+#: canteen/views.py:85
 msgid ""
 "Formats like \"YYYY.mm.dd\", \"YYYY/mm/dd\", \"YYYY.mm.dd\", \"mm/dd\", "
 "\"mmdd\", and \"mm.dd\" are all acceptable. In short, FNSCHOOL wants to be "
@@ -717,11 +725,11 @@ msgstr ""
 "月.日日”、“月月-日日”、“月月日日”，“月月.日日” 。总之，FNSCHOOL 想兼容所有你"
 "喜欢的格式，但是如果出错了，你要告诉开发者，谢谢你！"
 
-#: canteen/views.py:90
+#: canteen/views.py:93
 msgid "Name of Ingredient"
 msgstr "食材名称"
 
-#: canteen/views.py:94
+#: canteen/views.py:97
 msgid ""
 "For example, breakfast, dinner, regular meals, nutritious meals, etc., when "
 "generating a spreadsheet, each meal category corresponds to a spread sheet. "
@@ -730,22 +738,22 @@ msgstr ""
 "比如早餐、晚餐、正餐、营养餐等，生成 表册 的时候每个餐类对应着一个 表册  。不"
 "填的话只生成一个 表册 。"
 
-#: canteen/views.py:102
+#: canteen/views.py:105
 msgid "Category"
 msgstr "食材大类"
 
-#: canteen/views.py:104
+#: canteen/views.py:107
 msgid ""
 "Usually there are seven categories: vegetables, meat, grains, seasonings, "
 "eggs and milk, oils, and fruits."
 msgstr ""
 "通常是七大类：蔬菜类、肉类、粮食类、调味类、蛋奶和糕点类、油类、水果类。"
 
-#: canteen/views.py:109
+#: canteen/views.py:112
 msgid "Quantity"
 msgstr "数量"
 
-#: canteen/views.py:111
+#: canteen/views.py:114
 msgid ""
 "To prevent the number of decimal places in the unit price from becoming too "
 "large, \"quantity\" is only allowed to be an integer. If your unit price is "
@@ -755,47 +763,47 @@ msgstr ""
 "为防止单价的小数位数变得很多，“数量”只允许为整数。如果你的单价是小数，请你用"
 "更小的数量单位，然后把数量扩大为整数。"
 
-#: canteen/views.py:122
+#: canteen/views.py:125
 msgid "Total Price"
 msgstr "总价"
 
-#: canteen/views.py:126
+#: canteen/views.py:129
 msgid "Unit Name of Quantity"
 msgstr "数量单位"
 
-#: canteen/views.py:130
+#: canteen/views.py:133
 msgid "Is Ignorable"
 msgstr "是不用入库的"
 
-#: canteen/views.py:131
+#: canteen/views.py:134
 msgid "As long as a cell has content, it will be considered as \"yes\"."
 msgstr "只要单元格有内容，就会被当作“是”。"
 
-#: canteen/views.py:443
+#: canteen/views.py:446
 msgid "Please select the item(s) you wish to delete."
 msgstr "请选择要删除的食材项。"
 
-#: canteen/views.py:465
+#: canteen/views.py:468
 #, python-brace-format
 msgid "{0} ingredients have been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:467
+#: canteen/views.py:470
 #, python-brace-format
 msgid "{0} ingredient has been deleted."
 msgstr "{0} 项食材已被删除。"
 
-#: canteen/views.py:471
+#: canteen/views.py:474
 #, python-brace-format
 msgid "{0} consumptions have been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:473
+#: canteen/views.py:476
 #, python-brace-format
 msgid "{0} consumption has been deleted."
 msgstr "{0} 项食材消耗已被删除。"
 
-#: canteen/views.py:519
+#: canteen/views.py:522
 #, python-brace-format
 msgid ""
 "The unit pricei ({unit_price}) has more than {decimal_prec} decimal places "
@@ -804,39 +812,39 @@ msgstr ""
 "单价（{unit_price}）的小数位数已经多于 {decimal_prec} 位，保存失败，请更改总"
 "价和数量。"
 
-#: canteen/views.py:741
+#: canteen/views.py:760
 #, python-brace-format
 msgid "{meal_type}:{meal_type_total_price}"
 msgstr "{meal_type}：{meal_type_total_price}"
 
-#: canteen/views.py:750
+#: canteen/views.py:769
 #, python-brace-format
 msgid "{month}:{total_price}"
 msgstr "{month}：{total_price}"
 
-#: canteen/views.py:751
+#: canteen/views.py:770
 #, python-brace-format
 msgid "{year}.{month}"
 msgstr "{year}年{month}月"
 
-#: canteen/views.py:790
+#: canteen/views.py:809
 msgid "Please upload a file in \"xlsx\" format."
 msgstr "请上传 “xlsx” 格式的文件。"
 
-#: canteen/views.py:950
+#: canteen/views.py:963
 msgid "Purchased Ingredients Sheet"
 msgstr "购入食材表"
 
-#: canteen/views.py:970
+#: canteen/views.py:983
 msgid "the FNSCHOOL Authors"
 msgstr "FNSCHOOL 的作者们"
 
-#: canteen/views.py:986
+#: canteen/views.py:999
 #, python-brace-format
 msgid "Purchased Ingredients WorkBook ({0})"
 msgstr "购入食材工作表（{0}）"
 
-#: canteen/views.py:1012
+#: canteen/views.py:1025
 #, python-brace-format
 msgid "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
 msgstr "（{month}）{affiliation}食堂出入库工作簿（{timestamp}）"
@@ -2251,15 +2259,16 @@ msgstr "没有张号？"
 msgid "Register here"
 msgstr "现在注册"
 
-#: fnprofile/templates/fnprofile/profile/log_out.html:7
+#: fnprofile/templates/fnprofile/profile/log_out.html:3
+#: fnprofile/templates/fnprofile/profile/log_out.html:6
 msgid "Logged Out"
 msgstr "已退出"
 
-#: fnprofile/templates/fnprofile/profile/log_out.html:8
+#: fnprofile/templates/fnprofile/profile/log_out.html:7
 msgid "You have been successfully logged out."
 msgstr "你的账号已退出登录。"
 
-#: fnprofile/templates/fnprofile/profile/log_out.html:10
+#: fnprofile/templates/fnprofile/profile/log_out.html:9
 msgid "Log in again"
 msgstr "再次登录"
 
