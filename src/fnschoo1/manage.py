@@ -66,9 +66,14 @@ def main():
             2, open_local_url, args=(local_url,)
         )
         run_local_server_timer.start()
+        pass
 
     execute_from_command_line(sys.argv)
+    pass
 
 
 if __name__ == "__main__":
     main()
+    pass
+
+# The end.

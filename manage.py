@@ -14,4 +14,9 @@ from fnschoo1.manage import main
 if __name__ == "__main__":
     if sys.argv[0].endswith(".exe"):
         sys.argv[0] = sys.argv[0][:-4]
+        pass
+
     sys.exit(main())
+    pass
+
+# The end.
