@@ -118,20 +118,11 @@ class Fnuser(AbstractUser, PermissionsMixin):
         unique=True,
         verbose_name=_("Phone Number"),
     )
-    affiliation = models.CharField(
-        max_length=256, blank=True, null=True, verbose_name=_("Affiliation")
-    )
-
-    superior_department = models.CharField(
-        max_length=256,
-        blank=True,
-        null=True,
-        verbose_name=_("Superior department"),
-    )
 
     date_of_birth = models.DateField(
         blank=True, null=True, verbose_name=_("Date of Birth")
     )
+
     gender = models.CharField(
         max_length=1,
         choices=Gender.choices,
@@ -142,11 +133,49 @@ class Fnuser(AbstractUser, PermissionsMixin):
     address = models.CharField(
         max_length=256, blank=True, null=True, verbose_name=_("Address")
     )
+
     avatar = models.ImageField(
         upload_to="avatars/", blank=True, null=True, verbose_name=_("Avatar")
     )
+
     bio = models.TextField(
         max_length=512, blank=True, verbose_name=_("Biography")
+    )
+
+    province = models.CharField(
+        _("Province"),
+        max_length=64,
+        blank=True,
+        null=True,
+        help_text=_("Residential province"),
+    )
+    state_or_prefecture = models.CharField(
+        _("State / Prefecture"),
+        max_length=64,
+        blank=True,
+        null=True,
+        help_text=_("Residential state or prefecture"),
+    )
+    county_or_city = models.CharField(
+        _("County / City"),
+        max_length=64,
+        blank=True,
+        null=True,
+        help_text=_("Residential county or city"),
+    )
+    township = models.CharField(
+        _("Township"),
+        max_length=64,
+        blank=True,
+        null=True,
+        help_text=_("Residential township"),
+    )
+    village_group = models.CharField(
+        _("Village Group"),
+        max_length=128,
+        blank=True,
+        null=True,
+        help_text=_("Residential village group"),
     )
 
     logout_token = models.CharField(
@@ -173,12 +202,12 @@ class Fnuser(AbstractUser, PermissionsMixin):
         null=True, auto_now=True, verbose_name=_("Time of updating.")
     )
 
-    class Meta:
-        verbose_name = _("User Information")
-        verbose_name_plural = _("User Information")
+    class meta:
+        verbose_name = _("user information")
+        verbose_name_plural = _("user information")
 
     def __str__(self):
-        return _("{0}'s Information").format(self.username)
+        return _("{0}'s information").format(self.username)
 
     def get_full_name(self, request=None):
         full_name = None

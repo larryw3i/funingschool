@@ -7,6 +7,7 @@ from django.core.validators import MinValueValidator
 # Create your models here.
 from django.db import models
 from django.db.models import Q
+from fnprofile.models import Fnuser
 from fnschool import _
 
 meal_type_name_0 = _("Meal type 0")
@@ -16,9 +17,30 @@ yes_str = _("Yes")
 no_str = _("No")
 
 
+class CanteenManager(Fnuser):
+
+    affiliation = models.CharField(
+        max_length=256, blank=True, null=True, verbose_name=_("Affiliation")
+    )
+
+    superior_department = models.CharField(
+        max_length=256,
+        blank=True,
+        null=True,
+        verbose_name=_("Superior department"),
+    )
+
+    class meta:
+        verbose_name = _("Manager information")
+        verbose_name_plural = _("Manager information")
+
+    def __str__(self):
+        return _("{0}'s information").format(self.username)
+
+
 class MealType(models.Model):
-    user = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
+    canteen_manager = models.ForeignKey(
+        to=CanteenManager,
         on_delete=models.CASCADE,
         related_name="meal_types",
         verbose_name=_("Ingredient meal type"),
@@ -60,8 +82,8 @@ class MealType(models.Model):
 
 
 class Category(models.Model):
-    user = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
+    canteen_manager = models.ForeignKey(
+        to=CanteenManager,
         on_delete=models.CASCADE,
         related_name="Categories",
         verbose_name=_("Ingredient category"),
@@ -108,8 +130,8 @@ class Category(models.Model):
 
 class Ingredient(models.Model):
 
-    user = models.ForeignKey(
-        to=settings.AUTH_USER_MODEL,
+    canteen_manager = models.ForeignKey(
+        to=CanteenManager,
         on_delete=models.CASCADE,
         related_name="ingredients",
         verbose_name=_("User"),

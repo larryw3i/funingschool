@@ -4,7 +4,7 @@ from django import forms
 from django.db.models import CheckConstraint, Q, Sum
 from fnschool import _
 
-from .models import Category, Consumption, Ingredient, MealType
+from .models import CanteenManager, Category, Consumption, Ingredient, MealType
 
 
 class PurchasedIngredientsWorkBookForm(forms.Form):
@@ -160,6 +160,26 @@ class MealTypeForm(forms.ModelForm):
     class Meta:
         model = MealType
         fields = ["name", "abbreviation", "is_disabled"]
+
+
+class CanteenManagerForm(forms.ModelForm):
+    class Meta:
+        model = CanteenManager
+        fields = [
+            "affiliation",
+            "superior_department",
+        ]
+        widgets = {
+            "affiliation": forms.TextInput(attrs={"class": "form-control"}),
+            "superior_department": forms.TextInput(
+                attrs={"class": "form-control"}
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({"class": "form-control"})
 
 
 # The end.

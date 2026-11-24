@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     # "profiles",
     "canteen",
     "fnhome",
+    # education
+    "education",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

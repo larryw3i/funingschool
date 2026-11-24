@@ -55,7 +55,9 @@ from openpyxl.comments import Comment
 from openpyxl.styles import Alignment, Font
 from openpyxl.utils import get_column_letter
 
+from .decorators import canteen_manager_required
 from .forms import (
+    CanteenManagerForm,
     CategoryForm,
     ConsumptionForm,
     IngredientForm,
@@ -63,6 +65,7 @@ from .forms import (
     PurchasedIngredientsWorkBookForm,
 )
 from .models import (
+    CanteenManager,
     Category,
     Consumption,
     Ingredient,
@@ -143,6 +146,11 @@ date_patterns = [
 ]
 
 
+def edit_canteen_manager(request):
+
+    pass
+
+
 def get_decimal_places(decimal_number):
     if not isinstance(decimal_number, Decimal):
         decimal_number = Decimal(str(decimal_number))
@@ -179,7 +187,7 @@ def split_price(total_price, quantity, prec=2):
     return [[total_price0, quantity0], [total_price1, quantity1]]
 
 
-@login_required
+@canteen_manager_required
 def create_consumptions(request, ingredient_id=None):
     search_params = get_search_params_from_cookie(
         request, name="canteen/create_consumptions"
@@ -383,7 +391,7 @@ def create_consumptions(request, ingredient_id=None):
     )
 
 
-@login_required
+@canteen_manager_required
 @require_POST
 def new_consumption(request):
     form = None
@@ -439,7 +447,7 @@ def new_consumption(request):
     return HttpResponse("Form is not valid.", status=202)
 
 
-@login_required()
+@canteen_manager_required
 @require_POST
 def delete_ingredients(request):
     selected_ids = request.POST.get("selected_ingredient_ids", "").strip()
@@ -481,7 +489,7 @@ def delete_ingredients(request):
     return redirect(next_url)
 
 
-@login_required()
+@canteen_manager_required
 def delete_ingredient(request, ingredient_id):
     ingredient = get_object_or_404(
         Ingredient, pk=ingredient_id, user=request.user
@@ -499,7 +507,7 @@ def delete_ingredient(request, ingredient_id):
     return render(request, "canteen/ingredient/delete.html", {"form": form})
 
 
-@login_required
+@canteen_manager_required
 def edit_ingredient(request, ingredient_id):
     ingredient = get_object_or_404(
         Ingredient, pk=ingredient_id, user=request.user
@@ -577,7 +585,7 @@ def edit_ingredient(request, ingredient_id):
     return render(request, "canteen/ingredient/update.html", {"form": form})
 
 
-@login_required
+@canteen_manager_required
 def list_ingredients(request):
     search_params = get_search_params_from_cookie(request)
     search_query = search_params.get("q", None)
@@ -1236,6 +1244,39 @@ class IngredientCreateView(LoginRequiredMixin, CreateView):
         form.instance.quantity = quantity0
 
         return super().form_valid(form)
+
+
+@login_required
+def edit_canteen_manager(request):
+    if request.method == "POST":
+        form = CanteenManagerForm(request.POST)
+        next_url = request.POST.get("next")
+
+        if form.is_valid():
+            manager = form.save(commit=False)
+            manager.fnuser_ptr = request.user
+            manager.save()
+            messages.success(
+                request, _("Canteen manager profile created successfully.")
+            )
+
+            if next_url:
+                return redirect(next_url)
+            return redirect("canteen:list_ingredients")
+    else:
+        form = CanteenManagerForm()
+        next_url = request.GET.get("next", "")
+
+    return render(
+        request,
+        "canteen/edit_canteen_manager.html",
+        {
+            "form": form,
+            "user": request.user,
+            "is_create": True,
+            "next": next_url,
+        },
+    )
 
 
 # The end.
