@@ -10,8 +10,6 @@ class FnuserAdmin(admin.ModelAdmin):
     list_display = [
         "user",
         "phone",
-        "affiliation",
-        "superior_department",
         "date_of_birth",
         "address",
     ]

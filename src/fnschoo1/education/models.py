@@ -188,7 +188,7 @@ class Course(models.Model):
         verbose_name = _("Course")
         verbose_name_plural = _("Courses")
         db_table = "courses_course"
-        ordering = ["-uploaded_at"]
+        ordering = ["-updated_at"]
 
     def __str__(self):
         return f"{self.subject} - {self.topic} ({self.grade})"
