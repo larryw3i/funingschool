@@ -204,7 +204,7 @@ class Course(models.Model):
         return f"{self.subject} - {self.topic} ({self.grade})"
 
 
-class Leave(models.Model):
+class TeacherLeave(models.Model):
     STATUS_CHOICES = (
         ("pending", _("Pending")),
         ("approved", _("Approved")),
