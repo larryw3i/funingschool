@@ -15,7 +15,14 @@ from fnschool import _
 # Create your models here.
 
 
-class Student(Fnuser):
+class Student(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="as_student",
+        null=True,
+    )
+
     student_id = models.CharField(
         _("Student ID"),
         max_length=64,
@@ -43,13 +50,18 @@ class Student(Fnuser):
     class Meta:
         verbose_name = _("Student")
         verbose_name_plural = _("Students")
-        db_table = "students_student"
 
     def __str__(self):
         return f"{self.username} ({self.grade} {self.class_name})"
 
 
-class Teacher(Fnuser):
+class Teacher(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="as_teacher",
+        null=True,
+    )
 
     teacher_certificate_number = models.CharField(
         _("Teacher Certificate Number"),
@@ -125,7 +137,6 @@ class Teacher(Fnuser):
     class Meta:
         verbose_name = _("Teacher")
         verbose_name_plural = _("Teachers")
-        db_table = "teachers_teacher"
 
     def __str__(self):
         return f"{self.username} ({self.get_full_name()})"
@@ -187,7 +198,6 @@ class Course(models.Model):
     class Meta:
         verbose_name = _("Course")
         verbose_name_plural = _("Courses")
-        db_table = "courses_course"
         ordering = ["-updated_at"]
 
     def __str__(self):
@@ -254,7 +264,6 @@ class Leave(models.Model):
     class Meta:
         verbose_name = _("Leave")
         verbose_name_plural = _("Leaves")
-        db_table = "leaves_leave"
         ordering = ["-created_at"]
 
     def __str__(self):

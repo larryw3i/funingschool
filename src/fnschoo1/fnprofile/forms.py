@@ -351,8 +351,6 @@ class FnuserEditForm(ModelForm):
                 else ("first_name", "last_name")
             ),
             "phone",
-            "affiliation",
-            "superior_department",
             "date_of_birth",
             "gender",
             "address",

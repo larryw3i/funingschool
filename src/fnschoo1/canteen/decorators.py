@@ -1,5 +1,5 @@
 from functools import wraps
-
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required as _login_required
 from django.shortcuts import redirect
 

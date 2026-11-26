@@ -8,7 +8,6 @@ from .models import CanteenManager
 class CanteenManagerAdmin(admin.ModelAdmin):
     list_display = [
         "username",
-        "full_name",
         "phone",
         "email",
         "affiliation",

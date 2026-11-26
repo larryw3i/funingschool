@@ -115,7 +115,7 @@ def get_workbook_zip(request, month, timestamp):
                     "Canteen Daybook WorkBook ({month}) of {affiliation}({timestamp})"
                 ).format(
                     month=f"{year}{month:0>2}",
-                    affiliation=request.user.affiliation,
+                    affiliation=request.user.canteenmanager.affiliation,
                     timestamp=timestamp,
                 )
                 if meal_type.name == default_meal_type_name
@@ -124,7 +124,7 @@ def get_workbook_zip(request, month, timestamp):
                 ).format(
                     meal_type=meal_type,
                     month=f"{year}{month:0>2}",
-                    affiliation=request.user.affiliation,
+                    affiliation=request.user.canteenmanager.affiliation,
                     timestamp=timestamp,
                 )
             ) + ".xlsx"

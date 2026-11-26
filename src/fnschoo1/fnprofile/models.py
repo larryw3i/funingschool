@@ -202,7 +202,7 @@ class Fnuser(AbstractUser, PermissionsMixin):
         null=True, auto_now=True, verbose_name=_("Time of updating.")
     )
 
-    class meta:
+    class Meta:
         verbose_name = _("user information")
         verbose_name_plural = _("user information")
 
@@ -527,7 +527,10 @@ class Fnemail(models.Model):
         time_since_last = (
             timezone.now() - self.verification_token_updated_at
         ).total_seconds()
-        return time_since_last >= resend_verification_email_timedelta
+        return (
+            time_since_last
+            >= resend_verification_email_timedelta.total_seconds()
+        )
 
     def generate_verification_token(self, with_underline=True):
         verification_token = get_uuid_hex()
@@ -599,9 +602,7 @@ class Fnemail(models.Model):
         if self.verification_token_updated_at:
             expiry_time = (
                 self.verification_token_updated_at
-                + timezone.timedelta(
-                    seconds=resend_verification_email_timedelta
-                )
+                + resend_verification_email_timedelta
             )
             if timezone.now() > expiry_time:
                 return False

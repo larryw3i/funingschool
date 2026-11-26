@@ -1033,7 +1033,7 @@ def generate_spreadsheet(request, month):
             "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
         ).format(
             month=month.replace("-", ""),
-            affiliation=request.user.affiliation,
+            affiliation=request.user.canteenmanager.affiliation,
             timestamp=timestamp,
         )
         + ".zip"
@@ -1248,32 +1248,38 @@ class IngredientCreateView(LoginRequiredMixin, CreateView):
 
 @login_required
 def edit_canteen_manager(request):
+    if hasattr(request.user, 'canteenmanager'):
+        instance = request.user.canteenmanager
+    else:
+        instance = None
+
     if request.method == "POST":
-        form = CanteenManagerForm(request.POST)
+        form = CanteenManagerForm(request.POST, instance=instance)
         next_url = request.POST.get("next")
 
         if form.is_valid():
-            manager = form.save(commit=False)
-            manager.fnuser_ptr = request.user
-            manager.save()
+            canteenmanager = form.save(commit=False)
+            if not instance:
+                canteenmanager.fnuser_ptr = request.user
+            canteenmanager.save()
             messages.success(
-                request, _("Canteen manager profile created successfully.")
+                request, _("Canteen manager profile saved successfully.")
             )
 
             if next_url:
                 return redirect(next_url)
             return redirect("canteen:list_ingredients")
     else:
-        form = CanteenManagerForm()
+        form = CanteenManagerForm(instance=instance)
         next_url = request.GET.get("next", "")
 
     return render(
         request,
-        "canteen/edit_canteen_manager.html",
+        "canteen/canteen_manager/edit.html",
         {
             "form": form,
             "user": request.user,
-            "is_create": True,
+            "is_create": instance is None,
             "next": next_url,
         },
     )

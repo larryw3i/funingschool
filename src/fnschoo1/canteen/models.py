@@ -17,8 +17,13 @@ yes_str = _("Yes")
 no_str = _("No")
 
 
-class CanteenManager(Fnuser):
-
+class CanteenManager(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="as_canteen_manager",
+        null=True,
+    )
     affiliation = models.CharField(
         max_length=256, blank=True, null=True, verbose_name=_("Affiliation")
     )
@@ -30,7 +35,7 @@ class CanteenManager(Fnuser):
         verbose_name=_("Superior department"),
     )
 
-    class meta:
+    class Meta:
         verbose_name = _("Manager information")
         verbose_name_plural = _("Manager information")
 
@@ -42,6 +47,7 @@ class MealType(models.Model):
     canteen_manager = models.ForeignKey(
         to=CanteenManager,
         on_delete=models.CASCADE,
+        null=True,
         related_name="meal_types",
         verbose_name=_("Ingredient meal type"),
     )
@@ -85,6 +91,7 @@ class Category(models.Model):
     canteen_manager = models.ForeignKey(
         to=CanteenManager,
         on_delete=models.CASCADE,
+        null=True,
         related_name="Categories",
         verbose_name=_("Ingredient category"),
     )
@@ -133,6 +140,7 @@ class Ingredient(models.Model):
     canteen_manager = models.ForeignKey(
         to=CanteenManager,
         on_delete=models.CASCADE,
+        null=True,
         related_name="ingredients",
         verbose_name=_("User"),
     )

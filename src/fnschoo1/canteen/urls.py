@@ -111,6 +111,12 @@ urlpatterns = [
         views.get_template_workbook_of_purchased_ingredients,
         name="get_template_workbook_of_purchased_ingredients",
     ),
+    path(
+        "edit_canteen_manager",
+        views.edit_canteen_manager,
+        name="edit_canteen_manager",
+    ),
+
 ]
 
 # The end.
