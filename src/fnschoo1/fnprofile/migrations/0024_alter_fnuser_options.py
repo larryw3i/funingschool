@@ -6,7 +6,10 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("fnprofile", "0023_alter_fnuser_options_remove_fnuser_affiliation_and_more"),
+        (
+            "fnprofile",
+            "0023_alter_fnuser_options_remove_fnuser_affiliation_and_more",
+        ),
     ]
 
     operations = [

@@ -57,7 +57,7 @@ from openpyxl.utils import get_column_letter
 
 from .decorators import canteen_manager_required
 from .forms import (
-    CanteenManagerForm,
+    CanteenManagerProfileForm,
     CategoryForm,
     ConsumptionForm,
     IngredientForm,
@@ -65,7 +65,7 @@ from .forms import (
     PurchasedIngredientsWorkBookForm,
 )
 from .models import (
-    CanteenManager,
+    CanteenManagerProfile,
     Category,
     Consumption,
     Ingredient,
@@ -1033,7 +1033,7 @@ def generate_spreadsheet(request, month):
             "Canteen Daybook WorkBook ({month}) of {affiliation} ({timestamp})"
         ).format(
             month=month.replace("-", ""),
-            affiliation=request.user.canteenmanager.affiliation,
+            affiliation=request.user.canteen_manager_profile.affiliation,
             timestamp=timestamp,
         )
         + ".zip"
@@ -1247,21 +1247,21 @@ class IngredientCreateView(LoginRequiredMixin, CreateView):
 
 
 @login_required
-def edit_canteen_manager(request):
-    if hasattr(request.user, 'canteenmanager'):
-        instance = request.user.canteenmanager
+def edit_canteen_manager_profile(request):
+    if hasattr(request.user, "canteen_manager_profile"):
+        instance = request.user.canteen_manager_profile
     else:
         instance = None
 
     if request.method == "POST":
-        form = CanteenManagerForm(request.POST, instance=instance)
+        form = CanteenManagerProfileForm(request.POST, instance=instance)
         next_url = request.POST.get("next")
 
         if form.is_valid():
-            canteenmanager = form.save(commit=False)
+            canteen_manager_profile = form.save(commit=False)
             if not instance:
-                canteenmanager.fnuser_ptr = request.user
-            canteenmanager.save()
+                canteen_manager_profile.user = request.user
+            canteen_manager_profile.save()
             messages.success(
                 request, _("Canteen manager profile saved successfully.")
             )
@@ -1270,7 +1270,7 @@ def edit_canteen_manager(request):
                 return redirect(next_url)
             return redirect("canteen:list_ingredients")
     else:
-        form = CanteenManagerForm(instance=instance)
+        form = CanteenManagerProfileForm(instance=instance)
         next_url = request.GET.get("next", "")
 
     return render(

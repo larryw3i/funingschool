@@ -112,11 +112,10 @@ urlpatterns = [
         name="get_template_workbook_of_purchased_ingredients",
     ),
     path(
-        "edit_canteen_manager",
-        views.edit_canteen_manager,
-        name="edit_canteen_manager",
+        "edit_canteen_manager_profile",
+        views.edit_canteen_manager_profile,
+        name="edit_canteen_manager_profile",
     ),
-
 ]
 
 # The end.

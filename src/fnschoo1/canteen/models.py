@@ -17,13 +17,13 @@ yes_str = _("Yes")
 no_str = _("No")
 
 
-class CanteenManager(models.Model):
+class CanteenManagerProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="as_canteen_manager",
-        null=True,
+        related_name="canteen_manager_profile",
     )
+
     affiliation = models.CharField(
         max_length=256, blank=True, null=True, verbose_name=_("Affiliation")
     )
@@ -44,10 +44,9 @@ class CanteenManager(models.Model):
 
 
 class MealType(models.Model):
-    canteen_manager = models.ForeignKey(
-        to=CanteenManager,
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        null=True,
         related_name="meal_types",
         verbose_name=_("Ingredient meal type"),
     )
@@ -88,11 +87,10 @@ class MealType(models.Model):
 
 
 class Category(models.Model):
-    canteen_manager = models.ForeignKey(
-        to=CanteenManager,
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        null=True,
-        related_name="Categories",
+        related_name="categories",
         verbose_name=_("Ingredient category"),
     )
     name = models.CharField(
@@ -137,10 +135,9 @@ class Category(models.Model):
 
 class Ingredient(models.Model):
 
-    canteen_manager = models.ForeignKey(
-        to=CanteenManager,
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        null=True,
         related_name="ingredients",
         verbose_name=_("User"),
     )
@@ -256,6 +253,7 @@ class Ingredient(models.Model):
         return quantity
 
     class Meta:
+        ordering = ["-storage_date"]
         verbose_name = "Ingredient"
         verbose_name_plural = _("Ingredient List")
 

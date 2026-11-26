@@ -4,7 +4,13 @@ from django import forms
 from django.db.models import CheckConstraint, Q, Sum
 from fnschool import _
 
-from .models import CanteenManager, Category, Consumption, Ingredient, MealType
+from .models import (
+    CanteenManagerProfile,
+    Category,
+    Consumption,
+    Ingredient,
+    MealType,
+)
 
 
 class PurchasedIngredientsWorkBookForm(forms.Form):
@@ -162,9 +168,9 @@ class MealTypeForm(forms.ModelForm):
         fields = ["name", "abbreviation", "is_disabled"]
 
 
-class CanteenManagerForm(forms.ModelForm):
+class CanteenManagerProfileForm(forms.ModelForm):
     class Meta:
-        model = CanteenManager
+        model = CanteenManagerProfile
         fields = [
             "affiliation",
             "superior_department",

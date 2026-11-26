@@ -15,11 +15,11 @@ from fnschool import _
 # Create your models here.
 
 
-class Student(models.Model):
+class StudentProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="as_student",
+        related_name="student_profile",
         null=True,
     )
 
@@ -55,11 +55,11 @@ class Student(models.Model):
         return f"{self.username} ({self.grade} {self.class_name})"
 
 
-class Teacher(models.Model):
+class TeacherProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="as_teacher",
+        related_name="teacher_profile",
         null=True,
     )
 
@@ -143,8 +143,8 @@ class Teacher(models.Model):
 
 
 class Course(models.Model):
-    teacher = models.ForeignKey(
-        Teacher,
+    teacher_profile = models.ForeignKey(
+        TeacherProfile,
         on_delete=models.CASCADE,
         verbose_name=_("Teacher"),
         related_name="courses",
@@ -211,8 +211,8 @@ class Leave(models.Model):
         ("rejected", _("Rejected")),
     )
 
-    teacher = models.ForeignKey(
-        Teacher,
+    teacher_profile = models.ForeignKey(
+        TeacherProfile,
         on_delete=models.CASCADE,
         verbose_name=_("Teacher"),
         related_name="leaves",
@@ -231,7 +231,7 @@ class Leave(models.Model):
         help_text=_("Reason for leave"),
     )
     approver = models.ForeignKey(
-        Teacher,
+        TeacherProfile,
         on_delete=models.SET_NULL,
         verbose_name=_("Approver"),
         related_name="approved_leaves",

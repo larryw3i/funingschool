@@ -1,10 +1,10 @@
 # canteen/admin.py
 from django.contrib import admin
 
-from .models import CanteenManager
+from .models import CanteenManagerProfile
 
 
-@admin.register(CanteenManager)
+@admin.register(CanteenManagerProfile)
 class CanteenManagerAdmin(admin.ModelAdmin):
     list_display = [
         "username",

@@ -158,7 +158,7 @@ class MealTypeWorkbook:
             (
                 any(
                     [
-                        name in self.user.canteenmanager.affiliation
+                        name in self.user.canteen_manager_profile.affiliation
                         for name in [
                             "\u5e7c\u513f\u56ed",
                             "\u5c0f\u5b66",
@@ -182,7 +182,7 @@ class MealTypeWorkbook:
         title_cell.value = _(
             "Table of {superior_department} Canteen Non-Storaged Ingredients Statistics"
         ).format(
-            superior_department=user.canteenmanager.superior_department,
+            superior_department=user.canteen_manager_profile.superior_department,
         )
         title_cell.font = self.font_16_bold
         title_cell.alignment = self.center_alignment
@@ -201,7 +201,7 @@ class MealTypeWorkbook:
         sub_title_cell.value = _(
             "Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}.{day:0>2}"
         ).format(
-            affiliation=user.canteenmanager.affiliation,
+            affiliation=user.canteen_manager_profile.affiliation,
             year=self.year,
             month=self.month,
             day=self.last_date_of_month.day,
@@ -344,7 +344,7 @@ class MealTypeWorkbook:
         title_cell.value = _(
             "Table of {superior_department} Canteen Consumed Ingredients Statistics"
         ).format(
-            superior_department=user.canteenmanager.superior_department,
+            superior_department=user.canteen_manager_profile.superior_department,
         )
         title_cell.font = self.font_16_bold
         title_cell.alignment = self.center_alignment
@@ -363,7 +363,7 @@ class MealTypeWorkbook:
         sub_title_cell.value = _(
             "Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}.{day:0>2}"
         ).format(
-            affiliation=user.canteenmanager.affiliation,
+            affiliation=user.canteen_manager_profile.affiliation,
             year=self.year,
             month=self.month,
             day=self.last_date_of_month.day,
@@ -534,7 +534,7 @@ class MealTypeWorkbook:
         title_cell.value = _(
             "Table of {superior_department} Canteen Storaged Ingredients Statistics"
         ).format(
-            superior_department=user.canteenmanager.superior_department,
+            superior_department=user.canteen_manager_profile.superior_department,
         )
         title_cell.font = self.font_16_bold
         title_cell.alignment = self.center_alignment
@@ -553,7 +553,7 @@ class MealTypeWorkbook:
         sub_title_cell.value = _(
             "Affiliation: {affiliation}        Monetary Unit:         {year}.{month:0>2}.{day:0>2}"
         ).format(
-            affiliation=user.canteenmanager.affiliation,
+            affiliation=user.canteen_manager_profile.affiliation,
             year=self.year,
             month=self.month,
             day=self.last_date_of_month.day,
@@ -833,7 +833,7 @@ class MealTypeWorkbook:
                 _("Affiliation Name: {affiliation_name}")
                 if self.is_school
                 else _("Principal Name: {affiliation_name}")
-            ).format(affiliation_name=user.canteenmanager.affiliation)
+            ).format(affiliation_name=user.canteen_manager_profile.affiliation)
 
             sub_title_date_and_unit_cell_row_num = title_cell_row_num + 1
             sub_title_date_and_unit_cell = sheet.cell(
@@ -1193,7 +1193,7 @@ class MealTypeWorkbook:
                 _("Affiliation Name: {affiliation_name}")
                 if self.is_school
                 else _("Principal Name: {affiliation_name}")
-            ).format(affiliation_name=user.canteenmanager.affiliation)
+            ).format(affiliation_name=user.canteen_manager_profile.affiliation)
 
             sub_title_date_and_unit_cell_row_num = title_cell_row_num + 1
             sub_title_date_and_unit_cell = sheet.cell(
@@ -1411,7 +1411,7 @@ class MealTypeWorkbook:
         title_cell.value = _(
             "Table of {affiliation} Canteen Ingredients Procurement Statistics in {month:0>2} {year}"
         ).format(
-            affiliation=user.canteenmanager.affiliation,
+            affiliation=user.canteen_manager_profile.affiliation,
             year=self.year,
             month=self.month,
         )
@@ -1643,7 +1643,7 @@ class MealTypeWorkbook:
                     "Affiliation Name: {affiliation}                {year}.{month:0>2}.{day:0>2} (Sub-title of Surplus Sheet)"
                 )
             ).format(
-                affiliation=user.canteenmanager.affiliation,
+                affiliation=user.canteen_manager_profile.affiliation,
                 year=inventory_day.year,
                 month=inventory_day.month,
                 day=inventory_day.day,
@@ -1903,7 +1903,7 @@ class MealTypeWorkbook:
                 _("Principal Name: {affiliation}")
                 if self.is_school
                 else _("Affiliation Name: {affiliation}")
-            ).format(affiliation=user.canteenmanager.affiliation)
+            ).format(affiliation=user.canteen_manager_profile.affiliation)
 
             sub_title_date_cell = sheet.cell(sub_title_row_num, 4)
             sub_title_date_cell.value = _(
@@ -2537,7 +2537,7 @@ class MealTypeWorkbook:
         props.title = (
             _("Canteen Daybook WorkBook ({month}) of {affiliation}").format(
                 month=f"{self.year}{self.month:0>2}",
-                affiliation=self.request.user.canteenmanager.affiliation,
+                affiliation=self.request.user.canteen_manager_profile.affiliation,
             )
             if self.meal_type.name == default_meal_type_name
             else _(
@@ -2545,7 +2545,7 @@ class MealTypeWorkbook:
             ).format(
                 meal_type=self.meal_type,
                 month=f"{self.year}{self.month:0>2}",
-                affiliation=self.request.user.canteenmanager.affiliation,
+                affiliation=self.request.user.canteen_manager_profile.affiliation,
             )
         )
         props.subject = _("Daybook Workbook")

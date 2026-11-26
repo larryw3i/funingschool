@@ -1,6 +1,7 @@
 from functools import wraps
-from django.http import HttpResponseRedirect
+
 from django.contrib.auth.decorators import login_required as _login_required
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 
 
@@ -12,8 +13,8 @@ def canteen_manager_required(view_func):
         if isinstance(result, HttpResponseRedirect):
             return result
 
-        if not hasattr(request.user, "canteen_manager"):
-            return redirect("canteen:edit_canteen_manager")
+        if not hasattr(request.user, "canteen_manager_profile"):
+            return redirect("canteen:edit_canteen_manager_profile")
 
         return view_func(request, *args, **kwargs)
 
