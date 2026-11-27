@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load i18n static %}
+{% load crispy_forms_tags %}
+{% load fnschool_tags %}
+<html>
+  <head>
+    <title>
+      {% block title %}
+        {% trans "FNSCHOOL" %}
+      {% endblock %}
+    </title>
+    <script>
+      function apply_system_theme() {
+        var is_dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-bs-theme', is_dark ? 'dark' : 'light');
+      }
+      apply_system_theme();
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', apply_system_theme);
+    </script>
+    <link rel="icon"
+          href="{% static 'public/favicon.ico' %}"
+          type="image/x-icon" />
+    <link href="{% static 'node_modules/bootstrap5/css/bootstrap.min.css' %}"
+          rel="stylesheet" />
+    <link href="{% static 'src/assets/css/main.css' %}" rel="stylesheet" />
+
+    <script src="{% static 'node_modules/bootstrap5/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'node_modules/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'node_modules/popperjs2/popper.min.js' %}"></script>
+    <script src="{% static 'src/fnschool/main.js' %}"></script>
+    <script src="{% static 'src/fnschool/canteen/main.js' %}"></script>
+    {% include 'base/_js.html' %}
+    {% include 'base/_css.html' %}
+  </head>
+  <body>
+    <header class="fixed-top">
+      {% include 'includes/_header.html' %}
+    </header>
+    <main class="container" data-bs-scroll="true" data-bs-backdrop="false">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="py-3 bg-dark fixed-bottom border-top border-success">
+      {% include 'includes/_footer.html' %}
+    </footer>
+    {% block extra_css %}{% endblock %}
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>
+
+{# The end. #}

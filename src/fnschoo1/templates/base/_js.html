@@ -1,15 +1,17 @@
 <script>
-  function localize_content(elements) {
-    $(elements).each(function(index, _element) {
-      var _element = $(_element)
-      const text = _element.text().replace(/\s+/g, '');
-      if (text == "True") {
-        _element.text("{% trans 'Yes' %}")
-      } else if (text == "False") {
-        _element.text("{% trans 'No' %}")
-      } else if (text == "None") {
-        _element.text('{% trans "None" %}')
-      }
-    });
-  }
+  $(document).ready(function() {
+    const proverbs = [
+      "{% trans 'The road is long, but if you walk, you will arrive.' %}",
+      "{% trans 'A journey of a thousand miles begins with a single step.' %}",
+      "{% trans 'It does not matter how slowly you go as long as you do not stop.' %}",
+      "{% trans 'The best time to plant a tree was 20 years ago. The second best time is now.' %}",
+      "{% trans 'Fall seven times, stand up eight.' %}",
+      "{% trans 'Smooth seas do not make skillful sailors.' %}",
+      "{% trans 'The only way to do great work is to love what you do.' %}",
+      "{% trans 'In the middle of difficulty lies opportunity.' %}"
+    ];
+    var randomIndex = Math.floor(Math.random() * proverbs.length);
+    $('.navbar-brand').attr('title', proverbs[randomIndex]);
+  });
+  // The end.
 </script>

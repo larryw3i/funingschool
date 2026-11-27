@@ -51,6 +51,7 @@ from fnschool.views import (
     get_search_params_from_cookie,
 )
 
+from .forms import StudentProfileForm, TeacherProfileForm
 from .models import Course, StudentProfile, TeacherLeave, TeacherProfile
 from .permissions import StudentRequiredMixin, TeacherRequiredMixin
 
@@ -193,7 +194,7 @@ class CourseListView(TeacherRequiredMixin, ListView):
         return self.paginate_by
 
 
-class TeacherListView(StudentRequiredMixin, ListView):
+class TeacherListView(TeacherRequiredMixin, ListView):
     model = StudentProfile
     template_name = "education/teacher_profile/list.html"
     context_object_name = "teachers"

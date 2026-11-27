@@ -17,7 +17,7 @@
       {% endif %}
     </h2>
 
-    <form method="post" action="{% url 'canteen:edit_teacher_profile' %}">
+    <form method="post" action="{% url 'education:edit_teacher_profile' %}">
       {% csrf_token %}
       {% if next %}
         <input type="hidden" name="next" value="{{ next }}">

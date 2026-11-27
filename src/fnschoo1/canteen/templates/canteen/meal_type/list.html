@@ -1,10 +1,9 @@
-{% extends "base/document.html" %}
+{% extends "canteen/base/document.html" %}
 {% load crispy_forms_tags %}
 {% block title %}
   {% trans "Meal Type List" %}
 {% endblock %}
 {% block content %}
-  <h1>{% trans "Meal type list" %}</h1>
   {% include 'canteen/includes/_canteen_navigation.html' %}
   <div class="d-flex justify-content-end pt-2">
     <a class="btn btn-primary"

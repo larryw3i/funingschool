@@ -4,12 +4,8 @@ from django import forms
 from django.db.models import CheckConstraint, Q, Sum
 from fnschool import _
 
-from .models import (
-        StudentProfile,
-        TeacherProfile,
-        Course,
-        TeacherLeave
-)
+from .models import Course, StudentProfile, TeacherLeave, TeacherProfile
+
 
 class StudentProfileForm(forms.ModelForm):
     class Meta:

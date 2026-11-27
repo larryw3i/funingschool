@@ -1,4 +1,4 @@
-{% extends "base/content.html" %}
+{% extends "canteen/base/content.html" %}
 {% load crispy_forms_tags %}
 {% block title %}
   {% blocktrans with instance_name=form.instance.name %}
@@ -37,9 +37,6 @@
       </button>
     </form>
   </div>
-  <script>
-    localize_content($("dd"))
-  </script>
 {% endblock %}
 
 {% block extra_js %}{% endblock %}
