@@ -130,10 +130,72 @@ def edit_student_profile(request):
     )
 
 
-class StudentListView(TeacherRequiredMixin, ListView):
+class TeacherLeaveListView(TeacherRequiredMixin, ListView):
+    model = TeacherLeave
+    template_name = "education/teacher_leave/list.html"
+    context_object_name = "teacher_leaves"
+
+    paginate_by = 10
+    paginate_orphans = 2
+
+    def get_ordering(self):
+        request = self.request
+        self.ordering = get_object_orders_from_cookie(request, model=self.model)
+        return self.ordering
+
+    def paginate_queryset(self, queryset, page_size):
+        search_params = get_search_params_from_cookie(self.request)
+        page = int(search_params.get("page", 1))
+        self.kwargs[self.page_kwarg] = page
+        return super().paginate_queryset(queryset, page_size)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
+    def get_paginate_by(self, queryset):
+        search_params = get_search_params_from_cookie(self.request)
+        page_size = int(search_params.get("page_size", self.paginate_by))
+        self.paginate_by = page_size
+        return self.paginate_by
+
+
+class CourseListView(TeacherRequiredMixin, ListView):
+    model = Course
+    template_name = "education/course/list.html"
+    context_object_name = "courses"
+
+    paginate_by = 10
+    paginate_orphans = 2
+
+    def get_ordering(self):
+        request = self.request
+        self.ordering = get_object_orders_from_cookie(request, model=self.model)
+        return self.ordering
+
+    def paginate_queryset(self, queryset, page_size):
+        search_params = get_search_params_from_cookie(self.request)
+        page = int(search_params.get("page", 1))
+        self.kwargs[self.page_kwarg] = page
+        return super().paginate_queryset(queryset, page_size)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset
+
+    def get_paginate_by(self, queryset):
+        search_params = get_search_params_from_cookie(self.request)
+        page_size = int(search_params.get("page_size", self.paginate_by))
+        self.paginate_by = page_size
+        return self.paginate_by
+
+
+class TeacherListView(StudentRequiredMixin, ListView):
     model = StudentProfile
-    template_name = "education/student_profile/list.html"
-    context_object_name = "students"
+    template_name = "education/teacher_profile/list.html"
+    context_object_name = "teaches"
 
     paginate_by = 10
     paginate_orphans = 2

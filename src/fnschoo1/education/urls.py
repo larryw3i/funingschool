@@ -18,13 +18,23 @@ urlpatterns = [
     ),
     path(
         "list_teachers",
-        views.list_teachers,
+        views.TeacherListView.as_view(),
         name="list_teachers",
     ),
     path(
         "list_students",
-        views.list_students,
+        views.StudentListView.as_view(),
         name="list_students",
+    ),
+    path(
+        "list_courses",
+        views.CourseListView.as_view(),
+        name="list_courses",
+    ),
+    path(
+        "list_teacher_leaves",
+        views.TeacherLeaveListView.as_view(),
+        name="list_teacher_leaves",
     ),
 ]
 
