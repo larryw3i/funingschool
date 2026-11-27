@@ -1275,7 +1275,7 @@ def edit_canteen_manager_profile(request):
 
     return render(
         request,
-        "canteen/canteen_manager/edit.html",
+        "canteen/canteen_manager_profile/edit.html",
         {
             "form": form,
             "user": request.user,

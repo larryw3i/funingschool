@@ -31,6 +31,7 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     path("fnprofile/", include("fnprofile.urls")),
     path("canteen/", include("canteen.urls")),
+    path("education/", include("education.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
