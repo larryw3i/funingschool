@@ -51,7 +51,8 @@ from fnschool.views import (
     get_search_params_from_cookie,
 )
 
-from .minxins import StudentRequiredMixin, TeacherRequiredMixin
+from .mixins import StudentRequiredMixin, TeacherRequiredMixin
+from .models import Course, StudentProfile, TeacherLeave, TeacherProfile
 
 # Create your views here.
 
@@ -195,7 +196,7 @@ class CourseListView(TeacherRequiredMixin, ListView):
 class TeacherListView(StudentRequiredMixin, ListView):
     model = StudentProfile
     template_name = "education/teacher_profile/list.html"
-    context_object_name = "teaches"
+    context_object_name = "teachers"
 
     paginate_by = 10
     paginate_orphans = 2
