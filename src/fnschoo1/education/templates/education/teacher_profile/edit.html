@@ -1,20 +1,23 @@
 {% extends "base/document.html" %}
 {% load crispy_forms_tags %}
 {% block title %}
-  {% trans "Category list" %}
+  {% if is_create %}
+    {% trans "Edit Teacher Profile" %}
+  {% else %}
+    {% trans "Edit Teacher Profile" %}
+  {% endif %}
 {% endblock %}
 {% block content %}
   <div class="container mt-4">
     <h2>
       {% if is_create %}
-        {% trans "Create Canteen Manager Profile" %}
+        {% trans "Create Teacher Profile" %}
       {% else %}
-        {% trans "Edit Canteen Manager Profile" %}
+        {% trans "Edit Teacher Profile" %}
       {% endif %}
     </h2>
 
-    <form method="post"
-          action="{% url 'canteen:edit_canteen_manager_profile' %}">
+    <form method="post" action="{% url 'canteen:edit_teacher_profile' %}">
       {% csrf_token %}
       {% if next %}
         <input type="hidden" name="next" value="{{ next }}">
@@ -30,7 +33,7 @@
             {% trans "Save Changes" %}
           {% endif %}
         </button>
-        <a href="{% if next %}{{ next }}{% else %}{% url 'canteen:list_ingredients' %}{% endif %}"
+        <a href="{% if next %}{{ next }}{% else %}{% url 'education:list_teachers' %}{% endif %}"
            class="btn btn-secondary">{% trans "Cancel" %}</a>
       </div>
     </form>

@@ -51,8 +51,8 @@ from fnschool.views import (
     get_search_params_from_cookie,
 )
 
-from .mixins import StudentRequiredMixin, TeacherRequiredMixin
 from .models import Course, StudentProfile, TeacherLeave, TeacherProfile
+from .permissions import StudentRequiredMixin, TeacherRequiredMixin
 
 # Create your views here.
 

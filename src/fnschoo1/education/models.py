@@ -262,8 +262,8 @@ class TeacherLeave(models.Model):
     )
 
     class Meta:
-        verbose_name = _("Leave")
-        verbose_name_plural = _("Leaves")
+        verbose_name = _("Teacher's Leave")
+        verbose_name_plural = _("Teachers' Leaves")
         ordering = ["-created_at"]
 
     def __str__(self):
