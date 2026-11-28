@@ -74,6 +74,33 @@ autocmd BufNewFile,BufRead .tmux.conf,tmux.conf              setfiletype tmux
 " Vim
 autocmd BufNewFile,BufRead .vimrc,vimrc,_vimrc               setfiletype vim
 
+function! s:update_tags()
+    if !executable('ctags')
+        return
+    endif
+    if empty(findfile('manage.py', '.;')) && empty(finddir('.git', '.;'))
+        return
+    endif
+    call job_start([
+      \ 'ctags', '-R',
+      \ '--languages=Python,JavaScript',
+      \ '--exclude=*.min.js',
+      \ '--exclude=*.min.css',
+      \ '--exclude=*.js.map',
+      \ '--exclude=node_modules',
+      \ '--exclude=__pycache__',
+      \ '--exclude=migrations',
+      \ '--exclude=media',
+      \ '--exclude=*.egg-info',
+      \ '--exclude=release',
+      \ '--exclude=venv',
+      \ '--tag-relative=yes',
+      \ '--fields=+iaS+KS',
+      \ '.'])
+
+endfunction
+autocmd BufWritePost *.py,*.js call s:update_tags()
+
 syntax enable
 set background=dark
 
