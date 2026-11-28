@@ -47,6 +47,15 @@ class StudentProfile(models.Model):
         help_text=_("Date of enrollment"),
     )
 
+    created_at = models.DateTimeField(
+        _("Created At"),
+        auto_now_add=True,
+    )
+    updated_at = models.DateTimeField(
+        _("Updated At"),
+        auto_now=True,
+    )
+
     class Meta:
         verbose_name = _("Student")
         verbose_name_plural = _("Students")
@@ -132,6 +141,15 @@ class TeacherProfile(models.Model):
         blank=True,
         null=True,
         help_text=_("Specific major, e.g. Computer Science"),
+    )
+
+    created_at = models.DateTimeField(
+        _("Created At"),
+        auto_now_add=True,
+    )
+    updated_at = models.DateTimeField(
+        _("Updated At"),
+        auto_now=True,
     )
 
     class Meta:
@@ -252,6 +270,7 @@ class TeacherLeave(models.Model):
         null=True,
         help_text=_("Additional remarks or notes"),
     )
+
     created_at = models.DateTimeField(
         _("Created At"),
         auto_now_add=True,
@@ -268,6 +287,67 @@ class TeacherLeave(models.Model):
 
     def __str__(self):
         return f"{self.teacher} - {self.start_time.date()} to {self.end_time.date()}"
+
+
+class TeacherTraining(models.Model):
+    teacher_profile = models.ForeignKey(
+        TeacherProfile,
+        on_delete=models.CASCADE,
+        verbose_name=_("Teacher"),
+        related_name="trainings",
+        help_text=_("Teacher participating in training"),
+    )
+    training_notice_file = models.FileField(
+        _("Training Notice File"),
+        upload_to="training_notices/%Y/%m/",
+        blank=True,
+        null=True,
+        help_text=_("Upload training notice file (PDF, Word, etc.)"),
+    )
+    start_time = models.DateTimeField(
+        _("Start Time"),
+        help_text=_("Training start date and time"),
+    )
+    end_time = models.DateTimeField(
+        _("End Time"),
+        help_text=_("Training end date and time"),
+    )
+    training_image = models.ImageField(
+        _("Training Image"),
+        upload_to="training_images/%Y/%m/",
+        blank=True,
+        null=True,
+        help_text=_("Upload training participation photo"),
+    )
+    training_hours = models.DecimalField(
+        _("Training Hours"),
+        max_digits=6,
+        decimal_places=2,
+        validators=[MinValueValidator(Decimal("0.01"))],
+        help_text=_("Total training hours"),
+    )
+    remark = models.TextField(
+        _("Remark"),
+        blank=True,
+        null=True,
+        help_text=_("Additional remarks or notes"),
+    )
+    created_at = models.DateTimeField(
+        _("Created At"),
+        auto_now_add=True,
+    )
+    updated_at = models.DateTimeField(
+        _("Updated At"),
+        auto_now=True,
+    )
+
+    class Meta:
+        verbose_name = _("Teacher Training")
+        verbose_name_plural = _("Teacher Trainings")
+        ordering = ["-start_time"]
+
+    def __str__(self):
+        return f"{self.teacher_profile} - {self.start_time.date()}"
 
 
 # The end.
