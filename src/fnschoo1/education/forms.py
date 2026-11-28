@@ -4,7 +4,13 @@ from django import forms
 from django.db.models import CheckConstraint, Q, Sum
 from fnschool import _
 
-from .models import Course, StudentProfile, TeacherLeave, TeacherProfile
+from .models import (
+    Course,
+    StudentProfile,
+    TeacherLeave,
+    TeacherProfile,
+    TeacherTraining,
+)
 
 
 class StudentProfileForm(forms.ModelForm):
@@ -14,7 +20,9 @@ class StudentProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field_name in ["user", "created_at", "updated_at"]:
+        for field_name in [
+            "user",
+        ]:
             self.fields.pop(field_name)
         for field in self.fields.values():
             field.widget.attrs.update({"class": "form-control"})
@@ -27,7 +35,9 @@ class TeacherProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field_name in ["user", "created_at", "updated_at"]:
+        for field_name in [
+            "user",
+        ]:
             self.fields.pop(field_name)
         for field in self.fields.values():
             field.widget.attrs.update({"class": "form-control"})
@@ -35,12 +45,14 @@ class TeacherProfileForm(forms.ModelForm):
 
 class CourseForm(forms.ModelForm):
     class Meta:
-        model = TeacherProfile
+        model = Course
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field_name in ["teacher_profile", "created_at", "updated_at"]:
+        for field_name in [
+            "teacher_profile",
+        ]:
             self.fields.pop(field_name)
         for field in self.fields.values():
             field.widget.attrs.update({"class": "form-control"})
@@ -48,7 +60,7 @@ class CourseForm(forms.ModelForm):
 
 class TeacherLeaveCreateForm(forms.ModelForm):
     class Meta:
-        model = TeacherProfile
+        model = TeacherLeave
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
@@ -56,8 +68,6 @@ class TeacherLeaveCreateForm(forms.ModelForm):
         for field_name in [
             "teacher_profile",
             "status",
-            "created_at",
-            "updated_at",
         ]:
             self.fields.pop(field_name)
         for field in self.fields.values():
@@ -85,12 +95,12 @@ class TeacherLeaveReviewForm(forms.ModelForm):
 
 class TeacherTrainingForm(forms.ModelForm):
     class Meta:
-        model = TeacherProfile
+        model = TeacherTraining
         fields = "__all__"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields.pop("user")
+        self.fields.pop("teacher_profile")
         for field in self.fields.values():
             field.widget.attrs.update({"class": "form-control"})
 

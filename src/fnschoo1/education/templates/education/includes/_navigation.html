@@ -1,0 +1,23 @@
+<div class="btn-group flex-wrap border rounded education-navigation"
+     role="group">
+  <a type="button"
+     class="btn"
+     target="education/edit_teacher_profile"
+     href="{% url 'education:edit_teacher_profile' %}">{% trans "My Profile" %}</a>
+  <a type="button"
+     class="btn"
+     target="education/list_teachers"
+     href="{% url 'education:list_teachers' %}">{% trans "Teachers" %}</a>
+  <a type="button"
+     class="btn"
+     target="education/list_students"
+     href="{% url 'education:list_students' %}">{% trans "Students" %}</a>
+  <a type="button"
+     class="btn"
+     target="education/list_teacher_leaves"
+     href="{% url 'education:list_teacher_leaves' %}">{% trans "Teachers' Leaves" %}</a>
+  <a type="button"
+     class="btn"
+     target="education/list_courses"
+     href="{% url 'education:list_courses' %}">{% trans 'Courses' %}</a>
+</div>
