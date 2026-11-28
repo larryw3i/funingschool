@@ -1,6 +1,6 @@
 #!/bin/bash
 
-project_dir=$(dirname "$(readlink -f "$0")")
+project_dir=$(cd "$(dirname "$(readlink -f "$0")")/.." && pwd)
 venv_dir=${project_dir}/venv
 src_dir=${project_dir}/src
 fnschoo1_dir=${src_dir}/fnschoo1
